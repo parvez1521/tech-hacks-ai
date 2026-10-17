@@ -66,9 +66,18 @@ open-alternative/
 │       ├── AlternativeDetailPage.tsx
 │       ├── CollectionDetailPage.tsx
 │       └── NotFoundPage.tsx
+├── public/
+│   ├── _redirects              # Static SPA rewrites (Cloudflare / Netlify)
+│   ├── favicon.svg             # Standalone SVG platform icon
+│   ├── robots.txt              # Crawler permissions & sitemap reference
+│   └── sitemap.xml             # XML sitemap covering all 40+ routes
+├── vercel.json                 # Vercel SPA rewrite & caching config
 └── tests/
-    ├── catalog.test.js       # Unit tests for data, search, filters & sort
-    └── routes.test.js        # Route matching tests
+    ├── catalog.test.js         # Unit tests for data, search, filters & sort
+    ├── qa_verification.test.js # Sort, bounds, and data provenance tests
+    ├── routes.test.js          # Core route pattern matching tests
+    ├── ssr_routes.test.js      # React DOM server rendering & landmark tests
+    └── interactive_browser_simulator.test.js # Window history, back/forward & deep route simulator
 ```
 
 ## Getting Started
@@ -79,14 +88,21 @@ npm run dev
 ```
 Starts the local development server at `http://localhost:3000`.
 
-### Production Build
+### Production Build & Preview
 ```bash
 npm run build
+npm run preview
 ```
-Creates an optimized, production-ready bundle in `dist/`.
+Creates an optimized, production-ready bundle in `dist/` and runs the preview server.
 
 ### Automated Tests
 ```bash
 npm test
 ```
-Executes the test suite with Node.js built-in test runner.
+Executes the comprehensive test suite (66 passing tests across 11 test suites) with Node.js built-in test runner.
+
+## Deployment Readiness
+- **Vercel:** Ready to deploy out-of-the-box via `vercel.json` with client-side rewrites and immutable asset caching.
+- **Cloudflare Pages / Netlify:** Pre-configured with `public/_redirects` (`/* /index.html 200`).
+- **SEO & Social:** Open Graph, Twitter Cards, canonical tags, `sitemap.xml`, and `robots.txt` are included.
+

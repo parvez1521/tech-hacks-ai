@@ -8,13 +8,20 @@ export interface RouteMatch {
   searchParams: URLSearchParams;
 }
 
+export function safeScrollTo(options: ScrollToOptions) {
+  if (typeof window !== 'undefined' && typeof window.scrollTo === 'function') {
+    window.scrollTo(options);
+  }
+}
+
 interface RouterContextType {
   currentPath: string;
   searchParams: URLSearchParams;
   params: Record<string, string>;
   route: string;
   navigate: (to: string, options?: { replace?: boolean }) => void;
-  setSearchParam: (key: string, value: string | null) => void;
+  setSearchParam: (key: string, value: string | null, options?: { replace?: boolean }) => void;
+  setSearchParams: (params: Record<string, string | null>, options?: { replace?: boolean }) => void;
   resetSearchParams: () => void;
 }
 
@@ -105,28 +112,39 @@ export const RouterProvider: React.FC<{ children: ReactNode }> = ({ children }) 
 
     setCurrentPath(newPath);
     setSearchParamsState(newSearch);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    safeScrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  const setSearchParam = (key: string, value: string | null) => {
+  const setSearchParams = (paramsToUpdate: Record<string, string | null>, options?: { replace?: boolean }) => {
     if (typeof window === 'undefined') return;
 
     const currentUrl = new URL(window.location.href);
-    if (value === null || value === '' || (key === 'page' && value === '1')) {
-      currentUrl.searchParams.delete(key);
-    } else {
-      currentUrl.searchParams.set(key, value);
-    }
+    Object.entries(paramsToUpdate).forEach(([key, value]) => {
+      if (value === null || value === '' || (key === 'page' && value === '1')) {
+        currentUrl.searchParams.delete(key);
+      } else {
+        currentUrl.searchParams.set(key, value);
+      }
+    });
 
-    window.history.pushState({}, '', currentUrl.toString());
+    const targetUrl = currentUrl.pathname + (currentUrl.search ? currentUrl.search : '');
+    if (options?.replace) {
+      window.history.replaceState({}, '', targetUrl);
+    } else {
+      window.history.pushState({}, '', targetUrl);
+    }
     setSearchParamsState(new URLSearchParams(currentUrl.search));
+  };
+
+  const setSearchParam = (key: string, value: string | null, options?: { replace?: boolean }) => {
+    setSearchParams({ [key]: value }, options);
   };
 
   const resetSearchParams = () => {
     if (typeof window === 'undefined') return;
     const currentUrl = new URL(window.location.href);
     currentUrl.search = '';
-    window.history.pushState({}, '', currentUrl.toString());
+    window.history.pushState({}, '', currentUrl.pathname);
     setSearchParamsState(new URLSearchParams());
   };
 
@@ -141,6 +159,7 @@ export const RouterProvider: React.FC<{ children: ReactNode }> = ({ children }) 
         route,
         navigate,
         setSearchParam,
+        setSearchParams,
         resetSearchParams,
       }}
     >

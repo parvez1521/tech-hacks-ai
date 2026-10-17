@@ -4,12 +4,12 @@ import { FilterBar } from '../components/FilterBar';
 import { ToolCard } from '../components/ToolCard';
 import { Pagination } from '../components/Pagination';
 import { EmptyState } from '../components/EmptyState';
-import { useRouter } from '../router/Router';
+import { useRouter, safeScrollTo } from '../router/Router';
 import { filterAndSortTools } from '../services/catalogService';
 import { FilterState, SortOption } from '../types';
 
 export const HomePage: React.FC = () => {
-  const { searchParams, setSearchParam, resetSearchParams } = useRouter();
+  const { searchParams, setSearchParam, setSearchParams, resetSearchParams } = useRouter();
 
   // Read filter state from URL search params
   const filterState: FilterState = {
@@ -25,13 +25,11 @@ export const HomePage: React.FC = () => {
   const { tools, totalCount, totalPages, currentPage } = filterAndSortTools(filterState);
 
   const handleSearchChange = (q: string) => {
-    setSearchParam('q', q || null);
-    setSearchParam('page', '1');
+    setSearchParams({ q: q || null, page: null }, { replace: true });
   };
 
   const handleSortChange = (sort: SortOption) => {
-    setSearchParam('sort', sort === 'popular' ? null : sort);
-    setSearchParam('page', '1');
+    setSearchParams({ sort: sort === 'popular' ? null : sort, page: null });
   };
 
   const handleFilterChange = (key: keyof FilterState, value: string | null) => {
@@ -41,13 +39,12 @@ export const HomePage: React.FC = () => {
         : key === 'techStack'
         ? 'stack'
         : (key as string);
-    setSearchParam(paramKey, value);
-    setSearchParam('page', '1');
+    setSearchParams({ [paramKey]: value, page: null });
   };
 
   const handlePageChange = (newPage: number) => {
     setSearchParam('page', newPage.toString());
-    window.scrollTo({ top: 400, behavior: 'smooth' });
+    safeScrollTo({ top: 400, behavior: 'smooth' });
   };
 
   return (

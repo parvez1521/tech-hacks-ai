@@ -1,5 +1,5 @@
 import React from 'react';
-import { useRouter, Link } from '../router/Router';
+import { useRouter, Link, safeScrollTo } from '../router/Router';
 import { getProprietaryToolBySlug, filterAndSortTools } from '../services/catalogService';
 import { FilterBar } from '../components/FilterBar';
 import { ToolCard } from '../components/ToolCard';
@@ -9,7 +9,7 @@ import { FilterState, SortOption } from '../types';
 import { Replace, ExternalLink, ArrowLeft } from 'lucide-react';
 
 export const AlternativeDetailPage: React.FC = () => {
-  const { params, searchParams, setSearchParam, resetSearchParams } = useRouter();
+  const { params, searchParams, setSearchParam, setSearchParams, resetSearchParams } = useRouter();
   const slug = params.slug;
   const proprietary = getProprietaryToolBySlug(slug);
 
@@ -45,13 +45,11 @@ export const AlternativeDetailPage: React.FC = () => {
   const { tools, totalCount, totalPages, currentPage } = filterAndSortTools(filterState);
 
   const handleSearchChange = (q: string) => {
-    setSearchParam('q', q || null);
-    setSearchParam('page', '1');
+    setSearchParams({ q: q || null, page: null }, { replace: true });
   };
 
   const handleSortChange = (sort: SortOption) => {
-    setSearchParam('sort', sort === 'popular' ? null : sort);
-    setSearchParam('page', '1');
+    setSearchParams({ sort: sort === 'popular' ? null : sort, page: null });
   };
 
   const handleFilterChange = (key: keyof FilterState, value: string | null) => {
@@ -61,13 +59,12 @@ export const AlternativeDetailPage: React.FC = () => {
         : key === 'techStack'
         ? 'stack'
         : (key as string);
-    setSearchParam(paramKey, value);
-    setSearchParam('page', '1');
+    setSearchParams({ [paramKey]: value, page: null });
   };
 
   const handlePageChange = (newPage: number) => {
     setSearchParam('page', newPage.toString());
-    window.scrollTo({ top: 300, behavior: 'smooth' });
+    safeScrollTo({ top: 300, behavior: 'smooth' });
   };
 
   return (
