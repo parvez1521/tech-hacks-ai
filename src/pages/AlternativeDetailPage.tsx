@@ -1,12 +1,13 @@
 import React from 'react';
 import { useRouter, Link, safeScrollTo } from '../router/Router';
-import { getProprietaryToolBySlug, filterAndSortTools } from '../services/catalogService';
-import { FilterBar } from '../components/FilterBar';
-import { ToolCard } from '../components/ToolCard';
+import { getProprietaryToolBySlug, getToolsForProprietary, getCategoryBySlug } from '../services/catalogService';
+import { ReplacementCard } from '../components/ReplacementCard';
 import { Pagination } from '../components/Pagination';
 import { EmptyState } from '../components/EmptyState';
-import { FilterState, SortOption } from '../types';
-import { Replace, ExternalLink, ArrowLeft } from 'lucide-react';
+import { SortOption } from '../types';
+import { Replace, ExternalLink, ArrowLeft, Search, X, SlidersHorizontal } from 'lucide-react';
+
+const PAGE_SIZE = 12;
 
 export const AlternativeDetailPage: React.FC = () => {
   const { params, searchParams, setSearchParam, setSearchParams, resetSearchParams } = useRouter();
@@ -22,7 +23,7 @@ export const AlternativeDetailPage: React.FC = () => {
         </p>
         <Link
           to="/alternatives"
-          className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-primary text-primary-foreground text-sm font-medium hover:bg-primary-hover"
+          className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-primary text-primary-foreground text-sm font-medium hover:bg-primary-hover transition-colors"
         >
           <ArrowLeft className="w-4 h-4" />
           <span>Back to Alternatives</span>
@@ -31,40 +32,78 @@ export const AlternativeDetailPage: React.FC = () => {
     );
   }
 
-  // Filter scoped to this proprietary tool
-  const filterState: FilterState = {
-    searchQuery: searchParams.get('q') || '',
-    sortBy: (searchParams.get('sort') as SortOption) || 'popular',
-    category: searchParams.get('category') || null,
-    alternativeTo: proprietary.slug,
-    techStack: searchParams.get('stack') || null,
-    license: searchParams.get('license') || null,
-    page: parseInt(searchParams.get('page') || '1', 10) || 1,
-  };
+  // All open source tools mapped to this proprietary target
+  const allReplacements = getToolsForProprietary(proprietary.slug);
+  const category = getCategoryBySlug(proprietary.category);
 
-  const { tools, totalCount, totalPages, currentPage } = filterAndSortTools(filterState);
+  // Distinct licenses among mapped replacements
+  const availableLicenses = Array.from(new Set(allReplacements.map((t) => t.license))).sort();
+
+  // Local filter parameters from URL
+  const searchQuery = searchParams.get('q') || '';
+  const sortBy = (searchParams.get('sort') as SortOption) || 'stars';
+  const selectedLicense = searchParams.get('license') || null;
+  const currentPage = parseInt(searchParams.get('page') || '1', 10) || 1;
+
+  // Filter and sort replacements
+  let filteredReplacements = [...allReplacements];
+
+  if (searchQuery.trim()) {
+    const q = searchQuery.toLowerCase().trim();
+    filteredReplacements = filteredReplacements.filter((tool) => {
+      const matchName = tool.name.toLowerCase().includes(q);
+      const matchTagline = tool.tagline.toLowerCase().includes(q);
+      const matchDesc = tool.description.toLowerCase().includes(q);
+      const matchStack = tool.techStack.some((s) => s.toLowerCase().includes(q));
+      const matchLicense = tool.license.toLowerCase().includes(q);
+      return matchName || matchTagline || matchDesc || matchStack || matchLicense;
+    });
+  }
+
+  if (selectedLicense) {
+    filteredReplacements = filteredReplacements.filter(
+      (t) => t.license.toLowerCase() === selectedLicense.toLowerCase()
+    );
+  }
+
+  filteredReplacements.sort((a, b) => {
+    switch (sortBy) {
+      case 'trending':
+        return b.starGrowthDelta - a.starGrowthDelta;
+      case 'forks':
+        return b.forks - a.forks;
+      case 'last_commit':
+        return new Date(b.lastCommitDate).getTime() - new Date(a.lastCommitDate).getTime();
+      case 'name_asc':
+        return a.name.localeCompare(b.name);
+      case 'name_desc':
+        return b.name.localeCompare(a.name);
+      case 'stars':
+      default:
+        return b.stars - a.stars;
+    }
+  });
+
+  const totalCount = filteredReplacements.length;
+  const totalPages = Math.max(1, Math.ceil(totalCount / PAGE_SIZE));
+  const validPage = Math.min(Math.max(1, currentPage), totalPages);
+  const paginatedTools = filteredReplacements.slice((validPage - 1) * PAGE_SIZE, validPage * PAGE_SIZE);
 
   const handleSearchChange = (q: string) => {
     setSearchParams({ q: q || null, page: null }, { replace: true });
   };
 
-  const handleSortChange = (sort: SortOption) => {
-    setSearchParams({ sort: sort === 'popular' ? null : sort, page: null });
+  const handleSortChange = (newSort: string) => {
+    setSearchParams({ sort: newSort === 'stars' ? null : newSort, page: null });
   };
 
-  const handleFilterChange = (key: keyof FilterState, value: string | null) => {
-    const paramKey =
-      key === 'alternativeTo'
-        ? 'alt'
-        : key === 'techStack'
-        ? 'stack'
-        : (key as string);
-    setSearchParams({ [paramKey]: value, page: null });
+  const handleLicenseChange = (license: string | null) => {
+    setSearchParams({ license, page: null });
   };
 
   const handlePageChange = (newPage: number) => {
     setSearchParam('page', newPage.toString());
-    safeScrollTo({ top: 300, behavior: 'smooth' });
+    safeScrollTo({ top: 350, behavior: 'smooth' });
   };
 
   return (
@@ -93,9 +132,20 @@ export const AlternativeDetailPage: React.FC = () => {
           <h1 className="text-2xl sm:text-4xl font-extrabold text-foreground tracking-tight mb-3">
             Open Source {proprietary.name} Alternatives
           </h1>
-          <p className="text-sm sm:text-base text-secondary-foreground leading-relaxed">
+          <p className="text-sm sm:text-base text-secondary-foreground leading-relaxed mb-4">
             Discover community-maintained, privacy-focused open source software tools that can replace {proprietary.name}. Save subscription costs and gain total ownership over your data.
           </p>
+
+          <div className="flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
+            <span className="inline-flex items-center px-2.5 py-1 rounded-full bg-primary/10 text-primary border border-primary/20 font-medium">
+              {allReplacements.length} {allReplacements.length === 1 ? 'verified replacement' : 'verified replacements'}
+            </span>
+            {category && (
+              <span className="inline-flex items-center px-2.5 py-1 rounded-full bg-muted text-secondary-foreground border border-border">
+                {category.name}
+              </span>
+            )}
+          </div>
         </div>
 
         {/* Right Sticky Proprietary Profile Card */}
@@ -103,16 +153,21 @@ export const AlternativeDetailPage: React.FC = () => {
           <div>
             <div className="flex items-center gap-3 mb-2.5">
               <div
-                className="w-8 h-8 rounded-md flex items-center justify-center font-bold text-xs text-white shrink-0"
+                className="w-10 h-10 rounded-md flex items-center justify-center font-bold text-sm text-white shrink-0 shadow-inner"
                 style={{ backgroundColor: proprietary.iconBgColor }}
               >
                 {proprietary.iconLetter}
               </div>
-              <h2 className="font-bold text-foreground text-base">
-                {proprietary.name}
-              </h2>
+              <div>
+                <h2 className="font-bold text-foreground text-base">
+                  {proprietary.name}
+                </h2>
+                <span className="text-xs text-muted-foreground block">
+                  Proprietary Software
+                </span>
+              </div>
             </div>
-            <p className="text-xs text-muted-foreground mb-3">
+            <p className="text-xs text-muted-foreground mb-3 leading-relaxed">
               {proprietary.description}
             </p>
           </div>
@@ -121,44 +176,131 @@ export const AlternativeDetailPage: React.FC = () => {
             href={proprietary.websiteUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-lg border border-border bg-muted hover:bg-border text-foreground text-xs font-medium transition-colors"
+            className="inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg border border-border bg-muted hover:bg-border text-foreground text-xs font-medium transition-colors"
           >
-            <span>Visit {proprietary.name}</span>
+            <span>Visit {proprietary.name} Official Website</span>
             <ExternalLink className="w-3.5 h-3.5" />
           </a>
         </div>
       </div>
 
-      {/* Filter and Search Bar */}
-      <FilterBar
-        filterState={filterState}
-        onSearchChange={handleSearchChange}
-        onSortChange={handleSortChange}
-        onFilterChange={handleFilterChange}
-        onResetFilters={resetSearchParams}
-        totalResults={totalCount}
-      />
+      {/* Local Search and Filter Controls (only if this app has mapped replacements) */}
+      {allReplacements.length > 0 && (
+        <div className="mb-6 p-4 rounded-lg bg-card/60 border border-border flex flex-col md:flex-row gap-3 items-stretch md:items-center justify-between">
+          {/* Search replacements */}
+          <div className="relative flex-1 max-w-sm">
+            <Search className="w-4 h-4 text-muted-foreground absolute left-3 top-1/2 -translate-y-1/2" />
+            <input
+              type="text"
+              value={searchQuery}
+              onChange={(e) => handleSearchChange(e.target.value)}
+              placeholder={`Search ${proprietary.name} alternatives...`}
+              className="w-full pl-9 pr-8 py-1.5 rounded-lg bg-card border border-border text-foreground placeholder:text-muted-foreground text-xs focus:outline-none focus:ring-1 focus:ring-primary"
+            />
+            {searchQuery && (
+              <button
+                type="button"
+                onClick={() => handleSearchChange('')}
+                className="absolute right-2.5 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
+                aria-label="Clear search"
+              >
+                <X className="w-3.5 h-3.5" />
+              </button>
+            )}
+          </div>
 
-      {/* Matching Tools Grid */}
-      {tools.length > 0 ? (
+          {/* Controls: Sort and License filter */}
+          <div className="flex flex-wrap items-center gap-2 text-xs">
+            {/* Sort select */}
+            <div className="flex items-center gap-1.5">
+              <span className="text-muted-foreground">Sort:</span>
+              <select
+                value={sortBy}
+                onChange={(e) => handleSortChange(e.target.value)}
+                className="bg-card border border-border rounded-md px-2 py-1 text-xs text-foreground focus:outline-none focus:ring-1 focus:ring-primary"
+              >
+                <option value="stars">Most Starred</option>
+                <option value="trending">Trending Velocity</option>
+                <option value="name_asc">Name (A-Z)</option>
+                <option value="last_commit">Recently Updated</option>
+              </select>
+            </div>
+
+            {/* License filter */}
+            {availableLicenses.length > 1 && (
+              <div className="flex items-center gap-1.5">
+                <span className="text-muted-foreground">License:</span>
+                <select
+                  value={selectedLicense || ''}
+                  onChange={(e) => handleLicenseChange(e.target.value || null)}
+                  className="bg-card border border-border rounded-md px-2 py-1 text-xs text-foreground focus:outline-none focus:ring-1 focus:ring-primary"
+                >
+                  <option value="">All Licenses</option>
+                  {availableLicenses.map((lic) => (
+                    <option key={lic} value={lic}>
+                      {lic}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            )}
+
+            {(searchQuery || selectedLicense || sortBy !== 'stars') && (
+              <button
+                type="button"
+                onClick={resetSearchParams}
+                className="text-primary hover:underline ml-1"
+              >
+                Reset filters
+              </button>
+            )}
+          </div>
+        </div>
+      )}
+
+      {/* Grid or Empty States */}
+      {allReplacements.length === 0 ? (
+        <div className="p-8 rounded-lg border border-border bg-card/60 text-center max-w-xl mx-auto my-8">
+          <Replace className="w-8 h-8 text-muted-foreground mx-auto mb-3 opacity-60" />
+          <h3 className="text-base font-bold text-foreground mb-2">
+            No Alternatives Mapped Yet
+          </h3>
+          <p className="text-xs text-secondary-foreground mb-4">
+            We haven't indexed any verified open source software replacements for {proprietary.name} yet.
+          </p>
+          <Link
+            to="/alternatives"
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-primary text-primary-foreground text-xs font-medium hover:bg-primary-hover transition-colors"
+          >
+            <ArrowLeft className="w-3.5 h-3.5" />
+            <span>Browse Other Alternatives</span>
+          </Link>
+        </div>
+      ) : paginatedTools.length > 0 ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
-          {tools.map((tool) => (
-            <ToolCard key={tool.id} tool={tool} />
+          {paginatedTools.map((tool) => (
+            <ReplacementCard
+              key={tool.id}
+              tool={tool}
+              proprietaryName={proprietary.name}
+            />
           ))}
         </div>
       ) : (
         <EmptyState
-          title={`No open source alternatives found matching your search for ${proprietary.name}.`}
+          title={`No open source alternatives matching "${searchQuery}" found for ${proprietary.name}.`}
           onReset={resetSearchParams}
         />
       )}
 
       {/* Pagination */}
-      <Pagination
-        currentPage={currentPage}
-        totalPages={totalPages}
-        onPageChange={handlePageChange}
-      />
+      {totalPages > 1 && (
+        <Pagination
+          currentPage={validPage}
+          totalPages={totalPages}
+          onPageChange={handlePageChange}
+        />
+      )}
     </div>
   );
 };
