@@ -30,8 +30,8 @@ export const Header: React.FC = () => {
         {/* Left: Brand Logo & Title */}
         <div className="flex items-center gap-6">
           <Link to="/" className="flex items-center gap-2.5 group">
-            {/* Geometric Modern Logo */}
-            <div className="w-7 h-7 rounded-lg bg-primary/10 border border-primary/30 flex items-center justify-center text-primary group-hover:rotate-90 transition-transform duration-300">
+            {/* Geometric Modern Logo with Tasteful Microinteraction */}
+            <div className="w-7 h-7 rounded-lg bg-primary/10 border border-primary/30 flex items-center justify-center text-primary group-hover:rotate-12 group-hover:scale-105 group-hover:bg-primary/20 group-hover:border-primary/50 transition-all duration-300 ease-out shadow-sm">
               <svg
                 viewBox="0 0 24 24"
                 className="w-4 h-4 fill-current stroke-current"
@@ -49,19 +49,19 @@ export const Header: React.FC = () => {
           <nav className="hidden md:flex items-center gap-1 text-sm font-medium">
             <Link
               to="/tools"
-              className="px-3 py-1.5 rounded-md text-muted-foreground hover:text-foreground hover:bg-muted/60 transition-colors"
+              className="px-3 py-1.5 rounded-md text-muted-foreground hover:text-foreground hover:bg-muted/70 active:scale-98 transition-all duration-150"
             >
               Tools
             </Link>
             <Link
               to="/alternatives"
-              className="px-3 py-1.5 rounded-md text-muted-foreground hover:text-foreground hover:bg-muted/60 transition-colors"
+              className="px-3 py-1.5 rounded-md text-muted-foreground hover:text-foreground hover:bg-muted/70 active:scale-98 transition-all duration-150"
             >
               Alternatives
             </Link>
             <Link
               to="/categories"
-              className="px-3 py-1.5 rounded-md text-muted-foreground hover:text-foreground hover:bg-muted/60 transition-colors"
+              className="px-3 py-1.5 rounded-md text-muted-foreground hover:text-foreground hover:bg-muted/70 active:scale-98 transition-all duration-150"
             >
               Categories
             </Link>
@@ -72,38 +72,38 @@ export const Header: React.FC = () => {
                 type="button"
                 onClick={() => setIsCollectionsOpen(!isCollectionsOpen)}
                 onBlur={() => setTimeout(() => setIsCollectionsOpen(false), 200)}
-                className="inline-flex items-center gap-1 px-3 py-1.5 rounded-md text-muted-foreground hover:text-foreground hover:bg-muted/60 transition-colors"
+                className="inline-flex items-center gap-1 px-3 py-1.5 rounded-md text-muted-foreground hover:text-foreground hover:bg-muted/70 active:scale-98 transition-all duration-150 cursor-pointer"
               >
                 <span>Collections</span>
-                <span className="text-xs">▾</span>
+                <span className="text-xs transition-transform duration-200">▾</span>
               </button>
 
               {isCollectionsOpen && (
-                <div className="absolute top-full left-0 mt-1 w-56 rounded-lg bg-card border border-border p-1.5 shadow-xl z-50 flex flex-col gap-0.5 animate-fade-in">
+                <div className="absolute top-full left-0 mt-1.5 w-56 rounded-lg bg-card/95 backdrop-blur-md border border-border p-1.5 shadow-xl shadow-black/40 z-50 flex flex-col gap-0.5 animate-fade-in">
                   <Link
                     to="/collections/trending"
-                    className="flex items-center gap-2.5 px-3 py-2 rounded-md text-xs font-medium text-foreground hover:bg-accent"
+                    className="flex items-center gap-2.5 px-3 py-2 rounded-md text-xs font-medium text-foreground hover:bg-primary/10 hover:text-primary transition-all duration-150"
                   >
                     <Flame className="w-3.5 h-3.5 text-orange-400" />
                     <span>Trending</span>
                   </Link>
                   <Link
                     to="/collections/self-hosted"
-                    className="flex items-center gap-2.5 px-3 py-2 rounded-md text-xs font-medium text-foreground hover:bg-accent"
+                    className="flex items-center gap-2.5 px-3 py-2 rounded-md text-xs font-medium text-foreground hover:bg-primary/10 hover:text-primary transition-all duration-150"
                   >
                     <HardDrive className="w-3.5 h-3.5 text-emerald-400" />
                     <span>Self-Hosted</span>
                   </Link>
                   <Link
                     to="/collections/ai-native"
-                    className="flex items-center gap-2.5 px-3 py-2 rounded-md text-xs font-medium text-foreground hover:bg-accent"
+                    className="flex items-center gap-2.5 px-3 py-2 rounded-md text-xs font-medium text-foreground hover:bg-primary/10 hover:text-primary transition-all duration-150"
                   >
                     <Bot className="w-3.5 h-3.5 text-purple-400" />
                     <span>AI-Native</span>
                   </Link>
                   <Link
                     to="/collections/latest"
-                    className="flex items-center gap-2.5 px-3 py-2 rounded-md text-xs font-medium text-foreground hover:bg-accent"
+                    className="flex items-center gap-2.5 px-3 py-2 rounded-md text-xs font-medium text-foreground hover:bg-primary/10 hover:text-primary transition-all duration-150"
                   >
                     <Clock className="w-3.5 h-3.5 text-blue-400" />
                     <span>Latest Discoveries</span>
@@ -120,7 +120,7 @@ export const Header: React.FC = () => {
           <button
             type="button"
             onClick={handleSearchClick}
-            className="p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
+            className="p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted active:scale-95 transition-all duration-150 cursor-pointer"
             title="Search software"
             aria-label="Search software catalog"
           >
@@ -132,9 +132,9 @@ export const Header: React.FC = () => {
             href="https://github.com"
             target="_blank"
             rel="noopener noreferrer"
-            className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-border bg-card hover:bg-accent text-foreground text-xs font-medium transition-colors"
+            className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-border bg-card/80 hover:bg-card hover:border-primary/40 hover:-translate-y-0.5 active:translate-y-0 text-foreground text-xs font-medium transition-all duration-150 shadow-sm"
           >
-            <Sparkles className="w-3.5 h-3.5 text-amber-400" />
+            <Sparkles className="w-3.5 h-3.5 text-amber-400 animate-pulse-subtle" />
             <span>Submit Tool</span>
           </a>
 

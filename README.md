@@ -77,7 +77,8 @@ open-alternative/
     ├── qa_verification.test.js # Sort, bounds, and data provenance tests
     ├── routes.test.js          # Core route pattern matching tests
     ├── ssr_routes.test.js      # React DOM server rendering & landmark tests
-    └── interactive_browser_simulator.test.js # Window history, back/forward & deep route simulator
+    ├── interactive_browser_simulator.test.js # Window history, back/forward & deep route simulator
+    └── phase5_motion_polish.test.js          # Cursor glow, card spotlight & motion accessibility tests
 ```
 
 ## Getting Started
@@ -99,7 +100,13 @@ Creates an optimized, production-ready bundle in `dist/` and runs the preview se
 ```bash
 npm test
 ```
-Executes the comprehensive test suite (66 passing tests across 11 test suites) with Node.js built-in test runner.
+Executes the comprehensive test suite (72 passing tests across 12 test suites) with Node.js built-in test runner.
+
+## Motion & Interactive Lighting Design
+- **Cursor Ambient Spotlight:** Hardware-accelerated radial spotlight that smoothly tracks fine pointers using `requestAnimationFrame` and CSS variables (`--mouse-x`, `--mouse-y`), bypassing React render cycles.
+- **Card-Level Dynamic Border Glow:** Cards (`ToolCard`, `CategoryCard`, `AlternativeCard`) track localized mouse coordinates to illuminate borders and surface highlights on hover.
+- **Microinteractions:** Tasteful logo rotation, smooth search ring focus glow, active filter drawer transitions, animated chevron triggers, and hover lift.
+- **Strict Accessibility:** Comprehensive `@media (prefers-reduced-motion: reduce)` support, visible keyboard focus indicators (`focus-visible:ring-2`), and pointer-events immunity.
 
 ## Deployment Readiness
 - **Vercel:** Ready to deploy out-of-the-box via `vercel.json` with client-side rewrites and immutable asset caching.

@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { RouterProvider, useRouter } from './router/Router';
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
+import { AmbientGlow } from './components/AmbientGlow';
 import {
   getToolBySlug,
   getCategoryBySlug,
@@ -99,9 +100,10 @@ const AppRoutes: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-background text-foreground">
+    <div className="min-h-screen flex flex-col bg-background text-foreground relative selection:bg-primary/25 selection:text-foreground">
+      <AmbientGlow />
       <Header />
-      <main className="flex-1">{renderRoute()}</main>
+      <main className="flex-1 relative z-10">{renderRoute()}</main>
       <Footer />
     </div>
   );

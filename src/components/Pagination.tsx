@@ -42,7 +42,7 @@ export const Pagination: React.FC<PaginationProps> = ({
         type="button"
         disabled={currentPage === 1}
         onClick={() => onPageChange(currentPage - 1)}
-        className="inline-flex items-center gap-1 px-3 py-1.5 rounded-md border border-border bg-card text-foreground hover:bg-accent disabled:opacity-40 disabled:pointer-events-none transition-colors"
+        className="inline-flex items-center gap-1 px-3 py-1.5 rounded-md border border-border bg-card text-foreground hover:bg-accent hover:border-border/80 active:scale-95 disabled:opacity-40 disabled:pointer-events-none transition-all duration-150 cursor-pointer"
         aria-label="Previous page"
       >
         <ChevronLeft className="w-4 h-4" />
@@ -54,7 +54,7 @@ export const Pagination: React.FC<PaginationProps> = ({
         {pages.map((p, idx) => {
           if (p === '...') {
             return (
-              <span key={`dots-${idx}`} className="px-2 py-1 text-muted-foreground select-none">
+              <span key={`dots-${idx}`} className="px-2 py-1 text-muted-foreground select-none font-mono text-xs">
                 ...
               </span>
             );
@@ -70,10 +70,10 @@ export const Pagination: React.FC<PaginationProps> = ({
               onClick={() => onPageChange(pageNum)}
               aria-current={isCurrent ? 'page' : undefined}
               aria-label={`Go to page ${pageNum}`}
-              className={`min-w-[34px] h-[34px] rounded-md font-mono text-xs flex items-center justify-center transition-colors border ${
+              className={`min-w-[34px] h-[34px] rounded-md font-mono text-xs flex items-center justify-center border transition-all duration-150 cursor-pointer ${
                 isCurrent
-                  ? 'bg-primary border-primary text-primary-foreground font-bold shadow-sm'
-                  : 'bg-card border-border text-foreground hover:bg-accent'
+                  ? 'bg-primary border-primary text-primary-foreground font-bold shadow-md shadow-primary/20 ring-1 ring-primary/40 scale-105'
+                  : 'bg-card border-border text-foreground hover:bg-accent hover:border-border/80 hover:-translate-y-0.5 active:translate-y-0'
               }`}
             >
               {pageNum}
@@ -87,7 +87,7 @@ export const Pagination: React.FC<PaginationProps> = ({
         type="button"
         disabled={currentPage === totalPages}
         onClick={() => onPageChange(currentPage + 1)}
-        className="inline-flex items-center gap-1 px-3 py-1.5 rounded-md border border-border bg-card text-foreground hover:bg-accent disabled:opacity-40 disabled:pointer-events-none transition-colors"
+        className="inline-flex items-center gap-1 px-3 py-1.5 rounded-md border border-border bg-card text-foreground hover:bg-accent hover:border-border/80 active:scale-95 disabled:opacity-40 disabled:pointer-events-none transition-all duration-150 cursor-pointer"
         aria-label="Next page"
       >
         <span className="hidden sm:inline">Next</span>

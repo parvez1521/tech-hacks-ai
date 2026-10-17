@@ -48,13 +48,13 @@ export const FilterBar: React.FC<FilterBarProps> = ({
             onChange={(e) => onSearchChange(e.target.value)}
             placeholder="Search tools by name, description, stack, or tag..."
             aria-label="Search software catalog"
-            className="w-full pl-9 pr-9 py-2 rounded-lg bg-card border border-border text-foreground placeholder:text-muted-foreground text-sm focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary transition-colors"
+            className="w-full pl-9 pr-9 py-2 rounded-lg bg-card/90 border border-border text-foreground placeholder:text-muted-foreground text-sm focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary/80 transition-all duration-200"
           />
           {filterState.searchQuery && (
             <button
               type="button"
               onClick={() => onSearchChange('')}
-              className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground p-0.5 rounded cursor-pointer"
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground hover:bg-muted/70 active:scale-90 p-0.5 rounded transition-all duration-150 cursor-pointer"
               title="Clear search"
               aria-label="Clear search query"
             >
@@ -71,16 +71,16 @@ export const FilterBar: React.FC<FilterBarProps> = ({
             onClick={() => setIsDrawerOpen(!isDrawerOpen)}
             aria-expanded={isDrawerOpen}
             aria-label="Toggle filter drawer"
-            className={`inline-flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-medium border transition-colors cursor-pointer ${
+            className={`inline-flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-medium border transition-all duration-150 cursor-pointer active:scale-98 ${
               isDrawerOpen || activeFilterCount > 0
-                ? 'bg-accent border-primary/40 text-primary'
-                : 'bg-card border-border text-foreground hover:bg-accent'
+                ? 'bg-accent border-primary/50 text-primary shadow-sm shadow-primary/10'
+                : 'bg-card border-border text-foreground hover:bg-accent hover:border-border/80'
             }`}
           >
             <ListFilter className="w-4 h-4" aria-hidden="true" />
             <span>Filters</span>
             {activeFilterCount > 0 && (
-              <span className="w-5 h-5 rounded-full bg-primary text-primary-foreground text-xs flex items-center justify-center font-bold">
+              <span className="w-5 h-5 rounded-full bg-primary text-primary-foreground text-xs flex items-center justify-center font-bold shadow-sm">
                 {activeFilterCount}
               </span>
             )}
@@ -98,7 +98,7 @@ export const FilterBar: React.FC<FilterBarProps> = ({
               value={filterState.sortBy}
               onChange={(e) => onSortChange(e.target.value as SortOption)}
               aria-label="Order tools by"
-              className="appearance-none bg-card border border-border text-foreground text-sm rounded-lg pl-3 pr-8 py-2 font-medium focus:outline-none focus:ring-1 focus:ring-primary cursor-pointer hover:bg-accent transition-colors"
+              className="appearance-none bg-card border border-border text-foreground text-sm rounded-lg pl-3 pr-8 py-2 font-medium focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary/80 cursor-pointer hover:bg-accent transition-all duration-150"
             >
               <option value="popular">Order by: Most Popular</option>
               <option value="latest">Order by: Latest</option>
@@ -217,12 +217,13 @@ export const FilterBar: React.FC<FilterBarProps> = ({
           )}
 
           {filterState.alternativeTo && (
-            <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-muted border border-border text-foreground">
+            <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-muted/80 hover:bg-muted border border-border hover:border-primary/40 text-foreground transition-all duration-150 text-xs">
               Alternative to: {filterState.alternativeTo}
               <button
                 type="button"
                 onClick={() => onFilterChange('alternativeTo', null)}
-                className="hover:text-primary ml-0.5"
+                className="hover:text-primary hover:scale-110 active:scale-90 ml-0.5 transition-transform duration-150 cursor-pointer"
+                aria-label={`Remove alternative filter for ${filterState.alternativeTo}`}
               >
                 <X className="w-3 h-3" />
               </button>
@@ -230,12 +231,13 @@ export const FilterBar: React.FC<FilterBarProps> = ({
           )}
 
           {filterState.category && (
-            <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-muted border border-border text-foreground">
+            <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-muted/80 hover:bg-muted border border-border hover:border-primary/40 text-foreground transition-all duration-150 text-xs">
               Category: {filterState.category}
               <button
                 type="button"
                 onClick={() => onFilterChange('category', null)}
-                className="hover:text-primary ml-0.5"
+                className="hover:text-primary hover:scale-110 active:scale-90 ml-0.5 transition-transform duration-150 cursor-pointer"
+                aria-label={`Remove category filter for ${filterState.category}`}
               >
                 <X className="w-3 h-3" />
               </button>
@@ -243,12 +245,13 @@ export const FilterBar: React.FC<FilterBarProps> = ({
           )}
 
           {filterState.techStack && (
-            <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-muted border border-border text-foreground">
+            <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-muted/80 hover:bg-muted border border-border hover:border-primary/40 text-foreground transition-all duration-150 text-xs">
               Stack: {filterState.techStack}
               <button
                 type="button"
                 onClick={() => onFilterChange('techStack', null)}
-                className="hover:text-primary ml-0.5"
+                className="hover:text-primary hover:scale-110 active:scale-90 ml-0.5 transition-transform duration-150 cursor-pointer"
+                aria-label={`Remove stack filter for ${filterState.techStack}`}
               >
                 <X className="w-3 h-3" />
               </button>
@@ -256,12 +259,13 @@ export const FilterBar: React.FC<FilterBarProps> = ({
           )}
 
           {filterState.license && (
-            <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-muted border border-border text-foreground">
+            <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-muted/80 hover:bg-muted border border-border hover:border-primary/40 text-foreground transition-all duration-150 text-xs">
               License: {filterState.license}
               <button
                 type="button"
                 onClick={() => onFilterChange('license', null)}
-                className="hover:text-primary ml-0.5"
+                className="hover:text-primary hover:scale-110 active:scale-90 ml-0.5 transition-transform duration-150 cursor-pointer"
+                aria-label={`Remove license filter for ${filterState.license}`}
               >
                 <X className="w-3 h-3" />
               </button>
@@ -273,9 +277,9 @@ export const FilterBar: React.FC<FilterBarProps> = ({
           <button
             type="button"
             onClick={onResetFilters}
-            className="inline-flex items-center gap-1 text-primary hover:underline font-medium cursor-pointer"
+            className="group inline-flex items-center gap-1.5 text-primary hover:text-primary-hover hover:underline font-medium cursor-pointer transition-colors duration-150 text-xs sm:text-sm"
           >
-            <RotateCcw className="w-3 h-3" />
+            <RotateCcw className="w-3 h-3 group-hover:-rotate-45 transition-transform duration-300" />
             <span>Reset filters</span>
           </button>
         )}

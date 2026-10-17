@@ -93,19 +93,19 @@ export const ToolDetailPage: React.FC = () => {
               href={tool.websiteUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg bg-primary hover:bg-primary-hover text-primary-foreground font-semibold text-sm transition-colors shadow-sm"
+              className="group flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg bg-primary hover:bg-primary-hover hover:-translate-y-0.5 hover:shadow-md hover:shadow-primary/20 active:translate-y-0 text-primary-foreground font-semibold text-sm transition-all duration-150 shadow-sm"
             >
               <span>Visit Website</span>
-              <ExternalLink className="w-4 h-4" />
+              <ExternalLink className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-200" />
             </a>
 
             <a
               href={tool.repositoryUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg border border-border bg-muted hover:bg-border text-foreground font-semibold text-sm transition-colors"
+              className="group flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg border border-border bg-muted hover:bg-border/80 hover:-translate-y-0.5 active:translate-y-0 text-foreground font-semibold text-sm transition-all duration-150"
             >
-              <Github className="w-4 h-4" />
+              <Github className="w-4 h-4 group-hover:scale-110 transition-transform duration-200" />
               <span>GitHub</span>
             </a>
           </div>
@@ -120,7 +120,7 @@ export const ToolDetailPage: React.FC = () => {
                 <Link
                   key={alt.slug}
                   to={`/alternatives/${alt.slug}`}
-                  className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-background border border-border hover:border-primary/50 text-foreground transition-colors"
+                  className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-background border border-border hover:border-primary/50 hover:bg-primary/10 hover:text-primary active:scale-95 text-foreground transition-all duration-150 shadow-xs"
                 >
                   <span
                     className="w-3.5 h-3.5 rounded-full flex items-center justify-center text-[9px] text-white font-bold"

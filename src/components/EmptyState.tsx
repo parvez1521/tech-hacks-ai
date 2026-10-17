@@ -13,9 +13,9 @@ export const EmptyState: React.FC<EmptyStateProps> = ({
   onReset,
 }) => {
   return (
-    <div className="flex flex-col items-center justify-center p-12 text-center border border-dashed border-border rounded-lg bg-card/40 my-8">
-      <div className="w-12 h-12 rounded-full bg-muted flex items-center justify-center text-muted-foreground mb-4">
-        <SearchX className="w-6 h-6" />
+    <div className="animate-fade-in flex flex-col items-center justify-center p-12 text-center border border-dashed border-border hover:border-primary/40 rounded-lg bg-card/40 my-8 transition-colors duration-300 shadow-sm">
+      <div className="w-12 h-12 rounded-full bg-muted flex items-center justify-center text-muted-foreground mb-4 shadow-inner">
+        <SearchX className="w-6 h-6 animate-pulse-subtle" />
       </div>
       <h3 className="text-base font-semibold text-foreground mb-1">{title}</h3>
       <p className="text-sm text-muted-foreground max-w-sm mb-5">{description}</p>
@@ -23,9 +23,9 @@ export const EmptyState: React.FC<EmptyStateProps> = ({
         <button
           type="button"
           onClick={onReset}
-          className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-primary text-primary-foreground font-medium text-sm hover:bg-primary-hover transition-colors shadow-sm cursor-pointer"
+          className="group inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-primary text-primary-foreground font-medium text-sm hover:bg-primary-hover hover:-translate-y-0.5 hover:shadow-md hover:shadow-primary/20 active:translate-y-0 transition-all duration-150 shadow-sm cursor-pointer"
         >
-          <RotateCcw className="w-4 h-4" />
+          <RotateCcw className="w-4 h-4 group-hover:-rotate-45 transition-transform duration-300" />
           <span>Reset all filters</span>
         </button>
       )}

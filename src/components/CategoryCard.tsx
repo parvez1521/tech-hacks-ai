@@ -35,15 +35,25 @@ export const CategoryCard: React.FC<CategoryCardProps> = ({ category }) => {
   return (
     <Link
       to={`/categories/${category.slug}`}
-      className="group relative flex flex-col justify-between p-5 rounded-lg border border-border bg-card hover:bg-accent/40 hover:border-border/80 transition-all duration-200 shadow-sm hover:shadow-md"
+      className="group relative flex flex-col justify-between p-5 rounded-lg border border-border bg-card/90 hover:bg-card hover:-translate-y-1 hover:border-primary/40 hover:shadow-xl hover:shadow-black/20 transition-all duration-300 ease-out focus-visible:ring-2 focus-visible:ring-primary/60 focus-visible:border-primary/60 focus-visible:outline-none focus-visible:-translate-y-1"
     >
-      <div>
+      {/* Decorative Subtle Inner Spotlight on Hover */}
+      <div
+        className="pointer-events-none absolute -inset-px rounded-lg opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+        style={{
+          background:
+            'radial-gradient(240px circle at 50% 30%, rgba(59, 130, 246, 0.08), transparent 75%)',
+        }}
+        aria-hidden="true"
+      />
+
+      <div className="relative z-10">
         <div className="flex items-center gap-3 mb-3">
-          <div className="w-9 h-9 rounded-md bg-primary/10 text-primary flex items-center justify-center shrink-0 border border-primary/20">
+          <div className="w-9 h-9 rounded-md bg-primary/10 text-primary flex items-center justify-center shrink-0 border border-primary/20 group-hover:bg-primary/20 group-hover:scale-105 transition-all duration-200">
             <IconComponent className="w-5 h-5" />
           </div>
           <div>
-            <h3 className="font-semibold text-foreground text-base tracking-tight truncate group-hover:text-primary transition-colors">
+            <h3 className="font-semibold text-foreground text-base tracking-tight truncate group-hover:text-primary transition-colors duration-200">
               {category.name}
             </h3>
             <span className="text-xs text-muted-foreground block">
@@ -61,7 +71,7 @@ export const CategoryCard: React.FC<CategoryCardProps> = ({ category }) => {
           {category.subcategories.slice(0, 3).map((sub) => (
             <span
               key={sub.slug}
-              className="px-2 py-0.5 rounded text-[11px] bg-muted text-muted-foreground border border-border"
+              className="px-2 py-0.5 rounded text-[11px] bg-muted text-muted-foreground border border-border group-hover:border-border/80 transition-colors"
             >
               {sub.name}
             </span>
@@ -74,9 +84,9 @@ export const CategoryCard: React.FC<CategoryCardProps> = ({ category }) => {
         </div>
       </div>
 
-      <div className="pt-3 border-t border-border/50 flex items-center justify-between text-xs text-primary font-medium">
+      <div className="relative z-10 pt-3 border-t border-border/50 flex items-center justify-between text-xs text-primary font-medium">
         <span>Browse category</span>
-        <span className="group-hover:translate-x-0.5 transition-transform">→</span>
+        <span className="group-hover:translate-x-1 transition-transform duration-200">→</span>
       </div>
     </Link>
   );
