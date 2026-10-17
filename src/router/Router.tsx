@@ -42,6 +42,33 @@ function matchRoute(pathname: string): { route: string; params: Record<string, s
   if (cleanPath === '/alternatives') {
     return { route: 'alternatives', params: {} };
   }
+  if (cleanPath === '/ai-tools') {
+    return { route: 'ai-tools', params: {} };
+  }
+  if (cleanPath === '/free-ai-sites') {
+    return { route: 'free-ai-sites', params: {} };
+  }
+  if (cleanPath === '/guides') {
+    return { route: 'guides', params: {} };
+  }
+  if (cleanPath === '/prompt-library') {
+    return { route: 'prompt-library', params: {} };
+  }
+  if (cleanPath === '/free-tools') {
+    return { route: 'free-tools', params: {} };
+  }
+  if (cleanPath === '/compare') {
+    return { route: 'compare', params: {} };
+  }
+  if (cleanPath === '/pick') {
+    return { route: 'pick', params: {} };
+  }
+  if (cleanPath === '/saved') {
+    return { route: 'saved', params: {} };
+  }
+  if (cleanPath === '/updates') {
+    return { route: 'updates', params: {} };
+  }
 
   // /tools/:slug
   const toolsMatch = cleanPath.match(/^\/tools\/([^/]+)$/);
@@ -65,6 +92,30 @@ function matchRoute(pathname: string): { route: string; params: Record<string, s
   const collectionsMatch = cleanPath.match(/^\/collections\/([^/]+)$/);
   if (collectionsMatch) {
     return { route: 'collection-detail', params: { slug: collectionsMatch[1] } };
+  }
+
+  // /ai-tools/:slug
+  const aiToolsMatch = cleanPath.match(/^\/ai-tools\/([^/]+)$/);
+  if (aiToolsMatch) {
+    return { route: 'ai-tool-detail', params: { slug: aiToolsMatch[1] } };
+  }
+
+  // /guides/:slug
+  const guidesMatch = cleanPath.match(/^\/guides\/([^/]+)$/);
+  if (guidesMatch) {
+    return { route: 'guide-detail', params: { slug: guidesMatch[1] } };
+  }
+
+  // /prompt-library/:slug
+  const promptsMatch = cleanPath.match(/^\/prompt-library\/([^/]+)$/);
+  if (promptsMatch) {
+    return { route: 'prompt-detail', params: { slug: promptsMatch[1] } };
+  }
+
+  // /free-tools/:slug
+  const freeToolsMatch = cleanPath.match(/^\/free-tools\/([^/]+)$/);
+  if (freeToolsMatch) {
+    return { route: 'free-tool-detail', params: { slug: freeToolsMatch[1] } };
   }
 
   // Also support root tool paths like /supabase if it matches a known tool

@@ -81,3 +81,106 @@ export interface FilterState {
   license: string | null;
   page: number;
 }
+
+export type PricingType = 'free' | 'freemium' | 'paid' | 'free-trial';
+
+export interface AiTool {
+  id: string;
+  name: string;
+  slug: string;
+  tagline: string;
+  description: string;
+  longDescription?: string;
+  websiteUrl: string;
+  category: string; // e.g. 'video', 'image', 'voice', 'assistants', 'writing', 'coding', 'automation', 'productivity', '3d', 'music'
+  pricingType: PricingType;
+  pricingDetails: string;
+  iconLetter: string;
+  iconBgColor: string;
+  isFeatured?: boolean;
+  isTrending?: boolean;
+  rating?: number;
+  features: string[];
+  tags: string[];
+  hasFreePlan: boolean;
+  releaseYear?: number;
+}
+
+export interface GuideStep {
+  stepNumber: number;
+  title: string;
+  description: string;
+  promptTemplate?: string;
+}
+
+export interface Guide {
+  id: string;
+  title: string;
+  slug: string;
+  summary: string;
+  category: string; // e.g. 'video-creation', 'prompting', 'productivity', 'coding'
+  readTime: string; // e.g. '5 min read'
+  author: string;
+  publishedDate: string; // e.g. '2026-10-12'
+  tags: string[];
+  steps: GuideStep[];
+  relatedToolSlugs: string[];
+}
+
+export interface PromptItem {
+  id: string;
+  title: string;
+  slug: string;
+  description: string;
+  category: string; // e.g. 'image-generation', 'video-scripts', 'coding', 'writing', 'marketing'
+  targetModel: string; // e.g. 'Midjourney v6', 'ChatGPT / Claude', 'Flux.1', 'Kling / Runway'
+  promptText: string;
+  copyCount?: number;
+  tags: string[];
+  tips?: string;
+  authorOrSource?: string;
+}
+
+export interface FreeToolUtility {
+  id: string;
+  name: string;
+  slug: string;
+  tagline: string;
+  description: string;
+  category: 'image' | 'text' | 'code' | 'security' | 'developer';
+  iconName: string;
+  isClientSideOnly: boolean;
+  acceptedInput: string;
+  outputFormat: string;
+}
+
+export interface BookmarkItem {
+  id: string;
+  type: 'open-source-tool' | 'ai-tool' | 'guide' | 'prompt' | 'free-tool';
+  slug: string;
+  title: string;
+  subtitle: string;
+  url: string;
+  iconBgColor?: string;
+  iconLetter?: string;
+  savedAt: string;
+}
+
+export interface UpdateItem {
+  id: string;
+  title: string;
+  date: string;
+  category: 'tool-release' | 'model-update' | 'platform-news' | 'guide';
+  summary: string;
+  toolSlug?: string;
+  link?: string;
+}
+
+export interface AiFilterState {
+  searchQuery: string;
+  category: string | null;
+  pricingType: PricingType | 'all';
+  sortBy: 'popular' | 'latest' | 'name_asc' | 'rating';
+  page: number;
+}
+
