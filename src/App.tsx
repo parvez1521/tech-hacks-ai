@@ -3,6 +3,7 @@ import { RouterProvider, useRouter } from './router/Router';
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
 import { AmbientGlow } from './components/AmbientGlow';
+import { siteConfig, formatPageTitle } from './config/site';
 import {
   getToolBySlug,
   getCategoryBySlug,
@@ -40,113 +41,94 @@ import { SavedPage } from './pages/SavedPage';
 import { UpdatesPage } from './pages/UpdatesPage';
 import { NotFoundPage } from './pages/NotFoundPage';
 
+export function getRouteTitle(route: string, params: Record<string, string> = {}): string {
+  switch (route) {
+    case 'home':
+      return formatPageTitle();
+    case 'tools':
+      return formatPageTitle('All Open Source Tools');
+    case 'tool-detail': {
+      const tool = getToolBySlug(params.slug);
+      return tool
+        ? formatPageTitle(`${tool.name}: Open Source Alternative to ${tool.alternativesTo.join(', ')}`)
+        : formatPageTitle('Tool Not Found');
+    }
+    case 'categories':
+      return formatPageTitle('Software Categories');
+    case 'category-detail': {
+      const cat = getCategoryBySlug(params.slug);
+      return cat
+        ? formatPageTitle(`Open Source ${cat.name}`)
+        : formatPageTitle('Category Not Found');
+    }
+    case 'alternatives':
+      return formatPageTitle('Browse Proprietary Software Alternatives');
+    case 'alternative-detail': {
+      const alt = getProprietaryToolBySlug(params.slug);
+      return alt
+        ? formatPageTitle(`Open Source ${alt.name} Alternatives`)
+        : formatPageTitle('Software Not Found');
+    }
+    case 'collection-detail': {
+      const col = getCollectionBySlug(params.slug);
+      return col
+        ? formatPageTitle(col.headline)
+        : formatPageTitle('Collection Not Found');
+    }
+    case 'ai-tools':
+      return formatPageTitle('AI Tools & Generative Platforms Directory');
+    case 'ai-tool-detail': {
+      const aiTool = getAiToolBySlug(params.slug);
+      return aiTool
+        ? formatPageTitle(`${aiTool.name} (${aiTool.pricingType}) — AI Tool Review & Features`)
+        : formatPageTitle('AI Tool Not Found');
+    }
+    case 'free-ai-sites':
+      return formatPageTitle('Free AI Sites & Zero-Cost Generative Tools');
+    case 'guides':
+      return formatPageTitle('Step-by-Step AI Workflows & Tutorials');
+    case 'guide-detail': {
+      const guide = getGuideBySlug(params.slug);
+      return guide
+        ? formatPageTitle(`${guide.title} — AI Guides`)
+        : formatPageTitle('Guide Not Found');
+    }
+    case 'prompt-library':
+      return formatPageTitle('AI Prompt Library & Creative Recipes');
+    case 'prompt-detail': {
+      const prompt = getPromptBySlug(params.slug);
+      return prompt
+        ? formatPageTitle(`${prompt.title} (${prompt.targetModel}) — AI Prompt Recipe`)
+        : formatPageTitle('Prompt Not Found');
+    }
+    case 'free-tools':
+      return formatPageTitle('Free Browser-Based Utilities');
+    case 'free-tool-detail': {
+      const freeTool = getFreeToolBySlug(params.slug);
+      return freeTool
+        ? formatPageTitle(`${freeTool.name} (100% Client-Side) — Free Browser Utility`)
+        : formatPageTitle('Utility Not Found');
+    }
+    case 'compare':
+      return formatPageTitle('Side-by-Side Tool Comparison');
+    case 'pick':
+      return formatPageTitle('Help Me Pick: Guided Tool Discovery');
+    case 'saved':
+      return formatPageTitle('Saved Tools & Prompt Recipes');
+    case 'updates':
+      return formatPageTitle('Platform & Model Changelog');
+    case 'not-found':
+    default:
+      return formatPageTitle('404 Page Not Found');
+  }
+}
+
 const AppRoutes: React.FC = () => {
   const { route, params } = useRouter();
 
   useEffect(() => {
     if (typeof document === 'undefined') return;
-
-    switch (route) {
-      case 'home':
-        document.title = 'OpenAlternative — AI Tools & Open Source Discovery Platform';
-        break;
-      case 'tools':
-        document.title = 'All Open Source Tools — OpenAlternative';
-        break;
-      case 'tool-detail': {
-        const tool = getToolBySlug(params.slug);
-        document.title = tool
-          ? `${tool.name}: Open Source Alternative to ${tool.alternativesTo.join(', ')} — OpenAlternative`
-          : 'Tool Not Found — OpenAlternative';
-        break;
-      }
-      case 'categories':
-        document.title = 'Software Categories — OpenAlternative';
-        break;
-      case 'category-detail': {
-        const cat = getCategoryBySlug(params.slug);
-        document.title = cat
-          ? `Open Source ${cat.name} — OpenAlternative`
-          : 'Category Not Found — OpenAlternative';
-        break;
-      }
-      case 'alternatives':
-        document.title = 'Browse Proprietary Software Alternatives — OpenAlternative';
-        break;
-      case 'alternative-detail': {
-        const alt = getProprietaryToolBySlug(params.slug);
-        document.title = alt
-          ? `Open Source ${alt.name} Alternatives — OpenAlternative`
-          : 'Software Not Found — OpenAlternative';
-        break;
-      }
-      case 'collection-detail': {
-        const col = getCollectionBySlug(params.slug);
-        document.title = col
-          ? `${col.headline} — OpenAlternative`
-          : 'Collection Not Found — OpenAlternative';
-        break;
-      }
-      case 'ai-tools':
-        document.title = 'AI Tools & Generative Platforms Directory — OpenAlternative';
-        break;
-      case 'ai-tool-detail': {
-        const aiTool = getAiToolBySlug(params.slug);
-        document.title = aiTool
-          ? `${aiTool.name} (${aiTool.pricingType}) — AI Tool Review & Features`
-          : 'AI Tool Not Found — OpenAlternative';
-        break;
-      }
-      case 'free-ai-sites':
-        document.title = 'Free AI Sites & Zero-Cost Generative Tools — OpenAlternative';
-        break;
-      case 'guides':
-        document.title = 'Step-by-Step AI Workflows & Tutorials — OpenAlternative';
-        break;
-      case 'guide-detail': {
-        const guide = getGuideBySlug(params.slug);
-        document.title = guide
-          ? `${guide.title} — OpenAlternative Guides`
-          : 'Guide Not Found — OpenAlternative';
-        break;
-      }
-      case 'prompt-library':
-        document.title = 'AI Prompt Library & Creative Recipes — OpenAlternative';
-        break;
-      case 'prompt-detail': {
-        const prompt = getPromptBySlug(params.slug);
-        document.title = prompt
-          ? `${prompt.title} (${prompt.targetModel}) — AI Prompt Recipe`
-          : 'Prompt Not Found — OpenAlternative';
-        break;
-      }
-      case 'free-tools':
-        document.title = 'Free Browser-Based Utilities — OpenAlternative';
-        break;
-      case 'free-tool-detail': {
-        const freeTool = getFreeToolBySlug(params.slug);
-        document.title = freeTool
-          ? `${freeTool.name} (100% Client-Side) — Free Browser Utility`
-          : 'Utility Not Found — OpenAlternative';
-        break;
-      }
-      case 'compare':
-        document.title = 'Side-by-Side Tool Comparison — OpenAlternative';
-        break;
-      case 'pick':
-        document.title = 'Help Me Pick: Guided Tool Discovery — OpenAlternative';
-        break;
-      case 'saved':
-        document.title = 'Saved Tools & Prompt Recipes — OpenAlternative';
-        break;
-      case 'updates':
-        document.title = 'Platform & Model Changelog — OpenAlternative';
-        break;
-      case 'not-found':
-      default:
-        document.title = '404 Page Not Found — OpenAlternative';
-        break;
-    }
+    document.title = getRouteTitle(route, params);
   }, [route, params]);
 
   const renderRoute = () => {

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useRouter } from '../router/Router';
 import { getBookmarks, subscribeBookmarks } from '../services/bookmarkService';
+import { TechHacksLogo } from './TechHacksLogo';
 import {
   Menu,
   X,
@@ -45,19 +46,8 @@ export const Header: React.FC = () => {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-4">
         {/* Left: Brand Logo & Title */}
         <div className="flex items-center gap-6">
-          <Link to="/" className="flex items-center gap-2.5 group">
-            <div className="w-7 h-7 rounded-lg bg-primary/10 border border-primary/30 flex items-center justify-center text-primary group-hover:rotate-12 group-hover:scale-105 group-hover:bg-primary/20 group-hover:border-primary/50 transition-all duration-300 ease-out shadow-sm">
-              <svg
-                viewBox="0 0 24 24"
-                className="w-4 h-4 fill-current stroke-current"
-                strokeWidth="1.5"
-              >
-                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
-              </svg>
-            </div>
-            <span className="font-bold text-foreground text-base tracking-tight">
-              Open<span className="text-primary font-normal">Alternative</span>
-            </span>
+          <Link to="/" className="flex items-center" aria-label="Tech Hacks AI Home">
+            <TechHacksLogo size="sm" showWordmark={true} />
           </Link>
 
           {/* Desktop Navigation */}

@@ -110,7 +110,7 @@ describe('Phase 4: Interactive Browser Simulation & Route Navigation', () => {
     const { mockWindow } = setupMockBrowser('https://openalternative.co/');
     const html = renderClean(React.createElement(ssrModule.App));
 
-    assert.ok(html.includes('OpenAlternative'), 'Should render platform brand');
+    assert.ok(html.includes('Tech Hacks'), 'Should render platform brand');
     assert.ok(html.includes('Curated Open Source Software Directory'), 'Should render hero pill');
     assert.ok(html.includes('Open Source Alternatives to Popular Software'), 'Should render headline');
     assert.ok(html.includes('Supabase'), 'Should render seed tools');

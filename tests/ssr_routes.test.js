@@ -20,7 +20,7 @@ describe('Task 3 & 5: Component & Page Rendering Audit', () => {
     const html = ReactDOMServer.renderToString(React.createElement(ssrModule.App));
 
     assert.ok(html.length > 1000, 'Rendered HTML should have content');
-    assert.ok(html.includes('OpenAlternative'), 'HTML should include brand title');
+    assert.ok(html.includes('Tech Hacks'), 'HTML should include brand title');
     assert.ok(html.includes('Open Source Alternatives'), 'HTML should include headline');
     assert.ok(html.includes('Filters'), 'HTML should render filter drawer trigger');
     assert.ok(html.includes('Supabase'), 'HTML should render tool cards');

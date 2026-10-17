@@ -2,250 +2,250 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <!-- Core Routes -->
   <url>
-    <loc>https://openalternative.co/</loc>
+    <loc>https://techhacksai.com/</loc>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://openalternative.co/tools</loc>
+    <loc>https://techhacksai.com/tools</loc>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://openalternative.co/categories</loc>
+    <loc>https://techhacksai.com/categories</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://openalternative.co/alternatives</loc>
+    <loc>https://techhacksai.com/alternatives</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <!-- Curated Collections -->
   <url>
-    <loc>https://openalternative.co/collections/trending</loc>
+    <loc>https://techhacksai.com/collections/trending</loc>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://openalternative.co/collections/self-hosted</loc>
+    <loc>https://techhacksai.com/collections/self-hosted</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://openalternative.co/collections/ai-native</loc>
+    <loc>https://techhacksai.com/collections/ai-native</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://openalternative.co/collections/latest</loc>
+    <loc>https://techhacksai.com/collections/latest</loc>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
 
   <!-- Categories -->
   <url>
-    <loc>https://openalternative.co/categories/developer-tools</loc>
+    <loc>https://techhacksai.com/categories/developer-tools</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://openalternative.co/categories/ai-machine-learning</loc>
+    <loc>https://techhacksai.com/categories/ai-machine-learning</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://openalternative.co/categories/productivity</loc>
+    <loc>https://techhacksai.com/categories/productivity</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://openalternative.co/categories/business-software</loc>
+    <loc>https://techhacksai.com/categories/business-software</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://openalternative.co/categories/analytics</loc>
+    <loc>https://techhacksai.com/categories/analytics</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://openalternative.co/categories/design-media</loc>
+    <loc>https://techhacksai.com/categories/design-media</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://openalternative.co/categories/security-auth</loc>
+    <loc>https://techhacksai.com/categories/security-auth</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <!-- Proprietary Targets -->
   <url>
-    <loc>https://openalternative.co/alternatives/firebase</loc>
+    <loc>https://techhacksai.com/alternatives/firebase</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://openalternative.co/alternatives/notion</loc>
+    <loc>https://techhacksai.com/alternatives/notion</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://openalternative.co/alternatives/airtable</loc>
+    <loc>https://techhacksai.com/alternatives/airtable</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://openalternative.co/alternatives/buffer</loc>
+    <loc>https://techhacksai.com/alternatives/buffer</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://openalternative.co/alternatives/figma</loc>
+    <loc>https://techhacksai.com/alternatives/figma</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://openalternative.co/alternatives/zapier</loc>
+    <loc>https://techhacksai.com/alternatives/zapier</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://openalternative.co/alternatives/google-analytics</loc>
+    <loc>https://techhacksai.com/alternatives/google-analytics</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://openalternative.co/alternatives/postman</loc>
+    <loc>https://techhacksai.com/alternatives/postman</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://openalternative.co/alternatives/calendly</loc>
+    <loc>https://techhacksai.com/alternatives/calendly</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://openalternative.co/alternatives/docker</loc>
+    <loc>https://techhacksai.com/alternatives/docker</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://openalternative.co/alternatives/typeform</loc>
+    <loc>https://techhacksai.com/alternatives/typeform</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://openalternative.co/alternatives/slack</loc>
+    <loc>https://techhacksai.com/alternatives/slack</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://openalternative.co/alternatives/1password</loc>
+    <loc>https://techhacksai.com/alternatives/1password</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <!-- Open Source Tools -->
   <url>
-    <loc>https://openalternative.co/tools/supabase</loc>
+    <loc>https://techhacksai.com/tools/supabase</loc>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://openalternative.co/tools/appwrite</loc>
+    <loc>https://techhacksai.com/tools/appwrite</loc>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://openalternative.co/tools/pocketbase</loc>
+    <loc>https://techhacksai.com/tools/pocketbase</loc>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://openalternative.co/tools/plausible</loc>
+    <loc>https://techhacksai.com/tools/plausible</loc>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://openalternative.co/tools/umami</loc>
+    <loc>https://techhacksai.com/tools/umami</loc>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://openalternative.co/tools/posthog</loc>
+    <loc>https://techhacksai.com/tools/posthog</loc>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://openalternative.co/tools/affine</loc>
+    <loc>https://techhacksai.com/tools/affine</loc>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://openalternative.co/tools/appflowy</loc>
+    <loc>https://techhacksai.com/tools/appflowy</loc>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://openalternative.co/tools/nocodb</loc>
+    <loc>https://techhacksai.com/tools/nocodb</loc>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://openalternative.co/tools/baserow</loc>
+    <loc>https://techhacksai.com/tools/baserow</loc>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://openalternative.co/tools/penpot</loc>
+    <loc>https://techhacksai.com/tools/penpot</loc>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://openalternative.co/tools/n8n</loc>
+    <loc>https://techhacksai.com/tools/n8n</loc>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://openalternative.co/tools/activepieces</loc>
+    <loc>https://techhacksai.com/tools/activepieces</loc>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://openalternative.co/tools/calcom</loc>
+    <loc>https://techhacksai.com/tools/calcom</loc>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://openalternative.co/tools/crawl4ai</loc>
+    <loc>https://techhacksai.com/tools/crawl4ai</loc>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://openalternative.co/tools/dify</loc>
+    <loc>https://techhacksai.com/tools/dify</loc>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://openalternative.co/tools/hoppscotch</loc>
+    <loc>https://techhacksai.com/tools/hoppscotch</loc>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://openalternative.co/tools/coolify</loc>
+    <loc>https://techhacksai.com/tools/coolify</loc>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://openalternative.co/tools/formbricks</loc>
+    <loc>https://techhacksai.com/tools/formbricks</loc>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://openalternative.co/tools/mattermost</loc>
+    <loc>https://techhacksai.com/tools/mattermost</loc>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>

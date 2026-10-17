@@ -148,8 +148,8 @@ export const Footer: React.FC = () => {
             <h4 className="font-semibold text-foreground mb-3 text-xs uppercase tracking-wider">
               About Project
             </h4>
-            <p className="text-xs text-muted-foreground mb-3">
-              OpenAlternative is a curated community platform indexing reliable, production-ready open source software.
+            <p className="text-xs text-muted-foreground mb-3 leading-relaxed">
+              Tech Hacks AI is a curated discovery platform indexing the top generative AI tools, verified free software, open-source alternatives, step-by-step guides, and developer utilities.
             </p>
             <div className="flex items-center gap-3">
               <a
@@ -167,9 +167,9 @@ export const Footer: React.FC = () => {
 
         {/* Bottom Copyright */}
         <div className="pt-8 border-t border-border/40 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-muted-foreground">
-          <p>© {new Date().getFullYear()} OpenAlternative. Built with open web standards.</p>
+          <p>© {new Date().getFullYear()} Tech Hacks AI. Built with open web standards.</p>
           <p className="flex items-center gap-1">
-            Made with <Heart className="w-3 h-3 text-rose-500 fill-rose-500" /> for the open-source community
+            Made with <Heart className="w-3 h-3 text-rose-500 fill-rose-500" /> for the AI &amp; open-source community
           </p>
         </div>
       </div>

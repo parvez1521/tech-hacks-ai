@@ -94,7 +94,7 @@ export const HomePage: React.FC = () => {
 
         {/* Subtitle */}
         <p className="animate-fade-in-up [animation-delay:120ms] text-sm sm:text-lg text-secondary-foreground max-w-2xl mx-auto mb-8 font-normal leading-relaxed">
-          Over 1 million developers, creators, and businesses use OpenAlternative to replace expensive proprietary SaaS, explore top generative AI models, follow step-by-step guides, and run free browser utilities.
+          Over 1 million developers, creators, and businesses use Tech Hacks AI to replace expensive proprietary SaaS, explore top generative AI models, follow step-by-step guides, and run free browser utilities.
         </p>
 
         {/* Universal Search Bar with Intent Chips */}
