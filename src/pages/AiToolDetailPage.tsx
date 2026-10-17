@@ -4,7 +4,8 @@ import { getAiToolBySlug, filterAndSortAiTools } from '../services/aiCatalogServ
 import { BookmarkButton } from '../components/BookmarkButton';
 import { AiToolCard } from '../components/AiToolCard';
 import { BookmarkItem } from '../types';
-import { Sparkles, Star, ExternalLink, ArrowLeft, CheckCircle2, ShieldCheck, Tag } from 'lucide-react';
+import { Sparkles, Star, ExternalLink, ArrowLeft, CheckCircle2, ShieldCheck, Tag, Info, Calendar, Lock, Unlock, Server } from 'lucide-react';
+import { BrandLogo } from '../components/BrandLogo';
 
 export const AiToolDetailPage: React.FC = () => {
   const { params } = useRouter();
@@ -66,12 +67,14 @@ export const AiToolDetailPage: React.FC = () => {
       <div className="p-6 sm:p-8 rounded-xl border border-border bg-card/80 shadow-md mb-8">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
           <div className="flex items-center gap-4">
-            <div
-              className="w-14 h-14 rounded-xl flex items-center justify-center font-bold text-xl text-white shadow-md shrink-0"
-              style={{ backgroundColor: tool.iconBgColor }}
-            >
-              {tool.iconLetter}
-            </div>
+            <BrandLogo
+              slug={tool.slug}
+              name={tool.name}
+              size="xl"
+              iconBgColor={tool.iconBgColor}
+              iconLetter={tool.iconLetter}
+              className="w-14 h-14 rounded-xl shadow-md"
+            />
             <div>
               <div className="flex items-center gap-2 flex-wrap">
                 <h1 className="text-2xl sm:text-3xl font-extrabold text-foreground tracking-tight">
@@ -81,6 +84,12 @@ export const AiToolDetailPage: React.FC = () => {
                   <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-xs font-medium bg-amber-500/10 text-amber-400 border border-amber-500/20">
                     <Sparkles className="w-3 h-3" />
                     <span>Featured</span>
+                  </span>
+                )}
+                {tool.isSelfHostable && (
+                  <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-xs font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                    <Server className="w-3 h-3" />
+                    <span>Self-Hostable</span>
                   </span>
                 )}
               </div>
@@ -112,17 +121,79 @@ export const AiToolDetailPage: React.FC = () => {
           {tool.longDescription || tool.description}
         </p>
 
-        {/* Pricing Box */}
-        <div className="p-4 rounded-lg bg-muted/60 border border-border/80 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
-          <div>
-            <span className="font-semibold text-foreground uppercase tracking-wider block text-[11px] mb-0.5">
-              Pricing Structure
-            </span>
-            <span className="text-secondary-foreground">{tool.pricingDetails}</span>
+        {/* Verified Free Access & Pricing Specifications */}
+        <div className="p-5 rounded-lg bg-muted/60 border border-border/80 text-xs space-y-3">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-border/60 pb-3">
+            <div>
+              <span className="font-semibold text-foreground uppercase tracking-wider block text-[11px] mb-0.5">
+                Pricing Structure & Model Access
+              </span>
+              <span className="text-secondary-foreground">{tool.pricingDetails}</span>
+            </div>
+            <div className="flex items-center gap-2 self-start sm:self-auto">
+              <span className="font-mono px-2.5 py-1 rounded bg-card text-foreground border border-border font-medium capitalize">
+                {tool.pricingType}
+              </span>
+              <a
+                href={tool.pricingSourceUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1 px-2.5 py-1 rounded bg-primary/10 text-primary border border-primary/20 hover:bg-primary/20 transition-colors font-medium"
+              >
+                <span>Official Pricing</span>
+                <ExternalLink className="w-3 h-3" />
+              </a>
+            </div>
           </div>
-          <span className="font-mono px-2.5 py-1 rounded bg-card text-foreground border border-border font-medium self-start sm:self-auto capitalize">
-            {tool.pricingType}
-          </span>
+
+          {/* Granular Free Tier Information */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 pt-1">
+            <div className="p-3 rounded bg-card/60 border border-border/60">
+              <span className="text-muted-foreground block text-[11px] mb-1 font-medium">Free Access Quota</span>
+              <span className="text-foreground font-medium leading-tight block">{tool.freeTierSummary}</span>
+            </div>
+            <div className="p-3 rounded bg-card/60 border border-border/60">
+              <span className="text-muted-foreground block text-[11px] mb-1 font-medium">Free Tier Limits</span>
+              <span className="text-secondary-foreground leading-tight block">{tool.freeTierLimits}</span>
+            </div>
+            <div className="p-3 rounded bg-card/60 border border-border/60">
+              <span className="text-muted-foreground block text-[11px] mb-1 font-medium">Requirements & Verification</span>
+              <div className="flex flex-col gap-1 text-[11px]">
+                <span className="flex items-center gap-1.5 text-foreground">
+                  {tool.requiresAccount ? (
+                    <>
+                      <Lock className="w-3 h-3 text-amber-400" />
+                      <span>Account Required</span>
+                    </>
+                  ) : (
+                    <>
+                      <Unlock className="w-3 h-3 text-emerald-400" />
+                      <span>No Account Required (Instant)</span>
+                    </>
+                  )}
+                </span>
+                <span className="flex items-center gap-1.5 text-muted-foreground">
+                  <Calendar className="w-3 h-3" />
+                  <span>Verified: {tool.pricingVerifiedAt}</span>
+                </span>
+              </div>
+            </div>
+          </div>
+
+          {tool.openSourceRepoUrl && (
+            <div className="pt-2 flex items-center justify-between text-[11px] text-muted-foreground">
+              <span>Open-Source Repository & Local Deployment:</span>
+              <a
+                href={tool.openSourceRepoUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-primary hover:underline font-mono inline-flex items-center gap-1"
+              >
+                <span>GitHub Repository</span>
+                <ExternalLink className="w-3 h-3" />
+              </a>
+            </div>
+          )}
         </div>
       </div>
 

@@ -41,6 +41,11 @@ export function filterAndSortAiTools(state: AiFilterState): AiFilterResult {
     list = list.filter((tool) => tool.pricingType === state.pricingType);
   }
 
+  // 3b. Free Access Type
+  if (state.freeAccessType && state.freeAccessType !== 'all') {
+    list = list.filter((tool) => tool.freeAccessType === state.freeAccessType);
+  }
+
   // 4. Sort
   list.sort((a, b) => {
     switch (state.sortBy) {
@@ -88,6 +93,11 @@ export function getTrendingAiTools(limit = 6): AiTool[] {
 export function getFreeAiTools(limit?: number): AiTool[] {
   const free = aiToolsData.filter((t) => t.hasFreePlan || t.pricingType === 'free');
   return limit ? free.slice(0, limit) : free;
+}
+
+export function getOpenSourceAiTools(limit?: number): AiTool[] {
+  const os = aiToolsData.filter((t) => t.isSelfHostable || t.freeAccessType === 'open-source-local');
+  return limit ? os.slice(0, limit) : os;
 }
 
 export function getAllGuides(): Guide[] {

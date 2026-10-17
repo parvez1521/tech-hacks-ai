@@ -4,6 +4,7 @@ import { VerifiedBadge, AiNativeBadge } from './Badge';
 import { proprietaryTools } from '../data/alternatives';
 import { Link } from '../router/Router';
 import { Star, Clock, FileCode } from 'lucide-react';
+import { BrandLogo } from './BrandLogo';
 
 interface ToolCardProps {
   tool: Tool;
@@ -47,13 +48,14 @@ export const ToolCard: React.FC<ToolCardProps> = ({ tool }) => {
       <div className="relative z-10">
         <div className="flex items-center justify-between gap-3 mb-2.5">
           <div className="flex items-center gap-2.5 min-w-0">
-            {/* Custom App Avatar */}
-            <div
-              className="w-8 h-8 rounded-md flex items-center justify-center font-bold text-xs text-white shrink-0 shadow-inner group-hover:scale-105 transition-transform duration-300"
-              style={{ backgroundColor: tool.iconBgColor || '#3b82f6' }}
-            >
-              {tool.iconLetter || tool.name.slice(0, 2).toUpperCase()}
-            </div>
+            {/* Brand Logo with vector support and fallback */}
+            <BrandLogo
+              slug={tool.slug}
+              name={tool.name}
+              size="sm"
+              iconBgColor={tool.iconBgColor}
+              iconLetter={tool.iconLetter}
+            />
             <h3 className="font-semibold text-foreground text-base tracking-tight truncate group-hover:text-primary transition-colors duration-200">
               {tool.name}
             </h3>
@@ -123,12 +125,14 @@ export const ToolCard: React.FC<ToolCardProps> = ({ tool }) => {
                     to={`/alternatives/${alt.slug}`}
                     className="relative z-20 inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-xs bg-muted hover:bg-primary/10 hover:border-primary/40 hover:text-primary active:scale-95 text-foreground transition-all duration-150 border border-border"
                   >
-                    <span
-                      className="w-3.5 h-3.5 rounded-full flex items-center justify-center text-[9px] text-white shrink-0"
-                      style={{ backgroundColor: alt.iconBgColor }}
-                    >
-                      {alt.iconLetter}
-                    </span>
+                    <BrandLogo
+                      slug={alt.slug}
+                      name={alt.name}
+                      size="xs"
+                      iconBgColor={alt.iconBgColor}
+                      iconLetter={alt.iconLetter}
+                      className="w-3.5 h-3.5 rounded-full overflow-hidden p-0"
+                    />
                     <span className="font-medium truncate max-w-[80px]">{alt.name}</span>
                   </Link>
                 ))

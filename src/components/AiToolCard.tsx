@@ -3,6 +3,7 @@ import { AiTool, BookmarkItem } from '../types';
 import { Link } from '../router/Router';
 import { BookmarkButton } from './BookmarkButton';
 import { Star, ExternalLink, ArrowRight, Sparkles } from 'lucide-react';
+import { BrandLogo } from './BrandLogo';
 
 interface AiToolCardProps {
   tool: AiTool;
@@ -28,6 +29,14 @@ export const AiToolCard: React.FC<AiToolCardProps> = ({ tool }) => {
   };
 
   const getPricingBadge = () => {
+    if (tool.freeAccessType === 'open-source-local' || tool.isSelfHostable) {
+      return (
+        <span className="px-2 py-0.5 rounded text-[11px] font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+          Open Source
+        </span>
+      );
+    }
+
     switch (tool.pricingType) {
       case 'free':
         return (
@@ -39,6 +48,12 @@ export const AiToolCard: React.FC<AiToolCardProps> = ({ tool }) => {
         return (
           <span className="px-2 py-0.5 rounded text-[11px] font-semibold bg-blue-500/10 text-blue-400 border border-blue-500/20">
             Freemium
+          </span>
+        );
+      case 'free-credits':
+        return (
+          <span className="px-2 py-0.5 rounded text-[11px] font-semibold bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">
+            Credits
           </span>
         );
       case 'free-trial':
@@ -76,12 +91,13 @@ export const AiToolCard: React.FC<AiToolCardProps> = ({ tool }) => {
         {/* Top Header Row */}
         <div className="flex items-start justify-between gap-3 mb-2.5">
           <div className="flex items-center gap-2.5 min-w-0">
-            <div
-              className="w-9 h-9 rounded-md flex items-center justify-center font-bold text-xs text-white shrink-0 shadow-inner group-hover:scale-105 transition-transform duration-300"
-              style={{ backgroundColor: tool.iconBgColor || '#6366f1' }}
-            >
-              {tool.iconLetter || tool.name.slice(0, 2)}
-            </div>
+            <BrandLogo
+              slug={tool.slug}
+              name={tool.name}
+              size="md"
+              iconBgColor={tool.iconBgColor}
+              iconLetter={tool.iconLetter}
+            />
             <div className="min-w-0">
               <div className="flex items-center gap-1.5">
                 <Link

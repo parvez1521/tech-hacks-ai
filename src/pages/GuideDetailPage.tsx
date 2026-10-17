@@ -5,6 +5,7 @@ import { getToolBySlug } from '../services/catalogService';
 import { BookmarkButton } from '../components/BookmarkButton';
 import { BookmarkItem } from '../types';
 import { BookOpen, Clock, Calendar, Copy, Check, ArrowLeft, ArrowRight, ExternalLink, Wrench } from 'lucide-react';
+import { BrandLogo } from '../components/BrandLogo';
 
 export const GuideDetailPage: React.FC = () => {
   const { params } = useRouter();
@@ -172,12 +173,14 @@ export const GuideDetailPage: React.FC = () => {
                   className="flex items-center justify-between p-3 rounded-lg border border-border bg-muted/50 hover:bg-muted transition-colors"
                 >
                   <div className="flex items-center gap-2.5 min-w-0">
-                    <div
-                      className="w-7 h-7 rounded flex items-center justify-center font-bold text-xs text-white shrink-0"
-                      style={{ backgroundColor: tool.iconBgColor }}
-                    >
-                      {tool.iconLetter}
-                    </div>
+                    <BrandLogo
+                      slug={tool.slug}
+                      name={tool.name}
+                      size="xs"
+                      iconBgColor={tool.iconBgColor}
+                      iconLetter={tool.iconLetter}
+                      className="w-7 h-7"
+                    />
                     <span className="font-semibold text-sm text-foreground truncate">{tool.name}</span>
                   </div>
                   <span className="text-xs text-primary font-medium shrink-0">View Tool →</span>

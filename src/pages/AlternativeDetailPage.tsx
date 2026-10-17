@@ -6,6 +6,7 @@ import { Pagination } from '../components/Pagination';
 import { EmptyState } from '../components/EmptyState';
 import { SortOption } from '../types';
 import { Replace, ExternalLink, ArrowLeft, Search, X, SlidersHorizontal } from 'lucide-react';
+import { BrandLogo } from '../components/BrandLogo';
 
 const PAGE_SIZE = 12;
 
@@ -152,12 +153,13 @@ export const AlternativeDetailPage: React.FC = () => {
         <div className="p-5 rounded-xl border border-border bg-card/80 shadow-sm flex flex-col justify-between">
           <div>
             <div className="flex items-center gap-3 mb-2.5">
-              <div
-                className="w-10 h-10 rounded-md flex items-center justify-center font-bold text-sm text-white shrink-0 shadow-inner"
-                style={{ backgroundColor: proprietary.iconBgColor }}
-              >
-                {proprietary.iconLetter}
-              </div>
+              <BrandLogo
+                slug={proprietary.slug}
+                name={proprietary.name}
+                size="lg"
+                iconBgColor={proprietary.iconBgColor}
+                iconLetter={proprietary.iconLetter}
+              />
               <div>
                 <h2 className="font-bold text-foreground text-base">
                   {proprietary.name}

@@ -4,6 +4,7 @@ import { Link } from '../router/Router';
 import { getCategoryBySlug } from '../services/catalogService';
 import { VerifiedBadge, AiNativeBadge } from './Badge';
 import { Star, FileCode, ExternalLink, Github, ArrowRight } from 'lucide-react';
+import { BrandLogo } from './BrandLogo';
 
 interface ReplacementCardProps {
   tool: Tool;
@@ -38,12 +39,13 @@ export const ReplacementCard: React.FC<ReplacementCardProps> = ({ tool, propriet
         {/* Top Header: Logo, Name, Badges, Category */}
         <div className="flex items-start justify-between gap-3 mb-2.5">
           <div className="flex items-center gap-2.5 min-w-0">
-            <div
-              className="w-9 h-9 rounded-md flex items-center justify-center font-bold text-xs text-white shrink-0 shadow-inner group-hover:scale-105 transition-transform duration-300"
-              style={{ backgroundColor: tool.iconBgColor || '#3b82f6' }}
-            >
-              {tool.iconLetter || tool.name.slice(0, 2).toUpperCase()}
-            </div>
+            <BrandLogo
+              slug={tool.slug}
+              name={tool.name}
+              size="md"
+              iconBgColor={tool.iconBgColor}
+              iconLetter={tool.iconLetter}
+            />
             <div className="min-w-0">
               <div className="flex items-center gap-1.5">
                 <Link

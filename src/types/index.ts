@@ -82,7 +82,9 @@ export interface FilterState {
   page: number;
 }
 
-export type PricingType = 'free' | 'freemium' | 'paid' | 'free-trial';
+export type PricingType = 'free' | 'freemium' | 'paid' | 'free-trial' | 'free-credits';
+
+export type FreeAccessType = 'open-source-local' | 'recurring-free' | 'limited-free' | 'free-credits' | 'none';
 
 export interface AiTool {
   id: string;
@@ -104,6 +106,14 @@ export interface AiTool {
   tags: string[];
   hasFreePlan: boolean;
   releaseYear?: number;
+  freeAccessType: FreeAccessType;
+  freeTierSummary: string;
+  freeTierLimits: string;
+  requiresAccount: boolean;
+  pricingSourceUrl: string;
+  pricingVerifiedAt: string;
+  isSelfHostable?: boolean;
+  openSourceRepoUrl?: string;
 }
 
 export interface GuideStep {
@@ -180,7 +190,9 @@ export interface AiFilterState {
   searchQuery: string;
   category: string | null;
   pricingType: PricingType | 'all';
+  freeAccessType?: FreeAccessType | 'all';
   sortBy: 'popular' | 'latest' | 'name_asc' | 'rating';
   page: number;
 }
+
 

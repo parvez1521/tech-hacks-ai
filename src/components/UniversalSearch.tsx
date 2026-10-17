@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { useRouter, Link } from '../router/Router';
 import { universalSearch, UniversalSearchResult } from '../services/aiCatalogService';
 import { Search, X, Sparkles, FolderKanban, Replace, BookOpen, MessageSquareCode, Wrench, ArrowRight } from 'lucide-react';
+import { BrandLogo } from './BrandLogo';
 
 export const UniversalSearch: React.FC = () => {
   const [query, setQuery] = useState('');
@@ -114,12 +115,14 @@ export const UniversalSearch: React.FC = () => {
                         onClick={() => setIsOpen(false)}
                         className="flex items-center gap-2.5 p-2 rounded-lg hover:bg-muted/70 transition-colors"
                       >
-                        <div
-                          className="w-7 h-7 rounded flex items-center justify-center font-bold text-xs text-white shrink-0"
-                          style={{ backgroundColor: tool.iconBgColor }}
-                        >
-                          {tool.iconLetter}
-                        </div>
+                        <BrandLogo
+                          slug={tool.slug}
+                          name={tool.name}
+                          size="xs"
+                          iconBgColor={tool.iconBgColor}
+                          iconLetter={tool.iconLetter}
+                          className="w-7 h-7"
+                        />
                         <div className="min-w-0">
                           <p className="font-semibold text-foreground text-sm truncate">{tool.name}</p>
                           <p className="text-xs text-muted-foreground truncate">{tool.tagline}</p>
@@ -145,12 +148,14 @@ export const UniversalSearch: React.FC = () => {
                         onClick={() => setIsOpen(false)}
                         className="flex items-center gap-2.5 p-2 rounded-lg hover:bg-muted/70 transition-colors"
                       >
-                        <div
-                          className="w-7 h-7 rounded flex items-center justify-center font-bold text-xs text-white shrink-0"
-                          style={{ backgroundColor: tool.iconBgColor }}
-                        >
-                          {tool.iconLetter}
-                        </div>
+                        <BrandLogo
+                          slug={tool.slug}
+                          name={tool.name}
+                          size="xs"
+                          iconBgColor={tool.iconBgColor}
+                          iconLetter={tool.iconLetter}
+                          className="w-7 h-7"
+                        />
                         <div className="min-w-0">
                           <p className="font-semibold text-foreground text-sm truncate">{tool.name}</p>
                           <p className="text-xs text-muted-foreground truncate">{tool.tagline}</p>
@@ -176,12 +181,14 @@ export const UniversalSearch: React.FC = () => {
                         onClick={() => setIsOpen(false)}
                         className="flex items-center gap-2.5 p-2 rounded-lg hover:bg-muted/70 transition-colors"
                       >
-                        <div
-                          className="w-7 h-7 rounded flex items-center justify-center font-bold text-xs text-white shrink-0"
-                          style={{ backgroundColor: alt.iconBgColor }}
-                        >
-                          {alt.iconLetter}
-                        </div>
+                        <BrandLogo
+                          slug={alt.slug}
+                          name={alt.name}
+                          size="xs"
+                          iconBgColor={alt.iconBgColor}
+                          iconLetter={alt.iconLetter}
+                          className="w-7 h-7"
+                        />
                         <div className="min-w-0">
                           <p className="font-semibold text-foreground text-sm truncate">{alt.name}</p>
                           <p className="text-xs text-muted-foreground truncate">Explore open alternatives →</p>

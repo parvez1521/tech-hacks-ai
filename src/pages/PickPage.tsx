@@ -4,6 +4,7 @@ import { aiToolsData } from '../data/aiToolsData';
 import { Link } from '../router/Router';
 import { Tool, AiTool } from '../types';
 import { Sparkles, ArrowRight, ArrowLeft, RefreshCw, CheckCircle2, Star, ExternalLink, ShieldCheck } from 'lucide-react';
+import { BrandLogo } from '../components/BrandLogo';
 
 interface MatchedRecommendation {
   tool: Tool | AiTool;
@@ -333,12 +334,13 @@ export const PickPage: React.FC = () => {
                 >
                   <div className="flex items-start justify-between gap-3">
                     <div className="flex items-center gap-3">
-                      <div
-                        className="w-10 h-10 rounded-lg flex items-center justify-center font-bold text-sm text-white shrink-0 shadow-inner"
-                        style={{ backgroundColor: tool.iconBgColor }}
-                      >
-                        {tool.iconLetter}
-                      </div>
+                      <BrandLogo
+                        slug={tool.slug}
+                        name={tool.name}
+                        size="lg"
+                        iconBgColor={tool.iconBgColor}
+                        iconLetter={tool.iconLetter}
+                      />
                       <div>
                         <div className="flex items-center gap-2">
                           <Link to={link} className="font-bold text-base text-foreground hover:text-primary transition-colors">

@@ -5,6 +5,7 @@ import { proprietaryTools } from '../data/alternatives';
 import { categories } from '../data/categories';
 import { ToolCard } from '../components/ToolCard';
 import { VerifiedBadge, AiNativeBadge } from '../components/Badge';
+import { BrandLogo } from '../components/BrandLogo';
 import {
   ExternalLink,
   Github,
@@ -67,12 +68,14 @@ export const ToolDetailPage: React.FC = () => {
       <div className="p-6 sm:p-8 rounded-xl border border-border bg-card/60 mb-8 shadow-sm">
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 mb-6">
           <div className="flex items-center gap-4">
-            <div
-              className="w-14 h-14 rounded-xl flex items-center justify-center font-bold text-xl text-white shadow-md shrink-0"
-              style={{ backgroundColor: tool.iconBgColor }}
-            >
-              {tool.iconLetter}
-            </div>
+            <BrandLogo
+              slug={tool.slug}
+              name={tool.name}
+              size="xl"
+              iconBgColor={tool.iconBgColor}
+              iconLetter={tool.iconLetter}
+              className="w-14 h-14 rounded-xl shadow-md"
+            />
             <div>
               <div className="flex items-center gap-2 mb-1">
                 <h1 className="text-2xl sm:text-3xl font-extrabold text-foreground tracking-tight">
@@ -122,12 +125,14 @@ export const ToolDetailPage: React.FC = () => {
                   to={`/alternatives/${alt.slug}`}
                   className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-background border border-border hover:border-primary/50 hover:bg-primary/10 hover:text-primary active:scale-95 text-foreground transition-all duration-150 shadow-xs"
                 >
-                  <span
-                    className="w-3.5 h-3.5 rounded-full flex items-center justify-center text-[9px] text-white font-bold"
-                    style={{ backgroundColor: alt.iconBgColor }}
-                  >
-                    {alt.iconLetter}
-                  </span>
+                  <BrandLogo
+                    slug={alt.slug}
+                    name={alt.name}
+                    size="xs"
+                    iconBgColor={alt.iconBgColor}
+                    iconLetter={alt.iconLetter}
+                    className="w-3.5 h-3.5 rounded-full overflow-hidden p-0"
+                  />
                   <span className="font-semibold">{alt.name}</span>
                 </Link>
               ))}

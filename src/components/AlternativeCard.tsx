@@ -3,6 +3,7 @@ import { ProprietaryTool } from '../types';
 import { Link } from '../router/Router';
 import { getToolsForProprietary, getCategoryBySlug } from '../services/catalogService';
 import { ArrowRight } from 'lucide-react';
+import { BrandLogo } from './BrandLogo';
 
 interface AlternativeCardProps {
   alternative: ProprietaryTool;
@@ -47,12 +48,13 @@ export const AlternativeCard: React.FC<AlternativeCardProps> = ({ alternative })
         {/* Header: Logo, Name, Category, Alternative Count */}
         <div className="flex items-start justify-between gap-3 mb-3">
           <div className="flex items-center gap-3 min-w-0">
-            <div
-              className="w-10 h-10 rounded-md flex items-center justify-center font-bold text-sm text-white shrink-0 shadow-inner group-hover:scale-105 transition-transform duration-300"
-              style={{ backgroundColor: alternative.iconBgColor || '#3b82f6' }}
-            >
-              {alternative.iconLetter || alternative.name.slice(0, 2)}
-            </div>
+            <BrandLogo
+              slug={alternative.slug}
+              name={alternative.name}
+              size="lg"
+              iconBgColor={alternative.iconBgColor}
+              iconLetter={alternative.iconLetter}
+            />
             <div className="min-w-0">
               <h3 className="font-semibold text-foreground text-base tracking-tight truncate group-hover:text-primary transition-colors duration-200">
                 {alternative.name}

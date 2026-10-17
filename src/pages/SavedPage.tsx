@@ -3,6 +3,7 @@ import { getBookmarks, removeBookmark, clearBookmarks, subscribeBookmarks } from
 import { BookmarkItem } from '../types';
 import { Link } from '../router/Router';
 import { Bookmark, Trash2, ExternalLink, ArrowRight, Sparkles, BookOpen, MessageSquareCode, FolderKanban } from 'lucide-react';
+import { BrandLogo } from '../components/BrandLogo';
 
 export const SavedPage: React.FC = () => {
   const [items, setItems] = useState<BookmarkItem[]>([]);
@@ -138,7 +139,16 @@ export const SavedPage: React.FC = () => {
               className="p-4 rounded-xl border border-border bg-card/80 hover:bg-card flex items-center justify-between gap-4 transition-all shadow-sm"
             >
               <div className="flex items-center gap-3 min-w-0">
-                {item.iconLetter ? (
+                {item.slug && (item.type === 'open-source-tool' || item.type === 'ai-tool') ? (
+                  <BrandLogo
+                    slug={item.slug}
+                    name={item.title}
+                    size="sm"
+                    iconBgColor={item.iconBgColor}
+                    iconLetter={item.iconLetter}
+                    className="w-8 h-8"
+                  />
+                ) : item.iconLetter ? (
                   <div
                     className="w-8 h-8 rounded-md flex items-center justify-center font-bold text-xs text-white shrink-0 shadow-inner"
                     style={{ backgroundColor: item.iconBgColor || '#3b82f6' }}

@@ -6,6 +6,7 @@ import { toolsData } from '../data/seedData';
 import { aiToolsData } from '../data/aiToolsData';
 import { Tool, AiTool } from '../types';
 import { Scales, Plus, X, ExternalLink, Check, Star, ShieldCheck, HardDrive, RefreshCw } from 'lucide-react';
+import { BrandLogo } from '../components/BrandLogo';
 
 type UnifiedTool =
   | { kind: 'open-source'; data: Tool }
@@ -162,12 +163,14 @@ export const ComparePage: React.FC = () => {
                   <th key={t.data.id} className="p-4 min-w-[220px] max-w-[280px]">
                     <div className="flex items-start justify-between gap-2">
                       <div className="flex items-center gap-2">
-                        <div
-                          className="w-7 h-7 rounded flex items-center justify-center font-bold text-xs text-white shrink-0"
-                          style={{ backgroundColor: t.data.iconBgColor }}
-                        >
-                          {t.data.iconLetter}
-                        </div>
+                        <BrandLogo
+                          slug={t.data.slug}
+                          name={t.data.name}
+                          size="xs"
+                          iconBgColor={t.data.iconBgColor}
+                          iconLetter={t.data.iconLetter}
+                          className="w-7 h-7"
+                        />
                         <div>
                           <span className="font-bold text-foreground text-sm block truncate">{t.data.name}</span>
                           <span className="text-[10px] text-muted-foreground uppercase font-mono">
