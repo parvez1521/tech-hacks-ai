@@ -85,6 +85,11 @@ export const Footer: React.FC = () => {
                   Trending Projects
                 </Link>
               </li>
+              <li>
+                <Link to="/offers" className="hover:text-foreground text-primary font-medium">
+                  AI Deals &amp; Student Benefits
+                </Link>
+              </li>
             </ul>
           </div>
 

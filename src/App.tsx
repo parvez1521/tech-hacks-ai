@@ -17,6 +17,7 @@ import {
   getPromptBySlug,
   getFreeToolBySlug,
 } from './services/aiCatalogService';
+import { getOfferBySlug } from './data/offersData';
 
 // Pages
 import { HomePage } from './pages/HomePage';
@@ -40,6 +41,8 @@ import { ComparePage } from './pages/ComparePage';
 import { PickPage } from './pages/PickPage';
 import { SavedPage } from './pages/SavedPage';
 import { UpdatesPage } from './pages/UpdatesPage';
+import { OffersPage } from './pages/OffersPage';
+import { OfferDetailPage } from './pages/OfferDetailPage';
 import { NotFoundPage } from './pages/NotFoundPage';
 
 export function getRouteTitle(route: string, params: Record<string, string> = {}): string {
@@ -118,6 +121,14 @@ export function getRouteTitle(route: string, params: Record<string, string> = {}
       return formatPageTitle('Saved Tools & Prompt Recipes');
     case 'updates':
       return formatPageTitle('Platform & Model Changelog');
+    case 'offers':
+      return formatPageTitle('AI Deals, Student Plans & Exclusive Discounts');
+    case 'offer-detail': {
+      const offer = getOfferBySlug(params.slug);
+      return offer
+        ? formatPageTitle(`${offer.title} — AI Deals & Benefits`)
+        : formatPageTitle('Offer Not Found');
+    }
     case 'not-found':
     default:
       return formatPageTitle('404 Page Not Found');
@@ -176,6 +187,10 @@ const AppRoutes: React.FC = () => {
         return <SavedPage />;
       case 'updates':
         return <UpdatesPage />;
+      case 'offers':
+        return <OffersPage />;
+      case 'offer-detail':
+        return <OfferDetailPage />;
       case 'not-found':
       default:
         return <NotFoundPage />;

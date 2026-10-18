@@ -40,6 +40,7 @@ export const UniversalSearch: React.FC = () => {
     { label: '💻 Build an app', to: '/tools?category=developer-tools' },
     { label: '⚡ Automate work', to: '/tools?category=developer-tools' },
     { label: '🎁 Free AI tools', to: '/free-ai-sites' },
+    { label: '🏷️ AI Deals & Student Perks', to: '/offers' },
     { label: '🔄 Replace proprietary SaaS', to: '/alternatives' },
     { label: '✨ Discover prompts', to: '/prompt-library' },
   ];

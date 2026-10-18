@@ -69,6 +69,15 @@ function matchRoute(pathname: string): { route: string; params: Record<string, s
   if (cleanPath === '/updates') {
     return { route: 'updates', params: {} };
   }
+  if (cleanPath === '/offers') {
+    return { route: 'offers', params: {} };
+  }
+
+  // /offers/:slug
+  const offersMatch = cleanPath.match(/^\/offers\/([^/]+)$/);
+  if (offersMatch) {
+    return { route: 'offer-detail', params: { slug: offersMatch[1] } };
+  }
 
   // /tools/:slug
   const toolsMatch = cleanPath.match(/^\/tools\/([^/]+)$/);

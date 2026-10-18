@@ -6,8 +6,10 @@ import { AiToolCard } from '../components/AiToolCard';
 import { GuideCard } from '../components/GuideCard';
 import { PromptCard } from '../components/PromptCard';
 import { Pagination } from '../components/Pagination';
+import { OfferCard } from '../components/OfferCard';
 import { proprietaryTools } from '../data/alternatives';
 import { aiToolsData, aiCategories } from '../data/aiToolsData';
+import { getFeaturedOffers } from '../data/offersData';
 import { getAllGuides, getAllPrompts, getAllFreeTools } from '../services/aiCatalogService';
 import {
   Sparkles,
@@ -25,6 +27,8 @@ import {
   Check,
   SlidersHorizontal,
   Flame,
+  Tag,
+  Gift,
 } from 'lucide-react';
 
 export const HomePage: React.FC = () => {
@@ -50,6 +54,9 @@ export const HomePage: React.FC = () => {
 
   // 4. Client-side utilities preview
   const previewUtilities = getAllFreeTools().slice(0, 3);
+
+  // 5. Featured AI Deals & Student Benefits
+  const previewOffers = getFeaturedOffers().slice(0, 3);
 
   const handleNewsletterSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -360,6 +367,40 @@ export const HomePage: React.FC = () => {
               </Link>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* =========================================================================
+          SECTION 4.5: VERIFIED AI DEALS & STUDENT BENEFITS
+      ========================================================================= */}
+      <section className="max-w-6xl mx-auto px-4 sm:px-6 w-full">
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-6">
+          <div>
+            <div className="inline-flex items-center gap-2 text-primary text-xs font-semibold uppercase tracking-wider mb-2">
+              <Tag className="w-4 h-4" />
+              <span>Verified AI Perks &amp; Partnerships</span>
+            </div>
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-foreground tracking-tight">
+              AI Deals, Student Plans &amp; Bundles
+            </h2>
+            <p className="text-sm text-secondary-foreground max-w-xl mt-1">
+              Save hundreds of dollars on premium AI access through verified carrier bundles (like Jio + Gemini), student developer packs, and startup cloud credits.
+            </p>
+          </div>
+
+          <Link
+            to="/offers"
+            className="inline-flex items-center gap-1.5 text-primary text-xs font-semibold hover:text-primary-hover transition-colors shrink-0"
+          >
+            <span>Explore All {getFeaturedOffers().length}+ Verified Deals</span>
+            <ArrowRight className="w-4 h-4" />
+          </Link>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {previewOffers.map((offer) => (
+            <OfferCard key={offer.id} offer={offer} />
+          ))}
         </div>
       </section>
 

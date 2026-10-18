@@ -248,4 +248,40 @@ export interface AiFilterState {
   page: number;
 }
 
+export type OfferType =
+  | 'free-subscription'
+  | 'student-plan'
+  | 'telecom-bundle'
+  | 'developer-pack'
+  | 'startup-credits'
+  | 'discount'
+  | 'coupon'
+  | 'free-trial';
+
+export interface AiOffer {
+  id: string;
+  slug: string;
+  title: string;
+  provider: string;
+  description: string;
+  offerType: OfferType;
+  eligibility: string;
+  benefitSummary: string;
+  claimUrl: string;
+  officialTermsUrl: string;
+  couponCode?: string;
+  discountValue?: string;
+  validFrom?: string;
+  validUntil?: string;
+  lastVerifiedAt: string;
+  verificationStatus: 'verified-active' | 'limited-time' | 'archived-expired';
+  region: 'India' | 'Global' | 'US' | 'EU';
+  requiresStudentVerification: boolean;
+  renewalTerms: string;
+  claimSteps: { step: number; title: string; detail: string }[];
+  logoAssetPath: string;
+  tags: string[];
+  isFeatured?: boolean;
+}
+
 

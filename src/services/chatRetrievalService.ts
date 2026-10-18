@@ -37,7 +37,177 @@ export function generateGroundedResponse(userQuery: string): ChatMessage {
   const q = normalizeQuery(userQuery);
   const now = Date.now();
 
-  // 1. Pika Specific Query (Pricing & Recurring Free Check)
+  // 1. Jio Gemini Offer / Reliance Jio Bundle Query
+  if (
+    q.includes('jio') ||
+    q.includes('jio gemini') ||
+    q.includes('jio google') ||
+    q.includes('jio 5g') ||
+    q.includes('jio offer')
+  ) {
+    const isHindi = q.includes('kaise') || q.includes('kare') || q.includes('milega') || q.includes('kya hai');
+    const intro = isHindi
+      ? `**Reliance Jio + Google One AI Premium (Gemini Advanced) Offer:**\n\nJio ke True 5G users ko takreeban 18 months tak Google One AI Premium (Gemini Advanced) complimentary milta hai.`
+      : `**Reliance Jio + Google One AI Premium (Gemini Advanced) Offer Details:**\n\nEligible Reliance Jio 5G users in India can receive up to 18 months of complimentary Google One AI Premium (worth ₹1,950/month).`;
+
+    return {
+      id: `bot-${now}`,
+      sender: 'assistant',
+      timestamp: now,
+      text: `${intro}\n\n` +
+        `**What is included:**\n` +
+        `• **Gemini Advanced:** Access to Google's frontier 1.5 Pro multimodal reasoning model\n` +
+        `• **2TB Cloud Storage:** Shared across Google Drive, Gmail, and Google Photos\n` +
+        `• **Google Workspace AI:** Gemini integrated into Docs, Sheets, and Gmail\n\n` +
+        `**Eligibility Criteria:**\n` +
+        `• Active Reliance Jio prepaid or postpaid mobile subscription in India on eligible True 5G unlimited plans (e.g., ₹349+ 28-day plan or quarterly/annual tiers) with a 5G compatible device.\n\n` +
+        `**Step-by-Step Claim Process:**\n` +
+        `1. Ensure an active recharge of ₹349 or higher on your Jio number.\n` +
+        `2. Open the **MyJio App** on your smartphone connected to the Jio network.\n` +
+        `3. Look for the **Google Gemini / Google One AI Offer** banner on the home screen or under Coupons/Rewards.\n` +
+        `4. Link your primary Google Account and complete the Google Play zero-dollar verification to activate.\n\n` +
+        `**Renewal Terms & Caution:**\n` +
+        `• Complimentary access is strictly linked to continuous qualifying Jio 5G recharges. If your recharge lapses, access suspends. After the offer period ends, it renews at standard Google One monthly rates unless cancelled.\n\n` +
+        `👉 View full details and claim links on our [Jio Google Gemini Deal Page](/offers/jio-google-gemini-offer).`,
+      suggestions: [
+        'How to verify student status for Gemini',
+        'GitHub Student Developer Pack',
+        'Explore All AI Deals',
+      ],
+      groundedTools: [
+        { name: 'Google Gemini', slug: 'gemini', type: 'ai', pricingSummary: '18 Months Free via Jio True 5G', websiteUrl: 'https://gemini.google.com' },
+      ],
+    };
+  }
+
+  // 2. Student AI Plans & Educational Discounts
+  if (
+    q.includes('student') ||
+    q.includes('college') ||
+    q.includes('university') ||
+    q.includes('sheerid') ||
+    q.includes('campus') ||
+    q.includes('education discount')
+  ) {
+    return {
+      id: `bot-${now}`,
+      sender: 'assistant',
+      timestamp: now,
+      text: `**Verified Student AI Perks & Developer Packages:**\n\n` +
+        `If you are an enrolled college or university student with an academic email (.edu or campus domain), you can access significant verified AI discounts and free subscriptions:\n\n` +
+        `• [GitHub Student Developer Pack](/offers/github-student-pack-copilot) — **100% Free GitHub Copilot Individual**, free GitHub Pro, JetBrains suite, and $100+ cloud credits.\n` +
+        `• [Google Gemini Student Plan (India)](/offers/google-gemini-student-offer-india) — Subsidized and complimentary access to Gemini Advanced & 2TB Drive storage via SheerID verification.\n` +
+        `• [Perplexity Education Pro](/offers/perplexity-education-pro) — Discounted Pro Search with multi-model switching (Claude 3.5 Sonnet, GPT-4o) for verified students and faculty.\n` +
+        `• [JetBrains Student Pack](/offers/jetbrains-student-pack) — Free professional IDE suite (IntelliJ, PyCharm, WebStorm) for active students.\n` +
+        `• [Notion for Education](/offers/notion-for-education) — Free Notion Plus tier with unlimited file uploads for students and teachers.\n\n` +
+        `👉 Explore all verified student packages and claim links on our [AI Deals & Student Benefits Directory](/offers).`,
+      suggestions: [
+        'GitHub Copilot Student activation',
+        'Perplexity Education Pro requirements',
+        'Reliance Jio Gemini 18mo offer',
+      ],
+      groundedTools: [
+        { name: 'GitHub Copilot', slug: 'copilot', type: 'ai', pricingSummary: '100% Free for Students', websiteUrl: 'https://education.github.com/pack' },
+        { name: 'Perplexity', slug: 'perplexity', type: 'ai', pricingSummary: 'Academic Discount available', websiteUrl: 'https://www.perplexity.ai/pro' },
+      ],
+    };
+  }
+
+  // 3. Coupons, Promo Codes & Discounts
+  if (
+    q.includes('coupon') ||
+    q.includes('promo code') ||
+    q.includes('discount code') ||
+    q.includes('voucher') ||
+    q.includes('promo')
+  ) {
+    return {
+      id: `bot-${now}`,
+      sender: 'assistant',
+      timestamp: now,
+      text: `**Verified AI Deals & Partner Benefits (No Fake Codes):**\n\n` +
+        `Tech Hacks AI independently verifies official institutional discounts, carrier partnerships, and cloud credit programs. We **never** list expired or fabricated coupon codes.\n\n` +
+        `**Top Active Verified Offers Today:**\n` +
+        `• [Reliance Jio + Google Gemini](/offers/jio-google-gemini-offer) — 18 Months free Google One AI Premium (Gemini Advanced + 2TB storage) for Jio 5G users.\n` +
+        `• [GitHub Student Developer Pack](/offers/github-student-pack-copilot) — Free GitHub Copilot Individual for students.\n` +
+        `• [Google AI Student Plan India](/offers/google-gemini-student-offer-india) — Gemini Advanced student discount.\n` +
+        `• [Microsoft for Startups Founders Hub](/offers/microsoft-founders-hub-credits) — Up to $150k in Azure cloud & OpenAI credits for early-stage builders.\n` +
+        `• [AWS Activate](/offers/aws-activate-ai-startups) — $1,000+ in AWS Bedrock & compute credits for bootstrapped startups.\n\n` +
+        `👉 Browse all terms and claim instructions on our [AI Deals Directory](/offers).`,
+      suggestions: [
+        'Jio Gemini 18-month deal details',
+        'Free GitHub Copilot for students',
+        'Startup cloud credits',
+      ],
+    };
+  }
+
+  // 4. Claude Code Alternatives
+  if (
+    q.includes('claude code') ||
+    (q.includes('claude') && (q.includes('cli') || q.includes('terminal') || q.includes('agent'))) ||
+    q.includes('aider') ||
+    q.includes('cline') ||
+    q.includes('roocode') ||
+    q.includes('opencode')
+  ) {
+    return {
+      id: `bot-${now}`,
+      sender: 'assistant',
+      timestamp: now,
+      text: `**Top Open-Source Alternatives to Claude Code (Agentic CLI & Coding):**\n\n` +
+        `Claude Code is Anthropic's agentic command-line assistant. If you want open-source, multi-model, or local alternatives with zero vendor lock-in, here are the top tools:\n\n` +
+        `• [Aider](/tools/aider) — The leading AI pair programming CLI. Edits files in git repos, creates automated commits, and supports Claude 3.5 Sonnet, DeepSeek-R1, and local Ollama models.\n` +
+        `• [Cline](/tools/cline) — Autonomous coding agent for VS Code. Can create/edit files, run terminal commands, execute browser tests with Playwright, and inspect errors.\n` +
+        `• [Roo Code](/tools/roocode) — Autonomous coding extension with custom modes (Architect, Code, Ask) and multi-model API support.\n` +
+        `• [OpenCode](/tools/opencode) — Modern open-source terminal coding assistant built with Go/Node.\n\n` +
+        `👉 View the full breakdown and comparison on [Claude Code Alternatives](/alternatives/claude-code).`,
+      suggestions: [
+        'How to setup Aider with DeepSeek-R1',
+        'Cline vs Roo Code',
+        'Cursor Editor alternatives',
+      ],
+      groundedTools: [
+        { name: 'Aider', slug: 'aider', type: 'open-source', pricingSummary: 'Apache 2.0 (Terminal CLI)', websiteUrl: 'https://aider.chat' },
+        { name: 'Cline', slug: 'cline', type: 'open-source', pricingSummary: 'Apache 2.0 (VS Code Agent)', websiteUrl: 'https://cline.bot' },
+        { name: 'Roo Code', slug: 'roocode', type: 'open-source', pricingSummary: 'Apache 2.0 (Multi-mode Agent)', websiteUrl: 'https://github.com/RooVetGit/Roo-Code' },
+        { name: 'OpenCode', slug: 'opencode', type: 'open-source', pricingSummary: 'MIT (Terminal Assistant)', websiteUrl: 'https://github.com/opencode-ai/opencode' },
+      ],
+    };
+  }
+
+  // 5. Perplexity Alternatives
+  if (
+    q.includes('perplexity') ||
+    q.includes('perplexica') ||
+    q.includes('khoj') ||
+    q.includes('searxng') ||
+    q.includes('ai search')
+  ) {
+    return {
+      id: `bot-${now}`,
+      sender: 'assistant',
+      timestamp: now,
+      text: `**Top Open-Source Alternatives to Perplexity AI:**\n\n` +
+        `If you love Perplexity's conversational web-grounded answer format but want self-hostable, privacy-first software with your own local LLMs, here are the top open-source replacements:\n\n` +
+        `• [Perplexica](/tools/perplexica) — Direct open-source replica of Perplexity. Uses SearXNG for web scraping and connects to local Ollama models or cloud APIs.\n` +
+        `• [Khoj](/tools/khoj) — Open-source AI second brain that searches both the public web and your personal notes/PDFs with local LLM support.\n` +
+        `• [SearXNG](/tools/searxng) — Privacy-respecting metasearch engine aggregating 70+ search engines with zero logging or profile tracking.\n\n` +
+        `👉 Explore the detailed comparison on [Perplexity Alternatives](/alternatives/perplexity).`,
+      suggestions: [
+        'How to install Perplexica with Docker',
+        'Khoj self-hosting guide',
+        'Perplexity Education Pro discount',
+      ],
+      groundedTools: [
+        { name: 'Perplexica', slug: 'perplexica', type: 'open-source', pricingSummary: 'MIT (Self-Hostable AI Search)', websiteUrl: 'https://github.com/ItzCrazyBlaze/Perplexica' },
+        { name: 'Khoj', slug: 'khoj', type: 'open-source', pricingSummary: 'GPL-3.0 (Personal AI & Search)', websiteUrl: 'https://khoj.dev' },
+        { name: 'SearXNG', slug: 'searxng', type: 'open-source', pricingSummary: 'AGPL-3.0 (Metasearch Engine)', websiteUrl: 'https://searx.space' },
+      ],
+    };
+  }
+
+  // 6. Pika Specific Query (Pricing & Recurring Free Check)
   if (q.includes('pika')) {
     const pika = aiToolsData.find((t) => t.id === 'pika');
     const freeAlts = aiToolsData.filter(
@@ -66,7 +236,7 @@ export function generateGroundedResponse(userQuery: string): ChatMessage {
     };
   }
 
-  // 2. Frontier Models: GPT-6 Astra, Claude Fable 5.1 & OmniRush / KIE AI
+  // 7. Frontier Models: GPT-6 Astra, Claude Fable 5.1 & OmniRush / KIE AI
   if (
     q.includes('gpt-6') ||
     q.includes('astra') ||
@@ -81,12 +251,12 @@ export function generateGroundedResponse(userQuery: string): ChatMessage {
       text: `**Frontier Model Status & Evaluation Platforms:**\n\n` +
         `• **Claude Fable 5.1:** Marked as **Evaluation / Coming Soon** on specialized model marketplaces like [KIE AI](/ai-tools/kie-ai). Note that Anthropic's public free tier does not currently offer Fable 5.1. For frontier code and logic today, use [Claude 3.5 Sonnet](/ai-tools/claude) or [DeepSeek-R1](/ai-tools/deepseek).\n` +
         `• **GPT-6 Astra:** Previewed in experimental model playgrounds such as [KIE AI](/ai-tools/kie-ai) with starter test credits. For production tasks, [ChatGPT](/ai-tools/chatgpt) (GPT-4o) and [DeepSeek-V3](/ai-tools/deepseek) remain the verified active standards.\n` +
-        `• **OmniRush:** [OmniRush](/ai-tools/omnirush) is a developer desktop & terminal platform advertising free community access to frontier model endpoints without upfront credit card requirements.\n\n` +
+        `• **OmniRush:** [OmniRush](/ai-tools/omnirush) is classified as **100% Free** (not freemium). It is a desktop/CLI developer workspace offering direct free community model routing without upfront credit cards, plus optional BYOK (Bring Your Own Key) for developers connecting private keys.\n\n` +
         `Would you like to compare Claude 3.5 Sonnet with DeepSeek-R1 or explore free frontier coding tools?`,
       suggestions: ['Claude 3.5 Sonnet vs DeepSeek-R1', 'Best free coding tools', 'Explore KIE AI'],
       groundedTools: [
         { name: 'KIE AI', slug: 'kie-ai', type: 'ai', pricingSummary: 'Model evaluation playground with starter trial credits', websiteUrl: 'https://kie.ai' },
-        { name: 'OmniRush', slug: 'omnirush', type: 'ai', pricingSummary: 'Frontier developer tool without upfront cards', websiteUrl: 'https://omnirush.ai' },
+        { name: 'OmniRush', slug: 'omnirush', type: 'ai', pricingSummary: '100% Free Desktop/CLI (Community + BYOK)', websiteUrl: 'https://omnirush.ai' },
         { name: 'Claude 3.5 Sonnet', slug: 'claude', type: 'ai', pricingSummary: 'Free tier with dynamic daily quota', websiteUrl: 'https://claude.ai' },
       ],
     };

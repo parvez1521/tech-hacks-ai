@@ -21,6 +21,7 @@ import {
   Bookmark,
   Scales,
   Compass,
+  Tag,
 } from 'lucide-react';
 
 export const Header: React.FC = () => {
@@ -88,6 +89,13 @@ export const Header: React.FC = () => {
             >
               Free Tools
             </Link>
+            <Link
+              to="/offers"
+              className="px-2.5 py-1.5 rounded-md text-muted-foreground hover:text-foreground hover:bg-muted/70 active:scale-98 transition-all duration-150 inline-flex items-center gap-1.5"
+            >
+              <span>AI Deals</span>
+              <span className="px-1.5 py-0.2 rounded text-[10px] font-bold bg-primary/20 text-primary uppercase">New</span>
+            </Link>
 
             {/* Resources Popover */}
             <div className="relative">
@@ -103,6 +111,13 @@ export const Header: React.FC = () => {
 
               {isResourcesOpen && (
                 <div className="absolute top-full left-0 mt-1.5 w-56 rounded-lg bg-card/95 backdrop-blur-md border border-border p-1.5 shadow-xl shadow-black/40 z-50 flex flex-col gap-0.5 animate-fade-in">
+                  <Link
+                    to="/offers"
+                    className="flex items-center gap-2.5 px-3 py-2 rounded-md text-xs font-medium text-foreground hover:bg-primary/10 hover:text-primary transition-all duration-150"
+                  >
+                    <Tag className="w-3.5 h-3.5 text-primary" />
+                    <span>AI Deals & Benefits</span>
+                  </Link>
                   <Link
                     to="/pick"
                     className="flex items-center gap-2.5 px-3 py-2 rounded-md text-xs font-medium text-foreground hover:bg-primary/10 hover:text-primary transition-all duration-150"
@@ -245,6 +260,17 @@ export const Header: React.FC = () => {
                 <span>Free AI Sites</span>
               </div>
               <ArrowRight className="w-3.5 h-3.5 text-muted-foreground" />
+            </Link>
+            <Link
+              to="/offers"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="flex items-center justify-between px-3 py-2 rounded-md text-sm text-foreground hover:bg-muted"
+            >
+              <div className="flex items-center gap-2.5">
+                <Tag className="w-4 h-4 text-primary" />
+                <span>AI Deals & Benefits</span>
+              </div>
+              <span className="px-1.5 py-0.5 rounded text-[10px] font-bold bg-primary/20 text-primary">NEW</span>
             </Link>
           </div>
 
