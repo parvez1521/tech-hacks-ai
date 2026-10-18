@@ -29,6 +29,8 @@ export interface Tool {
   iconLetter: string;
   iconBgColor: string;
   selfHostingSteps?: { step: number; title: string; detail: string }[];
+  generationTasks?: GenerationTask[];
+  outputModalities?: OutputModality[];
 }
 
 export interface ProprietaryTool {
@@ -86,6 +88,46 @@ export type PricingType = 'free' | 'freemium' | 'paid' | 'free-trial' | 'free-cr
 
 export type FreeAccessType = 'open-source-local' | 'recurring-free' | 'limited-free' | 'free-credits' | 'none';
 
+export type GenerationTask =
+  | 'text-to-video'
+  | 'image-to-video'
+  | 'video-to-video'
+  | 'avatar-video'
+  | 'text-to-image'
+  | 'image-editing'
+  | 'text-to-speech'
+  | 'speech-to-text'
+  | 'music-generation'
+  | 'coding-assistant'
+  | 'chat'
+  | 'research'
+  | 'automation'
+  | '3d-generation';
+
+export type InputModality = 'text' | 'image' | 'video' | 'audio' | 'code' | 'file';
+export type OutputModality = 'text' | 'image' | 'video' | 'audio' | 'code' | '3d';
+
+export interface PickCriteria {
+  goal: string;
+  taskDetail?: string;
+  budget: 'completely-free' | 'free-credits' | 'free-trial' | 'self-hosted' | 'any';
+  hostingPreference?: 'browser' | 'local' | 'any';
+  watermarkPreference?: 'no-watermark' | 'any';
+}
+
+export interface MatchedPickResult {
+  tool: Tool | AiTool;
+  type: 'open-source' | 'ai' | 'utility';
+  matchScore: number;
+  matchExplanation: string;
+  matchReasons: string[];
+  tasks: string[];
+  freeAccessSummary: string;
+  websiteUrl: string;
+  detailUrl: string;
+  pricingVerifiedAt: string;
+}
+
 export interface AiTool {
   id: string;
   name: string;
@@ -95,6 +137,7 @@ export interface AiTool {
   longDescription?: string;
   websiteUrl: string;
   category: string; // e.g. 'video', 'image', 'voice', 'assistants', 'writing', 'coding', 'automation', 'productivity', '3d', 'music'
+  primaryCategory?: string;
   pricingType: PricingType;
   pricingDetails: string;
   iconLetter: string;
@@ -114,6 +157,16 @@ export interface AiTool {
   pricingVerifiedAt: string;
   isSelfHostable?: boolean;
   openSourceRepoUrl?: string;
+  generationTasks?: GenerationTask[];
+  inputModalities?: InputModality[];
+  outputModalities?: OutputModality[];
+  useCases?: string[];
+  hardwareRequirements?: string;
+  requiresInstallation?: boolean;
+  alternativesTo?: string[];
+  subType?: 'standalone-tool' | 'model-access-platform';
+  supportedModels?: string[];
+  platformStatus?: 'live' | 'coming-soon' | 'preview';
 }
 
 export interface GuideStep {

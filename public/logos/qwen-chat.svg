@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48" fill="none">
+  <defs>
+    <linearGradient id="qwenGrad" x1="12" y1="12" x2="36" y2="36" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#6366f1" />
+      <stop offset="100%" stop-color="#8b5cf6" />
+    </linearGradient>
+  </defs>
+  <rect width="48" height="48" rx="12" fill="#0f172a" />
+  <circle cx="24" cy="22" r="11" stroke="url(#qwenGrad)" stroke-width="4" />
+  <path d="M29 27L36 34" stroke="url(#qwenGrad)" stroke-width="4" stroke-linecap="round" />
+  <circle cx="24" cy="22" r="3" fill="#6366f1" />
+</svg>

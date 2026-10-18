@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48" fill="none">
+  <defs>
+    <linearGradient id="metaGrad" x1="10" y1="14" x2="38" y2="34" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#0081fb" />
+      <stop offset="100%" stop-color="#0064e0" />
+    </linearGradient>
+  </defs>
+  <rect width="48" height="48" rx="12" fill="#0b0f19" />
+  <path d="M14 28C10.6863 28 8 25.3137 8 22C8 18.6863 10.6863 16 14 16C18 16 21 21 24 24C27 27 30 32 34 32C37.3137 32 40 29.3137 40 26C40 22.6863 37.3137 20 34 20C30 20 27 25 24 24C21 23 18 28 14 28Z" stroke="url(#metaGrad)" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" />
+</svg>

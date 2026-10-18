@@ -3,6 +3,7 @@ import { RouterProvider, useRouter } from './router/Router';
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
 import { AmbientGlow } from './components/AmbientGlow';
+import { FloatingChatbot } from './components/FloatingChatbot';
 import { siteConfig, formatPageTitle } from './config/site';
 import {
   getToolBySlug,
@@ -187,6 +188,7 @@ const AppRoutes: React.FC = () => {
       <Header />
       <main className="flex-1 relative z-10">{renderRoute()}</main>
       <Footer />
+      <FloatingChatbot />
     </div>
   );
 };

@@ -219,6 +219,41 @@ export const HomePage: React.FC = () => {
           </div>
         </div>
 
+        {/* Spotlight Showcase Ribbon */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-5">
+          <div className="p-3.5 rounded-xl border border-primary/20 bg-primary/5 flex items-center justify-between gap-3 text-xs">
+            <div className="flex items-center gap-2.5">
+              <span className="text-base">🎬</span>
+              <div>
+                <span className="font-bold text-foreground block">Verified AI Video Generators</span>
+                <span className="text-[11px] text-muted-foreground">Kling (66 daily credits), Vidu, Hailuo, Wan 2.1 (Apache 2.0)</span>
+              </div>
+            </div>
+            <Link
+              to="/ai-tools?category=video"
+              className="px-2.5 py-1 rounded-md bg-primary/10 hover:bg-primary/20 text-primary font-semibold text-[11px] shrink-0"
+            >
+              Explore Video →
+            </Link>
+          </div>
+
+          <div className="p-3.5 rounded-xl border border-border bg-card/80 flex items-center justify-between gap-3 text-xs">
+            <div className="flex items-center gap-2.5">
+              <span className="text-base">🧠</span>
+              <div>
+                <span className="font-bold text-foreground block">Flagship Chatbot &amp; LLM Alternatives</span>
+                <span className="text-[11px] text-muted-foreground">Mistral Le Chat (free Canvas), Qwen Chat, DeepSeek-R1</span>
+              </div>
+            </div>
+            <Link
+              to="/ai-tools?category=assistants"
+              className="px-2.5 py-1 rounded-md bg-muted hover:bg-border text-foreground font-semibold text-[11px] shrink-0"
+            >
+              Explore Chatbots →
+            </Link>
+          </div>
+        </div>
+
         {/* Category Tabs */}
         <div className="flex items-center gap-2 overflow-x-auto no-scrollbar pb-2 mb-6">
           <button

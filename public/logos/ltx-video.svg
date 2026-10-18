@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48" fill="none">
+  <defs>
+    <linearGradient id="ltxGrad" x1="12" y1="12" x2="36" y2="36" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#00f2fe" />
+      <stop offset="100%" stop-color="#4facfe" />
+    </linearGradient>
+  </defs>
+  <rect width="48" height="48" rx="12" fill="#030712" />
+  <path d="M16 12V36L36 24L16 12Z" fill="url(#ltxGrad)" />
+  <path d="M12 12V36" stroke="#4facfe" stroke-width="3" stroke-linecap="round" />
+</svg>
