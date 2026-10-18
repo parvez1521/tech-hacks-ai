@@ -4,8 +4,9 @@ import { getGuideBySlug, getAllGuides, getAiToolBySlug } from '../services/aiCat
 import { getToolBySlug } from '../services/catalogService';
 import { BookmarkButton } from '../components/BookmarkButton';
 import { BookmarkItem } from '../types';
-import { BookOpen, Clock, Calendar, Copy, Check, ArrowLeft, ArrowRight, ExternalLink, Wrench } from 'lucide-react';
+import { BookOpen, Clock, Calendar, Copy, Check, ArrowLeft, ArrowRight, ExternalLink, Wrench, Share2 } from 'lucide-react';
 import { BrandLogo } from '../components/BrandLogo';
+import { siteConfig } from '../config/siteConfig';
 
 export const GuideDetailPage: React.FC = () => {
   const { params } = useRouter();
@@ -13,6 +14,7 @@ export const GuideDetailPage: React.FC = () => {
   const guide = getGuideBySlug(slug);
 
   const [copiedStep, setCopiedStep] = useState<number | null>(null);
+  const [copiedShare, setCopiedShare] = useState(false);
 
   if (!guide) {
     return (
@@ -53,15 +55,71 @@ export const GuideDetailPage: React.FC = () => {
     setTimeout(() => setCopiedStep(null), 2000);
   };
 
+  const handleCopyShare = () => {
+    if (typeof window !== 'undefined') {
+      const canonicalUrl = `${siteConfig.url}/guides/${guide.slug}`;
+      navigator.clipboard.writeText(canonicalUrl);
+      setCopiedShare(true);
+      setTimeout(() => setCopiedShare(false), 2500);
+    }
+  };
+
+  // Structured Data (HowTo schema)
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'HowTo',
+    name: guide.title,
+    description: guide.summary,
+    url: `${siteConfig.url}/guides/${guide.slug}`,
+    datePublished: guide.publishedDate,
+    author: {
+      '@type': 'Person',
+      name: guide.author,
+    },
+    step: guide.steps.map((s) => ({
+      '@type': 'HowToStep',
+      position: s.stepNumber,
+      name: s.title,
+      text: s.description,
+    })),
+  };
+
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 py-8">
+      {/* Embedded JSON-LD */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+
       {/* Breadcrumbs */}
-      <nav className="flex items-center gap-2 text-xs text-muted-foreground mb-6">
-        <Link to="/" className="hover:text-foreground">Home</Link>
-        <span>/</span>
-        <Link to="/guides" className="hover:text-foreground">Guides</Link>
-        <span>/</span>
-        <span className="text-foreground font-medium truncate max-w-[200px] sm:max-w-md">{guide.title}</span>
+      <nav className="flex items-center justify-between text-xs text-muted-foreground mb-6" aria-label="Breadcrumb">
+        <div className="flex items-center gap-2">
+          <Link to="/" className="hover:text-foreground">Home</Link>
+          <span>/</span>
+          <Link to="/guides" className="hover:text-foreground">Guides</Link>
+          <span>/</span>
+          <span className="text-foreground font-medium truncate max-w-[200px] sm:max-w-md">{guide.title}</span>
+        </div>
+
+        <button
+          type="button"
+          onClick={handleCopyShare}
+          className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded border border-border bg-card hover:bg-muted text-foreground transition-colors shrink-0"
+          aria-label="Share guide"
+        >
+          {copiedShare ? (
+            <>
+              <Check className="w-3.5 h-3.5 text-emerald-400" />
+              <span className="text-emerald-400 font-medium text-[11px]">Copied!</span>
+            </>
+          ) : (
+            <>
+              <Share2 className="w-3.5 h-3.5 text-muted-foreground" />
+              <span className="text-[11px]">Share</span>
+            </>
+          )}
+        </button>
       </nav>
 
       {/* Guide Header */}

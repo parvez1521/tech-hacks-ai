@@ -15,8 +15,50 @@ export interface AiFilterResult {
   currentPage: number;
 }
 
+const dynamicPublishedTools: AiTool[] = [];
+const dynamicPublishedGuides: Guide[] = [];
+
+export function registerPublishedTool(tool: AiTool) {
+  if (!tool || !tool.slug) return;
+  const existingIdx = dynamicPublishedTools.findIndex((t) => t.slug === tool.slug);
+  if (existingIdx >= 0) {
+    dynamicPublishedTools[existingIdx] = tool;
+  } else {
+    dynamicPublishedTools.unshift(tool);
+  }
+}
+
+export function registerPublishedGuide(guide: Guide) {
+  if (!guide || !guide.slug) return;
+  const existingIdx = dynamicPublishedGuides.findIndex((g) => g.slug === guide.slug);
+  if (existingIdx >= 0) {
+    dynamicPublishedGuides[existingIdx] = guide;
+  } else {
+    dynamicPublishedGuides.unshift(guide);
+  }
+}
+
+export function getAllAiTools(): AiTool[] {
+  return [...dynamicPublishedTools, ...aiToolsData];
+}
+
+// Client hydration: fetch approved additions if running in browser
+if (typeof window !== 'undefined' && typeof fetch === 'function') {
+  fetch('/api/submissions?action=published')
+    .then((res) => (res.ok ? res.json() : null))
+    .then((data) => {
+      if (data?.tools && Array.isArray(data.tools)) {
+        data.tools.forEach(registerPublishedTool);
+      }
+      if (data?.guides && Array.isArray(data.guides)) {
+        data.guides.forEach(registerPublishedGuide);
+      }
+    })
+    .catch(() => {});
+}
+
 export function filterAndSortAiTools(state: AiFilterState): AiFilterResult {
-  let list = [...aiToolsData];
+  let list = getAllAiTools();
 
   // 1. Text search
   if (state.searchQuery.trim()) {
@@ -79,33 +121,35 @@ export function filterAndSortAiTools(state: AiFilterState): AiFilterResult {
 }
 
 export function getAiToolBySlug(slug: string): AiTool | undefined {
-  return aiToolsData.find((t) => t.slug.toLowerCase() === slug.toLowerCase());
+  if (!slug) return undefined;
+  return getAllAiTools().find((t) => t.slug.toLowerCase() === slug.toLowerCase());
 }
 
 export function getFeaturedAiTools(limit = 6): AiTool[] {
-  return aiToolsData.filter((t) => t.isFeatured).slice(0, limit);
+  return getAllAiTools().filter((t) => t.isFeatured).slice(0, limit);
 }
 
 export function getTrendingAiTools(limit = 6): AiTool[] {
-  return aiToolsData.filter((t) => t.isTrending).slice(0, limit);
+  return getAllAiTools().filter((t) => t.isTrending).slice(0, limit);
 }
 
 export function getFreeAiTools(limit?: number): AiTool[] {
-  const free = aiToolsData.filter((t) => t.hasFreePlan || t.pricingType === 'free');
+  const free = getAllAiTools().filter((t) => t.hasFreePlan || t.pricingType === 'free');
   return limit ? free.slice(0, limit) : free;
 }
 
 export function getOpenSourceAiTools(limit?: number): AiTool[] {
-  const os = aiToolsData.filter((t) => t.isSelfHostable || t.freeAccessType === 'open-source-local');
+  const os = getAllAiTools().filter((t) => t.isSelfHostable || t.freeAccessType === 'open-source-local');
   return limit ? os.slice(0, limit) : os;
 }
 
 export function getAllGuides(): Guide[] {
-  return guidesData;
+  return [...dynamicPublishedGuides, ...guidesData];
 }
 
 export function getGuideBySlug(slug: string): Guide | undefined {
-  return guidesData.find((g) => g.slug.toLowerCase() === slug.toLowerCase());
+  if (!slug) return undefined;
+  return getAllGuides().find((g) => g.slug.toLowerCase() === slug.toLowerCase());
 }
 
 export function getAllPrompts(): PromptItem[] {

@@ -78,8 +78,50 @@ function chatApiPlugin() {
   };
 }
 
+import submissionsHandler from './api/submissions.js';
+
+function submissionsApiPlugin() {
+  return {
+    name: 'submissions-api-plugin',
+    configureServer(server) {
+      server.middlewares.use(async (req, res, next) => {
+        if (req.url && req.url.startsWith('/api/submissions')) {
+          let body = '';
+          req.on('data', (chunk) => {
+            body += chunk;
+          });
+          req.on('end', async () => {
+            try {
+              req.body = body ? JSON.parse(body) : {};
+            } catch {
+              req.body = {};
+            }
+            res.status = (code) => {
+              res.statusCode = code;
+              return {
+                json: (payload) => {
+                  res.setHeader('Content-Type', 'application/json');
+                  res.end(JSON.stringify(payload));
+                },
+              };
+            };
+            res.json = (payload) => {
+              res.setHeader('Content-Type', 'application/json');
+              res.end(JSON.stringify(payload));
+            };
+
+            await submissionsHandler(req, res);
+          });
+          return;
+        }
+        next();
+      });
+    },
+  };
+}
+
 export default defineConfig({
-  plugins: [react(), chatApiPlugin()],
+  plugins: [react(), chatApiPlugin(), submissionsApiPlugin()],
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
@@ -88,4 +130,25 @@ export default defineConfig({
   server: {
     port: 3000,
   },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (id.includes('node_modules/react') || id.includes('node_modules/react-dom')) {
+            return 'vendor-react';
+          }
+          if (id.includes('node_modules/lucide-react')) {
+            return 'vendor-icons';
+          }
+          if (id.includes('src/data/')) {
+            return 'catalog-data';
+          }
+          if (id.includes('src/pages/')) {
+            return 'app-pages';
+          }
+        },
+      },
+    },
+  },
+
 });

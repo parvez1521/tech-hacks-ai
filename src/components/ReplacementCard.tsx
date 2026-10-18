@@ -23,7 +23,7 @@ export const ReplacementCard: React.FC<ReplacementCardProps> = ({ tool, propriet
   return (
     <div
       onMouseMove={handleMouseMove}
-      className="group relative flex flex-col justify-between p-5 rounded-lg border border-border bg-card/90 hover:bg-card transition-all duration-300 ease-out hover:-translate-y-1 hover:border-primary/40 hover:shadow-xl hover:shadow-black/30 min-h-[250px] focus-within:ring-2 focus-within:ring-primary/60 focus-within:border-primary/60"
+      className="group relative flex flex-col justify-between h-full p-5 rounded-lg border border-border bg-card/90 hover:bg-card transition-all duration-300 ease-out hover:-translate-y-1 hover:border-primary/40 hover:shadow-xl hover:shadow-black/30 min-h-[250px] focus-within:ring-2 focus-within:ring-primary/60 focus-within:border-primary/60"
     >
       {/* Decorative Interactive Spotlight Inner Glow */}
       <div

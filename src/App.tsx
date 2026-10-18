@@ -1,9 +1,11 @@
 import React, { useEffect } from 'react';
-import { RouterProvider, useRouter } from './router/Router';
+import { RouterProvider, useRouter, matchRoute } from './router/Router';
+import { ThemeProvider } from './context/ThemeContext';
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
 import { AmbientGlow } from './components/AmbientGlow';
 import { FloatingChatbot } from './components/FloatingChatbot';
+import { AdSenseBanner } from './components/AdSenseBanner';
 import { siteConfig, formatPageTitle } from './config/site';
 import {
   getToolBySlug,
@@ -43,6 +45,15 @@ import { SavedPage } from './pages/SavedPage';
 import { UpdatesPage } from './pages/UpdatesPage';
 import { OffersPage } from './pages/OffersPage';
 import { OfferDetailPage } from './pages/OfferDetailPage';
+import { AboutPage } from './pages/AboutPage';
+import { ContactPage } from './pages/ContactPage';
+import { PrivacyPage } from './pages/PrivacyPage';
+import { TermsPage } from './pages/TermsPage';
+import { DisclosurePage } from './pages/DisclosurePage';
+import { SubmitToolPage } from './pages/SubmitToolPage';
+import { SubmitGuidePage } from './pages/SubmitGuidePage';
+import { ModerationDashboardPage } from './pages/ModerationDashboardPage';
+import { CookieConsentBanner } from './components/CookieConsentBanner';
 import { NotFoundPage } from './pages/NotFoundPage';
 
 export function getRouteTitle(route: string, params: Record<string, string> = {}): string {
@@ -129,9 +140,131 @@ export function getRouteTitle(route: string, params: Record<string, string> = {}
         ? formatPageTitle(`${offer.title} — AI Deals & Benefits`)
         : formatPageTitle('Offer Not Found');
     }
+    case 'about':
+      return formatPageTitle('About Us — Editorial Mission & Standards');
+    case 'contact':
+      return formatPageTitle('Contact Us — Feedback, Submissions & Inquiries');
+    case 'privacy':
+      return formatPageTitle('Privacy Policy — Data Protection & Cookie Notice');
+    case 'terms':
+      return formatPageTitle('Terms of Use — Platform Conditions & Disclaimers');
+    case 'disclosure':
+      return formatPageTitle('Affiliate & Advertising Disclosure');
+    case 'submit-tool':
+      return formatPageTitle('Submit an AI Tool — Community Directory Submission');
+    case 'submit-guide':
+      return formatPageTitle('Submit an AI Guide & Tutorial — Community Knowledge');
+    case 'moderation':
+      return formatPageTitle('Editorial Moderation Queue');
     case 'not-found':
     default:
       return formatPageTitle('404 Page Not Found');
+  }
+}
+
+export function getRouteDescription(route: string, params: Record<string, string> = {}): string {
+  switch (route) {
+    case 'home':
+      return siteConfig.description;
+    case 'tools':
+      return 'Explore verified open-source software alternatives to proprietary SaaS. Inspect star velocity, licenses, and self-hosting guides.';
+    case 'tool-detail': {
+      const tool = getToolBySlug(params.slug);
+      return tool
+        ? `${tool.name} is a verified open-source alternative to ${tool.alternativesTo.join(', ')}. ${tool.tagline} License: ${tool.license}.`
+        : 'Detailed review and metrics for this open-source software project.';
+    }
+    case 'categories':
+      return 'Browse open-source software and generative AI platforms by technology category, database engine, and workflow.';
+    case 'category-detail': {
+      const cat = getCategoryBySlug(params.slug);
+      return cat
+        ? `Explore curated open-source alternatives and software tools in the ${cat.name} category.`
+        : 'Explore software tools by category.';
+    }
+    case 'alternatives':
+      return 'Find community-maintained open-source replacements for proprietary tools like Figma, Notion, Firebase, and Airtable.';
+    case 'alternative-detail': {
+      const alt = getProprietaryToolBySlug(params.slug);
+      return alt
+        ? `Discover verified open-source alternatives to replace ${alt.name}. Avoid vendor lock-in and keep full data control.`
+        : 'Open source alternatives to proprietary software.';
+    }
+    case 'collection-detail': {
+      const col = getCollectionBySlug(params.slug);
+      return col
+        ? col.description
+        : 'Curated software collection.';
+    }
+    case 'ai-tools':
+      return 'Comprehensive directory of top generative AI platforms, foundation models, code editors, and video generation engines.';
+    case 'ai-tool-detail': {
+      const aiTool = getAiToolBySlug(params.slug);
+      return aiTool
+        ? `${aiTool.name} (${aiTool.pricingType}): ${aiTool.description}`
+        : 'Detailed pricing provenance, model capabilities, and verified benchmarks.';
+    }
+    case 'free-ai-sites':
+      return 'Curated directory of 100% free AI sites, recurring free plans, zero-cost accounts, and self-hostable open-source models.';
+    case 'guides':
+      return 'Actionable, step-by-step AI tutorials and open-source deployment guides written by practitioners.';
+    case 'guide-detail': {
+      const guide = getGuideBySlug(params.slug);
+      return guide
+        ? `${guide.title}: ${guide.summary}`
+        : 'Step-by-step AI tutorial and workflow guide.';
+    }
+    case 'prompt-library':
+      return 'Production-tested prompt recipes, system instructions, and multi-turn workflows for Claude, GPT-4o, and DeepSeek.';
+    case 'prompt-detail': {
+      const prompt = getPromptBySlug(params.slug);
+      return prompt
+        ? `${prompt.title} for ${prompt.targetModel}: ${prompt.description}`
+        : 'Tested prompt recipe and template.';
+    }
+    case 'free-tools':
+      return 'Free client-side browser utilities for developers and designers. 100% local processing with zero server uploads.';
+    case 'free-tool-detail': {
+      const freeTool = getFreeToolBySlug(params.slug);
+      return freeTool
+        ? `${freeTool.name}: ${freeTool.description}`
+        : 'Free browser-based privacy utility.';
+    }
+    case 'compare':
+      return 'Side-by-side software comparison matrix. Evaluate licenses, self-hostability, repository metrics, and pricing models.';
+    case 'pick':
+      return 'Answer 3 quick questions about your project goals and budget to get instant tailored software recommendations.';
+    case 'saved':
+      return 'Access your bookmarked open-source tools, AI platforms, and prompt recipes.';
+    case 'updates':
+      return 'Changelog of recently indexed software, platform releases, and generative model benchmarks.';
+    case 'offers':
+      return 'Verified AI deals, student developer packs, carrier bundles (like Jio Gemini), and startup cloud credits.';
+    case 'offer-detail': {
+      const offer = getOfferBySlug(params.slug);
+      return offer
+        ? `${offer.title} from ${offer.provider}. ${offer.benefitSummary} Eligibility: ${offer.eligibility}`
+        : 'Verified AI deal and benefit terms.';
+    }
+    case 'about':
+      return 'Learn about the mission, editorial methodology, and independent review standards behind Tech Hacks AI.';
+    case 'contact':
+      return 'Get in touch with the Tech Hacks AI editorial team for tool submissions, pricing corrections, feedback, and partnerships.';
+    case 'privacy':
+      return 'Our privacy policy details data handling, Google advertising cookies, DoubleClick opt-out mechanisms, and user rights under GDPR, CCPA, and ePrivacy.';
+    case 'terms':
+      return 'Terms of use, intellectual property conditions, acceptable conduct, and disclaimers for Tech Hacks AI visitors.';
+    case 'disclosure':
+      return 'Our advertising and affiliate disclosure policy. Learn how Tech Hacks AI maintains 100% editorial independence while funding operations.';
+    case 'submit-tool':
+      return 'Submit your AI platform, open-source model, developer tool, or creative application for editorial review and directory inclusion.';
+    case 'submit-guide':
+      return 'Share practical technical guides, prompt recipes, or developer workflows with the Tech Hacks AI community.';
+    case 'moderation':
+      return 'Editorial moderation queue for reviewing community-submitted AI tools and technical tutorials.';
+    case 'not-found':
+    default:
+      return 'The requested page could not be found on Tech Hacks AI.';
   }
 }
 
@@ -140,7 +273,26 @@ const AppRoutes: React.FC = () => {
 
   useEffect(() => {
     if (typeof document === 'undefined') return;
-    document.title = getRouteTitle(route, params);
+    const title = getRouteTitle(route, params);
+    const desc = getRouteDescription(route, params);
+    document.title = title;
+
+    // Update dynamic meta description
+    const metaDesc = document.querySelector('meta[name="description"]');
+    if (metaDesc) metaDesc.setAttribute('content', desc);
+
+    // Update OG metadata
+    const ogTitle = document.querySelector('meta[property="og:title"]');
+    if (ogTitle) ogTitle.setAttribute('content', title);
+
+    const ogDesc = document.querySelector('meta[property="og:description"]');
+    if (ogDesc) ogDesc.setAttribute('content', desc);
+
+    // Update canonical URL
+    const canonicalLink = document.querySelector('link[rel="canonical"]');
+    if (canonicalLink && typeof window !== 'undefined') {
+      canonicalLink.setAttribute('href', `${siteConfig.url}${window.location.pathname}`);
+    }
   }, [route, params]);
 
   const renderRoute = () => {
@@ -191,6 +343,22 @@ const AppRoutes: React.FC = () => {
         return <OffersPage />;
       case 'offer-detail':
         return <OfferDetailPage />;
+      case 'about':
+        return <AboutPage />;
+      case 'contact':
+        return <ContactPage />;
+      case 'privacy':
+        return <PrivacyPage />;
+      case 'terms':
+        return <TermsPage />;
+      case 'disclosure':
+        return <DisclosurePage />;
+      case 'submit-tool':
+        return <SubmitToolPage />;
+      case 'submit-guide':
+        return <SubmitGuidePage />;
+      case 'moderation':
+        return <ModerationDashboardPage />;
       case 'not-found':
       default:
         return <NotFoundPage />;
@@ -204,15 +372,32 @@ const AppRoutes: React.FC = () => {
       <main className="flex-1 relative z-10">{renderRoute()}</main>
       <Footer />
       <FloatingChatbot />
+      <CookieConsentBanner />
     </div>
   );
 };
 
 export const App: React.FC = () => {
   return (
-    <RouterProvider>
-      <AppRoutes />
-    </RouterProvider>
+    <ThemeProvider>
+      <RouterProvider>
+        <AppRoutes />
+      </RouterProvider>
+    </ThemeProvider>
   );
 };
+
+export {
+  AboutPage,
+  ContactPage,
+  PrivacyPage,
+  TermsPage,
+  DisclosurePage,
+  CookieConsentBanner,
+  Footer,
+  AdSenseBanner,
+  matchRoute,
+  RouterProvider,
+};
+
 export default App;

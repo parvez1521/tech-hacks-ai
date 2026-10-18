@@ -5,23 +5,23 @@ export default {
   theme: {
     extend: {
       colors: {
-        background: '#0c0e12',
-        foreground: '#f3f4f6',
-        card: '#13161c',
-        'card-foreground': '#f3f4f6',
-        muted: '#1f242d',
-        'muted-foreground': '#9ca3af',
-        accent: '#1e2430',
-        'accent-foreground': '#f9fafb',
-        border: '#232936',
+        background: 'rgb(var(--color-bg) / <alpha-value>)',
+        foreground: 'rgb(var(--color-fg) / <alpha-value>)',
+        card: 'rgb(var(--color-card) / <alpha-value>)',
+        'card-foreground': 'rgb(var(--color-card-fg) / <alpha-value>)',
+        muted: 'rgb(var(--color-muted) / <alpha-value>)',
+        'muted-foreground': 'rgb(var(--color-muted-fg) / <alpha-value>)',
+        accent: 'rgb(var(--color-accent) / <alpha-value>)',
+        'accent-foreground': 'rgb(var(--color-accent-fg) / <alpha-value>)',
+        border: 'rgb(var(--color-border) / <alpha-value>)',
         primary: {
-          DEFAULT: '#3b82f6',
+          DEFAULT: 'rgb(var(--color-primary) / <alpha-value>)',
           foreground: '#ffffff',
-          hover: '#2563eb',
+          hover: 'rgb(var(--color-primary-hover) / <alpha-value>)',
         },
         secondary: {
-          DEFAULT: '#1f2937',
-          foreground: '#d1d5db',
+          DEFAULT: 'rgb(var(--color-secondary) / <alpha-value>)',
+          foreground: 'rgb(var(--color-secondary-fg) / <alpha-value>)',
         },
       },
       borderRadius: {

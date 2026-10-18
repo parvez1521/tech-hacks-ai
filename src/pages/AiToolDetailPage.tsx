@@ -1,16 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useRouter, Link } from '../router/Router';
-import { getAiToolBySlug, filterAndSortAiTools } from '../services/aiCatalogService';
+import { getAiToolBySlug, filterAndSortAiTools, getAllGuides } from '../services/aiCatalogService';
 import { BookmarkButton } from '../components/BookmarkButton';
 import { AiToolCard } from '../components/AiToolCard';
+import { GuideCard } from '../components/GuideCard';
 import { BookmarkItem } from '../types';
-import { Sparkles, Star, ExternalLink, ArrowLeft, CheckCircle2, ShieldCheck, Tag, Info, Calendar, Lock, Unlock, Server } from 'lucide-react';
+import { Sparkles, Star, ExternalLink, ArrowLeft, CheckCircle2, ShieldCheck, Tag, Info, Calendar, Lock, Unlock, Server, Scale, Share2, Check, BookOpen, Users, Cpu } from 'lucide-react';
 import { BrandLogo } from '../components/BrandLogo';
+import { siteConfig } from '../config/siteConfig';
 
 export const AiToolDetailPage: React.FC = () => {
   const { params } = useRouter();
   const slug = params.slug;
   const tool = getAiToolBySlug(slug);
+  const [copied, setCopied] = useState(false);
 
   if (!tool) {
     return (
@@ -29,6 +32,15 @@ export const AiToolDetailPage: React.FC = () => {
       </div>
     );
   }
+
+  const handleCopyLink = () => {
+    if (typeof window !== 'undefined') {
+      const canonicalUrl = `${siteConfig.url}/ai-tools/${tool.slug}`;
+      navigator.clipboard.writeText(canonicalUrl);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2500);
+    }
+  };
 
   const bookmarkItem: BookmarkItem = {
     id: `ai-${tool.id}`,
@@ -52,15 +64,75 @@ export const AiToolDetailPage: React.FC = () => {
   });
   const similarTools = relatedTools.filter((t) => t.id !== tool.id).slice(0, 3);
 
+  // Find related guides mentioning this tool or category
+  const allGuides = getAllGuides();
+  const relatedGuides = allGuides.filter(
+    (g) =>
+      g.relatedToolSlugs.includes(tool.slug) ||
+      (tool.category === 'coding' && g.category === 'coding') ||
+      (tool.category === 'video' && g.category === 'video-creation') ||
+      (tool.category === 'assistants' && (g.category === 'prompting' || g.category === 'productivity'))
+  ).slice(0, 2);
+
+  // Comparison slugs
+  const comparisonSlugs = [
+    tool.slug,
+    ...(tool.alternativesTo || similarTools.map((s) => s.slug)),
+  ].slice(0, 3);
+
+  // SoftwareApplication JSON-LD schema
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'SoftwareApplication',
+    name: tool.name,
+    description: tool.description,
+    url: `${siteConfig.url}/ai-tools/${tool.slug}`,
+    applicationCategory: tool.category,
+    operatingSystem: tool.isSelfHostable ? 'Cross-platform, Docker, Local' : 'Cloud / Web Browser',
+    offers: {
+      '@type': 'Offer',
+      price: tool.pricingType === 'free' ? '0' : undefined,
+      priceCurrency: 'USD',
+      description: tool.freeTierSummary,
+    },
+  };
+
   return (
     <div className="max-w-6xl mx-auto px-4 sm:px-6 py-8">
+      {/* Embedded JSON-LD */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+
       {/* Breadcrumbs */}
-      <nav className="flex items-center gap-2 text-xs text-muted-foreground mb-6">
-        <Link to="/" className="hover:text-foreground">Home</Link>
-        <span>/</span>
-        <Link to="/ai-tools" className="hover:text-foreground">AI Tools</Link>
-        <span>/</span>
-        <span className="text-foreground font-medium">{tool.name}</span>
+      <nav className="flex items-center justify-between text-xs text-muted-foreground mb-6" aria-label="Breadcrumb">
+        <div className="flex items-center gap-2">
+          <Link to="/" className="hover:text-foreground">Home</Link>
+          <span>/</span>
+          <Link to="/ai-tools" className="hover:text-foreground">AI Tools</Link>
+          <span>/</span>
+          <span className="text-foreground font-medium">{tool.name}</span>
+        </div>
+
+        <button
+          type="button"
+          onClick={handleCopyLink}
+          className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg border border-border bg-card/80 hover:bg-card text-foreground transition-colors"
+          aria-label="Share tool link"
+        >
+          {copied ? (
+            <>
+              <Check className="w-3.5 h-3.5 text-emerald-400" />
+              <span className="text-emerald-400">Link Copied!</span>
+            </>
+          ) : (
+            <>
+              <Share2 className="w-3.5 h-3.5 text-muted-foreground" />
+              <span>Share</span>
+            </>
+          )}
+        </button>
       </nav>
 
       {/* Hero Overview */}
@@ -197,14 +269,14 @@ export const AiToolDetailPage: React.FC = () => {
         </div>
       </div>
 
-      {/* Features & Specifications */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+      {/* Features, Persona & Specifications */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
         <div className="md:col-span-2 p-6 rounded-xl border border-border bg-card/60">
           <h2 className="text-base font-bold text-foreground mb-4 flex items-center gap-2">
             <ShieldCheck className="w-4 h-4 text-primary" />
             <span>Core Capabilities & Features</span>
           </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6">
             {tool.features.map((feat) => (
               <div key={feat} className="flex items-start gap-2.5 text-xs text-foreground">
                 <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
@@ -212,30 +284,80 @@ export const AiToolDetailPage: React.FC = () => {
               </div>
             ))}
           </div>
+
+          {/* Persona & Execution Environment */}
+          <div className="pt-4 border-t border-border/60 grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
+            <div>
+              <div className="flex items-center gap-1.5 text-primary font-semibold uppercase text-[11px] tracking-wider mb-1">
+                <Users className="w-3.5 h-3.5" />
+                <span>Who It's Best Suited For</span>
+              </div>
+              <p className="text-secondary-foreground leading-relaxed">
+                {tool.bestFor ||
+                  (tool.useCases && tool.useCases.length > 0
+                    ? `Ideal for practitioners focused on ${tool.useCases.join(', ')}.`
+                    : `Professionals, developers, and creators requiring high-reliability ${tool.category} workflows.`)}
+              </p>
+            </div>
+
+            <div>
+              <div className="flex items-center gap-1.5 text-primary font-semibold uppercase text-[11px] tracking-wider mb-1">
+                <Cpu className="w-3.5 h-3.5" />
+                <span>Execution Environment</span>
+              </div>
+              <p className="text-secondary-foreground leading-relaxed">
+                {tool.isSelfHostable
+                  ? 'Self-hostable via Docker or local GPU (macOS, Linux, Windows).'
+                  : tool.requiresInstallation
+                  ? 'Desktop/CLI installation required for local workflow execution.'
+                  : 'Web browser cloud SaaS. No local GPU or installation required.'}
+              </p>
+            </div>
+          </div>
         </div>
 
-        <div className="p-6 rounded-xl border border-border bg-card/60 space-y-4">
-          <h3 className="text-sm font-bold text-foreground flex items-center gap-2">
-            <Tag className="w-4 h-4 text-primary" />
-            <span>Tags & Keywords</span>
-          </h3>
-          <div className="flex flex-wrap gap-1.5">
-            {tool.tags.map((tag) => (
-              <Link
-                key={tag}
-                to={`/ai-tools?q=${tag}`}
-                className="px-2 py-1 rounded text-xs bg-muted text-secondary-foreground hover:bg-border transition-colors"
-              >
-                #{tag}
-              </Link>
-            ))}
+        <div className="space-y-4">
+          <div className="p-6 rounded-xl border border-border bg-card/60 space-y-4">
+            <h3 className="text-sm font-bold text-foreground flex items-center gap-2">
+              <Tag className="w-4 h-4 text-primary" />
+              <span>Tags & Keywords</span>
+            </h3>
+            <div className="flex flex-wrap gap-1.5">
+              {tool.tags.map((tag) => (
+                <Link
+                  key={tag}
+                  to={`/ai-tools?q=${tag}`}
+                  className="px-2 py-1 rounded text-xs bg-muted text-secondary-foreground hover:bg-border transition-colors"
+                >
+                  #{tag}
+                </Link>
+              ))}
+            </div>
+          </div>
+
+          {/* Comparison CTA Box */}
+          <div className="p-5 rounded-xl border border-purple-500/20 bg-purple-500/5 text-xs">
+            <div className="flex items-center gap-1.5 text-purple-400 font-semibold uppercase text-[11px] tracking-wider mb-1.5">
+              <Scale className="w-3.5 h-3.5" />
+              <span>Side-by-Side Comparison</span>
+            </div>
+            <p className="text-secondary-foreground mb-3 leading-relaxed">
+              Evaluate licensing, rate limits, and pricing models directly against similar platforms.
+            </p>
+            <Link
+              to={`/compare?tools=${comparisonSlugs.join(',')}`}
+              className="inline-flex items-center justify-center gap-1.5 w-full px-3 py-2 rounded-lg bg-card border border-purple-500/30 hover:bg-muted text-foreground font-semibold text-xs transition-colors"
+            >
+              <span>Compare {tool.name}</span>
+              <Scale className="w-3.5 h-3.5 text-purple-400" />
+            </Link>
           </div>
         </div>
       </div>
 
       {/* Similar Tools in same category */}
       {similarTools.length > 0 && (
-        <section>
+        <section className="mb-14">
           <div className="flex items-center justify-between mb-6">
             <h2 className="text-lg font-bold text-foreground">
               Similar {tool.category} AI Platforms
@@ -250,6 +372,32 @@ export const AiToolDetailPage: React.FC = () => {
             ))}
           </div>
         </section>
+      )}
+
+      {/* Related Step-by-Step Guides Section */}
+      {relatedGuides.length > 0 && (
+        <div className="pt-8 border-t border-border">
+          <div className="flex items-center justify-between mb-6">
+            <div>
+              <div className="inline-flex items-center gap-1.5 text-primary text-xs font-semibold uppercase tracking-wider mb-1">
+                <BookOpen className="w-3.5 h-3.5" />
+                <span>Related Workflows</span>
+              </div>
+              <h2 className="text-xl font-bold text-foreground">
+                Step-by-Step Guides for {tool.name}
+              </h2>
+            </div>
+            <Link to="/guides" className="text-xs text-primary hover:underline">
+              Browse all guides →
+            </Link>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {relatedGuides.map((guide) => (
+              <GuideCard key={guide.id} guide={guide} />
+            ))}
+          </div>
+        </div>
       )}
     </div>
   );

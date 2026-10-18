@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { getBrandLogo } from '../data/brandLogos.ts';
 
 export type BrandLogoSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | number;
@@ -22,8 +22,22 @@ export const BrandLogo: React.FC<BrandLogoProps> = ({
   iconLetter,
   showContainer = true,
 }) => {
-  const [hasError, setHasError] = useState(false);
   const logoEntry = getBrandLogo(slug);
+  const [currentSrc, setCurrentSrc] = useState<string | undefined>(logoEntry?.assetPath);
+  const [hasError, setHasError] = useState(false);
+
+  useEffect(() => {
+    setCurrentSrc(logoEntry?.assetPath);
+    setHasError(false);
+  }, [slug, logoEntry?.assetPath]);
+
+  const handleImageError = () => {
+    if (logoEntry?.pngAssetPath && currentSrc !== logoEntry.pngAssetPath) {
+      setCurrentSrc(logoEntry.pngAssetPath);
+    } else {
+      setHasError(true);
+    }
+  };
 
   // Dimension helpers
   const getSizeStyles = () => {
@@ -79,33 +93,34 @@ export const BrandLogo: React.FC<BrandLogoProps> = ({
   const fallbackBg = iconBgColor || logoEntry?.badgeBg || '#3b82f6';
   const fallbackText = iconLetter || (name ? name.slice(0, 2).toUpperCase() : '??');
 
-  if (logoEntry && logoEntry.assetPath && !hasError) {
+  if (logoEntry && currentSrc && !hasError) {
     if (!showContainer) {
+      const hasSizeOverride = /\b(w-|h-)/.test(className);
       return (
         <img
-          src={logoEntry.assetPath}
+          src={currentSrc}
           alt=""
           aria-hidden="true"
-          className={`${sizeClasses.img} object-contain transition-transform duration-300 group-hover:scale-105 ${className}`}
+          className={`${hasSizeOverride ? '' : sizeClasses.img} object-contain transition-transform duration-300 group-hover:scale-105 ${className}`}
           loading="lazy"
           decoding="async"
-          onError={() => setHasError(true)}
+          onError={handleImageError}
         />
       );
     }
 
     return (
       <div
-        className={`${sizeClasses.container} rounded-md flex items-center justify-center shrink-0 overflow-hidden bg-card/90 border border-border/80 shadow-sm transition-transform duration-300 group-hover:scale-105 ${className}`}
+        className={`${sizeClasses.container} rounded-md flex items-center justify-center shrink-0 overflow-hidden bg-card border border-border/80 shadow-sm transition-transform duration-300 group-hover:scale-105 ${className}`}
         title={`${name} logo`}
       >
         <img
-          src={logoEntry.assetPath}
+          src={currentSrc}
           alt={`${name} logo`}
           className={`${sizeClasses.img} object-contain`}
           loading="lazy"
           decoding="async"
-          onError={() => setHasError(true)}
+          onError={handleImageError}
         />
       </div>
     );

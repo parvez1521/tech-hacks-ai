@@ -1,11 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useRouter, Link } from '../router/Router';
 import { getToolBySlug, getSimilarTools } from '../services/catalogService';
+import { getAllGuides } from '../services/aiCatalogService';
 import { proprietaryTools } from '../data/alternatives';
 import { categories } from '../data/categories';
 import { ToolCard } from '../components/ToolCard';
+import { GuideCard } from '../components/GuideCard';
 import { VerifiedBadge, AiNativeBadge } from '../components/Badge';
 import { BrandLogo } from '../components/BrandLogo';
+import { siteConfig } from '../config/siteConfig';
 import {
   ExternalLink,
   Github,
@@ -20,12 +23,17 @@ import {
   Terminal,
   Sparkles,
   BadgeCheck,
+  Scale,
+  Share2,
+  Check,
+  BookOpen,
 } from 'lucide-react';
 
 export const ToolDetailPage: React.FC = () => {
   const { params } = useRouter();
   const slug = params.slug;
   const tool = getToolBySlug(slug);
+  const [copied, setCopied] = useState(false);
 
   if (!tool) {
     return (
@@ -45,23 +53,85 @@ export const ToolDetailPage: React.FC = () => {
     );
   }
 
+  const handleCopyLink = () => {
+    if (typeof window !== 'undefined') {
+      const canonicalUrl = `${siteConfig.url}/tools/${tool.slug}`;
+      navigator.clipboard.writeText(canonicalUrl);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2500);
+    }
+  };
+
   const alternativeItems = proprietaryTools.filter((p) => tool.alternativesTo.includes(p.slug));
   const categoryItems = categories.filter((c) => tool.categories.includes(c.slug));
   const similarTools = getSimilarTools(tool, 3);
 
+  // Find related guides mentioning this tool or category
+  const allGuides = getAllGuides();
+  const relatedGuides = allGuides.filter(
+    (g) =>
+      g.relatedToolSlugs.includes(tool.slug) ||
+      (tool.categories.includes('developer-tools') && g.category === 'coding') ||
+      (tool.categories.includes('productivity') && g.category === 'productivity')
+  ).slice(0, 2);
+
+  // SoftwareApplication JSON-LD schema
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'SoftwareApplication',
+    name: tool.name,
+    description: tool.description,
+    url: `${siteConfig.url}/tools/${tool.slug}`,
+    applicationCategory: tool.categories[0] || 'DeveloperApplication',
+    operatingSystem: 'Cross-platform, Docker, Self-hosted',
+    offers: {
+      '@type': 'Offer',
+      price: '0',
+      priceCurrency: 'USD',
+      description: `Free and open-source under ${tool.license} license`,
+    },
+  };
+
   return (
     <div className="max-w-5xl mx-auto px-4 sm:px-6 py-8">
+      {/* Embedded JSON-LD */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+
       {/* Breadcrumb Navigation */}
-      <nav className="flex items-center gap-2 text-xs text-muted-foreground mb-6" aria-label="Breadcrumb">
-        <Link to="/" className="hover:text-foreground">
-          Home
-        </Link>
-        <span>/</span>
-        <Link to="/tools" className="hover:text-foreground">
-          Tools
-        </Link>
-        <span>/</span>
-        <span className="text-foreground font-medium">{tool.name}</span>
+      <nav className="flex items-center justify-between text-xs text-muted-foreground mb-6" aria-label="Breadcrumb">
+        <div className="flex items-center gap-2">
+          <Link to="/" className="hover:text-foreground">
+            Home
+          </Link>
+          <span>/</span>
+          <Link to="/tools" className="hover:text-foreground">
+            Tools
+          </Link>
+          <span>/</span>
+          <span className="text-foreground font-medium">{tool.name}</span>
+        </div>
+
+        <button
+          type="button"
+          onClick={handleCopyLink}
+          className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg border border-border bg-card/80 hover:bg-card text-foreground transition-colors"
+          aria-label="Share tool link"
+        >
+          {copied ? (
+            <>
+              <Check className="w-3.5 h-3.5 text-emerald-400" />
+              <span className="text-emerald-400">Link Copied!</span>
+            </>
+          ) : (
+            <>
+              <Share2 className="w-3.5 h-3.5 text-muted-foreground" />
+              <span>Share</span>
+            </>
+          )}
+        </button>
       </nav>
 
       {/* Main Hero Header */}
@@ -114,29 +184,39 @@ export const ToolDetailPage: React.FC = () => {
           </div>
         </div>
 
-        {/* Alternative to Chips */}
+        {/* Alternative to Chips & Comparison Link */}
         {alternativeItems.length > 0 && (
-          <div className="flex flex-wrap items-center gap-2 pt-4 border-t border-border/50 text-xs">
-            <span className="text-muted-foreground font-medium">Open source alternative to:</span>
-            <div className="flex flex-wrap items-center gap-1.5">
-              {alternativeItems.map((alt) => (
-                <Link
-                  key={alt.slug}
-                  to={`/alternatives/${alt.slug}`}
-                  className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-background border border-border hover:border-primary/50 hover:bg-primary/10 hover:text-primary active:scale-95 text-foreground transition-all duration-150 shadow-xs"
-                >
-                  <BrandLogo
-                    slug={alt.slug}
-                    name={alt.name}
-                    size="xs"
-                    iconBgColor={alt.iconBgColor}
-                    iconLetter={alt.iconLetter}
-                    className="w-3.5 h-3.5 rounded-full overflow-hidden p-0"
-                  />
-                  <span className="font-semibold">{alt.name}</span>
-                </Link>
-              ))}
+          <div className="flex flex-wrap items-center justify-between gap-2 pt-4 border-t border-border/50 text-xs">
+            <div className="flex flex-wrap items-center gap-2">
+              <span className="text-muted-foreground font-medium">Open source alternative to:</span>
+              <div className="flex flex-wrap items-center gap-1.5">
+                {alternativeItems.map((alt) => (
+                  <Link
+                    key={alt.slug}
+                    to={`/alternatives/${alt.slug}`}
+                    className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-background border border-border hover:border-primary/50 hover:bg-primary/10 hover:text-primary active:scale-95 text-foreground transition-all duration-150 shadow-xs"
+                  >
+                    <BrandLogo
+                      slug={alt.slug}
+                      name={alt.name}
+                      size="xs"
+                      iconBgColor={alt.iconBgColor}
+                      iconLetter={alt.iconLetter}
+                      className="w-3.5 h-3.5 rounded-full overflow-hidden p-0"
+                    />
+                    <span className="font-semibold">{alt.name}</span>
+                  </Link>
+                ))}
+              </div>
             </div>
+
+            <Link
+              to={`/compare?tools=${tool.slug},${alternativeItems[0].slug}`}
+              className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-purple-500/10 text-purple-400 border border-purple-500/20 font-medium hover:bg-purple-500/20 transition-colors"
+            >
+              <Scale className="w-3.5 h-3.5" />
+              <span>Compare Side-by-Side</span>
+            </Link>
           </div>
         )}
       </div>
@@ -331,7 +411,7 @@ export const ToolDetailPage: React.FC = () => {
 
       {/* Similar Open Source Projects */}
       {similarTools.length > 0 && (
-        <section className="pt-8 border-t border-border/60">
+        <section className="pt-8 border-t border-border/60 mb-12">
           <h2 className="text-xl font-bold text-foreground mb-4">
             Similar Open Source Projects
           </h2>
@@ -341,6 +421,32 @@ export const ToolDetailPage: React.FC = () => {
             ))}
           </div>
         </section>
+      )}
+
+      {/* Related Step-by-Step Guides Section */}
+      {relatedGuides.length > 0 && (
+        <div className="pt-8 border-t border-border">
+          <div className="flex items-center justify-between mb-6">
+            <div>
+              <div className="inline-flex items-center gap-1.5 text-primary text-xs font-semibold uppercase tracking-wider mb-1">
+                <BookOpen className="w-3.5 h-3.5" />
+                <span>Related Tutorials</span>
+              </div>
+              <h2 className="text-xl font-bold text-foreground">
+                Step-by-Step Guides for {tool.name}
+              </h2>
+            </div>
+            <Link to="/guides" className="text-xs text-primary hover:underline">
+              Browse all guides →
+            </Link>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {relatedGuides.map((guide) => (
+              <GuideCard key={guide.id} guide={guide} />
+            ))}
+          </div>
+        </div>
       )}
     </div>
   );

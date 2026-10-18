@@ -1,12 +1,13 @@
 import React from 'react';
-import { useRouter, safeScrollTo } from '../router/Router';
+import { Link, useRouter, safeScrollTo } from '../router/Router';
 import { filterAndSortAiTools } from '../services/aiCatalogService';
 import { aiCategories } from '../data/aiToolsData';
 import { AiToolCard } from '../components/AiToolCard';
 import { Pagination } from '../components/Pagination';
 import { EmptyState } from '../components/EmptyState';
+import { CommunityCallout } from '../components/CommunityCallout';
 import { AiFilterState, PricingType } from '../types';
-import { Sparkles, Search, X, SlidersHorizontal } from 'lucide-react';
+import { Sparkles, Search, X, SlidersHorizontal, PlusCircle } from 'lucide-react';
 
 export const AiToolsPage: React.FC = () => {
   const { searchParams, setSearchParam, setSearchParams, resetSearchParams } = useRouter();
@@ -46,13 +47,24 @@ export const AiToolsPage: React.FC = () => {
     <div className="max-w-6xl mx-auto px-4 sm:px-6 py-8">
       {/* Header */}
       <div className="mb-8">
-        <div className="inline-flex items-center gap-2 text-primary text-xs font-semibold uppercase tracking-wider mb-2">
-          <Sparkles className="w-4 h-4" />
-          <span>Curated AI Catalog</span>
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-2">
+          <div>
+            <div className="inline-flex items-center gap-2 text-primary text-xs font-semibold uppercase tracking-wider mb-2">
+              <Sparkles className="w-4 h-4" />
+              <span>Curated AI Catalog</span>
+            </div>
+            <h1 className="text-2xl sm:text-4xl font-extrabold text-foreground tracking-tight">
+              Discover Best AI Tools & Generative Platforms
+            </h1>
+          </div>
+          <Link
+            to="/submit-tool"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-primary hover:bg-primary/90 text-primary-foreground font-semibold text-xs shadow-md shadow-primary/20 transition-all shrink-0 self-start sm:self-auto"
+          >
+            <PlusCircle className="w-4 h-4" />
+            <span>Submit a Tool</span>
+          </Link>
         </div>
-        <h1 className="text-2xl sm:text-4xl font-extrabold text-foreground tracking-tight mb-2">
-          Discover Best AI Tools & Generative Platforms
-        </h1>
         <p className="text-sm sm:text-base text-secondary-foreground max-w-2xl mb-6">
           Explore top generative video, image, voice, coding, and workflow automation models. Filter by pricing tier, features, and user ratings.
         </p>
@@ -181,6 +193,9 @@ export const AiToolsPage: React.FC = () => {
           onPageChange={handlePageChange}
         />
       )}
+
+      {/* Community Contribution Callout */}
+      <CommunityCallout type="tool" className="mt-12" />
     </div>
   );
 };

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { offersData } from '../data/offersData';
+import { offersData, isOfferActive } from '../data/offersData';
 import { OfferCard } from '../components/OfferCard';
 import { EmptyState } from '../components/EmptyState';
 import {
@@ -14,6 +14,7 @@ import {
   Info,
   Gift,
   ExternalLink,
+  Archive,
 } from 'lucide-react';
 import type { OfferType } from '../types';
 
@@ -21,8 +22,17 @@ export const OffersPage: React.FC = () => {
   const [search, setSearch] = useState('');
   const [selectedType, setSelectedType] = useState<OfferType | 'all'>('all');
   const [selectedRegion, setSelectedRegion] = useState<'all' | 'India' | 'Global'>('all');
+  const [statusFilter, setStatusFilter] = useState<'active' | 'archived' | 'all'>('active');
 
   const filteredOffers = offersData.filter((offer) => {
+    // Expiration / status filter
+    if (statusFilter === 'active' && !isOfferActive(offer)) {
+      return false;
+    }
+    if (statusFilter === 'archived' && isOfferActive(offer)) {
+      return false;
+    }
+
     // Type filter
     if (selectedType !== 'all' && offer.offerType !== selectedType) {
       return false;
@@ -48,16 +58,19 @@ export const OffersPage: React.FC = () => {
     return true;
   });
 
-  const studentCount = offersData.filter((o) => o.requiresStudentVerification).length;
-  const indiaCount = offersData.filter((o) => o.region === 'India').length;
-  const globalCount = offersData.filter((o) => o.region === 'Global').length;
+  const activeCount = offersData.filter((o) => isOfferActive(o)).length;
+  const archivedCount = offersData.filter((o) => !isOfferActive(o)).length;
+  const studentCount = offersData.filter((o) => o.requiresStudentVerification && isOfferActive(o)).length;
+  const indiaCount = offersData.filter((o) => o.region === 'India' && isOfferActive(o)).length;
+  const globalCount = offersData.filter((o) => o.region === 'Global' && isOfferActive(o)).length;
 
-  const hasActiveFilters = search.trim() !== '' || selectedType !== 'all' || selectedRegion !== 'all';
+  const hasActiveFilters = search.trim() !== '' || selectedType !== 'all' || selectedRegion !== 'all' || statusFilter !== 'active';
 
   const resetFilters = () => {
     setSearch('');
     setSelectedType('all');
     setSelectedRegion('all');
+    setStatusFilter('active');
   };
 
   return (
@@ -125,6 +138,35 @@ export const OffersPage: React.FC = () => {
                 <X className="w-4 h-4" />
               </button>
             )}
+          </div>
+
+          {/* Status Filter */}
+          <div className="flex items-center gap-2">
+            <span className="text-xs font-semibold text-muted-foreground uppercase tracking-wider shrink-0 hidden sm:inline">
+              Status:
+            </span>
+            <div className="inline-flex rounded-lg border border-border bg-card p-1">
+              <button
+                onClick={() => setStatusFilter('active')}
+                className={`px-3 py-1.5 text-xs font-medium rounded-md transition-colors ${
+                  statusFilter === 'active'
+                    ? 'bg-emerald-500/20 text-emerald-400 font-semibold shadow-sm'
+                    : 'text-muted-foreground hover:text-foreground'
+                }`}
+              >
+                Active ({activeCount})
+              </button>
+              <button
+                onClick={() => setStatusFilter('archived')}
+                className={`px-3 py-1.5 text-xs font-medium rounded-md transition-colors ${
+                  statusFilter === 'archived'
+                    ? 'bg-rose-500/20 text-rose-400 font-semibold shadow-sm'
+                    : 'text-muted-foreground hover:text-foreground'
+                }`}
+              >
+                Archived ({archivedCount})
+              </button>
+            </div>
           </div>
 
           {/* Region Filter */}

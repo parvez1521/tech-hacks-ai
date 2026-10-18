@@ -1,0 +1,85 @@
+-- =============================================================================
+-- Tech Hacks AI — Production PostgreSQL Schema for Supabase
+-- =============================================================================
+-- This file contains the complete database schema for durable persistence of
+-- community tool & guide submissions, editorial moderation, and published items.
+--
+-- How to apply:
+-- 1. Create a project at https://supabase.com
+-- 2. Open your project dashboard -> SQL Editor -> New Query
+-- 3. Paste this entire file and click "Run" (CMD/CTRL + Enter)
+-- 4. Copy your Project URL & Service Role Key into your Vercel Environment Variables:
+--    - SUPABASE_URL=https://<your-project-ref>.supabase.co
+--    - SUPABASE_SERVICE_ROLE_KEY=<your-service-role-secret-key>
+-- =============================================================================
+
+-- 1. Submissions Queue Table
+CREATE TABLE IF NOT EXISTS public.techhacks_submissions (
+    id VARCHAR(120) PRIMARY KEY,
+    type VARCHAR(20) NOT NULL CHECK (type IN ('tool', 'guide')),
+    status VARCHAR(20) NOT NULL DEFAULT 'pending' CHECK (status IN ('pending', 'in_review', 'approved', 'rejected', 'published')),
+    created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+    updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+    tool_data JSONB,
+    guide_data JSONB,
+    potential_duplicate BOOLEAN DEFAULT FALSE,
+    duplicate_reason TEXT,
+    duplicate_matches JSONB DEFAULT '[]'::jsonb,
+    moderator_notes TEXT,
+    is_verified BOOLEAN DEFAULT FALSE,
+    published_slug VARCHAR(120),
+    published_at TIMESTAMPTZ
+);
+
+-- Performance Indexes for Moderation Queue & Filtering
+CREATE INDEX IF NOT EXISTS idx_techhacks_sub_status ON public.techhacks_submissions(status);
+CREATE INDEX IF NOT EXISTS idx_techhacks_sub_type ON public.techhacks_submissions(type);
+CREATE INDEX IF NOT EXISTS idx_techhacks_sub_created_at ON public.techhacks_submissions(created_at DESC);
+CREATE INDEX IF NOT EXISTS idx_techhacks_sub_pub_slug ON public.techhacks_submissions(published_slug);
+
+-- 2. Published Additions Table (Catalog Overlays)
+CREATE TABLE IF NOT EXISTS public.techhacks_published_additions (
+    key VARCHAR(50) PRIMARY KEY,
+    data JSONB NOT NULL DEFAULT '{"tools":[],"guides":[],"lastUpdated":""}'::jsonb,
+    updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
+-- 3. Initial Root Entry for Published Additions
+INSERT INTO public.techhacks_published_additions (key, data, updated_at)
+VALUES (
+    'root',
+    '{"tools":[],"guides":[],"lastUpdated":"2026-10-18T10:00:00.000Z"}'::jsonb,
+    NOW()
+)
+ON CONFLICT (key) DO NOTHING;
+
+-- 4. Enable Row Level Security (RLS)
+ALTER TABLE public.techhacks_submissions ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.techhacks_published_additions ENABLE ROW LEVEL SECURITY;
+
+-- 5. Row Level Security Policies
+
+-- techhacks_submissions: Only service_role can access (protected backend API)
+DROP POLICY IF EXISTS "Service role full access on submissions" ON public.techhacks_submissions;
+CREATE POLICY "Service role full access on submissions"
+ON public.techhacks_submissions
+FOR ALL
+TO service_role
+USING (true)
+WITH CHECK (true);
+
+-- techhacks_published_additions: Public can read, only service_role can write
+DROP POLICY IF EXISTS "Public can view published additions" ON public.techhacks_published_additions;
+CREATE POLICY "Public can view published additions"
+ON public.techhacks_published_additions
+FOR SELECT
+TO public
+USING (true);
+
+DROP POLICY IF EXISTS "Service role full access on published additions" ON public.techhacks_published_additions;
+CREATE POLICY "Service role full access on published additions"
+ON public.techhacks_published_additions
+FOR ALL
+TO service_role
+USING (true)
+WITH CHECK (true);

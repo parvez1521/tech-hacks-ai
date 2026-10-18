@@ -75,14 +75,14 @@ export const AiToolCard: React.FC<AiToolCardProps> = ({ tool }) => {
   return (
     <div
       onMouseMove={handleMouseMove}
-      className="group relative flex flex-col justify-between p-5 rounded-lg border border-border bg-card/90 hover:bg-card transition-all duration-300 ease-out hover:-translate-y-1 hover:border-primary/40 hover:shadow-xl hover:shadow-black/30 min-h-[250px] focus-within:ring-2 focus-within:ring-primary/60 focus-within:border-primary/60"
+      className="group relative flex flex-col justify-between p-5 rounded-lg border border-border bg-card/90 hover:bg-card transition-all duration-300 ease-out hover:-translate-y-1.5 hover:border-cyan-500/40 hover:shadow-xl hover:shadow-cyan-500/5 min-h-[250px] focus-within:ring-2 focus-within:ring-cyan-500/60 focus-within:border-cyan-500/60"
     >
       {/* Decorative Interactive Spotlight Inner Glow */}
       <div
         className="pointer-events-none absolute -inset-px rounded-lg opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-focus-within:opacity-100 -z-0"
         style={{
           background:
-            'radial-gradient(280px circle at var(--card-x, 50%) var(--card-y, 50%), rgba(59, 130, 246, 0.12), transparent 80%)',
+            'radial-gradient(280px circle at var(--card-x, 50%) var(--card-y, 50%), rgba(6, 182, 212, 0.12), transparent 80%)',
         }}
         aria-hidden="true"
       />

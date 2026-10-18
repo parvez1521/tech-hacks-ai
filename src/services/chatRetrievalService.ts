@@ -87,7 +87,12 @@ export function generateGroundedResponse(userQuery: string): ChatMessage {
     q.includes('university') ||
     q.includes('sheerid') ||
     q.includes('campus') ||
-    q.includes('education discount')
+    q.includes('education discount') ||
+    q.includes('azure for student') ||
+    q.includes('azure student') ||
+    q.includes('adobe student') ||
+    q.includes('figma student') ||
+    q.includes('figma education')
   ) {
     return {
       id: `bot-${now}`,
@@ -95,19 +100,25 @@ export function generateGroundedResponse(userQuery: string): ChatMessage {
       timestamp: now,
       text: `**Verified Student AI Perks & Developer Packages:**\n\n` +
         `If you are an enrolled college or university student with an academic email (.edu or campus domain), you can access significant verified AI discounts and free subscriptions:\n\n` +
-        `• [GitHub Student Developer Pack](/offers/github-student-pack-copilot) — **100% Free GitHub Copilot Individual**, free GitHub Pro, JetBrains suite, and $100+ cloud credits.\n` +
+        `• [GitHub Student Developer Pack](/offers/github-student-pack-copilot) — **100% Free GitHub Copilot Individual**, free GitHub Pro, JetBrains suite, and cloud credits.\n` +
+        `• [GitHub Copilot Free Tier](/offers/github-copilot-free) — 2,000 code completions/month & 50 chat turns for anyone with a standard GitHub account (zero student proof or credit card needed).\n` +
+        `• [Microsoft Azure for Students](/offers/azure-for-students) — **$100 USD cloud credit** for 12 months with **no credit card required**, access to Azure OpenAI models, cognitive services, and 55+ always-free services.\n` +
+        `• [Figma for Education](/offers/figma-education) — **100% Free Figma Professional Plan** and FigJam with unlimited files and Dev Mode for students and educators.\n` +
         `• [Google Gemini Student Plan (India)](/offers/google-gemini-student-offer-india) — Subsidized and complimentary access to Gemini Advanced & 2TB Drive storage via SheerID verification.\n` +
         `• [Perplexity Education Pro](/offers/perplexity-education-pro) — Discounted Pro Search with multi-model switching (Claude 3.5 Sonnet, GPT-4o) for verified students and faculty.\n` +
+        `• [Adobe Creative Cloud Student Discount (India)](/offers/adobe-cc-student-discount-india) — **Discounted paid tier** (~₹1,595/mo + GST first year, 65% off regular price) including 20+ creative apps and 1,000 monthly Firefly generative AI credits (valid payment method required, not free).\n` +
         `• [JetBrains Student Pack](/offers/jetbrains-student-pack) — Free professional IDE suite (IntelliJ, PyCharm, WebStorm) for active students.\n` +
         `• [Notion for Education](/offers/notion-for-education) — Free Notion Plus tier with unlimited file uploads for students and teachers.\n\n` +
         `👉 Explore all verified student packages and claim links on our [AI Deals & Student Benefits Directory](/offers).`,
       suggestions: [
-        'GitHub Copilot Student activation',
-        'Perplexity Education Pro requirements',
+        'GitHub Copilot Free vs Student Pack',
+        'Microsoft Azure $100 student credit',
+        'Adobe CC Student India pricing',
         'Reliance Jio Gemini 18mo offer',
       ],
       groundedTools: [
-        { name: 'GitHub Copilot', slug: 'copilot', type: 'ai', pricingSummary: '100% Free for Students', websiteUrl: 'https://education.github.com/pack' },
+        { name: 'GitHub Copilot', slug: 'copilot', type: 'ai', pricingSummary: '100% Free for Students / Free Tier available', websiteUrl: 'https://education.github.com/pack' },
+        { name: 'Microsoft Azure', slug: 'azure', type: 'ai', pricingSummary: '$100 Free Student Credit', websiteUrl: 'https://azure.microsoft.com/free/students/' },
         { name: 'Perplexity', slug: 'perplexity', type: 'ai', pricingSummary: 'Academic Discount available', websiteUrl: 'https://www.perplexity.ai/pro' },
       ],
     };
@@ -129,13 +140,17 @@ export function generateGroundedResponse(userQuery: string): ChatMessage {
         `Tech Hacks AI independently verifies official institutional discounts, carrier partnerships, and cloud credit programs. We **never** list expired or fabricated coupon codes.\n\n` +
         `**Top Active Verified Offers Today:**\n` +
         `• [Reliance Jio + Google Gemini](/offers/jio-google-gemini-offer) — 18 Months free Google One AI Premium (Gemini Advanced + 2TB storage) for Jio 5G users.\n` +
+        `• [Microsoft Azure for Students](/offers/azure-for-students) — $100 free cloud & Azure OpenAI credits without requiring a credit card.\n` +
         `• [GitHub Student Developer Pack](/offers/github-student-pack-copilot) — Free GitHub Copilot Individual for students.\n` +
-        `• [Google AI Student Plan India](/offers/google-gemini-student-offer-india) — Gemini Advanced student discount.\n` +
+        `• [GitHub Copilot Free Tier](/offers/github-copilot-free) — Ongoing 2,000 completions/month for all developers.\n` +
+        `• [Figma for Education](/offers/figma-education) — Free Professional workspace for design and Dev Mode.\n` +
         `• [Microsoft for Startups Founders Hub](/offers/microsoft-founders-hub-credits) — Up to $150k in Azure cloud & OpenAI credits for early-stage builders.\n` +
+        `• [Google for Startups Cloud Program](/offers/google-for-startups-cloud) — Up to $350k in Google Cloud & Gemini model credits.\n` +
         `• [AWS Activate](/offers/aws-activate-ai-startups) — $1,000+ in AWS Bedrock & compute credits for bootstrapped startups.\n\n` +
         `👉 Browse all terms and claim instructions on our [AI Deals Directory](/offers).`,
       suggestions: [
         'Jio Gemini 18-month deal details',
+        'Azure $100 student credit without credit card',
         'Free GitHub Copilot for students',
         'Startup cloud credits',
       ],
@@ -262,7 +277,77 @@ export function generateGroundedResponse(userQuery: string): ChatMessage {
     };
   }
 
-  // 3. Video Generation Queries (English & Hindi/Hinglish)
+  // 8. Tool Selection & Help Me Pick Inquiries
+  if (
+    q.includes('choose') ||
+    q.includes('help me pick') ||
+    q.includes('pick a tool') ||
+    q.includes('suggest a tool') ||
+    q.includes('which tool should') ||
+    q.includes('kaun sa tool')
+  ) {
+    return {
+      id: `bot-${now}`,
+      sender: 'assistant',
+      timestamp: now,
+      text: `**How to Choose the Right AI or Open-Source Tool:**\n\n` +
+        `To find the exact software for your workflow, you can either ask me directly or use our 3-question guided wizard: [Help Me Pick](/pick).\n\n` +
+        `**Quick Recommendations by Objective:**\n` +
+        `• **AI Coding & Terminal Agents:** [Cursor](/ai-tools/cursor) for full-project IDE editing, [Aider](/tools/aider) for Git-aware CLI pair programming, [Cline](/tools/cline) for VS Code autonomous tasks.\n` +
+        `• **Free Video Generation:** [Kling AI](/ai-tools/kling-ai) (66 daily credits), [Wan 2.1](/ai-tools/wan-video) (100% Free local GPU weights).\n` +
+        `• **Conversational LLM & Research:** [Claude 3.5 Sonnet](/ai-tools/claude) for logic/code, [DeepSeek-R1](/ai-tools/deepseek) for open reasoning, [Perplexica](/tools/perplexica) for private web search.\n` +
+        `• **Proprietary Replacements:** [Supabase](/tools/supabase) (Firebase alt), [Penpot](/tools/penpot) (Figma alt), [AppFlowy](/tools/appflowy) (Notion alt).\n\n` +
+        `👉 Try our [Help Me Pick Wizard](/pick) to filter by budget, watermark preference, and hosting style.`,
+      suggestions: [
+        'Free video generators',
+        'Claude Code alternatives',
+        'Compare Cursor vs Aider',
+        'AI deals for students',
+      ],
+      groundedTools: [
+        { name: 'Cursor', slug: 'cursor', type: 'ai', pricingSummary: 'AI Code Editor', websiteUrl: 'https://cursor.com' },
+        { name: 'Aider', slug: 'aider', type: 'open-source', pricingSummary: 'Git Pair Programming CLI', websiteUrl: 'https://aider.chat' },
+        { name: 'Kling AI', slug: 'kling-ai', type: 'ai', pricingSummary: '66 daily video credits', websiteUrl: 'https://klingai.com' },
+      ],
+    };
+  }
+
+  // 9. Side-by-Side Comparisons
+  if (
+    q.includes('compare') ||
+    q.includes('vs') ||
+    q.includes('difference between') ||
+    q.includes('better than')
+  ) {
+    return {
+      id: `bot-${now}`,
+      sender: 'assistant',
+      timestamp: now,
+      text: `**Side-by-Side Tool & Alternative Comparisons:**\n\n` +
+        `You can evaluate licensing, self-hostability, pricing models, tech stacks, and repository metrics side by side on our interactive [Comparison Matrix](/compare).\n\n` +
+        `**Popular Benchmarks & Head-to-Head Comparisons:**\n` +
+        `• [Cursor vs Claude Code vs Aider](/compare?tools=cursor,claude-code,aider) — AI Code Editor vs Agentic Terminal CLIs\n` +
+        `• [Supabase vs Firebase](/compare?tools=supabase,firebase) — PostgreSQL Open Source BaaS vs Google Cloud\n` +
+        `• [Penpot vs Figma](/compare?tools=penpot,figma) — Self-hostable web design vs proprietary cloud SaaS\n` +
+        `• [Perplexity vs Perplexica vs Khoj](/compare?tools=perplexity,perplexica,khoj) — Public web AI search vs private self-hosted second brains\n` +
+        `• [Kling AI vs Wan 2.1 vs Runway](/compare?tools=kling-ai,wan-video,runway) — Cloud check-in credits vs local open weights\n` +
+        `• [Ollama vs Open WebUI](/compare?tools=ollama,open-webui) — Headless local model runner vs ChatGPT-style local web frontend\n\n` +
+        `👉 Launch our [Interactive Comparison Tool](/compare) or tell me which specific tools you'd like to compare!`,
+      suggestions: [
+        'Cursor vs Claude Code vs Aider',
+        'Supabase vs Firebase',
+        'Kling AI vs Wan 2.1',
+        'Help me pick a tool',
+      ],
+      groundedTools: [
+        { name: 'Cursor Editor', slug: 'cursor', type: 'ai', pricingSummary: 'Free tier + Pro trial', websiteUrl: 'https://cursor.com' },
+        { name: 'Aider', slug: 'aider', type: 'open-source', pricingSummary: 'Apache 2.0 CLI', websiteUrl: 'https://aider.chat' },
+        { name: 'Supabase', slug: 'supabase', type: 'open-source', pricingSummary: 'Apache 2.0 Open BaaS', websiteUrl: 'https://supabase.com' },
+      ],
+    };
+  }
+
+  // 10. Video Generation Queries (English & Hindi/Hinglish)
   if (
     q.includes('video') ||
     q.includes('animation') ||
@@ -472,7 +557,7 @@ export function generateGroundedResponse(userQuery: string): ChatMessage {
     };
   }
 
-  // 9. Greeting / General Inquiries (English & Hindi/Hinglish)
+  // 11. Greeting / General Inquiries (English & Hindi/Hinglish)
   const isGreeting = q === 'hi' || q === 'hello' || q === 'hey' || q.includes('namaste') || q.includes('kaise ho') || q.includes('kya kar sakte');
   const greetingText = isGreeting
     ? `**Namaste! Welcome to Tech Hacks AI Assistant.** 👋\n\n` +

@@ -3,11 +3,58 @@
 @tailwind utilities;
 
 @layer base {
+  :root,
+  html.dark,
+  body.dark,
+  [data-theme='dark'] {
+    color-scheme: dark;
+    --color-bg: 12 14 18;
+    --color-fg: 243 244 246;
+    --color-card: 19 22 28;
+    --color-card-fg: 243 244 246;
+    --color-muted: 31 36 45;
+    --color-muted-fg: 156 163 175;
+    --color-accent: 30 36 48;
+    --color-accent-fg: 249 250 251;
+    --color-border: 35 41 54;
+    --color-secondary: 31 41 55;
+    --color-secondary-fg: 209 213 219;
+    --color-primary: 59 130 246;
+    --color-primary-hover: 37 99 235;
+    --glow-spotlight: rgba(6, 182, 212, 0.14);
+    --dot-color: rgba(255, 255, 255, 0.08);
+    --grid-color: rgba(255, 255, 255, 0.03);
+  }
+
+  html.light,
+  body.light,
+  .light,
+  [data-theme='light'] {
+    color-scheme: light;
+    --color-bg: 248 250 252;
+    --color-fg: 15 23 42;
+    --color-card: 255 255 255;
+    --color-card-fg: 15 23 42;
+    --color-muted: 241 245 249;
+    --color-muted-fg: 80 95 118;
+    --color-accent: 226 232 240;
+    --color-accent-fg: 15 23 42;
+    --color-border: 218 226 235;
+    --color-secondary: 241 245 249;
+    --color-secondary-fg: 51 65 85;
+    --color-primary: 37 99 235;
+    --color-primary-hover: 29 78 216;
+    --glow-spotlight: rgba(37, 99, 235, 0.04);
+    --dot-color: rgba(15, 23, 42, 0.08);
+    --grid-color: rgba(15, 23, 42, 0.04);
+  }
+
   body {
-    background-color: #0c0e12;
-    color: #f3f4f6;
+    background-color: rgb(var(--color-bg));
+    color: rgb(var(--color-fg));
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     overflow-x: hidden;
+    transition: background-color 0.2s ease, color 0.2s ease;
   }
 
   /* Focus ring accessibility */
@@ -29,17 +76,37 @@
 
   /* Subtle background dot texture for technology aesthetic */
   .bg-dot-pattern {
-    background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+    background-image: radial-gradient(var(--dot-color) 1px, transparent 1px);
     background-size: 24px 24px;
   }
 
   /* Fine subtle grid pattern */
   .bg-grid-pattern {
-    background-image: linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-                      linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    background-image: linear-gradient(to right, var(--grid-color) 1px, transparent 1px),
+                      linear-gradient(to bottom, var(--grid-color) 1px, transparent 1px);
     background-size: 32px 32px;
   }
+
+  /* Scroll-reveal: initial hidden state */
+  .reveal-section {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: opacity, transform;
+  }
+
+  /* Scroll-reveal: revealed state */
+  .reveal-section.in-view {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Optional stagger delays for child groups */
+  .reveal-section.delay-1 { transition-delay: 80ms; }
+  .reveal-section.delay-2 { transition-delay: 160ms; }
+  .reveal-section.delay-3 { transition-delay: 240ms; }
 }
+
 
 /* Keyframe animations */
 @keyframes ambientDrift {
@@ -73,6 +140,46 @@
   }
 }
 
+@keyframes petBlink {
+  0%, 88%, 100% {
+    transform: scaleY(1);
+  }
+  94% {
+    transform: scaleY(0.12);
+  }
+}
+
+@keyframes petFloat {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-3px);
+  }
+}
+
+@keyframes petThinkPulse {
+  0%, 100% {
+    opacity: 0.65;
+    transform: scaleX(0.88);
+  }
+  50% {
+    opacity: 1;
+    transform: scaleX(1.15);
+  }
+}
+
+@keyframes petRespondRadiance {
+  0%, 100% {
+    filter: drop-shadow(0 0 2px rgba(56, 189, 248, 0.7));
+    transform: scale(1);
+  }
+  50% {
+    filter: drop-shadow(0 0 6px rgba(56, 189, 248, 1)) drop-shadow(0 0 10px rgba(168, 85, 247, 0.6));
+    transform: scale(1.06);
+  }
+}
+
 .animate-ambient-drift {
   animation: ambientDrift 14s ease-in-out infinite;
 }
@@ -83,6 +190,48 @@
 
 .animate-pulse-subtle {
   animation: pulseSubtle 3s ease-in-out infinite;
+}
+
+.animate-pet-blink {
+  animation: petBlink 4s ease-in-out infinite;
+}
+
+.animate-pet-float {
+  animation: petFloat 2.5s ease-in-out infinite;
+}
+
+.animate-pet-think {
+  animation: petThinkPulse 1.2s ease-in-out infinite;
+}
+
+.animate-pet-respond {
+  animation: petRespondRadiance 1.6s ease-in-out infinite;
+}
+
+@keyframes floatSlow1 {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-6px) rotate(1.2deg);
+  }
+}
+
+@keyframes floatSlow2 {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(6px) rotate(-1.2deg);
+  }
+}
+
+.animate-float-slow-1 {
+  animation: floatSlow1 9s ease-in-out infinite;
+}
+
+.animate-float-slow-2 {
+  animation: floatSlow2 11s ease-in-out infinite;
 }
 
 /* Strict prefers-reduced-motion accessibility support */
@@ -99,9 +248,24 @@
   .animate-ambient-drift,
   .animate-fade-in-up,
   .animate-pulse-subtle,
-  .animate-fade-in {
+  .animate-fade-in,
+  .animate-pet-blink,
+  .animate-pet-float,
+  .animate-pet-think,
+  .animate-pet-respond,
+  .animate-float-slow-1,
+  .animate-float-slow-2 {
     animation: none !important;
     transform: none !important;
     opacity: 1 !important;
+    filter: none !important;
+  }
+
+  /* Scroll-reveal: skip all transitions for reduced-motion users */
+  .reveal-section {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
   }
 }
+

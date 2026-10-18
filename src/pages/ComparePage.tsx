@@ -5,12 +5,22 @@ import { getAiToolBySlug } from '../services/aiCatalogService';
 import { toolsData } from '../data/seedData';
 import { aiToolsData } from '../data/aiToolsData';
 import { Tool, AiTool } from '../types';
-import { Scales, Plus, X, ExternalLink, Check, Star, ShieldCheck, HardDrive, RefreshCw } from 'lucide-react';
+import { Plus, X, ExternalLink, Check, Star, ShieldCheck, HardDrive, RefreshCw, Share2, Compass, BookOpen, CheckCircle2 } from 'lucide-react';
 import { BrandLogo } from '../components/BrandLogo';
+import { siteConfig } from '../config/siteConfig';
 
 type UnifiedTool =
   | { kind: 'open-source'; data: Tool }
   | { kind: 'ai'; data: AiTool };
+
+const POPULAR_COMPARISONS = [
+  { label: 'Cursor vs Claude Code vs Aider', tools: 'cursor,claude-code,aider' },
+  { label: 'Supabase vs Firebase', tools: 'supabase,firebase' },
+  { label: 'Penpot vs Figma', tools: 'penpot,figma' },
+  { label: 'Perplexity vs Perplexica vs Khoj', tools: 'perplexity,perplexica,khoj' },
+  { label: 'Kling AI vs Wan 2.1 vs Runway', tools: 'kling-ai,wan-video,runway' },
+  { label: 'Ollama vs Open WebUI', tools: 'ollama,open-webui' },
+];
 
 export const ComparePage: React.FC = () => {
   const { searchParams, setSearchParams } = useRouter();
@@ -19,6 +29,16 @@ export const ComparePage: React.FC = () => {
 
   const [searchPicker, setSearchPicker] = useState('');
   const [isPickerOpen, setIsPickerOpen] = useState(false);
+  const [copied, setCopied] = useState(false);
+
+  const handleCopyComparison = () => {
+    if (typeof window !== 'undefined') {
+      const canonicalUrl = `${siteConfig.url}/compare?tools=${slugs.join(',')}`;
+      navigator.clipboard.writeText(canonicalUrl);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2500);
+    }
+  };
 
   // Resolve tools from catalog
   const resolvedTools: UnifiedTool[] = [];
@@ -73,9 +93,27 @@ export const ComparePage: React.FC = () => {
         <h1 className="text-2xl sm:text-4xl font-extrabold text-foreground tracking-tight mb-2">
           Compare Open Source & AI Software
         </h1>
-        <p className="text-sm sm:text-base text-secondary-foreground max-w-2xl mb-6">
+        <p className="text-sm sm:text-base text-secondary-foreground max-w-2xl mb-4">
           Evaluate licensing, self-hostability, pricing models, tech stacks, and repository metrics side by side.
         </p>
+
+        {/* Popular Comparison Presets */}
+        <div className="flex flex-wrap items-center gap-2 mb-6">
+          <span className="text-xs text-muted-foreground font-medium">Popular Comparisons:</span>
+          {POPULAR_COMPARISONS.map((preset) => (
+            <Link
+              key={preset.tools}
+              to={`/compare?tools=${preset.tools}`}
+              className={`px-2.5 py-1 rounded-full text-xs font-medium border transition-colors ${
+                toolsParam === preset.tools
+                  ? 'bg-primary/10 text-primary border-primary/30'
+                  : 'bg-card text-secondary-foreground border-border hover:bg-muted'
+              }`}
+            >
+              {preset.label}
+            </Link>
+          ))}
+        </div>
 
         {/* Action Controls */}
         <div className="flex flex-wrap items-center justify-between gap-3 p-4 rounded-xl bg-card/60 border border-border">
@@ -123,6 +161,26 @@ export const ComparePage: React.FC = () => {
             <span className="text-muted-foreground">
               Comparing <strong className="text-foreground">{resolvedTools.length}</strong> {resolvedTools.length === 1 ? 'tool' : 'tools'}
             </span>
+
+            <button
+              type="button"
+              onClick={handleCopyComparison}
+              className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded border border-border bg-card hover:bg-muted text-foreground transition-colors"
+              aria-label="Share comparison"
+            >
+              {copied ? (
+                <>
+                  <Check className="w-3 h-3 text-emerald-400" />
+                  <span className="text-emerald-400">Copied!</span>
+                </>
+              ) : (
+                <>
+                  <Share2 className="w-3 h-3 text-muted-foreground" />
+                  <span>Share URL</span>
+                </>
+              )}
+            </button>
+
             {resolvedTools.length > 0 && (
               <button
                 type="button"
@@ -327,6 +385,149 @@ export const ComparePage: React.FC = () => {
           </table>
         </div>
       )}
+
+      {/* Decision-Making Framework */}
+      <div className="mt-12 space-y-8">
+        <div className="border-t border-border pt-8">
+          <div className="flex items-center gap-2 text-primary text-xs font-semibold uppercase tracking-wider mb-2">
+            <Compass className="w-4 h-4" />
+            <span>Architecture & Cost Evaluation</span>
+          </div>
+          <h2 className="text-xl sm:text-2xl font-bold text-foreground mb-3">
+            Software Decision-Making Framework
+          </h2>
+          <p className="text-sm text-secondary-foreground max-w-3xl leading-relaxed">
+            Comparing software isn't just about feature checklists—it requires balancing infrastructure hosting overhead, inference token economics, privacy compliance, and team ergonomics.
+          </p>
+        </div>
+
+        {/* 3 Pillars */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="p-5 rounded-xl border border-border bg-card/60 space-y-3">
+            <div className="w-9 h-9 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold text-sm">
+              01
+            </div>
+            <h3 className="text-base font-semibold text-foreground">Self-Hosted vs. Cloud SaaS</h3>
+            <p className="text-xs text-secondary-foreground leading-relaxed">
+              Open-source self-hosted solutions (e.g. Supabase, Penpot, Umami) give you complete data sovereignty and zero per-seat licensing fees. However, factor in ongoing VM costs, automated database backups, security patching, and uptime monitoring.
+            </p>
+            <div className="pt-2 text-[11px] text-muted-foreground border-t border-border/50">
+              <strong>Best for:</strong> Regulated industries, cost-conscious dev shops, and long-term project archiving.
+            </div>
+          </div>
+
+          <div className="p-5 rounded-xl border border-border bg-card/60 space-y-3">
+            <div className="w-9 h-9 rounded-lg bg-blue-500/10 border border-blue-500/20 text-blue-400 flex items-center justify-center font-bold text-sm">
+              02
+            </div>
+            <h3 className="text-base font-semibold text-foreground">Fixed SaaS vs. BYOK Token Economics</h3>
+            <p className="text-xs text-secondary-foreground leading-relaxed">
+              Proprietary AI tools usually charge $20–$30/user/month. Open-source or CLI alternatives (Aider, Cline, OpenCode) leverage BYOK (Bring Your Own Key) where you pay Anthropic or OpenAI directly at wholesale token rates, often saving 60–80% for moderate users.
+            </p>
+            <div className="pt-2 text-[11px] text-muted-foreground border-t border-border/50">
+              <strong>Best for:</strong> Developers wanting model flexibility (Sonnet 3.7 vs DeepSeek V3) without vendor margin.
+            </div>
+          </div>
+
+          <div className="p-5 rounded-xl border border-border bg-card/60 space-y-3">
+            <div className="w-9 h-9 rounded-lg bg-purple-500/10 border border-purple-500/20 text-purple-400 flex items-center justify-center font-bold text-sm">
+              03
+            </div>
+            <h3 className="text-base font-semibold text-foreground">Licensing & Commercial Freedom</h3>
+            <p className="text-xs text-secondary-foreground leading-relaxed">
+              Always verify repository licenses before embedding tools into commercial workflows. Permissive licenses (MIT, Apache 2.0, BSD) allow unrestricted commercial integration; copyleft licenses (GPL, AGPL) may require open-sourcing derivative backend services.
+            </p>
+            <div className="pt-2 text-[11px] text-muted-foreground border-t border-border/50">
+              <strong>Best for:</strong> Founders and enterprise compliance teams verifying IP boundaries.
+            </div>
+          </div>
+        </div>
+
+        {/* Practical Selection Matrix */}
+        <div className="p-6 rounded-xl border border-border bg-card/70 space-y-4">
+          <h3 className="text-base font-bold text-foreground flex items-center gap-2">
+            <CheckCircle2 className="w-4 h-4 text-primary" />
+            <span>Practical Selection Cheat Sheet</span>
+          </h3>
+
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs">
+            <div className="p-3.5 rounded-lg bg-muted/40 border border-border/70 space-y-1.5">
+              <span className="font-semibold text-foreground block">Individual Developer / Solopreneur</span>
+              <p className="text-secondary-foreground text-[11px] leading-relaxed">
+                Prioritize low monthly overhead. Pair <strong>Supabase</strong> (free tier) with <strong>Cursor</strong> or <strong>Aider/Cline</strong> using DeepSeek V3 / Sonnet APIs to keep software costs under $10/month.
+              </p>
+            </div>
+
+            <div className="p-3.5 rounded-lg bg-muted/40 border border-border/70 space-y-1.5">
+              <span className="font-semibold text-foreground block">Privacy & Confidential Codebase</span>
+              <p className="text-secondary-foreground text-[11px] leading-relaxed">
+                Deploy <strong>Ollama</strong> or <strong>vLLM</strong> locally with <strong>Open WebUI</strong> or <strong>Aider</strong> running over local weights (Qwen 2.5 Coder 32B). No code or context tokens ever leave your local network.
+              </p>
+            </div>
+
+            <div className="p-3.5 rounded-lg bg-muted/40 border border-border/70 space-y-1.5">
+              <span className="font-semibold text-foreground block">Scaling Growth Team</span>
+              <p className="text-secondary-foreground text-[11px] leading-relaxed">
+                Start with managed cloud versions of open-source software (e.g. Supabase Cloud, Penpot Cloud). When usage scales, transition to self-hosted Docker/Kube clusters without rewriting client application code.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Related Deep Dive Guides */}
+        <div className="p-6 rounded-xl border border-border bg-card/50">
+          <div className="flex items-center justify-between mb-4">
+            <div className="flex items-center gap-2">
+              <BookOpen className="w-4 h-4 text-primary" />
+              <h3 className="text-sm font-bold text-foreground">Related Guides & Migration Frameworks</h3>
+            </div>
+            <Link to="/guides" className="text-xs text-primary hover:underline font-medium">
+              View All Guides →
+            </Link>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <Link
+              to="/guides/how-to-choose-ai-coding-assistant"
+              className="p-3.5 rounded-lg border border-border bg-muted/40 hover:bg-muted/80 transition-colors flex flex-col justify-between group"
+            >
+              <div>
+                <span className="text-[10px] uppercase font-mono font-bold text-primary mb-1 block">Architecture Deep-Dive</span>
+                <span className="text-xs font-semibold text-foreground group-hover:text-primary transition-colors line-clamp-2">
+                  Cursor vs Claude Code vs Aider vs Cline
+                </span>
+              </div>
+              <span className="text-[11px] text-muted-foreground mt-2">12 min read • Coding</span>
+            </Link>
+
+            <Link
+              to="/guides/evaluating-free-ai-plans"
+              className="p-3.5 rounded-lg border border-border bg-muted/40 hover:bg-muted/80 transition-colors flex flex-col justify-between group"
+            >
+              <div>
+                <span className="text-[10px] uppercase font-mono font-bold text-primary mb-1 block">Cost Reality Check</span>
+                <span className="text-xs font-semibold text-foreground group-hover:text-primary transition-colors line-clamp-2">
+                  How to Evaluate Free AI Tool Plans: Recurring vs Starter Credits
+                </span>
+              </div>
+              <span className="text-[11px] text-muted-foreground mt-2">8 min read • Productivity</span>
+            </Link>
+
+            <Link
+              to="/guides/local-llm-privacy-guide"
+              className="p-3.5 rounded-lg border border-border bg-muted/40 hover:bg-muted/80 transition-colors flex flex-col justify-between group"
+            >
+              <div>
+                <span className="text-[10px] uppercase font-mono font-bold text-primary mb-1 block">Data Sovereignty</span>
+                <span className="text-xs font-semibold text-foreground group-hover:text-primary transition-colors line-clamp-2">
+                  Running Local LLMs for Total Privacy: Ollama + Open WebUI
+                </span>
+              </div>
+              <span className="text-[11px] text-muted-foreground mt-2">7 min read • Privacy</span>
+            </Link>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

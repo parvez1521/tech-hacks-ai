@@ -6,6 +6,18 @@
     <title>Tech Hacks AI — Discover AI Tools, Free Software &amp; Open-Source Alternatives</title>
     <meta name="description" content="A curated discovery platform for top generative AI tools, verified free software, open-source alternatives, step-by-step guides, and developer utilities." />
     <meta name="theme-color" content="#0c0e12" />
+    <script>
+      (function() {
+        try {
+          // Strictly dark theme enforcement (Phase 24)
+          localStorage.removeItem('theme');
+          document.documentElement.classList.remove('light');
+          document.documentElement.classList.add('dark');
+          document.documentElement.setAttribute('data-theme', 'dark');
+          document.documentElement.style.colorScheme = 'dark';
+        } catch (e) {}
+      })();
+    </script>
     <link rel="canonical" href="https://techhacksai.com" />
 
     <!-- Open Graph Metadata -->

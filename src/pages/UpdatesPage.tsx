@@ -1,6 +1,7 @@
 import React from 'react';
 import { updatesData } from '../data/updatesData';
 import { Link } from '../router/Router';
+import { BrandLogo } from '../components/BrandLogo';
 import { Bell, Calendar, ArrowRight, Sparkles, BookOpen, Wrench, ShieldCheck } from 'lucide-react';
 
 export const UpdatesPage: React.FC = () => {
@@ -77,13 +78,24 @@ export const UpdatesPage: React.FC = () => {
               )}
             </div>
 
-            <h3 className="font-bold text-base text-foreground tracking-tight">
-              {item.title}
-            </h3>
-
-            <p className="text-sm text-secondary-foreground leading-relaxed">
-              {item.summary}
-            </p>
+            <div className="flex items-start gap-3 pt-1">
+              {item.toolSlug && (
+                <BrandLogo
+                  slug={item.toolSlug}
+                  name={item.title}
+                  size="md"
+                  className="mt-0.5"
+                />
+              )}
+              <div className="min-w-0 flex-1">
+                <h3 className="font-bold text-base text-foreground tracking-tight mb-1">
+                  {item.title}
+                </h3>
+                <p className="text-sm text-secondary-foreground leading-relaxed">
+                  {item.summary}
+                </p>
+              </div>
+            </div>
           </div>
         ))}
       </div>

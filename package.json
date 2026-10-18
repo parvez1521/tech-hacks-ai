@@ -8,7 +8,8 @@
     "build": "vite build",
     "preview": "vite preview",
     "pretest": "./node_modules/.bin/esbuild src/App.tsx --bundle --platform=node --format=esm --external:react --external:react-dom --external:lucide-react --outfile=dist/test-ssr.js",
-    "test": "node --experimental-strip-types --test tests/*.test.js"
+    "test": "node --experimental-strip-types --test tests/*.test.js",
+    "db:migrate": "node scripts/migrate-to-supabase.js"
   },
   "dependencies": {
     "react": "^18.2.0",

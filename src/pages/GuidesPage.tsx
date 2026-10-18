@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
+import { Link } from '../router/Router';
 import { getAllGuides } from '../services/aiCatalogService';
 import { guideCategories } from '../data/guidesData';
 import { GuideCard } from '../components/GuideCard';
 import { EmptyState } from '../components/EmptyState';
-import { BookOpen, Search, X } from 'lucide-react';
+import { CommunityCallout } from '../components/CommunityCallout';
+import { BookOpen, Search, X, PenTool } from 'lucide-react';
 
 export const GuidesPage: React.FC = () => {
   const [search, setSearch] = useState('');
@@ -27,13 +29,24 @@ export const GuidesPage: React.FC = () => {
     <div className="max-w-6xl mx-auto px-4 sm:px-6 py-8">
       {/* Header */}
       <div className="mb-8">
-        <div className="inline-flex items-center gap-2 text-primary text-xs font-semibold uppercase tracking-wider mb-2">
-          <BookOpen className="w-4 h-4" />
-          <span>Practical AI & Dev Tutorials</span>
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-2">
+          <div>
+            <div className="inline-flex items-center gap-2 text-primary text-xs font-semibold uppercase tracking-wider mb-2">
+              <BookOpen className="w-4 h-4" />
+              <span>Practical AI & Dev Tutorials</span>
+            </div>
+            <h1 className="text-2xl sm:text-4xl font-extrabold text-foreground tracking-tight">
+              Step-by-Step AI Guides & Workflows
+            </h1>
+          </div>
+          <Link
+            to="/submit-guide"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-primary hover:bg-primary/90 text-primary-foreground font-semibold text-xs shadow-md shadow-primary/20 transition-all shrink-0 self-start sm:self-auto"
+          >
+            <PenTool className="w-4 h-4" />
+            <span>Submit a Guide</span>
+          </Link>
         </div>
-        <h1 className="text-2xl sm:text-4xl font-extrabold text-foreground tracking-tight mb-2">
-          Step-by-Step AI Guides & Workflows
-        </h1>
         <p className="text-sm sm:text-base text-secondary-foreground max-w-2xl mb-6">
           Learn how to combine cutting-edge generative models, open-source frameworks, and developer workflows with step-by-step instructions and copyable prompt templates.
         </p>
@@ -115,6 +128,9 @@ export const GuidesPage: React.FC = () => {
           }}
         />
       )}
+
+      {/* Community Contribution Callout */}
+      <CommunityCallout type="guide" className="mt-12" />
     </div>
   );
 };

@@ -90,6 +90,16 @@ export const Footer: React.FC = () => {
                   AI Deals &amp; Student Benefits
                 </Link>
               </li>
+              <li>
+                <Link to="/submit-tool" className="hover:text-foreground text-primary font-medium">
+                  Submit an AI Tool
+                </Link>
+              </li>
+              <li>
+                <Link to="/submit-guide" className="hover:text-foreground">
+                  Submit a Guide
+                </Link>
+              </li>
             </ul>
           </div>
 
@@ -151,11 +161,56 @@ export const Footer: React.FC = () => {
 
           <div>
             <h4 className="font-semibold text-foreground mb-3 text-xs uppercase tracking-wider">
-              About Project
+              Editorial &amp; Legal
             </h4>
             <p className="text-xs text-muted-foreground mb-3 leading-relaxed">
               Tech Hacks AI is a curated discovery platform indexing the top generative AI tools, verified free software, open-source alternatives, step-by-step guides, and developer utilities.
             </p>
+            <ul className="space-y-1.5 text-muted-foreground text-xs mb-3">
+              <li>
+                <Link to="/about" className="hover:text-foreground">
+                  About Us
+                </Link>
+              </li>
+              <li>
+                <Link to="/contact" className="hover:text-foreground">
+                  Contact Us
+                </Link>
+              </li>
+              <li>
+                <Link to="/privacy" className="hover:text-foreground">
+                  Privacy Policy
+                </Link>
+              </li>
+              <li>
+                <Link to="/terms" className="hover:text-foreground">
+                  Terms of Use
+                </Link>
+              </li>
+              <li>
+                <Link to="/disclosure" className="hover:text-foreground">
+                  Affiliate &amp; Ad Disclosure
+                </Link>
+              </li>
+              <li>
+                <button
+                  type="button"
+                  onClick={() => {
+                    if (typeof window !== 'undefined') {
+                      window.dispatchEvent(new Event('open_cookie_preferences_modal'));
+                    }
+                  }}
+                  className="hover:text-foreground text-left cursor-pointer transition-colors"
+                >
+                  Cookie Preferences
+                </button>
+              </li>
+              <li>
+                <Link to="/moderation" className="hover:text-foreground text-[11px] text-muted-foreground/60">
+                  Moderation Queue
+                </Link>
+              </li>
+            </ul>
             <div className="flex items-center gap-3">
               <a
                 href="https://github.com"
@@ -170,8 +225,43 @@ export const Footer: React.FC = () => {
           </div>
         </div>
 
+        {/* Legal & Policy Navigation Strip */}
+        <div className="py-4 border-t border-border/40 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-[11px] text-muted-foreground">
+          <Link to="/about" className="hover:text-foreground transition-colors">
+            About Us
+          </Link>
+          <span>•</span>
+          <Link to="/contact" className="hover:text-foreground transition-colors">
+            Contact
+          </Link>
+          <span>•</span>
+          <Link to="/privacy" className="hover:text-foreground transition-colors">
+            Privacy Policy
+          </Link>
+          <span>•</span>
+          <Link to="/terms" className="hover:text-foreground transition-colors">
+            Terms of Use
+          </Link>
+          <span>•</span>
+          <Link to="/disclosure" className="hover:text-foreground transition-colors">
+            Affiliate Disclosure
+          </Link>
+          <span>•</span>
+          <button
+            type="button"
+            onClick={() => {
+              if (typeof window !== 'undefined') {
+                window.dispatchEvent(new Event('open_cookie_preferences_modal'));
+              }
+            }}
+            className="hover:text-foreground transition-colors underline cursor-pointer"
+          >
+            Cookie Preferences
+          </button>
+        </div>
+
         {/* Bottom Copyright */}
-        <div className="pt-8 border-t border-border/40 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-muted-foreground">
+        <div className="pt-4 border-t border-border/30 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-muted-foreground">
           <p>© {new Date().getFullYear()} Tech Hacks AI. Built with open web standards.</p>
           <p className="flex items-center gap-1">
             Made with <Heart className="w-3 h-3 text-rose-500 fill-rose-500" /> for the AI &amp; open-source community

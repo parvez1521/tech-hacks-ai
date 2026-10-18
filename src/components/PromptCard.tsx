@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { PromptItem, BookmarkItem } from '../types';
 import { Link } from '../router/Router';
 import { BookmarkButton } from './BookmarkButton';
+import { BrandLogo } from './BrandLogo';
 import { Copy, Check, Sparkles, ArrowRight } from 'lucide-react';
 
 interface PromptCardProps {
@@ -55,11 +56,28 @@ export const PromptCard: React.FC<PromptCardProps> = ({ prompt }) => {
       <div className="relative z-10">
         <div className="flex items-start justify-between gap-3 mb-2.5">
           <div className="flex items-center gap-1.5 flex-wrap">
+            {prompt.provider && (
+              <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded text-[11px] font-medium bg-blue-500/10 text-blue-400 border border-blue-500/20">
+                <BrandLogo
+                  slug={prompt.provider.toLowerCase().replace(/\s+/g, '-')}
+                  name={prompt.provider}
+                  size="xs"
+                  showContainer={false}
+                  className="w-3.5 h-3.5"
+                />
+                <span>{prompt.provider}</span>
+              </span>
+            )}
             <span className="px-2 py-0.5 rounded text-[11px] font-mono font-medium bg-purple-500/10 text-purple-400 border border-purple-500/20">
               {prompt.targetModel}
             </span>
+            {prompt.placeholders && prompt.placeholders.length > 0 && (
+              <span className="px-1.5 py-0.5 rounded text-[10px] font-medium bg-amber-500/10 text-amber-300 border border-amber-500/20">
+                {prompt.placeholders.length} Placeholders
+              </span>
+            )}
             <span className="text-[11px] text-muted-foreground capitalize">
-              {prompt.category.replace('-', ' ')}
+              {prompt.category.replace(/-/g, ' ')}
             </span>
           </div>
 

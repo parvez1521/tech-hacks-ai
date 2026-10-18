@@ -1,13 +1,15 @@
 import React from 'react';
 import type { AiOffer } from '../types/index.ts';
 import { Link } from '../router/Router.tsx';
-import { ExternalLink, ArrowRight, ShieldCheck, GraduationCap, Gift, CheckCircle2, Globe } from 'lucide-react';
+import { isOfferActive } from '../data/offersData.ts';
+import { ExternalLink, ArrowRight, ShieldCheck, GraduationCap, Gift, CheckCircle2, Globe, AlertTriangle } from 'lucide-react';
 
 interface OfferCardProps {
   offer: AiOffer;
 }
 
 export const OfferCard: React.FC<OfferCardProps> = ({ offer }) => {
+  const active = isOfferActive(offer);
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     const rect = e.currentTarget.getBoundingClientRect();
     e.currentTarget.style.setProperty('--card-x', `${e.clientX - rect.left}px`);
@@ -36,7 +38,9 @@ export const OfferCard: React.FC<OfferCardProps> = ({ offer }) => {
   return (
     <div
       onMouseMove={handleMouseMove}
-      className="group relative flex flex-col justify-between p-5 rounded-xl border border-border bg-card/90 hover:bg-card transition-all duration-300 ease-out hover:-translate-y-1 hover:border-primary/40 hover:shadow-xl hover:shadow-black/20 focus-within:ring-2 focus-within:ring-primary/60 cursor-pointer"
+      className={`group relative flex flex-col justify-between h-full p-5 rounded-xl border border-border bg-card/90 hover:bg-card transition-all duration-300 ease-out hover:-translate-y-1 hover:border-primary/40 hover:shadow-xl hover:shadow-black/20 focus-within:ring-2 focus-within:ring-primary/60 cursor-pointer ${
+        !active ? 'opacity-80 border-dashed' : ''
+      }`}
     >
       {/* Decorative Subtle Inner Spotlight on Hover */}
       <div
@@ -79,25 +83,46 @@ export const OfferCard: React.FC<OfferCardProps> = ({ offer }) => {
             )}
           </div>
 
-          {offer.requiresStudentVerification && (
-            <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-medium bg-amber-500/10 text-amber-400 border border-amber-500/20">
-              <GraduationCap className="w-3 h-3" />
-              <span>Student ID Req.</span>
-            </span>
-          )}
+          <div className="flex items-center gap-1.5">
+            {!active && (
+              <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold bg-rose-500/10 text-rose-400 border border-rose-500/20">
+                <AlertTriangle className="w-3 h-3" />
+                <span>Expired / Archived</span>
+              </span>
+            )}
+            {offer.requiresStudentVerification && (
+              <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-medium bg-amber-500/10 text-amber-400 border border-amber-500/20">
+                <GraduationCap className="w-3 h-3" />
+                <span>Student ID Req.</span>
+              </span>
+            )}
+          </div>
         </div>
 
-        {/* Title & Provider */}
-        <div className="mb-2.5">
-          <Link
-            to={`/offers/${offer.slug}`}
-            className="pointer-events-auto font-bold text-foreground text-base tracking-tight hover:text-primary transition-colors block line-clamp-1 focus:outline-none focus:underline"
-          >
-            {offer.title}
-          </Link>
-          <span className="text-xs text-muted-foreground block mt-0.5 font-medium">
-            By <strong className="text-secondary-foreground">{offer.provider}</strong>
-          </span>
+        {/* Title & Provider with Brand Logo */}
+        <div className="flex items-start gap-3 mb-2.5">
+          {offer.logoAssetPath && (
+            <div className="w-10 h-10 rounded-lg flex items-center justify-center shrink-0 overflow-hidden bg-card/90 border border-border/80 shadow-sm p-1.5 mt-0.5">
+              <img
+                src={offer.logoAssetPath}
+                alt={`${offer.provider} logo`}
+                className="w-full h-full object-contain"
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+          )}
+          <div className="min-w-0 flex-1">
+            <Link
+              to={`/offers/${offer.slug}`}
+              className="pointer-events-auto font-bold text-foreground text-base tracking-tight hover:text-primary transition-colors block line-clamp-1 focus:outline-none focus:underline"
+            >
+              {offer.title}
+            </Link>
+            <span className="text-xs text-muted-foreground block mt-0.5 font-medium">
+              By <strong className="text-secondary-foreground">{offer.provider}</strong>
+            </span>
+          </div>
         </div>
 
         {/* Highlighted Benefit Summary Box */}

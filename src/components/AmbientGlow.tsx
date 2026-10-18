@@ -39,10 +39,15 @@ export const AmbientGlow: React.FC = () => {
     let currentY = targetY;
     let isMoving = false;
 
+    if (containerRef.current) {
+      containerRef.current.style.setProperty('--mouse-x', `${Math.round(currentX)}px`);
+      containerRef.current.style.setProperty('--mouse-y', `${Math.round(currentY)}px`);
+    }
+
     const updatePosition = () => {
-      // Smooth interpolation (lerp factor 0.12 for fluid, lag-free motion)
-      currentX += (targetX - currentX) * 0.12;
-      currentY += (targetY - currentY) * 0.12;
+      // Smooth interpolation (lerp factor 0.14 for fluid, reactive trailing motion)
+      currentX += (targetX - currentX) * 0.14;
+      currentY += (targetY - currentY) * 0.14;
 
       if (containerRef.current) {
         containerRef.current.style.setProperty('--mouse-x', `${Math.round(currentX)}px`);
@@ -84,16 +89,24 @@ export const AmbientGlow: React.FC = () => {
       className="pointer-events-none fixed inset-0 -z-10 overflow-hidden ambient-glow-container select-none"
       aria-hidden="true"
     >
-      {/* Dynamic Cursor Spotlight (follows pointer with soft radial gradient) */}
+      {/* Outer Holographic Cursor Aura (Cyan to Electric Blue to Subtle Violet) */}
       <div
-        className="pointer-events-none absolute inset-0 opacity-100 transition-opacity duration-700"
+        className="pointer-events-none absolute inset-0 opacity-100 transition-opacity duration-500"
         style={{
-          background: `radial-gradient(650px circle at var(--mouse-x, 50%) var(--mouse-y, 240px), rgba(59, 130, 246, 0.08), rgba(99, 102, 241, 0.03), transparent 70%)`,
+          background: `radial-gradient(650px circle at var(--mouse-x, 50vw) var(--mouse-y, 250px), rgba(6, 182, 212, 0.14) 0%, rgba(59, 130, 246, 0.09) 35%, rgba(147, 51, 234, 0.04) 65%, transparent 80%)`,
+        }}
+      />
+
+      {/* Focused Inner Core Glow for Cybernetic Illumination */}
+      <div
+        className="pointer-events-none absolute inset-0 opacity-90 transition-opacity duration-300"
+        style={{
+          background: `radial-gradient(320px circle at var(--mouse-x, 50vw) var(--mouse-y, 250px), rgba(6, 182, 212, 0.12) 0%, rgba(59, 130, 246, 0.06) 50%, transparent 75%)`,
         }}
       />
 
       {/* Static Ambient Light Backdrop for Top Hero Accent */}
-      <div className="pointer-events-none absolute top-[-100px] left-1/2 -translate-x-1/2 w-[850px] h-[450px] bg-gradient-to-b from-primary/10 via-primary/5 to-transparent rounded-full blur-3xl opacity-40 -z-20" />
+      <div className="pointer-events-none absolute top-[-120px] left-1/2 -translate-x-1/2 w-[900px] h-[480px] bg-gradient-to-b from-cyan-500/10 via-primary/5 to-transparent rounded-full blur-3xl opacity-50 -z-20" />
     </div>
   );
 };

@@ -27,7 +27,7 @@ interface RouterContextType {
 
 const RouterContext = createContext<RouterContextType | null>(null);
 
-function matchRoute(pathname: string): { route: string; params: Record<string, string> } {
+export function matchRoute(pathname: string): { route: string; params: Record<string, string> } {
   const cleanPath = pathname.replace(/\/+$/, '') || '/';
 
   if (cleanPath === '/') {
@@ -71,6 +71,30 @@ function matchRoute(pathname: string): { route: string; params: Record<string, s
   }
   if (cleanPath === '/offers') {
     return { route: 'offers', params: {} };
+  }
+  if (cleanPath === '/about' || cleanPath === '/about-us') {
+    return { route: 'about', params: {} };
+  }
+  if (cleanPath === '/contact' || cleanPath === '/contact-us') {
+    return { route: 'contact', params: {} };
+  }
+  if (cleanPath === '/privacy' || cleanPath === '/privacy-policy') {
+    return { route: 'privacy', params: {} };
+  }
+  if (cleanPath === '/terms' || cleanPath === '/terms-of-use' || cleanPath === '/terms-of-service') {
+    return { route: 'terms', params: {} };
+  }
+  if (cleanPath === '/disclosure' || cleanPath === '/affiliate-disclosure') {
+    return { route: 'disclosure', params: {} };
+  }
+  if (cleanPath === '/submit-tool' || cleanPath === '/submit') {
+    return { route: 'submit-tool', params: {} };
+  }
+  if (cleanPath === '/submit-guide') {
+    return { route: 'submit-guide', params: {} };
+  }
+  if (cleanPath === '/admin/moderation' || cleanPath === '/moderation' || cleanPath === '/admin') {
+    return { route: 'moderation', params: {} };
   }
 
   // /offers/:slug

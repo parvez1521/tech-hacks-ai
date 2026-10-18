@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link, useRouter } from '../router/Router';
 import { getBookmarks, subscribeBookmarks } from '../services/bookmarkService';
+import { useTheme } from '../context/ThemeContext';
 import { TechHacksLogo } from './TechHacksLogo';
 import {
   Menu,
@@ -11,24 +12,33 @@ import {
   ArrowRight,
   Replace,
   FolderKanban,
-  Flame,
-  HardDrive,
-  Bot,
   Clock,
   BookOpen,
   MessageSquareCode,
   Wrench,
   Bookmark,
-  Scales,
+  Scale,
   Compass,
   Tag,
+  Sun,
+  Moon,
+  ChevronDown,
+  Gift,
+  Flame,
+  PlusCircle,
+  PenTool,
 } from 'lucide-react';
 
 export const Header: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isResourcesOpen, setIsResourcesOpen] = useState(false);
+  const [isDiscoverOpen, setIsDiscoverOpen] = useState(false);
+  const [isLearnOpen, setIsLearnOpen] = useState(false);
   const [savedCount, setSavedCount] = useState(0);
+  const { theme, toggleTheme } = useTheme();
   const { navigate } = useRouter();
+
+  const discoverRef = useRef<HTMLDivElement>(null);
+  const learnRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     setSavedCount(getBookmarks().length);
@@ -36,6 +46,20 @@ export const Header: React.FC = () => {
       setSavedCount(items.length);
     });
     return unsubscribe;
+  }, []);
+
+  // Close popovers when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (discoverRef.current && !discoverRef.current.contains(event.target as Node)) {
+        setIsDiscoverOpen(false);
+      }
+      if (learnRef.current && !learnRef.current.contains(event.target as Node)) {
+        setIsLearnOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
   const handleSearchClick = () => {
@@ -46,121 +70,220 @@ export const Header: React.FC = () => {
     <header className="sticky top-0 inset-x-0 z-50 bg-background/80 backdrop-blur-md border-b border-border/60 transition-colors">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-4">
         {/* Left: Brand Logo & Title */}
-        <div className="flex items-center gap-6">
-          <Link to="/" className="flex items-center" aria-label="Tech Hacks AI Home">
+        <div className="flex items-center gap-5 xl:gap-7">
+          <Link to="/" className="flex items-center shrink-0" aria-label="Tech Hacks AI Home">
             <TechHacksLogo size="sm" showWordmark={true} />
           </Link>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center gap-1 text-sm font-medium">
-            <Link
-              to="/ai-tools"
-              className="px-3 py-1.5 rounded-md text-muted-foreground hover:text-foreground hover:bg-muted/70 active:scale-98 transition-all duration-150"
-            >
-              AI Tools
-            </Link>
-            <Link
-              to="/alternatives"
-              className="px-3 py-1.5 rounded-md text-muted-foreground hover:text-foreground hover:bg-muted/70 active:scale-98 transition-all duration-150"
-            >
-              Alternatives
-            </Link>
-            <Link
-              to="/tools"
-              className="px-3 py-1.5 rounded-md text-muted-foreground hover:text-foreground hover:bg-muted/70 active:scale-98 transition-all duration-150"
-            >
-              Open Source
-            </Link>
-            <Link
-              to="/guides"
-              className="px-3 py-1.5 rounded-md text-muted-foreground hover:text-foreground hover:bg-muted/70 active:scale-98 transition-all duration-150"
-            >
-              Guides
-            </Link>
-            <Link
-              to="/prompt-library"
-              className="px-3 py-1.5 rounded-md text-muted-foreground hover:text-foreground hover:bg-muted/70 active:scale-98 transition-all duration-150"
-            >
-              Prompts
-            </Link>
-            <Link
-              to="/free-tools"
-              className="px-3 py-1.5 rounded-md text-muted-foreground hover:text-foreground hover:bg-muted/70 active:scale-98 transition-all duration-150"
-            >
-              Free Tools
-            </Link>
-            <Link
-              to="/offers"
-              className="px-2.5 py-1.5 rounded-md text-muted-foreground hover:text-foreground hover:bg-muted/70 active:scale-98 transition-all duration-150 inline-flex items-center gap-1.5"
-            >
-              <span>AI Deals</span>
-              <span className="px-1.5 py-0.2 rounded text-[10px] font-bold bg-primary/20 text-primary uppercase">New</span>
-            </Link>
-
-            {/* Resources Popover */}
-            <div className="relative">
+          {/* Compact, Organized Desktop Navigation */}
+          <nav className="hidden lg:flex items-center gap-0.5 text-sm font-medium">
+            {/* 1. Discover Dropdown */}
+            <div className="relative" ref={discoverRef}>
               <button
                 type="button"
-                onClick={() => setIsResourcesOpen(!isResourcesOpen)}
-                onBlur={() => setTimeout(() => setIsResourcesOpen(false), 200)}
-                className="inline-flex items-center gap-1 px-3 py-1.5 rounded-md text-muted-foreground hover:text-foreground hover:bg-muted/70 active:scale-98 transition-all duration-150 cursor-pointer"
+                onClick={() => {
+                  setIsDiscoverOpen(!isDiscoverOpen);
+                  setIsLearnOpen(false);
+                }}
+                className={`inline-flex items-center gap-1 px-2.5 py-1.5 rounded-md transition-all duration-150 cursor-pointer ${
+                  isDiscoverOpen
+                    ? 'text-foreground bg-muted font-semibold'
+                    : 'text-muted-foreground hover:text-foreground hover:bg-muted/70'
+                }`}
+                aria-expanded={isDiscoverOpen}
               >
-                <span>More</span>
-                <span className="text-xs transition-transform duration-200">▾</span>
+                <span>Discover</span>
+                <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${isDiscoverOpen ? 'rotate-180' : ''}`} />
               </button>
 
-              {isResourcesOpen && (
-                <div className="absolute top-full left-0 mt-1.5 w-56 rounded-lg bg-card/95 backdrop-blur-md border border-border p-1.5 shadow-xl shadow-black/40 z-50 flex flex-col gap-0.5 animate-fade-in">
-                  <Link
-                    to="/offers"
-                    className="flex items-center gap-2.5 px-3 py-2 rounded-md text-xs font-medium text-foreground hover:bg-primary/10 hover:text-primary transition-all duration-150"
-                  >
-                    <Tag className="w-3.5 h-3.5 text-primary" />
-                    <span>AI Deals & Benefits</span>
-                  </Link>
+              {isDiscoverOpen && (
+                <div className="absolute top-full left-0 mt-1.5 w-60 rounded-xl bg-card/95 backdrop-blur-md border border-border p-1.5 shadow-xl shadow-black/40 z-50 flex flex-col gap-0.5 animate-fade-in">
                   <Link
                     to="/pick"
-                    className="flex items-center gap-2.5 px-3 py-2 rounded-md text-xs font-medium text-foreground hover:bg-primary/10 hover:text-primary transition-all duration-150"
+                    onClick={() => setIsDiscoverOpen(false)}
+                    className="flex items-center gap-2.5 px-3 py-2 rounded-lg text-xs font-medium text-foreground hover:bg-primary/10 hover:text-primary transition-all duration-150"
                   >
-                    <Compass className="w-3.5 h-3.5 text-purple-400" />
-                    <span>Help Me Pick</span>
+                    <Compass className="w-4 h-4 text-purple-400" />
+                    <div>
+                      <span className="block font-semibold">Help Me Pick</span>
+                      <span className="text-[11px] text-muted-foreground">Guided 3-question tool wizard</span>
+                    </div>
                   </Link>
                   <Link
-                    to="/compare"
-                    className="flex items-center gap-2.5 px-3 py-2 rounded-md text-xs font-medium text-foreground hover:bg-primary/10 hover:text-primary transition-all duration-150"
+                    to="/tools"
+                    onClick={() => setIsDiscoverOpen(false)}
+                    className="flex items-center gap-2.5 px-3 py-2 rounded-lg text-xs font-medium text-foreground hover:bg-primary/10 hover:text-primary transition-all duration-150"
                   >
-                    <span className="text-xs">⚖️</span>
-                    <span>Compare Software</span>
-                  </Link>
-                  <Link
-                    to="/free-ai-sites"
-                    className="flex items-center gap-2.5 px-3 py-2 rounded-md text-xs font-medium text-foreground hover:bg-primary/10 hover:text-primary transition-all duration-150"
-                  >
-                    <Sparkles className="w-3.5 h-3.5 text-emerald-400" />
-                    <span>Free AI Sites</span>
+                    <FolderKanban className="w-4 h-4 text-emerald-400" />
+                    <div>
+                      <span className="block font-semibold">Open Source Catalog</span>
+                      <span className="text-[11px] text-muted-foreground">Self-hostable tools & repos</span>
+                    </div>
                   </Link>
                   <Link
                     to="/categories"
-                    className="flex items-center gap-2.5 px-3 py-2 rounded-md text-xs font-medium text-foreground hover:bg-primary/10 hover:text-primary transition-all duration-150"
+                    onClick={() => setIsDiscoverOpen(false)}
+                    className="flex items-center gap-2.5 px-3 py-2 rounded-lg text-xs font-medium text-foreground hover:bg-primary/10 hover:text-primary transition-all duration-150"
                   >
-                    <Layers className="w-3.5 h-3.5 text-blue-400" />
-                    <span>Categories Index</span>
+                    <Layers className="w-4 h-4 text-blue-400" />
+                    <div>
+                      <span className="block font-semibold">Category Index</span>
+                      <span className="text-[11px] text-muted-foreground">Explore software domains</span>
+                    </div>
                   </Link>
                   <Link
-                    to="/updates"
-                    className="flex items-center gap-2.5 px-3 py-2 rounded-md text-xs font-medium text-foreground hover:bg-primary/10 hover:text-primary transition-all duration-150"
+                    to="/collections/trending"
+                    onClick={() => setIsDiscoverOpen(false)}
+                    className="flex items-center gap-2.5 px-3 py-2 rounded-lg text-xs font-medium text-foreground hover:bg-primary/10 hover:text-primary transition-all duration-150"
                   >
-                    <Clock className="w-3.5 h-3.5 text-amber-400" />
-                    <span>Changelog & Updates</span>
+                    <Flame className="w-4 h-4 text-amber-400" />
+                    <div>
+                      <span className="block font-semibold">Trending Projects</span>
+                      <span className="text-[11px] text-muted-foreground">Fastest growing repos</span>
+                    </div>
                   </Link>
                 </div>
               )}
             </div>
+
+            {/* 2. AI Tools Directory */}
+            <Link
+              to="/ai-tools"
+              className="px-2.5 py-1.5 rounded-md text-muted-foreground hover:text-foreground hover:bg-muted/70 active:scale-98 transition-all duration-150"
+            >
+              AI Tools
+            </Link>
+
+            {/* 3. Free Tools */}
+            <Link
+              to="/free-tools"
+              className="px-2.5 py-1.5 rounded-md text-muted-foreground hover:text-foreground hover:bg-muted/70 active:scale-98 transition-all duration-150"
+            >
+              Free Tools
+            </Link>
+
+            {/* 4. Alternatives */}
+            <Link
+              to="/alternatives"
+              className="px-2.5 py-1.5 rounded-md text-muted-foreground hover:text-foreground hover:bg-muted/70 active:scale-98 transition-all duration-150"
+            >
+              Alternatives
+            </Link>
+
+            {/* 5. Offers (AI Deals & Student Benefits) */}
+            <Link
+              to="/offers"
+              className="px-2.5 py-1.5 rounded-md text-muted-foreground hover:text-foreground hover:bg-muted/70 active:scale-98 transition-all duration-150 inline-flex items-center gap-1.5"
+            >
+              <span>Offers</span>
+              <span className="px-1.5 py-0.2 rounded text-[10px] font-bold bg-primary/20 text-primary uppercase">New</span>
+            </Link>
+
+            {/* 6. Learn Dropdown */}
+            <div className="relative" ref={learnRef}>
+              <button
+                type="button"
+                onClick={() => {
+                  setIsLearnOpen(!isLearnOpen);
+                  setIsDiscoverOpen(false);
+                }}
+                className={`inline-flex items-center gap-1 px-2.5 py-1.5 rounded-md transition-all duration-150 cursor-pointer ${
+                  isLearnOpen
+                    ? 'text-foreground bg-muted font-semibold'
+                    : 'text-muted-foreground hover:text-foreground hover:bg-muted/70'
+                }`}
+                aria-expanded={isLearnOpen}
+              >
+                <span>Learn</span>
+                <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${isLearnOpen ? 'rotate-180' : ''}`} />
+              </button>
+
+              {isLearnOpen && (
+                <div className="absolute top-full left-0 mt-1.5 w-56 rounded-xl bg-card/95 backdrop-blur-md border border-border p-1.5 shadow-xl shadow-black/40 z-50 flex flex-col gap-0.5 animate-fade-in">
+                  <Link
+                    to="/guides"
+                    onClick={() => setIsLearnOpen(false)}
+                    className="flex items-center gap-2.5 px-3 py-2 rounded-lg text-xs font-medium text-foreground hover:bg-primary/10 hover:text-primary transition-all duration-150"
+                  >
+                    <BookOpen className="w-4 h-4 text-blue-400" />
+                    <div>
+                      <span className="block font-semibold">Guides & Tutorials</span>
+                      <span className="text-[11px] text-muted-foreground">Step-by-step AI workflows</span>
+                    </div>
+                  </Link>
+                  <Link
+                    to="/prompt-library"
+                    onClick={() => setIsLearnOpen(false)}
+                    className="flex items-center gap-2.5 px-3 py-2 rounded-lg text-xs font-medium text-foreground hover:bg-primary/10 hover:text-primary transition-all duration-150"
+                  >
+                    <MessageSquareCode className="w-4 h-4 text-purple-400" />
+                    <div>
+                      <span className="block font-semibold">Prompt Library</span>
+                      <span className="text-[11px] text-muted-foreground">Tested model recipes</span>
+                    </div>
+                  </Link>
+                  <Link
+                    to="/updates"
+                    onClick={() => setIsLearnOpen(false)}
+                    className="flex items-center gap-2.5 px-3 py-2 rounded-lg text-xs font-medium text-foreground hover:bg-primary/10 hover:text-primary transition-all duration-150"
+                  >
+                    <Clock className="w-3.5 h-3.5 text-amber-400" />
+                    <div>
+                      <span className="block font-semibold">Changelog & Updates</span>
+                      <span className="text-[11px] text-muted-foreground">Platform & AI releases</span>
+                    </div>
+                  </Link>
+                  <div className="pt-1 mt-1 border-t border-border/60">
+                    <Link
+                      to="/submit-tool"
+                      onClick={() => setIsLearnOpen(false)}
+                      className="flex items-center gap-2.5 px-3 py-2 rounded-lg text-xs font-medium text-foreground hover:bg-primary/10 hover:text-primary transition-all duration-150"
+                    >
+                      <PlusCircle className="w-4 h-4 text-emerald-400" />
+                      <div>
+                        <span className="block font-semibold">Submit an AI Tool</span>
+                        <span className="text-[11px] text-muted-foreground">Add to public directory</span>
+                      </div>
+                    </Link>
+                    <Link
+                      to="/submit-guide"
+                      onClick={() => setIsLearnOpen(false)}
+                      className="flex items-center gap-2.5 px-3 py-2 rounded-lg text-xs font-medium text-foreground hover:bg-primary/10 hover:text-primary transition-all duration-150"
+                    >
+                      <PenTool className="w-4 h-4 text-blue-400" />
+                      <div>
+                        <span className="block font-semibold">Submit a Guide</span>
+                        <span className="text-[11px] text-muted-foreground">Share tutorial article</span>
+                      </div>
+                    </Link>
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {/* 7. Compare */}
+            <Link
+              to="/compare"
+              className="px-2.5 py-1.5 rounded-md text-muted-foreground hover:text-foreground hover:bg-muted/70 active:scale-98 transition-all duration-150"
+            >
+              Compare
+            </Link>
           </nav>
         </div>
 
         {/* Right Action Buttons */}
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1.5 sm:gap-2">
+          {/* Quick Search Button */}
+          <button
+            type="button"
+            onClick={handleSearchClick}
+            className="p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted active:scale-95 transition-all duration-150 cursor-pointer"
+            title="Search software catalog"
+            aria-label="Search software catalog"
+          >
+            <Search className="w-4 h-4" />
+          </button>
+
           {/* Saved Items Link */}
           <Link
             to="/saved"
@@ -176,31 +299,21 @@ export const Header: React.FC = () => {
             )}
           </Link>
 
-          {/* Quick Search Button */}
-          <button
-            type="button"
-            onClick={handleSearchClick}
-            className="p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted active:scale-95 transition-all duration-150 cursor-pointer"
-            title="Search software catalog"
-            aria-label="Search software catalog"
-          >
-            <Search className="w-4 h-4" />
-          </button>
-
-          {/* Help Me Pick CTA */}
+          {/* Submit Quick Link */}
           <Link
-            to="/pick"
-            className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-border bg-card/80 hover:bg-card hover:border-primary/40 hover:-translate-y-0.5 active:translate-y-0 text-foreground text-xs font-medium transition-all duration-150 shadow-sm"
+            to="/submit-tool"
+            className="hidden md:inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg border border-border/80 hover:border-primary/40 bg-card/60 hover:bg-muted text-xs font-semibold text-foreground transition-all duration-150"
+            title="Submit an AI Tool or Tutorial"
           >
-            <Compass className="w-3.5 h-3.5 text-purple-400" />
-            <span>Help Me Pick</span>
+            <PlusCircle className="w-3.5 h-3.5 text-primary" />
+            <span>Submit</span>
           </Link>
 
           {/* Mobile Menu Toggle Button */}
           <button
             type="button"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="lg:hidden p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted cursor-pointer"
+            className="lg:hidden p-2 min-h-[44px] min-w-[44px] flex items-center justify-center rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted cursor-pointer"
             aria-label="Toggle mobile navigation menu"
             aria-expanded={isMobileMenuOpen}
             aria-controls="mobile-nav"
@@ -213,6 +326,7 @@ export const Header: React.FC = () => {
       {/* Mobile Backdrop Overlay Menu */}
       {isMobileMenuOpen && (
         <div id="mobile-nav" className="lg:hidden border-b border-border bg-background/95 backdrop-blur-xl px-4 py-5 flex flex-col gap-4 animate-fade-in max-h-[85vh] overflow-y-auto no-scrollbar">
+          {/* Group 1: Core Directories */}
           <div className="flex flex-col gap-1">
             <span className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground px-2">
               Discovery Directories
@@ -220,7 +334,7 @@ export const Header: React.FC = () => {
             <Link
               to="/ai-tools"
               onClick={() => setIsMobileMenuOpen(false)}
-              className="flex items-center justify-between px-3 py-2 rounded-md text-sm text-foreground hover:bg-muted"
+              className="flex items-center justify-between px-3 py-2.5 min-h-[44px] rounded-md text-sm text-foreground hover:bg-muted"
             >
               <div className="flex items-center gap-2.5">
                 <Sparkles className="w-4 h-4 text-primary" />
@@ -231,7 +345,7 @@ export const Header: React.FC = () => {
             <Link
               to="/alternatives"
               onClick={() => setIsMobileMenuOpen(false)}
-              className="flex items-center justify-between px-3 py-2 rounded-md text-sm text-foreground hover:bg-muted"
+              className="flex items-center justify-between px-3 py-2.5 min-h-[44px] rounded-md text-sm text-foreground hover:bg-muted"
             >
               <div className="flex items-center gap-2.5">
                 <Replace className="w-4 h-4 text-primary" />
@@ -240,31 +354,31 @@ export const Header: React.FC = () => {
               <ArrowRight className="w-3.5 h-3.5 text-muted-foreground" />
             </Link>
             <Link
-              to="/tools"
+              to="/free-tools"
               onClick={() => setIsMobileMenuOpen(false)}
-              className="flex items-center justify-between px-3 py-2 rounded-md text-sm text-foreground hover:bg-muted"
+              className="flex items-center justify-between px-3 py-2.5 min-h-[44px] rounded-md text-sm text-foreground hover:bg-muted"
             >
               <div className="flex items-center gap-2.5">
-                <FolderKanban className="w-4 h-4 text-emerald-400" />
-                <span>Open Source Catalog</span>
+                <Wrench className="w-4 h-4 text-rose-400" />
+                <span>Free Browser Utilities</span>
               </div>
               <ArrowRight className="w-3.5 h-3.5 text-muted-foreground" />
             </Link>
             <Link
               to="/free-ai-sites"
               onClick={() => setIsMobileMenuOpen(false)}
-              className="flex items-center justify-between px-3 py-2 rounded-md text-sm text-foreground hover:bg-muted"
+              className="flex items-center justify-between px-3 py-2.5 min-h-[44px] rounded-md text-sm text-foreground hover:bg-muted"
             >
               <div className="flex items-center gap-2.5">
-                <Sparkles className="w-4 h-4 text-emerald-400" />
-                <span>Free AI Sites</span>
+                <Gift className="w-4 h-4 text-emerald-400" />
+                <span>Free AI Sites & Plans</span>
               </div>
               <ArrowRight className="w-3.5 h-3.5 text-muted-foreground" />
             </Link>
             <Link
               to="/offers"
               onClick={() => setIsMobileMenuOpen(false)}
-              className="flex items-center justify-between px-3 py-2 rounded-md text-sm text-foreground hover:bg-muted"
+              className="flex items-center justify-between px-3 py-2.5 min-h-[44px] rounded-md text-sm text-foreground hover:bg-muted"
             >
               <div className="flex items-center gap-2.5">
                 <Tag className="w-4 h-4 text-primary" />
@@ -274,38 +388,15 @@ export const Header: React.FC = () => {
             </Link>
           </div>
 
+          {/* Group 2: Guided Discovery & Comparison */}
           <div className="flex flex-col gap-1 pt-2 border-t border-border/50">
             <span className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground px-2">
-              Learning & Utilities
+              Guided Discovery & Catalog
             </span>
-            <Link
-              to="/guides"
-              onClick={() => setIsMobileMenuOpen(false)}
-              className="flex items-center gap-2.5 px-3 py-2 rounded-md text-sm text-foreground hover:bg-muted"
-            >
-              <BookOpen className="w-4 h-4 text-blue-400" />
-              <span>Guides & Tutorials</span>
-            </Link>
-            <Link
-              to="/prompt-library"
-              onClick={() => setIsMobileMenuOpen(false)}
-              className="flex items-center gap-2.5 px-3 py-2 rounded-md text-sm text-foreground hover:bg-muted"
-            >
-              <MessageSquareCode className="w-4 h-4 text-purple-400" />
-              <span>Prompt Library</span>
-            </Link>
-            <Link
-              to="/free-tools"
-              onClick={() => setIsMobileMenuOpen(false)}
-              className="flex items-center gap-2.5 px-3 py-2 rounded-md text-sm text-foreground hover:bg-muted"
-            >
-              <Wrench className="w-4 h-4 text-rose-400" />
-              <span>Free Browser Utilities</span>
-            </Link>
             <Link
               to="/pick"
               onClick={() => setIsMobileMenuOpen(false)}
-              className="flex items-center gap-2.5 px-3 py-2 rounded-md text-sm text-foreground hover:bg-muted"
+              className="flex items-center gap-2.5 px-3 py-2.5 min-h-[44px] rounded-md text-sm text-foreground hover:bg-muted"
             >
               <Compass className="w-4 h-4 text-purple-400" />
               <span>Help Me Pick Wizard</span>
@@ -313,15 +404,89 @@ export const Header: React.FC = () => {
             <Link
               to="/compare"
               onClick={() => setIsMobileMenuOpen(false)}
-              className="flex items-center gap-2.5 px-3 py-2 rounded-md text-sm text-foreground hover:bg-muted"
+              className="flex items-center gap-2.5 px-3 py-2.5 min-h-[44px] rounded-md text-sm text-foreground hover:bg-muted"
             >
-              <span className="text-xs">⚖️</span>
+              <Scale className="w-4 h-4 text-indigo-400" />
               <span>Compare Software</span>
             </Link>
             <Link
+              to="/tools"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="flex items-center gap-2.5 px-3 py-2.5 min-h-[44px] rounded-md text-sm text-foreground hover:bg-muted"
+            >
+              <FolderKanban className="w-4 h-4 text-emerald-400" />
+              <span>Open Source Catalog</span>
+            </Link>
+            <Link
+              to="/categories"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="flex items-center gap-2.5 px-3 py-2.5 min-h-[44px] rounded-md text-sm text-foreground hover:bg-muted"
+            >
+              <Layers className="w-4 h-4 text-blue-400" />
+              <span>Categories Index</span>
+            </Link>
+          </div>
+
+          {/* Group 3: Learning & Resources */}
+          <div className="flex flex-col gap-1 pt-2 border-t border-border/50">
+            <span className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground px-2">
+              Learning & Resources
+            </span>
+            <Link
+              to="/guides"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="flex items-center gap-2.5 px-3 py-2.5 min-h-[44px] rounded-md text-sm text-foreground hover:bg-muted"
+            >
+              <BookOpen className="w-4 h-4 text-blue-400" />
+              <span>Guides & Tutorials</span>
+            </Link>
+            <Link
+              to="/prompt-library"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="flex items-center gap-2.5 px-3 py-2.5 min-h-[44px] rounded-md text-sm text-foreground hover:bg-muted"
+            >
+              <MessageSquareCode className="w-4 h-4 text-purple-400" />
+              <span>Prompt Library</span>
+            </Link>
+            <Link
+              to="/updates"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="flex items-center gap-2.5 px-3 py-2.5 min-h-[44px] rounded-md text-sm text-foreground hover:bg-muted"
+            >
+              <Clock className="w-4 h-4 text-amber-400" />
+              <span>Changelog & Updates</span>
+            </Link>
+          </div>
+
+          {/* Group 4: Community Contributions */}
+          <div className="flex flex-col gap-1 pt-2 border-t border-border/50">
+            <span className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground px-2">
+              Community Contributions
+            </span>
+            <Link
+              to="/submit-tool"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="flex items-center gap-2.5 px-3 py-2.5 min-h-[44px] rounded-md text-sm text-foreground hover:bg-muted"
+            >
+              <PlusCircle className="w-4 h-4 text-emerald-400" />
+              <span>Submit an AI Tool</span>
+            </Link>
+            <Link
+              to="/submit-guide"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="flex items-center gap-2.5 px-3 py-2.5 min-h-[44px] rounded-md text-sm text-foreground hover:bg-muted"
+            >
+              <PenTool className="w-4 h-4 text-blue-400" />
+              <span>Submit a Guide</span>
+            </Link>
+          </div>
+
+          {/* Group 5: Preferences & Saved */}
+          <div className="flex flex-col gap-2 pt-2 border-t border-border/50">
+            <Link
               to="/saved"
               onClick={() => setIsMobileMenuOpen(false)}
-              className="flex items-center justify-between px-3 py-2 rounded-md text-sm text-foreground hover:bg-muted"
+              className="flex items-center justify-between px-3 py-2.5 min-h-[44px] rounded-md text-sm text-foreground hover:bg-muted"
             >
               <div className="flex items-center gap-2.5">
                 <Bookmark className="w-4 h-4 text-primary" />

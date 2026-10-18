@@ -1,12 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useRouter, Link, safeScrollTo } from '../router/Router';
 import { getProprietaryToolBySlug, getToolsForProprietary, getCategoryBySlug } from '../services/catalogService';
+import { getAllGuides } from '../services/aiCatalogService';
 import { ReplacementCard } from '../components/ReplacementCard';
+import { GuideCard } from '../components/GuideCard';
 import { Pagination } from '../components/Pagination';
 import { EmptyState } from '../components/EmptyState';
 import { SortOption } from '../types';
-import { Replace, ExternalLink, ArrowLeft, Search, X, SlidersHorizontal } from 'lucide-react';
+import { Replace, ExternalLink, ArrowLeft, Search, X, SlidersHorizontal, CheckCircle2, AlertTriangle, Scale, BookOpen, Share2, Check } from 'lucide-react';
 import { BrandLogo } from '../components/BrandLogo';
+import { siteConfig } from '../config/siteConfig';
 
 const PAGE_SIZE = 12;
 
@@ -14,6 +17,7 @@ export const AlternativeDetailPage: React.FC = () => {
   const { params, searchParams, setSearchParam, setSearchParams, resetSearchParams } = useRouter();
   const slug = params.slug;
   const proprietary = getProprietaryToolBySlug(slug);
+  const [copied, setCopied] = useState(false);
 
   if (!proprietary) {
     return (
@@ -107,6 +111,26 @@ export const AlternativeDetailPage: React.FC = () => {
     safeScrollTo({ top: 350, behavior: 'smooth' });
   };
 
+  const handleCopyLink = () => {
+    if (typeof window !== 'undefined') {
+      const canonicalUrl = `${siteConfig.url}/alternatives/${proprietary.slug}`;
+      navigator.clipboard.writeText(canonicalUrl);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2500);
+    }
+  };
+
+  // Find related guides for this alternative
+  const allGuides = getAllGuides();
+  const relatedGuides = allGuides.filter(
+    (g) =>
+      g.relatedToolSlugs.some((s) => allReplacements.some((r) => r.slug === s)) ||
+      (proprietary.slug === 'claude-code' && (g.slug === 'how-to-choose-ai-coding-assistant' || g.category === 'coding')) ||
+      (proprietary.slug === 'perplexity' && (g.slug === 'automating-research-perplexity-n8n' || g.category === 'productivity')) ||
+      (proprietary.slug === 'firebase' && g.slug === 'building-apps-with-cursor-supabase') ||
+      g.category === proprietary.category
+  ).slice(0, 2);
+
   return (
     <div className="max-w-6xl mx-auto px-4 sm:px-6 py-8">
       {/* Breadcrumbs */}
@@ -142,9 +166,21 @@ export const AlternativeDetailPage: React.FC = () => {
               {allReplacements.length} {allReplacements.length === 1 ? 'verified replacement' : 'verified replacements'}
             </span>
             {category && (
-              <span className="inline-flex items-center px-2.5 py-1 rounded-full bg-muted text-secondary-foreground border border-border">
-                {category.name}
-              </span>
+              <Link
+                to={`/categories/${category.slug}`}
+                className="inline-flex items-center px-2.5 py-1 rounded-full bg-muted text-secondary-foreground border border-border hover:bg-border transition-colors"
+              >
+                Category: {category.name}
+              </Link>
+            )}
+            {allReplacements.length >= 2 && (
+              <Link
+                to={`/compare?tools=${allReplacements.slice(0, 3).map((r) => r.slug).join(',')}`}
+                className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-purple-500/10 text-purple-400 border border-purple-500/20 font-medium hover:bg-purple-500/20 transition-colors"
+              >
+                <Scale className="w-3 h-3" />
+                <span>Compare Top Replacements</span>
+              </Link>
             )}
           </div>
         </div>
@@ -152,22 +188,34 @@ export const AlternativeDetailPage: React.FC = () => {
         {/* Right Sticky Proprietary Profile Card */}
         <div className="p-5 rounded-xl border border-border bg-card/80 shadow-sm flex flex-col justify-between">
           <div>
-            <div className="flex items-center gap-3 mb-2.5">
-              <BrandLogo
-                slug={proprietary.slug}
-                name={proprietary.name}
-                size="lg"
-                iconBgColor={proprietary.iconBgColor}
-                iconLetter={proprietary.iconLetter}
-              />
-              <div>
-                <h2 className="font-bold text-foreground text-base">
-                  {proprietary.name}
-                </h2>
-                <span className="text-xs text-muted-foreground block">
-                  Proprietary Software
-                </span>
+            <div className="flex items-center justify-between mb-2.5">
+              <div className="flex items-center gap-3">
+                <BrandLogo
+                  slug={proprietary.slug}
+                  name={proprietary.name}
+                  size="lg"
+                  iconBgColor={proprietary.iconBgColor}
+                  iconLetter={proprietary.iconLetter}
+                />
+                <div>
+                  <h2 className="font-bold text-foreground text-base">
+                    {proprietary.name}
+                  </h2>
+                  <span className="text-xs text-muted-foreground block">
+                    Proprietary Software
+                  </span>
+                </div>
               </div>
+
+              <button
+                type="button"
+                onClick={handleCopyLink}
+                className="text-muted-foreground hover:text-foreground p-1.5 rounded-lg border border-border bg-card hover:bg-muted transition-colors text-xs inline-flex items-center gap-1"
+                aria-label="Share alternative"
+                title="Copy canonical share link"
+              >
+                {copied ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Share2 className="w-3.5 h-3.5" />}
+              </button>
             </div>
             <p className="text-xs text-muted-foreground mb-3 leading-relaxed">
               {proprietary.description}
@@ -183,6 +231,56 @@ export const AlternativeDetailPage: React.FC = () => {
             <span>Visit {proprietary.name} Official Website</span>
             <ExternalLink className="w-3.5 h-3.5" />
           </a>
+        </div>
+      </div>
+
+      {/* Migration Analysis & Honest Cost Architecture */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 p-5 rounded-xl border border-border bg-card/60 text-xs mb-8">
+        <div>
+          <span className="font-semibold text-foreground uppercase tracking-wider block text-[11px] mb-2">
+            Why Teams Look for {proprietary.name} Alternatives
+          </span>
+          <ul className="space-y-2">
+            {(proprietary.migrationDrivers || [
+              'High recurring monthly subscription costs scaling per team seat',
+              'Proprietary data formats creating vendor lock-in',
+              'Compliance and sovereignty requirements for self-hosting on private clouds',
+            ]).map((reason, idx) => (
+              <li key={idx} className="flex items-start gap-2 p-2.5 rounded-lg bg-card/80 border border-border/60">
+                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 shrink-0 mt-0.5" />
+                <span className="text-secondary-foreground leading-relaxed">{reason}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div className="space-y-3">
+          <div className="p-3.5 rounded-lg bg-amber-500/10 border border-amber-500/20 text-foreground">
+            <div className="flex items-center gap-1.5 text-amber-400 font-semibold uppercase text-[11px] tracking-wider mb-1">
+              <AlertTriangle className="w-3.5 h-3.5" />
+              <span>Hosting & Inference Reality</span>
+            </div>
+            <p className="text-secondary-foreground leading-relaxed text-[11px]">
+              {proprietary.hostedCostNote ||
+                'Open-source software is free to inspect, modify, and self-host on your own infrastructure. Note that cloud API tokens (such as external LLM inference) or managed cloud hosting tiers may carry separate server or usage costs.'}
+            </p>
+          </div>
+
+          {proprietary.selectionCriteria && proprietary.selectionCriteria.length > 0 && (
+            <div className="p-3 rounded-lg bg-card/80 border border-border/80">
+              <span className="font-semibold text-foreground uppercase tracking-wider block text-[11px] mb-1.5">
+                Key Selection Factors
+              </span>
+              <ul className="space-y-1 text-muted-foreground text-[11px]">
+                {proprietary.selectionCriteria.map((c, idx) => (
+                  <li key={idx} className="flex items-center gap-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-primary shrink-0" />
+                    <span>{c}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
         </div>
       </div>
 
@@ -302,6 +400,32 @@ export const AlternativeDetailPage: React.FC = () => {
           totalPages={totalPages}
           onPageChange={handlePageChange}
         />
+      )}
+
+      {/* Related Step-by-Step Guides Section */}
+      {relatedGuides.length > 0 && (
+        <div className="mt-16 pt-8 border-t border-border">
+          <div className="flex items-center justify-between mb-6">
+            <div>
+              <div className="inline-flex items-center gap-1.5 text-primary text-xs font-semibold uppercase tracking-wider mb-1">
+                <BookOpen className="w-3.5 h-3.5" />
+                <span>Migration & Workflow Tutorials</span>
+              </div>
+              <h2 className="text-xl font-bold text-foreground">
+                Step-by-Step Guides for {proprietary.name} Replacements
+              </h2>
+            </div>
+            <Link to="/guides" className="text-xs text-primary hover:underline">
+              Browse all guides →
+            </Link>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {relatedGuides.map((guide) => (
+              <GuideCard key={guide.id} guide={guide} />
+            ))}
+          </div>
+        </div>
       )}
     </div>
   );

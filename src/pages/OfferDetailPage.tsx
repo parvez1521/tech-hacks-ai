@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useRouter, Link } from '../router/Router';
-import { getOfferBySlug, offersData } from '../data/offersData';
+import { getOfferBySlug, offersData, isOfferActive } from '../data/offersData';
 import {
   ExternalLink,
   ArrowLeft,
@@ -15,13 +15,18 @@ import {
   Sparkles,
   Globe,
   Share2,
+  Check,
+  BookOpen,
 } from 'lucide-react';
 import { OfferCard } from '../components/OfferCard';
+import { siteConfig } from '../config/siteConfig';
 
 export const OfferDetailPage: React.FC = () => {
   const { params } = useRouter();
   const slug = params.slug;
   const offer = getOfferBySlug(slug);
+
+  const [copiedShare, setCopiedShare] = useState(false);
 
   if (!offer) {
     return (
@@ -41,9 +46,35 @@ export const OfferDetailPage: React.FC = () => {
     );
   }
 
-  // Related offers (other offers, excluding current)
+  const active = isOfferActive(offer);
+
+  const handleCopyShare = () => {
+    if (typeof window !== 'undefined') {
+      const canonicalUrl = `${siteConfig.url}/offers/${offer.slug}`;
+      navigator.clipboard.writeText(canonicalUrl);
+      setCopiedShare(true);
+      setTimeout(() => setCopiedShare(false), 2500);
+    }
+  };
+
+  // Structured Data (Offer / SpecialAnnouncement)
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Offer',
+    name: offer.title,
+    description: offer.description,
+    url: `${siteConfig.url}/offers/${offer.slug}`,
+    offeredBy: {
+      '@type': 'Organization',
+      name: offer.provider,
+    },
+    eligibleRegion: offer.region,
+    validThrough: offer.expiresAt || undefined,
+  };
+
+  // Related offers (other active offers, excluding current)
   const relatedOffers = offersData
-    .filter((o) => o.id !== offer.id)
+    .filter((o) => o.id !== offer.id && isOfferActive(o))
     .slice(0, 3);
 
   const formatOfferType = (type: string) => {
@@ -67,19 +98,46 @@ export const OfferDetailPage: React.FC = () => {
 
   return (
     <div className="max-w-5xl mx-auto px-4 sm:px-6 py-8">
+      {/* Embedded JSON-LD */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+
       {/* Breadcrumbs */}
-      <nav className="flex items-center gap-2 text-xs text-muted-foreground mb-6" aria-label="Breadcrumb">
-        <Link to="/" className="hover:text-foreground transition-colors">
-          Home
-        </Link>
-        <span>/</span>
-        <Link to="/offers" className="hover:text-foreground transition-colors">
-          AI Deals & Benefits
-        </Link>
-        <span>/</span>
-        <span className="text-foreground font-medium truncate max-w-[200px] sm:max-w-none">
-          {offer.title}
-        </span>
+      <nav className="flex items-center justify-between text-xs text-muted-foreground mb-6" aria-label="Breadcrumb">
+        <div className="flex items-center gap-2">
+          <Link to="/" className="hover:text-foreground transition-colors">
+            Home
+          </Link>
+          <span>/</span>
+          <Link to="/offers" className="hover:text-foreground transition-colors">
+            AI Deals & Benefits
+          </Link>
+          <span>/</span>
+          <span className="text-foreground font-medium truncate max-w-[200px] sm:max-w-none">
+            {offer.title}
+          </span>
+        </div>
+
+        <button
+          type="button"
+          onClick={handleCopyShare}
+          className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded border border-border bg-card hover:bg-muted text-foreground transition-colors shrink-0"
+          aria-label="Share deal"
+        >
+          {copiedShare ? (
+            <>
+              <Check className="w-3.5 h-3.5 text-emerald-400" />
+              <span className="text-emerald-400 font-medium text-[11px]">Copied!</span>
+            </>
+          ) : (
+            <>
+              <Share2 className="w-3.5 h-3.5 text-muted-foreground" />
+              <span className="text-[11px]">Share</span>
+            </>
+          )}
+        </button>
       </nav>
 
       {/* Main Header Card */}
@@ -109,19 +167,49 @@ export const OfferDetailPage: React.FC = () => {
             </span>
           )}
 
-          <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 ml-auto">
-            <ShieldCheck className="w-3.5 h-3.5" />
-            <span>Verified Active ({offer.lastVerifiedAt})</span>
-          </span>
+          {active ? (
+            <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 ml-auto">
+              <ShieldCheck className="w-3.5 h-3.5" />
+              <span>Verified Active ({offer.lastVerifiedAt})</span>
+            </span>
+          ) : (
+            <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-rose-500/10 text-rose-400 border border-rose-500/20 ml-auto">
+              <AlertTriangle className="w-3.5 h-3.5" />
+              <span>Expired / Archived</span>
+            </span>
+          )}
         </div>
 
-        {/* Title & Provider */}
-        <h1 className="text-2xl sm:text-4xl font-extrabold text-foreground tracking-tight mb-3">
-          {offer.title}
-        </h1>
-        <p className="text-sm font-medium text-secondary-foreground mb-4">
-          Offered by <strong className="text-foreground">{offer.provider}</strong>
-        </p>
+        {/* Title & Provider with Brand Logo */}
+        <div className="flex items-start gap-4 mb-4">
+          {offer.logoAssetPath && (
+            <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-xl flex items-center justify-center shrink-0 overflow-hidden bg-card/90 border border-border/80 shadow-md p-2 mt-1">
+              <img
+                src={offer.logoAssetPath}
+                alt={`${offer.provider} logo`}
+                className="w-full h-full object-contain"
+              />
+            </div>
+          )}
+          <div className="min-w-0 flex-1">
+            <h1 className="text-2xl sm:text-4xl font-extrabold text-foreground tracking-tight mb-2">
+              {offer.title}
+            </h1>
+            <p className="text-sm font-medium text-secondary-foreground">
+              Offered by <strong className="text-foreground">{offer.provider}</strong>
+            </p>
+          </div>
+        </div>
+
+        {!active && (
+          <div className="p-4 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-300 text-xs flex items-start gap-2.5 mb-6">
+            <AlertTriangle className="w-4 h-4 shrink-0 mt-0.5 text-rose-400" />
+            <div>
+              <strong className="block font-semibold mb-0.5">Offer Expired or Archived</strong>
+              <span>This promotional deal or program deadline has passed. Details are preserved for historical reference and documentation. Official terms and benefits may no longer be honored by the provider.</span>
+            </div>
+          </div>
+        )}
 
         <p className="text-base text-secondary-foreground leading-relaxed mb-6 max-w-3xl">
           {offer.description}
@@ -146,9 +234,13 @@ export const OfferDetailPage: React.FC = () => {
             href={offer.claimUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-primary text-primary-foreground font-semibold text-sm hover:bg-primary-hover shadow-lg shadow-primary/20 hover:shadow-primary/30 transition-all hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-primary/50"
+            className={`inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold text-sm transition-all focus:outline-none focus:ring-2 ${
+              active
+                ? 'bg-primary text-primary-foreground hover:bg-primary-hover shadow-lg shadow-primary/20 hover:shadow-primary/30 hover:-translate-y-0.5 focus:ring-primary/50'
+                : 'bg-muted text-muted-foreground hover:text-foreground border border-border'
+            }`}
           >
-            <span>Claim Offer on Official Site</span>
+            <span>{active ? 'Claim Offer on Official Site' : 'View Archived Offer Site'}</span>
             <ExternalLink className="w-4 h-4" />
           </a>
 
@@ -321,6 +413,47 @@ export const OfferDetailPage: React.FC = () => {
           </div>
         </div>
       )}
+
+      {/* Related Educational Guides */}
+      <div className="mt-12 p-6 rounded-xl border border-border bg-card/60">
+        <div className="flex items-center justify-between mb-4">
+          <div className="flex items-center gap-2">
+            <BookOpen className="w-4 h-4 text-primary" />
+            <h3 className="text-sm font-bold text-foreground">Related Guides & Benefit Tutorials</h3>
+          </div>
+          <Link to="/guides" className="text-xs text-primary hover:underline font-medium">
+            Browse All Guides →
+          </Link>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <Link
+            to="/guides/free-ai-student-benefits-guide"
+            className="p-4 rounded-lg border border-border bg-muted/40 hover:bg-muted/80 transition-colors group"
+          >
+            <span className="text-[10px] uppercase font-mono font-bold text-primary mb-1 block">Student & Cloud Credits</span>
+            <span className="text-xs font-semibold text-foreground group-hover:text-primary transition-colors block mb-1">
+              The Definitive Guide to Free AI & Cloud Credits for Students in 2026
+            </span>
+            <p className="text-[11px] text-secondary-foreground line-clamp-2">
+              Step-by-step verification blueprints for GitHub Student Pack, Azure $100 no-card, AWS Educate, and carrier bundles.
+            </p>
+          </Link>
+
+          <Link
+            to="/guides/evaluating-free-ai-plans"
+            className="p-4 rounded-lg border border-border bg-muted/40 hover:bg-muted/80 transition-colors group"
+          >
+            <span className="text-[10px] uppercase font-mono font-bold text-primary mb-1 block">Plan Evaluation</span>
+            <span className="text-xs font-semibold text-foreground group-hover:text-primary transition-colors block mb-1">
+              How to Evaluate Free AI Tool Plans: Recurring Free vs Starter Trial Credits
+            </span>
+            <p className="text-[11px] text-secondary-foreground line-clamp-2">
+              Avoid fake free trials. Discover daily resets, watermark rules, and commercial license terms before registering.
+            </p>
+          </Link>
+        </div>
+      </div>
 
       {/* Disclaimer */}
       <div className="mt-12 p-4 rounded-xl border border-border bg-card/40 text-[11px] text-muted-foreground leading-relaxed flex items-start gap-2.5">

@@ -127,7 +127,7 @@ export const offersData: AiOffer[] = [
       { step: 3, title: 'Receive Tier 1 Approval', detail: 'Receive initial $1,000 to $5,000 in Azure credits upon rapid review within 3-5 days.' },
       { step: 4, title: 'Unlock OpenAI Models', detail: 'Deploy Azure OpenAI Service endpoints with your allocated credit balance.' },
     ],
-    logoAssetPath: '/logos/copilot.svg',
+    logoAssetPath: '/logos/microsoft.svg',
     tags: ['Startups', 'Microsoft', 'Azure OpenAI', 'GPT-4o', 'Cloud Credits', 'Global'],
     isFeatured: true,
   },
@@ -152,7 +152,7 @@ export const offersData: AiOffer[] = [
       { step: 2, title: 'Apply on AWS Portal', detail: 'Submit your AWS account ID and company website on aws.amazon.com/activate.' },
       { step: 3, title: 'Credit Application', detail: 'Credits are deposited into your AWS Billing console within 7 to 10 business days.' },
     ],
-    logoAssetPath: '/logos/huggingface.svg',
+    logoAssetPath: '/logos/aws.svg',
     tags: ['AWS', 'Startups', 'Amazon Bedrock', 'Cloud Credits', 'GPU', 'Global'],
     isFeatured: false,
   },
@@ -177,7 +177,7 @@ export const offersData: AiOffer[] = [
       { step: 2, title: 'Verify Status', detail: 'Authenticate through GitHub Student Pack or confirm your .edu email link.' },
       { step: 3, title: 'Download IDEs', detail: 'Sign into JetBrains Toolbox or any JetBrains IDE with your JetBrains Account credentials.' },
     ],
-    logoAssetPath: '/logos/continue-dev.svg',
+    logoAssetPath: '/logos/jetbrains.svg',
     tags: ['JetBrains', 'Students', 'IDEs', 'PyCharm', 'IntelliJ', 'Education', 'Global'],
     isFeatured: false,
   },
@@ -206,17 +206,192 @@ export const offersData: AiOffer[] = [
     tags: ['Notion', 'Students', 'Education', 'Productivity', 'Notes', 'Global'],
     isFeatured: false,
   },
+  {
+    id: 'github-copilot-free',
+    slug: 'github-copilot-free',
+    title: 'GitHub Copilot Free (Ongoing Public Free Tier)',
+    provider: 'GitHub & Microsoft',
+    description: '2,000 code completions per month and 50 chat turns across VS Code, JetBrains, and Visual Studio for all developers with a free GitHub account.',
+    offerType: 'free-subscription',
+    eligibility: 'Open to all developers worldwide with a registered GitHub personal account. Zero credit card or academic status required.',
+    benefitSummary: '2,000 free code completions/month, 50 free Copilot Chat turns/month, multi-model selection (Claude 3.5 Sonnet, GPT-4o), and CLI integration.',
+    claimUrl: 'https://github.com/features/copilot',
+    officialTermsUrl: 'https://docs.github.com/en/copilot/about-github-copilot/subscription-plans-for-github-copilot',
+    lastVerifiedAt: '2026-10-18',
+    verificationStatus: 'verified-active',
+    region: 'Global',
+    requiresStudentVerification: false,
+    renewalTerms: 'Ongoing permanent free tier. Monthly completions quota resets on the 1st of every calendar month. Zero credit card required.',
+    claimSteps: [
+      { step: 1, title: 'Install VS Code Copilot Extension', detail: 'Open VS Code and search for "GitHub Copilot" in the Extensions Marketplace.' },
+      { step: 2, title: 'Sign into GitHub', detail: 'Authenticate with your standard free GitHub user account when prompted.' },
+      { step: 3, title: 'Start Coding Free', detail: 'Your 2,000 completions and 50 chat messages per month activate immediately with zero setup.' },
+    ],
+    logoAssetPath: '/logos/copilot.svg',
+    tags: ['GitHub', 'Copilot', 'Free Plan', 'Coding', 'VS Code', 'Global'],
+    isFeatured: true,
+  },
+  {
+    id: 'azure-for-students',
+    slug: 'azure-for-students',
+    title: 'Microsoft Azure for Students ($100 USD Credit + Free AI Services)',
+    provider: 'Microsoft',
+    description: '$100 in Azure Cloud credit for 12 months with no credit card required, plus 12 months of popular free services and 55+ always-free developer resources including Azure OpenAI / AI Studio.',
+    offerType: 'student-plan',
+    eligibility: 'Full-time students aged 18+ enrolled in accredited higher education institutions worldwide. Verification via university academic email.',
+    benefitSummary: '$100 USD Azure credit (1 year validity), 12 months free Azure AI services, cognitive search, App Services, Linux VMs, and Azure OpenAI model testing without requiring a credit card.',
+    claimUrl: 'https://azure.microsoft.com/en-us/free/students/',
+    officialTermsUrl: 'https://azure.microsoft.com/en-us/pricing/offers/ms-azr-0170p/',
+    lastVerifiedAt: '2026-10-18',
+    verificationStatus: 'verified-active',
+    region: 'Global',
+    requiresStudentVerification: true,
+    renewalTerms: 'Credits valid for 12 months from activation. Renewable annually while maintaining verifiable student status. No credit card required; service caps prevent unexpected charges.',
+    claimSteps: [
+      { step: 1, title: 'Visit Azure Students Portal', detail: 'Navigate to azure.microsoft.com/free/students and click "Start free".' },
+      { step: 2, title: 'Authenticate Academic Email', detail: 'Sign in with a Microsoft account and verify your institutional .edu or university email.' },
+      { step: 3, title: 'Access Azure AI Studio', detail: '$100 credit is deposited immediately into your subscription balance with zero credit card needed.' },
+    ],
+    logoAssetPath: '/logos/azure.svg',
+    tags: ['Azure', 'Microsoft', 'Students', 'Cloud Credits', 'Azure OpenAI', 'Global'],
+    isFeatured: true,
+  },
+  {
+    id: 'figma-education',
+    slug: 'figma-education',
+    title: 'Figma for Education (Free Professional Plan)',
+    provider: 'Figma',
+    description: '100% Free Figma Professional Plan and FigJam for verified students and educators, unlocking unlimited design files, team workspaces, shared component libraries, and Dev Mode.',
+    offerType: 'student-plan',
+    eligibility: 'Students, educators, and school administrators at accredited secondary and tertiary education institutions with proof of academic enrollment.',
+    benefitSummary: 'Complimentary Figma & FigJam Professional license (standard value $15/editor/month), unlimited files, shared design systems, audio chat, and full Dev Mode.',
+    claimUrl: 'https://www.figma.com/education/',
+    officialTermsUrl: 'https://help.figma.com/hc/en-us/articles/360041061214-Verify-education-status',
+    lastVerifiedAt: '2026-10-18',
+    verificationStatus: 'verified-active',
+    region: 'Global',
+    requiresStudentVerification: true,
+    renewalTerms: 'Valid for 2 years from date of verification; renewable upon re-verification of student or educator status. Downgrades to Starter tier upon graduation.',
+    claimSteps: [
+      { step: 1, title: 'Create Figma Account', detail: 'Sign up on figma.com with your institution or school email.' },
+      { step: 2, title: 'Apply for Education Status', detail: 'Visit figma.com/education and select "Apply for free access".' },
+      { step: 3, title: 'Submit School Details', detail: 'Provide your institution name, degree program, and expected graduation year with SheerID.' },
+      { step: 4, title: 'Upgrade Team', detail: 'Once approved, upgrade your team workspace to Education Professional for $0.' },
+    ],
+    logoAssetPath: '/logos/figma.svg',
+    tags: ['Figma', 'UI/UX', 'Students', 'Design', 'Education', 'Global'],
+    isFeatured: true,
+  },
+  {
+    id: 'adobe-cc-student-discount-india',
+    slug: 'adobe-cc-student-discount-india',
+    title: 'Adobe Creative Cloud Student & Teacher Discount — India',
+    provider: 'Adobe',
+    description: 'Up to 65% discount on the full Creative Cloud All Apps subscription for university students and teachers in India, including Adobe Firefly Generative AI credits and 20+ apps.',
+    offerType: 'discount',
+    eligibility: 'Enrolled students aged 13+ or faculty members at recognized schools or universities in India with institutional email or acceptable student ID card verification.',
+    benefitSummary: 'Discounted paid subscription (~₹1,595/mo + GST for first year instead of ₹4,630/mo regular price), Photoshop, Illustrator, Premiere Pro, and 1,000 monthly Firefly generative AI credits.',
+    claimUrl: 'https://www.adobe.com/in/creativecloud/buy/students.html',
+    officialTermsUrl: 'https://www.adobe.com/in/legal/terms.html',
+    lastVerifiedAt: '2026-10-18',
+    verificationStatus: 'verified-active',
+    region: 'India',
+    requiresStudentVerification: true,
+    renewalTerms: 'Discounted rate applies for the first 12 months. Renews automatically at standard student renewal rates unless cancelled before the renewal date. A valid payment method is required at purchase.',
+    claimSteps: [
+      { step: 1, title: 'Visit Adobe India Student Store', detail: 'Go to adobe.com/in/creativecloud/buy/students.html.' },
+      { step: 2, title: 'Enter Academic Credentials', detail: 'Provide your college email or upload school ID card during checkout for SheerID instant verification.' },
+      { step: 3, title: 'Complete Purchase', detail: 'Provide payment card and confirm discounted first-year student subscription.' },
+    ],
+    logoAssetPath: '/logos/adobe.svg',
+    tags: ['Adobe', 'Students', 'India', 'Firefly', 'Design', 'Generative AI', 'Discount'],
+    isFeatured: false,
+  },
+  {
+    id: 'google-for-startups-cloud',
+    slug: 'google-for-startups-cloud',
+    title: 'Google for Startups Cloud Program (AI Startup Tier)',
+    provider: 'Google Cloud',
+    description: 'Up to $350,000 in Google Cloud and Google AI Studio credits for early-stage AI startups building on foundation models like Gemini, Vertex AI, and Gemma.',
+    offerType: 'startup-credits',
+    eligibility: 'AI-first startups up to Series A (founded within last 5 years) not previously funded by significant Google Cloud promotional credits.',
+    benefitSummary: 'Up to $250k Google Cloud credits in Year 1 + up to $100k in Year 2, Google Cloud AI infrastructure, Gemini API tokens, dedicated startup success manager, and Google Cloud skills training.',
+    claimUrl: 'https://cloud.google.com/startup/ai',
+    officialTermsUrl: 'https://cloud.google.com/terms',
+    lastVerifiedAt: '2026-10-18',
+    verificationStatus: 'verified-active',
+    region: 'Global',
+    requiresStudentVerification: false,
+    renewalTerms: 'Credits are issued in tranches over 2 years; non-transferable and subject to active Google Cloud development milestones.',
+    claimSteps: [
+      { step: 1, title: 'Review Program Guidelines', detail: 'Check company eligibility on cloud.google.com/startup/ai.' },
+      { step: 2, title: 'Submit Founder Application', detail: 'Submit details on your AI product architecture, founding team, and model requirements.' },
+      { step: 3, title: 'Receive Credit Allocation', detail: 'Upon acceptance, Google Cloud credits are applied directly to your company GCP billing account.' },
+    ],
+    logoAssetPath: '/logos/google.svg',
+    tags: ['Google Cloud', 'Startups', 'Gemini', 'Vertex AI', 'Cloud Credits', 'Global'],
+    isFeatured: false,
+  },
+  {
+    id: 'canva-for-campus',
+    slug: 'canva-for-campus',
+    title: 'Canva for Education & Campus (Free Classroom Suite)',
+    provider: 'Canva',
+    description: '100% Free Canva Pro features for eligible K-12 educators, schools, and university classrooms, including Magic Studio generative AI design tools, brand kits, and collaboration.',
+    offerType: 'student-plan',
+    eligibility: 'Certified teachers and administrators at recognized K-12 schools, as well as educational institutions with campus-wide education partnerships. Individual university students can access free standard Canva or campus licenses if their institution is enrolled.',
+    benefitSummary: '100% Free Canva for Education license with Magic Studio AI tools, 100M+ stock assets, background remover, classroom LMS integration (Canvas, Google Classroom), and unlimited storage.',
+    claimUrl: 'https://www.canva.com/education/',
+    officialTermsUrl: 'https://www.canva.com/policies/terms-of-use/',
+    lastVerifiedAt: '2026-10-18',
+    verificationStatus: 'verified-active',
+    region: 'Global',
+    requiresStudentVerification: true,
+    renewalTerms: 'Free continuously for validated educators and educational domains. Annual school re-validation may apply.',
+    claimSteps: [
+      { step: 1, title: 'Sign up with School Account', detail: 'Register on canva.com using your certified school domain email.' },
+      { step: 2, title: 'Submit Educator Verification', detail: 'Provide teaching license or school ID badge on canva.com/education.' },
+      { step: 3, title: 'Invite Classroom', detail: 'Once approved, your account unlocks full Canva for Education features and allows adding students.' },
+    ],
+    logoAssetPath: '/logos/canva.svg',
+    tags: ['Canva', 'Education', 'Teachers', 'Students', 'Magic Studio', 'Design', 'Global'],
+    isFeatured: false,
+  },
 ];
+
+export function isOfferActive(offer: AiOffer, referenceDate: Date = new Date()): boolean {
+  if (offer.verificationStatus === 'expired' || offer.verificationStatus === 'archived-expired') {
+    return false;
+  }
+  if (offer.verificationStatus === 'pending-verification') {
+    return false;
+  }
+  if (offer.validUntil) {
+    const expiryTime = new Date(offer.validUntil).getTime();
+    if (!isNaN(expiryTime) && expiryTime < referenceDate.getTime()) {
+      return false;
+    }
+  }
+  return offer.verificationStatus === 'verified-active' || offer.verificationStatus === 'limited-time';
+}
 
 export function getOfferBySlug(slug: string): AiOffer | undefined {
   return offersData.find((o) => o.slug.toLowerCase() === slug.toLowerCase() || o.id.toLowerCase() === slug.toLowerCase());
 }
 
 export function getFeaturedOffers(): AiOffer[] {
-  return offersData.filter((o) => o.isFeatured && o.verificationStatus === 'verified-active');
+  return offersData.filter((o) => o.isFeatured && isOfferActive(o));
+}
+
+export function getActiveOffers(): AiOffer[] {
+  return offersData.filter((o) => isOfferActive(o));
+}
+
+export function getArchivedOffers(): AiOffer[] {
+  return offersData.filter((o) => !isOfferActive(o));
 }
 
 export function getOffersByType(type: string): AiOffer[] {
-  if (type === 'all') return offersData;
-  return offersData.filter((o) => o.offerType === type);
+  if (type === 'all') return getActiveOffers();
+  return getActiveOffers().filter((o) => o.offerType === type);
 }

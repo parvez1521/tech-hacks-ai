@@ -1,0 +1,295 @@
+import React, { useState, useEffect } from 'react';
+import { Link } from '../router/Router';
+import { Cookie, X, Check, ShieldCheck, Settings2, Info } from 'lucide-react';
+
+export interface CookiePreferences {
+  essential: boolean;
+  analytics: boolean;
+  advertising: boolean;
+  updatedAt: string;
+}
+
+const STORAGE_KEY = 'cookie_consent_preferences';
+
+export function getCookiePreferences(): CookiePreferences | null {
+  if (typeof window === 'undefined') return null;
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return null;
+    return JSON.parse(raw) as CookiePreferences;
+  } catch {
+    return null;
+  }
+}
+
+export function saveCookiePreferences(prefs: CookiePreferences) {
+  if (typeof window === 'undefined') return;
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(prefs));
+    window.dispatchEvent(new CustomEvent('cookie_consent_updated', { detail: prefs }));
+  } catch {
+    // Ignore storage errors
+  }
+}
+
+export function openCookiePreferencesModal() {
+  if (typeof window === 'undefined') return;
+  window.dispatchEvent(new Event('open_cookie_preferences_modal'));
+}
+
+export const CookieConsentBanner: React.FC = () => {
+  const [isOpen, setIsOpen] = useState(() => {
+    if (typeof window === 'undefined') return true;
+    return !getCookiePreferences();
+  });
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [analytics, setAnalytics] = useState(false);
+  const [advertising, setAdvertising] = useState(false);
+
+  useEffect(() => {
+    // Check if user already set preferences
+    const existing = getCookiePreferences();
+    if (existing) {
+      setIsOpen(false);
+      setAnalytics(existing.analytics);
+      setAdvertising(existing.advertising);
+    }
+  }, []);
+
+  useEffect(() => {
+    const handleOpenModal = () => {
+      const existing = getCookiePreferences();
+      if (existing) {
+        setAnalytics(existing.analytics);
+        setAdvertising(existing.advertising);
+      }
+      setIsModalOpen(true);
+    };
+
+    window.addEventListener('open_cookie_preferences_modal', handleOpenModal);
+    return () => window.removeEventListener('open_cookie_preferences_modal', handleOpenModal);
+  }, []);
+
+  const handleAcceptAll = () => {
+    const prefs: CookiePreferences = {
+      essential: true,
+      analytics: true,
+      advertising: true,
+      updatedAt: new Date().toISOString(),
+    };
+    saveCookiePreferences(prefs);
+    setAnalytics(true);
+    setAdvertising(true);
+    setIsOpen(false);
+    setIsModalOpen(false);
+  };
+
+  const handleRejectNonEssential = () => {
+    const prefs: CookiePreferences = {
+      essential: true,
+      analytics: false,
+      advertising: false,
+      updatedAt: new Date().toISOString(),
+    };
+    saveCookiePreferences(prefs);
+    setAnalytics(false);
+    setAdvertising(false);
+    setIsOpen(false);
+    setIsModalOpen(false);
+  };
+
+  const handleSaveCustom = () => {
+    const prefs: CookiePreferences = {
+      essential: true,
+      analytics,
+      advertising,
+      updatedAt: new Date().toISOString(),
+    };
+    saveCookiePreferences(prefs);
+    setIsOpen(false);
+    setIsModalOpen(false);
+  };
+
+  return (
+    <>
+      {/* Floating Bottom Banner (Initial prompt for new visitors) */}
+      {isOpen && !isModalOpen && (
+        <div
+          role="region"
+          aria-label="Cookie consent banner"
+          className="fixed bottom-20 left-4 right-4 sm:bottom-6 sm:left-6 sm:right-auto sm:max-w-md z-40 p-5 rounded-2xl border border-border bg-card/95 backdrop-blur-md shadow-2xl shadow-black/40 animate-slide-up text-xs space-y-3"
+        >
+          <div className="flex items-start justify-between gap-3">
+            <div className="flex items-center gap-2 text-primary font-bold text-sm">
+              <Cookie className="w-4 h-4" />
+              <span>Cookie &amp; Privacy Notice</span>
+            </div>
+            <button
+              type="button"
+              onClick={handleRejectNonEssential}
+              className="text-muted-foreground hover:text-foreground p-1 rounded hover:bg-muted"
+              aria-label="Close and reject non-essential cookies"
+            >
+              <X className="w-3.5 h-3.5" />
+            </button>
+          </div>
+
+          <p className="text-secondary-foreground leading-relaxed">
+            We use cookies and client-side storage to remember your UI preferences, measure site traffic, and support independent research via contextual advertising in accordance with our{' '}
+            <Link to="/privacy" className="text-primary hover:underline font-medium">
+              Privacy Policy
+            </Link>.
+          </p>
+
+          <div className="flex flex-wrap items-center gap-2 pt-1">
+            <button
+              type="button"
+              onClick={handleAcceptAll}
+              className="px-3.5 py-1.5 rounded-lg bg-primary text-primary-foreground font-semibold hover:bg-primary-hover shadow-sm transition-colors text-xs"
+            >
+              Accept All
+            </button>
+            <button
+              type="button"
+              onClick={handleRejectNonEssential}
+              className="px-3.5 py-1.5 rounded-lg bg-muted border border-border text-foreground font-medium hover:bg-muted/80 transition-colors text-xs"
+            >
+              Essential Only
+            </button>
+            <button
+              type="button"
+              onClick={() => setIsModalOpen(true)}
+              className="px-2.5 py-1.5 text-muted-foreground hover:text-foreground underline text-[11px] ml-auto"
+            >
+              Customize
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* Detailed Cookie Preferences Modal (Accessible anytime from footer) */}
+      {isModalOpen && (
+        <div
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="cookie-preferences-title"
+          className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 animate-fade-in"
+        >
+          <div className="max-w-lg w-full rounded-2xl border border-border bg-card p-6 shadow-2xl space-y-5 text-xs max-h-[90vh] overflow-y-auto">
+            <div className="flex items-center justify-between pb-3 border-b border-border">
+              <div className="flex items-center gap-2">
+                <Settings2 className="w-4 h-4 text-primary" />
+                <h2 id="cookie-preferences-title" className="text-base font-bold text-foreground">
+                  Cookie &amp; Consent Preferences
+                </h2>
+              </div>
+              <button
+                type="button"
+                onClick={() => setIsModalOpen(false)}
+                className="text-muted-foreground hover:text-foreground p-1 rounded hover:bg-muted"
+                aria-label="Close modal"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            </div>
+
+            <p className="text-secondary-foreground leading-relaxed">
+              In accordance with Google AdSense publisher policies, the General Data Protection Regulation (GDPR), and the IAB Europe Transparency and Consent Framework (TCF v2.2), you can select which cookie categories you permit:
+            </p>
+
+            <div className="space-y-3">
+              {/* Essential */}
+              <div className="p-3.5 rounded-xl border border-border bg-muted/30 flex items-start justify-between gap-3">
+                <div className="space-y-1">
+                  <div className="flex items-center gap-1.5 font-bold text-foreground text-xs">
+                    <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
+                    <span>Essential Website Cookies</span>
+                  </div>
+                  <p className="text-[11px] text-muted-foreground leading-relaxed">
+                    Necessary for site navigation, light/dark theme persistence, and local software bookmarks. Cannot be disabled.
+                  </p>
+                </div>
+                <span className="px-2 py-0.5 rounded text-[10px] font-mono font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 shrink-0">
+                  Always Active
+                </span>
+              </div>
+
+              {/* Analytics */}
+              <div className="p-3.5 rounded-xl border border-border bg-card flex items-start justify-between gap-3">
+                <div className="space-y-1">
+                  <span className="font-bold text-foreground text-xs block">
+                    Analytics &amp; Site Diagnostics
+                  </span>
+                  <p className="text-[11px] text-muted-foreground leading-relaxed">
+                    Collects anonymous, aggregated metrics on popular tools and page performance to help us improve catalog discovery.
+                  </p>
+                </div>
+                <label className="relative inline-flex items-center cursor-pointer shrink-0 mt-1">
+                  <input
+                    type="checkbox"
+                    checked={analytics}
+                    onChange={(e) => setAnalytics(e.target.checked)}
+                    className="sr-only peer"
+                  />
+                  <div className="w-9 h-5 bg-muted peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-primary"></div>
+                </label>
+              </div>
+
+              {/* Advertising */}
+              <div className="p-3.5 rounded-xl border border-border bg-card flex items-start justify-between gap-3">
+                <div className="space-y-1">
+                  <span className="font-bold text-foreground text-xs block">
+                    Advertising &amp; Google AdSense Personalization
+                  </span>
+                  <p className="text-[11px] text-muted-foreground leading-relaxed">
+                    Permits Google AdSense and third-party advertising partners to deliver contextual and personalized advertisements based on your browsing interests.
+                  </p>
+                </div>
+                <label className="relative inline-flex items-center cursor-pointer shrink-0 mt-1">
+                  <input
+                    type="checkbox"
+                    checked={advertising}
+                    onChange={(e) => setAdvertising(e.target.checked)}
+                    className="sr-only peer"
+                  />
+                  <div className="w-9 h-5 bg-muted peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-primary"></div>
+                </label>
+              </div>
+            </div>
+
+            <div className="p-3 rounded-lg bg-muted/60 border border-border/80 flex items-start gap-2 text-[11px] text-muted-foreground">
+              <Info className="w-4 h-4 text-primary shrink-0 mt-0.5" />
+              <span>
+                You can revisit and update these choices at any time by selecting <strong>Cookie Preferences</strong> in our site footer. For full details on third-party ad vendors and opt-out links, visit our <Link to="/privacy" className="text-primary hover:underline">Privacy Policy</Link>.
+              </span>
+            </div>
+
+            <div className="flex items-center justify-end gap-2 pt-2 border-t border-border">
+              <button
+                type="button"
+                onClick={handleRejectNonEssential}
+                className="px-3.5 py-2 rounded-lg bg-muted hover:bg-muted/80 text-foreground font-medium text-xs transition-colors"
+              >
+                Reject All
+              </button>
+              <button
+                type="button"
+                onClick={handleSaveCustom}
+                className="px-4 py-2 rounded-lg bg-secondary text-secondary-foreground font-semibold text-xs hover:bg-secondary/80 border border-border transition-colors"
+              >
+                Save Preferences
+              </button>
+              <button
+                type="button"
+                onClick={handleAcceptAll}
+                className="px-4 py-2 rounded-lg bg-primary text-primary-foreground font-semibold text-xs hover:bg-primary-hover shadow-sm transition-colors"
+              >
+                Accept All
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+    </>
+  );
+};

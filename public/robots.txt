@@ -1,4 +1,9 @@
 User-agent: *
 Allow: /
+Disallow: /saved
+Disallow: /moderation
+Disallow: /admin
+Disallow: /api/
 
 Sitemap: https://techhacksai.com/sitemap.xml
+

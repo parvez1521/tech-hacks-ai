@@ -1,21 +1,73 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useMemo } from 'react';
 import { useRouter, Link } from '../router/Router';
 import { universalSearch, UniversalSearchResult } from '../services/aiCatalogService';
-import { Search, X, Sparkles, FolderKanban, Replace, BookOpen, MessageSquareCode, Wrench, ArrowRight } from 'lucide-react';
+import { Search, X, Sparkles, FolderKanban, Replace, BookOpen, MessageSquareCode, Wrench } from 'lucide-react';
 import { BrandLogo } from './BrandLogo';
 
 export const UniversalSearch: React.FC = () => {
   const [query, setQuery] = useState('');
   const [isOpen, setIsOpen] = useState(false);
+  const [selectedIndex, setSelectedIndex] = useState<number>(-1);
   const { navigate } = useRouter();
   const containerRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
+  const activeItemRef = useRef<HTMLAnchorElement>(null);
+
+  // Global Cmd+K / Ctrl+K keyboard shortcut to focus search
+  useEffect(() => {
+    const handleGlobalKeyDown = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+        e.preventDefault();
+        inputRef.current?.focus();
+      }
+    };
+    window.addEventListener('keydown', handleGlobalKeyDown);
+    return () => window.removeEventListener('keydown', handleGlobalKeyDown);
+  }, []);
 
   const results: UniversalSearchResult = universalSearch(query);
+
+  // Flatten searchable results for seamless arrow-key navigation
+  const flatResults = useMemo(() => {
+    const list: { id: string; name: string; url: string; group: string }[] = [];
+    results.aiTools.forEach((t) =>
+      list.push({ id: `ai-${t.id}`, name: t.name, url: `/ai-tools/${t.slug}`, group: 'AI Tools' })
+    );
+    results.openSourceTools.forEach((t) =>
+      list.push({ id: `os-${t.id}`, name: t.name, url: `/tools/${t.slug}`, group: 'Open Source Software' })
+    );
+    results.proprietaryAlternatives.forEach((a) =>
+      list.push({ id: `alt-${a.id}`, name: a.name, url: `/alternatives/${a.slug}`, group: 'Proprietary Targets' })
+    );
+    results.guides.forEach((g) =>
+      list.push({ id: `guide-${g.id}`, name: g.title, url: `/guides/${g.slug}`, group: 'Tutorials & Guides' })
+    );
+    results.prompts.forEach((p) =>
+      list.push({ id: `prompt-${p.id}`, name: p.title, url: `/prompt-library/${p.slug}`, group: 'Prompts & Recipes' })
+    );
+    results.utilities.forEach((u) =>
+      list.push({ id: `util-${u.id}`, name: u.name, url: `/free-tools/${u.slug}`, group: 'Browser Utilities' })
+    );
+    return list;
+  }, [results]);
+
+  // Reset selected index when query changes
+  useEffect(() => {
+    setSelectedIndex(-1);
+  }, [query]);
+
+  // Auto-scroll selected item into view during arrow-key navigation
+  useEffect(() => {
+    if (selectedIndex >= 0 && activeItemRef.current) {
+      activeItemRef.current.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+    }
+  }, [selectedIndex]);
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
       if (containerRef.current && !containerRef.current.contains(e.target as Node)) {
         setIsOpen(false);
+        setSelectedIndex(-1);
       }
     };
     document.addEventListener('mousedown', handleClickOutside);
@@ -25,12 +77,36 @@ export const UniversalSearch: React.FC = () => {
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === 'Escape') {
       setIsOpen(false);
+      setSelectedIndex(-1);
+      return;
+    }
+
+    if (!isOpen && query.trim() && (e.key === 'ArrowDown' || e.key === 'ArrowUp')) {
+      setIsOpen(true);
+    }
+
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      if (flatResults.length === 0) return;
+      setSelectedIndex((prev) => (prev < flatResults.length - 1 ? prev + 1 : 0));
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      if (flatResults.length === 0) return;
+      setSelectedIndex((prev) => (prev > 0 ? prev - 1 : flatResults.length - 1));
+    } else if (e.key === 'Enter') {
+      if (selectedIndex >= 0 && flatResults[selectedIndex]) {
+        e.preventDefault();
+        navigate(flatResults[selectedIndex].url);
+        setIsOpen(false);
+        setSelectedIndex(-1);
+      }
     }
   };
 
   const handleClear = () => {
     setQuery('');
     setIsOpen(false);
+    setSelectedIndex(-1);
   };
 
   const intentChips = [
@@ -45,13 +121,24 @@ export const UniversalSearch: React.FC = () => {
     { label: '✨ Discover prompts', to: '/prompt-library' },
   ];
 
+  // Helper to get index within flatResults for an item
+  let flatCounter = 0;
+
   return (
     <div ref={containerRef} className="relative w-full max-w-3xl mx-auto z-40" onKeyDown={handleKeyDown}>
-      {/* Search Input Bar */}
+      {/* Search Input Bar with Apple Glass UI */}
       <div className="relative flex items-center">
         <Search className="w-5 h-5 text-muted-foreground absolute left-4 pointer-events-none" />
         <input
+          ref={inputRef}
           type="text"
+          role="combobox"
+          aria-expanded={isOpen && Boolean(query.trim())}
+          aria-autocomplete="list"
+          aria-controls="universal-search-results"
+          aria-activedescendant={
+            selectedIndex >= 0 && flatResults[selectedIndex] ? `search-item-${selectedIndex}` : undefined
+          }
           value={query}
           onChange={(e) => {
             setQuery(e.target.value);
@@ -61,24 +148,35 @@ export const UniversalSearch: React.FC = () => {
             if (query.trim()) setIsOpen(true);
           }}
           placeholder="Search 1,000+ AI tools, open source alternatives, guides, prompts, or utilities..."
-          className="w-full pl-12 pr-12 py-3.5 sm:py-4 rounded-xl bg-card/95 border border-border/80 text-foreground placeholder:text-muted-foreground text-sm sm:text-base shadow-lg shadow-black/20 focus:outline-none focus:ring-2 focus:ring-primary/60 focus:border-primary/60 transition-all duration-200"
+          className="w-full pl-12 pr-14 py-3.5 sm:py-4 rounded-2xl bg-card/90 backdrop-blur-xl border border-white/15 dark:border-white/10 text-foreground placeholder:text-muted-foreground text-sm sm:text-base shadow-xl shadow-slate-200/60 dark:shadow-black/25 focus:outline-none focus:ring-2 focus:ring-cyan-500/50 focus:border-cyan-500/60 focus:shadow-[0_0_28px_rgba(6,182,212,0.18)] transition-all duration-200"
           aria-label="Universal software and AI discovery search"
         />
-        {query && (
+        {query ? (
           <button
             type="button"
             onClick={handleClear}
-            className="absolute right-4 p-1 text-muted-foreground hover:text-foreground rounded-full hover:bg-muted"
+            className="absolute right-4 p-1.5 text-muted-foreground hover:text-foreground rounded-full hover:bg-muted/80 transition-colors"
             aria-label="Clear search"
           >
             <X className="w-4 h-4" />
           </button>
+        ) : (
+          <div className="absolute right-4 hidden sm:flex items-center gap-1 pointer-events-none text-muted-foreground select-none">
+            <kbd className="px-1.5 py-0.5 rounded text-[10px] font-mono font-semibold bg-muted/80 border border-border/80 text-muted-foreground shadow-xs">
+              ⌘K
+            </kbd>
+          </div>
         )}
       </div>
 
-      {/* Grouped Search Results Dropdown */}
+      {/* Grouped Search Results Dropdown with Apple Glass UI & Accessible Listbox */}
       {isOpen && query.trim() && (
-        <div className="absolute top-full left-0 right-0 mt-2 rounded-xl bg-card/95 backdrop-blur-xl border border-border p-4 shadow-2xl shadow-black/50 max-h-[75vh] overflow-y-auto no-scrollbar z-50 flex flex-col gap-4 animate-fade-in">
+        <div
+          id="universal-search-results"
+          role="listbox"
+          aria-label="Universal search suggestions"
+          className="absolute top-full left-0 right-0 mt-2.5 rounded-2xl bg-card/95 backdrop-blur-2xl border border-border/80 dark:border-white/10 p-4 shadow-2xl shadow-black/20 dark:shadow-black/50 max-h-[75vh] overflow-y-auto no-scrollbar z-50 flex flex-col gap-4 animate-fade-in"
+        >
           {results.totalMatches === 0 ? (
             <div className="py-8 text-center text-muted-foreground text-sm">
               <p>No direct matches found for "{query}".</p>
@@ -86,14 +184,14 @@ export const UniversalSearch: React.FC = () => {
                 <Link
                   to={`/tools?q=${encodeURIComponent(query)}`}
                   onClick={() => setIsOpen(false)}
-                  className="px-3 py-1.5 rounded-md bg-muted text-foreground text-xs hover:bg-border"
+                  className="px-3 py-1.5 rounded-lg bg-muted/80 text-foreground text-xs hover:bg-muted"
                 >
                   Search Open Source Catalog →
                 </Link>
                 <Link
                   to={`/ai-tools?q=${encodeURIComponent(query)}`}
                   onClick={() => setIsOpen(false)}
-                  className="px-3 py-1.5 rounded-md bg-muted text-foreground text-xs hover:bg-border"
+                  className="px-3 py-1.5 rounded-lg bg-muted/80 text-foreground text-xs hover:bg-muted"
                 >
                   Search AI Directory →
                 </Link>
@@ -109,27 +207,42 @@ export const UniversalSearch: React.FC = () => {
                     <span>AI Tools</span>
                   </div>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                    {results.aiTools.map((tool) => (
-                      <Link
-                        key={tool.id}
-                        to={`/ai-tools/${tool.slug}`}
-                        onClick={() => setIsOpen(false)}
-                        className="flex items-center gap-2.5 p-2 rounded-lg hover:bg-muted/70 transition-colors"
-                      >
-                        <BrandLogo
-                          slug={tool.slug}
-                          name={tool.name}
-                          size="xs"
-                          iconBgColor={tool.iconBgColor}
-                          iconLetter={tool.iconLetter}
-                          className="w-7 h-7"
-                        />
-                        <div className="min-w-0">
-                          <p className="font-semibold text-foreground text-sm truncate">{tool.name}</p>
-                          <p className="text-xs text-muted-foreground truncate">{tool.tagline}</p>
-                        </div>
-                      </Link>
-                    ))}
+                    {results.aiTools.map((tool) => {
+                      const itemIndex = flatCounter++;
+                      const isSelected = selectedIndex === itemIndex;
+                      return (
+                        <Link
+                          key={tool.id}
+                          ref={isSelected ? activeItemRef : undefined}
+                          id={`search-item-${itemIndex}`}
+                          role="option"
+                          aria-selected={isSelected}
+                          to={`/ai-tools/${tool.slug}`}
+                          onClick={() => {
+                            setIsOpen(false);
+                            setSelectedIndex(-1);
+                          }}
+                          className={`flex items-center gap-2.5 p-2 rounded-xl transition-all ${
+                            isSelected
+                              ? 'bg-primary/20 text-primary border border-primary/40 ring-1 ring-primary/40'
+                              : 'hover:bg-muted/70 text-foreground'
+                          }`}
+                        >
+                          <BrandLogo
+                            slug={tool.slug}
+                            name={tool.name}
+                            size="xs"
+                            iconBgColor={tool.iconBgColor}
+                            iconLetter={tool.iconLetter}
+                            className="w-7 h-7 shrink-0"
+                          />
+                          <div className="min-w-0">
+                            <p className="font-semibold text-foreground text-sm truncate">{tool.name}</p>
+                            <p className="text-xs text-muted-foreground truncate">{tool.tagline}</p>
+                          </div>
+                        </Link>
+                      );
+                    })}
                   </div>
                 </div>
               )}
@@ -142,27 +255,42 @@ export const UniversalSearch: React.FC = () => {
                     <span>Open Source Software</span>
                   </div>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                    {results.openSourceTools.map((tool) => (
-                      <Link
-                        key={tool.id}
-                        to={`/tools/${tool.slug}`}
-                        onClick={() => setIsOpen(false)}
-                        className="flex items-center gap-2.5 p-2 rounded-lg hover:bg-muted/70 transition-colors"
-                      >
-                        <BrandLogo
-                          slug={tool.slug}
-                          name={tool.name}
-                          size="xs"
-                          iconBgColor={tool.iconBgColor}
-                          iconLetter={tool.iconLetter}
-                          className="w-7 h-7"
-                        />
-                        <div className="min-w-0">
-                          <p className="font-semibold text-foreground text-sm truncate">{tool.name}</p>
-                          <p className="text-xs text-muted-foreground truncate">{tool.tagline}</p>
-                        </div>
-                      </Link>
-                    ))}
+                    {results.openSourceTools.map((tool) => {
+                      const itemIndex = flatCounter++;
+                      const isSelected = selectedIndex === itemIndex;
+                      return (
+                        <Link
+                          key={tool.id}
+                          ref={isSelected ? activeItemRef : undefined}
+                          id={`search-item-${itemIndex}`}
+                          role="option"
+                          aria-selected={isSelected}
+                          to={`/tools/${tool.slug}`}
+                          onClick={() => {
+                            setIsOpen(false);
+                            setSelectedIndex(-1);
+                          }}
+                          className={`flex items-center gap-2.5 p-2 rounded-xl transition-all ${
+                            isSelected
+                              ? 'bg-primary/20 text-primary border border-primary/40 ring-1 ring-primary/40'
+                              : 'hover:bg-muted/70 text-foreground'
+                          }`}
+                        >
+                          <BrandLogo
+                            slug={tool.slug}
+                            name={tool.name}
+                            size="xs"
+                            iconBgColor={tool.iconBgColor}
+                            iconLetter={tool.iconLetter}
+                            className="w-7 h-7 shrink-0"
+                          />
+                          <div className="min-w-0">
+                            <p className="font-semibold text-foreground text-sm truncate">{tool.name}</p>
+                            <p className="text-xs text-muted-foreground truncate">{tool.tagline}</p>
+                          </div>
+                        </Link>
+                      );
+                    })}
                   </div>
                 </div>
               )}
@@ -175,27 +303,42 @@ export const UniversalSearch: React.FC = () => {
                     <span>Proprietary Targets to Replace</span>
                   </div>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                    {results.proprietaryAlternatives.map((alt) => (
-                      <Link
-                        key={alt.id}
-                        to={`/alternatives/${alt.slug}`}
-                        onClick={() => setIsOpen(false)}
-                        className="flex items-center gap-2.5 p-2 rounded-lg hover:bg-muted/70 transition-colors"
-                      >
-                        <BrandLogo
-                          slug={alt.slug}
-                          name={alt.name}
-                          size="xs"
-                          iconBgColor={alt.iconBgColor}
-                          iconLetter={alt.iconLetter}
-                          className="w-7 h-7"
-                        />
-                        <div className="min-w-0">
-                          <p className="font-semibold text-foreground text-sm truncate">{alt.name}</p>
-                          <p className="text-xs text-muted-foreground truncate">Explore open alternatives →</p>
-                        </div>
-                      </Link>
-                    ))}
+                    {results.proprietaryAlternatives.map((alt) => {
+                      const itemIndex = flatCounter++;
+                      const isSelected = selectedIndex === itemIndex;
+                      return (
+                        <Link
+                          key={alt.id}
+                          ref={isSelected ? activeItemRef : undefined}
+                          id={`search-item-${itemIndex}`}
+                          role="option"
+                          aria-selected={isSelected}
+                          to={`/alternatives/${alt.slug}`}
+                          onClick={() => {
+                            setIsOpen(false);
+                            setSelectedIndex(-1);
+                          }}
+                          className={`flex items-center gap-2.5 p-2 rounded-xl transition-all ${
+                            isSelected
+                              ? 'bg-primary/20 text-primary border border-primary/40 ring-1 ring-primary/40'
+                              : 'hover:bg-muted/70 text-foreground'
+                          }`}
+                        >
+                          <BrandLogo
+                            slug={alt.slug}
+                            name={alt.name}
+                            size="xs"
+                            iconBgColor={alt.iconBgColor}
+                            iconLetter={alt.iconLetter}
+                            className="w-7 h-7 shrink-0"
+                          />
+                          <div className="min-w-0">
+                            <p className="font-semibold text-foreground text-sm truncate">{alt.name}</p>
+                            <p className="text-xs text-muted-foreground truncate">Explore open alternatives →</p>
+                          </div>
+                        </Link>
+                      );
+                    })}
                   </div>
                 </div>
               )}
@@ -208,17 +351,32 @@ export const UniversalSearch: React.FC = () => {
                     <span>Tutorials & Guides</span>
                   </div>
                   <div className="flex flex-col gap-1.5">
-                    {results.guides.map((g) => (
-                      <Link
-                        key={g.id}
-                        to={`/guides/${g.slug}`}
-                        onClick={() => setIsOpen(false)}
-                        className="p-2 rounded-lg hover:bg-muted/70 transition-colors flex items-center justify-between gap-2"
-                      >
-                        <span className="text-sm font-medium text-foreground truncate">{g.title}</span>
-                        <span className="text-[11px] text-muted-foreground shrink-0">{g.readTime}</span>
-                      </Link>
-                    ))}
+                    {results.guides.map((g) => {
+                      const itemIndex = flatCounter++;
+                      const isSelected = selectedIndex === itemIndex;
+                      return (
+                        <Link
+                          key={g.id}
+                          ref={isSelected ? activeItemRef : undefined}
+                          id={`search-item-${itemIndex}`}
+                          role="option"
+                          aria-selected={isSelected}
+                          to={`/guides/${g.slug}`}
+                          onClick={() => {
+                            setIsOpen(false);
+                            setSelectedIndex(-1);
+                          }}
+                          className={`p-2 rounded-xl transition-all flex items-center justify-between gap-2 ${
+                            isSelected
+                              ? 'bg-primary/20 text-primary border border-primary/40 ring-1 ring-primary/40'
+                              : 'hover:bg-muted/70 text-foreground'
+                          }`}
+                        >
+                          <span className="text-sm font-medium truncate">{g.title}</span>
+                          <span className="text-[11px] text-muted-foreground shrink-0">{g.readTime}</span>
+                        </Link>
+                      );
+                    })}
                   </div>
                 </div>
               )}
@@ -231,17 +389,32 @@ export const UniversalSearch: React.FC = () => {
                     <span>Prompts & Recipes</span>
                   </div>
                   <div className="flex flex-col gap-1.5">
-                    {results.prompts.map((p) => (
-                      <Link
-                        key={p.id}
-                        to={`/prompt-library/${p.slug}`}
-                        onClick={() => setIsOpen(false)}
-                        className="p-2 rounded-lg hover:bg-muted/70 transition-colors flex items-center justify-between gap-2"
-                      >
-                        <span className="text-sm font-medium text-foreground truncate">{p.title}</span>
-                        <span className="text-[11px] text-purple-400 shrink-0 font-mono">{p.targetModel}</span>
-                      </Link>
-                    ))}
+                    {results.prompts.map((p) => {
+                      const itemIndex = flatCounter++;
+                      const isSelected = selectedIndex === itemIndex;
+                      return (
+                        <Link
+                          key={p.id}
+                          ref={isSelected ? activeItemRef : undefined}
+                          id={`search-item-${itemIndex}`}
+                          role="option"
+                          aria-selected={isSelected}
+                          to={`/prompt-library/${p.slug}`}
+                          onClick={() => {
+                            setIsOpen(false);
+                            setSelectedIndex(-1);
+                          }}
+                          className={`p-2 rounded-xl transition-all flex items-center justify-between gap-2 ${
+                            isSelected
+                              ? 'bg-primary/20 text-primary border border-primary/40 ring-1 ring-primary/40'
+                              : 'hover:bg-muted/70 text-foreground'
+                          }`}
+                        >
+                          <span className="text-sm font-medium truncate">{p.title}</span>
+                          <span className="text-[11px] text-purple-400 shrink-0 font-mono">{p.targetModel}</span>
+                        </Link>
+                      );
+                    })}
                   </div>
                 </div>
               )}
@@ -254,17 +427,32 @@ export const UniversalSearch: React.FC = () => {
                     <span>Browser Utilities</span>
                   </div>
                   <div className="flex flex-col gap-1.5">
-                    {results.utilities.map((u) => (
-                      <Link
-                        key={u.id}
-                        to={`/free-tools/${u.slug}`}
-                        onClick={() => setIsOpen(false)}
-                        className="p-2 rounded-lg hover:bg-muted/70 transition-colors flex items-center justify-between gap-2"
-                      >
-                        <span className="text-sm font-medium text-foreground truncate">{u.name}</span>
-                        <span className="text-[11px] text-muted-foreground shrink-0">Client-side 100%</span>
-                      </Link>
-                    ))}
+                    {results.utilities.map((u) => {
+                      const itemIndex = flatCounter++;
+                      const isSelected = selectedIndex === itemIndex;
+                      return (
+                        <Link
+                          key={u.id}
+                          ref={isSelected ? activeItemRef : undefined}
+                          id={`search-item-${itemIndex}`}
+                          role="option"
+                          aria-selected={isSelected}
+                          to={`/free-tools/${u.slug}`}
+                          onClick={() => {
+                            setIsOpen(false);
+                            setSelectedIndex(-1);
+                          }}
+                          className={`p-2 rounded-xl transition-all flex items-center justify-between gap-2 ${
+                            isSelected
+                              ? 'bg-primary/20 text-primary border border-primary/40 ring-1 ring-primary/40'
+                              : 'hover:bg-muted/70 text-foreground'
+                          }`}
+                        >
+                          <span className="text-sm font-medium truncate">{u.name}</span>
+                          <span className="text-[11px] text-muted-foreground shrink-0">Client-side 100%</span>
+                        </Link>
+                      );
+                    })}
                   </div>
                 </div>
               )}
@@ -273,13 +461,13 @@ export const UniversalSearch: React.FC = () => {
         </div>
       )}
 
-      {/* Quick Intent Chips */}
+      {/* Quick Intent Chips with Apple Glass UI */}
       <div className="mt-4 flex flex-wrap items-center justify-center gap-2">
         {intentChips.map((chip) => (
           <Link
             key={chip.label}
             to={chip.to}
-            className="px-3 py-1 rounded-full text-xs font-medium bg-card/80 border border-border/70 hover:border-primary/40 hover:bg-primary/5 hover:text-primary transition-all duration-150 shadow-sm"
+            className="px-3.5 py-1.5 rounded-full text-xs font-medium bg-card/80 backdrop-blur-md border border-border/80 dark:border-white/10 hover:border-primary/40 hover:bg-primary/10 hover:text-primary transition-all duration-150 shadow-sm"
           >
             {chip.label}
           </Link>

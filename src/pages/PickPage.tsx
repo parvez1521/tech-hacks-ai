@@ -14,14 +14,14 @@ export const PickPage: React.FC = () => {
   const [watermarkPreference, setWatermarkPreference] = useState<'no-watermark' | 'any'>('any');
 
   const goals = [
-    { id: 'coding-dev', label: '💻 Build a Web App or Backend', desc: 'Databases, auth, APIs, code generation, and AI IDE editors' },
-    { id: 'video-generation', label: '🎬 Generate Video or Images', desc: 'AI video, text-to-video, realistic motion, and talking avatars' },
-    { id: 'image-generation', label: '🎨 AI Image Creation & Art', desc: 'Photorealism, design assets, typography, FLUX, Midjourney' },
-    { id: 'chat-research', label: '🧠 AI Assistants, Reasoning & Research', desc: 'Frontier LLMs, deep reasoning, live web citations' },
-    { id: 'voice-music', label: '🎙️ Voice, Speech & Music Generation', desc: 'Hyper-realistic voices, sound effects, full song composition' },
-    { id: 'workflow-automation', label: '⚡ Workflow Automation', desc: 'Visual integrations, webhooks, multi-step triggers' },
-    { id: 'open-source-software', label: '🔓 Open-Source Replacements', desc: 'Self-hostable alternatives to Notion, Firebase, Figma, Airtable' },
-    { id: 'browser-utilities', label: '🛠️ Fast Browser Utilities', desc: 'Client-side JSON formatters, hashers, diff checkers' },
+    { id: 'coding-dev', label: '💻 Code or Build a Web App or Backend', desc: 'AI code editors, full-stack builders, databases, and APIs' },
+    { id: 'video-generation', label: '🎬 Create Videos — Generate Video or Images', desc: 'Text-to-video, realistic animation, motion, and talking avatars' },
+    { id: 'image-generation', label: '🎨 Create Images & AI Art', desc: 'Photorealism, design assets, typography, FLUX, and Midjourney' },
+    { id: 'chat-research', label: '✍️ Write or Research with AI', desc: 'AI assistants, deep research, summarization, and writing' },
+    { id: 'workflow-automation', label: '⚡ Work Faster & Automate', desc: 'Visual integrations, webhooks, multi-step triggers, and workflow automation' },
+    { id: 'open-source-software', label: '🔓 Explore Open Source', desc: 'Self-hostable, privacy-first replacements for Notion, Firebase, Figma, Airtable' },
+    { id: 'voice-music', label: '🎙️ Voice, Speech & Music', desc: 'Realistic voice generation and music creators' },
+    { id: 'browser-utilities', label: '🛠️ Fast Browser Utilities', desc: 'Client-side JSON formatters, hashers, diff checkers, and generators' },
   ];
 
   // Dynamic task details based on chosen goal
@@ -80,17 +80,23 @@ export const PickPage: React.FC = () => {
   };
 
   const budgets = [
-    { id: 'free-credits', label: '🎁 Free Credits / Daily Check-in Allowance', desc: 'Generous daily or monthly free generations (Kling, Vidu, PixVerse, Suno, etc.)' },
-    { id: 'completely-free', label: '✨ 100% Free / Free Forever', desc: 'Zero cost, no credit card required, or permanently free plan' },
-    { id: 'self-hosted', label: '🖥️ Self-Hosted / Local GPU Open-Weights', desc: 'Run locally on your GPU (Wan 2.1, LTX Video, CogVideoX, FLUX.1)' },
-    { id: 'free-trial', label: '⏱️ Free Trial / Starter Credits', desc: 'One-time initial starter credits (Runway, Kaiber, KIE AI)' },
-    { id: 'any', label: '🌐 Any Budget / Commercial Tools Okay', desc: 'Evaluate top tools regardless of payment requirements' },
+    { id: 'completely-free', label: '✨ Free only', desc: 'Zero cost, 100% free forever, no credit card required' },
+    { id: 'free-credits', label: '🎁 Free plan is okay', desc: 'Generous daily or monthly free generations (Kling, Vidu, PixVerse, etc.)' },
+    { id: 'any', label: '🌐 Paid tools are fine', desc: 'Evaluate top tools regardless of payment requirements' },
+    { id: 'free-trial', label: '⏱️ Free trial credits', desc: 'One-time initial starter credits (Runway, Kaiber, KIE AI)' },
+    { id: 'self-hosted', label: '🖥️ Run on my computer', desc: 'Run locally on your GPU (Wan 2.1, LTX Video, CogVideoX, FLUX.1)' },
   ];
+
+  const showWatermark = goal === 'video-generation' || goal === 'image-generation';
 
   const handleGoalSelect = (newGoal: string) => {
     setGoal(newGoal);
     const options = getTaskOptions(newGoal);
     setTaskDetail(options[0].id);
+    // Reset watermark preference when switching to non-media goals
+    if (newGoal !== 'video-generation' && newGoal !== 'image-generation') {
+      setWatermarkPreference('any');
+    }
   };
 
   // Run recommendation engine with current criteria
@@ -283,18 +289,22 @@ export const PickPage: React.FC = () => {
               onClick={() => setStep(4)}
               className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-primary text-primary-foreground text-sm font-semibold hover:bg-primary/90 shadow-sm"
             >
-              <span>Next: Hosting & Watermark</span>
+              <span>{showWatermark ? 'Next: Setup & Watermarks' : 'Next: Setup & Preferences'}</span>
               <ArrowRight className="w-4 h-4" />
             </button>
           </div>
         </div>
       )}
 
-      {/* Step 4: Hosting & Watermark Preferences */}
+      {/* Step 4: Hosting & Conditional Watermark Preferences */}
       {step === 4 && (
         <div className="p-6 rounded-xl border border-border bg-card/80 space-y-6 shadow-md">
           <div className="flex items-center justify-between">
-            <h2 className="text-lg font-bold text-foreground">Step 4 of 4: Hosting and watermark preferences</h2>
+            <h2 className="text-lg font-bold text-foreground">
+              {showWatermark
+                ? 'Step 4 of 4: Setup and watermark preferences'
+                : 'Step 4 of 4: Setup and preferences'}
+            </h2>
             <span className="text-xs text-muted-foreground font-mono">4/4</span>
           </div>
 
@@ -305,9 +315,9 @@ export const PickPage: React.FC = () => {
             </span>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
               {[
-                { id: 'any', label: 'No Preference', desc: 'Show both web and local' },
-                { id: 'browser', label: '🌐 In Browser / Cloud', desc: 'No GPU or installation required' },
-                { id: 'local', label: '🖥️ Local GPU / Self-Hosted', desc: 'Maximum data privacy & Docker' },
+                { id: 'any', label: 'No preference', desc: 'Show both website and desktop options' },
+                { id: 'browser', label: '🌐 Website', desc: 'Run directly in your browser without installing' },
+                { id: 'local', label: '🖥️ Desktop app / local', desc: 'Install on your computer or self-host' },
               ].map((h) => (
                 <button
                   key={h.id}
@@ -326,32 +336,34 @@ export const PickPage: React.FC = () => {
             </div>
           </div>
 
-          {/* Watermark Preference */}
-          <div className="space-y-3 pt-2 border-t border-border/50">
-            <span className="text-xs font-semibold text-foreground uppercase tracking-wider block">
-              Watermark Tolerance on Free Output:
-            </span>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-              {[
-                { id: 'any', label: 'Watermark is Fine', desc: 'Prioritize free generations even if watermarked' },
-                { id: 'no-watermark', label: 'No Watermark Required', desc: 'Prioritize open-source or watermark-free plans' },
-              ].map((w) => (
-                <button
-                  key={w.id}
-                  type="button"
-                  onClick={() => setWatermarkPreference(w.id as any)}
-                  className={`p-3 rounded-lg border text-left transition-all ${
-                    watermarkPreference === w.id
-                      ? 'border-primary bg-primary/10 ring-1 ring-primary'
-                      : 'border-border bg-card/50 hover:bg-muted'
-                  }`}
-                >
-                  <span className="text-xs font-semibold text-foreground block">{w.label}</span>
-                  <span className="text-[11px] text-muted-foreground">{w.desc}</span>
-                </button>
-              ))}
+          {/* Watermark Preference — Strictly conditional for video & image workflows only */}
+          {showWatermark && (
+            <div className="space-y-3 pt-2 border-t border-border/50">
+              <span className="text-xs font-semibold text-foreground uppercase tracking-wider block">
+                Watermark Tolerance on Free Output:
+              </span>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                {[
+                  { id: 'any', label: 'Watermark is fine', desc: 'Prioritize free generations even if watermarked' },
+                  { id: 'no-watermark', label: 'No watermark', desc: 'Prioritize clean output or watermark-free plans' },
+                ].map((w) => (
+                  <button
+                    key={w.id}
+                    type="button"
+                    onClick={() => setWatermarkPreference(w.id as any)}
+                    className={`p-3 rounded-lg border text-left transition-all ${
+                      watermarkPreference === w.id
+                        ? 'border-primary bg-primary/10 ring-1 ring-primary'
+                        : 'border-border bg-card/50 hover:bg-muted'
+                    }`}
+                  >
+                    <span className="text-xs font-semibold text-foreground block">{w.label}</span>
+                    <span className="text-[11px] text-muted-foreground">{w.desc}</span>
+                  </button>
+                ))}
+              </div>
             </div>
-          </div>
+          )}
 
           <div className="pt-4 flex items-center justify-between">
             <button

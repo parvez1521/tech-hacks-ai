@@ -43,6 +43,10 @@ export interface ProprietaryTool {
   category: string;
   iconLetter: string;
   iconBgColor: string;
+  migrationDrivers?: string[];
+  selectionCriteria?: string[];
+  hostedCostNote?: string;
+  replacementsOverview?: string;
 }
 
 export interface Category {
@@ -52,6 +56,10 @@ export interface Category {
   description: string;
   iconName: string;
   subcategories: { name: string; slug: string }[];
+  editorialOverview?: string;
+  targetAudience?: string;
+  selectionCriteria?: string[];
+  keyDifferences?: { title: string; explanation: string }[];
 }
 
 export interface Collection {
@@ -161,6 +169,8 @@ export interface AiTool {
   inputModalities?: InputModality[];
   outputModalities?: OutputModality[];
   useCases?: string[];
+  bestFor?: string;
+  executionEnvironment?: string;
   hardwareRequirements?: string;
   requiresInstallation?: boolean;
   alternativesTo?: string[];
@@ -195,13 +205,20 @@ export interface PromptItem {
   title: string;
   slug: string;
   description: string;
-  category: string; // e.g. 'image-generation', 'video-scripts', 'coding', 'writing', 'marketing'
-  targetModel: string; // e.g. 'Midjourney v6', 'ChatGPT / Claude', 'Flux.1', 'Kling / Runway'
+  category: string;
+  targetModel: string; // e.g. 'FLUX.1', 'Claude 3.5 Sonnet', 'Gemini Nano Banana', 'Higgsfield AI'
+  provider?: string; // e.g. 'Google', 'Anthropic', 'Higgsfield', 'Black Forest Labs', 'Runway', 'Cursor'
   promptText: string;
   copyCount?: number;
   tags: string[];
   tips?: string;
   authorOrSource?: string;
+  placeholders?: string[]; // e.g. ['[PRODUCT]', '[BRAND COLORS]', '[ASPECT RATIO]', '[VISUAL STYLE]']
+  customizationInstructions?: string;
+  expectedOutputType?: string; // e.g. '16:9 4K Photorealistic Render', 'Interactive React Component (.tsx)', '9:16 Vertical Video'
+  exampleUseCase?: string;
+  relatedPromptSlugs?: string[];
+  officialToolUrl?: string; // e.g. 'https://ai.google.dev/gemini-api/docs/image-generation', 'https://higgsfield.ai/'
 }
 
 export interface FreeToolUtility {
@@ -274,7 +291,7 @@ export interface AiOffer {
   validFrom?: string;
   validUntil?: string;
   lastVerifiedAt: string;
-  verificationStatus: 'verified-active' | 'limited-time' | 'archived-expired';
+  verificationStatus: 'verified-active' | 'limited-time' | 'archived-expired' | 'expired' | 'pending-verification';
   region: 'India' | 'Global' | 'US' | 'EU';
   requiresStudentVerification: boolean;
   renewalTerms: string;
