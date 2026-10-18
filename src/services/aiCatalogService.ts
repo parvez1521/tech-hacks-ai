@@ -237,13 +237,37 @@ export function getPickRecommendations(criteria: PickCriteria): MatchedPickResul
           Boolean(tool.outputModalities?.includes('video'))
         );
       case 'image-generation':
+        // Must produce images, never video, never coding tools, never general assistants
+        if (
+          tool.category === 'video' ||
+          tool.category === 'coding' ||
+          tool.category === 'assistants' ||
+          (tool.outputModalities?.includes('video') && !tool.outputModalities?.includes('image'))
+        ) {
+          return false;
+        }
+        if (taskDetail === 'image-editing') {
+          return (
+            tool.category === 'image' &&
+            (Boolean(tool.generationTasks?.includes('image-editing')) ||
+              tool.features.some((f) => f.toLowerCase().includes('canvas') || f.toLowerCase().includes('inpainting') || f.toLowerCase().includes('editing')) ||
+              tool.tags.some((t) => t.includes('editing')))
+          );
+        }
         return (
           tool.category === 'image' ||
-          Boolean(tool.generationTasks?.some((t) => t.includes('image'))) ||
+          Boolean(tool.generationTasks?.some((t) => t === 'text-to-image' || t === 'image-editing')) ||
           Boolean(tool.outputModalities?.includes('image'))
         );
       case 'chat-research':
       case 'write-copy':
+        // Exclude dedicated code editors and serving engines from general conversational chat
+        if (tool.category === 'coding' && (taskDetail === 'all-chat' || taskDetail === 'reasoning' || taskDetail === 'research')) {
+          return false;
+        }
+        if (taskDetail === 'all-chat' && tool.category === 'productivity' && !tool.tags.includes('chat')) {
+          return false;
+        }
         return (
           tool.category === 'assistants' ||
           tool.category === 'productivity' ||
@@ -252,6 +276,12 @@ export function getPickRecommendations(criteria: PickCriteria): MatchedPickResul
         );
       case 'coding-dev':
       case 'build-app':
+        if (taskDetail === 'ide-editor') {
+          return (
+            tool.category === 'coding' &&
+            (tool.tags.includes('ide') || tool.tags.includes('editor'))
+          );
+        }
         return (
           tool.category === 'coding' ||
           Boolean(tool.generationTasks?.includes('coding-assistant'))
@@ -305,6 +335,14 @@ export function getPickRecommendations(criteria: PickCriteria): MatchedPickResul
   const matchesBudgetAi = (tool: AiTool): boolean => {
     if (budget === 'any') return true;
     if (budget === 'completely-free') {
+      // Must have recurring free allowance or be 100% free / open-source; exclude one-time trial credits
+      if (
+        tool.freeAccessType === 'limited-free' ||
+        tool.pricingType === 'free-trial' ||
+        (tool.pricingType === 'free-credits' && !tool.freeTierSummary.toLowerCase().includes('daily') && !tool.freeTierSummary.toLowerCase().includes('monthly'))
+      ) {
+        return false;
+      }
       return (
         tool.pricingType === 'free' ||
         tool.freeAccessType === 'recurring-free' ||
@@ -376,15 +414,43 @@ export function getPickRecommendations(criteria: PickCriteria): MatchedPickResul
       const reasons: string[] = [];
 
       // Task detail bonus
-      if (taskDetail && taskDetail !== 'all-video' && taskDetail !== 'all-image' && taskDetail !== 'all-chat') {
-        const matchesTask =
-          tool.generationTasks?.some((t) => t.toLowerCase() === taskDetail.toLowerCase()) ||
-          tool.tags.some((tag) => tag.toLowerCase().includes(taskDetail.toLowerCase())) ||
-          tool.features.some((f) => f.toLowerCase().includes(taskDetail.toLowerCase()));
+      if (taskDetail === 'all-chat' && tool.category === 'assistants') {
+        score += 35;
+        reasons.push('Conversational assistant with multi-turn dialog and general reasoning');
+      } else if (taskDetail && taskDetail !== 'all-video' && taskDetail !== 'all-image' && taskDetail !== 'all-chat') {
+        const detailNormalized = taskDetail.toLowerCase();
 
-        if (matchesTask) {
-          score += 35;
-          reasons.push(`Tailored specifically for ${taskDetail.replace(/-/g, ' ')}`);
+        // Check specific task matches
+        if (detailNormalized === 'ide-editor') {
+          if (tool.category === 'coding' && (tool.tags.includes('ide') || tool.tags.includes('editor'))) {
+            score += 45;
+            reasons.push('AI-first code editor with deep repository indexing');
+          }
+        } else if (detailNormalized === 'reasoning') {
+          if (tool.tags.includes('reasoning') || tool.features.some((f) => f.toLowerCase().includes('reasoning'))) {
+            score += 40;
+            reasons.push('Features chain-of-thought mathematical and logical reasoning');
+          }
+        } else if (detailNormalized === 'research') {
+          if (tool.category === 'productivity' || tool.tags.includes('research') || tool.tags.includes('citations')) {
+            score += 40;
+            reasons.push('Directly provides live web search and bibliographic citations');
+          }
+        } else if (detailNormalized === 'image-editing') {
+          if (tool.generationTasks?.includes('image-editing') || tool.tags.includes('editing')) {
+            score += 40;
+            reasons.push('Specialized image inpainting, canvas expansion, and editing');
+          }
+        } else {
+          const matchesTask =
+            tool.generationTasks?.some((t) => t.toLowerCase() === detailNormalized) ||
+            tool.tags.some((tag) => tag.toLowerCase().includes(detailNormalized)) ||
+            tool.features.some((f) => f.toLowerCase().includes(detailNormalized));
+
+          if (matchesTask) {
+            score += 35;
+            reasons.push(`Tailored specifically for ${taskDetail.replace(/-/g, ' ')}`);
+          }
         }
       }
 
@@ -401,12 +467,20 @@ export function getPickRecommendations(criteria: PickCriteria): MatchedPickResul
         if (tool.freeTierSummary.toLowerCase().includes('daily') || tool.freeTierLimits.toLowerCase().includes('daily')) {
           score += 30;
           reasons.push('Generous daily check-in credits to generate without upfront payment');
+        } else if (tool.freeTierSummary.toLowerCase().includes('monthly') || tool.freeTierLimits.toLowerCase().includes('monthly')) {
+          score += 20;
+          reasons.push('Recurring monthly free allowance');
         } else {
-          score += 15;
+          score += 10;
           reasons.push('Starter test credits provided');
         }
+      } else if (budget === 'free-trial') {
+        if (tool.pricingType === 'free-trial' || tool.freeAccessType === 'limited-free' || tool.freeAccessType === 'free-credits') {
+          score += 35;
+          reasons.push('Starter trial credits available without recurring commitment');
+        }
       } else if (budget === 'self-hosted') {
-        if (tool.isSelfHostable) {
+        if (tool.isSelfHostable || tool.freeAccessType === 'open-source-local') {
           score += 30;
           reasons.push('Open weights running locally on consumer hardware (zero API fees)');
         }
@@ -428,8 +502,8 @@ export function getPickRecommendations(criteria: PickCriteria): MatchedPickResul
       // Construct detailed explanation
       const explanation =
         reasons.length > 0
-          ? `${tool.name} ${reasons.join('. ')}.`
-          : `${tool.name} delivers verified ${tool.category} capabilities with ${tool.freeTierSummary}`;
+          ? `${tool.name}: ${reasons.join('. ')}.`
+          : `${tool.name}: Verified ${tool.category} tool with ${tool.freeTierSummary}`;
 
       const tasks = tool.generationTasks ? tool.generationTasks.map((t) => t.replace(/-/g, ' ')) : [tool.category];
 
