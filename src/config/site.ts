@@ -78,6 +78,7 @@ export const siteConfig: SiteConfig = {
       { title: 'Free Tools', href: '/free-tools' },
     ],
     discovery: [
+      { title: 'Daily Discoveries', href: '/discoveries', badge: 'New' },
       { title: 'AI Tools Directory', href: '/ai-tools' },
       { title: 'Proprietary Alternatives', href: '/alternatives' },
       { title: 'Open Source Catalog', href: '/tools' },

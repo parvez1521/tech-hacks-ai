@@ -11,19 +11,32 @@
 
 import fs from 'fs';
 import path from 'path';
-import { toDbRow } from '../server/storageAdapter.js';
+import { fileURLToPath } from 'url';
+import { toDbRow, toDiscoveryDbRow } from '../server/storageAdapter.js';
 
-const ROOT_DIR = process.cwd();
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const ROOT_DIR = path.resolve(__dirname, '..');
 const SUBMISSIONS_FILE = path.join(ROOT_DIR, 'data', 'submissions.json');
 const PUBLISHED_FILE = path.join(ROOT_DIR, 'data', 'published-additions.json');
+const DISCOVERIES_FILE = path.join(ROOT_DIR, 'data', 'discoveries.json');
 
 function loadJson(file, defaultValue = []) {
-  if (fs.existsSync(file)) {
-    try {
-      return JSON.parse(fs.readFileSync(file, 'utf8'));
-    } catch (err) {
-      console.error(`Error reading ${file}:`, err.message);
+  for (let attempt = 0; attempt < 3; attempt++) {
+    if (fs.existsSync(file)) {
+      try {
+        const raw = fs.readFileSync(file, 'utf8');
+        if (raw.trim()) {
+          return JSON.parse(raw);
+        }
+      } catch (err) {
+        if (attempt === 2) {
+          console.error(`Error reading ${file}:`, err.message);
+        }
+      }
     }
+    const start = Date.now();
+    while (Date.now() - start < 30) {}
   }
   return defaultValue;
 }
@@ -34,12 +47,14 @@ const isDryRun = args.includes('--dry-run');
 
 const submissions = loadJson(SUBMISSIONS_FILE, []);
 const published = loadJson(PUBLISHED_FILE, { tools: [], guides: [], lastUpdated: '' });
+const discoveries = loadJson(DISCOVERIES_FILE, []);
 
 console.log('='.repeat(70));
 console.log('Tech Hacks AI — Database Migration Assistant');
 console.log('='.repeat(70));
 console.log(`Found ${submissions.length} local submissions.`);
 console.log(`Found ${(published.tools || []).length} published tools and ${(published.guides || []).length} published guides.`);
+console.log(`Found ${discoveries.length} daily tool discoveries.`);
 
 if (isSqlMode) {
   console.log('\n-- SQL Migration Script for Supabase SQL Editor:');
@@ -61,6 +76,22 @@ if (isSqlMode) {
     );
   }
 
+  console.log('\n-- Daily Discoveries & Featured Tools:');
+  for (const disc of discoveries) {
+    const row = toDiscoveryDbRow(disc);
+    const escapeSql = (val) => {
+      if (val === null || val === undefined) return 'NULL';
+      if (typeof val === 'boolean') return val ? 'TRUE' : 'FALSE';
+      return `'${String(val).replace(/'/g, "''")}'`;
+    };
+
+    console.log(
+      `INSERT INTO public.techhacks_discoveries (id, name, description, website_url, image_url, category, is_featured, is_new, status, created_at, updated_at)` +
+      ` VALUES (${escapeSql(row.id)}, ${escapeSql(row.name)}, ${escapeSql(row.description)}, ${escapeSql(row.website_url)}, ${escapeSql(row.image_url)}, ${escapeSql(row.category)}, ${escapeSql(row.is_featured)}, ${escapeSql(row.is_new)}, ${escapeSql(row.status)}, ${escapeSql(row.created_at)}, ${escapeSql(row.updated_at)})` +
+      ` ON CONFLICT (id) DO UPDATE SET name = EXCLUDED.name, description = EXCLUDED.description, website_url = EXCLUDED.website_url, image_url = EXCLUDED.image_url, category = EXCLUDED.category, is_featured = EXCLUDED.is_featured, is_new = EXCLUDED.is_new, status = EXCLUDED.status, updated_at = NOW();`
+    );
+  }
+
   const pubJson = JSON.stringify(published).replace(/'/g, "''");
   console.log(
     `\nINSERT INTO public.techhacks_published_additions (key, data, updated_at)` +
@@ -78,6 +109,10 @@ if (isDryRun) {
   submissions.forEach((s, idx) => {
     const title = s.toolData?.name || s.guideData?.title || 'Unknown';
     console.log(`  ${idx + 1}. [${s.type.toUpperCase()}] ${title} (${s.id}) - Status: ${s.status}`);
+  });
+  console.log(`- Daily Discoveries ready for sync: ${discoveries.length}`);
+  discoveries.forEach((d, idx) => {
+    console.log(`  ${idx + 1}. [DISCOVERY] ${d.name} (${d.category || 'General'}) - Status: ${d.status}${d.isFeatured ? ' [FEATURED]' : ''}`);
   });
   console.log(`- Published additions ready for sync: Key 'root' with ${(published.tools || []).length} tools and ${(published.guides || []).length} guides.`);
   console.log('\nTo generate ready-to-run SQL: node scripts/migrate-to-supabase.js --sql');
@@ -123,6 +158,30 @@ async function migrateLive() {
 
   console.log(`Successfully synced ${syncedSubs}/${submissions.length} submissions.`);
 
+  // Sync Discoveries
+  let syncedDisc = 0;
+  for (const disc of discoveries) {
+    const row = toDiscoveryDbRow(disc);
+    const res = await fetch(`${supabaseUrl.replace(/\/+$/, '')}/rest/v1/techhacks_discoveries`, {
+      method: 'POST',
+      headers: {
+        apikey: supabaseKey,
+        Authorization: `Bearer ${supabaseKey}`,
+        'Content-Type': 'application/json',
+        Prefer: 'resolution=merge-duplicates',
+      },
+      body: JSON.stringify(row),
+    });
+
+    if (res.ok) {
+      syncedDisc++;
+    } else {
+      const err = await res.text();
+      console.error(`Failed to sync discovery ${disc.id}:`, err);
+    }
+  }
+  console.log(`Successfully synced ${syncedDisc}/${discoveries.length} daily tool discoveries.`);
+
   // Published additions
   const pubRes = await fetch(`${supabaseUrl.replace(/\/+$/, '')}/rest/v1/techhacks_published_additions`, {
     method: 'POST',
@@ -153,3 +212,4 @@ migrateLive().catch((err) => {
   console.error('Migration error:', err);
   process.exit(1);
 });
+

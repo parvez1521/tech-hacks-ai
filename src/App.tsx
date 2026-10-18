@@ -52,6 +52,7 @@ import { TermsPage } from './pages/TermsPage';
 import { DisclosurePage } from './pages/DisclosurePage';
 import { SubmitToolPage } from './pages/SubmitToolPage';
 import { SubmitGuidePage } from './pages/SubmitGuidePage';
+import { DiscoveriesPage } from './pages/DiscoveriesPage';
 import { ModerationDashboardPage } from './pages/ModerationDashboardPage';
 import { CookieConsentBanner } from './components/CookieConsentBanner';
 import { NotFoundPage } from './pages/NotFoundPage';
@@ -154,6 +155,8 @@ export function getRouteTitle(route: string, params: Record<string, string> = {}
       return formatPageTitle('Submit an AI Tool — Community Directory Submission');
     case 'submit-guide':
       return formatPageTitle('Submit an AI Guide & Tutorial — Community Knowledge');
+    case 'discoveries':
+      return formatPageTitle('Daily Discoveries & Featured AI Tools');
     case 'moderation':
       return formatPageTitle('Editorial Moderation Queue');
     case 'not-found':
@@ -260,6 +263,8 @@ export function getRouteDescription(route: string, params: Record<string, string
       return 'Submit your AI platform, open-source model, developer tool, or creative application for editorial review and directory inclusion.';
     case 'submit-guide':
       return 'Share practical technical guides, prompt recipes, or developer workflows with the Tech Hacks AI community.';
+    case 'discoveries':
+      return 'Explore hand-curated daily discoveries and featured AI platforms reviewed by the Tech Hacks AI editorial team.';
     case 'moderation':
       return 'Editorial moderation queue for reviewing community-submitted AI tools and technical tutorials.';
     case 'not-found':
@@ -357,6 +362,8 @@ const AppRoutes: React.FC = () => {
         return <SubmitToolPage />;
       case 'submit-guide':
         return <SubmitGuidePage />;
+      case 'discoveries':
+        return <DiscoveriesPage />;
       case 'moderation':
         return <ModerationDashboardPage />;
       case 'not-found':

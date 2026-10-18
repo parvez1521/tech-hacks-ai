@@ -11,10 +11,14 @@
 
 import fs from 'fs';
 import path from 'path';
+import { fileURLToPath } from 'url';
 
-const BUNDLED_DATA_DIR = path.resolve(process.cwd(), 'data');
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const BUNDLED_DATA_DIR = path.resolve(__dirname, '..', 'data');
 const LOCAL_SUBMISSIONS_FILE = path.join(BUNDLED_DATA_DIR, 'submissions.json');
 const LOCAL_PUBLISHED_FILE = path.join(BUNDLED_DATA_DIR, 'published-additions.json');
+const LOCAL_DISCOVERIES_FILE = path.join(BUNDLED_DATA_DIR, 'discoveries.json');
 
 // Determine active storage mode
 export function getStorageMode() {
@@ -456,3 +460,302 @@ export async function savePublishedAdditions(data) {
   fs.renameSync(tempFile, LOCAL_PUBLISHED_FILE);
   return { success: true, data };
 }
+
+// ---------------------------------------------------------------------------
+// Discoveries Data Mapping & Database Methods
+// ---------------------------------------------------------------------------
+export function toDiscoveryDbRow(disc = {}) {
+  return {
+    id: disc.id,
+    name: disc.name,
+    description: disc.description,
+    website_url: disc.websiteUrl,
+    image_url: disc.imageUrl || null,
+    category: disc.category || null,
+    is_featured: Boolean(disc.isFeatured),
+    is_new: Boolean(disc.isNew),
+    status: disc.status || 'published',
+    created_at: disc.createdAt || new Date().toISOString(),
+    updated_at: disc.updatedAt || new Date().toISOString(),
+  };
+}
+
+export function fromDiscoveryDbRow(row = {}) {
+  return {
+    id: row.id,
+    name: row.name,
+    description: row.description,
+    websiteUrl: row.website_url,
+    imageUrl: row.image_url || undefined,
+    category: row.category || undefined,
+    isFeatured: Boolean(row.is_featured),
+    isNew: Boolean(row.is_new),
+    status: row.status || 'published',
+    createdAt: row.created_at,
+    updatedAt: row.updated_at,
+  };
+}
+
+async function fetchDiscoveriesSupabase(onlyPublished = false) {
+  let url = `${process.env.SUPABASE_URL.replace(/\/+$/, '')}/rest/v1/techhacks_discoveries?select=*&order=created_at.desc`;
+  if (onlyPublished) {
+    url += '&status=eq.published';
+  }
+  const res = await fetch(url, {
+    method: 'GET',
+    headers: getSupabaseHeaders(),
+  });
+  if (!res.ok) {
+    const errorText = await res.text();
+    throw new Error(`Supabase discoveries query failed (${res.status}): ${errorText}`);
+  }
+  const rows = await res.json();
+  return Array.isArray(rows) ? rows.map(fromDiscoveryDbRow) : [];
+}
+
+async function insertDiscoverySupabase(discovery) {
+  const url = `${process.env.SUPABASE_URL.replace(/\/+$/, '')}/rest/v1/techhacks_discoveries`;
+  const row = toDiscoveryDbRow(discovery);
+  const res = await fetch(url, {
+    method: 'POST',
+    headers: {
+      ...getSupabaseHeaders(),
+      Prefer: 'return=representation',
+    },
+    body: JSON.stringify(row),
+  });
+  if (!res.ok) {
+    const errorText = await res.text();
+    throw new Error(`Supabase insert discovery failed (${res.status}): ${errorText}`);
+  }
+  const inserted = await res.json();
+  return Array.isArray(inserted) && inserted[0] ? fromDiscoveryDbRow(inserted[0]) : discovery;
+}
+
+async function updateDiscoverySupabase(id, patch) {
+  const url = `${process.env.SUPABASE_URL.replace(/\/+$/, '')}/rest/v1/techhacks_discoveries?id=eq.${encodeURIComponent(id)}`;
+  const dbPatch = {};
+  if (patch.name !== undefined) dbPatch.name = patch.name;
+  if (patch.description !== undefined) dbPatch.description = patch.description;
+  if (patch.websiteUrl !== undefined) dbPatch.website_url = patch.websiteUrl;
+  if (patch.imageUrl !== undefined) dbPatch.image_url = patch.imageUrl;
+  if (patch.category !== undefined) dbPatch.category = patch.category;
+  if (patch.isFeatured !== undefined) dbPatch.is_featured = Boolean(patch.isFeatured);
+  if (patch.isNew !== undefined) dbPatch.is_new = Boolean(patch.isNew);
+  if (patch.status !== undefined) dbPatch.status = patch.status;
+  dbPatch.updated_at = new Date().toISOString();
+
+  const res = await fetch(url, {
+    method: 'PATCH',
+    headers: {
+      ...getSupabaseHeaders(),
+      Prefer: 'return=representation',
+    },
+    body: JSON.stringify(dbPatch),
+  });
+  if (!res.ok) {
+    const errorText = await res.text();
+    throw new Error(`Supabase patch discovery failed (${res.status}): ${errorText}`);
+  }
+  const updated = await res.json();
+  return Array.isArray(updated) && updated[0] ? fromDiscoveryDbRow(updated[0]) : null;
+}
+
+async function deleteDiscoverySupabase(id) {
+  const url = `${process.env.SUPABASE_URL.replace(/\/+$/, '')}/rest/v1/techhacks_discoveries?id=eq.${encodeURIComponent(id)}`;
+  const res = await fetch(url, {
+    method: 'DELETE',
+    headers: getSupabaseHeaders(),
+  });
+  if (!res.ok) {
+    const errorText = await res.text();
+    throw new Error(`Supabase delete discovery failed (${res.status}): ${errorText}`);
+  }
+  return true;
+}
+
+async function fetchDiscoveriesUpstash() {
+  const url = `${process.env.UPSTASH_REDIS_REST_URL.replace(/\/+$/, '')}/get/techhacks:discoveries`;
+  const res = await fetch(url, {
+    headers: { Authorization: `Bearer ${process.env.UPSTASH_REDIS_REST_TOKEN}` },
+  });
+  if (!res.ok) return [];
+  const data = await res.json();
+  if (data?.result) {
+    try {
+      return JSON.parse(data.result);
+    } catch {}
+  }
+  return [];
+}
+
+async function saveDiscoveriesUpstash(discoveries) {
+  const url = `${process.env.UPSTASH_REDIS_REST_URL.replace(/\/+$/, '')}/set/techhacks:discoveries`;
+  await fetch(url, {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${process.env.UPSTASH_REDIS_REST_TOKEN}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(discoveries),
+  });
+  return discoveries;
+}
+
+export async function getDiscoveries(onlyPublished = false) {
+  const mode = getStorageMode();
+  let list = [];
+  if (mode === 'supabase') {
+    try {
+      return await fetchDiscoveriesSupabase(onlyPublished);
+    } catch (err) {
+      console.error('[Storage Error] Failed to fetch discoveries from Supabase, falling back to local file:', err.message);
+      list = readBundledJson(LOCAL_DISCOVERIES_FILE, []);
+    }
+  } else if (mode === 'upstash') {
+    try {
+      list = await fetchDiscoveriesUpstash();
+      if (!list || list.length === 0) {
+        list = readBundledJson(LOCAL_DISCOVERIES_FILE, []);
+      }
+    } catch (err) {
+      list = readBundledJson(LOCAL_DISCOVERIES_FILE, []);
+    }
+  } else {
+    list = readBundledJson(LOCAL_DISCOVERIES_FILE, []);
+  }
+
+  if (onlyPublished) {
+    return list.filter((d) => d.status === 'published');
+  }
+  return list;
+}
+
+export async function saveNewDiscovery(discovery) {
+  const mode = getStorageMode();
+
+  if (mode === 'unconfigured_production') {
+    return {
+      success: false,
+      status: 503,
+      error: 'StorageUnavailable',
+      message: 'Durable database storage is not configured for production discoveries. Please configure SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY.',
+    };
+  }
+
+  if (mode === 'supabase') {
+    try {
+      const inserted = await insertDiscoverySupabase(discovery);
+      return { success: true, discovery: inserted };
+    } catch (err) {
+      return { success: false, status: 500, message: err.message };
+    }
+  }
+
+  if (mode === 'upstash') {
+    try {
+      const list = await fetchDiscoveriesUpstash();
+      list.unshift(discovery);
+      await saveDiscoveriesUpstash(list);
+      return { success: true, discovery };
+    } catch (err) {
+      return { success: false, status: 500, message: err.message };
+    }
+  }
+
+  // Local
+  const list = readBundledJson(LOCAL_DISCOVERIES_FILE, []);
+  list.unshift(discovery);
+  const tempFile = `${LOCAL_DISCOVERIES_FILE}.tmp.${Date.now()}`;
+  fs.writeFileSync(tempFile, JSON.stringify(list, null, 2), 'utf8');
+  fs.renameSync(tempFile, LOCAL_DISCOVERIES_FILE);
+  return { success: true, discovery };
+}
+
+export async function updateExistingDiscovery(id, patch) {
+  const mode = getStorageMode();
+
+  if (mode === 'unconfigured_production') {
+    return {
+      success: false,
+      status: 503,
+      error: 'StorageUnavailable',
+      message: 'Durable database storage is not configured for production discovery updates.',
+    };
+  }
+
+  if (mode === 'supabase') {
+    try {
+      const updated = await updateDiscoverySupabase(id, patch);
+      if (!updated) {
+        return { success: false, status: 404, message: 'Discovery not found in database.' };
+      }
+      return { success: true, discovery: updated };
+    } catch (err) {
+      return { success: false, status: 500, message: err.message };
+    }
+  }
+
+  if (mode === 'upstash') {
+    const list = await fetchDiscoveriesUpstash();
+    const idx = list.findIndex((d) => d.id === id);
+    if (idx === -1) return { success: false, status: 404, message: 'Discovery not found.' };
+    list[idx] = { ...list[idx], ...patch, updatedAt: new Date().toISOString() };
+    await saveDiscoveriesUpstash(list);
+    return { success: true, discovery: list[idx] };
+  }
+
+  // Local
+  const list = readBundledJson(LOCAL_DISCOVERIES_FILE, []);
+  const idx = list.findIndex((d) => d.id === id);
+  if (idx === -1) return { success: false, status: 404, message: 'Discovery not found.' };
+  list[idx] = { ...list[idx], ...patch, updatedAt: new Date().toISOString() };
+  const tempFile = `${LOCAL_DISCOVERIES_FILE}.tmp.${Date.now()}`;
+  fs.writeFileSync(tempFile, JSON.stringify(list, null, 2), 'utf8');
+  fs.renameSync(tempFile, LOCAL_DISCOVERIES_FILE);
+  return { success: true, discovery: list[idx] };
+}
+
+export async function deleteExistingDiscovery(id) {
+  const mode = getStorageMode();
+
+  if (mode === 'unconfigured_production') {
+    return {
+      success: false,
+      status: 503,
+      error: 'StorageUnavailable',
+      message: 'Durable database storage is not configured for production discovery deletions.',
+    };
+  }
+
+  if (mode === 'supabase') {
+    try {
+      await deleteDiscoverySupabase(id);
+      return { success: true };
+    } catch (err) {
+      return { success: false, status: 500, message: err.message };
+    }
+  }
+
+  if (mode === 'upstash') {
+    const list = await fetchDiscoveriesUpstash();
+    const filtered = list.filter((d) => d.id !== id);
+    if (filtered.length === list.length) {
+      return { success: false, status: 404, message: 'Discovery not found.' };
+    }
+    await saveDiscoveriesUpstash(filtered);
+    return { success: true };
+  }
+
+  // Local
+  const list = readBundledJson(LOCAL_DISCOVERIES_FILE, []);
+  const filtered = list.filter((d) => d.id !== id);
+  if (filtered.length === list.length) {
+    return { success: false, status: 404, message: 'Discovery not found.' };
+  }
+  const tempFile = `${LOCAL_DISCOVERIES_FILE}.tmp.${Date.now()}`;
+  fs.writeFileSync(tempFile, JSON.stringify(filtered, null, 2), 'utf8');
+  fs.renameSync(tempFile, LOCAL_DISCOVERIES_FILE);
+  return { success: true };
+}
+

@@ -93,6 +93,9 @@ export function matchRoute(pathname: string): { route: string; params: Record<st
   if (cleanPath === '/submit-guide') {
     return { route: 'submit-guide', params: {} };
   }
+  if (cleanPath === '/discoveries' || cleanPath === '/daily-discoveries' || cleanPath === '/featured') {
+    return { route: 'discoveries', params: {} };
+  }
   if (cleanPath === '/admin/moderation' || cleanPath === '/moderation' || cleanPath === '/admin') {
     return { route: 'moderation', params: {} };
   }

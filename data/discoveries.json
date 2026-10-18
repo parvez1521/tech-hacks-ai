@@ -1,0 +1,80 @@
+[
+  {
+    "id": "disc_cursor",
+    "name": "Cursor",
+    "description": "An AI-first code editor built on VS Code with intelligent multi-file editing, codebase context indexing, and proactive bug fixing.",
+    "websiteUrl": "https://cursor.com",
+    "imageUrl": "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=400&q=80",
+    "category": "Developer Tools",
+    "isFeatured": true,
+    "isNew": false,
+    "status": "published",
+    "createdAt": "2026-10-18T08:00:00.000Z",
+    "updatedAt": "2026-10-18T08:00:00.000Z"
+  },
+  {
+    "id": "disc_v0",
+    "name": "v0 by Vercel",
+    "description": "Generative user interface platform that turns natural language descriptions into clean, production-ready React and Tailwind CSS components.",
+    "websiteUrl": "https://v0.dev",
+    "imageUrl": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=400&q=80",
+    "category": "Developer Tools",
+    "isFeatured": true,
+    "isNew": false,
+    "status": "published",
+    "createdAt": "2026-10-18T08:30:00.000Z",
+    "updatedAt": "2026-10-18T08:30:00.000Z"
+  },
+  {
+    "id": "disc_perplexity",
+    "name": "Perplexity AI",
+    "description": "Conversational answer engine combining generative language models with live web search to deliver verified, citation-backed answers in real time.",
+    "websiteUrl": "https://perplexity.ai",
+    "imageUrl": "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=400&q=80",
+    "category": "Search & Research",
+    "isFeatured": true,
+    "isNew": false,
+    "status": "published",
+    "createdAt": "2026-10-18T09:00:00.000Z",
+    "updatedAt": "2026-10-18T09:00:00.000Z"
+  },
+  {
+    "id": "disc_elevenlabs",
+    "name": "ElevenLabs",
+    "description": "Frontier voice synthesis and speech platform providing ultra-realistic text-to-speech, voice cloning, and emotional speech inflection across 30+ languages.",
+    "websiteUrl": "https://elevenlabs.io",
+    "imageUrl": "https://images.unsplash.com/photo-1590602847861-f357a9332bbc?auto=format&fit=crop&w=400&q=80",
+    "category": "Audio & Speech",
+    "isFeatured": false,
+    "isNew": true,
+    "status": "published",
+    "createdAt": "2026-10-18T09:30:00.000Z",
+    "updatedAt": "2026-10-18T09:30:00.000Z"
+  },
+  {
+    "id": "disc_recraft",
+    "name": "Recraft",
+    "description": "Infinite canvas vector design generator that creates consistent iconography, 3D assets, and vector illustrations with fine-tuned palette controls.",
+    "websiteUrl": "https://recraft.ai",
+    "imageUrl": "https://images.unsplash.com/photo-1600132806370-bf17e65e942f?auto=format&fit=crop&w=400&q=80",
+    "category": "Design & Image",
+    "isFeatured": false,
+    "isNew": true,
+    "status": "published",
+    "createdAt": "2026-10-18T10:00:00.000Z",
+    "updatedAt": "2026-10-18T10:00:00.000Z"
+  },
+  {
+    "id": "disc_bolt_new",
+    "name": "Bolt.new",
+    "description": "In-browser full-stack AI development sandbox running Node.js and modern frameworks directly inside WebContainers for prompt-to-app deployment.",
+    "websiteUrl": "https://bolt.new",
+    "imageUrl": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=400&q=80",
+    "category": "Developer Tools",
+    "isFeatured": true,
+    "isNew": true,
+    "status": "published",
+    "createdAt": "2026-10-18T10:30:00.000Z",
+    "updatedAt": "2026-10-18T10:30:00.000Z"
+  }
+]

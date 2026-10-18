@@ -79,6 +79,7 @@ function chatApiPlugin() {
 }
 
 import submissionsHandler from './api/submissions.js';
+import discoveriesHandler from './api/discoveries.js';
 
 function submissionsApiPlugin() {
   return {
@@ -120,8 +121,48 @@ function submissionsApiPlugin() {
   };
 }
 
+function discoveriesApiPlugin() {
+  return {
+    name: 'discoveries-api-plugin',
+    configureServer(server) {
+      server.middlewares.use(async (req, res, next) => {
+        if (req.url && req.url.startsWith('/api/discoveries')) {
+          let body = '';
+          req.on('data', (chunk) => {
+            body += chunk;
+          });
+          req.on('end', async () => {
+            try {
+              req.body = body ? JSON.parse(body) : {};
+            } catch {
+              req.body = {};
+            }
+            res.status = (code) => {
+              res.statusCode = code;
+              return {
+                json: (payload) => {
+                  res.setHeader('Content-Type', 'application/json');
+                  res.end(JSON.stringify(payload));
+                },
+              };
+            };
+            res.json = (payload) => {
+              res.setHeader('Content-Type', 'application/json');
+              res.end(JSON.stringify(payload));
+            };
+
+            await discoveriesHandler(req, res);
+          });
+          return;
+        }
+        next();
+      });
+    },
+  };
+}
+
 export default defineConfig({
-  plugins: [react(), chatApiPlugin(), submissionsApiPlugin()],
+  plugins: [react(), chatApiPlugin(), submissionsApiPlugin(), discoveriesApiPlugin()],
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),

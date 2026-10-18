@@ -66,6 +66,11 @@ export const Footer: React.FC = () => {
             </h4>
             <ul className="space-y-2 text-muted-foreground text-xs">
               <li>
+                <Link to="/discoveries" className="hover:text-foreground text-primary font-medium">
+                  Daily Discoveries
+                </Link>
+              </li>
+              <li>
                 <Link to="/tools" className="hover:text-foreground">
                   All Open Source Tools
                 </Link>

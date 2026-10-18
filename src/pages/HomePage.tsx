@@ -10,6 +10,7 @@ import { PromptCard } from '../components/PromptCard';
 import { Pagination } from '../components/Pagination';
 import { OfferCard } from '../components/OfferCard';
 import { BrandLogo } from '../components/BrandLogo';
+import { DailyDiscoveriesSection } from '../components/DailyDiscoveriesSection';
 import { proprietaryTools } from '../data/alternatives';
 import { aiToolsData, aiCategories } from '../data/aiToolsData';
 import { getFeaturedOffers } from '../data/offersData';
@@ -172,6 +173,7 @@ export const HomePage: React.FC = () => {
   // Scroll-reveal refs for below-fold sections (Section 1 / hero is above the fold)
   const reveal2 = useScrollReveal<HTMLElement>();
   const reveal3 = useScrollReveal<HTMLElement>();
+  const revealDiscoveries = useScrollReveal<HTMLElement>();
   const reveal4 = useScrollReveal<HTMLElement>();
   const reveal5 = useScrollReveal<HTMLElement>();
   const reveal6 = useScrollReveal<HTMLElement>();
@@ -393,6 +395,16 @@ export const HomePage: React.FC = () => {
             </Link>
           ))}
         </div>
+      </section>
+
+      {/* =========================================================================
+          SECTION 3.5: DAILY DISCOVERIES (ADMIN-CURATED FEATURED BREAKTHROUGHS)
+      ========================================================================= */}
+      <section
+        ref={revealDiscoveries.ref}
+        className={`max-w-6xl mx-auto px-4 sm:px-6 w-full reveal-section${revealDiscoveries.isVisible ? ' in-view' : ''}`}
+      >
+        <DailyDiscoveriesSection maxItems={6} />
       </section>
 
       {/* =========================================================================

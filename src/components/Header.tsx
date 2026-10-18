@@ -99,6 +99,17 @@ export const Header: React.FC = () => {
               {isDiscoverOpen && (
                 <div className="absolute top-full left-0 mt-1.5 w-60 rounded-xl bg-card/95 backdrop-blur-md border border-border p-1.5 shadow-xl shadow-black/40 z-50 flex flex-col gap-0.5 animate-fade-in">
                   <Link
+                    to="/discoveries"
+                    onClick={() => setIsDiscoverOpen(false)}
+                    className="flex items-center gap-2.5 px-3 py-2 rounded-lg text-xs font-medium text-foreground hover:bg-primary/10 hover:text-primary transition-all duration-150"
+                  >
+                    <Sparkles className="w-4 h-4 text-primary" />
+                    <div>
+                      <span className="block font-semibold">Daily Discoveries</span>
+                      <span className="text-[11px] text-muted-foreground">Editor-featured AI tools</span>
+                    </div>
+                  </Link>
+                  <Link
                     to="/pick"
                     onClick={() => setIsDiscoverOpen(false)}
                     className="flex items-center gap-2.5 px-3 py-2 rounded-lg text-xs font-medium text-foreground hover:bg-primary/10 hover:text-primary transition-all duration-150"
@@ -331,6 +342,17 @@ export const Header: React.FC = () => {
             <span className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground px-2">
               Discovery Directories
             </span>
+            <Link
+              to="/discoveries"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="flex items-center justify-between px-3 py-2.5 min-h-[44px] rounded-md text-sm text-foreground hover:bg-muted"
+            >
+              <div className="flex items-center gap-2.5">
+                <Sparkles className="w-4 h-4 text-primary" />
+                <span>Daily Discoveries</span>
+              </div>
+              <ArrowRight className="w-3.5 h-3.5 text-muted-foreground" />
+            </Link>
             <Link
               to="/ai-tools"
               onClick={() => setIsMobileMenuOpen(false)}

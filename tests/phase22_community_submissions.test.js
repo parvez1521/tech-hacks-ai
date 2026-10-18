@@ -1,4 +1,4 @@
-import { test, describe, before } from 'node:test';
+import { test, describe, before, after } from 'node:test';
 import assert from 'node:assert';
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
@@ -33,9 +33,21 @@ import {
 
 describe('Phase 22: Community Contributions (Submit a Tool & Submit a Guide)', () => {
   let ssrModule;
+  const ROOT_DIR = process.cwd();
+  const SUBMISSIONS_FILE = path.join(ROOT_DIR, 'data', 'submissions.json');
+  const PUBLISHED_FILE = path.join(ROOT_DIR, 'data', 'published-additions.json');
+  let originalSubmissions = '';
+  let originalPublished = '';
 
   before(async () => {
     ssrModule = await import('../dist/test-ssr.js');
+    if (fs.existsSync(SUBMISSIONS_FILE)) originalSubmissions = fs.readFileSync(SUBMISSIONS_FILE, 'utf8');
+    if (fs.existsSync(PUBLISHED_FILE)) originalPublished = fs.readFileSync(PUBLISHED_FILE, 'utf8');
+  });
+
+  after(() => {
+    if (originalSubmissions) fs.writeFileSync(SUBMISSIONS_FILE, originalSubmissions, 'utf8');
+    if (originalPublished) fs.writeFileSync(PUBLISHED_FILE, originalPublished, 'utf8');
   });
 
   function setupMockBrowser(initialUrl = 'https://techhacksai.com/') {

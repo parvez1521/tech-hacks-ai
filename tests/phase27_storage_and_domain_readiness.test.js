@@ -226,14 +226,22 @@ describe('Phase 27: Durable Data Storage & Production Deployment Readiness', () 
       const scriptPath = path.join(ROOT_DIR, 'scripts', 'migrate-to-supabase.js');
       assert.ok(fs.existsSync(scriptPath), 'scripts/migrate-to-supabase.js must exist');
 
-      const output = execSync('node scripts/migrate-to-supabase.js --dry-run', { encoding: 'utf8' });
+      const output = execSync('node scripts/migrate-to-supabase.js --dry-run', {
+        cwd: ROOT_DIR,
+        encoding: 'utf8',
+        maxBuffer: 10 * 1024 * 1024,
+      });
       assert.ok(output.includes('Tech Hacks AI — Database Migration Assistant'));
       assert.ok(output.includes('[Dry Run] Inspection summary'));
       assert.ok(output.includes('Submissions ready for sync'));
     });
 
     test('scripts/migrate-to-supabase.js --sql outputs valid SQL INSERT statements', () => {
-      const output = execSync('node scripts/migrate-to-supabase.js --sql', { encoding: 'utf8' });
+      const output = execSync('node scripts/migrate-to-supabase.js --sql', {
+        cwd: ROOT_DIR,
+        encoding: 'utf8',
+        maxBuffer: 10 * 1024 * 1024,
+      });
       assert.ok(output.includes('INSERT INTO public.techhacks_submissions'));
       assert.ok(output.includes('INSERT INTO public.techhacks_published_additions'));
       assert.ok(output.includes('ON CONFLICT (id) DO NOTHING'));

@@ -53,9 +53,30 @@ VALUES (
 )
 ON CONFLICT (key) DO NOTHING;
 
+-- 3. Daily Discoveries & Featured Tools Table
+CREATE TABLE IF NOT EXISTS public.techhacks_discoveries (
+    id VARCHAR(120) PRIMARY KEY,
+    name VARCHAR(120) NOT NULL,
+    description TEXT NOT NULL,
+    website_url VARCHAR(500) NOT NULL,
+    image_url VARCHAR(500),
+    category VARCHAR(80),
+    is_featured BOOLEAN DEFAULT FALSE,
+    is_new BOOLEAN DEFAULT TRUE,
+    status VARCHAR(20) NOT NULL DEFAULT 'published' CHECK (status IN ('draft', 'published')),
+    created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+    updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
+-- Performance Indexes for Discoveries
+CREATE INDEX IF NOT EXISTS idx_techhacks_disc_status ON public.techhacks_discoveries(status);
+CREATE INDEX IF NOT EXISTS idx_techhacks_disc_created_at ON public.techhacks_discoveries(created_at DESC);
+CREATE INDEX IF NOT EXISTS idx_techhacks_disc_featured ON public.techhacks_discoveries(is_featured);
+
 -- 4. Enable Row Level Security (RLS)
 ALTER TABLE public.techhacks_submissions ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.techhacks_published_additions ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.techhacks_discoveries ENABLE ROW LEVEL SECURITY;
 
 -- 5. Row Level Security Policies
 
@@ -83,3 +104,20 @@ FOR ALL
 TO service_role
 USING (true)
 WITH CHECK (true);
+
+-- techhacks_discoveries: Public can read published items; service_role has full access
+DROP POLICY IF EXISTS "Public can view published discoveries" ON public.techhacks_discoveries;
+CREATE POLICY "Public can view published discoveries"
+ON public.techhacks_discoveries
+FOR SELECT
+TO public
+USING (status = 'published');
+
+DROP POLICY IF EXISTS "Service role full access on discoveries" ON public.techhacks_discoveries;
+CREATE POLICY "Service role full access on discoveries"
+ON public.techhacks_discoveries
+FOR ALL
+TO service_role
+USING (true)
+WITH CHECK (true);
+

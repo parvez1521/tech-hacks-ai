@@ -16,6 +16,7 @@ import {
 import { SafeMarkdown } from '../components/SafeMarkdown';
 import { registerPublishedTool, registerPublishedGuide } from '../services/aiCatalogService';
 import { useRouter } from '../router/Router';
+import { AdminDiscoveriesManager } from '../components/AdminDiscoveriesManager';
 
 export const ModerationDashboardPage: React.FC = () => {
   const { navigate } = useRouter();
@@ -23,6 +24,7 @@ export const ModerationDashboardPage: React.FC = () => {
   // Authentication State
   const [token, setToken] = useState<string | null>(() => getStoredModeratorToken());
   const [passkeyInput, setPasskeyInput] = useState('');
+  const [activeAdminTab, setActiveAdminTab] = useState<'submissions' | 'discoveries'>('submissions');
   const [authError, setAuthError] = useState<string | null>(null);
   const [isAuthenticating, setIsAuthenticating] = useState(false);
 
@@ -419,8 +421,46 @@ export const ModerationDashboardPage: React.FC = () => {
         </div>
       </div>
 
-      {/* Metrics Counters */}
-      <div className="grid grid-cols-2 sm:grid-cols-5 gap-3 my-6">
+      {/* Admin Section Tabs */}
+      <div className="flex items-center gap-2 mt-6 mb-8 border-b border-border/80 pb-3 overflow-x-auto">
+        <button
+          onClick={() => setActiveAdminTab('submissions')}
+          className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all cursor-pointer whitespace-nowrap ${
+            activeAdminTab === 'submissions'
+              ? 'bg-primary text-primary-foreground shadow-sm shadow-primary/20'
+              : 'text-muted-foreground hover:text-foreground hover:bg-muted/60'
+          }`}
+        >
+          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+          </svg>
+          <span>Community Submissions</span>
+          <span className="px-2 py-0.5 rounded-full text-[11px] bg-background/30">
+            {stats.pending > 0 ? `${stats.pending} pending` : stats.total}
+          </span>
+        </button>
+
+        <button
+          onClick={() => setActiveAdminTab('discoveries')}
+          className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all cursor-pointer whitespace-nowrap ${
+            activeAdminTab === 'discoveries'
+              ? 'bg-primary text-primary-foreground shadow-sm shadow-primary/20'
+              : 'text-muted-foreground hover:text-foreground hover:bg-muted/60'
+          }`}
+        >
+          <svg className="w-4 h-4 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+          </svg>
+          <span>Daily Discoveries &amp; Featured Tools</span>
+        </button>
+      </div>
+
+      {activeAdminTab === 'discoveries' ? (
+        <AdminDiscoveriesManager token={token} />
+      ) : (
+        <>
+          {/* Metrics Counters */}
+          <div className="grid grid-cols-2 sm:grid-cols-5 gap-3 my-6">
         <div
           onClick={() => setFilterStatus('all')}
           className={`cursor-pointer p-4 rounded-xl border bg-card/60 transition-all ${
@@ -987,6 +1027,8 @@ export const ModerationDashboardPage: React.FC = () => {
           </div>
         )}
       </div>
+      </>
+      )}
     </div>
   );
 };
