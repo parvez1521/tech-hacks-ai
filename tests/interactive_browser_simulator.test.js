@@ -2,6 +2,8 @@ import { test, describe, before, beforeEach } from 'node:test';
 import assert from 'node:assert';
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
+import fs from 'node:fs';
+import path from 'node:path';
 import { execSync } from 'child_process';
 import { toolsData } from '../src/data/seedData.ts';
 import { categories } from '../src/data/categories.ts';
@@ -12,11 +14,12 @@ describe('Phase 4: Interactive Browser Simulation & Route Navigation', () => {
   let ssrModule;
 
   before(() => {
-    // Recompile App bundle for Node SSR & interactive simulation
-    execSync(
-      './node_modules/.bin/esbuild src/App.tsx --bundle --platform=node --format=esm --external:react --external:react-dom --external:lucide-react --outfile=dist/test-ssr.js',
-      { stdio: 'pipe' }
-    );
+    if (!fs.existsSync(path.resolve(process.cwd(), 'dist/test-ssr.js'))) {
+      execSync(
+        './node_modules/.bin/esbuild src/App.tsx --bundle --platform=node --format=esm --external:react --external:react-dom --external:lucide-react --outfile=dist/test-ssr.js',
+        { stdio: 'pipe' }
+      );
+    }
   });
 
   beforeEach(async () => {

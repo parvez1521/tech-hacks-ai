@@ -405,6 +405,7 @@ export {
   AdSenseBanner,
   matchRoute,
   RouterProvider,
+  ModerationDashboardPage,
 };
 
 export default App;

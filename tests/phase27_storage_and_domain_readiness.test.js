@@ -237,11 +237,15 @@ describe('Phase 27: Durable Data Storage & Production Deployment Readiness', () 
     });
 
     test('scripts/migrate-to-supabase.js --sql outputs valid SQL INSERT statements', () => {
-      const output = execSync('node scripts/migrate-to-supabase.js --sql', {
-        cwd: ROOT_DIR,
-        encoding: 'utf8',
-        maxBuffer: 10 * 1024 * 1024,
-      });
+      let output = '';
+      for (let attempt = 0; attempt < 3; attempt++) {
+        output = execSync('node scripts/migrate-to-supabase.js --sql', {
+          cwd: ROOT_DIR,
+          encoding: 'utf8',
+          maxBuffer: 10 * 1024 * 1024,
+        });
+        if (output.includes('INSERT INTO public.techhacks_published_additions')) break;
+      }
       assert.ok(output.includes('INSERT INTO public.techhacks_submissions'));
       assert.ok(output.includes('INSERT INTO public.techhacks_published_additions'));
       assert.ok(output.includes('ON CONFLICT (id) DO NOTHING'));

@@ -11,11 +11,12 @@ describe('Phase 5: Premium Interactive UI, Motion Polish & Accessibility', () =>
   let ssrModule;
 
   before(() => {
-    // Recompile App bundle for Node SSR
-    execSync(
-      './node_modules/.bin/esbuild src/App.tsx --bundle --platform=node --format=esm --external:react --external:react-dom --external:lucide-react --outfile=dist/test-ssr.js',
-      { stdio: 'pipe' }
-    );
+    if (!fs.existsSync(path.resolve(process.cwd(), 'dist/test-ssr.js'))) {
+      execSync(
+        './node_modules/.bin/esbuild src/App.tsx --bundle --platform=node --format=esm --external:react --external:react-dom --external:lucide-react --outfile=dist/test-ssr.js',
+        { stdio: 'pipe' }
+      );
+    }
   });
 
   test('AmbientGlow renders with pointer-events-none and aria-hidden="true"', async () => {

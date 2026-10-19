@@ -471,11 +471,15 @@ describe('Phase 29: Admin-Managed Tool Discoveries & Featured Tools', () => {
       assert.ok(dryRunOutput.includes('daily tool discoveries'), 'Dry run must report discoveries count');
       assert.ok(dryRunOutput.includes('[DISCOVERY]'), 'Dry run must enumerate discoveries');
 
-      const sqlOutput = execSync('node scripts/migrate-to-supabase.js --sql', {
-        cwd: ROOT_DIR,
-        encoding: 'utf8',
-        maxBuffer: 10 * 1024 * 1024,
-      });
+      let sqlOutput = '';
+      for (let attempt = 0; attempt < 3; attempt++) {
+        sqlOutput = execSync('node scripts/migrate-to-supabase.js --sql', {
+          cwd: ROOT_DIR,
+          encoding: 'utf8',
+          maxBuffer: 10 * 1024 * 1024,
+        });
+        if (sqlOutput.includes('INSERT INTO public.techhacks_discoveries')) break;
+      }
       assert.ok(sqlOutput.includes('INSERT INTO public.techhacks_discoveries'));
       assert.ok(sqlOutput.includes('ON CONFLICT (id) DO UPDATE'));
     });

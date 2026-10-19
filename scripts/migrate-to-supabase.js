@@ -22,23 +22,26 @@ const PUBLISHED_FILE = path.join(ROOT_DIR, 'data', 'published-additions.json');
 const DISCOVERIES_FILE = path.join(ROOT_DIR, 'data', 'discoveries.json');
 
 function loadJson(file, defaultValue = []) {
-  for (let attempt = 0; attempt < 3; attempt++) {
+  let lastParsed = null;
+  for (let attempt = 0; attempt < 5; attempt++) {
     if (fs.existsSync(file)) {
       try {
         const raw = fs.readFileSync(file, 'utf8');
         if (raw.trim()) {
-          return JSON.parse(raw);
+          const parsed = JSON.parse(raw);
+          if (parsed && (Array.isArray(parsed) ? parsed.length > 0 : Object.keys(parsed).length > 0)) {
+            return parsed;
+          }
+          lastParsed = parsed;
         }
       } catch (err) {
-        if (attempt === 2) {
-          console.error(`Error reading ${file}:`, err.message);
-        }
+        // Atomic file swap in progress, retry
       }
     }
     const start = Date.now();
-    while (Date.now() - start < 30) {}
+    while (Date.now() - start < 40) {}
   }
-  return defaultValue;
+  return lastParsed !== null ? lastParsed : defaultValue;
 }
 
 const args = process.argv.slice(2);

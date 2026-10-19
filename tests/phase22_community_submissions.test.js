@@ -46,8 +46,16 @@ describe('Phase 22: Community Contributions (Submit a Tool & Submit a Guide)', (
   });
 
   after(() => {
-    if (originalSubmissions) fs.writeFileSync(SUBMISSIONS_FILE, originalSubmissions, 'utf8');
-    if (originalPublished) fs.writeFileSync(PUBLISHED_FILE, originalPublished, 'utf8');
+    if (originalSubmissions) {
+      const tmp = `${SUBMISSIONS_FILE}.tmp.${Date.now()}`;
+      fs.writeFileSync(tmp, originalSubmissions, 'utf8');
+      fs.renameSync(tmp, SUBMISSIONS_FILE);
+    }
+    if (originalPublished) {
+      const tmp = `${PUBLISHED_FILE}.tmp.${Date.now()}`;
+      fs.writeFileSync(tmp, originalPublished, 'utf8');
+      fs.renameSync(tmp, PUBLISHED_FILE);
+    }
   });
 
   function setupMockBrowser(initialUrl = 'https://techhacksai.com/') {
@@ -369,10 +377,37 @@ describe('Phase 22: Community Contributions (Submit a Tool & Submit a Guide)', (
 
     test('/admin/moderation page renders secure passkey gate when unauthenticated', () => {
       setupMockBrowser('https://techhacksai.com/admin/moderation');
+      global.window.sessionStorage.removeItem('th_mod_token');
       const html = ReactDOMServer.renderToString(React.createElement(ssrModule.App));
       assert.ok(html.includes('Editorial Moderation'));
       assert.ok(html.includes('Moderator Passkey'));
       assert.ok(html.includes('Unlock Moderation Queue'));
+    });
+
+    test('/admin/moderation page renders unlocked dashboard without blank screen when token is present', () => {
+      setupMockBrowser('https://techhacksai.com/admin/moderation');
+      global.window.sessionStorage.setItem('th_mod_token', ADMIN_TOKEN);
+      const html = ReactDOMServer.renderToString(React.createElement(ssrModule.App));
+      assert.ok(html.includes('Editorial Moderation Queue'));
+      assert.ok(html.includes('Community Submissions'));
+      assert.ok(html.includes('Daily Discoveries'));
+      // Clean up
+      global.window.sessionStorage.removeItem('th_mod_token');
+    });
+
+    test('/admin/moderation dashboard renders submission cards and detail panel safely with toolData and guideData', () => {
+      setupMockBrowser('https://techhacksai.com/admin/moderation');
+      global.window.sessionStorage.setItem('th_mod_token', ADMIN_TOKEN);
+      const element = React.createElement(
+        ssrModule.RouterProvider,
+        null,
+        React.createElement(ssrModule.ModerationDashboardPage)
+      );
+      const html = ReactDOMServer.renderToString(element);
+      assert.ok(html.includes('Editorial Moderation Queue'));
+      assert.ok(html.includes('Community Submissions'));
+      assert.ok(html.includes('Daily Discoveries'));
+      global.window.sessionStorage.removeItem('th_mod_token');
     });
 
     test('/ai-tools directory renders Submit a Tool CTA in header and CommunityCallout', () => {

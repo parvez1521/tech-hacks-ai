@@ -18,6 +18,92 @@ import { registerPublishedTool, registerPublishedGuide } from '../services/aiCat
 import { useRouter } from '../router/Router';
 import { AdminDiscoveriesManager } from '../components/AdminDiscoveriesManager';
 
+interface NormalizedSubmissionInfo {
+  title: string;
+  name: string;
+  summary: string;
+  category: string;
+  pricingType: string;
+  websiteUrl?: string;
+  sourceCodeUrl?: string;
+  submitterName: string;
+  submitterEmail?: string;
+  submitterRole?: string;
+  submitterGithub?: string;
+  isAffiliated?: boolean;
+  tags: string[];
+  content?: string;
+  readingTimeMinutes?: number | string;
+  slug?: string;
+}
+
+const slugify = (str: string) =>
+  (str || '')
+    .toLowerCase()
+    .trim()
+    .replace(/[^\w\s-]/g, '')
+    .replace(/[\s_-]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+
+function getSubmissionInfo(sub: CommunitySubmission | null | undefined): NormalizedSubmissionInfo {
+  if (!sub) {
+    return {
+      title: '',
+      name: '',
+      summary: '',
+      category: '',
+      pricingType: 'freemium',
+      submitterName: 'Community Contributor',
+      tags: [],
+    };
+  }
+
+  const rawLegacy = (sub as any).data || {};
+
+  if (sub.type === 'tool') {
+    const t = sub.toolData || rawLegacy;
+    const name = t.name || rawLegacy.name || 'Untitled Tool';
+    return {
+      title: name,
+      name,
+      summary: t.description || t.shortDescription || rawLegacy.description || rawLegacy.shortDescription || '',
+      category: t.category || rawLegacy.category || 'assistants',
+      pricingType: t.pricingType || rawLegacy.pricingType || 'freemium',
+      websiteUrl: t.websiteUrl || rawLegacy.websiteUrl,
+      sourceCodeUrl: t.sourceCodeUrl || t.alternativeTo || rawLegacy.sourceCodeUrl,
+      submitterName: t.submitterName || rawLegacy.submitterName || 'Community Contributor',
+      submitterEmail: t.submitterEmail || rawLegacy.submitterEmail,
+      submitterRole: (t as any).submitterRole || rawLegacy.submitterRole,
+      submitterGithub: (t as any).submitterGithub || rawLegacy.submitterGithub,
+      isAffiliated: Boolean((t as any).isAffiliated || rawLegacy.isAffiliated),
+      tags: Array.isArray(t.features) ? t.features : Array.isArray(t.tags) ? t.tags : [],
+      content: t.description || rawLegacy.description || '',
+      slug: sub.publishedSlug || (t as any).slug || rawLegacy.slug || slugify(name),
+    };
+  } else {
+    const g = sub.guideData || rawLegacy;
+    const title = g.title || rawLegacy.title || 'Untitled Guide';
+    return {
+      title,
+      name: title,
+      summary: g.summary || rawLegacy.summary || '',
+      category: g.category || rawLegacy.category || 'guides',
+      pricingType: '',
+      websiteUrl: Array.isArray(g.referenceUrls) && g.referenceUrls[0] ? g.referenceUrls[0] : undefined,
+      sourceCodeUrl: undefined,
+      submitterName: g.authorName || (g as any).submitterName || rawLegacy.authorName || rawLegacy.submitterName || 'Community Contributor',
+      submitterEmail: g.contactEmail || (g as any).submitterEmail || rawLegacy.contactEmail || rawLegacy.submitterEmail,
+      submitterRole: (g as any).submitterRole || rawLegacy.submitterRole,
+      submitterGithub: (g as any).submitterGithub || rawLegacy.submitterGithub,
+      isAffiliated: Boolean((g as any).isAffiliated || rawLegacy.isAffiliated),
+      tags: Array.isArray(g.tags) ? g.tags : [],
+      content: g.content || rawLegacy.content || '',
+      readingTimeMinutes: g.readTime ? parseInt(g.readTime, 10) || 5 : 5,
+      slug: sub.publishedSlug || (g as any).slug || rawLegacy.slug || slugify(title),
+    };
+  }
+}
+
 export const ModerationDashboardPage: React.FC = () => {
   const { navigate } = useRouter();
 
@@ -56,19 +142,12 @@ export const ModerationDashboardPage: React.FC = () => {
   // Synchronize edit form when selectedSubmission changes
   useEffect(() => {
     if (selectedSubmission) {
-      if (selectedSubmission.type === 'tool') {
-        setEditName(selectedSubmission.data.name || '');
-        setEditCategory(selectedSubmission.data.category || '');
-        setEditPricingType(selectedSubmission.data.pricingType || 'Freemium');
-        setEditSummary(selectedSubmission.data.shortDescription || '');
-        setEditTags((selectedSubmission.data.tags || []).join(', '));
-      } else {
-        setEditName(selectedSubmission.data.title || '');
-        setEditCategory(selectedSubmission.data.category || '');
-        setEditPricingType('');
-        setEditSummary(selectedSubmission.data.summary || '');
-        setEditTags((selectedSubmission.data.tags || []).join(', '));
-      }
+      const info = getSubmissionInfo(selectedSubmission);
+      setEditName(info.name);
+      setEditCategory(info.category);
+      setEditPricingType(info.pricingType || (selectedSubmission.type === 'tool' ? 'freemium' : ''));
+      setEditSummary(info.summary);
+      setEditTags(info.tags.join(', '));
       setEditSlug(selectedSubmission.publishedSlug || '');
       setReviewNotes(selectedSubmission.moderatorNotes || '');
       setActionError(null);
@@ -149,18 +228,21 @@ export const ModerationDashboardPage: React.FC = () => {
       if (filterStatus !== 'all' && sub.status !== filterStatus) return false;
       if (searchQuery.trim()) {
         const q = searchQuery.toLowerCase();
-        const title = sub.type === 'tool' ? sub.data.name : sub.data.title;
-        const author = sub.data.submitterName;
-        const category = sub.data.category;
-        const matchTitle = title?.toLowerCase().includes(q);
-        const matchAuthor = author?.toLowerCase().includes(q);
-        const matchCat = category?.toLowerCase().includes(q);
+        const info = getSubmissionInfo(sub);
+        const matchTitle = info.name.toLowerCase().includes(q);
+        const matchAuthor = info.submitterName.toLowerCase().includes(q);
+        const matchCat = info.category.toLowerCase().includes(q);
         const matchId = sub.id.toLowerCase().includes(q);
         if (!matchTitle && !matchAuthor && !matchCat && !matchId) return false;
       }
       return true;
     });
   }, [submissions, filterType, filterStatus, searchQuery]);
+
+  // Normalized Info for Selected Submission
+  const selectedInfo = useMemo(() => {
+    return selectedSubmission ? getSubmissionInfo(selectedSubmission) : null;
+  }, [selectedSubmission]);
 
   // Stats Counters
   const stats = useMemo(() => {
@@ -178,27 +260,38 @@ export const ModerationDashboardPage: React.FC = () => {
     setIsProcessingAction(true);
     setActionError(null);
 
-    const updatedData: any = { ...selectedSubmission.data };
+    const tagsArray = editTags
+      .split(',')
+      .map((t) => t.trim())
+      .filter(Boolean);
+
+    const updatePayload: any = {
+      moderatorNotes: reviewNotes,
+      publishedSlug: editSlug.trim() || undefined,
+    };
+
     if (selectedSubmission.type === 'tool') {
-      updatedData.name = editName;
-      updatedData.category = editCategory;
-      updatedData.pricingType = editPricingType;
-      updatedData.shortDescription = editSummary;
-      updatedData.tags = editTags.split(',').map((t) => t.trim()).filter(Boolean);
+      updatePayload.toolData = {
+        ...(selectedSubmission.toolData || {}),
+        name: editName,
+        category: editCategory,
+        pricingType: editPricingType.toLowerCase().replace(/\s+/g, '-'),
+        description: editSummary,
+        features: tagsArray,
+      };
     } else {
-      updatedData.title = editName;
-      updatedData.category = editCategory;
-      updatedData.summary = editSummary;
-      updatedData.tags = editTags.split(',').map((t) => t.trim()).filter(Boolean);
+      updatePayload.guideData = {
+        ...(selectedSubmission.guideData || {}),
+        title: editName,
+        category: editCategory,
+        summary: editSummary,
+        tags: tagsArray,
+      };
     }
 
     const res = await updateSubmission(
       selectedSubmission.id,
-      {
-        data: updatedData,
-        moderatorNotes: reviewNotes,
-        publishedSlug: editSlug.trim() || undefined,
-      },
+      updatePayload,
       token
     );
 
@@ -244,13 +337,10 @@ export const ModerationDashboardPage: React.FC = () => {
   // Action: Publish to Live Catalog
   const handlePublish = async () => {
     if (!token || !selectedSubmission) return;
+    const info = getSubmissionInfo(selectedSubmission);
     if (
       !confirm(
-        `Are you sure you want to publish "${
-          selectedSubmission.type === 'tool'
-            ? selectedSubmission.data.name
-            : selectedSubmission.data.title
-        }" to the live catalog? It will immediately appear on public catalog pages.`
+        `Are you sure you want to publish "${info.name}" to the live catalog? It will immediately appear on public catalog pages.`
       )
     ) {
       return;
@@ -625,8 +715,7 @@ export const ModerationDashboardPage: React.FC = () => {
           ) : (
             filteredSubmissions.map((sub) => {
               const isSelected = selectedSubmission?.id === sub.id;
-              const title = sub.type === 'tool' ? sub.data.name : sub.data.title;
-              const summary = sub.type === 'tool' ? sub.data.shortDescription : sub.data.summary;
+              const info = getSubmissionInfo(sub);
               const dateStr = new Date(sub.createdAt).toLocaleDateString(undefined, {
                 month: 'short',
                 day: 'numeric',
@@ -667,8 +756,8 @@ export const ModerationDashboardPage: React.FC = () => {
                     <span className="text-[11px] text-muted-foreground">{dateStr}</span>
                   </div>
 
-                  <h3 className="text-base font-bold text-foreground line-clamp-1">{title}</h3>
-                  <p className="text-xs text-muted-foreground line-clamp-2 mt-1">{summary}</p>
+                  <h3 className="text-base font-bold text-foreground line-clamp-1">{info.name}</h3>
+                  <p className="text-xs text-muted-foreground line-clamp-2 mt-1">{info.summary}</p>
 
                   {/* Duplicate warning tag if present */}
                   {sub.potentialDuplicate && (
@@ -682,7 +771,7 @@ export const ModerationDashboardPage: React.FC = () => {
 
                   <div className="mt-3 pt-2.5 border-t border-border/40 flex items-center justify-between text-[11px] text-muted-foreground">
                     <span className="truncate">
-                      By <strong className="text-foreground font-medium">{sub.data.submitterName}</strong>
+                      By <strong className="text-foreground font-medium">{info.submitterName}</strong>
                     </span>
                     <span className="font-mono text-[10px] text-muted-foreground/80">{sub.id}</span>
                   </div>
@@ -693,7 +782,7 @@ export const ModerationDashboardPage: React.FC = () => {
         </div>
 
         {/* Detailed Review & Edit Panel */}
-        {selectedSubmission && (
+        {selectedSubmission && selectedInfo && (
           <div className="lg:col-span-7 bg-card border border-border rounded-2xl p-6 shadow-xl relative space-y-6">
             {/* Drawer Header */}
             <div className="flex items-start justify-between gap-4 pb-4 border-b border-border">
@@ -717,9 +806,7 @@ export const ModerationDashboardPage: React.FC = () => {
                   </span>
                 </div>
                 <h2 className="text-xl font-bold text-foreground">
-                  {selectedSubmission.type === 'tool'
-                    ? selectedSubmission.data.name
-                    : selectedSubmission.data.title}
+                  {selectedInfo.name}
                 </h2>
                 <div className="text-xs text-muted-foreground mt-0.5">
                   ID: <code className="font-mono">{selectedSubmission.id}</code> · Received{' '}
@@ -769,28 +856,25 @@ export const ModerationDashboardPage: React.FC = () => {
               <div>
                 <span className="text-muted-foreground block text-[11px]">Submitted By</span>
                 <span className="font-semibold text-foreground">
-                  {selectedSubmission.data.submitterName}
+                  {selectedInfo.submitterName}
                 </span>
-                {selectedSubmission.data.submitterEmail && (
+                {selectedInfo.submitterEmail && (
                   <span className="text-muted-foreground block">
-                    {selectedSubmission.data.submitterEmail}
+                    {selectedInfo.submitterEmail}
                   </span>
                 )}
               </div>
 
               <div>
-                <span className="text-muted-foreground block text-[11px]">Affiliation & Links</span>
+                <span className="text-muted-foreground block text-[11px]">Submission Context</span>
                 <span className="text-foreground">
-                  {selectedSubmission.data.submitterRole || 'Community Contributor'}
-                  {selectedSubmission.data.isAffiliated && (
-                    <span className="ml-2 px-1.5 py-0.5 rounded text-[10px] bg-primary/10 text-primary border border-primary/20">
-                      Maker / Team
-                    </span>
-                  )}
+                  {selectedSubmission.type === 'tool'
+                    ? selectedSubmission.toolData?.notes || 'Community submission'
+                    : selectedSubmission.guideData?.notes || 'Community tutorial'}
                 </span>
-                {selectedSubmission.data.submitterGithub && (
+                {selectedSubmission.type === 'tool' && selectedSubmission.toolData?.alternativeTo && (
                   <span className="text-muted-foreground block truncate">
-                    GitHub/X: {selectedSubmission.data.submitterGithub}
+                    Alternative to: {selectedSubmission.toolData.alternativeTo}
                   </span>
                 )}
               </div>
@@ -799,26 +883,28 @@ export const ModerationDashboardPage: React.FC = () => {
             {/* Official Link Out */}
             {selectedSubmission.type === 'tool' && (
               <div className="flex flex-wrap items-center gap-3">
-                <a
-                  href={selectedSubmission.data.websiteUrl}
-                  target="_blank"
-                  rel="noreferrer noopener"
-                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-primary/10 text-primary border border-primary/20 hover:bg-primary/20 text-xs font-semibold transition-colors"
-                >
-                  <span>Visit Official Website</span>
-                  <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                  </svg>
-                </a>
-
-                {selectedSubmission.data.sourceCodeUrl && (
+                {selectedInfo.websiteUrl && (
                   <a
-                    href={selectedSubmission.data.sourceCodeUrl}
+                    href={selectedInfo.websiteUrl}
+                    target="_blank"
+                    rel="noreferrer noopener"
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-primary/10 text-primary border border-primary/20 hover:bg-primary/20 text-xs font-semibold transition-colors"
+                  >
+                    <span>Visit Official Website</span>
+                    <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                    </svg>
+                  </a>
+                )}
+
+                {selectedInfo.sourceCodeUrl && (
+                  <a
+                    href={selectedInfo.sourceCodeUrl}
                     target="_blank"
                     rel="noreferrer noopener"
                     className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-card border border-border hover:bg-muted text-xs font-semibold transition-colors"
                   >
-                    <span>View Repository</span>
+                    <span>View Repository / Reference</span>
                     <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                     </svg>
@@ -835,11 +921,11 @@ export const ModerationDashboardPage: React.FC = () => {
                     Submitted Guide Article Content
                   </label>
                   <span className="text-xs text-muted-foreground">
-                    ~{selectedSubmission.data.readingTimeMinutes || 5} min read
+                    ~{selectedInfo.readingTimeMinutes || 5} min read
                   </span>
                 </div>
                 <div className="p-4 rounded-xl bg-background border border-border max-h-72 overflow-y-auto text-sm">
-                  <SafeMarkdown content={selectedSubmission.data.content} />
+                  <SafeMarkdown content={selectedInfo.content || selectedInfo.summary || ''} />
                 </div>
               </div>
             )}
@@ -881,15 +967,14 @@ export const ModerationDashboardPage: React.FC = () => {
                       Pricing Model
                     </label>
                     <select
-                      value={editPricingType}
+                      value={editPricingType.toLowerCase()}
                       onChange={(e) => setEditPricingType(e.target.value)}
                       className="w-full px-3 py-1.5 rounded-lg bg-background border border-border text-foreground text-xs"
                     >
-                      <option value="Free">Free</option>
-                      <option value="Freemium">Freemium</option>
-                      <option value="Open Source">Open Source</option>
-                      <option value="Free Trial">Free Trial</option>
-                      <option value="Paid">Paid</option>
+                      <option value="free">Free</option>
+                      <option value="freemium">Freemium</option>
+                      <option value="open-source">Open Source</option>
+                      <option value="paid">Paid</option>
                     </select>
                   </div>
                 )}
@@ -997,8 +1082,8 @@ export const ModerationDashboardPage: React.FC = () => {
                   <a
                     href={
                       selectedSubmission.type === 'tool'
-                        ? `/ai-tools/${selectedSubmission.publishedSlug || selectedSubmission.data.slug}`
-                        : `/guides/${selectedSubmission.publishedSlug || selectedSubmission.data.slug}`
+                        ? `/ai-tools/${selectedSubmission.publishedSlug || selectedInfo.slug || slugify(selectedInfo.name)}`
+                        : `/guides/${selectedSubmission.publishedSlug || selectedInfo.slug || slugify(selectedInfo.name)}`
                     }
                     target="_blank"
                     rel="noreferrer noopener"
