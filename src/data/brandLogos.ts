@@ -16,7 +16,7 @@ export const brandLogos: Record<string, BrandLogoEntry> = {
       "slug": "adobe",
       "name": "Adobe",
       "assetPath": "/logos/adobe.svg",
-      "sourceType": "official",
+      "sourceType": "simple-icons",
       "verifiedAt": "2026-10-18",
       "badgeBg": "#fa0f00",
       "format": "svg",
@@ -335,7 +335,7 @@ export const brandLogos: Record<string, BrandLogoEntry> = {
       "slug": "canva",
       "name": "Canva",
       "assetPath": "/logos/canva.svg",
-      "sourceType": "official",
+      "sourceType": "simple-icons",
       "verifiedAt": "2026-10-18",
       "badgeBg": "#00c4cc",
       "format": "svg",
@@ -358,11 +358,12 @@ export const brandLogos: Record<string, BrandLogoEntry> = {
       "slug": "chatgpt",
       "name": "ChatGPT",
       "assetPath": "/logos/chatgpt.svg",
-      "sourceType": "simple-icons",
+      "sourceType": "fallback",
       "verifiedAt": "2026-10-17",
       "badgeBg": "#10a37f",
       "format": "svg",
       "sourceUrl": "https://www.google.com/s2/favicons?domain=chatgpt.com&sz=256",
+      "notes": "Favicon-derived fallback; not treated as a verified ChatGPT brand mark.",
       "pngAssetPath": "/logos/png/chatgpt.png"
   },
   "chroma": {
@@ -522,7 +523,7 @@ export const brandLogos: Record<string, BrandLogoEntry> = {
       "slug": "cursor",
       "name": "Cursor Editor",
       "assetPath": "/logos/cursor.svg",
-      "sourceType": "official",
+      "sourceType": "simple-icons",
       "verifiedAt": "2026-10-17",
       "badgeBg": "#18181b",
       "format": "svg",
@@ -545,7 +546,7 @@ export const brandLogos: Record<string, BrandLogoEntry> = {
       "slug": "deepseek",
       "name": "DeepSeek",
       "assetPath": "/logos/deepseek.svg",
-      "sourceType": "official",
+      "sourceType": "simple-icons",
       "verifiedAt": "2026-10-17",
       "badgeBg": "#0284c7",
       "format": "svg",
@@ -743,7 +744,7 @@ export const brandLogos: Record<string, BrandLogoEntry> = {
       "slug": "github",
       "name": "GitHub",
       "assetPath": "/logos/github.svg",
-      "sourceType": "official",
+      "sourceType": "simple-icons",
       "verifiedAt": "2026-10-18",
       "badgeBg": "#24292e",
       "format": "svg",
@@ -766,7 +767,7 @@ export const brandLogos: Record<string, BrandLogoEntry> = {
       "slug": "google",
       "name": "Google",
       "assetPath": "/logos/google.svg",
-      "sourceType": "official",
+      "sourceType": "simple-icons",
       "verifiedAt": "2026-10-18",
       "badgeBg": "#4285f4",
       "format": "svg",
@@ -865,11 +866,12 @@ export const brandLogos: Record<string, BrandLogoEntry> = {
       "slug": "groq",
       "name": "Groq",
       "assetPath": "/logos/groq.svg",
-      "sourceType": "official",
+      "sourceType": "fallback",
       "verifiedAt": "2026-10-17",
       "badgeBg": "#f43f5e",
       "format": "svg",
       "sourceUrl": "https://www.google.com/s2/favicons?domain=groq.com&sz=256",
+      "notes": "Favicon-derived fallback; not treated as a verified Groq brand mark.",
       "pngAssetPath": "/logos/png/groq.png"
   },
   "hailuo-ai": {
@@ -906,11 +908,12 @@ export const brandLogos: Record<string, BrandLogoEntry> = {
       "slug": "higgsfield",
       "name": "Higgsfield AI",
       "assetPath": "/logos/higgsfield.svg",
-      "sourceType": "official",
+      "sourceType": "fallback",
       "verifiedAt": "2026-10-18",
       "badgeBg": "#0c0f17",
       "format": "svg",
       "sourceUrl": "https://www.google.com/s2/favicons?domain=higgsfield.ai&sz=256",
+      "notes": "Favicon-derived fallback; not treated as a verified Higgsfield brand mark.",
       "pngAssetPath": "/logos/png/higgsfield.png"
   },
   "hoppscotch": {
@@ -937,7 +940,7 @@ export const brandLogos: Record<string, BrandLogoEntry> = {
       "slug": "huggingface",
       "name": "Hugging Face",
       "assetPath": "/logos/huggingface.svg",
-      "sourceType": "official",
+      "sourceType": "simple-icons",
       "verifiedAt": "2026-10-18",
       "badgeBg": "#ffd21e",
       "format": "svg",
@@ -948,11 +951,12 @@ export const brandLogos: Record<string, BrandLogoEntry> = {
       "slug": "ideogram",
       "name": "Ideogram v2",
       "assetPath": "/logos/ideogram.svg",
-      "sourceType": "official",
+      "sourceType": "fallback",
       "verifiedAt": "2026-10-17",
       "badgeBg": "#000000",
       "format": "svg",
       "sourceUrl": "https://www.google.com/s2/favicons?domain=ideogram.ai&sz=256",
+      "notes": "Favicon-derived fallback; not treated as a verified Ideogram brand mark.",
       "pngAssetPath": "/logos/png/ideogram.png"
   },
   "immich": {
@@ -1015,7 +1019,7 @@ export const brandLogos: Record<string, BrandLogoEntry> = {
       "slug": "jetbrains",
       "name": "JetBrains",
       "assetPath": "/logos/jetbrains.svg",
-      "sourceType": "official",
+      "sourceType": "simple-icons",
       "verifiedAt": "2026-10-18",
       "badgeBg": "#000000",
       "format": "svg",
@@ -1340,7 +1344,7 @@ export const brandLogos: Record<string, BrandLogoEntry> = {
       "slug": "microsoft",
       "name": "Microsoft",
       "assetPath": "/logos/microsoft.svg",
-      "sourceType": "official",
+      "sourceType": "simple-icons",
       "verifiedAt": "2026-10-18",
       "badgeBg": "#00a4ef",
       "format": "svg",
@@ -1651,11 +1655,12 @@ export const brandLogos: Record<string, BrandLogoEntry> = {
       "slug": "pika",
       "name": "Pika",
       "assetPath": "/logos/pika.svg",
-      "sourceType": "official",
+      "sourceType": "fallback",
       "verifiedAt": "2026-10-17",
       "badgeBg": "#ec4899",
       "format": "svg",
       "sourceUrl": "https://www.google.com/s2/favicons?domain=pika.art&sz=256",
+      "notes": "Favicon-derived fallback; not treated as a verified Pika brand mark.",
       "pngAssetPath": "/logos/png/pika.png"
   },
   "pinecone": {
@@ -1896,11 +1901,12 @@ export const brandLogos: Record<string, BrandLogoEntry> = {
       "slug": "runway",
       "name": "Runway Gen-3 Alpha",
       "assetPath": "/logos/runway.svg",
-      "sourceType": "official",
+      "sourceType": "fallback",
       "verifiedAt": "2026-10-17",
       "badgeBg": "#000000",
       "format": "svg",
       "sourceUrl": "https://www.google.com/s2/favicons?domain=runwayml.com&sz=256",
+      "notes": "Favicon-derived fallback; not treated as a verified Runway brand mark.",
       "pngAssetPath": "/logos/png/runway.png"
   },
   "rust": {
@@ -2375,10 +2381,8 @@ export const brandLogos: Record<string, BrandLogoEntry> = {
       "format": "svg",
       "sourceType": "fallback",
       "verifiedAt": "2026-10-18",
-      "badgeBg": "#000000",
-      "sourceUrl": "https://www.google.com/s2/favicons?domain=x.ai&sz=256",
-      "notes": "Website favicon fallback; visually review before using as a logo",
-      "pngAssetPath": "/logos/png/xai.png"
+      "badgeBg": "#272a30",
+      "notes": "No verified xAI brand mark is stored. BrandLogo intentionally uses a neutral lettermark fallback instead of the X mark."
   },
   "youtube": {
       "slug": "youtube",
@@ -2469,10 +2473,8 @@ export function getBrandLogo(slug: string): BrandLogoEntry | undefined {
   if (brandLogos[normalized]) {
     return brandLogos[normalized];
   }
-  const noHyphen = normalized.replace(/-/g, '');
-  if (brandLogos[noHyphen]) {
-    return brandLogos[noHyphen];
-  }
+  // Do not guess by stripping punctuation. Explicit aliases above are safer:
+  // a near-match must never silently inherit another company's logo.
   return undefined;
 }
 

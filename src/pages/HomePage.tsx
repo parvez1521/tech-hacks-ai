@@ -12,9 +12,9 @@ import { OfferCard } from '../components/OfferCard';
 import { BrandLogo } from '../components/BrandLogo';
 import { DailyDiscoveriesSection } from '../components/DailyDiscoveriesSection';
 import { proprietaryTools } from '../data/alternatives';
-import { aiToolsData, aiCategories } from '../data/aiToolsData';
+import { aiCategories } from '../data/aiToolsData';
 import { getFeaturedOffers } from '../data/offersData';
-import { getAllGuides, getAllPrompts, getAllFreeTools } from '../services/aiCatalogService';
+import { getAllAiTools, getAllGuides, getAllPrompts, getAllFreeTools } from '../services/aiCatalogService';
 import {
   Sparkles,
   Replace,
@@ -30,7 +30,6 @@ import {
   Mail,
   Check,
   SlidersHorizontal,
-  Flame,
   Tag,
   Gift,
   Code2,
@@ -42,8 +41,6 @@ import {
   Scale,
   GraduationCap,
   Star,
-  Terminal,
-  ExternalLink,
 } from 'lucide-react';
 
 export const HomePage: React.FC = () => {
@@ -51,29 +48,30 @@ export const HomePage: React.FC = () => {
   const [aiPage, setAiPage] = useState(1);
   const [emailSubscribed, setEmailSubscribed] = useState(false);
   const [emailInput, setEmailInput] = useState('');
+  const allAiTools = getAllAiTools();
 
   // 1. Curated Editor's Picks (Section 3)
   const editorsPicks = [
     {
-      tool: aiToolsData.find((t) => t.slug === 'claude') || aiToolsData[0],
+      tool: allAiTools.find((t) => t.slug === 'claude') || allAiTools[0],
       badge: "Editor's Choice",
       badgeColor: 'text-purple-400 bg-purple-500/10 border-purple-500/20',
       highlight: 'Frontier reasoning, artifacts, and multi-turn prompt intelligence.',
     },
     {
-      tool: aiToolsData.find((t) => t.slug === 'runway') || aiToolsData[1],
+      tool: allAiTools.find((t) => t.slug === 'runway') || allAiTools[1],
       badge: 'Best Video Model',
       badgeColor: 'text-pink-400 bg-pink-500/10 border-pink-500/20',
       highlight: 'Cinematic Gen-3 Alpha video generation with camera controls.',
     },
     {
-      tool: aiToolsData.find((t) => t.slug === 'cursor') || aiToolsData[2],
+      tool: allAiTools.find((t) => t.slug === 'cursor') || allAiTools[2],
       badge: 'Best AI Code Editor',
       badgeColor: 'text-blue-400 bg-blue-500/10 border-blue-500/20',
       highlight: 'Deep codebase indexing, Composer agent, and instant code edits.',
     },
     {
-      tool: aiToolsData.find((t) => t.slug === 'ollama') || aiToolsData[3],
+      tool: allAiTools.find((t) => t.slug === 'ollama') || allAiTools[3],
       badge: 'Top Open Source & Local',
       badgeColor: 'text-emerald-400 bg-emerald-500/10 border-emerald-500/20',
       highlight: 'Run Llama 3, DeepSeek-R1, and Qwen locally on your machine for free.',
@@ -139,7 +137,7 @@ export const HomePage: React.FC = () => {
   ];
 
   // 3. AI tools filtered by category and paginated for Section 4
-  const allFilteredAi = aiToolsData.filter(
+  const allFilteredAi = allAiTools.filter(
     (t) => (selectedAiCategory === 'all' ? true : t.category === selectedAiCategory)
   );
   const aiPageSize = 6;
@@ -147,7 +145,7 @@ export const HomePage: React.FC = () => {
   const filteredAiTools = allFilteredAi.slice((aiPage - 1) * aiPageSize, aiPage * aiPageSize);
 
   // 4. Free AI Tools (Section 5)
-  const freeAiTools = aiToolsData.filter((t) => t.hasFreePlan).slice(0, 4);
+  const freeAiTools = allAiTools.filter((t) => t.hasFreePlan).slice(0, 4);
 
   // 5. Proprietary targets for Section 9 (Figma, Notion, Firebase, Airtable, Zapier, Google Analytics)
   const featuredProprietary = proprietaryTools.slice(0, 6);
@@ -184,45 +182,27 @@ export const HomePage: React.FC = () => {
 
   return (
 
-    <div className="flex flex-col gap-16 sm:gap-20 pb-20">
+    <div className="flex flex-col gap-14 sm:gap-16 pb-20">
       {/* =========================================================================
           SECTION 1: HERO & UNIVERSAL SEARCH
       ========================================================================= */}
-      <section className="relative pt-12 pb-6 sm:pt-16 sm:pb-10 text-center max-w-6xl mx-auto px-4 w-full">
-        {/* Modern Layered Background: Fine Texture & Futuristic Ambient Halo (Phase 24) */}
-        <div
-          className="absolute inset-0 bg-dot-pattern opacity-25 [mask-image:radial-gradient(ellipse_70%_60%_at_50%_15%,#000_60%,transparent_100%)] pointer-events-none -z-10"
-          aria-hidden="true"
-        />
-        <div
-          className="absolute inset-0 bg-grid-pattern opacity-15 [mask-image:radial-gradient(ellipse_60%_50%_at_50%_20%,#000_40%,transparent_90%)] pointer-events-none -z-10"
-          aria-hidden="true"
-        />
-
-        {/* Central Hero Halo: Soft glow centered behind the hero title for focus and depth */}
-        <div
-          className="absolute inset-0 -top-20 -z-10 flex items-center justify-center pointer-events-none overflow-visible"
-          aria-hidden="true"
-        >
-          <div className="w-[680px] h-[380px] bg-gradient-to-r from-cyan-500/15 via-blue-600/15 to-purple-600/10 rounded-full blur-3xl opacity-70 animate-ambient-drift" />
-        </div>
-
-        {/* Pill Badge */}
+      <section className="relative pt-14 pb-8 sm:pt-16 sm:pb-10 text-center max-w-6xl mx-auto px-4 w-full">
+        {/* A small context line keeps the hero useful without competing with search. */}
         <div className="animate-fade-in-up [animation-delay:0ms]">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full text-xs font-medium bg-primary/10 text-primary border border-primary/20 hover:border-primary/40 hover:bg-primary/15 transition-all duration-200 cursor-default mb-5 shadow-sm">
-            <Sparkles className="w-3.5 h-3.5 text-primary animate-pulse-subtle" />
-            <span>Curated Open Source Software Directory & AI Discovery Platform</span>
+          <div className="inline-flex items-center gap-2 eyebrow mb-5">
+            <Sparkles className="w-3.5 h-3.5" aria-hidden="true" />
+            <span>Independent software directory</span>
           </div>
         </div>
 
         {/* H1 Headline */}
-        <h1 className="animate-fade-in-up [animation-delay:60ms] text-3xl sm:text-5xl lg:text-6xl font-extrabold text-foreground tracking-tight max-w-3xl mx-auto leading-tight sm:leading-none mb-4">
+        <h1 className="animate-fade-in-up [animation-delay:60ms] text-4xl sm:text-5xl lg:text-[4.25rem] font-bold text-foreground tracking-[-0.035em] max-w-4xl mx-auto leading-[1.04] text-balance mb-5">
           Discover the Best AI Tools & Open Source Alternatives
         </h1>
 
         {/* Subtitle */}
-        <p className="animate-fade-in-up [animation-delay:120ms] text-sm sm:text-lg text-secondary-foreground max-w-2xl mx-auto mb-8 font-normal leading-relaxed">
-          Over 1 million developers, creators, and businesses use Tech Hacks AI to replace expensive proprietary SaaS, explore top generative AI models, follow step-by-step guides, and run free browser utilities.
+        <p className="animate-fade-in-up [animation-delay:120ms] text-sm sm:text-base text-secondary-foreground max-w-2xl mx-auto mb-8 font-normal leading-relaxed">
+          Tech Hacks AI is a practical directory for finding AI products, open-source software, and browser utilities without wading through hype. Search by what you need to make, replace, or learn.
         </p>
 
         {/* Universal Search Bar with Intent Chips */}
@@ -231,38 +211,38 @@ export const HomePage: React.FC = () => {
         </div>
 
         {/* Quick Route Shortcuts Ribbon */}
-        <div className="animate-fade-in-up [animation-delay:240ms] flex flex-wrap items-center justify-center gap-3 text-xs pt-4 border-t border-border/50 max-w-2xl mx-auto">
+        <div className="animate-fade-in-up [animation-delay:240ms] flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-xs pt-4 border-t border-border/50 max-w-2xl mx-auto">
           <Link
             to="/ai-tools"
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-border bg-card/60 hover:bg-card hover:border-primary/40 text-foreground transition-all duration-150"
+            className="flex items-center gap-1.5 py-1 text-muted-foreground hover:text-primary transition-colors duration-150"
           >
             <Sparkles className="w-3.5 h-3.5 text-primary" />
             <span>AI Directory</span>
           </Link>
           <Link
             to="/free-ai-sites"
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-border bg-card/60 hover:bg-card hover:border-primary/40 text-foreground transition-all duration-150"
+            className="flex items-center gap-1.5 py-1 text-muted-foreground hover:text-primary transition-colors duration-150"
           >
             <Gift className="w-3.5 h-3.5 text-emerald-400" />
             <span>Free AI Tools</span>
           </Link>
           <Link
             to="/alternatives"
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-border bg-card/60 hover:bg-card hover:border-primary/40 text-foreground transition-all duration-150"
+            className="flex items-center gap-1.5 py-1 text-muted-foreground hover:text-primary transition-colors duration-150"
           >
             <Replace className="w-3.5 h-3.5 text-primary" />
             <span>SaaS Alternatives</span>
           </Link>
           <Link
             to="/offers"
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-border bg-card/60 hover:bg-card hover:border-primary/40 text-foreground transition-all duration-150"
+            className="flex items-center gap-1.5 py-1 text-muted-foreground hover:text-primary transition-colors duration-150"
           >
             <Tag className="w-3.5 h-3.5 text-amber-400" />
             <span>AI Deals</span>
           </Link>
           <Link
             to="/pick"
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-border bg-card/60 hover:bg-card hover:border-primary/40 text-foreground transition-all duration-150 font-medium"
+            className="flex items-center gap-1.5 py-1 text-primary font-medium hover:text-primary-hover transition-colors duration-150"
           >
             <Compass className="w-3.5 h-3.5 text-purple-400" />
             <span>Help Me Pick</span>
@@ -307,7 +287,7 @@ export const HomePage: React.FC = () => {
               <Link
                 key={goal.id}
                 to={goal.href}
-                className="group p-5 rounded-2xl border border-border bg-card/80 hover:bg-card hover:border-primary/40 hover:-translate-y-1 hover:shadow-xl hover:shadow-black/20 transition-all duration-200 flex flex-col justify-between"
+               className="group p-5 rounded-lg border border-border bg-card/80 interactive-card flex flex-col justify-between"
               >
                 <div>
                   <div className="flex items-center justify-between mb-3">
@@ -346,11 +326,10 @@ export const HomePage: React.FC = () => {
               <span>Handpicked by Tech Hacks AI Editorial</span>
             </div>
             <h2 className="text-2xl sm:text-3xl font-extrabold text-foreground tracking-tight">
-              Editor's Picks: Benchmark-Leading Tools
-
+              Editor's Picks
             </h2>
             <p className="text-sm text-secondary-foreground max-w-xl mt-1">
-              Every quarter our team stress-tests dozens of platforms. Here are 4 standouts delivering exceptional quality, speed, and reliability.
+              A small editorial shortlist of tools worth a closer look, with the reason each one is here made explicit.
             </p>
           </div>
 
@@ -368,12 +347,12 @@ export const HomePage: React.FC = () => {
             <Link
               key={item.tool.id}
               to={`/ai-tools/${item.tool.slug}`}
-              className="group p-5 rounded-2xl border border-border bg-card/90 hover:bg-card hover:border-primary/40 hover:-translate-y-1 hover:shadow-xl hover:shadow-black/20 transition-all duration-200 flex flex-col justify-between"
+               className="group p-5 rounded-lg border border-border bg-card/90 interactive-card flex flex-col justify-between"
             >
               <div>
                 <div className="flex items-center justify-between gap-2 mb-3">
                   <BrandLogo slug={item.tool.slug} name={item.tool.name} size="sm" />
-                  <span className={`px-2 py-0.5 rounded-full text-[10px] font-bold border uppercase tracking-wider ${item.badgeColor}`}>
+              <span className={`px-2 py-0.5 rounded-md text-[10px] font-bold border uppercase tracking-wider ${item.badgeColor}`}>
                     {item.badge}
                   </span>
                 </div>
@@ -446,7 +425,7 @@ export const HomePage: React.FC = () => {
               to="/ai-tools"
               className="inline-flex items-center gap-1.5 text-primary text-xs font-semibold hover:text-primary-hover transition-colors"
             >
-              <span>View All {aiToolsData.length}+ AI Tools</span>
+              <span>View All AI Tools</span>
               <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
@@ -456,7 +435,7 @@ export const HomePage: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-5">
           <div className="p-3.5 rounded-xl border border-primary/20 bg-primary/5 flex items-center justify-between gap-3 text-xs">
             <div className="flex items-center gap-2.5">
-              <span className="text-base">🎬</span>
+               <Video className="w-4 h-4 text-primary shrink-0" aria-hidden="true" />
               <div>
                 <span className="font-bold text-foreground block">Verified AI Video Generators</span>
                 <span className="text-[11px] text-muted-foreground">Kling (66 daily credits), Vidu, Hailuo, Wan 2.1 (Apache 2.0)</span>
@@ -472,7 +451,7 @@ export const HomePage: React.FC = () => {
 
           <div className="p-3.5 rounded-xl border border-border bg-card/80 flex items-center justify-between gap-3 text-xs">
             <div className="flex items-center gap-2.5">
-              <span className="text-base">🧠</span>
+               <Bot className="w-4 h-4 text-primary shrink-0" aria-hidden="true" />
               <div>
                 <span className="font-bold text-foreground block">Flagship Chatbot &amp; LLM Alternatives</span>
                 <span className="text-[11px] text-muted-foreground">Mistral Le Chat (free Canvas), Qwen Chat, DeepSeek-R1</span>
@@ -495,7 +474,7 @@ export const HomePage: React.FC = () => {
               setSelectedAiCategory('all');
               setAiPage(1);
             }}
-            className={`px-3 py-1.5 rounded-full text-xs font-medium shrink-0 transition-colors ${
+            className={`px-3 py-1.5 rounded-md text-xs font-medium shrink-0 transition-colors ${
               selectedAiCategory === 'all'
                 ? 'bg-primary text-primary-foreground'
                 : 'bg-muted/80 text-secondary-foreground hover:bg-muted border border-border/60'
@@ -511,7 +490,7 @@ export const HomePage: React.FC = () => {
                 setSelectedAiCategory(cat.id);
                 setAiPage(1);
               }}
-              className={`px-3 py-1.5 rounded-full text-xs font-medium shrink-0 transition-colors ${
+               className={`px-3 py-1.5 rounded-md text-xs font-medium shrink-0 transition-colors ${
                 selectedAiCategory === cat.id
                   ? 'bg-primary text-primary-foreground'
                   : 'bg-muted/80 text-secondary-foreground hover:bg-muted border border-border/60'
@@ -574,7 +553,7 @@ export const HomePage: React.FC = () => {
               <Link
                 key={tool.id}
                 to={`/ai-tools/${tool.slug}`}
-                className="group p-5 rounded-2xl border border-border bg-card/90 hover:bg-card hover:border-emerald-500/40 hover:-translate-y-1 hover:shadow-xl hover:shadow-black/20 transition-all duration-200 flex flex-col justify-between"
+                 className="group p-5 rounded-lg border border-border bg-card/90 interactive-card flex flex-col justify-between"
               >
                 <div>
                   <div className="flex items-center justify-between mb-3">
@@ -600,7 +579,7 @@ export const HomePage: React.FC = () => {
         </div>
 
         {/* Client-Side Browser Utilities Sub-block */}
-        <div className="p-6 sm:p-8 rounded-2xl border border-border bg-card/60">
+           <div className="p-6 sm:p-8 rounded-lg border border-border bg-card/60">
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-6">
             <div>
               <div className="inline-flex items-center gap-2 text-rose-400 text-xs font-semibold uppercase tracking-wider mb-2">
@@ -629,7 +608,7 @@ export const HomePage: React.FC = () => {
               <Link
                 key={util.id}
                 to={`/free-tools/${util.slug}`}
-                className="group p-5 rounded-xl border border-border bg-card/80 hover:bg-card hover:-translate-y-1 hover:border-primary/40 hover:shadow-xl hover:shadow-black/20 transition-all duration-300 flex flex-col justify-between"
+                 className="group p-5 rounded-lg border border-border bg-card/80 interactive-card flex flex-col justify-between"
               >
                 <div>
                   <div className="flex items-center justify-between text-xs mb-3">
@@ -700,9 +679,9 @@ export const HomePage: React.FC = () => {
               <Link
                 key={idx}
                 to={cat.href}
-                className="group p-4 rounded-xl border border-border bg-card/80 hover:bg-card hover:border-primary/40 hover:-translate-y-1 hover:shadow-md transition-all text-center flex flex-col items-center justify-center gap-2"
+                 className="group p-4 rounded-lg border border-border bg-card/80 interactive-card text-center flex flex-col items-center justify-center gap-2"
               >
-                <div className="w-10 h-10 rounded-xl bg-primary/10 text-primary flex items-center justify-center group-hover:scale-110 transition-transform">
+                   <div className="w-10 h-10 rounded-lg bg-primary/10 text-primary flex items-center justify-center">
                   <Icon className="w-5 h-5" />
                 </div>
                 <div>
@@ -833,9 +812,9 @@ export const HomePage: React.FC = () => {
         {/* Guided Discovery Bento (Help Me Pick & Compare) */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {/* Card 1: Help Me Pick */}
-          <div className="p-6 sm:p-8 rounded-2xl border border-primary/30 bg-gradient-to-br from-card to-primary/5 flex flex-col justify-between shadow-xl shadow-black/20 relative overflow-hidden group">
+           <div className="p-6 sm:p-8 rounded-lg border border-primary/30 bg-card flex flex-col justify-between relative overflow-hidden group">
             <div className="relative z-10">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium bg-primary/20 text-primary border border-primary/30 mb-4">
+               <div className="inline-flex items-center gap-2 text-xs font-medium text-primary border-b border-primary/30 pb-2 mb-4">
                 <Compass className="w-3.5 h-3.5" />
                 <span>Interactive Recommendation Wizard</span>
               </div>
@@ -850,7 +829,7 @@ export const HomePage: React.FC = () => {
             <div className="relative z-10 pt-4 border-t border-border/40">
               <Link
                 to="/pick"
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-primary text-primary-foreground font-semibold text-xs sm:text-sm hover:bg-primary-hover shadow-md transition-all active:scale-98 group-hover:translate-x-1"
+                 className="inline-flex items-center gap-2 px-4 py-2 rounded-md bg-primary text-primary-foreground font-semibold text-xs sm:text-sm hover:bg-primary-hover transition-colors active:scale-98"
               >
                 <span>Start "Help Me Pick" Wizard</span>
                 <ArrowRight className="w-4 h-4" />
@@ -859,10 +838,10 @@ export const HomePage: React.FC = () => {
           </div>
 
           {/* Card 2: Compare Any Software */}
-          <div className="p-6 sm:p-8 rounded-2xl border border-border bg-gradient-to-br from-card to-card/60 flex flex-col justify-between shadow-xl shadow-black/20 relative overflow-hidden group">
+           <div className="p-6 sm:p-8 rounded-lg border border-border bg-card flex flex-col justify-between relative overflow-hidden group">
             <div className="relative z-10">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium bg-muted text-secondary-foreground border border-border mb-4">
-                <span className="text-xs">⚖️</span>
+               <div className="inline-flex items-center gap-2 text-xs font-medium text-secondary-foreground border-b border-border pb-2 mb-4">
+                 <Scale className="w-3.5 h-3.5" aria-hidden="true" />
                 <span>Side-by-Side Analysis</span>
               </div>
               <h3 className="text-xl sm:text-2xl font-extrabold text-foreground tracking-tight mb-2">
@@ -876,7 +855,7 @@ export const HomePage: React.FC = () => {
             <div className="relative z-10 pt-4 border-t border-border/40 flex items-center justify-between">
               <Link
                 to="/compare?tools=supabase,firebase,cursor"
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl border border-border bg-card hover:bg-muted text-foreground font-semibold text-xs sm:text-sm shadow-md transition-all active:scale-98"
+                 className="inline-flex items-center gap-2 px-4 py-2 rounded-md border border-border bg-card hover:bg-muted text-foreground font-semibold text-xs sm:text-sm transition-colors active:scale-98"
               >
                 <span>Compare Supabase vs Firebase vs Cursor</span>
                 <ArrowRight className="w-4 h-4" />
@@ -890,8 +869,8 @@ export const HomePage: React.FC = () => {
           SECTION 10: ABOUT PLATFORM & COMMUNITY NEWSLETTER
       ========================================================================= */}
       <section ref={reveal10.ref} className={`max-w-4xl mx-auto px-4 sm:px-6 w-full reveal-section${reveal10.isVisible ? ' in-view' : ''}`}>
-        <div className="p-8 sm:p-10 rounded-2xl border border-border bg-card/70 shadow-xl text-center space-y-6">
-          <div className="w-12 h-12 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center text-primary mx-auto shadow-inner">
+         <div className="p-8 sm:p-10 rounded-lg border border-border bg-card/70 text-center space-y-6">
+           <div className="w-12 h-12 rounded-lg bg-primary/10 border border-primary/20 flex items-center justify-center text-primary mx-auto">
             <Mail className="w-6 h-6" />
           </div>
 
@@ -907,7 +886,7 @@ export const HomePage: React.FC = () => {
           {emailSubscribed ? (
             <div className="p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-sm font-semibold max-w-md mx-auto flex items-center justify-center gap-2">
               <Check className="w-5 h-5" />
-              <span>Thank you! You're subscribed to weekly platform digests.</span>
+              <span>Thanks — your interest is saved for this session.</span>
             </div>
           ) : (
             <form onSubmit={handleNewsletterSubmit} className="flex flex-col sm:flex-row gap-2 max-w-md mx-auto">
@@ -941,7 +920,7 @@ export const HomePage: React.FC = () => {
             <span>•</span>
             <div className="flex items-center gap-1.5">
               <Sparkles className="w-4 h-4 text-primary" />
-              <span>Over 1,000+ Tools Indexed</span>
+               <span>Curated and updated regularly</span>
             </div>
           </div>
         </div>

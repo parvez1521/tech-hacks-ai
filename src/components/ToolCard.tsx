@@ -14,27 +14,10 @@ export const ToolCard: React.FC<ToolCardProps> = ({ tool }) => {
   // Find mapped proprietary tools
   const alternativeItems = proprietaryTools.filter((p) => tool.alternativesTo.includes(p.slug));
 
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    e.currentTarget.style.setProperty('--card-x', `${e.clientX - rect.left}px`);
-    e.currentTarget.style.setProperty('--card-y', `${e.clientY - rect.top}px`);
-  };
-
   return (
     <div
-      onMouseMove={handleMouseMove}
-      className="group relative flex flex-col justify-between h-full p-5 rounded-lg border border-border bg-card/90 hover:bg-card transition-all duration-300 ease-out hover:-translate-y-1 hover:border-primary/40 hover:shadow-xl hover:shadow-black/30 min-h-[220px] focus-within:ring-2 focus-within:ring-primary/60 focus-within:border-primary/60 focus-within:-translate-y-1"
+      className="group relative flex flex-col justify-between h-full p-5 rounded-lg border border-border bg-card/90 interactive-card min-h-[224px] focus-within:ring-2 focus-within:ring-primary/50"
     >
-      {/* Interactive Radial Spotlight Inner Glow */}
-      <div
-        className="pointer-events-none absolute -inset-px rounded-lg opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-focus-within:opacity-100 -z-0"
-        style={{
-          background:
-            'radial-gradient(280px circle at var(--card-x, 50%) var(--card-y, 50%), rgba(59, 130, 246, 0.12), transparent 80%)',
-        }}
-        aria-hidden="true"
-      />
-
       {/* Primary Card Stretch Link */}
       <Link
         to={`/tools/${tool.slug}`}
@@ -46,8 +29,8 @@ export const ToolCard: React.FC<ToolCardProps> = ({ tool }) => {
 
       {/* Top Header Row */}
       <div className="relative z-10">
-        <div className="flex items-center justify-between gap-3 mb-2.5">
-          <div className="flex items-center gap-2.5 min-w-0">
+          <div className="flex items-start justify-between gap-3 mb-3">
+            <div className="flex items-center gap-2.5 min-w-0">
             {/* Brand Logo with vector support and fallback */}
             <BrandLogo
               slug={tool.slug}
@@ -67,26 +50,17 @@ export const ToolCard: React.FC<ToolCardProps> = ({ tool }) => {
           </div>
         </div>
 
-        {/* Dual-State Content Container */}
-        <div className="relative min-h-[64px] mb-3">
-          {/* Normal State: Short Tagline */}
-          <p className="text-sm text-secondary-foreground line-clamp-2 transition-all duration-200 ease-out group-hover:opacity-0 group-hover:-translate-y-0.5">
-            {tool.tagline}
+        <div className="min-h-[72px] mb-3">
+          <p className="text-xs text-primary/90 font-medium mb-1.5 line-clamp-1">{tool.tagline}</p>
+          <p className="text-sm text-secondary-foreground leading-relaxed line-clamp-3">
+            {tool.description}
           </p>
-
-          {/* Hover State: Extended Description */}
-          <div className="absolute inset-0 opacity-0 translate-y-1 transition-all duration-250 ease-out group-hover:opacity-100 group-hover:translate-y-0 pointer-events-none">
-            <p className="text-sm text-secondary-foreground line-clamp-3">
-              {tool.description}
-            </p>
-          </div>
         </div>
       </div>
 
-      {/* Bottom Dual-State Footer */}
+      {/* Metadata stays visible; cards should not require hover to reveal useful facts. */}
       <div className="relative z-10 pt-3 border-t border-border/50">
-        {/* Normal State: Stats Row */}
-        <div className="flex items-center justify-between text-xs text-muted-foreground transition-all duration-200 ease-out group-hover:opacity-0 group-hover:translate-y-1">
+        <div className="flex items-center justify-between gap-2 text-xs text-muted-foreground">
           <div className="flex items-center gap-1.5 font-mono">
             <Star className="w-3.5 h-3.5 text-muted-foreground/70" />
             <span className="font-medium text-foreground">{tool.stars.toLocaleString()}</span>
@@ -113,35 +87,30 @@ export const ToolCard: React.FC<ToolCardProps> = ({ tool }) => {
           </div>
         </div>
 
-        {/* Hover State: "Alternative to" Targets */}
-        <div className="absolute inset-x-0 bottom-0 top-3 flex items-center opacity-0 translate-y-1 transition-all duration-250 ease-out group-hover:opacity-100 group-hover:translate-y-0">
-          <div className="flex items-center gap-2 overflow-hidden w-full">
-            <span className="text-xs text-muted-foreground shrink-0">Alternative to:</span>
-            <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar py-0.5">
-              {alternativeItems.length > 0 ? (
-                alternativeItems.map((alt) => (
-                  <Link
-                    key={alt.slug}
-                    to={`/alternatives/${alt.slug}`}
-                    className="relative z-20 inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-xs bg-muted hover:bg-primary/10 hover:border-primary/40 hover:text-primary active:scale-95 text-foreground transition-all duration-150 border border-border"
-                  >
-                    <BrandLogo
-                      slug={alt.slug}
-                      name={alt.name}
-                      size="xs"
-                      iconBgColor={alt.iconBgColor}
-                      iconLetter={alt.iconLetter}
-                      className="w-3.5 h-3.5 rounded-full overflow-hidden p-0"
-                    />
-                    <span className="font-medium truncate max-w-[80px]">{alt.name}</span>
-                  </Link>
-                ))
-              ) : (
-                <span className="text-xs text-muted-foreground italic">Proprietary SaaS</span>
-              )}
+        {alternativeItems.length > 0 && (
+          <div className="mt-3 pt-3 border-t border-border/40 flex items-center gap-2 min-w-0">
+            <span className="text-[11px] text-muted-foreground shrink-0">Alternative to</span>
+            <div className="flex items-center gap-1.5 min-w-0 overflow-x-auto no-scrollbar">
+              {alternativeItems.slice(0, 2).map((alt) => (
+                <Link
+                  key={alt.slug}
+                  to={`/alternatives/${alt.slug}`}
+                  className="relative z-20 inline-flex items-center gap-1.5 px-1.5 py-0.5 rounded-md text-[11px] bg-muted hover:bg-primary/10 hover:text-primary text-foreground transition-colors border border-border shrink-0"
+                >
+                  <BrandLogo
+                    slug={alt.slug}
+                    name={alt.name}
+                    size="xs"
+                    iconBgColor={alt.iconBgColor}
+                    iconLetter={alt.iconLetter}
+                    className="w-3.5 h-3.5 rounded-sm overflow-hidden p-0"
+                  />
+                  <span className="font-medium truncate max-w-[76px]">{alt.name}</span>
+                </Link>
+              ))}
             </div>
           </div>
-        </div>
+        )}
       </div>
     </div>
   );

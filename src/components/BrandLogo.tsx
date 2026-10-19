@@ -23,18 +23,27 @@ export const BrandLogo: React.FC<BrandLogoProps> = ({
   showContainer = true,
 }) => {
   const logoEntry = getBrandLogo(slug);
-  const [currentSrc, setCurrentSrc] = useState<string | undefined>(logoEntry?.assetPath);
+  const [currentSrc, setCurrentSrc] = useState<string | undefined>(
+    logoEntry?.sourceType === 'fallback' ? undefined : logoEntry?.assetPath
+  );
   const [hasError, setHasError] = useState(false);
 
   useEffect(() => {
-    setCurrentSrc(logoEntry?.assetPath);
+    if (logoEntry?.sourceType === 'fallback') {
+      setCurrentSrc(undefined);
+    } else {
+      setCurrentSrc(logoEntry?.assetPath);
+    }
     setHasError(false);
-  }, [slug, logoEntry?.assetPath]);
+  }, [slug, logoEntry?.assetPath, logoEntry?.sourceType]);
 
   const handleImageError = () => {
     if (logoEntry?.pngAssetPath && currentSrc !== logoEntry.pngAssetPath) {
       setCurrentSrc(logoEntry.pngAssetPath);
     } else {
+      if (import.meta.env?.DEV) {
+        console.warn(`[BrandLogo] Unable to load logo for ${slug}: ${currentSrc || 'unknown asset'}`);
+      }
       setHasError(true);
     }
   };
@@ -90,7 +99,7 @@ export const BrandLogo: React.FC<BrandLogoProps> = ({
   };
 
   const sizeClasses = getSizeStyles();
-  const fallbackBg = iconBgColor || logoEntry?.badgeBg || '#3b82f6';
+  const fallbackBg = iconBgColor || logoEntry?.badgeBg || '#272a30';
   const fallbackText = iconLetter || (name ? name.slice(0, 2).toUpperCase() : '??');
 
   if (logoEntry && currentSrc && !hasError) {
@@ -132,6 +141,7 @@ export const BrandLogo: React.FC<BrandLogoProps> = ({
       className={`${sizeClasses.container} rounded-md flex items-center justify-center font-bold ${sizeClasses.text} text-white shrink-0 shadow-inner group-hover:scale-105 transition-transform duration-300 ${className}`}
       style={{ backgroundColor: fallbackBg }}
       title={name}
+      role="img"
       aria-label={name}
     >
       {fallbackText}

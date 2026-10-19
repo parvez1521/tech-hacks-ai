@@ -154,7 +154,7 @@ export const AlternativeDetailPage: React.FC = () => {
             <Replace className="w-4 h-4" />
             <span>Open Source Replacements</span>
           </div>
-          <h1 className="text-2xl sm:text-4xl font-extrabold text-foreground tracking-tight mb-3">
+           <h1 className="text-2xl sm:text-3xl font-bold text-foreground tracking-tight mb-3">
             Open Source {proprietary.name} Alternatives
           </h1>
           <p className="text-sm sm:text-base text-secondary-foreground leading-relaxed mb-4">
@@ -186,7 +186,7 @@ export const AlternativeDetailPage: React.FC = () => {
         </div>
 
         {/* Right Sticky Proprietary Profile Card */}
-        <div className="p-5 rounded-xl border border-border bg-card/80 shadow-sm flex flex-col justify-between">
+        <div className="p-5 rounded-lg border border-border bg-card/80 flex flex-col justify-between">
           <div>
             <div className="flex items-center justify-between mb-2.5">
               <div className="flex items-center gap-3">

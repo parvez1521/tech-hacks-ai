@@ -111,8 +111,8 @@ describe('Phase 4: Interactive Browser Simulation & Route Navigation', () => {
     const html = renderClean(React.createElement(ssrModule.App));
 
     assert.ok(html.includes('Tech Hacks'), 'Should render platform brand');
-    assert.ok(html.includes('Curated Open Source Software Directory'), 'Should render hero pill');
-    assert.ok(html.includes('Open Source Alternatives to Popular Software'), 'Should render headline');
+    assert.ok(html.includes('Independent software directory'), 'Should render the hero context line');
+    assert.ok(html.includes('Discover the Best AI Tools &amp; Open Source Alternatives'), 'Should render headline');
     assert.ok(html.includes('Supabase'), 'Should render seed tools');
     assert.ok(html.includes('Filters'), 'Should render filter drawer trigger');
     assert.ok(html.includes('Most Popular'), 'Should render default sort');

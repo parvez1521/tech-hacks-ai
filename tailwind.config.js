@@ -29,6 +29,21 @@ export default {
         md: '0.5rem',
         sm: '0.375rem',
       },
+      boxShadow: {
+        xs: '0 1px 2px rgb(0 0 0 / 0.18)',
+      },
+      spacing: {
+        '0.2': '0.125rem',
+      },
+      width: {
+        '5.5': '1.375rem',
+      },
+      height: {
+        '5.5': '1.375rem',
+      },
+      scale: {
+        '98': '0.98',
+      },
       animation: {
         'fade-in': 'fadeIn 0.2s ease-out forwards',
       },

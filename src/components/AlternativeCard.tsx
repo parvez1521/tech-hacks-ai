@@ -14,23 +14,16 @@ export const AlternativeCard: React.FC<AlternativeCardProps> = ({ alternative })
   const count = alternativesList.length;
   const category = getCategoryBySlug(alternative.category);
 
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    e.currentTarget.style.setProperty('--card-x', `${e.clientX - rect.left}px`);
-    e.currentTarget.style.setProperty('--card-y', `${e.clientY - rect.top}px`);
-  };
-
   return (
     <div
-      onMouseMove={handleMouseMove}
-      className="group relative flex flex-col justify-between h-full p-5 rounded-lg border border-border bg-card/90 hover:bg-card hover:-translate-y-1.5 hover:border-cyan-500/40 hover:shadow-xl hover:shadow-cyan-500/5 transition-all duration-300 ease-out focus-within:ring-2 focus-within:ring-cyan-500/60 focus-within:border-cyan-500/60 cursor-pointer"
+      className="group relative flex flex-col justify-between h-full p-5 rounded-lg border border-border bg-card/90 interactive-card hover:-translate-y-1.5 hover:border-cyan-500/40 focus-within:ring-2 focus-within:ring-cyan-500/60 focus-within:border-cyan-500/60 cursor-pointer"
     >
-      {/* Decorative Subtle Inner Spotlight on Hover */}
+      {/* A quiet accent wash keeps the hover state legible without adding a permanent glow. */}
       <div
-        className="pointer-events-none absolute -inset-px rounded-lg opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-focus-within:opacity-100 -z-0"
+        className="pointer-events-none absolute inset-0 rounded-lg opacity-0 transition-opacity duration-200 group-hover:opacity-100 group-focus-within:opacity-100 -z-0"
         style={{
           background:
-            'radial-gradient(260px circle at var(--card-x, 50%) var(--card-y, 30%), rgba(6, 182, 212, 0.1), transparent 75%)',
+            'radial-gradient(260px circle at 50% 0%, rgba(6, 182, 212, 0.03), transparent 70%)',
         }}
         aria-hidden="true"
       />

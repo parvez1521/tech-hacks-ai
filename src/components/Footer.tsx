@@ -29,7 +29,7 @@ export const Footer: React.FC = () => {
           {isSubscribed ? (
             <div className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-sm font-medium">
               <CheckCircle className="w-4 h-4" />
-              <span>Thank you for subscribing! Check your inbox for confirmation.</span>
+              <span>Thanks — your interest is saved for this session.</span>
             </div>
           ) : (
             <form onSubmit={handleSubscribe} className="flex gap-2 max-w-md mx-auto">
@@ -54,7 +54,7 @@ export const Footer: React.FC = () => {
           )}
 
           <p className="text-xs text-muted-foreground mt-3">
-            Trusted by 12,000+ developers and engineering teams worldwide.
+            Independent picks and practical notes. Delivery will be connected before launch.
           </p>
         </div>
 

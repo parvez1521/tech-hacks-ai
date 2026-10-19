@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect, useMemo } from 'react';
 import { useRouter, Link } from '../router/Router';
 import { universalSearch, UniversalSearchResult } from '../services/aiCatalogService';
-import { Search, X, Sparkles, FolderKanban, Replace, BookOpen, MessageSquareCode, Wrench } from 'lucide-react';
+import { Search, X, Sparkles, FolderKanban, Replace, BookOpen, MessageSquareCode, Wrench, Video, Image, PenLine, Code2, Zap, Gift, Tag } from 'lucide-react';
 import { BrandLogo } from './BrandLogo';
 
 export const UniversalSearch: React.FC = () => {
@@ -110,15 +110,15 @@ export const UniversalSearch: React.FC = () => {
   };
 
   const intentChips = [
-    { label: '🎬 Make AI videos', to: '/ai-tools?category=video' },
-    { label: '🎨 Create images', to: '/ai-tools?category=image' },
-    { label: '✍️ Find writing tools', to: '/ai-tools?category=writing' },
-    { label: '💻 Build an app', to: '/tools?category=developer-tools' },
-    { label: '⚡ Automate work', to: '/tools?category=developer-tools' },
-    { label: '🎁 Free AI tools', to: '/free-ai-sites' },
-    { label: '🏷️ AI Deals & Student Perks', to: '/offers' },
-    { label: '🔄 Replace proprietary SaaS', to: '/alternatives' },
-    { label: '✨ Discover prompts', to: '/prompt-library' },
+    { label: 'Make AI videos', to: '/ai-tools?category=video', icon: Video },
+    { label: 'Create images', to: '/ai-tools?category=image', icon: Image },
+    { label: 'Find writing tools', to: '/ai-tools?category=writing', icon: PenLine },
+    { label: 'Build an app', to: '/tools?category=developer-tools', icon: Code2 },
+    { label: 'Automate work', to: '/tools?category=developer-tools', icon: Zap },
+    { label: 'Free AI tools', to: '/free-ai-sites', icon: Gift },
+    { label: 'AI deals & perks', to: '/offers', icon: Tag },
+    { label: 'Replace proprietary SaaS', to: '/alternatives', icon: Replace },
+    { label: 'Discover prompts', to: '/prompt-library', icon: Sparkles },
   ];
 
   // Helper to get index within flatResults for an item
@@ -126,7 +126,7 @@ export const UniversalSearch: React.FC = () => {
 
   return (
     <div ref={containerRef} className="relative w-full max-w-3xl mx-auto z-40" onKeyDown={handleKeyDown}>
-      {/* Search Input Bar with Apple Glass UI */}
+      {/* Search is the strongest control in the directory shell; opaque surfaces keep results legible. */}
       <div className="relative flex items-center">
         <Search className="w-5 h-5 text-muted-foreground absolute left-4 pointer-events-none" />
         <input
@@ -147,8 +147,8 @@ export const UniversalSearch: React.FC = () => {
           onFocus={() => {
             if (query.trim()) setIsOpen(true);
           }}
-          placeholder="Search 1,000+ AI tools, open source alternatives, guides, prompts, or utilities..."
-          className="w-full pl-12 pr-14 py-3.5 sm:py-4 rounded-2xl bg-card/90 backdrop-blur-xl border border-white/15 dark:border-white/10 text-foreground placeholder:text-muted-foreground text-sm sm:text-base shadow-xl shadow-slate-200/60 dark:shadow-black/25 focus:outline-none focus:ring-2 focus:ring-cyan-500/50 focus:border-cyan-500/60 focus:shadow-[0_0_28px_rgba(6,182,212,0.18)] transition-all duration-200"
+          placeholder="Search AI tools, open-source alternatives, guides, prompts, or utilities..."
+          className="w-full pl-12 pr-14 py-3.5 sm:py-4 rounded-lg bg-card border border-border text-foreground placeholder:text-muted-foreground text-sm sm:text-base shadow-sm focus:outline-none focus:ring-2 focus:ring-cyan-500/50 focus:border-cyan-500/60 focus:shadow-[0_0_0_3px_rgba(6,182,212,0.08)] transition-all duration-200"
           aria-label="Universal software and AI discovery search"
         />
         {query ? (
@@ -169,13 +169,13 @@ export const UniversalSearch: React.FC = () => {
         )}
       </div>
 
-      {/* Grouped Search Results Dropdown with Apple Glass UI & Accessible Listbox */}
+      {/* Grouped results stay opaque so the directory remains easy to scan. */}
       {isOpen && query.trim() && (
         <div
           id="universal-search-results"
           role="listbox"
           aria-label="Universal search suggestions"
-          className="absolute top-full left-0 right-0 mt-2.5 rounded-2xl bg-card/95 backdrop-blur-2xl border border-border/80 dark:border-white/10 p-4 shadow-2xl shadow-black/20 dark:shadow-black/50 max-h-[75vh] overflow-y-auto no-scrollbar z-50 flex flex-col gap-4 animate-fade-in"
+          className="absolute top-full left-0 right-0 mt-2 rounded-lg bg-card border border-border p-3 sm:p-4 shadow-lg shadow-black/30 max-h-[75vh] overflow-y-auto no-scrollbar z-50 flex flex-col gap-4 animate-fade-in"
         >
           {results.totalMatches === 0 ? (
             <div className="py-8 text-center text-muted-foreground text-sm">
@@ -222,7 +222,7 @@ export const UniversalSearch: React.FC = () => {
                             setIsOpen(false);
                             setSelectedIndex(-1);
                           }}
-                          className={`flex items-center gap-2.5 p-2 rounded-xl transition-all ${
+                            className={`flex items-center gap-2.5 p-2 rounded-md transition-colors ${
                             isSelected
                               ? 'bg-primary/20 text-primary border border-primary/40 ring-1 ring-primary/40'
                               : 'hover:bg-muted/70 text-foreground'
@@ -270,7 +270,7 @@ export const UniversalSearch: React.FC = () => {
                             setIsOpen(false);
                             setSelectedIndex(-1);
                           }}
-                          className={`flex items-center gap-2.5 p-2 rounded-xl transition-all ${
+                            className={`flex items-center gap-2.5 p-2 rounded-md transition-colors ${
                             isSelected
                               ? 'bg-primary/20 text-primary border border-primary/40 ring-1 ring-primary/40'
                               : 'hover:bg-muted/70 text-foreground'
@@ -318,7 +318,7 @@ export const UniversalSearch: React.FC = () => {
                             setIsOpen(false);
                             setSelectedIndex(-1);
                           }}
-                          className={`flex items-center gap-2.5 p-2 rounded-xl transition-all ${
+                            className={`flex items-center gap-2.5 p-2 rounded-md transition-colors ${
                             isSelected
                               ? 'bg-primary/20 text-primary border border-primary/40 ring-1 ring-primary/40'
                               : 'hover:bg-muted/70 text-foreground'
@@ -366,7 +366,7 @@ export const UniversalSearch: React.FC = () => {
                             setIsOpen(false);
                             setSelectedIndex(-1);
                           }}
-                          className={`p-2 rounded-xl transition-all flex items-center justify-between gap-2 ${
+                          className={`p-2 rounded-md transition-colors flex items-center justify-between gap-2 ${
                             isSelected
                               ? 'bg-primary/20 text-primary border border-primary/40 ring-1 ring-primary/40'
                               : 'hover:bg-muted/70 text-foreground'
@@ -404,7 +404,7 @@ export const UniversalSearch: React.FC = () => {
                             setIsOpen(false);
                             setSelectedIndex(-1);
                           }}
-                          className={`p-2 rounded-xl transition-all flex items-center justify-between gap-2 ${
+                          className={`p-2 rounded-md transition-colors flex items-center justify-between gap-2 ${
                             isSelected
                               ? 'bg-primary/20 text-primary border border-primary/40 ring-1 ring-primary/40'
                               : 'hover:bg-muted/70 text-foreground'
@@ -442,7 +442,7 @@ export const UniversalSearch: React.FC = () => {
                             setIsOpen(false);
                             setSelectedIndex(-1);
                           }}
-                          className={`p-2 rounded-xl transition-all flex items-center justify-between gap-2 ${
+                          className={`p-2 rounded-md transition-colors flex items-center justify-between gap-2 ${
                             isSelected
                               ? 'bg-primary/20 text-primary border border-primary/40 ring-1 ring-primary/40'
                               : 'hover:bg-muted/70 text-foreground'
@@ -461,17 +461,21 @@ export const UniversalSearch: React.FC = () => {
         </div>
       )}
 
-      {/* Quick Intent Chips with Apple Glass UI */}
-      <div className="mt-4 flex flex-wrap items-center justify-center gap-2">
-        {intentChips.map((chip) => (
-          <Link
-            key={chip.label}
-            to={chip.to}
-            className="px-3.5 py-1.5 rounded-full text-xs font-medium bg-card/80 backdrop-blur-md border border-border/80 dark:border-white/10 hover:border-primary/40 hover:bg-primary/10 hover:text-primary transition-all duration-150 shadow-sm"
-          >
-            {chip.label}
-          </Link>
-        ))}
+      {/* Common routes are links, not decorative badges. */}
+      <div className="mt-4 flex flex-wrap items-center justify-center gap-x-4 gap-y-2">
+        {intentChips.map((chip) => {
+          const Icon = chip.icon;
+          return (
+            <Link
+              key={chip.label}
+              to={chip.to}
+              className="inline-flex items-center gap-1.5 text-xs font-medium text-muted-foreground hover:text-primary transition-colors duration-150"
+            >
+              <Icon className="w-3.5 h-3.5" aria-hidden="true" />
+              {chip.label}
+            </Link>
+          );
+        })}
       </div>
     </div>
   );

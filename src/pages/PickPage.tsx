@@ -14,14 +14,14 @@ export const PickPage: React.FC = () => {
   const [watermarkPreference, setWatermarkPreference] = useState<'no-watermark' | 'any'>('any');
 
   const goals = [
-    { id: 'coding-dev', label: '💻 Code or Build a Web App or Backend', desc: 'AI code editors, full-stack builders, databases, and APIs' },
-    { id: 'video-generation', label: '🎬 Create Videos — Generate Video or Images', desc: 'Text-to-video, realistic animation, motion, and talking avatars' },
-    { id: 'image-generation', label: '🎨 Create Images & AI Art', desc: 'Photorealism, design assets, typography, FLUX, and Midjourney' },
-    { id: 'chat-research', label: '✍️ Write or Research with AI', desc: 'AI assistants, deep research, summarization, and writing' },
-    { id: 'workflow-automation', label: '⚡ Work Faster & Automate', desc: 'Visual integrations, webhooks, multi-step triggers, and workflow automation' },
-    { id: 'open-source-software', label: '🔓 Explore Open Source', desc: 'Self-hostable, privacy-first replacements for Notion, Firebase, Figma, Airtable' },
-    { id: 'voice-music', label: '🎙️ Voice, Speech & Music', desc: 'Realistic voice generation and music creators' },
-    { id: 'browser-utilities', label: '🛠️ Fast Browser Utilities', desc: 'Client-side JSON formatters, hashers, diff checkers, and generators' },
+    { id: 'coding-dev', label: 'Code or Build a Web App or Backend', desc: 'AI code editors, full-stack builders, databases, and APIs' },
+    { id: 'video-generation', label: 'Create Videos — Generate Video or Images', desc: 'Text-to-video, realistic animation, motion, and talking avatars' },
+    { id: 'image-generation', label: 'Create Images & AI Art', desc: 'Photorealism, design assets, typography, FLUX, and Midjourney' },
+    { id: 'chat-research', label: 'Write or Research with AI', desc: 'AI assistants, deep research, summarization, and writing' },
+    { id: 'workflow-automation', label: 'Work Faster & Automate', desc: 'Visual integrations, webhooks, multi-step triggers, and workflow automation' },
+    { id: 'open-source-software', label: 'Explore Open Source', desc: 'Self-hostable, privacy-first replacements for Notion, Firebase, Figma, Airtable' },
+    { id: 'voice-music', label: 'Voice, Speech & Music', desc: 'Realistic voice generation and music creators' },
+    { id: 'browser-utilities', label: 'Fast Browser Utilities', desc: 'Client-side JSON formatters, hashers, diff checkers, and generators' },
   ];
 
   // Dynamic task details based on chosen goal
@@ -80,11 +80,11 @@ export const PickPage: React.FC = () => {
   };
 
   const budgets = [
-    { id: 'completely-free', label: '✨ Free only', desc: 'Zero cost, 100% free forever, no credit card required' },
-    { id: 'free-credits', label: '🎁 Free plan is okay', desc: 'Generous daily or monthly free generations (Kling, Vidu, PixVerse, etc.)' },
-    { id: 'any', label: '🌐 Paid tools are fine', desc: 'Evaluate top tools regardless of payment requirements' },
-    { id: 'free-trial', label: '⏱️ Free trial credits', desc: 'One-time initial starter credits (Runway, Kaiber, KIE AI)' },
-    { id: 'self-hosted', label: '🖥️ Run on my computer', desc: 'Run locally on your GPU (Wan 2.1, LTX Video, CogVideoX, FLUX.1)' },
+    { id: 'completely-free', label: 'Free only', desc: 'Zero cost, 100% free forever, no credit card required' },
+    { id: 'free-credits', label: 'Free plan is okay', desc: 'Generous daily or monthly free generations (Kling, Vidu, PixVerse, etc.)' },
+    { id: 'any', label: 'Paid tools are fine', desc: 'Evaluate top tools regardless of payment requirements' },
+    { id: 'free-trial', label: 'Free trial credits', desc: 'One-time initial starter credits (Runway, Kaiber, KIE AI)' },
+    { id: 'self-hosted', label: 'Run on my computer', desc: 'Run locally on your GPU (Wan 2.1, LTX Video, CogVideoX, FLUX.1)' },
   ];
 
   const showWatermark = goal === 'video-generation' || goal === 'image-generation';
@@ -317,7 +317,7 @@ export const PickPage: React.FC = () => {
               {[
                 { id: 'any', label: 'No preference', desc: 'Show both website and desktop options' },
                 { id: 'browser', label: '🌐 Website', desc: 'Run directly in your browser without installing' },
-                { id: 'local', label: '🖥️ Desktop app / local', desc: 'Install on your computer or self-host' },
+                { id: 'local', label: 'Desktop app / local', desc: 'Install on your computer or self-host' },
               ].map((h) => (
                 <button
                   key={h.id}

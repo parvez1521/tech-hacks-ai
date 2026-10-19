@@ -219,8 +219,8 @@ describe('Phase 20: Floating Brand-Logo Background & Assistant Branding Cleanup'
         'No "grounded 3D AI companion" in welcome message'
       );
       assert.ok(
-        content.includes('I am your Tech Hacks AI Assistant.'),
-        'Uses friendly "I am your Tech Hacks AI Assistant."'
+        content.includes('Welcome to the Tech Hacks AI assistant.'),
+        'Uses a concise, product-focused welcome message'
       );
     });
 

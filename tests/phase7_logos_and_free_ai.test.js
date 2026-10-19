@@ -194,7 +194,7 @@ describe('Phase 7: Official Brand Logos & Verified Free AI Tools Directory', () 
   // -------------------------------------------------------------------------
   // 3. UI Route Rendering & BrandLogo Integration
   // -------------------------------------------------------------------------
-  test('/free-ai-sites renders access type tabs and official brand logos', async () => {
+  test('/free-ai-sites renders access type tabs and safe brand fallbacks', async () => {
     ssrModule = await import('../dist/test-ssr.js');
     setupMockBrowser('https://openalternative.co/free-ai-sites');
     const html = renderClean(React.createElement(ssrModule.App));
@@ -205,7 +205,7 @@ describe('Phase 7: Official Brand Logos & Verified Free AI Tools Directory', () 
     assert.ok(html.includes('No Account Required'), 'Renders No Account Required tab');
     assert.ok(html.includes('src="/logos/ollama.svg"'), 'Renders Ollama official brand logo');
     assert.ok(html.includes('src="/logos/claude.svg"'), 'Renders Claude official brand logo');
-    assert.ok(html.includes('src="/logos/chatgpt.svg"'), 'Renders ChatGPT official brand logo');
+    assert.ok(!html.includes('src="/logos/chatgpt.svg"') && html.includes('aria-label="ChatGPT"'), 'Uses a safe ChatGPT fallback when provenance is unresolved');
   });
 
   test('tool detail page renders high-res brand logo in hero header', async () => {

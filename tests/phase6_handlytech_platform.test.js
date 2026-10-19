@@ -94,9 +94,9 @@ describe('Phase 6: Homepage Redesign & HandlyTech Platform Integration', () => {
 
     // Hero Section & Universal Search
     assert.ok(html.includes('Discover the Best AI Tools &amp; Open Source Alternatives') || html.includes('Discover the Best AI Tools & Open Source Alternatives'), 'Hero headline present');
-    assert.ok(html.includes('Search 1,000+ AI tools, open source alternatives'), 'Universal search bar placeholder');
-    assert.ok(html.includes('🎬 Make AI videos'), 'Intent chip: Make AI videos');
-    assert.ok(html.includes('🔄 Replace proprietary SaaS'), 'Intent chip: Replace proprietary SaaS');
+    assert.ok(html.includes('Search AI tools, open-source alternatives'), 'Universal search bar placeholder');
+    assert.ok(html.includes('Make AI videos'), 'Intent chip: Make AI videos');
+    assert.ok(html.includes('Replace proprietary SaaS'), 'Intent chip: Replace proprietary SaaS');
 
     // Section 2: Open Source Alternatives (Proprietary Cards)
     assert.ok(html.includes('Find an open-source alternative'), 'Section 2 badge');

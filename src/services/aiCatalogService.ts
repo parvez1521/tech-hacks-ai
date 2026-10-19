@@ -39,7 +39,12 @@ export function registerPublishedGuide(guide: Guide) {
 }
 
 export function getAllAiTools(): AiTool[] {
-  return [...dynamicPublishedTools, ...aiToolsData];
+  const seen = new Set<string>();
+  return [...dynamicPublishedTools, ...aiToolsData].filter((tool) => {
+    if (!tool.slug || seen.has(tool.slug)) return false;
+    seen.add(tool.slug);
+    return true;
+  });
 }
 
 // Client hydration: fetch approved additions if running in browser
@@ -144,7 +149,12 @@ export function getOpenSourceAiTools(limit?: number): AiTool[] {
 }
 
 export function getAllGuides(): Guide[] {
-  return [...dynamicPublishedGuides, ...guidesData];
+  const seen = new Set<string>();
+  return [...dynamicPublishedGuides, ...guidesData].filter((guide) => {
+    if (!guide.slug || seen.has(guide.slug)) return false;
+    seen.add(guide.slug);
+    return true;
+  });
 }
 
 export function getGuideBySlug(slug: string): Guide | undefined {
@@ -201,7 +211,7 @@ export function universalSearch(query: string): UniversalSearchResult {
     )
     .slice(0, 4);
 
-  const aiTools = aiToolsData
+  const aiTools = getAllAiTools()
     .filter(
       (t) =>
         t.name.toLowerCase().includes(q) ||
@@ -220,7 +230,7 @@ export function universalSearch(query: string): UniversalSearchResult {
     )
     .slice(0, 3);
 
-  const guides = guidesData
+  const guides = getAllGuides()
     .filter(
       (g) =>
         g.title.toLowerCase().includes(q) ||

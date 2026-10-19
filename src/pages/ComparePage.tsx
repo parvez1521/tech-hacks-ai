@@ -1,17 +1,18 @@
 import React, { useState } from 'react';
 import { useRouter, Link } from '../router/Router';
-import { getToolBySlug } from '../services/catalogService';
-import { getAiToolBySlug } from '../services/aiCatalogService';
+import { getToolBySlug, getProprietaryToolBySlug } from '../services/catalogService';
+import { getAiToolBySlug, getAllAiTools } from '../services/aiCatalogService';
 import { toolsData } from '../data/seedData';
-import { aiToolsData } from '../data/aiToolsData';
+import { proprietaryTools } from '../data/alternatives';
 import { Tool, AiTool } from '../types';
-import { Plus, X, ExternalLink, Check, Star, ShieldCheck, HardDrive, RefreshCw, Share2, Compass, BookOpen, CheckCircle2 } from 'lucide-react';
+import { Plus, X, ExternalLink, Check, Star, ShieldCheck, HardDrive, RefreshCw, Share2, Compass, BookOpen, CheckCircle2, Scale } from 'lucide-react';
 import { BrandLogo } from '../components/BrandLogo';
 import { siteConfig } from '../config/siteConfig';
 
 type UnifiedTool =
   | { kind: 'open-source'; data: Tool }
-  | { kind: 'ai'; data: AiTool };
+  | { kind: 'ai'; data: AiTool }
+  | { kind: 'proprietary'; data: import('../types').ProprietaryTool };
 
 const POPULAR_COMPARISONS = [
   { label: 'Cursor vs Claude Code vs Aider', tools: 'cursor,claude-code,aider' },
@@ -51,6 +52,11 @@ export const ComparePage: React.FC = () => {
     const ai = getAiToolBySlug(slug);
     if (ai) {
       resolvedTools.push({ kind: 'ai', data: ai });
+      return;
+    }
+    const proprietary = getProprietaryToolBySlug(slug);
+    if (proprietary) {
+      resolvedTools.push({ kind: 'proprietary', data: proprietary });
     }
   });
 
@@ -74,7 +80,8 @@ export const ComparePage: React.FC = () => {
   // Available tools to add
   const availableOptions: { name: string; slug: string; type: string }[] = [
     ...toolsData.map((t) => ({ name: t.name, slug: t.slug, type: 'Open Source' })),
-    ...aiToolsData.map((a) => ({ name: a.name, slug: a.slug, type: 'AI Tool' })),
+    ...getAllAiTools().map((a) => ({ name: a.name, slug: a.slug, type: 'AI Tool' })),
+    ...proprietaryTools.map((p) => ({ name: p.name, slug: p.slug, type: 'Proprietary Target' })),
   ].filter(
     (item) =>
       !slugs.includes(item.slug) &&
@@ -87,10 +94,10 @@ export const ComparePage: React.FC = () => {
       {/* Header */}
       <div className="mb-8">
         <div className="inline-flex items-center gap-2 text-primary text-xs font-semibold uppercase tracking-wider mb-2">
-          <span className="text-sm">⚖️</span>
+          <Scale className="w-4 h-4" aria-hidden="true" />
           <span>Side-by-Side Analysis</span>
         </div>
-        <h1 className="text-2xl sm:text-4xl font-extrabold text-foreground tracking-tight mb-2">
+        <h1 className="text-2xl sm:text-3xl font-bold text-foreground tracking-tight mb-2">
           Compare Open Source & AI Software
         </h1>
         <p className="text-sm sm:text-base text-secondary-foreground max-w-2xl mb-4">
@@ -104,7 +111,7 @@ export const ComparePage: React.FC = () => {
             <Link
               key={preset.tools}
               to={`/compare?tools=${preset.tools}`}
-              className={`px-2.5 py-1 rounded-full text-xs font-medium border transition-colors ${
+               className={`px-2.5 py-1 rounded-md text-xs font-medium border transition-colors ${
                 toolsParam === preset.tools
                   ? 'bg-primary/10 text-primary border-primary/30'
                   : 'bg-card text-secondary-foreground border-border hover:bg-muted'
@@ -210,7 +217,7 @@ export const ComparePage: React.FC = () => {
           </button>
         </div>
       ) : (
-        <div className="overflow-x-auto no-scrollbar rounded-xl border border-border bg-card/80 shadow-md">
+        <div className="overflow-x-auto no-scrollbar rounded-lg border border-border bg-card/80">
           <table className="w-full border-collapse text-left text-xs">
             <thead>
               <tr className="border-b border-border bg-muted/40">
@@ -232,7 +239,7 @@ export const ComparePage: React.FC = () => {
                         <div>
                           <span className="font-bold text-foreground text-sm block truncate">{t.data.name}</span>
                           <span className="text-[10px] text-muted-foreground uppercase font-mono">
-                            {t.kind === 'open-source' ? 'Open Source' : 'Cloud AI'}
+                            {t.kind === 'open-source' ? 'Open Source' : t.kind === 'ai' ? 'Cloud AI' : 'Proprietary'}
                           </span>
                         </div>
                       </div>
@@ -279,12 +286,19 @@ export const ComparePage: React.FC = () => {
                       <span className="px-2 py-0.5 rounded font-mono text-[11px] bg-muted border border-border">
                         {t.data.license} (Free & Open Source)
                       </span>
-                    ) : (
+                    ) : t.kind === 'ai' ? (
                       <div>
                         <span className="px-2 py-0.5 rounded font-medium text-[11px] bg-primary/10 text-primary border border-primary/20 capitalize">
                           {t.data.pricingType}
                         </span>
                         <p className="text-[11px] text-muted-foreground mt-1">{t.data.pricingDetails}</p>
+                      </div>
+                    ) : (
+                      <div>
+                        <span className="px-2 py-0.5 rounded font-medium text-[11px] bg-muted text-secondary-foreground border border-border">
+                          Proprietary software
+                        </span>
+                        <p className="text-[11px] text-muted-foreground mt-1">Pricing varies by plan and usage.</p>
                       </div>
                     )}
                   </td>
@@ -301,8 +315,10 @@ export const ComparePage: React.FC = () => {
                         <HardDrive className="w-3.5 h-3.5" />
                         <span>Self-Hostable (Docker / Local)</span>
                       </span>
-                    ) : (
+                    ) : t.kind === 'ai' ? (
                       <span className="text-secondary-foreground">Cloud SaaS Platform</span>
+                    ) : (
+                      <span className="text-secondary-foreground">Managed proprietary platform</span>
                     )}
                   </td>
                 ))}
@@ -320,11 +336,13 @@ export const ComparePage: React.FC = () => {
                               {s}
                             </span>
                           ))
-                        : t.data.features.map((f) => (
+                        : t.kind === 'ai'
+                        ? t.data.features.map((f) => (
                             <span key={f} className="px-1.5 py-0.5 rounded bg-muted text-[10px] text-secondary-foreground">
                               {f}
                             </span>
-                          ))}
+                          ))
+                        : <span className="text-[11px] text-secondary-foreground">Commercial cloud service</span>}
                     </div>
                   </td>
                 ))}
@@ -345,11 +363,13 @@ export const ComparePage: React.FC = () => {
                           Updated {t.data.lastCommitFormatted}
                         </span>
                       </div>
-                    ) : (
+                    ) : t.kind === 'ai' ? (
                       <div className="flex items-center gap-1">
                         <Star className="w-3.5 h-3.5 text-amber-400 fill-amber-400" />
                         <span>{t.data.rating ? `${t.data.rating.toFixed(1)} / 5.0` : 'Curated'}</span>
                       </div>
+                    ) : (
+                      <span className="text-secondary-foreground">Reference profile</span>
                     )}
                   </td>
                 ))}
@@ -362,7 +382,7 @@ export const ComparePage: React.FC = () => {
                   <td key={t.data.id} className="p-4">
                     <div className="flex flex-col gap-1.5">
                       <Link
-                        to={t.kind === 'open-source' ? `/tools/${t.data.slug}` : `/ai-tools/${t.data.slug}`}
+                        to={t.kind === 'open-source' ? `/tools/${t.data.slug}` : t.kind === 'ai' ? `/ai-tools/${t.data.slug}` : `/alternatives/${t.data.slug}`}
                         className="inline-flex items-center gap-1 text-primary font-medium hover:underline text-xs"
                       >
                         <span>View Details</span>

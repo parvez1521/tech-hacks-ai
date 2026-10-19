@@ -92,8 +92,8 @@ describe('Phase 19: Floating AI Pet, Glass UI, Theme Repair & UX Bug Fixes', () 
       const content = fs.readFileSync(cssPath, 'utf8');
 
       // Check dark RGB values
-      assert.ok(content.includes('--color-bg: 12 14 18;'), 'Dark background RGB numbers defined');
-      assert.ok(content.includes('--color-card: 19 22 28;'), 'Dark card RGB numbers defined');
+      assert.ok(content.includes('--color-bg: 11 12 14;'), 'Dark background RGB numbers defined');
+      assert.ok(content.includes('--color-card: 17 19 21;'), 'Dark card RGB numbers defined');
 
       // Check light RGB values
       assert.ok(content.includes('--color-bg: 248 250 252;'), 'Light background RGB numbers defined');
@@ -153,22 +153,18 @@ describe('Phase 19: Floating AI Pet, Glass UI, Theme Repair & UX Bug Fixes', () 
   });
 
   // =========================================================================
-  // 3. Delayed Welcome Invitation Popup (Phase B)
+  // 3. Immediate Welcome Invitation Popup (Phase B)
   // =========================================================================
-  describe('3. Delayed Welcome Invitation Popup & Persistence', () => {
+  describe('3. Immediate Welcome Invitation Popup & Persistence', () => {
     test('Welcome popup contains exact required copy and accessibility attributes', () => {
       const chatbotPath = path.resolve(process.cwd(), 'src/components/FloatingChatbot.tsx');
       const content = fs.readFileSync(chatbotPath, 'utf8');
 
-      // Exact title and body
-      assert.ok(content.includes('Need a hand? 👋'), 'Exact welcome header rendered');
-      assert.ok(
-        content.includes("Tell me what you're looking for. I'll help you find the right AI tools."),
-        'Exact welcome body text rendered'
-      );
+      assert.ok(content.includes('A useful place to start'), 'Useful welcome header rendered');
+      assert.ok(content.includes('proactiveSuggestion?.description'), 'Catalog-backed suggestion body rendered');
 
       // Exact button labels
-      assert.ok(content.includes("Let's explore"), "CTA primary label is 'Let\\'s explore'");
+      assert.ok(content.includes('Open assistant'), "CTA primary label is 'Open assistant'");
       assert.ok(content.includes('Not now'), "Secondary label is 'Not now'");
       assert.ok(
         content.includes('aria-label="Dismiss assistant invitation"'),
@@ -176,17 +172,13 @@ describe('Phase 19: Floating AI Pet, Glass UI, Theme Repair & UX Bug Fixes', () 
       );
     });
 
-    test('Welcome popup checks session storage and has 5-second timer delay', () => {
+    test('Welcome popup selects immediately and avoids duplicate messages', () => {
       const chatbotPath = path.resolve(process.cwd(), 'src/components/FloatingChatbot.tsx');
       const content = fs.readFileSync(chatbotPath, 'utf8');
 
-      assert.ok(
-        content.includes('techhacks_assistant_welcome_dismissed'),
-        'Persists dismissal via techhacks_assistant_welcome_dismissed'
-      );
-      assert.ok(content.includes('setTimeout('), 'Uses setTimeout for delayed invitation');
-      assert.ok(content.includes('5000'), 'Uses 5000ms delay for welcome popup');
-      assert.ok(content.includes('clearTimeout(timer)'), 'Cleans up timer on unmount');
+      assert.ok(content.includes('selectProactiveSuggestion()'), 'Selects a suggestion on mount');
+      assert.ok(content.includes('proactiveInitializedRef.current'), 'Guards against rerender duplicates');
+      assert.ok(!content.includes('5000'), 'Does not delay the welcome suggestion');
     });
   });
 
@@ -239,16 +231,16 @@ describe('Phase 19: Floating AI Pet, Glass UI, Theme Repair & UX Bug Fixes', () 
   });
 
   // =========================================================================
-  // 5. Apple Glass UI & Search Enhancements (Phase D)
+  // 5. Opaque UI & Search Enhancements (Phase D)
   // =========================================================================
-  describe('5. Apple Glass UI & Keyboard-Navigable Search Combobox', () => {
-    test('UniversalSearch applies Apple Glass backdrop blurs and borders', () => {
+  describe('5. Opaque UI & Keyboard-Navigable Search Combobox', () => {
+    test('UniversalSearch applies the shared opaque surface and focus treatment', () => {
       const searchPath = path.resolve(process.cwd(), 'src/components/UniversalSearch.tsx');
       const content = fs.readFileSync(searchPath, 'utf8');
 
-      assert.ok(content.includes('backdrop-blur-xl'), 'Search input includes backdrop-blur-xl');
-      assert.ok(content.includes('backdrop-blur-2xl'), 'Results dropdown includes backdrop-blur-2xl');
-      assert.ok(content.includes('border-white/15 dark:border-white/10'), 'Low-contrast fine glass borders');
+      assert.ok(content.includes('bg-card border border-border'), 'Search input uses the shared opaque surface');
+      assert.ok(content.includes('focus:ring-cyan-500/50'), 'Search input has a visible focus ring');
+      assert.ok(!content.includes('backdrop-blur-xl'), 'Search does not require a glass backdrop');
     });
 
     test('UniversalSearch implements accessible combobox pattern with ARIA roles', () => {

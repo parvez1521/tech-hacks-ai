@@ -3,7 +3,7 @@ import assert from 'node:assert';
 import fs from 'node:fs';
 import path from 'node:path';
 
-describe('Phase 24: Futuristic UI, Interactive Background & Chatbot Repair', () => {
+describe('Phase 24: Restrained UI, Verified Navigation & Chatbot Repair', () => {
   // =========================================================================
   // 1. Task 1: Homepage Floating Brand Logos Removal
   // =========================================================================
@@ -62,18 +62,15 @@ describe('Phase 24: Futuristic UI, Interactive Background & Chatbot Repair', () 
   });
 
   // =========================================================================
-  // 3. Task 3: Real Mouse-Follow Glow Effect
+  // 3. Task 3: Quiet background treatment
   // =========================================================================
-  describe('Task 3: Real Mouse-Follow Glow Effect', () => {
-    test('AmbientGlow renders holographic multi-stop radial gradient in cyan, blue and purple', () => {
+  describe('Task 3: Quiet background treatment', () => {
+    test('AmbientGlow is retained for compatibility but disabled in the quiet shell', () => {
       const glowPath = path.resolve(process.cwd(), 'src/components/AmbientGlow.tsx');
       const content = fs.readFileSync(glowPath, 'utf8');
 
-      assert.ok(content.includes('rgba(6, 182, 212,'), 'Uses vibrant cyan stop in cursor aura');
-      assert.ok(content.includes('rgba(59, 130, 246,'), 'Uses electric blue stop in cursor aura');
-      assert.ok(content.includes('rgba(147, 51, 234,'), 'Uses subtle violet stop in cursor aura');
-      assert.ok(content.includes('--mouse-x'), 'Uses dynamic --mouse-x CSS custom property');
-      assert.ok(content.includes('--mouse-y'), 'Uses dynamic --mouse-y CSS custom property');
+      assert.ok(content.includes('const ENABLE_AMBIENT_GLOW = false'), 'Global ambient painting is disabled');
+      assert.ok(content.includes('opacity-0'), 'Legacy ambient container is visually suppressed');
     });
 
     test('AmbientGlow container is non-blocking, behind content, and accessible', () => {
@@ -89,16 +86,16 @@ describe('Phase 24: Futuristic UI, Interactive Background & Chatbot Repair', () 
   });
 
   // =========================================================================
-  // 4. Task 4: Working 5-Second Chatbot Welcome Popup
+  // 4. Task 4: Working proactive chatbot suggestion
   // =========================================================================
-  describe('Task 4: Working 5-Second Chatbot Welcome Popup', () => {
-    test('FloatingChatbot initializes 5000ms delay timer with sessionStorage persistence', () => {
+  describe('Task 4: Working proactive chatbot suggestion', () => {
+    test('FloatingChatbot selects and displays a local suggestion immediately', () => {
       const chatbotPath = path.resolve(process.cwd(), 'src/components/FloatingChatbot.tsx');
       const content = fs.readFileSync(chatbotPath, 'utf8');
 
-      assert.ok(content.includes('5000'), 'Uses exact 5000ms delay timer');
-      assert.ok(content.includes('techhacks_assistant_welcome_dismissed'), 'Uses session persistence key');
-      assert.ok(content.includes('clearTimeout(timer)'), 'Cleans up timer on unmount');
+      assert.ok(content.includes('selectProactiveSuggestion()'), 'Uses the local proactive selector');
+      assert.ok(content.includes('setShowWelcome(true)'), 'Makes the suggestion bubble visible');
+      assert.ok(!content.includes('5000'), 'Does not delay the first suggestion');
     });
 
     test('Welcome popup bubble contains dismiss button and opens chat on click', () => {
@@ -107,23 +104,23 @@ describe('Phase 24: Futuristic UI, Interactive Background & Chatbot Repair', () 
 
       assert.ok(content.includes('data-testid="dismiss-welcome-btn"'), 'Has accessible dismiss button');
       assert.ok(content.includes('onClick={handleOpenFromWelcome}'), 'Bubble body opens chat on click');
-      assert.ok(content.includes('Need help finding the right AI tool? 👋'), 'Has friendly invitation headline');
-      assert.ok(content.includes('border-cyan-500/30'), 'Styled with holographic cyan border glow');
+      assert.ok(content.includes('A useful place to start'), 'Has a useful invitation headline');
+      assert.ok(content.includes('bg-card border border-border'), 'Styled with an opaque shared surface');
     });
   });
 
   // =========================================================================
-  // 5. Task 5: Futuristic Holographic Chatbot UI
+  // 5. Task 5: Focused chatbot UI
   // =========================================================================
-  describe('Task 5: Futuristic Holographic Chatbot UI', () => {
-    test('Chat panel uses translucent glass, cyan border glow, and cybernetic halo', () => {
+  describe('Task 5: Focused chatbot UI', () => {
+    test('Chat panel uses an opaque surface and clear catalog status', () => {
       const chatbotPath = path.resolve(process.cwd(), 'src/components/FloatingChatbot.tsx');
       const content = fs.readFileSync(chatbotPath, 'utf8');
 
-      assert.ok(content.includes('backdrop-blur-2xl'), 'Uses high-blur translucent glass');
-      assert.ok(content.includes('border-cyan-500/30'), 'Uses holographic cyan border');
-      assert.ok(content.includes('Online / Ready'), 'Header displays cybernetic Online / Ready status badge');
-      assert.ok(content.includes('from-cyan-600 to-blue-600'), 'User messages styled with cyan-to-blue gradient');
+      assert.ok(content.includes('bg-card shadow-xl'), 'Panel uses an opaque elevated surface');
+      assert.ok(content.includes('border-border'), 'Panel uses the shared border token');
+      assert.ok(content.includes('Catalog'), 'Header displays the catalog assistant status');
+      assert.ok(!content.includes('from-cyan-600 to-blue-600'), 'User messages do not use a gradient');
       assert.ok(content.includes('animate-bounce'), 'Includes animated pulsing typing indicator dots');
     });
 
@@ -133,22 +130,21 @@ describe('Phase 24: Futuristic UI, Interactive Background & Chatbot Repair', () 
 
       assert.ok(content.includes('Ask Tech Hacks AI'), 'Displays clear Ask Tech Hacks AI label');
       assert.ok(content.includes('AiOrb3D'), 'Renders 3D companion orb inside launcher');
-      assert.ok(content.includes('shadow-cyan-500'), 'Launcher illuminates with cyan hover glow');
+      assert.ok(content.includes('border-border'), 'Launcher uses the shared border token');
     });
   });
 
   // =========================================================================
-  // 6. Task 6 & 7: Interactive Background, Search Polish & Card Illumination
+  // 6. Task 6 & 7: Search polish & card interaction
   // =========================================================================
   describe('Task 6 & 7: Interactive Background & Interaction Polish', () => {
-    test('HomePage features modern layered background and hero halo bloom', () => {
+    test('HomePage keeps the hero focused on search without decorative layers', () => {
       const homePath = path.resolve(process.cwd(), 'src/pages/HomePage.tsx');
       const content = fs.readFileSync(homePath, 'utf8');
 
-      assert.ok(content.includes('bg-dot-pattern'), 'Features fine dot texture pattern');
-      assert.ok(content.includes('bg-grid-pattern'), 'Features subtle geometric grid pattern');
-      assert.ok(content.includes('animate-ambient-drift'), 'Features drifting ambient gradient bloom');
-      assert.ok(content.includes('from-cyan-500/15 via-blue-600/15 to-purple-600/10'), 'Central hero halo has cybernetic color mesh');
+      assert.ok(!content.includes('bg-dot-pattern'), 'Does not render a dot texture in the hero');
+      assert.ok(!content.includes('bg-grid-pattern'), 'Does not render a grid texture in the hero');
+      assert.ok(!content.includes('animate-ambient-drift'), 'Does not render an ambient gradient bloom');
     });
 
     test('UniversalSearch includes Cmd+K shortcut listener and glowing cyan focus ring', () => {
@@ -161,18 +157,18 @@ describe('Phase 24: Futuristic UI, Interactive Background & Chatbot Repair', () 
       assert.ok(content.includes('focus:shadow-['), 'Includes soft focus glow shadow');
     });
 
-    test('AiToolCard and AlternativeCard feature refined elevation and cyan spotlight', () => {
+    test('AiToolCard and AlternativeCard use shared restrained interaction styles', () => {
       const aiCardPath = path.resolve(process.cwd(), 'src/components/AiToolCard.tsx');
       const aiContent = fs.readFileSync(aiCardPath, 'utf8');
       assert.ok(aiContent.includes('hover:-translate-y-1.5'), 'AiToolCard has refined hover elevation');
       assert.ok(aiContent.includes('hover:border-cyan-500/40'), 'AiToolCard illuminates with cyan border on hover');
-      assert.ok(aiContent.includes('rgba(6, 182, 212,'), 'AiToolCard features cyan interactive spotlight');
+      assert.ok(aiContent.includes('interactive-card'), 'AiToolCard uses the shared interaction utility');
 
       const altCardPath = path.resolve(process.cwd(), 'src/components/AlternativeCard.tsx');
       const altContent = fs.readFileSync(altCardPath, 'utf8');
       assert.ok(altContent.includes('hover:-translate-y-1.5'), 'AlternativeCard has refined hover elevation');
       assert.ok(altContent.includes('hover:border-cyan-500/40'), 'AlternativeCard illuminates with cyan border on hover');
-      assert.ok(altContent.includes('rgba(6, 182, 212,'), 'AlternativeCard features cyan interactive spotlight');
+      assert.ok(altContent.includes('interactive-card'), 'AlternativeCard uses the shared interaction utility');
     });
   });
 });

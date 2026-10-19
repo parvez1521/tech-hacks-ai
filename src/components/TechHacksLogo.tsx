@@ -23,7 +23,7 @@ export const TechHacksLogo: React.FC<TechHacksLogoProps> = ({
     <div className={`flex items-center gap-2.5 group select-none ${className}`}>
       {/* Dynamic Vector Icon Mark */}
       <div
-        className={`${current.box} rounded-lg bg-[#0b0f19] border border-cyan-500/40 relative flex items-center justify-center shrink-0 shadow-sm transition-all duration-300 ease-out group-hover:rotate-12 group-hover:border-cyan-400 group-hover:scale-105 group-hover:shadow-[0_0_15px_rgba(6,182,212,0.35)] overflow-hidden`}
+        className={`${current.box} rounded-md bg-[#111315] border border-cyan-500/45 relative flex items-center justify-center shrink-0 overflow-hidden transition-transform duration-200 group-hover:rotate-12 group-hover:scale-105`}
       >
         <svg
           viewBox="0 0 32 32"
@@ -48,10 +48,10 @@ export const TechHacksLogo: React.FC<TechHacksLogoProps> = ({
           <rect width="32" height="32" rx="6" fill="url(#navGlowGrad)" />
 
           {/* Lightning Monogram */}
-          <path
+            <path
             d="M17.5 4.5L7 17h8l-2 10.5 12-13.5h-8.5l2-9.5z"
             fill="url(#navBoltGrad)"
-            className="transition-transform duration-300 group-hover:scale-105"
+             className=""
           />
 
           {/* AI Sparkle */}
@@ -66,7 +66,7 @@ export const TechHacksLogo: React.FC<TechHacksLogoProps> = ({
       {showWordmark && (
         <span className={`font-extrabold tracking-tight text-foreground ${current.text} flex items-center`}>
           <span>Tech Hacks</span>
-          <span className="ml-1.5 font-black bg-gradient-to-r from-cyan-400 via-sky-400 to-blue-500 bg-clip-text text-transparent">
+          <span className="ml-1.5 font-black text-cyan-300">
             AI
           </span>
         </span>

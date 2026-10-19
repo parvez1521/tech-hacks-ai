@@ -38,21 +38,19 @@ describe('Phase 5: Premium Interactive UI, Motion Polish & Accessibility', () =>
     assert.ok(cssContent.includes('@keyframes fadeInUp'), 'Should define fadeInUp animation keyframe');
   });
 
-  test('ToolCard includes interactive spotlight markup and accessible keyboard focus states', async () => {
+  test('ToolCard includes restrained interaction markup and accessible keyboard focus states', async () => {
     if (!ssrModule) ssrModule = await import('../dist/test-ssr.js');
     const html = ReactDOMServer.renderToString(React.createElement(ssrModule.App));
 
-    // ToolCards have focus-within classes and radial-gradient spotlight
+    // ToolCards expose a shared interaction utility and focus ring.
     assert.ok(html.includes('focus-within:ring-2'), 'ToolCard must contain focus-within ring for keyboard access');
-    assert.ok(html.includes('radial-gradient('), 'ToolCard should contain radial-gradient spotlight background');
+    assert.ok(html.includes('interactive-card'), 'ToolCard should use the shared restrained interaction utility');
   });
 
-  test('Hero section contains ambient drift animation and dot pattern background', async () => {
+  test('Hero section keeps motion limited to a short entrance sequence', async () => {
     if (!ssrModule) ssrModule = await import('../dist/test-ssr.js');
     const html = ReactDOMServer.renderToString(React.createElement(ssrModule.App));
 
-    assert.ok(html.includes('animate-ambient-drift'), 'Hero should include ambient drift animation');
-    assert.ok(html.includes('bg-dot-pattern'), 'Hero should include subtle background dot texture');
     assert.ok(html.includes('animate-fade-in-up'), 'Hero should include staggered entrance animation');
   });
 

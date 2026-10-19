@@ -53,13 +53,13 @@ export const AiToolsPage: React.FC = () => {
               <Sparkles className="w-4 h-4" />
               <span>Curated AI Catalog</span>
             </div>
-            <h1 className="text-2xl sm:text-4xl font-extrabold text-foreground tracking-tight">
+            <h1 className="text-2xl sm:text-3xl font-bold text-foreground tracking-tight">
               Discover Best AI Tools & Generative Platforms
             </h1>
           </div>
           <Link
             to="/submit-tool"
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-primary hover:bg-primary/90 text-primary-foreground font-semibold text-xs shadow-md shadow-primary/20 transition-all shrink-0 self-start sm:self-auto"
+             className="inline-flex items-center gap-2 px-4 py-2 rounded-md bg-primary hover:bg-primary-hover text-primary-foreground font-semibold text-xs transition-colors shrink-0 self-start sm:self-auto"
           >
             <PlusCircle className="w-4 h-4" />
             <span>Submit a Tool</span>
@@ -70,7 +70,7 @@ export const AiToolsPage: React.FC = () => {
         </p>
 
         {/* Search & Main Controls Bar */}
-        <div className="p-4 rounded-xl bg-card/60 border border-border flex flex-col md:flex-row gap-3 items-stretch md:items-center justify-between mb-6">
+        <div className="p-3 rounded-lg bg-card/60 border border-border flex flex-col md:flex-row gap-3 items-stretch md:items-center justify-between mb-6">
           {/* Search Input */}
           <div className="relative flex-1 max-w-md">
             <Search className="w-4 h-4 text-muted-foreground absolute left-3 top-1/2 -translate-y-1/2" />
@@ -143,7 +143,7 @@ export const AiToolsPage: React.FC = () => {
           <button
             type="button"
             onClick={() => handleCategoryChange(null)}
-            className={`px-3 py-1.5 rounded-full text-xs font-medium shrink-0 transition-colors ${
+                 className={`px-3 py-1.5 rounded-md text-xs font-medium shrink-0 transition-colors ${
               !filterState.category
                 ? 'bg-primary text-primary-foreground'
                 : 'bg-muted/80 text-secondary-foreground hover:bg-muted border border-border/60'
@@ -158,7 +158,7 @@ export const AiToolsPage: React.FC = () => {
                 key={cat.id}
                 type="button"
                 onClick={() => handleCategoryChange(isSelected ? null : cat.id)}
-                className={`px-3 py-1.5 rounded-full text-xs font-medium shrink-0 transition-colors ${
+                 className={`px-3 py-1.5 rounded-md text-xs font-medium shrink-0 transition-colors ${
                   isSelected
                     ? 'bg-primary text-primary-foreground'
                     : 'bg-muted/80 text-secondary-foreground hover:bg-muted border border-border/60'

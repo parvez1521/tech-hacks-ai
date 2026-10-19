@@ -135,7 +135,7 @@ export const ToolDetailPage: React.FC = () => {
       </nav>
 
       {/* Main Hero Header */}
-      <div className="p-6 sm:p-8 rounded-xl border border-border bg-card/60 mb-8 shadow-sm">
+       <div className="p-6 sm:p-8 rounded-lg border border-border bg-card/60 mb-8">
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 mb-6">
           <div className="flex items-center gap-4">
             <BrandLogo

@@ -42,7 +42,7 @@ export const DailyDiscoveriesSection: React.FC<DailyDiscoveriesSectionProps> = (
       {/* Header Bar */}
       <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-6">
         <div>
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-primary/15 text-primary border border-primary/25 mb-2.5">
+          <div className="inline-flex items-center gap-1.5 eyebrow mb-2.5">
             <Sparkles className="w-3.5 h-3.5" />
             <span>Curated Daily by Editors</span>
           </div>
@@ -74,7 +74,7 @@ export const DailyDiscoveriesSection: React.FC<DailyDiscoveriesSectionProps> = (
           {[1, 2, 3].map((i) => (
             <div
               key={i}
-              className="h-56 rounded-2xl border border-border/60 bg-card/40 p-6 animate-pulse flex flex-col justify-between"
+              className="h-56 rounded-lg border border-border/60 bg-card/40 p-6 animate-pulse flex flex-col justify-between"
             >
               <div>
                 <div className="w-24 h-4 bg-muted rounded-full mb-4" />
@@ -95,7 +95,7 @@ export const DailyDiscoveriesSection: React.FC<DailyDiscoveriesSectionProps> = (
 
       {/* Error state */}
       {!isLoading && error && (
-        <div className="p-8 rounded-2xl border border-border/80 bg-card/60 text-center">
+          <div className="p-8 rounded-lg border border-border/80 bg-card/60 text-center">
           <p className="text-sm text-muted-foreground mb-3">{error}</p>
           <button
             onClick={loadDiscoveries}
@@ -109,8 +109,8 @@ export const DailyDiscoveriesSection: React.FC<DailyDiscoveriesSectionProps> = (
 
       {/* Empty State */}
       {!isLoading && !error && discoveries.length === 0 && (
-        <div className="p-10 rounded-2xl border border-border/80 bg-card/60 text-center flex flex-col items-center">
-          <div className="w-12 h-12 rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center text-primary mb-3">
+         <div className="p-10 rounded-lg border border-border/80 bg-card/60 text-center flex flex-col items-center">
+           <div className="w-12 h-12 rounded-lg bg-primary/10 border border-primary/20 flex items-center justify-center text-primary mb-3">
             <Compass className="w-6 h-6" />
           </div>
           <h3 className="text-base font-bold text-foreground mb-1">No discoveries featured yet</h3>
@@ -119,7 +119,7 @@ export const DailyDiscoveriesSection: React.FC<DailyDiscoveriesSectionProps> = (
           </p>
           <Link
             to="/submit-tool"
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-semibold bg-primary text-primary-foreground hover:bg-primary-hover shadow transition-all"
+             className="inline-flex items-center gap-2 px-4 py-2 rounded-md text-xs font-semibold bg-primary text-primary-foreground hover:bg-primary-hover transition-colors"
           >
             <span>Submit a Breakthrough Tool</span>
             <ArrowRight className="w-3.5 h-3.5" />

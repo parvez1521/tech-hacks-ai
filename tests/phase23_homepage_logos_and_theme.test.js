@@ -48,7 +48,7 @@ describe('Phase 23: Homepage Logo Fix, Real Brand Assets & Theme Toggle Repair',
 
       assert.ok(content.includes('html.dark'), 'Includes html.dark selector');
       assert.ok(content.includes('color-scheme: dark'), 'Dark mode declares color-scheme: dark');
-      assert.ok(content.includes('--color-bg: 12 14 18'), 'Dark background token exists');
+      assert.ok(content.includes('--color-bg: 11 12 14'), 'Dark background token exists');
     });
 
     test('Header component cleanly removes theme toggle buttons per Phase 24 specifications', () => {

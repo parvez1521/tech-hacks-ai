@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, useRouter } from '../router/Router';
 import { getBookmarks, subscribeBookmarks } from '../services/bookmarkService';
-import { useTheme } from '../context/ThemeContext';
 import { TechHacksLogo } from './TechHacksLogo';
 import {
   Menu,
@@ -20,8 +19,6 @@ import {
   Scale,
   Compass,
   Tag,
-  Sun,
-  Moon,
   ChevronDown,
   Gift,
   Flame,
@@ -34,7 +31,6 @@ export const Header: React.FC = () => {
   const [isDiscoverOpen, setIsDiscoverOpen] = useState(false);
   const [isLearnOpen, setIsLearnOpen] = useState(false);
   const [savedCount, setSavedCount] = useState(0);
-  const { theme, toggleTheme } = useTheme();
   const { navigate } = useRouter();
 
   const discoverRef = useRef<HTMLDivElement>(null);
@@ -67,8 +63,8 @@ export const Header: React.FC = () => {
   };
 
   return (
-    <header className="sticky top-0 inset-x-0 z-50 bg-background/80 backdrop-blur-md border-b border-border/60 transition-colors">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-4">
+    <header className="sticky top-0 inset-x-0 z-50 bg-background/95 border-b border-border/80">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 h-[68px] flex items-center justify-between gap-4">
         {/* Left: Brand Logo & Title */}
         <div className="flex items-center gap-5 xl:gap-7">
           <Link to="/" className="flex items-center shrink-0" aria-label="Tech Hacks AI Home">
@@ -97,7 +93,7 @@ export const Header: React.FC = () => {
               </button>
 
               {isDiscoverOpen && (
-                <div className="absolute top-full left-0 mt-1.5 w-60 rounded-xl bg-card/95 backdrop-blur-md border border-border p-1.5 shadow-xl shadow-black/40 z-50 flex flex-col gap-0.5 animate-fade-in">
+                  <div className="absolute top-full left-0 mt-2 w-60 rounded-lg bg-card border border-border p-1.5 shadow-lg shadow-black/30 z-50 flex flex-col gap-0.5 animate-fade-in">
                   <Link
                     to="/discoveries"
                     onClick={() => setIsDiscoverOpen(false)}
@@ -210,7 +206,7 @@ export const Header: React.FC = () => {
               </button>
 
               {isLearnOpen && (
-                <div className="absolute top-full left-0 mt-1.5 w-56 rounded-xl bg-card/95 backdrop-blur-md border border-border p-1.5 shadow-xl shadow-black/40 z-50 flex flex-col gap-0.5 animate-fade-in">
+                <div className="absolute top-full left-0 mt-2 w-56 rounded-lg bg-card border border-border p-1.5 shadow-lg shadow-black/30 z-50 flex flex-col gap-0.5 animate-fade-in">
                   <Link
                     to="/guides"
                     onClick={() => setIsLearnOpen(false)}
@@ -336,7 +332,7 @@ export const Header: React.FC = () => {
 
       {/* Mobile Backdrop Overlay Menu */}
       {isMobileMenuOpen && (
-        <div id="mobile-nav" className="lg:hidden border-b border-border bg-background/95 backdrop-blur-xl px-4 py-5 flex flex-col gap-4 animate-fade-in max-h-[85vh] overflow-y-auto no-scrollbar">
+        <div id="mobile-nav" className="lg:hidden border-b border-border bg-background px-4 py-5 flex flex-col gap-4 animate-fade-in max-h-[85vh] overflow-y-auto no-scrollbar">
           {/* Group 1: Core Directories */}
           <div className="flex flex-col gap-1">
             <span className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground px-2">

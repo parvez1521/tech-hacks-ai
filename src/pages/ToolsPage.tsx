@@ -54,7 +54,7 @@ export const ToolsPage: React.FC = () => {
           <FolderKanban className="w-4 h-4" />
           <span>Full Directory</span>
         </div>
-        <h1 className="text-2xl sm:text-4xl font-extrabold text-foreground tracking-tight mb-2">
+        <h1 className="text-2xl sm:text-3xl font-bold text-foreground tracking-tight mb-2">
           All Open Source Software Tools
         </h1>
         <p className="text-sm sm:text-base text-secondary-foreground max-w-2xl">

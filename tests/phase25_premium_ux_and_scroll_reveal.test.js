@@ -4,14 +4,14 @@
  * Tests cover:
  * 1. WELCOME_QUESTIONS array exists with exactly 10 curated entries
  * 2. All welcome questions are unique strings of minimum useful length
- * 3. pickWelcomeQuestion de-duplication logic (via WELCOME_QUESTIONS export)
+   * 3. proactive selector de-duplicates suggestions across visits
  * 4. scroll-reveal CSS utilities exist in index.css
  * 5. useScrollReveal hook file exists and exports the hook
  * 6. FloatingChatbot exports WELCOME_QUESTIONS
- * 7. Homepage has useScrollReveal import
+   * 7. Homepage has useScrollReveal import
  * 8. prefers-reduced-motion guard exists for reveal-section in CSS
  * 9. welcome-question-chip testid referenced in the component source
- * 10. No theme toggle reintroduced
+   * 10. No theme toggle reintroduced
  */
 
 import { describe, it } from 'node:test';
@@ -90,16 +90,16 @@ describe('Phase 25: Premium UX, Scroll Reveal & Smart Welcome', () => {
       'handleSendWelcomeQuestion handler should be defined'
     );
     assert.ok(
-      src.includes('handleSend(q)') || src.includes('handleSend(welcomeQuestion)'),
+      src.includes('handleSend(q') || src.includes('handleSend(welcomeQuestion)'),
       'handleSendWelcomeQuestion should invoke handleSend with the question'
     );
   });
 
-  it('welcomeQuestion state is set from pickWelcomeQuestion', () => {
+  it('welcomeQuestion state is set from the proactive selector', () => {
     const src = read('src/components/FloatingChatbot.tsx');
     assert.ok(
-      src.includes('pickWelcomeQuestion()'),
-      'pickWelcomeQuestion() should be called to select the welcome question'
+      src.includes('selectProactiveSuggestion()'),
+      'selectProactiveSuggestion() should be called to select the welcome suggestion'
     );
     assert.ok(
       src.includes('setWelcomeQuestion'),
@@ -223,24 +223,24 @@ describe('Phase 25: Premium UX, Scroll Reveal & Smart Welcome', () => {
   });
 
   // ──────────────────────────────────────────────────────────────────────────
-  // 7. Welcome session de-duplication storage key
+  // 7. Welcome de-duplication storage key
   // ──────────────────────────────────────────────────────────────────────────
-  it('FloatingChatbot tracks welcome question index in sessionStorage to avoid repeats', () => {
-    const src = read('src/components/FloatingChatbot.tsx');
+  it('The proactive selector tracks the previous suggestion in localStorage', () => {
+    const src = read('src/services/proactiveSuggestionService.ts');
     assert.ok(
-      src.includes('WELCOME_Q_STORAGE_KEY') || src.includes('techhacks_welcome_q_idx'),
-      'Should use a sessionStorage key to track and avoid repeating the same welcome question'
+      src.includes('techhacks_proactive_suggestion_id'),
+      'Should use a storage key to track and avoid repeating the same suggestion'
     );
   });
 
   // ──────────────────────────────────────────────────────────────────────────
-  // 8. 5-second timer preserved
+  // 8. Immediate suggestion
   // ──────────────────────────────────────────────────────────────────────────
-  it('FloatingChatbot 5-second welcome timer is preserved', () => {
+  it('FloatingChatbot shows the welcome suggestion without a timer', () => {
     const src = read('src/components/FloatingChatbot.tsx');
     assert.ok(
-      src.includes('5000'),
-      'The 5-second delay for the welcome popup should still be present'
+      src.includes('setShowWelcome(true)') && !src.includes('5000'),
+      'The proactive suggestion should be visible immediately'
     );
   });
 });

@@ -10,12 +10,6 @@ interface AiToolCardProps {
 }
 
 export const AiToolCard: React.FC<AiToolCardProps> = ({ tool }) => {
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    e.currentTarget.style.setProperty('--card-x', `${e.clientX - rect.left}px`);
-    e.currentTarget.style.setProperty('--card-y', `${e.clientY - rect.top}px`);
-  };
-
   const bookmarkItem: BookmarkItem = {
     id: `ai-${tool.id}`,
     type: 'ai-tool',
@@ -74,15 +68,14 @@ export const AiToolCard: React.FC<AiToolCardProps> = ({ tool }) => {
 
   return (
     <div
-      onMouseMove={handleMouseMove}
-      className="group relative flex flex-col justify-between p-5 rounded-lg border border-border bg-card/90 hover:bg-card transition-all duration-300 ease-out hover:-translate-y-1.5 hover:border-cyan-500/40 hover:shadow-xl hover:shadow-cyan-500/5 min-h-[250px] focus-within:ring-2 focus-within:ring-cyan-500/60 focus-within:border-cyan-500/60"
+      className="group relative flex flex-col justify-between p-5 rounded-lg border border-border bg-card/90 interactive-card hover:-translate-y-1.5 hover:border-cyan-500/40 min-h-[250px] focus-within:ring-2 focus-within:ring-cyan-500/60 focus-within:border-cyan-500/60"
     >
-      {/* Decorative Interactive Spotlight Inner Glow */}
+      {/* A quiet accent wash keeps the hover state legible without turning the card into a light source. */}
       <div
-        className="pointer-events-none absolute -inset-px rounded-lg opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-focus-within:opacity-100 -z-0"
+        className="pointer-events-none absolute inset-0 rounded-lg opacity-0 transition-opacity duration-200 group-hover:opacity-100 group-focus-within:opacity-100 -z-0"
         style={{
           background:
-            'radial-gradient(280px circle at var(--card-x, 50%) var(--card-y, 50%), rgba(6, 182, 212, 0.12), transparent 80%)',
+            'radial-gradient(280px circle at 50% 0%, rgba(6, 182, 212, 0.03), transparent 70%)',
         }}
         aria-hidden="true"
       />

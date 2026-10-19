@@ -89,7 +89,7 @@ describe('Phase 14: Deep QA, Production Readiness & Trust Audit', () => {
 
       assert.ok(html.includes('Discover the Best AI Tools &amp; Open Source Alternatives') || html.includes('Discover the Best AI Tools & Open Source Alternatives'), 'Homepage H1 headline');
       assert.ok(html.includes('What do you want to build or replace today?'), 'Goal-driven discovery section');
-      assert.ok(html.includes("Editor&#x27;s Picks: Benchmark-Leading Tools") || html.includes("Editor's Picks: Benchmark-Leading Tools"), 'Curated showcase section');
+      assert.ok(html.includes("Editor&#x27;s Picks") || html.includes("Editor's Picks"), 'Curated showcase section');
       assert.ok(html.includes('Explore Top Generative AI Platforms'), 'Trending AI models section');
       assert.ok(html.includes('Free AI Tools (No Credit Card Required)'), 'Free AI tools section');
       assert.ok(html.includes('Explore by Tech Category'), 'Category taxonomy section');

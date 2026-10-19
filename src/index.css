@@ -8,19 +8,19 @@
   body.dark,
   [data-theme='dark'] {
     color-scheme: dark;
-    --color-bg: 12 14 18;
-    --color-fg: 243 244 246;
-    --color-card: 19 22 28;
-    --color-card-fg: 243 244 246;
-    --color-muted: 31 36 45;
-    --color-muted-fg: 156 163 175;
-    --color-accent: 30 36 48;
-    --color-accent-fg: 249 250 251;
-    --color-border: 35 41 54;
-    --color-secondary: 31 41 55;
-    --color-secondary-fg: 209 213 219;
-    --color-primary: 59 130 246;
-    --color-primary-hover: 37 99 235;
+    --color-bg: 11 12 14;
+    --color-fg: 244 245 246;
+    --color-card: 17 19 21;
+    --color-card-fg: 244 245 246;
+    --color-muted: 23 25 28;
+    --color-muted-fg: 150 155 165;
+    --color-accent: 31 34 38;
+    --color-accent-fg: 244 245 246;
+    --color-border: 39 42 48;
+    --color-secondary: 23 25 28;
+    --color-secondary-fg: 205 209 214;
+    --color-primary: 56 189 248;
+    --color-primary-hover: 34 211 238;
     --glow-spotlight: rgba(6, 182, 212, 0.14);
     --dot-color: rgba(255, 255, 255, 0.08);
     --grid-color: rgba(255, 255, 255, 0.03);
@@ -54,7 +54,7 @@
     color: rgb(var(--color-fg));
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     overflow-x: hidden;
-    transition: background-color 0.2s ease, color 0.2s ease;
+    text-rendering: optimizeLegibility;
   }
 
   /* Focus ring accessibility */
@@ -72,6 +72,40 @@
   .no-scrollbar {
     -ms-overflow-style: none;
     scrollbar-width: none;
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .surface-card {
+    background-color: rgb(var(--color-card) / 0.92);
+    border: 1px solid rgb(var(--color-border) / 0.92);
+  }
+
+  .interactive-card {
+    transition: border-color 160ms ease, background-color 160ms ease, transform 160ms ease;
+  }
+
+  .interactive-card:hover,
+  .interactive-card:focus-within {
+    background-color: rgb(var(--color-card));
+    border-color: rgb(var(--color-primary) / 0.42);
+    transform: translateY(-2px);
+  }
+
+  .eyebrow {
+    color: rgb(var(--color-primary));
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    line-height: 1rem;
+    text-transform: uppercase;
+  }
+
+  .focus-ring:focus-visible {
+    outline: 2px solid rgb(var(--color-primary) / 0.9);
+    outline-offset: 3px;
   }
 
   /* Subtle background dot texture for technology aesthetic */
@@ -267,5 +301,9 @@
     transform: none !important;
     transition: none !important;
   }
-}
 
+  .interactive-card:hover,
+  .interactive-card:focus-within {
+    transform: none;
+  }
+}
