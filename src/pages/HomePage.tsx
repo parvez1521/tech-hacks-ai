@@ -230,43 +230,26 @@ export const HomePage: React.FC = () => {
           <UniversalSearch />
         </div>
 
-        {/* Quick Route Shortcuts Ribbon */}
-        <div className="animate-fade-in-up [animation-delay:240ms] flex flex-wrap items-center justify-center gap-3 text-xs pt-4 border-t border-border/50 max-w-2xl mx-auto">
-          <Link
-            to="/ai-tools"
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-border bg-card/60 hover:bg-card hover:border-primary/40 text-foreground transition-all duration-150"
-          >
-            <Sparkles className="w-3.5 h-3.5 text-primary" />
-            <span>AI Directory</span>
-          </Link>
-          <Link
-            to="/free-ai-sites"
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-border bg-card/60 hover:bg-card hover:border-primary/40 text-foreground transition-all duration-150"
-          >
-            <Gift className="w-3.5 h-3.5 text-emerald-400" />
-            <span>Free AI Tools</span>
-          </Link>
-          <Link
-            to="/alternatives"
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-border bg-card/60 hover:bg-card hover:border-primary/40 text-foreground transition-all duration-150"
-          >
-            <Replace className="w-3.5 h-3.5 text-primary" />
-            <span>SaaS Alternatives</span>
-          </Link>
-          <Link
-            to="/offers"
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-border bg-card/60 hover:bg-card hover:border-primary/40 text-foreground transition-all duration-150"
-          >
-            <Tag className="w-3.5 h-3.5 text-amber-400" />
-            <span>AI Deals</span>
-          </Link>
-          <Link
-            to="/pick"
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-border bg-card/60 hover:bg-card hover:border-primary/40 text-foreground transition-all duration-150 font-medium"
-          >
-            <Compass className="w-3.5 h-3.5 text-purple-400" />
-            <span>Help Me Pick</span>
-          </Link>
+        {/* Editorial Standards & Verified Catalog Metrics */}
+        <div className="animate-fade-in-up [animation-delay:240ms] mt-8 max-w-4xl mx-auto">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 p-4 sm:p-5 rounded-2xl bg-white border border-[#DFE7F3] shadow-xs">
+            <div className="flex flex-col items-center justify-center p-2 text-center">
+              <span className="text-2xl sm:text-3xl font-extrabold text-[#0F172A] tracking-tight">100+</span>
+              <span className="text-xs font-medium text-[#64748B] mt-0.5">Verified Tools</span>
+            </div>
+            <div className="flex flex-col items-center justify-center p-2 text-center border-l border-[#DFE7F3]">
+              <span className="text-2xl sm:text-3xl font-extrabold text-[#2563EB] tracking-tight">65+</span>
+              <span className="text-xs font-medium text-[#64748B] mt-0.5">AI Platforms</span>
+            </div>
+            <div className="flex flex-col items-center justify-center p-2 text-center border-l border-[#DFE7F3]">
+              <span className="text-2xl sm:text-3xl font-extrabold text-[#0F172A] tracking-tight">58</span>
+              <span className="text-xs font-medium text-[#64748B] mt-0.5">Open Source</span>
+            </div>
+            <div className="flex flex-col items-center justify-center p-2 text-center border-l border-[#DFE7F3]">
+              <span className="text-2xl sm:text-3xl font-extrabold text-[#2563EB] tracking-tight">100%</span>
+              <span className="text-xs font-medium text-[#64748B] mt-0.5">Editorial Reviews</span>
+            </div>
+          </div>
         </div>
       </section>
 

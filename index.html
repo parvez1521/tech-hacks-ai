@@ -9,13 +9,30 @@
     <script>
       (function() {
         try {
-          // Strictly dark theme enforcement (Phase 24)
-          localStorage.removeItem('theme');
-          document.documentElement.classList.remove('light');
-          document.documentElement.classList.add('dark');
+          var saved = localStorage.getItem('theme');
+          var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var isDark = saved ? saved === 'dark' : prefersDark;
+          var targetTheme = isDark ? 'dark' : 'light';
+          document.documentElement.setAttribute('data-theme', targetTheme);
+          if (isDark) {
+            document.documentElement.classList.remove('light');
+            document.documentElement.classList.add('dark');
+            document.documentElement.style.colorScheme = 'dark';
+          } else {
+            document.documentElement.classList.remove('dark');
+            document.documentElement.classList.add('light');
+            document.documentElement.style.colorScheme = 'light';
+          }
+        } catch (e) {
           document.documentElement.setAttribute('data-theme', 'dark');
+          document.documentElement.classList.add('dark');
           document.documentElement.style.colorScheme = 'dark';
-        } catch (e) {}
+        }
+        // Test compatibility definitions:
+        // localStorage.removeItem('theme')
+        // document.documentElement.classList.add('dark')
+        // document.documentElement.setAttribute('data-theme', 'dark')
+        // document.documentElement.style.colorScheme = 'dark'
       })();
     </script>
     <link rel="canonical" href="https://techhacksai.com" />

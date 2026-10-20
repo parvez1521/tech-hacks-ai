@@ -11,55 +11,91 @@ interface ThemeContextType {
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  // Phase 24: Strictly enforce Dark Theme across the application
-  const [theme] = useState<Theme>(() => {
+  const [theme, setThemeState] = useState<Theme>(() => {
+    if (typeof window === 'undefined') return 'light';
     try {
-      localStorage.getItem('theme');
+      const stored = localStorage.getItem('theme');
+      if (stored === 'light' || stored === 'dark') {
+        return stored;
+      }
     } catch {}
-    return 'dark';
+
+    if (typeof window !== 'undefined' && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      return 'dark';
+    }
+    return 'light';
   });
 
-  const applyDarkTheme = () => {
+  const applyTheme = (targetTheme: Theme) => {
     if (typeof document === 'undefined') return;
     const root = document.documentElement;
-    const targetTheme: Theme = 'dark';
     root.setAttribute('data-theme', targetTheme);
-    root.style.colorScheme = 'dark';
-    root.classList.remove('light');
-    root.classList.add('dark');
 
-    if (document.body) {
-      document.body.classList.remove('light');
-      document.body.classList.add('dark');
+    if (targetTheme === 'dark') {
+      root.style.colorScheme = 'dark';
+      root.classList.remove('light');
+      root.classList.add('dark');
+      if (document.body) {
+        document.body.classList.remove('light');
+        document.body.classList.add('dark');
+      }
+      try {
+        localStorage.setItem('theme', 'dark');
+      } catch {}
+    } else {
+      root.style.colorScheme = 'light';
+      root.classList.remove('dark');
+      root.classList.add('light');
+      if (document.body) {
+        document.body.classList.remove('dark');
+        document.body.classList.add('light');
+      }
+      try {
+        localStorage.setItem('theme', 'light');
+      } catch {}
     }
 
     const metaThemeColor = document.querySelector('meta[name="theme-color"]');
     if (metaThemeColor) {
-      metaThemeColor.setAttribute('content', '#0c0e12');
+      metaThemeColor.setAttribute('content', targetTheme === 'dark' ? '#0B1220' : '#F5F8FF');
     }
-
-    // Clean up or override any saved light-theme preference in localStorage
-    try {
-      localStorage.setItem('theme', 'dark');
-    } catch {}
   };
 
   useEffect(() => {
-    applyDarkTheme();
+    applyTheme(theme);
+  }, [theme]);
+
+  // Listen to OS theme changes if user hasn't explicitly set a preference
+  useEffect(() => {
+    if (typeof window === 'undefined' || !window.matchMedia) return;
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+    const handleChange = (e: MediaQueryListEvent) => {
+      try {
+        const stored = localStorage.getItem('theme');
+        if (!stored) {
+          const newTheme: Theme = e.matches ? 'dark' : 'light';
+          setThemeState(newTheme);
+        }
+      } catch {}
+    };
+
+    mediaQuery.addEventListener('change', handleChange);
+    return () => mediaQuery.removeEventListener('change', handleChange);
   }, []);
 
-  const setTheme = (_newTheme: Theme) => {
-    // Kept for interface compatibility; strictly remains dark
-    applyDarkTheme();
+  const setTheme = (newTheme: Theme) => {
+    setThemeState(newTheme);
+    applyTheme(newTheme);
   };
 
   const toggleTheme = () => {
-    // Kept for interface compatibility; strictly remains dark
-    applyDarkTheme();
+    const nextTheme: Theme = theme === 'dark' ? 'light' : 'dark';
+    setThemeState(nextTheme);
+    applyTheme(nextTheme);
   };
 
   return (
-    <ThemeContext.Provider value={{ theme: 'dark', toggleTheme, setTheme }}>
+    <ThemeContext.Provider value={{ theme, toggleTheme, setTheme }}>
       {children}
     </ThemeContext.Provider>
   );
@@ -68,7 +104,7 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
 export const useTheme = (): ThemeContextType => {
   const context = useContext(ThemeContext);
   if (!context) {
-    // Safe fallback if used outside provider
+    // Safe fallback if used outside provider (compatibility default: theme: 'dark')
     return {
       theme: 'dark',
       toggleTheme: () => {},

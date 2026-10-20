@@ -42,33 +42,33 @@ export const PromptLibraryPage: React.FC = () => {
     <div className="max-w-6xl mx-auto px-4 sm:px-6 py-8">
       {/* Header */}
       <div className="mb-8">
-        <div className="inline-flex items-center gap-2 text-purple-400 text-xs font-semibold uppercase tracking-wider mb-2">
-          <MessageSquareCode className="w-4 h-4" />
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 border border-blue-200 text-blue-700 text-xs font-semibold uppercase tracking-wider mb-3">
+          <MessageSquareCode className="w-3.5 h-3.5 text-blue-600" />
           <span>Curated Prompt Recipes & Workflows</span>
         </div>
-        <h1 className="text-2xl sm:text-4xl font-extrabold text-foreground tracking-tight mb-2">
+        <h1 className="text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight mb-2">
           AI Prompt Library & Creative Recipes
         </h1>
-        <p className="text-sm sm:text-base text-secondary-foreground max-w-2xl mb-6">
+        <p className="text-sm sm:text-base text-slate-600 max-w-2xl mb-6">
           High-performance prompt recipes engineered for Gemini Nano Banana, Claude 3.5 Sonnet, Higgsfield AI, FLUX.1, and Cursor with customizable placeholders and verified developer workflows.
         </p>
 
         {/* Quick Search */}
-        <div className="flex flex-col sm:flex-row gap-3 items-stretch sm:items-center justify-between mb-6">
+        <div className="p-3.5 sm:p-4 rounded-2xl bg-white border border-[#DFE7F3] shadow-invary-card flex flex-col sm:flex-row gap-3 items-stretch sm:items-center justify-between mb-6">
           <div className="relative flex-1 max-w-md">
-            <Search className="w-4 h-4 text-muted-foreground absolute left-3 top-1/2 -translate-y-1/2" />
+            <Search className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
             <input
               type="text"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               placeholder="Search by keyword, placeholder, provider, or model..."
-              className="w-full pl-9 pr-8 py-2 rounded-lg bg-card border border-border text-foreground placeholder:text-muted-foreground text-xs sm:text-sm focus:outline-none focus:ring-1 focus:ring-primary"
+              className="w-full pl-9 pr-8 py-2 rounded-xl bg-[#F5F8FF] border border-[#DFE7F3] text-slate-900 placeholder:text-slate-400 text-xs sm:text-sm focus:outline-none focus:bg-white focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all"
             />
             {search && (
               <button
                 type="button"
                 onClick={() => setSearch('')}
-                className="absolute right-2.5 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
+                className="absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-700"
                 aria-label="Clear search"
               >
                 <X className="w-4 h-4" />
@@ -76,15 +76,15 @@ export const PromptLibraryPage: React.FC = () => {
             )}
           </div>
 
-          <span className="text-xs text-muted-foreground">
-            Showing <strong className="text-foreground">{filteredPrompts.length}</strong> of {allPrompts.length} prompt recipes
+          <span className="text-xs text-slate-500">
+            Showing <strong className="text-slate-900 font-mono">{filteredPrompts.length}</strong> of {allPrompts.length} prompt recipes
           </span>
         </div>
 
         {/* Provider Filter Tabs */}
         <div className="mb-4">
-          <div className="flex items-center gap-1.5 text-xs text-muted-foreground font-medium mb-2">
-            <Sparkles className="w-3.5 h-3.5 text-primary" />
+          <div className="flex items-center gap-1.5 text-xs text-slate-600 font-medium mb-2">
+            <Sparkles className="w-3.5 h-3.5 text-blue-600" />
             <span>Filter by Provider / Engine:</span>
           </div>
           <div className="flex items-center gap-2 overflow-x-auto no-scrollbar pb-1">
@@ -95,10 +95,10 @@ export const PromptLibraryPage: React.FC = () => {
                   key={prov.id}
                   type="button"
                   onClick={() => setSelectedProvider(prov.filterValue)}
-                  className={`px-3 py-1.5 rounded-lg text-xs font-medium whitespace-nowrap transition-all cursor-pointer ${
+                  className={`px-3 py-1.5 rounded-xl text-xs font-medium whitespace-nowrap transition-all cursor-pointer ${
                     isSelected
-                      ? 'bg-primary text-primary-foreground shadow-sm font-semibold'
-                      : 'bg-muted/70 text-secondary-foreground hover:bg-muted border border-border/60 hover:text-foreground'
+                      ? 'bg-blue-600 text-white shadow-sm font-semibold'
+                      : 'bg-white text-slate-700 hover:bg-slate-50 border border-[#DFE7F3] hover:text-slate-900'
                   }`}
                 >
                   {prov.name}
@@ -110,18 +110,18 @@ export const PromptLibraryPage: React.FC = () => {
 
         {/* 14 Category Pills */}
         <div>
-          <div className="flex items-center gap-1.5 text-xs text-muted-foreground font-medium mb-2">
-            <Filter className="w-3.5 h-3.5 text-purple-400" />
+          <div className="flex items-center gap-1.5 text-xs text-slate-600 font-medium mb-2">
+            <Filter className="w-3.5 h-3.5 text-blue-600" />
             <span>Filter by Category (14 Curated Domains):</span>
           </div>
           <div className="flex items-center gap-2 overflow-x-auto no-scrollbar pb-2">
             <button
               type="button"
               onClick={() => setSelectedCat(null)}
-              className={`px-3 py-1.5 rounded-full text-xs font-medium shrink-0 transition-colors cursor-pointer ${
+              className={`px-3.5 py-1.5 rounded-full text-xs font-medium shrink-0 transition-all cursor-pointer ${
                 !selectedCat
-                  ? 'bg-purple-600 text-white font-semibold'
-                  : 'bg-muted/80 text-secondary-foreground hover:bg-muted border border-border/60'
+                  ? 'bg-blue-600 text-white font-semibold shadow-sm'
+                  : 'bg-white text-slate-700 hover:bg-slate-50 hover:text-slate-900 border border-[#DFE7F3]'
               }`}
             >
               All Categories ({allPrompts.length})
@@ -134,10 +134,10 @@ export const PromptLibraryPage: React.FC = () => {
                   key={cat.id}
                   type="button"
                   onClick={() => setSelectedCat(isSelected ? null : cat.slug)}
-                  className={`px-3 py-1.5 rounded-full text-xs font-medium shrink-0 transition-colors cursor-pointer ${
+                  className={`px-3.5 py-1.5 rounded-full text-xs font-medium shrink-0 transition-all cursor-pointer ${
                     isSelected
-                      ? 'bg-purple-600 text-white font-semibold'
-                      : 'bg-muted/80 text-secondary-foreground hover:bg-muted border border-border/60'
+                      ? 'bg-blue-600 text-white font-semibold shadow-sm'
+                      : 'bg-white text-slate-700 hover:bg-slate-50 hover:text-slate-900 border border-[#DFE7F3]'
                   }`}
                 >
                   {cat.name} ({count})

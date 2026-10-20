@@ -25,15 +25,15 @@ export const SavedPage: React.FC = () => {
   const getTypeIcon = (type: string) => {
     switch (type) {
       case 'ai-tool':
-        return <Sparkles className="w-3.5 h-3.5 text-primary" />;
+        return <Sparkles className="w-3.5 h-3.5 text-blue-600" />;
       case 'open-source-tool':
-        return <FolderKanban className="w-3.5 h-3.5 text-emerald-400" />;
+        return <FolderKanban className="w-3.5 h-3.5 text-emerald-600" />;
       case 'guide':
-        return <BookOpen className="w-3.5 h-3.5 text-blue-400" />;
+        return <BookOpen className="w-3.5 h-3.5 text-blue-600" />;
       case 'prompt':
-        return <MessageSquareCode className="w-3.5 h-3.5 text-purple-400" />;
+        return <MessageSquareCode className="w-3.5 h-3.5 text-purple-600" />;
       default:
-        return <Bookmark className="w-3.5 h-3.5 text-muted-foreground" />;
+        return <Bookmark className="w-3.5 h-3.5 text-slate-500" />;
     }
   };
 
@@ -56,16 +56,16 @@ export const SavedPage: React.FC = () => {
     <div className="max-w-4xl mx-auto px-4 sm:px-6 py-8">
       {/* Header */}
       <div className="mb-8">
-        <div className="inline-flex items-center gap-2 text-primary text-xs font-semibold uppercase tracking-wider mb-2">
-          <Bookmark className="w-4 h-4 fill-primary/20" />
+        <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full border border-blue-200 bg-blue-50 text-blue-700 text-xs font-semibold uppercase tracking-wider mb-3 font-mono">
+          <Bookmark className="w-3.5 h-3.5 fill-blue-600/20" />
           <span>Personal Library</span>
         </div>
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
-            <h1 className="text-2xl sm:text-4xl font-extrabold text-foreground tracking-tight">
-              Saved Tools & Resources
+            <h1 className="text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+              Saved Tools &amp; Resources
             </h1>
-            <p className="text-sm text-secondary-foreground mt-1">
+            <p className="text-sm text-slate-600 mt-1 leading-relaxed">
               Locally persisted in your browser via localStorage. Zero telemetry or account requirements.
             </p>
           </div>
@@ -74,7 +74,7 @@ export const SavedPage: React.FC = () => {
             <button
               type="button"
               onClick={clearBookmarks}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-border text-xs text-rose-400 hover:bg-rose-500/10 transition-colors self-start sm:self-auto"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-rose-200 bg-white text-xs text-rose-600 hover:bg-rose-50 transition-colors self-start sm:self-auto font-medium shadow-xs cursor-pointer"
             >
               <Trash2 className="w-3.5 h-3.5" />
               <span>Clear All</span>
@@ -94,10 +94,10 @@ export const SavedPage: React.FC = () => {
                   key={t}
                   type="button"
                   onClick={() => setFilterType(t)}
-                  className={`px-3 py-1.5 rounded-full text-xs font-medium transition-colors ${
+                  className={`px-3 py-1.5 rounded-full text-xs font-medium transition-colors cursor-pointer shadow-xs ${
                     isSelected
-                      ? 'bg-primary text-primary-foreground'
-                      : 'bg-muted/80 text-secondary-foreground hover:bg-muted border border-border/60'
+                      ? 'bg-blue-600 text-white font-semibold'
+                      : 'bg-white text-slate-700 hover:bg-slate-50 border border-[#DFE7F3]'
                   }`}
                 >
                   {t === 'all' ? 'All Items' : getTypeLabel(t)} ({count})
@@ -110,22 +110,22 @@ export const SavedPage: React.FC = () => {
 
       {/* Items List or Empty State */}
       {filteredItems.length === 0 ? (
-        <div className="p-12 text-center rounded-xl bg-card/60 border border-border max-w-md mx-auto my-8">
-          <Bookmark className="w-10 h-10 text-muted-foreground mx-auto mb-3 opacity-40" />
-          <h3 className="font-bold text-foreground text-base mb-1">No Saved Items Yet</h3>
-          <p className="text-xs text-secondary-foreground mb-6">
+        <div className="p-12 text-center rounded-2xl bg-white border border-[#DFE7F3] max-w-md mx-auto my-8 shadow-xs">
+          <Bookmark className="w-10 h-10 text-slate-300 mx-auto mb-3" />
+          <h3 className="font-bold text-slate-900 text-base mb-1">No Saved Items Yet</h3>
+          <p className="text-xs text-slate-500 mb-6 leading-relaxed">
             Click the bookmark icon on any AI tool, open-source project, guide, or prompt to access it quickly here.
           </p>
           <div className="flex justify-center gap-3">
             <Link
               to="/ai-tools"
-              className="px-3 py-1.5 rounded-lg bg-primary text-primary-foreground text-xs font-semibold hover:bg-primary-hover shadow-sm"
+              className="px-4 py-2 rounded-xl bg-blue-600 text-white text-xs font-semibold hover:bg-blue-700 shadow-md shadow-blue-600/20"
             >
               Explore AI Tools
             </Link>
             <Link
               to="/prompt-library"
-              className="px-3 py-1.5 rounded-lg bg-muted text-foreground text-xs font-semibold hover:bg-border"
+              className="px-4 py-2 rounded-xl bg-white text-slate-700 text-xs font-semibold hover:bg-slate-50 border border-slate-300 shadow-xs"
             >
               Browse Prompts
             </Link>
@@ -136,7 +136,7 @@ export const SavedPage: React.FC = () => {
           {filteredItems.map((item) => (
             <div
               key={item.id}
-              className="p-4 rounded-xl border border-border bg-card/80 hover:bg-card flex items-center justify-between gap-4 transition-all shadow-sm"
+              className="p-4 sm:p-5 rounded-2xl border border-[#DFE7F3] bg-white hover:border-blue-400 hover:shadow-invary-blue flex items-center justify-between gap-4 transition-all shadow-xs"
             >
               <div className="flex items-center gap-3 min-w-0">
                 {item.slug && (item.type === 'open-source-tool' || item.type === 'ai-tool') ? (
@@ -150,13 +150,13 @@ export const SavedPage: React.FC = () => {
                   />
                 ) : item.iconLetter ? (
                   <div
-                    className="w-8 h-8 rounded-md flex items-center justify-center font-bold text-xs text-white shrink-0 shadow-inner"
-                    style={{ backgroundColor: item.iconBgColor || '#3b82f6' }}
+                    className="w-8 h-8 rounded-lg flex items-center justify-center font-bold text-xs text-white shrink-0 shadow-inner"
+                    style={{ backgroundColor: item.iconBgColor || '#2563eb' }}
                   >
                     {item.iconLetter}
                   </div>
                 ) : (
-                  <div className="w-8 h-8 rounded-md bg-muted flex items-center justify-center text-muted-foreground shrink-0 border border-border">
+                  <div className="w-8 h-8 rounded-lg bg-blue-50 flex items-center justify-center text-blue-600 shrink-0 border border-blue-200">
                     {getTypeIcon(item.type)}
                   </div>
                 )}
@@ -165,29 +165,29 @@ export const SavedPage: React.FC = () => {
                   <div className="flex items-center gap-2">
                     <Link
                       to={item.url}
-                      className="font-bold text-sm text-foreground hover:text-primary transition-colors truncate"
+                      className="font-bold text-sm text-slate-900 hover:text-blue-600 transition-colors truncate"
                     >
                       {item.title}
                     </Link>
-                    <span className="text-[10px] px-1.5 py-0.5 rounded bg-muted text-muted-foreground border border-border/50 uppercase font-mono">
+                    <span className="text-[10px] px-2 py-0.5 rounded-full bg-slate-100 text-slate-600 border border-slate-200 uppercase font-mono font-medium">
                       {getTypeLabel(item.type)}
                     </span>
                   </div>
-                  <p className="text-xs text-muted-foreground truncate">{item.subtitle}</p>
+                  <p className="text-xs text-slate-500 truncate mt-0.5">{item.subtitle}</p>
                 </div>
               </div>
 
               <div className="flex items-center gap-2 shrink-0">
                 <Link
                   to={item.url}
-                  className="px-2.5 py-1 rounded bg-primary/10 text-primary text-xs font-medium hover:bg-primary/20 transition-colors"
+                  className="px-3 py-1.5 rounded-lg bg-blue-50 text-blue-700 text-xs font-semibold hover:bg-blue-100 transition-colors border border-blue-200"
                 >
                   View
                 </Link>
                 <button
                   type="button"
                   onClick={() => removeBookmark(item.id)}
-                  className="p-1.5 rounded text-muted-foreground hover:text-rose-400 hover:bg-rose-500/10 transition-colors"
+                  className="p-1.5 rounded-lg text-slate-400 hover:text-rose-600 hover:bg-rose-50 transition-colors cursor-pointer"
                   aria-label={`Remove ${item.title}`}
                 >
                   <Trash2 className="w-3.5 h-3.5" />

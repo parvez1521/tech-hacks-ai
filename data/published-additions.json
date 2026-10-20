@@ -1,6 +1,74 @@
 {
   "tools": [
     {
+      "id": "jan-ai",
+      "slug": "jan-ai",
+      "name": "Jan AI",
+      "tagline": "Open-source local AI alternative to ChatGPT that runs 100% offline on your device with loc...",
+      "description": "Open-source local AI alternative to ChatGPT that runs 100% offline on your device with local LLMs.",
+      "longDescription": "Open-source local AI alternative to ChatGPT that runs 100% offline on your device with local LLMs.",
+      "websiteUrl": "https://jan.ai",
+      "category": "assistants",
+      "pricingType": "open-source",
+      "pricingDetails": "Open Source",
+      "iconLetter": "JA",
+      "iconBgColor": "#6366f1",
+      "hasFreePlan": true,
+      "freeAccessType": "open-source-local",
+      "freeTierSummary": "Community submission verified by Tech Hacks AI editorial team.",
+      "freeTierLimits": "Verified live on official platform docs.",
+      "features": [
+        "100% Offline Privacy",
+        "Local GGUF Models",
+        "Custom System Prompts",
+        "Multi-Engine Support"
+      ],
+      "tags": [
+        "assistants",
+        "open-source",
+        "community-verified",
+        "macOS",
+        "Windows",
+        "Linux"
+      ],
+      "requiresAccount": false,
+      "pricingSourceUrl": "https://jan.ai",
+      "pricingVerifiedAt": "2026-10-19",
+      "isVerified": true,
+      "alternativesTo": [
+        "ChatGPT"
+      ]
+    },
+    {
+      "id": "test-tool-prelaunch",
+      "slug": "test-tool-prelaunch",
+      "name": "Test Tool Prelaunch",
+      "tagline": "A testing tool for prelaunch QA audit verification.",
+      "description": "A testing tool for prelaunch QA audit verification.",
+      "longDescription": "A testing tool for prelaunch QA audit verification.",
+      "websiteUrl": "https://test-tool-prelaunch.com/",
+      "category": "assistants",
+      "pricingType": "free",
+      "pricingDetails": "Free forever",
+      "iconLetter": "TE",
+      "iconBgColor": "#6366f1",
+      "hasFreePlan": true,
+      "freeAccessType": "recurring-free",
+      "freeTierSummary": "Community submission verified by Tech Hacks AI editorial team.",
+      "freeTierLimits": "Verified live on official platform docs.",
+      "features": [],
+      "tags": [
+        "assistants",
+        "free",
+        "community-verified"
+      ],
+      "requiresAccount": true,
+      "pricingSourceUrl": "https://test-tool-prelaunch.com/",
+      "pricingVerifiedAt": "2026-10-19",
+      "isVerified": true,
+      "alternativesTo": []
+    },
+    {
       "id": "community-tool-1792347400006",
       "slug": "community-tool-1792347400006",
       "name": "Community Tool 1792347400006",

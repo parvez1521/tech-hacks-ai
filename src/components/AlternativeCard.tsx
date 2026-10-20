@@ -23,14 +23,14 @@ export const AlternativeCard: React.FC<AlternativeCardProps> = ({ alternative })
   return (
     <div
       onMouseMove={handleMouseMove}
-      className="group relative flex flex-col justify-between h-full p-5 rounded-lg border border-border bg-card/90 hover:bg-card hover:-translate-y-1.5 hover:border-cyan-500/40 hover:shadow-xl hover:shadow-cyan-500/5 transition-all duration-300 ease-out focus-within:ring-2 focus-within:ring-cyan-500/60 focus-within:border-cyan-500/60 cursor-pointer"
+      className="group relative flex flex-col justify-between h-full p-5 rounded-2xl border border-[#DFE7F3] bg-white hover:border-cyan-500/40 hover:-translate-y-1.5 hover:shadow-xl hover:shadow-blue-500/5 transition-all duration-300 ease-out focus-within:ring-2 focus-within:ring-[#2563EB]/40 cursor-pointer"
     >
       {/* Decorative Subtle Inner Spotlight on Hover */}
       <div
-        className="pointer-events-none absolute -inset-px rounded-lg opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-focus-within:opacity-100 -z-0"
+        className="pointer-events-none absolute -inset-px rounded-2xl opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-focus-within:opacity-100 -z-0"
         style={{
           background:
-            'radial-gradient(260px circle at var(--card-x, 50%) var(--card-y, 30%), rgba(6, 182, 212, 0.1), transparent 75%)',
+            'radial-gradient(260px circle at var(--card-x, 50%) var(--card-y, 30%), rgba(6, 182, 212, 0.08), transparent 75%)',
         }}
         aria-hidden="true"
       />
@@ -62,14 +62,14 @@ export const AlternativeCard: React.FC<AlternativeCardProps> = ({ alternative })
             <div className="min-w-0 pointer-events-auto">
               <Link
                 to={`/alternatives/${alternative.slug}`}
-                className="font-semibold text-foreground text-base tracking-tight truncate block group-hover:text-primary transition-colors duration-200 focus:outline-none focus:underline"
+                className="font-bold text-[#0F172A] text-base tracking-tight truncate block group-hover:text-[#2563EB] transition-colors duration-200 focus:outline-none focus:underline"
               >
                 {alternative.name}
               </Link>
               {category && (
                 <Link
                   to={`/categories/${alternative.category}`}
-                  className="text-xs text-muted-foreground hover:text-foreground block truncate transition-colors focus:outline-none focus:underline"
+                  className="text-xs text-[#64748B] hover:text-[#0F172A] block truncate transition-colors focus:outline-none focus:underline"
                 >
                   {category.name}
                 </Link>
@@ -77,19 +77,19 @@ export const AlternativeCard: React.FC<AlternativeCardProps> = ({ alternative })
             </div>
           </div>
 
-          <span className="inline-flex items-center px-2 py-0.5 rounded-full bg-muted font-medium text-xs text-secondary-foreground border border-border shrink-0 group-hover:border-primary/30 group-hover:bg-primary/5 transition-colors">
+          <span className="inline-flex items-center px-2.5 py-0.5 rounded-full bg-[#EAF2FF] font-semibold text-xs text-[#2563EB] border border-[#BFDBFE] shrink-0 transition-colors">
             {count} {count === 1 ? 'alternative' : 'alternatives'}
           </span>
         </div>
 
-        <p className="text-sm text-secondary-foreground line-clamp-2 mb-3">
+        <p className="text-sm text-[#64748B] line-clamp-2 mb-3 leading-relaxed">
           {alternative.description}
         </p>
 
         {/* Preview of top mapped replacements */}
         {count > 0 && (
-          <div className="mb-4 pt-2 border-t border-border/40">
-            <span className="text-[11px] text-muted-foreground block mb-1.5 font-medium">
+          <div className="mb-4 pt-2.5 border-t border-[#DFE7F3]">
+            <span className="text-[11px] text-[#64748B] block mb-1.5 font-medium">
               Popular replacements:
             </span>
             <div className="flex flex-wrap items-center gap-1.5">
@@ -97,7 +97,7 @@ export const AlternativeCard: React.FC<AlternativeCardProps> = ({ alternative })
                 <Link
                   key={tool.slug}
                   to={`/tools/${tool.slug}`}
-                  className="pointer-events-auto inline-flex items-center gap-1 px-1.5 py-0.5 rounded text-[11px] bg-muted/60 hover:bg-muted text-foreground border border-border/50 hover:border-primary/40 transition-colors focus:outline-none focus:underline"
+                  className="pointer-events-auto inline-flex items-center gap-1.5 px-2 py-0.5 rounded-md text-[11px] font-medium bg-[#F1F5F9] hover:bg-[#EAF2FF] text-slate-700 hover:text-[#2563EB] border border-slate-200/80 hover:border-[#BFDBFE] transition-colors focus:outline-none focus:underline"
                   title={`View ${tool.name} open source tool`}
                 >
                   <span
@@ -108,7 +108,7 @@ export const AlternativeCard: React.FC<AlternativeCardProps> = ({ alternative })
                 </Link>
               ))}
               {count > 3 && (
-                <span className="text-[10px] text-muted-foreground font-mono">
+                <span className="text-[10px] text-[#64748B] font-mono">
                   +{count - 3} more
                 </span>
               )}
@@ -117,13 +117,13 @@ export const AlternativeCard: React.FC<AlternativeCardProps> = ({ alternative })
         )}
       </div>
 
-      <div className="relative z-20 pt-3 border-t border-border/50 flex items-center justify-between text-xs pointer-events-none">
-        <span className="text-muted-foreground truncate mr-2">
+      <div className="relative z-20 pt-3 border-t border-[#DFE7F3] flex items-center justify-between text-xs pointer-events-none">
+        <span className="text-[#64748B] truncate mr-2">
           {alternative.tagline}
         </span>
         <Link
           to={`/alternatives/${alternative.slug}`}
-          className="pointer-events-auto text-primary hover:text-primary-hover font-semibold flex items-center gap-1 group-hover:translate-x-1 transition-all duration-200 shrink-0 focus:outline-none focus:underline"
+          className="pointer-events-auto text-[#2563EB] hover:text-[#1D4ED8] font-semibold flex items-center gap-1 group-hover:translate-x-1 transition-all duration-200 shrink-0 focus:outline-none focus:underline"
           aria-label={`Explore open source alternatives to ${alternative.name}`}
         >
           <span>Explore</span>

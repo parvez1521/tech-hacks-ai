@@ -106,29 +106,29 @@ export const AiToolDetailPage: React.FC = () => {
       />
 
       {/* Breadcrumbs */}
-      <nav className="flex items-center justify-between text-xs text-muted-foreground mb-6" aria-label="Breadcrumb">
+      <nav className="flex items-center justify-between text-xs text-slate-500 mb-6" aria-label="Breadcrumb">
         <div className="flex items-center gap-2">
-          <Link to="/" className="hover:text-foreground">Home</Link>
+          <Link to="/" className="hover:text-[#0F172A] transition-colors">Home</Link>
           <span>/</span>
-          <Link to="/ai-tools" className="hover:text-foreground">AI Tools</Link>
+          <Link to="/ai-tools" className="hover:text-[#0F172A] transition-colors">AI Tools</Link>
           <span>/</span>
-          <span className="text-foreground font-medium">{tool.name}</span>
+          <span className="text-[#0F172A] font-medium">{tool.name}</span>
         </div>
 
         <button
           type="button"
           onClick={handleCopyLink}
-          className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg border border-border bg-card/80 hover:bg-card text-foreground transition-colors"
-          aria-label="Share tool link"
+          className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-[#DFE7F3] bg-white hover:bg-slate-50 text-slate-700 transition-colors cursor-pointer shadow-xs"
+          aria-label={copied ? 'Link Copied!' : 'Share'}
         >
           {copied ? (
             <>
               <Check className="w-3.5 h-3.5 text-emerald-400" />
-              <span className="text-emerald-400">Link Copied!</span>
+              <span className="text-emerald-400 font-medium">Link Copied!</span>
             </>
           ) : (
             <>
-              <Share2 className="w-3.5 h-3.5 text-muted-foreground" />
+              <Share2 className="w-3.5 h-3.5 text-slate-400" />
               <span>Share</span>
             </>
           )}
@@ -136,7 +136,7 @@ export const AiToolDetailPage: React.FC = () => {
       </nav>
 
       {/* Hero Overview */}
-      <div className="p-6 sm:p-8 rounded-xl border border-border bg-card/80 shadow-md mb-8">
+      <div className="p-6 sm:p-8 rounded-2xl border border-[#DFE7F3] bg-white shadow-sm mb-8">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
           <div className="flex items-center gap-4">
             <BrandLogo
@@ -145,27 +145,27 @@ export const AiToolDetailPage: React.FC = () => {
               size="xl"
               iconBgColor={tool.iconBgColor}
               iconLetter={tool.iconLetter}
-              className="w-14 h-14 rounded-xl shadow-md"
+              className="w-14 h-14 rounded-xl shadow-xs border border-[#DFE7F3] bg-[#F5F8FF]"
             />
             <div>
               <div className="flex items-center gap-2 flex-wrap">
-                <h1 className="text-2xl sm:text-3xl font-extrabold text-foreground tracking-tight">
+                <h1 className="text-2xl sm:text-3xl font-extrabold text-[#0F172A] tracking-tight">
                   {tool.name}
                 </h1>
                 {tool.isFeatured && (
-                  <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-xs font-medium bg-amber-500/10 text-amber-400 border border-amber-500/20">
-                    <Sparkles className="w-3 h-3" />
+                  <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-medium bg-amber-50 text-amber-700 border border-amber-200 font-mono">
+                    <Sparkles className="w-3 h-3 text-amber-500" />
                     <span>Featured</span>
                   </span>
                 )}
                 {tool.isSelfHostable && (
-                  <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-xs font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
-                    <Server className="w-3 h-3" />
+                  <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-medium bg-emerald-50 text-emerald-700 border border-emerald-200 font-mono">
+                    <Server className="w-3 h-3 text-emerald-600" />
                     <span>Self-Hostable</span>
                   </span>
                 )}
               </div>
-              <p className="text-sm text-muted-foreground mt-1 capitalize">
+              <p className="text-sm text-[#64748B] mt-1 capitalize">
                 Category: {tool.category} • Released {tool.releaseYear || 2024}
               </p>
             </div>
@@ -177,7 +177,7 @@ export const AiToolDetailPage: React.FC = () => {
               href={tool.websiteUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-primary text-primary-foreground font-semibold text-sm hover:bg-primary-hover shadow-md transition-all active:scale-98"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#2563EB] text-white font-semibold text-sm hover:bg-[#1D4ED8] shadow-md shadow-blue-500/20 transition-all active:scale-98 cursor-pointer"
             >
               <span>Visit Official Website</span>
               <ExternalLink className="w-4 h-4" />
@@ -185,32 +185,32 @@ export const AiToolDetailPage: React.FC = () => {
           </div>
         </div>
 
-        <p className="text-base sm:text-lg text-foreground font-medium leading-relaxed mb-4">
+        <p className="text-base sm:text-lg text-[#0F172A] font-medium leading-relaxed mb-4">
           {tool.tagline}
         </p>
 
-        <p className="text-sm text-secondary-foreground leading-relaxed mb-6">
+        <p className="text-sm text-[#64748B] leading-relaxed mb-6">
           {tool.longDescription || tool.description}
         </p>
 
         {/* Verified Free Access & Pricing Specifications */}
-        <div className="p-5 rounded-lg bg-muted/60 border border-border/80 text-xs space-y-3">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-border/60 pb-3">
+        <div className="p-5 rounded-xl bg-[#F5F8FF] border border-[#DFE7F3] text-xs space-y-3 shadow-xs">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-[#DFE7F3] pb-3">
             <div>
-              <span className="font-semibold text-foreground uppercase tracking-wider block text-[11px] mb-0.5">
+              <span className="font-semibold text-[#0F172A] uppercase tracking-wider block text-[11px] mb-0.5">
                 Pricing Structure & Model Access
               </span>
-              <span className="text-secondary-foreground">{tool.pricingDetails}</span>
+              <span className="text-[#64748B]">{tool.pricingDetails}</span>
             </div>
             <div className="flex items-center gap-2 self-start sm:self-auto">
-              <span className="font-mono px-2.5 py-1 rounded bg-card text-foreground border border-border font-medium capitalize">
+              <span className="font-mono px-3 py-1 rounded-lg bg-white text-[#0F172A] border border-[#DFE7F3] font-medium capitalize">
                 {tool.pricingType}
               </span>
               <a
                 href={tool.pricingSourceUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1 px-2.5 py-1 rounded bg-primary/10 text-primary border border-primary/20 hover:bg-primary/20 transition-colors font-medium"
+                className="inline-flex items-center gap-1 px-3 py-1 rounded-lg bg-[#EAF2FF] text-[#2563EB] border border-[#BFDBFE] hover:bg-blue-100 transition-colors font-medium"
               >
                 <span>Official Pricing</span>
                 <ExternalLink className="w-3 h-3" />
@@ -220,31 +220,31 @@ export const AiToolDetailPage: React.FC = () => {
 
           {/* Granular Free Tier Information */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 pt-1">
-            <div className="p-3 rounded bg-card/60 border border-border/60">
-              <span className="text-muted-foreground block text-[11px] mb-1 font-medium">Free Access Quota</span>
-              <span className="text-foreground font-medium leading-tight block">{tool.freeTierSummary}</span>
+            <div className="p-3 rounded-lg bg-white border border-[#DFE7F3]">
+              <span className="text-[#64748B] block text-[11px] mb-1 font-medium">Free Access Quota</span>
+              <span className="text-[#0F172A] font-medium leading-tight block">{tool.freeTierSummary}</span>
             </div>
-            <div className="p-3 rounded bg-card/60 border border-border/60">
-              <span className="text-muted-foreground block text-[11px] mb-1 font-medium">Free Tier Limits</span>
-              <span className="text-secondary-foreground leading-tight block">{tool.freeTierLimits}</span>
+            <div className="p-3 rounded-lg bg-white border border-[#DFE7F3]">
+              <span className="text-[#64748B] block text-[11px] mb-1 font-medium">Free Tier Limits</span>
+              <span className="text-[#64748B] leading-tight block">{tool.freeTierLimits}</span>
             </div>
-            <div className="p-3 rounded bg-card/60 border border-border/60">
-              <span className="text-muted-foreground block text-[11px] mb-1 font-medium">Requirements & Verification</span>
+            <div className="p-3 rounded-lg bg-white border border-[#DFE7F3]">
+              <span className="text-[#64748B] block text-[11px] mb-1 font-medium">Requirements & Verification</span>
               <div className="flex flex-col gap-1 text-[11px]">
-                <span className="flex items-center gap-1.5 text-foreground">
+                <span className="flex items-center gap-1.5 text-[#0F172A]">
                   {tool.requiresAccount ? (
                     <>
-                      <Lock className="w-3 h-3 text-amber-400" />
+                      <Lock className="w-3 h-3 text-amber-500" />
                       <span>Account Required</span>
                     </>
                   ) : (
                     <>
-                      <Unlock className="w-3 h-3 text-emerald-400" />
+                      <Unlock className="w-3 h-3 text-emerald-600" />
                       <span>No Account Required (Instant)</span>
                     </>
                   )}
                 </span>
-                <span className="flex items-center gap-1.5 text-muted-foreground">
+                <span className="flex items-center gap-1.5 text-[#64748B] font-mono">
                   <Calendar className="w-3 h-3" />
                   <span>Verified: {tool.pricingVerifiedAt}</span>
                 </span>
@@ -253,13 +253,13 @@ export const AiToolDetailPage: React.FC = () => {
           </div>
 
           {tool.openSourceRepoUrl && (
-            <div className="pt-2 flex items-center justify-between text-[11px] text-muted-foreground">
+            <div className="pt-2 flex items-center justify-between text-[11px] text-[#64748B]">
               <span>Open-Source Repository & Local Deployment:</span>
               <a
                 href={tool.openSourceRepoUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-primary hover:underline font-mono inline-flex items-center gap-1"
+                className="text-[#2563EB] hover:underline font-mono inline-flex items-center gap-1"
               >
                 <span>GitHub Repository</span>
                 <ExternalLink className="w-3 h-3" />
@@ -271,28 +271,28 @@ export const AiToolDetailPage: React.FC = () => {
 
       {/* Features, Persona & Specifications */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-        <div className="md:col-span-2 p-6 rounded-xl border border-border bg-card/60">
-          <h2 className="text-base font-bold text-foreground mb-4 flex items-center gap-2">
-            <ShieldCheck className="w-4 h-4 text-primary" />
+        <div className="md:col-span-2 p-6 rounded-2xl border border-[#DFE7F3] bg-white shadow-sm">
+          <h2 className="text-base font-bold text-[#0F172A] mb-4 flex items-center gap-2">
+            <ShieldCheck className="w-4 h-4 text-[#2563EB]" />
             <span>Core Capabilities & Features</span>
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6">
             {tool.features.map((feat) => (
-              <div key={feat} className="flex items-start gap-2.5 text-xs text-foreground">
-                <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+              <div key={feat} className="flex items-start gap-2.5 text-xs text-[#0F172A]">
+                <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
                 <span>{feat}</span>
               </div>
             ))}
           </div>
 
           {/* Persona & Execution Environment */}
-          <div className="pt-4 border-t border-border/60 grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
+          <div className="pt-4 border-t border-[#DFE7F3] grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
             <div>
-              <div className="flex items-center gap-1.5 text-primary font-semibold uppercase text-[11px] tracking-wider mb-1">
-                <Users className="w-3.5 h-3.5" />
+              <div className="flex items-center gap-1.5 text-[#2563EB] font-semibold uppercase text-[11px] tracking-wider mb-1">
+                <Users className="w-3.5 h-3.5 text-[#2563EB]" />
                 <span>Who It's Best Suited For</span>
               </div>
-              <p className="text-secondary-foreground leading-relaxed">
+              <p className="text-[#64748B] leading-relaxed">
                 {tool.bestFor ||
                   (tool.useCases && tool.useCases.length > 0
                     ? `Ideal for practitioners focused on ${tool.useCases.join(', ')}.`
@@ -301,11 +301,11 @@ export const AiToolDetailPage: React.FC = () => {
             </div>
 
             <div>
-              <div className="flex items-center gap-1.5 text-primary font-semibold uppercase text-[11px] tracking-wider mb-1">
-                <Cpu className="w-3.5 h-3.5" />
+              <div className="flex items-center gap-1.5 text-[#2563EB] font-semibold uppercase text-[11px] tracking-wider mb-1">
+                <Cpu className="w-3.5 h-3.5 text-[#2563EB]" />
                 <span>Execution Environment</span>
               </div>
-              <p className="text-secondary-foreground leading-relaxed">
+              <p className="text-[#64748B] leading-relaxed">
                 {tool.isSelfHostable
                   ? 'Self-hostable via Docker or local GPU (macOS, Linux, Windows).'
                   : tool.requiresInstallation
@@ -317,9 +317,9 @@ export const AiToolDetailPage: React.FC = () => {
         </div>
 
         <div className="space-y-4">
-          <div className="p-6 rounded-xl border border-border bg-card/60 space-y-4">
-            <h3 className="text-sm font-bold text-foreground flex items-center gap-2">
-              <Tag className="w-4 h-4 text-primary" />
+          <div className="p-6 rounded-2xl border border-[#DFE7F3] bg-white shadow-sm space-y-4">
+            <h3 className="text-sm font-bold text-[#0F172A] flex items-center gap-2">
+              <Tag className="w-4 h-4 text-[#2563EB]" />
               <span>Tags & Keywords</span>
             </h3>
             <div className="flex flex-wrap gap-1.5">
@@ -327,7 +327,7 @@ export const AiToolDetailPage: React.FC = () => {
                 <Link
                   key={tag}
                   to={`/ai-tools?q=${tag}`}
-                  className="px-2 py-1 rounded text-xs bg-muted text-secondary-foreground hover:bg-border transition-colors"
+                  className="px-2.5 py-1 rounded-md text-xs bg-[#F5F8FF] text-[#2563EB] hover:bg-[#EAF2FF] border border-[#BFDBFE] transition-colors"
                 >
                   #{tag}
                 </Link>
@@ -336,20 +336,20 @@ export const AiToolDetailPage: React.FC = () => {
           </div>
 
           {/* Comparison CTA Box */}
-          <div className="p-5 rounded-xl border border-purple-500/20 bg-purple-500/5 text-xs">
-            <div className="flex items-center gap-1.5 text-purple-400 font-semibold uppercase text-[11px] tracking-wider mb-1.5">
-              <Scale className="w-3.5 h-3.5" />
+          <div className="p-5 rounded-2xl border border-[#BFDBFE] bg-[#EAF2FF] text-xs shadow-xs">
+            <div className="flex items-center gap-1.5 text-[#2563EB] font-semibold uppercase text-[11px] tracking-wider mb-1.5">
+              <Scale className="w-3.5 h-3.5 text-[#2563EB]" />
               <span>Side-by-Side Comparison</span>
             </div>
-            <p className="text-secondary-foreground mb-3 leading-relaxed">
+            <p className="text-[#0F172A] mb-3 leading-relaxed">
               Evaluate licensing, rate limits, and pricing models directly against similar platforms.
             </p>
             <Link
               to={`/compare?tools=${comparisonSlugs.join(',')}`}
-              className="inline-flex items-center justify-center gap-1.5 w-full px-3 py-2 rounded-lg bg-card border border-purple-500/30 hover:bg-muted text-foreground font-semibold text-xs transition-colors"
+              className="inline-flex items-center justify-center gap-1.5 w-full px-3 py-2 rounded-xl bg-[#2563EB] hover:bg-[#1D4ED8] text-white font-semibold text-xs shadow-md shadow-blue-500/20 transition-all active:scale-98"
             >
               <span>Compare {tool.name}</span>
-              <Scale className="w-3.5 h-3.5 text-purple-400" />
+              <Scale className="w-3.5 h-3.5" />
             </Link>
           </div>
         </div>
@@ -359,10 +359,10 @@ export const AiToolDetailPage: React.FC = () => {
       {similarTools.length > 0 && (
         <section className="mb-14">
           <div className="flex items-center justify-between mb-6">
-            <h2 className="text-lg font-bold text-foreground">
+            <h2 className="text-lg font-bold text-[#0F172A]">
               Similar {tool.category} AI Platforms
             </h2>
-            <Link to={`/ai-tools?category=${tool.category}`} className="text-xs text-primary hover:underline">
+            <Link to={`/ai-tools?category=${tool.category}`} className="text-xs text-blue-600 hover:text-blue-700 hover:underline">
               View all {tool.category} tools →
             </Link>
           </div>
@@ -376,18 +376,18 @@ export const AiToolDetailPage: React.FC = () => {
 
       {/* Related Step-by-Step Guides Section */}
       {relatedGuides.length > 0 && (
-        <div className="pt-8 border-t border-border">
+        <div className="pt-8 border-t border-[#DFE7F3]">
           <div className="flex items-center justify-between mb-6">
             <div>
-              <div className="inline-flex items-center gap-1.5 text-primary text-xs font-semibold uppercase tracking-wider mb-1">
-                <BookOpen className="w-3.5 h-3.5" />
+              <div className="inline-flex items-center gap-1.5 text-blue-700 text-xs font-semibold uppercase tracking-wider mb-1">
+                <BookOpen className="w-3.5 h-3.5 text-blue-600" />
                 <span>Related Workflows</span>
               </div>
-              <h2 className="text-xl font-bold text-foreground">
+              <h2 className="text-xl font-bold text-slate-900">
                 Step-by-Step Guides for {tool.name}
               </h2>
             </div>
-            <Link to="/guides" className="text-xs text-primary hover:underline">
+            <Link to="/guides" className="text-xs text-blue-600 hover:text-blue-700 hover:underline font-semibold">
               Browse all guides →
             </Link>
           </div>

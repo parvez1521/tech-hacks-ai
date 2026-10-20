@@ -148,26 +148,26 @@ export const CollectionDetailPage: React.FC = () => {
   return (
     <div className="max-w-6xl mx-auto px-4 sm:px-6 py-8">
       {/* Breadcrumb */}
-      <nav className="flex items-center gap-2 text-xs text-muted-foreground mb-6">
-        <Link to="/" className="hover:text-foreground">
+      <nav className="flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400 mb-6">
+        <Link to="/" className="hover:text-[#0F172A] dark:hover:text-white transition-colors">
           Home
         </Link>
         <span>/</span>
-        <span className="text-muted-foreground">Collections</span>
+        <span className="text-slate-400 dark:text-slate-500">Collections</span>
         <span>/</span>
-        <span className="text-foreground font-medium">{collection.name}</span>
+        <span className="text-[#0F172A] dark:text-white font-medium">{collection.name}</span>
       </nav>
 
       {/* Header */}
       <div className="mb-8">
-        <div className="inline-flex items-center gap-2 text-primary text-xs font-semibold uppercase tracking-wider mb-2">
-          <IconComponent className="w-4 h-4" />
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 dark:bg-blue-950/40 border border-blue-200 dark:border-blue-800 text-blue-700 dark:text-blue-300 text-xs font-semibold uppercase tracking-wider mb-3">
+          <IconComponent className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" />
           <span>Curated Collection</span>
         </div>
-        <h1 className="text-2xl sm:text-4xl font-extrabold text-foreground tracking-tight mb-2">
+        <h1 className="text-2xl sm:text-4xl font-extrabold text-[#0F172A] dark:text-[#F1F5F9] tracking-tight mb-2">
           {collection.headline}
         </h1>
-        <p className="text-sm sm:text-base text-secondary-foreground max-w-2xl">
+        <p className="text-sm sm:text-base text-[#475569] dark:text-[#94A3B8] max-w-2xl">
           {collection.description}
         </p>
       </div>

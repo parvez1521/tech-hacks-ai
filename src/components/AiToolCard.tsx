@@ -31,7 +31,7 @@ export const AiToolCard: React.FC<AiToolCardProps> = ({ tool }) => {
   const getPricingBadge = () => {
     if (tool.freeAccessType === 'open-source-local' || tool.isSelfHostable) {
       return (
-        <span className="px-2 py-0.5 rounded text-[11px] font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+        <span className="px-2 py-0.5 rounded text-[11px] font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">
           Open Source
         </span>
       );
@@ -40,32 +40,32 @@ export const AiToolCard: React.FC<AiToolCardProps> = ({ tool }) => {
     switch (tool.pricingType) {
       case 'free':
         return (
-          <span className="px-2 py-0.5 rounded text-[11px] font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+          <span className="px-2 py-0.5 rounded text-[11px] font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">
             Free
           </span>
         );
       case 'freemium':
         return (
-          <span className="px-2 py-0.5 rounded text-[11px] font-semibold bg-blue-500/10 text-blue-400 border border-blue-500/20">
+          <span className="px-2 py-0.5 rounded text-[11px] font-semibold bg-blue-50 text-blue-700 border border-blue-200">
             Freemium
           </span>
         );
       case 'free-credits':
         return (
-          <span className="px-2 py-0.5 rounded text-[11px] font-semibold bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">
+          <span className="px-2 py-0.5 rounded text-[11px] font-semibold bg-cyan-50 text-cyan-700 border border-cyan-200">
             Credits
           </span>
         );
       case 'free-trial':
         return (
-          <span className="px-2 py-0.5 rounded text-[11px] font-semibold bg-purple-500/10 text-purple-400 border border-purple-500/20">
+          <span className="px-2 py-0.5 rounded text-[11px] font-semibold bg-purple-50 text-purple-700 border border-purple-200">
             Free Trial
           </span>
         );
       case 'paid':
       default:
         return (
-          <span className="px-2 py-0.5 rounded text-[11px] font-semibold bg-amber-500/10 text-amber-400 border border-amber-500/20">
+          <span className="px-2 py-0.5 rounded text-[11px] font-semibold bg-amber-50 text-amber-700 border border-amber-200">
             Paid
           </span>
         );
@@ -75,14 +75,14 @@ export const AiToolCard: React.FC<AiToolCardProps> = ({ tool }) => {
   return (
     <div
       onMouseMove={handleMouseMove}
-      className="group relative flex flex-col justify-between p-5 rounded-lg border border-border bg-card/90 hover:bg-card transition-all duration-300 ease-out hover:-translate-y-1.5 hover:border-cyan-500/40 hover:shadow-xl hover:shadow-cyan-500/5 min-h-[250px] focus-within:ring-2 focus-within:ring-cyan-500/60 focus-within:border-cyan-500/60"
+      className="group relative flex flex-col justify-between p-5 rounded-2xl border border-[#DFE7F3] bg-white hover:border-cyan-500/40 hover:-translate-y-1.5 hover:shadow-xl hover:shadow-blue-500/5 transition-all duration-300 ease-out min-h-[250px] focus-within:ring-2 focus-within:ring-[#2563EB]/40"
     >
       {/* Decorative Interactive Spotlight Inner Glow */}
       <div
-        className="pointer-events-none absolute -inset-px rounded-lg opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-focus-within:opacity-100 -z-0"
+        className="pointer-events-none absolute -inset-px rounded-2xl opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-focus-within:opacity-100 -z-0"
         style={{
           background:
-            'radial-gradient(280px circle at var(--card-x, 50%) var(--card-y, 50%), rgba(6, 182, 212, 0.12), transparent 80%)',
+            'radial-gradient(280px circle at var(--card-x, 50%) var(--card-y, 50%), rgba(6, 182, 212, 0.08), transparent 80%)',
         }}
         aria-hidden="true"
       />
@@ -102,20 +102,20 @@ export const AiToolCard: React.FC<AiToolCardProps> = ({ tool }) => {
               <div className="flex items-center gap-1.5">
                 <Link
                   to={`/ai-tools/${tool.slug}`}
-                  className="font-bold text-foreground text-base tracking-tight truncate hover:text-primary transition-colors focus:outline-none focus:underline"
+                  className="font-bold text-[#0F172A] text-base tracking-tight truncate hover:text-[#2563EB] transition-colors focus:outline-none focus:underline"
                 >
                   {tool.name}
                 </Link>
                 {tool.isFeatured && (
                   <span
-                    className="text-amber-400 cursor-help"
+                    className="text-amber-500 cursor-help"
                     title="Featured AI Platform"
                   >
-                    <Sparkles className="w-3.5 h-3.5 fill-amber-400/20" />
+                    <Sparkles className="w-3.5 h-3.5 fill-amber-400/30" />
                   </span>
                 )}
               </div>
-              <span className="text-[11px] text-muted-foreground capitalize block truncate">
+              <span className="text-[11px] text-[#64748B] capitalize block truncate">
                 {tool.category}
               </span>
             </div>
@@ -128,7 +128,7 @@ export const AiToolCard: React.FC<AiToolCardProps> = ({ tool }) => {
         </div>
 
         {/* Tagline */}
-        <p className="text-sm text-secondary-foreground line-clamp-2 mb-3">
+        <p className="text-sm text-[#64748B] line-clamp-2 mb-3 leading-relaxed">
           {tool.tagline}
         </p>
 
@@ -137,7 +137,7 @@ export const AiToolCard: React.FC<AiToolCardProps> = ({ tool }) => {
           {tool.features.slice(0, 3).map((f) => (
             <span
               key={f}
-              className="px-2 py-0.5 rounded text-[11px] font-medium bg-muted/70 text-secondary-foreground border border-border/50"
+              className="px-2 py-0.5 rounded-md text-[11px] font-medium bg-[#F1F5F9] text-slate-700 border border-slate-200/80"
             >
               {f}
             </span>
@@ -146,15 +146,15 @@ export const AiToolCard: React.FC<AiToolCardProps> = ({ tool }) => {
       </div>
 
       {/* Footer Area */}
-      <div className="relative z-10 pt-3 border-t border-border/50 flex items-center justify-between text-xs">
-        <div className="flex items-center gap-2 text-muted-foreground font-mono">
+      <div className="relative z-10 pt-3 border-t border-[#DFE7F3] flex items-center justify-between text-xs">
+        <div className="flex items-center gap-2 text-[#64748B] font-mono">
           {tool.rating && (
-            <div className="flex items-center gap-1 text-foreground font-medium">
-              <Star className="w-3.5 h-3.5 text-amber-400 fill-amber-400" />
+            <div className="flex items-center gap-1 text-[#0F172A] font-medium">
+              <Star className="w-3.5 h-3.5 text-amber-500 fill-amber-400" />
               <span>{tool.rating.toFixed(1)}</span>
             </div>
           )}
-          <span className="truncate max-w-[140px] text-[11px] text-muted-foreground">
+          <span className="truncate max-w-[140px] text-[11px] text-[#64748B]">
             {tool.pricingDetails.split(';')[0]}
           </span>
         </div>
@@ -162,7 +162,7 @@ export const AiToolCard: React.FC<AiToolCardProps> = ({ tool }) => {
         <div className="flex items-center gap-2">
           <Link
             to={`/ai-tools/${tool.slug}`}
-            className="inline-flex items-center gap-1 text-primary font-medium hover:text-primary-hover group-hover:translate-x-0.5 transition-transform"
+            className="inline-flex items-center gap-1 text-[#2563EB] font-semibold hover:text-[#1D4ED8] group-hover:translate-x-0.5 transition-transform"
           >
             <span>Explore</span>
             <ArrowRight className="w-3.5 h-3.5" />
@@ -171,7 +171,7 @@ export const AiToolCard: React.FC<AiToolCardProps> = ({ tool }) => {
             href={tool.websiteUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="p-1 rounded text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
+            className="p-1.5 rounded-lg text-slate-400 hover:text-[#0F172A] hover:bg-[#F1F5F9] transition-colors"
             title={`Visit ${tool.name} website`}
           >
             <ExternalLink className="w-3.5 h-3.5" />

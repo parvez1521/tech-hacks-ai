@@ -101,33 +101,33 @@ export const ToolDetailPage: React.FC = () => {
       />
 
       {/* Breadcrumb Navigation */}
-      <nav className="flex items-center justify-between text-xs text-muted-foreground mb-6" aria-label="Breadcrumb">
+      <nav className="flex items-center justify-between text-xs text-slate-500 mb-6" aria-label="Breadcrumb">
         <div className="flex items-center gap-2">
-          <Link to="/" className="hover:text-foreground">
+          <Link to="/" className="hover:text-[#0F172A] transition-colors">
             Home
           </Link>
           <span>/</span>
-          <Link to="/tools" className="hover:text-foreground">
+          <Link to="/tools" className="hover:text-[#0F172A] transition-colors">
             Tools
           </Link>
           <span>/</span>
-          <span className="text-foreground font-medium">{tool.name}</span>
+          <span className="text-[#0F172A] font-medium">{tool.name}</span>
         </div>
 
         <button
           type="button"
           onClick={handleCopyLink}
-          className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg border border-border bg-card/80 hover:bg-card text-foreground transition-colors"
-          aria-label="Share tool link"
+          className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-[#DFE7F3] bg-white hover:bg-slate-50 text-slate-700 transition-colors cursor-pointer shadow-xs"
+          aria-label={copied ? 'Link Copied!' : 'Share'}
         >
           {copied ? (
             <>
               <Check className="w-3.5 h-3.5 text-emerald-400" />
-              <span className="text-emerald-400">Link Copied!</span>
+              <span className="text-emerald-400 font-medium">Link Copied!</span>
             </>
           ) : (
             <>
-              <Share2 className="w-3.5 h-3.5 text-muted-foreground" />
+              <Share2 className="w-3.5 h-3.5 text-slate-400" />
               <span>Share</span>
             </>
           )}
@@ -135,7 +135,7 @@ export const ToolDetailPage: React.FC = () => {
       </nav>
 
       {/* Main Hero Header */}
-      <div className="p-6 sm:p-8 rounded-xl border border-border bg-card/60 mb-8 shadow-sm">
+      <div className="p-6 sm:p-8 rounded-2xl border border-[#DFE7F3] bg-white mb-8 shadow-sm">
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 mb-6">
           <div className="flex items-center gap-4">
             <BrandLogo
@@ -144,17 +144,17 @@ export const ToolDetailPage: React.FC = () => {
               size="xl"
               iconBgColor={tool.iconBgColor}
               iconLetter={tool.iconLetter}
-              className="w-14 h-14 rounded-xl shadow-md"
+              className="w-14 h-14 rounded-xl shadow-xs border border-[#DFE7F3] bg-[#F5F8FF]"
             />
             <div>
               <div className="flex items-center gap-2 mb-1">
-                <h1 className="text-2xl sm:text-3xl font-extrabold text-foreground tracking-tight">
+                <h1 className="text-2xl sm:text-3xl font-extrabold text-[#0F172A] tracking-tight">
                   {tool.name}
                 </h1>
                 {tool.isVerified && <VerifiedBadge />}
                 {tool.isAiNative && <AiNativeBadge />}
               </div>
-              <p className="text-sm sm:text-base text-secondary-foreground">
+              <p className="text-sm sm:text-base text-[#64748B]">
                 {tool.tagline}
               </p>
             </div>
@@ -166,7 +166,7 @@ export const ToolDetailPage: React.FC = () => {
               href={tool.websiteUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="group flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg bg-primary hover:bg-primary-hover hover:-translate-y-0.5 hover:shadow-md hover:shadow-primary/20 active:translate-y-0 text-primary-foreground font-semibold text-sm transition-all duration-150 shadow-sm"
+              className="group flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-[#2563EB] hover:bg-[#1D4ED8] hover:-translate-y-0.5 hover:shadow-md hover:shadow-blue-500/20 active:translate-y-0 text-white font-semibold text-sm transition-all duration-150 shadow-sm cursor-pointer"
             >
               <span>Visit Website</span>
               <ExternalLink className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-200" />
@@ -176,9 +176,9 @@ export const ToolDetailPage: React.FC = () => {
               href={tool.repositoryUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="group flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg border border-border bg-muted hover:bg-border/80 hover:-translate-y-0.5 active:translate-y-0 text-foreground font-semibold text-sm transition-all duration-150"
+              className="group flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl border border-[#DFE7F3] bg-[#F5F8FF] hover:bg-[#EAF2FF] hover:border-[#BFDBFE] hover:-translate-y-0.5 active:translate-y-0 text-[#0F172A] font-semibold text-sm transition-all duration-150 cursor-pointer"
             >
-              <Github className="w-4 h-4 group-hover:scale-110 transition-transform duration-200" />
+              <Github className="w-4 h-4 group-hover:scale-110 transition-transform duration-200 text-[#0F172A]" />
               <span>GitHub</span>
             </a>
           </div>
@@ -186,15 +186,15 @@ export const ToolDetailPage: React.FC = () => {
 
         {/* Alternative to Chips & Comparison Link */}
         {alternativeItems.length > 0 && (
-          <div className="flex flex-wrap items-center justify-between gap-2 pt-4 border-t border-border/50 text-xs">
+          <div className="flex flex-wrap items-center justify-between gap-2 pt-4 border-t border-[#DFE7F3] text-xs">
             <div className="flex flex-wrap items-center gap-2">
-              <span className="text-muted-foreground font-medium">Open source alternative to:</span>
+              <span className="text-[#64748B] font-medium">Open source alternative to:</span>
               <div className="flex flex-wrap items-center gap-1.5">
                 {alternativeItems.map((alt) => (
                   <Link
                     key={alt.slug}
                     to={`/alternatives/${alt.slug}`}
-                    className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-background border border-border hover:border-primary/50 hover:bg-primary/10 hover:text-primary active:scale-95 text-foreground transition-all duration-150 shadow-xs"
+                    className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#F5F8FF] border border-[#DFE7F3] hover:border-[#2563EB]/50 hover:bg-[#EAF2FF] hover:text-[#2563EB] active:scale-95 text-[#0F172A] transition-all duration-150 shadow-xs"
                   >
                     <BrandLogo
                       slug={alt.slug}
@@ -212,9 +212,9 @@ export const ToolDetailPage: React.FC = () => {
 
             <Link
               to={`/compare?tools=${tool.slug},${alternativeItems[0].slug}`}
-              className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-purple-500/10 text-purple-400 border border-purple-500/20 font-medium hover:bg-purple-500/20 transition-colors"
+              className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#EAF2FF] text-[#2563EB] border border-[#BFDBFE] font-medium hover:bg-blue-100 transition-colors"
             >
-              <Scale className="w-3.5 h-3.5" />
+              <Scale className="w-3.5 h-3.5 text-[#2563EB]" />
               <span>Compare Side-by-Side</span>
             </Link>
           </div>
@@ -225,79 +225,79 @@ export const ToolDetailPage: React.FC = () => {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
         {/* Left Column: Key Specifications */}
         <div className="flex flex-col gap-6">
-          <div className="p-5 rounded-lg border border-border bg-card/60">
-            <h2 className="text-sm font-semibold uppercase tracking-wider text-foreground mb-4">
+          <div className="p-5 rounded-2xl border border-[#DFE7F3] bg-white shadow-sm">
+            <h2 className="text-sm font-semibold uppercase tracking-wider text-[#0F172A] mb-4">
               Project Metrics
             </h2>
 
             <ul className="space-y-3 text-xs">
-              <li className="flex items-center justify-between pb-2 border-b border-border/40">
-                <span className="text-muted-foreground flex items-center gap-1.5">
-                  <Star className="w-3.5 h-3.5" />
+              <li className="flex items-center justify-between pb-2 border-b border-[#DFE7F3]">
+                <span className="text-[#64748B] flex items-center gap-1.5">
+                  <Star className="w-3.5 h-3.5 text-[#2563EB]" />
                   GitHub Stars
                 </span>
-                <span className="font-mono font-medium text-foreground">
+                <span className="font-mono font-medium text-[#0F172A]">
                   {tool.stars.toLocaleString()}
                   {tool.starGrowthDelta > 0 && (
-                    <span className="text-emerald-400 ml-1 text-[10px]">
+                    <span className="text-emerald-600 ml-1 text-[10px]">
                       ↑+{tool.starGrowthDelta}
                     </span>
                   )}
                 </span>
               </li>
 
-              <li className="flex items-center justify-between pb-2 border-b border-border/40">
-                <span className="text-muted-foreground flex items-center gap-1.5">
-                  <GitFork className="w-3.5 h-3.5" />
+              <li className="flex items-center justify-between pb-2 border-b border-[#DFE7F3]">
+                <span className="text-[#64748B] flex items-center gap-1.5">
+                  <GitFork className="w-3.5 h-3.5 text-[#2563EB]" />
                   Forks
                 </span>
-                <span className="font-mono font-medium text-foreground">
+                <span className="font-mono font-medium text-[#0F172A]">
                   {tool.forks.toLocaleString()}
                 </span>
               </li>
 
-              <li className="flex items-center justify-between pb-2 border-b border-border/40">
-                <span className="text-muted-foreground flex items-center gap-1.5">
-                  <FileCode className="w-3.5 h-3.5" />
+              <li className="flex items-center justify-between pb-2 border-b border-[#DFE7F3]">
+                <span className="text-[#64748B] flex items-center gap-1.5">
+                  <FileCode className="w-3.5 h-3.5 text-[#2563EB]" />
                   License
                 </span>
-                <span className="font-mono font-medium px-1.5 py-0.5 rounded bg-muted text-foreground">
+                <span className="font-mono font-medium px-2 py-0.5 rounded bg-[#F1F5F9] dark:bg-[#17243A] text-[#0F172A] dark:text-[#F1F5F9] border border-slate-200 dark:border-[#29384F]">
                   {tool.license}
                 </span>
               </li>
 
-              <li className="flex items-center justify-between pb-2 border-b border-border/40">
-                <span className="text-muted-foreground flex items-center gap-1.5">
-                  <Clock className="w-3.5 h-3.5" />
+              <li className="flex items-center justify-between pb-2 border-b border-[#DFE7F3]">
+                <span className="text-[#64748B] flex items-center gap-1.5">
+                  <Clock className="w-3.5 h-3.5 text-[#2563EB]" />
                   Last Commit
                 </span>
-                <span className="text-foreground">{tool.lastCommitFormatted}</span>
+                <span className="text-[#0F172A]">{tool.lastCommitFormatted}</span>
               </li>
 
-              <li className="flex items-center justify-between pb-2 border-b border-border/40">
-                <span className="text-muted-foreground flex items-center gap-1.5">
-                  <Calendar className="w-3.5 h-3.5" />
+              <li className="flex items-center justify-between pb-2 border-b border-[#DFE7F3]">
+                <span className="text-[#64748B] flex items-center gap-1.5">
+                  <Calendar className="w-3.5 h-3.5 text-[#2563EB]" />
                   Repository Age
                 </span>
-                <span className="text-foreground">{tool.repositoryAge}</span>
+                <span className="text-[#0F172A]">{tool.repositoryAge}</span>
               </li>
 
-              <li className="flex items-center justify-between pb-2 border-b border-border/40">
-                <span className="text-muted-foreground flex items-center gap-1.5">
-                  <Sparkles className="w-3.5 h-3.5" />
+              <li className="flex items-center justify-between pb-2 border-b border-[#DFE7F3]">
+                <span className="text-[#64748B] flex items-center gap-1.5">
+                  <Sparkles className="w-3.5 h-3.5 text-[#2563EB]" />
                   Release Version
                 </span>
-                <span className="font-mono text-foreground font-medium">v{tool.version}</span>
+                <span className="font-mono text-[#0F172A] font-medium">v{tool.version}</span>
               </li>
 
               <li className="flex items-center justify-between">
-                <span className="text-muted-foreground flex items-center gap-1.5">
-                  <Server className="w-3.5 h-3.5" />
+                <span className="text-[#64748B] flex items-center gap-1.5">
+                  <Server className="w-3.5 h-3.5 text-[#2563EB]" />
                   Self-Hostable
                 </span>
                 <span
                   className={`font-medium ${
-                    tool.isSelfHostable ? 'text-emerald-400' : 'text-muted-foreground'
+                    tool.isSelfHostable ? 'text-emerald-600' : 'text-[#64748B]'
                   }`}
                 >
                   {tool.isSelfHostable ? 'Yes (Docker / Bare Metal)' : 'Cloud Managed'}
@@ -306,9 +306,9 @@ export const ToolDetailPage: React.FC = () => {
             </ul>
 
             {/* Provenance and Verification Note */}
-            <div className="mt-4 pt-3 border-t border-border/40 text-[11px] text-muted-foreground flex flex-col gap-1">
-              <span className="flex items-center gap-1 text-emerald-400 font-medium">
-                <BadgeCheck className="w-3.5 h-3.5" />
+            <div className="mt-4 pt-3 border-t border-[#DFE7F3] text-[11px] text-[#64748B] flex flex-col gap-1">
+              <span className="flex items-center gap-1 text-emerald-600 font-medium">
+                <BadgeCheck className="w-3.5 h-3.5 text-emerald-600" />
                 <span>Verified Snapshot ({tool.verifiedAt || 'October 2026'})</span>
               </span>
               <p>
@@ -318,16 +318,16 @@ export const ToolDetailPage: React.FC = () => {
           </div>
 
           {/* Tech Stack Box */}
-          <div className="p-5 rounded-lg border border-border bg-card/60">
-            <h2 className="text-sm font-semibold uppercase tracking-wider text-foreground mb-3 flex items-center gap-2">
-              <Layers className="w-4 h-4 text-primary" />
+          <div className="p-5 rounded-2xl border border-[#DFE7F3] bg-white shadow-sm">
+            <h2 className="text-sm font-semibold uppercase tracking-wider text-[#0F172A] mb-3 flex items-center gap-2">
+              <Layers className="w-4 h-4 text-[#2563EB]" />
               <span>Technology Stack</span>
             </h2>
             <div className="flex flex-wrap gap-1.5">
               {tool.techStack.map((stack) => (
                 <span
                   key={stack}
-                  className="px-2 py-1 rounded text-xs bg-muted text-foreground border border-border font-medium"
+                  className="px-2.5 py-1 rounded-md text-xs bg-[#F5F8FF] text-[#0F172A] border border-[#DFE7F3] font-medium"
                 >
                   {stack}
                 </span>
@@ -336,8 +336,8 @@ export const ToolDetailPage: React.FC = () => {
           </div>
 
           {/* Categories Box */}
-          <div className="p-5 rounded-lg border border-border bg-card/60">
-            <h2 className="text-sm font-semibold uppercase tracking-wider text-foreground mb-3">
+          <div className="p-5 rounded-2xl border border-[#DFE7F3] bg-white shadow-sm">
+            <h2 className="text-sm font-semibold uppercase tracking-wider text-[#0F172A] mb-3">
               Categories
             </h2>
             <div className="flex flex-wrap gap-1.5">
@@ -345,7 +345,7 @@ export const ToolDetailPage: React.FC = () => {
                 <Link
                   key={cat.slug}
                   to={`/categories/${cat.slug}`}
-                  className="px-2.5 py-1 rounded text-xs bg-primary/10 text-primary border border-primary/20 hover:bg-primary/20 transition-colors font-medium"
+                  className="px-3 py-1 rounded-full text-xs bg-[#EAF2FF] text-[#2563EB] border border-[#BFDBFE] hover:bg-blue-100 transition-colors font-medium"
                 >
                   {cat.name}
                 </Link>
@@ -357,11 +357,11 @@ export const ToolDetailPage: React.FC = () => {
         {/* Right Column: Deep-Dive Description & Self-Hosting Guide */}
         <div className="lg:col-span-2 flex flex-col gap-6">
           {/* About Section */}
-          <div className="p-6 rounded-lg border border-border bg-card/60">
-            <h2 className="text-lg font-bold text-foreground mb-3">
+          <div className="p-6 rounded-2xl border border-[#DFE7F3] bg-white shadow-sm">
+            <h2 className="text-lg font-bold text-[#0F172A] mb-3">
               About {tool.name}
             </h2>
-            <p className="text-secondary-foreground text-sm leading-relaxed mb-4">
+            <p className="text-[#64748B] text-sm leading-relaxed mb-4">
               {tool.longDescription}
             </p>
 
@@ -369,7 +369,7 @@ export const ToolDetailPage: React.FC = () => {
               {tool.tags.map((tag) => (
                 <span
                   key={tag}
-                  className="px-2 py-0.5 rounded text-xs bg-background text-muted-foreground border border-border"
+                  className="px-2.5 py-0.5 rounded-md text-xs bg-[#F5F8FF] text-[#64748B] border border-[#DFE7F3]"
                 >
                   #{tag}
                 </span>
@@ -379,10 +379,10 @@ export const ToolDetailPage: React.FC = () => {
 
           {/* Self-Hosting Instructions (if available) */}
           {tool.selfHostingSteps && tool.selfHostingSteps.length > 0 && (
-            <div className="p-6 rounded-lg border border-border bg-card/60">
+            <div className="p-6 rounded-2xl border border-[#DFE7F3] bg-white shadow-sm">
               <div className="flex items-center gap-2 mb-4">
-                <Terminal className="w-5 h-5 text-primary" />
-                <h2 className="text-lg font-bold text-foreground">
+                <Terminal className="w-5 h-5 text-[#2563EB]" />
+                <h2 className="text-lg font-bold text-[#0F172A]">
                   Quick Self-Host Guide
                 </h2>
               </div>
@@ -390,14 +390,14 @@ export const ToolDetailPage: React.FC = () => {
               <div className="space-y-4">
                 {tool.selfHostingSteps.map((s) => (
                   <div key={s.step} className="flex gap-3">
-                    <span className="w-6 h-6 rounded-full bg-primary/20 text-primary text-xs font-bold flex items-center justify-center shrink-0 mt-0.5">
+                    <span className="w-6 h-6 rounded-full bg-[#EAF2FF] text-[#2563EB] text-xs font-bold flex items-center justify-center shrink-0 mt-0.5">
                       {s.step}
                     </span>
                     <div className="min-w-0 flex-1">
-                      <h3 className="text-sm font-semibold text-foreground mb-1">
+                      <h3 className="text-sm font-semibold text-[#0F172A] mb-1">
                         {s.title}
                       </h3>
-                      <pre className="p-2.5 rounded bg-background border border-border text-xs font-mono text-emerald-400 overflow-x-auto">
+                      <pre className="p-3 rounded-xl bg-[#0F172A] border border-slate-700 text-xs font-mono text-emerald-400 overflow-x-auto">
                         <code>{s.detail}</code>
                       </pre>
                     </div>
@@ -411,8 +411,8 @@ export const ToolDetailPage: React.FC = () => {
 
       {/* Similar Open Source Projects */}
       {similarTools.length > 0 && (
-        <section className="pt-8 border-t border-border/60 mb-12">
-          <h2 className="text-xl font-bold text-foreground mb-4">
+        <section className="pt-8 border-t border-[#DFE7F3] mb-12">
+          <h2 className="text-xl font-bold text-[#0F172A] mb-4">
             Similar Open Source Projects
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
@@ -425,18 +425,18 @@ export const ToolDetailPage: React.FC = () => {
 
       {/* Related Step-by-Step Guides Section */}
       {relatedGuides.length > 0 && (
-        <div className="pt-8 border-t border-border">
+        <div className="pt-8 border-t border-[#DFE7F3]">
           <div className="flex items-center justify-between mb-6">
             <div>
-              <div className="inline-flex items-center gap-1.5 text-primary text-xs font-semibold uppercase tracking-wider mb-1">
+              <div className="inline-flex items-center gap-1.5 text-blue-600 text-xs font-semibold uppercase tracking-wider mb-1">
                 <BookOpen className="w-3.5 h-3.5" />
                 <span>Related Tutorials</span>
               </div>
-              <h2 className="text-xl font-bold text-foreground">
+              <h2 className="text-xl font-bold text-[#0F172A]">
                 Step-by-Step Guides for {tool.name}
               </h2>
             </div>
-            <Link to="/guides" className="text-xs text-primary hover:underline">
+            <Link to="/guides" className="text-xs text-blue-600 hover:text-blue-700 hover:underline">
               Browse all guides →
             </Link>
           </div>

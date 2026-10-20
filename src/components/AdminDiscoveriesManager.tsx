@@ -253,9 +253,9 @@ export const AdminDiscoveriesManager: React.FC<AdminDiscoveriesManagerProps> = (
     <div className="space-y-6">
       {/* Toast Notification */}
       {toastMessage && (
-        <div className="fixed bottom-6 right-6 z-50 p-4 rounded-xl bg-card border border-emerald-500/40 text-emerald-400 shadow-2xl flex items-center gap-3 animate-in fade-in slide-in-from-bottom-4">
-          <CheckCircle2 className="w-5 h-5 flex-shrink-0 text-emerald-400" />
-          <span className="text-sm font-medium">{toastMessage}</span>
+        <div className="fixed bottom-6 right-6 z-50 p-4 rounded-xl bg-white border border-emerald-300 text-emerald-800 shadow-xl flex items-center gap-3 animate-in fade-in slide-in-from-bottom-4">
+          <CheckCircle2 className="w-5 h-5 flex-shrink-0 text-emerald-600" />
+          <span className="text-sm font-semibold">{toastMessage}</span>
         </div>
       )}
 
@@ -263,84 +263,84 @@ export const AdminDiscoveriesManager: React.FC<AdminDiscoveriesManagerProps> = (
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
         <div
           onClick={() => setStatusFilter('all')}
-          className={`cursor-pointer p-4 rounded-xl border bg-card/60 transition-all ${
-            statusFilter === 'all' ? 'border-primary ring-1 ring-primary/40' : 'border-border hover:border-border/80'
+          className={`cursor-pointer p-4 rounded-xl border bg-white transition-all shadow-xs ${
+            statusFilter === 'all' ? 'border-blue-500 ring-2 ring-blue-500/20' : 'border-[#DFE7F3] hover:border-slate-300'
           }`}
         >
-          <div className="text-xs text-muted-foreground font-semibold">Total Discoveries</div>
-          <div className="text-2xl font-bold mt-1 text-foreground">{stats.total}</div>
+          <div className="text-xs text-slate-500 font-semibold tracking-wide">Total Discoveries</div>
+          <div className="text-2xl font-bold mt-1 text-slate-900">{stats.total}</div>
         </div>
 
         <div
           onClick={() => setStatusFilter('published')}
-          className={`cursor-pointer p-4 rounded-xl border bg-card/60 transition-all ${
-            statusFilter === 'published' ? 'border-emerald-500 ring-1 ring-emerald-500/40' : 'border-border hover:border-border/80'
+          className={`cursor-pointer p-4 rounded-xl border bg-white transition-all shadow-xs ${
+            statusFilter === 'published' ? 'border-emerald-500 ring-2 ring-emerald-500/20' : 'border-[#DFE7F3] hover:border-slate-300'
           }`}
         >
-          <div className="text-xs text-emerald-400 font-semibold flex items-center gap-1.5">
-            <span className="w-2 h-2 rounded-full bg-emerald-400" />
+          <div className="text-xs text-emerald-700 font-semibold flex items-center gap-1.5">
+            <span className="w-2 h-2 rounded-full bg-emerald-500 shadow-xs" />
             Published (Live)
           </div>
-          <div className="text-2xl font-bold mt-1 text-emerald-400">{stats.published}</div>
+          <div className="text-2xl font-bold mt-1 text-emerald-700">{stats.published}</div>
         </div>
 
         <div
           onClick={() => setStatusFilter('draft')}
-          className={`cursor-pointer p-4 rounded-xl border bg-card/60 transition-all ${
-            statusFilter === 'draft' ? 'border-amber-500 ring-1 ring-amber-500/40' : 'border-border hover:border-border/80'
+          className={`cursor-pointer p-4 rounded-xl border bg-white transition-all shadow-xs ${
+            statusFilter === 'draft' ? 'border-amber-500 ring-2 ring-amber-500/20' : 'border-[#DFE7F3] hover:border-slate-300'
           }`}
         >
-          <div className="text-xs text-amber-400 font-semibold flex items-center gap-1.5">
-            <span className="w-2 h-2 rounded-full bg-amber-400" />
+          <div className="text-xs text-amber-700 font-semibold flex items-center gap-1.5">
+            <span className="w-2 h-2 rounded-full bg-amber-500 shadow-xs" />
             Drafts (Hidden)
           </div>
-          <div className="text-2xl font-bold mt-1 text-amber-400">{stats.drafts}</div>
+          <div className="text-2xl font-bold mt-1 text-amber-700">{stats.drafts}</div>
         </div>
 
-        <div className="p-4 rounded-xl border border-border bg-card/60">
-          <div className="text-xs text-purple-400 font-semibold flex items-center gap-1.5">
-            <Star className="w-3 h-3 text-purple-400" />
+        <div className="p-4 rounded-xl border border-[#DFE7F3] bg-white shadow-xs">
+          <div className="text-xs text-purple-700 font-semibold flex items-center gap-1.5">
+            <Star className="w-3.5 h-3.5 text-purple-600" />
             Featured Badges
           </div>
-          <div className="text-2xl font-bold mt-1 text-purple-400">{stats.featured}</div>
+          <div className="text-2xl font-bold mt-1 text-purple-700">{stats.featured}</div>
         </div>
       </div>
 
       {/* Action / Search Bar */}
-      <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 bg-card/70 border border-border/80 rounded-xl p-3">
+      <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 bg-white border border-[#DFE7F3] rounded-2xl p-3 shadow-xs">
         <div className="flex items-center gap-2 flex-1">
           <div className="relative flex-1 max-w-md">
-            <Search className="w-4 h-4 text-muted-foreground absolute left-3 top-1/2 -translate-y-1/2" />
+            <Search className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
             <input
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search discoveries by name or category..."
-              className="w-full pl-9 pr-3 py-1.5 rounded-lg border border-border bg-background text-foreground text-xs focus:outline-none focus:ring-1 focus:ring-primary"
+              className="w-full pl-9 pr-3 py-1.5 rounded-xl border border-[#DFE7F3] bg-white text-slate-900 placeholder-slate-400 text-xs focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-colors"
             />
           </div>
 
-          <div className="flex items-center gap-1 border border-border/60 rounded-lg p-0.5 bg-background/50">
+          <div className="flex items-center gap-1 border border-slate-200 rounded-xl p-0.5 bg-slate-100">
             <button
               onClick={() => setStatusFilter('all')}
-              className={`px-2.5 py-1 rounded text-xs font-medium transition-colors ${
-                statusFilter === 'all' ? 'bg-primary text-primary-foreground' : 'text-muted-foreground hover:text-foreground'
+              className={`px-2.5 py-1 rounded-lg text-xs font-medium transition-colors cursor-pointer ${
+                statusFilter === 'all' ? 'bg-white text-slate-900 shadow-xs font-semibold' : 'text-slate-600 hover:text-slate-900'
               }`}
             >
               All
             </button>
             <button
               onClick={() => setStatusFilter('published')}
-              className={`px-2.5 py-1 rounded text-xs font-medium transition-colors ${
-                statusFilter === 'published' ? 'bg-emerald-500 text-white' : 'text-muted-foreground hover:text-foreground'
+              className={`px-2.5 py-1 rounded-lg text-xs font-medium transition-colors cursor-pointer ${
+                statusFilter === 'published' ? 'bg-emerald-600 text-white shadow-xs font-semibold' : 'text-slate-600 hover:text-slate-900'
               }`}
             >
               Published
             </button>
             <button
               onClick={() => setStatusFilter('draft')}
-              className={`px-2.5 py-1 rounded text-xs font-medium transition-colors ${
-                statusFilter === 'draft' ? 'bg-amber-500 text-white' : 'text-muted-foreground hover:text-foreground'
+              className={`px-2.5 py-1 rounded-lg text-xs font-medium transition-colors cursor-pointer ${
+                statusFilter === 'draft' ? 'bg-amber-600 text-white shadow-xs font-semibold' : 'text-slate-600 hover:text-slate-900'
               }`}
             >
               Drafts
@@ -352,16 +352,16 @@ export const AdminDiscoveriesManager: React.FC<AdminDiscoveriesManagerProps> = (
           <button
             onClick={loadDiscoveries}
             disabled={isLoading}
-            className="p-2 rounded-xl bg-card border border-border hover:bg-muted text-muted-foreground hover:text-foreground transition-colors flex items-center gap-1 text-xs px-2.5"
+            className="p-2 rounded-xl bg-white border border-[#DFE7F3] hover:bg-slate-50 text-slate-700 transition-colors flex items-center gap-1.5 text-xs px-3 shadow-xs cursor-pointer"
             title="Refresh list"
           >
             <RefreshCw className={`w-3.5 h-3.5 ${isLoading ? 'animate-spin' : ''}`} />
-            <span>Refresh</span>
+            <span className="font-medium">Refresh</span>
           </button>
 
           <button
             onClick={handleOpenCreateModal}
-            className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-primary text-primary-foreground text-xs font-semibold hover:bg-primary-hover shadow transition-all active:scale-95 shrink-0"
+            className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold shadow-md shadow-blue-600/25 transition-all active:scale-95 shrink-0 cursor-pointer"
           >
             <Plus className="w-3.5 h-3.5" />
             <span>Add New Discovery</span>
@@ -371,9 +371,9 @@ export const AdminDiscoveriesManager: React.FC<AdminDiscoveriesManagerProps> = (
 
       {/* Error Banner */}
       {fetchError && (
-        <div className="p-4 rounded-xl border border-rose-500/30 bg-rose-500/10 text-rose-400 text-xs flex items-center justify-between">
+        <div className="p-4 rounded-xl border border-rose-200 bg-rose-50 text-rose-700 text-xs flex items-center justify-between">
           <span>{fetchError}</span>
-          <button onClick={loadDiscoveries} className="underline hover:text-rose-300">
+          <button onClick={loadDiscoveries} className="underline hover:text-rose-800 font-semibold cursor-pointer">
             Retry
           </button>
         </div>
@@ -381,31 +381,31 @@ export const AdminDiscoveriesManager: React.FC<AdminDiscoveriesManagerProps> = (
 
       {/* Discoveries List / Table */}
       {isLoading ? (
-        <div className="p-12 text-center text-sm text-muted-foreground">
-          <RefreshCw className="w-6 h-6 animate-spin mx-auto mb-2 text-primary" />
+        <div className="p-12 text-center text-sm text-slate-500">
+          <RefreshCw className="w-6 h-6 animate-spin mx-auto mb-2 text-blue-600" />
           <span>Loading tool discoveries...</span>
         </div>
       ) : filteredList.length === 0 ? (
-        <div className="p-12 rounded-xl border border-border/80 bg-card/40 text-center">
-          <p className="text-sm font-semibold text-foreground mb-1">No discoveries found</p>
-          <p className="text-xs text-muted-foreground mb-4">
+        <div className="p-12 rounded-2xl border border-slate-300 bg-white text-center shadow-xs">
+          <p className="text-sm font-semibold text-slate-900 mb-1">No discoveries found</p>
+          <p className="text-xs text-slate-500 mb-4">
             {searchQuery || statusFilter !== 'all'
               ? 'No items matched your current search or status filter.'
               : 'You have not added any tool discoveries yet.'}
           </p>
           <button
             onClick={handleOpenCreateModal}
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-primary text-primary-foreground text-xs font-semibold hover:bg-primary-hover transition-colors"
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold shadow-md shadow-blue-600/20 transition-colors cursor-pointer"
           >
             <Plus className="w-3.5 h-3.5" />
             <span>Create First Discovery</span>
           </button>
         </div>
       ) : (
-        <div className="rounded-xl border border-border overflow-hidden bg-card/50">
+        <div className="rounded-2xl border border-[#DFE7F3] overflow-hidden bg-white shadow-xs">
           <div className="overflow-x-auto">
-            <table className="w-full text-left text-xs text-foreground">
-              <thead className="bg-muted/60 text-muted-foreground border-b border-border text-[11px] uppercase tracking-wider font-semibold">
+            <table className="w-full text-left text-xs text-slate-700">
+              <thead className="bg-slate-50 text-slate-500 border-b border-[#DFE7F3] text-[11px] uppercase tracking-wider font-semibold">
                 <tr>
                   <th className="py-3 px-4">Tool</th>
                   <th className="py-3 px-3">Category</th>
@@ -415,27 +415,27 @@ export const AdminDiscoveriesManager: React.FC<AdminDiscoveriesManagerProps> = (
                   <th className="py-3 px-4 text-right">Actions</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-border/60">
+              <tbody className="divide-y divide-slate-100">
                 {filteredList.map((disc) => {
                   const safeUrl = sanitizeOutboundUrl(disc.websiteUrl);
                   const safeImg = disc.imageUrl ? sanitizeOutboundUrl(disc.imageUrl) : '';
                   return (
-                    <tr key={disc.id} className="hover:bg-muted/30 transition-colors">
+                    <tr key={disc.id} className="hover:bg-slate-50/80 transition-colors">
                       {/* Tool Name & Logo */}
                       <td className="py-3 px-4">
                         <div className="flex items-center gap-3">
-                          <div className="w-9 h-9 rounded-lg border border-border bg-background p-0.5 flex-shrink-0 flex items-center justify-center overflow-hidden">
+                          <div className="w-9 h-9 rounded-lg border border-slate-200 bg-slate-50 p-0.5 flex-shrink-0 flex items-center justify-center overflow-hidden">
                             {safeImg ? (
                               <img src={safeImg} alt="" className="w-full h-full object-cover rounded" />
                             ) : (
-                              <div className="w-full h-full bg-primary/20 text-primary font-bold flex items-center justify-center text-xs">
+                              <div className="w-full h-full bg-blue-50 text-blue-700 font-bold flex items-center justify-center text-xs">
                                 {disc.name.charAt(0).toUpperCase()}
                               </div>
                             )}
                           </div>
                           <div className="min-w-0 max-w-xs">
-                            <div className="font-bold text-foreground truncate">{disc.name}</div>
-                            <div className="text-[11px] text-muted-foreground truncate max-w-[200px] sm:max-w-xs">
+                            <div className="font-bold text-slate-900 truncate">{disc.name}</div>
+                            <div className="text-[11px] text-slate-500 truncate max-w-[200px] sm:max-w-xs">
                               {disc.description}
                             </div>
                             {safeUrl && (
@@ -443,7 +443,7 @@ export const AdminDiscoveriesManager: React.FC<AdminDiscoveriesManagerProps> = (
                                 href={safeUrl}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="inline-flex items-center gap-1 text-[11px] text-primary hover:underline mt-0.5"
+                                className="inline-flex items-center gap-1 text-[11px] text-blue-600 hover:text-blue-700 hover:underline mt-0.5 font-medium"
                               >
                                 <span>{new URL(safeUrl).hostname}</span>
                                 <ExternalLink className="w-2.5 h-2.5" />
@@ -455,7 +455,7 @@ export const AdminDiscoveriesManager: React.FC<AdminDiscoveriesManagerProps> = (
 
                       {/* Category */}
                       <td className="py-3 px-3">
-                        <span className="px-2 py-0.5 rounded-full text-[11px] bg-muted text-muted-foreground border border-border/60">
+                        <span className="px-2 py-0.5 rounded-full text-[11px] bg-slate-100 text-slate-700 border border-slate-200">
                           {disc.category || 'General'}
                         </span>
                       </td>
@@ -466,14 +466,14 @@ export const AdminDiscoveriesManager: React.FC<AdminDiscoveriesManagerProps> = (
                           onClick={() => handleToggleStatus(disc)}
                           className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-semibold border transition-all cursor-pointer ${
                             disc.status === 'published'
-                              ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/30 hover:bg-emerald-500/20'
-                              : 'bg-amber-500/10 text-amber-400 border-amber-500/30 hover:bg-amber-500/20'
+                              ? 'bg-emerald-50 text-emerald-700 border-emerald-200 hover:bg-emerald-100'
+                              : 'bg-amber-50 text-amber-700 border-amber-200 hover:bg-amber-100'
                           }`}
                           title={`Click to switch to ${disc.status === 'published' ? 'Draft' : 'Published'}`}
                         >
                           <span
                             className={`w-1.5 h-1.5 rounded-full ${
-                              disc.status === 'published' ? 'bg-emerald-400' : 'bg-amber-400'
+                              disc.status === 'published' ? 'bg-emerald-500' : 'bg-amber-500'
                             }`}
                           />
                           <span className="capitalize">{disc.status}</span>
@@ -487,15 +487,15 @@ export const AdminDiscoveriesManager: React.FC<AdminDiscoveriesManagerProps> = (
                             onClick={() => handleToggleFeatured(disc)}
                             className={`p-1 rounded-md border transition-colors cursor-pointer ${
                               disc.isFeatured
-                                ? 'bg-purple-500/20 border-purple-500/40 text-purple-400'
-                                : 'bg-muted/40 border-border text-muted-foreground hover:text-foreground'
+                                ? 'bg-purple-50 border-purple-200 text-purple-700'
+                                : 'bg-slate-50 border-slate-200 text-slate-400 hover:text-slate-700'
                             }`}
                             title={disc.isFeatured ? 'Featured (click to remove)' : 'Click to feature'}
                           >
-                            <Star className={`w-3.5 h-3.5 ${disc.isFeatured ? 'fill-purple-400' : ''}`} />
+                            <Star className={`w-3.5 h-3.5 ${disc.isFeatured ? 'fill-purple-600 text-purple-600' : ''}`} />
                           </button>
                           {disc.isNew && (
-                            <span className="px-1.5 py-0.2 rounded text-[10px] font-bold bg-primary/15 text-primary border border-primary/20 uppercase">
+                            <span className="px-1.5 py-0.2 rounded text-[10px] font-bold bg-blue-50 text-blue-700 border border-blue-200 uppercase">
                               New
                             </span>
                           )}
@@ -503,7 +503,7 @@ export const AdminDiscoveriesManager: React.FC<AdminDiscoveriesManagerProps> = (
                       </td>
 
                       {/* Date */}
-                      <td className="py-3 px-3 text-muted-foreground text-[11px]">
+                      <td className="py-3 px-3 text-slate-500 text-[11px]">
                         {new Date(disc.createdAt).toLocaleDateString()}
                       </td>
 
@@ -512,7 +512,7 @@ export const AdminDiscoveriesManager: React.FC<AdminDiscoveriesManagerProps> = (
                         <div className="inline-flex items-center gap-1">
                           <button
                             onClick={() => handleToggleStatus(disc)}
-                            className="p-1.5 rounded-lg border border-border hover:bg-muted text-muted-foreground hover:text-foreground transition-colors"
+                            className="p-1.5 rounded-lg border border-slate-200 hover:bg-slate-100 text-slate-500 hover:text-slate-900 transition-colors cursor-pointer"
                             title={disc.status === 'published' ? 'Unpublish (make draft)' : 'Publish (make live)'}
                           >
                             {disc.status === 'published' ? (
@@ -524,7 +524,7 @@ export const AdminDiscoveriesManager: React.FC<AdminDiscoveriesManagerProps> = (
 
                           <button
                             onClick={() => handleOpenEditModal(disc)}
-                            className="p-1.5 rounded-lg border border-border hover:bg-primary/10 hover:border-primary/30 hover:text-primary transition-colors text-muted-foreground"
+                            className="p-1.5 rounded-lg border border-slate-200 hover:bg-blue-50 hover:border-blue-200 hover:text-blue-700 transition-colors text-slate-500 cursor-pointer"
                             title="Edit discovery details"
                           >
                             <Edit2 className="w-3.5 h-3.5" />
@@ -532,7 +532,7 @@ export const AdminDiscoveriesManager: React.FC<AdminDiscoveriesManagerProps> = (
 
                           <button
                             onClick={() => setDeleteCandidate(disc)}
-                            className="p-1.5 rounded-lg border border-border hover:bg-rose-500/10 hover:border-rose-500/30 hover:text-rose-400 transition-colors text-muted-foreground"
+                            className="p-1.5 rounded-lg border border-slate-200 hover:bg-rose-50 hover:border-rose-200 hover:text-rose-700 transition-colors text-slate-500 cursor-pointer"
                             title="Delete discovery"
                           >
                             <Trash2 className="w-3.5 h-3.5" />
@@ -550,27 +550,27 @@ export const AdminDiscoveriesManager: React.FC<AdminDiscoveriesManagerProps> = (
 
       {/* Add / Edit Modal */}
       {isModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm animate-in fade-in">
-          <div className="w-full max-w-xl rounded-2xl border border-border bg-card p-6 shadow-2xl relative max-h-[90vh] overflow-y-auto">
-            <div className="flex items-center justify-between pb-4 border-b border-border mb-5">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs animate-in fade-in">
+          <div className="w-full max-w-xl rounded-2xl border border-[#DFE7F3] bg-white p-6 shadow-2xl relative max-h-[90vh] overflow-y-auto">
+            <div className="flex items-center justify-between pb-4 border-b border-[#DFE7F3] mb-5">
               <div className="flex items-center gap-2.5">
-                <div className="w-8 h-8 rounded-lg bg-primary/15 text-primary flex items-center justify-center">
+                <div className="w-8 h-8 rounded-lg bg-blue-50 text-blue-700 border border-blue-200 flex items-center justify-center">
                   <Sparkles className="w-4 h-4" />
                 </div>
-                <h3 className="text-lg font-bold text-foreground">
+                <h3 className="text-lg font-bold text-slate-900">
                   {editingId ? 'Edit Tool Discovery' : 'Add New Daily Discovery'}
                 </h3>
               </div>
               <button
                 onClick={() => setIsModalOpen(false)}
-                className="p-1.5 text-muted-foreground hover:text-foreground rounded-lg"
+                className="p-1.5 text-slate-400 hover:text-slate-700 rounded-lg transition-colors cursor-pointer"
               >
                 <X className="w-4 h-4" />
               </button>
             </div>
 
             {formError && (
-              <div className="p-3.5 rounded-xl border border-rose-500/30 bg-rose-500/10 text-rose-400 text-xs mb-4 flex items-start gap-2">
+              <div className="p-3.5 rounded-xl border border-rose-200 bg-rose-50 text-rose-700 text-xs mb-4 flex items-start gap-2">
                 <AlertCircle className="w-4 h-4 shrink-0 mt-0.5" />
                 <span>{formError}</span>
               </div>
@@ -579,8 +579,8 @@ export const AdminDiscoveriesManager: React.FC<AdminDiscoveriesManagerProps> = (
             <form onSubmit={handleFormSubmit} className="space-y-4">
               {/* Tool Name */}
               <div>
-                <label className="block text-xs font-semibold text-foreground mb-1.5">
-                  Tool Name <span className="text-rose-400">*</span>
+                <label className="block text-xs font-semibold text-slate-700 mb-1.5">
+                  Tool Name <span className="text-rose-500">*</span>
                 </label>
                 <input
                   type="text"
@@ -588,14 +588,14 @@ export const AdminDiscoveriesManager: React.FC<AdminDiscoveriesManagerProps> = (
                   value={formName}
                   onChange={(e) => setFormName(e.target.value)}
                   placeholder="e.g. Cursor, Perplexity AI, ElevenLabs"
-                  className="w-full px-3.5 py-2 rounded-xl border border-border bg-background text-foreground text-sm focus:outline-none focus:ring-1 focus:ring-primary"
+                  className="w-full px-3.5 py-2 rounded-xl border border-[#DFE7F3] bg-white text-slate-900 placeholder-slate-400 text-sm focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-colors"
                 />
               </div>
 
               {/* Short Description */}
               <div>
-                <label className="block text-xs font-semibold text-foreground mb-1.5">
-                  Short Description <span className="text-rose-400">*</span>
+                <label className="block text-xs font-semibold text-slate-700 mb-1.5">
+                  Short Description <span className="text-rose-500">*</span>
                 </label>
                 <textarea
                   required
@@ -603,17 +603,17 @@ export const AdminDiscoveriesManager: React.FC<AdminDiscoveriesManagerProps> = (
                   value={formDescription}
                   onChange={(e) => setFormDescription(e.target.value)}
                   placeholder="Explain why this tool is groundbreaking, what problems it solves, and why editors recommend it..."
-                  className="w-full px-3.5 py-2 rounded-xl border border-border bg-background text-foreground text-sm focus:outline-none focus:ring-1 focus:ring-primary"
+                  className="w-full px-3.5 py-2 rounded-xl border border-[#DFE7F3] bg-white text-slate-900 placeholder-slate-400 text-sm focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-colors"
                 />
-                <span className="text-[10px] text-muted-foreground block text-right mt-1">
+                <span className="text-[10px] text-slate-500 block text-right mt-1">
                   {formDescription.length}/600 chars
                 </span>
               </div>
 
               {/* Website URL */}
               <div>
-                <label className="block text-xs font-semibold text-foreground mb-1.5">
-                  Official Website URL <span className="text-rose-400">*</span>
+                <label className="block text-xs font-semibold text-slate-700 mb-1.5">
+                  Official Website URL <span className="text-rose-500">*</span>
                 </label>
                 <input
                   type="text"
@@ -621,31 +621,31 @@ export const AdminDiscoveriesManager: React.FC<AdminDiscoveriesManagerProps> = (
                   value={formWebsiteUrl}
                   onChange={(e) => setFormWebsiteUrl(e.target.value)}
                   placeholder="https://example.com"
-                  className="w-full px-3.5 py-2 rounded-xl border border-border bg-background text-foreground text-sm focus:outline-none focus:ring-1 focus:ring-primary"
+                  className="w-full px-3.5 py-2 rounded-xl border border-[#DFE7F3] bg-white text-slate-900 placeholder-slate-400 text-sm focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-colors"
                 />
               </div>
 
               {/* Image / Logo URL */}
               <div>
-                <label className="block text-xs font-semibold text-foreground mb-1.5">
-                  Tool Logo or Cover Image URL <span className="text-muted-foreground">(Optional)</span>
+                <label className="block text-xs font-semibold text-slate-700 mb-1.5">
+                  Tool Logo or Cover Image URL <span className="text-slate-400 font-normal">(Optional)</span>
                 </label>
                 <input
                   type="text"
                   value={formImageUrl}
                   onChange={(e) => setFormImageUrl(e.target.value)}
                   placeholder="https://.../logo.png or Unsplash image URL"
-                  className="w-full px-3.5 py-2 rounded-xl border border-border bg-background text-foreground text-sm focus:outline-none focus:ring-1 focus:ring-primary"
+                  className="w-full px-3.5 py-2 rounded-xl border border-[#DFE7F3] bg-white text-slate-900 placeholder-slate-400 text-sm focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-colors"
                 />
                 {formImageUrl && sanitizeOutboundUrl(formImageUrl) && (
-                  <div className="mt-2 flex items-center gap-2 p-2 rounded-lg border border-border/60 bg-muted/30">
+                  <div className="mt-2 flex items-center gap-2 p-2 rounded-lg border border-slate-200 bg-slate-50">
                     <img
                       src={sanitizeOutboundUrl(formImageUrl)}
                       alt="Preview"
-                      className="w-8 h-8 rounded object-cover border border-border"
+                      className="w-8 h-8 rounded object-cover border border-slate-200"
                       onError={(e) => ((e.target as HTMLElement).style.display = 'none')}
                     />
-                    <span className="text-[11px] text-muted-foreground">Image preview valid</span>
+                    <span className="text-[11px] text-slate-600">Image preview valid</span>
                   </div>
                 )}
               </div>
@@ -653,11 +653,12 @@ export const AdminDiscoveriesManager: React.FC<AdminDiscoveriesManagerProps> = (
               {/* Category & Status Grid */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs font-semibold text-foreground mb-1.5">Category</label>
+                  <label className="block text-xs font-semibold text-slate-700 mb-1.5">Category</label>
                   <select
+                    aria-label="Discovery category"
                     value={formCategory}
                     onChange={(e) => setFormCategory(e.target.value)}
-                    className="w-full px-3.5 py-2 rounded-xl border border-border bg-background text-foreground text-sm focus:outline-none focus:ring-1 focus:ring-primary cursor-pointer"
+                    className="w-full px-3.5 py-2 rounded-xl border border-[#DFE7F3] bg-white text-slate-900 text-sm focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 cursor-pointer"
                   >
                     <option value="Developer Tools">Developer Tools</option>
                     <option value="Search & Research">Search & Research</option>
@@ -672,11 +673,12 @@ export const AdminDiscoveriesManager: React.FC<AdminDiscoveriesManagerProps> = (
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-foreground mb-1.5">Publication Status</label>
+                  <label className="block text-xs font-semibold text-slate-700 mb-1.5">Publication Status</label>
                   <select
+                    aria-label="Publication status"
                     value={formStatus}
                     onChange={(e) => setFormStatus(e.target.value as any)}
-                    className="w-full px-3.5 py-2 rounded-xl border border-border bg-background text-foreground text-sm focus:outline-none focus:ring-1 focus:ring-primary cursor-pointer"
+                    className="w-full px-3.5 py-2 rounded-xl border border-[#DFE7F3] bg-white text-slate-900 text-sm focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 cursor-pointer"
                   >
                     <option value="published">Published (Visible on site)</option>
                     <option value="draft">Draft (Hidden from public)</option>
@@ -685,16 +687,16 @@ export const AdminDiscoveriesManager: React.FC<AdminDiscoveriesManagerProps> = (
               </div>
 
               {/* Badges Toggles */}
-              <div className="pt-2 border-t border-border/60 flex items-center gap-6">
+              <div className="pt-2 border-t border-[#DFE7F3] flex items-center gap-6">
                 <label className="inline-flex items-center gap-2 cursor-pointer">
                   <input
                     type="checkbox"
                     checked={formIsFeatured}
                     onChange={(e) => setFormIsFeatured(e.target.checked)}
-                    className="w-4 h-4 rounded text-primary focus:ring-primary bg-background border-border"
+                    className="w-4 h-4 rounded text-blue-600 focus:ring-blue-500 border-slate-300"
                   />
-                  <span className="text-xs text-foreground font-medium flex items-center gap-1">
-                    <Star className="w-3.5 h-3.5 text-purple-400" />
+                  <span className="text-xs text-slate-700 font-medium flex items-center gap-1">
+                    <Star className="w-3.5 h-3.5 text-purple-600" />
                     <span>Featured in Highlights</span>
                   </span>
                 </label>
@@ -704,29 +706,29 @@ export const AdminDiscoveriesManager: React.FC<AdminDiscoveriesManagerProps> = (
                     type="checkbox"
                     checked={formIsNew}
                     onChange={(e) => setFormIsNew(e.target.checked)}
-                    className="w-4 h-4 rounded text-primary focus:ring-primary bg-background border-border"
+                    className="w-4 h-4 rounded text-blue-600 focus:ring-blue-500 border-slate-300"
                   />
-                  <span className="text-xs text-foreground font-medium flex items-center gap-1">
-                    <Sparkles className="w-3.5 h-3.5 text-primary" />
+                  <span className="text-xs text-slate-700 font-medium flex items-center gap-1">
+                    <Sparkles className="w-3.5 h-3.5 text-blue-600" />
                     <span>Display "New" Badge</span>
                   </span>
                 </label>
               </div>
 
               {/* Modal Buttons */}
-              <div className="pt-4 border-t border-border/60 flex items-center justify-end gap-3">
+              <div className="pt-4 border-t border-[#DFE7F3] flex items-center justify-end gap-3">
                 <button
                   type="button"
                   onClick={() => setIsModalOpen(false)}
                   disabled={isSaving}
-                  className="px-4 py-2 rounded-xl border border-border text-muted-foreground hover:text-foreground text-xs font-semibold hover:bg-muted transition-colors"
+                  className="px-4 py-2 rounded-xl border border-slate-300 text-slate-700 hover:text-slate-900 text-xs font-semibold hover:bg-slate-50 transition-colors cursor-pointer"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={isSaving}
-                  className="inline-flex items-center gap-2 px-5 py-2 rounded-xl bg-primary text-primary-foreground text-xs font-semibold hover:bg-primary-hover shadow transition-all active:scale-95 disabled:opacity-50"
+                  className="inline-flex items-center gap-2 px-5 py-2 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold shadow-md shadow-blue-600/25 transition-all active:scale-95 disabled:opacity-50 cursor-pointer"
                 >
                   {isSaving && <RefreshCw className="w-3.5 h-3.5 animate-spin" />}
                   <span>{editingId ? 'Save Changes' : 'Create Discovery'}</span>
@@ -739,33 +741,33 @@ export const AdminDiscoveriesManager: React.FC<AdminDiscoveriesManagerProps> = (
 
       {/* Delete Confirmation Modal */}
       {deleteCandidate && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 backdrop-blur-sm animate-in fade-in">
-          <div className="w-full max-w-md rounded-2xl border border-border bg-card p-6 shadow-2xl">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs animate-in fade-in">
+          <div className="w-full max-w-md rounded-2xl border border-[#DFE7F3] bg-white p-6 shadow-2xl">
             <div className="flex items-center gap-3 mb-3">
-              <div className="w-10 h-10 rounded-xl bg-rose-500/10 text-rose-400 flex items-center justify-center shrink-0">
+              <div className="w-10 h-10 rounded-xl bg-rose-50 text-rose-600 flex items-center justify-center shrink-0 border border-rose-200">
                 <Trash2 className="w-5 h-5" />
               </div>
               <div>
-                <h3 className="text-base font-bold text-foreground">Confirm Deletion</h3>
-                <p className="text-xs text-muted-foreground">This action cannot be undone.</p>
+                <h3 className="text-base font-bold text-slate-900">Confirm Deletion</h3>
+                <p className="text-xs text-slate-500">This action cannot be undone.</p>
               </div>
             </div>
 
-            <p className="text-xs text-secondary-foreground leading-relaxed my-4">
+            <p className="text-xs text-slate-600 leading-relaxed my-4">
               Are you sure you want to permanently delete the tool discovery{' '}
-              <strong className="text-foreground">"{deleteCandidate.name}"</strong>?
+              <strong className="text-slate-900 font-semibold">&quot;{deleteCandidate.name}&quot;</strong>?
             </p>
 
-            <div className="flex items-center justify-end gap-3 pt-3 border-t border-border">
+            <div className="flex items-center justify-end gap-3 pt-3 border-t border-[#DFE7F3]">
               <button
                 onClick={() => setDeleteCandidate(null)}
-                className="px-4 py-2 rounded-xl border border-border text-muted-foreground hover:text-foreground text-xs font-semibold hover:bg-muted transition-colors"
+                className="px-4 py-2 rounded-xl border border-slate-300 text-slate-700 hover:text-slate-900 text-xs font-semibold hover:bg-slate-50 transition-colors cursor-pointer"
               >
                 Cancel
               </button>
               <button
                 onClick={handleConfirmDelete}
-                className="px-4 py-2 rounded-xl bg-rose-500 text-white text-xs font-semibold hover:bg-rose-600 transition-colors shadow"
+                className="px-4 py-2 rounded-xl bg-rose-600 text-white text-xs font-semibold hover:bg-rose-700 transition-colors shadow-md shadow-rose-600/20 cursor-pointer"
               >
                 Delete Discovery
               </button>

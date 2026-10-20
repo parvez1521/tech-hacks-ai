@@ -77,40 +77,40 @@ export const OffersPage: React.FC = () => {
     <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8">
       {/* Header Banner */}
       <div className="mb-8">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-semibold uppercase tracking-wider mb-3">
-          <Tag className="w-3.5 h-3.5" />
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 border border-blue-200 text-blue-700 text-xs font-semibold uppercase tracking-wider mb-3">
+          <Tag className="w-3.5 h-3.5 text-blue-600" />
           <span>Independently Verified Deals & Student Perks</span>
         </div>
-        <h1 className="text-2xl sm:text-4xl font-extrabold text-foreground tracking-tight mb-3">
+        <h1 className="text-2xl sm:text-4xl font-extrabold text-[#0F172A] tracking-tight mb-3">
           AI Deals, Student Plans & Exclusive Discounts
         </h1>
-        <p className="text-sm sm:text-base text-secondary-foreground max-w-3xl leading-relaxed mb-6">
+        <p className="text-sm sm:text-base text-[#475569] max-w-3xl leading-relaxed mb-6">
           Discover verified promotional benefits, carrier bundles (like Reliance Jio + Google Gemini Advanced), 
           free student developer packs, and startup cloud credits. All deals include honest claim instructions, 
           renewal caveats, and direct links to official terms.
         </p>
 
         {/* Informational Callout Bar */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-3 p-4 rounded-xl bg-card/60 border border-border/80 text-xs text-secondary-foreground mb-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-3.5 p-4 sm:p-5 rounded-2xl bg-white border border-[#DFE7F3] shadow-invary-card text-xs text-slate-600 mb-6">
           <div className="flex items-start gap-2.5">
-            <Radio className="w-4 h-4 text-primary shrink-0 mt-0.5" />
+            <Radio className="w-4 h-4 text-blue-600 shrink-0 mt-0.5" />
             <div>
-              <strong className="text-foreground font-semibold block mb-0.5">Telecom 5G Bundles</strong>
-              <span>Complimentary high-tier subscriptions (e.g. Jio 18-month Gemini Advanced) tied to qualifying mobile plans.</span>
+              <strong className="text-slate-900 font-semibold block mb-0.5">Telecom 5G Bundles</strong>
+              <span className="text-slate-500">Complimentary high-tier subscriptions (e.g. Jio 18-month Gemini Advanced) tied to qualifying mobile plans.</span>
             </div>
           </div>
           <div className="flex items-start gap-2.5">
-            <GraduationCap className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
+            <GraduationCap className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />
             <div>
-              <strong className="text-foreground font-semibold block mb-0.5">Verified Student Plans</strong>
-              <span>100% free Copilot, JetBrains, and education discounts verified via academic email or SheerID.</span>
+              <strong className="text-slate-900 font-semibold block mb-0.5">Verified Student Plans</strong>
+              <span className="text-slate-500">100% free Copilot, JetBrains, and education discounts verified via academic email or SheerID.</span>
             </div>
           </div>
           <div className="flex items-start gap-2.5">
-            <ShieldCheck className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+            <ShieldCheck className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
             <div>
-              <strong className="text-foreground font-semibold block mb-0.5">Zero Fabricated Codes</strong>
-              <span>Every listing links directly to official provider URLs with clear expiration and renewal terms.</span>
+              <strong className="text-slate-900 font-semibold block mb-0.5">Zero Fabricated Codes</strong>
+              <span className="text-slate-500">Every listing links directly to official provider URLs with clear expiration and renewal terms.</span>
             </div>
           </div>
         </div>
@@ -121,18 +121,18 @@ export const OffersPage: React.FC = () => {
         <div className="flex flex-col md:flex-row gap-3">
           {/* Search Box */}
           <div className="relative flex-1">
-            <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+            <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 pointer-events-none" />
             <input
               type="text"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               placeholder="Search deals (e.g. 'Jio', 'student', 'Copilot', 'credits', 'India')..."
-              className="w-full pl-10 pr-10 py-2.5 rounded-lg bg-card border border-border text-foreground text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary transition-all"
+              className="w-full pl-10 pr-10 py-2.5 rounded-xl bg-white border border-[#DFE7F3] text-slate-900 text-sm placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all shadow-sm"
             />
             {search && (
               <button
                 onClick={() => setSearch('')}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-700 cursor-pointer"
                 aria-label="Clear search"
               >
                 <X className="w-4 h-4" />
@@ -142,26 +142,26 @@ export const OffersPage: React.FC = () => {
 
           {/* Status Filter */}
           <div className="flex items-center gap-2">
-            <span className="text-xs font-semibold text-muted-foreground uppercase tracking-wider shrink-0 hidden sm:inline">
+            <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider shrink-0 hidden sm:inline">
               Status:
             </span>
-            <div className="inline-flex rounded-lg border border-border bg-card p-1">
+            <div className="inline-flex rounded-xl border border-[#DFE7F3] bg-[#F5F8FF] p-1">
               <button
                 onClick={() => setStatusFilter('active')}
-                className={`px-3 py-1.5 text-xs font-medium rounded-md transition-colors ${
+                className={`px-3 py-1.5 text-xs font-medium rounded-lg transition-colors cursor-pointer ${
                   statusFilter === 'active'
-                    ? 'bg-emerald-500/20 text-emerald-400 font-semibold shadow-sm'
-                    : 'text-muted-foreground hover:text-foreground'
+                    ? 'bg-emerald-100 text-emerald-800 font-semibold shadow-xs'
+                    : 'text-slate-600 hover:text-slate-900'
                 }`}
               >
                 Active ({activeCount})
               </button>
               <button
                 onClick={() => setStatusFilter('archived')}
-                className={`px-3 py-1.5 text-xs font-medium rounded-md transition-colors ${
+                className={`px-3 py-1.5 text-xs font-medium rounded-lg transition-colors cursor-pointer ${
                   statusFilter === 'archived'
-                    ? 'bg-rose-500/20 text-rose-400 font-semibold shadow-sm'
-                    : 'text-muted-foreground hover:text-foreground'
+                    ? 'bg-rose-100 text-rose-800 font-semibold shadow-xs'
+                    : 'text-slate-600 hover:text-slate-900'
                 }`}
               >
                 Archived ({archivedCount})
@@ -171,36 +171,36 @@ export const OffersPage: React.FC = () => {
 
           {/* Region Filter */}
           <div className="flex items-center gap-2">
-            <span className="text-xs font-semibold text-muted-foreground uppercase tracking-wider shrink-0 hidden sm:inline">
+            <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider shrink-0 hidden sm:inline">
               Region:
             </span>
-            <div className="inline-flex rounded-lg border border-border bg-card p-1">
+            <div className="inline-flex rounded-xl border border-[#DFE7F3] bg-[#F5F8FF] p-1">
               <button
                 onClick={() => setSelectedRegion('all')}
-                className={`px-3 py-1.5 text-xs font-medium rounded-md transition-colors ${
+                className={`px-3 py-1.5 text-xs font-medium rounded-lg transition-colors cursor-pointer ${
                   selectedRegion === 'all'
-                    ? 'bg-primary text-primary-foreground shadow-sm'
-                    : 'text-muted-foreground hover:text-foreground'
+                    ? 'bg-blue-600 text-white font-semibold shadow-xs'
+                    : 'text-slate-600 hover:text-slate-900'
                 }`}
               >
                 All Regions
               </button>
               <button
                 onClick={() => setSelectedRegion('India')}
-                className={`px-3 py-1.5 text-xs font-medium rounded-md transition-colors ${
+                className={`px-3 py-1.5 text-xs font-medium rounded-lg transition-colors cursor-pointer ${
                   selectedRegion === 'India'
-                    ? 'bg-primary text-primary-foreground shadow-sm'
-                    : 'text-muted-foreground hover:text-foreground'
+                    ? 'bg-blue-600 text-white font-semibold shadow-xs'
+                    : 'text-slate-600 hover:text-slate-900'
                 }`}
               >
                 🇮🇳 India ({indiaCount})
               </button>
               <button
                 onClick={() => setSelectedRegion('Global')}
-                className={`px-3 py-1.5 text-xs font-medium rounded-md transition-colors ${
+                className={`px-3 py-1.5 text-xs font-medium rounded-lg transition-colors cursor-pointer ${
                   selectedRegion === 'Global'
-                    ? 'bg-primary text-primary-foreground shadow-sm'
-                    : 'text-muted-foreground hover:text-foreground'
+                    ? 'bg-blue-600 text-white font-semibold shadow-xs'
+                    : 'text-slate-600 hover:text-slate-900'
                 }`}
               >
                 🌐 Global ({globalCount})
@@ -210,26 +210,26 @@ export const OffersPage: React.FC = () => {
         </div>
 
         {/* Offer Type Tabs */}
-        <div className="flex flex-wrap items-center gap-2 pt-1 border-t border-border/50">
-          <span className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mr-1 hidden sm:inline">
+        <div className="flex flex-wrap items-center gap-2 pt-1 border-t border-[#DFE7F3]">
+          <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider mr-1 hidden sm:inline">
             Offer Type:
           </span>
           <button
             onClick={() => setSelectedType('all')}
-            className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
+            className={`px-3.5 py-1.5 rounded-xl text-xs font-medium transition-all cursor-pointer ${
               selectedType === 'all'
-                ? 'bg-foreground text-background font-semibold shadow-sm'
-                : 'bg-card text-muted-foreground hover:text-foreground border border-border/80'
+                ? 'bg-blue-600 text-white font-semibold shadow-sm'
+                : 'bg-white text-slate-700 hover:text-slate-900 border border-[#DFE7F3] hover:bg-slate-50'
             }`}
           >
             All Offers ({offersData.length})
           </button>
           <button
             onClick={() => setSelectedType('student-plan')}
-            className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all flex items-center gap-1.5 ${
+            className={`px-3.5 py-1.5 rounded-xl text-xs font-medium transition-all flex items-center gap-1.5 cursor-pointer ${
               selectedType === 'student-plan'
-                ? 'bg-primary text-primary-foreground font-semibold shadow-sm'
-                : 'bg-card text-muted-foreground hover:text-foreground border border-border/80'
+                ? 'bg-blue-600 text-white font-semibold shadow-sm'
+                : 'bg-white text-slate-700 hover:text-slate-900 border border-[#DFE7F3] hover:bg-slate-50'
             }`}
           >
             <GraduationCap className="w-3.5 h-3.5" />
@@ -237,10 +237,10 @@ export const OffersPage: React.FC = () => {
           </button>
           <button
             onClick={() => setSelectedType('telecom-bundle')}
-            className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all flex items-center gap-1.5 ${
+            className={`px-3.5 py-1.5 rounded-xl text-xs font-medium transition-all flex items-center gap-1.5 cursor-pointer ${
               selectedType === 'telecom-bundle'
-                ? 'bg-primary text-primary-foreground font-semibold shadow-sm'
-                : 'bg-card text-muted-foreground hover:text-foreground border border-border/80'
+                ? 'bg-blue-600 text-white font-semibold shadow-sm'
+                : 'bg-white text-slate-700 hover:text-slate-900 border border-[#DFE7F3] hover:bg-slate-50'
             }`}
           >
             <Radio className="w-3.5 h-3.5" />
@@ -248,10 +248,10 @@ export const OffersPage: React.FC = () => {
           </button>
           <button
             onClick={() => setSelectedType('developer-pack')}
-            className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all flex items-center gap-1.5 ${
+            className={`px-3.5 py-1.5 rounded-xl text-xs font-medium transition-all flex items-center gap-1.5 cursor-pointer ${
               selectedType === 'developer-pack'
-                ? 'bg-primary text-primary-foreground font-semibold shadow-sm'
-                : 'bg-card text-muted-foreground hover:text-foreground border border-border/80'
+                ? 'bg-blue-600 text-white font-semibold shadow-sm'
+                : 'bg-white text-slate-700 hover:text-slate-900 border border-[#DFE7F3] hover:bg-slate-50'
             }`}
           >
             <Gift className="w-3.5 h-3.5" />
@@ -259,10 +259,10 @@ export const OffersPage: React.FC = () => {
           </button>
           <button
             onClick={() => setSelectedType('startup-credits')}
-            className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all flex items-center gap-1.5 ${
+            className={`px-3.5 py-1.5 rounded-xl text-xs font-medium transition-all flex items-center gap-1.5 cursor-pointer ${
               selectedType === 'startup-credits'
-                ? 'bg-primary text-primary-foreground font-semibold shadow-sm'
-                : 'bg-card text-muted-foreground hover:text-foreground border border-border/80'
+                ? 'bg-blue-600 text-white font-semibold shadow-sm'
+                : 'bg-white text-slate-700 hover:text-slate-900 border border-[#DFE7F3] hover:bg-slate-50'
             }`}
           >
             <Sparkles className="w-3.5 h-3.5" />
@@ -272,7 +272,7 @@ export const OffersPage: React.FC = () => {
           {hasActiveFilters && (
             <button
               onClick={resetFilters}
-              className="ml-auto text-xs text-muted-foreground hover:text-primary transition-colors flex items-center gap-1 py-1"
+              className="ml-auto text-xs text-blue-600 hover:text-blue-700 transition-colors flex items-center gap-1 py-1 cursor-pointer font-medium"
             >
               <X className="w-3.5 h-3.5" />
               Reset all filters
@@ -309,11 +309,11 @@ export const OffersPage: React.FC = () => {
       )}
 
       {/* Transparency & Verification Policy Disclaimer */}
-      <div className="mt-14 p-5 rounded-xl border border-border bg-card/40 text-xs text-muted-foreground leading-relaxed">
+      <div className="mt-14 p-6 rounded-2xl border border-[#DFE7F3] bg-white text-xs text-slate-600 leading-relaxed shadow-invary-card">
         <div className="flex items-start gap-3">
-          <Info className="w-5 h-5 text-primary shrink-0 mt-0.5" />
+          <Info className="w-5 h-5 text-blue-600 shrink-0 mt-0.5" />
           <div className="space-y-1.5">
-            <h4 className="font-semibold text-foreground text-sm">
+            <h4 className="font-semibold text-slate-900 text-sm">
               Tech Hacks AI Deal Verification & Transparency Policy
             </h4>
             <p>

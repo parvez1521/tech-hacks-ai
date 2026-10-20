@@ -175,7 +175,7 @@ export const UniversalSearch: React.FC = () => {
           id="universal-search-results"
           role="listbox"
           aria-label="Universal search suggestions"
-          className="absolute top-full left-0 right-0 mt-2.5 rounded-2xl bg-card/95 backdrop-blur-2xl border border-border/80 dark:border-white/10 p-4 shadow-2xl shadow-black/20 dark:shadow-black/50 max-h-[75vh] overflow-y-auto no-scrollbar z-50 flex flex-col gap-4 animate-fade-in"
+          className="absolute top-full left-0 right-0 mt-2.5 rounded-2xl bg-white/98 backdrop-blur-2xl border border-[#DFE7F3] p-4 shadow-2xl shadow-slate-300/40 max-h-[75vh] overflow-y-auto no-scrollbar z-50 flex flex-col gap-4 animate-fade-in"
         >
           {results.totalMatches === 0 ? (
             <div className="py-8 text-center text-muted-foreground text-sm">
@@ -461,13 +461,13 @@ export const UniversalSearch: React.FC = () => {
         </div>
       )}
 
-      {/* Quick Intent Chips with Apple Glass UI */}
+      {/* Quick Intent Chips */}
       <div className="mt-4 flex flex-wrap items-center justify-center gap-2">
         {intentChips.map((chip) => (
           <Link
             key={chip.label}
             to={chip.to}
-            className="px-3.5 py-1.5 rounded-full text-xs font-medium bg-card/80 backdrop-blur-md border border-border/80 dark:border-white/10 hover:border-primary/40 hover:bg-primary/10 hover:text-primary transition-all duration-150 shadow-sm"
+            className="px-3.5 py-1.5 rounded-full text-xs font-medium bg-white text-[#0F172A] border border-[#DFE7F3] hover:border-[#2563EB] hover:bg-[#EAF2FF] hover:text-[#2563EB] transition-all duration-150 shadow-xs"
           >
             {chip.label}
           </Link>

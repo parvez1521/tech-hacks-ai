@@ -64,7 +64,7 @@ export const TechHacksLogo: React.FC<TechHacksLogoProps> = ({
 
       {/* Typography Lockup */}
       {showWordmark && (
-        <span className={`font-extrabold tracking-tight text-foreground ${current.text} flex items-center`}>
+        <span className={`font-extrabold tracking-tight text-[#0F172A] dark:text-[#F1F5F9] ${current.text} flex items-center`}>
           <span>Tech Hacks</span>
           <span className="ml-1.5 font-black bg-gradient-to-r from-cyan-400 via-sky-400 to-blue-500 bg-clip-text text-transparent">
             AI
