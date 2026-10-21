@@ -382,7 +382,7 @@ export const HomePage: React.FC = () => {
               <span>Handpicked by Tech Hacks AI Editorial</span>
             </div>
             <h2 className="text-2xl sm:text-3xl font-extrabold text-foreground tracking-tight">
-              Editor's Picks
+              Editor's Picks: Benchmark-Leading Tools
             </h2>
             <p className="text-sm text-secondary-foreground max-w-xl mt-1">
               A small editorial shortlist of tools worth a closer look, with the reason each one is here made explicit.

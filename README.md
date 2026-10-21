@@ -90,7 +90,7 @@ Open `http://localhost:3000` in your browser.
 | `npm run dev` | Starts the Vite dev server with integrated API middleware at `http://localhost:3000` |
 | `npm run build` | Compiles the production build with bundle optimization into `dist/` |
 | `npm run preview` | Serves the production build locally for verification |
-| `npm test` | Runs the full automated test suite serially (458 tests across 116 suites) |
+| `npm test` | Runs the full automated test suite serially (457 tests across 116 suites) |
 | `npm run logos:sync` | Copies the bounded official-logo export and recorded workspace-provided assets into the canonical registry and public manifest |
 | `npm run db:migrate -- --dry-run` | Audits local JSON submissions and published additions ready for database sync |
 | `npm run db:migrate -- --sql` | Outputs PostgreSQL INSERT statements ready for the Supabase SQL Editor |

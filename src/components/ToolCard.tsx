@@ -14,14 +14,31 @@ export const ToolCard: React.FC<ToolCardProps> = ({ tool }) => {
   // Find mapped proprietary tools
   const alternativeItems = proprietaryTools.filter((p) => tool.alternativesTo.includes(p.slug));
 
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    e.currentTarget.style.setProperty('--card-x', `${e.clientX - rect.left}px`);
+    e.currentTarget.style.setProperty('--card-y', `${e.clientY - rect.top}px`);
+  };
+
   return (
     <div
-      className="group relative flex flex-col justify-between h-full p-5 rounded-lg border border-border bg-card/90 interactive-card min-h-[224px] focus-within:ring-2 focus-within:ring-primary/50"
+      onMouseMove={handleMouseMove}
+      className="group relative flex flex-col justify-between h-full p-5 rounded-2xl border border-[#DFE7F3] bg-white transition-all duration-300 ease-out hover:-translate-y-1 hover:border-[#2563EB]/40 hover:shadow-xl hover:shadow-blue-500/5 min-h-[220px] focus-within:ring-2 focus-within:ring-[#2563EB]/60 focus-within:border-[#2563EB]/60 focus-within:-translate-y-1"
     >
+      {/* Interactive Radial Spotlight Inner Glow */}
+      <div
+        className="pointer-events-none absolute -inset-px rounded-2xl opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-focus-within:opacity-100 -z-0"
+        style={{
+          background:
+            'radial-gradient(280px circle at var(--card-x, 50%) var(--card-y, 50%), rgba(37, 99, 235, 0.08), transparent 80%)',
+        }}
+        aria-hidden="true"
+      />
+
       {/* Primary Card Stretch Link */}
       <Link
         to={`/tools/${tool.slug}`}
-        className="absolute inset-0 z-10 rounded-lg focus:outline-none"
+        className="absolute inset-0 z-10 rounded-2xl focus:outline-none"
         aria-label={`View details for ${tool.name}`}
       >
         <span className="sr-only">View {tool.name}</span>
@@ -29,8 +46,8 @@ export const ToolCard: React.FC<ToolCardProps> = ({ tool }) => {
 
       {/* Top Header Row */}
       <div className="relative z-10">
-          <div className="flex items-start justify-between gap-3 mb-3">
-            <div className="flex items-center gap-2.5 min-w-0">
+        <div className="flex items-center justify-between gap-3 mb-2.5">
+          <div className="flex items-center gap-2.5 min-w-0">
             {/* Brand Logo with vector support and fallback */}
             <BrandLogo
               slug={tool.slug}
@@ -39,7 +56,7 @@ export const ToolCard: React.FC<ToolCardProps> = ({ tool }) => {
               iconBgColor={tool.iconBgColor}
               iconLetter={tool.iconLetter}
             />
-            <h3 className="font-semibold text-foreground text-base tracking-tight truncate group-hover:text-primary transition-colors duration-200">
+            <h3 className="font-bold text-[#0F172A] text-base tracking-tight truncate group-hover:text-[#2563EB] transition-colors duration-200">
               {tool.name}
             </h3>
             {tool.isVerified && <VerifiedBadge />}
@@ -50,23 +67,32 @@ export const ToolCard: React.FC<ToolCardProps> = ({ tool }) => {
           </div>
         </div>
 
-        <div className="min-h-[72px] mb-3">
-          <p className="text-xs text-primary/90 font-medium mb-1.5 line-clamp-1">{tool.tagline}</p>
-          <p className="text-sm text-secondary-foreground leading-relaxed line-clamp-3">
-            {tool.description}
+        {/* Dual-State Content Container */}
+        <div className="relative min-h-[64px] mb-3">
+          {/* Normal State: Short Tagline */}
+          <p className="text-sm text-[#64748B] line-clamp-2 transition-all duration-200 ease-out group-hover:opacity-0 group-hover:-translate-y-0.5 leading-relaxed">
+            {tool.tagline}
           </p>
+
+          {/* Hover State: Extended Description */}
+          <div className="absolute inset-0 opacity-0 translate-y-1 transition-all duration-250 ease-out group-hover:opacity-100 group-hover:translate-y-0 pointer-events-none">
+            <p className="text-sm text-[#64748B] line-clamp-3 leading-relaxed">
+              {tool.description}
+            </p>
+          </div>
         </div>
       </div>
 
-      {/* Metadata stays visible; cards should not require hover to reveal useful facts. */}
-      <div className="relative z-10 pt-3 border-t border-border/50">
-        <div className="flex items-center justify-between gap-2 text-xs text-muted-foreground">
+      {/* Bottom Dual-State Footer */}
+      <div className="relative z-10 pt-3 border-t border-[#DFE7F3]">
+        {/* Normal State: Stats Row */}
+        <div className="flex items-center justify-between text-xs text-[#64748B] transition-all duration-200 ease-out group-hover:opacity-0 group-hover:translate-y-1">
           <div className="flex items-center gap-1.5 font-mono">
-            <Star className="w-3.5 h-3.5 text-muted-foreground/70" />
-            <span className="font-medium text-foreground">{tool.stars.toLocaleString()}</span>
+            <Star className="w-3.5 h-3.5 text-amber-500 fill-amber-400" />
+            <span className="font-semibold text-[#0F172A]">{tool.stars.toLocaleString()}</span>
             {tool.starGrowthDelta > 0 && (
               <span
-                className="text-emerald-400 text-[10px] cursor-help"
+                className="text-emerald-600 text-[10px] font-semibold cursor-help"
                 title="Estimated 30-day star velocity (Oct 2026 snapshot)"
               >
                 ↑+{tool.starGrowthDelta}
@@ -81,36 +107,41 @@ export const ToolCard: React.FC<ToolCardProps> = ({ tool }) => {
 
           <div className="flex items-center gap-1">
             <FileCode className="w-3.5 h-3.5 opacity-60" />
-            <span className="font-mono text-[11px] px-1 py-0.5 rounded bg-muted/60 text-secondary-foreground">
+            <span className="font-mono text-[11px] px-1.5 py-0.5 rounded bg-[#F1F5F9] text-slate-700 border border-slate-200/80">
               {tool.license}
             </span>
           </div>
         </div>
 
-        {alternativeItems.length > 0 && (
-          <div className="mt-3 pt-3 border-t border-border/40 flex items-center gap-2 min-w-0">
-            <span className="text-[11px] text-muted-foreground shrink-0">Alternative to</span>
-            <div className="flex items-center gap-1.5 min-w-0 overflow-x-auto no-scrollbar">
-              {alternativeItems.slice(0, 2).map((alt) => (
-                <Link
-                  key={alt.slug}
-                  to={`/alternatives/${alt.slug}`}
-                  className="relative z-20 inline-flex items-center gap-1.5 px-1.5 py-0.5 rounded-md text-[11px] bg-muted hover:bg-primary/10 hover:text-primary text-foreground transition-colors border border-border shrink-0"
-                >
-                  <BrandLogo
-                    slug={alt.slug}
-                    name={alt.name}
-                    size="xs"
-                    iconBgColor={alt.iconBgColor}
-                    iconLetter={alt.iconLetter}
-                    className="w-3.5 h-3.5 rounded-sm overflow-hidden p-0"
-                  />
-                  <span className="font-medium truncate max-w-[76px]">{alt.name}</span>
-                </Link>
-              ))}
+        {/* Hover State: "Alternative to" Targets */}
+        <div className="absolute inset-x-0 bottom-0 top-3 flex items-center opacity-0 translate-y-1 transition-all duration-250 ease-out group-hover:opacity-100 group-hover:translate-y-0">
+          <div className="flex items-center gap-2 overflow-hidden w-full">
+            <span className="text-xs text-[#64748B] shrink-0">Alternative to:</span>
+            <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar py-0.5">
+              {alternativeItems.length > 0 ? (
+                alternativeItems.map((alt) => (
+                  <Link
+                    key={alt.slug}
+                    to={`/alternatives/${alt.slug}`}
+                    className="relative z-20 inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-xs bg-[#F1F5F9] hover:bg-[#EAF2FF] hover:border-[#BFDBFE] hover:text-[#2563EB] active:scale-95 text-slate-700 transition-all duration-150 border border-slate-200/80"
+                  >
+                    <BrandLogo
+                      slug={alt.slug}
+                      name={alt.name}
+                      size="xs"
+                      iconBgColor={alt.iconBgColor}
+                      iconLetter={alt.iconLetter}
+                      className="w-3.5 h-3.5 rounded-full overflow-hidden p-0"
+                    />
+                    <span className="font-medium truncate max-w-[80px]">{alt.name}</span>
+                  </Link>
+                ))
+              ) : (
+                <span className="text-xs text-[#64748B] italic">Proprietary SaaS</span>
+              )}
             </div>
           </div>
-        )}
+        </div>
       </div>
     </div>
   );

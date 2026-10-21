@@ -4,7 +4,7 @@
     "type": "guide",
     "status": "published",
     "createdAt": "2026-10-18T18:16:40.159Z",
-    "updatedAt": "2026-10-18T18:16:40.161Z",
+    "updatedAt": "2026-10-19T07:28:57.610Z",
     "guideData": {
       "title": "Building Autonomous Agents with Community Workflows 1792347400158",
       "summary": "A comprehensive step-by-step tutorial on building autonomous agents using modern AI models.",
@@ -21,7 +21,8 @@
     "potentialDuplicate": false,
     "publishedSlug": "building-autonomous-agents-with-community-workflows-1792347400158",
     "publishedAt": "2026-10-18T18:16:40.161Z",
-    "isVerified": true
+    "isVerified": true,
+    "moderatorNotes": ""
   },
   {
     "id": "sub_tool_1792347400144_wtaion",
@@ -596,9 +597,9 @@
   {
     "id": "sub_tool_1792333847406_pa667t",
     "type": "tool",
-    "status": "pending",
+    "status": "published",
     "createdAt": "2026-10-18T14:30:47.406Z",
-    "updatedAt": "2026-10-18T14:30:47.406Z",
+    "updatedAt": "2026-10-19T07:35:04.896Z",
     "toolData": {
       "name": "Test Tool Prelaunch",
       "websiteUrl": "https://test-tool-prelaunch.com/",
@@ -614,14 +615,18 @@
     "duplicateReason": "A tool named \"Test Tool Prelaunch\" was already submitted (Status: pending).",
     "duplicateMatches": [
       "Test Tool Prelaunch"
-    ]
+    ],
+    "moderatorNotes": "",
+    "publishedSlug": "test-tool-prelaunch",
+    "publishedAt": "2026-10-19T07:35:04.896Z",
+    "isVerified": true
   },
   {
     "id": "sub_tool_1792333842564_x4o1kn",
     "type": "tool",
-    "status": "pending",
+    "status": "published",
     "createdAt": "2026-10-18T14:30:42.564Z",
-    "updatedAt": "2026-10-18T14:30:42.564Z",
+    "updatedAt": "2026-10-19T07:35:40.073Z",
     "toolData": {
       "name": "Test Tool Prelaunch",
       "websiteUrl": "https://test-tool-prelaunch.com/",
@@ -633,7 +638,11 @@
       "submitterName": "QA Auditor",
       "submitterEmail": "qa@example.com"
     },
-    "potentialDuplicate": false
+    "potentialDuplicate": false,
+    "moderatorNotes": "",
+    "publishedSlug": "test-tool-prelaunch",
+    "publishedAt": "2026-10-19T07:35:40.073Z",
+    "isVerified": true
   },
   {
     "id": "sub_guide_1792333663530_pl9081",
@@ -1658,9 +1667,9 @@
   {
     "id": "sub_tool_seed_001",
     "type": "tool",
-    "status": "pending",
+    "status": "published",
     "createdAt": "2026-10-18T10:00:00.000Z",
-    "updatedAt": "2026-10-18T10:00:00.000Z",
+    "updatedAt": "2026-10-19T07:35:28.939Z",
     "toolData": {
       "name": "Jan AI",
       "websiteUrl": "https://jan.ai",
@@ -1683,6 +1692,10 @@
       "submitterEmail": "priya.dev@example.com",
       "notes": "Tested on Apple Silicon M2, works smoothly with Llama 3 and Mistral 7B."
     },
-    "potentialDuplicate": false
+    "potentialDuplicate": false,
+    "moderatorNotes": "",
+    "publishedSlug": "jan-ai",
+    "publishedAt": "2026-10-19T07:35:28.939Z",
+    "isVerified": true
   }
 ]

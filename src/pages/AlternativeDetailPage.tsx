@@ -134,41 +134,41 @@ export const AlternativeDetailPage: React.FC = () => {
   return (
     <div className="max-w-6xl mx-auto px-4 sm:px-6 py-8">
       {/* Breadcrumbs */}
-      <nav className="flex items-center gap-2 text-xs text-muted-foreground mb-6">
-        <Link to="/" className="hover:text-foreground">
+      <nav className="flex items-center gap-2 text-xs text-slate-500 mb-6">
+        <Link to="/" className="hover:text-[#0F172A] transition-colors">
           Home
         </Link>
-        <span>/</span>
-        <Link to="/alternatives" className="hover:text-foreground">
+        <span className="text-slate-400">/</span>
+        <Link to="/alternatives" className="hover:text-[#0F172A] transition-colors">
           Alternatives
         </Link>
-        <span>/</span>
-        <span className="text-foreground font-medium">{proprietary.name}</span>
+        <span className="text-slate-400">/</span>
+        <span className="text-[#2563EB] font-medium">{proprietary.name}</span>
       </nav>
 
       {/* Hero Header with Proprietary Overview Card */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8 items-start">
         {/* Left Headline */}
         <div className="lg:col-span-2">
-          <div className="inline-flex items-center gap-2 text-primary text-xs font-semibold uppercase tracking-wider mb-2">
-            <Replace className="w-4 h-4" />
+          <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full border border-[#BFDBFE] bg-[#EAF2FF] text-[#2563EB] text-xs font-semibold uppercase tracking-wider mb-3">
+            <Replace className="w-3.5 h-3.5 text-[#2563EB]" />
             <span>Open Source Replacements</span>
           </div>
-           <h1 className="text-2xl sm:text-3xl font-bold text-foreground tracking-tight mb-3">
+          <h1 className="text-2xl sm:text-4xl font-extrabold text-[#0F172A] tracking-tight mb-3">
             Open Source {proprietary.name} Alternatives
           </h1>
-          <p className="text-sm sm:text-base text-secondary-foreground leading-relaxed mb-4">
+          <p className="text-sm sm:text-base text-[#64748B] leading-relaxed mb-4">
             Discover community-maintained, privacy-focused open source software tools that can replace {proprietary.name}. Save subscription costs and gain total ownership over your data.
           </p>
 
-          <div className="flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
-            <span className="inline-flex items-center px-2.5 py-1 rounded-full bg-primary/10 text-primary border border-primary/20 font-medium">
+          <div className="flex flex-wrap items-center gap-2 text-xs text-[#64748B]">
+            <span className="inline-flex items-center px-2.5 py-1 rounded-full bg-[#EAF2FF] text-[#2563EB] border border-[#BFDBFE] font-medium">
               {allReplacements.length} {allReplacements.length === 1 ? 'verified replacement' : 'verified replacements'}
             </span>
             {category && (
               <Link
                 to={`/categories/${category.slug}`}
-                className="inline-flex items-center px-2.5 py-1 rounded-full bg-muted text-secondary-foreground border border-border hover:bg-border transition-colors"
+                className="inline-flex items-center px-2.5 py-1 rounded-full bg-white text-[#64748B] border border-[#DFE7F3] hover:text-[#2563EB] hover:bg-[#EAF2FF] transition-colors"
               >
                 Category: {category.name}
               </Link>
@@ -176,9 +176,9 @@ export const AlternativeDetailPage: React.FC = () => {
             {allReplacements.length >= 2 && (
               <Link
                 to={`/compare?tools=${allReplacements.slice(0, 3).map((r) => r.slug).join(',')}`}
-                className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-purple-500/10 text-purple-400 border border-purple-500/20 font-medium hover:bg-purple-500/20 transition-colors"
+                className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-purple-50 text-purple-700 border border-purple-200 font-medium hover:bg-purple-100 transition-colors"
               >
-                <Scale className="w-3 h-3" />
+                <Scale className="w-3 h-3 text-purple-600" />
                 <span>Compare Top Replacements</span>
               </Link>
             )}
@@ -186,9 +186,9 @@ export const AlternativeDetailPage: React.FC = () => {
         </div>
 
         {/* Right Sticky Proprietary Profile Card */}
-        <div className="p-5 rounded-lg border border-border bg-card/80 flex flex-col justify-between">
+        <div className="p-6 rounded-2xl border border-[#DFE7F3] bg-white shadow-sm flex flex-col justify-between">
           <div>
-            <div className="flex items-center justify-between mb-2.5">
+            <div className="flex items-center justify-between mb-3">
               <div className="flex items-center gap-3">
                 <BrandLogo
                   slug={proprietary.slug}
@@ -198,10 +198,10 @@ export const AlternativeDetailPage: React.FC = () => {
                   iconLetter={proprietary.iconLetter}
                 />
                 <div>
-                  <h2 className="font-bold text-foreground text-base">
+                  <h2 className="font-bold text-[#0F172A] text-base">
                     {proprietary.name}
                   </h2>
-                  <span className="text-xs text-muted-foreground block">
+                  <span className="text-xs text-[#64748B] block font-mono">
                     Proprietary Software
                   </span>
                 </div>
@@ -210,14 +210,14 @@ export const AlternativeDetailPage: React.FC = () => {
               <button
                 type="button"
                 onClick={handleCopyLink}
-                className="text-muted-foreground hover:text-foreground p-1.5 rounded-lg border border-border bg-card hover:bg-muted transition-colors text-xs inline-flex items-center gap-1"
+                className="text-[#64748B] hover:text-[#0F172A] p-2 rounded-lg border border-[#DFE7F3] bg-[#F5F8FF] hover:bg-[#EAF2FF] transition-colors text-xs inline-flex items-center gap-1"
                 aria-label="Share alternative"
                 title="Copy canonical share link"
               >
-                {copied ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Share2 className="w-3.5 h-3.5" />}
+                {copied ? <Check className="w-3.5 h-3.5 text-emerald-600" /> : <Share2 className="w-3.5 h-3.5" />}
               </button>
             </div>
-            <p className="text-xs text-muted-foreground mb-3 leading-relaxed">
+            <p className="text-xs text-[#64748B] mb-4 leading-relaxed">
               {proprietary.description}
             </p>
           </div>
@@ -226,7 +226,7 @@ export const AlternativeDetailPage: React.FC = () => {
             href={proprietary.websiteUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg border border-border bg-muted hover:bg-border text-foreground text-xs font-medium transition-colors"
+            className="inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl bg-[#2563EB] hover:bg-[#1D4ED8] text-white text-xs font-semibold shadow-md shadow-blue-500/20 transition-all cursor-pointer"
           >
             <span>Visit {proprietary.name} Official Website</span>
             <ExternalLink className="w-3.5 h-3.5" />
@@ -235,46 +235,46 @@ export const AlternativeDetailPage: React.FC = () => {
       </div>
 
       {/* Migration Analysis & Honest Cost Architecture */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 p-5 rounded-xl border border-border bg-card/60 text-xs mb-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 p-6 rounded-2xl border border-[#DFE7F3] bg-white text-xs mb-8 shadow-sm">
         <div>
-          <span className="font-semibold text-foreground uppercase tracking-wider block text-[11px] mb-2">
+          <span className="font-semibold text-[#0F172A] uppercase tracking-wider block text-[11px] mb-3">
             Why Teams Look for {proprietary.name} Alternatives
           </span>
-          <ul className="space-y-2">
+          <ul className="space-y-2.5">
             {(proprietary.migrationDrivers || [
               'High recurring monthly subscription costs scaling per team seat',
               'Proprietary data formats creating vendor lock-in',
               'Compliance and sovereignty requirements for self-hosting on private clouds',
             ]).map((reason, idx) => (
-              <li key={idx} className="flex items-start gap-2 p-2.5 rounded-lg bg-card/80 border border-border/60">
-                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 shrink-0 mt-0.5" />
-                <span className="text-secondary-foreground leading-relaxed">{reason}</span>
+              <li key={idx} className="flex items-start gap-2.5 p-3 rounded-xl bg-[#F5F8FF] border border-[#DFE7F3]">
+                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0 mt-0.5" />
+                <span className="text-[#0F172A] leading-relaxed">{reason}</span>
               </li>
             ))}
           </ul>
         </div>
 
         <div className="space-y-3">
-          <div className="p-3.5 rounded-lg bg-amber-500/10 border border-amber-500/20 text-foreground">
-            <div className="flex items-center gap-1.5 text-amber-400 font-semibold uppercase text-[11px] tracking-wider mb-1">
-              <AlertTriangle className="w-3.5 h-3.5" />
+          <div className="p-4 rounded-xl bg-amber-50 border border-amber-200 text-amber-900">
+            <div className="flex items-center gap-1.5 text-amber-700 font-semibold uppercase text-[11px] tracking-wider mb-1.5">
+              <AlertTriangle className="w-3.5 h-3.5 text-amber-600" />
               <span>Hosting & Inference Reality</span>
             </div>
-            <p className="text-secondary-foreground leading-relaxed text-[11px]">
+            <p className="text-amber-800 leading-relaxed text-[11px]">
               {proprietary.hostedCostNote ||
                 'Open-source software is free to inspect, modify, and self-host on your own infrastructure. Note that cloud API tokens (such as external LLM inference) or managed cloud hosting tiers may carry separate server or usage costs.'}
             </p>
           </div>
 
           {proprietary.selectionCriteria && proprietary.selectionCriteria.length > 0 && (
-            <div className="p-3 rounded-lg bg-card/80 border border-border/80">
-              <span className="font-semibold text-foreground uppercase tracking-wider block text-[11px] mb-1.5">
+            <div className="p-4 rounded-xl bg-[#F5F8FF] border border-[#DFE7F3]">
+              <span className="font-semibold text-[#0F172A] uppercase tracking-wider block text-[11px] mb-2">
                 Key Selection Factors
               </span>
-              <ul className="space-y-1 text-muted-foreground text-[11px]">
+              <ul className="space-y-1.5 text-[#64748B] text-[11px]">
                 {proprietary.selectionCriteria.map((c, idx) => (
-                  <li key={idx} className="flex items-center gap-1.5">
-                    <span className="w-1.5 h-1.5 rounded-full bg-primary shrink-0" />
+                  <li key={idx} className="flex items-center gap-2">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#2563EB] shrink-0" />
                     <span>{c}</span>
                   </li>
                 ))}
@@ -286,22 +286,22 @@ export const AlternativeDetailPage: React.FC = () => {
 
       {/* Local Search and Filter Controls (only if this app has mapped replacements) */}
       {allReplacements.length > 0 && (
-        <div className="mb-6 p-4 rounded-lg bg-card/60 border border-border flex flex-col md:flex-row gap-3 items-stretch md:items-center justify-between">
+        <div className="mb-6 p-4 rounded-xl bg-white border border-[#DFE7F3] shadow-sm flex flex-col md:flex-row gap-3 items-stretch md:items-center justify-between">
           {/* Search replacements */}
           <div className="relative flex-1 max-w-sm">
-            <Search className="w-4 h-4 text-muted-foreground absolute left-3 top-1/2 -translate-y-1/2" />
+            <Search className="w-4 h-4 text-[#64748B] absolute left-3 top-1/2 -translate-y-1/2" />
             <input
               type="text"
               value={searchQuery}
               onChange={(e) => handleSearchChange(e.target.value)}
               placeholder={`Search ${proprietary.name} alternatives...`}
-              className="w-full pl-9 pr-8 py-1.5 rounded-lg bg-card border border-border text-foreground placeholder:text-muted-foreground text-xs focus:outline-none focus:ring-1 focus:ring-primary"
+              className="w-full pl-9 pr-8 py-2 rounded-lg bg-white border border-[#DFE7F3] text-[#0F172A] placeholder:text-[#64748B] text-xs focus:outline-none focus:ring-2 focus:ring-[#2563EB]/20 focus:border-[#2563EB]"
             />
             {searchQuery && (
               <button
                 type="button"
                 onClick={() => handleSearchChange('')}
-                className="absolute right-2.5 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
+                className="absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-800"
                 aria-label="Clear search"
               >
                 <X className="w-3.5 h-3.5" />
@@ -313,11 +313,12 @@ export const AlternativeDetailPage: React.FC = () => {
           <div className="flex flex-wrap items-center gap-2 text-xs">
             {/* Sort select */}
             <div className="flex items-center gap-1.5">
-              <span className="text-muted-foreground">Sort:</span>
+              <span className="text-slate-500 font-medium">Sort:</span>
               <select
+                aria-label="Sort alternative tools"
                 value={sortBy}
                 onChange={(e) => handleSortChange(e.target.value)}
-                className="bg-card border border-border rounded-md px-2 py-1 text-xs text-foreground focus:outline-none focus:ring-1 focus:ring-primary"
+                className="bg-white border border-[#DFE7F3] rounded-lg px-2.5 py-1.5 text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 cursor-pointer shadow-xs"
               >
                 <option value="stars">Most Starred</option>
                 <option value="trending">Trending Velocity</option>
@@ -329,11 +330,12 @@ export const AlternativeDetailPage: React.FC = () => {
             {/* License filter */}
             {availableLicenses.length > 1 && (
               <div className="flex items-center gap-1.5">
-                <span className="text-muted-foreground">License:</span>
+                <span className="text-slate-500 font-medium">License:</span>
                 <select
+                  aria-label="Filter alternatives by license"
                   value={selectedLicense || ''}
                   onChange={(e) => handleLicenseChange(e.target.value || null)}
-                  className="bg-card border border-border rounded-md px-2 py-1 text-xs text-foreground focus:outline-none focus:ring-1 focus:ring-primary"
+                  className="bg-white border border-[#DFE7F3] rounded-lg px-2.5 py-1.5 text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 cursor-pointer shadow-xs"
                 >
                   <option value="">All Licenses</option>
                   {availableLicenses.map((lic) => (
@@ -349,7 +351,7 @@ export const AlternativeDetailPage: React.FC = () => {
               <button
                 type="button"
                 onClick={resetSearchParams}
-                className="text-primary hover:underline ml-1"
+                className="text-blue-600 hover:text-blue-700 hover:underline ml-1 font-semibold cursor-pointer"
               >
                 Reset filters
               </button>
@@ -360,17 +362,17 @@ export const AlternativeDetailPage: React.FC = () => {
 
       {/* Grid or Empty States */}
       {allReplacements.length === 0 ? (
-        <div className="p-8 rounded-lg border border-border bg-card/60 text-center max-w-xl mx-auto my-8">
-          <Replace className="w-8 h-8 text-muted-foreground mx-auto mb-3 opacity-60" />
-          <h3 className="text-base font-bold text-foreground mb-2">
+        <div className="p-8 rounded-2xl border border-[#DFE7F3] bg-white text-center max-w-xl mx-auto my-8 shadow-xs">
+          <Replace className="w-8 h-8 text-slate-400 mx-auto mb-3" />
+          <h3 className="text-base font-bold text-slate-900 mb-2">
             No Alternatives Mapped Yet
           </h3>
-          <p className="text-xs text-secondary-foreground mb-4">
+          <p className="text-xs text-slate-600 mb-4 leading-relaxed">
             We haven't indexed any verified open source software replacements for {proprietary.name} yet.
           </p>
           <Link
             to="/alternatives"
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-primary text-primary-foreground text-xs font-medium hover:bg-primary-hover transition-colors"
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold shadow-xs transition-colors"
           >
             <ArrowLeft className="w-3.5 h-3.5" />
             <span>Browse Other Alternatives</span>
@@ -404,18 +406,18 @@ export const AlternativeDetailPage: React.FC = () => {
 
       {/* Related Step-by-Step Guides Section */}
       {relatedGuides.length > 0 && (
-        <div className="mt-16 pt-8 border-t border-border">
+        <div className="mt-16 pt-8 border-t border-[#DFE7F3]">
           <div className="flex items-center justify-between mb-6">
             <div>
-              <div className="inline-flex items-center gap-1.5 text-primary text-xs font-semibold uppercase tracking-wider mb-1">
-                <BookOpen className="w-3.5 h-3.5" />
-                <span>Migration & Workflow Tutorials</span>
+              <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full border border-blue-200 bg-blue-50 text-blue-700 text-xs font-semibold uppercase tracking-wider mb-1">
+                <BookOpen className="w-3.5 h-3.5 text-blue-600" />
+                <span>Migration &amp; Workflow Tutorials</span>
               </div>
-              <h2 className="text-xl font-bold text-foreground">
+              <h2 className="text-xl font-bold text-slate-900">
                 Step-by-Step Guides for {proprietary.name} Replacements
               </h2>
             </div>
-            <Link to="/guides" className="text-xs text-primary hover:underline">
+            <Link to="/guides" className="text-xs text-blue-600 hover:text-blue-700 hover:underline font-semibold">
               Browse all guides →
             </Link>
           </div>

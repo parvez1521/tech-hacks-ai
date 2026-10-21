@@ -14,14 +14,14 @@ export const PickPage: React.FC = () => {
   const [watermarkPreference, setWatermarkPreference] = useState<'no-watermark' | 'any'>('any');
 
   const goals = [
-    { id: 'coding-dev', label: 'Code or Build a Web App or Backend', desc: 'AI code editors, full-stack builders, databases, and APIs' },
-    { id: 'video-generation', label: 'Create Videos — Generate Video or Images', desc: 'Text-to-video, realistic animation, motion, and talking avatars' },
-    { id: 'image-generation', label: 'Create Images & AI Art', desc: 'Photorealism, design assets, typography, FLUX, and Midjourney' },
-    { id: 'chat-research', label: 'Write or Research with AI', desc: 'AI assistants, deep research, summarization, and writing' },
-    { id: 'workflow-automation', label: 'Work Faster & Automate', desc: 'Visual integrations, webhooks, multi-step triggers, and workflow automation' },
-    { id: 'open-source-software', label: 'Explore Open Source', desc: 'Self-hostable, privacy-first replacements for Notion, Firebase, Figma, Airtable' },
-    { id: 'voice-music', label: 'Voice, Speech & Music', desc: 'Realistic voice generation and music creators' },
-    { id: 'browser-utilities', label: 'Fast Browser Utilities', desc: 'Client-side JSON formatters, hashers, diff checkers, and generators' },
+    { id: 'coding-dev', label: '💻 Code or Build a Web App or Backend', desc: 'AI code editors, full-stack builders, databases, and APIs' },
+    { id: 'video-generation', label: '🎬 Create Videos — Generate Video or Images', desc: 'Text-to-video, realistic animation, motion, and talking avatars' },
+    { id: 'image-generation', label: '🎨 Create Images & AI Art', desc: 'Photorealism, design assets, typography, FLUX, and Midjourney' },
+    { id: 'chat-research', label: '✍️ Write or Research with AI', desc: 'AI assistants, deep research, summarization, and writing' },
+    { id: 'workflow-automation', label: '⚡ Work Faster & Automate', desc: 'Visual integrations, webhooks, multi-step triggers, and workflow automation' },
+    { id: 'open-source-software', label: '🔓 Explore Open Source', desc: 'Self-hostable, privacy-first replacements for Notion, Firebase, Figma, Airtable' },
+    { id: 'voice-music', label: '🎙️ Voice, Speech & Music', desc: 'Realistic voice generation and music creators' },
+    { id: 'browser-utilities', label: '🛠️ Fast Browser Utilities', desc: 'Client-side JSON formatters, hashers, diff checkers, and generators' },
   ];
 
   // Dynamic task details based on chosen goal
@@ -80,11 +80,11 @@ export const PickPage: React.FC = () => {
   };
 
   const budgets = [
-    { id: 'completely-free', label: 'Free only', desc: 'Zero cost, 100% free forever, no credit card required' },
-    { id: 'free-credits', label: 'Free plan is okay', desc: 'Generous daily or monthly free generations (Kling, Vidu, PixVerse, etc.)' },
-    { id: 'any', label: 'Paid tools are fine', desc: 'Evaluate top tools regardless of payment requirements' },
-    { id: 'free-trial', label: 'Free trial credits', desc: 'One-time initial starter credits (Runway, Kaiber, KIE AI)' },
-    { id: 'self-hosted', label: 'Run on my computer', desc: 'Run locally on your GPU (Wan 2.1, LTX Video, CogVideoX, FLUX.1)' },
+    { id: 'completely-free', label: '✨ Free only', desc: 'Zero cost, 100% free forever, no credit card required' },
+    { id: 'free-credits', label: '🎁 Free plan is okay', desc: 'Generous daily or monthly free generations (Kling, Vidu, PixVerse, etc.)' },
+    { id: 'any', label: '🌐 Paid tools are fine', desc: 'Evaluate top tools regardless of payment requirements' },
+    { id: 'free-trial', label: '⏱️ Free trial credits', desc: 'One-time initial starter credits (Runway, Kaiber, KIE AI)' },
+    { id: 'self-hosted', label: '🖥️ Run on my computer', desc: 'Run locally on your GPU (Wan 2.1, LTX Video, CogVideoX, FLUX.1)' },
   ];
 
   const showWatermark = goal === 'video-generation' || goal === 'image-generation';
@@ -114,14 +114,14 @@ export const PickPage: React.FC = () => {
     <div className="max-w-3xl mx-auto px-4 sm:px-6 py-8">
       {/* Header */}
       <div className="mb-8 text-center">
-        <div className="inline-flex items-center gap-2 text-primary text-xs font-semibold uppercase tracking-wider mb-2">
-          <Sparkles className="w-4 h-4" />
+        <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full border border-blue-200 bg-blue-50 text-blue-700 text-xs font-semibold uppercase tracking-wider mb-3 font-mono">
+          <Sparkles className="w-3.5 h-3.5" />
           <span>Intelligent Tool Matcher</span>
         </div>
-        <h1 className="text-2xl sm:text-4xl font-extrabold text-foreground tracking-tight mb-2">
+        <h1 className="text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight mb-2">
           Help Me Pick the Right Tool
         </h1>
-        <p className="text-sm sm:text-base text-secondary-foreground max-w-xl mx-auto mb-6">
+        <p className="text-sm sm:text-base text-slate-600 max-w-xl mx-auto mb-6">
           Answer 4 quick questions. Our recommendation engine eliminates irrelevant tools first, then scores the best verified AI platforms and open-source software for your workflow.
         </p>
 
@@ -132,10 +132,10 @@ export const PickPage: React.FC = () => {
               key={s}
               className={`h-1.5 rounded-full transition-all duration-200 ${
                 s === step
-                  ? 'w-10 bg-primary'
+                  ? 'w-10 bg-blue-600 shadow-xs'
                   : s < step
-                  ? 'w-6 bg-primary/40'
-                  : 'w-6 bg-muted'
+                  ? 'w-6 bg-blue-200'
+                  : 'w-6 bg-slate-200'
               }`}
             />
           ))}
@@ -144,10 +144,10 @@ export const PickPage: React.FC = () => {
 
       {/* Step 1: Goal */}
       {step === 1 && (
-        <div className="p-6 rounded-xl border border-border bg-card/80 space-y-4 shadow-md">
+        <div className="p-6 sm:p-8 rounded-2xl border border-[#DFE7F3] bg-white space-y-4 shadow-invary-card">
           <div className="flex items-center justify-between">
-            <h2 className="text-lg font-bold text-foreground">Step 1 of 4: What is your primary objective?</h2>
-            <span className="text-xs text-muted-foreground font-mono">1/4</span>
+            <h2 className="text-lg font-bold text-slate-900">Step 1 of 4: What is your primary objective?</h2>
+            <span className="text-xs text-slate-500 font-mono">1/4</span>
           </div>
           <div className="space-y-2.5">
             {goals.map((g) => (
@@ -156,17 +156,17 @@ export const PickPage: React.FC = () => {
                 onClick={() => handleGoalSelect(g.id)}
                 className={`p-4 rounded-xl border flex items-center justify-between cursor-pointer transition-all ${
                   goal === g.id
-                    ? 'border-primary bg-primary/10 shadow-sm ring-1 ring-primary'
-                    : 'border-border bg-card/50 hover:bg-muted'
+                    ? 'border-blue-500 bg-blue-50/70 shadow-xs ring-1 ring-blue-500'
+                    : 'border-[#DFE7F3] bg-[#F5F8FF] hover:bg-white hover:border-blue-300'
                 }`}
               >
                 <div>
-                  <span className="font-semibold text-foreground text-sm block">{g.label}</span>
-                  <span className="text-xs text-muted-foreground">{g.desc}</span>
+                  <span className="font-semibold text-slate-900 text-sm block">{g.label}</span>
+                  <span className="text-xs text-slate-600">{g.desc}</span>
                 </div>
                 <div
                   className={`w-4 h-4 rounded-full border flex items-center justify-center shrink-0 ml-3 ${
-                    goal === g.id ? 'border-primary bg-primary text-white' : 'border-border'
+                    goal === g.id ? 'border-blue-600 bg-blue-600 text-white' : 'border-slate-300'
                   }`}
                 >
                   {goal === g.id && <div className="w-1.5 h-1.5 rounded-full bg-white" />}
@@ -179,7 +179,7 @@ export const PickPage: React.FC = () => {
             <button
               type="button"
               onClick={() => setStep(2)}
-              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-primary text-primary-foreground text-sm font-semibold hover:bg-primary/90 shadow-sm"
+              className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-xl bg-blue-600 text-white text-sm font-semibold hover:bg-blue-700 shadow-sm transition-all cursor-pointer"
             >
               <span>Next Step</span>
               <ArrowRight className="w-4 h-4" />
@@ -190,10 +190,10 @@ export const PickPage: React.FC = () => {
 
       {/* Step 2: Task Details */}
       {step === 2 && (
-        <div className="p-6 rounded-xl border border-border bg-card/80 space-y-4 shadow-md">
+        <div className="p-6 sm:p-8 rounded-2xl border border-[#DFE7F3] bg-white space-y-4 shadow-invary-card">
           <div className="flex items-center justify-between">
-            <h2 className="text-lg font-bold text-foreground">Step 2 of 4: Which specific task do you need?</h2>
-            <span className="text-xs text-muted-foreground font-mono">2/4</span>
+            <h2 className="text-lg font-bold text-slate-900">Step 2 of 4: Which specific task do you need?</h2>
+            <span className="text-xs text-slate-500 font-mono">2/4</span>
           </div>
           <div className="space-y-2.5">
             {getTaskOptions(goal).map((opt) => (
@@ -202,17 +202,17 @@ export const PickPage: React.FC = () => {
                 onClick={() => setTaskDetail(opt.id)}
                 className={`p-4 rounded-xl border flex items-center justify-between cursor-pointer transition-all ${
                   taskDetail === opt.id
-                    ? 'border-primary bg-primary/10 shadow-sm ring-1 ring-primary'
-                    : 'border-border bg-card/50 hover:bg-muted'
+                    ? 'border-blue-500 bg-blue-50/70 shadow-xs ring-1 ring-blue-500'
+                    : 'border-[#DFE7F3] bg-[#F5F8FF] hover:bg-white hover:border-blue-300'
                 }`}
               >
                 <div>
-                  <span className="font-semibold text-foreground text-sm block">{opt.label}</span>
-                  <span className="text-xs text-muted-foreground">{opt.desc}</span>
+                  <span className="font-semibold text-slate-900 text-sm block">{opt.label}</span>
+                  <span className="text-xs text-slate-600">{opt.desc}</span>
                 </div>
                 <div
                   className={`w-4 h-4 rounded-full border flex items-center justify-center shrink-0 ml-3 ${
-                    taskDetail === opt.id ? 'border-primary bg-primary text-white' : 'border-border'
+                    taskDetail === opt.id ? 'border-blue-600 bg-blue-600 text-white' : 'border-slate-300'
                   }`}
                 >
                   {taskDetail === opt.id && <div className="w-1.5 h-1.5 rounded-full bg-white" />}
@@ -225,7 +225,7 @@ export const PickPage: React.FC = () => {
             <button
               type="button"
               onClick={() => setStep(1)}
-              className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-muted-foreground hover:text-foreground text-xs font-medium"
+              className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-slate-500 hover:text-slate-900 text-xs font-medium transition-colors cursor-pointer"
             >
               <ArrowLeft className="w-3.5 h-3.5" />
               <span>Back</span>
@@ -233,7 +233,7 @@ export const PickPage: React.FC = () => {
             <button
               type="button"
               onClick={() => setStep(3)}
-              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-primary text-primary-foreground text-sm font-semibold hover:bg-primary/90 shadow-sm"
+              className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-xl bg-blue-600 text-white text-sm font-semibold hover:bg-blue-700 shadow-sm transition-all cursor-pointer"
             >
               <span>Next: Budget & Access</span>
               <ArrowRight className="w-4 h-4" />
@@ -244,10 +244,10 @@ export const PickPage: React.FC = () => {
 
       {/* Step 3: Budget & Access */}
       {step === 3 && (
-        <div className="p-6 rounded-xl border border-border bg-card/80 space-y-4 shadow-md">
+        <div className="p-6 sm:p-8 rounded-2xl border border-[#DFE7F3] bg-white space-y-4 shadow-invary-card">
           <div className="flex items-center justify-between">
-            <h2 className="text-lg font-bold text-foreground">Step 3 of 4: What is your budget and access model?</h2>
-            <span className="text-xs text-muted-foreground font-mono">3/4</span>
+            <h2 className="text-lg font-bold text-slate-900">Step 3 of 4: What is your budget and access model?</h2>
+            <span className="text-xs text-slate-500 font-mono">3/4</span>
           </div>
           <div className="space-y-2.5">
             {budgets.map((b) => (
@@ -256,17 +256,17 @@ export const PickPage: React.FC = () => {
                 onClick={() => setBudget(b.id as PickCriteria['budget'])}
                 className={`p-4 rounded-xl border flex items-center justify-between cursor-pointer transition-all ${
                   budget === b.id
-                    ? 'border-primary bg-primary/10 shadow-sm ring-1 ring-primary'
-                    : 'border-border bg-card/50 hover:bg-muted'
+                    ? 'border-blue-500 bg-blue-50/70 shadow-xs ring-1 ring-blue-500'
+                    : 'border-[#DFE7F3] bg-[#F5F8FF] hover:bg-white hover:border-blue-300'
                 }`}
               >
                 <div>
-                  <span className="font-semibold text-foreground text-sm block">{b.label}</span>
-                  <span className="text-xs text-muted-foreground">{b.desc}</span>
+                  <span className="font-semibold text-slate-900 text-sm block">{b.label}</span>
+                  <span className="text-xs text-slate-600">{b.desc}</span>
                 </div>
                 <div
                   className={`w-4 h-4 rounded-full border flex items-center justify-center shrink-0 ml-3 ${
-                    budget === b.id ? 'border-primary bg-primary text-white' : 'border-border'
+                    budget === b.id ? 'border-blue-600 bg-blue-600 text-white' : 'border-slate-300'
                   }`}
                 >
                   {budget === b.id && <div className="w-1.5 h-1.5 rounded-full bg-white" />}
@@ -279,7 +279,7 @@ export const PickPage: React.FC = () => {
             <button
               type="button"
               onClick={() => setStep(2)}
-              className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-muted-foreground hover:text-foreground text-xs font-medium"
+              className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-slate-500 hover:text-slate-900 text-xs font-medium transition-colors cursor-pointer"
             >
               <ArrowLeft className="w-3.5 h-3.5" />
               <span>Back</span>
@@ -287,7 +287,7 @@ export const PickPage: React.FC = () => {
             <button
               type="button"
               onClick={() => setStep(4)}
-              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-primary text-primary-foreground text-sm font-semibold hover:bg-primary/90 shadow-sm"
+              className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-xl bg-blue-600 text-white text-sm font-semibold hover:bg-blue-700 shadow-sm transition-all cursor-pointer"
             >
               <span>{showWatermark ? 'Next: Setup & Watermarks' : 'Next: Setup & Preferences'}</span>
               <ArrowRight className="w-4 h-4" />
@@ -298,39 +298,39 @@ export const PickPage: React.FC = () => {
 
       {/* Step 4: Hosting & Conditional Watermark Preferences */}
       {step === 4 && (
-        <div className="p-6 rounded-xl border border-border bg-card/80 space-y-6 shadow-md">
+        <div className="p-6 sm:p-8 rounded-2xl border border-[#DFE7F3] bg-white space-y-6 shadow-invary-card">
           <div className="flex items-center justify-between">
-            <h2 className="text-lg font-bold text-foreground">
+            <h2 className="text-lg font-bold text-slate-900">
               {showWatermark
                 ? 'Step 4 of 4: Setup and watermark preferences'
                 : 'Step 4 of 4: Setup and preferences'}
             </h2>
-            <span className="text-xs text-muted-foreground font-mono">4/4</span>
+            <span className="text-xs text-slate-500 font-mono">4/4</span>
           </div>
 
           {/* Hosting Preference */}
           <div className="space-y-3">
-            <span className="text-xs font-semibold text-foreground uppercase tracking-wider block">
+            <span className="text-xs font-semibold text-slate-700 uppercase tracking-wider block font-mono">
               Where do you prefer to run the tool?
             </span>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
               {[
                 { id: 'any', label: 'No preference', desc: 'Show both website and desktop options' },
                 { id: 'browser', label: '🌐 Website', desc: 'Run directly in your browser without installing' },
-                { id: 'local', label: 'Desktop app / local', desc: 'Install on your computer or self-host' },
+                { id: 'local', label: '🖥️ Desktop app / local', desc: 'Install on your computer or self-host' },
               ].map((h) => (
                 <button
                   key={h.id}
                   type="button"
                   onClick={() => setHostingPreference(h.id as any)}
-                  className={`p-3 rounded-lg border text-left transition-all ${
+                  className={`p-3.5 rounded-xl border text-left transition-all cursor-pointer ${
                     hostingPreference === h.id
-                      ? 'border-primary bg-primary/10 ring-1 ring-primary'
-                      : 'border-border bg-card/50 hover:bg-muted'
+                      ? 'border-blue-500 bg-blue-50/70 ring-1 ring-blue-500'
+                      : 'border-[#DFE7F3] bg-[#F5F8FF] hover:bg-white hover:border-blue-300'
                   }`}
                 >
-                  <span className="text-xs font-semibold text-foreground block">{h.label}</span>
-                  <span className="text-[11px] text-muted-foreground">{h.desc}</span>
+                  <span className="text-xs font-semibold text-slate-900 block">{h.label}</span>
+                  <span className="text-[11px] text-slate-600">{h.desc}</span>
                 </button>
               ))}
             </div>
@@ -338,8 +338,8 @@ export const PickPage: React.FC = () => {
 
           {/* Watermark Preference — Strictly conditional for video & image workflows only */}
           {showWatermark && (
-            <div className="space-y-3 pt-2 border-t border-border/50">
-              <span className="text-xs font-semibold text-foreground uppercase tracking-wider block">
+            <div className="space-y-3 pt-4 border-t border-[#DFE7F3]">
+              <span className="text-xs font-semibold text-slate-700 uppercase tracking-wider block font-mono">
                 Watermark Tolerance on Free Output:
               </span>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
@@ -351,14 +351,14 @@ export const PickPage: React.FC = () => {
                     key={w.id}
                     type="button"
                     onClick={() => setWatermarkPreference(w.id as any)}
-                    className={`p-3 rounded-lg border text-left transition-all ${
+                    className={`p-3.5 rounded-xl border text-left transition-all cursor-pointer ${
                       watermarkPreference === w.id
-                        ? 'border-primary bg-primary/10 ring-1 ring-primary'
-                        : 'border-border bg-card/50 hover:bg-muted'
+                        ? 'border-blue-500 bg-blue-50/70 ring-1 ring-blue-500'
+                        : 'border-[#DFE7F3] bg-[#F5F8FF] hover:bg-white hover:border-blue-300'
                     }`}
                   >
-                    <span className="text-xs font-semibold text-foreground block">{w.label}</span>
-                    <span className="text-[11px] text-muted-foreground">{w.desc}</span>
+                    <span className="text-xs font-semibold text-slate-900 block">{w.label}</span>
+                    <span className="text-[11px] text-slate-600">{w.desc}</span>
                   </button>
                 ))}
               </div>
@@ -369,7 +369,7 @@ export const PickPage: React.FC = () => {
             <button
               type="button"
               onClick={() => setStep(3)}
-              className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-muted-foreground hover:text-foreground text-xs font-medium"
+              className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-slate-500 hover:text-slate-900 text-xs font-medium transition-colors cursor-pointer"
             >
               <ArrowLeft className="w-3.5 h-3.5" />
               <span>Back</span>
@@ -377,7 +377,7 @@ export const PickPage: React.FC = () => {
             <button
               type="button"
               onClick={() => setStep(5)}
-              className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-lg bg-primary text-primary-foreground text-sm font-semibold hover:bg-primary/90 shadow-md transition-all hover:scale-[1.02]"
+              className="inline-flex items-center gap-1.5 px-6 py-2.5 rounded-xl bg-blue-600 text-white text-sm font-semibold hover:bg-blue-700 shadow-sm transition-all hover:scale-[1.02] cursor-pointer"
             >
               <Sparkles className="w-4 h-4" />
               <span>Find My Best Matches</span>
@@ -389,14 +389,14 @@ export const PickPage: React.FC = () => {
       {/* Step 5: Recommendations Results */}
       {step === 5 && (
         <div className="space-y-6">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-border">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-[#DFE7F3]">
             <div>
-              <div className="inline-flex items-center gap-1.5 text-xs text-emerald-400 font-semibold mb-1">
-                <ShieldCheck className="w-4 h-4" />
+              <div className="inline-flex items-center gap-1.5 text-xs text-emerald-700 font-semibold mb-1 font-mono">
+                <ShieldCheck className="w-4 h-4 text-emerald-600" />
                 <span>Verified Match Calculation</span>
               </div>
-              <h2 className="text-xl font-bold text-foreground">Recommended Tools for Your Workflow</h2>
-              <span className="text-xs text-muted-foreground">
+              <h2 className="text-xl font-bold text-slate-900">Recommended Tools for Your Workflow</h2>
+              <span className="text-xs text-slate-500">
                 Strictly filtered to eliminate non-matching categories; scored on capabilities and access provenance.
               </span>
             </div>
@@ -404,7 +404,7 @@ export const PickPage: React.FC = () => {
             <button
               type="button"
               onClick={() => setStep(1)}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-border bg-card hover:bg-muted text-foreground text-xs font-medium transition-colors shrink-0 self-start sm:self-auto"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-[#DFE7F3] bg-white hover:bg-slate-50 text-slate-700 text-xs font-medium transition-colors shrink-0 self-start sm:self-auto shadow-xs cursor-pointer"
             >
               <RefreshCw className="w-3.5 h-3.5" />
               <span>Change Criteria</span>
@@ -412,37 +412,37 @@ export const PickPage: React.FC = () => {
           </div>
 
           {/* Active criteria tags bar */}
-          <div className="flex flex-wrap items-center gap-1.5 p-3 rounded-lg bg-card/60 border border-border/60 text-xs">
-            <span className="text-muted-foreground font-medium">Applied Criteria:</span>
-            <span className="px-2 py-0.5 rounded bg-primary/10 text-primary border border-primary/20 font-medium">
+          <div className="flex flex-wrap items-center gap-1.5 p-3 rounded-2xl bg-white border border-[#DFE7F3] text-xs shadow-invary-card">
+            <span className="text-slate-500 font-medium">Applied Criteria:</span>
+            <span className="px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200 font-medium">
               Goal: {goals.find((g) => g.id === goal)?.label.split(' ')[1] || goal}
             </span>
-            <span className="px-2 py-0.5 rounded bg-muted text-foreground border border-border font-medium">
+            <span className="px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-700 border border-slate-200 font-medium">
               Task: {taskDetail.replace(/-/g, ' ')}
             </span>
-            <span className="px-2 py-0.5 rounded bg-muted text-foreground border border-border font-medium">
+            <span className="px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-700 border border-slate-200 font-medium">
               Budget: {budget.replace(/-/g, ' ')}
             </span>
             {hostingPreference !== 'any' && (
-              <span className="px-2 py-0.5 rounded bg-muted text-foreground border border-border font-medium">
+              <span className="px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-700 border border-slate-200 font-medium">
                 Host: {hostingPreference}
               </span>
             )}
             {watermarkPreference !== 'any' && (
-              <span className="px-2 py-0.5 rounded bg-muted text-foreground border border-border font-medium">
+              <span className="px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-700 border border-slate-200 font-medium">
                 No watermark
               </span>
             )}
           </div>
 
           {recommendations.length === 0 ? (
-            <div className="p-8 text-center rounded-xl border border-dashed border-border bg-card/40 space-y-4">
-              <div className="w-12 h-12 rounded-full bg-muted flex items-center justify-center mx-auto text-muted-foreground">
+            <div className="p-8 text-center rounded-2xl border border-dashed border-[#DFE7F3] bg-white shadow-invary-card space-y-4">
+              <div className="w-12 h-12 rounded-full bg-slate-100 flex items-center justify-center mx-auto text-slate-400">
                 <AlertCircle className="w-6 h-6" />
               </div>
               <div>
-                <h3 className="font-bold text-base text-foreground mb-1">No exact tool matched all strict filters</h3>
-                <p className="text-xs text-muted-foreground max-w-md mx-auto">
+                <h3 className="font-bold text-base text-slate-900 mb-1">No exact tool matched all strict filters</h3>
+                <p className="text-xs text-slate-600 max-w-md mx-auto">
                   Your combination of goal ({goal}), hosting ({hostingPreference}), and watermark preferences is very narrow. Try broadening your budget or hosting preference.
                 </p>
               </div>
@@ -453,7 +453,7 @@ export const PickPage: React.FC = () => {
                   setHostingPreference('any');
                   setWatermarkPreference('any');
                 }}
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-primary text-primary-foreground text-xs font-semibold hover:bg-primary/90"
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-blue-600 text-white text-xs font-semibold hover:bg-blue-700 transition-colors shadow-sm cursor-pointer"
               >
                 <RefreshCw className="w-3.5 h-3.5" />
                 <span>Broaden Budget & Hosting Filters</span>
@@ -462,12 +462,12 @@ export const PickPage: React.FC = () => {
           ) : (
             <div className="space-y-4">
               {recommendations.map((rec, i) => {
-                const { tool, type, matchScore, matchExplanation, matchReasons, tasks, freeAccessSummary, detailUrl, websiteUrl, pricingVerifiedAt } = rec;
+                const { tool, type, matchScore, matchExplanation, tasks, freeAccessSummary, detailUrl, websiteUrl, pricingVerifiedAt } = rec;
 
                 return (
                   <div
                     key={tool.id}
-                    className="p-5 rounded-xl border border-border bg-card hover:border-primary/40 transition-all space-y-3.5 shadow-md relative group"
+                    className="p-6 rounded-2xl border border-[#DFE7F3] bg-white hover:border-blue-300 transition-all space-y-4 shadow-invary-card relative group"
                   >
                     <div className="flex items-start justify-between gap-3">
                       <div className="flex items-center gap-3">
@@ -480,25 +480,25 @@ export const PickPage: React.FC = () => {
                         />
                         <div>
                           <div className="flex items-center gap-2 flex-wrap">
-                            <Link to={detailUrl} className="font-bold text-base text-foreground hover:text-primary transition-colors">
+                            <Link to={detailUrl} className="font-bold text-base text-slate-900 hover:text-blue-600 transition-colors">
                               {tool.name}
                             </Link>
-                            <span className="px-2 py-0.5 rounded text-[10px] font-mono font-medium bg-muted text-secondary-foreground border border-border uppercase">
+                            <span className="px-2 py-0.5 rounded text-[10px] font-mono font-medium bg-slate-100 text-slate-700 border border-slate-200 uppercase">
                               {type === 'open-source' ? 'Open Source' : type === 'utility' ? 'Utility' : 'Cloud AI'}
                             </span>
-                            <span className="px-2 py-0.5 rounded text-[10px] font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                            <span className="px-2 py-0.5 rounded text-[10px] font-medium bg-emerald-50 text-emerald-700 border border-emerald-200 font-mono">
                               Verified {pricingVerifiedAt}
                             </span>
                           </div>
-                          <p className="text-xs text-muted-foreground line-clamp-1 mt-0.5">{tool.tagline}</p>
+                          <p className="text-xs text-slate-600 line-clamp-1 mt-0.5">{tool.tagline}</p>
                         </div>
                       </div>
 
                       <div className="flex flex-col items-end shrink-0">
-                        <span className="inline-flex items-center px-2 py-1 rounded bg-emerald-500/10 text-emerald-400 font-mono text-xs font-bold border border-emerald-500/20">
+                        <span className="inline-flex items-center px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 font-mono text-xs font-bold border border-emerald-200">
                           {Math.min(99, matchScore)}% Match
                         </span>
-                        <span className="text-[10px] text-muted-foreground mt-0.5">Rank #{i + 1}</span>
+                        <span className="text-[10px] text-slate-400 mt-0.5 font-mono">Rank #{i + 1}</span>
                       </div>
                     </div>
 
@@ -508,7 +508,7 @@ export const PickPage: React.FC = () => {
                         {tasks.map((task, ti) => (
                           <span
                             key={ti}
-                            className="text-[11px] font-medium px-2 py-0.5 rounded-full bg-muted/80 text-secondary-foreground border border-border/50"
+                            className="text-[11px] font-medium px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-700 border border-slate-200"
                           >
                             {task}
                           </span>
@@ -517,17 +517,17 @@ export const PickPage: React.FC = () => {
                     )}
 
                     {/* Detailed match rationale */}
-                    <div className="p-3 rounded-lg bg-muted/40 border border-border/50 text-xs space-y-2">
-                      <p className="text-foreground leading-relaxed font-medium">
+                    <div className="p-4 rounded-xl bg-[#F5F8FF] border border-[#DFE7F3] text-xs space-y-2">
+                      <p className="text-slate-800 leading-relaxed font-medium">
                         {matchExplanation}
                       </p>
 
-                      <div className="pt-2 border-t border-border/40 space-y-1">
-                        <span className="text-[10px] font-semibold text-muted-foreground uppercase tracking-wider block">
+                      <div className="pt-2 border-t border-[#DFE7F3] space-y-1">
+                        <span className="text-[10px] font-semibold text-slate-500 uppercase tracking-wider block font-mono">
                           Verified Access Provenance:
                         </span>
-                        <div className="flex items-center gap-1.5 text-xs text-secondary-foreground">
-                          <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+                        <div className="flex items-center gap-1.5 text-xs text-slate-700">
+                          <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
                           <span>{freeAccessSummary}</span>
                         </div>
                       </div>
@@ -537,7 +537,7 @@ export const PickPage: React.FC = () => {
                     <div className="pt-1 flex items-center justify-between text-xs">
                       <Link
                         to={detailUrl}
-                        className="inline-flex items-center gap-1 text-primary font-semibold hover:underline"
+                        className="inline-flex items-center gap-1 text-blue-600 font-semibold hover:text-blue-700 hover:underline"
                       >
                         <span>View Details & Limits</span>
                         <ArrowRight className="w-3.5 h-3.5" />
@@ -546,7 +546,7 @@ export const PickPage: React.FC = () => {
                         href={websiteUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1 text-muted-foreground hover:text-foreground text-xs"
+                        className="inline-flex items-center gap-1 text-slate-500 hover:text-slate-800 text-xs transition-colors"
                       >
                         <span>Official Destination</span>
                         <ExternalLink className="w-3 h-3" />

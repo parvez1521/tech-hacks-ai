@@ -16,7 +16,7 @@ let sessionTokenMemory: string | null = null;
 export function getStoredModeratorToken(): string | null {
   if (typeof window !== 'undefined' && window.sessionStorage) {
     try {
-      return sessionStorage.getItem(MODERATOR_TOKEN_KEY) || sessionTokenMemory;
+      return window.sessionStorage.getItem(MODERATOR_TOKEN_KEY) || sessionTokenMemory;
     } catch {
       return sessionTokenMemory;
     }
@@ -28,7 +28,7 @@ export function setStoredModeratorToken(token: string): void {
   sessionTokenMemory = token;
   if (typeof window !== 'undefined' && window.sessionStorage) {
     try {
-      sessionStorage.setItem(MODERATOR_TOKEN_KEY, token);
+      window.sessionStorage.setItem(MODERATOR_TOKEN_KEY, token);
     } catch {
       // Storage blocked or quota
     }
@@ -39,7 +39,7 @@ export function clearStoredModeratorToken(): void {
   sessionTokenMemory = null;
   if (typeof window !== 'undefined' && window.sessionStorage) {
     try {
-      sessionStorage.removeItem(MODERATOR_TOKEN_KEY);
+      window.sessionStorage.removeItem(MODERATOR_TOKEN_KEY);
     } catch {
       // Ignore
     }

@@ -192,48 +192,49 @@ export const SubmitToolPage: React.FC = () => {
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 py-10">
       {/* Navigation Breadcrumb */}
-      <nav className="flex items-center gap-2 text-xs text-muted-foreground mb-6" aria-label="Breadcrumb">
-        <Link to="/" className="hover:text-foreground">Home</Link>
-        <span>/</span>
-        <Link to="/ai-tools" className="hover:text-foreground">AI Tools</Link>
-        <span>/</span>
-        <span className="text-foreground font-medium">Submit a Tool</span>
+      <nav className="flex items-center gap-2 text-xs text-slate-500 mb-6" aria-label="Breadcrumb">
+        <Link to="/" className="hover:text-slate-900 transition-colors">Home</Link>
+        <span className="text-slate-400">/</span>
+        <Link to="/ai-tools" className="hover:text-slate-900 transition-colors">AI Tools</Link>
+        <span className="text-slate-400">/</span>
+        <span className="text-slate-900 font-semibold">Submit a Tool</span>
       </nav>
 
       {/* Header Banner */}
       <div className="mb-8">
-        <div className="inline-flex items-center gap-2 text-primary text-xs font-semibold uppercase tracking-wider mb-2">
-          <UploadCloud className="w-4 h-4" />
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-blue-200 bg-blue-50 text-blue-700 text-xs font-semibold uppercase tracking-wider mb-3">
+          <UploadCloud className="w-3.5 h-3.5" />
           <span>Community Directory Contributions</span>
         </div>
-        <h1 className="text-2xl sm:text-4xl font-extrabold text-foreground tracking-tight mb-3">
+        <h1 className="text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight mb-3">
           Submit an AI Tool or Alternative
         </h1>
-        <p className="text-sm sm:text-base text-secondary-foreground max-w-2xl leading-relaxed">
+        <p className="text-sm sm:text-base text-slate-600 max-w-2xl leading-relaxed">
           Help independent developers, creators, and teams discover high-quality software. Submissions are reviewed by the Tech Hacks AI editorial team to verify accurate pricing, legitimate websites, and quality standards before being cataloged.
         </p>
       </div>
 
       {/* Success Confirmation View */}
       {submissionSuccess ? (
-        <div className="p-8 rounded-2xl border border-emerald-500/30 bg-card/90 shadow-xl text-center animate-fade-in">
-          <div className="w-16 h-16 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 flex items-center justify-center mx-auto mb-4">
+        <div className="p-8 rounded-2xl border border-emerald-200 bg-white shadow-xl text-center animate-fade-in relative overflow-hidden">
+          <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-emerald-500 via-blue-500 to-indigo-500" />
+          <div className="w-16 h-16 rounded-2xl bg-emerald-50 text-emerald-600 border border-emerald-200 flex items-center justify-center mx-auto mb-4">
             <CheckCircle2 className="w-8 h-8" />
           </div>
 
-          <h2 className="text-2xl font-bold text-foreground mb-2">Submission Successfully Received!</h2>
-          <p className="text-sm text-secondary-foreground max-w-lg mx-auto mb-4 leading-relaxed">
-            Thanks for contributing to Tech Hacks AI! Your submission for <strong className="text-foreground">{formData.name}</strong> has been saved with reference ID:
+          <h2 className="text-2xl font-bold text-slate-900 mb-2">Submission Successfully Received!</h2>
+          <p className="text-sm text-slate-600 max-w-lg mx-auto mb-4 leading-relaxed">
+            Thanks for contributing to Tech Hacks AI! Your submission for <strong className="text-slate-900 font-semibold">{formData.name}</strong> has been saved with reference ID:
           </p>
 
-          <div className="inline-block px-4 py-1.5 rounded-lg bg-muted font-mono text-xs text-primary font-bold border border-border mb-6">
+          <div className="inline-block px-4 py-1.5 rounded-lg bg-blue-50 font-mono text-xs text-blue-700 font-bold border border-blue-200 mb-6 shadow-inner">
             {submissionSuccess.id}
           </div>
 
           {submissionSuccess.duplicateWarning && (
-            <div className="p-4 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-300 text-xs text-left max-w-md mx-auto mb-6">
+            <div className="p-4 rounded-xl bg-amber-50 border border-amber-200 text-amber-800 text-xs text-left max-w-md mx-auto mb-6">
               <div className="flex items-start gap-2.5">
-                <AlertTriangle className="w-4 h-4 shrink-0 text-amber-400 mt-0.5" />
+                <AlertTriangle className="w-4 h-4 shrink-0 text-amber-600 mt-0.5" />
                 <div>
                   <strong className="block font-semibold mb-0.5">Note on Duplicate Check:</strong>
                   <span>{submissionSuccess.reason} Our editorial team will review whether this constitutes a major update or separate product edition.</span>
@@ -242,9 +243,9 @@ export const SubmitToolPage: React.FC = () => {
             </div>
           )}
 
-          <div className="p-4 rounded-xl bg-card border border-border text-xs text-muted-foreground max-w-md mx-auto mb-8 text-left space-y-1.5">
-            <div className="font-semibold text-foreground flex items-center gap-1.5 mb-1">
-              <ShieldCheck className="w-3.5 h-3.5 text-primary" />
+          <div className="p-4 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-600 max-w-md mx-auto mb-8 text-left space-y-1.5">
+            <div className="font-semibold text-slate-900 flex items-center gap-1.5 mb-1">
+              <ShieldCheck className="w-3.5 h-3.5 text-blue-600" />
               <span>What happens next?</span>
             </div>
             <p>1. Editors test the website, verify HTTPS security, and inspect the pricing tier.</p>
@@ -256,13 +257,13 @@ export const SubmitToolPage: React.FC = () => {
             <button
               type="button"
               onClick={handleResetForm}
-              className="px-5 py-2.5 rounded-xl bg-primary hover:bg-primary-hover text-primary-foreground font-semibold text-sm transition-all"
+              className="px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-semibold text-sm shadow-md shadow-blue-600/25 transition-all cursor-pointer"
             >
               Submit Another Tool
             </button>
             <Link
               to="/ai-tools"
-              className="px-5 py-2.5 rounded-xl border border-border bg-card hover:bg-muted text-foreground font-medium text-sm transition-all"
+              className="px-5 py-2.5 rounded-xl border border-slate-300 bg-white hover:bg-slate-50 text-slate-700 font-medium text-sm transition-all shadow-xs"
             >
               Browse AI Tools Directory
             </Link>
@@ -286,8 +287,8 @@ export const SubmitToolPage: React.FC = () => {
           </div>
 
           {generalError && (
-            <div className="p-4 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-300 text-sm flex items-start gap-2.5">
-              <AlertTriangle className="w-4 h-4 text-rose-400 shrink-0 mt-0.5" />
+            <div className="p-4 rounded-xl bg-rose-50 border border-rose-200 text-rose-700 text-sm flex items-start gap-2.5">
+              <AlertTriangle className="w-4 h-4 text-rose-600 shrink-0 mt-0.5" />
               <div>
                 <strong className="block font-semibold">Submission Error</strong>
                 <span>{generalError}</span>
@@ -297,11 +298,11 @@ export const SubmitToolPage: React.FC = () => {
 
           {/* Duplicate warning notification */}
           {duplicateNotice.isDuplicate && (
-            <div className="p-4 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-200 text-xs sm:text-sm flex items-start gap-3">
-              <AlertTriangle className="w-5 h-5 text-amber-400 shrink-0 mt-0.5" />
+            <div className="p-4 rounded-xl bg-amber-50 border border-amber-200 text-amber-800 text-xs sm:text-sm flex items-start gap-3">
+              <AlertTriangle className="w-5 h-5 text-amber-600 shrink-0 mt-0.5" />
               <div>
-                <strong className="block font-semibold text-amber-300 mb-0.5">Potential Existing Catalog Entry</strong>
-                <p className="leading-relaxed">
+                <strong className="block font-semibold text-amber-900 mb-0.5">Potential Existing Catalog Entry</strong>
+                <p className="leading-relaxed text-amber-800">
                   {duplicateNotice.reason} If your submission represents a newly launched feature, v2 upgrade, or distinct open-source edition, feel free to proceed and specify this in the notes below.
                 </p>
               </div>
@@ -309,17 +310,19 @@ export const SubmitToolPage: React.FC = () => {
           )}
 
           {/* Section 1: Core Tool Information */}
-          <div className="p-6 sm:p-7 rounded-2xl border border-border bg-card/80 shadow-sm space-y-5">
-            <div className="flex items-center gap-2 pb-3 border-b border-border/60">
-              <Globe className="w-4 h-4 text-primary" />
-              <h2 className="text-base font-bold text-foreground">1. Core Tool Information</h2>
+          <div className="p-6 sm:p-7 rounded-2xl border border-[#DFE7F3] bg-white shadow-sm space-y-5 relative overflow-hidden">
+            <div className="flex items-center gap-2.5 pb-3 border-b border-[#DFE7F3]">
+              <div className="p-1.5 rounded-lg bg-blue-50 border border-blue-200 text-blue-700">
+                <Globe className="w-4 h-4" />
+              </div>
+              <h2 className="text-base font-bold text-slate-900">1. Core Tool Information</h2>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
               {/* Tool Name */}
               <div>
-                <label htmlFor="tool-name" className="block text-xs font-semibold text-foreground mb-1.5">
-                  Tool Name <span className="text-rose-400">*</span>
+                <label htmlFor="tool-name" className="block text-xs font-semibold text-slate-700 mb-1.5">
+                  Tool Name <span className="text-rose-500">*</span>
                 </label>
                 <input
                   id="tool-name"
@@ -328,21 +331,21 @@ export const SubmitToolPage: React.FC = () => {
                   value={formData.name}
                   onChange={(e) => handleInputChange('name', e.target.value)}
                   placeholder="e.g. Cursor, Higgsfield AI, Postiz"
-                  className={`w-full px-3.5 py-2.5 rounded-lg bg-card border text-foreground placeholder:text-muted-foreground text-sm focus:outline-none focus:ring-2 ${
-                    errors.name ? 'border-rose-500 focus:ring-rose-500/50' : 'border-border focus:ring-primary/50'
+                  className={`w-full px-3.5 py-2.5 rounded-lg bg-white border text-slate-900 placeholder:text-slate-400 text-sm focus:outline-none transition-all ${
+                    errors.name ? 'border-rose-400 focus:border-rose-500 focus:ring-2 focus:ring-rose-500/20' : 'border-[#DFE7F3] focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20'
                   }`}
                 />
                 {errors.name ? (
-                  <p className="text-[11px] text-rose-400 mt-1 font-medium">{errors.name}</p>
+                  <p className="text-[11px] text-rose-600 mt-1 font-medium">{errors.name}</p>
                 ) : (
-                  <p className="text-[11px] text-muted-foreground mt-1">Official brand or product title</p>
+                  <p className="text-[11px] text-slate-500 mt-1">Official brand or product title</p>
                 )}
               </div>
 
               {/* Official Website URL */}
               <div>
-                <label htmlFor="website-url" className="block text-xs font-semibold text-foreground mb-1.5">
-                  Official Website URL <span className="text-rose-400">*</span>
+                <label htmlFor="website-url" className="block text-xs font-semibold text-slate-700 mb-1.5">
+                  Official Website URL <span className="text-rose-500">*</span>
                 </label>
                 <input
                   id="website-url"
@@ -351,14 +354,14 @@ export const SubmitToolPage: React.FC = () => {
                   value={formData.websiteUrl}
                   onChange={(e) => handleInputChange('websiteUrl', e.target.value)}
                   placeholder="https://example.com"
-                  className={`w-full px-3.5 py-2.5 rounded-lg bg-card border text-foreground placeholder:text-muted-foreground text-sm focus:outline-none focus:ring-2 ${
-                    errors.websiteUrl ? 'border-rose-500 focus:ring-rose-500/50' : 'border-border focus:ring-primary/50'
+                  className={`w-full px-3.5 py-2.5 rounded-lg bg-white border text-slate-900 placeholder:text-slate-400 text-sm focus:outline-none transition-all ${
+                    errors.websiteUrl ? 'border-rose-400 focus:border-rose-500 focus:ring-2 focus:ring-rose-500/20' : 'border-[#DFE7F3] focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20'
                   }`}
                 />
                 {errors.websiteUrl ? (
-                  <p className="text-[11px] text-rose-400 mt-1 font-medium">{errors.websiteUrl}</p>
+                  <p className="text-[11px] text-rose-600 mt-1 font-medium">{errors.websiteUrl}</p>
                 ) : (
-                  <p className="text-[11px] text-muted-foreground mt-1">Primary landing page or official project repository</p>
+                  <p className="text-[11px] text-slate-500 mt-1">Primary landing page or official project repository</p>
                 )}
               </div>
             </div>
@@ -366,10 +369,10 @@ export const SubmitToolPage: React.FC = () => {
             {/* Short Description */}
             <div>
               <div className="flex items-center justify-between mb-1.5">
-                <label htmlFor="tool-description" className="block text-xs font-semibold text-foreground">
-                  Short Description <span className="text-rose-400">*</span>
+                <label htmlFor="tool-description" className="block text-xs font-semibold text-slate-700">
+                  Short Description <span className="text-rose-500">*</span>
                 </label>
-                <span className="text-[11px] text-muted-foreground">
+                <span className="text-[11px] text-slate-500 font-mono">
                   {formData.description.length}/500 chars
                 </span>
               </div>
@@ -380,21 +383,23 @@ export const SubmitToolPage: React.FC = () => {
                 value={formData.description}
                 onChange={(e) => handleInputChange('description', e.target.value)}
                 placeholder="Explain what the tool does, who it is for, and its primary technical capabilities (20 to 500 characters)..."
-                className={`w-full px-3.5 py-2.5 rounded-lg bg-card border text-foreground placeholder:text-muted-foreground text-sm focus:outline-none focus:ring-2 leading-relaxed ${
-                  errors.description ? 'border-rose-500 focus:ring-rose-500/50' : 'border-border focus:ring-primary/50'
+                className={`w-full px-3.5 py-2.5 rounded-lg bg-white border text-slate-900 placeholder:text-slate-400 text-sm focus:outline-none leading-relaxed transition-all ${
+                  errors.description ? 'border-rose-400 focus:border-rose-500 focus:ring-2 focus:ring-rose-500/20' : 'border-[#DFE7F3] focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20'
                 }`}
               />
               {errors.description && (
-                <p className="text-[11px] text-rose-400 mt-1 font-medium">{errors.description}</p>
+                <p className="text-[11px] text-rose-600 mt-1 font-medium">{errors.description}</p>
               )}
             </div>
           </div>
 
           {/* Section 2: Category & Pricing Model */}
-          <div className="p-6 sm:p-7 rounded-2xl border border-border bg-card/80 shadow-sm space-y-5">
-            <div className="flex items-center gap-2 pb-3 border-b border-border/60">
-              <DollarSign className="w-4 h-4 text-emerald-400" />
-              <h2 className="text-base font-bold text-foreground">2. Classification &amp; Pricing Tier</h2>
+          <div className="p-6 sm:p-7 rounded-2xl border border-[#DFE7F3] bg-white shadow-sm space-y-5 relative overflow-hidden">
+            <div className="flex items-center gap-2.5 pb-3 border-b border-[#DFE7F3]">
+              <div className="p-1.5 rounded-lg bg-emerald-50 border border-emerald-200 text-emerald-700">
+                <DollarSign className="w-4 h-4" />
+              </div>
+              <h2 className="text-base font-bold text-slate-900">2. Classification &amp; Pricing Tier</h2>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
@@ -407,16 +412,16 @@ export const SubmitToolPage: React.FC = () => {
               </div>
               {/* Category */}
               <div>
-                <label htmlFor="tool-category" className="block text-xs font-semibold text-foreground mb-1.5">
-                  Primary Category <span className="text-rose-400">*</span>
+                <label htmlFor="tool-category" className="block text-xs font-semibold text-slate-700 mb-1.5">
+                  Primary Category <span className="text-rose-500">*</span>
                 </label>
                 <select
                   id="tool-category"
                   required
                   value={formData.category}
                   onChange={(e) => handleInputChange('category', e.target.value)}
-                  className={`w-full px-3.5 py-2.5 rounded-lg bg-card border text-foreground text-sm focus:outline-none focus:ring-2 ${
-                    errors.category ? 'border-rose-500 focus:ring-rose-500/50' : 'border-border focus:ring-primary/50'
+                  className={`w-full px-3.5 py-2.5 rounded-lg bg-white border text-slate-900 text-sm focus:outline-none transition-all cursor-pointer ${
+                    errors.category ? 'border-rose-400 focus:border-rose-500 focus:ring-2 focus:ring-rose-500/20' : 'border-[#DFE7F3] focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20'
                   }`}
                 >
                   <option value="">Select a category...</option>
@@ -430,28 +435,28 @@ export const SubmitToolPage: React.FC = () => {
                   <option value="security">Privacy &amp; Security</option>
                 </select>
                 {errors.category && (
-                  <p className="text-[11px] text-rose-400 mt-1 font-medium">{errors.category}</p>
+                  <p className="text-[11px] text-rose-600 mt-1 font-medium">{errors.category}</p>
                 )}
               </div>
 
               {/* Pricing Type */}
               <div>
-                <label htmlFor="pricing-type" className="block text-xs font-semibold text-foreground mb-1.5">
-                  Pricing Model <span className="text-rose-400">*</span>
+                <label htmlFor="pricing-type" className="block text-xs font-semibold text-slate-700 mb-1.5">
+                  Pricing Model <span className="text-rose-500">*</span>
                 </label>
                 <select
                   id="pricing-type"
                   required
                   value={formData.pricingType}
                   onChange={(e) => handleInputChange('pricingType', e.target.value as any)}
-                  className="w-full px-3.5 py-2.5 rounded-lg bg-card border border-border text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-primary/50"
+                  className="w-full px-3.5 py-2.5 rounded-lg bg-white border border-[#DFE7F3] text-slate-900 text-sm focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-all cursor-pointer"
                 >
                   <option value="free">100% Free / Zero Cost</option>
                   <option value="freemium">Freemium (Free tier + paid upgrades)</option>
                   <option value="open-source">Open Source Software (Self-Hostable)</option>
                   <option value="paid">Paid Only / Commercial License</option>
                 </select>
-                <p className="text-[11px] text-muted-foreground mt-1">
+                <p className="text-[11px] text-slate-500 mt-1">
                   Pricing claims will be verified against official pricing documentation.
                 </p>
               </div>
@@ -459,7 +464,7 @@ export const SubmitToolPage: React.FC = () => {
 
             {/* Platform checkboxes */}
             <div>
-              <label className="block text-xs font-semibold text-foreground mb-2">
+              <label className="block text-xs font-semibold text-slate-700 mb-2">
                 Supported Platforms &amp; Execution Environments
               </label>
               <div className="flex flex-wrap gap-2">
@@ -470,10 +475,10 @@ export const SubmitToolPage: React.FC = () => {
                       type="button"
                       key={plat}
                       onClick={() => handlePlatformToggle(plat)}
-                      className={`px-3 py-1.5 rounded-lg text-xs font-medium border transition-all ${
+                      className={`px-3 py-1.5 rounded-lg text-xs font-medium border transition-all cursor-pointer ${
                         isChecked
-                          ? 'bg-primary/10 border-primary text-primary font-semibold'
-                          : 'bg-card border-border text-muted-foreground hover:text-foreground'
+                          ? 'bg-blue-50 border-blue-500 text-blue-700 font-semibold shadow-xs'
+                          : 'bg-slate-50 border-slate-200 text-slate-600 hover:text-slate-900 hover:border-slate-300'
                       }`}
                     >
                       {plat}
@@ -485,16 +490,18 @@ export const SubmitToolPage: React.FC = () => {
           </div>
 
           {/* Section 3: Feature Highlights & Competitive Positioning */}
-          <div className="p-6 sm:p-7 rounded-2xl border border-border bg-card/80 shadow-sm space-y-5">
-            <div className="flex items-center gap-2 pb-3 border-b border-border/60">
-              <Layers className="w-4 h-4 text-purple-400" />
-              <h2 className="text-base font-bold text-foreground">3. Features &amp; Open Alternative Context</h2>
+          <div className="p-6 sm:p-7 rounded-2xl border border-[#DFE7F3] bg-white shadow-sm space-y-5 relative overflow-hidden">
+            <div className="flex items-center gap-2.5 pb-3 border-b border-[#DFE7F3]">
+              <div className="p-1.5 rounded-lg bg-cyan-50 border border-cyan-200 text-cyan-700">
+                <Layers className="w-4 h-4" />
+              </div>
+              <h2 className="text-base font-bold text-slate-900">3. Features &amp; Open Alternative Context</h2>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
               {/* Alternative To */}
               <div>
-                <label htmlFor="alternative-to" className="block text-xs font-semibold text-foreground mb-1.5">
+                <label htmlFor="alternative-to" className="block text-xs font-semibold text-slate-700 mb-1.5">
                   Alternative / Replacement To (Optional)
                 </label>
                 <input
@@ -503,16 +510,16 @@ export const SubmitToolPage: React.FC = () => {
                   value={formData.alternativeTo || ''}
                   onChange={(e) => handleInputChange('alternativeTo', e.target.value)}
                   placeholder="e.g. ChatGPT, Notion, Midjourney, Figma"
-                  className="w-full px-3.5 py-2.5 rounded-lg bg-card border border-border text-foreground placeholder:text-muted-foreground text-sm focus:outline-none focus:ring-2 focus:ring-primary/50"
+                  className="w-full px-3.5 py-2.5 rounded-lg bg-white border border-[#DFE7F3] text-slate-900 placeholder:text-slate-400 text-sm focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-all"
                 />
-                <p className="text-[11px] text-muted-foreground mt-1">
+                <p className="text-[11px] text-slate-500 mt-1">
                   If this tool replaces proprietary software, specify which one.
                 </p>
               </div>
 
               {/* Logo / Asset URL */}
               <div>
-                <label htmlFor="logo-url" className="block text-xs font-semibold text-foreground mb-1.5">
+                <label htmlFor="logo-url" className="block text-xs font-semibold text-slate-700 mb-1.5">
                   Official Logo URL (Optional)
                 </label>
                 <input
@@ -521,11 +528,11 @@ export const SubmitToolPage: React.FC = () => {
                   value={formData.logoUrl || ''}
                   onChange={(e) => handleInputChange('logoUrl', e.target.value)}
                   placeholder="https://example.com/logo.svg"
-                  className={`w-full px-3.5 py-2.5 rounded-lg bg-card border text-foreground placeholder:text-muted-foreground text-sm focus:outline-none focus:ring-2 ${
-                    errors.logoUrl ? 'border-rose-500 focus:ring-rose-500/50' : 'border-border focus:ring-primary/50'
+                  className={`w-full px-3.5 py-2.5 rounded-lg bg-white border text-slate-900 placeholder:text-slate-400 text-sm focus:outline-none transition-all ${
+                    errors.logoUrl ? 'border-rose-400 focus:border-rose-500 focus:ring-2 focus:ring-rose-500/20' : 'border-[#DFE7F3] focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20'
                   }`}
                 />
-                <p className="text-[11px] text-muted-foreground mt-1">
+                <p className="text-[11px] text-slate-500 mt-1">
                   Official SVG or transparent PNG link. All brand marks are audited before display.
                 </p>
               </div>
@@ -533,7 +540,7 @@ export const SubmitToolPage: React.FC = () => {
 
             {/* Feature Highlights */}
             <div>
-              <label htmlFor="features-input" className="block text-xs font-semibold text-foreground mb-1.5">
+              <label htmlFor="features-input" className="block text-xs font-semibold text-slate-700 mb-1.5">
                 Key Features (Comma-separated)
               </label>
               <input
@@ -542,25 +549,27 @@ export const SubmitToolPage: React.FC = () => {
                 value={featuresInput}
                 onChange={(e) => handleFeaturesChange(e.target.value)}
                 placeholder="e.g. Local GGUF models, API access, Unlimited generations, Privacy-first"
-                className="w-full px-3.5 py-2.5 rounded-lg bg-card border border-border text-foreground placeholder:text-muted-foreground text-sm focus:outline-none focus:ring-2 focus:ring-primary/50"
+                className="w-full px-3.5 py-2.5 rounded-lg bg-white border border-[#DFE7F3] text-slate-900 placeholder:text-slate-400 text-sm focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-all"
               />
-              <p className="text-[11px] text-muted-foreground mt-1">
+              <p className="text-[11px] text-slate-500 mt-1">
                 Enter 3–5 distinctive features separated by commas.
               </p>
             </div>
           </div>
 
           {/* Section 4: Submitter Attribution & Notes */}
-          <div className="p-6 sm:p-7 rounded-2xl border border-border bg-card/80 shadow-sm space-y-5">
-            <div className="flex items-center gap-2 pb-3 border-b border-border/60">
-              <User className="w-4 h-4 text-amber-400" />
-              <h2 className="text-base font-bold text-foreground">4. Attribution &amp; Editorial Notes</h2>
+          <div className="p-6 sm:p-7 rounded-2xl border border-[#DFE7F3] bg-white shadow-sm space-y-5 relative overflow-hidden">
+            <div className="flex items-center gap-2.5 pb-3 border-b border-[#DFE7F3]">
+              <div className="p-1.5 rounded-lg bg-indigo-50 border border-indigo-200 text-indigo-700">
+                <User className="w-4 h-4" />
+              </div>
+              <h2 className="text-base font-bold text-slate-900">4. Attribution &amp; Editorial Notes</h2>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
               {/* Submitter Name */}
               <div>
-                <label htmlFor="submitter-name" className="block text-xs font-semibold text-foreground mb-1.5">
+                <label htmlFor="submitter-name" className="block text-xs font-semibold text-slate-700 mb-1.5">
                   Your Name / Handle (Optional)
                 </label>
                 <input
@@ -569,16 +578,16 @@ export const SubmitToolPage: React.FC = () => {
                   value={formData.submitterName || ''}
                   onChange={(e) => handleInputChange('submitterName', e.target.value)}
                   placeholder="e.g. Rahul Verma or @rahul_ai"
-                  className="w-full px-3.5 py-2.5 rounded-lg bg-card border border-border text-foreground placeholder:text-muted-foreground text-sm focus:outline-none focus:ring-2 focus:ring-primary/50"
+                  className="w-full px-3.5 py-2.5 rounded-lg bg-white border border-[#DFE7F3] text-slate-900 placeholder:text-slate-400 text-sm focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-all"
                 />
-                <p className="text-[11px] text-muted-foreground mt-1">
+                <p className="text-[11px] text-slate-500 mt-1">
                   Credit as community contributor
                 </p>
               </div>
 
               {/* Submitter Email */}
               <div>
-                <label htmlFor="submitter-email" className="block text-xs font-semibold text-foreground mb-1.5">
+                <label htmlFor="submitter-email" className="block text-xs font-semibold text-slate-700 mb-1.5">
                   Contact Email (Optional)
                 </label>
                 <input
@@ -587,11 +596,11 @@ export const SubmitToolPage: React.FC = () => {
                   value={formData.submitterEmail || ''}
                   onChange={(e) => handleInputChange('submitterEmail', e.target.value)}
                   placeholder="your.email@example.com"
-                  className={`w-full px-3.5 py-2.5 rounded-lg bg-card border text-foreground placeholder:text-muted-foreground text-sm focus:outline-none focus:ring-2 ${
-                    errors.submitterEmail ? 'border-rose-500 focus:ring-rose-500/50' : 'border-border focus:ring-primary/50'
+                  className={`w-full px-3.5 py-2.5 rounded-lg bg-white border text-slate-900 placeholder:text-slate-400 text-sm focus:outline-none transition-all ${
+                    errors.submitterEmail ? 'border-rose-400 focus:border-rose-500 focus:ring-2 focus:ring-rose-500/20' : 'border-[#DFE7F3] focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20'
                   }`}
                 />
-                <p className="text-[11px] text-muted-foreground mt-1">
+                <p className="text-[11px] text-slate-500 mt-1">
                   Only used for verification questions. Never published or marketed.
                 </p>
               </div>
@@ -599,7 +608,7 @@ export const SubmitToolPage: React.FC = () => {
 
             {/* Editorial Notes */}
             <div>
-              <label htmlFor="editorial-notes" className="block text-xs font-semibold text-foreground mb-1.5">
+              <label htmlFor="editorial-notes" className="block text-xs font-semibold text-slate-700 mb-1.5">
                 Notes for the Editorial Team (Optional)
               </label>
               <textarea
@@ -608,22 +617,22 @@ export const SubmitToolPage: React.FC = () => {
                 value={formData.notes || ''}
                 onChange={(e) => handleInputChange('notes', e.target.value)}
                 placeholder="Mention coupon codes, benchmark scores, self-hosting gotchas, or context about recent updates..."
-                className="w-full px-3.5 py-2.5 rounded-lg bg-card border border-border text-foreground placeholder:text-muted-foreground text-sm focus:outline-none focus:ring-2 focus:ring-primary/50"
+                className="w-full px-3.5 py-2.5 rounded-lg bg-white border border-[#DFE7F3] text-slate-900 placeholder:text-slate-400 text-sm focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 leading-relaxed transition-all"
               />
             </div>
           </div>
 
           {/* Submission Action Bar */}
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4 border-t border-border">
-            <div className="flex items-center gap-2 text-xs text-muted-foreground">
-              <ShieldCheck className="w-4 h-4 text-emerald-400 shrink-0" />
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4 border-t border-[#DFE7F3]">
+            <div className="flex items-center gap-2 text-xs text-slate-500">
+              <ShieldCheck className="w-4 h-4 text-emerald-600 shrink-0" />
               <span>Public submissions are editorialized and never automatically published.</span>
             </div>
 
             <button
               type="submit"
               disabled={isSubmitting}
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3 rounded-xl bg-primary hover:bg-primary-hover disabled:bg-primary/50 text-primary-foreground font-bold text-sm shadow-lg shadow-primary/25 cursor-pointer disabled:cursor-not-allowed transition-all"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3 rounded-xl bg-blue-600 hover:bg-blue-700 disabled:bg-blue-400 text-white font-semibold text-sm shadow-md shadow-blue-600/25 cursor-pointer disabled:cursor-not-allowed transition-all"
             >
               {isSubmitting ? (
                 <>

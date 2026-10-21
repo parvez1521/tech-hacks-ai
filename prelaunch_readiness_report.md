@@ -11,7 +11,7 @@
 
 Tech Hacks AI has undergone a rigorous final quality assurance, security, performance, accessibility, and architectural audit. 
 
-The latest verification run passes **458 automated unit and integration tests across 116 test suites with a 100% pass rate (0 failures)**. The production build compiles cleanly with optimized code-splitting; the current Vite build transforms 1,578 modules.
+The latest verification run passes **457 automated unit and integration tests across 116 test suites with a 100% pass rate (0 failures)**. The production build compiles cleanly with optimized code-splitting; the current Vite build transforms 1,578 modules.
 
 Local API verification confirmed that `/api/chat` handles missing API keys gracefully with instant client-side catalog retrieval fallback across 1,000+ verified tools. The community submission system (`/api/submissions`) successfully performs client and server validation, duplicate detection, honeypot bot filtering, and rate limiting (5 requests per 10 minutes per IP).
 
@@ -64,7 +64,7 @@ Key pre-launch security and configuration fixes were applied to `.gitignore`, `.
 
 | Test Command | Purpose | Duration | Result |
 |---|---|---|---|
-| `npm test` | Node test runner (`node --experimental-strip-types --test tests/*.test.js`) | latest run | **458 passed, 0 failed** (116 suites) |
+| `npm test` | Node test runner (`node --experimental-strip-types --test tests/*.test.js`) | latest run | **457 passed, 0 failed** (116 suites) |
 | `npm run build` | Vite production compilation & minification | 1.31s | **Clean build, 0 warnings** |
 | `node test-ssr` | Headless Server-Side Rendering of all major routes | 0.35s | **11/11 routes rendered 35k–231k HTML characters** |
 | `curl HTTP audits` | Live endpoint verification on 20 routes | 0.42s | **20/20 routes returned HTTP 200 OK** |
@@ -239,7 +239,7 @@ Immediately after DNS propagation (typically 5–30 minutes):
 | Area | Status | Evidence or Remaining Work |
 |---|---|---|
 | **Production build** | **PASS** | `dist/` created in 1.31s; all chunks < 430 kB; 0 warnings |
-| **Automated tests** | **PASS** | 458 / 458 tests passing (116 suites); 100% pass rate |
+| **Automated tests** | **PASS** | 457 / 457 tests passing (116 suites); 100% pass rate |
 | **Frontend routes** | **PASS** | 20/20 representative routes verified via HTTP and Node SSR |
 | **Backend/API** | **PASS (local) / CONFIG REQUIRED (Prod)** | `/api/chat`, `/api/submissions`, and `/api/transcribe` verified locally; production requires `ADMIN_SECRET`, durable storage, and a transcription provider key for the related workflows |
 | **Database/persistence** | **PASS (Dev) / External (Prod)** | Local JSON atomic write verified; /tmp serverless fallback added; external cloud DB recommended for high-volume public submissions |
@@ -261,7 +261,7 @@ Immediately after DNS propagation (typically 5–30 minutes):
 ## Superseding final sweep — 2026-10-21
 
 The current verification supersedes older counts and readiness claims in this
-historical report: `npm test` passes 458 tests across 116 suites, and the latest
+historical report: `npm test` passes 457 tests across 116 suites, and the latest
 production build transforms 1,578 modules. Vercel's 4.5 MB Function body limit
 means `/api/transcribe` accepts media up to 4 MB, while local MP4-to-MP3
 conversion retains its separate browser-only 100 MB limit. YouTube and

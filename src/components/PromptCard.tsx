@@ -41,14 +41,14 @@ export const PromptCard: React.FC<PromptCardProps> = ({ prompt }) => {
   return (
     <div
       onMouseMove={handleMouseMove}
-      className="group relative flex flex-col justify-between p-5 rounded-lg border border-border bg-card/90 hover:bg-card transition-all duration-300 ease-out hover:-translate-y-1 hover:border-primary/40 hover:shadow-xl hover:shadow-black/30 min-h-[260px] focus-within:ring-2 focus-within:ring-primary/60 focus-within:border-primary/60"
+      className="group relative flex flex-col justify-between p-5 rounded-2xl border border-[#DFE7F3] bg-white transition-all duration-300 ease-out hover:-translate-y-0.5 hover:border-blue-300 hover:shadow-invary-card-hover min-h-[260px] focus-within:ring-2 focus-within:ring-blue-500/40 focus-within:border-blue-500 shadow-invary-card"
     >
       {/* Decorative Interactive Spotlight Inner Glow */}
       <div
-        className="pointer-events-none absolute -inset-px rounded-lg opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-focus-within:opacity-100 -z-0"
+        className="pointer-events-none absolute -inset-px rounded-2xl opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-focus-within:opacity-100 -z-0"
         style={{
           background:
-            'radial-gradient(280px circle at var(--card-x, 50%) var(--card-y, 50%), rgba(59, 130, 246, 0.12), transparent 80%)',
+            'radial-gradient(280px circle at var(--card-x, 50%) var(--card-y, 50%), rgba(37, 99, 235, 0.06), transparent 80%)',
         }}
         aria-hidden="true"
       />
@@ -57,7 +57,7 @@ export const PromptCard: React.FC<PromptCardProps> = ({ prompt }) => {
         <div className="flex items-start justify-between gap-3 mb-2.5">
           <div className="flex items-center gap-1.5 flex-wrap">
             {prompt.provider && (
-              <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded text-[11px] font-medium bg-blue-500/10 text-blue-400 border border-blue-500/20">
+              <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-lg text-[11px] font-medium bg-blue-50 text-blue-700 border border-blue-200">
                 <BrandLogo
                   slug={prompt.provider.toLowerCase().replace(/\s+/g, '-')}
                   name={prompt.provider}
@@ -68,15 +68,15 @@ export const PromptCard: React.FC<PromptCardProps> = ({ prompt }) => {
                 <span>{prompt.provider}</span>
               </span>
             )}
-            <span className="px-2 py-0.5 rounded text-[11px] font-mono font-medium bg-purple-500/10 text-purple-400 border border-purple-500/20">
+            <span className="px-2 py-0.5 rounded-lg text-[11px] font-mono font-medium bg-purple-50 text-purple-700 border border-purple-200">
               {prompt.targetModel}
             </span>
             {prompt.placeholders && prompt.placeholders.length > 0 && (
-              <span className="px-1.5 py-0.5 rounded text-[10px] font-medium bg-amber-500/10 text-amber-300 border border-amber-500/20">
+              <span className="px-1.5 py-0.5 rounded-md text-[10px] font-medium bg-amber-50 text-amber-800 border border-amber-200">
                 {prompt.placeholders.length} Placeholders
               </span>
             )}
-            <span className="text-[11px] text-muted-foreground capitalize">
+            <span className="text-[11px] text-slate-500 capitalize">
               {prompt.category.replace(/-/g, ' ')}
             </span>
           </div>
@@ -84,30 +84,30 @@ export const PromptCard: React.FC<PromptCardProps> = ({ prompt }) => {
           <BookmarkButton item={bookmarkItem} size="sm" />
         </div>
 
-        <h3 className="font-bold text-foreground text-base tracking-tight mb-1.5 group-hover:text-primary transition-colors">
+        <h3 className="font-bold text-slate-900 text-base tracking-tight mb-1.5 group-hover:text-blue-600 transition-colors">
           <Link to={`/prompt-library/${prompt.slug}`} className="focus:outline-none focus:underline">
             {prompt.title}
           </Link>
         </h3>
 
-        <p className="text-xs text-muted-foreground line-clamp-2 mb-3">
+        <p className="text-xs text-slate-600 line-clamp-2 mb-3">
           {prompt.description}
         </p>
 
         {/* Prompt Container */}
-        <div className="relative p-3 rounded-md bg-muted/60 border border-border/80 font-mono text-xs text-secondary-foreground line-clamp-3 mb-3 leading-relaxed selection:bg-primary/20">
+        <div className="relative p-3 rounded-xl bg-[#F5F8FF] border border-[#DFE7F3] font-mono text-xs text-slate-800 line-clamp-3 mb-3 leading-relaxed selection:bg-blue-100">
           "{prompt.promptText}"
         </div>
       </div>
 
-      <div className="relative z-10 pt-3 border-t border-border/50 flex items-center justify-between text-xs">
+      <div className="relative z-10 pt-3 border-t border-[#DFE7F3] flex items-center justify-between text-xs">
         <button
           type="button"
           onClick={handleCopy}
-          className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md font-medium text-xs transition-all duration-150 active:scale-95 cursor-pointer ${
+          className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg font-semibold text-xs transition-all duration-150 active:scale-95 cursor-pointer ${
             copied
-              ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30'
-              : 'bg-primary text-primary-foreground hover:bg-primary-hover shadow-sm'
+              ? 'bg-emerald-50 text-emerald-700 border border-emerald-200'
+              : 'bg-blue-600 hover:bg-blue-700 text-white shadow-sm'
           }`}
           aria-label={copied ? 'Copied prompt to clipboard' : 'Copy prompt to clipboard'}
         >
@@ -126,7 +126,7 @@ export const PromptCard: React.FC<PromptCardProps> = ({ prompt }) => {
 
         <Link
           to={`/prompt-library/${prompt.slug}`}
-          className="inline-flex items-center gap-1 text-muted-foreground hover:text-foreground transition-colors"
+          className="inline-flex items-center gap-1 text-blue-600 font-semibold hover:text-blue-700 transition-colors"
         >
           <span>Details</span>
           <ArrowRight className="w-3.5 h-3.5" />

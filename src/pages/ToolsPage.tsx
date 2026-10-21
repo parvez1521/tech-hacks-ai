@@ -50,14 +50,14 @@ export const ToolsPage: React.FC = () => {
     <div className="max-w-6xl mx-auto px-4 sm:px-6 py-8">
       {/* Header */}
       <div className="mb-8">
-        <div className="inline-flex items-center gap-2 text-primary text-xs font-semibold uppercase tracking-wider mb-2">
-          <FolderKanban className="w-4 h-4" />
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 border border-blue-200 text-blue-700 text-xs font-semibold uppercase tracking-wider mb-3">
+          <FolderKanban className="w-3.5 h-3.5 text-blue-600" />
           <span>Full Directory</span>
         </div>
-        <h1 className="text-2xl sm:text-3xl font-bold text-foreground tracking-tight mb-2">
+        <h1 className="text-2xl sm:text-4xl font-extrabold text-[#0F172A] tracking-tight mb-2">
           All Open Source Software Tools
         </h1>
-        <p className="text-sm sm:text-base text-secondary-foreground max-w-2xl">
+        <p className="text-sm sm:text-base text-[#475569] max-w-2xl">
           Search and filter the complete index of hand-picked open-source software, developer tools, and privacy-respecting platforms.
         </p>
       </div>

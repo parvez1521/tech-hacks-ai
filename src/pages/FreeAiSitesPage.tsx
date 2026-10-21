@@ -67,31 +67,31 @@ export const FreeAiSitesPage: React.FC = () => {
     <div className="max-w-6xl mx-auto px-4 sm:px-6 py-8">
       {/* Header Banner */}
       <div className="mb-8">
-        <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-semibold uppercase tracking-wider mb-3">
-          <Gift className="w-3.5 h-3.5" />
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-700 text-xs font-semibold uppercase tracking-wider mb-3">
+          <Gift className="w-3.5 h-3.5 text-emerald-600" />
           <span>Independently Verified • Zero Upfront Cost</span>
         </div>
-        <h1 className="text-2xl sm:text-4xl font-extrabold text-foreground tracking-tight mb-3">
+        <h1 className="text-2xl sm:text-4xl font-extrabold text-[#0F172A] tracking-tight mb-3">
           Free AI Sites & Generative Tools
         </h1>
-        <p className="text-sm sm:text-base text-secondary-foreground max-w-3xl leading-relaxed mb-6">
+        <p className="text-sm sm:text-base text-[#64748B] max-w-3xl leading-relaxed mb-6">
           Explore {allFreeTools.length} tested and verified AI platforms you can use at zero cost. Clearly partitioned between self-hosted open-source software and commercial SaaS with recurring free tiers.
         </p>
 
         {/* Informational Callout: Open Source vs Hosted Commercial */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 p-4 rounded-xl bg-card/60 border border-border/80 mb-6 text-xs text-secondary-foreground">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5 p-4 sm:p-5 rounded-xl bg-white border border-[#DFE7F3] shadow-sm mb-6 text-xs text-[#64748B]">
           <div className="flex items-start gap-2.5">
-            <Server className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+            <Server className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
             <div>
-              <strong className="text-foreground font-semibold block mb-0.5">100% Free & Open Source Local AI</strong>
-              <span>Tools like Ollama, Open WebUI, and ComfyUI run on your own hardware with no cloud fees, data logging, or subscriptions.</span>
+              <strong className="text-[#0F172A] font-semibold block mb-0.5">100% Free & Open Source Local AI</strong>
+              <span className="text-[#64748B]">Tools like Ollama, Open WebUI, and ComfyUI run on your own hardware with no cloud fees, data logging, or subscriptions.</span>
             </div>
           </div>
           <div className="flex items-start gap-2.5">
-            <CheckCircle2 className="w-4 h-4 text-blue-400 shrink-0 mt-0.5" />
+            <CheckCircle2 className="w-4 h-4 text-[#2563EB] shrink-0 mt-0.5" />
             <div>
-              <strong className="text-foreground font-semibold block mb-0.5">Hosted Freemium & Free-Plan SaaS</strong>
-              <span>Cloud services like Claude, ChatGPT, and Perplexity offer permanent free quotas with no credit card required.</span>
+              <strong className="text-[#0F172A] font-semibold block mb-0.5">Hosted Freemium & Free-Plan SaaS</strong>
+              <span className="text-[#64748B]">Cloud services like Claude, ChatGPT, and Perplexity offer permanent free quotas with no credit card required.</span>
             </div>
           </div>
         </div>
@@ -99,14 +99,14 @@ export const FreeAiSitesPage: React.FC = () => {
         {/* Filter Bar & Controls */}
         <div className="space-y-4">
           {/* Access Type Tabs */}
-          <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar pb-1">
+          <div className="flex items-center gap-2 overflow-x-auto no-scrollbar pb-1">
             <button
               type="button"
               onClick={() => setSelectedAccessType('all')}
-              className={`px-3 py-1.5 rounded-lg text-xs font-medium shrink-0 transition-colors ${
+              className={`px-3.5 py-1.5 rounded-lg text-xs font-medium shrink-0 transition-all cursor-pointer ${
                 selectedAccessType === 'all'
-                  ? 'bg-primary text-primary-foreground shadow-sm'
-                  : 'bg-card text-muted-foreground hover:text-foreground border border-border/60'
+                  ? 'bg-[#2563EB] text-white shadow-sm'
+                  : 'bg-white text-[#64748B] hover:text-[#2563EB] border border-[#DFE7F3] hover:bg-[#EAF2FF]'
               }`}
             >
               All Free Access ({allFreeTools.length})
@@ -114,10 +114,10 @@ export const FreeAiSitesPage: React.FC = () => {
             <button
               type="button"
               onClick={() => setSelectedAccessType('open-source-local')}
-              className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium shrink-0 transition-colors ${
+              className={`inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-medium shrink-0 transition-all cursor-pointer ${
                 selectedAccessType === 'open-source-local'
                   ? 'bg-emerald-600 text-white shadow-sm'
-                  : 'bg-card text-emerald-400 hover:bg-emerald-500/10 border border-emerald-500/20'
+                  : 'bg-white text-emerald-700 hover:bg-emerald-50 border border-emerald-200'
               }`}
             >
               <Server className="w-3.5 h-3.5" />
@@ -126,10 +126,10 @@ export const FreeAiSitesPage: React.FC = () => {
             <button
               type="button"
               onClick={() => setSelectedAccessType('recurring-free')}
-              className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium shrink-0 transition-colors ${
+              className={`inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-medium shrink-0 transition-all cursor-pointer ${
                 selectedAccessType === 'recurring-free'
-                  ? 'bg-blue-600 text-white shadow-sm'
-                  : 'bg-card text-blue-400 hover:bg-blue-500/10 border border-blue-500/20'
+                  ? 'bg-[#2563EB] text-white shadow-sm'
+                  : 'bg-white text-[#2563EB] hover:bg-[#EAF2FF] border border-[#BFDBFE]'
               }`}
             >
               <Sparkles className="w-3.5 h-3.5" />
@@ -138,10 +138,10 @@ export const FreeAiSitesPage: React.FC = () => {
             <button
               type="button"
               onClick={() => setSelectedAccessType('no-account')}
-              className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium shrink-0 transition-colors ${
+              className={`inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-medium shrink-0 transition-all cursor-pointer ${
                 selectedAccessType === 'no-account'
-                  ? 'bg-purple-600 text-white shadow-sm'
-                  : 'bg-card text-purple-400 hover:bg-purple-500/10 border border-purple-500/20'
+                  ? 'bg-indigo-600 text-white shadow-sm'
+                  : 'bg-white text-indigo-700 hover:bg-indigo-50 border border-indigo-200'
               }`}
             >
               <Unlock className="w-3.5 h-3.5" />
@@ -150,22 +150,21 @@ export const FreeAiSitesPage: React.FC = () => {
           </div>
 
           {/* Quick Search & Sort */}
-          <div className="flex flex-col sm:flex-row gap-3 items-stretch sm:items-center justify-between">
+          <div className="flex flex-col sm:flex-row gap-3 items-stretch sm:items-center justify-between p-3.5 sm:p-4 rounded-xl bg-white border border-[#DFE7F3] shadow-sm">
             <div className="relative flex-1 max-w-md">
-              <Search className="w-4 h-4 text-muted-foreground absolute left-3 top-1/2 -translate-y-1/2" />
+              <Search className="w-4 h-4 text-[#64748B] absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
               <input
                 type="text"
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
                 placeholder="Search by name, features, or tags..."
-                className="w-full pl-9 pr-8 py-2 rounded-lg bg-card border border-border text-foreground placeholder:text-muted-foreground text-xs sm:text-sm focus:outline-none focus:ring-1 focus:ring-primary shadow-xs"
-              >
-              </input>
+                className="w-full pl-9 pr-8 py-2 rounded-lg bg-white border border-[#DFE7F3] text-[#0F172A] placeholder:text-[#64748B] text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-[#2563EB]/20 focus:border-[#2563EB] shadow-xs"
+              />
               {search && (
                 <button
                   type="button"
                   onClick={() => setSearch('')}
-                  className="absolute right-2.5 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
+                  className="absolute right-2.5 top-1/2 -translate-y-1/2 text-[#64748B] hover:text-[#0F172A]"
                 >
                   <X className="w-4 h-4" />
                 </button>
@@ -174,11 +173,12 @@ export const FreeAiSitesPage: React.FC = () => {
 
             <div className="flex items-center gap-3 justify-between sm:justify-end">
               <div className="flex items-center gap-2">
-                <SlidersHorizontal className="w-3.5 h-3.5 text-muted-foreground" />
+                <SlidersHorizontal className="w-3.5 h-3.5 text-[#64748B]" />
                 <select
+                  aria-label="Sort free AI tools"
                   value={sortBy}
                   onChange={(e) => setSortBy(e.target.value as any)}
-                  className="py-1.5 px-2.5 rounded-lg bg-card border border-border text-foreground text-xs focus:outline-none focus:ring-1 focus:ring-primary"
+                  className="py-1.5 px-2.5 rounded-lg bg-white border border-[#DFE7F3] text-[#0F172A] text-xs focus:outline-none focus:ring-2 focus:ring-[#2563EB]/20 focus:border-[#2563EB] cursor-pointer"
                 >
                   <option value="popular">Most Popular</option>
                   <option value="rating">Highest Rated</option>
@@ -187,21 +187,21 @@ export const FreeAiSitesPage: React.FC = () => {
                 </select>
               </div>
 
-              <span className="text-xs text-muted-foreground">
-                Showing <strong className="text-foreground">{filteredTools.length}</strong> tools
+              <span className="text-xs text-[#64748B]">
+                Showing <strong className="text-[#0F172A] font-mono">{filteredTools.length}</strong> tools
               </span>
             </div>
           </div>
 
           {/* Category Pills */}
-          <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar pb-1">
+          <div className="flex items-center gap-2 overflow-x-auto no-scrollbar pb-1">
             <button
               type="button"
               onClick={() => setSelectedCat(null)}
-              className={`px-3 py-1 rounded-full text-xs font-medium shrink-0 transition-colors ${
+              className={`px-3.5 py-1.5 rounded-full text-xs font-medium shrink-0 transition-all cursor-pointer ${
                 !selectedCat
-                  ? 'bg-muted text-foreground border border-primary/40 font-semibold'
-                  : 'text-muted-foreground hover:text-foreground border border-border/50'
+                  ? 'bg-[#2563EB] text-white shadow-sm'
+                  : 'bg-white text-[#64748B] hover:bg-[#EAF2FF] hover:text-[#2563EB] border border-[#DFE7F3]'
               }`}
             >
               All Categories
@@ -215,10 +215,10 @@ export const FreeAiSitesPage: React.FC = () => {
                   key={cat.id}
                   type="button"
                   onClick={() => setSelectedCat(isSelected ? null : cat.id)}
-                  className={`px-3 py-1 rounded-full text-xs font-medium shrink-0 transition-colors ${
+                  className={`px-3.5 py-1.5 rounded-full text-xs font-medium shrink-0 transition-all cursor-pointer ${
                     isSelected
-                      ? 'bg-muted text-foreground border border-primary/40 font-semibold'
-                      : 'text-muted-foreground hover:text-foreground border border-border/50'
+                      ? 'bg-[#2563EB] text-white shadow-sm'
+                      : 'bg-white text-[#64748B] hover:bg-[#EAF2FF] hover:text-[#2563EB] border border-[#DFE7F3]'
                   }`}
                 >
                   {cat.name} ({count})

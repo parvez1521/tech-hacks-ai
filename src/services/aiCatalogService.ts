@@ -4,7 +4,7 @@ import { promptsData, promptCategories } from '../data/promptsData.ts';
 import { freeToolsData } from '../data/freeToolsData.ts';
 import { toolsData } from '../data/seedData.ts';
 import { proprietaryTools } from '../data/alternatives.ts';
-import type { AiTool, AiFilterState, Guide, PromptItem, FreeToolUtility, Tool, ProprietaryTool, PickCriteria, MatchedPickResult, UtilityCategory } from '../types/index.ts';
+import type { AiTool, AiFilterState, Guide, PromptItem, FreeToolUtility, Tool, ProprietaryTool, PickCriteria, MatchedPickResult } from '../types/index.ts';
 import { getUtilityCategory } from '../data/catalogTaxonomy.ts';
 
 export const AI_PAGE_SIZE = 12;
@@ -207,11 +207,6 @@ export interface CatalogStats {
   browserUtilities: number;
 }
 
-/**
- * Counts the real in-app catalog identities without inflating the number with
- * duplicate records. Alternative targets and browser utilities are reported
- * separately so the homepage never needs to invent a large vanity number.
- */
 export function getCatalogStats(): CatalogStats {
   const openSourceSlugs = new Set(toolsData.map((tool) => tool.slug));
   const aiSlugs = new Set(getAllAiTools().filter((tool) => !isCommunityTool(tool)).map((tool) => tool.slug));

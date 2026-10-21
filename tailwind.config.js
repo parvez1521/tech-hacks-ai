@@ -9,6 +9,9 @@ export default {
         foreground: 'rgb(var(--color-fg) / <alpha-value>)',
         card: 'rgb(var(--color-card) / <alpha-value>)',
         'card-foreground': 'rgb(var(--color-card-fg) / <alpha-value>)',
+        surface: 'rgb(var(--color-card) / <alpha-value>)',
+        'surface-elevated': 'rgb(var(--color-surface-elevated) / <alpha-value>)',
+        input: 'rgb(var(--color-input) / <alpha-value>)',
         muted: 'rgb(var(--color-muted) / <alpha-value>)',
         'muted-foreground': 'rgb(var(--color-muted-fg) / <alpha-value>)',
         accent: 'rgb(var(--color-accent) / <alpha-value>)',
@@ -23,29 +26,38 @@ export default {
           DEFAULT: 'rgb(var(--color-secondary) / <alpha-value>)',
           foreground: 'rgb(var(--color-secondary-fg) / <alpha-value>)',
         },
+        invary: {
+          blue: '#2563eb',
+          'blue-hover': '#1d4ed8',
+          'blue-dark': '#1e40af',
+          'blue-light': '#60a5fa',
+          'blue-glow': '#93c5fd',
+          ice: '#f5f8ff',
+          surface: '#ffffff',
+          panel: '#ffffff',
+          slate: '#0f172a',
+          muted: '#64748b',
+          border: '#dfe7f3',
+          'border-light': '#edf2f7',
+          'border-blue': 'rgba(37, 99, 235, 0.25)',
+          navy: '#f5f8ff',
+        },
+      },
+      boxShadow: {
+        'invary-sm': '0 1px 3px 0 rgba(15, 23, 42, 0.05), 0 1px 2px -1px rgba(15, 23, 42, 0.04)',
+        'invary-md': '0 4px 12px -2px rgba(15, 23, 42, 0.06), 0 2px 4px -2px rgba(15, 23, 42, 0.04)',
+        'invary-lg': '0 12px 24px -4px rgba(15, 23, 42, 0.08), 0 4px 6px -4px rgba(15, 23, 42, 0.04)',
+        'invary-blue': '0 0 25px -5px rgba(37, 99, 235, 0.2)',
+        'invary-card': '0 4px 20px -2px rgba(15, 23, 42, 0.04), 0 0 0 1px #dfe7f3',
       },
       borderRadius: {
         lg: '0.625rem',
         md: '0.5rem',
         sm: '0.375rem',
       },
-      boxShadow: {
-        xs: '0 1px 2px rgb(0 0 0 / 0.18)',
-      },
-      spacing: {
-        '0.2': '0.125rem',
-      },
-      width: {
-        '5.5': '1.375rem',
-      },
-      height: {
-        '5.5': '1.375rem',
-      },
-      scale: {
-        '98': '0.98',
-      },
       animation: {
         'fade-in': 'fadeIn 0.2s ease-out forwards',
+        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
       },
       keyframes: {
         fadeIn: {

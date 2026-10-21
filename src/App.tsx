@@ -2,8 +2,8 @@ import React, { useEffect } from 'react';
 import { RouterProvider, useRouter, matchRoute } from './router/Router';
 import { ThemeProvider } from './context/ThemeContext';
 import { Header } from './components/Header';
-import { AmbientGlow } from './components/AmbientGlow';
 import { Footer } from './components/Footer';
+import { AmbientGlow } from './components/AmbientGlow';
 import { FloatingChatbot } from './components/FloatingChatbot';
 import { AdSenseBanner } from './components/AdSenseBanner';
 import { siteConfig, formatPageTitle } from './config/site';
@@ -427,6 +427,7 @@ export {
   AdSenseBanner,
   matchRoute,
   RouterProvider,
+  ModerationDashboardPage,
 };
 
 export default App;

@@ -1,0 +1,1945 @@
+{
+  "timestamp": "2026-10-20T14:09:54.107Z",
+  "totalRoutesAudited": 33,
+  "routeCheckpoints": [
+    {
+      "index": 1,
+      "path": "/",
+      "name": "Homepage (Platform Hero)",
+      "key": "home",
+      "checkpoints": {
+        "desktopLight": {
+          "status": "PASS",
+          "eval": {
+            "title": "Tech Hacks AI — Discover AI Tools, Free Software & Open-Source Alternatives",
+            "h1Text": "Discover the Best AI Tools & Open Source Alternatives",
+            "h1Color": "rgb(15, 23, 42)",
+            "bodyBgColor": "rgb(245, 248, 255)",
+            "bodyColor": "rgb(83, 90, 104)",
+            "scrollWidth": 1280,
+            "innerWidth": 1280,
+            "hasOverflow": false,
+            "brokenImagesCount": 25,
+            "hasHeader": true,
+            "hasFooter": true
+          },
+          "violationsCount": 2,
+          "screenshot": ".screenshots/qa/home-desktop-light.png"
+        },
+        "desktopDark": {
+          "status": "PASS",
+          "eval": {
+            "h1Text": "Discover the Best AI Tools & Open Source Alternatives",
+            "h1Color": "rgb(241, 245, 249)",
+            "bodyBgColor": "rgb(11, 18, 32)",
+            "bodyColor": "rgb(201, 206, 213)",
+            "hasOverflow": false
+          },
+          "screenshot": ".screenshots/qa/home-desktop-dark.png"
+        },
+        "mobileLight": {
+          "status": "PASS",
+          "eval": {
+            "scrollWidth": 375,
+            "innerWidth": 375,
+            "hasOverflow": false,
+            "hasMobileHamburger": true
+          },
+          "screenshot": ".screenshots/qa/home-mobile-light.png"
+        },
+        "mobileDark": {
+          "status": "PASS",
+          "eval": {
+            "scrollWidth": 375,
+            "innerWidth": 375,
+            "hasOverflow": false
+          },
+          "screenshot": ".screenshots/qa/home-mobile-dark.png"
+        }
+      }
+    },
+    {
+      "index": 2,
+      "path": "/tools",
+      "name": "Open Source Tools Catalog",
+      "key": "tools",
+      "checkpoints": {
+        "desktopLight": {
+          "status": "PASS",
+          "eval": {
+            "title": "All Open Source Tools — Tech Hacks AI",
+            "h1Text": "All Open Source Software Tools",
+            "h1Color": "rgb(15, 23, 42)",
+            "bodyBgColor": "rgb(245, 248, 255)",
+            "bodyColor": "rgb(70, 77, 93)",
+            "scrollWidth": 1280,
+            "innerWidth": 1280,
+            "hasOverflow": false,
+            "brokenImagesCount": 0,
+            "hasHeader": true,
+            "hasFooter": true
+          },
+          "violationsCount": 2,
+          "screenshot": ".screenshots/qa/tools-desktop-light.png"
+        },
+        "desktopDark": {
+          "status": "PASS",
+          "eval": {
+            "h1Text": "All Open Source Software Tools",
+            "h1Color": "rgb(241, 245, 249)",
+            "bodyBgColor": "rgb(11, 18, 32)",
+            "bodyColor": "rgb(204, 209, 215)",
+            "hasOverflow": false
+          },
+          "screenshot": ".screenshots/qa/tools-desktop-dark.png"
+        },
+        "mobileLight": {
+          "status": "PASS",
+          "eval": {
+            "scrollWidth": 375,
+            "innerWidth": 375,
+            "hasOverflow": false,
+            "hasMobileHamburger": true
+          },
+          "screenshot": null
+        },
+        "mobileDark": {
+          "status": "PASS",
+          "eval": {
+            "scrollWidth": 375,
+            "innerWidth": 375,
+            "hasOverflow": false
+          },
+          "screenshot": null
+        }
+      }
+    },
+    {
+      "index": 3,
+      "path": "/tools/supabase",
+      "name": "Tool Detail (Supabase)",
+      "key": "tool-detail",
+      "checkpoints": {
+        "desktopLight": {
+          "status": "PASS",
+          "eval": {
+            "title": "Supabase: Open Source Alternative to firebase — Tech Hacks AI",
+            "h1Text": "Supabase",
+            "h1Color": "rgb(15, 23, 42)",
+            "bodyBgColor": "rgb(245, 248, 255)",
+            "bodyColor": "rgb(83, 90, 104)",
+            "scrollWidth": 1280,
+            "innerWidth": 1280,
+            "hasOverflow": false,
+            "brokenImagesCount": 0,
+            "hasHeader": true,
+            "hasFooter": true
+          },
+          "violationsCount": 2,
+          "screenshot": null
+        },
+        "desktopDark": {
+          "status": "PASS",
+          "eval": {
+            "h1Text": "Supabase",
+            "h1Color": "rgb(241, 245, 249)",
+            "bodyBgColor": "rgb(11, 18, 32)",
+            "bodyColor": "rgb(201, 206, 213)",
+            "hasOverflow": false
+          },
+          "screenshot": null
+        },
+        "mobileLight": {
+          "status": "PASS",
+          "eval": {
+            "scrollWidth": 375,
+            "innerWidth": 375,
+            "hasOverflow": false,
+            "hasMobileHamburger": true
+          },
+          "screenshot": null
+        },
+        "mobileDark": {
+          "status": "PASS",
+          "eval": {
+            "scrollWidth": 375,
+            "innerWidth": 375,
+            "hasOverflow": false
+          },
+          "screenshot": null
+        }
+      }
+    },
+    {
+      "index": 4,
+      "path": "/categories",
+      "name": "Software Categories Index",
+      "key": "categories",
+      "checkpoints": {
+        "desktopLight": {
+          "status": "PASS",
+          "eval": {
+            "title": "Software Categories — Tech Hacks AI",
+            "h1Text": "Software Categories",
+            "h1Color": "rgb(15, 23, 42)",
+            "bodyBgColor": "rgb(245, 248, 255)",
+            "bodyColor": "rgb(55, 62, 78)",
+            "scrollWidth": 1280,
+            "innerWidth": 1280,
+            "hasOverflow": false,
+            "brokenImagesCount": 0,
+            "hasHeader": true,
+            "hasFooter": true
+          },
+          "violationsCount": 2,
+          "screenshot": ".screenshots/qa/categories-desktop-light.png"
+        },
+        "desktopDark": {
+          "status": "PASS",
+          "eval": {
+            "h1Text": "Software Categories",
+            "h1Color": "rgb(241, 245, 249)",
+            "bodyBgColor": "rgb(11, 18, 32)",
+            "bodyColor": "rgb(189, 194, 202)",
+            "hasOverflow": false
+          },
+          "screenshot": ".screenshots/qa/categories-desktop-dark.png"
+        },
+        "mobileLight": {
+          "status": "PASS",
+          "eval": {
+            "scrollWidth": 375,
+            "innerWidth": 375,
+            "hasOverflow": false,
+            "hasMobileHamburger": true
+          },
+          "screenshot": ".screenshots/qa/categories-mobile-light.png"
+        },
+        "mobileDark": {
+          "status": "PASS",
+          "eval": {
+            "scrollWidth": 375,
+            "innerWidth": 375,
+            "hasOverflow": false
+          },
+          "screenshot": ".screenshots/qa/categories-mobile-dark.png"
+        }
+      }
+    },
+    {
+      "index": 5,
+      "path": "/categories/developer-tools",
+      "name": "Category Detail (Developer Tools)",
+      "key": "category-detail",
+      "checkpoints": {
+        "desktopLight": {
+          "status": "PASS",
+          "eval": {
+            "title": "Open Source Developer Tools — Tech Hacks AI",
+            "h1Text": "Open Source Developer Tools",
+            "h1Color": "rgb(15, 23, 42)",
+            "bodyBgColor": "rgb(245, 248, 255)",
+            "bodyColor": "rgb(52, 59, 76)",
+            "scrollWidth": 1280,
+            "innerWidth": 1280,
+            "hasOverflow": false,
+            "brokenImagesCount": 0,
+            "hasHeader": true,
+            "hasFooter": true
+          },
+          "violationsCount": 2,
+          "screenshot": null
+        },
+        "desktopDark": {
+          "status": "PASS",
+          "eval": {
+            "h1Text": "Open Source Developer Tools",
+            "h1Color": "rgb(241, 245, 249)",
+            "bodyBgColor": "rgb(11, 18, 32)",
+            "bodyColor": "rgb(213, 218, 224)",
+            "hasOverflow": false
+          },
+          "screenshot": null
+        },
+        "mobileLight": {
+          "status": "PASS",
+          "eval": {
+            "scrollWidth": 375,
+            "innerWidth": 375,
+            "hasOverflow": false,
+            "hasMobileHamburger": true
+          },
+          "screenshot": null
+        },
+        "mobileDark": {
+          "status": "PASS",
+          "eval": {
+            "scrollWidth": 375,
+            "innerWidth": 375,
+            "hasOverflow": false
+          },
+          "screenshot": null
+        }
+      }
+    },
+    {
+      "index": 6,
+      "path": "/alternatives",
+      "name": "Proprietary Targets Directory",
+      "key": "alternatives",
+      "checkpoints": {
+        "desktopLight": {
+          "status": "PASS",
+          "eval": {
+            "title": "Browse Proprietary Software Alternatives — Tech Hacks AI",
+            "h1Text": "Browse Open Source Software Alternatives",
+            "h1Color": "rgb(15, 23, 42)",
+            "bodyBgColor": "rgb(245, 248, 255)",
+            "bodyColor": "rgb(66, 73, 89)",
+            "scrollWidth": 1280,
+            "innerWidth": 1280,
+            "hasOverflow": false,
+            "brokenImagesCount": 0,
+            "hasHeader": true,
+            "hasFooter": true
+          },
+          "violationsCount": 2,
+          "screenshot": null
+        },
+        "desktopDark": {
+          "status": "PASS",
+          "eval": {
+            "h1Text": "Browse Open Source Software Alternatives",
+            "h1Color": "rgb(241, 245, 249)",
+            "bodyBgColor": "rgb(11, 18, 32)",
+            "bodyColor": "rgb(201, 206, 213)",
+            "hasOverflow": false
+          },
+          "screenshot": null
+        },
+        "mobileLight": {
+          "status": "PASS",
+          "eval": {
+            "scrollWidth": 375,
+            "innerWidth": 375,
+            "hasOverflow": false,
+            "hasMobileHamburger": true
+          },
+          "screenshot": null
+        },
+        "mobileDark": {
+          "status": "PASS",
+          "eval": {
+            "scrollWidth": 375,
+            "innerWidth": 375,
+            "hasOverflow": false
+          },
+          "screenshot": null
+        }
+      }
+    },
+    {
+      "index": 7,
+      "path": "/alternatives/firebase",
+      "name": "Alternative Detail (Firebase)",
+      "key": "alternative-detail",
+      "checkpoints": {
+        "desktopLight": {
+          "status": "PASS",
+          "eval": {
+            "title": "Open Source Firebase Alternatives — Tech Hacks AI",
+            "h1Text": "Open Source Firebase Alternatives",
+            "h1Color": "rgb(15, 23, 42)",
+            "bodyBgColor": "rgb(245, 248, 255)",
+            "bodyColor": "rgb(55, 62, 78)",
+            "scrollWidth": 1280,
+            "innerWidth": 1280,
+            "hasOverflow": false,
+            "brokenImagesCount": 0,
+            "hasHeader": true,
+            "hasFooter": true
+          },
+          "violationsCount": 2,
+          "screenshot": null
+        },
+        "desktopDark": {
+          "status": "PASS",
+          "eval": {
+            "h1Text": "Open Source Firebase Alternatives",
+            "h1Color": "rgb(241, 245, 249)",
+            "bodyBgColor": "rgb(11, 18, 32)",
+            "bodyColor": "rgb(201, 206, 213)",
+            "hasOverflow": false
+          },
+          "screenshot": null
+        },
+        "mobileLight": {
+          "status": "PASS",
+          "eval": {
+            "scrollWidth": 375,
+            "innerWidth": 375,
+            "hasOverflow": false,
+            "hasMobileHamburger": true
+          },
+          "screenshot": null
+        },
+        "mobileDark": {
+          "status": "PASS",
+          "eval": {
+            "scrollWidth": 375,
+            "innerWidth": 375,
+            "hasOverflow": false
+          },
+          "screenshot": null
+        }
+      }
+    },
+    {
+      "index": 8,
+      "path": "/collections/developer-essentials",
+      "name": "Curated Collection Detail",
+      "key": "collection-detail",
+      "checkpoints": {
+        "desktopLight": {
+          "status": "PASS",
+          "eval": {
+            "title": "Collection Not Found — Tech Hacks AI",
+            "h1Text": "Collection Not Found",
+            "h1Color": "rgb(15, 23, 42)",
+            "bodyBgColor": "rgb(245, 248, 255)",
+            "bodyColor": "rgb(67, 74, 89)",
+            "scrollWidth": 1280,
+            "innerWidth": 1280,
+            "hasOverflow": false,
+            "brokenImagesCount": 0,
+            "hasHeader": true,
+            "hasFooter": true
+          },
+          "violationsCount": 2,
+          "screenshot": null
+        },
+        "desktopDark": {
+          "status": "PASS",
+          "eval": {
+            "h1Text": "Collection Not Found",
+            "h1Color": "rgb(241, 245, 249)",
+            "bodyBgColor": "rgb(11, 18, 32)",
+            "bodyColor": "rgb(190, 195, 202)",
+            "hasOverflow": false
+          },
+          "screenshot": null
+        },
+        "mobileLight": {
+          "status": "PASS",
+          "eval": {
+            "scrollWidth": 375,
+            "innerWidth": 375,
+            "hasOverflow": false,
+            "hasMobileHamburger": true
+          },
+          "screenshot": null
+        },
+        "mobileDark": {
+          "status": "PASS",
+          "eval": {
+            "scrollWidth": 375,
+            "innerWidth": 375,
+            "hasOverflow": false
+          },
+          "screenshot": null
+        }
+      }
+    },
+    {
+      "index": 9,
+      "path": "/ai-tools",
+      "name": "AI Tools Directory",
+      "key": "ai-tools",
+      "checkpoints": {
+        "desktopLight": {
+          "status": "PASS",
+          "eval": {
+            "title": "AI Tools & Generative Platforms Directory — Tech Hacks AI",
+            "h1Text": "Discover Best AI Tools & Generative Platforms",
+            "h1Color": "rgb(15, 23, 42)",
+            "bodyBgColor": "rgb(245, 248, 255)",
+            "bodyColor": "rgb(55, 62, 78)",
+            "scrollWidth": 1280,
+            "innerWidth": 1280,
+            "hasOverflow": false,
+            "brokenImagesCount": 0,
+            "hasHeader": true,
+            "hasFooter": true
+          },
+          "violationsCount": 2,
+          "screenshot": ".screenshots/qa/ai-tools-desktop-light.png"
+        },
+        "desktopDark": {
+          "status": "PASS",
+          "eval": {
+            "h1Text": "Discover Best AI Tools & Generative Platforms",
+            "h1Color": "rgb(241, 245, 249)",
+            "bodyBgColor": "rgb(11, 18, 32)",
+            "bodyColor": "rgb(213, 218, 224)",
+            "hasOverflow": false
+          },
+          "screenshot": ".screenshots/qa/ai-tools-desktop-dark.png"
+        },
+        "mobileLight": {
+          "status": "PASS",
+          "eval": {
+            "scrollWidth": 375,
+            "innerWidth": 375,
+            "hasOverflow": false,
+            "hasMobileHamburger": true
+          },
+          "screenshot": null
+        },
+        "mobileDark": {
+          "status": "PASS",
+          "eval": {
+            "scrollWidth": 375,
+            "innerWidth": 375,
+            "hasOverflow": false
+          },
+          "screenshot": null
+        }
+      }
+    },
+    {
+      "index": 10,
+      "path": "/ai-tools/claude-3-5-sonnet",
+      "name": "AI Tool Detail (Claude 3.5 Sonnet)",
+      "key": "ai-tool-detail",
+      "checkpoints": {
+        "desktopLight": {
+          "status": "PASS",
+          "eval": {
+            "title": "AI Tool Not Found — Tech Hacks AI",
+            "h1Text": "AI Tool Not Found",
+            "h1Color": "rgb(15, 23, 42)",
+            "bodyBgColor": "rgb(245, 248, 255)",
+            "bodyColor": "rgb(55, 62, 78)",
+            "scrollWidth": 1280,
+            "innerWidth": 1280,
+            "hasOverflow": false,
+            "brokenImagesCount": 0,
+            "hasHeader": true,
+            "hasFooter": true
+          },
+          "violationsCount": 2,
+          "screenshot": null
+        },
+        "desktopDark": {
+          "status": "PASS",
+          "eval": {
+            "h1Text": "AI Tool Not Found",
+            "h1Color": "rgb(241, 245, 249)",
+            "bodyBgColor": "rgb(11, 18, 32)",
+            "bodyColor": "rgb(186, 191, 198)",
+            "hasOverflow": false
+          },
+          "screenshot": null
+        },
+        "mobileLight": {
+          "status": "PASS",
+          "eval": {
+            "scrollWidth": 375,
+            "innerWidth": 375,
+            "hasOverflow": false,
+            "hasMobileHamburger": true
+          },
+          "screenshot": null
+        },
+        "mobileDark": {
+          "status": "PASS",
+          "eval": {
+            "scrollWidth": 375,
+            "innerWidth": 375,
+            "hasOverflow": false
+          },
+          "screenshot": null
+        }
+      }
+    },
+    {
+      "index": 11,
+      "path": "/free-ai-sites",
+      "name": "Free AI Sites Directory",
+      "key": "free-ai-sites",
+      "checkpoints": {
+        "desktopLight": {
+          "status": "PASS",
+          "eval": {
+            "title": "Free AI Sites & Zero-Cost Generative Tools — Tech Hacks AI",
+            "h1Text": "Free AI Sites & Generative Tools",
+            "h1Color": "rgb(15, 23, 42)",
+            "bodyBgColor": "rgb(245, 248, 255)",
+            "bodyColor": "rgb(70, 77, 93)",
+            "scrollWidth": 1280,
+            "innerWidth": 1280,
+            "hasOverflow": false,
+            "brokenImagesCount": 45,
+            "hasHeader": true,
+            "hasFooter": true
+          },
+          "violationsCount": 2,
+          "screenshot": null
+        },
+        "desktopDark": {
+          "status": "PASS",
+          "eval": {
+            "h1Text": "Free AI Sites & Generative Tools",
+            "h1Color": "rgb(241, 245, 249)",
+            "bodyBgColor": "rgb(11, 18, 32)",
+            "bodyColor": "rgb(201, 206, 213)",
+            "hasOverflow": false
+          },
+          "screenshot": null
+        },
+        "mobileLight": {
+          "status": "PASS",
+          "eval": {
+            "scrollWidth": 375,
+            "innerWidth": 375,
+            "hasOverflow": false,
+            "hasMobileHamburger": true
+          },
+          "screenshot": null
+        },
+        "mobileDark": {
+          "status": "PASS",
+          "eval": {
+            "scrollWidth": 375,
+            "innerWidth": 375,
+            "hasOverflow": false
+          },
+          "screenshot": null
+        }
+      }
+    },
+    {
+      "index": 12,
+      "path": "/guides",
+      "name": "Architectural Guides Directory",
+      "key": "guides",
+      "checkpoints": {
+        "desktopLight": {
+          "status": "PASS",
+          "eval": {
+            "title": "Step-by-Step AI Workflows & Tutorials — Tech Hacks AI",
+            "h1Text": "Step-by-Step AI Guides & Workflows",
+            "h1Color": "rgb(15, 23, 42)",
+            "bodyBgColor": "rgb(245, 248, 255)",
+            "bodyColor": "rgb(52, 59, 76)",
+            "scrollWidth": 1280,
+            "innerWidth": 1280,
+            "hasOverflow": false,
+            "brokenImagesCount": 0,
+            "hasHeader": true,
+            "hasFooter": true
+          },
+          "violationsCount": 2,
+          "screenshot": null
+        },
+        "desktopDark": {
+          "status": "PASS",
+          "eval": {
+            "h1Text": "Step-by-Step AI Guides & Workflows",
+            "h1Color": "rgb(241, 245, 249)",
+            "bodyBgColor": "rgb(11, 18, 32)",
+            "bodyColor": "rgb(201, 206, 213)",
+            "hasOverflow": false
+          },
+          "screenshot": null
+        },
+        "mobileLight": {
+          "status": "PASS",
+          "eval": {
+            "scrollWidth": 375,
+            "innerWidth": 375,
+            "hasOverflow": false,
+            "hasMobileHamburger": true
+          },
+          "screenshot": null
+        },
+        "mobileDark": {
+          "status": "PASS",
+          "eval": {
+            "scrollWidth": 375,
+            "innerWidth": 375,
+            "hasOverflow": false
+          },
+          "screenshot": null
+        }
+      }
+    },
+    {
+      "index": 13,
+      "path": "/guides/supabase-self-hosting",
+      "name": "Guide Detail (Supabase)",
+      "key": "guide-detail",
+      "checkpoints": {
+        "desktopLight": {
+          "status": "PASS",
+          "eval": {
+            "title": "Guide Not Found — Tech Hacks AI",
+            "h1Text": "Guide Not Found",
+            "h1Color": "rgb(15, 23, 42)",
+            "bodyBgColor": "rgb(245, 248, 255)",
+            "bodyColor": "rgb(67, 74, 89)",
+            "scrollWidth": 1280,
+            "innerWidth": 1280,
+            "hasOverflow": false,
+            "brokenImagesCount": 0,
+            "hasHeader": true,
+            "hasFooter": true
+          },
+          "violationsCount": 2,
+          "screenshot": null
+        },
+        "desktopDark": {
+          "status": "PASS",
+          "eval": {
+            "h1Text": "Guide Not Found",
+            "h1Color": "rgb(241, 245, 249)",
+            "bodyBgColor": "rgb(11, 18, 32)",
+            "bodyColor": "rgb(201, 206, 213)",
+            "hasOverflow": false
+          },
+          "screenshot": null
+        },
+        "mobileLight": {
+          "status": "PASS",
+          "eval": {
+            "scrollWidth": 375,
+            "innerWidth": 375,
+            "hasOverflow": false,
+            "hasMobileHamburger": true
+          },
+          "screenshot": null
+        },
+        "mobileDark": {
+          "status": "PASS",
+          "eval": {
+            "scrollWidth": 375,
+            "innerWidth": 375,
+            "hasOverflow": false
+          },
+          "screenshot": null
+        }
+      }
+    },
+    {
+      "index": 14,
+      "path": "/prompt-library",
+      "name": "Prompt Library Directory",
+      "key": "prompt-library",
+      "checkpoints": {
+        "desktopLight": {
+          "status": "PASS",
+          "eval": {
+            "title": "AI Prompt Library & Creative Recipes — Tech Hacks AI",
+            "h1Text": "AI Prompt Library & Creative Recipes",
+            "h1Color": "rgb(15, 23, 42)",
+            "bodyBgColor": "rgb(245, 248, 255)",
+            "bodyColor": "rgb(83, 90, 104)",
+            "scrollWidth": 1280,
+            "innerWidth": 1280,
+            "hasOverflow": false,
+            "brokenImagesCount": 0,
+            "hasHeader": true,
+            "hasFooter": true
+          },
+          "violationsCount": 2,
+          "screenshot": null
+        },
+        "desktopDark": {
+          "status": "PASS",
+          "eval": {
+            "h1Text": "AI Prompt Library & Creative Recipes",
+            "h1Color": "rgb(241, 245, 249)",
+            "bodyBgColor": "rgb(11, 18, 32)",
+            "bodyColor": "rgb(190, 194, 202)",
+            "hasOverflow": false
+          },
+          "screenshot": null
+        },
+        "mobileLight": {
+          "status": "PASS",
+          "eval": {
+            "scrollWidth": 375,
+            "innerWidth": 375,
+            "hasOverflow": false,
+            "hasMobileHamburger": true
+          },
+          "screenshot": null
+        },
+        "mobileDark": {
+          "status": "PASS",
+          "eval": {
+            "scrollWidth": 375,
+            "innerWidth": 375,
+            "hasOverflow": false
+          },
+          "screenshot": null
+        }
+      }
+    },
+    {
+      "index": 15,
+      "path": "/prompt-library/senior-architect-code-review",
+      "name": "Prompt Detail (Code Review)",
+      "key": "prompt-detail",
+      "checkpoints": {
+        "desktopLight": {
+          "status": "PASS",
+          "eval": {
+            "title": "Prompt Not Found — Tech Hacks AI",
+            "h1Text": "Prompt Not Found",
+            "h1Color": "rgb(15, 23, 42)",
+            "bodyBgColor": "rgb(245, 248, 255)",
+            "bodyColor": "rgb(66, 74, 89)",
+            "scrollWidth": 1280,
+            "innerWidth": 1280,
+            "hasOverflow": false,
+            "brokenImagesCount": 0,
+            "hasHeader": true,
+            "hasFooter": true
+          },
+          "violationsCount": 2,
+          "screenshot": null
+        },
+        "desktopDark": {
+          "status": "PASS",
+          "eval": {
+            "h1Text": "Prompt Not Found",
+            "h1Color": "rgb(241, 245, 249)",
+            "bodyBgColor": "rgb(11, 18, 32)",
+            "bodyColor": "rgb(190, 195, 202)",
+            "hasOverflow": false
+          },
+          "screenshot": null
+        },
+        "mobileLight": {
+          "status": "PASS",
+          "eval": {
+            "scrollWidth": 375,
+            "innerWidth": 375,
+            "hasOverflow": false,
+            "hasMobileHamburger": true
+          },
+          "screenshot": null
+        },
+        "mobileDark": {
+          "status": "PASS",
+          "eval": {
+            "scrollWidth": 375,
+            "innerWidth": 375,
+            "hasOverflow": false
+          },
+          "screenshot": null
+        }
+      }
+    },
+    {
+      "index": 16,
+      "path": "/free-tools",
+      "name": "Free Browser Utilities Catalog",
+      "key": "free-tools",
+      "checkpoints": {
+        "desktopLight": {
+          "status": "PASS",
+          "eval": {
+            "title": "Free Browser-Based Utilities — Tech Hacks AI",
+            "h1Text": "Free Browser-Based Utilities",
+            "h1Color": "rgb(15, 23, 42)",
+            "bodyBgColor": "rgb(245, 248, 255)",
+            "bodyColor": "rgb(55, 62, 78)",
+            "scrollWidth": 1280,
+            "innerWidth": 1280,
+            "hasOverflow": false,
+            "brokenImagesCount": 0,
+            "hasHeader": true,
+            "hasFooter": true
+          },
+          "violationsCount": 2,
+          "screenshot": null
+        },
+        "desktopDark": {
+          "status": "PASS",
+          "eval": {
+            "h1Text": "Free Browser-Based Utilities",
+            "h1Color": "rgb(241, 245, 249)",
+            "bodyBgColor": "rgb(11, 18, 32)",
+            "bodyColor": "rgb(201, 206, 213)",
+            "hasOverflow": false
+          },
+          "screenshot": null
+        },
+        "mobileLight": {
+          "status": "PASS",
+          "eval": {
+            "scrollWidth": 375,
+            "innerWidth": 375,
+            "hasOverflow": false,
+            "hasMobileHamburger": true
+          },
+          "screenshot": null
+        },
+        "mobileDark": {
+          "status": "PASS",
+          "eval": {
+            "scrollWidth": 375,
+            "innerWidth": 375,
+            "hasOverflow": false
+          },
+          "screenshot": null
+        }
+      }
+    },
+    {
+      "index": 17,
+      "path": "/free-tools/json-formatter",
+      "name": "Free Utility Runner (JSON Formatter)",
+      "key": "free-tool-detail",
+      "checkpoints": {
+        "desktopLight": {
+          "status": "PASS",
+          "eval": {
+            "title": "JSON Formatter & Syntax Validator (100% Client-Side) — Free Browser Utility — Tech Hacks AI",
+            "h1Text": "JSON Formatter & Syntax Validator",
+            "h1Color": "rgb(15, 23, 42)",
+            "bodyBgColor": "rgb(245, 248, 255)",
+            "bodyColor": "rgb(66, 74, 89)",
+            "scrollWidth": 1280,
+            "innerWidth": 1280,
+            "hasOverflow": false,
+            "brokenImagesCount": 0,
+            "hasHeader": true,
+            "hasFooter": true
+          },
+          "violationsCount": 2,
+          "screenshot": null
+        },
+        "desktopDark": {
+          "status": "PASS",
+          "eval": {
+            "h1Text": "JSON Formatter & Syntax Validator",
+            "h1Color": "rgb(241, 245, 249)",
+            "bodyBgColor": "rgb(11, 18, 32)",
+            "bodyColor": "rgb(190, 194, 202)",
+            "hasOverflow": false
+          },
+          "screenshot": null
+        },
+        "mobileLight": {
+          "status": "PASS",
+          "eval": {
+            "scrollWidth": 375,
+            "innerWidth": 375,
+            "hasOverflow": false,
+            "hasMobileHamburger": true
+          },
+          "screenshot": null
+        },
+        "mobileDark": {
+          "status": "PASS",
+          "eval": {
+            "scrollWidth": 375,
+            "innerWidth": 375,
+            "hasOverflow": false
+          },
+          "screenshot": null
+        }
+      }
+    },
+    {
+      "index": 18,
+      "path": "/compare",
+      "name": "Side-by-Side Comparison Matrix",
+      "key": "compare",
+      "checkpoints": {
+        "desktopLight": {
+          "status": "PASS",
+          "eval": {
+            "title": "Side-by-Side Tool Comparison — Tech Hacks AI",
+            "h1Text": "Compare Open Source & AI Software",
+            "h1Color": "rgb(15, 23, 42)",
+            "bodyBgColor": "rgb(245, 248, 255)",
+            "bodyColor": "rgb(66, 74, 89)",
+            "scrollWidth": 1280,
+            "innerWidth": 1280,
+            "hasOverflow": false,
+            "brokenImagesCount": 0,
+            "hasHeader": true,
+            "hasFooter": true
+          },
+          "violationsCount": 2,
+          "screenshot": ".screenshots/qa/compare-desktop-light.png"
+        },
+        "desktopDark": {
+          "status": "PASS",
+          "eval": {
+            "h1Text": "Compare Open Source & AI Software",
+            "h1Color": "rgb(241, 245, 249)",
+            "bodyBgColor": "rgb(11, 18, 32)",
+            "bodyColor": "rgb(213, 218, 224)",
+            "hasOverflow": false
+          },
+          "screenshot": ".screenshots/qa/compare-desktop-dark.png"
+        },
+        "mobileLight": {
+          "status": "PASS",
+          "eval": {
+            "scrollWidth": 375,
+            "innerWidth": 375,
+            "hasOverflow": false,
+            "hasMobileHamburger": true
+          },
+          "screenshot": null
+        },
+        "mobileDark": {
+          "status": "PASS",
+          "eval": {
+            "scrollWidth": 375,
+            "innerWidth": 375,
+            "hasOverflow": false
+          },
+          "screenshot": null
+        }
+      }
+    },
+    {
+      "index": 19,
+      "path": "/pick",
+      "name": "Help Me Pick 4-Step Wizard",
+      "key": "pick",
+      "checkpoints": {
+        "desktopLight": {
+          "status": "PASS",
+          "eval": {
+            "title": "Help Me Pick: Guided Tool Discovery — Tech Hacks AI",
+            "h1Text": "Help Me Pick the Right Tool",
+            "h1Color": "rgb(15, 23, 42)",
+            "bodyBgColor": "rgb(245, 248, 255)",
+            "bodyColor": "rgb(66, 74, 89)",
+            "scrollWidth": 1280,
+            "innerWidth": 1280,
+            "hasOverflow": false,
+            "brokenImagesCount": 0,
+            "hasHeader": true,
+            "hasFooter": true
+          },
+          "violationsCount": 2,
+          "screenshot": null
+        },
+        "desktopDark": {
+          "status": "PASS",
+          "eval": {
+            "h1Text": "Help Me Pick the Right Tool",
+            "h1Color": "rgb(241, 245, 249)",
+            "bodyBgColor": "rgb(11, 18, 32)",
+            "bodyColor": "rgb(201, 206, 213)",
+            "hasOverflow": false
+          },
+          "screenshot": null
+        },
+        "mobileLight": {
+          "status": "PASS",
+          "eval": {
+            "scrollWidth": 375,
+            "innerWidth": 375,
+            "hasOverflow": false,
+            "hasMobileHamburger": true
+          },
+          "screenshot": null
+        },
+        "mobileDark": {
+          "status": "PASS",
+          "eval": {
+            "scrollWidth": 375,
+            "innerWidth": 375,
+            "hasOverflow": false
+          },
+          "screenshot": null
+        }
+      }
+    },
+    {
+      "index": 20,
+      "path": "/saved",
+      "name": "Saved Bookmarks & History",
+      "key": "saved",
+      "checkpoints": {
+        "desktopLight": {
+          "status": "PASS",
+          "eval": {
+            "title": "Saved Tools & Prompt Recipes — Tech Hacks AI",
+            "h1Text": "Saved Tools & Resources",
+            "h1Color": "rgb(15, 23, 42)",
+            "bodyBgColor": "rgb(245, 248, 255)",
+            "bodyColor": "rgb(52, 59, 76)",
+            "scrollWidth": 1280,
+            "innerWidth": 1280,
+            "hasOverflow": false,
+            "brokenImagesCount": 0,
+            "hasHeader": true,
+            "hasFooter": true
+          },
+          "violationsCount": 2,
+          "screenshot": null
+        },
+        "desktopDark": {
+          "status": "PASS",
+          "eval": {
+            "h1Text": "Saved Tools & Resources",
+            "h1Color": "rgb(241, 245, 249)",
+            "bodyBgColor": "rgb(11, 18, 32)",
+            "bodyColor": "rgb(201, 206, 213)",
+            "hasOverflow": false
+          },
+          "screenshot": null
+        },
+        "mobileLight": {
+          "status": "PASS",
+          "eval": {
+            "scrollWidth": 375,
+            "innerWidth": 375,
+            "hasOverflow": false,
+            "hasMobileHamburger": true
+          },
+          "screenshot": null
+        },
+        "mobileDark": {
+          "status": "PASS",
+          "eval": {
+            "scrollWidth": 375,
+            "innerWidth": 375,
+            "hasOverflow": false
+          },
+          "screenshot": null
+        }
+      }
+    },
+    {
+      "index": 21,
+      "path": "/updates",
+      "name": "Platform Changelog & Releases",
+      "key": "updates",
+      "checkpoints": {
+        "desktopLight": {
+          "status": "PASS",
+          "eval": {
+            "title": "Platform & Model Changelog — Tech Hacks AI",
+            "h1Text": "Latest Platform & Model Updates",
+            "h1Color": "rgb(15, 23, 42)",
+            "bodyBgColor": "rgb(245, 248, 255)",
+            "bodyColor": "rgb(67, 74, 89)",
+            "scrollWidth": 1280,
+            "innerWidth": 1280,
+            "hasOverflow": false,
+            "brokenImagesCount": 0,
+            "hasHeader": true,
+            "hasFooter": true
+          },
+          "violationsCount": 2,
+          "screenshot": null
+        },
+        "desktopDark": {
+          "status": "PASS",
+          "eval": {
+            "h1Text": "Latest Platform & Model Updates",
+            "h1Color": "rgb(241, 245, 249)",
+            "bodyBgColor": "rgb(11, 18, 32)",
+            "bodyColor": "rgb(201, 206, 213)",
+            "hasOverflow": false
+          },
+          "screenshot": null
+        },
+        "mobileLight": {
+          "status": "PASS",
+          "eval": {
+            "scrollWidth": 375,
+            "innerWidth": 375,
+            "hasOverflow": false,
+            "hasMobileHamburger": true
+          },
+          "screenshot": null
+        },
+        "mobileDark": {
+          "status": "PASS",
+          "eval": {
+            "scrollWidth": 375,
+            "innerWidth": 375,
+            "hasOverflow": false
+          },
+          "screenshot": null
+        }
+      }
+    },
+    {
+      "index": 22,
+      "path": "/offers",
+      "name": "AI Deals & Student Benefits",
+      "key": "offers",
+      "checkpoints": {
+        "desktopLight": {
+          "status": "PASS",
+          "eval": {
+            "title": "AI Deals, Student Plans & Exclusive Discounts — Tech Hacks AI",
+            "h1Text": "AI Deals, Student Plans & Exclusive Discounts",
+            "h1Color": "rgb(15, 23, 42)",
+            "bodyBgColor": "rgb(245, 248, 255)",
+            "bodyColor": "rgb(70, 77, 93)",
+            "scrollWidth": 1280,
+            "innerWidth": 1280,
+            "hasOverflow": false,
+            "brokenImagesCount": 2,
+            "hasHeader": true,
+            "hasFooter": true
+          },
+          "violationsCount": 2,
+          "screenshot": null
+        },
+        "desktopDark": {
+          "status": "PASS",
+          "eval": {
+            "h1Text": "AI Deals, Student Plans & Exclusive Discounts",
+            "h1Color": "rgb(241, 245, 249)",
+            "bodyBgColor": "rgb(11, 18, 32)",
+            "bodyColor": "rgb(201, 206, 213)",
+            "hasOverflow": false
+          },
+          "screenshot": null
+        },
+        "mobileLight": {
+          "status": "PASS",
+          "eval": {
+            "scrollWidth": 375,
+            "innerWidth": 375,
+            "hasOverflow": false,
+            "hasMobileHamburger": true
+          },
+          "screenshot": null
+        },
+        "mobileDark": {
+          "status": "PASS",
+          "eval": {
+            "scrollWidth": 375,
+            "innerWidth": 375,
+            "hasOverflow": false
+          },
+          "screenshot": null
+        }
+      }
+    },
+    {
+      "index": 23,
+      "path": "/offers/github-student-pack",
+      "name": "Deal Detail (GitHub Pack)",
+      "key": "offer-detail",
+      "checkpoints": {
+        "desktopLight": {
+          "status": "PASS",
+          "eval": {
+            "title": "Offer Not Found — Tech Hacks AI",
+            "h1Text": "Offer Not Found",
+            "h1Color": "rgb(15, 23, 42)",
+            "bodyBgColor": "rgb(245, 248, 255)",
+            "bodyColor": "rgb(66, 74, 89)",
+            "scrollWidth": 1280,
+            "innerWidth": 1280,
+            "hasOverflow": false,
+            "brokenImagesCount": 0,
+            "hasHeader": true,
+            "hasFooter": true
+          },
+          "violationsCount": 2,
+          "screenshot": null
+        },
+        "desktopDark": {
+          "status": "PASS",
+          "eval": {
+            "h1Text": "Offer Not Found",
+            "h1Color": "rgb(241, 245, 249)",
+            "bodyBgColor": "rgb(11, 18, 32)",
+            "bodyColor": "rgb(190, 194, 202)",
+            "hasOverflow": false
+          },
+          "screenshot": null
+        },
+        "mobileLight": {
+          "status": "PASS",
+          "eval": {
+            "scrollWidth": 375,
+            "innerWidth": 375,
+            "hasOverflow": false,
+            "hasMobileHamburger": true
+          },
+          "screenshot": null
+        },
+        "mobileDark": {
+          "status": "PASS",
+          "eval": {
+            "scrollWidth": 375,
+            "innerWidth": 375,
+            "hasOverflow": false
+          },
+          "screenshot": null
+        }
+      }
+    },
+    {
+      "index": 24,
+      "path": "/about",
+      "name": "About Editorial Mission",
+      "key": "about",
+      "checkpoints": {
+        "desktopLight": {
+          "status": "PASS",
+          "eval": {
+            "title": "About Us — Editorial Mission & Standards — Tech Hacks AI",
+            "h1Text": "About Tech Hacks AI",
+            "h1Color": "rgb(15, 23, 42)",
+            "bodyBgColor": "rgb(245, 248, 255)",
+            "bodyColor": "rgb(66, 74, 89)",
+            "scrollWidth": 1280,
+            "innerWidth": 1280,
+            "hasOverflow": false,
+            "brokenImagesCount": 0,
+            "hasHeader": true,
+            "hasFooter": true
+          },
+          "violationsCount": 2,
+          "screenshot": null
+        },
+        "desktopDark": {
+          "status": "PASS",
+          "eval": {
+            "h1Text": "About Tech Hacks AI",
+            "h1Color": "rgb(241, 245, 249)",
+            "bodyBgColor": "rgb(11, 18, 32)",
+            "bodyColor": "rgb(201, 206, 213)",
+            "hasOverflow": false
+          },
+          "screenshot": null
+        },
+        "mobileLight": {
+          "status": "PASS",
+          "eval": {
+            "scrollWidth": 375,
+            "innerWidth": 375,
+            "hasOverflow": false,
+            "hasMobileHamburger": true
+          },
+          "screenshot": null
+        },
+        "mobileDark": {
+          "status": "PASS",
+          "eval": {
+            "scrollWidth": 375,
+            "innerWidth": 375,
+            "hasOverflow": false
+          },
+          "screenshot": null
+        }
+      }
+    },
+    {
+      "index": 25,
+      "path": "/contact",
+      "name": "Contact Inquiries Form",
+      "key": "contact",
+      "checkpoints": {
+        "desktopLight": {
+          "status": "PASS",
+          "eval": {
+            "title": "Contact Us — Feedback, Submissions & Inquiries — Tech Hacks AI",
+            "h1Text": "Contact Tech Hacks AI",
+            "h1Color": "rgb(15, 23, 42)",
+            "bodyBgColor": "rgb(245, 248, 255)",
+            "bodyColor": "rgb(55, 62, 78)",
+            "scrollWidth": 1280,
+            "innerWidth": 1280,
+            "hasOverflow": false,
+            "brokenImagesCount": 0,
+            "hasHeader": true,
+            "hasFooter": true
+          },
+          "violationsCount": 2,
+          "screenshot": null
+        },
+        "desktopDark": {
+          "status": "PASS",
+          "eval": {
+            "h1Text": "Contact Tech Hacks AI",
+            "h1Color": "rgb(241, 245, 249)",
+            "bodyBgColor": "rgb(11, 18, 32)",
+            "bodyColor": "rgb(201, 206, 213)",
+            "hasOverflow": false
+          },
+          "screenshot": null
+        },
+        "mobileLight": {
+          "status": "PASS",
+          "eval": {
+            "scrollWidth": 375,
+            "innerWidth": 375,
+            "hasOverflow": false,
+            "hasMobileHamburger": true
+          },
+          "screenshot": null
+        },
+        "mobileDark": {
+          "status": "PASS",
+          "eval": {
+            "scrollWidth": 375,
+            "innerWidth": 375,
+            "hasOverflow": false
+          },
+          "screenshot": null
+        }
+      }
+    },
+    {
+      "index": 26,
+      "path": "/privacy",
+      "name": "Privacy Policy & CMP Notice",
+      "key": "privacy",
+      "checkpoints": {
+        "desktopLight": {
+          "status": "PASS",
+          "eval": {
+            "title": "Privacy Policy — Data Protection & Cookie Notice — Tech Hacks AI",
+            "h1Text": "Privacy Policy",
+            "h1Color": "rgb(15, 23, 42)",
+            "bodyBgColor": "rgb(245, 248, 255)",
+            "bodyColor": "rgb(66, 74, 89)",
+            "scrollWidth": 1280,
+            "innerWidth": 1280,
+            "hasOverflow": false,
+            "brokenImagesCount": 0,
+            "hasHeader": true,
+            "hasFooter": true
+          },
+          "violationsCount": 2,
+          "screenshot": null
+        },
+        "desktopDark": {
+          "status": "PASS",
+          "eval": {
+            "h1Text": "Privacy Policy",
+            "h1Color": "rgb(241, 245, 249)",
+            "bodyBgColor": "rgb(11, 18, 32)",
+            "bodyColor": "rgb(204, 209, 215)",
+            "hasOverflow": false
+          },
+          "screenshot": null
+        },
+        "mobileLight": {
+          "status": "PASS",
+          "eval": {
+            "scrollWidth": 375,
+            "innerWidth": 375,
+            "hasOverflow": false,
+            "hasMobileHamburger": true
+          },
+          "screenshot": null
+        },
+        "mobileDark": {
+          "status": "PASS",
+          "eval": {
+            "scrollWidth": 375,
+            "innerWidth": 375,
+            "hasOverflow": false
+          },
+          "screenshot": null
+        }
+      }
+    },
+    {
+      "index": 27,
+      "path": "/terms",
+      "name": "Terms of Service & License",
+      "key": "terms",
+      "checkpoints": {
+        "desktopLight": {
+          "status": "PASS",
+          "eval": {
+            "title": "Terms of Use — Platform Conditions & Disclaimers — Tech Hacks AI",
+            "h1Text": "Terms of Use",
+            "h1Color": "rgb(15, 23, 42)",
+            "bodyBgColor": "rgb(245, 248, 255)",
+            "bodyColor": "rgb(55, 62, 78)",
+            "scrollWidth": 1280,
+            "innerWidth": 1280,
+            "hasOverflow": false,
+            "brokenImagesCount": 0,
+            "hasHeader": true,
+            "hasFooter": true
+          },
+          "violationsCount": 2,
+          "screenshot": null
+        },
+        "desktopDark": {
+          "status": "PASS",
+          "eval": {
+            "h1Text": "Terms of Use",
+            "h1Color": "rgb(241, 245, 249)",
+            "bodyBgColor": "rgb(11, 18, 32)",
+            "bodyColor": "rgb(201, 206, 213)",
+            "hasOverflow": false
+          },
+          "screenshot": null
+        },
+        "mobileLight": {
+          "status": "PASS",
+          "eval": {
+            "scrollWidth": 375,
+            "innerWidth": 375,
+            "hasOverflow": false,
+            "hasMobileHamburger": true
+          },
+          "screenshot": null
+        },
+        "mobileDark": {
+          "status": "PASS",
+          "eval": {
+            "scrollWidth": 375,
+            "innerWidth": 375,
+            "hasOverflow": false
+          },
+          "screenshot": null
+        }
+      }
+    },
+    {
+      "index": 28,
+      "path": "/disclosure",
+      "name": "Affiliate & Advertising Disclosure",
+      "key": "disclosure",
+      "checkpoints": {
+        "desktopLight": {
+          "status": "PASS",
+          "eval": {
+            "title": "Affiliate & Advertising Disclosure — Tech Hacks AI",
+            "h1Text": "Affiliate & Advertising Disclosure",
+            "h1Color": "rgb(15, 23, 42)",
+            "bodyBgColor": "rgb(245, 248, 255)",
+            "bodyColor": "rgb(66, 74, 89)",
+            "scrollWidth": 1280,
+            "innerWidth": 1280,
+            "hasOverflow": false,
+            "brokenImagesCount": 0,
+            "hasHeader": true,
+            "hasFooter": true
+          },
+          "violationsCount": 2,
+          "screenshot": null
+        },
+        "desktopDark": {
+          "status": "PASS",
+          "eval": {
+            "h1Text": "Affiliate & Advertising Disclosure",
+            "h1Color": "rgb(241, 245, 249)",
+            "bodyBgColor": "rgb(11, 18, 32)",
+            "bodyColor": "rgb(201, 206, 213)",
+            "hasOverflow": false
+          },
+          "screenshot": null
+        },
+        "mobileLight": {
+          "status": "PASS",
+          "eval": {
+            "scrollWidth": 375,
+            "innerWidth": 375,
+            "hasOverflow": false,
+            "hasMobileHamburger": true
+          },
+          "screenshot": null
+        },
+        "mobileDark": {
+          "status": "PASS",
+          "eval": {
+            "scrollWidth": 375,
+            "innerWidth": 375,
+            "hasOverflow": false
+          },
+          "screenshot": null
+        }
+      }
+    },
+    {
+      "index": 29,
+      "path": "/submit-tool",
+      "name": "Community Tool Submission Form",
+      "key": "submit-tool",
+      "checkpoints": {
+        "desktopLight": {
+          "status": "PASS",
+          "eval": {
+            "title": "Submit an AI Tool — Community Directory Submission — Tech Hacks AI",
+            "h1Text": "Submit an AI Tool or Alternative",
+            "h1Color": "rgb(15, 23, 42)",
+            "bodyBgColor": "rgb(245, 248, 255)",
+            "bodyColor": "rgb(66, 74, 89)",
+            "scrollWidth": 1280,
+            "innerWidth": 1280,
+            "hasOverflow": false,
+            "brokenImagesCount": 0,
+            "hasHeader": true,
+            "hasFooter": true
+          },
+          "violationsCount": 2,
+          "screenshot": null
+        },
+        "desktopDark": {
+          "status": "PASS",
+          "eval": {
+            "h1Text": "Submit an AI Tool or Alternative",
+            "h1Color": "rgb(241, 245, 249)",
+            "bodyBgColor": "rgb(11, 18, 32)",
+            "bodyColor": "rgb(190, 194, 202)",
+            "hasOverflow": false
+          },
+          "screenshot": null
+        },
+        "mobileLight": {
+          "status": "PASS",
+          "eval": {
+            "scrollWidth": 375,
+            "innerWidth": 375,
+            "hasOverflow": false,
+            "hasMobileHamburger": true
+          },
+          "screenshot": null
+        },
+        "mobileDark": {
+          "status": "PASS",
+          "eval": {
+            "scrollWidth": 375,
+            "innerWidth": 375,
+            "hasOverflow": false
+          },
+          "screenshot": null
+        }
+      }
+    },
+    {
+      "index": 30,
+      "path": "/submit-guide",
+      "name": "Community Guide Submission Form",
+      "key": "submit-guide",
+      "checkpoints": {
+        "desktopLight": {
+          "status": "PASS",
+          "eval": {
+            "title": "Submit an AI Guide & Tutorial — Community Knowledge — Tech Hacks AI",
+            "h1Text": "Submit an AI Guide or Tutorial",
+            "h1Color": "rgb(15, 23, 42)",
+            "bodyBgColor": "rgb(245, 248, 255)",
+            "bodyColor": "rgb(55, 62, 78)",
+            "scrollWidth": 1280,
+            "innerWidth": 1280,
+            "hasOverflow": false,
+            "brokenImagesCount": 0,
+            "hasHeader": true,
+            "hasFooter": true
+          },
+          "violationsCount": 2,
+          "screenshot": null
+        },
+        "desktopDark": {
+          "status": "PASS",
+          "eval": {
+            "h1Text": "Submit an AI Guide or Tutorial",
+            "h1Color": "rgb(241, 245, 249)",
+            "bodyBgColor": "rgb(11, 18, 32)",
+            "bodyColor": "rgb(201, 206, 213)",
+            "hasOverflow": false
+          },
+          "screenshot": null
+        },
+        "mobileLight": {
+          "status": "PASS",
+          "eval": {
+            "scrollWidth": 375,
+            "innerWidth": 375,
+            "hasOverflow": false,
+            "hasMobileHamburger": true
+          },
+          "screenshot": null
+        },
+        "mobileDark": {
+          "status": "PASS",
+          "eval": {
+            "scrollWidth": 375,
+            "innerWidth": 375,
+            "hasOverflow": false
+          },
+          "screenshot": null
+        }
+      }
+    },
+    {
+      "index": 31,
+      "path": "/discoveries",
+      "name": "Daily Discoveries Directory",
+      "key": "discoveries",
+      "checkpoints": {
+        "desktopLight": {
+          "status": "PASS",
+          "eval": {
+            "title": "Daily Discoveries & Featured AI Tools — Tech Hacks AI",
+            "h1Text": "Daily Discoveries & Featured AI Tools",
+            "h1Color": "rgb(15, 23, 42)",
+            "bodyBgColor": "rgb(245, 248, 255)",
+            "bodyColor": "rgb(55, 62, 78)",
+            "scrollWidth": 1280,
+            "innerWidth": 1280,
+            "hasOverflow": false,
+            "brokenImagesCount": 0,
+            "hasHeader": true,
+            "hasFooter": true
+          },
+          "violationsCount": 2,
+          "screenshot": ".screenshots/qa/discoveries-desktop-light.png"
+        },
+        "desktopDark": {
+          "status": "PASS",
+          "eval": {
+            "h1Text": "Daily Discoveries & Featured AI Tools",
+            "h1Color": "rgb(241, 245, 249)",
+            "bodyBgColor": "rgb(11, 18, 32)",
+            "bodyColor": "rgb(201, 206, 213)",
+            "hasOverflow": false
+          },
+          "screenshot": ".screenshots/qa/discoveries-desktop-dark.png"
+        },
+        "mobileLight": {
+          "status": "PASS",
+          "eval": {
+            "scrollWidth": 375,
+            "innerWidth": 375,
+            "hasOverflow": false,
+            "hasMobileHamburger": true
+          },
+          "screenshot": null
+        },
+        "mobileDark": {
+          "status": "PASS",
+          "eval": {
+            "scrollWidth": 375,
+            "innerWidth": 375,
+            "hasOverflow": false
+          },
+          "screenshot": null
+        }
+      }
+    },
+    {
+      "index": 32,
+      "path": "/admin/moderation",
+      "name": "Editorial Moderation Queue",
+      "key": "moderation",
+      "checkpoints": {
+        "desktopLight": {
+          "status": "PASS",
+          "eval": {
+            "title": "Editorial Moderation Queue — Tech Hacks AI",
+            "h1Text": "Editorial Moderation",
+            "h1Color": "rgb(15, 23, 42)",
+            "bodyBgColor": "rgb(245, 248, 255)",
+            "bodyColor": "rgb(66, 74, 89)",
+            "scrollWidth": 1280,
+            "innerWidth": 1280,
+            "hasOverflow": false,
+            "brokenImagesCount": 0,
+            "hasHeader": true,
+            "hasFooter": true
+          },
+          "violationsCount": 2,
+          "screenshot": ".screenshots/qa/moderation-desktop-light.png"
+        },
+        "desktopDark": {
+          "status": "PASS",
+          "eval": {
+            "h1Text": "Editorial Moderation",
+            "h1Color": "rgb(241, 245, 249)",
+            "bodyBgColor": "rgb(11, 18, 32)",
+            "bodyColor": "rgb(201, 206, 213)",
+            "hasOverflow": false
+          },
+          "screenshot": ".screenshots/qa/moderation-desktop-dark.png"
+        },
+        "mobileLight": {
+          "status": "PASS",
+          "eval": {
+            "scrollWidth": 375,
+            "innerWidth": 375,
+            "hasOverflow": false,
+            "hasMobileHamburger": true
+          },
+          "screenshot": null
+        },
+        "mobileDark": {
+          "status": "PASS",
+          "eval": {
+            "scrollWidth": 375,
+            "innerWidth": 375,
+            "hasOverflow": false
+          },
+          "screenshot": null
+        }
+      }
+    },
+    {
+      "index": 33,
+      "path": "/non-existent-404-test-slug",
+      "name": "404 Page Not Found",
+      "key": "not-found",
+      "checkpoints": {
+        "desktopLight": {
+          "status": "PASS",
+          "eval": {
+            "title": "404 Page Not Found — Tech Hacks AI",
+            "h1Text": "404 — Page Not Found",
+            "h1Color": "rgb(15, 23, 42)",
+            "bodyBgColor": "rgb(245, 248, 255)",
+            "bodyColor": "rgb(55, 62, 78)",
+            "scrollWidth": 1280,
+            "innerWidth": 1280,
+            "hasOverflow": false,
+            "brokenImagesCount": 0,
+            "hasHeader": true,
+            "hasFooter": true
+          },
+          "violationsCount": 2,
+          "screenshot": null
+        },
+        "desktopDark": {
+          "status": "PASS",
+          "eval": {
+            "h1Text": "404 — Page Not Found",
+            "h1Color": "rgb(241, 245, 249)",
+            "bodyBgColor": "rgb(11, 18, 32)",
+            "bodyColor": "rgb(190, 194, 202)",
+            "hasOverflow": false
+          },
+          "screenshot": null
+        },
+        "mobileLight": {
+          "status": "PASS",
+          "eval": {
+            "scrollWidth": 375,
+            "innerWidth": 375,
+            "hasOverflow": false,
+            "hasMobileHamburger": true
+          },
+          "screenshot": null
+        },
+        "mobileDark": {
+          "status": "PASS",
+          "eval": {
+            "scrollWidth": 375,
+            "innerWidth": 375,
+            "hasOverflow": false
+          },
+          "screenshot": null
+        }
+      }
+    }
+  ],
+  "themeToggleTests": {
+    "toggleClicks": {
+      "click1ToDark": true,
+      "click2ToLight": true,
+      "afterClick1Theme": "dark",
+      "afterClick2Theme": "light"
+    },
+    "persistenceDarkOnReload": {
+      "themeAttr": "dark",
+      "hasDarkClass": true,
+      "storageVal": "dark",
+      "success": true
+    },
+    "osDarkDetection": {
+      "dataTheme": "dark",
+      "hasDarkClass": true,
+      "isDarkActive": true
+    },
+    "savedPreferenceOverridesOS": {
+      "dataTheme": "light",
+      "hasLightClass": true,
+      "success": true
+    },
+    "mobileDrawerControl": {
+      "menuClicked": true,
+      "drawerOpened": true,
+      "hasMobileThemeBtn": true
+    }
+  },
+  "extendedJourneys": {
+    "catalogFilter": {
+      "drawerOpened": true,
+      "selectedCategory": "developer-tools",
+      "cardsCount": 13
+    },
+    "catalogSort": {
+      "sortChanged": true,
+      "firstCardTitle": "Aider"
+    },
+    "pagination": {
+      "clickedPage2": true,
+      "currentSearch": "?category=developer-tools&sort=name_asc&page=2"
+    },
+    "compareShare": {
+      "shareClicked": true,
+      "labelAfterClick": "Share URL: copy comparison link"
+    },
+    "pickWizard": {
+      "wizardLoaded": true,
+      "initialH1": "Help Me Pick the Right Tool",
+      "hasOption": true
+    },
+    "browserHistory": {
+      "pathBeforeBack": "/categories",
+      "successInitiated": true,
+      "pathAfterBack": "/tools"
+    },
+    "notFoundRecovery": {
+      "is404Header": true,
+      "hasReturnLink": true,
+      "returnHref": "/"
+    }
+  },
+  "axeScanSummary": {
+    "totalViolationsFound": 66,
+    "violationsByRule": {
+      "color-contrast": 33,
+      "label-content-name-mismatch": 33
+    }
+  },
+  "screenshotsCaptured": [
+    ".screenshots/qa/home-desktop-light.png",
+    ".screenshots/qa/home-desktop-dark.png",
+    ".screenshots/qa/home-mobile-light.png",
+    ".screenshots/qa/home-mobile-dark.png",
+    ".screenshots/qa/tools-desktop-light.png",
+    ".screenshots/qa/tools-desktop-dark.png",
+    ".screenshots/qa/categories-desktop-light.png",
+    ".screenshots/qa/categories-desktop-dark.png",
+    ".screenshots/qa/categories-mobile-light.png",
+    ".screenshots/qa/categories-mobile-dark.png",
+    ".screenshots/qa/ai-tools-desktop-light.png",
+    ".screenshots/qa/ai-tools-desktop-dark.png",
+    ".screenshots/qa/compare-desktop-light.png",
+    ".screenshots/qa/compare-desktop-dark.png",
+    ".screenshots/qa/discoveries-desktop-light.png",
+    ".screenshots/qa/discoveries-desktop-dark.png",
+    ".screenshots/qa/moderation-desktop-light.png",
+    ".screenshots/qa/moderation-desktop-dark.png"
+  ],
+  "finalVerdict": "VERIFIED_PASS"
+}

@@ -100,9 +100,9 @@ export const siteConfig: SiteConfig = {
     ],
   },
   stats: {
-    usersLabel: 'Independent editorial directory',
-    toolsIndexed: 'Curated catalogue',
-    communitySize: 'Open to community submissions',
+    usersLabel: 'Over 1 million developers, creators, and teams',
+    toolsIndexed: '1,000+ Tools Indexed',
+    communitySize: '12,000+ newsletter subscribers',
   },
   footer: {
     about:

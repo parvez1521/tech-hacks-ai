@@ -47,34 +47,34 @@ export const AlternativesPage: React.FC = () => {
     <div className="max-w-6xl mx-auto px-4 sm:px-6 py-8">
       {/* Header */}
       <div className="mb-8">
-        <div className="inline-flex items-center gap-2 text-primary text-xs font-semibold uppercase tracking-wider mb-2">
-          <Replace className="w-4 h-4" />
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#EAF2FF] border border-[#BFDBFE] text-[#2563EB] text-xs font-semibold uppercase tracking-wider mb-3">
+          <Replace className="w-3.5 h-3.5 text-[#2563EB]" />
           <span>Proprietary Replacements</span>
         </div>
-        <h1 className="text-2xl sm:text-4xl font-extrabold text-foreground tracking-tight mb-2">
+        <h1 className="text-2xl sm:text-4xl font-extrabold text-[#0F172A] tracking-tight mb-2">
           Browse Open Source Software Alternatives
         </h1>
-        <p className="text-sm sm:text-base text-secondary-foreground max-w-2xl mb-6">
+        <p className="text-sm sm:text-base text-[#64748B] max-w-2xl mb-6">
           Find self-hostable and community-maintained open-source replacements for everyday proprietary SaaS tools like Figma, Notion, Airtable, and Firebase.
         </p>
 
         {/* Search & Filter Controls Bar */}
-        <div className="flex flex-col sm:flex-row gap-3 items-stretch sm:items-center justify-between mb-6">
+        <div className="p-3.5 sm:p-4 rounded-xl bg-white border border-[#DFE7F3] shadow-sm flex flex-col sm:flex-row gap-3 items-stretch sm:items-center justify-between mb-6">
           {/* Quick Search */}
           <div className="relative flex-1 max-w-md">
-            <Search className="w-4 h-4 text-muted-foreground absolute left-3 top-1/2 -translate-y-1/2" />
+            <Search className="w-4 h-4 text-[#64748B] absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
             <input
               type="text"
               value={searchQuery}
               onChange={(e) => handleSearchChange(e.target.value)}
               placeholder="Search proprietary software (e.g. Notion, Figma, Airtable)..."
-              className="w-full pl-9 pr-9 py-2 rounded-lg bg-card border border-border text-foreground placeholder:text-muted-foreground text-sm focus:outline-none focus:ring-1 focus:ring-primary"
+              className="w-full pl-9 pr-9 py-2 rounded-lg bg-white border border-[#DFE7F3] text-[#0F172A] placeholder:text-[#64748B] text-sm focus:outline-none focus:ring-2 focus:ring-[#2563EB]/20 focus:border-[#2563EB]"
             />
             {searchQuery && (
               <button
                 type="button"
                 onClick={() => handleSearchChange('')}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-[#64748B] hover:text-[#0F172A]"
                 aria-label="Clear search"
               >
                 <X className="w-4 h-4" />
@@ -82,8 +82,8 @@ export const AlternativesPage: React.FC = () => {
             )}
           </div>
 
-          <span className="text-xs text-muted-foreground self-center">
-            Showing <strong className="text-foreground">{filteredAlternatives.length}</strong> proprietary {filteredAlternatives.length === 1 ? 'target' : 'targets'}
+          <span className="text-xs text-[#64748B] self-center">
+            Showing <strong className="text-[#0F172A] font-mono">{filteredAlternatives.length}</strong> proprietary {filteredAlternatives.length === 1 ? 'target' : 'targets'}
           </span>
         </div>
 
@@ -92,10 +92,10 @@ export const AlternativesPage: React.FC = () => {
           <button
             type="button"
             onClick={() => handleCategorySelect(null)}
-            className={`px-3 py-1.5 rounded-full text-xs font-medium shrink-0 transition-colors ${
+            className={`px-3.5 py-1.5 rounded-full text-xs font-medium shrink-0 transition-all cursor-pointer ${
               !selectedCategory
-                ? 'bg-primary text-primary-foreground'
-                : 'bg-muted/80 text-secondary-foreground hover:bg-muted border border-border/60'
+                ? 'bg-[#2563EB] text-white shadow-sm'
+                : 'bg-white text-[#64748B] hover:bg-[#EAF2FF] hover:text-[#2563EB] border border-[#DFE7F3]'
             }`}
           >
             All Categories ({proprietaryTools.length})
@@ -108,10 +108,10 @@ export const AlternativesPage: React.FC = () => {
                 key={cat.slug}
                 type="button"
                 onClick={() => handleCategorySelect(isSelected ? null : cat.slug)}
-                className={`px-3 py-1.5 rounded-full text-xs font-medium shrink-0 transition-colors ${
+                className={`px-3.5 py-1.5 rounded-full text-xs font-medium shrink-0 transition-all cursor-pointer ${
                   isSelected
-                    ? 'bg-primary text-primary-foreground'
-                    : 'bg-muted/80 text-secondary-foreground hover:bg-muted border border-border/60'
+                    ? 'bg-[#2563EB] text-white shadow-sm'
+                    : 'bg-white text-[#64748B] hover:bg-[#EAF2FF] hover:text-[#2563EB] border border-[#DFE7F3]'
                 }`}
               >
                 {cat.name} ({count})

@@ -571,7 +571,7 @@ export function generateGroundedResponse(userQuery: string): ChatMessage {
       `Aapko kis category me tool chahiye? Click a suggestion below or type your question!`
     : `**Tech Hacks AI Discovery Assistant:**\n\n` +
       `I couldn't find a direct match for "${userQuery}", but here is how I can help:\n\n` +
-      `• Search our verified AI catalogue across video, image, code, and chat.\n` +
+      `• Search our directory of **40+ verified AI platforms** across video, image, code, and chat.\n` +
       `• Explore **100% Free & Open-Source** software replacements for popular proprietary services.\n` +
       `• Guide you through our interactive [Help Me Pick](/pick) recommendation wizard.\n\n` +
       `Try asking: *"Best free AI video generators"*, *"Claude 3.5 Sonnet alternatives"*, or *"Coding ke liye best free tool"*.`;

@@ -318,6 +318,7 @@ const ImageResizerTool: React.FC = () => {
             <div>
               <label className="block text-muted-foreground mb-1">Target Format</label>
               <select
+                aria-label="Target format"
                 value={format}
                 onChange={(e) => setFormat(e.target.value as any)}
                 className="w-full px-3 py-1.5 rounded-lg bg-muted border border-border text-foreground"

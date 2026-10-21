@@ -1,0 +1,2887 @@
+{
+  "totalRoutes": 33,
+  "consoleErrors": [],
+  "networkErrors": [],
+  "horizontalOverflows": [],
+  "contrastIssues": [],
+  "axeIssues": [
+    {
+      "route": "/tools",
+      "theme": "light",
+      "violations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+          "nodesCount": 79,
+          "samples": [
+            {
+              "html": "<span>Tech Hacks</span>",
+              "target": [
+                ".dark\\:text-\\[\\#F1F5F9\\] > span:nth-child(1)"
+              ]
+            },
+            {
+              "html": "<span>Discover</span>",
+              "target": [
+                ".relative:nth-child(1) > .dark\\:text-\\[\\#94A3B8\\].text-\\[\\#475569\\].hover\\:bg-\\[\\#F1F5F9\\] > span"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "label-content-name-mismatch",
+          "impact": "serious",
+          "description": "Ensure that elements labelled through their content must have their visible text as part of their accessible name",
+          "nodesCount": 2,
+          "samples": [
+            {
+              "html": "<a href=\"/\" class=\"flex items-center shrink-0\" aria-label=\"Tech Hacks AI Home\">",
+              "target": [
+                "a[href=\"/\"]"
+              ]
+            },
+            {
+              "html": "<button type=\"button\" aria-label=\"Open Tech Hacks AI A...\" class=\"flex items-center ga...\">",
+              "target": [
+                ".pl-2\\.5"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "route": "/tools",
+      "theme": "dark",
+      "violations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+          "nodesCount": 27,
+          "samples": [
+            {
+              "html": "<span>Tech Hacks</span>",
+              "target": [
+                ".dark\\:text-\\[\\#F1F5F9\\] > span:nth-child(1)"
+              ]
+            },
+            {
+              "html": "<span>Discover</span>",
+              "target": [
+                ".relative:nth-child(1) > .dark\\:text-\\[\\#94A3B8\\].text-\\[\\#475569\\].hover\\:bg-\\[\\#F1F5F9\\] > span"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "label-content-name-mismatch",
+          "impact": "serious",
+          "description": "Ensure that elements labelled through their content must have their visible text as part of their accessible name",
+          "nodesCount": 2,
+          "samples": [
+            {
+              "html": "<a href=\"/\" class=\"flex items-center shrink-0\" aria-label=\"Tech Hacks AI Home\">",
+              "target": [
+                "a[href=\"/\"]"
+              ]
+            },
+            {
+              "html": "<button type=\"button\" aria-label=\"Open Tech Hacks AI A...\" class=\"flex items-center ga...\">",
+              "target": [
+                ".pl-2\\.5"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "route": "/categories",
+      "theme": "light",
+      "violations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+          "nodesCount": 46,
+          "samples": [
+            {
+              "html": "<span>Tech Hacks</span>",
+              "target": [
+                ".font-extrabold.dark\\:text-\\[\\#F1F5F9\\].text-\\[\\#0F172A\\] > span:nth-child(1)"
+              ]
+            },
+            {
+              "html": "<span>Discover</span>",
+              "target": [
+                ".relative:nth-child(1) > .inline-flex.text-\\[\\#475569\\].dark\\:text-\\[\\#94A3B8\\] > span"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "label-content-name-mismatch",
+          "impact": "serious",
+          "description": "Ensure that elements labelled through their content must have their visible text as part of their accessible name",
+          "nodesCount": 2,
+          "samples": [
+            {
+              "html": "<a href=\"/\" class=\"flex items-center shrink-0\" aria-label=\"Tech Hacks AI Home\">",
+              "target": [
+                "a[href=\"/\"]"
+              ]
+            },
+            {
+              "html": "<button type=\"button\" aria-label=\"Open Tech Hacks AI A...\" class=\"flex items-center ga...\">",
+              "target": [
+                ".pl-2\\.5"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "route": "/categories",
+      "theme": "dark",
+      "violations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+          "nodesCount": 27,
+          "samples": [
+            {
+              "html": "<span>Tech Hacks</span>",
+              "target": [
+                ".font-extrabold.dark\\:text-\\[\\#F1F5F9\\].text-\\[\\#0F172A\\] > span:nth-child(1)"
+              ]
+            },
+            {
+              "html": "<span>Discover</span>",
+              "target": [
+                ".relative:nth-child(1) > .inline-flex.text-\\[\\#475569\\].dark\\:text-\\[\\#94A3B8\\] > span"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "label-content-name-mismatch",
+          "impact": "serious",
+          "description": "Ensure that elements labelled through their content must have their visible text as part of their accessible name",
+          "nodesCount": 2,
+          "samples": [
+            {
+              "html": "<a href=\"/\" class=\"flex items-center shrink-0\" aria-label=\"Tech Hacks AI Home\">",
+              "target": [
+                "a[href=\"/\"]"
+              ]
+            },
+            {
+              "html": "<button type=\"button\" aria-label=\"Open Tech Hacks AI A...\" class=\"flex items-center ga...\">",
+              "target": [
+                ".pl-2\\.5"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "route": "/categories/developer-tools",
+      "theme": "light",
+      "violations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+          "nodesCount": 89,
+          "samples": [
+            {
+              "html": "<span>Tech Hacks</span>",
+              "target": [
+                ".dark\\:text-\\[\\#F1F5F9\\] > span:nth-child(1)"
+              ]
+            },
+            {
+              "html": "<span>Discover</span>",
+              "target": [
+                ".relative:nth-child(1) > .text-\\[\\#475569\\].dark\\:text-\\[\\#94A3B8\\].hover\\:bg-\\[\\#F1F5F9\\] > span"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "label-content-name-mismatch",
+          "impact": "serious",
+          "description": "Ensure that elements labelled through their content must have their visible text as part of their accessible name",
+          "nodesCount": 3,
+          "samples": [
+            {
+              "html": "<a href=\"/\" class=\"flex items-center shrink-0\" aria-label=\"Tech Hacks AI Home\">",
+              "target": [
+                "a[aria-label=\"Tech Hacks AI Home\"]"
+              ]
+            },
+            {
+              "html": "<button type=\"button\" aria-expanded=\"false\" aria-label=\"Filters (1 active)\" class=\"inline-flex items-center gap-2 px-3.5 py-2.5 rounded-xl text-sm font-medium border transition-all duration-150 cursor-pointer active:scale-98 shadow-xs bg-blue-50 border-blue-500 text-blue-700 shadow-xs\">",
+              "target": [
+                ".active\\:scale-98"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "route": "/categories/developer-tools",
+      "theme": "dark",
+      "violations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+          "nodesCount": 43,
+          "samples": [
+            {
+              "html": "<span>Tech Hacks</span>",
+              "target": [
+                ".dark\\:text-\\[\\#F1F5F9\\] > span:nth-child(1)"
+              ]
+            },
+            {
+              "html": "<span>Discover</span>",
+              "target": [
+                ".relative:nth-child(1) > .text-\\[\\#475569\\].dark\\:text-\\[\\#94A3B8\\].hover\\:bg-\\[\\#F1F5F9\\] > span"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "label-content-name-mismatch",
+          "impact": "serious",
+          "description": "Ensure that elements labelled through their content must have their visible text as part of their accessible name",
+          "nodesCount": 3,
+          "samples": [
+            {
+              "html": "<a href=\"/\" class=\"flex items-center shrink-0\" aria-label=\"Tech Hacks AI Home\">",
+              "target": [
+                "a[aria-label=\"Tech Hacks AI Home\"]"
+              ]
+            },
+            {
+              "html": "<button type=\"button\" aria-expanded=\"false\" aria-label=\"Filters (1 active)\" class=\"inline-flex items-center gap-2 px-3.5 py-2.5 rounded-xl text-sm font-medium border transition-all duration-150 cursor-pointer active:scale-98 shadow-xs bg-blue-50 border-blue-500 text-blue-700 shadow-xs\">",
+              "target": [
+                ".active\\:scale-98"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "route": "/alternatives",
+      "theme": "light",
+      "violations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+          "nodesCount": 99,
+          "samples": [
+            {
+              "html": "<span>Tech Hacks</span>",
+              "target": [
+                ".dark\\:text-\\[\\#F1F5F9\\] > span:nth-child(1)"
+              ]
+            },
+            {
+              "html": "<span>Discover</span>",
+              "target": [
+                ".relative:nth-child(1) > .text-\\[\\#475569\\].dark\\:text-\\[\\#94A3B8\\].px-3 > span"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "label-content-name-mismatch",
+          "impact": "serious",
+          "description": "Ensure that elements labelled through their content must have their visible text as part of their accessible name",
+          "nodesCount": 2,
+          "samples": [
+            {
+              "html": "<a href=\"/\" class=\"flex items-center shrink-0\" aria-label=\"Tech Hacks AI Home\">",
+              "target": [
+                "a[href=\"/\"]"
+              ]
+            },
+            {
+              "html": "<button type=\"button\" aria-label=\"Open Tech Hacks AI A...\" class=\"flex items-center ga...\">",
+              "target": [
+                ".pl-2\\.5"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "route": "/alternatives",
+      "theme": "dark",
+      "violations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+          "nodesCount": 43,
+          "samples": [
+            {
+              "html": "<span>Tech Hacks</span>",
+              "target": [
+                ".dark\\:text-\\[\\#F1F5F9\\] > span:nth-child(1)"
+              ]
+            },
+            {
+              "html": "<span>Discover</span>",
+              "target": [
+                ".relative:nth-child(1) > .text-\\[\\#475569\\].dark\\:text-\\[\\#94A3B8\\].px-3 > span"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "label-content-name-mismatch",
+          "impact": "serious",
+          "description": "Ensure that elements labelled through their content must have their visible text as part of their accessible name",
+          "nodesCount": 2,
+          "samples": [
+            {
+              "html": "<a href=\"/\" class=\"flex items-center shrink-0\" aria-label=\"Tech Hacks AI Home\">",
+              "target": [
+                "a[href=\"/\"]"
+              ]
+            },
+            {
+              "html": "<button type=\"button\" aria-label=\"Open Tech Hacks AI A...\" class=\"flex items-center ga...\">",
+              "target": [
+                ".pl-2\\.5"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "route": "/alternatives/firebase",
+      "theme": "light",
+      "violations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+          "nodesCount": 57,
+          "samples": [
+            {
+              "html": "<span>Tech Hacks</span>",
+              "target": [
+                ".dark\\:text-\\[\\#F1F5F9\\] > span:nth-child(1)"
+              ]
+            },
+            {
+              "html": "<span>Discover</span>",
+              "target": [
+                ".relative:nth-child(1) > .text-\\[\\#475569\\].dark\\:text-\\[\\#94A3B8\\].px-3 > span"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "label-content-name-mismatch",
+          "impact": "serious",
+          "description": "Ensure that elements labelled through their content must have their visible text as part of their accessible name",
+          "nodesCount": 2,
+          "samples": [
+            {
+              "html": "<a href=\"/\" class=\"flex items-center shrink-0\" aria-label=\"Tech Hacks AI Home\">",
+              "target": [
+                "a[aria-label=\"Tech Hacks AI Home\"]"
+              ]
+            },
+            {
+              "html": "<button type=\"button\" aria-label=\"Open Tech Hacks AI A...\" class=\"flex items-center ga...\">",
+              "target": [
+                ".pl-2\\.5"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "route": "/alternatives/firebase",
+      "theme": "dark",
+      "violations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+          "nodesCount": 33,
+          "samples": [
+            {
+              "html": "<span>Tech Hacks</span>",
+              "target": [
+                ".dark\\:text-\\[\\#F1F5F9\\] > span:nth-child(1)"
+              ]
+            },
+            {
+              "html": "<span>Discover</span>",
+              "target": [
+                ".relative:nth-child(1) > .text-\\[\\#475569\\].dark\\:text-\\[\\#94A3B8\\].px-3 > span"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "label-content-name-mismatch",
+          "impact": "serious",
+          "description": "Ensure that elements labelled through their content must have their visible text as part of their accessible name",
+          "nodesCount": 2,
+          "samples": [
+            {
+              "html": "<a href=\"/\" class=\"flex items-center shrink-0\" aria-label=\"Tech Hacks AI Home\">",
+              "target": [
+                "a[aria-label=\"Tech Hacks AI Home\"]"
+              ]
+            },
+            {
+              "html": "<button type=\"button\" aria-label=\"Open Tech Hacks AI A...\" class=\"flex items-center ga...\">",
+              "target": [
+                ".pl-2\\.5"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "route": "/collections/developer-essentials",
+      "theme": "light",
+      "violations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+          "nodesCount": 40,
+          "samples": [
+            {
+              "html": "<span>Tech Hacks</span>",
+              "target": [
+                ".font-extrabold > span:nth-child(1)"
+              ]
+            },
+            {
+              "html": "<span>Discover</span>",
+              "target": [
+                ".relative:nth-child(1) > .inline-flex.text-\\[\\#475569\\].dark\\:text-\\[\\#94A3B8\\] > span"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "label-content-name-mismatch",
+          "impact": "serious",
+          "description": "Ensure that elements labelled through their content must have their visible text as part of their accessible name",
+          "nodesCount": 2,
+          "samples": [
+            {
+              "html": "<a href=\"/\" class=\"flex items-center shrink-0\" aria-label=\"Tech Hacks AI Home\">",
+              "target": [
+                "a[aria-label=\"Tech Hacks AI Home\"]"
+              ]
+            },
+            {
+              "html": "<button type=\"button\" aria-label=\"Open Tech Hacks AI A...\" class=\"flex items-center ga...\">",
+              "target": [
+                ".pl-2\\.5"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "route": "/collections/developer-essentials",
+      "theme": "dark",
+      "violations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+          "nodesCount": 15,
+          "samples": [
+            {
+              "html": "<span>Tech Hacks</span>",
+              "target": [
+                ".font-extrabold > span:nth-child(1)"
+              ]
+            },
+            {
+              "html": "<span>Discover</span>",
+              "target": [
+                ".relative:nth-child(1) > .inline-flex.text-\\[\\#475569\\].dark\\:text-\\[\\#94A3B8\\] > span"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "label-content-name-mismatch",
+          "impact": "serious",
+          "description": "Ensure that elements labelled through their content must have their visible text as part of their accessible name",
+          "nodesCount": 2,
+          "samples": [
+            {
+              "html": "<a href=\"/\" class=\"flex items-center shrink-0\" aria-label=\"Tech Hacks AI Home\">",
+              "target": [
+                "a[aria-label=\"Tech Hacks AI Home\"]"
+              ]
+            },
+            {
+              "html": "<button type=\"button\" aria-label=\"Open Tech Hacks AI A...\" class=\"flex items-center ga...\">",
+              "target": [
+                ".pl-2\\.5"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "route": "/ai-tools",
+      "theme": "light",
+      "violations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+          "nodesCount": 78,
+          "samples": [
+            {
+              "html": "<span>Tech Hacks</span>",
+              "target": [
+                ".dark\\:text-\\[\\#F1F5F9\\] > span:nth-child(1)"
+              ]
+            },
+            {
+              "html": "<span>Discover</span>",
+              "target": [
+                ".relative:nth-child(1) > .text-\\[\\#475569\\].dark\\:text-\\[\\#94A3B8\\].px-3 > span"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "label-content-name-mismatch",
+          "impact": "serious",
+          "description": "Ensure that elements labelled through their content must have their visible text as part of their accessible name",
+          "nodesCount": 2,
+          "samples": [
+            {
+              "html": "<a href=\"/\" class=\"flex items-center shrink-0\" aria-label=\"Tech Hacks AI Home\">",
+              "target": [
+                "a[href=\"/\"]"
+              ]
+            },
+            {
+              "html": "<button type=\"button\" aria-label=\"Open Tech Hacks AI A...\" class=\"flex items-center ga...\">",
+              "target": [
+                ".pl-2\\.5"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "route": "/ai-tools",
+      "theme": "dark",
+      "violations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+          "nodesCount": 28,
+          "samples": [
+            {
+              "html": "<span>Tech Hacks</span>",
+              "target": [
+                ".dark\\:text-\\[\\#F1F5F9\\] > span:nth-child(1)"
+              ]
+            },
+            {
+              "html": "<span>Discover</span>",
+              "target": [
+                ".relative:nth-child(1) > .text-\\[\\#475569\\].dark\\:text-\\[\\#94A3B8\\].px-3 > span"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "label-content-name-mismatch",
+          "impact": "serious",
+          "description": "Ensure that elements labelled through their content must have their visible text as part of their accessible name",
+          "nodesCount": 2,
+          "samples": [
+            {
+              "html": "<a href=\"/\" class=\"flex items-center shrink-0\" aria-label=\"Tech Hacks AI Home\">",
+              "target": [
+                "a[href=\"/\"]"
+              ]
+            },
+            {
+              "html": "<button type=\"button\" aria-label=\"Open Tech Hacks AI A...\" class=\"flex items-center ga...\">",
+              "target": [
+                ".pl-2\\.5"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "route": "/ai-tools/claude-3-5-sonnet",
+      "theme": "light",
+      "violations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+          "nodesCount": 40,
+          "samples": [
+            {
+              "html": "<span>Tech Hacks</span>",
+              "target": [
+                ".font-extrabold > span:nth-child(1)"
+              ]
+            },
+            {
+              "html": "<span>Discover</span>",
+              "target": [
+                ".relative:nth-child(1) > .inline-flex.text-\\[\\#475569\\].dark\\:text-\\[\\#94A3B8\\] > span"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "label-content-name-mismatch",
+          "impact": "serious",
+          "description": "Ensure that elements labelled through their content must have their visible text as part of their accessible name",
+          "nodesCount": 2,
+          "samples": [
+            {
+              "html": "<a href=\"/\" class=\"flex items-center shrink-0\" aria-label=\"Tech Hacks AI Home\">",
+              "target": [
+                "a[href=\"/\"]"
+              ]
+            },
+            {
+              "html": "<button type=\"button\" aria-label=\"Open Tech Hacks AI A...\" class=\"flex items-center ga...\">",
+              "target": [
+                ".pl-2\\.5"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "route": "/ai-tools/claude-3-5-sonnet",
+      "theme": "dark",
+      "violations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+          "nodesCount": 15,
+          "samples": [
+            {
+              "html": "<span>Tech Hacks</span>",
+              "target": [
+                ".font-extrabold > span:nth-child(1)"
+              ]
+            },
+            {
+              "html": "<span>Discover</span>",
+              "target": [
+                ".relative:nth-child(1) > .inline-flex.text-\\[\\#475569\\].dark\\:text-\\[\\#94A3B8\\] > span"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "label-content-name-mismatch",
+          "impact": "serious",
+          "description": "Ensure that elements labelled through their content must have their visible text as part of their accessible name",
+          "nodesCount": 2,
+          "samples": [
+            {
+              "html": "<a href=\"/\" class=\"flex items-center shrink-0\" aria-label=\"Tech Hacks AI Home\">",
+              "target": [
+                "a[href=\"/\"]"
+              ]
+            },
+            {
+              "html": "<button type=\"button\" aria-label=\"Open Tech Hacks AI A...\" class=\"flex items-center ga...\">",
+              "target": [
+                ".pl-2\\.5"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "route": "/free-ai-sites",
+      "theme": "light",
+      "violations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+          "nodesCount": 223,
+          "samples": [
+            {
+              "html": "<span>Tech Hacks</span>",
+              "target": [
+                ".dark\\:text-\\[\\#F1F5F9\\] > span:nth-child(1)"
+              ]
+            },
+            {
+              "html": "<span>Discover</span>",
+              "target": [
+                ".relative:nth-child(1) > .text-\\[\\#475569\\].dark\\:text-\\[\\#94A3B8\\].px-3 > span"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "label-content-name-mismatch",
+          "impact": "serious",
+          "description": "Ensure that elements labelled through their content must have their visible text as part of their accessible name",
+          "nodesCount": 2,
+          "samples": [
+            {
+              "html": "<a href=\"/\" class=\"flex items-center shrink-0\" aria-label=\"Tech Hacks AI Home\">",
+              "target": [
+                "a[href=\"/\"]"
+              ]
+            },
+            {
+              "html": "<button type=\"button\" aria-label=\"Open Tech Hacks AI A...\" class=\"flex items-center ga...\">",
+              "target": [
+                ".pl-2\\.5"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "route": "/free-ai-sites",
+      "theme": "dark",
+      "violations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+          "nodesCount": 78,
+          "samples": [
+            {
+              "html": "<span>Tech Hacks</span>",
+              "target": [
+                ".dark\\:text-\\[\\#F1F5F9\\] > span:nth-child(1)"
+              ]
+            },
+            {
+              "html": "<span>Discover</span>",
+              "target": [
+                ".relative:nth-child(1) > .text-\\[\\#475569\\].dark\\:text-\\[\\#94A3B8\\].px-3 > span"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "label-content-name-mismatch",
+          "impact": "serious",
+          "description": "Ensure that elements labelled through their content must have their visible text as part of their accessible name",
+          "nodesCount": 2,
+          "samples": [
+            {
+              "html": "<a href=\"/\" class=\"flex items-center shrink-0\" aria-label=\"Tech Hacks AI Home\">",
+              "target": [
+                "a[href=\"/\"]"
+              ]
+            },
+            {
+              "html": "<button type=\"button\" aria-label=\"Open Tech Hacks AI A...\" class=\"flex items-center ga...\">",
+              "target": [
+                ".pl-2\\.5"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "route": "/guides",
+      "theme": "light",
+      "violations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+          "nodesCount": 52,
+          "samples": [
+            {
+              "html": "<span>Tech Hacks</span>",
+              "target": [
+                ".dark\\:text-\\[\\#F1F5F9\\] > span:nth-child(1)"
+              ]
+            },
+            {
+              "html": "<span>Discover</span>",
+              "target": [
+                ".relative:nth-child(1) > .text-\\[\\#475569\\].dark\\:text-\\[\\#94A3B8\\].px-3 > span"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "label-content-name-mismatch",
+          "impact": "serious",
+          "description": "Ensure that elements labelled through their content must have their visible text as part of their accessible name",
+          "nodesCount": 2,
+          "samples": [
+            {
+              "html": "<a href=\"/\" class=\"flex items-center shrink-0\" aria-label=\"Tech Hacks AI Home\">",
+              "target": [
+                "a[href=\"/\"]"
+              ]
+            },
+            {
+              "html": "<button type=\"button\" aria-label=\"Open Tech Hacks AI A...\" class=\"flex items-center ga...\">",
+              "target": [
+                ".pl-2\\.5"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "route": "/guides",
+      "theme": "dark",
+      "violations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+          "nodesCount": 60,
+          "samples": [
+            {
+              "html": "<span>Tech Hacks</span>",
+              "target": [
+                ".dark\\:text-\\[\\#F1F5F9\\] > span:nth-child(1)"
+              ]
+            },
+            {
+              "html": "<span>Discover</span>",
+              "target": [
+                ".relative:nth-child(1) > .text-\\[\\#475569\\].dark\\:text-\\[\\#94A3B8\\].px-3 > span"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "label-content-name-mismatch",
+          "impact": "serious",
+          "description": "Ensure that elements labelled through their content must have their visible text as part of their accessible name",
+          "nodesCount": 2,
+          "samples": [
+            {
+              "html": "<a href=\"/\" class=\"flex items-center shrink-0\" aria-label=\"Tech Hacks AI Home\">",
+              "target": [
+                "a[href=\"/\"]"
+              ]
+            },
+            {
+              "html": "<button type=\"button\" aria-label=\"Open Tech Hacks AI A...\" class=\"flex items-center ga...\">",
+              "target": [
+                ".pl-2\\.5"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "route": "/guides/supabase-self-hosting",
+      "theme": "light",
+      "violations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+          "nodesCount": 40,
+          "samples": [
+            {
+              "html": "<span>Tech Hacks</span>",
+              "target": [
+                ".font-extrabold > span:nth-child(1)"
+              ]
+            },
+            {
+              "html": "<span>Discover</span>",
+              "target": [
+                ".relative:nth-child(1) > .inline-flex.text-\\[\\#475569\\].dark\\:text-\\[\\#94A3B8\\] > span"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "label-content-name-mismatch",
+          "impact": "serious",
+          "description": "Ensure that elements labelled through their content must have their visible text as part of their accessible name",
+          "nodesCount": 2,
+          "samples": [
+            {
+              "html": "<a href=\"/\" class=\"flex items-center shrink-0\" aria-label=\"Tech Hacks AI Home\">",
+              "target": [
+                "a[href=\"/\"]"
+              ]
+            },
+            {
+              "html": "<button type=\"button\" aria-label=\"Open Tech Hacks AI A...\" class=\"flex items-center ga...\">",
+              "target": [
+                ".pl-2\\.5"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "route": "/guides/supabase-self-hosting",
+      "theme": "dark",
+      "violations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+          "nodesCount": 15,
+          "samples": [
+            {
+              "html": "<span>Tech Hacks</span>",
+              "target": [
+                ".font-extrabold > span:nth-child(1)"
+              ]
+            },
+            {
+              "html": "<span>Discover</span>",
+              "target": [
+                ".relative:nth-child(1) > .inline-flex.text-\\[\\#475569\\].dark\\:text-\\[\\#94A3B8\\] > span"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "label-content-name-mismatch",
+          "impact": "serious",
+          "description": "Ensure that elements labelled through their content must have their visible text as part of their accessible name",
+          "nodesCount": 2,
+          "samples": [
+            {
+              "html": "<a href=\"/\" class=\"flex items-center shrink-0\" aria-label=\"Tech Hacks AI Home\">",
+              "target": [
+                "a[href=\"/\"]"
+              ]
+            },
+            {
+              "html": "<button type=\"button\" aria-label=\"Open Tech Hacks AI A...\" class=\"flex items-center ga...\">",
+              "target": [
+                ".pl-2\\.5"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "route": "/prompt-library",
+      "theme": "light",
+      "violations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+          "nodesCount": 85,
+          "samples": [
+            {
+              "html": "<span>Tech Hacks</span>",
+              "target": [
+                ".dark\\:text-\\[\\#F1F5F9\\] > span:nth-child(1)"
+              ]
+            },
+            {
+              "html": "<span>Discover</span>",
+              "target": [
+                ".relative:nth-child(1) > .text-\\[\\#475569\\].dark\\:text-\\[\\#94A3B8\\].hover\\:bg-\\[\\#F1F5F9\\] > span"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "label-content-name-mismatch",
+          "impact": "serious",
+          "description": "Ensure that elements labelled through their content must have their visible text as part of their accessible name",
+          "nodesCount": 2,
+          "samples": [
+            {
+              "html": "<a href=\"/\" class=\"flex items-center shrink-0\" aria-label=\"Tech Hacks AI Home\">",
+              "target": [
+                "a[href=\"/\"]"
+              ]
+            },
+            {
+              "html": "<button type=\"button\" aria-label=\"Open Tech Hacks AI A...\" class=\"flex items-center ga...\">",
+              "target": [
+                ".pl-2\\.5"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "route": "/prompt-library",
+      "theme": "dark",
+      "violations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+          "nodesCount": 100,
+          "samples": [
+            {
+              "html": "<span>Tech Hacks</span>",
+              "target": [
+                ".dark\\:text-\\[\\#F1F5F9\\] > span:nth-child(1)"
+              ]
+            },
+            {
+              "html": "<span>Discover</span>",
+              "target": [
+                ".relative:nth-child(1) > .text-\\[\\#475569\\].dark\\:text-\\[\\#94A3B8\\].hover\\:bg-\\[\\#F1F5F9\\] > span"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "label-content-name-mismatch",
+          "impact": "serious",
+          "description": "Ensure that elements labelled through their content must have their visible text as part of their accessible name",
+          "nodesCount": 2,
+          "samples": [
+            {
+              "html": "<a href=\"/\" class=\"flex items-center shrink-0\" aria-label=\"Tech Hacks AI Home\">",
+              "target": [
+                "a[href=\"/\"]"
+              ]
+            },
+            {
+              "html": "<button type=\"button\" aria-label=\"Open Tech Hacks AI A...\" class=\"flex items-center ga...\">",
+              "target": [
+                ".pl-2\\.5"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "route": "/prompt-library/senior-architect-code-review",
+      "theme": "light",
+      "violations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+          "nodesCount": 40,
+          "samples": [
+            {
+              "html": "<span>Tech Hacks</span>",
+              "target": [
+                ".font-extrabold > span:nth-child(1)"
+              ]
+            },
+            {
+              "html": "<span>Discover</span>",
+              "target": [
+                ".relative:nth-child(1) > .inline-flex.text-\\[\\#475569\\].dark\\:text-\\[\\#94A3B8\\] > span"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "label-content-name-mismatch",
+          "impact": "serious",
+          "description": "Ensure that elements labelled through their content must have their visible text as part of their accessible name",
+          "nodesCount": 2,
+          "samples": [
+            {
+              "html": "<a href=\"/\" class=\"flex items-center shrink-0\" aria-label=\"Tech Hacks AI Home\">",
+              "target": [
+                "a[href=\"/\"]"
+              ]
+            },
+            {
+              "html": "<button type=\"button\" aria-label=\"Open Tech Hacks AI A...\" class=\"flex items-center ga...\">",
+              "target": [
+                ".pl-2\\.5"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "route": "/prompt-library/senior-architect-code-review",
+      "theme": "dark",
+      "violations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+          "nodesCount": 15,
+          "samples": [
+            {
+              "html": "<span>Tech Hacks</span>",
+              "target": [
+                ".font-extrabold > span:nth-child(1)"
+              ]
+            },
+            {
+              "html": "<span>Discover</span>",
+              "target": [
+                ".relative:nth-child(1) > .inline-flex.text-\\[\\#475569\\].dark\\:text-\\[\\#94A3B8\\] > span"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "label-content-name-mismatch",
+          "impact": "serious",
+          "description": "Ensure that elements labelled through their content must have their visible text as part of their accessible name",
+          "nodesCount": 2,
+          "samples": [
+            {
+              "html": "<a href=\"/\" class=\"flex items-center shrink-0\" aria-label=\"Tech Hacks AI Home\">",
+              "target": [
+                "a[href=\"/\"]"
+              ]
+            },
+            {
+              "html": "<button type=\"button\" aria-label=\"Open Tech Hacks AI A...\" class=\"flex items-center ga...\">",
+              "target": [
+                ".pl-2\\.5"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "route": "/free-tools",
+      "theme": "light",
+      "violations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+          "nodesCount": 53,
+          "samples": [
+            {
+              "html": "<span>Tech Hacks</span>",
+              "target": [
+                ".dark\\:text-\\[\\#F1F5F9\\] > span:nth-child(1)"
+              ]
+            },
+            {
+              "html": "<span>Discover</span>",
+              "target": [
+                ".relative:nth-child(1) > .text-\\[\\#475569\\].dark\\:text-\\[\\#94A3B8\\].gap-1\\.5 > span"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "label-content-name-mismatch",
+          "impact": "serious",
+          "description": "Ensure that elements labelled through their content must have their visible text as part of their accessible name",
+          "nodesCount": 2,
+          "samples": [
+            {
+              "html": "<a href=\"/\" class=\"flex items-center shrink-0\" aria-label=\"Tech Hacks AI Home\">",
+              "target": [
+                "a[href=\"/\"]"
+              ]
+            },
+            {
+              "html": "<button type=\"button\" aria-label=\"Open Tech Hacks AI A...\" class=\"flex items-center ga...\">",
+              "target": [
+                ".pl-2\\.5"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "route": "/free-tools",
+      "theme": "dark",
+      "violations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+          "nodesCount": 32,
+          "samples": [
+            {
+              "html": "<span>Tech Hacks</span>",
+              "target": [
+                ".dark\\:text-\\[\\#F1F5F9\\] > span:nth-child(1)"
+              ]
+            },
+            {
+              "html": "<span>Discover</span>",
+              "target": [
+                ".relative:nth-child(1) > .text-\\[\\#475569\\].dark\\:text-\\[\\#94A3B8\\].gap-1\\.5 > span"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "label-content-name-mismatch",
+          "impact": "serious",
+          "description": "Ensure that elements labelled through their content must have their visible text as part of their accessible name",
+          "nodesCount": 2,
+          "samples": [
+            {
+              "html": "<a href=\"/\" class=\"flex items-center shrink-0\" aria-label=\"Tech Hacks AI Home\">",
+              "target": [
+                "a[href=\"/\"]"
+              ]
+            },
+            {
+              "html": "<button type=\"button\" aria-label=\"Open Tech Hacks AI A...\" class=\"flex items-center ga...\">",
+              "target": [
+                ".pl-2\\.5"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "route": "/free-tools/json-formatter",
+      "theme": "light",
+      "violations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+          "nodesCount": 44,
+          "samples": [
+            {
+              "html": "<span>Tech Hacks</span>",
+              "target": [
+                ".dark\\:text-\\[\\#F1F5F9\\] > span:nth-child(1)"
+              ]
+            },
+            {
+              "html": "<span>Discover</span>",
+              "target": [
+                ".relative:nth-child(1) > .text-\\[\\#475569\\].dark\\:text-\\[\\#94A3B8\\].inline-flex > span"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "label-content-name-mismatch",
+          "impact": "serious",
+          "description": "Ensure that elements labelled through their content must have their visible text as part of their accessible name",
+          "nodesCount": 2,
+          "samples": [
+            {
+              "html": "<a href=\"/\" class=\"flex items-center shrink-0\" aria-label=\"Tech Hacks AI Home\">",
+              "target": [
+                "a[aria-label=\"Tech Hacks AI Home\"]"
+              ]
+            },
+            {
+              "html": "<button type=\"button\" aria-label=\"Open Tech Hacks AI A...\" class=\"flex items-center ga...\">",
+              "target": [
+                ".pl-2\\.5"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "route": "/free-tools/json-formatter",
+      "theme": "dark",
+      "violations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+          "nodesCount": 21,
+          "samples": [
+            {
+              "html": "<span>Tech Hacks</span>",
+              "target": [
+                ".dark\\:text-\\[\\#F1F5F9\\] > span:nth-child(1)"
+              ]
+            },
+            {
+              "html": "<span>Discover</span>",
+              "target": [
+                ".relative:nth-child(1) > .text-\\[\\#475569\\].dark\\:text-\\[\\#94A3B8\\].inline-flex > span"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "label-content-name-mismatch",
+          "impact": "serious",
+          "description": "Ensure that elements labelled through their content must have their visible text as part of their accessible name",
+          "nodesCount": 2,
+          "samples": [
+            {
+              "html": "<a href=\"/\" class=\"flex items-center shrink-0\" aria-label=\"Tech Hacks AI Home\">",
+              "target": [
+                "a[aria-label=\"Tech Hacks AI Home\"]"
+              ]
+            },
+            {
+              "html": "<button type=\"button\" aria-label=\"Open Tech Hacks AI A...\" class=\"flex items-center ga...\">",
+              "target": [
+                ".pl-2\\.5"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "route": "/compare",
+      "theme": "light",
+      "violations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+          "nodesCount": 46,
+          "samples": [
+            {
+              "html": "<span>Tech Hacks</span>",
+              "target": [
+                ".dark\\:text-\\[\\#F1F5F9\\] > span:nth-child(1)"
+              ]
+            },
+            {
+              "html": "<span>Discover</span>",
+              "target": [
+                ".relative:nth-child(1) > .text-\\[\\#475569\\].dark\\:text-\\[\\#94A3B8\\].hover\\:bg-\\[\\#F1F5F9\\] > span"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "label-content-name-mismatch",
+          "impact": "serious",
+          "description": "Ensure that elements labelled through their content must have their visible text as part of their accessible name",
+          "nodesCount": 2,
+          "samples": [
+            {
+              "html": "<a href=\"/\" class=\"flex items-center shrink-0\" aria-label=\"Tech Hacks AI Home\">",
+              "target": [
+                "a[href=\"/\"]"
+              ]
+            },
+            {
+              "html": "<button type=\"button\" aria-label=\"Open Tech Hacks AI A...\" class=\"flex items-center ga...\">",
+              "target": [
+                ".pl-2\\.5"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "route": "/compare",
+      "theme": "dark",
+      "violations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+          "nodesCount": 46,
+          "samples": [
+            {
+              "html": "<span>Tech Hacks</span>",
+              "target": [
+                ".dark\\:text-\\[\\#F1F5F9\\] > span:nth-child(1)"
+              ]
+            },
+            {
+              "html": "<span>Discover</span>",
+              "target": [
+                ".relative:nth-child(1) > .text-\\[\\#475569\\].dark\\:text-\\[\\#94A3B8\\].hover\\:bg-\\[\\#F1F5F9\\] > span"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "label-content-name-mismatch",
+          "impact": "serious",
+          "description": "Ensure that elements labelled through their content must have their visible text as part of their accessible name",
+          "nodesCount": 2,
+          "samples": [
+            {
+              "html": "<a href=\"/\" class=\"flex items-center shrink-0\" aria-label=\"Tech Hacks AI Home\">",
+              "target": [
+                "a[href=\"/\"]"
+              ]
+            },
+            {
+              "html": "<button type=\"button\" aria-label=\"Open Tech Hacks AI A...\" class=\"flex items-center ga...\">",
+              "target": [
+                ".pl-2\\.5"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "route": "/pick",
+      "theme": "light",
+      "violations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+          "nodesCount": 31,
+          "samples": [
+            {
+              "html": "<a href=\"/tools\" class=\"hover:text-[#2563EB] transition-colors\">All Open Source Tools</a>",
+              "target": [
+                "li:nth-child(2) > a[href$=\"tools\"]"
+              ]
+            },
+            {
+              "html": "<a href=\"/alternatives\" class=\"hover:text-[#2563EB] transition-colors\">Proprietary Alternatives</a>",
+              "target": [
+                ".hover\\:text-\\[\\#2563EB\\].transition-colors[href$=\"alternatives\"]"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "label-content-name-mismatch",
+          "impact": "serious",
+          "description": "Ensure that elements labelled through their content must have their visible text as part of their accessible name",
+          "nodesCount": 2,
+          "samples": [
+            {
+              "html": "<a href=\"/\" class=\"flex items-center shrink-0\" aria-label=\"Tech Hacks AI Home\">",
+              "target": [
+                "a[href=\"/\"]"
+              ]
+            },
+            {
+              "html": "<button type=\"button\" aria-label=\"Open Tech Hacks AI A...\" class=\"flex items-center ga...\">",
+              "target": [
+                ".pl-2\\.5"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "route": "/pick",
+      "theme": "dark",
+      "violations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+          "nodesCount": 21,
+          "samples": [
+            {
+              "html": "<span>Tech Hacks</span>",
+              "target": [
+                ".dark\\:text-\\[\\#F1F5F9\\] > span:nth-child(1)"
+              ]
+            },
+            {
+              "html": "<span>Discover</span>",
+              "target": [
+                ".relative:nth-child(1) > .text-\\[\\#475569\\].dark\\:text-\\[\\#94A3B8\\].inline-flex > span"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "label-content-name-mismatch",
+          "impact": "serious",
+          "description": "Ensure that elements labelled through their content must have their visible text as part of their accessible name",
+          "nodesCount": 2,
+          "samples": [
+            {
+              "html": "<a href=\"/\" class=\"flex items-center shrink-0\" aria-label=\"Tech Hacks AI Home\">",
+              "target": [
+                "a[href=\"/\"]"
+              ]
+            },
+            {
+              "html": "<button type=\"button\" aria-label=\"Open Tech Hacks AI A...\" class=\"flex items-center ga...\">",
+              "target": [
+                ".pl-2\\.5"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "route": "/saved",
+      "theme": "light",
+      "violations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+          "nodesCount": 41,
+          "samples": [
+            {
+              "html": "<span>Tech Hacks</span>",
+              "target": [
+                ".dark\\:text-\\[\\#F1F5F9\\] > span:nth-child(1)"
+              ]
+            },
+            {
+              "html": "<span>Discover</span>",
+              "target": [
+                ".relative:nth-child(1) > .inline-flex.text-\\[\\#475569\\].dark\\:text-\\[\\#94A3B8\\] > span"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "label-content-name-mismatch",
+          "impact": "serious",
+          "description": "Ensure that elements labelled through their content must have their visible text as part of their accessible name",
+          "nodesCount": 2,
+          "samples": [
+            {
+              "html": "<a href=\"/\" class=\"flex items-center shrink-0\" aria-label=\"Tech Hacks AI Home\">",
+              "target": [
+                "a[href=\"/\"]"
+              ]
+            },
+            {
+              "html": "<button type=\"button\" aria-label=\"Open Tech Hacks AI A...\" class=\"flex items-center ga...\">",
+              "target": [
+                ".pl-2\\.5"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "route": "/saved",
+      "theme": "dark",
+      "violations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+          "nodesCount": 15,
+          "samples": [
+            {
+              "html": "<span>Tech Hacks</span>",
+              "target": [
+                ".dark\\:text-\\[\\#F1F5F9\\] > span:nth-child(1)"
+              ]
+            },
+            {
+              "html": "<span>Discover</span>",
+              "target": [
+                ".relative:nth-child(1) > .inline-flex.text-\\[\\#475569\\].dark\\:text-\\[\\#94A3B8\\] > span"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "label-content-name-mismatch",
+          "impact": "serious",
+          "description": "Ensure that elements labelled through their content must have their visible text as part of their accessible name",
+          "nodesCount": 2,
+          "samples": [
+            {
+              "html": "<a href=\"/\" class=\"flex items-center shrink-0\" aria-label=\"Tech Hacks AI Home\">",
+              "target": [
+                "a[href=\"/\"]"
+              ]
+            },
+            {
+              "html": "<button type=\"button\" aria-label=\"Open Tech Hacks AI A...\" class=\"flex items-center ga...\">",
+              "target": [
+                ".pl-2\\.5"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "route": "/updates",
+      "theme": "light",
+      "violations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+          "nodesCount": 41,
+          "samples": [
+            {
+              "html": "<span>Tech Hacks</span>",
+              "target": [
+                ".dark\\:text-\\[\\#F1F5F9\\] > span:nth-child(1)"
+              ]
+            },
+            {
+              "html": "<span>Discover</span>",
+              "target": [
+                ".relative:nth-child(1) > .text-\\[\\#475569\\].dark\\:text-\\[\\#94A3B8\\].px-3 > span"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "label-content-name-mismatch",
+          "impact": "serious",
+          "description": "Ensure that elements labelled through their content must have their visible text as part of their accessible name",
+          "nodesCount": 2,
+          "samples": [
+            {
+              "html": "<a href=\"/\" class=\"flex items-center shrink-0\" aria-label=\"Tech Hacks AI Home\">",
+              "target": [
+                "a[href=\"/\"]"
+              ]
+            },
+            {
+              "html": "<button type=\"button\" aria-label=\"Open Tech Hacks AI A...\" class=\"flex items-center ga...\">",
+              "target": [
+                ".pl-2\\.5"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "route": "/updates",
+      "theme": "dark",
+      "violations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+          "nodesCount": 24,
+          "samples": [
+            {
+              "html": "<span>Tech Hacks</span>",
+              "target": [
+                ".dark\\:text-\\[\\#F1F5F9\\] > span:nth-child(1)"
+              ]
+            },
+            {
+              "html": "<span>Discover</span>",
+              "target": [
+                ".relative:nth-child(1) > .text-\\[\\#475569\\].dark\\:text-\\[\\#94A3B8\\].px-3 > span"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "label-content-name-mismatch",
+          "impact": "serious",
+          "description": "Ensure that elements labelled through their content must have their visible text as part of their accessible name",
+          "nodesCount": 2,
+          "samples": [
+            {
+              "html": "<a href=\"/\" class=\"flex items-center shrink-0\" aria-label=\"Tech Hacks AI Home\">",
+              "target": [
+                "a[href=\"/\"]"
+              ]
+            },
+            {
+              "html": "<button type=\"button\" aria-label=\"Open Tech Hacks AI A...\" class=\"flex items-center ga...\">",
+              "target": [
+                ".pl-2\\.5"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "route": "/offers",
+      "theme": "light",
+      "violations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+          "nodesCount": 71,
+          "samples": [
+            {
+              "html": "<span>Tech Hacks</span>",
+              "target": [
+                ".dark\\:text-\\[\\#F1F5F9\\] > span:nth-child(1)"
+              ]
+            },
+            {
+              "html": "<span>Discover</span>",
+              "target": [
+                ".relative:nth-child(1) > .dark\\:text-\\[\\#94A3B8\\].text-\\[\\#475569\\].hover\\:bg-\\[\\#F1F5F9\\] > span"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "label-content-name-mismatch",
+          "impact": "serious",
+          "description": "Ensure that elements labelled through their content must have their visible text as part of their accessible name",
+          "nodesCount": 2,
+          "samples": [
+            {
+              "html": "<a href=\"/\" class=\"flex items-center shrink-0\" aria-label=\"Tech Hacks AI Home\">",
+              "target": [
+                "a[href=\"/\"]"
+              ]
+            },
+            {
+              "html": "<button type=\"button\" aria-label=\"Open Tech Hacks AI A...\" class=\"flex items-center ga...\">",
+              "target": [
+                ".pl-2\\.5"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "route": "/offers",
+      "theme": "dark",
+      "violations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+          "nodesCount": 62,
+          "samples": [
+            {
+              "html": "<span>Tech Hacks</span>",
+              "target": [
+                ".dark\\:text-\\[\\#F1F5F9\\] > span:nth-child(1)"
+              ]
+            },
+            {
+              "html": "<span>Discover</span>",
+              "target": [
+                ".relative:nth-child(1) > .dark\\:text-\\[\\#94A3B8\\].text-\\[\\#475569\\].hover\\:bg-\\[\\#F1F5F9\\] > span"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "label-content-name-mismatch",
+          "impact": "serious",
+          "description": "Ensure that elements labelled through their content must have their visible text as part of their accessible name",
+          "nodesCount": 2,
+          "samples": [
+            {
+              "html": "<a href=\"/\" class=\"flex items-center shrink-0\" aria-label=\"Tech Hacks AI Home\">",
+              "target": [
+                "a[href=\"/\"]"
+              ]
+            },
+            {
+              "html": "<button type=\"button\" aria-label=\"Open Tech Hacks AI A...\" class=\"flex items-center ga...\">",
+              "target": [
+                ".pl-2\\.5"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "route": "/offers/github-student-pack",
+      "theme": "light",
+      "violations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+          "nodesCount": 40,
+          "samples": [
+            {
+              "html": "<span>Tech Hacks</span>",
+              "target": [
+                ".font-extrabold > span:nth-child(1)"
+              ]
+            },
+            {
+              "html": "<span>Discover</span>",
+              "target": [
+                ".relative:nth-child(1) > .inline-flex.text-\\[\\#475569\\].dark\\:text-\\[\\#94A3B8\\] > span"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "label-content-name-mismatch",
+          "impact": "serious",
+          "description": "Ensure that elements labelled through their content must have their visible text as part of their accessible name",
+          "nodesCount": 2,
+          "samples": [
+            {
+              "html": "<a href=\"/\" class=\"flex items-center shrink-0\" aria-label=\"Tech Hacks AI Home\">",
+              "target": [
+                "a[href=\"/\"]"
+              ]
+            },
+            {
+              "html": "<button type=\"button\" aria-label=\"Open Tech Hacks AI A...\" class=\"flex items-center ga...\">",
+              "target": [
+                ".pl-2\\.5"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "route": "/offers/github-student-pack",
+      "theme": "dark",
+      "violations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+          "nodesCount": 15,
+          "samples": [
+            {
+              "html": "<span>Tech Hacks</span>",
+              "target": [
+                ".font-extrabold > span:nth-child(1)"
+              ]
+            },
+            {
+              "html": "<span>Discover</span>",
+              "target": [
+                ".relative:nth-child(1) > .inline-flex.text-\\[\\#475569\\].dark\\:text-\\[\\#94A3B8\\] > span"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "label-content-name-mismatch",
+          "impact": "serious",
+          "description": "Ensure that elements labelled through their content must have their visible text as part of their accessible name",
+          "nodesCount": 2,
+          "samples": [
+            {
+              "html": "<a href=\"/\" class=\"flex items-center shrink-0\" aria-label=\"Tech Hacks AI Home\">",
+              "target": [
+                "a[href=\"/\"]"
+              ]
+            },
+            {
+              "html": "<button type=\"button\" aria-label=\"Open Tech Hacks AI A...\" class=\"flex items-center ga...\">",
+              "target": [
+                ".pl-2\\.5"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "route": "/about",
+      "theme": "light",
+      "violations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+          "nodesCount": 48,
+          "samples": [
+            {
+              "html": "<span>Tech Hacks</span>",
+              "target": [
+                ".dark\\:text-\\[\\#F1F5F9\\] > span:nth-child(1)"
+              ]
+            },
+            {
+              "html": "<span>Discover</span>",
+              "target": [
+                ".relative:nth-child(1) > .text-\\[\\#475569\\].dark\\:text-\\[\\#94A3B8\\].inline-flex > span"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "label-content-name-mismatch",
+          "impact": "serious",
+          "description": "Ensure that elements labelled through their content must have their visible text as part of their accessible name",
+          "nodesCount": 2,
+          "samples": [
+            {
+              "html": "<a href=\"/\" class=\"flex items-center shrink-0\" aria-label=\"Tech Hacks AI Home\">",
+              "target": [
+                "a[aria-label=\"Tech Hacks AI Home\"]"
+              ]
+            },
+            {
+              "html": "<button type=\"button\" aria-label=\"Open Tech Hacks AI A...\" class=\"flex items-center ga...\">",
+              "target": [
+                ".pl-2\\.5"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "route": "/about",
+      "theme": "dark",
+      "violations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+          "nodesCount": 17,
+          "samples": [
+            {
+              "html": "<span>Tech Hacks</span>",
+              "target": [
+                ".dark\\:text-\\[\\#F1F5F9\\] > span:nth-child(1)"
+              ]
+            },
+            {
+              "html": "<span>Discover</span>",
+              "target": [
+                ".relative:nth-child(1) > .text-\\[\\#475569\\].dark\\:text-\\[\\#94A3B8\\].inline-flex > span"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "label-content-name-mismatch",
+          "impact": "serious",
+          "description": "Ensure that elements labelled through their content must have their visible text as part of their accessible name",
+          "nodesCount": 2,
+          "samples": [
+            {
+              "html": "<a href=\"/\" class=\"flex items-center shrink-0\" aria-label=\"Tech Hacks AI Home\">",
+              "target": [
+                "a[aria-label=\"Tech Hacks AI Home\"]"
+              ]
+            },
+            {
+              "html": "<button type=\"button\" aria-label=\"Open Tech Hacks AI A...\" class=\"flex items-center ga...\">",
+              "target": [
+                ".pl-2\\.5"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "route": "/contact",
+      "theme": "light",
+      "violations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+          "nodesCount": 43,
+          "samples": [
+            {
+              "html": "<span>Tech Hacks</span>",
+              "target": [
+                ".dark\\:text-\\[\\#F1F5F9\\] > span:nth-child(1)"
+              ]
+            },
+            {
+              "html": "<span>Discover</span>",
+              "target": [
+                ".relative:nth-child(1) > .text-\\[\\#475569\\].dark\\:text-\\[\\#94A3B8\\].inline-flex > span"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "label-content-name-mismatch",
+          "impact": "serious",
+          "description": "Ensure that elements labelled through their content must have their visible text as part of their accessible name",
+          "nodesCount": 2,
+          "samples": [
+            {
+              "html": "<a href=\"/\" class=\"flex items-center shrink-0\" aria-label=\"Tech Hacks AI Home\">",
+              "target": [
+                "a[aria-label=\"Tech Hacks AI Home\"]"
+              ]
+            },
+            {
+              "html": "<button type=\"button\" aria-label=\"Open Tech Hacks AI A...\" class=\"flex items-center ga...\">",
+              "target": [
+                ".pl-2\\.5"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "route": "/contact",
+      "theme": "dark",
+      "violations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+          "nodesCount": 17,
+          "samples": [
+            {
+              "html": "<span>Tech Hacks</span>",
+              "target": [
+                ".dark\\:text-\\[\\#F1F5F9\\] > span:nth-child(1)"
+              ]
+            },
+            {
+              "html": "<span>Discover</span>",
+              "target": [
+                ".relative:nth-child(1) > .text-\\[\\#475569\\].dark\\:text-\\[\\#94A3B8\\].inline-flex > span"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "label-content-name-mismatch",
+          "impact": "serious",
+          "description": "Ensure that elements labelled through their content must have their visible text as part of their accessible name",
+          "nodesCount": 2,
+          "samples": [
+            {
+              "html": "<a href=\"/\" class=\"flex items-center shrink-0\" aria-label=\"Tech Hacks AI Home\">",
+              "target": [
+                "a[aria-label=\"Tech Hacks AI Home\"]"
+              ]
+            },
+            {
+              "html": "<button type=\"button\" aria-label=\"Open Tech Hacks AI A...\" class=\"flex items-center ga...\">",
+              "target": [
+                ".pl-2\\.5"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "route": "/privacy",
+      "theme": "light",
+      "violations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+          "nodesCount": 80,
+          "samples": [
+            {
+              "html": "<span>Tech Hacks</span>",
+              "target": [
+                ".dark\\:text-\\[\\#F1F5F9\\] > span:nth-child(1)"
+              ]
+            },
+            {
+              "html": "<span>Discover</span>",
+              "target": [
+                ".relative:nth-child(1) > .inline-flex.text-\\[\\#475569\\].dark\\:text-\\[\\#94A3B8\\] > span"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "label-content-name-mismatch",
+          "impact": "serious",
+          "description": "Ensure that elements labelled through their content must have their visible text as part of their accessible name",
+          "nodesCount": 2,
+          "samples": [
+            {
+              "html": "<a href=\"/\" class=\"flex items-center shrink-0\" aria-label=\"Tech Hacks AI Home\">",
+              "target": [
+                "a[aria-label=\"Tech Hacks AI Home\"]"
+              ]
+            },
+            {
+              "html": "<button type=\"button\" aria-label=\"Open Tech Hacks AI A...\" class=\"flex items-center ga...\">",
+              "target": [
+                ".pl-2\\.5"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "route": "/privacy",
+      "theme": "dark",
+      "violations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+          "nodesCount": 31,
+          "samples": [
+            {
+              "html": "<span>Tech Hacks</span>",
+              "target": [
+                ".dark\\:text-\\[\\#F1F5F9\\] > span:nth-child(1)"
+              ]
+            },
+            {
+              "html": "<span>Discover</span>",
+              "target": [
+                ".relative:nth-child(1) > .inline-flex.text-\\[\\#475569\\].dark\\:text-\\[\\#94A3B8\\] > span"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "label-content-name-mismatch",
+          "impact": "serious",
+          "description": "Ensure that elements labelled through their content must have their visible text as part of their accessible name",
+          "nodesCount": 2,
+          "samples": [
+            {
+              "html": "<a href=\"/\" class=\"flex items-center shrink-0\" aria-label=\"Tech Hacks AI Home\">",
+              "target": [
+                "a[aria-label=\"Tech Hacks AI Home\"]"
+              ]
+            },
+            {
+              "html": "<button type=\"button\" aria-label=\"Open Tech Hacks AI A...\" class=\"flex items-center ga...\">",
+              "target": [
+                ".pl-2\\.5"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "route": "/terms",
+      "theme": "light",
+      "violations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+          "nodesCount": 63,
+          "samples": [
+            {
+              "html": "<span>Tech Hacks</span>",
+              "target": [
+                ".dark\\:text-\\[\\#F1F5F9\\] > span:nth-child(1)"
+              ]
+            },
+            {
+              "html": "<span>Discover</span>",
+              "target": [
+                ".relative:nth-child(1) > .inline-flex.text-\\[\\#475569\\].dark\\:text-\\[\\#94A3B8\\] > span"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "label-content-name-mismatch",
+          "impact": "serious",
+          "description": "Ensure that elements labelled through their content must have their visible text as part of their accessible name",
+          "nodesCount": 2,
+          "samples": [
+            {
+              "html": "<a href=\"/\" class=\"flex items-center shrink-0\" aria-label=\"Tech Hacks AI Home\">",
+              "target": [
+                "a[aria-label=\"Tech Hacks AI Home\"]"
+              ]
+            },
+            {
+              "html": "<button type=\"button\" aria-label=\"Open Tech Hacks AI A...\" class=\"flex items-center ga...\">",
+              "target": [
+                ".pl-2\\.5"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "route": "/terms",
+      "theme": "dark",
+      "violations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+          "nodesCount": 22,
+          "samples": [
+            {
+              "html": "<span>Tech Hacks</span>",
+              "target": [
+                ".dark\\:text-\\[\\#F1F5F9\\] > span:nth-child(1)"
+              ]
+            },
+            {
+              "html": "<span>Discover</span>",
+              "target": [
+                ".relative:nth-child(1) > .inline-flex.text-\\[\\#475569\\].dark\\:text-\\[\\#94A3B8\\] > span"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "label-content-name-mismatch",
+          "impact": "serious",
+          "description": "Ensure that elements labelled through their content must have their visible text as part of their accessible name",
+          "nodesCount": 2,
+          "samples": [
+            {
+              "html": "<a href=\"/\" class=\"flex items-center shrink-0\" aria-label=\"Tech Hacks AI Home\">",
+              "target": [
+                "a[aria-label=\"Tech Hacks AI Home\"]"
+              ]
+            },
+            {
+              "html": "<button type=\"button\" aria-label=\"Open Tech Hacks AI A...\" class=\"flex items-center ga...\">",
+              "target": [
+                ".pl-2\\.5"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "route": "/disclosure",
+      "theme": "light",
+      "violations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+          "nodesCount": 60,
+          "samples": [
+            {
+              "html": "<span>Tech Hacks</span>",
+              "target": [
+                ".dark\\:text-\\[\\#F1F5F9\\] > span:nth-child(1)"
+              ]
+            },
+            {
+              "html": "<span>Discover</span>",
+              "target": [
+                ".relative:nth-child(1) > .inline-flex.text-\\[\\#475569\\].dark\\:text-\\[\\#94A3B8\\] > span"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "label-content-name-mismatch",
+          "impact": "serious",
+          "description": "Ensure that elements labelled through their content must have their visible text as part of their accessible name",
+          "nodesCount": 2,
+          "samples": [
+            {
+              "html": "<a href=\"/\" class=\"flex items-center shrink-0\" aria-label=\"Tech Hacks AI Home\">",
+              "target": [
+                "a[aria-label=\"Tech Hacks AI Home\"]"
+              ]
+            },
+            {
+              "html": "<button type=\"button\" aria-label=\"Open Tech Hacks AI A...\" class=\"flex items-center ga...\">",
+              "target": [
+                ".pl-2\\.5"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "route": "/disclosure",
+      "theme": "dark",
+      "violations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+          "nodesCount": 22,
+          "samples": [
+            {
+              "html": "<span>Tech Hacks</span>",
+              "target": [
+                ".dark\\:text-\\[\\#F1F5F9\\] > span:nth-child(1)"
+              ]
+            },
+            {
+              "html": "<span>Discover</span>",
+              "target": [
+                ".relative:nth-child(1) > .inline-flex.text-\\[\\#475569\\].dark\\:text-\\[\\#94A3B8\\] > span"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "label-content-name-mismatch",
+          "impact": "serious",
+          "description": "Ensure that elements labelled through their content must have their visible text as part of their accessible name",
+          "nodesCount": 2,
+          "samples": [
+            {
+              "html": "<a href=\"/\" class=\"flex items-center shrink-0\" aria-label=\"Tech Hacks AI Home\">",
+              "target": [
+                "a[aria-label=\"Tech Hacks AI Home\"]"
+              ]
+            },
+            {
+              "html": "<button type=\"button\" aria-label=\"Open Tech Hacks AI A...\" class=\"flex items-center ga...\">",
+              "target": [
+                ".pl-2\\.5"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "route": "/submit-tool",
+      "theme": "light",
+      "violations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+          "nodesCount": 45,
+          "samples": [
+            {
+              "html": "<span>Tech Hacks</span>",
+              "target": [
+                ".dark\\:text-\\[\\#F1F5F9\\] > span:nth-child(1)"
+              ]
+            },
+            {
+              "html": "<span>Discover</span>",
+              "target": [
+                ".relative:nth-child(1) > .text-\\[\\#475569\\].dark\\:text-\\[\\#94A3B8\\].inline-flex > span"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "label-content-name-mismatch",
+          "impact": "serious",
+          "description": "Ensure that elements labelled through their content must have their visible text as part of their accessible name",
+          "nodesCount": 2,
+          "samples": [
+            {
+              "html": "<a href=\"/\" class=\"flex items-center shrink-0\" aria-label=\"Tech Hacks AI Home\">",
+              "target": [
+                "a[aria-label=\"Tech Hacks AI Home\"]"
+              ]
+            },
+            {
+              "html": "<button type=\"button\" aria-label=\"Open Tech Hacks AI A...\" class=\"flex items-center ga...\">",
+              "target": [
+                ".pl-2\\.5"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "route": "/submit-tool",
+      "theme": "dark",
+      "violations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+          "nodesCount": 26,
+          "samples": [
+            {
+              "html": "<span>Tech Hacks</span>",
+              "target": [
+                ".dark\\:text-\\[\\#F1F5F9\\] > span:nth-child(1)"
+              ]
+            },
+            {
+              "html": "<span>Discover</span>",
+              "target": [
+                ".relative:nth-child(1) > .text-\\[\\#475569\\].dark\\:text-\\[\\#94A3B8\\].inline-flex > span"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "label-content-name-mismatch",
+          "impact": "serious",
+          "description": "Ensure that elements labelled through their content must have their visible text as part of their accessible name",
+          "nodesCount": 2,
+          "samples": [
+            {
+              "html": "<a href=\"/\" class=\"flex items-center shrink-0\" aria-label=\"Tech Hacks AI Home\">",
+              "target": [
+                "a[aria-label=\"Tech Hacks AI Home\"]"
+              ]
+            },
+            {
+              "html": "<button type=\"button\" aria-label=\"Open Tech Hacks AI A...\" class=\"flex items-center ga...\">",
+              "target": [
+                ".pl-2\\.5"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "route": "/submit-guide",
+      "theme": "light",
+      "violations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+          "nodesCount": 45,
+          "samples": [
+            {
+              "html": "<span>Tech Hacks</span>",
+              "target": [
+                ".dark\\:text-\\[\\#F1F5F9\\] > span:nth-child(1)"
+              ]
+            },
+            {
+              "html": "<span>Discover</span>",
+              "target": [
+                ".relative:nth-child(1) > .text-\\[\\#475569\\].dark\\:text-\\[\\#94A3B8\\].inline-flex > span"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "label-content-name-mismatch",
+          "impact": "serious",
+          "description": "Ensure that elements labelled through their content must have their visible text as part of their accessible name",
+          "nodesCount": 2,
+          "samples": [
+            {
+              "html": "<a href=\"/\" class=\"flex items-center shrink-0\" aria-label=\"Tech Hacks AI Home\">",
+              "target": [
+                "a[aria-label=\"Tech Hacks AI Home\"]"
+              ]
+            },
+            {
+              "html": "<button type=\"button\" aria-label=\"Open Tech Hacks AI A...\" class=\"flex items-center ga...\">",
+              "target": [
+                ".pl-2\\.5"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "route": "/submit-guide",
+      "theme": "dark",
+      "violations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+          "nodesCount": 26,
+          "samples": [
+            {
+              "html": "<span>Tech Hacks</span>",
+              "target": [
+                ".dark\\:text-\\[\\#F1F5F9\\] > span:nth-child(1)"
+              ]
+            },
+            {
+              "html": "<span>Discover</span>",
+              "target": [
+                ".relative:nth-child(1) > .text-\\[\\#475569\\].dark\\:text-\\[\\#94A3B8\\].inline-flex > span"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "label-content-name-mismatch",
+          "impact": "serious",
+          "description": "Ensure that elements labelled through their content must have their visible text as part of their accessible name",
+          "nodesCount": 2,
+          "samples": [
+            {
+              "html": "<a href=\"/\" class=\"flex items-center shrink-0\" aria-label=\"Tech Hacks AI Home\">",
+              "target": [
+                "a[aria-label=\"Tech Hacks AI Home\"]"
+              ]
+            },
+            {
+              "html": "<button type=\"button\" aria-label=\"Open Tech Hacks AI A...\" class=\"flex items-center ga...\">",
+              "target": [
+                ".pl-2\\.5"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "route": "/discoveries",
+      "theme": "light",
+      "violations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+          "nodesCount": 67,
+          "samples": [
+            {
+              "html": "<span>Tech Hacks</span>",
+              "target": [
+                ".dark\\:text-\\[\\#F1F5F9\\] > span:nth-child(1)"
+              ]
+            },
+            {
+              "html": "<span>Discover</span>",
+              "target": [
+                ".relative:nth-child(1) > .text-\\[\\#475569\\].dark\\:text-\\[\\#94A3B8\\].py-1\\.5 > span"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "label-content-name-mismatch",
+          "impact": "serious",
+          "description": "Ensure that elements labelled through their content must have their visible text as part of their accessible name",
+          "nodesCount": 2,
+          "samples": [
+            {
+              "html": "<a href=\"/\" class=\"flex items-center shrink-0\" aria-label=\"Tech Hacks AI Home\">",
+              "target": [
+                "a[href=\"/\"]"
+              ]
+            },
+            {
+              "html": "<button type=\"button\" aria-label=\"Open Tech Hacks AI A...\" class=\"flex items-center ga...\">",
+              "target": [
+                ".pl-2\\.5"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "route": "/discoveries",
+      "theme": "dark",
+      "violations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+          "nodesCount": 21,
+          "samples": [
+            {
+              "html": "<span>Tech Hacks</span>",
+              "target": [
+                ".dark\\:text-\\[\\#F1F5F9\\] > span:nth-child(1)"
+              ]
+            },
+            {
+              "html": "<span>Discover</span>",
+              "target": [
+                ".relative:nth-child(1) > .text-\\[\\#475569\\].dark\\:text-\\[\\#94A3B8\\].py-1\\.5 > span"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "label-content-name-mismatch",
+          "impact": "serious",
+          "description": "Ensure that elements labelled through their content must have their visible text as part of their accessible name",
+          "nodesCount": 2,
+          "samples": [
+            {
+              "html": "<a href=\"/\" class=\"flex items-center shrink-0\" aria-label=\"Tech Hacks AI Home\">",
+              "target": [
+                "a[href=\"/\"]"
+              ]
+            },
+            {
+              "html": "<button type=\"button\" aria-label=\"Open Tech Hacks AI A...\" class=\"flex items-center ga...\">",
+              "target": [
+                ".pl-2\\.5"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "route": "/admin/moderation",
+      "theme": "light",
+      "violations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+          "nodesCount": 39,
+          "samples": [
+            {
+              "html": "<span>Tech Hacks</span>",
+              "target": [
+                ".font-extrabold > span:nth-child(1)"
+              ]
+            },
+            {
+              "html": "<span>Discover</span>",
+              "target": [
+                ".relative:nth-child(1) > .inline-flex.text-\\[\\#475569\\].dark\\:text-\\[\\#94A3B8\\] > span"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "label-content-name-mismatch",
+          "impact": "serious",
+          "description": "Ensure that elements labelled through their content must have their visible text as part of their accessible name",
+          "nodesCount": 2,
+          "samples": [
+            {
+              "html": "<a href=\"/\" class=\"flex items-center shrink-0\" aria-label=\"Tech Hacks AI Home\">",
+              "target": [
+                "a[href=\"/\"]"
+              ]
+            },
+            {
+              "html": "<button type=\"button\" aria-label=\"Open Tech Hacks AI A...\" class=\"flex items-center ga...\">",
+              "target": [
+                ".pl-2\\.5"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "route": "/admin/moderation",
+      "theme": "dark",
+      "violations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+          "nodesCount": 15,
+          "samples": [
+            {
+              "html": "<span>Tech Hacks</span>",
+              "target": [
+                ".font-extrabold > span:nth-child(1)"
+              ]
+            },
+            {
+              "html": "<span>Discover</span>",
+              "target": [
+                ".relative:nth-child(1) > .inline-flex.text-\\[\\#475569\\].dark\\:text-\\[\\#94A3B8\\] > span"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "label-content-name-mismatch",
+          "impact": "serious",
+          "description": "Ensure that elements labelled through their content must have their visible text as part of their accessible name",
+          "nodesCount": 2,
+          "samples": [
+            {
+              "html": "<a href=\"/\" class=\"flex items-center shrink-0\" aria-label=\"Tech Hacks AI Home\">",
+              "target": [
+                "a[href=\"/\"]"
+              ]
+            },
+            {
+              "html": "<button type=\"button\" aria-label=\"Open Tech Hacks AI A...\" class=\"flex items-center ga...\">",
+              "target": [
+                ".pl-2\\.5"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "route": "/non-existent-route-for-404-test",
+      "theme": "light",
+      "violations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+          "nodesCount": 41,
+          "samples": [
+            {
+              "html": "<span>Tech Hacks</span>",
+              "target": [
+                ".dark\\:text-\\[\\#F1F5F9\\] > span:nth-child(1)"
+              ]
+            },
+            {
+              "html": "<span>Discover</span>",
+              "target": [
+                ".relative:nth-child(1) > .text-\\[\\#475569\\].dark\\:text-\\[\\#94A3B8\\].inline-flex > span"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "label-content-name-mismatch",
+          "impact": "serious",
+          "description": "Ensure that elements labelled through their content must have their visible text as part of their accessible name",
+          "nodesCount": 2,
+          "samples": [
+            {
+              "html": "<a href=\"/\" class=\"flex items-center shrink-0\" aria-label=\"Tech Hacks AI Home\">",
+              "target": [
+                "a[aria-label=\"Tech Hacks AI Home\"]"
+              ]
+            },
+            {
+              "html": "<button type=\"button\" aria-label=\"Open Tech Hacks AI A...\" class=\"flex items-center ga...\">",
+              "target": [
+                ".pl-2\\.5"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "route": "/non-existent-route-for-404-test",
+      "theme": "dark",
+      "violations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+          "nodesCount": 14,
+          "samples": [
+            {
+              "html": "<span>Tech Hacks</span>",
+              "target": [
+                ".dark\\:text-\\[\\#F1F5F9\\] > span:nth-child(1)"
+              ]
+            },
+            {
+              "html": "<span>Discover</span>",
+              "target": [
+                ".relative:nth-child(1) > .text-\\[\\#475569\\].dark\\:text-\\[\\#94A3B8\\].inline-flex > span"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "label-content-name-mismatch",
+          "impact": "serious",
+          "description": "Ensure that elements labelled through their content must have their visible text as part of their accessible name",
+          "nodesCount": 2,
+          "samples": [
+            {
+              "html": "<a href=\"/\" class=\"flex items-center shrink-0\" aria-label=\"Tech Hacks AI Home\">",
+              "target": [
+                "a[aria-label=\"Tech Hacks AI Home\"]"
+              ]
+            },
+            {
+              "html": "<button type=\"button\" aria-label=\"Open Tech Hacks AI A...\" class=\"flex items-center ga...\">",
+              "target": [
+                ".pl-2\\.5"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "interactiveTests": {
+    "themeToggle": {
+      "found": true,
+      "initialTheme": "dark",
+      "afterTheme": "light",
+      "storageVal": "light",
+      "success": true
+    },
+    "search": {
+      "found": true,
+      "query": "supabase",
+      "hasSupabaseLink": true,
+      "count": 1
+    },
+    "chatbot": {
+      "found": true,
+      "dialogOpened": true,
+      "hasInput": true
+    },
+    "mobileMenu": {
+      "clicked": true,
+      "drawerVisible": true,
+      "navLinksCount": 24,
+      "hasThemeBtn": true
+    }
+  }
+}
