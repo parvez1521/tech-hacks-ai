@@ -294,7 +294,7 @@ describe('Phase 22: Authentic Brand Logo Integration & Catalog Mapping', () => {
       setupMockBrowser('https://techhacksai.com/prompt-library/gemini-commercial-product-photography');
       const { App } = ssrModule;
       const html = renderClean(React.createElement(App));
-      assert.ok(html.includes('/logos/google.svg'), 'Gemini prompt detail must render Google brand logo in header badge');
+      assert.ok(html.includes('/logos/googlegemini.svg'), 'Gemini prompt detail must render the Google Gemini product logo in the header badge');
     });
 
     test('/updates changelog renders brand logos for tool releases', () => {

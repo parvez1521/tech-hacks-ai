@@ -79,7 +79,7 @@ export const PromptLibraryPage: React.FC = () => {
           <p className="mt-3 max-w-2xl text-sm sm:text-base leading-7 text-slate-600 dark:text-slate-300">Browse adaptable recipes for image, video, and creative workflows. Preview the direction, check model notes, then copy and make it yours.</p>
         </div>
         <div className="prompt-atlas__art" aria-hidden="true">
-          <img src="/prompts/product-studio.svg" alt="" width="720" height="460" fetchpriority="high" />
+          <img src="/prompts/generated/gemini-commercial-product-photography.webp" alt="" width="1254" height="1254" fetchpriority="high" decoding="async" />
           <div className="prompt-atlas__art-note"><Sparkles size={15} /> Make a prompt your own</div>
         </div>
       </section>

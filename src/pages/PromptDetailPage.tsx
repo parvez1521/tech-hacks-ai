@@ -4,6 +4,8 @@ import { getPromptBySlug, getAllPrompts } from '../services/aiCatalogService';
 import { BookmarkButton } from '../components/BookmarkButton';
 import { PromptCard } from '../components/PromptCard';
 import { BrandLogo } from '../components/BrandLogo';
+import { PromptPreviewImage } from '../components/PromptPreviewImage';
+import { getPromptProviderLogoSlug } from '../data/promptProviderLogos.ts';
 import { BookmarkItem } from '../types';
 import type { PromptItem } from '../types';
 import { fetchPublishedPrompts } from '../services/promptLibraryService';
@@ -146,7 +148,7 @@ export const PromptDetailPage: React.FC = () => {
             {prompt.provider && (
               <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-blue-50 text-blue-700 border border-primary/30">
                 <BrandLogo
-                  slug={prompt.provider.toLowerCase().replace(/\s+/g, '-')}
+                  slug={getPromptProviderLogoSlug(prompt.provider, prompt.targetModel)}
                   name={prompt.provider}
                   size="xs"
                   showContainer={false}
@@ -180,11 +182,12 @@ export const PromptDetailPage: React.FC = () => {
         </p>
 
         <figure className="mb-6 overflow-hidden rounded-2xl border border-border bg-muted">
-          <img src={prompt.previewImage || '/prompts/digital-garden.svg'} alt={`${prompt.visualStyle || 'Creative'} preview for ${prompt.title}`} width="720" height="460" fetchpriority="high" decoding="async" className="block max-h-[420px] w-full object-cover" />
+          <PromptPreviewImage src={prompt.previewImage} alt={prompt.previewImageAlt || `${prompt.title} prompt preview`} priority className="block max-h-[500px] w-full bg-slate-100 object-contain dark:bg-slate-800" />
           <figcaption className="flex flex-wrap items-center gap-x-4 gap-y-1 px-4 py-3 text-xs text-muted-foreground">
             <span><strong className="text-foreground">Visual style</strong> {prompt.visualStyle || 'Conceptual'}</span>
             <span><strong className="text-foreground">Aspect ratio</strong> {prompt.aspectRatio || '1:1'}</span>
             <span><strong className="text-foreground">Model</strong> {prompt.targetModel}</span>
+            <span>Original AI-generated preview created for Tech Hacks AI.</span>
           </figcaption>
         </figure>
 

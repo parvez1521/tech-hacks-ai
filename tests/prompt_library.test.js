@@ -3,23 +3,28 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
 import { promptsData } from '../src/data/promptsData.ts';
+import { promptArtwork } from '../src/data/promptArtwork.ts';
 import { validatePrompt, listPrompts } from '../server/promptsStore.js';
 import promptApi from '../api/prompts.js';
 
-test('prompt library recipes have usable metadata and original local preview artwork', () => {
+test('prompt library recipes have usable metadata and unique original local previews', () => {
   assert.ok(promptsData.length > 0);
+  const mapped = promptsData.map((prompt) => promptArtwork[prompt.slug]);
+  assert.ok(mapped.every(Boolean), 'each prompt has a slug-specific artwork record');
+  assert.equal(new Set(mapped.map((item) => item.path)).size, promptsData.length, 'every prompt has its own preview path');
   const source = fs.readFileSync(path.resolve('src/services/aiCatalogService.ts'), 'utf8');
-  assert.match(source, /function getPromptArtwork/);
   assert.match(source, /function inferPromptStyle/);
   assert.match(source, /function inferPromptAspectRatio/);
-  for (const image of ['product-studio.svg', 'cinematic-frame.svg', 'character-study.svg', 'editorial-layout.svg', 'digital-garden.svg']) {
-    assert.ok(fs.existsSync(path.resolve('public/prompts', image)), `${image} exists`);
+  for (const item of mapped) {
+    const filePath = path.resolve('public', item.path.replace(/^\//, ''));
+    assert.ok(fs.existsSync(filePath), `${item.path} exists`);
+    assert.ok(item.alt.length >= 20, `${item.path} has meaningful alt text`);
   }
   assert.ok(promptsData.every((prompt) => prompt.promptText && prompt.tags.length && prompt.targetModel));
 });
 
 test('prompt storage rejects missing attribution and invalid image locations', () => {
-  const good = { id: 'original-1', slug: 'original-one', title: 'Original one', description: 'Description', category: 'ai-image-generation', targetModel: 'Flux', promptText: 'An original image recipe.', tags: ['editorial'], authorOrSource: 'Tech Hacks AI', previewImage: '/prompts/digital-garden.svg' };
+  const good = { id: 'original-1', slug: 'original-one', title: 'Original one', description: 'Description', category: 'ai-image-generation', targetModel: 'Flux', promptText: 'An original image recipe.', tags: ['editorial'], authorOrSource: 'Tech Hacks AI', previewImage: '/prompts/generated/gemini-commercial-product-photography.webp' };
   assert.equal(validatePrompt(good), null);
   assert.match(validatePrompt({ ...good, authorOrSource: '' }), /attribution/i);
   assert.match(validatePrompt({ ...good, previewImage: 'http://unsafe.test/preview.jpg' }), /HTTPS/);

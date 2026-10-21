@@ -146,16 +146,16 @@ export const BrandLogo: React.FC<BrandLogoProps> = ({
     );
   }
 
-  // Graceful Fallback badge with consistent initials and contrast styling
+  // Explicitly label monograms as a fallback so they cannot be mistaken for brand artwork.
   return (
     <div
       className={`${sizeClasses.container} rounded-md flex items-center justify-center font-bold ${sizeClasses.text} text-white shrink-0 shadow-inner group-hover:scale-105 transition-transform duration-300 ${className}`}
       style={{ backgroundColor: fallbackBg }}
-      title={name}
+      title={`${name} logo unavailable; showing initials fallback`}
       role="img"
-      aria-label={name}
+      aria-label={`${name} logo unavailable; showing initials fallback`}
       data-brand-slug={slug}
-      data-logo-status="neutral-fallback"
+      data-logo-status="intentional-neutral-fallback"
     >
       {fallbackText}
     </div>

@@ -237,6 +237,8 @@ export interface PromptItem {
   officialToolUrl?: string; // e.g. 'https://ai.google.dev/gemini-api/docs/image-generation', 'https://higgsfield.ai/'
   /** Original or properly licensed preview image hosted by this project. */
   previewImage?: string;
+  /** Describes what is visibly present in the prompt preview. */
+  previewImageAlt?: string;
   /** Editorial visual treatment to help users find a compatible recipe. */
   visualStyle?: string;
   aspectRatio?: string;

@@ -12,7 +12,9 @@
     "logos:sync": "node scripts/sync-official-ai-logo-assets.mjs",
     "db:migrate": "node scripts/migrate-to-supabase.js",
     "prompts:sitemap": "node --experimental-strip-types scripts/generate-prompt-sitemap.mjs",
-    "prompts:import": "node --experimental-strip-types scripts/import-prompts.mjs"
+    "prompts:import": "node --experimental-strip-types scripts/import-prompts.mjs",
+    "prompts:audit": "node --experimental-strip-types scripts/audit-prompt-assets.mjs --write --check",
+    "prompts:audit:remote": "node --experimental-strip-types scripts/audit-prompt-assets.mjs --write --check-remote --check"
   },
   "dependencies": {
     "@ffmpeg/ffmpeg": "^0.12.15",

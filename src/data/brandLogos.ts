@@ -64,11 +64,12 @@ export const brandLogos: Record<string, BrandLogoEntry> = {
     "slug": "affine",
     "name": "AFFiNE",
     "assetPath": "/logos/affine.svg",
-    "sourceType": "official",
-    "verifiedAt": "2026-10-17",
+    "sourceType": "fallback",
+    "verifiedAt": "2026-10-22",
     "badgeBg": "#ec4899",
     "format": "svg",
-    "pngAssetPath": "/logos/png/affine.png"
+    "pngAssetPath": "/logos/png/affine.png",
+    "notes": "Verification gap: the existing local mark has no traceable source and is withheld from display. BrandLogo shows its neutral initials fallback until a verified source is recorded."
   },
   "aider": {
     "slug": "aider",
@@ -86,20 +87,24 @@ export const brandLogos: Record<string, BrandLogoEntry> = {
     "name": "Airtable",
     "assetPath": "/logos/airtable.svg",
     "sourceType": "simple-icons",
-    "verifiedAt": "2026-10-17",
+    "verifiedAt": "2026-10-22",
     "badgeBg": "#18bfff",
     "format": "svg",
-    "pngAssetPath": "/logos/png/airtable.png"
+    "pngAssetPath": "/logos/png/airtable.png",
+    "sourceUrl": "https://cdn.jsdelivr.net/npm/simple-icons/icons/airtable.svg",
+    "notes": "Simple Icons airtable SVG source; local vector paths verified against the maintained source on 2026-10-22, with the local brand color retained."
   },
   "algolia": {
     "slug": "algolia",
     "name": "Algolia",
     "assetPath": "/logos/algolia.svg",
     "sourceType": "simple-icons",
-    "verifiedAt": "2026-10-17",
+    "verifiedAt": "2026-10-22",
     "badgeBg": "#003dff",
     "format": "svg",
-    "pngAssetPath": "/logos/png/algolia.png"
+    "pngAssetPath": "/logos/png/algolia.png",
+    "sourceUrl": "https://cdn.jsdelivr.net/npm/simple-icons/icons/algolia.svg",
+    "notes": "Simple Icons algolia SVG source; local vector paths verified against the maintained source on 2026-10-22, with the local brand color retained."
   },
   "amazonaws": {
     "slug": "amazonaws",
@@ -176,11 +181,12 @@ export const brandLogos: Record<string, BrandLogoEntry> = {
     "slug": "appflowy",
     "name": "AppFlowy",
     "assetPath": "/logos/appflowy.svg",
-    "sourceType": "official",
-    "verifiedAt": "2026-10-17",
+    "sourceType": "fallback",
+    "verifiedAt": "2026-10-22",
     "badgeBg": "#4f46e5",
     "format": "svg",
-    "pngAssetPath": "/logos/png/appflowy.png"
+    "pngAssetPath": "/logos/png/appflowy.png",
+    "notes": "Verification gap: the existing local mark has no traceable source and is withheld from display. BrandLogo shows its neutral initials fallback until a verified source is recorded."
   },
   "apple": {
     "slug": "apple",
@@ -222,41 +228,45 @@ export const brandLogos: Record<string, BrandLogoEntry> = {
     "slug": "aws",
     "name": "Amazon Web Services",
     "assetPath": "/logos/aws.svg",
-    "sourceType": "official",
-    "verifiedAt": "2026-10-18",
+    "sourceType": "fallback",
+    "verifiedAt": "2026-10-22",
     "badgeBg": "#232f3e",
     "format": "svg",
-    "pngAssetPath": "/logos/png/aws.png"
+    "pngAssetPath": "/logos/png/aws.png",
+    "notes": "Verification gap: the existing local mark has no traceable source and is withheld from display. BrandLogo shows its neutral initials fallback until a verified source is recorded."
   },
   "azure": {
     "slug": "azure",
     "name": "Microsoft Azure",
     "assetPath": "/logos/azure.svg",
-    "sourceType": "official",
-    "verifiedAt": "2026-10-18",
+    "sourceType": "fallback",
+    "verifiedAt": "2026-10-22",
     "badgeBg": "#0078d4",
     "format": "svg",
-    "pngAssetPath": "/logos/png/azure.png"
+    "pngAssetPath": "/logos/png/azure.png",
+    "notes": "Verification gap: the existing local mark has no traceable source and is withheld from display. BrandLogo shows its neutral initials fallback until a verified source is recorded."
   },
   "baserow": {
     "slug": "baserow",
     "name": "Baserow",
     "assetPath": "/logos/baserow.svg",
-    "sourceType": "official",
-    "verifiedAt": "2026-10-17",
+    "sourceType": "fallback",
+    "verifiedAt": "2026-10-22",
     "badgeBg": "#2d60ff",
     "format": "svg",
-    "pngAssetPath": "/logos/png/baserow.png"
+    "pngAssetPath": "/logos/png/baserow.png",
+    "notes": "Verification gap: the existing local mark has no traceable source and is withheld from display. BrandLogo shows its neutral initials fallback until a verified source is recorded."
   },
   "beekeeper-studio": {
     "slug": "beekeeper-studio",
     "name": "Beekeeper Studio",
     "assetPath": "/logos/beekeeper-studio.svg",
-    "sourceType": "official",
-    "verifiedAt": "2026-10-17",
+    "sourceType": "fallback",
+    "verifiedAt": "2026-10-22",
     "badgeBg": "#f59e0b",
     "format": "svg",
-    "pngAssetPath": "/logos/png/beekeeper-studio.png"
+    "pngAssetPath": "/logos/png/beekeeper-studio.png",
+    "notes": "Verification gap: the existing local mark has no traceable source and is withheld from display. BrandLogo shows its neutral initials fallback until a verified source is recorded."
   },
   "blender": {
     "slug": "blender",
@@ -274,11 +284,12 @@ export const brandLogos: Record<string, BrandLogoEntry> = {
     "slug": "bolt-new",
     "name": "Bolt.new",
     "assetPath": "/logos/bolt-new.svg",
-    "sourceType": "official",
-    "verifiedAt": "2026-10-17",
+    "sourceType": "fallback",
+    "verifiedAt": "2026-10-22",
     "badgeBg": "#1389fd",
     "format": "svg",
-    "pngAssetPath": "/logos/png/bolt-new.png"
+    "pngAssetPath": "/logos/png/bolt-new.png",
+    "notes": "Verification gap: the existing local mark has no traceable source and is withheld from display. BrandLogo shows its neutral initials fallback until a verified source is recorded."
   },
   "brave": {
     "slug": "brave",
@@ -297,10 +308,12 @@ export const brandLogos: Record<string, BrandLogoEntry> = {
     "name": "Buffer",
     "assetPath": "/logos/buffer.svg",
     "sourceType": "simple-icons",
-    "verifiedAt": "2026-10-17",
+    "verifiedAt": "2026-10-22",
     "badgeBg": "#3b82f6",
     "format": "svg",
-    "pngAssetPath": "/logos/png/buffer.png"
+    "pngAssetPath": "/logos/png/buffer.png",
+    "sourceUrl": "https://cdn.jsdelivr.net/npm/simple-icons/icons/buffer.svg",
+    "notes": "Simple Icons buffer SVG source; local vector paths verified against the maintained source on 2026-10-22, with the local brand color retained."
   },
   "bun": {
     "slug": "bun",
@@ -319,20 +332,24 @@ export const brandLogos: Record<string, BrandLogoEntry> = {
     "name": "Cal.com",
     "assetPath": "/logos/cal-com.svg",
     "sourceType": "simple-icons",
-    "verifiedAt": "2026-10-17",
+    "verifiedAt": "2026-10-22",
     "badgeBg": "#111827",
     "format": "svg",
-    "pngAssetPath": "/logos/png/cal-com.png"
+    "pngAssetPath": "/logos/png/cal-com.png",
+    "sourceUrl": "https://cdn.jsdelivr.net/npm/simple-icons/icons/caldotcom.svg",
+    "notes": "Simple Icons caldotcom SVG source; local vector paths verified against the maintained source on 2026-10-22, with the local brand color retained."
   },
   "calendly": {
     "slug": "calendly",
     "name": "Calendly",
     "assetPath": "/logos/calendly.svg",
     "sourceType": "simple-icons",
-    "verifiedAt": "2026-10-17",
+    "verifiedAt": "2026-10-22",
     "badgeBg": "#006bff",
     "format": "svg",
-    "pngAssetPath": "/logos/png/calendly.png"
+    "pngAssetPath": "/logos/png/calendly.png",
+    "sourceUrl": "https://cdn.jsdelivr.net/npm/simple-icons/icons/calendly.svg",
+    "notes": "Simple Icons calendly SVG source; local vector paths verified against the maintained source on 2026-10-22, with the local brand color retained."
   },
   "canva": {
     "slug": "canva",
@@ -360,13 +377,13 @@ export const brandLogos: Record<string, BrandLogoEntry> = {
   "chatgpt": {
     "slug": "chatgpt",
     "name": "ChatGPT",
-    "assetPath": "/logos/chatgpt.svg",
-    "sourceType": "simple-icons",
-    "verifiedAt": "2026-10-17",
+    "assetPath": "/logos/official-ai/chatgpt.webp",
+    "sourceType": "official",
+    "verifiedAt": "2026-10-22",
     "badgeBg": "#10a37f",
-    "format": "svg",
-    "sourceUrl": "https://www.google.com/s2/favicons?domain=chatgpt.com&sz=256",
-    "pngAssetPath": "/logos/png/chatgpt.png"
+    "format": "webp",
+    "sourceUrl": "https://images.ctfassets.net/j22is2dtoxu1/intercom-img-d177d076c9a5453052925143/49d5d812b0a6fcc20a14faa8c629d9fb/icon-ios-1024_401x.png?fm=webp&q=80&w=1024",
+    "notes": "Official ChatGPT app icon shown in the OpenAI Help Center article about identifying the official iOS app."
   },
   "chroma": {
     "slug": "chroma",
@@ -407,11 +424,12 @@ export const brandLogos: Record<string, BrandLogoEntry> = {
     "slug": "claude-code",
     "name": "Claude Code",
     "assetPath": "/logos/claude-code.svg",
-    "sourceType": "vector",
-    "verifiedAt": "2026-10-18",
+    "sourceType": "fallback",
+    "verifiedAt": "2026-10-22",
     "badgeBg": "#d97706",
     "format": "svg",
-    "pngAssetPath": "/logos/png/claude-code.png"
+    "pngAssetPath": "/logos/png/claude-code.png",
+    "notes": "Verification gap: the existing local mark has no traceable source and is withheld from display. BrandLogo shows its neutral initials fallback until a verified source is recorded."
   },
   "clickup": {
     "slug": "clickup",
@@ -429,11 +447,12 @@ export const brandLogos: Record<string, BrandLogoEntry> = {
     "slug": "cline",
     "name": "Cline",
     "assetPath": "/logos/cline.svg",
-    "sourceType": "vector",
-    "verifiedAt": "2026-10-18",
+    "sourceType": "fallback",
+    "verifiedAt": "2026-10-22",
     "badgeBg": "#6366f1",
     "format": "svg",
-    "pngAssetPath": "/logos/png/cline.png"
+    "pngAssetPath": "/logos/png/cline.png",
+    "notes": "Verification gap: the existing local mark has no traceable source and is withheld from display. BrandLogo shows its neutral initials fallback until a verified source is recorded."
   },
   "cloudflare": {
     "slug": "cloudflare",
@@ -530,7 +549,7 @@ export const brandLogos: Record<string, BrandLogoEntry> = {
     "slug": "cursor",
     "name": "Cursor Editor",
     "assetPath": "/logos/cursor.svg",
-    "sourceType": "official",
+    "sourceType": "simple-icons",
     "verifiedAt": "2026-10-17",
     "badgeBg": "#18181b",
     "format": "svg",
@@ -611,11 +630,12 @@ export const brandLogos: Record<string, BrandLogoEntry> = {
     "slug": "docmost",
     "name": "Docmost",
     "assetPath": "/logos/docmost.svg",
-    "sourceType": "official",
-    "verifiedAt": "2026-10-17",
+    "sourceType": "fallback",
+    "verifiedAt": "2026-10-22",
     "badgeBg": "#2563eb",
     "format": "svg",
-    "pngAssetPath": "/logos/png/docmost.png"
+    "pngAssetPath": "/logos/png/docmost.png",
+    "notes": "Verification gap: the existing local mark has no traceable source and is withheld from display. BrandLogo shows its neutral initials fallback until a verified source is recorded."
   },
   "dreamina": {
     "slug": "dreamina",
@@ -689,11 +709,12 @@ export const brandLogos: Record<string, BrandLogoEntry> = {
     "slug": "firecrawl",
     "name": "Firecrawl",
     "assetPath": "/logos/firecrawl.svg",
-    "sourceType": "official",
-    "verifiedAt": "2026-10-17",
+    "sourceType": "fallback",
+    "verifiedAt": "2026-10-22",
     "badgeBg": "#ff4d00",
     "format": "svg",
-    "pngAssetPath": "/logos/png/firecrawl.png"
+    "pngAssetPath": "/logos/png/firecrawl.png",
+    "notes": "Verification gap: the existing local mark has no traceable source and is withheld from display. BrandLogo shows its neutral initials fallback until a verified source is recorded."
   },
   "firefox": {
     "slug": "firefox",
@@ -710,32 +731,36 @@ export const brandLogos: Record<string, BrandLogoEntry> = {
   "flux-1": {
     "slug": "flux-1",
     "name": "FLUX.1 by Black Forest Labs",
-    "assetPath": "/logos/flux-1.svg",
+    "assetPath": "/logos/official-ai/flux-symbol-black.svg",
     "sourceType": "official",
-    "verifiedAt": "2026-10-17",
+    "verifiedAt": "2026-10-22",
     "badgeBg": "#000000",
     "format": "svg",
-    "pngAssetPath": "/logos/png/flux-1.png"
+    "sourceUrl": "https://bfl.ai/brand/symbol-black.svg",
+    "notes": "Black Forest Labs official symbol from its brand-guidelines page; use on a light tile and preserve its original color."
   },
   "gemini": {
     "slug": "gemini",
     "name": "Google Gemini",
     "assetPath": "/logos/gemini.svg",
     "sourceType": "simple-icons",
-    "verifiedAt": "2026-10-17",
+    "verifiedAt": "2026-10-22",
     "badgeBg": "#388bfd",
     "format": "svg",
-    "pngAssetPath": "/logos/png/gemini.png"
+    "pngAssetPath": "/logos/png/gemini.png",
+    "sourceUrl": "https://cdn.jsdelivr.net/npm/simple-icons/icons/googlegemini.svg",
+    "notes": "Simple Icons googlegemini SVG source; local vector paths verified against the maintained source on 2026-10-22, with the local brand color retained."
   },
   "gemini-cli": {
     "slug": "gemini-cli",
     "name": "Gemini CLI",
     "assetPath": "/logos/gemini-cli.svg",
-    "sourceType": "vector",
-    "verifiedAt": "2026-10-18",
+    "sourceType": "fallback",
+    "verifiedAt": "2026-10-22",
     "badgeBg": "#1e293b",
     "format": "svg",
-    "pngAssetPath": "/logos/png/gemini-cli.png"
+    "pngAssetPath": "/logos/png/gemini-cli.png",
+    "notes": "Verification gap: the existing local mark has no traceable source and is withheld from display. BrandLogo shows its neutral initials fallback until a verified source is recorded."
   },
   "gimp": {
     "slug": "gimp",
@@ -776,7 +801,7 @@ export const brandLogos: Record<string, BrandLogoEntry> = {
     "slug": "google",
     "name": "Google",
     "assetPath": "/logos/google.svg",
-    "sourceType": "official",
+    "sourceType": "simple-icons",
     "verifiedAt": "2026-10-18",
     "badgeBg": "#4285f4",
     "format": "svg",
@@ -799,20 +824,24 @@ export const brandLogos: Record<string, BrandLogoEntry> = {
     "name": "Google Analytics",
     "assetPath": "/logos/google-analytics.svg",
     "sourceType": "simple-icons",
-    "verifiedAt": "2026-10-17",
+    "verifiedAt": "2026-10-22",
     "badgeBg": "#e37400",
     "format": "svg",
-    "pngAssetPath": "/logos/png/google-analytics.png"
+    "pngAssetPath": "/logos/png/google-analytics.png",
+    "sourceUrl": "https://cdn.jsdelivr.net/npm/simple-icons/icons/googleanalytics.svg",
+    "notes": "Simple Icons googleanalytics SVG source; local vector paths verified against the maintained source on 2026-10-22, with the local brand color retained."
   },
   "google-photos": {
     "slug": "google-photos",
     "name": "Google Photos",
     "assetPath": "/logos/google-photos.svg",
     "sourceType": "simple-icons",
-    "verifiedAt": "2026-10-17",
+    "verifiedAt": "2026-10-22",
     "badgeBg": "#ea4335",
     "format": "svg",
-    "pngAssetPath": "/logos/png/google-photos.png"
+    "pngAssetPath": "/logos/png/google-photos.png",
+    "sourceUrl": "https://cdn.jsdelivr.net/npm/simple-icons/icons/googlephotos.svg",
+    "notes": "Simple Icons googlephotos SVG source; local vector paths verified against the maintained source on 2026-10-22, with the local brand color retained."
   },
   "googlechrome": {
     "slug": "googlechrome",
@@ -866,11 +895,12 @@ export const brandLogos: Record<string, BrandLogoEntry> = {
     "slug": "gpt4all",
     "name": "GPT4All",
     "assetPath": "/logos/gpt4all.svg",
-    "sourceType": "official",
-    "verifiedAt": "2026-10-17",
+    "sourceType": "fallback",
+    "verifiedAt": "2026-10-22",
     "badgeBg": "#0e7490",
     "format": "svg",
-    "pngAssetPath": "/logos/png/gpt4all.png"
+    "pngAssetPath": "/logos/png/gpt4all.png",
+    "notes": "Verification gap: the existing local mark has no traceable source and is withheld from display. BrandLogo shows its neutral initials fallback until a verified source is recorded."
   },
   "groq": {
     "slug": "groq",
@@ -919,33 +949,36 @@ export const brandLogos: Record<string, BrandLogoEntry> = {
   "higgsfield": {
     "slug": "higgsfield",
     "name": "Higgsfield AI",
-    "assetPath": "/logos/higgsfield.svg",
+    "assetPath": "/logos/official-ai/higgsfield.png",
     "sourceType": "official",
-    "verifiedAt": "2026-10-18",
+    "verifiedAt": "2026-10-22",
     "badgeBg": "#0c0f17",
-    "format": "svg",
-    "sourceUrl": "https://www.google.com/s2/favicons?domain=higgsfield.ai&sz=256",
-    "pngAssetPath": "/logos/png/higgsfield.png"
+    "format": "png",
+    "sourceUrl": "https://higgsfield.ai/icon.png",
+    "notes": "Official-site icon asset; downloaded and visually checked as the lime square Higgsfield mark."
   },
   "hoppscotch": {
     "slug": "hoppscotch",
     "name": "Hoppscotch",
     "assetPath": "/logos/hoppscotch.svg",
     "sourceType": "simple-icons",
-    "verifiedAt": "2026-10-17",
+    "verifiedAt": "2026-10-22",
     "badgeBg": "#25b39e",
     "format": "svg",
-    "pngAssetPath": "/logos/png/hoppscotch.png"
+    "pngAssetPath": "/logos/png/hoppscotch.png",
+    "sourceUrl": "https://cdn.jsdelivr.net/npm/simple-icons/icons/hoppscotch.svg",
+    "notes": "Simple Icons hoppscotch SVG source; local vector paths verified against the maintained source on 2026-10-22, with the local brand color retained."
   },
   "huggingchat": {
     "slug": "huggingchat",
     "name": "HuggingChat",
     "assetPath": "/logos/huggingchat.svg",
-    "sourceType": "simple-icons",
-    "verifiedAt": "2026-10-17",
+    "sourceType": "fallback",
+    "verifiedAt": "2026-10-22",
     "badgeBg": "#ffd21e",
     "format": "svg",
-    "pngAssetPath": "/logos/png/huggingchat.png"
+    "pngAssetPath": "/logos/png/huggingchat.png",
+    "notes": "Verification gap: the existing local mark has no traceable source and is withheld from display. BrandLogo shows its neutral initials fallback until a verified source is recorded."
   },
   "huggingface": {
     "slug": "huggingface",
@@ -973,11 +1006,12 @@ export const brandLogos: Record<string, BrandLogoEntry> = {
     "slug": "immich",
     "name": "Immich",
     "assetPath": "/logos/immich.svg",
-    "sourceType": "official",
-    "verifiedAt": "2026-10-17",
+    "sourceType": "fallback",
+    "verifiedAt": "2026-10-22",
     "badgeBg": "#1e1b4b",
     "format": "svg",
-    "pngAssetPath": "/logos/png/immich.png"
+    "pngAssetPath": "/logos/png/immich.png",
+    "notes": "Verification gap: the existing local mark has no traceable source and is withheld from display. BrandLogo shows its neutral initials fallback until a verified source is recorded."
   },
   "instagram": {
     "slug": "instagram",
@@ -1065,11 +1099,12 @@ export const brandLogos: Record<string, BrandLogoEntry> = {
     "slug": "kaiber",
     "name": "Kaiber",
     "assetPath": "/logos/kaiber.svg",
-    "sourceType": "official",
-    "verifiedAt": "2026-10-18",
+    "sourceType": "fallback",
+    "verifiedAt": "2026-10-22",
     "badgeBg": "#f59e0b",
     "format": "svg",
-    "pngAssetPath": "/logos/png/kaiber.png"
+    "pngAssetPath": "/logos/png/kaiber.png",
+    "notes": "Verification gap: the existing local mark has no traceable source and is withheld from display. BrandLogo shows its neutral initials fallback until a verified source is recorded."
   },
   "keras": {
     "slug": "keras",
@@ -1087,11 +1122,12 @@ export const brandLogos: Record<string, BrandLogoEntry> = {
     "slug": "khoj",
     "name": "Khoj",
     "assetPath": "/logos/khoj.svg",
-    "sourceType": "vector",
-    "verifiedAt": "2026-10-18",
+    "sourceType": "fallback",
+    "verifiedAt": "2026-10-22",
     "badgeBg": "#4338ca",
     "format": "svg",
-    "pngAssetPath": "/logos/png/khoj.png"
+    "pngAssetPath": "/logos/png/khoj.png",
+    "notes": "Verification gap: the existing local mark has no traceable source and is withheld from display. BrandLogo shows its neutral initials fallback until a verified source is recorded."
   },
   "kie-ai": {
     "slug": "kie-ai",
@@ -1108,11 +1144,12 @@ export const brandLogos: Record<string, BrandLogoEntry> = {
     "slug": "kling-ai",
     "name": "Kling AI",
     "assetPath": "/logos/kling-ai.svg",
-    "sourceType": "official",
-    "verifiedAt": "2026-10-17",
+    "sourceType": "fallback",
+    "verifiedAt": "2026-10-22",
     "badgeBg": "#e11d48",
     "format": "svg",
-    "pngAssetPath": "/logos/png/kling-ai.png"
+    "pngAssetPath": "/logos/png/kling-ai.png",
+    "notes": "Verification gap: the existing local mark has no traceable source and is withheld from display. BrandLogo shows its neutral initials fallback until a verified source is recorded."
   },
   "klingai": {
     "slug": "klingai",
@@ -1141,11 +1178,12 @@ export const brandLogos: Record<string, BrandLogoEntry> = {
     "slug": "krea-ai",
     "name": "Krea AI",
     "assetPath": "/logos/krea-ai.svg",
-    "sourceType": "official",
-    "verifiedAt": "2026-10-17",
+    "sourceType": "fallback",
+    "verifiedAt": "2026-10-22",
     "badgeBg": "#18181b",
     "format": "svg",
-    "pngAssetPath": "/logos/png/krea-ai.png"
+    "pngAssetPath": "/logos/png/krea-ai.png",
+    "notes": "Verification gap: the existing local mark has no traceable source and is withheld from display. BrandLogo shows its neutral initials fallback until a verified source is recorded."
   },
   "langchain": {
     "slug": "langchain",
@@ -1301,31 +1339,36 @@ export const brandLogos: Record<string, BrandLogoEntry> = {
     "slug": "luma-dream-machine",
     "name": "Luma Dream Machine",
     "assetPath": "/logos/luma-dream-machine.svg",
-    "sourceType": "official",
-    "verifiedAt": "2026-10-17",
+    "sourceType": "fallback",
+    "verifiedAt": "2026-10-22",
     "badgeBg": "#090a0f",
     "format": "svg",
-    "pngAssetPath": "/logos/png/luma-dream-machine.png"
+    "pngAssetPath": "/logos/png/luma-dream-machine.png",
+    "notes": "Verification gap: the existing local mark has no traceable source and is withheld from display. BrandLogo shows its neutral initials fallback until a verified source is recorded."
   },
   "make": {
     "slug": "make",
     "name": "Make",
     "assetPath": "/logos/make.svg",
     "sourceType": "simple-icons",
-    "verifiedAt": "2026-10-17",
+    "verifiedAt": "2026-10-22",
     "badgeBg": "#6c47ff",
     "format": "svg",
-    "pngAssetPath": "/logos/png/make.png"
+    "pngAssetPath": "/logos/png/make.png",
+    "sourceUrl": "https://cdn.jsdelivr.net/npm/simple-icons/icons/make.svg",
+    "notes": "Simple Icons make SVG source; local vector paths verified against the maintained source on 2026-10-22, with the local brand color retained."
   },
   "meilisearch": {
     "slug": "meilisearch",
     "name": "Meilisearch",
     "assetPath": "/logos/meilisearch.svg",
     "sourceType": "simple-icons",
-    "verifiedAt": "2026-10-17",
+    "verifiedAt": "2026-10-22",
     "badgeBg": "#ff4069",
     "format": "svg",
-    "pngAssetPath": "/logos/png/meilisearch.png"
+    "pngAssetPath": "/logos/png/meilisearch.png",
+    "sourceUrl": "https://cdn.jsdelivr.net/npm/simple-icons/icons/meilisearch.svg",
+    "notes": "Simple Icons meilisearch SVG source; local vector paths verified against the maintained source on 2026-10-22, with the local brand color retained."
   },
   "meshy-3d": {
     "slug": "meshy-3d",
@@ -1400,11 +1443,12 @@ export const brandLogos: Record<string, BrandLogoEntry> = {
     "slug": "midjourney",
     "name": "Midjourney v6.1",
     "assetPath": "/logos/midjourney.svg",
-    "sourceType": "official",
-    "verifiedAt": "2026-10-17",
+    "sourceType": "fallback",
+    "verifiedAt": "2026-10-22",
     "badgeBg": "#0f172a",
     "format": "svg",
-    "pngAssetPath": "/logos/png/midjourney.png"
+    "pngAssetPath": "/logos/png/midjourney.png",
+    "notes": "Verification gap: the existing local mark has no traceable source and is withheld from display. BrandLogo shows its neutral initials fallback until a verified source is recorded."
   },
   "mistral": {
     "slug": "mistral",
@@ -1422,11 +1466,12 @@ export const brandLogos: Record<string, BrandLogoEntry> = {
     "slug": "mistral-le-chat",
     "name": "Mistral Le Chat",
     "assetPath": "/logos/mistral-le-chat.svg",
-    "sourceType": "official",
-    "verifiedAt": "2026-10-18",
+    "sourceType": "fallback",
+    "verifiedAt": "2026-10-22",
     "badgeBg": "#f97316",
     "format": "svg",
-    "pngAssetPath": "/logos/png/mistral-le-chat.png"
+    "pngAssetPath": "/logos/png/mistral-le-chat.png",
+    "notes": "Verification gap: the existing local mark has no traceable source and is withheld from display. BrandLogo shows its neutral initials fallback until a verified source is recorded."
   },
   "modal": {
     "slug": "modal",
@@ -1513,11 +1558,12 @@ export const brandLogos: Record<string, BrandLogoEntry> = {
     "slug": "novu",
     "name": "Novu",
     "assetPath": "/logos/novu.svg",
-    "sourceType": "official",
-    "verifiedAt": "2026-10-17",
+    "sourceType": "fallback",
+    "verifiedAt": "2026-10-22",
     "badgeBg": "#ff2460",
     "format": "svg",
-    "pngAssetPath": "/logos/png/novu.png"
+    "pngAssetPath": "/logos/png/novu.png",
+    "notes": "Verification gap: the existing local mark has no traceable source and is withheld from display. BrandLogo shows its neutral initials fallback until a verified source is recorded."
   },
   "nvidia": {
     "slug": "nvidia",
@@ -1592,11 +1638,12 @@ export const brandLogos: Record<string, BrandLogoEntry> = {
     "slug": "opencode",
     "name": "OpenCode",
     "assetPath": "/logos/opencode.svg",
-    "sourceType": "vector",
-    "verifiedAt": "2026-10-18",
+    "sourceType": "fallback",
+    "verifiedAt": "2026-10-22",
     "badgeBg": "#0284c7",
     "format": "svg",
-    "pngAssetPath": "/logos/png/opencode.png"
+    "pngAssetPath": "/logos/png/opencode.png",
+    "notes": "Verification gap: the existing local mark has no traceable source and is withheld from display. BrandLogo shows its neutral initials fallback until a verified source is recorded."
   },
   "openrouter": {
     "slug": "openrouter",
@@ -1626,11 +1673,12 @@ export const brandLogos: Record<string, BrandLogoEntry> = {
     "slug": "outline",
     "name": "Outline",
     "assetPath": "/logos/outline.svg",
-    "sourceType": "official",
-    "verifiedAt": "2026-10-17",
+    "sourceType": "fallback",
+    "verifiedAt": "2026-10-22",
     "badgeBg": "#10b981",
     "format": "svg",
-    "pngAssetPath": "/logos/png/outline.png"
+    "pngAssetPath": "/logos/png/outline.png",
+    "notes": "Verification gap: the existing local mark has no traceable source and is withheld from display. BrandLogo shows its neutral initials fallback until a verified source is recorded."
   },
   "paypal": {
     "slug": "paypal",
@@ -1649,20 +1697,23 @@ export const brandLogos: Record<string, BrandLogoEntry> = {
     "name": "Penpot",
     "assetPath": "/logos/penpot.svg",
     "sourceType": "simple-icons",
-    "verifiedAt": "2026-10-17",
+    "verifiedAt": "2026-10-22",
     "badgeBg": "#00e5a3",
     "format": "svg",
-    "pngAssetPath": "/logos/png/penpot.png"
+    "pngAssetPath": "/logos/png/penpot.png",
+    "sourceUrl": "https://cdn.jsdelivr.net/npm/simple-icons/icons/penpot.svg",
+    "notes": "Simple Icons penpot SVG source; local vector paths verified against the maintained source on 2026-10-22, with the local brand color retained."
   },
   "perplexica": {
     "slug": "perplexica",
     "name": "Perplexica",
     "assetPath": "/logos/perplexica.svg",
-    "sourceType": "vector",
-    "verifiedAt": "2026-10-18",
+    "sourceType": "fallback",
+    "verifiedAt": "2026-10-22",
     "badgeBg": "#0f766e",
     "format": "svg",
-    "pngAssetPath": "/logos/png/perplexica.png"
+    "pngAssetPath": "/logos/png/perplexica.png",
+    "notes": "Verification gap: the existing local mark has no traceable source and is withheld from display. BrandLogo shows its neutral initials fallback until a verified source is recorded."
   },
   "perplexity": {
     "slug": "perplexity",
@@ -1702,21 +1753,24 @@ export const brandLogos: Record<string, BrandLogoEntry> = {
     "slug": "pixverse",
     "name": "PixVerse",
     "assetPath": "/logos/pixverse.svg",
-    "sourceType": "official",
-    "verifiedAt": "2026-10-18",
+    "sourceType": "fallback",
+    "verifiedAt": "2026-10-22",
     "badgeBg": "#a855f7",
     "format": "svg",
-    "pngAssetPath": "/logos/png/pixverse.png"
+    "pngAssetPath": "/logos/png/pixverse.png",
+    "notes": "Verification gap: the existing local mark has no traceable source and is withheld from display. BrandLogo shows its neutral initials fallback until a verified source is recorded."
   },
   "plausible": {
     "slug": "plausible",
     "name": "Plausible Analytics",
     "assetPath": "/logos/plausible.svg",
     "sourceType": "simple-icons",
-    "verifiedAt": "2026-10-17",
+    "verifiedAt": "2026-10-22",
     "badgeBg": "#6366f1",
     "format": "svg",
-    "pngAssetPath": "/logos/png/plausible.png"
+    "pngAssetPath": "/logos/png/plausible.png",
+    "sourceUrl": "https://cdn.jsdelivr.net/npm/simple-icons/icons/plausibleanalytics.svg",
+    "notes": "Simple Icons plausibleanalytics SVG source; local vector paths verified against the maintained source on 2026-10-22, with the local brand color retained."
   },
   "play-ht": {
     "slug": "play-ht",
@@ -1734,21 +1788,24 @@ export const brandLogos: Record<string, BrandLogoEntry> = {
     "slug": "postiz",
     "name": "Postiz",
     "assetPath": "/logos/postiz.svg",
-    "sourceType": "official",
-    "verifiedAt": "2026-10-17",
+    "sourceType": "fallback",
+    "verifiedAt": "2026-10-22",
     "badgeBg": "#7c3aed",
     "format": "svg",
-    "pngAssetPath": "/logos/png/postiz.png"
+    "pngAssetPath": "/logos/png/postiz.png",
+    "notes": "Verification gap: the existing local mark has no traceable source and is withheld from display. BrandLogo shows its neutral initials fallback until a verified source is recorded."
   },
   "postman": {
     "slug": "postman",
     "name": "Postman",
     "assetPath": "/logos/postman.svg",
     "sourceType": "simple-icons",
-    "verifiedAt": "2026-10-17",
+    "verifiedAt": "2026-10-22",
     "badgeBg": "#ff6c37",
     "format": "svg",
-    "pngAssetPath": "/logos/png/postman.png"
+    "pngAssetPath": "/logos/png/postman.png",
+    "sourceUrl": "https://cdn.jsdelivr.net/npm/simple-icons/icons/postman.svg",
+    "notes": "Simple Icons postman SVG source; local vector paths verified against the maintained source on 2026-10-22, with the local brand color retained."
   },
   "python": {
     "slug": "python",
@@ -1848,11 +1905,12 @@ export const brandLogos: Record<string, BrandLogoEntry> = {
     "slug": "recraft",
     "name": "Recraft AI",
     "assetPath": "/logos/recraft.svg",
-    "sourceType": "official",
-    "verifiedAt": "2026-10-17",
+    "sourceType": "fallback",
+    "verifiedAt": "2026-10-22",
     "badgeBg": "#f43f5e",
     "format": "svg",
-    "pngAssetPath": "/logos/png/recraft.png"
+    "pngAssetPath": "/logos/png/recraft.png",
+    "notes": "Verification gap: the existing local mark has no traceable source and is withheld from display. BrandLogo shows its neutral initials fallback until a verified source is recorded."
   },
   "render": {
     "slug": "render",
@@ -1905,11 +1963,12 @@ export const brandLogos: Record<string, BrandLogoEntry> = {
     "slug": "roocode",
     "name": "Roo Code",
     "assetPath": "/logos/roocode.svg",
-    "sourceType": "vector",
-    "verifiedAt": "2026-10-18",
+    "sourceType": "fallback",
+    "verifiedAt": "2026-10-22",
     "badgeBg": "#f43f5e",
     "format": "svg",
-    "pngAssetPath": "/logos/png/roocode.png"
+    "pngAssetPath": "/logos/png/roocode.png",
+    "notes": "Verification gap: the existing local mark has no traceable source and is withheld from display. BrandLogo shows its neutral initials fallback until a verified source is recorded."
   },
   "runpod": {
     "slug": "runpod",
@@ -1951,10 +2010,12 @@ export const brandLogos: Record<string, BrandLogoEntry> = {
     "name": "RustDesk",
     "assetPath": "/logos/rustdesk.svg",
     "sourceType": "simple-icons",
-    "verifiedAt": "2026-10-17",
+    "verifiedAt": "2026-10-22",
     "badgeBg": "#1b85f3",
     "format": "svg",
-    "pngAssetPath": "/logos/png/rustdesk.png"
+    "pngAssetPath": "/logos/png/rustdesk.png",
+    "sourceUrl": "https://cdn.jsdelivr.net/npm/simple-icons/icons/rustdesk.svg",
+    "notes": "Simple Icons rustdesk SVG source; local vector paths verified against the maintained source on 2026-10-22, with the local brand color retained."
   },
   "safari": {
     "slug": "safari",
@@ -1996,11 +2057,12 @@ export const brandLogos: Record<string, BrandLogoEntry> = {
     "slug": "searxng",
     "name": "SearXNG",
     "assetPath": "/logos/searxng.svg",
-    "sourceType": "vector",
-    "verifiedAt": "2026-10-18",
+    "sourceType": "fallback",
+    "verifiedAt": "2026-10-22",
     "badgeBg": "#2563eb",
     "format": "svg",
-    "pngAssetPath": "/logos/png/searxng.png"
+    "pngAssetPath": "/logos/png/searxng.png",
+    "notes": "Verification gap: the existing local mark has no traceable source and is withheld from display. BrandLogo shows its neutral initials fallback until a verified source is recorded."
   },
   "shopify": {
     "slug": "shopify",
@@ -2042,11 +2104,12 @@ export const brandLogos: Record<string, BrandLogoEntry> = {
     "slug": "stable-diffusion-3",
     "name": "Stable Diffusion 3.5",
     "assetPath": "/logos/stable-diffusion-3.svg",
-    "sourceType": "official",
-    "verifiedAt": "2026-10-17",
+    "sourceType": "fallback",
+    "verifiedAt": "2026-10-22",
     "badgeBg": "#090d16",
     "format": "svg",
-    "pngAssetPath": "/logos/png/stable-diffusion-3.png"
+    "pngAssetPath": "/logos/png/stable-diffusion-3.png",
+    "notes": "Verification gap: the existing local mark has no traceable source and is withheld from display. BrandLogo shows its neutral initials fallback until a verified source is recorded."
   },
   "stripe": {
     "slug": "stripe",
@@ -2170,21 +2233,24 @@ export const brandLogos: Record<string, BrandLogoEntry> = {
     "slug": "typebot",
     "name": "Typebot",
     "assetPath": "/logos/typebot.svg",
-    "sourceType": "official",
-    "verifiedAt": "2026-10-17",
+    "sourceType": "fallback",
+    "verifiedAt": "2026-10-22",
     "badgeBg": "#f97316",
     "format": "svg",
-    "pngAssetPath": "/logos/png/typebot.png"
+    "pngAssetPath": "/logos/png/typebot.png",
+    "notes": "Verification gap: the existing local mark has no traceable source and is withheld from display. BrandLogo shows its neutral initials fallback until a verified source is recorded."
   },
   "typeform": {
     "slug": "typeform",
     "name": "Typeform",
     "assetPath": "/logos/typeform.svg",
     "sourceType": "simple-icons",
-    "verifiedAt": "2026-10-17",
+    "verifiedAt": "2026-10-22",
     "badgeBg": "#262627",
     "format": "svg",
-    "pngAssetPath": "/logos/png/typeform.png"
+    "pngAssetPath": "/logos/png/typeform.png",
+    "sourceUrl": "https://cdn.jsdelivr.net/npm/simple-icons/icons/typeform.svg",
+    "notes": "Simple Icons typeform SVG source; local vector paths verified against the maintained source on 2026-10-22, with the local brand color retained."
   },
   "typescript": {
     "slug": "typescript",
@@ -2202,21 +2268,24 @@ export const brandLogos: Record<string, BrandLogoEntry> = {
     "slug": "udio",
     "name": "Udio",
     "assetPath": "/logos/udio.svg",
-    "sourceType": "official",
-    "verifiedAt": "2026-10-17",
+    "sourceType": "fallback",
+    "verifiedAt": "2026-10-22",
     "badgeBg": "#0f172a",
     "format": "svg",
-    "pngAssetPath": "/logos/png/udio.png"
+    "pngAssetPath": "/logos/png/udio.png",
+    "notes": "Verification gap: the existing local mark has no traceable source and is withheld from display. BrandLogo shows its neutral initials fallback until a verified source is recorded."
   },
   "umami": {
     "slug": "umami",
     "name": "Umami",
     "assetPath": "/logos/umami.svg",
     "sourceType": "simple-icons",
-    "verifiedAt": "2026-10-17",
+    "verifiedAt": "2026-10-22",
     "badgeBg": "#22c55e",
     "format": "svg",
-    "pngAssetPath": "/logos/png/umami.png"
+    "pngAssetPath": "/logos/png/umami.png",
+    "sourceUrl": "https://cdn.jsdelivr.net/npm/simple-icons/icons/umami.svg",
+    "notes": "Simple Icons umami SVG source; local vector paths verified against the maintained source on 2026-10-22, with the local brand color retained."
   },
   "v0-vercel": {
     "slug": "v0-vercel",
@@ -2245,11 +2314,12 @@ export const brandLogos: Record<string, BrandLogoEntry> = {
     "slug": "vidu",
     "name": "Vidu",
     "assetPath": "/logos/vidu.svg",
-    "sourceType": "official",
-    "verifiedAt": "2026-10-18",
+    "sourceType": "fallback",
+    "verifiedAt": "2026-10-22",
     "badgeBg": "#00e5ff",
     "format": "svg",
-    "pngAssetPath": "/logos/png/vidu.png"
+    "pngAssetPath": "/logos/png/vidu.png",
+    "notes": "Verification gap: the existing local mark has no traceable source and is withheld from display. BrandLogo shows its neutral initials fallback until a verified source is recorded."
   },
   "visualstudiocode": {
     "slug": "visualstudiocode",
@@ -2432,20 +2502,23 @@ export const brandLogos: Record<string, BrandLogoEntry> = {
     "name": "Zapier",
     "assetPath": "/logos/zapier.svg",
     "sourceType": "simple-icons",
-    "verifiedAt": "2026-10-17",
+    "verifiedAt": "2026-10-22",
     "badgeBg": "#ff4a00",
     "format": "svg",
-    "pngAssetPath": "/logos/png/zapier.png"
+    "pngAssetPath": "/logos/png/zapier.png",
+    "sourceUrl": "https://cdn.jsdelivr.net/npm/simple-icons/icons/zapier.svg",
+    "notes": "Simple Icons zapier SVG source; local vector paths verified against the maintained source on 2026-10-22, with the local brand color retained."
   },
   "zapier-central": {
     "slug": "zapier-central",
     "name": "Zapier Central",
     "assetPath": "/logos/zapier-central.svg",
-    "sourceType": "official",
-    "verifiedAt": "2026-10-17",
+    "sourceType": "fallback",
+    "verifiedAt": "2026-10-22",
     "badgeBg": "#ff4a00",
     "format": "svg",
-    "pngAssetPath": "/logos/png/zapier-central.png"
+    "pngAssetPath": "/logos/png/zapier-central.png",
+    "notes": "Verification gap: the existing local mark has no traceable source and is withheld from display. BrandLogo shows its neutral initials fallback until a verified source is recorded."
   },
   "zedindustries": {
     "slug": "zedindustries",
@@ -2504,7 +2577,7 @@ export const brandLogos: Record<string, BrandLogoEntry> = {
     "format": "svg",
     "notes": "Neutral monogram fallback; a sourced provider logo has not been added."
   }
-}
+};
 
 export const SLUG_ALIASES: Record<string, string> = {
   "amazonaws": "aws",

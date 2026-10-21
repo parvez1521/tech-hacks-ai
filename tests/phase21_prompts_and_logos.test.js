@@ -239,12 +239,11 @@ describe('Phase 21: Prompt Library Expansion, Creative Workflows & Authentic Bra
   // 7. Global Brand Logo Audit & Verification (Phase H)
   // -------------------------------------------------------------------------
   describe('7. Brand Logo Audit & Higgsfield Asset', () => {
-    test('higgsfield.svg exists on disk and is a valid SVG vector', () => {
-      const higgsfieldSvgPath = path.join(LOGOS_DIR, 'higgsfield.svg');
-      assert.ok(fs.existsSync(higgsfieldSvgPath), 'higgsfield.svg must exist in public/logos');
-      const content = fs.readFileSync(higgsfieldSvgPath, 'utf8').trim();
-      assert.ok(content.includes('<svg') && content.includes('</svg>'), 'higgsfield.svg must have root svg tags');
-      assert.ok(content.includes('viewBox'), 'higgsfield.svg must specify viewBox');
+    test('Higgsfield uses the official-site icon asset with a valid PNG signature', () => {
+      const higgsfieldPath = path.resolve(process.cwd(), 'public/logos/official-ai/higgsfield.png');
+      assert.ok(fs.existsSync(higgsfieldPath), 'official Higgsfield icon must exist');
+      const content = fs.readFileSync(higgsfieldPath);
+      assert.deepStrictEqual([...content.subarray(0, 8)], [137, 80, 78, 71, 13, 10, 26, 10]);
     });
 
     test('higgsfield is registered in brandLogos manifest', () => {
@@ -252,7 +251,8 @@ describe('Phase 21: Prompt Library Expansion, Creative Workflows & Authentic Bra
       assert.ok(logo, 'getBrandLogo("higgsfield") must return logo entry');
       assert.strictEqual(logo.slug, 'higgsfield');
       assert.strictEqual(logo.name, 'Higgsfield AI');
-      assert.strictEqual(logo.assetPath, '/logos/higgsfield.svg');
+      assert.strictEqual(logo.assetPath, '/logos/official-ai/higgsfield.png');
+      assert.strictEqual(logo.sourceUrl, 'https://higgsfield.ai/icon.png');
     });
 
     test('higgsfield is registered in aiToolsData catalog with valid logo asset', () => {

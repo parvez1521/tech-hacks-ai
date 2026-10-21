@@ -207,7 +207,7 @@ describe('Phase 7: Official Brand Logos & Verified Free AI Tools Directory', () 
     assert.ok(html.includes('No Account Required'), 'Renders No Account Required tab');
     assert.ok(html.includes('src="/logos/official-ai/ollama.png"'), 'Renders Ollama official brand logo');
     assert.ok(html.includes('src="/logos/claude.svg"'), 'Renders Claude official brand logo');
-    assert.ok(html.includes('src="/logos/chatgpt.svg"'), 'Renders ChatGPT official brand logo');
+    assert.ok(html.includes('src="/logos/official-ai/chatgpt.webp"'), 'Renders ChatGPT icon sourced from OpenAI Help Center');
   });
 
   test('tool detail page renders high-res brand logo in hero header', async () => {

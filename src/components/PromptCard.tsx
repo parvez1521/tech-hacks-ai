@@ -3,6 +3,8 @@ import { PromptItem, BookmarkItem } from '../types';
 import { Link } from '../router/Router';
 import { BookmarkButton } from './BookmarkButton';
 import { BrandLogo } from './BrandLogo';
+import { PromptPreviewImage } from './PromptPreviewImage';
+import { getPromptProviderLogoSlug } from '../data/promptProviderLogos.ts';
 import { Copy, Check, Sparkles, ArrowRight } from 'lucide-react';
 import { copyText } from '../lib/copyText';
 
@@ -43,7 +45,7 @@ export const PromptCard: React.FC<PromptCardProps> = ({ prompt }) => {
     >
       <div className="relative z-10">
         <Link to={`/prompt-library/${prompt.slug}`} className="prompt-card__image-link" aria-label={`Open ${prompt.title}`} tabIndex={-1}>
-          <img className="prompt-card__image" src={prompt.previewImage || '/prompts/digital-garden.svg'} alt={`${prompt.visualStyle || 'Creative'} prompt preview: ${prompt.title}`} width="720" height="460" loading="lazy" decoding="async" />
+          <PromptPreviewImage className="prompt-card__image" src={prompt.previewImage} alt={prompt.previewImageAlt || `${prompt.title} prompt preview`} />
           <span className="prompt-card__ratio">{prompt.aspectRatio || '1:1'}</span>
         </Link>
         <div className="px-5 pt-4">
@@ -52,7 +54,7 @@ export const PromptCard: React.FC<PromptCardProps> = ({ prompt }) => {
             {prompt.provider && (
               <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-lg text-[11px] font-medium bg-blue-50 text-blue-700 border border-blue-200">
                 <BrandLogo
-                  slug={prompt.provider.toLowerCase().replace(/\s+/g, '-')}
+                  slug={getPromptProviderLogoSlug(prompt.provider, prompt.targetModel)}
                   name={prompt.provider}
                   size="xs"
                   showContainer={false}

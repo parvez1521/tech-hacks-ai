@@ -2,6 +2,20 @@
 
 Audit date: 2026-10-21
 
+## Follow-up: source corrections and fallback policy (2026-10-22)
+
+The [prompt artwork and logo provenance audit](./prompt-artwork-audit.md) and
+[`prompt-image-audit.json`](./prompt-image-audit.json) supersede earlier registry
+counts in this historical report. The current registry contains 223 entries.
+ChatGPT, FLUX, and Higgsfield now reference locally stored assets from direct
+official sources. Google and Cursor are classified as Simple Icons marks, and
+18 further Simple Icons source URLs were recorded after checking the local SVG
+geometry against those sources. Thirty-six entries with no traceable source are
+now explicitly marked as verification gaps; their local marks are not rendered,
+and `BrandLogo` displays a labeled neutral initials fallback. Thirty-three of
+those gaps affect active catalogue identities. A full visual review of all 223
+assets remains outstanding.
+
 ## Phase 3 verification addendum (2026-10-22)
 
 The four Adobe registry records were inspected against their actual local SVG

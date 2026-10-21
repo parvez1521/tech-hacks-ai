@@ -6,6 +6,7 @@ import { toolsData } from '../data/seedData.ts';
 import { proprietaryTools } from '../data/alternatives.ts';
 import type { AiTool, AiFilterState, Guide, PromptItem, FreeToolUtility, Tool, ProprietaryTool, PickCriteria, MatchedPickResult } from '../types/index.ts';
 import { getUtilityCategory } from '../data/catalogTaxonomy.ts';
+import { getPromptArtwork } from '../data/promptArtwork.ts';
 
 export const AI_PAGE_SIZE = 12;
 
@@ -181,7 +182,8 @@ export function getGuideBySlug(slug: string): Guide | undefined {
 export function getAllPrompts(): PromptItem[] {
   return promptsData.map((prompt) => ({
     ...prompt,
-    previewImage: prompt.previewImage || getPromptArtwork(prompt),
+    previewImage: prompt.previewImage || getPromptArtwork(prompt)?.path,
+    previewImageAlt: prompt.previewImageAlt || getPromptArtwork(prompt)?.alt,
     visualStyle: prompt.visualStyle || inferPromptStyle(prompt),
     aspectRatio: prompt.aspectRatio || inferPromptAspectRatio(prompt),
     status: prompt.status || 'published',
@@ -190,15 +192,6 @@ export function getAllPrompts(): PromptItem[] {
 
 export function getPromptBySlug(slug: string): PromptItem | undefined {
   return getAllPrompts().find((p) => p.slug.toLowerCase() === slug.toLowerCase());
-}
-
-function getPromptArtwork(prompt: PromptItem): string {
-  const category = prompt.category;
-  if (category.includes('video') || category.includes('cinematic')) return '/prompts/cinematic-frame.svg';
-  if (category.includes('3d') || category.includes('product')) return '/prompts/product-studio.svg';
-  if (category.includes('editing') || category.includes('character')) return '/prompts/character-study.svg';
-  if (category.includes('marketing') || category.includes('website')) return '/prompts/editorial-layout.svg';
-  return '/prompts/digital-garden.svg';
 }
 
 function inferPromptStyle(prompt: PromptItem): string {

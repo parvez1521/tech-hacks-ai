@@ -8,7 +8,7 @@ type ManagedPrompt = PromptItem & { status?: PromptStatus };
 const blankPrompt = (): ManagedPrompt => ({
   id: `editorial-${Date.now()}`, title: '', slug: '', description: '', category: 'ai-image-generation',
   targetModel: 'Gemini', provider: 'Google', promptText: '', tags: [], authorOrSource: 'Tech Hacks AI editorial team',
-  previewImage: '/prompts/digital-garden.svg', visualStyle: 'Conceptual', aspectRatio: '1:1', status: 'draft',
+  previewImage: '', visualStyle: 'Conceptual', aspectRatio: '1:1', status: 'draft',
 });
 
 export const AdminPromptManager: React.FC<{ token: string }> = ({ token }) => {
@@ -87,7 +87,7 @@ export const AdminPromptManager: React.FC<{ token: string }> = ({ token }) => {
         <label className="text-xs font-semibold text-muted-foreground sm:col-span-2">Short description<textarea className={`${inputClass} mt-1`} rows={2} value={form.description} onChange={(e) => change('description', e.target.value)} /></label>
         <label className="text-xs font-semibold text-muted-foreground sm:col-span-2">Full prompt<textarea className={`${inputClass} mt-1 font-mono`} rows={5} value={form.promptText} onChange={(e) => change('promptText', e.target.value)} /></label>
         <label className="text-xs font-semibold text-muted-foreground">Tags, comma separated<input className={`${inputClass} mt-1`} value={(form.tags || []).join(', ')} onChange={(e) => change('tags', e.target.value.split(',').map((tag) => tag.trim()).filter(Boolean))} /></label>
-        <label className="text-xs font-semibold text-muted-foreground">Preview image path<input className={`${inputClass} mt-1`} value={form.previewImage || ''} onChange={(e) => change('previewImage', e.target.value)} /></label>
+        <label className="text-xs font-semibold text-muted-foreground">Preview image path<input className={`${inputClass} mt-1`} value={form.previewImage || ''} onChange={(e) => change('previewImage', e.target.value)} placeholder="/prompts/generated/your-image.webp" /></label>
         <label className="text-xs font-semibold text-muted-foreground">Author / attribution<input className={`${inputClass} mt-1`} value={form.authorOrSource || ''} onChange={(e) => change('authorOrSource', e.target.value)} /></label>
         <label className="text-xs font-semibold text-muted-foreground">Attribution URL<input className={`${inputClass} mt-1`} value={form.attributionUrl || ''} onChange={(e) => change('attributionUrl', e.target.value)} placeholder="https://…" /></label>
       </div>

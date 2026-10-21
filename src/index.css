@@ -459,6 +459,7 @@
    the site's midnight cards. Keep these selectors outside Tailwind's generated
    utility layer because the canonical slug class is intentionally dynamic. */
 .brand-logo-image--googlegemini,
+.brand-logo-image--flux-1,
 .brand-logo-image--githubcopilot,
 .brand-logo-image--googlecloud,
 .brand-logo-image--vercel,
@@ -1054,7 +1055,7 @@
 .prompt-atlas__art img {
   display: block;
   width: 100%;
-  aspect-ratio: 720 / 460;
+  aspect-ratio: 1;
   object-fit: cover;
 }
 .prompt-atlas__art-note {
@@ -1089,7 +1090,7 @@
 .prompt-card__image {
   display: block;
   width: 100%;
-  aspect-ratio: 720 / 330;
+  aspect-ratio: 1;
   object-fit: cover;
   transition: transform .35s ease;
 }

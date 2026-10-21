@@ -187,7 +187,7 @@ describe('Phase 23: Homepage Logo Fix, Real Brand Assets & Theme Toggle Repair',
 
       assert.ok(content.includes('const isTrustedLogo = Boolean(logoEntry?.sourceUrl'), 'Trust is based on provenance, not filename');
        assert.ok(content.includes('data-logo-status={logoStatus}'), 'Logo provenance status is exposed for QA');
-      assert.ok(content.includes('data-logo-status="neutral-fallback"'), 'Fallback status is exposed for QA');
+       assert.ok(content.includes('data-logo-status="intentional-neutral-fallback"'), 'Fallback status is exposed for QA');
     });
 
     test('Homepage uses a reduced-motion-aware discovery interface with real logo components', () => {
