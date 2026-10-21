@@ -64,6 +64,32 @@ try {
 
 const existingSlugs = new Set(promptsData.map((p) => p.slug));
 const existingPrompts = new Set(promptsData.map((p) => fingerprint(p.promptText)));
+let importReady = false;
+let importUrl;
+const importSecret = process.env.ADMIN_SECRET;
+if (shouldImport) {
+  if (!process.env.PROMPT_IMPORT_URL || !importSecret) {
+    errors.push({ entry: 'import', errors: ['Set PROMPT_IMPORT_URL and ADMIN_SECRET in the local environment before using --import.'] });
+  } else {
+    try {
+      importUrl = new URL(process.env.PROMPT_IMPORT_URL);
+      const localHttp = importUrl.protocol === 'http:' && ['localhost', '127.0.0.1', '::1'].includes(importUrl.hostname);
+      if (importUrl.protocol !== 'https:' && !localHttp) throw new Error('PROMPT_IMPORT_URL must use HTTPS (HTTP is allowed only for localhost).');
+      const adminUrl = new URL(importUrl);
+      adminUrl.searchParams.set('admin', '1');
+      const response = await fetch(adminUrl, { headers: { Authorization: `Bearer ${importSecret}` }, signal: AbortSignal.timeout(15000) });
+      const result = await response.json().catch(() => ({}));
+      if (!response.ok) throw new Error(result.error || `Prompt API returned HTTP ${response.status}.`);
+      for (const saved of result.prompts || []) {
+        if (saved.slug) existingSlugs.add(saved.slug);
+        if (saved.promptText) existingPrompts.add(fingerprint(saved.promptText));
+      }
+      importReady = true;
+    } catch (error) {
+      errors.push({ entry: 'import', errors: [`Could not check existing prompt records: ${error.message}`] });
+    }
+  }
+}
 const seenSlugs = new Set();
 const seenPrompts = new Set();
 const valid = [];
@@ -94,13 +120,10 @@ for (const [index, prompt] of entries.entries()) {
 
 let importedCount = 0;
 if (shouldImport && valid.length) {
-  const endpoint = process.env.PROMPT_IMPORT_URL;
-  const secret = process.env.ADMIN_SECRET;
-  if (!endpoint || !secret) errors.push({ entry: 'import', errors: ['Set PROMPT_IMPORT_URL and ADMIN_SECRET in the local environment before using --import.'] });
-  else {
+  if (importReady) {
     for (const prompt of valid) {
       try {
-        const response = await fetch(endpoint, { method: 'POST', headers: { Authorization: `Bearer ${secret}`, 'Content-Type': 'application/json' }, body: JSON.stringify({ prompt, status: 'draft' }) });
+        const response = await fetch(importUrl, { method: 'POST', headers: { Authorization: `Bearer ${importSecret}`, 'Content-Type': 'application/json' }, body: JSON.stringify({ prompt, status: 'draft' }), signal: AbortSignal.timeout(15000) });
         if (!response.ok) {
           const result = await response.json().catch(() => ({}));
           errors.push({ entry: prompt.slug, errors: [result.error || `Import endpoint returned HTTP ${response.status}.`] });
