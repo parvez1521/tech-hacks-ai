@@ -179,11 +179,42 @@ export function getGuideBySlug(slug: string): Guide | undefined {
 }
 
 export function getAllPrompts(): PromptItem[] {
-  return promptsData;
+  return promptsData.map((prompt) => ({
+    ...prompt,
+    previewImage: prompt.previewImage || getPromptArtwork(prompt),
+    visualStyle: prompt.visualStyle || inferPromptStyle(prompt),
+    aspectRatio: prompt.aspectRatio || inferPromptAspectRatio(prompt),
+    status: prompt.status || 'published',
+  }));
 }
 
 export function getPromptBySlug(slug: string): PromptItem | undefined {
-  return promptsData.find((p) => p.slug.toLowerCase() === slug.toLowerCase());
+  return getAllPrompts().find((p) => p.slug.toLowerCase() === slug.toLowerCase());
+}
+
+function getPromptArtwork(prompt: PromptItem): string {
+  const category = prompt.category;
+  if (category.includes('video') || category.includes('cinematic')) return '/prompts/cinematic-frame.svg';
+  if (category.includes('3d') || category.includes('product')) return '/prompts/product-studio.svg';
+  if (category.includes('editing') || category.includes('character')) return '/prompts/character-study.svg';
+  if (category.includes('marketing') || category.includes('website')) return '/prompts/editorial-layout.svg';
+  return '/prompts/digital-garden.svg';
+}
+
+function inferPromptStyle(prompt: PromptItem): string {
+  const tags = prompt.tags.join(' ').toLowerCase();
+  if (/cinematic|film|video|motion/.test(tags)) return 'Cinematic';
+  if (/product|commercial|studio/.test(tags)) return 'Studio product';
+  if (/character|portrait|fashion/.test(tags)) return 'Character study';
+  if (/vector|interface|ui|app-icon/.test(tags)) return 'Graphic';
+  return 'Conceptual';
+}
+
+function inferPromptAspectRatio(prompt: PromptItem): string {
+  const text = `${prompt.expectedOutputType || ''} ${prompt.promptText}`;
+  const ratio = text.match(/(?:--ar\s*)?(\d{1,2}:\d{1,2})/i);
+  if (ratio) return ratio[1];
+  return /portrait|vertical|9:16/i.test(text) ? '9:16' : /panorama|wide|16:9/i.test(text) ? '16:9' : '1:1';
 }
 
 export function getAllFreeTools(): FreeToolUtility[] {

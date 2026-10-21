@@ -235,6 +235,13 @@ export interface PromptItem {
   exampleUseCase?: string;
   relatedPromptSlugs?: string[];
   officialToolUrl?: string; // e.g. 'https://ai.google.dev/gemini-api/docs/image-generation', 'https://higgsfield.ai/'
+  /** Original or properly licensed preview image hosted by this project. */
+  previewImage?: string;
+  /** Editorial visual treatment to help users find a compatible recipe. */
+  visualStyle?: string;
+  aspectRatio?: string;
+  attributionUrl?: string;
+  status?: 'draft' | 'pending' | 'published' | 'rejected';
 }
 
 export interface FreeToolUtility {

@@ -1,10 +1,14 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useRouter, Link } from '../router/Router';
 import { getPromptBySlug, getAllPrompts } from '../services/aiCatalogService';
 import { BookmarkButton } from '../components/BookmarkButton';
 import { PromptCard } from '../components/PromptCard';
 import { BrandLogo } from '../components/BrandLogo';
 import { BookmarkItem } from '../types';
+import type { PromptItem } from '../types';
+import { fetchPublishedPrompts } from '../services/promptLibraryService';
+import { copyText } from '../lib/copyText';
+import { formatPageTitle, siteConfig } from '../config/site';
 import {
   Copy,
   Check,
@@ -22,7 +26,28 @@ import {
 export const PromptDetailPage: React.FC = () => {
   const { params } = useRouter();
   const slug = params.slug;
-  const prompt = getPromptBySlug(slug);
+  const [remotePrompt, setRemotePrompt] = useState<PromptItem | undefined>();
+  const prompt = remotePrompt?.slug === slug ? remotePrompt : getPromptBySlug(slug);
+
+  useEffect(() => {
+    let active = true;
+    setRemotePrompt(undefined);
+    fetchPublishedPrompts(slug).then((prompts) => {
+      if (active && prompts[0]) setRemotePrompt(prompts[0]);
+    });
+    return () => { active = false; };
+  }, [slug]);
+
+  useEffect(() => {
+    if (!prompt || typeof document === 'undefined') return;
+    const title = formatPageTitle(`${prompt.title} — AI Prompt Recipe`);
+    const description = `${prompt.title} for ${prompt.targetModel}: ${prompt.description}`.slice(0, 300);
+    document.title = title;
+    document.querySelector('meta[name="description"]')?.setAttribute('content', description);
+    document.querySelector('meta[property="og:title"]')?.setAttribute('content', title);
+    document.querySelector('meta[property="og:description"]')?.setAttribute('content', description);
+    document.querySelector('link[rel="canonical"]')?.setAttribute('href', `${siteConfig.url}/prompt-library/${prompt.slug}`);
+  }, [prompt]);
 
   const [copied, setCopied] = useState(false);
   const [copiedOriginal, setCopiedOriginal] = useState(false);
@@ -74,20 +99,18 @@ export const PromptDetailPage: React.FC = () => {
   const hasPlaceholders = prompt.placeholders && prompt.placeholders.length > 0;
   const hasCustomizedValues = Object.values(placeholderValues).some((v) => v.trim().length > 0);
 
-  const handleCopyCustomized = () => {
-    if (typeof navigator !== 'undefined' && navigator.clipboard) {
-      navigator.clipboard.writeText(customizedText).catch(() => {});
+  const handleCopyCustomized = async () => {
+    if (await copyText(customizedText)) {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
     }
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
   };
 
-  const handleCopyOriginal = () => {
-    if (typeof navigator !== 'undefined' && navigator.clipboard) {
-      navigator.clipboard.writeText(prompt.promptText).catch(() => {});
+  const handleCopyOriginal = async () => {
+    if (await copyText(prompt.promptText)) {
+      setCopiedOriginal(true);
+      setTimeout(() => setCopiedOriginal(false), 2000);
     }
-    setCopiedOriginal(true);
-    setTimeout(() => setCopiedOriginal(false), 2000);
   };
 
   const handlePlaceholderChange = (ph: string, val: string) => {
@@ -155,6 +178,15 @@ export const PromptDetailPage: React.FC = () => {
         <p className="text-sm text-secondary-foreground leading-relaxed mb-6">
           {prompt.description}
         </p>
+
+        <figure className="mb-6 overflow-hidden rounded-2xl border border-border bg-muted">
+          <img src={prompt.previewImage || '/prompts/digital-garden.svg'} alt={`${prompt.visualStyle || 'Creative'} preview for ${prompt.title}`} width="720" height="460" fetchpriority="high" decoding="async" className="block max-h-[420px] w-full object-cover" />
+          <figcaption className="flex flex-wrap items-center gap-x-4 gap-y-1 px-4 py-3 text-xs text-muted-foreground">
+            <span><strong className="text-foreground">Visual style</strong> {prompt.visualStyle || 'Conceptual'}</span>
+            <span><strong className="text-foreground">Aspect ratio</strong> {prompt.aspectRatio || '1:1'}</span>
+            <span><strong className="text-foreground">Model</strong> {prompt.targetModel}</span>
+          </figcaption>
+        </figure>
 
         {/* Expected Output & Use Case Badges */}
         {(prompt.expectedOutputType || prompt.exampleUseCase || prompt.officialToolUrl) && (

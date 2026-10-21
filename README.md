@@ -145,6 +145,22 @@ To enable persistent community submissions and moderation in production:
    - Update submission statuses and add editorial notes.
    - Click **Publish to Live Catalog** to publish approved tools or guides directly into live search, filters, and directory pages.
 
+## Prompt Library
+
+The prompt gallery ships original Tech Hacks AI recipes and original locally hosted SVG previews. It supports text, provider/model, category, tag, and sort filters; prompt detail pages provide the full text, model/style/aspect-ratio notes, and local bookmarks. Meigen media and prompt records are not included.
+
+To enable database-backed prompt management, apply the `techhacks_prompts` section at the end of [`server/schema.sql`](server/schema.sql) in Supabase and configure the existing server-only `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`, and `ADMIN_SECRET` variables. Open `/moderation` → **Prompt Library**. The public API returns only published prompts, while every write is protected by the moderator passkey and service-role server storage. Favorites use the existing browser-local bookmark store because the site has no user account system.
+
+For authorized source imports, prepare a JSON array (or `{ "prompts": [...] }`) with `slug`, `title`, `description`, `category`, `targetModel`, `promptText`, `tags`, `authorOrSource`, `previewImage`, and `rightsConfirmed: true`; `id` is optional and generated if absent. Add `attributionUrl` where required. Local preview files must be under `/prompts/`; remote previews must be HTTPS, return an image content type, and be no larger than 10 MB. The importer checks fields, preview image availability, rights confirmation, duplicate slugs, and duplicate prompt text against the bundled catalog and import batch.
+
+Validate without saving:
+
+```sh
+npm run prompts:import -- ./authorized-prompts.json
+```
+
+To create database drafts, set `PROMPT_IMPORT_URL` to the site's `/api/prompts` endpoint and `ADMIN_SECRET` in the local shell, then add `--import`. Entries are always imported as drafts for review. After adding bundled editorial prompts, refresh the detail URL sitemap with `npm run prompts:sitemap`.
+
 ---
 
 ## Deployment Notes (Vercel)

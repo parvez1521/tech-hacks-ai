@@ -10,7 +10,9 @@
     "pretest": "./node_modules/.bin/esbuild src/App.tsx --bundle --platform=node --format=esm --external:react --external:react-dom --external:lucide-react --outfile=dist/test-ssr.js",
     "test": "node --experimental-strip-types --test --test-concurrency=1 tests/*.test.js",
     "logos:sync": "node scripts/sync-official-ai-logo-assets.mjs",
-    "db:migrate": "node scripts/migrate-to-supabase.js"
+    "db:migrate": "node scripts/migrate-to-supabase.js",
+    "prompts:sitemap": "node --experimental-strip-types scripts/generate-prompt-sitemap.mjs",
+    "prompts:import": "node --experimental-strip-types scripts/import-prompts.mjs"
   },
   "dependencies": {
     "@ffmpeg/ffmpeg": "^0.12.15",

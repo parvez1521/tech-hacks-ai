@@ -218,7 +218,7 @@ export function getRouteDescription(route: string, params: Record<string, string
         : 'Step-by-step AI tutorial and workflow guide.';
     }
     case 'prompt-library':
-      return 'Production-tested prompt recipes, system instructions, and multi-turn workflows for Claude, GPT-4o, and DeepSeek.';
+      return 'Explore original AI image and creative prompt recipes with model notes, visual styles, aspect ratios, tag filters, previews, and one-click copying.';
     case 'prompt-detail': {
       const prompt = getPromptBySlug(params.slug);
       return prompt

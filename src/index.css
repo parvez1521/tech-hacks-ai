@@ -1035,3 +1035,83 @@
   .discovery-card:hover,
   .chat-launcher:hover { transform: none; }
 }
+/* Prompt atlas: a quiet catalog frame with one oversized editorial artwork. */
+.prompt-atlas__intro {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(250px, .8fr);
+  align-items: center;
+  gap: clamp(1.5rem, 5vw, 4rem);
+}
+.prompt-atlas__art {
+  position: relative;
+  min-width: 0;
+  overflow: hidden;
+  border-radius: 1.25rem;
+  border: 1px solid rgba(45, 125, 123, .24);
+  background: #102b3b;
+  box-shadow: 0 16px 48px rgba(10, 40, 49, .15);
+}
+.prompt-atlas__art img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 720 / 460;
+  object-fit: cover;
+}
+.prompt-atlas__art-note {
+  position: absolute;
+  right: .8rem;
+  bottom: .8rem;
+  display: inline-flex;
+  gap: .45rem;
+  align-items: center;
+  border: 1px solid rgba(255,255,255,.24);
+  border-radius: 999px;
+  padding: .55rem .8rem;
+  background: rgba(12, 30, 40, .78);
+  color: #f3fffd;
+  font-size: .72rem;
+  font-weight: 600;
+  backdrop-filter: blur(10px);
+}
+.prompt-atlas__controls {
+  border: 1px solid rgb(226 232 240);
+  border-radius: 1rem;
+  padding: clamp(1rem, 2.5vw, 1.5rem);
+  background: rgba(248, 250, 252, .72);
+}
+.dark .prompt-atlas__controls { border-color: rgb(51 65 85); background: rgba(15, 23, 42, .62); }
+.prompt-card__image-link {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  background: #122b35;
+}
+.prompt-card__image {
+  display: block;
+  width: 100%;
+  aspect-ratio: 720 / 330;
+  object-fit: cover;
+  transition: transform .35s ease;
+}
+.prompt-card__image-link:hover .prompt-card__image,
+.prompt-card__image-link:focus-visible .prompt-card__image { transform: scale(1.035); }
+.prompt-card__ratio {
+  position: absolute;
+  right: .75rem;
+  bottom: .75rem;
+  border: 1px solid rgba(255,255,255,.28);
+  border-radius: .5rem;
+  padding: .25rem .5rem;
+  background: rgba(11, 24, 33, .76);
+  color: white;
+  font-size: .68rem;
+  font-weight: 600;
+}
+@media (max-width: 700px) {
+  .prompt-atlas__intro { grid-template-columns: minmax(0, 1fr); }
+  .prompt-atlas__art { max-width: 540px; }
+  .prompt-atlas__controls { margin-inline: -.15rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .prompt-card__image { transition: none; }
+}

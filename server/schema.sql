@@ -121,3 +121,50 @@ TO service_role
 USING (true)
 WITH CHECK (true);
 
+-- 5. Prompt Library overlay. Public visitors may only read published recipes;
+-- every create/edit/delete operation goes through the ADMIN_SECRET-protected API.
+CREATE TABLE IF NOT EXISTS public.techhacks_prompts (
+    id VARCHAR(160) PRIMARY KEY,
+    slug VARCHAR(180) NOT NULL UNIQUE,
+    status VARCHAR(20) NOT NULL DEFAULT 'draft'
+        CHECK (status IN ('draft', 'pending', 'published', 'rejected')),
+    content JSONB NOT NULL,
+    created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+    updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
+CREATE INDEX IF NOT EXISTS idx_techhacks_prompts_status ON public.techhacks_prompts(status);
+CREATE INDEX IF NOT EXISTS idx_techhacks_prompts_updated_at ON public.techhacks_prompts(updated_at DESC);
+ALTER TABLE public.techhacks_prompts ENABLE ROW LEVEL SECURITY;
+REVOKE ALL ON public.techhacks_prompts FROM anon, authenticated;
+GRANT SELECT ON public.techhacks_prompts TO anon, authenticated;
+GRANT ALL ON public.techhacks_prompts TO service_role;
+
+CREATE OR REPLACE FUNCTION public.techhacks_set_prompt_updated_at()
+RETURNS TRIGGER AS $$
+BEGIN
+  NEW.updated_at = NOW();
+  RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+DROP TRIGGER IF EXISTS techhacks_prompts_updated_at ON public.techhacks_prompts;
+CREATE TRIGGER techhacks_prompts_updated_at
+BEFORE UPDATE ON public.techhacks_prompts
+FOR EACH ROW EXECUTE FUNCTION public.techhacks_set_prompt_updated_at();
+
+DROP POLICY IF EXISTS "Public can view published prompts" ON public.techhacks_prompts;
+CREATE POLICY "Public can view published prompts"
+ON public.techhacks_prompts
+FOR SELECT
+TO anon, authenticated
+USING (status = 'published');
+
+DROP POLICY IF EXISTS "Service role full access on prompts" ON public.techhacks_prompts;
+CREATE POLICY "Service role full access on prompts"
+ON public.techhacks_prompts
+FOR ALL
+TO service_role
+USING (true)
+WITH CHECK (true);
+

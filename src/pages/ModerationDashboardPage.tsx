@@ -17,6 +17,7 @@ import { SafeMarkdown } from '../components/SafeMarkdown';
 import { registerPublishedTool, registerPublishedGuide } from '../services/aiCatalogService';
 import { useRouter } from '../router/Router';
 import { AdminDiscoveriesManager } from '../components/AdminDiscoveriesManager';
+import { AdminPromptManager } from '../components/AdminPromptManager';
 
 export const ModerationDashboardPage: React.FC = () => {
   const { navigate } = useRouter();
@@ -24,7 +25,7 @@ export const ModerationDashboardPage: React.FC = () => {
   // Authentication State
   const [token, setToken] = useState<string | null>(() => getStoredModeratorToken());
   const [passkeyInput, setPasskeyInput] = useState('');
-  const [activeAdminTab, setActiveAdminTab] = useState<'submissions' | 'discoveries'>('submissions');
+  const [activeAdminTab, setActiveAdminTab] = useState<'submissions' | 'discoveries' | 'prompts'>('submissions');
   const [authError, setAuthError] = useState<string | null>(null);
   const [isAuthenticating, setIsAuthenticating] = useState(false);
 
@@ -322,7 +323,7 @@ export const ModerationDashboardPage: React.FC = () => {
             </div>
             <h1 className="text-2xl font-bold tracking-tight">Editorial Moderation</h1>
             <p className="text-sm text-muted-foreground mt-1">
-              Enter your editorial access passkey to review community tool and guide submissions.
+              Enter your editorial access passkey to review community submissions, discoveries, and prompt recipes.
             </p>
           </div>
 
@@ -400,7 +401,7 @@ export const ModerationDashboardPage: React.FC = () => {
             </span>
           </div>
           <p className="text-sm text-muted-foreground mt-1">
-            Review community AI tools and technical guides before publishing them to the live Tech Hacks AI catalog.
+            Review community submissions, manage discoveries, and curate original prompt recipes for the Tech Hacks AI catalog.
           </p>
         </div>
 
@@ -467,10 +468,26 @@ export const ModerationDashboardPage: React.FC = () => {
           </svg>
           <span>Daily Discoveries &amp; Featured Tools</span>
         </button>
+
+        <button
+          onClick={() => setActiveAdminTab('prompts')}
+          className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all cursor-pointer whitespace-nowrap ${
+            activeAdminTab === 'prompts'
+              ? 'bg-primary text-primary-foreground shadow-sm shadow-primary/20'
+              : 'text-muted-foreground hover:text-foreground hover:bg-muted/60'
+          }`}
+        >
+          <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.8" d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v16H6.5A2.5 2.5 0 0 0 4 21V5.5Zm0 13.5A2.5 2.5 0 0 1 6.5 16H20M8 7h8M8 10h6" />
+          </svg>
+          <span>Prompt Library</span>
+        </button>
       </div>
 
       {activeAdminTab === 'discoveries' ? (
         <AdminDiscoveriesManager token={token} />
+      ) : activeAdminTab === 'prompts' ? (
+        <AdminPromptManager token={token} />
       ) : (
         <>
           {/* Metrics Counters */}
