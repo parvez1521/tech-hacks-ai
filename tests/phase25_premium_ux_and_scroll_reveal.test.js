@@ -216,7 +216,8 @@ describe('Phase 25: Premium UX, Scroll Reveal & Smart Welcome', () => {
     assert.ok(src.includes('<ThemeToggle compact />'), 'Mobile theme control is rendered');
 
     const toggleSrc = read('src/components/ThemeToggle.tsx');
-    assert.ok(toggleSrc.includes('aria-label={`Switch to'), 'Theme control exposes an action label');
+    assert.ok(toggleSrc.includes("aria-label={theme === 'dark' ? 'Dark' : 'Light'}"), 'Theme control name matches its visible state label');
+    assert.ok(toggleSrc.includes('title={`Switch to'), 'Theme control exposes its next action as a tooltip');
     assert.ok(toggleSrc.includes('data-testid={compact ?'), 'Theme control has desktop/mobile test hooks');
   });
 

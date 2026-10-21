@@ -14,43 +14,63 @@ function chatApiPlugin() {
           });
           req.on('end', async () => {
             try {
-              const { message } = JSON.parse(body || '{}');
+              const parsed = JSON.parse(body || '{}');
+              const message = typeof parsed?.message === 'string' ? parsed.message.trim() : '';
               const groqKey = process.env.GROQ_API_KEY;
-              const geminiKey = process.env.GEMINI_API_KEY;
+
+              if (!message) {
+                res.setHeader('Content-Type', 'application/json');
+                res.statusCode = 400;
+                res.end(JSON.stringify({ error: 'Enter a message to continue.' }));
+                return;
+              }
+              if (message.length > 8000) {
+                res.setHeader('Content-Type', 'application/json');
+                res.statusCode = 413;
+                res.end(JSON.stringify({ error: 'Message is too long. Keep it under 8,000 characters.' }));
+                return;
+              }
 
               if (groqKey && message) {
+                let timeout;
                 try {
+                  const controller = new AbortController();
+                  timeout = setTimeout(() => controller.abort(), 20000);
                   const groqRes = await fetch('https://api.groq.com/openai/v1/chat/completions', {
                     method: 'POST',
+                    signal: controller.signal,
                     headers: {
                       'Content-Type': 'application/json',
                       Authorization: `Bearer ${groqKey}`,
                     },
                     body: JSON.stringify({
-                      model: 'llama-3.3-70b-versatile',
+                      model: 'openai/gpt-oss-120b',
                       messages: [
                         {
                           role: 'system',
                           content:
                             'You are the Tech Hacks AI Assistant for techhacksai.com. Ground your answers in real software tools. Never invent pricing. Differentiate open-source, recurring free plans, starter trial credits, and paid-only tools. Support English and Hindi queries.',
                         },
+                        ...normalizeChatHistory(parsed?.conversationHistory),
                         { role: 'user', content: message },
                       ],
-                      max_tokens: 600,
+                      max_completion_tokens: 600,
                     }),
                   });
+                  clearTimeout(timeout);
 
                   if (groqRes.ok) {
                     const groqData = await groqRes.json();
-                    const text = groqData.choices?.[0]?.message?.content;
-                    if (text) {
+                    const text = groqData?.choices?.[0]?.message?.content;
+                    if (typeof text === 'string' && text.trim()) {
                       res.setHeader('Content-Type', 'application/json');
                       res.statusCode = 200;
-                      res.end(JSON.stringify({ text }));
+                      res.end(JSON.stringify({ text: text.trim(), mode: 'live' }));
                       return;
                     }
                   }
                 } catch {
+                  clearTimeout(timeout);
                   // Fall back gracefully
                 }
               }
@@ -61,6 +81,9 @@ function chatApiPlugin() {
               res.end(
                 JSON.stringify({
                   status: 'grounded_local_mode',
+                  message: groqKey
+                    ? 'Live AI is temporarily unavailable. Showing matches from the published catalogue.'
+                    : 'Live AI is not configured. Showing matches from the published catalogue.',
                   text: null,
                 })
               );
@@ -76,6 +99,15 @@ function chatApiPlugin() {
       });
     },
   };
+}
+
+function normalizeChatHistory(history) {
+  if (!Array.isArray(history)) return [];
+  return history.slice(-8).flatMap((item) => {
+    if (!item || !['user', 'assistant'].includes(item.sender) || typeof item.text !== 'string') return [];
+    const content = item.text.trim().slice(0, 1200);
+    return content ? [{ role: item.sender, content }] : [];
+  });
 }
 
 import submissionsHandler from './api/submissions.js';

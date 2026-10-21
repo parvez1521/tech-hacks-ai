@@ -28,7 +28,6 @@ import {
   ShieldCheck,
   Zap,
   Cpu,
-  Mail,
   Check,
   SlidersHorizontal,
   Tag,
@@ -47,8 +46,6 @@ import {
 export const HomePage: React.FC = () => {
   const [selectedAiCategory, setSelectedAiCategory] = useState<string>('all');
   const [aiPage, setAiPage] = useState(1);
-  const [emailSubscribed, setEmailSubscribed] = useState(false);
-  const [emailInput, setEmailInput] = useState('');
   const [catalogStats, setCatalogStats] = useState(getCatalogStats);
   const allAiTools = getAllAiTools();
 
@@ -163,18 +160,13 @@ export const HomePage: React.FC = () => {
   const previewPrompts = getAllPrompts().slice(0, 2);
 
   // 7. Client-side utilities preview (Section 5)
-  const previewUtilities = getAllFreeTools().slice(0, 3);
+  const featuredUtilityOrder = ['json-formatter', 'word-counter', 'qr-generator'];
+  const previewUtilities = getAllFreeTools()
+    .filter((tool) => featuredUtilityOrder.includes(tool.slug))
+    .sort((a, b) => featuredUtilityOrder.indexOf(a.slug) - featuredUtilityOrder.indexOf(b.slug));
 
   // 8. Featured AI Deals & Student Benefits (Section 7)
   const previewOffers = getFeaturedOffers().slice(0, 3);
-
-  const handleNewsletterSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (emailInput.trim()) {
-      setEmailSubscribed(true);
-      setEmailInput('');
-    }
-  };
 
   // Scroll-reveal refs for below-fold sections (Section 1 / hero is above the fold)
   const reveal2 = useScrollReveal<HTMLElement>();
@@ -616,7 +608,7 @@ export const HomePage: React.FC = () => {
                 <div>
                   <div className="flex items-center justify-between mb-3">
                     <BrandLogo slug={tool.slug} name={tool.name} size="sm" />
-                    <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                    <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-50 text-emerald-800 border border-emerald-200 dark:bg-emerald-500/10 dark:text-emerald-300 dark:border-emerald-500/20">
                       {tool.pricingType === 'free' ? '100% Free' : 'Free Tier'}
                     </span>
                   </div>
@@ -768,7 +760,7 @@ export const HomePage: React.FC = () => {
               AI Deals, Student Plans &amp; Bundles
             </h2>
             <p className="text-sm text-secondary-foreground max-w-xl mt-1">
-              Save hundreds of dollars on premium AI access through verified carrier bundles (like Jio + Gemini), student developer packs, and startup cloud credits.
+              Browse current carrier bundles, student plans, free software tiers, and startup credits. Terms and eligibility vary by provider.
             </p>
           </div>
 
@@ -776,7 +768,7 @@ export const HomePage: React.FC = () => {
             to="/offers"
             className="inline-flex items-center gap-1.5 text-primary text-xs font-semibold hover:text-primary-hover transition-colors shrink-0"
           >
-            <span>Explore All {getFeaturedOffers().length}+ Verified Deals</span>
+            <span>Explore {getFeaturedOffers().length} current offers</span>
             <ArrowRight className="w-4 h-4" />
           </Link>
         </div>
@@ -924,46 +916,26 @@ export const HomePage: React.FC = () => {
       </section>
 
       {/* =========================================================================
-          SECTION 10: ABOUT PLATFORM & COMMUNITY NEWSLETTER
+          SECTION 10: ABOUT PLATFORM & DISCOVERY CTA
       ========================================================================= */}
       <section ref={reveal10.ref} className={`max-w-4xl mx-auto px-4 sm:px-6 w-full reveal-section${reveal10.isVisible ? ' in-view' : ''}`}>
          <div className="p-8 sm:p-10 rounded-lg border border-border bg-card/70 text-center space-y-6">
            <div className="w-12 h-12 rounded-lg bg-primary/10 border border-primary/20 flex items-center justify-center text-primary mx-auto">
-            <Mail className="w-6 h-6" />
+            <Compass className="w-6 h-6" />
           </div>
 
           <div className="max-w-xl mx-auto space-y-2">
             <h2 className="text-2xl sm:text-3xl font-extrabold text-foreground tracking-tight">
-              Stay Ahead of the Open Source &amp; AI Wave
+              Find tools worth trying
             </h2>
             <p className="text-sm text-secondary-foreground leading-relaxed">
-              Receive a weekly digest of newly indexed open-source software, generative AI models, verified self-hosting benchmarks, and prompt recipes. No spam, unsubscribe anytime.
+              Browse recent AI products, open-source software, useful utilities, and practical guides from one place.
             </p>
           </div>
 
-          {emailSubscribed ? (
-            <div className="p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-sm font-semibold max-w-md mx-auto flex items-center justify-center gap-2">
-              <Check className="w-5 h-5" />
-              <span>Thanks — your interest is saved for this session.</span>
-            </div>
-          ) : (
-            <form onSubmit={handleNewsletterSubmit} className="flex flex-col sm:flex-row gap-2 max-w-md mx-auto">
-              <input
-                type="email"
-                required
-                value={emailInput}
-                onChange={(e) => setEmailInput(e.target.value)}
-                placeholder="Enter your email address..."
-                className="flex-1 px-4 py-2.5 rounded-xl bg-muted border border-border text-foreground placeholder:text-muted-foreground text-sm focus:outline-none focus:ring-2 focus:ring-primary/60"
-              />
-              <button
-                type="submit"
-                className="px-5 py-2.5 rounded-xl bg-primary text-primary-foreground font-semibold text-sm hover:bg-primary-hover shadow-md transition-colors shrink-0"
-              >
-                Subscribe Free
-              </button>
-            </form>
-          )}
+          <Link to="/discoveries" className="inline-flex items-center gap-2 rounded-lg bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary">
+            Browse recent discoveries <ArrowRight className="h-4 w-4" />
+          </Link>
 
           <div className="pt-4 border-t border-border/40 flex flex-wrap items-center justify-center gap-6 text-xs text-muted-foreground">
             <div className="flex items-center gap-1.5">

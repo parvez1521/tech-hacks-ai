@@ -33,11 +33,11 @@ export const GuideCard: React.FC<GuideCardProps> = ({ guide }) => {
           <BookmarkButton item={bookmarkItem} size="sm" />
         </div>
 
-        <h3 className="font-bold text-slate-900 text-base tracking-tight mb-2 group-hover:text-blue-600 transition-colors">
+        <h2 className="font-bold text-slate-900 text-base tracking-tight mb-2 group-hover:text-blue-600 transition-colors">
           <Link to={`/guides/${guide.slug}`} className="focus:outline-none focus:underline">
             {guide.title}
           </Link>
-        </h3>
+        </h2>
 
         <p className="text-sm text-slate-600 line-clamp-2 mb-3 leading-relaxed">
           {guide.summary}
@@ -63,7 +63,7 @@ export const GuideCard: React.FC<GuideCardProps> = ({ guide }) => {
 
         <Link
           to={`/guides/${guide.slug}`}
-          className="inline-flex items-center gap-1 text-blue-600 font-semibold hover:text-blue-700 group-hover:translate-x-1 transition-transform"
+          className="inline-flex items-center gap-1 text-blue-800 dark:text-blue-300 font-semibold hover:text-blue-900 dark:hover:text-blue-200 group-hover:translate-x-1 transition-transform"
         >
           <span>Read Guide</span>
           <ArrowRight className="w-3.5 h-3.5" />

@@ -10,37 +10,39 @@ fallback.
 
 ## Audit summary
 
-- **218** canonical registry mappings audited.
-- **104** unique active catalogue identities audited: 27 open-source tools, 65
-  AI tools, and 14 proprietary alternative targets (106 records because two
-  identities appear in more than one catalogue relationship).
-- **14** offer records audited; they reference **12** shared provider logos.
-- **35** active AI mappings have traceable official-web or maintained Simple
-  Icons metadata and are marked `verified` below when the source is not a
-  favicon fallback.
-- **8** active AI mappings use workspace-provided logo files supplied after the
-  browser export. They are marked `provided`, include SHA-256 hashes in
-  `exports/official-ai-logos/provided-assets.csv`, and are not claimed as
-  direct web downloads.
-- **1** known mismatch was corrected: xAI no longer points to the X mark. It
-  remains explicitly `unverified` and uses the component's name fallback.
-- **108** registry mappings remain `unverified` or need provenance follow-up.
-  They are not presented as official marks in the UI.
+Audit reconciliation against the current router data and `brandLogos` manifest
+(found in `public/logo-manifest.json`) on 2026-10-22:
 
-The runtime now requires a non-fallback entry to carry a traceable `sourceUrl`
-before it renders the local asset. The active catalogue currently has 43
-traceable entries (35 web/Simple Icons references and 8 explicitly labelled
-workspace-provided assets), 5 explicit fallback mappings, and 17
-provenance-follow-up identities. The latter use a neutral monogram until an
-official source or maintained Simple Icons reference is recorded.
+- The manifest contains **218** logo registry mappings. The active catalogue
+  contains **104 unique identities** across open-source tools, AI tools, and
+  proprietary alternatives; all 104 resolve to a registry entry.
+- Of those 104 active identities, **44** have a recorded official-site or
+  maintained Simple Icons source URL and **8** use workspace-provided files
+  with recorded provenance metadata. These 52 have source references recorded;
+  this audit did not re-research every first-party source URL.
+- **52 active identities remain without a source URL**. Their local file paths
+  exist, but that does not verify the brand identity or provenance. The runtime
+  shows a neutral name fallback for these records until source provenance is
+  recorded.
+- Registry `sourceType` counts: 70 `official`, 118 `simple-icons`, 13
+  `fallback`, 9 `vector`, and 8 `provided`. These are manifest labels, not a
+  claim that every active identity was individually checked against its
+  first-party site.
+- The earlier claim of **108** unresolved/follow-up mappings was not supported
+  by a current active-catalogue reconciliation. It is superseded by the
+  52-active-identity figure above; inactive registry entries are not counted as
+  active catalogue gaps.
+- This turn made **no brand identity or provenance corrections**. The
+  previously documented xAI-to-X mismatch remediation remains in place.
+- Existing automated logo checks verify manifest parity, local SVG/PNG
+  validity, raster signatures, path coverage, and fallback behavior. A full
+  visual review/contact sheet of all 218 entries was not performed in this
+  audit.
 
-`verified` means the local asset has a recorded official or Simple Icons source
-reference. `provided` means the workspace supplied the actual file and the
-identity was visually reviewed, but the direct asset URL was not independently
-verified. `unverified` means the asset has no traceable source in the current
-manifest, or is derived from a favicon. `corrected` is reserved for a mapping
-that was actively fixed but still needs a first-party mark; xAI is documented
-as `unverified` because no trustworthy original mark is stored.
+The runtime requires a non-fallback mapping to include a recorded `sourceUrl`
+before rendering its asset. That safeguard prevents unresolved local artwork
+from being presented as a verified mark; it does not prove the correctness of
+the source URL itself.
 
 ## Corrections and safety decisions
 
@@ -231,3 +233,11 @@ under `/var/folders/qj/bhnrw20s1cnfm2dsqpxn358h0000gn/T/agent-tmp/`, including
 `offer-logo-googlegemini.png`, `offer-logo-githubcopilot.png`, and
 `offer-logo-googlecloud.png`. No claim of complete first-party visual
 verification is made.
+
+## Active identities still awaiting source provenance
+
+The following 52 active identities have no `sourceUrl` recorded in the manifest.
+This list reports a provenance gap, not a confirmed wrong logo. The app renders
+the neutral name fallback for each until provenance is added and reviewed.
+
+Firecrawl (`firecrawl`), Postiz (`postiz`), Baserow (`baserow`), AppFlowy (`appflowy`), Penpot (`penpot`), Plausible Analytics (`plausible`), Meilisearch (`meilisearch`), Hoppscotch (`hoppscotch`), Cal.com (`cal-com`), Typebot (`typebot`), Immich (`immich`), Outline (`outline`), Novu (`novu`), Docmost (`docmost`), Beekeeper Studio (`beekeeper-studio`), AFFiNE (`affine`), RustDesk (`rustdesk`), Umami (`umami`), Cline (`cline`), Roo Code (`roocode`), OpenCode (`opencode`), Perplexica (`perplexica`), Khoj (`khoj`), SearXNG (`searxng`), Google Gemini (`gemini`), Mistral Le Chat (`mistral-le-chat`), HuggingChat (`huggingchat`), GPT4All (`gpt4all`), Bolt.new (`bolt-new`), FLUX.1 by Black Forest Labs (`flux-1`), Stable Diffusion 3.5 (`stable-diffusion-3`), Recraft AI (`recraft`), Krea AI (`krea-ai`), Midjourney v6.1 (`midjourney`), Luma Dream Machine (`luma-dream-machine`), Kling AI (`kling-ai`), Vidu (`vidu`), PixVerse (`pixverse`), Kaiber (`kaiber`), Udio (`udio`), Make (`make`), Zapier Central (`zapier-central`), Airtable (`airtable`), Buffer (`buffer`), Zapier (`zapier`), Google Analytics (`google-analytics`), Postman (`postman`), Calendly (`calendly`), Algolia (`algolia`), Typeform (`typeform`), Google Photos (`google-photos`), Claude Code (`claude-code`).

@@ -70,7 +70,6 @@ export const FilterBar: React.FC<FilterBarProps> = ({
             type="button"
             onClick={() => setIsDrawerOpen(!isDrawerOpen)}
             aria-expanded={isDrawerOpen}
-            aria-label={activeFilterCount > 0 ? `Filters (${activeFilterCount} active)` : 'Filters'}
             className={`inline-flex items-center gap-2 px-3.5 py-2.5 rounded-xl text-sm font-medium border transition-all duration-150 cursor-pointer active:scale-98 shadow-xs ${
               isDrawerOpen || activeFilterCount > 0
                 ? 'bg-blue-50 border-blue-500 text-blue-700 shadow-xs'

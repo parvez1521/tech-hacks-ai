@@ -233,7 +233,7 @@ export const CategoryDetailPage: React.FC = () => {
       {tools.length > 0 ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 mb-10">
           {tools.map((tool) => (
-            <ToolCard key={tool.id} tool={tool} />
+            <ToolCard key={tool.id} tool={tool} headingLevel={2} />
           ))}
         </div>
       ) : (

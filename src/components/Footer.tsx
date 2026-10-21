@@ -1,69 +1,30 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from '../router/Router';
-import { Mail, CheckCircle, Github, Heart } from 'lucide-react';
+import { Github, Heart, ArrowRight } from 'lucide-react';
 
 export const Footer: React.FC = () => {
-  const [email, setEmail] = useState('');
-  const [isSubscribed, setIsSubscribed] = useState(false);
-
-  const handleSubscribe = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (email.trim()) {
-      setIsSubscribed(true);
-      setEmail('');
-    }
-  };
-
   return (
     <footer className="border-t border-border bg-card/30 mt-20 pt-12 pb-16 transition-colors">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
-        {/* Newsletter Box */}
+        {/* Discovery callout */}
         <div className="max-w-xl mx-auto text-center mb-12 p-8 rounded-xl border border-border bg-card/60">
-          <h3 className="text-xl font-bold text-foreground mb-2">
-            Subscribe to our newsletter
-          </h3>
+          <h2 className="text-xl font-bold text-foreground mb-2">
+            Find your next useful tool
+          </h2>
           <p className="text-sm text-secondary-foreground mb-5">
-            Every week we deconstruct one proprietary app and review the best open source alternatives worth switching to.
+            Explore recent discoveries, practical utilities, and open-source alternatives in one directory.
           </p>
-
-          {isSubscribed ? (
-            <div className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-sm font-medium">
-              <CheckCircle className="w-4 h-4" />
-              <span>Thanks — your interest is saved for this session.</span>
-            </div>
-          ) : (
-            <form onSubmit={handleSubscribe} className="flex gap-2 max-w-md mx-auto">
-              <div className="relative flex-1">
-                <Mail className="w-4 h-4 text-muted-foreground absolute left-3 top-1/2 -translate-y-1/2" />
-                <input
-                  type="email"
-                  required
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="Enter your email"
-                  className="w-full pl-9 pr-3 py-2 rounded-lg bg-background border border-border text-foreground text-sm focus:outline-none focus:ring-1 focus:ring-primary"
-                />
-              </div>
-              <button
-                type="submit"
-                className="px-4 py-2 rounded-lg bg-primary hover:bg-primary-hover text-primary-foreground font-medium text-sm transition-colors shrink-0 shadow-sm cursor-pointer"
-              >
-                Subscribe
-              </button>
-            </form>
-          )}
-
-          <p className="text-xs text-muted-foreground mt-3">
-            Independent picks and practical notes. Delivery will be connected before launch.
-          </p>
+          <Link to="/discoveries" className="inline-flex items-center gap-2 rounded-lg bg-primary px-4 py-2.5 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary">
+            Browse recent discoveries <ArrowRight className="h-4 w-4" />
+          </Link>
         </div>
 
         {/* Links Grid */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 py-8 border-t border-border/50 text-sm">
           <div>
-            <h4 className="font-semibold text-foreground mb-3 text-xs uppercase tracking-wider">
+            <h3 className="font-semibold text-foreground mb-3 text-xs uppercase tracking-wider">
               Browse Software
-            </h4>
+            </h3>
             <ul className="space-y-2 text-muted-foreground text-xs">
               <li>
                 <Link to="/discoveries" className="hover:text-foreground text-primary font-medium">
@@ -124,9 +85,9 @@ export const Footer: React.FC = () => {
           </div>
 
           <div>
-            <h4 className="font-semibold text-foreground mb-3 text-xs uppercase tracking-wider">
+            <h3 className="font-semibold text-foreground mb-3 text-xs uppercase tracking-wider">
               Popular Categories
-            </h4>
+            </h3>
             <ul className="space-y-2 text-muted-foreground text-xs">
               <li>
                 <Link to="/categories/developer-tools" className="hover:text-foreground">
@@ -152,9 +113,9 @@ export const Footer: React.FC = () => {
           </div>
 
           <div>
-            <h4 className="font-semibold text-foreground mb-3 text-xs uppercase tracking-wider">
+            <h3 className="font-semibold text-foreground mb-3 text-xs uppercase tracking-wider">
               Alternatives
-            </h4>
+            </h3>
             <ul className="space-y-2 text-muted-foreground text-xs">
               <li>
                 <Link to="/alternatives/notion" className="hover:text-foreground">
@@ -180,9 +141,9 @@ export const Footer: React.FC = () => {
           </div>
 
           <div>
-            <h4 className="font-semibold text-foreground mb-3 text-xs uppercase tracking-wider">
+            <h3 className="font-semibold text-foreground mb-3 text-xs uppercase tracking-wider">
               Editorial &amp; Legal
-            </h4>
+            </h3>
             <p className="text-xs text-muted-foreground mb-3 leading-relaxed">
               Tech Hacks AI is a curated discovery platform indexing the top generative AI tools, verified free software, open-source alternatives, step-by-step guides, and developer utilities.
             </p>
@@ -226,7 +187,7 @@ export const Footer: React.FC = () => {
                 </button>
               </li>
               <li>
-                <Link to="/moderation" className="hover:text-foreground text-[11px] text-muted-foreground/60">
+                <Link to="/moderation" className="hover:text-foreground text-[11px] text-muted-foreground">
                   Moderation Queue
                 </Link>
               </li>

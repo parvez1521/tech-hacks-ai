@@ -104,12 +104,12 @@ export const DailyDiscoveryCard: React.FC<DailyDiscoveryCardProps> = ({ discover
           </div>
 
           <div className="min-w-0 flex-1">
-            <h3
+            <h2
               id={`disc-title-${discovery.id}`}
               className="text-lg font-bold text-[#0F172A] group-hover:text-[#2563EB] transition-colors tracking-tight truncate"
             >
               {discovery.name}
-            </h3>
+            </h2>
             {safeUrl && (
               <p className="text-xs text-[#64748B] truncate">
                 {new URL(safeUrl).hostname.replace(/^www\./, '')}

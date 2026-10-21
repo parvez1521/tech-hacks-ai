@@ -43,9 +43,9 @@ export const CategoryCard: React.FC<CategoryCardProps> = ({ category }) => {
             <IconComponent className="w-5 h-5 text-blue-600 dark:text-blue-400" />
           </div>
           <div>
-            <h3 className="font-bold text-[#0F172A] dark:text-[#F1F5F9] text-base tracking-tight truncate group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-200">
+            <h2 className="font-bold text-[#0F172A] dark:text-[#F1F5F9] text-base tracking-tight truncate group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-200">
               {category.name}
-            </h3>
+            </h2>
             <span className="text-xs text-[#64748B] dark:text-[#94A3B8] block font-mono">
               {toolCount} {toolCount === 1 ? 'tool' : 'tools'} listed
             </span>

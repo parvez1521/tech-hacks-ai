@@ -51,7 +51,7 @@ export const WELCOME_QUESTIONS = [
   'What are the top AI tools for voice cloning?',
   'Help me pick an AI tool for automating my workflow.',
   'Are there any open-source alternatives to Figma?',
-  'What are the best AI tools for video editing in 2025?',
+  'What are some practical AI tools for video editing?',
 ] as const;
 
 function createProactiveAssistantMessage(suggestion: ProactiveSuggestion): ChatMessage {
@@ -75,12 +75,14 @@ export const FloatingChatbot: React.FC = () => {
   const [unreadCount, setUnreadCount] = useState(0);
   const [lastQuery, setLastQuery] = useState<string | null>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [serviceNotice, setServiceNotice] = useState<string | null>(null);
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const proactiveMessageRef = useRef<ChatMessage | null>(null);
   const proactiveInitializedRef = useRef(false);
   const isOpenRef = useRef(false);
+  const isLoadingRef = useRef(false);
 
   useEffect(() => {
     isOpenRef.current = isOpen;
@@ -161,9 +163,14 @@ export const FloatingChatbot: React.FC = () => {
     options: { suppressUnread?: boolean } = {}
   ) => {
     const textToSend = (queryText || input).trim();
-    if (!textToSend || isLoading) return;
+    if (!textToSend || isLoadingRef.current) return;
+    if (textToSend.length > 8000) {
+      setErrorMessage('Please keep messages under 8,000 characters.');
+      return;
+    }
 
     setErrorMessage(null);
+    setServiceNotice(null);
     setLastQuery(textToSend);
 
     const userMsg: ChatMessage = {
@@ -175,51 +182,74 @@ export const FloatingChatbot: React.FC = () => {
 
     setMessages((prev) => [...prev, userMsg]);
     setInput('');
+    isLoadingRef.current = true;
     setIsLoading(true);
 
+    let useCatalogFallback = false;
+    let timeoutId: number | undefined;
     try {
-      // 1. Attempt serverless endpoint /api/chat
+      // Provider keys stay on the server; an unconfigured or unavailable API
+      // explicitly signals that the local catalogue will answer this request.
+      const controller = new AbortController();
+      timeoutId = window.setTimeout(() => controller.abort(), 22000);
       const response = await fetch('/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
+        signal: controller.signal,
         body: JSON.stringify({
           message: textToSend,
           conversationHistory: messages.slice(-4),
         }),
       });
+      window.clearTimeout(timeoutId);
 
-      if (response.ok) {
-        const data = await response.json();
-        if (data && data.text) {
+      const data = await response.json().catch(() => null);
+      if (!response.ok && [400, 413, 429].includes(response.status)) {
+        setErrorMessage(typeof data?.error === 'string' ? data.error : 'Please check your message and try again.');
+        isLoadingRef.current = false;
+        setIsLoading(false);
+        return;
+      }
+      if (response.ok && typeof data?.text === 'string' && data.text.trim()) {
           const botMsg: ChatMessage = {
             id: `bot-${Date.now()}`,
             sender: 'assistant',
-            text: data.text,
+            text: data.text.trim(),
             timestamp: Date.now(),
-            suggestions: data.suggestions || ['Ask about another tool', 'Help me choose an AI tool for coding.'],
+            suggestions: Array.isArray(data.suggestions) ? data.suggestions : ['Ask about another tool', 'Help me choose an AI tool for coding.'],
             groundedTools: data.groundedTools,
           };
           setMessages((prev) => [...prev, botMsg]);
+          isLoadingRef.current = false;
           setIsLoading(false);
           return;
-        }
+      }
+      if (data?.status === 'grounded_local_mode' && typeof data.message === 'string') {
+        setServiceNotice(data.message);
+      } else {
+        useCatalogFallback = true;
       }
     } catch {
-      // Gracefully fall through to client grounded catalog engine
+      if (timeoutId !== undefined) window.clearTimeout(timeoutId);
+      useCatalogFallback = true;
+      setServiceNotice('Chat service is unavailable. Showing matches from the published catalogue.');
     }
 
-    // 2. Client grounded catalog fallback
-    setTimeout(() => {
-      try {
-        const botMsg = generateGroundedResponse(textToSend);
-        setMessages((prev) => [...prev, botMsg]);
-        setIsLoading(false);
-        if (!options.suppressUnread && !isOpenRef.current) setUnreadCount((c) => c + 1);
-      } catch {
-        setIsLoading(false);
-        setErrorMessage('Unable to process request. Please try again.');
+    // Published catalogue retrieval is a real local feature, clearly identified
+    // when no live provider response was received.
+    try {
+      if (useCatalogFallback) {
+        setServiceNotice((notice) => notice || 'Live AI is unavailable. Showing matches from the published catalogue.');
       }
-    }, 350);
+      const botMsg = generateGroundedResponse(textToSend);
+      setMessages((prev) => [...prev, botMsg]);
+      if (!options.suppressUnread && !isOpenRef.current) setUnreadCount((c) => c + 1);
+    } catch {
+      setErrorMessage('Unable to process this request. Please try again.');
+    } finally {
+      isLoadingRef.current = false;
+      setIsLoading(false);
+    }
   };
 
   const handleClearHistory = () => {
@@ -228,6 +258,7 @@ export const FloatingChatbot: React.FC = () => {
       ...(proactiveMessageRef.current ? [proactiveMessageRef.current] : []),
     ]);
     setErrorMessage(null);
+    setServiceNotice(null);
     setLastQuery(null);
   };
 
@@ -314,7 +345,7 @@ export const FloatingChatbot: React.FC = () => {
             role="region"
             aria-label="Assistant welcome invitation"
             onClick={handleOpenFromWelcome}
-            className="group absolute bottom-full right-0 mb-3 w-[min(330px,calc(100vw-2rem))] rounded-lg p-4 bg-card border border-border shadow-lg shadow-black/30 text-foreground animate-fade-in-up z-50 flex flex-col gap-3 cursor-pointer hover:border-primary/50 transition-colors"
+            className="group absolute bottom-full right-0 mb-3 w-[min(330px,calc(100vw-2rem))] rounded-lg p-4 bg-card border border-border shadow-lg shadow-black/30 text-foreground animate-fade-in-up z-50 hidden lg:flex flex-col gap-3 cursor-pointer hover:border-primary/50 transition-colors"
           >
             {/* Header & Dismiss Button */}
             <div className="flex items-start justify-between gap-2">
@@ -401,7 +432,6 @@ export const FloatingChatbot: React.FC = () => {
           <button
             type="button"
             onClick={handleOpenChat}
-            aria-label="Open Tech Hacks AI Assistant"
             className="flex items-center gap-3 pl-2.5 pr-4 py-2 rounded-lg bg-card border border-border text-foreground font-semibold text-xs sm:text-sm shadow-lg shadow-black/30 hover:border-primary/50 hover:bg-muted active:scale-[0.98] transition-colors duration-200 group cursor-pointer"
           >
             <div className="relative">
@@ -601,6 +631,12 @@ export const FloatingChatbot: React.FC = () => {
                   </button>
                 )}
               </div>
+            )}
+
+            {serviceNotice && !errorMessage && (
+              <p role="status" className="mx-1 text-[11px] leading-relaxed text-muted-foreground">
+                {serviceNotice}
+              </p>
             )}
 
             <div ref={messagesEndRef} />

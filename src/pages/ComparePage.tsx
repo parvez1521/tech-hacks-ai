@@ -497,7 +497,7 @@ export const ComparePage: React.FC = () => {
                   Cursor vs Claude Code vs Aider vs Cline
                 </span>
               </div>
-              <span className="text-[11px] text-slate-500 mt-2">12 min read • Coding</span>
+              <span className="text-[11px] text-slate-600 dark:text-slate-300 mt-2">12 min read • Coding</span>
             </Link>
 
             <Link
@@ -510,7 +510,7 @@ export const ComparePage: React.FC = () => {
                   How to Evaluate Free AI Tool Plans: Recurring vs Starter Credits
                 </span>
               </div>
-              <span className="text-[11px] text-slate-500 mt-2">8 min read • Productivity</span>
+              <span className="text-[11px] text-slate-600 dark:text-slate-300 mt-2">8 min read • Productivity</span>
             </Link>
 
             <Link
@@ -523,7 +523,7 @@ export const ComparePage: React.FC = () => {
                   Running Local LLMs for Total Privacy: Ollama + Open WebUI
                 </span>
               </div>
-              <span className="text-[11px] text-slate-500 mt-2">7 min read • Privacy</span>
+              <span className="text-[11px] text-slate-600 dark:text-slate-300 mt-2">7 min read • Privacy</span>
             </Link>
           </div>
         </div>

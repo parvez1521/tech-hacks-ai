@@ -294,14 +294,14 @@ export const ModerationDashboardPage: React.FC = () => {
   const getStatusBadge = (status: SubmissionStatus) => {
     switch (status) {
       case 'pending':
-        return 'bg-amber-500/10 text-amber-400 border-amber-500/30';
+        return 'bg-amber-50 text-amber-800 border-amber-200 dark:bg-amber-500/10 dark:text-amber-300 dark:border-amber-500/30';
       case 'in_review':
-        return 'bg-blue-500/10 text-blue-400 border-blue-500/30';
+        return 'bg-blue-50 text-blue-800 border-blue-200 dark:bg-blue-500/10 dark:text-blue-300 dark:border-blue-500/30';
       case 'approved':
       case 'published':
-        return 'bg-emerald-500/10 text-emerald-400 border-emerald-500/30';
+        return 'bg-emerald-50 text-emerald-800 border-emerald-200 dark:bg-emerald-500/10 dark:text-emerald-300 dark:border-emerald-500/30';
       case 'rejected':
-        return 'bg-rose-500/10 text-rose-400 border-rose-500/30';
+        return 'bg-rose-50 text-rose-800 border-rose-200 dark:bg-rose-500/10 dark:text-rose-300 dark:border-rose-500/30';
       default:
         return 'bg-muted text-muted-foreground border-border';
     }
@@ -663,8 +663,8 @@ export const ModerationDashboardPage: React.FC = () => {
                       <span
                         className={`px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider ${
                           sub.type === 'tool'
-                            ? 'bg-blue-500/10 text-blue-400 border border-blue-500/20'
-                            : 'bg-purple-500/10 text-purple-400 border border-purple-500/20'
+                            ? 'bg-blue-50 text-blue-800 border border-blue-200 dark:bg-blue-500/10 dark:text-blue-300 dark:border-blue-500/20'
+                            : 'bg-purple-50 text-purple-800 border border-purple-200 dark:bg-purple-500/10 dark:text-purple-300 dark:border-purple-500/20'
                         }`}
                       >
                         {sub.type === 'tool' ? 'AI Tool' : 'Guide'}
@@ -717,8 +717,8 @@ export const ModerationDashboardPage: React.FC = () => {
                   <span
                     className={`px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider ${
                       selectedSubmission.type === 'tool'
-                        ? 'bg-blue-500/10 text-blue-400 border border-blue-500/20'
-                        : 'bg-purple-500/10 text-purple-400 border border-purple-500/20'
+                        ? 'bg-blue-50 text-blue-800 border border-blue-200 dark:bg-blue-500/10 dark:text-blue-300 dark:border-blue-500/20'
+                        : 'bg-purple-50 text-purple-800 border border-purple-200 dark:bg-purple-500/10 dark:text-purple-300 dark:border-purple-500/20'
                     }`}
                   >
                     {selectedSubmission.type === 'tool' ? 'AI Tool Submission' : 'Guide Submission'}

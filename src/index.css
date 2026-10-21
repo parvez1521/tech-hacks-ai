@@ -20,6 +20,7 @@
     --color-secondary: 23 36 58;
     --color-secondary-fg: 203 213 225;
     --color-primary: 96 165 250;
+    --color-primary-fg: 15 23 42;
     --color-primary-hover: 59 130 246;
     --glow-spotlight: rgba(59, 130, 246, 0.16);
     --dot-color: rgba(148, 163, 184, 0.1);
@@ -42,8 +43,9 @@
     --color-border: 218 226 235;
     --color-secondary: 241 245 249;
     --color-secondary-fg: 51 65 85;
-    --color-primary: 37 99 235;
-    --color-primary-hover: 29 78 216;
+    --color-primary: 29 78 216;
+    --color-primary-fg: 255 255 255;
+    --color-primary-hover: 30 64 175;
     --glow-spotlight: rgba(37, 99, 235, 0.04);
     --dot-color: rgba(15, 23, 42, 0.08);
     --grid-color: rgba(15, 23, 42, 0.04);
@@ -67,6 +69,103 @@
     outline: 2px solid rgba(59, 130, 246, 0.7);
     outline-offset: 2px;
   }
+}
+
+/* Keep legacy light-palette utility classes readable when the dark theme is active. */
+.dark [class~="bg-white"],
+.dark [class~="bg-[#ffffff]"],
+.dark [class~="bg-[#FFFFFF]"] {
+  background-color: rgb(var(--color-card)) !important;
+}
+
+.dark [class~="bg-slate-50"],
+.dark [class~="bg-slate-50/70"],
+.dark [class~="bg-slate-50/80"],
+.dark [class~="bg-slate-50/50"],
+.dark [class~="bg-blue-50/70"],
+.dark [class~="bg-blue-50/80"],
+.dark [class~="bg-blue-50/60"],
+.dark [class~="bg-amber-50/50"],
+.dark [class~="bg-amber-50/70"],
+.dark [class~="bg-amber-50/80"],
+.dark [class~="bg-slate-100"],
+.dark [class~="bg-blue-50"],
+.dark [class~="bg-indigo-50"],
+.dark [class~="bg-cyan-50"],
+.dark [class~="bg-emerald-50"],
+.dark [class~="bg-green-50"],
+.dark [class~="bg-purple-50"],
+.dark [class~="bg-amber-50"],
+.dark [class~="bg-rose-50"],
+.dark [class~="bg-red-50"],
+.dark [class~="bg-orange-50"],
+.dark [class~="bg-yellow-50"],
+.dark [class~="bg-[#F1F5F9]"],
+.dark [class~="bg-[#F5F8FF]"] {
+  background-color: rgb(var(--color-muted)) !important;
+}
+
+.dark [class~="bg-[#EAF2FF]"] {
+  background-color: rgb(var(--color-accent)) !important;
+}
+
+.dark [class~="text-slate-900"],
+.dark [class~="text-slate-800"],
+.dark [class~="text-[#0F172A]"],
+.dark [class~="text-[#0f172a]"] {
+  color: rgb(var(--color-fg)) !important;
+}
+
+.dark [class~="text-slate-700"],
+.dark [class~="text-slate-600"],
+.dark [class~="text-[#475569]"] {
+  color: rgb(var(--color-secondary-fg)) !important;
+}
+
+.dark [class~="text-slate-500"],
+.dark [class~="text-[#64748B]"],
+.dark [class~="text-[#64748b]"] {
+  color: rgb(var(--color-muted-fg)) !important;
+}
+
+.dark [class~="text-blue-600"],
+.dark [class~="text-blue-700"],
+.dark [class~="text-blue-800"],
+.dark [class~="text-blue-900"],
+.dark [class~="text-indigo-700"],
+.dark [class~="text-indigo-800"],
+.dark [class~="border-[#BFDBFE]"] {
+  color: rgb(var(--color-primary)) !important;
+}
+
+.dark [class~="text-emerald-700"],
+.dark [class~="text-emerald-800"],
+.dark [class~="text-green-700"] {
+  color: #6ee7b7 !important;
+}
+
+.dark [class~="text-purple-700"],
+.dark [class~="text-purple-800"] {
+  color: #d8b4fe !important;
+}
+
+.dark [class~="text-amber-700"],
+.dark [class~="text-amber-800"],
+.dark [class~="text-amber-900"],
+.dark [class~="text-amber-950"],
+.dark [class~="text-amber-900/90"] {
+  color: #fcd34d !important;
+}
+
+.dark [class~="text-rose-700"],
+.dark [class~="text-rose-800"],
+.dark [class~="text-red-700"],
+.dark [class~="text-red-800"] {
+  color: #fda4af !important;
+}
+
+.dark [class~="text-primary-foreground"] {
+  color: rgb(var(--color-primary-fg)) !important;
 }
 
 /* Custom visual utilities & animations */

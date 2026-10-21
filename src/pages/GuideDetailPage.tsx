@@ -93,19 +93,19 @@ export const GuideDetailPage: React.FC = () => {
       />
 
       {/* Breadcrumbs */}
-      <nav className="flex items-center justify-between text-xs text-slate-500 mb-6" aria-label="Breadcrumb">
+      <nav className="mb-6 flex flex-col items-start gap-3 text-xs text-muted-foreground sm:flex-row sm:items-center sm:justify-between" aria-label="Breadcrumb">
         <div className="flex items-center gap-2">
-          <Link to="/" className="hover:text-slate-900 transition-colors">Home</Link>
-          <span className="text-slate-400">/</span>
-          <Link to="/guides" className="hover:text-slate-900 transition-colors">Guides</Link>
-          <span className="text-slate-400">/</span>
+          <Link to="/" className="hover:text-foreground transition-colors">Home</Link>
+          <span className="text-muted-foreground">/</span>
+          <Link to="/guides" className="hover:text-foreground transition-colors">Guides</Link>
+          <span className="text-muted-foreground">/</span>
           <span className="text-blue-600 font-medium truncate max-w-[200px] sm:max-w-md">{guide.title}</span>
         </div>
 
         <button
           type="button"
           onClick={handleCopyShare}
-          className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-[#DFE7F3] bg-white hover:bg-slate-50 text-slate-700 transition-colors shrink-0 shadow-xs cursor-pointer"
+          className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-border bg-card hover:bg-muted text-secondary-foreground transition-colors shrink-0 shadow-xs cursor-pointer"
           aria-label={copiedShare ? 'Copied!' : 'Share'}
         >
           {copiedShare ? (
@@ -115,7 +115,7 @@ export const GuideDetailPage: React.FC = () => {
             </>
           ) : (
             <>
-              <Share2 className="w-3.5 h-3.5 text-slate-400" />
+              <Share2 className="w-3.5 h-3.5 text-muted-foreground" />
               <span className="text-[11px] font-medium">Share</span>
             </>
           )}
@@ -123,7 +123,7 @@ export const GuideDetailPage: React.FC = () => {
       </nav>
 
       {/* Guide Header */}
-      <div className="mb-8 pb-6 border-b border-[#DFE7F3]">
+      <div className="mb-8 pb-6 border-b border-border">
         <div className="flex items-center justify-between gap-3 mb-3">
           <span className="px-3 py-1 rounded-full text-xs font-semibold bg-blue-50 text-blue-700 border border-blue-200 capitalize font-mono">
             {guide.category.replace('-', ' ')}
@@ -131,63 +131,63 @@ export const GuideDetailPage: React.FC = () => {
           <BookmarkButton item={bookmarkItem} size="md" />
         </div>
 
-        <h1 className="text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight mb-4 leading-tight">
+        <h1 className="text-2xl sm:text-4xl font-extrabold text-foreground tracking-tight mb-4 leading-tight">
           {guide.title}
         </h1>
 
-        <div className="flex flex-wrap items-center gap-4 text-xs text-slate-500 mb-4">
-          <span>By <strong className="text-slate-700 font-medium">{guide.author}</strong></span>
-          <span className="text-slate-300">•</span>
+        <div className="flex flex-wrap items-center gap-4 text-xs text-muted-foreground mb-4">
+          <span>By <strong className="text-secondary-foreground font-medium">{guide.author}</strong></span>
+          <span className="text-border">•</span>
           <div className="flex items-center gap-1.5">
-            <Clock className="w-3.5 h-3.5 text-slate-400" />
+            <Clock className="w-3.5 h-3.5 text-muted-foreground" />
             <span>{guide.readTime}</span>
           </div>
-          <span className="text-slate-300">•</span>
+          <span className="text-border">•</span>
           <div className="flex items-center gap-1.5">
-            <Calendar className="w-3.5 h-3.5 text-slate-400" />
+            <Calendar className="w-3.5 h-3.5 text-muted-foreground" />
             <span>{guide.publishedDate}</span>
           </div>
         </div>
 
-        <p className="text-sm sm:text-base text-slate-700 leading-relaxed bg-white p-5 rounded-2xl border border-[#DFE7F3] shadow-invary-card">
+        <p className="text-sm sm:text-base text-secondary-foreground leading-relaxed bg-card p-5 rounded-2xl border border-border shadow-invary-card">
           {guide.summary}
         </p>
       </div>
 
       {/* Step by Step Walkthrough */}
       <div className="space-y-6 mb-12">
-        <h2 className="text-lg font-bold text-slate-900 flex items-center gap-2">
+        <h2 className="text-lg font-bold text-foreground flex items-center gap-2">
           <span>Step-by-Step Instructions</span>
         </h2>
 
         {guide.steps.map((step) => (
           <div
             key={step.stepNumber}
-            className="p-6 rounded-2xl border border-[#DFE7F3] bg-white shadow-invary-card space-y-3 relative hover:border-blue-300 transition-colors"
+            className="p-6 rounded-2xl border border-border bg-card shadow-invary-card space-y-3 relative hover:border-primary/40 transition-colors"
           >
             <div className="flex items-center gap-3">
               <span className="w-8 h-8 rounded-full bg-blue-50 text-blue-700 font-bold text-xs flex items-center justify-center shrink-0 border border-blue-200 font-mono">
                 {step.stepNumber}
               </span>
-              <h3 className="font-bold text-slate-900 text-base tracking-tight">
+              <h3 className="font-bold text-foreground text-base tracking-tight">
                 {step.title}
               </h3>
             </div>
 
-            <p className="text-sm text-slate-600 leading-relaxed pl-11">
+            <p className="text-sm text-secondary-foreground leading-relaxed pl-11">
               {step.description}
             </p>
 
             {step.promptTemplate && (
-              <div className="ml-11 mt-4 p-4 rounded-xl bg-[#F5F8FF] border border-[#DFE7F3] space-y-2">
-                <div className="flex items-center justify-between text-xs text-slate-500">
+              <div className="ml-11 mt-4 p-4 rounded-xl bg-[#F5F8FF] border border-border space-y-2">
+                <div className="flex items-center justify-between text-xs text-muted-foreground">
                   <span className="font-semibold uppercase tracking-wider text-[10px] text-blue-700 font-mono">
                     Recommended Prompt Template
                   </span>
                   <button
                     type="button"
                     onClick={() => handleCopyPrompt(step.promptTemplate!, step.stepNumber)}
-                    className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-white hover:bg-slate-50 text-slate-700 border border-[#DFE7F3] transition-colors font-medium text-[11px] shadow-xs cursor-pointer"
+                    className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-card hover:bg-muted text-secondary-foreground border border-border transition-colors font-medium text-[11px] shadow-xs cursor-pointer"
                   >
                     {copiedStep === step.stepNumber ? (
                       <>
@@ -196,13 +196,13 @@ export const GuideDetailPage: React.FC = () => {
                       </>
                     ) : (
                       <>
-                        <Copy className="w-3.5 h-3.5 text-slate-400" />
+                        <Copy className="w-3.5 h-3.5 text-muted-foreground" />
                         <span>Copy Prompt</span>
                       </>
                     )}
                   </button>
                 </div>
-                <pre className="font-mono text-xs text-slate-900 whitespace-pre-wrap leading-relaxed select-all">
+                <pre className="font-mono text-xs text-foreground whitespace-pre-wrap leading-relaxed select-all">
                   "{step.promptTemplate}"
                 </pre>
               </div>
@@ -213,8 +213,8 @@ export const GuideDetailPage: React.FC = () => {
 
       {/* Featured / Mentioned Tools */}
       {guide.relatedToolSlugs.length > 0 && (
-        <div className="mb-12 p-6 rounded-2xl border border-[#DFE7F3] bg-white shadow-invary-card">
-          <h3 className="text-sm font-bold text-slate-900 mb-4 flex items-center gap-2">
+        <div className="mb-12 p-6 rounded-2xl border border-border bg-card shadow-invary-card">
+          <h3 className="text-sm font-bold text-foreground mb-4 flex items-center gap-2">
             <Wrench className="w-4 h-4 text-blue-600" />
             <span>Tools & Models Used in this Guide</span>
           </h3>
@@ -230,7 +230,7 @@ export const GuideDetailPage: React.FC = () => {
                 <Link
                   key={tool.id}
                   to={link}
-                  className="flex items-center justify-between p-3.5 rounded-xl border border-[#DFE7F3] bg-[#F5F8FF] hover:bg-white hover:border-blue-300 transition-all group"
+                  className="flex items-center justify-between p-3.5 rounded-xl border border-border bg-[#F5F8FF] hover:bg-card hover:border-primary/40 transition-all group"
                 >
                   <div className="flex items-center gap-3 min-w-0">
                     <BrandLogo
@@ -241,7 +241,7 @@ export const GuideDetailPage: React.FC = () => {
                       iconLetter={tool.iconLetter}
                       className="w-7 h-7"
                     />
-                    <span className="font-semibold text-sm text-slate-900 group-hover:text-blue-600 transition-colors truncate">{tool.name}</span>
+                    <span className="font-semibold text-sm text-foreground group-hover:text-blue-600 transition-colors truncate">{tool.name}</span>
                   </div>
                   <span className="text-xs text-blue-600 font-medium shrink-0 group-hover:translate-x-0.5 transition-transform">View Tool →</span>
                 </Link>
@@ -252,16 +252,16 @@ export const GuideDetailPage: React.FC = () => {
       )}
 
       {/* Previous / Next Navigation */}
-      <div className="pt-6 border-t border-[#DFE7F3] flex items-center justify-between gap-4 text-xs">
+      <div className="pt-6 border-t border-border flex items-center justify-between gap-4 text-xs">
         {prevGuide ? (
           <Link
             to={`/guides/${prevGuide.slug}`}
-            className="flex items-center gap-2 text-slate-500 hover:text-slate-900 transition-colors max-w-[45%]"
+            className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors max-w-[45%]"
           >
             <ArrowLeft className="w-4 h-4 shrink-0 text-blue-600" />
             <div className="text-left truncate">
-              <span className="block text-[10px] uppercase tracking-wider text-slate-400">Previous Guide</span>
-              <span className="font-medium text-slate-700 hover:text-blue-600 truncate block">{prevGuide.title}</span>
+              <span className="block text-[10px] uppercase tracking-wider text-muted-foreground">Previous Guide</span>
+              <span className="font-medium text-secondary-foreground hover:text-blue-600 truncate block">{prevGuide.title}</span>
             </div>
           </Link>
         ) : <div />}
@@ -269,11 +269,11 @@ export const GuideDetailPage: React.FC = () => {
         {nextGuide ? (
           <Link
             to={`/guides/${nextGuide.slug}`}
-            className="flex items-center gap-2 text-slate-500 hover:text-slate-900 transition-colors max-w-[45%] text-right"
+            className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors max-w-[45%] text-right"
           >
             <div className="text-right truncate">
-              <span className="block text-[10px] uppercase tracking-wider text-slate-400">Next Guide</span>
-              <span className="font-medium text-slate-700 hover:text-blue-600 truncate block">{nextGuide.title}</span>
+              <span className="block text-[10px] uppercase tracking-wider text-muted-foreground">Next Guide</span>
+              <span className="font-medium text-secondary-foreground hover:text-blue-600 truncate block">{nextGuide.title}</span>
             </div>
             <ArrowRight className="w-4 h-4 shrink-0 text-blue-600" />
           </Link>

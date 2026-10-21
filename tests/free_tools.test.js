@@ -5,6 +5,7 @@ import path from 'node:path';
 import { freeToolsData } from '../src/data/freeToolsData.ts';
 import { getCatalogStats, getFreeToolBySlug } from '../src/services/aiCatalogService.ts';
 import { createQrMatrix } from '../src/lib/utilities/qr.ts';
+import { createLatestRequestGate } from '../src/lib/utilities/requestGate.ts';
 
 describe('Built-in browser utility registry', () => {
   test('contains at least 20 new distinct utilities with unique IDs and slugs', () => {
@@ -39,6 +40,16 @@ describe('Built-in browser utility registry', () => {
     assert.equal(matrix.length, matrix[0].length, 'QR matrix is square');
     assert.throws(() => createQrMatrix('x'.repeat(40)), /32 UTF-8 bytes/);
     assert.throws(() => createQrMatrix(''), /Enter text/);
+  });
+
+  test('latest-request gate prevents stale asynchronous outputs from replacing current results', () => {
+    const gate = createLatestRequestGate();
+    const olderRequest = gate.begin();
+    const currentRequest = gate.begin();
+    assert.equal(gate.isCurrent(olderRequest), false);
+    assert.equal(gate.isCurrent(currentRequest), true);
+    gate.cancel(currentRequest);
+    assert.equal(gate.isCurrent(currentRequest), false);
   });
 
   test('Catalog stats are de-duplicated and include the expanded utility count', () => {

@@ -112,7 +112,7 @@ export const SavedPage: React.FC = () => {
       {filteredItems.length === 0 ? (
         <div className="p-12 text-center rounded-2xl bg-white border border-[#DFE7F3] max-w-md mx-auto my-8 shadow-xs">
           <Bookmark className="w-10 h-10 text-slate-300 mx-auto mb-3" />
-          <h3 className="font-bold text-slate-900 text-base mb-1">No Saved Items Yet</h3>
+          <h2 className="font-bold text-slate-900 text-base mb-1">No Saved Items Yet</h2>
           <p className="text-xs text-slate-500 mb-6 leading-relaxed">
             Click the bookmark icon on any AI tool, open-source project, guide, or prompt to access it quickly here.
           </p>

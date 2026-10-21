@@ -172,7 +172,7 @@ describe('Phase 9: Tech Hacks AI Platform Rebranding', () => {
 
     assert.ok(html.includes('Tech Hacks'), 'Header must render "Tech Hacks" wordmark');
     assert.ok(html.includes('AI'), 'Header must render "AI" accent badge');
-    assert.ok(html.includes('aria-label="Tech Hacks AI Home"'), 'Header logo link must have accessible aria-label');
+    assert.ok(html.includes('aria-label="Tech Hacks AI"'), 'Header logo link accessible name matches visible wordmark');
     assert.ok(html.includes('group-hover:rotate-12'), 'Logo must maintain microinteraction rotate hover');
   });
 

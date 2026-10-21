@@ -108,7 +108,7 @@ Configure these variables in your hosting environment (e.g. Vercel Project Setti
 | `ADMIN_SECRET` | Server (Secret) | Bearer token / passkey required for `/moderation` and PATCH `/api/submissions`. |
 | `SUPABASE_URL` | Server (Secret) | Supabase project URL (e.g. `https://<project-ref>.supabase.co`). |
 | `SUPABASE_SERVICE_ROLE_KEY` | Server (Secret) | Supabase secret key with RLS bypass for API storage operations. |
-| `GROQ_API_KEY` | Server (Secret) | *(Optional)* Groq API key for Llama 3.3 live chatbot responses or Groq multilingual speech-to-text when `TRANSCRIPTION_API_URL` points to Groq. |
+| `GROQ_API_KEY` | Server (Secret) | *(Optional)* Groq API key for live chatbot responses (`openai/gpt-oss-120b`) or Groq multilingual speech-to-text when `TRANSCRIPTION_API_URL` points to Groq. |
 | `GEMINI_API_KEY` | Server (Secret) | *(Optional)* Google Gemini API key for multimodal model inference. |
 | `OPENAI_API_KEY` | Server (Secret) | *(Optional)* Server-side OpenAI speech-to-text key for the Video & Audio Transcriber. Never expose it as `VITE_`. The default `whisper-1` model supports multilingual transcription. |
 | `TRANSCRIPTION_API_URL` | Server (Secret) | *(Optional)* Allowlisted OpenAI or Groq transcription endpoint. Defaults to OpenAI's audio transcription endpoint. |

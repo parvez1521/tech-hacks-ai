@@ -88,9 +88,9 @@ export const UpdatesPage: React.FC = () => {
                 />
               )}
               <div className="min-w-0 flex-1">
-                <h3 className="font-bold text-base text-slate-900 tracking-tight mb-1">
+                <h2 className="font-bold text-base text-slate-900 tracking-tight mb-1">
                   {item.title}
-                </h3>
+                </h2>
                 <p className="text-sm text-slate-600 leading-relaxed">
                   {item.summary}
                 </p>

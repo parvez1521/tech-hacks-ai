@@ -194,7 +194,7 @@ describe('Phase 10: Help Me Pick, Floating Chatbot, Video Generators & LLM Alter
     const html = renderClean(React.createElement(ssrModule.App));
 
     assert.ok(html.includes('Ask Tech Hacks AI'), 'Floating launcher button text rendered');
-    assert.ok(html.includes('aria-label="Open Tech Hacks AI Assistant"'), 'Accessible aria-label on launcher');
+    assert.ok(!html.includes('aria-label="Ask Tech Hacks AI'), 'Launcher uses its visible child text as its accessible name');
   });
 
   test('PickPage renders adaptive wizard with verified criteria and step progression', async () => {

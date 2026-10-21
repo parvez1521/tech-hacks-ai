@@ -104,7 +104,7 @@ export const BrandLogo: React.FC<BrandLogoProps> = ({
   };
 
   const sizeClasses = getSizeStyles();
-  const fallbackBg = iconBgColor || logoEntry?.badgeBg || '#272a30';
+  const fallbackBg = '#334155';
   const fallbackText = iconLetter || (name ? name.slice(0, 2).toUpperCase() : '??');
 
   if (logoEntry && isTrustedLogo && currentSrc && !hasError) {

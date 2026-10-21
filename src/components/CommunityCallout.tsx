@@ -23,9 +23,9 @@ export const CommunityCallout: React.FC<CommunityCalloutProps> = ({ type }) => {
             <span>Community Contributions</span>
           </div>
 
-          <h3 className="text-xl sm:text-2xl font-bold text-foreground tracking-tight mb-2">
+          <h2 className="text-xl sm:text-2xl font-bold text-foreground tracking-tight mb-2">
             {isTool ? 'Missing an AI Tool or Open Source Alternative?' : 'Have an AI Workflow or Practical Tutorial to Share?'}
-          </h3>
+          </h2>
 
           <p className="text-xs sm:text-sm text-secondary-foreground leading-relaxed">
             {isTool

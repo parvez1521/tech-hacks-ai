@@ -285,7 +285,7 @@ In your Vercel Dashboard under **Project Settings -> Environment Variables**, ad
 - `ADMIN_SECRET`: Generate a random 32-character string (e.g. `openssl rand -base64 32`)
 - `SUPABASE_URL`: `https://<your-project-ref>.supabase.co`
 - `SUPABASE_SERVICE_ROLE_KEY`: Your Supabase service role key
-- `GROQ_API_KEY`: *(Optional)* Your Groq API key for Llama 3.3 chatbot responses
+- `GROQ_API_KEY`: *(Optional)* Your Groq API key for GPT-OSS 120B chatbot responses
 
 ### Step 4: Connect Domain DNS
 1. In Vercel, go to **Settings -> Domains** and add `techhacksai.com`.

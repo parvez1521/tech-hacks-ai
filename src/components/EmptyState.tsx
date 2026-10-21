@@ -17,7 +17,7 @@ export const EmptyState: React.FC<EmptyStateProps> = ({
       <div className="w-12 h-12 rounded-full bg-muted flex items-center justify-center text-muted-foreground mb-4 shadow-inner">
         <SearchX className="w-6 h-6 animate-pulse-subtle" />
       </div>
-      <h3 className="text-base font-semibold text-foreground mb-1">{title}</h3>
+      <h2 className="text-base font-semibold text-foreground mb-1">{title}</h2>
       <p className="text-sm text-muted-foreground max-w-sm mb-5">{description}</p>
       {onReset && (
         <button

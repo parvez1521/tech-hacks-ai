@@ -101,7 +101,7 @@ export const ContactPage: React.FC = () => {
           <div className="w-8 h-8 rounded-lg bg-blue-50 border border-blue-200 text-blue-700 flex items-center justify-center">
             <Sparkles className="w-4 h-4 text-blue-600" />
           </div>
-          <h3 className="font-semibold text-slate-900 text-sm">Tool Submissions</h3>
+          <h2 className="font-semibold text-slate-900 text-sm">Tool Submissions</h2>
           <p className="text-xs text-slate-600 leading-relaxed">
             Building an open-source tool or verified free generative platform? Share your repository or website link.
           </p>
@@ -111,7 +111,7 @@ export const ContactPage: React.FC = () => {
           <div className="w-8 h-8 rounded-lg bg-emerald-50 border border-emerald-200 text-emerald-700 flex items-center justify-center">
             <Wrench className="w-4 h-4 text-emerald-600" />
           </div>
-          <h3 className="font-semibold text-slate-900 text-sm">Data & Pricing Updates</h3>
+          <h2 className="font-semibold text-slate-900 text-sm">Data & Pricing Updates</h2>
           <p className="text-xs text-slate-600 leading-relaxed">
             Did an indexed tool alter its pricing tier, free quota, or license? Let us know so we can keep our catalog accurate.
           </p>
@@ -121,7 +121,7 @@ export const ContactPage: React.FC = () => {
           <div className="w-8 h-8 rounded-lg bg-purple-50 border border-purple-200 text-purple-700 flex items-center justify-center">
             <ShieldCheck className="w-4 h-4 text-purple-600" />
           </div>
-          <h3 className="font-semibold text-slate-900 text-sm">Editorial & Legal</h3>
+          <h2 className="font-semibold text-slate-900 text-sm">Editorial & Legal</h2>
           <p className="text-xs text-slate-600 leading-relaxed">
             For trademark, copyright (DMCA), or privacy inquiries, our team responds promptly to address concerns.
           </p>

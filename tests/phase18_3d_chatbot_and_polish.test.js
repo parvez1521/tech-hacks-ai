@@ -92,7 +92,7 @@ describe('Phase 18: Pre-Launch Polish & Interactive 3D AI Chatbot Assistant', ()
       const html = ReactDOMServer.renderToString(React.createElement(ssrModule.App));
 
       assert.ok(html.includes('Ask Tech Hacks AI'), 'Chatbot launcher must render visible "Ask Tech Hacks AI" prompt');
-      assert.ok(html.includes('aria-label="Open Tech Hacks AI Assistant"'), 'Chatbot launcher must have standard accessible label');
+      assert.ok(!html.includes('aria-label="Ask Tech Hacks AI'), 'Chatbot launcher uses its visible child text as its accessible name');
       assert.ok(html.includes('preserve-3d') || html.includes('perspective:'), 'Chatbot launcher embeds the 3D orb component');
       assert.ok(html.includes('fixed bottom-') && html.includes('right-'), 'Chatbot launcher is anchored to viewport bottom-right');
     });

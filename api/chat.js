@@ -4,47 +4,72 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  const { message } = req.body || {};
+  const body = typeof req.body === 'string' ? safeJsonParse(req.body) : req.body;
+  const message = typeof body?.message === 'string' ? body.message.trim() : '';
+  if (!message) return res.status(400).json({ error: 'Enter a message to continue.' });
+  if (message.length > 8000) return res.status(413).json({ error: 'Message is too long. Keep it under 8,000 characters.' });
   const groqKey = process.env.GROQ_API_KEY;
-  const geminiKey = process.env.GEMINI_API_KEY;
 
-  if (groqKey && message) {
+  if (groqKey) {
+    let timeout;
     try {
+      const controller = new AbortController();
+      timeout = setTimeout(() => controller.abort(), 20000);
       const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
         method: 'POST',
+        signal: controller.signal,
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${groqKey}`,
         },
         body: JSON.stringify({
-          model: 'llama-3.3-70b-versatile',
+          model: 'openai/gpt-oss-120b',
           messages: [
             {
               role: 'system',
               content:
                 'You are the Tech Hacks AI Assistant for techhacksai.com. Ground answers in verified software tools. Differentiate open-source, recurring free plans, starter trial credits, and paid-only tools. Support English and Hindi queries.',
             },
+            ...normalizeHistory(body?.conversationHistory),
             { role: 'user', content: message },
           ],
-          max_tokens: 600,
+          max_completion_tokens: 600,
         }),
       });
+      clearTimeout(timeout);
 
       if (response.ok) {
         const data = await response.json();
-        const text = data.choices?.[0]?.message?.content;
-        if (text) {
-          return res.status(200).json({ text });
+        const text = data?.choices?.[0]?.message?.content;
+        if (typeof text === 'string' && text.trim()) {
+          return res.status(200).json({ text: text.trim(), mode: 'live' });
         }
       }
     } catch {
-      // Fall through to local fallback
+      clearTimeout(timeout);
+      // The browser can still use the published catalog when the provider is down.
     }
   }
 
   // Graceful fallback to client catalog engine
   return res.status(200).json({
     status: 'grounded_local_mode',
+    message: groqKey
+      ? 'Live AI is temporarily unavailable. Showing matches from the published catalogue.'
+      : 'Live AI is not configured. Showing matches from the published catalogue.',
     text: null,
+  });
+}
+
+function safeJsonParse(value) {
+  try { return JSON.parse(value); } catch { return null; }
+}
+
+function normalizeHistory(history) {
+  if (!Array.isArray(history)) return [];
+  return history.slice(-8).flatMap((item) => {
+    if (!item || !['user', 'assistant'].includes(item.sender) || typeof item.text !== 'string') return [];
+    const content = item.text.trim().slice(0, 1200);
+    return content ? [{ role: item.sender, content }] : [];
   });
 }

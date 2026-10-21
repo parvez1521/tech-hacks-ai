@@ -65,15 +65,15 @@ export const Header: React.FC = () => {
 
   return (
     <header className="sticky top-0 inset-x-0 z-50 bg-background/95 border-b border-border/80">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 h-[68px] flex items-center justify-between gap-4">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 h-[68px] flex items-center justify-between gap-2">
         {/* Left: Brand Logo & Title */}
         <div className="flex items-center gap-5 xl:gap-7">
-          <Link to="/" className="flex items-center shrink-0" aria-label="Tech Hacks AI Home">
+          <Link to="/" aria-label="Tech Hacks AI" className="flex items-center shrink-0">
             <TechHacksLogo size="sm" showWordmark={true} />
           </Link>
 
           {/* Compact, Organized Desktop Navigation */}
-          <nav className="hidden lg:flex items-center gap-0.5 text-sm font-medium">
+          <nav aria-label="Primary" className="hidden lg:flex items-center gap-0.5 text-sm font-medium">
             {/* 1. Discover Dropdown */}
             <div className="relative" ref={discoverRef}>
               <button

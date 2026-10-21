@@ -27,7 +27,7 @@ export const AiToolCard: React.FC<AiToolCardProps> = ({ tool, routePrefix = '/ai
   const getPricingBadge = () => {
     if (tool.freeAccessType === 'open-source-local' || tool.isSelfHostable) {
       return (
-        <span className="px-2 py-0.5 rounded text-[11px] font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+        <span className="px-2 py-0.5 rounded text-[11px] font-semibold bg-emerald-50 text-emerald-800 border border-emerald-200 dark:bg-emerald-500/10 dark:text-emerald-300 dark:border-emerald-500/20">
           Open Source
         </span>
       );
@@ -36,32 +36,32 @@ export const AiToolCard: React.FC<AiToolCardProps> = ({ tool, routePrefix = '/ai
     switch (tool.pricingType) {
       case 'free':
         return (
-          <span className="px-2 py-0.5 rounded text-[11px] font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+          <span className="px-2 py-0.5 rounded text-[11px] font-semibold bg-emerald-50 text-emerald-800 border border-emerald-200 dark:bg-emerald-500/10 dark:text-emerald-300 dark:border-emerald-500/20">
             Free
           </span>
         );
       case 'freemium':
         return (
-          <span className="px-2 py-0.5 rounded text-[11px] font-semibold bg-blue-500/10 text-blue-400 border border-blue-500/20">
+          <span className="px-2 py-0.5 rounded text-[11px] font-semibold bg-blue-50 text-blue-800 border border-blue-200 dark:bg-blue-500/10 dark:text-blue-300 dark:border-blue-500/20">
             Freemium
           </span>
         );
       case 'free-credits':
         return (
-          <span className="px-2 py-0.5 rounded text-[11px] font-semibold bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">
+          <span className="px-2 py-0.5 rounded text-[11px] font-semibold bg-cyan-50 text-cyan-900 border border-cyan-200 dark:bg-cyan-500/10 dark:text-cyan-300 dark:border-cyan-500/20">
             Credits
           </span>
         );
       case 'free-trial':
         return (
-          <span className="px-2 py-0.5 rounded text-[11px] font-semibold bg-purple-500/10 text-purple-400 border border-purple-500/20">
+          <span className="px-2 py-0.5 rounded text-[11px] font-semibold bg-purple-50 text-purple-800 border border-purple-200 dark:bg-purple-500/10 dark:text-purple-300 dark:border-purple-500/20">
             Free Trial
           </span>
         );
       case 'paid':
       default:
         return (
-          <span className="px-2 py-0.5 rounded text-[11px] font-semibold bg-amber-500/10 text-amber-400 border border-amber-500/20">
+          <span className="px-2 py-0.5 rounded text-[11px] font-semibold bg-amber-50 text-amber-800 border border-amber-200 dark:bg-amber-500/10 dark:text-amber-300 dark:border-amber-500/20">
             Paid
           </span>
         );

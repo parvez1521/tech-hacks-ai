@@ -1,15 +1,42 @@
 # Pre-Launch Readiness & Domain Preparation Report
 
-**Project:** Tech Hacks AI (`open-alternative`)  
-**Audit Date:** October 18, 2026  
-**Auditor:** Senior Full-Stack, QA & Deployment Architect  
-**Final Verdict:** **Ready Pending External Domain & Secret Configuration**
+> **Current verification update — October 21, 2026:** The prior report below
+> is historical. After the current audit, `npm test` passes **463/463 tests**
+> (115 suites, no cancellations), `npm run build` succeeds (1,578 modules),
+> and `npm audit --omit=dev` reports zero production dependency advisories.
+> Full `npm audit` reports 11 advisories in the development dependency tree
+> (3 moderate, 8 high); suggested forced fixes include major toolchain upgrades
+> and were not applied during this pass.
+> The offers directory contains 17 active listings plus one pending Figma
+> listing excluded from the active view. A live `/api/chat` request with no
+> provider key returned `grounded_local_mode` and an honest catalogue fallback.
+> The unconnected newsletter interactions were replaced with real discovery
+> links. Pending offer review is now distinct from expired offers,
+> and date-only deadlines include the listed day.
+> The offers page was visually checked at a 774 px browser width; its dark-theme
+> heading, controls, and cards now use the shared theme tokens. See
+> [`docs/offer-research-log.md`](docs/offer-research-log.md) for dated provider
+> sources and exclusions.
+> A historical QA artifact records 66 accessibility findings across 33 routes;
+> that full axe scan was not regenerated in this update, so site-wide
+> accessibility clearance remains unverified.
+
+> Production still requires `ADMIN_SECRET`; durable serverless submissions
+> require `SUPABASE_URL` and `SUPABASE_SERVICE_ROLE_KEY`. Live assistant replies
+> require `GROQ_API_KEY`; transcription requires `OPENAI_API_KEY` or supported
+> Groq transcription configuration. No configured TypeScript, lint, or
+> browser automation script is present in `package.json`.
+
+**Project:** Tech Hacks AI (`open-alternative`)
+**Historical Audit Date:** October 18, 2026
+**Auditor:** Senior Full-Stack, QA & Deployment Architect
+**Historical Verdict:** **Ready Pending External Domain & Secret Configuration**
 
 ---
 
 ## 1. Executive Summary
 
-Tech Hacks AI has undergone a rigorous final quality assurance, security, performance, accessibility, and architectural audit. 
+Tech Hacks AI has undergone a rigorous final quality assurance, security, performance, accessibility, and architectural audit.
 
 The latest verification run passes **457 automated unit and integration tests across 116 test suites with a 100% pass rate (0 failures)**. The production build compiles cleanly with optimized code-splitting; the current Vite build transforms 1,578 modules.
 
@@ -32,7 +59,7 @@ Key pre-launch security and configuration fixes were applied to `.gitignore`, `.
                    ▼                                           ▼
       [ Vercel Edge / CDN ]                         [ Serverless Functions ]
        ├── index.html                                ├── api/chat.js
-       ├── dist/assets/*.js                          │    ├── Groq Llama 3.3 (optional)
+       ├── dist/assets/*.js                          │    ├── Groq GPT-OSS 120B (optional)
        └── dist/assets/*.css                         │    └── Client Retrieval Fallback
                    │                                 └── api/submissions.js
                    │                                      ├── Honeypot & Rate Limiting
@@ -50,11 +77,11 @@ Key pre-launch security and configuration fixes were applied to `.gitignore`, `.
 - **Build Tool & Package Manager:** Vite 5.1.4 (rollup production bundler), npm lockfile version 3.
 - **Client Routing:** Custom lightweight React router in `src/router/Router.tsx` using HTML5 History API (`pushState`, `popstate`), scroll restoration, and query parameter state synchronization.
 - **Backend Architecture:** Node.js Serverless Functions (`api/chat.js` and `api/submissions.js`). In local development, Vite Connect middlewares emulate these endpoints seamlessly.
-- **Database / Data Persistence:** 
+- **Database / Data Persistence:**
   - Primary tool catalog, guides, and prompts are statically versioned TypeScript datasets in `src/data/*.ts`.
   - Community submissions use JSON file storage in `data/submissions.json` and `data/published-additions.json` with an atomic temporary file write mechanism (`fs.renameSync`). In serverless environments, writable storage falls back safely to `/tmp/techhacks-data`.
 - **AI Provider Integration:** Dual-mode AI chatbot:
-  - Online Mode: Groq Cloud API (`llama-3.3-70b-versatile`) via serverless proxy `api/chat.js` if `GROQ_API_KEY` is set.
+  - Online Mode: Groq Cloud API (`openai/gpt-oss-120b`) via serverless proxy `api/chat.js` if `GROQ_API_KEY` is set.
   - Offline / Fallback Mode: Deterministic client-side catalog retrieval engine (`src/services/chatRetrievalService.ts`) with keyword, category, and pricing heuristics across 1,000+ tools.
 - **Production Build Output:** `dist/` containing `index.html` (3.07 kB), `index-DkIMEhUn.js` (99.79 kB), `app-pages-Bn2JcfF6.js` (427.09 kB), `catalog-data-DIplf_Uo.js` (337.67 kB), `vendor-react-Ds7D3P6J.js` (141.83 kB), `vendor-icons-ogAxUVGt.js` (38.51 kB), and `index-bh89dZYe.css` (79.07 kB).
 
@@ -125,7 +152,7 @@ Key pre-launch security and configuration fixes were applied to `.gitignore`, `.
 
 ### P2 — Important Improvements (Post-Domain)
 - **Google AdSense Verification:** Once the domain is live and indexed with traffic, supply `publisherId` in `src/config/site.ts` to activate monetization.
-- **Groq API Key:** Supply production `GROQ_API_KEY` in hosting environment variables to enable live Llama 3.3 chatbot responses alongside local catalog retrieval.
+- **Groq API Key:** Supply production `GROQ_API_KEY` in hosting environment variables to enable live GPT-OSS 120B chatbot responses alongside local catalog retrieval.
 
 ### P3 — Optional Polish
 - Dynamic code-splitting with `React.lazy` on non-critical pages if bundle size reduction is desired in the future.
@@ -146,7 +173,7 @@ Key pre-launch security and configuration fixes were applied to `.gitignore`, `.
 |---|---|---|---|---|
 | `VITE_SITE_URL` | Canonical domain origin | Client-Side (Public) | Required | Set to `https://techhacksai.com` |
 | `ADMIN_SECRET` | Authentication for editorial moderation | Server-Side (Secret) | Required | Generate random 32+ char token |
-| `GROQ_API_KEY` | Live Llama 3.3 AI assistant responses | Server-Side (Secret) | Optional | Set if live LLM responses are desired |
+| `GROQ_API_KEY` | Live GPT-OSS 120B AI assistant responses | Server-Side (Secret) | Optional | Set if live LLM responses are desired |
 | `GEMINI_API_KEY` | Secondary model inference | Server-Side (Secret) | Optional | Set if Gemini models are desired |
 
 ---
@@ -164,7 +191,7 @@ Key pre-launch security and configuration fixes were applied to `.gitignore`, `.
 
 - **Production Build:** `npm run build` completes in **1.31s**.
 - **Initial JS Bundle:** Core initial script is **99.79 kB** (26.91 kB gzipped), well within web performance standards.
-- **Motion Accessibility:** 
+- **Motion Accessibility:**
   - [`src/index.css`](file:///Users/parvez/.gemini/antigravity/scratch/open-alternative/src/index.css) contains strict `@media (prefers-reduced-motion: reduce)` overrides disabling all CSS animations and transitions.
   - [`useScrollReveal.ts`](file:///Users/parvez/.gemini/antigravity/scratch/open-alternative/src/hooks/useScrollReveal.ts) checks `window.matchMedia('(prefers-reduced-motion: reduce)')` and immediately sets `isVisible = true` without transition delays.
   - [`AmbientGlow.tsx`](file:///Users/parvez/.gemini/antigravity/scratch/open-alternative/src/components/AmbientGlow.tsx) disables pointer tracking under reduced-motion and on coarse/touch screens.

@@ -7,7 +7,7 @@ import path from 'path';
 import { toolsData } from '../src/data/seedData.ts';
 import { aiToolsData } from '../src/data/aiToolsData.ts';
 import { proprietaryTools } from '../src/data/alternatives.ts';
-import { offersData, isOfferActive, getActiveOffers, getArchivedOffers, getOfferBySlug } from '../src/data/offersData.ts';
+import { offersData, isOfferActive, isOfferArchived, isOfferPendingVerification, getActiveOffers, getArchivedOffers, getOfferBySlug } from '../src/data/offersData.ts';
 import { brandLogos, getBrandLogo } from '../src/data/brandLogos.ts';
 import { generateGroundedResponse } from '../src/services/chatRetrievalService.ts';
 import { getBookmarks, addBookmark, removeBookmark, clearBookmarks, isBookmarked } from '../src/services/bookmarkService.ts';
@@ -96,7 +96,7 @@ describe('Phase 14: Deep QA, Production Readiness & Trust Audit', () => {
       assert.ok(html.includes('AI Deals, Student Plans &amp; Bundles') || html.includes('AI Deals, Student Plans & Bundles'), 'AI Deals section');
       assert.ok(html.includes('Step-by-Step AI Guides'), 'Guides section');
       assert.ok(html.includes('Open Source Alternatives to Popular Software'), 'Proprietary alternatives section');
-      assert.ok(html.includes('Stay Ahead of the Open Source &amp; AI Wave') || html.includes('Stay Ahead of the Open Source & AI Wave'), 'Newsletter section');
+      assert.ok(html.includes('Find tools worth trying'), 'Discovery callout');
     });
 
     test('renders /ai-tools directory and /ai-tools/claude detail page', () => {
@@ -134,12 +134,14 @@ describe('Phase 14: Deep QA, Production Readiness & Trust Audit', () => {
       const listHtml = renderClean(React.createElement(ssrModule.App));
       assert.ok(listHtml.includes('AI Deals, Student Plans &amp; Exclusive Discounts') || listHtml.includes('AI Deals, Student Plans & Exclusive Discounts'), 'Offers directory header');
       assert.ok(listHtml.includes('Active ('), 'Active status tab');
+      assert.ok(listHtml.includes('Pending ('), 'Pending verification offers have their own filter');
+      assert.ok(listHtml.includes('aria-label="Sort offers"'), 'Offers have an accessible sorting control');
 
       // Test Azure for Students detail page
       setupMockBrowser('https://techhacksai.com/offers/azure-for-students');
       const azureHtml = renderClean(React.createElement(ssrModule.App));
       assert.ok(azureHtml.includes('Microsoft Azure for Students'), 'Azure offer title');
-      assert.ok(azureHtml.includes('$100 USD Azure credit'), 'Azure benefit summary');
+      assert.ok(azureHtml.includes('$100 in Azure credit'), 'Azure benefit summary');
       assert.ok(azureHtml.includes('https://azure.microsoft.com/en-us/free/students/'), 'Official claim URL');
       assert.ok(azureHtml.includes('Step-by-Step'), 'Claim steps rendered');
 
@@ -147,7 +149,11 @@ describe('Phase 14: Deep QA, Production Readiness & Trust Audit', () => {
       setupMockBrowser('https://techhacksai.com/offers/jio-google-gemini-offer');
       const jioHtml = renderClean(React.createElement(ssrModule.App));
       assert.ok(jioHtml.includes('Reliance Jio'), 'Jio provider');
-      assert.ok(jioHtml.includes('18 Months'), '18 months duration');
+      assert.ok(jioHtml.toLowerCase().includes('18 months'), '18 months duration');
+
+      setupMockBrowser('https://techhacksai.com/offers/figma-education');
+      const figmaOfferHtml = renderClean(React.createElement(ssrModule.App));
+      assert.ok(figmaOfferHtml.includes('Pending Verification'), 'Unverified offer detail is labelled as pending, not expired');
     });
 
     test('renders /compare with multi-tool parameters and /pick wizard', () => {
@@ -204,6 +210,19 @@ describe('Phase 14: Deep QA, Production Readiness & Trust Audit', () => {
         validUntil: '2020-01-01',
       };
       assert.strictEqual(isOfferActive(pastDeadlineOffer), false, 'Past deadline is not active');
+
+      const lastDayOffer = { verificationStatus: 'limited-time', validUntil: '2026-12-31' };
+      assert.strictEqual(isOfferActive(lastDayOffer, new Date('2026-12-31T23:59:59.999Z')), true, 'Date-only deadline includes its full stated day');
+      assert.strictEqual(isOfferActive(lastDayOffer, new Date('2027-01-01T00:00:00.000Z')), false, 'Offer expires after its stated calendar day');
+    });
+
+    test('pending verification offers are excluded from active and archived lists', () => {
+      const figma = getOfferBySlug('figma-education');
+      assert.ok(figma);
+      assert.strictEqual(isOfferPendingVerification(figma), true);
+      assert.strictEqual(isOfferArchived(figma), false);
+      assert.ok(!getActiveOffers().some((offer) => offer.id === figma.id));
+      assert.ok(!getArchivedOffers().some((offer) => offer.id === figma.id));
     });
 
     test('getActiveOffers excludes unverified or expired records', () => {
@@ -229,7 +248,7 @@ describe('Phase 14: Deep QA, Production Readiness & Trust Audit', () => {
       assert.ok(adobeOffer, 'Adobe student offer exists');
       assert.strictEqual(adobeOffer.offerType, 'discount', 'Must be classified as discount, not free-subscription');
       assert.ok(
-        adobeOffer.description.includes('discount') || adobeOffer.benefitSummary.includes('Discounted paid subscription'),
+        adobeOffer.description.includes('₹398.99/month') && adobeOffer.benefitSummary.includes('paid subscription'),
         'Must disclose discounted paid subscription'
       );
     });
@@ -238,7 +257,7 @@ describe('Phase 14: Deep QA, Production Readiness & Trust Audit', () => {
       const azureOffer = getOfferBySlug('azure-for-students');
       assert.ok(azureOffer, 'Azure for students offer exists');
       assert.ok(azureOffer.description.includes('no credit card required'), 'Must state no credit card required');
-      assert.ok(azureOffer.benefitSummary.includes('$100 USD Azure credit'), 'Must state $100 credit');
+      assert.ok(azureOffer.benefitSummary.includes('$100 in Azure credit'), 'Must state $100 credit');
     });
   });
 

@@ -2,6 +2,7 @@ import React, { Suspense, useState, useRef, useEffect } from 'react';
 import { FreeToolUtility } from '../../types';
 import { Upload, Download, Copy, Check, RefreshCw, AlertCircle, FileCheck, Sparkles } from 'lucide-react';
 import { createQrMatrix } from '../../lib/utilities/qr';
+import { createLatestRequestGate } from '../../lib/utilities/requestGate';
 
 interface UtilityRunnerProps {
   utility: FreeToolUtility;
@@ -168,6 +169,7 @@ const ImageResizerTool: React.FC = () => {
   const [resizedSize, setResizedSize] = useState<number | null>(null);
   const [error, setError] = useState<string | null>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const resizeRequestRef = useRef(createLatestRequestGate());
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setError(null);
@@ -175,15 +177,27 @@ const ImageResizerTool: React.FC = () => {
     if (!file) return;
 
     if (!file.type.startsWith('image/')) {
+      setSelectedFile(null);
+      setPreviewUrl(null);
+      setResizedBlobUrl(null);
+      setResizedSize(null);
+      setOriginalDimensions(null);
       setError('Please upload a valid image file (PNG, JPEG, WEBP).');
       return;
     }
     if (file.size > 25 * 1024 * 1024) {
+      setSelectedFile(null);
+      setPreviewUrl(null);
+      setResizedBlobUrl(null);
+      setResizedSize(null);
+      setOriginalDimensions(null);
       setError('File exceeds maximum limit of 25MB.');
       return;
     }
 
     setSelectedFile(file);
+    setResizedBlobUrl(null);
+    setResizedSize(null);
     const objectUrl = URL.createObjectURL(file);
     setPreviewUrl(objectUrl);
 
@@ -212,39 +226,55 @@ const ImageResizerTool: React.FC = () => {
     }
   };
 
-  const processResize = () => {
+  useEffect(() => {
     if (!previewUrl || !canvasRef.current) return;
-    const canvas = canvasRef.current;
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
+    const requestId = resizeRequestRef.current.begin();
+    const image = new Image();
+    image.onload = () => {
+      if (!resizeRequestRef.current.isCurrent(requestId)) return;
+      const canvas = canvasRef.current;
+      const context = canvas?.getContext('2d');
+      if (!canvas || !context) {
+        setError('This browser could not create an image preview canvas.');
+        return;
+      }
 
-    const img = new Image();
-    img.onload = () => {
       canvas.width = width;
       canvas.height = height;
-      ctx.clearRect(0, 0, width, height);
-      ctx.drawImage(img, 0, 0, width, height);
-
-      canvas.toBlob(
-        (blob) => {
-          if (!blob) return;
-          if (resizedBlobUrl) URL.revokeObjectURL(resizedBlobUrl);
-          const url = URL.createObjectURL(blob);
-          setResizedBlobUrl(url);
-          setResizedSize(blob.size);
-        },
-        format,
-        quality
-      );
+      context.clearRect(0, 0, width, height);
+      context.drawImage(image, 0, 0, width, height);
+      canvas.toBlob((blob) => {
+        if (!resizeRequestRef.current.isCurrent(requestId)) return;
+        if (!blob) {
+          setError('The browser could not encode this image in the selected format.');
+          return;
+        }
+        setResizedBlobUrl(URL.createObjectURL(blob));
+        setResizedSize(blob.size);
+        setError(null);
+      }, format, quality);
     };
-    img.src = previewUrl;
-  };
+    image.onerror = () => {
+      if (resizeRequestRef.current.isCurrent(requestId)) setError('The browser could not decode this image.');
+    };
+    image.src = previewUrl;
+
+    return () => {
+      resizeRequestRef.current.cancel(requestId);
+      image.onload = null;
+      image.onerror = null;
+    };
+  }, [width, height, format, quality, previewUrl]);
 
   useEffect(() => {
-    if (previewUrl) {
-      processResize();
-    }
-  }, [width, height, format, quality, previewUrl]);
+    if (!previewUrl) return;
+    return () => URL.revokeObjectURL(previewUrl);
+  }, [previewUrl]);
+
+  useEffect(() => {
+    if (!resizedBlobUrl) return;
+    return () => URL.revokeObjectURL(resizedBlobUrl);
+  }, [resizedBlobUrl]);
 
   return (
     <div className="space-y-6">
@@ -717,12 +747,12 @@ const JsonFormatterTool: React.FC = () => {
 
       <div className="flex items-center gap-2 text-xs">
         {isValid ? (
-          <span className="inline-flex items-center gap-1 text-emerald-400 font-medium">
+          <span className="inline-flex items-center gap-1 text-emerald-700 dark:text-emerald-400 font-medium">
             <FileCheck className="w-4 h-4" />
             <span>Valid JSON payload</span>
           </span>
         ) : (
-          <span className="inline-flex items-center gap-1 text-rose-400 font-medium">
+          <span className="inline-flex items-center gap-1 text-rose-700 dark:text-rose-400 font-medium">
             <AlertCircle className="w-4 h-4" />
             <span>Syntax Error: {errorMsg}</span>
           </span>

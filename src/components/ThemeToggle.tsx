@@ -85,7 +85,7 @@ export const ThemeToggle: React.FC<ThemeToggleProps> = ({ compact = false }) => 
         data-testid={compact ? 'mobile-theme-toggle-btn' : 'theme-toggle-btn'}
         onClick={handleToggle}
         className="theme-toggle focus-ring"
-        aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
+        aria-label={theme === 'dark' ? 'Dark' : 'Light'}
         aria-pressed={theme === 'dark'}
         title={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
       >

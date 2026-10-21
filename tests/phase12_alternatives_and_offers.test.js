@@ -189,10 +189,10 @@ describe('Phase 12: Alternative Navigation, Claude Code/Perplexity Alts, OmniRus
       assert.ok(jioOffer, 'Jio offer must exist');
       assert.strictEqual(jioOffer?.region, 'India');
       assert.strictEqual(jioOffer?.offerType, 'telecom-bundle');
-      assert.ok(jioOffer?.benefitSummary.includes('18 Months'), 'Must specify 18 Months');
-      assert.ok(jioOffer?.benefitSummary.includes('Google One AI Premium'), 'Must specify Google One AI Premium');
+      assert.ok(jioOffer?.benefitSummary.toLowerCase().includes('up to 18 months'), 'Must specify up to 18 months');
+      assert.ok(jioOffer?.benefitSummary.includes('Google AI Pro'), 'Must specify Google AI Pro');
       assert.ok(jioOffer?.eligibility.includes('349'), 'Must specify ₹349+ recharge eligibility');
-      assert.ok(jioOffer?.renewalTerms.includes('recharge'), 'Must state dependence on active 5G recharge');
+      assert.ok(jioOffer?.renewalTerms.includes('eligible Jio plan active'), 'Must state dependence on an eligible Jio plan');
       assert.ok(jioOffer?.claimSteps.length >= 4, 'Must have detailed step-by-step claim instructions');
     });
 

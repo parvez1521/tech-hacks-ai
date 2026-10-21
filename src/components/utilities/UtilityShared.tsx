@@ -7,8 +7,8 @@ export const utilityQuietButtonClass = 'inline-flex items-center justify-center 
 
 export const UtilityMessage: React.FC<{ children: React.ReactNode; tone?: 'error' | 'success' | 'info' }> = ({ children, tone = 'error' }) => {
   const styles = {
-    error: 'border-red-500/30 bg-red-500/10 text-red-300',
-    success: 'border-emerald-500/30 bg-emerald-500/10 text-emerald-300',
+    error: 'border-red-200 bg-red-50 text-red-800 dark:border-red-500/30 dark:bg-red-500/10 dark:text-red-300',
+    success: 'border-emerald-200 bg-emerald-50 text-emerald-800 dark:border-emerald-500/30 dark:bg-emerald-500/10 dark:text-emerald-300',
     info: 'border-primary/25 bg-primary/10 text-secondary-foreground',
   }[tone];
 

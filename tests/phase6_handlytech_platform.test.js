@@ -116,15 +116,15 @@ describe('Phase 6: Homepage Redesign & HandlyTech Platform Integration', () => {
 
     // Section 5: Client-side Utilities
     assert.ok(html.includes('Free Browser-Based Utilities'), 'Utilities section');
-    assert.ok(html.includes('Client-Side Image Resizer &amp; Converter') || html.includes('Image Resizer'), 'Image resizer utility preview');
+    assert.ok(html.includes('Text Inspector &amp; Case Converter') || html.includes('Text Inspector'), 'Text utility preview');
     assert.ok(html.includes('Vector QR Code Generator'), 'QR code generator utility preview');
 
     // Section 6: Guides & Prompts
     assert.ok(html.includes('Step-by-Step AI Guides'), 'Guides section heading');
     assert.ok(html.includes('Curated Prompt Recipes'), 'Prompt recipes heading');
 
-    // Section 7: Newsletter
-    assert.ok(html.includes('Stay Ahead of the Open Source &amp; AI Wave') || html.includes('Stay Ahead of the Open Source & AI Wave'), 'Newsletter section');
+    // Section 7: Discovery callout
+    assert.ok(html.includes('Find tools worth trying'), 'Discovery callout');
   });
 
   // -------------------------------------------------------------------------

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useRouter, Link } from '../router/Router';
-import { getOfferBySlug, offersData, isOfferActive } from '../data/offersData';
+import { getOfferBySlug, offersData, isOfferActive, isOfferPendingVerification } from '../data/offersData';
 import { getBrandLogo } from '../data/brandLogos';
 import {
   ExternalLink,
@@ -107,7 +107,7 @@ export const OfferDetailPage: React.FC = () => {
       />
 
       {/* Breadcrumbs */}
-      <nav className="flex items-center justify-between text-xs text-muted-foreground mb-6" aria-label="Breadcrumb">
+      <nav className="mb-6 flex flex-col items-start gap-3 text-xs text-muted-foreground sm:flex-row sm:items-center sm:justify-between" aria-label="Breadcrumb">
         <div className="flex items-center gap-2">
           <Link to="/" className="hover:text-foreground transition-colors">
             Home
@@ -152,7 +152,7 @@ export const OfferDetailPage: React.FC = () => {
           </span>
 
           {offer.region === 'India' ? (
-            <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+            <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium bg-emerald-50 text-emerald-800 border border-emerald-200 dark:bg-emerald-500/10 dark:text-emerald-300 dark:border-emerald-500/20">
               <span>🇮🇳 India Eligible</span>
             </span>
           ) : (
@@ -163,21 +163,21 @@ export const OfferDetailPage: React.FC = () => {
           )}
 
           {offer.requiresStudentVerification && (
-            <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-amber-500/10 text-amber-400 border border-amber-500/20">
+            <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-amber-50 text-amber-800 border border-amber-200 dark:bg-amber-500/10 dark:text-amber-300 dark:border-amber-500/20">
               <GraduationCap className="w-3.5 h-3.5" />
               <span>Student / Educator Verification Required</span>
             </span>
           )}
 
           {active ? (
-            <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 ml-auto">
+            <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-emerald-50 text-emerald-800 border border-emerald-200 dark:bg-emerald-500/10 dark:text-emerald-300 dark:border-emerald-500/20 ml-auto">
               <ShieldCheck className="w-3.5 h-3.5" />
               <span>Verified Active ({offer.lastVerifiedAt})</span>
             </span>
           ) : (
-            <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-rose-500/10 text-rose-400 border border-rose-500/20 ml-auto">
+            <span className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium border ml-auto ${isOfferPendingVerification(offer) ? 'bg-amber-50 text-amber-800 border-amber-200 dark:bg-amber-500/10 dark:text-amber-300 dark:border-amber-500/20' : 'bg-rose-50 text-rose-800 border-rose-200 dark:bg-rose-500/10 dark:text-rose-300 dark:border-rose-500/20'}`}>
               <AlertTriangle className="w-3.5 h-3.5" />
-              <span>Expired / Archived</span>
+              <span>{isOfferPendingVerification(offer) ? 'Pending Verification' : 'Expired / Archived'}</span>
             </span>
           )}
         </div>
@@ -264,7 +264,7 @@ export const OfferDetailPage: React.FC = () => {
               {offer.eligibility}
             </p>
             {offer.requiresStudentVerification && (
-              <div className="p-3 rounded-lg bg-amber-500/10 border border-amber-500/20 text-xs text-amber-300 flex items-start gap-2">
+              <div className="p-3 rounded-lg bg-amber-50 border border-amber-200 text-xs text-amber-800 dark:bg-amber-500/10 dark:border-amber-500/20 dark:text-amber-300 flex items-start gap-2">
                 <GraduationCap className="w-4 h-4 shrink-0 mt-0.5" />
                 <span>
                   <strong>Academic Proof Needed:</strong> You will be required to submit documentation (e.g. an official school-issued email, university registration ID, or student proof via SheerID/GitHub Education) to claim this benefit.
@@ -340,7 +340,7 @@ export const OfferDetailPage: React.FC = () => {
 
             <div>
               <span className="text-muted-foreground block mb-0.5">Last Verified:</span>
-              <span className="font-medium text-emerald-400">{offer.lastVerifiedAt}</span>
+              <span className="font-medium text-emerald-700 dark:text-emerald-400">{offer.lastVerifiedAt}</span>
             </div>
 
             {offer.couponCode && (

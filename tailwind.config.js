@@ -19,7 +19,7 @@ export default {
         border: 'rgb(var(--color-border) / <alpha-value>)',
         primary: {
           DEFAULT: 'rgb(var(--color-primary) / <alpha-value>)',
-          foreground: '#ffffff',
+          foreground: 'rgb(var(--color-primary-fg) / <alpha-value>)',
           hover: 'rgb(var(--color-primary-hover) / <alpha-value>)',
         },
         secondary: {

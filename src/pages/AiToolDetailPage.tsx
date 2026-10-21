@@ -156,13 +156,13 @@ export const AiToolDetailPage: React.FC = () => {
                   {tool.name}
                 </h1>
                 {tool.isFeatured && (
-                  <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-xs font-medium bg-amber-500/10 text-amber-400 border border-amber-500/20">
+                  <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-xs font-medium bg-amber-50 text-amber-800 border border-amber-200 dark:bg-amber-500/10 dark:text-amber-300 dark:border-amber-500/20">
                     <Sparkles className="w-3 h-3" />
                     <span>Featured</span>
                   </span>
                 )}
                 {tool.isSelfHostable && (
-                  <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-xs font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                  <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-xs font-medium bg-emerald-50 text-emerald-800 border border-emerald-200 dark:bg-emerald-500/10 dark:text-emerald-300 dark:border-emerald-500/20">
                     <Server className="w-3 h-3" />
                     <span>Self-Hostable</span>
                   </span>
@@ -340,7 +340,7 @@ export const AiToolDetailPage: React.FC = () => {
 
           {/* Comparison CTA Box */}
           <div className="p-5 rounded-xl border border-purple-500/20 bg-purple-500/5 text-xs">
-            <div className="flex items-center gap-1.5 text-purple-400 font-semibold uppercase text-[11px] tracking-wider mb-1.5">
+            <div className="flex items-center gap-1.5 text-purple-800 dark:text-purple-300 font-semibold uppercase text-[11px] tracking-wider mb-1.5">
               <Scale className="w-3.5 h-3.5" />
               <span>Side-by-Side Comparison</span>
             </div>

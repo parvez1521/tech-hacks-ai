@@ -209,7 +209,7 @@ export const CookieConsentBanner: React.FC = () => {
                     Necessary for site navigation, light/dark theme persistence, and local software bookmarks. Cannot be disabled.
                   </p>
                 </div>
-                <span className="px-2 py-0.5 rounded text-[10px] font-mono font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 shrink-0">
+                <span className="px-2 py-0.5 rounded text-[10px] font-mono font-semibold bg-emerald-50 text-emerald-800 border border-emerald-200 dark:bg-emerald-500/10 dark:text-emerald-300 dark:border-emerald-500/20 shrink-0">
                   Always Active
                 </span>
               </div>

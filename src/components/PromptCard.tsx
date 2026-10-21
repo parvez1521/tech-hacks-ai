@@ -84,11 +84,11 @@ export const PromptCard: React.FC<PromptCardProps> = ({ prompt }) => {
           <BookmarkButton item={bookmarkItem} size="sm" />
         </div>
 
-        <h3 className="font-bold text-slate-900 text-base tracking-tight mb-1.5 group-hover:text-blue-600 transition-colors">
+        <h2 className="font-bold text-slate-900 text-base tracking-tight mb-1.5 group-hover:text-blue-600 transition-colors">
           <Link to={`/prompt-library/${prompt.slug}`} className="focus:outline-none focus:underline">
             {prompt.title}
           </Link>
-        </h3>
+        </h2>
 
         <p className="text-xs text-slate-600 line-clamp-2 mb-3">
           {prompt.description}
