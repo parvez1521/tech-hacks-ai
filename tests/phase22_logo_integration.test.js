@@ -13,6 +13,7 @@ import { promptsData, promptProviders } from '../src/data/promptsData.ts';
 import { updatesData } from '../src/data/updatesData.ts';
 
 const LOGOS_DIR = path.resolve(process.cwd(), 'public/logos');
+const PUBLIC_DIR = path.resolve(process.cwd(), 'public');
 const PNG_DIR = path.resolve(process.cwd(), 'public/logos/png');
 const MANIFEST_PATH = path.resolve(process.cwd(), 'public/logo-manifest.json');
 
@@ -88,7 +89,7 @@ describe('Phase 22: Authentic Brand Logo Integration & Catalog Mapping', () => {
         assert.ok(entry.name && typeof entry.name === 'string', `Entry ${entry.slug} missing name`);
         assert.ok(entry.assetPath && entry.assetPath.startsWith('/logos/'), `Entry ${entry.slug} invalid assetPath`);
         assert.ok(entry.verifiedAt && /^\d{4}-\d{2}-\d{2}/.test(entry.verifiedAt), `Entry ${entry.slug} invalid verifiedAt`);
-        assert.ok(['official', 'simple-icons', 'vector', 'fallback'].includes(entry.sourceType), `Entry ${entry.slug} invalid sourceType`);
+         assert.ok(['official', 'provided', 'simple-icons', 'vector', 'fallback'].includes(entry.sourceType), `Entry ${entry.slug} invalid sourceType`);
       }
     });
   });
@@ -97,14 +98,19 @@ describe('Phase 22: Authentic Brand Logo Integration & Catalog Mapping', () => {
   // 2. Vector Files on Disk & SVG Validation
   // -------------------------------------------------------------------------
   describe('2. Vector Files on Disk & SVG Validation', () => {
-    test('every manifest entry has an existing SVG file on disk with valid tags', () => {
+    test('every manifest entry has an existing asset on disk with a valid image container', () => {
       const manifest = JSON.parse(fs.readFileSync(MANIFEST_PATH, 'utf8'));
       for (const entry of manifest) {
-        const filePath = path.join(LOGOS_DIR, `${entry.slug}.svg`);
+        const filePath = path.join(PUBLIC_DIR, entry.assetPath.replace(/^\//, ''));
         assert.ok(fs.existsSync(filePath), `Vector file missing for slug "${entry.slug}": ${filePath}`);
-        const content = fs.readFileSync(filePath, 'utf8');
-        assert.ok(content.includes('<svg') && content.includes('</svg>'), `Vector file for "${entry.slug}" must have SVG tags`);
-        assert.ok(content.length > 50, `Vector file for "${entry.slug}" is suspiciously small`);
+        const content = fs.readFileSync(filePath);
+        if (/\.svg$/i.test(filePath)) {
+          const text = content.toString('utf8');
+          assert.ok(text.includes('<svg') && text.includes('</svg>'), `Vector file for "${entry.slug}" must have SVG tags`);
+          assert.ok(text.length > 50, `Vector file for "${entry.slug}" is suspiciously small`);
+        } else {
+          assert.ok(content.length > 32, `Raster file for "${entry.slug}" is suspiciously small`);
+        }
       }
     });
 
@@ -170,8 +176,10 @@ describe('Phase 22: Authentic Brand Logo Integration & Catalog Mapping', () => {
       assert.strictEqual(getBrandLogo('amazonaws')?.slug, 'aws', 'amazonaws -> aws');
       assert.strictEqual(getBrandLogo('amazon-web-services')?.slug, 'aws', 'amazon-web-services -> aws');
       assert.strictEqual(getBrandLogo('microsoftazure')?.slug, 'azure', 'microsoftazure -> azure');
-      assert.strictEqual(getBrandLogo('githubcopilot')?.slug, 'copilot', 'githubcopilot -> copilot');
-      assert.strictEqual(getBrandLogo('googlegemini')?.slug, 'gemini', 'googlegemini -> gemini');
+       assert.strictEqual(getBrandLogo('githubcopilot')?.slug, 'githubcopilot', 'githubcopilot keeps its canonical identity');
+       assert.strictEqual(getBrandLogo('github-copilot')?.slug, 'githubcopilot', 'github-copilot -> githubcopilot');
+       assert.strictEqual(getBrandLogo('googlegemini')?.slug, 'googlegemini', 'googlegemini keeps its canonical identity');
+       assert.strictEqual(getBrandLogo('google-gemini')?.slug, 'googlegemini', 'google-gemini -> googlegemini');
       assert.strictEqual(getBrandLogo('black-forest-labs')?.slug, 'flux-1', 'black-forest-labs -> flux-1');
       assert.strictEqual(getBrandLogo('nextjs')?.slug, 'nextdotjs', 'nextjs -> nextdotjs');
       assert.strictEqual(getBrandLogo('photoshop')?.slug, 'adobephotoshop', 'photoshop -> adobephotoshop');
@@ -221,6 +229,21 @@ describe('Phase 22: Authentic Brand Logo Integration & Catalog Mapping', () => {
       }
     });
 
+    test('Offers resolve through canonical registry identities instead of raw image paths', () => {
+      const offerCard = fs.readFileSync(path.resolve(process.cwd(), 'src/components/OfferCard.tsx'), 'utf8');
+      const offerDetail = fs.readFileSync(path.resolve(process.cwd(), 'src/pages/OfferDetailPage.tsx'), 'utf8');
+
+      assert.ok(!offerCard.includes('src={offer.logoAssetPath}'), 'Offer cards do not bypass BrandLogo with raw paths');
+      assert.ok(!offerDetail.includes('src={offer.logoAssetPath}'), 'Offer details do not bypass BrandLogo with raw paths');
+
+      for (const offer of offersData) {
+        assert.ok(offer.logoSlug, `Offer "${offer.title}" must define a canonical logoSlug`);
+        const entry = getBrandLogo(offer.logoSlug);
+        assert.ok(entry, `Offer "${offer.title}" logoSlug must resolve in brandLogos`);
+        assert.strictEqual(offer.logoAssetPath, entry.assetPath, `Offer "${offer.title}" asset path must match its canonical registry entry`);
+      }
+    });
+
     test('100% of prompt providers in promptsData.ts resolve to brand logos', () => {
       const distinctProviders = [...new Set(promptsData.map((p) => p.provider).filter(Boolean))];
       for (const provider of distinctProviders) {
@@ -248,23 +271,23 @@ describe('Phase 22: Authentic Brand Logo Integration & Catalog Mapping', () => {
       setupMockBrowser('https://techhacksai.com/offers');
       const { App } = ssrModule;
       const html = renderClean(React.createElement(App));
-      assert.ok(html.includes('/logos/gemini.svg'), 'Offers directory must render Gemini logo');
-      assert.ok(html.includes('/logos/copilot.svg'), 'Offers directory must render Copilot logo');
+       assert.ok(html.includes('/logos/googlegemini.svg'), 'Offers directory must render the canonical Google Gemini logo');
+       assert.ok(html.includes('/logos/githubcopilot.svg'), 'Offers directory must render the canonical GitHub Copilot logo');
     });
 
     test('/offers/:slug detail page renders hero provider logo', () => {
       setupMockBrowser('https://techhacksai.com/offers/jio-google-gemini-offer');
       const { App } = ssrModule;
       const html = renderClean(React.createElement(App));
-      assert.ok(html.includes('/logos/gemini.svg'), 'Offer detail page must render hero Gemini logo');
-      assert.ok(html.includes('Reliance Jio &amp; Google logo') || html.includes('Reliance Jio & Google logo'), 'Offer detail page must include provider logo alt text');
+       assert.ok(html.includes('/logos/googlegemini.svg'), 'Offer detail page must render hero Gemini logo');
+       assert.ok(html.includes('Google Gemini logo'), 'Offer detail page must use the canonical asset name for its logo alt text');
     });
 
     test('/prompt-library directory renders provider brand logo badges', () => {
       setupMockBrowser('https://techhacksai.com/prompt-library');
       const { App } = ssrModule;
       const html = renderClean(React.createElement(App));
-      assert.ok(html.includes('/logos/google.svg') || html.includes('/logos/anthropic.svg') || html.includes('Google'), 'Prompt library must render provider brand logo or name');
+       assert.ok(html.includes('/logos/google.svg') || html.includes('/logos/anthropic.svg') || html.includes('Google'), 'Prompt library must render provider brand logo or name');
     });
 
     test('/prompt-library/:slug renders provider brand logo in header badge', () => {

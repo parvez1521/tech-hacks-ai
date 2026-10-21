@@ -59,12 +59,13 @@
   {
     "slug": "aider",
     "name": "Aider",
-    "assetPath": "/logos/aider.svg",
+    "assetPath": "/logos/official-ai/aider.svg",
     "sourceType": "official",
-    "verifiedAt": "2026-10-17",
+    "verifiedAt": "2026-10-21",
     "badgeBg": "#1e1e24",
     "format": "svg",
-    "pngAssetPath": "/logos/png/aider.png"
+    "sourceUrl": "https://aider.chat/assets/logo.svg",
+    "notes": "Browser-inspected official logo from https://github.com/Aider-AI/aider. Alternative official page title: GitHub - Aider-AI/aider: aider is AI pair programming in your terminal · GitHub"
   },
   {
     "slug": "airtable",
@@ -149,12 +150,13 @@
   {
     "slug": "anythingllm",
     "name": "AnythingLLM",
-    "assetPath": "/logos/anythingllm.svg",
+    "assetPath": "/logos/official-ai/anythingllm.svg",
     "sourceType": "official",
-    "verifiedAt": "2026-10-17",
+    "verifiedAt": "2026-10-21",
     "badgeBg": "#0284c7",
     "format": "svg",
-    "pngAssetPath": "/logos/png/anythingllm.png"
+    "sourceUrl": "https://anythingllm.com/images/brand/logo-mark.svg",
+    "notes": "Browser-inspected official logo from https://anythingllm.com/. Page title: AnythingLLM — On-device AI for productivity | Local & Private"
   },
   {
     "slug": "appflowy",
@@ -435,12 +437,13 @@
   {
     "slug": "cogvideox",
     "name": "CogVideoX",
-    "assetPath": "/logos/cogvideox.svg",
+    "assetPath": "/logos/official-ai/cogvideox.svg",
     "sourceType": "official",
-    "verifiedAt": "2026-10-18",
+    "verifiedAt": "2026-10-21",
     "badgeBg": "#3b82f6",
     "format": "svg",
-    "pngAssetPath": "/logos/png/cogvideox.png"
+    "sourceUrl": "https://github.com/zai-org/CogVideo/raw/main/resources/logo.svg",
+    "notes": "Browser-inspected official logo from https://github.com/zai-org/CogVideo. Page title: GitHub - zai-org/CogVideo: text and image to video generation: CogVideoX (2024) and CogVideo (ICLR 2023) · GitHub"
   },
   {
     "slug": "cohere",
@@ -457,42 +460,46 @@
   {
     "slug": "comfyui",
     "name": "ComfyUI",
-    "assetPath": "/logos/comfyui.svg",
+    "assetPath": "/logos/official-ai/comfyui.svg",
     "sourceType": "official",
-    "verifiedAt": "2026-10-17",
+    "verifiedAt": "2026-10-21",
     "badgeBg": "#111827",
     "format": "svg",
-    "pngAssetPath": "/logos/png/comfyui.png"
+    "sourceUrl": "https://comfy.org/icons/logomark.svg",
+    "notes": "Browser-inspected official logo from https://comfy.org/. Page title: Comfy - Professional Control of Visual AI"
   },
   {
     "slug": "continue-dev",
     "name": "Continue",
-    "assetPath": "/logos/continue-dev.svg",
+    "assetPath": "/logos/official-ai/continue-dev.svg",
     "sourceType": "official",
-    "verifiedAt": "2026-10-17",
+    "verifiedAt": "2026-10-21",
     "badgeBg": "#0369a1",
     "format": "svg",
-    "pngAssetPath": "/logos/png/continue-dev.png"
+    "sourceUrl": "https://continue.dev/continue-logo-black.svg",
+    "notes": "Browser-inspected official logo from https://continue.dev/. Page title: Continue (acquired by Cursor)"
   },
   {
     "slug": "copilot",
     "name": "Microsoft Copilot",
-    "assetPath": "/logos/copilot.svg",
+    "assetPath": "/logos/official-ai/copilot.png",
     "sourceType": "official",
-    "verifiedAt": "2026-10-17",
+    "verifiedAt": "2026-10-21",
     "badgeBg": "#0078d4",
-    "format": "svg",
-    "pngAssetPath": "/logos/png/copilot.png"
+    "format": "png",
+    "sourceUrl": "https://res.cdn.office.net/officehub/images/content/images/unauth-copilotcom/copilot-mobile-logo-static-286643fc8c.png",
+    "notes": "Browser-inspected official logo from https://copilot.com/. Page title: Microsoft Copilot | Sign in"
   },
   {
     "slug": "copy-ai",
     "name": "Copy.ai",
-    "assetPath": "/logos/copy-ai.svg",
+    "assetPath": "/logos/official-ai/copy-ai.svg",
     "sourceType": "official",
-    "verifiedAt": "2026-10-17",
+    "verifiedAt": "2026-10-21",
     "badgeBg": "#059669",
     "format": "svg",
-    "pngAssetPath": "/logos/png/copy-ai.png"
+    "sourceUrl": "https://cdn.prod.website-files.com/628288c5cd3e8411b90a36a4/6797ee68ae7908e605a9a4d0_copy_logo-all-dark.svg",
+    "notes": "Browser-inspected official logo from https://www.copy.ai/. Page title: Future proof your business with GTM AI"
   },
   {
     "slug": "crewai",
@@ -532,13 +539,13 @@
   {
     "slug": "deepseek",
     "name": "DeepSeek",
-    "assetPath": "/logos/deepseek.svg",
-    "sourceType": "simple-icons",
-    "verifiedAt": "2026-10-17",
+    "assetPath": "/logos/official-ai/deepseek.webp",
+    "sourceType": "provided",
+    "verifiedAt": "2026-10-21",
     "badgeBg": "#0284c7",
-    "format": "svg",
-    "pngAssetPath": "/logos/png/deepseek.png",
-    "sourceUrl": "https://cdn.jsdelivr.net/npm/simple-icons/icons/deepseek.svg"
+    "format": "webp",
+    "sourceUrl": "https://chat.deepseek.com",
+    "notes": "Workspace-provided asset visually reviewed against the official page. Direct asset URL was not independently verified. SHA-256: 0407d60522f0030f650de0dd86d07eacfa10c57d8b844f5f451d066398abf583"
   },
   {
     "slug": "deno",
@@ -555,12 +562,13 @@
   {
     "slug": "dify",
     "name": "Dify.ai",
-    "assetPath": "/logos/dify.svg",
+    "assetPath": "/logos/official-ai/dify.svg",
     "sourceType": "official",
-    "verifiedAt": "2026-10-17",
+    "verifiedAt": "2026-10-21",
     "badgeBg": "#155eef",
     "format": "svg",
-    "pngAssetPath": "/logos/png/dify.png"
+    "sourceUrl": "https://dify.ai/assets/dify-logo.svg",
+    "notes": "Browser-inspected official logo from https://dify.ai/. Page title: Dify - The Platform for Production-Ready Agentic Workflows"
   },
   {
     "slug": "discord",
@@ -599,12 +607,13 @@
   {
     "slug": "dreamina",
     "name": "Dreamina",
-    "assetPath": "/logos/dreamina.svg",
-    "sourceType": "official",
-    "verifiedAt": "2026-10-18",
+    "assetPath": "/logos/official-ai/dreamina.webp",
+    "sourceType": "provided",
+    "verifiedAt": "2026-10-21",
     "badgeBg": "#ec4899",
-    "format": "svg",
-    "pngAssetPath": "/logos/png/dreamina.png"
+    "format": "webp",
+    "sourceUrl": "https://dreamina.capcut.com",
+    "notes": "Workspace-provided asset visually reviewed against the official page. Direct asset URL was not independently verified. SHA-256: d1b9317678659356036f062528e0bdaf274f5a03ce1e3e3e484320efa9c25457"
   },
   {
     "slug": "dropbox",
@@ -703,6 +712,8 @@
     "verifiedAt": "2026-10-17",
     "badgeBg": "#388bfd",
     "format": "svg",
+    "sourceUrl": "https://gemini.google.com",
+    "notes": "Official Google Gemini product site; local mark reviewed against the product identity.",
     "pngAssetPath": "/logos/png/gemini.png"
   },
   {
@@ -764,12 +775,13 @@
   {
     "slug": "google-ai-studio",
     "name": "Google AI Studio",
-    "assetPath": "/logos/google-ai-studio.svg",
+    "assetPath": "/logos/official-ai/google-ai-studio.svg",
     "sourceType": "official",
-    "verifiedAt": "2026-10-17",
+    "verifiedAt": "2026-10-21",
     "badgeBg": "#1a73e8",
     "format": "svg",
-    "pngAssetPath": "/logos/png/google-ai-studio.png"
+    "sourceUrl": "https://www.gstatic.com/aistudio-static/mobile/ais-logo.svg",
+    "notes": "Browser-inspected official logo from https://aistudio.google.com/welcome. Page title: Google AI Studio"
   },
   {
     "slug": "google-analytics",
@@ -864,32 +876,35 @@
   {
     "slug": "hailuo-ai",
     "name": "Hailuo AI",
-    "assetPath": "/logos/hailuo-ai.svg",
+    "assetPath": "/logos/official-ai/hailuo-ai.webp",
     "sourceType": "official",
-    "verifiedAt": "2026-10-18",
+    "verifiedAt": "2026-10-21",
     "badgeBg": "#ff5722",
-    "format": "svg",
-    "pngAssetPath": "/logos/png/hailuo-ai.png"
+    "format": "webp",
+    "sourceUrl": "https://cdn.hailuoai.video/open-hailuo-video-web/public_assets/oversea-hailuoaixminimax-logo-white-20251203.webp",
+    "notes": "Browser-inspected official logo from https://hailuoai.video/. Page title: Hailuo AI: MiniMax H3 LIVE NOW. Top-Tier Quality, Versatile References"
   },
   {
     "slug": "haiper",
     "name": "Haiper AI",
-    "assetPath": "/logos/haiper.svg",
-    "sourceType": "official",
-    "verifiedAt": "2026-10-17",
+    "assetPath": "/logos/official-ai/haiper.jpg",
+    "sourceType": "provided",
+    "verifiedAt": "2026-10-21",
     "badgeBg": "#1e1b4b",
-    "format": "svg",
-    "pngAssetPath": "/logos/png/haiper.png"
+    "format": "jpg",
+    "sourceUrl": "https://haiper.ai",
+    "notes": "Workspace-provided asset visually reviewed against the official page. Direct asset URL was not independently verified. SHA-256: 00c383e8336b459488c0e1296cf5b195f6daaf096b728d341825d0e6d4e3203a"
   },
   {
     "slug": "hedra",
     "name": "Hedra",
-    "assetPath": "/logos/hedra.svg",
+    "assetPath": "/logos/official-ai/hedra.svg",
     "sourceType": "official",
-    "verifiedAt": "2026-10-18",
+    "verifiedAt": "2026-10-21",
     "badgeBg": "#10b981",
     "format": "svg",
-    "pngAssetPath": "/logos/png/hedra.png"
+    "sourceUrl": "https://mkt.hedra.com/_next/static/immutable/media/header-lockup.3hs46lijq_-2r.svg",
+    "notes": "Browser-inspected official logo from https://www.hedra.com/. Page title: Hedra — Visual Inference Models and Infrastructure"
   },
   {
     "slug": "higgsfield",
@@ -983,12 +998,13 @@
   {
     "slug": "jan",
     "name": "Jan",
-    "assetPath": "/logos/jan.svg",
+    "assetPath": "/logos/official-ai/jan.svg",
     "sourceType": "official",
-    "verifiedAt": "2026-10-17",
+    "verifiedAt": "2026-10-21",
     "badgeBg": "#6d28d9",
     "format": "svg",
-    "pngAssetPath": "/logos/png/jan.png"
+    "sourceUrl": "https://www.jan.ai/_next/static/media/logo-jan.db83c5f0.svg",
+    "notes": "Browser-inspected official logo from https://www.jan.ai/. Page title: Jan - Open-Source ChatGPT Replacement"
   },
   {
     "slug": "javascript",
@@ -1072,12 +1088,13 @@
   {
     "slug": "kie-ai",
     "name": "KIE AI",
-    "assetPath": "/logos/kie-ai.svg",
+    "assetPath": "/logos/official-ai/kie-ai.webp",
     "sourceType": "official",
-    "verifiedAt": "2026-10-18",
+    "verifiedAt": "2026-10-21",
     "badgeBg": "#8b5cf6",
-    "format": "svg",
-    "pngAssetPath": "/logos/png/kie-ai.png"
+    "format": "webp",
+    "sourceUrl": "https://kie.ai/logo-icon.webp",
+    "notes": "Browser-inspected official logo from https://kie.ai/. Page title: One API for All the Best AI Models – Try Affordable AI API on Kie.ai"
   },
   {
     "slug": "kling-ai",
@@ -1104,12 +1121,13 @@
   {
     "slug": "kokoro-tts",
     "name": "Kokoro TTS",
-    "assetPath": "/logos/kokoro-tts.svg",
-    "sourceType": "official",
-    "verifiedAt": "2026-10-17",
+    "assetPath": "/logos/official-ai/kokoro-tts.png",
+    "sourceType": "provided",
+    "verifiedAt": "2026-10-21",
     "badgeBg": "#e11d48",
-    "format": "svg",
-    "pngAssetPath": "/logos/png/kokoro-tts.png"
+    "format": "png",
+    "sourceUrl": "https://huggingface.co/hexgrad/Kokoro-82M",
+    "notes": "Workspace-provided asset visually reviewed against the official page. Direct asset URL was not independently verified. SHA-256: 295a5dbf7e6129d51384cd9397551e2910a94ad2a76361752c5c461328151972"
   },
   {
     "slug": "krea-ai",
@@ -1136,12 +1154,13 @@
   {
     "slug": "langflow",
     "name": "Langflow",
-    "assetPath": "/logos/langflow.svg",
+    "assetPath": "/logos/official-ai/langflow.png",
     "sourceType": "official",
-    "verifiedAt": "2026-10-17",
+    "verifiedAt": "2026-10-21",
     "badgeBg": "#9333ea",
-    "format": "svg",
-    "pngAssetPath": "/logos/png/langflow.png"
+    "format": "png",
+    "sourceUrl": "https://www.langflow.org/_next/static/media/logo.f6f14a6e.png",
+    "notes": "Browser-inspected official logo from https://www.langflow.org/. Page title: Langflow | Low-code AI builder for agentic and RAG applications"
   },
   {
     "slug": "langgraph",
@@ -1158,12 +1177,13 @@
   {
     "slug": "leonardo-ai",
     "name": "Leonardo.ai",
-    "assetPath": "/logos/leonardo-ai.svg",
+    "assetPath": "/logos/official-ai/leonardo-ai.svg",
     "sourceType": "official",
-    "verifiedAt": "2026-10-17",
+    "verifiedAt": "2026-10-21",
     "badgeBg": "#4f46e5",
     "format": "svg",
-    "pngAssetPath": "/logos/png/leonardo-ai.png"
+    "sourceUrl": "https://leonardo.ai/images/leonardo_wordmark.svg?dpl=dpl_EPFEypZEFK3yS5sL2ExZbfKGkUk5",
+    "notes": "Browser-inspected official logo from https://leonardo.ai/. Page title: Leonardo.Ai - Generative AI Platform for Images, Art & Video"
   },
   {
     "slug": "leonardoai",
@@ -1180,12 +1200,13 @@
   {
     "slug": "librechat",
     "name": "LibreChat",
-    "assetPath": "/logos/librechat.svg",
+    "assetPath": "/logos/official-ai/librechat.svg",
     "sourceType": "official",
-    "verifiedAt": "2026-10-17",
+    "verifiedAt": "2026-10-21",
     "badgeBg": "#0891b2",
     "format": "svg",
-    "pngAssetPath": "/logos/png/librechat.png"
+    "sourceUrl": "https://www.librechat.ai/librechat.svg",
+    "notes": "Browser-inspected official logo from https://www.librechat.ai/. Page title: LibreChat - The Open-Source AI Platform"
   },
   {
     "slug": "linear",
@@ -1214,12 +1235,13 @@
   {
     "slug": "llama-cpp",
     "name": "llama.cpp",
-    "assetPath": "/logos/llama-cpp.svg",
+    "assetPath": "/logos/official-ai/llama-cpp.svg",
     "sourceType": "official",
-    "verifiedAt": "2026-10-17",
+    "verifiedAt": "2026-10-21",
     "badgeBg": "#374151",
     "format": "svg",
-    "pngAssetPath": "/logos/png/llama-cpp.png"
+    "sourceUrl": "https://raw.githubusercontent.com/ggml-org/llama.brand/refs/heads/master/cover/llama-cpp/cover-llama-cpp-dark.svg",
+    "notes": "Browser-inspected official logo from https://github.com/ggml-org/llama.cpp. Page title: GitHub - ggml-org/llama.cpp: LLM inference in C/C++ · GitHub"
   },
   {
     "slug": "lmstudio",
@@ -1236,22 +1258,24 @@
   {
     "slug": "localai",
     "name": "LocalAI",
-    "assetPath": "/logos/localai.svg",
+    "assetPath": "/logos/official-ai/localai.png",
     "sourceType": "official",
-    "verifiedAt": "2026-10-17",
+    "verifiedAt": "2026-10-21",
     "badgeBg": "#15803d",
-    "format": "svg",
-    "pngAssetPath": "/logos/png/localai.png"
+    "format": "png",
+    "sourceUrl": "https://localai.io/img/logo-full.png",
+    "notes": "Browser-inspected official logo from https://localai.io/. Page title: LocalAI · Make AI run on every machine"
   },
   {
     "slug": "ltx-video",
     "name": "LTX Video",
-    "assetPath": "/logos/ltx-video.svg",
-    "sourceType": "official",
-    "verifiedAt": "2026-10-18",
+    "assetPath": "/logos/official-ai/ltx-video.png",
+    "sourceType": "provided",
+    "verifiedAt": "2026-10-21",
     "badgeBg": "#00f2fe",
-    "format": "svg",
-    "pngAssetPath": "/logos/png/ltx-video.png"
+    "format": "png",
+    "sourceUrl": "https://github.com/Lightricks/LTX-Video",
+    "notes": "Workspace-provided asset visually reviewed against the official page. Direct asset URL was not independently verified. SHA-256: 634506ca9c0d9ff35cd13b3348ab7d6983d220eaa2a96878a56d624ae716f56a"
   },
   {
     "slug": "luma",
@@ -1298,12 +1322,13 @@
   {
     "slug": "meshy-3d",
     "name": "Meshy 3D",
-    "assetPath": "/logos/meshy-3d.svg",
-    "sourceType": "official",
-    "verifiedAt": "2026-10-17",
+    "assetPath": "/logos/official-ai/meshy-3d.png",
+    "sourceType": "provided",
+    "verifiedAt": "2026-10-21",
     "badgeBg": "#6366f1",
-    "format": "svg",
-    "pngAssetPath": "/logos/png/meshy-3d.png"
+    "format": "png",
+    "sourceUrl": "https://www.meshy.ai",
+    "notes": "Workspace-provided asset visually reviewed against the official page. Direct asset URL was not independently verified. SHA-256: 8a0b1cdffeb24a0389c08ce820de390e7c335de8ff8e2c348a3ba743e0f22206"
   },
   {
     "slug": "meta",
@@ -1320,12 +1345,13 @@
   {
     "slug": "meta-ai",
     "name": "Meta AI",
-    "assetPath": "/logos/meta-ai.svg",
+    "assetPath": "/logos/official-ai/meta-ai.svg",
     "sourceType": "official",
-    "verifiedAt": "2026-10-18",
+    "verifiedAt": "2026-10-21",
     "badgeBg": "#0081fb",
     "format": "svg",
-    "pngAssetPath": "/logos/png/meta-ai.png"
+    "sourceUrl": "https://www.meta.ai/images/meta-ai-orbit-logo-gradient-3d_light.svg",
+    "notes": "Browser-inspected official logo from https://www.meta.ai/. Page title: Meta AI - Your AI Assistant for Images, Shopping and More"
   },
   {
     "slug": "microsoft",
@@ -1456,12 +1482,13 @@
   {
     "slug": "notebooklm",
     "name": "Google NotebookLM",
-    "assetPath": "/logos/notebooklm.svg",
+    "assetPath": "/logos/official-ai/notebooklm.svg",
     "sourceType": "official",
-    "verifiedAt": "2026-10-17",
+    "verifiedAt": "2026-10-21",
     "badgeBg": "#4285f4",
     "format": "svg",
-    "pngAssetPath": "/logos/png/notebooklm.png"
+    "sourceUrl": "https://www.gstatic.com/tailwind/_/static/branding/v6/light_mode/notebook-logo.svg",
+    "notes": "Browser-inspected official logo from https://notebook.google.com/trynow. Page title: Gemini Notebook"
   },
   {
     "slug": "notion",
@@ -1511,33 +1538,35 @@
   {
     "slug": "ollama",
     "name": "Ollama",
-    "assetPath": "/logos/ollama.svg",
-    "sourceType": "simple-icons",
-    "verifiedAt": "2026-10-17",
+    "assetPath": "/logos/official-ai/ollama.png",
+    "sourceType": "official",
+    "verifiedAt": "2026-10-21",
     "badgeBg": "#111827",
-    "format": "svg",
-    "pngAssetPath": "/logos/png/ollama.png",
-    "sourceUrl": "https://cdn.jsdelivr.net/npm/simple-icons/icons/ollama.svg"
+    "format": "png",
+    "sourceUrl": "https://ollama.com/public/ollama-nav.png",
+    "notes": "Browser-inspected official logo from https://ollama.com/. Page title: Ollama · Run AI models locally and in the cloud"
   },
   {
     "slug": "omnirush",
     "name": "OmniRush",
-    "assetPath": "/logos/omnirush.svg",
+    "assetPath": "/logos/official-ai/omnirush.webp",
     "sourceType": "official",
-    "verifiedAt": "2026-10-18",
+    "verifiedAt": "2026-10-21",
     "badgeBg": "#38bdf8",
-    "format": "svg",
-    "pngAssetPath": "/logos/png/omnirush.png"
+    "format": "webp",
+    "sourceUrl": "https://omnirush.ai/brand/lockup-ink-240.webp",
+    "notes": "Browser-inspected official logo from https://omnirush.ai/. Page title: Free AI Coding Agent, Desktop App & CLI | OmniRush"
   },
   {
     "slug": "open-webui",
     "name": "Open WebUI",
-    "assetPath": "/logos/open-webui.svg",
+    "assetPath": "/logos/official-ai/open-webui.png",
     "sourceType": "official",
-    "verifiedAt": "2026-10-17",
+    "verifiedAt": "2026-10-21",
     "badgeBg": "#0d9488",
-    "format": "svg",
-    "pngAssetPath": "/logos/png/open-webui.png"
+    "format": "png",
+    "sourceUrl": "https://openwebui.com/logo.png",
+    "notes": "Browser-inspected official logo from https://openwebui.com/. Page title: Open WebUI: Self-Hosted AI Platform"
   },
   {
     "slug": "openai",
@@ -1765,22 +1794,24 @@
   {
     "slug": "qwen-chat",
     "name": "Qwen Chat",
-    "assetPath": "/logos/qwen-chat.svg",
+    "assetPath": "/logos/official-ai/qwen-chat.svg",
     "sourceType": "official",
-    "verifiedAt": "2026-10-18",
+    "verifiedAt": "2026-10-21",
     "badgeBg": "#6366f1",
     "format": "svg",
-    "pngAssetPath": "/logos/png/qwen-chat.png"
+    "sourceUrl": "https://assets.alicdn.com/g/qwenweb/qwen-chat-fe/0.3.20/static/images/qwen-logo.svg",
+    "notes": "Browser-inspected official logo from https://chat.qwen.ai/. Page title: Qwen Suspected duplicate content hash: 501a95022bac0d03914ec7605730817386c3e392a6667f75d8582f22917fa914."
   },
   {
     "slug": "qwen-coder",
     "name": "Qwen 2.5 Coder",
-    "assetPath": "/logos/qwen-coder.svg",
+    "assetPath": "/logos/official-ai/qwen-coder.svg",
     "sourceType": "official",
-    "verifiedAt": "2026-10-17",
+    "verifiedAt": "2026-10-21",
     "badgeBg": "#6366f1",
     "format": "svg",
-    "pngAssetPath": "/logos/png/qwen-coder.png"
+    "sourceUrl": "https://assets.alicdn.com/g/qwenweb/qwen-chat-fe/0.3.20/static/images/qwen-logo.svg",
+    "notes": "Browser-inspected official logo from https://chat.qwen.ai/. Page title: Qwen Suspected duplicate content hash: 501a95022bac0d03914ec7605730817386c3e392a6667f75d8582f22917fa914."
   },
   {
     "slug": "railway",
@@ -1855,12 +1886,13 @@
   {
     "slug": "replit-agent",
     "name": "Replit Agent",
-    "assetPath": "/logos/replit-agent.svg",
-    "sourceType": "official",
-    "verifiedAt": "2026-10-17",
+    "assetPath": "/logos/official-ai/replit-agent.png",
+    "sourceType": "provided",
+    "verifiedAt": "2026-10-21",
     "badgeBg": "#f25f22",
-    "format": "svg",
-    "pngAssetPath": "/logos/png/replit-agent.png"
+    "format": "png",
+    "sourceUrl": "https://replit.com",
+    "notes": "Workspace-provided asset visually reviewed against the official page. Direct asset URL was not independently verified. SHA-256: 350b9530f12e3c45a9466ee0c12c1ed4b0f193c8f445ff1c15d894e82dba2b95"
   },
   {
     "slug": "roocode",
@@ -1887,14 +1919,13 @@
   {
     "slug": "runway",
     "name": "Runway Gen-3 Alpha",
-    "assetPath": "/logos/runway.svg",
-    "sourceType": "fallback",
-    "verifiedAt": "2026-10-17",
+    "assetPath": "/logos/official-ai/runway.webp",
+    "sourceType": "official",
+    "verifiedAt": "2026-10-21",
     "badgeBg": "#000000",
-    "format": "svg",
-    "sourceUrl": "https://www.google.com/s2/favicons?domain=runwayml.com&sz=256",
-    "notes": "Favicon-derived fallback; not treated as a verified Runway brand mark.",
-    "pngAssetPath": "/logos/png/runway.png"
+    "format": "webp",
+    "sourceUrl": "https://runway.com/_next/image?url=%2Fimages%2Flogos%2Frunway-app-icon.png&w=96&q=75&dpl=dpl_GqFujUqBsMTPLWNpUwKXrpSxYmHK",
+    "notes": "Browser-inspected official logo from https://runway.com/. Page title: Runway | Building Real-World Intelligence"
   },
   {
     "slug": "rust",
@@ -2025,12 +2056,13 @@
   {
     "slug": "suno",
     "name": "Suno",
-    "assetPath": "/logos/suno.svg",
+    "assetPath": "/logos/official-ai/suno.svg",
     "sourceType": "official",
-    "verifiedAt": "2026-10-17",
+    "verifiedAt": "2026-10-21",
     "badgeBg": "#f97316",
     "format": "svg",
-    "pngAssetPath": "/logos/png/suno.png"
+    "sourceUrl": "https://cdn-o.suno.com/splash-page/logo-cloud/Billboard_logo.svg",
+    "notes": "Browser-inspected official logo from https://suno.com/. Page title: Suno | AI Music Generator"
   },
   {
     "slug": "supabase",
@@ -2182,12 +2214,13 @@
   {
     "slug": "v0-vercel",
     "name": "v0 by Vercel",
-    "assetPath": "/logos/v0-vercel.svg",
-    "sourceType": "simple-icons",
-    "verifiedAt": "2026-10-17",
+    "assetPath": "/logos/official-ai/v0-vercel.svg",
+    "sourceType": "official",
+    "verifiedAt": "2026-10-21",
     "badgeBg": "#000000",
     "format": "svg",
-    "pngAssetPath": "/logos/png/v0-vercel.png"
+    "sourceUrl": "https://v0.app/chat-static/_next/static/immutable/media/logo-v0-light.442nx-e-yl-x_.svg",
+    "notes": "Browser-inspected official logo from https://v0.app/. Page title: v0 by Vercel - Build Full-Stack Web Apps with AI"
   },
   {
     "slug": "vercel",
@@ -2250,12 +2283,13 @@
   {
     "slug": "vllm",
     "name": "vLLM",
-    "assetPath": "/logos/vllm.svg",
+    "assetPath": "/logos/official-ai/vllm.svg",
     "sourceType": "official",
-    "verifiedAt": "2026-10-17",
+    "verifiedAt": "2026-10-21",
     "badgeBg": "#701a75",
     "format": "svg",
-    "pngAssetPath": "/logos/png/vllm.png"
+    "sourceUrl": "https://vllm.ai/vLLM-Full-Logo.svg",
+    "notes": "Browser-inspected official logo from https://vllm.ai/. Page title: vLLM"
   },
   {
     "slug": "vuedotjs",
@@ -2272,12 +2306,13 @@
   {
     "slug": "wan-video",
     "name": "Wan 2.1",
-    "assetPath": "/logos/wan-video.svg",
+    "assetPath": "/logos/official-ai/wan-video.png",
     "sourceType": "official",
-    "verifiedAt": "2026-10-18",
+    "verifiedAt": "2026-10-21",
     "badgeBg": "#ff6a00",
-    "format": "svg",
-    "pngAssetPath": "/logos/png/wan-video.png"
+    "format": "png",
+    "sourceUrl": "https://github.com/Wan-Video/Wan2.1/raw/main/assets/logo.png",
+    "notes": "Browser-inspected official logo from https://github.com/Wan-Video/Wan2.1. Page title: GitHub - Wan-Video/Wan2.1: Wan: Open and Advanced Large-Scale Video Generative Models · GitHub"
   },
   {
     "slug": "weaviate",
@@ -2318,12 +2353,13 @@
   {
     "slug": "whisper",
     "name": "Whisper",
-    "assetPath": "/logos/whisper.svg",
-    "sourceType": "official",
-    "verifiedAt": "2026-10-17",
+    "assetPath": "/logos/official-ai/whisper.png",
+    "sourceType": "provided",
+    "verifiedAt": "2026-10-21",
     "badgeBg": "#10a37f",
-    "format": "svg",
-    "pngAssetPath": "/logos/png/whisper.png"
+    "format": "png",
+    "sourceUrl": "https://github.com/openai/whisper",
+    "notes": "Workspace-provided asset visually reviewed against the official page. Direct asset URL was not independently verified. SHA-256: 114437d9d14d19e537db017d62cebb3903f4503adbeedd6a0396619e7b0276c5"
   },
   {
     "slug": "windsurf",

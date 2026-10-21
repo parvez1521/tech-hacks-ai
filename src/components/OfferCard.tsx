@@ -2,6 +2,8 @@ import React from 'react';
 import type { AiOffer } from '../types/index.ts';
 import { Link } from '../router/Router.tsx';
 import { isOfferActive } from '../data/offersData.ts';
+import { getBrandLogo } from '../data/brandLogos.ts';
+import { BrandLogo } from './BrandLogo.tsx';
 import { ExternalLink, ArrowRight, ShieldCheck, GraduationCap, Gift, CheckCircle2, Globe, AlertTriangle } from 'lucide-react';
 
 interface OfferCardProps {
@@ -101,17 +103,7 @@ export const OfferCard: React.FC<OfferCardProps> = ({ offer }) => {
 
         {/* Title & Provider with Brand Logo */}
         <div className="flex items-start gap-3 mb-2.5">
-          {offer.logoAssetPath && (
-            <div className="w-10 h-10 rounded-lg flex items-center justify-center shrink-0 overflow-hidden bg-card/90 border border-border/80 shadow-sm p-1.5 mt-0.5">
-              <img
-                src={offer.logoAssetPath}
-                alt={`${offer.provider} logo`}
-                className="w-full h-full object-contain"
-                loading="lazy"
-                decoding="async"
-              />
-            </div>
-          )}
+          <BrandLogo slug={offer.logoSlug} name={getBrandLogo(offer.logoSlug)?.name || offer.provider} size="lg" className="mt-0.5" />
           <div className="min-w-0 flex-1">
             <Link
               to={`/offers/${offer.slug}`}

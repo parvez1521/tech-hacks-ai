@@ -1,17 +1,7 @@
 import type { AiTool } from '../types/index.ts';
+import { aiSectionCategories } from './catalogTaxonomy.ts';
 
-export const aiCategories = [
-  { id: 'assistants', name: 'AI Assistants & Chat', iconName: 'Bot', description: 'General intelligence assistants, reasoning models, and research agents.' },
-  { id: 'coding', name: 'Coding & Dev Tools', iconName: 'Code', description: 'AI code editors, UI scaffolding, code completion, and terminal agents.' },
-  { id: 'image', name: 'AI Image & Art', iconName: 'Image', description: 'Text-to-image synthesis, upscaling, editing, and style transfer.' },
-  { id: 'video', name: 'AI Video', iconName: 'Video', description: 'Generative video models, video editing, and text-to-video tools.' },
-  { id: 'voice', name: 'Voice & Speech', iconName: 'Mic', description: 'AI voice generation, speech cloning, text-to-speech, and audio isolation.' },
-  { id: 'music', name: 'AI Music & Audio', iconName: 'Music', description: 'Full song composition, instrumental tracks, and stems generation.' },
-  { id: 'productivity', name: 'Productivity & Search', iconName: 'Search', description: 'Neural search engines, meeting transcribers, and knowledge synthesizers.' },
-  { id: 'automation', name: 'Workflow Automation', iconName: 'Zap', description: 'Connecting AI models to databases, webhooks, and multi-step processes.' },
-  { id: '3d', name: '3D & Spatial', iconName: 'Box', description: 'Text to 3D meshes, UV unwrapping, and game-ready asset generation.' },
-  { id: 'writing', name: 'Writing & Content', iconName: 'PenTool', description: 'Copywriting, long-form articles, summarization, and tone enhancement.' },
-];
+export const aiCategories = aiSectionCategories;
 
 export const aiToolsData: AiTool[] = [
   // ==========================================

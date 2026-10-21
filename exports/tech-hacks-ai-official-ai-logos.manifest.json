@@ -1,0 +1,3437 @@
+{
+  "generated_at": "2026-10-21T09:52:21.969836+00:00",
+  "catalog_source": "src/data/aiToolsData.ts",
+  "unique_ai_tool_count": 65,
+  "actual_web_downloads": 57,
+  "official_logos_verified": 30,
+  "official_favicon_fallbacks": 27,
+  "unresolved_count": 8,
+  "existing_local_assets_used": 0,
+  "entries": [
+    {
+      "tool_name": "Aider",
+      "canonical_slug": "aider",
+      "official_website": "https://aider.chat",
+      "source_page_url": "https://github.com/Aider-AI/aider",
+      "direct_asset_url": "https://aider.chat/assets/logo.svg",
+      "downloaded_filename": "logos/aider.svg",
+      "file_format": "svg",
+      "source_type": "official logo",
+      "verification_status": "browser-inspected official page; image: Aider Logo Aider Logo; asset validated",
+      "downloaded_from_web": true,
+      "notes": "Alternative official page title: GitHub - Aider-AI/aider: aider is AI pair programming in your terminal \u00b7 GitHub",
+      "sha256": "c2012ba0a3141ef162f6bc6f4cc8cb4ab19444dba0408c975f58ceeda4ed79b1",
+      "candidates": [
+        {
+          "url": "https://aider.chat/favicon.ico",
+          "source_type": "official favicon fallback",
+          "score": 45,
+          "reason": "official website /favicon.ico fallback",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://aider.chat/apple-touch-icon.png",
+          "source_type": "official favicon fallback",
+          "score": 42,
+          "reason": "official website /apple-touch-icon.png fallback",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://aider.chat/assets/logo.svg",
+          "source_type": "official logo",
+          "score": 120,
+          "reason": "image: Aider Logo Aider Logo",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://avatars.githubusercontent.com/u/172139148?s=60&v=4",
+          "source_type": "official organization avatar",
+          "score": 75,
+          "reason": "image: Aider-AI Aider-AI mr-2 flex-shrink-0 prc-Avatar-Avatar-0xaUi",
+          "inline_svg": ""
+        }
+      ]
+    },
+    {
+      "tool_name": "AnythingLLM",
+      "canonical_slug": "anythingllm",
+      "official_website": "https://anythingllm.com",
+      "source_page_url": "https://anythingllm.com/",
+      "direct_asset_url": "https://anythingllm.com/images/brand/logo-mark.svg",
+      "downloaded_filename": "logos/anythingllm.svg",
+      "file_format": "svg",
+      "source_type": "official logo",
+      "verification_status": "browser-inspected official page; image: h-4 w-auto; asset validated",
+      "downloaded_from_web": true,
+      "notes": "Page title: AnythingLLM \u2014 On-device AI for productivity | Local & Private",
+      "sha256": "20df5a9c1a2678de19dc1412e7890b96296878e7a8183c6fae7b56b7a0dfa6f9",
+      "candidates": [
+        {
+          "url": "https://anythingllm.com/images/brand/logo-mark.svg",
+          "source_type": "official logo",
+          "score": 160,
+          "reason": "image: h-4 w-auto",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://anythingllm.com/images/home/logos/nvidia.webp",
+          "source_type": "official logo",
+          "score": 120,
+          "reason": "image: NVIDIA NVIDIA max-h-full max-w-full object-contain",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://anythingllm.com/images/home/logos/amd.webp",
+          "source_type": "official logo",
+          "score": 120,
+          "reason": "image: AMD AMD max-h-full max-w-full object-contain",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://anythingllm.com/images/home/logos/qualcomm.webp",
+          "source_type": "official logo",
+          "score": 120,
+          "reason": "image: Qualcomm Qualcomm max-h-full max-w-full object-contain",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://anythingllm.com/images/home/logos/intel.webp",
+          "source_type": "official logo",
+          "score": 120,
+          "reason": "image: Intel Intel max-h-full max-w-full object-contain",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://anythingllm.com/images/home/logos/samsung.webp",
+          "source_type": "official logo",
+          "score": 120,
+          "reason": "image: Samsung Samsung max-h-full max-w-full object-contain",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://anythingllm.com/images/home/logos/comcast.webp",
+          "source_type": "official logo",
+          "score": 120,
+          "reason": "image: Comcast Comcast max-h-full max-w-full object-contain",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://anythingllm.com/images/brand/mark.svg",
+          "source_type": "official logo",
+          "score": 120,
+          "reason": "image: AnythingLLM AnythingLLM hidden h-12 w-auto shrink-0 select-none sm:block",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://anythingllm.com/icon.png?0a59f488e9ddf54c",
+          "source_type": "official favicon fallback",
+          "score": 90,
+          "reason": "link-icon: icon",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://anythingllm.com/favicon.ico",
+          "source_type": "official favicon fallback",
+          "score": 45,
+          "reason": "official website /favicon.ico fallback",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://anythingllm.com/apple-touch-icon.png",
+          "source_type": "official favicon fallback",
+          "score": 42,
+          "reason": "official website /apple-touch-icon.png fallback",
+          "inline_svg": ""
+        }
+      ]
+    },
+    {
+      "tool_name": "Bolt.new",
+      "canonical_slug": "bolt-new",
+      "official_website": "https://bolt.new",
+      "source_page_url": "https://bolt.new/",
+      "direct_asset_url": "https://bolt.new/static/favicon.svg",
+      "downloaded_filename": "logos/bolt-new.svg",
+      "file_format": "svg",
+      "source_type": "official favicon fallback",
+      "verification_status": "browser-inspected official page; link-icon: icon; asset validated",
+      "downloaded_from_web": true,
+      "notes": "Page title: Bolt AI builder: Websites, apps & prototypes",
+      "sha256": "ffb613a563d769368b996d03b91e8683b645d251a9a27f4cd8a7414715468523",
+      "candidates": [
+        {
+          "url": "https://bolt.new/static/favicon.svg",
+          "source_type": "official favicon fallback",
+          "score": 90,
+          "reason": "link-icon: icon",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://bolt.new/static/favicon-48x48.png",
+          "source_type": "official favicon fallback",
+          "score": 90,
+          "reason": "link-icon: icon",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://bolt.new/static/favicon-96x96.png",
+          "source_type": "official favicon fallback",
+          "score": 90,
+          "reason": "link-icon: icon",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://bolt.new/static/favicon-192x192.png",
+          "source_type": "official favicon fallback",
+          "score": 90,
+          "reason": "link-icon: icon",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://bolt.new/static/apple-touch-icon.png",
+          "source_type": "official favicon fallback",
+          "score": 90,
+          "reason": "link-icon: apple-touch-icon",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://bolt.new/favicon.ico",
+          "source_type": "official favicon fallback",
+          "score": 45,
+          "reason": "official website /favicon.ico fallback",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://bolt.new/apple-touch-icon.png",
+          "source_type": "official favicon fallback",
+          "score": 42,
+          "reason": "official website /apple-touch-icon.png fallback",
+          "inline_svg": ""
+        }
+      ]
+    },
+    {
+      "tool_name": "ChatGPT",
+      "canonical_slug": "chatgpt",
+      "official_website": "https://chatgpt.com",
+      "source_page_url": "https://chatgpt.com/",
+      "direct_asset_url": "https://chatgpt.com/unauth-mweb/favicon.ico",
+      "downloaded_filename": "logos/chatgpt.ico",
+      "file_format": "ico",
+      "source_type": "official favicon fallback",
+      "verification_status": "browser-inspected official page; link-icon: icon; asset validated",
+      "downloaded_from_web": true,
+      "notes": "Page title: ChatGPT: Chat, Work, Create & Code with AI",
+      "sha256": "def0730c050afcd86acd21bd1edf54f0ee3638c9e642f0e4107f7d666bc292a9",
+      "candidates": [
+        {
+          "url": "https://chatgpt.com/unauth-mweb/favicon.ico",
+          "source_type": "official favicon fallback",
+          "score": 90,
+          "reason": "link-icon: icon",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://chatgpt.com/unauth-mweb/images/favicon.ico",
+          "source_type": "official favicon fallback",
+          "score": 90,
+          "reason": "link-icon: icon",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://chatgpt.com/unauth-mweb/images/favicon.svg",
+          "source_type": "official favicon fallback",
+          "score": 90,
+          "reason": "link-icon: icon",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://chatgpt.com/unauth-mweb/images/favicon-48x48.png",
+          "source_type": "official favicon fallback",
+          "score": 90,
+          "reason": "link-icon: icon",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://chatgpt.com/unauth-mweb/apple-touch-icon.png",
+          "source_type": "official favicon fallback",
+          "score": 90,
+          "reason": "link-icon: apple-touch-icon",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://chatgpt.com/favicon.ico",
+          "source_type": "official favicon fallback",
+          "score": 45,
+          "reason": "official website /favicon.ico fallback",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://chatgpt.com/apple-touch-icon.png",
+          "source_type": "official favicon fallback",
+          "score": 42,
+          "reason": "official website /apple-touch-icon.png fallback",
+          "inline_svg": ""
+        }
+      ]
+    },
+    {
+      "tool_name": "Claude 3.5 Sonnet",
+      "canonical_slug": "claude",
+      "official_website": "https://claude.ai",
+      "source_page_url": "https://claude.ai/login",
+      "direct_asset_url": "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cd02a42d9-Vq_H3mgS.svg",
+      "downloaded_filename": "logos/claude.svg",
+      "file_format": "svg",
+      "source_type": "official favicon fallback",
+      "verification_status": "browser-inspected official page; link-icon: icon; asset validated",
+      "downloaded_from_web": true,
+      "notes": "Page title: Sign in - Claude",
+      "sha256": "b150888bc7257af83e3b85d3c2be4294f88986026f8168f6c12fc1fde6697350",
+      "candidates": [
+        {
+          "url": "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cd02a42d9-Vq_H3mgS.svg",
+          "source_type": "official favicon fallback",
+          "score": 90,
+          "reason": "link-icon: icon",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://claude.ai/favicon.ico",
+          "source_type": "official favicon fallback",
+          "score": 90,
+          "reason": "link-icon: shortcut icon",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/c129d018a-0ZbJsTbu.png",
+          "source_type": "official favicon fallback",
+          "score": 90,
+          "reason": "link-icon: apple-touch-icon",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://claude.ai/apple-touch-icon.png",
+          "source_type": "official favicon fallback",
+          "score": 42,
+          "reason": "official website /apple-touch-icon.png fallback",
+          "inline_svg": ""
+        }
+      ]
+    },
+    {
+      "tool_name": "CogVideoX",
+      "canonical_slug": "cogvideox",
+      "official_website": "https://github.com/THUDM/CogVideo",
+      "source_page_url": "https://github.com/zai-org/CogVideo",
+      "direct_asset_url": "https://github.com/zai-org/CogVideo/raw/main/resources/logo.svg",
+      "downloaded_filename": "logos/cogvideox.svg",
+      "file_format": "svg",
+      "source_type": "official logo",
+      "verification_status": "browser-inspected official page; image: ; asset validated",
+      "downloaded_from_web": true,
+      "notes": "Page title: GitHub - zai-org/CogVideo: text and image to video generation: CogVideoX (2024) and CogVideo (ICLR 2023) \u00b7 GitHub",
+      "sha256": "469ae3975c3b480735c015b23d394c04416a65544c0ac6587b8c214ca6f84224",
+      "candidates": [
+        {
+          "url": "https://github.com/zai-org/CogVideo/raw/main/resources/logo.svg",
+          "source_type": "official logo",
+          "score": 120,
+          "reason": "image: ",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://avatars.githubusercontent.com/u/223098841?s=60&v=4",
+          "source_type": "official organization avatar",
+          "score": 75,
+          "reason": "image: zai-org zai-org mr-2 flex-shrink-0 prc-Avatar-Avatar-0xaUi",
+          "inline_svg": ""
+        }
+      ]
+    },
+    {
+      "tool_name": "ComfyUI",
+      "canonical_slug": "comfyui",
+      "official_website": "https://comfy.org",
+      "source_page_url": "https://comfy.org/",
+      "direct_asset_url": "https://comfy.org/icons/logomark.svg",
+      "downloaded_filename": "logos/comfyui.svg",
+      "file_format": "svg",
+      "source_type": "official logo",
+      "verification_status": "browser-inspected official page; image: Comfy Comfy col-span-full row-span-full h-8; asset validated",
+      "downloaded_from_web": true,
+      "notes": "Page title: Comfy - Professional Control of Visual AI",
+      "sha256": "6d2e56975360ef44b9006977a8a3e1df285f2b15ae5bcc5fb366f9031f22eef6",
+      "candidates": [
+        {
+          "url": "https://comfy.org/icons/logomark.svg",
+          "source_type": "official logo",
+          "score": 160,
+          "reason": "image: Comfy Comfy col-span-full row-span-full h-8",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://comfy.org/icons/logo.svg",
+          "source_type": "official logo",
+          "score": 160,
+          "reason": "image: Comfy Comfy absolute top-0 left-0 h-10 w-36 max-w-none object-contain object-left",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://comfy.org/icons/node-left.svg",
+          "source_type": "official logo",
+          "score": 140,
+          "reason": "image: -mx-px h-full w-auto self-stretch",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://comfy.org/icons/node-right.svg",
+          "source_type": "official logo",
+          "score": 140,
+          "reason": "image: -mx-px h-full w-auto self-stretch",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://comfy.org/icons/arrow-up-right.svg",
+          "source_type": "official logo",
+          "score": 140,
+          "reason": "image: inline-block size-3",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://comfy.org/images/comfy-agent/agent-logo.svg",
+          "source_type": "official logo",
+          "score": 120,
+          "reason": "image: ",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://comfy.org/favicon-96x96.png",
+          "source_type": "official favicon fallback",
+          "score": 90,
+          "reason": "link-icon: icon",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://comfy.org/favicon.svg",
+          "source_type": "official favicon fallback",
+          "score": 90,
+          "reason": "link-icon: icon",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://comfy.org/favicon.ico",
+          "source_type": "official favicon fallback",
+          "score": 90,
+          "reason": "link-icon: shortcut icon",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://comfy.org/apple-touch-icon.png",
+          "source_type": "official favicon fallback",
+          "score": 90,
+          "reason": "link-icon: apple-touch-icon",
+          "inline_svg": ""
+        }
+      ]
+    },
+    {
+      "tool_name": "Continue",
+      "canonical_slug": "continue-dev",
+      "official_website": "https://continue.dev",
+      "source_page_url": "https://continue.dev/",
+      "direct_asset_url": "https://continue.dev/continue-logo-black.svg",
+      "downloaded_filename": "logos/continue-dev.svg",
+      "file_format": "svg",
+      "source_type": "official logo",
+      "verification_status": "browser-inspected official page; image: Continue Continue h-12 w-auto; asset validated",
+      "downloaded_from_web": true,
+      "notes": "Page title: Continue (acquired by Cursor)",
+      "sha256": "95632c149763183762b6d2117d4d7b9839744260d01968a6286a8e2082c7c1bd",
+      "candidates": [
+        {
+          "url": "https://continue.dev/continue-logo-black.svg",
+          "source_type": "official logo",
+          "score": 120,
+          "reason": "image: Continue Continue h-12 w-auto",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://continue.dev/favicon.png",
+          "source_type": "official favicon fallback",
+          "score": 90,
+          "reason": "link-icon: icon",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://continue.dev/favicon.ico",
+          "source_type": "official favicon fallback",
+          "score": 45,
+          "reason": "official website /favicon.ico fallback",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://continue.dev/apple-touch-icon.png",
+          "source_type": "official favicon fallback",
+          "score": 42,
+          "reason": "official website /apple-touch-icon.png fallback",
+          "inline_svg": ""
+        }
+      ]
+    },
+    {
+      "tool_name": "Microsoft Copilot",
+      "canonical_slug": "copilot",
+      "official_website": "https://copilot.microsoft.com",
+      "source_page_url": "https://copilot.com/",
+      "direct_asset_url": "https://res.cdn.office.net/officehub/images/content/images/unauth-copilotcom/copilot-mobile-logo-static-286643fc8c.png",
+      "downloaded_filename": "logos/copilot.png",
+      "file_format": "png",
+      "source_type": "official logo",
+      "verification_status": "browser-inspected official page; image: ; asset validated",
+      "downloaded_from_web": true,
+      "notes": "Page title: Microsoft Copilot | Sign in",
+      "sha256": "98a5ebda1f77e63fcbe9fd30705075e9d0e8b632a84e4ab76dfa8c37bb318d87",
+      "candidates": [
+        {
+          "url": "https://res.cdn.office.net/officehub/images/content/images/unauth-copilotcom/copilot-mobile-logo-static-286643fc8c.png",
+          "source_type": "official logo",
+          "score": 120,
+          "reason": "image: ",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://res.cdn.office.net/officehub/images/content/images/unauth-copilotcom/favicon-copilot-brand-refresh-23392c1f66.ico",
+          "source_type": "official favicon fallback",
+          "score": 90,
+          "reason": "link-icon: shortcut icon",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://copilot.com/favicon.ico",
+          "source_type": "official favicon fallback",
+          "score": 45,
+          "reason": "official website /favicon.ico fallback",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://copilot.com/apple-touch-icon.png",
+          "source_type": "official favicon fallback",
+          "score": 42,
+          "reason": "official website /apple-touch-icon.png fallback",
+          "inline_svg": ""
+        }
+      ]
+    },
+    {
+      "tool_name": "Copy.ai",
+      "canonical_slug": "copy-ai",
+      "official_website": "https://www.copy.ai",
+      "source_page_url": "https://www.copy.ai/",
+      "direct_asset_url": "https://cdn.prod.website-files.com/628288c5cd3e8411b90a36a4/6797ee68ae7908e605a9a4d0_copy_logo-all-dark.svg",
+      "downloaded_filename": "logos/copy-ai.svg",
+      "file_format": "svg",
+      "source_type": "official logo",
+      "verification_status": "browser-inspected official page; image: ; asset validated",
+      "downloaded_from_web": true,
+      "notes": "Page title: Future proof your business with GTM AI",
+      "sha256": "bfdb04c981cf42d2ae977e633f9403ab0ffa6922be15c9677799fc0b77501c3e",
+      "candidates": [
+        {
+          "url": "https://cdn.prod.website-files.com/628288c5cd3e8411b90a36a4/6797ee68ae7908e605a9a4d0_copy_logo-all-dark.svg",
+          "source_type": "official logo",
+          "score": 160,
+          "reason": "image: ",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://cdn.prod.website-files.com/628288c5cd3e8451380a36c7/6759e1968cbdec9badf57558_juniper-logo-p-1600.png",
+          "source_type": "official logo",
+          "score": 120,
+          "reason": "image: slide_case-logo",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://cdn.prod.website-files.com/628288c5cd3e8451380a36c7/6759dd0d3f90e5a3a72ce0a9_lenovo-logo.avif",
+          "source_type": "official logo",
+          "score": 120,
+          "reason": "image: slide_case-logo",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://cdn.prod.website-files.com/628288c5cd3e8451380a36c7/6835fccb88cf5c8f6ec83191_demio_logo_rgb_kelly-green.png",
+          "source_type": "official logo",
+          "score": 120,
+          "reason": "image: slide_case-logo",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://cdn.prod.website-files.com/628288c5cd3e8411b90a36a4/67024a186cbbdd837f2bd583_security%20logos.avif",
+          "source_type": "official logo",
+          "score": 120,
+          "reason": "image: Security logos: AICPA SOC 2, GDPR, SSO Security logos: AICPA SOC 2, GDPR, SSO security-logo",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://cdn.prod.website-files.com/628288c5cd3e8411b90a36a4/670249ed0ecec56203b094cd_Integration%20logos.avif",
+          "source_type": "official logo",
+          "score": 120,
+          "reason": "image: Integrations logos: Salesforce, Hubspot, GONG, Zapier, Outreach, Salesloft Integrations logos: Salesforce, Hubspot, GONG, Zapier, Outreach, Salesloft security-logo",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://cdn.prod.website-files.com/628288c5cd3e8411b90a36a4/670296a9ec61540cbd30725d_openai%20logo.svg",
+          "source_type": "official logo",
+          "score": 120,
+          "reason": "image: Logotype of Open AI Logotype of Open AI",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://cdn.prod.website-files.com/628288c5cd3e8411b90a36a4/670296a91751ec6b91593b74_anthropic%20logo.svg",
+          "source_type": "official logo",
+          "score": 120,
+          "reason": "image: Logotype of Anthropic Logotype of Anthropic",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://cdn.prod.website-files.com/628288c5cd3e8411b90a36a4/6851bf610ffd223866b81db5_860bcaf5fe3f597255873eba59fa6ec9_gemini%20logo.svg",
+          "source_type": "official logo",
+          "score": 120,
+          "reason": "image: gemini logo gemini logo",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://cdn.prod.website-files.com/628288c5cd3e8411b90a36a4/670296a937e52c66c089b910_Perplexity%20logo.svg",
+          "source_type": "official logo",
+          "score": 120,
+          "reason": "image: Logotype of Perplexity Logotype of Perplexity",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://cdn.prod.website-files.com/628288c5cd3e8411b90a36a4/659e8fa99080372ee502cfcc_logo_white_kerning-fix.svg",
+          "source_type": "official logo",
+          "score": 120,
+          "reason": "image: copy.ai black and white transparent background logo copy.ai black and white transparent background logo logo_v2",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://cdn.prod.website-files.com/628288c5cd3e8411b90a36a4/65822605bd3609a56a231a75_x.svg",
+          "source_type": "official logo",
+          "score": 120,
+          "reason": "image: twitter \"X\" logo twitter \"X\" logo soc_img_v2",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://cdn.prod.website-files.com/628288c5cd3e8411b90a36a4/6793eea386b5ac27242bb8eb_favicon_32x32px%20(1).png",
+          "source_type": "official favicon fallback",
+          "score": 90,
+          "reason": "link-icon: shortcut icon",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://cdn.prod.website-files.com/628288c5cd3e8411b90a36a4/6793eea6a090d6d2f4fa5570_favicon_256x256%20(2).png",
+          "source_type": "official favicon fallback",
+          "score": 90,
+          "reason": "link-icon: apple-touch-icon",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://cdn.prod.website-files.com/628288c5cd3e8451380a36c7/6759e1968cbdec9badf57558_juniper-logo.png",
+          "source_type": "official favicon fallback",
+          "score": 80,
+          "reason": "srcset: slide_case-logo",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://www.copy.ai/favicon.ico",
+          "source_type": "official favicon fallback",
+          "score": 45,
+          "reason": "official website /favicon.ico fallback",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://www.copy.ai/apple-touch-icon.png",
+          "source_type": "official favicon fallback",
+          "score": 42,
+          "reason": "official website /apple-touch-icon.png fallback",
+          "inline_svg": ""
+        }
+      ]
+    },
+    {
+      "tool_name": "Cursor Editor",
+      "canonical_slug": "cursor",
+      "official_website": "https://cursor.com",
+      "source_page_url": "https://cursor.com/",
+      "direct_asset_url": "https://cursor.com/marketing-static/favicon-light.ico",
+      "downloaded_filename": "logos/cursor.ico",
+      "file_format": "ico",
+      "source_type": "official favicon fallback",
+      "verification_status": "browser-inspected official page; link-icon: shortcut icon; asset validated",
+      "downloaded_from_web": true,
+      "notes": "Page title: AI Coding Agent for Building Ambitious Software | Cursor",
+      "sha256": "bfef6274a469b9888cee38f095aa659bf4d11d96651596a3805f91dc0cbf4dd7",
+      "candidates": [
+        {
+          "url": "https://cursor.com/marketing-static/favicon-light.ico",
+          "source_type": "official favicon fallback",
+          "score": 90,
+          "reason": "link-icon: shortcut icon",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://cursor.com/marketing-static/icon-192x192-light.png",
+          "source_type": "official favicon fallback",
+          "score": 90,
+          "reason": "link-icon: icon",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://cursor.com/marketing-static/favicon-light.svg",
+          "source_type": "official favicon fallback",
+          "score": 90,
+          "reason": "link-icon: icon",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://cursor.com/marketing-static/favicon.svg",
+          "source_type": "official favicon fallback",
+          "score": 90,
+          "reason": "link-icon: icon",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://cursor.com/marketing-static/apple-touch-icon-light.png",
+          "source_type": "official favicon fallback",
+          "score": 90,
+          "reason": "link-icon: apple-touch-icon",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://cursor.com/favicon.ico",
+          "source_type": "official favicon fallback",
+          "score": 45,
+          "reason": "official website /favicon.ico fallback",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://cursor.com/apple-touch-icon.png",
+          "source_type": "official favicon fallback",
+          "score": 42,
+          "reason": "official website /apple-touch-icon.png fallback",
+          "inline_svg": ""
+        }
+      ]
+    },
+    {
+      "tool_name": "DeepSeek",
+      "canonical_slug": "deepseek",
+      "official_website": "https://chat.deepseek.com",
+      "source_page_url": "https://chat.deepseek.com/",
+      "direct_asset_url": "",
+      "downloaded_filename": "",
+      "file_format": "",
+      "source_type": "",
+      "verification_status": "unresolved",
+      "downloaded_from_web": false,
+      "notes": "Official page returned HTTP 403; browser DOM was still inspected. Candidate https://chat.deepseek.com/favicon.ico: HTML response instead of an image asset. Candidate https://chat.deepseek.com/apple-touch-icon.png: HTML response instead of an image asset.",
+      "sha256": "",
+      "candidates": [
+        {
+          "url": "https://chat.deepseek.com/favicon.ico",
+          "source_type": "official favicon fallback",
+          "score": 45,
+          "reason": "official website /favicon.ico fallback",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://chat.deepseek.com/apple-touch-icon.png",
+          "source_type": "official favicon fallback",
+          "score": 42,
+          "reason": "official website /apple-touch-icon.png fallback",
+          "inline_svg": ""
+        }
+      ]
+    },
+    {
+      "tool_name": "Dify.ai",
+      "canonical_slug": "dify",
+      "official_website": "https://dify.ai",
+      "source_page_url": "https://dify.ai/",
+      "direct_asset_url": "https://dify.ai/assets/dify-logo.svg",
+      "downloaded_filename": "logos/dify.svg",
+      "file_format": "svg",
+      "source_type": "official logo",
+      "verification_status": "browser-inspected official page; image: Dify Dify block h-auto select-none w-17.5; asset validated",
+      "downloaded_from_web": true,
+      "notes": "Page title: Dify - The Platform for Production-Ready Agentic Workflows",
+      "sha256": "97cd981c90054ab97e6d4bffd86d41a51f88db059c7581496e5471a0c443f90c",
+      "candidates": [
+        {
+          "url": "https://dify.ai/assets/dify-logo.svg",
+          "source_type": "official logo",
+          "score": 160,
+          "reason": "image: Dify Dify block h-auto select-none w-17.5",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://dify.ai/favicon.svg",
+          "source_type": "official favicon fallback",
+          "score": 90,
+          "reason": "link-icon: icon",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://dify.ai/favicon.ico",
+          "source_type": "official favicon fallback",
+          "score": 45,
+          "reason": "official website /favicon.ico fallback",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://dify.ai/apple-touch-icon.png",
+          "source_type": "official favicon fallback",
+          "score": 42,
+          "reason": "official website /apple-touch-icon.png fallback",
+          "inline_svg": ""
+        }
+      ]
+    },
+    {
+      "tool_name": "Dreamina",
+      "canonical_slug": "dreamina",
+      "official_website": "https://dreamina.capcut.com",
+      "source_page_url": "https://dreamina.capcut.com/",
+      "direct_asset_url": "",
+      "downloaded_filename": "",
+      "file_format": "",
+      "source_type": "",
+      "verification_status": "unresolved",
+      "downloaded_from_web": false,
+      "notes": "Candidate https://dreamina.capcut.com/favicon.ico: empty response. Candidate https://dreamina.capcut.com/apple-touch-icon.png: HTML response instead of an image asset.",
+      "sha256": "",
+      "candidates": [
+        {
+          "url": "https://dreamina.capcut.com/favicon.ico",
+          "source_type": "official favicon fallback",
+          "score": 45,
+          "reason": "official website /favicon.ico fallback",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://dreamina.capcut.com/apple-touch-icon.png",
+          "source_type": "official favicon fallback",
+          "score": 42,
+          "reason": "official website /apple-touch-icon.png fallback",
+          "inline_svg": ""
+        }
+      ]
+    },
+    {
+      "tool_name": "ElevenLabs",
+      "canonical_slug": "elevenlabs",
+      "official_website": "https://elevenlabs.io",
+      "source_page_url": "https://elevenlabs.io/",
+      "direct_asset_url": "https://elevenlabs.io/favicon.ico?9c55860cee08706b",
+      "downloaded_filename": "logos/elevenlabs.ico",
+      "file_format": "ico",
+      "source_type": "official favicon fallback",
+      "verification_status": "browser-inspected official page; link-icon: icon; asset validated",
+      "downloaded_from_web": true,
+      "notes": "Page title: Free AI Voice Generator & Voice Agents Platform | ElevenLabs",
+      "sha256": "383748742e8ca888d4dff626a1d2a9fc898fdebb6d3ae679b86f24f81c46fb5f",
+      "candidates": [
+        {
+          "url": "https://elevenlabs.io/favicon.ico?9c55860cee08706b",
+          "source_type": "official favicon fallback",
+          "score": 90,
+          "reason": "link-icon: icon",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://elevenlabs.io/icon.svg?c23f5371fdd26632",
+          "source_type": "official favicon fallback",
+          "score": 90,
+          "reason": "link-icon: icon",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://elevenlabs.io/apple-icon.png?6592732ab34b1d42",
+          "source_type": "official favicon fallback",
+          "score": 90,
+          "reason": "link-icon: apple-touch-icon",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://elevenlabs.io/favicon.ico",
+          "source_type": "official favicon fallback",
+          "score": 45,
+          "reason": "official website /favicon.ico fallback",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://elevenlabs.io/apple-touch-icon.png",
+          "source_type": "official favicon fallback",
+          "score": 42,
+          "reason": "official website /apple-touch-icon.png fallback",
+          "inline_svg": ""
+        }
+      ]
+    },
+    {
+      "tool_name": "FLUX.1 by Black Forest Labs",
+      "canonical_slug": "flux-1",
+      "official_website": "https://blackforestlabs.ai",
+      "source_page_url": "https://bfl.ai/",
+      "direct_asset_url": "https://bfl.ai/favicon.ico",
+      "downloaded_filename": "logos/flux-1.ico",
+      "file_format": "ico",
+      "source_type": "official favicon fallback",
+      "verification_status": "browser-inspected official page; link-icon: icon; asset validated",
+      "downloaded_from_web": true,
+      "notes": "Page title: Black Forest Labs - Frontier AI Lab",
+      "sha256": "e27b5ef23712f0e7a64acc9965386da3bccf817e000b0644f024e1910e88fa43",
+      "candidates": [
+        {
+          "url": "https://bfl.ai/favicon.ico",
+          "source_type": "official favicon fallback",
+          "score": 90,
+          "reason": "link-icon: icon",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://bfl.ai/icon0.svg?7e050ff634b43f18",
+          "source_type": "official favicon fallback",
+          "score": 90,
+          "reason": "link-icon: icon",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://bfl.ai/icon1.png?5747da94009b2627",
+          "source_type": "official favicon fallback",
+          "score": 90,
+          "reason": "link-icon: icon",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://bfl.ai/apple-icon.png?f3e2842f59013de0",
+          "source_type": "official favicon fallback",
+          "score": 90,
+          "reason": "link-icon: apple-touch-icon",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://bfl.ai/apple-touch-icon.png",
+          "source_type": "official favicon fallback",
+          "score": 42,
+          "reason": "official website /apple-touch-icon.png fallback",
+          "inline_svg": ""
+        }
+      ]
+    },
+    {
+      "tool_name": "Google Gemini",
+      "canonical_slug": "gemini",
+      "official_website": "https://gemini.google.com",
+      "source_page_url": "https://gemini.google.com/app",
+      "direct_asset_url": "https://www.gstatic.com/lamda/images/gemini_sparkle_4g_512_lt_f94943af3be039176192d.png",
+      "downloaded_filename": "logos/gemini.png",
+      "file_format": "png",
+      "source_type": "official favicon fallback",
+      "verification_status": "browser-inspected official page; link-icon: icon; asset validated",
+      "downloaded_from_web": true,
+      "notes": "Page title: Google Gemini",
+      "sha256": "5e7cfecaa53f4f65a313fe89b0f389548126544a78fad8489510c70ae641a4a1",
+      "candidates": [
+        {
+          "url": "https://www.gstatic.com/lamda/images/gemini_sparkle_4g_512_lt_f94943af3be039176192d.png",
+          "source_type": "official favicon fallback",
+          "score": 90,
+          "reason": "link-icon: icon",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://gemini.google.com/favicon.ico",
+          "source_type": "official favicon fallback",
+          "score": 45,
+          "reason": "official website /favicon.ico fallback",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://gemini.google.com/apple-touch-icon.png",
+          "source_type": "official favicon fallback",
+          "score": 42,
+          "reason": "official website /apple-touch-icon.png fallback",
+          "inline_svg": ""
+        }
+      ]
+    },
+    {
+      "tool_name": "Google AI Studio",
+      "canonical_slug": "google-ai-studio",
+      "official_website": "https://aistudio.google.com",
+      "source_page_url": "https://aistudio.google.com/welcome",
+      "direct_asset_url": "https://www.gstatic.com/aistudio-static/mobile/ais-logo.svg",
+      "downloaded_filename": "logos/google-ai-studio.svg",
+      "file_format": "svg",
+      "source_type": "official logo",
+      "verification_status": "browser-inspected official page; image: Google AI Studio Google AI Studio nav__logo-img; asset validated",
+      "downloaded_from_web": true,
+      "notes": "Page title: Google AI Studio",
+      "sha256": "e0753fdb07bca4437a59b2cc90915c5fe0f6652f2279456e152c90fccc7b4761",
+      "candidates": [
+        {
+          "url": "https://www.gstatic.com/aistudio-static/mobile/ais-logo.svg",
+          "source_type": "official logo",
+          "score": 190,
+          "reason": "image: Google AI Studio Google AI Studio nav__logo-img",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://www.gstatic.com/aistudio-static/vibe_code/Google_AIS_Product_Lockup_RGB_White.svg",
+          "source_type": "official logo",
+          "score": 120,
+          "reason": "image: Google AI Studio large logo Google AI Studio large logo footer__logo-img",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://www.gstatic.com/images/branding/productlogos/ai_studio/v1/web-32dp/logo_ai_studio_color_1x_web_32dp.png",
+          "source_type": "official favicon fallback",
+          "score": 90,
+          "reason": "link-icon: icon",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://www.gstatic.com/images/branding/productlogos/ai_studio/v1/web-64dp/logo_ai_studio_color_1x_web_64dp.png",
+          "source_type": "official favicon fallback",
+          "score": 90,
+          "reason": "link-icon: icon",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://www.gstatic.com/images/branding/productlogos/ai_studio/v1/web-96dp/logo_ai_studio_color_1x_web_96dp.png",
+          "source_type": "official favicon fallback",
+          "score": 90,
+          "reason": "link-icon: icon",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://www.gstatic.com/images/branding/productlogos/ai_studio/v1/web-512dp/logo_ai_studio_color_1x_web_512dp.png",
+          "source_type": "official favicon fallback",
+          "score": 90,
+          "reason": "link-icon: icon",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://aistudio.google.com/favicon.ico",
+          "source_type": "official favicon fallback",
+          "score": 45,
+          "reason": "official website /favicon.ico fallback",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://aistudio.google.com/apple-touch-icon.png",
+          "source_type": "official favicon fallback",
+          "score": 42,
+          "reason": "official website /apple-touch-icon.png fallback",
+          "inline_svg": ""
+        }
+      ]
+    },
+    {
+      "tool_name": "GPT4All",
+      "canonical_slug": "gpt4all",
+      "official_website": "https://www.nomic.ai/gpt4all",
+      "source_page_url": "https://www.nomic.ai/gpt4all",
+      "direct_asset_url": "https://www.nomic.ai/favicon-48x48.png",
+      "downloaded_filename": "logos/gpt4all.png",
+      "file_format": "png",
+      "source_type": "official favicon fallback",
+      "verification_status": "browser-inspected official page; link-icon: icon; asset validated",
+      "downloaded_from_web": true,
+      "notes": "Page title: GPT4All - Private & Local AI Chatbot | Nomic",
+      "sha256": "4328f702bb8975631c90da2ef530aef614b60b31310fb1998ff424b5b20df4c2",
+      "candidates": [
+        {
+          "url": "https://www.nomic.ai/favicon-48x48.png",
+          "source_type": "official favicon fallback",
+          "score": 90,
+          "reason": "link-icon: icon",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://www.nomic.ai/favicon.svg",
+          "source_type": "official favicon fallback",
+          "score": 90,
+          "reason": "link-icon: icon",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://www.nomic.ai/favicon-96x96.png",
+          "source_type": "official favicon fallback",
+          "score": 90,
+          "reason": "link-icon: icon",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://www.nomic.ai/favicon-192x192.png",
+          "source_type": "official favicon fallback",
+          "score": 90,
+          "reason": "link-icon: icon",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://www.nomic.ai/favicon-512x512.png",
+          "source_type": "official favicon fallback",
+          "score": 90,
+          "reason": "link-icon: icon",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://www.nomic.ai/favicon.png",
+          "source_type": "official favicon fallback",
+          "score": 90,
+          "reason": "link-icon: icon",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://www.nomic.ai/favicon.ico",
+          "source_type": "official favicon fallback",
+          "score": 90,
+          "reason": "link-icon: shortcut icon",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://www.nomic.ai/images/webclip.png",
+          "source_type": "official favicon fallback",
+          "score": 90,
+          "reason": "link-icon: apple-touch-icon",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://www.nomic.ai/apple-touch-icon.png",
+          "source_type": "official favicon fallback",
+          "score": 42,
+          "reason": "official website /apple-touch-icon.png fallback",
+          "inline_svg": ""
+        }
+      ]
+    },
+    {
+      "tool_name": "Groq",
+      "canonical_slug": "groq",
+      "official_website": "https://groq.com",
+      "source_page_url": "https://groq.com/",
+      "direct_asset_url": "https://groq.com/favicon.ico",
+      "downloaded_filename": "logos/groq.ico",
+      "file_format": "ico",
+      "source_type": "official favicon fallback",
+      "verification_status": "browser-inspected official page; link-icon: shortcut icon; asset validated",
+      "downloaded_from_web": true,
+      "notes": "Page title: Groq is the premier neocloud for fast inference",
+      "sha256": "945268e4ed2640dcad9667a598323e572f50a9065928399f465d43cdd0c6aa57",
+      "candidates": [
+        {
+          "url": "https://groq.com/favicon.ico",
+          "source_type": "official favicon fallback",
+          "score": 90,
+          "reason": "link-icon: shortcut icon",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://groq.com/favicon.svg",
+          "source_type": "official favicon fallback",
+          "score": 90,
+          "reason": "link-icon: icon",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://groq.com/apple-touch-icon.png",
+          "source_type": "official favicon fallback",
+          "score": 90,
+          "reason": "link-icon: apple-touch-icon",
+          "inline_svg": ""
+        }
+      ]
+    },
+    {
+      "tool_name": "Hailuo AI (MiniMax)",
+      "canonical_slug": "hailuo-ai",
+      "official_website": "https://hailuoai.video",
+      "source_page_url": "https://hailuoai.video/",
+      "direct_asset_url": "https://cdn.hailuoai.video/open-hailuo-video-web/public_assets/oversea-hailuoaixminimax-logo-white-20251203.webp",
+      "downloaded_filename": "logos/hailuo-ai.webp",
+      "file_format": "webp",
+      "source_type": "official logo",
+      "verification_status": "browser-inspected official page; image: logo logo hidden h-[18px] w-auto sm:block; asset validated",
+      "downloaded_from_web": true,
+      "notes": "Page title: Hailuo AI: MiniMax H3 LIVE NOW. Top-Tier Quality, Versatile References",
+      "sha256": "bc616d717c4b35c23a7722f050ede3c70151c6221fe96b10acaefa41e3c212f2",
+      "candidates": [
+        {
+          "url": "https://cdn.hailuoai.video/open-hailuo-video-web/public_assets/oversea-hailuoaixminimax-logo-white-20251203.webp",
+          "source_type": "official logo",
+          "score": 120,
+          "reason": "image: logo logo hidden h-[18px] w-auto sm:block",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://cdn.hailuoai.video/open-hailuo-video-web/public_assets/favicon.png",
+          "source_type": "official favicon fallback",
+          "score": 90,
+          "reason": "link-icon: shortcut icon",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://hailuoai.video/favicon.ico",
+          "source_type": "official favicon fallback",
+          "score": 45,
+          "reason": "official website /favicon.ico fallback",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://hailuoai.video/apple-touch-icon.png",
+          "source_type": "official favicon fallback",
+          "score": 42,
+          "reason": "official website /apple-touch-icon.png fallback",
+          "inline_svg": ""
+        }
+      ]
+    },
+    {
+      "tool_name": "Haiper AI",
+      "canonical_slug": "haiper",
+      "official_website": "https://haiper.ai",
+      "source_page_url": "https://haiper.ai/",
+      "direct_asset_url": "",
+      "downloaded_filename": "",
+      "file_format": "",
+      "source_type": "",
+      "verification_status": "unresolved",
+      "downloaded_from_web": false,
+      "notes": "Candidate https://haiper.ai/favicon.ico: HTTP 404. Candidate https://haiper.ai/apple-touch-icon.png: HTTP 404.",
+      "sha256": "",
+      "candidates": [
+        {
+          "url": "https://haiper.ai/favicon.ico",
+          "source_type": "official favicon fallback",
+          "score": 45,
+          "reason": "official website /favicon.ico fallback",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://haiper.ai/apple-touch-icon.png",
+          "source_type": "official favicon fallback",
+          "score": 42,
+          "reason": "official website /apple-touch-icon.png fallback",
+          "inline_svg": ""
+        }
+      ]
+    },
+    {
+      "tool_name": "Hedra",
+      "canonical_slug": "hedra",
+      "official_website": "https://www.hedra.com",
+      "source_page_url": "https://www.hedra.com/",
+      "direct_asset_url": "https://mkt.hedra.com/_next/static/immutable/media/header-lockup.3hs46lijq_-2r.svg",
+      "downloaded_filename": "logos/hedra.svg",
+      "file_format": "svg",
+      "source_type": "official logo",
+      "verification_status": "browser-inspected official page; image: h-auto w-full; asset validated",
+      "downloaded_from_web": true,
+      "notes": "Page title: Hedra \u2014 Visual Inference Models and Infrastructure",
+      "sha256": "e54afb7e2627e0336685ca5f41c6f7f4bdd08f3b40a426b56cfe679f34ee13ec",
+      "candidates": [
+        {
+          "url": "https://mkt.hedra.com/_next/static/immutable/media/header-lockup.3hs46lijq_-2r.svg",
+          "source_type": "official logo",
+          "score": 140,
+          "reason": "image: h-auto w-full",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://imagedelivery.net/yn_JX_LzJpQI9TTynGwR_Q/brand/favicon-20261020/favicon-32x32.png/public",
+          "source_type": "official favicon fallback",
+          "score": 90,
+          "reason": "link-icon: icon",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://imagedelivery.net/yn_JX_LzJpQI9TTynGwR_Q/brand/favicon-20261020/apple-touch-icon.png/public",
+          "source_type": "official favicon fallback",
+          "score": 90,
+          "reason": "link-icon: apple-touch-icon",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://www.hedra.com/favicon.ico",
+          "source_type": "official favicon fallback",
+          "score": 45,
+          "reason": "official website /favicon.ico fallback",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://www.hedra.com/apple-touch-icon.png",
+          "source_type": "official favicon fallback",
+          "score": 42,
+          "reason": "official website /apple-touch-icon.png fallback",
+          "inline_svg": ""
+        }
+      ]
+    },
+    {
+      "tool_name": "Higgsfield AI",
+      "canonical_slug": "higgsfield",
+      "official_website": "https://higgsfield.ai",
+      "source_page_url": "https://higgsfield.ai/",
+      "direct_asset_url": "https://higgsfield.ai/icon.png",
+      "downloaded_filename": "logos/higgsfield.png",
+      "file_format": "png",
+      "source_type": "official favicon fallback",
+      "verification_status": "browser-inspected official page; link-icon: icon; asset validated",
+      "downloaded_from_web": true,
+      "notes": "Page title: Higgsfield AI \u2014 AI-native creative suite",
+      "sha256": "77edee005ae63f7881f930b815392b6cfa607f960ffb419d1c9df52e37fd50c1",
+      "candidates": [
+        {
+          "url": "https://higgsfield.ai/icon.png",
+          "source_type": "official favicon fallback",
+          "score": 90,
+          "reason": "link-icon: icon",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://higgsfield.ai/apple-icon.png",
+          "source_type": "official favicon fallback",
+          "score": 90,
+          "reason": "link-icon: apple-touch-icon",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://higgsfield.ai/favicon.ico",
+          "source_type": "official favicon fallback",
+          "score": 45,
+          "reason": "official website /favicon.ico fallback",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://higgsfield.ai/apple-touch-icon.png",
+          "source_type": "official favicon fallback",
+          "score": 42,
+          "reason": "official website /apple-touch-icon.png fallback",
+          "inline_svg": ""
+        }
+      ]
+    },
+    {
+      "tool_name": "HuggingChat",
+      "canonical_slug": "huggingchat",
+      "official_website": "https://huggingface.co/chat",
+      "source_page_url": "https://huggingface.co/chat/",
+      "direct_asset_url": "https://huggingface.co/chat/huggingchat/icon.svg",
+      "downloaded_filename": "logos/huggingchat.svg",
+      "file_format": "svg",
+      "source_type": "official favicon fallback",
+      "verification_status": "browser-inspected official page; link-icon: icon; asset validated",
+      "downloaded_from_web": true,
+      "notes": "Page title: HuggingChat",
+      "sha256": "7524c026448f4f767ae399a68da74afe2352485dd117ffc7b9a47aca14bb0dfe",
+      "candidates": [
+        {
+          "url": "https://huggingface.co/chat/huggingchat/icon.svg",
+          "source_type": "official favicon fallback",
+          "score": 90,
+          "reason": "link-icon: icon",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://huggingface.co/chat/huggingchat/favicon.svg",
+          "source_type": "official favicon fallback",
+          "score": 90,
+          "reason": "link-icon: icon",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://huggingface.co/chat/huggingchat/favicon-dark.svg",
+          "source_type": "official favicon fallback",
+          "score": 90,
+          "reason": "link-icon: icon",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://huggingface.co/chat/huggingchat/apple-touch-icon.png",
+          "source_type": "official favicon fallback",
+          "score": 90,
+          "reason": "link-icon: apple-touch-icon",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://huggingface.co/favicon.ico",
+          "source_type": "official favicon fallback",
+          "score": 45,
+          "reason": "official website /favicon.ico fallback",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://huggingface.co/apple-touch-icon.png",
+          "source_type": "official favicon fallback",
+          "score": 42,
+          "reason": "official website /apple-touch-icon.png fallback",
+          "inline_svg": ""
+        }
+      ]
+    },
+    {
+      "tool_name": "Ideogram v2",
+      "canonical_slug": "ideogram",
+      "official_website": "https://ideogram.ai",
+      "source_page_url": "https://ideogram.ai/",
+      "direct_asset_url": "https://ideogram.ai/favicon.ico?v=new-brand-20261020",
+      "downloaded_filename": "logos/ideogram.ico",
+      "file_format": "ico",
+      "source_type": "official favicon fallback",
+      "verification_status": "browser-inspected official page; link-icon: icon; asset validated",
+      "downloaded_from_web": true,
+      "notes": "Page title: Ideogram | AI apps and models in one platform",
+      "sha256": "a37d05df992375cdc84f8b2d9e0c69214dae3afd49f6591dfed35f24eef329a8",
+      "candidates": [
+        {
+          "url": "https://ideogram.ai/_astro/new-logo.wmOvXw7A.svg",
+          "source_type": "official logo",
+          "score": 160,
+          "reason": "image: Ideogram Ideogram",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://ideogram.ai/images/brand/apple.svg",
+          "source_type": "official logo",
+          "score": 120,
+          "reason": "image: ",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://ideogram.ai/images/brand/footer-wordmark-2026.svg",
+          "source_type": "official logo",
+          "score": 120,
+          "reason": "image: ",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://ideogram.ai/favicon.ico?v=new-brand-20261020",
+          "source_type": "official favicon fallback",
+          "score": 90,
+          "reason": "link-icon: icon",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://ideogram.ai/favicon.png?v=new-brand-20261020",
+          "source_type": "official favicon fallback",
+          "score": 90,
+          "reason": "link-icon: icon",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://ideogram.ai/favicon.svg?v=new-brand-20261020",
+          "source_type": "official favicon fallback",
+          "score": 90,
+          "reason": "link-icon: icon",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://ideogram.ai/favicon.ico",
+          "source_type": "official favicon fallback",
+          "score": 45,
+          "reason": "official website /favicon.ico fallback",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://ideogram.ai/apple-touch-icon.png",
+          "source_type": "official favicon fallback",
+          "score": 42,
+          "reason": "official website /apple-touch-icon.png fallback",
+          "inline_svg": ""
+        }
+      ]
+    },
+    {
+      "tool_name": "Jan",
+      "canonical_slug": "jan",
+      "official_website": "https://jan.ai",
+      "source_page_url": "https://www.jan.ai/",
+      "direct_asset_url": "https://www.jan.ai/_next/static/media/logo-jan.db83c5f0.svg",
+      "downloaded_filename": "logos/jan.svg",
+      "file_format": "svg",
+      "source_type": "official logo",
+      "verification_status": "browser-inspected official page; image: Jan Jan w-6 h-6; asset validated",
+      "downloaded_from_web": true,
+      "notes": "Page title: Jan - Open-Source ChatGPT Replacement",
+      "sha256": "848da72ddb86680db1f30e6e2b6d9584413e0170a67732f0107d167ae3995828",
+      "candidates": [
+        {
+          "url": "https://www.jan.ai/_next/static/media/logo-jan.db83c5f0.svg",
+          "source_type": "official logo",
+          "score": 120,
+          "reason": "image: Jan Jan w-6 h-6",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://www.jan.ai/favicon.ico",
+          "source_type": "official favicon fallback",
+          "score": 45,
+          "reason": "official website /favicon.ico fallback",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://www.jan.ai/apple-touch-icon.png",
+          "source_type": "official favicon fallback",
+          "score": 42,
+          "reason": "official website /apple-touch-icon.png fallback",
+          "inline_svg": ""
+        }
+      ]
+    },
+    {
+      "tool_name": "Kaiber",
+      "canonical_slug": "kaiber",
+      "official_website": "https://kaiber.ai",
+      "source_page_url": "https://kaiber.ai/",
+      "direct_asset_url": "https://kaiber.ai/apple-touch-icon.png",
+      "downloaded_filename": "logos/kaiber.png",
+      "file_format": "png",
+      "source_type": "official favicon fallback",
+      "verification_status": "browser-inspected official page; link-icon: apple-touch-icon; asset validated",
+      "downloaded_from_web": true,
+      "notes": "Page title: Kaiber",
+      "sha256": "2088097c14688f779b5b7d71b8087a2b22220992833625b886e1852da510b716",
+      "candidates": [
+        {
+          "url": "https://kaiber.ai/apple-touch-icon.png",
+          "source_type": "official favicon fallback",
+          "score": 90,
+          "reason": "link-icon: apple-touch-icon",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://kaiber.ai/favicon.svg",
+          "source_type": "official favicon fallback",
+          "score": 90,
+          "reason": "link-icon: icon",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://kaiber.ai/favicon.ico",
+          "source_type": "official favicon fallback",
+          "score": 45,
+          "reason": "official website /favicon.ico fallback",
+          "inline_svg": ""
+        }
+      ]
+    },
+    {
+      "tool_name": "KIE AI",
+      "canonical_slug": "kie-ai",
+      "official_website": "https://kie.ai",
+      "source_page_url": "https://kie.ai/",
+      "direct_asset_url": "https://kie.ai/logo-icon.webp",
+      "downloaded_filename": "logos/kie-ai.webp",
+      "file_format": "webp",
+      "source_type": "official logo",
+      "verification_status": "browser-inspected official page; image: kie.ai kie.ai mr-2 h-auto w-8; asset validated",
+      "downloaded_from_web": true,
+      "notes": "Page title: One API for All the Best AI Models \u2013 Try Affordable AI API on Kie.ai",
+      "sha256": "fd5d53a7c78573185b8f42257aa673b2e2639e864481da4f3f7e2a082bf9be94",
+      "candidates": [
+        {
+          "url": "https://kie.ai/logo-icon.webp",
+          "source_type": "official logo",
+          "score": 160,
+          "reason": "image: kie.ai kie.ai mr-2 h-auto w-8",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://kie.ai/favicon.ico",
+          "source_type": "official favicon fallback",
+          "score": 45,
+          "reason": "official website /favicon.ico fallback",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://kie.ai/apple-touch-icon.png",
+          "source_type": "official favicon fallback",
+          "score": 42,
+          "reason": "official website /apple-touch-icon.png fallback",
+          "inline_svg": ""
+        }
+      ]
+    },
+    {
+      "tool_name": "Kling AI",
+      "canonical_slug": "kling-ai",
+      "official_website": "https://klingai.com",
+      "source_page_url": "https://kling.ai/",
+      "direct_asset_url": "https://s16-kling.klingai.com/kos/s101/nlav112918/kling-homepage-aio/favicon.ico",
+      "downloaded_filename": "logos/kling-ai.ico",
+      "file_format": "ico",
+      "source_type": "official favicon fallback",
+      "verification_status": "browser-inspected official page; link-icon: icon; asset validated",
+      "downloaded_from_web": true,
+      "notes": "Page title: Kling AI: Next-Gen AI Video & Image Generator",
+      "sha256": "86a4261e984bcdf1cddbffe6cbc660b64023b421fdb2f9933db0b84a5a062377",
+      "candidates": [
+        {
+          "url": "https://s16-kling.klingai.com/kos/s101/nlav112918/kling-homepage-aio/favicon.ico",
+          "source_type": "official favicon fallback",
+          "score": 90,
+          "reason": "link-icon: icon",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://s16-kling.klingai.com/kos/s101/nlav112918/kling-homepage-aio/logo-180x180.png",
+          "source_type": "official favicon fallback",
+          "score": 90,
+          "reason": "link-icon: apple-touch-icon",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://s16-kling.klingai.com/kos/s101/nlav112918/kling-homepage-aio/logo-167x167.png",
+          "source_type": "official favicon fallback",
+          "score": 90,
+          "reason": "link-icon: apple-touch-icon",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://s16-kling.klingai.com/kos/s101/nlav112918/kling-homepage-aio/logo-152x152.png",
+          "source_type": "official favicon fallback",
+          "score": 90,
+          "reason": "link-icon: apple-touch-icon",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://s16-kling.klingai.com/kos/s101/nlav112918/kling-homepage-aio/logo-80x80.png",
+          "source_type": "official favicon fallback",
+          "score": 90,
+          "reason": "link-icon: apple-touch-icon",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://s16-kling.klingai.com/kos/s101/nlav112918/kling-homepage-aio/logo-58x58.png",
+          "source_type": "official favicon fallback",
+          "score": 90,
+          "reason": "link-icon: apple-touch-icon",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://kling.ai/favicon.ico",
+          "source_type": "official favicon fallback",
+          "score": 45,
+          "reason": "official website /favicon.ico fallback",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://kling.ai/apple-touch-icon.png",
+          "source_type": "official favicon fallback",
+          "score": 42,
+          "reason": "official website /apple-touch-icon.png fallback",
+          "inline_svg": ""
+        }
+      ]
+    },
+    {
+      "tool_name": "Kokoro TTS",
+      "canonical_slug": "kokoro-tts",
+      "official_website": "https://huggingface.co/hexgrad/Kokoro-82M",
+      "source_page_url": "https://huggingface.co/hexgrad/Kokoro-82M",
+      "direct_asset_url": "",
+      "downloaded_filename": "",
+      "file_format": "",
+      "source_type": "",
+      "verification_status": "unresolved",
+      "downloaded_from_web": false,
+      "notes": "No direct logo or official favicon asset was exposed by the inspected page.",
+      "sha256": "",
+      "candidates": []
+    },
+    {
+      "tool_name": "Krea AI",
+      "canonical_slug": "krea-ai",
+      "official_website": "https://www.krea.ai",
+      "source_page_url": "https://www.krea.ai/",
+      "direct_asset_url": "https://www.krea.ai/favicon/favicon-32.png",
+      "downloaded_filename": "logos/krea-ai.png",
+      "file_format": "png",
+      "source_type": "official favicon fallback",
+      "verification_status": "browser-inspected official page; link-icon: icon; asset validated",
+      "downloaded_from_web": true,
+      "notes": "Page title: Krea",
+      "sha256": "0d72763cce379b1b603d63127db3f10d817bcf32cab5625219976999509a6b0a",
+      "candidates": [
+        {
+          "url": "https://www.krea.ai/favicon/favicon-32.png",
+          "source_type": "official favicon fallback",
+          "score": 90,
+          "reason": "link-icon: icon",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://www.krea.ai/favicon/favicon-32-dark.png",
+          "source_type": "official favicon fallback",
+          "score": 90,
+          "reason": "link-icon: icon",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://www.krea.ai/favicon/favicon-64.png",
+          "source_type": "official favicon fallback",
+          "score": 90,
+          "reason": "link-icon: icon",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://www.krea.ai/favicon/favicon-64-dark.png",
+          "source_type": "official favicon fallback",
+          "score": 90,
+          "reason": "link-icon: icon",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://www.krea.ai/favicon/favicon-128.png",
+          "source_type": "official favicon fallback",
+          "score": 90,
+          "reason": "link-icon: icon",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://www.krea.ai/favicon/favicon-128-dark.png",
+          "source_type": "official favicon fallback",
+          "score": 90,
+          "reason": "link-icon: icon",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://www.krea.ai/favicon/favicon-192.png",
+          "source_type": "official favicon fallback",
+          "score": 90,
+          "reason": "link-icon: icon",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://www.krea.ai/favicon/favicon-192-dark.png",
+          "source_type": "official favicon fallback",
+          "score": 90,
+          "reason": "link-icon: icon",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://www.krea.ai/favicon.ico",
+          "source_type": "official favicon fallback",
+          "score": 45,
+          "reason": "official website /favicon.ico fallback",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://www.krea.ai/apple-touch-icon.png",
+          "source_type": "official favicon fallback",
+          "score": 42,
+          "reason": "official website /apple-touch-icon.png fallback",
+          "inline_svg": ""
+        }
+      ]
+    },
+    {
+      "tool_name": "Langflow",
+      "canonical_slug": "langflow",
+      "official_website": "https://www.langflow.org",
+      "source_page_url": "https://www.langflow.org/",
+      "direct_asset_url": "https://www.langflow.org/_next/static/media/logo.f6f14a6e.png",
+      "downloaded_filename": "logos/langflow.png",
+      "file_format": "png",
+      "source_type": "official logo",
+      "verification_status": "browser-inspected official page; image: Langflow Logo Langflow Logo object-contain; asset validated",
+      "downloaded_from_web": true,
+      "notes": "Page title: Langflow | Low-code AI builder for agentic and RAG applications",
+      "sha256": "27944c0451e1928600ed845614afe28cfbfaded3696b7b902effd0dbd33d6c92",
+      "candidates": [
+        {
+          "url": "https://www.langflow.org/_next/static/media/logo.f6f14a6e.png",
+          "source_type": "official logo",
+          "score": 160,
+          "reason": "image: Langflow Logo Langflow Logo object-contain",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://www.langflow.org/favicon.ico",
+          "source_type": "official favicon fallback",
+          "score": 90,
+          "reason": "link-icon: icon",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://www.langflow.org/apple-touch-icon.png",
+          "source_type": "official favicon fallback",
+          "score": 42,
+          "reason": "official website /apple-touch-icon.png fallback",
+          "inline_svg": ""
+        }
+      ]
+    },
+    {
+      "tool_name": "Leonardo.ai",
+      "canonical_slug": "leonardo-ai",
+      "official_website": "https://leonardo.ai",
+      "source_page_url": "https://leonardo.ai/",
+      "direct_asset_url": "https://leonardo.ai/images/leonardo_wordmark.svg?dpl=dpl_EPFEypZEFK3yS5sL2ExZbfKGkUk5",
+      "downloaded_filename": "logos/leonardo-ai.svg",
+      "file_format": "svg",
+      "source_type": "official logo",
+      "verification_status": "browser-inspected official page; image: Leonardo.AI Leonardo.AI h-4 w-auto sm:h-6; asset validated",
+      "downloaded_from_web": true,
+      "notes": "Page title: Leonardo.Ai - Generative AI Platform for Images, Art & Video",
+      "sha256": "76d44fa0a4c9d40676a8ed596cf94323a180f87f4aae570e0494f43443153aeb",
+      "candidates": [
+        {
+          "url": "https://leonardo.ai/images/leonardo_wordmark.svg?dpl=dpl_EPFEypZEFK3yS5sL2ExZbfKGkUk5",
+          "source_type": "official logo",
+          "score": 120,
+          "reason": "image: Leonardo.AI Leonardo.AI h-4 w-auto sm:h-6",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://leonardo.ai/images/leonardo_favicon.png",
+          "source_type": "official favicon fallback",
+          "score": 90,
+          "reason": "link-icon: icon",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://leonardo.ai/favicon.ico",
+          "source_type": "official favicon fallback",
+          "score": 45,
+          "reason": "official website /favicon.ico fallback",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://leonardo.ai/apple-touch-icon.png",
+          "source_type": "official favicon fallback",
+          "score": 42,
+          "reason": "official website /apple-touch-icon.png fallback",
+          "inline_svg": ""
+        }
+      ]
+    },
+    {
+      "tool_name": "LibreChat",
+      "canonical_slug": "librechat",
+      "official_website": "https://librechat.ai",
+      "source_page_url": "https://www.librechat.ai/",
+      "direct_asset_url": "https://www.librechat.ai/librechat.svg",
+      "downloaded_filename": "logos/librechat.svg",
+      "file_format": "svg",
+      "source_type": "official logo",
+      "verification_status": "browser-inspected official page; image: ; asset validated",
+      "downloaded_from_web": true,
+      "notes": "Page title: LibreChat - The Open-Source AI Platform",
+      "sha256": "0eddc203e9085190d0c9b60c65c0c43b16b28405c03f21e77cfdd08857911328",
+      "candidates": [
+        {
+          "url": "https://www.librechat.ai/librechat.svg",
+          "source_type": "official logo",
+          "score": 140,
+          "reason": "image: ",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://www.librechat.ai/favicon-32x32.png",
+          "source_type": "official favicon fallback",
+          "score": 90,
+          "reason": "link-icon: icon",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://www.librechat.ai/favicon-16x16.png",
+          "source_type": "official favicon fallback",
+          "score": 90,
+          "reason": "link-icon: icon",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://www.librechat.ai/apple-touch-icon.png",
+          "source_type": "official favicon fallback",
+          "score": 90,
+          "reason": "link-icon: apple-touch-icon",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://www.librechat.ai/favicon.ico",
+          "source_type": "official favicon fallback",
+          "score": 45,
+          "reason": "official website /favicon.ico fallback",
+          "inline_svg": ""
+        }
+      ]
+    },
+    {
+      "tool_name": "llama.cpp",
+      "canonical_slug": "llama-cpp",
+      "official_website": "https://github.com/ggerganov/llama.cpp",
+      "source_page_url": "https://github.com/ggml-org/llama.cpp",
+      "direct_asset_url": "https://raw.githubusercontent.com/ggml-org/llama.brand/refs/heads/master/cover/llama-cpp/cover-llama-cpp-dark.svg",
+      "downloaded_filename": "logos/llama-cpp.svg",
+      "file_format": "svg",
+      "source_type": "official logo",
+      "verification_status": "browser-inspected official page; image: llama llama; asset validated",
+      "downloaded_from_web": true,
+      "notes": "Page title: GitHub - ggml-org/llama.cpp: LLM inference in C/C++ \u00b7 GitHub",
+      "sha256": "f269cee3624d528022463cbf91cdb252c39f0f880c3e98c6d126d4eac1a805e4",
+      "candidates": [
+        {
+          "url": "https://raw.githubusercontent.com/ggml-org/llama.brand/refs/heads/master/cover/llama-cpp/cover-llama-cpp-dark.svg",
+          "source_type": "official logo",
+          "score": 120,
+          "reason": "image: llama llama",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://avatars.githubusercontent.com/u/134263123?s=60&v=4",
+          "source_type": "official organization avatar",
+          "score": 75,
+          "reason": "image: ggml-org ggml-org mr-2 flex-shrink-0 prc-Avatar-Avatar-0xaUi",
+          "inline_svg": ""
+        }
+      ]
+    },
+    {
+      "tool_name": "LocalAI",
+      "canonical_slug": "localai",
+      "official_website": "https://localai.io",
+      "source_page_url": "https://localai.io/",
+      "direct_asset_url": "https://localai.io/img/logo-full.png",
+      "downloaded_filename": "logos/localai.png",
+      "file_format": "png",
+      "source_type": "official logo",
+      "verification_status": "browser-inspected official page; image: LocalAI LocalAI; asset validated",
+      "downloaded_from_web": true,
+      "notes": "Page title: LocalAI \u00b7 Make AI run on every machine",
+      "sha256": "0638ef2e1b7912d9dd6df71cbc6abb6415554714ddef1ffdf7940985235169bd",
+      "candidates": [
+        {
+          "url": "https://localai.io/img/logo-full.png",
+          "source_type": "official logo",
+          "score": 120,
+          "reason": "image: LocalAI LocalAI",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://localai.io/img/logo-mark.png",
+          "source_type": "official favicon fallback",
+          "score": 90,
+          "reason": "link-icon: icon",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://localai.io/favicon.ico",
+          "source_type": "official favicon fallback",
+          "score": 45,
+          "reason": "official website /favicon.ico fallback",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://localai.io/apple-touch-icon.png",
+          "source_type": "official favicon fallback",
+          "score": 42,
+          "reason": "official website /apple-touch-icon.png fallback",
+          "inline_svg": ""
+        }
+      ]
+    },
+    {
+      "tool_name": "LTX Video",
+      "canonical_slug": "ltx-video",
+      "official_website": "https://github.com/Lightricks/LTX-Video",
+      "source_page_url": "https://github.com/Lightricks/LTX-Video",
+      "direct_asset_url": "",
+      "downloaded_filename": "",
+      "file_format": "",
+      "source_type": "",
+      "verification_status": "unresolved",
+      "downloaded_from_web": false,
+      "notes": "No direct logo or official favicon asset was exposed by the inspected page.",
+      "sha256": "",
+      "candidates": [
+        {
+          "url": "https://avatars.githubusercontent.com/u/3170348?s=60&v=4",
+          "source_type": "official organization avatar",
+          "score": 75,
+          "reason": "image: Lightricks Lightricks mr-2 flex-shrink-0 prc-Avatar-Avatar-0xaUi",
+          "inline_svg": ""
+        }
+      ]
+    },
+    {
+      "tool_name": "Luma Dream Machine",
+      "canonical_slug": "luma-dream-machine",
+      "official_website": "https://lumalabs.ai/dream-machine",
+      "source_page_url": "https://lumalabs.ai/app",
+      "direct_asset_url": "https://lumalabs.ai/favicons/favicon-black.ico",
+      "downloaded_filename": "logos/luma-dream-machine.ico",
+      "file_format": "ico",
+      "source_type": "official favicon fallback",
+      "verification_status": "browser-inspected official page; link-icon: icon; asset validated",
+      "downloaded_from_web": true,
+      "notes": "Page title: Creative agents for creative professionals | Luma",
+      "sha256": "fb7e0157e3d27c8e6b65f083390ebd2a34fc2e28e5be7f8726d09c09d6e0aa36",
+      "candidates": [
+        {
+          "url": "https://lumalabs.ai/favicons/favicon-black.ico",
+          "source_type": "official favicon fallback",
+          "score": 90,
+          "reason": "link-icon: icon",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://lumalabs.ai/favicons/favicon-white.ico",
+          "source_type": "official favicon fallback",
+          "score": 90,
+          "reason": "link-icon: icon",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://lumalabs.ai/favicon.ico",
+          "source_type": "official favicon fallback",
+          "score": 45,
+          "reason": "official website /favicon.ico fallback",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://lumalabs.ai/apple-touch-icon.png",
+          "source_type": "official favicon fallback",
+          "score": 42,
+          "reason": "official website /apple-touch-icon.png fallback",
+          "inline_svg": ""
+        }
+      ]
+    },
+    {
+      "tool_name": "Make",
+      "canonical_slug": "make",
+      "official_website": "https://www.make.com",
+      "source_page_url": "https://www.make.com/",
+      "direct_asset_url": "https://cdn.prod.website-files.com/6a294495bc84130c6dd0c4fd/6a7b944121e8a94aaf6ca04f_favicon-32x32.png",
+      "downloaded_filename": "logos/make.png",
+      "file_format": "png",
+      "source_type": "official favicon fallback",
+      "verification_status": "browser-inspected official page; link-icon: icon; asset validated",
+      "downloaded_from_web": true,
+      "notes": "Page title: AI Workflow Automation Software & Tools | Make",
+      "sha256": "7e7bbbdfc59aad6a88f7630332c79941f23b55c5152a1bf86e0f3179675aaf6d",
+      "candidates": [
+        {
+          "url": "https://cdn.prod.website-files.com/6a294495bc84130c6dd0c4fd/6a7b944121e8a94aaf6ca04f_favicon-32x32.png",
+          "source_type": "official favicon fallback",
+          "score": 90,
+          "reason": "link-icon: icon",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://cdn.prod.website-files.com/6a294495bc84130c6dd0c4fd/6a7b9440756d01907cfc9ba4_favicon-32x32.png",
+          "source_type": "official favicon fallback",
+          "score": 90,
+          "reason": "link-icon: icon",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://cdn.prod.website-files.com/6a294495bc84130c6dd0c4fd/6a7b9441756d01907cfc9bc0_favicon-32x32.png",
+          "source_type": "official favicon fallback",
+          "score": 90,
+          "reason": "link-icon: apple-touch-icon",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://cdn.prod.website-files.com/6a294495bc84130c6dd0c4fd/6a7b9441756d01907cfc9bbb_favicon-32x32.png",
+          "source_type": "official favicon fallback",
+          "score": 90,
+          "reason": "link-icon: icon",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://cdn.prod.website-files.com/6a294495bc84130c6dd0c4fd/6a7b9441e295d2f297063147_favicon-32x32.png",
+          "source_type": "official favicon fallback",
+          "score": 90,
+          "reason": "link-icon: icon",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://www.make.com/favicon.ico",
+          "source_type": "official favicon fallback",
+          "score": 45,
+          "reason": "official website /favicon.ico fallback",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://www.make.com/apple-touch-icon.png",
+          "source_type": "official favicon fallback",
+          "score": 42,
+          "reason": "official website /apple-touch-icon.png fallback",
+          "inline_svg": ""
+        }
+      ]
+    },
+    {
+      "tool_name": "Meshy 3D",
+      "canonical_slug": "meshy-3d",
+      "official_website": "https://www.meshy.ai",
+      "source_page_url": "https://www.meshy.ai/",
+      "direct_asset_url": "",
+      "downloaded_filename": "",
+      "file_format": "",
+      "source_type": "",
+      "verification_status": "unresolved",
+      "downloaded_from_web": false,
+      "notes": "No direct logo or official favicon asset was exposed by the inspected page.",
+      "sha256": "",
+      "candidates": []
+    },
+    {
+      "tool_name": "Meta AI",
+      "canonical_slug": "meta-ai",
+      "official_website": "https://www.meta.ai",
+      "source_page_url": "https://www.meta.ai/",
+      "direct_asset_url": "https://www.meta.ai/images/meta-ai-orbit-logo-gradient-3d_light.svg",
+      "downloaded_filename": "logos/meta-ai.svg",
+      "file_format": "svg",
+      "source_type": "official logo",
+      "verification_status": "browser-inspected official page; image: absolute box-border p-[3px] transition-opacity duration-300 group-hover/sidebar:opacity-0 group-focus-visible/button:opacity-0; asset validated",
+      "downloaded_from_web": true,
+      "notes": "Page title: Meta AI - Your AI Assistant for Images, Shopping and More",
+      "sha256": "80612133d7ccfd51cbdcd4e1625a7f0df642a5b1465deddfa8ec7c2969dcf6e8",
+      "candidates": [
+        {
+          "url": "https://www.meta.ai/images/meta-ai-orbit-logo-gradient-3d_light.svg",
+          "source_type": "official logo",
+          "score": 160,
+          "reason": "image: absolute box-border p-[3px] transition-opacity duration-300 group-hover/sidebar:opacity-0 group-focus-visible/button:opacity-0",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://www.meta.ai/images/cot_logo_static/orbit.png",
+          "source_type": "official logo",
+          "score": 120,
+          "reason": "image: ",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://www.meta.ai/favicon.ico?v=3",
+          "source_type": "official favicon fallback",
+          "score": 90,
+          "reason": "link-icon: icon",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://www.meta.ai/images/pwa_icons/apple/180.png?v=1",
+          "source_type": "official favicon fallback",
+          "score": 90,
+          "reason": "link-icon: apple-touch-icon",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://www.meta.ai/favicon.ico",
+          "source_type": "official favicon fallback",
+          "score": 45,
+          "reason": "official website /favicon.ico fallback",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://www.meta.ai/apple-touch-icon.png",
+          "source_type": "official favicon fallback",
+          "score": 42,
+          "reason": "official website /apple-touch-icon.png fallback",
+          "inline_svg": ""
+        }
+      ]
+    },
+    {
+      "tool_name": "Midjourney v6.1",
+      "canonical_slug": "midjourney",
+      "official_website": "https://www.midjourney.com",
+      "source_page_url": "https://www.midjourney.com/home",
+      "direct_asset_url": "https://www.midjourney.com/public/apple-touch-icon.png",
+      "downloaded_filename": "logos/midjourney.png",
+      "file_format": "png",
+      "source_type": "official favicon fallback",
+      "verification_status": "browser-inspected official page; link-icon: apple-touch-icon; asset validated",
+      "downloaded_from_web": true,
+      "notes": "Page title: Midjourney",
+      "sha256": "e1db80a5d5bd8cab8a46c3ce78f3b572e9f45ec6719c8094cc544e32b9a57005",
+      "candidates": [
+        {
+          "url": "https://www.midjourney.com/public/apple-touch-icon.png",
+          "source_type": "official favicon fallback",
+          "score": 90,
+          "reason": "link-icon: apple-touch-icon",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://www.midjourney.com/favicon.ico",
+          "source_type": "official favicon fallback",
+          "score": 90,
+          "reason": "link-icon: icon",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://www.midjourney.com/apple-touch-icon.png",
+          "source_type": "official favicon fallback",
+          "score": 42,
+          "reason": "official website /apple-touch-icon.png fallback",
+          "inline_svg": ""
+        }
+      ]
+    },
+    {
+      "tool_name": "Mistral Le Chat",
+      "canonical_slug": "mistral-le-chat",
+      "official_website": "https://chat.mistral.ai",
+      "source_page_url": "https://chat.mistral.ai/chat",
+      "direct_asset_url": "https://chat.mistral.ai/favicons/favicon.ico",
+      "downloaded_filename": "logos/mistral-le-chat.ico",
+      "file_format": "ico",
+      "source_type": "official favicon fallback",
+      "verification_status": "browser-inspected official page; link-icon: icon; asset validated",
+      "downloaded_from_web": true,
+      "notes": "Page title: Vibe Chat",
+      "sha256": "c9ee49e95e19890b2050fd13a6c8459f79d6f5dbcdf9d1500c27626846bbe1b4",
+      "candidates": [
+        {
+          "url": "https://chat.mistral.ai/favicons/favicon.ico",
+          "source_type": "official favicon fallback",
+          "score": 90,
+          "reason": "link-icon: icon",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://chat.mistral.ai/favicons/favicon-16x16.png",
+          "source_type": "official favicon fallback",
+          "score": 90,
+          "reason": "link-icon: icon",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://chat.mistral.ai/favicons/favicon-32x32.png",
+          "source_type": "official favicon fallback",
+          "score": 90,
+          "reason": "link-icon: icon",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://chat.mistral.ai/favicons/apple-touch-icon.png",
+          "source_type": "official favicon fallback",
+          "score": 90,
+          "reason": "link-icon: apple-touch-icon",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://chat.mistral.ai/favicon.ico",
+          "source_type": "official favicon fallback",
+          "score": 45,
+          "reason": "official website /favicon.ico fallback",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://chat.mistral.ai/apple-touch-icon.png",
+          "source_type": "official favicon fallback",
+          "score": 42,
+          "reason": "official website /apple-touch-icon.png fallback",
+          "inline_svg": ""
+        }
+      ]
+    },
+    {
+      "tool_name": "Google NotebookLM",
+      "canonical_slug": "notebooklm",
+      "official_website": "https://notebooklm.google.com",
+      "source_page_url": "https://notebook.google.com/trynow",
+      "direct_asset_url": "https://www.gstatic.com/tailwind/_/static/branding/v6/light_mode/notebook-logo.svg",
+      "downloaded_filename": "logos/notebooklm.svg",
+      "file_format": "svg",
+      "source_type": "official logo",
+      "verification_status": "browser-inspected official page; image: Gemini Notebook Gemini Notebook landing-logo; asset validated",
+      "downloaded_from_web": true,
+      "notes": "Page title: Gemini Notebook",
+      "sha256": "50785513aac5bf404b8a98007f06c83b0f52102d5fe49ceefa2d1cb72690671d",
+      "candidates": [
+        {
+          "url": "https://www.gstatic.com/tailwind/_/static/branding/v6/light_mode/notebook-logo.svg",
+          "source_type": "official logo",
+          "score": 160,
+          "reason": "image: Gemini Notebook Gemini Notebook landing-logo",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://www.gstatic.com/tailwind/_/static/landing/google-logo.svg",
+          "source_type": "official logo",
+          "score": 120,
+          "reason": "image: Google Google landing-footer-logo",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://www.gstatic.com/tailwind/_/static/branding/v6/light_mode/favicon/favicon.svg",
+          "source_type": "official favicon fallback",
+          "score": 90,
+          "reason": "link-icon: icon",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://www.gstatic.com/tailwind/_/static/branding/v6/light_mode/favicon/favicon-32x32.png",
+          "source_type": "official favicon fallback",
+          "score": 90,
+          "reason": "link-icon: icon",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://www.gstatic.com/tailwind/_/static/branding/v6/light_mode/favicon/favicon-16x16.png",
+          "source_type": "official favicon fallback",
+          "score": 90,
+          "reason": "link-icon: icon",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://www.gstatic.com/tailwind/_/static/branding/v6/dark_mode/favicon/favicon.svg",
+          "source_type": "official favicon fallback",
+          "score": 90,
+          "reason": "link-icon: icon",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://www.gstatic.com/tailwind/_/static/branding/v6/dark_mode/favicon/favicon-32x32.png",
+          "source_type": "official favicon fallback",
+          "score": 90,
+          "reason": "link-icon: icon",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://www.gstatic.com/tailwind/_/static/branding/v6/dark_mode/favicon/favicon-16x16.png",
+          "source_type": "official favicon fallback",
+          "score": 90,
+          "reason": "link-icon: icon",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://www.gstatic.com/tailwind/_/static/branding/v6/light_mode/favicon/apple-touch-icon.png",
+          "source_type": "official favicon fallback",
+          "score": 90,
+          "reason": "link-icon: apple-touch-icon",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://www.gstatic.com/tailwind/_/static/branding/v6/dark_mode/favicon/apple-touch-icon.png",
+          "source_type": "official favicon fallback",
+          "score": 90,
+          "reason": "link-icon: apple-touch-icon",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://notebook.google.com/favicon.ico",
+          "source_type": "official favicon fallback",
+          "score": 45,
+          "reason": "official website /favicon.ico fallback",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://notebook.google.com/apple-touch-icon.png",
+          "source_type": "official favicon fallback",
+          "score": 42,
+          "reason": "official website /apple-touch-icon.png fallback",
+          "inline_svg": ""
+        }
+      ]
+    },
+    {
+      "tool_name": "Ollama",
+      "canonical_slug": "ollama",
+      "official_website": "https://ollama.com",
+      "source_page_url": "https://ollama.com/",
+      "direct_asset_url": "https://ollama.com/public/ollama-nav.png",
+      "downloaded_filename": "logos/ollama.png",
+      "file_format": "png",
+      "source_type": "official logo",
+      "verification_status": "browser-inspected official page; image: Ollama logo Ollama logo h-auto w-[37px]; asset validated",
+      "downloaded_from_web": true,
+      "notes": "Page title: Ollama \u00b7 Run AI models locally and in the cloud",
+      "sha256": "ab2a93aa7f3756a87c9429e4056e6405ce9f94d5cb0aa188c19d3e4ca2d04b68",
+      "candidates": [
+        {
+          "url": "https://ollama.com/public/ollama-nav.png",
+          "source_type": "official logo",
+          "score": 160,
+          "reason": "image: Ollama logo Ollama logo h-auto w-[37px]",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://ollama.com/public/logos/apple.svg",
+          "source_type": "official logo",
+          "score": 120,
+          "reason": "image: Apple Apple h-[calc(var(--h)*0.75px)] w-auto object-contain opacity-50 grayscale md:h-[calc(var(--h)*1px)]",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://ollama.com/public/logos/nvidia.svg",
+          "source_type": "official logo",
+          "score": 120,
+          "reason": "image: NVIDIA NVIDIA h-[calc(var(--h)*0.75px)] w-auto object-contain opacity-50 grayscale md:h-[calc(var(--h)*1px)]",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://ollama.com/public/logos/microsoft.svg",
+          "source_type": "official logo",
+          "score": 120,
+          "reason": "image: Microsoft Microsoft h-[calc(var(--h)*0.75px)] w-auto object-contain opacity-50 grayscale md:h-[calc(var(--h)*1px)]",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://ollama.com/public/logos/meta.svg",
+          "source_type": "official logo",
+          "score": 120,
+          "reason": "image: Meta Meta h-[calc(var(--h)*0.75px)] w-auto object-contain opacity-50 grayscale md:h-[calc(var(--h)*1px)]",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://ollama.com/public/logos/adobe.svg",
+          "source_type": "official logo",
+          "score": 120,
+          "reason": "image: Adobe Adobe h-[calc(var(--h)*0.75px)] w-auto object-contain opacity-50 grayscale md:h-[calc(var(--h)*1px)]",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://ollama.com/public/logos/intel.svg",
+          "source_type": "official logo",
+          "score": 120,
+          "reason": "image: Intel Intel h-[calc(var(--h)*0.75px)] w-auto object-contain opacity-50 grayscale md:h-[calc(var(--h)*1px)]",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://ollama.com/public/logos/nasa.svg",
+          "source_type": "official logo",
+          "score": 120,
+          "reason": "image: NASA NASA h-[calc(var(--h)*0.75px)] w-auto object-contain opacity-50 grayscale md:h-[calc(var(--h)*1px)]",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://ollama.com/public/logos/netflix.svg",
+          "source_type": "official logo",
+          "score": 120,
+          "reason": "image: Netflix Netflix h-[calc(var(--h)*0.75px)] w-auto object-contain opacity-50 grayscale md:h-[calc(var(--h)*1px)]",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://ollama.com/public/logos/ibm.svg",
+          "source_type": "official logo",
+          "score": 120,
+          "reason": "image: IBM IBM h-[calc(var(--h)*0.75px)] w-auto object-contain opacity-50 grayscale md:h-[calc(var(--h)*1px)]",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://ollama.com/public/logos/nike.svg",
+          "source_type": "official logo",
+          "score": 120,
+          "reason": "image: Nike Nike h-[calc(var(--h)*0.75px)] w-auto object-contain opacity-50 grayscale md:h-[calc(var(--h)*1px)]",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://ollama.com/public/logos/visa.svg",
+          "source_type": "official logo",
+          "score": 120,
+          "reason": "image: Visa Visa h-[calc(var(--h)*0.75px)] w-auto object-contain opacity-50 grayscale md:h-[calc(var(--h)*1px)]",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://ollama.com/public/logos/mercedes.svg",
+          "source_type": "official logo",
+          "score": 120,
+          "reason": "image: Mercedes-Benz Mercedes-Benz h-[calc(var(--h)*0.75px)] w-auto object-contain opacity-50 grayscale md:h-[calc(var(--h)*1px)]",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://ollama.com/public/icon-16x16.png",
+          "source_type": "official favicon fallback",
+          "score": 90,
+          "reason": "link-icon: icon",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://ollama.com/public/icon-32x32.png",
+          "source_type": "official favicon fallback",
+          "score": 90,
+          "reason": "link-icon: icon",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://ollama.com/public/icon-48x48.png",
+          "source_type": "official favicon fallback",
+          "score": 90,
+          "reason": "link-icon: icon",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://ollama.com/public/icon-64x64.png",
+          "source_type": "official favicon fallback",
+          "score": 90,
+          "reason": "link-icon: icon",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://ollama.com/public/apple-touch-icon.png",
+          "source_type": "official favicon fallback",
+          "score": 90,
+          "reason": "link-icon: apple-touch-icon",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://ollama.com/public/android-chrome-icon-192x192.png",
+          "source_type": "official favicon fallback",
+          "score": 90,
+          "reason": "link-icon: icon",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://ollama.com/public/android-chrome-icon-512x512.png",
+          "source_type": "official favicon fallback",
+          "score": 90,
+          "reason": "link-icon: icon",
+          "inline_svg": ""
+        }
+      ]
+    },
+    {
+      "tool_name": "OmniRush",
+      "canonical_slug": "omnirush",
+      "official_website": "https://omnirush.ai",
+      "source_page_url": "https://omnirush.ai/",
+      "direct_asset_url": "https://omnirush.ai/brand/lockup-ink-240.webp",
+      "downloaded_filename": "logos/omnirush.webp",
+      "file_format": "webp",
+      "source_type": "official logo",
+      "verification_status": "browser-inspected official page; image: Omnirush Omnirush brand-lockup is-ink; asset validated",
+      "downloaded_from_web": true,
+      "notes": "Page title: Free AI Coding Agent, Desktop App & CLI | OmniRush",
+      "sha256": "bae4838baeae11a4649c52f8a0c9b51d086d33826ef5d15d98803d5cdab05bea",
+      "candidates": [
+        {
+          "url": "https://omnirush.ai/brand/lockup-ink-240.webp",
+          "source_type": "official logo",
+          "score": 160,
+          "reason": "image: Omnirush Omnirush brand-lockup is-ink",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://omnirush.ai/brand/lockup-240.webp",
+          "source_type": "official logo",
+          "score": 160,
+          "reason": "image: Omnirush Omnirush brand-lockup is-light",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://omnirush.ai/brand/icon.png",
+          "source_type": "official favicon fallback",
+          "score": 90,
+          "reason": "link-icon: icon",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://omnirush.ai/favicon.ico",
+          "source_type": "official favicon fallback",
+          "score": 90,
+          "reason": "link-icon: icon",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://omnirush.ai/brand/lockup-ink-480.webp",
+          "source_type": "official favicon fallback",
+          "score": 80,
+          "reason": "srcset: Omnirush Omnirush brand-lockup is-ink",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://omnirush.ai/brand/lockup-480.webp",
+          "source_type": "official favicon fallback",
+          "score": 80,
+          "reason": "srcset: Omnirush Omnirush brand-lockup is-light",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://omnirush.ai/apple-touch-icon.png",
+          "source_type": "official favicon fallback",
+          "score": 42,
+          "reason": "official website /apple-touch-icon.png fallback",
+          "inline_svg": ""
+        }
+      ]
+    },
+    {
+      "tool_name": "Open WebUI",
+      "canonical_slug": "open-webui",
+      "official_website": "https://openwebui.com",
+      "source_page_url": "https://openwebui.com/",
+      "direct_asset_url": "https://openwebui.com/logo.png",
+      "downloaded_filename": "logos/open-webui.png",
+      "file_format": "png",
+      "source_type": "official logo",
+      "verification_status": "browser-inspected official page; image: logo logo w-8 rounded-full dark:invert logo; asset validated",
+      "downloaded_from_web": true,
+      "notes": "Page title: Open WebUI: Self-Hosted AI Platform",
+      "sha256": "5037c863fbc23da7d70f03543f059c6e733e1d769bd7e56fd38a3c506f673f06",
+      "candidates": [
+        {
+          "url": "https://openwebui.com/logo.png",
+          "source_type": "official logo",
+          "score": 120,
+          "reason": "image: logo logo w-8 rounded-full dark:invert logo",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://openwebui.com/logo-dark.png",
+          "source_type": "official logo",
+          "score": 120,
+          "reason": "image: Open WebUI Open WebUI hidden size-10 dark:block",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://openwebui.com/favicon.png",
+          "source_type": "official favicon fallback",
+          "score": 90,
+          "reason": "link-icon: icon",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://openwebui.com/favicon.ico",
+          "source_type": "official favicon fallback",
+          "score": 45,
+          "reason": "official website /favicon.ico fallback",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://openwebui.com/apple-touch-icon.png",
+          "source_type": "official favicon fallback",
+          "score": 42,
+          "reason": "official website /apple-touch-icon.png fallback",
+          "inline_svg": ""
+        }
+      ]
+    },
+    {
+      "tool_name": "Perplexity AI",
+      "canonical_slug": "perplexity",
+      "official_website": "https://www.perplexity.ai",
+      "source_page_url": "https://www.perplexity.ai/",
+      "direct_asset_url": "https://www.perplexity.ai/favicon.svg",
+      "downloaded_filename": "logos/perplexity.svg",
+      "file_format": "svg",
+      "source_type": "official favicon fallback",
+      "verification_status": "browser-inspected official page; link-icon: icon; asset validated",
+      "downloaded_from_web": true,
+      "notes": "Page title: Perplexity",
+      "sha256": "00180a688c194d684a69b247769cdf24a7720712256dbe0f334f97e8a15821e4",
+      "candidates": [
+        {
+          "url": "https://www.perplexity.ai/favicon.svg",
+          "source_type": "official favicon fallback",
+          "score": 90,
+          "reason": "link-icon: icon",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://www.perplexity.ai/favicon.png",
+          "source_type": "official favicon fallback",
+          "score": 90,
+          "reason": "link-icon: icon",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://www.perplexity.ai/apple-touch-icon.png",
+          "source_type": "official favicon fallback",
+          "score": 90,
+          "reason": "link-icon: apple-touch-icon",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://www.perplexity.ai/favicon.ico",
+          "source_type": "official favicon fallback",
+          "score": 90,
+          "reason": "link-icon: alternate icon",
+          "inline_svg": ""
+        }
+      ]
+    },
+    {
+      "tool_name": "Pika",
+      "canonical_slug": "pika",
+      "official_website": "https://pika.art",
+      "source_page_url": "https://pika.art/",
+      "direct_asset_url": "https://pika.art/favicon.ico?favicon.03qzqgaru0by8.ico",
+      "downloaded_filename": "logos/pika.ico",
+      "file_format": "ico",
+      "source_type": "official favicon fallback",
+      "verification_status": "browser-inspected official page; link-icon: icon; asset validated",
+      "downloaded_from_web": true,
+      "notes": "Page title: Pika",
+      "sha256": "afe9094457172d72298dce8a5d9c4de040bd38f6eae4f8fdc800d0013184e986",
+      "candidates": [
+        {
+          "url": "https://pika.art/favicon.ico?favicon.03qzqgaru0by8.ico",
+          "source_type": "official favicon fallback",
+          "score": 90,
+          "reason": "link-icon: icon",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://pika.art/icon.svg?icon.3bty87qirfeg8.svg",
+          "source_type": "official favicon fallback",
+          "score": 90,
+          "reason": "link-icon: icon",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://pika.art/apple-icon.png?apple-icon.1pc-f1mhs57mu.png",
+          "source_type": "official favicon fallback",
+          "score": 90,
+          "reason": "link-icon: apple-touch-icon",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://pika.art/favicon.ico",
+          "source_type": "official favicon fallback",
+          "score": 45,
+          "reason": "official website /favicon.ico fallback",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://pika.art/apple-touch-icon.png",
+          "source_type": "official favicon fallback",
+          "score": 42,
+          "reason": "official website /apple-touch-icon.png fallback",
+          "inline_svg": ""
+        }
+      ]
+    },
+    {
+      "tool_name": "PixVerse",
+      "canonical_slug": "pixverse",
+      "official_website": "https://pixverse.ai",
+      "source_page_url": "https://pixverse.ai/en",
+      "direct_asset_url": "https://cdn.pixverse.ai/media/pixverse/favicon.svg",
+      "downloaded_filename": "logos/pixverse.svg",
+      "file_format": "svg",
+      "source_type": "official favicon fallback",
+      "verification_status": "browser-inspected official page; link-icon: icon; asset validated",
+      "downloaded_from_web": true,
+      "notes": "Page title: The Generative Core Behind Digital Worlds and Experiences | PixVerse",
+      "sha256": "d9e42b3ba2518d299a097963fd4d27a92a1db838b7540d77ec29246751eaacf0",
+      "candidates": [
+        {
+          "url": "https://cdn.pixverse.ai/media/pixverse/favicon.svg",
+          "source_type": "official favicon fallback",
+          "score": 90,
+          "reason": "link-icon: icon",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://cdn.pixverse.ai/media/pixverse/favicon.png",
+          "source_type": "official favicon fallback",
+          "score": 90,
+          "reason": "link-icon: icon",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://pixverse.ai/favicon.ico",
+          "source_type": "official favicon fallback",
+          "score": 45,
+          "reason": "official website /favicon.ico fallback",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://pixverse.ai/apple-touch-icon.png",
+          "source_type": "official favicon fallback",
+          "score": 42,
+          "reason": "official website /apple-touch-icon.png fallback",
+          "inline_svg": ""
+        }
+      ]
+    },
+    {
+      "tool_name": "Qwen Chat",
+      "canonical_slug": "qwen-chat",
+      "official_website": "https://chat.qwenlm.ai",
+      "source_page_url": "https://chat.qwen.ai/",
+      "direct_asset_url": "https://assets.alicdn.com/g/qwenweb/qwen-chat-fe/0.3.20/static/images/qwen-logo.svg",
+      "downloaded_filename": "logos/qwen-chat.svg",
+      "file_format": "svg",
+      "source_type": "official logo",
+      "verification_status": "browser-inspected official page; image: Qwen Qwen logo; asset validated",
+      "downloaded_from_web": true,
+      "notes": "Page title: Qwen Suspected duplicate content hash: 501a95022bac0d03914ec7605730817386c3e392a6667f75d8582f22917fa914.",
+      "sha256": "501a95022bac0d03914ec7605730817386c3e392a6667f75d8582f22917fa914",
+      "candidates": [
+        {
+          "url": "https://assets.alicdn.com/g/qwenweb/qwen-chat-fe/0.3.20/static/images/qwen-logo.svg",
+          "source_type": "official logo",
+          "score": 120,
+          "reason": "image: Qwen Qwen logo",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://img.alicdn.com/imgextra/i3/O1CN01TMiIsb1Z0Vd0aT37z_!!6000000003132-54-tps-72-72.apng",
+          "source_type": "official logo",
+          "score": 120,
+          "reason": "image: Qwen Qwen splash-center-logo",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://assets.alicdn.com/g/qwenweb/qwen-chat-fe/0.3.20/favicon.png",
+          "source_type": "official favicon fallback",
+          "score": 90,
+          "reason": "link-icon: icon",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://chat.qwen.ai/favicon.ico",
+          "source_type": "official favicon fallback",
+          "score": 45,
+          "reason": "official website /favicon.ico fallback",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://chat.qwen.ai/apple-touch-icon.png",
+          "source_type": "official favicon fallback",
+          "score": 42,
+          "reason": "official website /apple-touch-icon.png fallback",
+          "inline_svg": ""
+        }
+      ]
+    },
+    {
+      "tool_name": "Qwen 2.5 Coder",
+      "canonical_slug": "qwen-coder",
+      "official_website": "https://chat.qwenlm.ai",
+      "source_page_url": "https://chat.qwen.ai/",
+      "direct_asset_url": "https://assets.alicdn.com/g/qwenweb/qwen-chat-fe/0.3.20/static/images/qwen-logo.svg",
+      "downloaded_filename": "logos/qwen-coder.svg",
+      "file_format": "svg",
+      "source_type": "official logo",
+      "verification_status": "browser-inspected official page; image: Qwen Qwen logo; asset validated",
+      "downloaded_from_web": true,
+      "notes": "Page title: Qwen Suspected duplicate content hash: 501a95022bac0d03914ec7605730817386c3e392a6667f75d8582f22917fa914.",
+      "sha256": "501a95022bac0d03914ec7605730817386c3e392a6667f75d8582f22917fa914",
+      "candidates": [
+        {
+          "url": "https://assets.alicdn.com/g/qwenweb/qwen-chat-fe/0.3.20/static/images/qwen-logo.svg",
+          "source_type": "official logo",
+          "score": 120,
+          "reason": "image: Qwen Qwen logo",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://img.alicdn.com/imgextra/i3/O1CN01TMiIsb1Z0Vd0aT37z_!!6000000003132-54-tps-72-72.apng",
+          "source_type": "official logo",
+          "score": 120,
+          "reason": "image: Qwen Qwen splash-center-logo",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://assets.alicdn.com/g/qwenweb/qwen-chat-fe/0.3.20/favicon.png",
+          "source_type": "official favicon fallback",
+          "score": 90,
+          "reason": "link-icon: icon",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://chat.qwen.ai/favicon.ico",
+          "source_type": "official favicon fallback",
+          "score": 45,
+          "reason": "official website /favicon.ico fallback",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://chat.qwen.ai/apple-touch-icon.png",
+          "source_type": "official favicon fallback",
+          "score": 42,
+          "reason": "official website /apple-touch-icon.png fallback",
+          "inline_svg": ""
+        }
+      ]
+    },
+    {
+      "tool_name": "Recraft AI",
+      "canonical_slug": "recraft",
+      "official_website": "https://www.recraft.ai",
+      "source_page_url": "https://www.recraft.ai/",
+      "direct_asset_url": "https://framerusercontent.com/images/id5ZjKRfENkLEfAMrnKLKJfqfE.png",
+      "downloaded_filename": "logos/recraft.webp",
+      "file_format": "webp",
+      "source_type": "official favicon fallback",
+      "verification_status": "browser-inspected official page; link-icon: icon; asset validated",
+      "downloaded_from_web": true,
+      "notes": "Page title: Recraft | AI for designers, creatives, sellers, and teams",
+      "sha256": "a0be37286365cf0054b7c9eb9ef5d1cef4e19ce4fd692546bc1b8a10234123d2",
+      "candidates": [
+        {
+          "url": "https://framerusercontent.com/images/id5ZjKRfENkLEfAMrnKLKJfqfE.png",
+          "source_type": "official favicon fallback",
+          "score": 90,
+          "reason": "link-icon: icon",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://framerusercontent.com/images/abL15N3UiE3oDA6S807KUBarXrQ.png",
+          "source_type": "official favicon fallback",
+          "score": 90,
+          "reason": "link-icon: apple-touch-icon",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://www.recraft.ai/favicon.ico",
+          "source_type": "official favicon fallback",
+          "score": 45,
+          "reason": "official website /favicon.ico fallback",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://www.recraft.ai/apple-touch-icon.png",
+          "source_type": "official favicon fallback",
+          "score": 42,
+          "reason": "official website /apple-touch-icon.png fallback",
+          "inline_svg": ""
+        }
+      ]
+    },
+    {
+      "tool_name": "Replit Agent",
+      "canonical_slug": "replit-agent",
+      "official_website": "https://replit.com",
+      "source_page_url": "https://replit.com/",
+      "direct_asset_url": "",
+      "downloaded_filename": "",
+      "file_format": "",
+      "source_type": "",
+      "verification_status": "unresolved",
+      "downloaded_from_web": false,
+      "notes": "Official page returned HTTP 403; browser DOM was still inspected. Candidate https://replit.com/favicon.ico: HTTP 403. Candidate https://replit.com/apple-touch-icon.png: HTTP 403.",
+      "sha256": "",
+      "candidates": [
+        {
+          "url": "https://replit.com/favicon.ico",
+          "source_type": "official favicon fallback",
+          "score": 45,
+          "reason": "official website /favicon.ico fallback",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://replit.com/apple-touch-icon.png",
+          "source_type": "official favicon fallback",
+          "score": 42,
+          "reason": "official website /apple-touch-icon.png fallback",
+          "inline_svg": ""
+        }
+      ]
+    },
+    {
+      "tool_name": "Runway Gen-3 Alpha",
+      "canonical_slug": "runway",
+      "official_website": "https://runwayml.com",
+      "source_page_url": "https://runway.com/",
+      "direct_asset_url": "https://runway.com/_next/image?url=%2Fimages%2Flogos%2Frunway-app-icon.png&w=96&q=75&dpl=dpl_GqFujUqBsMTPLWNpUwKXrpSxYmHK",
+      "downloaded_filename": "logos/runway.webp",
+      "file_format": "webp",
+      "source_type": "official logo",
+      "verification_status": "browser-inspected official page; image: Runway app icon Runway app icon h-[48px] w-[48px]; asset validated",
+      "downloaded_from_web": true,
+      "notes": "Page title: Runway | Building Real-World Intelligence",
+      "sha256": "50e5a1d9596d83d462592e6cc3eb8f12dda616276287b265c799d3febfb0cac0",
+      "candidates": [
+        {
+          "url": "https://runway.com/_next/image?url=%2Fimages%2Flogos%2Frunway-app-icon.png&w=96&q=75&dpl=dpl_GqFujUqBsMTPLWNpUwKXrpSxYmHK",
+          "source_type": "official logo",
+          "score": 120,
+          "reason": "image: Runway app icon Runway app icon h-[48px] w-[48px]",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://runway.com/icon.png?icon.35ps9bmugbe1e.png",
+          "source_type": "official favicon fallback",
+          "score": 90,
+          "reason": "link-icon: icon",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://runway.com/favicon.ico",
+          "source_type": "official favicon fallback",
+          "score": 45,
+          "reason": "official website /favicon.ico fallback",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://runway.com/apple-touch-icon.png",
+          "source_type": "official favicon fallback",
+          "score": 42,
+          "reason": "official website /apple-touch-icon.png fallback",
+          "inline_svg": ""
+        }
+      ]
+    },
+    {
+      "tool_name": "Stable Diffusion 3.5",
+      "canonical_slug": "stable-diffusion-3",
+      "official_website": "https://stability.ai/stable-image",
+      "source_page_url": "https://stability.ai/stable-image",
+      "direct_asset_url": "https://images.squarespace-cdn.com/content/v1/6213c340453c3f502425776e/804f0e8b-0028-4262-a8b0-b9f1c5de72c0/favicon.ico?format=100w",
+      "downloaded_filename": "logos/stable-diffusion-3.webp",
+      "file_format": "webp",
+      "source_type": "official favicon fallback",
+      "verification_status": "browser-inspected official page; link-icon: icon; asset validated",
+      "downloaded_from_web": true,
+      "notes": "Page title: Stability AI Image Models \u2014 Stability AI",
+      "sha256": "19f128ea4b443eec616eece8bdd23405e532a2348946382c4fc30faf910e6580",
+      "candidates": [
+        {
+          "url": "https://images.squarespace-cdn.com/content/v1/6213c340453c3f502425776e/804f0e8b-0028-4262-a8b0-b9f1c5de72c0/favicon.ico?format=100w",
+          "source_type": "official favicon fallback",
+          "score": 90,
+          "reason": "link-icon: icon",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://stability.ai/favicon.ico",
+          "source_type": "official favicon fallback",
+          "score": 45,
+          "reason": "official website /favicon.ico fallback",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://stability.ai/apple-touch-icon.png",
+          "source_type": "official favicon fallback",
+          "score": 42,
+          "reason": "official website /apple-touch-icon.png fallback",
+          "inline_svg": ""
+        }
+      ]
+    },
+    {
+      "tool_name": "Suno",
+      "canonical_slug": "suno",
+      "official_website": "https://suno.com",
+      "source_page_url": "https://suno.com/",
+      "direct_asset_url": "https://cdn-o.suno.com/splash-page/logo-cloud/Billboard_logo.svg",
+      "downloaded_filename": "logos/suno.svg",
+      "file_format": "svg",
+      "source_type": "official logo",
+      "verification_status": "browser-inspected official page; image: Billboard Billboard h-auto max-h-8 w-auto max-w-full object-contain md:max-h-10; asset validated",
+      "downloaded_from_web": true,
+      "notes": "Page title: Suno | AI Music Generator",
+      "sha256": "58a1ec163261898508a732a15cb591c7f7434485f398c4a5f1690e733cb13ce3",
+      "candidates": [
+        {
+          "url": "https://cdn-o.suno.com/splash-page/logo-cloud/Billboard_logo.svg",
+          "source_type": "official logo",
+          "score": 120,
+          "reason": "image: Billboard Billboard h-auto max-h-8 w-auto max-w-full object-contain md:max-h-10",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://cdn-o.suno.com/splash-page/logo-cloud/COMPLEX_Magazine_logo.svg",
+          "source_type": "official logo",
+          "score": 120,
+          "reason": "image: Complex Complex h-auto max-h-8 w-auto max-w-full object-contain md:max-h-10",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://cdn-o.suno.com/splash-page/logo-cloud/Forbes_logo.svg",
+          "source_type": "official logo",
+          "score": 120,
+          "reason": "image: Forbes Forbes h-auto max-h-8 w-auto max-w-full object-contain md:max-h-10",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://cdn-o.suno.com/splash-page/logo-cloud/Rolling_Stone_logo.svg",
+          "source_type": "official logo",
+          "score": 120,
+          "reason": "image: Rolling Stone Rolling Stone h-auto max-h-8 w-auto max-w-full object-contain md:max-h-10",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://cdn-o.suno.com/splash-page/logo-cloud/Variety_logo.svg",
+          "source_type": "official logo",
+          "score": 120,
+          "reason": "image: Variety Variety h-auto max-h-8 w-auto max-w-full object-contain md:max-h-10",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://cdn-o.suno.com/splash-page/logo-cloud/Wired_logo.svg",
+          "source_type": "official logo",
+          "score": 120,
+          "reason": "image: Wired Wired h-auto max-h-8 w-auto max-w-full object-contain md:max-h-10",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://cdn-o.suno.com/favicon.ico",
+          "source_type": "official favicon fallback",
+          "score": 90,
+          "reason": "link-icon: icon",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://cdn-o.suno.com/favicon-192x192.png",
+          "source_type": "official favicon fallback",
+          "score": 90,
+          "reason": "link-icon: icon",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://cdn-o.suno.com/favicon-512x512.png",
+          "source_type": "official favicon fallback",
+          "score": 90,
+          "reason": "link-icon: icon",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://cdn-o.suno.com/apple-touch-icon.png",
+          "source_type": "official favicon fallback",
+          "score": 90,
+          "reason": "link-icon: apple-touch-icon",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://suno.com/favicon.ico",
+          "source_type": "official favicon fallback",
+          "score": 45,
+          "reason": "official website /favicon.ico fallback",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://suno.com/apple-touch-icon.png",
+          "source_type": "official favicon fallback",
+          "score": 42,
+          "reason": "official website /apple-touch-icon.png fallback",
+          "inline_svg": ""
+        }
+      ]
+    },
+    {
+      "tool_name": "Udio",
+      "canonical_slug": "udio",
+      "official_website": "https://www.udio.com",
+      "source_page_url": "https://www.udio.com/",
+      "direct_asset_url": "https://www.udio.com/favicon.ico?favicon.0wbc3vz33genq.ico",
+      "downloaded_filename": "logos/udio.ico",
+      "file_format": "ico",
+      "source_type": "official favicon fallback",
+      "verification_status": "browser-inspected official page; link-icon: icon; asset validated",
+      "downloaded_from_web": true,
+      "notes": "Page title: Udio | AI Music Generator - Official Website",
+      "sha256": "3764b3281d799d8ed4f1c07afba5bfd77c93fae014cdab46a795036333058dc5",
+      "candidates": [
+        {
+          "url": "https://www.udio.com/favicon.ico?favicon.0wbc3vz33genq.ico",
+          "source_type": "official favicon fallback",
+          "score": 90,
+          "reason": "link-icon: icon",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://www.udio.com/favicon.ico",
+          "source_type": "official favicon fallback",
+          "score": 45,
+          "reason": "official website /favicon.ico fallback",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://www.udio.com/apple-touch-icon.png",
+          "source_type": "official favicon fallback",
+          "score": 42,
+          "reason": "official website /apple-touch-icon.png fallback",
+          "inline_svg": ""
+        }
+      ]
+    },
+    {
+      "tool_name": "v0 by Vercel",
+      "canonical_slug": "v0-vercel",
+      "official_website": "https://v0.dev",
+      "source_page_url": "https://v0.app/",
+      "direct_asset_url": "https://v0.app/chat-static/_next/static/immutable/media/logo-v0-light.442nx-e-yl-x_.svg",
+      "downloaded_filename": "logos/v0-vercel.svg",
+      "file_format": "svg",
+      "source_type": "official logo",
+      "verification_status": "browser-inspected official page; image: geist-hide-on-dark text-v0-gray-1000; asset validated",
+      "downloaded_from_web": true,
+      "notes": "Page title: v0 by Vercel - Build Full-Stack Web Apps with AI",
+      "sha256": "5fee8c3e565c1a5929172a383b2763a894bc5e2febaa6051812f6a7be2fcf4cf",
+      "candidates": [
+        {
+          "url": "https://v0.app/chat-static/_next/static/immutable/media/logo-v0-light.442nx-e-yl-x_.svg",
+          "source_type": "official logo",
+          "score": 120,
+          "reason": "image: geist-hide-on-dark text-v0-gray-1000",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://v0.app/chat-static/_next/static/immutable/media/logo-v0-dark.2_0gdj5w98_kp.svg",
+          "source_type": "official logo",
+          "score": 120,
+          "reason": "image: geist-hide-on-light text-v0-gray-1000",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://v0.app/chat-static/_next/static/immutable/media/logo-twitter-x-small-light.2eiept7df9mk7.svg",
+          "source_type": "official logo",
+          "score": 120,
+          "reason": "image: geist-hide-on-dark mr-1 shrink-0",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://v0.app/chat-static/_next/static/immutable/media/logo-twitter-x-small-dark.44ro69c8mk5xp.svg",
+          "source_type": "official logo",
+          "score": 120,
+          "reason": "image: geist-hide-on-light mr-1 shrink-0",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://v0.app/chat-static/_next/static/immutable/media/logo-linkedin-small-light.2eijnjax_0lig.svg",
+          "source_type": "official logo",
+          "score": 120,
+          "reason": "image: geist-hide-on-dark mr-1 shrink-0",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://v0.app/chat-static/_next/static/immutable/media/logo-linkedin-small-dark.314bxwo6vw345.svg",
+          "source_type": "official logo",
+          "score": 120,
+          "reason": "image: geist-hide-on-light mr-1 shrink-0",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://v0.app/assets/icon-light-32x32.png",
+          "source_type": "official favicon fallback",
+          "score": 90,
+          "reason": "link-icon: icon",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://v0.app/assets/icon-dark-32x32.png",
+          "source_type": "official favicon fallback",
+          "score": 90,
+          "reason": "link-icon: icon",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://v0.app/assets/icon.svg",
+          "source_type": "official favicon fallback",
+          "score": 90,
+          "reason": "link-icon: icon",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://v0.app/assets/apple-icon.png",
+          "source_type": "official favicon fallback",
+          "score": 90,
+          "reason": "link-icon: apple-touch-icon",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://v0.app/favicon.ico",
+          "source_type": "official favicon fallback",
+          "score": 45,
+          "reason": "official website /favicon.ico fallback",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://v0.app/apple-touch-icon.png",
+          "source_type": "official favicon fallback",
+          "score": 42,
+          "reason": "official website /apple-touch-icon.png fallback",
+          "inline_svg": ""
+        }
+      ]
+    },
+    {
+      "tool_name": "Vidu",
+      "canonical_slug": "vidu",
+      "official_website": "https://go.vidu.com",
+      "source_page_url": "https://go.vidu.com/",
+      "direct_asset_url": "https://go.vidu.com/apple-touch-icon.png",
+      "downloaded_filename": "logos/vidu.png",
+      "file_format": "png",
+      "source_type": "official favicon fallback",
+      "verification_status": "browser-inspected official page; link-icon: apple-touch-icon; asset validated",
+      "downloaded_from_web": true,
+      "notes": "Page title: AI Video Generator for Text, Image & Reference Videos | Vidu AI",
+      "sha256": "3eb127d945480e06a3b15bba096bf699e31a38a936f147e098f237a99792ff86",
+      "candidates": [
+        {
+          "url": "https://go.vidu.com/apple-touch-icon.png",
+          "source_type": "official favicon fallback",
+          "score": 90,
+          "reason": "link-icon: apple-touch-icon",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://go.vidu.com/logo.svg",
+          "source_type": "official favicon fallback",
+          "score": 90,
+          "reason": "link-icon: icon",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://go.vidu.com/favicon.ico",
+          "source_type": "official favicon fallback",
+          "score": 45,
+          "reason": "official website /favicon.ico fallback",
+          "inline_svg": ""
+        }
+      ]
+    },
+    {
+      "tool_name": "vLLM",
+      "canonical_slug": "vllm",
+      "official_website": "https://vllm.ai",
+      "source_page_url": "https://vllm.ai/",
+      "direct_asset_url": "https://vllm.ai/vLLM-Full-Logo.svg",
+      "downloaded_filename": "logos/vllm.svg",
+      "file_format": "svg",
+      "source_type": "official logo",
+      "verification_status": "browser-inspected official page; image: vLLM Logo vLLM Logo h-11 w-auto dark:hidden; asset validated",
+      "downloaded_from_web": true,
+      "notes": "Page title: vLLM",
+      "sha256": "29fbbc5dd4b83c6935cc93ac253b84186aeeabee610cc8e7f636dc9c868dfe27",
+      "candidates": [
+        {
+          "url": "https://vllm.ai/vLLM-Full-Logo.svg",
+          "source_type": "official logo",
+          "score": 160,
+          "reason": "image: vLLM Logo vLLM Logo h-11 w-auto dark:hidden",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://vllm.ai/vLLM-Full-Dark-Mode-Logo.svg",
+          "source_type": "official logo",
+          "score": 160,
+          "reason": "image: vLLM Logo vLLM Logo h-11 w-auto hidden dark:block",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://vllm.ai/vLLM-Logo.svg",
+          "source_type": "official favicon fallback",
+          "score": 90,
+          "reason": "link-icon: shortcut icon",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://vllm.ai/favicon.ico",
+          "source_type": "official favicon fallback",
+          "score": 90,
+          "reason": "link-icon: icon",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://vllm.ai/vLLM-Logo.png",
+          "source_type": "official favicon fallback",
+          "score": 90,
+          "reason": "link-icon: apple-touch-icon",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://vllm.ai/apple-touch-icon.png",
+          "source_type": "official favicon fallback",
+          "score": 42,
+          "reason": "official website /apple-touch-icon.png fallback",
+          "inline_svg": ""
+        }
+      ]
+    },
+    {
+      "tool_name": "Wan 2.1 (Alibaba)",
+      "canonical_slug": "wan-video",
+      "official_website": "https://github.com/Wan-Video/Wan2.1",
+      "source_page_url": "https://github.com/Wan-Video/Wan2.1",
+      "direct_asset_url": "https://github.com/Wan-Video/Wan2.1/raw/main/assets/logo.png",
+      "downloaded_filename": "logos/wan-video.png",
+      "file_format": "png",
+      "source_type": "official logo",
+      "verification_status": "browser-inspected official page; image: ; asset validated",
+      "downloaded_from_web": true,
+      "notes": "Page title: GitHub - Wan-Video/Wan2.1: Wan: Open and Advanced Large-Scale Video Generative Models \u00b7 GitHub",
+      "sha256": "96cddc0f667293436d0b9f92a299b6346b65b231d38ee49719a33d46c91fe1e3",
+      "candidates": [
+        {
+          "url": "https://github.com/Wan-Video/Wan2.1/raw/main/assets/logo.png",
+          "source_type": "official logo",
+          "score": 120,
+          "reason": "image: ",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://avatars.githubusercontent.com/u/200620180?s=60&v=4",
+          "source_type": "official organization avatar",
+          "score": 75,
+          "reason": "image: Wan-Video Wan-Video mr-2 flex-shrink-0 prc-Avatar-Avatar-0xaUi",
+          "inline_svg": ""
+        }
+      ]
+    },
+    {
+      "tool_name": "Whisper by OpenAI",
+      "canonical_slug": "whisper",
+      "official_website": "https://github.com/openai/whisper",
+      "source_page_url": "https://github.com/openai/whisper",
+      "direct_asset_url": "",
+      "downloaded_filename": "",
+      "file_format": "",
+      "source_type": "",
+      "verification_status": "unresolved",
+      "downloaded_from_web": false,
+      "notes": "No direct logo or official favicon asset was exposed by the inspected page.",
+      "sha256": "",
+      "candidates": [
+        {
+          "url": "https://avatars.githubusercontent.com/u/14957082?s=60&v=4",
+          "source_type": "official organization avatar",
+          "score": 75,
+          "reason": "image: openai openai mr-2 flex-shrink-0 prc-Avatar-Avatar-0xaUi",
+          "inline_svg": ""
+        }
+      ]
+    },
+    {
+      "tool_name": "Zapier Central",
+      "canonical_slug": "zapier-central",
+      "official_website": "https://zapier.com/central",
+      "source_page_url": "https://zapier.com/agents",
+      "direct_asset_url": "https://framerusercontent.com/images/F0p1OYJhm4LaPzZZoDW2IdGjdt0.png",
+      "downloaded_filename": "logos/zapier-central.webp",
+      "file_format": "webp",
+      "source_type": "official favicon fallback",
+      "verification_status": "browser-inspected official page; link-icon: icon; asset validated",
+      "downloaded_from_web": true,
+      "notes": "Page title: Build AI teammates with Zapier Agents",
+      "sha256": "510e7952e60d9ccbd5dc0118211f0088440310d9891a183721f0f3ce828d8b1b",
+      "candidates": [
+        {
+          "url": "https://framerusercontent.com/images/F0p1OYJhm4LaPzZZoDW2IdGjdt0.png",
+          "source_type": "official favicon fallback",
+          "score": 90,
+          "reason": "link-icon: icon",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://zapier.com/favicon.ico",
+          "source_type": "official favicon fallback",
+          "score": 45,
+          "reason": "official website /favicon.ico fallback",
+          "inline_svg": ""
+        },
+        {
+          "url": "https://zapier.com/apple-touch-icon.png",
+          "source_type": "official favicon fallback",
+          "score": 42,
+          "reason": "official website /apple-touch-icon.png fallback",
+          "inline_svg": ""
+        }
+      ]
+    }
+  ]
+}

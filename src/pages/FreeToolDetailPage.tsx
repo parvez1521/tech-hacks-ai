@@ -2,12 +2,14 @@ import React from 'react';
 import { useRouter, Link } from '../router/Router';
 import { getFreeToolBySlug } from '../services/aiCatalogService';
 import { UtilityRunner } from '../components/utilities/UtilityRunner';
+import { getUtilityCategoryDefinition, getUtilityCategory } from '../data/catalogTaxonomy';
 import { Wrench, ShieldCheck, ArrowLeft, Cpu } from 'lucide-react';
 
 export const FreeToolDetailPage: React.FC = () => {
   const { params } = useRouter();
   const slug = params.slug;
   const tool = getFreeToolBySlug(slug);
+  const category = tool ? getUtilityCategoryDefinition(getUtilityCategory(tool)) : undefined;
 
   if (!tool) {
     return (
@@ -33,7 +35,7 @@ export const FreeToolDetailPage: React.FC = () => {
       <nav className="flex items-center gap-2 text-xs text-muted-foreground mb-6">
         <Link to="/" className="hover:text-foreground">Home</Link>
         <span>/</span>
-        <Link to="/free-tools" className="hover:text-foreground">Free Tools</Link>
+         <Link to="/free-tools" className="hover:text-foreground">Utility Tools</Link>
         <span>/</span>
         <span className="text-foreground font-medium truncate max-w-[200px] sm:max-w-md">{tool.name}</span>
       </nav>
@@ -43,11 +45,11 @@ export const FreeToolDetailPage: React.FC = () => {
         <div className="flex items-center justify-between gap-3 mb-3">
           <div className="flex items-center gap-2">
             <span className="px-2.5 py-1 rounded text-xs font-semibold bg-muted text-secondary-foreground border border-border capitalize">
-              {tool.category}
+               {category?.name || tool.category}
             </span>
-            <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded text-xs text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 font-mono">
-              <Cpu className="w-3.5 h-3.5" />
-              <span>100% Client-Side</span>
+               <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded text-xs text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 font-mono">
+               <Cpu className="w-3.5 h-3.5" />
+               <span>{tool.isClientSideOnly ? 'In-browser processing' : 'Server provider on request'}</span>
             </span>
           </div>
 
@@ -85,11 +87,11 @@ export const FreeToolDetailPage: React.FC = () => {
         <UtilityRunner utility={tool} />
       </div>
 
-      {/* Privacy Guarantee Note */}
+      {/* Processing policy note */}
       <div className="p-4 rounded-xl bg-card/40 border border-border/60 text-xs text-muted-foreground flex items-center gap-3">
         <ShieldCheck className="w-4 h-4 text-emerald-400 shrink-0" />
         <span>
-          <strong>Local Execution Guarantee:</strong> This utility processes data entirely within your local browser memory using Canvas / Web Workers. Your data is never uploaded to any remote server.
+           <strong>Processing policy:</strong> {tool.isClientSideOnly ? 'This runner processes supplied input in browser memory and does not send it to a remote utility-processing service.' : 'This runner sends the selected file to the configured transcription provider only after you start processing. If no provider is configured, it reports that setup is required.'} Normal application resources and optional clipboard/download browser APIs may still be used.
         </span>
       </div>
     </div>

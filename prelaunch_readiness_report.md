@@ -11,7 +11,7 @@
 
 Tech Hacks AI has undergone a rigorous final quality assurance, security, performance, accessibility, and architectural audit. 
 
-All **390 automated unit and integration tests across 102 test suites passed with a 100% pass rate (0 failures)**. The production build compiles cleanly in **1.31 seconds** with optimized code-splitting (every chunk is under 430 kB, and the initial core application bundle is only 99.79 kB / 26.91 kB gzip). 
+The latest verification run passes **458 automated unit and integration tests across 116 test suites with a 100% pass rate (0 failures)**. The production build compiles cleanly with optimized code-splitting; the current Vite build transforms 1,578 modules.
 
 Local API verification confirmed that `/api/chat` handles missing API keys gracefully with instant client-side catalog retrieval fallback across 1,000+ verified tools. The community submission system (`/api/submissions`) successfully performs client and server validation, duplicate detection, honeypot bot filtering, and rate limiting (5 requests per 10 minutes per IP).
 
@@ -64,7 +64,7 @@ Key pre-launch security and configuration fixes were applied to `.gitignore`, `.
 
 | Test Command | Purpose | Duration | Result |
 |---|---|---|---|
-| `npm test` | Node test runner (`node --experimental-strip-types --test tests/*.test.js`) | 0.93s | **390 passed, 0 failed** (102 suites) |
+| `npm test` | Node test runner (`node --experimental-strip-types --test tests/*.test.js`) | latest run | **458 passed, 0 failed** (116 suites) |
 | `npm run build` | Vite production compilation & minification | 1.31s | **Clean build, 0 warnings** |
 | `node test-ssr` | Headless Server-Side Rendering of all major routes | 0.35s | **11/11 routes rendered 35k–231k HTML characters** |
 | `curl HTTP audits` | Live endpoint verification on 20 routes | 0.42s | **20/20 routes returned HTTP 200 OK** |
@@ -120,7 +120,7 @@ Key pre-launch security and configuration fixes were applied to `.gitignore`, `.
 
 ### P1 — Launch Dependencies (External Setup Required)
 - **Domain Purchase:** `techhacksai.com` (or selected domain) must be registered with a domain registrar.
-- **Production Environment Secrets:** `ADMIN_SECRET` must be set in production hosting environment variables to replace the local default.
+- **Production Environment Secrets:** `ADMIN_SECRET` must be set explicitly in production hosting environment variables; the local development fallback is disabled in production/serverless environments.
 - **Serverless Submissions Persistence:** In serverless hosting (Vercel), `/tmp` is ephemeral across function container cold starts. While submissions will not throw runtime errors, persistent submissions require connecting a cloud database (e.g., Supabase Postgres, Neon, or Upstash KV) before high-volume public submissions are opened.
 
 ### P2 — Important Improvements (Post-Domain)
@@ -134,7 +134,7 @@ Key pre-launch security and configuration fixes were applied to `.gitignore`, `.
 
 ## 7. Security & Privacy Audit Findings
 
-- **Secret Leakage:** Zero hardcoded API keys or secrets detected in source code. All `.env*` files are now blocked by `.gitignore`.
+- **Secret Leakage:** No provider API keys are committed and all `.env*` files are blocked by `.gitignore`. The local admin fallback is not rendered in public HTML and is rejected in production/serverless environments.
 - **Cross-Site Scripting (XSS):** `dangerouslySetInnerHTML` is used strictly for structured JSON-LD data. All markdown rendering is routed through [`SafeMarkdown.tsx`](file:///Users/parvez/.gemini/antigravity/scratch/open-alternative/src/components/SafeMarkdown.tsx), which parses tokens into native React virtual DOM nodes and validates URL protocols against `javascript:` and `data:` schemes.
 - **Anti-Spam & Abuse:** Submissions feature honeypot field traps and in-memory rate limiting.
 - **Admin Access:** `/api/submissions` moderation queue requires an admin bearer token matching `ADMIN_SECRET`.
@@ -239,21 +239,35 @@ Immediately after DNS propagation (typically 5–30 minutes):
 | Area | Status | Evidence or Remaining Work |
 |---|---|---|
 | **Production build** | **PASS** | `dist/` created in 1.31s; all chunks < 430 kB; 0 warnings |
-| **Automated tests** | **PASS** | 390 / 390 tests passing (102 suites); 100% pass rate |
+| **Automated tests** | **PASS** | 458 / 458 tests passing (116 suites); 100% pass rate |
 | **Frontend routes** | **PASS** | 20/20 representative routes verified via HTTP and Node SSR |
-| **Backend/API** | **PASS** | `/api/chat` and `/api/submissions` verified locally |
+| **Backend/API** | **PASS (local) / CONFIG REQUIRED (Prod)** | `/api/chat`, `/api/submissions`, and `/api/transcribe` verified locally; production requires `ADMIN_SECRET`, durable storage, and a transcription provider key for the related workflows |
 | **Database/persistence** | **PASS (Dev) / External (Prod)** | Local JSON atomic write verified; /tmp serverless fallback added; external cloud DB recommended for high-volume public submissions |
 | **AI assistant** | **PASS** | 5s popup, curated question chip, and retrieval fallback verified |
 | **Submission workflows** | **PASS** | Client validation, duplicate detection, honeypot, and rate limits verified |
-| **Logo assets** | **PASS** | 100+ SVGs verified on disk; all catalog items mapped |
-| **Security** | **PASS** | `.gitignore` updated; `.env.example` created; SafeMarkdown XSS sanitized |
+| **Logo assets** | **PASS** | 218 canonical mappings pass parity checks; 30 direct official web assets and 8 explicitly labelled provided assets are integrated; favicon fallbacks remain unclaimed as original marks |
+| **Security** | **PASS (with required deployment secret)** | `.gitignore` updated; `.env.example` created; SafeMarkdown XSS sanitized; admin authentication fails closed without production `ADMIN_SECRET` |
 | **SEO** | **PASS** | Dynamic titles, canonical URLs, sitemap.xml, and updated robots.txt verified |
 | **Mobile responsiveness** | **PASS** | Responsive grid layouts, safe-area padding, mobile drawers verified |
 | **Performance** | **PASS** | Initial bundle 99 kB (26 kB gzip); scroll reveals and reduced-motion verified |
 | **Domain readiness** | **READY** | Configurable `VITE_SITE_URL` implemented; DNS guide prepared |
-| **Deployment readiness** | **READY** | Clean Vercel serverless + Vite architecture ready for deployment |
+| **Deployment readiness** | **CONDITIONAL** | Vercel build/API architecture is verified locally; configure `ADMIN_SECRET`, durable storage, and any provider credentials before opening production workflows |
 
 ---
 
 > [!IMPORTANT]
 > The website remains strictly local. No domain was purchased, no DNS records were modified, and no external deployment services were connected during this phase.
+
+## Superseding final sweep — 2026-10-21
+
+The current verification supersedes older counts and readiness claims in this
+historical report: `npm test` passes 458 tests across 116 suites, and the latest
+production build transforms 1,578 modules. Vercel's 4.5 MB Function body limit
+means `/api/transcribe` accepts media up to 4 MB, while local MP4-to-MP3
+conversion retains its separate browser-only 100 MB limit. YouTube and
+Instagram utilities remain validation and authorized-owner workflow tools, not
+general direct downloaders. Production still requires an explicit
+`ADMIN_SECRET`, durable storage credentials, and a real transcription provider
+key for those workflows. The transcriber now accepts auto-detect, English, and
+Hindi guidance; provider support remains dependent on the configured multilingual
+model.

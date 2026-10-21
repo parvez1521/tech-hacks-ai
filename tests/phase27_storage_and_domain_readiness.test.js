@@ -21,7 +21,6 @@ import {
   publishSubmissionToCatalogAsync,
   readSubmissionsAsync,
   readPublishedAdditionsAsync,
-  ADMIN_TOKEN,
 } from '../server/submissionsStore.js';
 
 import { siteConfig, getCanonicalUrl } from '../src/config/site.ts';
@@ -162,28 +161,31 @@ describe('Phase 27: Durable Data Storage & Production Deployment Readiness', () 
 
     test('updateSubmissionStatus and publishSubmission reject with 503 in unconfigured production', async () => {
       const origVercel = process.env.VERCEL;
+      const origAdminSecret = process.env.ADMIN_SECRET;
       try {
         process.env.VERCEL = '1';
+        process.env.ADMIN_SECRET = 'test-production-admin-secret';
         delete process.env.SUPABASE_URL;
         delete process.env.UPSTASH_REDIS_REST_URL;
 
-        const updateRes = updateSubmissionStatus('sub_tool_seed_001', { status: 'in_review' }, ADMIN_TOKEN);
+        const updateRes = updateSubmissionStatus('sub_tool_seed_001', { status: 'in_review' }, process.env.ADMIN_SECRET);
         assert.strictEqual(updateRes.success, false);
         assert.strictEqual(updateRes.status, 503);
 
-        const updateAsyncRes = await updateSubmissionStatusAsync('sub_tool_seed_001', { status: 'in_review' }, ADMIN_TOKEN);
+        const updateAsyncRes = await updateSubmissionStatusAsync('sub_tool_seed_001', { status: 'in_review' }, process.env.ADMIN_SECRET);
         assert.strictEqual(updateAsyncRes.success, false);
         assert.strictEqual(updateAsyncRes.status, 503);
 
-        const pubRes = publishSubmissionToCatalog('sub_tool_seed_001', ADMIN_TOKEN);
+        const pubRes = publishSubmissionToCatalog('sub_tool_seed_001', process.env.ADMIN_SECRET);
         assert.strictEqual(pubRes.success, false);
         assert.strictEqual(pubRes.status, 503);
 
-        const pubAsyncRes = await publishSubmissionToCatalogAsync('sub_tool_seed_001', ADMIN_TOKEN);
+        const pubAsyncRes = await publishSubmissionToCatalogAsync('sub_tool_seed_001', process.env.ADMIN_SECRET);
         assert.strictEqual(pubAsyncRes.success, false);
         assert.strictEqual(pubAsyncRes.status, 503);
       } finally {
         if (origVercel !== undefined) process.env.VERCEL = origVercel; else delete process.env.VERCEL;
+        if (origAdminSecret !== undefined) process.env.ADMIN_SECRET = origAdminSecret; else delete process.env.ADMIN_SECRET;
       }
     });
 

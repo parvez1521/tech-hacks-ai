@@ -25,6 +25,7 @@ import {
 import {
   getAiToolBySlug,
   getAllAiTools,
+  getAllCommunityTools,
   filterAndSortAiTools,
   registerPublishedTool,
   registerPublishedGuide,
@@ -266,6 +267,13 @@ describe('Phase 22: Community Contributions (Submit a Tool & Submit a Guide)', (
       assert.strictEqual(match, undefined);
     });
 
+    test('pending submissions cannot bypass approval when publishing', () => {
+      const blocked = publishSubmissionToCatalog(testSubId, ADMIN_TOKEN);
+      assert.strictEqual(blocked.success, false);
+      assert.strictEqual(blocked.status, 409);
+      assert.strictEqual(blocked.error, 'SubmissionNotApproved');
+    });
+
     test('moderator can update submission status and notes', () => {
       assert.ok(testSubId, 'Test submission ID should exist');
       const updateRes = updateSubmissionStatus(
@@ -280,6 +288,10 @@ describe('Phase 22: Community Contributions (Submit a Tool & Submit a Guide)', (
       assert.strictEqual(updateRes.success, true);
       assert.strictEqual(updateRes.submission.status, 'in_review');
       assert.strictEqual(updateRes.submission.moderatorNotes, 'Verified official website and pricing tier.');
+
+      const approvalRes = updateSubmissionStatus(testSubId, { status: 'approved' }, ADMIN_TOKEN);
+      assert.strictEqual(approvalRes.success, true);
+      assert.strictEqual(approvalRes.submission.status, 'approved');
     });
 
     test('moderator publishing to catalog makes item live immediately', () => {
@@ -302,7 +314,7 @@ describe('Phase 22: Community Contributions (Submit a Tool & Submit a Guide)', (
       assert.ok(catalogQuery, 'Catalog query by slug must find dynamically registered tool');
       assert.strictEqual(catalogQuery.name, testToolName);
 
-      // Verify search & filter includes it
+      // Community submissions are live in their own directory, not the AI filter.
       const filterRes = filterAndSortAiTools({
         searchQuery: testToolName,
         category: null,
@@ -310,7 +322,8 @@ describe('Phase 22: Community Contributions (Submit a Tool & Submit a Guide)', (
         sortBy: 'popular',
         page: 1,
       });
-      assert.ok(filterRes.tools.some((t) => t.slug === pubRes.publishedSlug));
+      assert.equal(filterRes.tools.some((t) => t.slug === pubRes.publishedSlug), false);
+      assert.ok(getAllCommunityTools().some((t) => t.slug === pubRes.publishedSlug));
     });
 
     test('guide submission and publication lifecycle', async () => {
@@ -328,6 +341,9 @@ describe('Phase 22: Community Contributions (Submit a Tool & Submit a Guide)', (
       const submitRes = await createGuideSubmission(guidePayload);
       assert.strictEqual(submitRes.success, true);
       assert.ok(submitRes.id.startsWith('sub_guide_'));
+
+      const approvalRes = updateSubmissionStatus(submitRes.id, { status: 'approved' }, ADMIN_TOKEN);
+      assert.strictEqual(approvalRes.success, true);
 
       // Publish guide
       const pubGuide = publishSubmissionToCatalog(submitRes.id, ADMIN_TOKEN);

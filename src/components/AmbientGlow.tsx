@@ -20,10 +20,9 @@ export const AmbientGlow: React.FC = () => {
   useEffect(() => {
     if (typeof window === 'undefined') return;
 
-    // The directory uses a quiet, content-first background. Keep the legacy
-    // component available for integrations, but do not install a global
-    // pointer listener or paint an ambient effect in the production shell.
-    const ENABLE_AMBIENT_GLOW = false;
+    // Keep the global field restrained: it paints behind content, listens only
+    // on fine pointers, and stops its frame loop as soon as the pointer settles.
+    const ENABLE_AMBIENT_GLOW = true;
     if (!ENABLE_AMBIENT_GLOW) return;
 
     // Check for fine pointer (mouse/trackpad) support
@@ -92,7 +91,7 @@ export const AmbientGlow: React.FC = () => {
   return (
     <div
       ref={containerRef}
-      className="pointer-events-none fixed inset-0 -z-10 overflow-hidden ambient-glow-container select-none opacity-0"
+      className="pointer-events-none fixed inset-0 z-0 overflow-hidden ambient-glow-container select-none opacity-100"
       aria-hidden="true"
     >
       {/* Outer Holographic Cursor Aura (Cyan to Electric Blue to Subtle Violet) */}

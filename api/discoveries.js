@@ -7,6 +7,19 @@ import {
   isAuthorized,
 } from '../server/discoveriesStore.js';
 
+function readJsonBody(req) {
+  if (req.bodyParseError) return null;
+  try {
+    const rawBody = req.body;
+    if (rawBody === undefined || rawBody === null || rawBody === '') return {};
+    const body = typeof rawBody === 'string' ? JSON.parse(rawBody) : rawBody;
+    if (!body || typeof body !== 'object' || Array.isArray(body)) return null;
+    return body;
+  } catch {
+    return null;
+  }
+}
+
 export default async function handler(req, res) {
   const method = req.method;
   const url = new URL(req.url, `http://${req.headers.host || 'localhost'}`);
@@ -55,7 +68,8 @@ export default async function handler(req, res) {
         return res.status(401).json({ error: 'Unauthorized. Moderator access token required.' });
       }
 
-      const body = req.body || {};
+      const body = readJsonBody(req);
+      if (!body) return res.status(400).json({ error: 'InvalidRequest', message: 'Request body must be a valid JSON object.' });
       const result = await createDiscoveryAsync(body, req.headers);
       return res.status(result.status).json(result);
     }
@@ -69,7 +83,8 @@ export default async function handler(req, res) {
         return res.status(400).json({ error: 'Discovery ID parameter is required.' });
       }
 
-      const body = req.body || {};
+      const body = readJsonBody(req);
+      if (!body) return res.status(400).json({ error: 'InvalidRequest', message: 'Request body must be a valid JSON object.' });
       const result = await updateDiscoveryAsync(id, body, req.headers);
       return res.status(result.status).json(result);
     }

@@ -11,7 +11,7 @@
    * 7. Homepage has useScrollReveal import
  * 8. prefers-reduced-motion guard exists for reveal-section in CSS
  * 9. welcome-question-chip testid referenced in the component source
-   * 10. No theme toggle reintroduced
+    * 10. Accessible theme toggle remains available
  */
 
 import { describe, it } from 'node:test';
@@ -207,19 +207,17 @@ describe('Phase 25: Premium UX, Scroll Reveal & Smart Welcome', () => {
   });
 
   // ──────────────────────────────────────────────────────────────────────────
-  // 6. Theme toggle not reintroduced (regression guard)
+  // 6. Theme toggle remains available (regression guard)
   // ──────────────────────────────────────────────────────────────────────────
-  it('Header does not contain a rendered theme toggle button', () => {
+  it('Header contains a rendered accessible theme toggle button', () => {
     const src = read('src/components/Header.tsx');
-    // Check that there's no actual theme toggle UI element (button with aria-label for theme)
-    // toggleTheme may still be imported/destructured from context but must not be rendered as a button
-    const hasToggleButton =
-      src.includes('aria-label="Toggle theme"') ||
-      src.includes('aria-label="Switch theme"') ||
-      src.includes('aria-label="Dark mode"') ||
-      src.includes('data-testid="theme-toggle"') ||
-      src.includes('onClick={toggleTheme}');
-    assert.ok(!hasToggleButton, 'Theme toggle button should NOT be rendered in the Header (dark-only mode)');
+    assert.ok(src.includes("import { ThemeToggle } from './ThemeToggle'"), 'Header imports the shared theme control');
+    assert.ok(src.includes('<ThemeToggle />'), 'Desktop theme control is rendered');
+    assert.ok(src.includes('<ThemeToggle compact />'), 'Mobile theme control is rendered');
+
+    const toggleSrc = read('src/components/ThemeToggle.tsx');
+    assert.ok(toggleSrc.includes('aria-label={`Switch to'), 'Theme control exposes an action label');
+    assert.ok(toggleSrc.includes('data-testid={compact ?'), 'Theme control has desktop/mobile test hooks');
   });
 
   // ──────────────────────────────────────────────────────────────────────────

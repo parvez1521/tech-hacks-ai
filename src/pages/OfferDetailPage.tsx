@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useRouter, Link } from '../router/Router';
 import { getOfferBySlug, offersData, isOfferActive } from '../data/offersData';
+import { getBrandLogo } from '../data/brandLogos';
 import {
   ExternalLink,
   ArrowLeft,
@@ -19,6 +20,7 @@ import {
   BookOpen,
 } from 'lucide-react';
 import { OfferCard } from '../components/OfferCard';
+import { BrandLogo } from '../components/BrandLogo';
 import { siteConfig } from '../config/siteConfig';
 
 export const OfferDetailPage: React.FC = () => {
@@ -182,15 +184,7 @@ export const OfferDetailPage: React.FC = () => {
 
         {/* Title & Provider with Brand Logo */}
         <div className="flex items-start gap-4 mb-4">
-          {offer.logoAssetPath && (
-            <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-xl flex items-center justify-center shrink-0 overflow-hidden bg-card/90 border border-border/80 shadow-md p-2 mt-1">
-              <img
-                src={offer.logoAssetPath}
-                alt={`${offer.provider} logo`}
-                className="w-full h-full object-contain"
-              />
-            </div>
-          )}
+          <BrandLogo slug={offer.logoSlug} name={getBrandLogo(offer.logoSlug)?.name || offer.provider} size="xl" className="mt-1 rounded-xl" />
           <div className="min-w-0 flex-1">
             <h1 className="text-2xl sm:text-4xl font-extrabold text-foreground tracking-tight mb-2">
               {offer.title}

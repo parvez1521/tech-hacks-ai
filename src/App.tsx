@@ -31,6 +31,7 @@ import { AlternativesPage } from './pages/AlternativesPage';
 import { AlternativeDetailPage } from './pages/AlternativeDetailPage';
 import { CollectionDetailPage } from './pages/CollectionDetailPage';
 import { AiToolsPage } from './pages/AiToolsPage';
+import { CommunityToolsPage } from './pages/CommunityToolsPage';
 import { AiToolDetailPage } from './pages/AiToolDetailPage';
 import { FreeAiSitesPage } from './pages/FreeAiSitesPage';
 import { GuidesPage } from './pages/GuidesPage';
@@ -93,11 +94,19 @@ export function getRouteTitle(route: string, params: Record<string, string> = {}
     }
     case 'ai-tools':
       return formatPageTitle('AI Tools & Generative Platforms Directory');
+    case 'community-tools':
+      return formatPageTitle('Community Tools Directory');
     case 'ai-tool-detail': {
       const aiTool = getAiToolBySlug(params.slug);
       return aiTool
         ? formatPageTitle(`${aiTool.name} (${aiTool.pricingType}) — AI Tool Review & Features`)
-        : formatPageTitle('AI Tool Not Found');
+         : formatPageTitle('AI Tool Not Found');
+    }
+    case 'community-tool-detail': {
+      const communityTool = getAiToolBySlug(params.slug);
+      return communityTool
+        ? formatPageTitle(`${communityTool.name} — Community Tool Review`)
+        : formatPageTitle('Community Tool Not Found');
     }
     case 'free-ai-sites':
       return formatPageTitle('Free AI Sites & Zero-Cost Generative Tools');
@@ -122,7 +131,7 @@ export function getRouteTitle(route: string, params: Record<string, string> = {}
     case 'free-tool-detail': {
       const freeTool = getFreeToolBySlug(params.slug);
       return freeTool
-        ? formatPageTitle(`${freeTool.name} (100% Client-Side) — Free Browser Utility`)
+        ? formatPageTitle(`${freeTool.name} (${freeTool.isClientSideOnly ? 'Client-Side' : 'Configured Service'}) — Utility Tool`)
         : formatPageTitle('Utility Not Found');
     }
     case 'compare':
@@ -201,11 +210,19 @@ export function getRouteDescription(route: string, params: Record<string, string
     }
     case 'ai-tools':
       return 'Comprehensive directory of top generative AI platforms, foundation models, code editors, and video generation engines.';
+    case 'community-tools':
+      return 'Browse community-submitted tools published after editorial review. Community Tools are kept separate from the curated AI and open-source directories.';
     case 'ai-tool-detail': {
       const aiTool = getAiToolBySlug(params.slug);
       return aiTool
         ? `${aiTool.name} (${aiTool.pricingType}): ${aiTool.description}`
-        : 'Detailed pricing provenance, model capabilities, and verified benchmarks.';
+         : 'Detailed pricing provenance, model capabilities, and verified benchmarks.';
+    }
+    case 'community-tool-detail': {
+      const communityTool = getAiToolBySlug(params.slug);
+      return communityTool
+        ? `${communityTool.name}: ${communityTool.description}`
+        : 'Detailed community tool review.';
     }
     case 'free-ai-sites':
       return 'Curated directory of 100% free AI sites, recurring free plans, zero-cost accounts, and self-hostable open-source models.';
@@ -226,7 +243,7 @@ export function getRouteDescription(route: string, params: Record<string, string
         : 'Tested prompt recipe and template.';
     }
     case 'free-tools':
-      return 'Free client-side browser utilities for developers and designers. 100% local processing with zero server uploads.';
+      return 'Utility Tools for developers, designers, and creators. Browser utilities run locally; service-backed transcription clearly reports its configured provider requirement.';
     case 'free-tool-detail': {
       const freeTool = getFreeToolBySlug(params.slug);
       return freeTool
@@ -274,7 +291,7 @@ export function getRouteDescription(route: string, params: Record<string, string
 }
 
 const AppRoutes: React.FC = () => {
-  const { route, params } = useRouter();
+  const { route, params, currentPath } = useRouter();
 
   useEffect(() => {
     if (typeof document === 'undefined') return;
@@ -296,9 +313,10 @@ const AppRoutes: React.FC = () => {
     // Update canonical URL
     const canonicalLink = document.querySelector('link[rel="canonical"]');
     if (canonicalLink && typeof window !== 'undefined') {
-      canonicalLink.setAttribute('href', `${siteConfig.url}${window.location.pathname}`);
+      const canonicalPath = window.location.pathname === '/community' ? '/community-tools' : window.location.pathname;
+      canonicalLink.setAttribute('href', `${siteConfig.url}${canonicalPath}`);
     }
-  }, [route, params]);
+  }, [route, params, currentPath]);
 
   const renderRoute = () => {
     switch (route) {
@@ -320,7 +338,11 @@ const AppRoutes: React.FC = () => {
         return <CollectionDetailPage />;
       case 'ai-tools':
         return <AiToolsPage />;
+      case 'community-tools':
+        return <CommunityToolsPage />;
       case 'ai-tool-detail':
+        return <AiToolDetailPage />;
+      case 'community-tool-detail':
         return <AiToolDetailPage />;
       case 'free-ai-sites':
         return <FreeAiSitesPage />;

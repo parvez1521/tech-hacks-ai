@@ -76,6 +76,21 @@ export const Footer: React.FC = () => {
                 </Link>
               </li>
               <li>
+                <Link to="/ai-tools" className="hover:text-foreground">
+                  AI Tools Directory
+                </Link>
+              </li>
+              <li>
+                <Link to="/community-tools" className="hover:text-foreground">
+                  Community Tools
+                </Link>
+              </li>
+              <li>
+                <Link to="/free-tools" className="hover:text-foreground">
+                  Utility Tools
+                </Link>
+              </li>
+              <li>
                 <Link to="/alternatives" className="hover:text-foreground">
                   Proprietary Alternatives
                 </Link>

@@ -4,7 +4,8 @@ import { promptsData, promptCategories } from '../data/promptsData.ts';
 import { freeToolsData } from '../data/freeToolsData.ts';
 import { toolsData } from '../data/seedData.ts';
 import { proprietaryTools } from '../data/alternatives.ts';
-import type { AiTool, AiFilterState, Guide, PromptItem, FreeToolUtility, Tool, ProprietaryTool, PickCriteria, MatchedPickResult } from '../types/index.ts';
+import type { AiTool, AiFilterState, Guide, PromptItem, FreeToolUtility, Tool, ProprietaryTool, PickCriteria, MatchedPickResult, UtilityCategory } from '../types/index.ts';
+import { getUtilityCategory } from '../data/catalogTaxonomy.ts';
 
 export const AI_PAGE_SIZE = 12;
 
@@ -43,8 +44,22 @@ export function getAllAiTools(): AiTool[] {
   return [...dynamicPublishedTools, ...aiToolsData].filter((tool) => {
     if (!tool.slug || seen.has(tool.slug)) return false;
     seen.add(tool.slug);
-    return true;
+    return !isCommunityTool(tool);
   });
+}
+
+/** Community submissions are kept separate from the editorial AI directory. */
+export function getAllCommunityTools(): AiTool[] {
+  const seen = new Set<string>();
+  return dynamicPublishedTools.filter((tool) => {
+    if (!tool.slug || seen.has(tool.slug)) return false;
+    seen.add(tool.slug);
+    return isCommunityTool(tool);
+  });
+}
+
+export function isCommunityTool(tool: AiTool): boolean {
+  return tool.section === 'community' || (Array.isArray(tool.tags) && tool.tags.includes('community-verified'));
 }
 
 // Client hydration: fetch approved additions if running in browser
@@ -58,12 +73,13 @@ if (typeof window !== 'undefined' && typeof fetch === 'function') {
       if (data?.guides && Array.isArray(data.guides)) {
         data.guides.forEach(registerPublishedGuide);
       }
+      if (typeof window !== 'undefined') window.dispatchEvent(new Event('techhacks:catalog-updated'));
     })
     .catch(() => {});
 }
 
 export function filterAndSortAiTools(state: AiFilterState): AiFilterResult {
-  let list = getAllAiTools();
+  let list = getAllAiTools().filter((tool) => !isCommunityTool(tool));
 
   // 1. Text search
   if (state.searchQuery.trim()) {
@@ -127,24 +143,24 @@ export function filterAndSortAiTools(state: AiFilterState): AiFilterResult {
 
 export function getAiToolBySlug(slug: string): AiTool | undefined {
   if (!slug) return undefined;
-  return getAllAiTools().find((t) => t.slug.toLowerCase() === slug.toLowerCase());
+  return [...getAllAiTools(), ...getAllCommunityTools()].find((t) => t.slug.toLowerCase() === slug.toLowerCase());
 }
 
 export function getFeaturedAiTools(limit = 6): AiTool[] {
-  return getAllAiTools().filter((t) => t.isFeatured).slice(0, limit);
+  return getAllAiTools().filter((t) => !isCommunityTool(t) && t.isFeatured).slice(0, limit);
 }
 
 export function getTrendingAiTools(limit = 6): AiTool[] {
-  return getAllAiTools().filter((t) => t.isTrending).slice(0, limit);
+  return getAllAiTools().filter((t) => !isCommunityTool(t) && t.isTrending).slice(0, limit);
 }
 
 export function getFreeAiTools(limit?: number): AiTool[] {
-  const free = getAllAiTools().filter((t) => t.hasFreePlan || t.pricingType === 'free');
+  const free = getAllAiTools().filter((t) => !isCommunityTool(t) && (t.hasFreePlan || t.pricingType === 'free'));
   return limit ? free.slice(0, limit) : free;
 }
 
 export function getOpenSourceAiTools(limit?: number): AiTool[] {
-  const os = getAllAiTools().filter((t) => t.isSelfHostable || t.freeAccessType === 'open-source-local');
+  const os = getAllAiTools().filter((t) => !isCommunityTool(t) && (t.isSelfHostable || t.freeAccessType === 'open-source-local'));
   return limit ? os.slice(0, limit) : os;
 }
 
@@ -171,16 +187,53 @@ export function getPromptBySlug(slug: string): PromptItem | undefined {
 }
 
 export function getAllFreeTools(): FreeToolUtility[] {
-  return freeToolsData;
+  return [...freeToolsData].map((tool) => ({
+    ...tool,
+    section: 'utility' as const,
+    primaryCategory: getUtilityCategory(tool),
+  }));
 }
 
 export function getFreeToolBySlug(slug: string): FreeToolUtility | undefined {
-  return freeToolsData.find((ft) => ft.slug.toLowerCase() === slug.toLowerCase());
+  return getAllFreeTools().find((ft) => ft.slug.toLowerCase() === slug.toLowerCase());
+}
+
+export interface CatalogStats {
+  catalogIdentities: number;
+  openSourceTools: number;
+  aiPlatforms: number;
+  communityTools: number;
+  alternativeTargets: number;
+  browserUtilities: number;
+}
+
+/**
+ * Counts the real in-app catalog identities without inflating the number with
+ * duplicate records. Alternative targets and browser utilities are reported
+ * separately so the homepage never needs to invent a large vanity number.
+ */
+export function getCatalogStats(): CatalogStats {
+  const openSourceSlugs = new Set(toolsData.map((tool) => tool.slug));
+  const aiSlugs = new Set(getAllAiTools().filter((tool) => !isCommunityTool(tool)).map((tool) => tool.slug));
+  const communitySlugs = new Set(getAllCommunityTools().map((tool) => tool.slug));
+  const alternativeSlugs = new Set(proprietaryTools.map((tool) => tool.slug));
+  const coreCatalogSlugs = new Set([...openSourceSlugs, ...aiSlugs, ...alternativeSlugs]);
+  const catalogSlugs = new Set([...coreCatalogSlugs, ...communitySlugs]);
+
+  return {
+    catalogIdentities: catalogSlugs.size,
+    openSourceTools: openSourceSlugs.size,
+    aiPlatforms: aiSlugs.size,
+    communityTools: communitySlugs.size,
+    alternativeTargets: alternativeSlugs.size,
+    browserUtilities: getAllFreeTools().length,
+  };
 }
 
 export interface UniversalSearchResult {
   openSourceTools: Tool[];
   aiTools: AiTool[];
+  communityTools: AiTool[];
   proprietaryAlternatives: ProprietaryTool[];
   guides: Guide[];
   prompts: PromptItem[];
@@ -194,6 +247,7 @@ export function universalSearch(query: string): UniversalSearchResult {
     return {
       openSourceTools: [],
       aiTools: [],
+      communityTools: [],
       proprietaryAlternatives: [],
       guides: [],
       prompts: [],
@@ -212,6 +266,17 @@ export function universalSearch(query: string): UniversalSearchResult {
     .slice(0, 4);
 
   const aiTools = getAllAiTools()
+    .filter((tool) => !isCommunityTool(tool))
+    .filter(
+      (t) =>
+        t.name.toLowerCase().includes(q) ||
+        t.tagline.toLowerCase().includes(q) ||
+        t.category.toLowerCase().includes(q) ||
+        t.tags.some((tag) => tag.toLowerCase().includes(q))
+    )
+    .slice(0, 4);
+
+  const communityTools = getAllCommunityTools()
     .filter(
       (t) =>
         t.name.toLowerCase().includes(q) ||
@@ -249,18 +314,20 @@ export function universalSearch(query: string): UniversalSearchResult {
     )
     .slice(0, 3);
 
-  const utilities = freeToolsData
+  const utilities = getAllFreeTools()
     .filter(
       (u) =>
         u.name.toLowerCase().includes(q) ||
         u.tagline.toLowerCase().includes(q) ||
-        u.category.toLowerCase().includes(q)
+        u.category.toLowerCase().includes(q) ||
+        Boolean(u.primaryCategory?.toLowerCase().includes(q))
     )
     .slice(0, 3);
 
   const totalMatches =
     openSourceTools.length +
     aiTools.length +
+    communityTools.length +
     proprietaryAlternatives.length +
     guides.length +
     prompts.length +
@@ -269,6 +336,7 @@ export function universalSearch(query: string): UniversalSearchResult {
   return {
     openSourceTools,
     aiTools,
+    communityTools,
     proprietaryAlternatives,
     guides,
     prompts,

@@ -3,6 +3,7 @@ import { Link } from '../router/Router';
 import { submitTool, checkClientToolDuplicate } from '../services/submissionService';
 import type { ToolSubmissionData } from '../types/submissions';
 import { aiCategories } from '../data/aiToolsData';
+import { categories } from '../data/categories';
 import {
   Sparkles,
   UploadCloud,
@@ -30,6 +31,7 @@ export const SubmitToolPage: React.FC = () => {
     name: '',
     websiteUrl: '',
     description: '',
+    section: 'community',
     category: '',
     pricingType: 'freemium',
     logoUrl: '',
@@ -169,8 +171,9 @@ export const SubmitToolPage: React.FC = () => {
     setFormData({
       name: '',
       websiteUrl: '',
-      description: '',
-      category: '',
+       description: '',
+       section: 'community',
+       category: '',
       pricingType: 'freemium',
       logoUrl: '',
       features: [],
@@ -395,6 +398,13 @@ export const SubmitToolPage: React.FC = () => {
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+              <div>
+                <label htmlFor="tool-section" className="block text-xs font-semibold text-foreground mb-1.5">Directory Section <span className="text-rose-400">*</span></label>
+                <select id="tool-section" required value={formData.section || 'community'} onChange={(e) => { handleInputChange('section', e.target.value); handleInputChange('category', ''); }} className="w-full px-3.5 py-2.5 rounded-lg bg-card border border-border text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-primary/50">
+                  <option value="community">Community Tools</option><option value="ai">AI Tools</option>
+                </select>
+                <p className="text-[11px] text-muted-foreground mt-1">Choose where the reviewed record should appear. Community is the default.</p>
+              </div>
               {/* Category */}
               <div>
                 <label htmlFor="tool-category" className="block text-xs font-semibold text-foreground mb-1.5">
@@ -410,7 +420,7 @@ export const SubmitToolPage: React.FC = () => {
                   }`}
                 >
                   <option value="">Select a category...</option>
-                  {aiCategories.map((cat) => (
+                  {(formData.section === 'open-source' ? categories : aiCategories).map((cat) => (
                     <option key={cat.id} value={cat.id}>
                       {cat.name} ({cat.id})
                     </option>

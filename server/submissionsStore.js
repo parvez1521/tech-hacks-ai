@@ -19,11 +19,19 @@ const DATA_DIR = process.env.VERCEL ? path.join('/tmp', 'techhacks-data') : BUND
 const SUBMISSIONS_FILE = path.join(DATA_DIR, 'submissions.json');
 const PUBLISHED_FILE = path.join(DATA_DIR, 'published-additions.json');
 
-export const ADMIN_SECRET = process.env.ADMIN_SECRET || 'techhacks-admin-2026';
+const DEVELOPMENT_ADMIN_SECRET = 'techhacks-admin-2026';
+
+function isProductionEnvironment() {
+  return process.env.VERCEL === '1' || process.env.NODE_ENV === 'production';
+}
+
+// Keep a local-only fallback so the file-backed development/test workflow remains usable.
+// Production and serverless environments must provide an explicit secret instead.
+export const ADMIN_SECRET = process.env.ADMIN_SECRET?.trim() || DEVELOPMENT_ADMIN_SECRET;
 export const ADMIN_TOKEN = ADMIN_SECRET;
 
-if ((process.env.VERCEL === '1' || process.env.NODE_ENV === 'production') && ADMIN_SECRET === 'techhacks-admin-2026') {
-  console.warn('[Security Alert] ADMIN_SECRET is using the default development passkey in production! Please set a strong, random ADMIN_SECRET in your Vercel Project Settings.');
+if (isProductionEnvironment() && (!process.env.ADMIN_SECRET?.trim() || process.env.ADMIN_SECRET.trim() === DEVELOPMENT_ADMIN_SECRET)) {
+  console.error('[Security Alert] ADMIN_SECRET is missing or uses the development passkey in production. Admin access is disabled until a strong random secret is configured.');
 }
 
 // In-memory rate limiting map: ip -> timestamps[]
@@ -208,19 +216,22 @@ export function checkRateLimit(ip = 'unknown') {
 // Check admin authorization
 export function isAuthorized(headers = {}) {
   if (!headers) return false;
+  const configuredSecret = process.env.ADMIN_SECRET?.trim();
+  const secret = configuredSecret || (isProductionEnvironment() ? '' : ADMIN_SECRET);
+  if (!secret || (isProductionEnvironment() && secret === DEVELOPMENT_ADMIN_SECRET)) return false;
   if (typeof headers === 'string') {
-    return headers === ADMIN_SECRET;
+    return headers === secret;
   }
   const authHeader = headers['authorization'] || headers['Authorization'] || '';
   const tokenHeader = headers['x-admin-token'] || headers['X-Admin-Token'] || '';
 
-  if (tokenHeader === ADMIN_SECRET) {
+  if (tokenHeader === secret) {
     return true;
   }
 
   if (authHeader.startsWith('Bearer ')) {
     const token = authHeader.slice(7).trim();
-    if (token === ADMIN_SECRET) {
+    if (token === secret) {
       return true;
     }
   }
@@ -685,6 +696,10 @@ export function updateSubmissionStatus(id, updateData, headers) {
     existing.isVerified = Boolean(updateData.isVerified);
   }
 
+  if (updateData.publishedSlug !== undefined) {
+    existing.publishedSlug = String(updateData.publishedSlug).trim() || undefined;
+  }
+
   // Allow moderator to edit toolData fields before publishing
   if (existing.type === 'tool' && updateData.toolData) {
     existing.toolData = {
@@ -758,11 +773,19 @@ export function publishSubmissionToCatalog(id, headers) {
   }
 
   const submission = submissions[index];
+  if (submission.status !== 'approved') {
+    return {
+      success: false,
+      status: 409,
+      error: 'SubmissionNotApproved',
+      message: 'Only submissions marked approved can be published to the catalog.',
+    };
+  }
   const publishedAdditions = readPublishedAdditions();
   const today = new Date().toISOString().split('T')[0];
 
   if (submission.type === 'tool' && submission.toolData) {
-    const slug = slugify(submission.toolData.name);
+    const slug = slugify(submission.publishedSlug || submission.toolData.name);
     const publishedTool = {
       id: slug,
       slug,
@@ -770,8 +793,9 @@ export function publishSubmissionToCatalog(id, headers) {
       tagline: submission.toolData.description.slice(0, 90) + (submission.toolData.description.length > 90 ? '...' : ''),
       description: submission.toolData.description,
       longDescription: submission.toolData.description,
-      websiteUrl: submission.toolData.websiteUrl,
-      category: submission.toolData.category,
+       websiteUrl: submission.toolData.websiteUrl,
+       section: submission.toolData.section || 'community',
+       category: submission.toolData.category,
       pricingType: submission.toolData.pricingType,
       pricingDetails:
         submission.toolData.pricingType === 'free'
@@ -791,10 +815,10 @@ export function publishSubmissionToCatalog(id, headers) {
       freeTierSummary: 'Community submission verified by Tech Hacks AI editorial team.',
       freeTierLimits: 'Verified live on official platform docs.',
       features: submission.toolData.features || [],
-      tags: [
-        submission.toolData.category,
-        submission.toolData.pricingType,
-        'community-verified',
+       tags: [
+         submission.toolData.category,
+         submission.toolData.pricingType,
+         ...(submission.toolData.section === 'ai' ? [] : ['community-verified']),
         ...(submission.toolData.platform || []),
       ],
       requiresAccount: submission.toolData.pricingType !== 'open-source',
@@ -832,7 +856,7 @@ export function publishSubmissionToCatalog(id, headers) {
   }
 
   if (submission.type === 'guide' && submission.guideData) {
-    const slug = slugify(submission.guideData.title);
+    const slug = slugify(submission.publishedSlug || submission.guideData.title);
 
     // Convert raw content into structured guide steps for compatibility
     const paragraphs = submission.guideData.content
@@ -927,11 +951,19 @@ export async function publishSubmissionToCatalogAsync(id, headers) {
     }
 
     const submission = submissions[index];
+    if (submission.status !== 'approved') {
+      return {
+        success: false,
+        status: 409,
+        error: 'SubmissionNotApproved',
+        message: 'Only submissions marked approved can be published to the catalog.',
+      };
+    }
     const publishedAdditions = await fetchPublishedAdditionsFromAdapter();
     const today = new Date().toISOString().split('T')[0];
 
     if (submission.type === 'tool' && submission.toolData) {
-      const slug = slugify(submission.toolData.name);
+      const slug = slugify(submission.publishedSlug || submission.toolData.name);
       const publishedTool = {
         id: slug,
         slug,
@@ -940,6 +972,7 @@ export async function publishSubmissionToCatalogAsync(id, headers) {
         description: submission.toolData.description,
         longDescription: submission.toolData.description,
         websiteUrl: submission.toolData.websiteUrl,
+        section: submission.toolData.section || 'community',
         category: submission.toolData.category,
         pricingType: submission.toolData.pricingType,
         pricingDetails:
@@ -963,7 +996,7 @@ export async function publishSubmissionToCatalogAsync(id, headers) {
         tags: [
           submission.toolData.category,
           submission.toolData.pricingType,
-          'community-verified',
+          ...(submission.toolData.section === 'ai' ? [] : ['community-verified']),
           ...(submission.toolData.platform || []),
         ],
         requiresAccount: submission.toolData.pricingType !== 'open-source',
@@ -1006,7 +1039,7 @@ export async function publishSubmissionToCatalogAsync(id, headers) {
     }
 
     if (submission.type === 'guide' && submission.guideData) {
-      const slug = slugify(submission.guideData.title);
+      const slug = slugify(submission.publishedSlug || submission.guideData.title);
       const paragraphs = submission.guideData.content
         .split(/\n\s*##\s+/)
         .map((section, idx) => {

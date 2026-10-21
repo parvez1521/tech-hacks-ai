@@ -5,10 +5,10 @@ import path from 'node:path';
 
 describe('Phase 24: Restrained UI, Verified Navigation & Chatbot Repair', () => {
   // =========================================================================
-  // 1. Task 1: Homepage Floating Brand Logos Removal
+  // 1. Task 1: Homepage Focused Hero
   // =========================================================================
   describe('Task 1: Homepage Floating Brand Logos Removal', () => {
-    test('HomePage does not render or import HeroFloatingLogos', () => {
+    test('HomePage removes the unwanted HeroFloatingLogos composition', () => {
       const homePath = path.resolve(process.cwd(), 'src/pages/HomePage.tsx');
       const content = fs.readFileSync(homePath, 'utf8');
 
@@ -27,50 +27,51 @@ describe('Phase 24: Restrained UI, Verified Navigation & Chatbot Repair', () => 
   });
 
   // =========================================================================
-  // 2. Task 2: Strictly Dark Theme Enforcement
+  // 2. Task 2: Dark-First Theme Preference
   // =========================================================================
-  describe('Task 2: Strictly Dark Theme Enforcement', () => {
-    test('Header component removes theme toggle button from desktop and mobile views', () => {
+  describe('Task 2: Dark-First Theme Preference', () => {
+    test('Header component renders theme toggle button from desktop and mobile views', () => {
       const headerPath = path.resolve(process.cwd(), 'src/components/Header.tsx');
       const content = fs.readFileSync(headerPath, 'utf8');
 
-      assert.ok(!content.includes('data-testid="theme-toggle-btn"'), 'Desktop theme button removed from Header');
-      assert.ok(!content.includes('data-testid="mobile-theme-toggle-btn"'), 'Mobile theme button removed from Header');
+      assert.ok(content.includes('<ThemeToggle />'), 'Desktop theme button is present in Header');
+      assert.ok(content.includes('<ThemeToggle compact />'), 'Mobile theme button is present in Header');
     });
 
-    test('ThemeContext strictly enforces dark theme and synchronizes DOM attributes', () => {
+    test('ThemeContext synchronizes both theme modes and explicit storage choices', () => {
       const contextPath = path.resolve(process.cwd(), 'src/context/ThemeContext.tsx');
       const content = fs.readFileSync(contextPath, 'utf8');
 
-      assert.ok(content.includes("theme: 'dark'"), 'useTheme provides theme: dark');
+      assert.ok(content.includes('value={{ theme, toggleTheme, setTheme }}'), 'useTheme provides the active theme');
       assert.ok(content.includes("root.setAttribute('data-theme'"), 'Applies data-theme attribute');
-      assert.ok(content.includes("root.style.colorScheme = 'dark'"), 'Applies dark colorScheme for form controls');
-      assert.ok(content.includes("root.classList.add('dark')"), 'Applies dark class to documentElement');
-      assert.ok(content.includes("root.classList.remove('light')"), 'Removes light class');
-      assert.ok(content.includes("localStorage.setItem('theme', 'dark')"), 'Overrides saved light mode in localStorage');
+      assert.ok(content.includes('root.style.colorScheme = theme'), 'Applies active colorScheme for form controls');
+      assert.ok(content.includes("root.classList.toggle('dark', isDark)"), 'Applies active dark class to documentElement');
+      assert.ok(content.includes("root.classList.toggle('light', !isDark)"), 'Applies active light class to documentElement');
+      assert.ok(content.includes('localStorage.setItem(THEME_STORAGE_KEY, nextTheme)'), 'Persists explicit mode choice');
     });
 
-    test('index.html initializes dark theme and removes stale light preference', () => {
+    test('index.html initializes dark theme without erasing a saved preference', () => {
       const htmlPath = path.resolve(process.cwd(), 'index.html');
       const content = fs.readFileSync(htmlPath, 'utf8');
 
-      assert.ok(content.includes("localStorage.removeItem('theme')"), 'Purges stale light theme');
-      assert.ok(content.includes("document.documentElement.classList.add('dark')"), 'Adds dark class synchronously');
-      assert.ok(content.includes("document.documentElement.setAttribute('data-theme', 'dark')"), 'Sets data-theme="dark"');
-      assert.ok(content.includes("document.documentElement.style.colorScheme = 'dark'"), 'Sets colorScheme to dark');
+      assert.ok(content.includes("var theme = savedTheme === 'light' ? 'light' : 'dark'"), 'Defaults to dark and reads saved light');
+      assert.ok(content.includes("root.classList.toggle('dark', theme === 'dark')"), 'Adds dark class synchronously');
+      assert.ok(content.includes("root.setAttribute('data-theme', theme)"), 'Sets data-theme synchronously');
+      assert.ok(content.includes("root.style.colorScheme = theme"), 'Sets colorScheme synchronously');
+      assert.ok(!content.includes("localStorage.removeItem('theme')"), 'Does not purge explicit preference');
     });
   });
 
   // =========================================================================
-  // 3. Task 3: Quiet background treatment
+  // 3. Task 3: Restrained global background treatment
   // =========================================================================
-  describe('Task 3: Quiet background treatment', () => {
-    test('AmbientGlow is retained for compatibility but disabled in the quiet shell', () => {
+  describe('Task 3: Restrained global background treatment', () => {
+    test('AmbientGlow paints a restrained global field behind the content shell', () => {
       const glowPath = path.resolve(process.cwd(), 'src/components/AmbientGlow.tsx');
       const content = fs.readFileSync(glowPath, 'utf8');
 
-      assert.ok(content.includes('const ENABLE_AMBIENT_GLOW = false'), 'Global ambient painting is disabled');
-      assert.ok(content.includes('opacity-0'), 'Legacy ambient container is visually suppressed');
+      assert.ok(content.includes('const ENABLE_AMBIENT_GLOW = true'), 'Global ambient painting is enabled');
+      assert.ok(content.includes('ambient-glow-container'), 'Global field uses a dedicated visual layer');
     });
 
     test('AmbientGlow container is non-blocking, behind content, and accessible', () => {
@@ -78,7 +79,7 @@ describe('Phase 24: Restrained UI, Verified Navigation & Chatbot Repair', () => 
       const content = fs.readFileSync(glowPath, 'utf8');
 
       assert.ok(content.includes('pointer-events-none'), 'Container has pointer-events-none');
-      assert.ok(content.includes('-z-10'), 'Container positioned behind interactive content (-z-10)');
+      assert.ok(content.includes('z-0'), 'Container positioned behind interactive content');
       assert.ok(content.includes('aria-hidden="true"'), 'Container hidden from screen readers');
       assert.ok(content.includes('prefers-reduced-motion'), 'Respects prefers-reduced-motion');
       assert.ok(content.includes('pointer: fine'), 'Disabled on coarse touch pointers');
@@ -138,13 +139,14 @@ describe('Phase 24: Restrained UI, Verified Navigation & Chatbot Repair', () => 
   // 6. Task 6 & 7: Search polish & card interaction
   // =========================================================================
   describe('Task 6 & 7: Interactive Background & Interaction Polish', () => {
-    test('HomePage keeps the hero focused on search without decorative layers', () => {
+    test('HomePage keeps decorative hero layers behind the functional search hierarchy', () => {
       const homePath = path.resolve(process.cwd(), 'src/pages/HomePage.tsx');
       const content = fs.readFileSync(homePath, 'utf8');
 
-      assert.ok(!content.includes('bg-dot-pattern'), 'Does not render a dot texture in the hero');
-      assert.ok(!content.includes('bg-grid-pattern'), 'Does not render a grid texture in the hero');
-      assert.ok(!content.includes('animate-ambient-drift'), 'Does not render an ambient gradient bloom');
+      assert.ok(content.includes('hero-shell'), 'Hero uses the cinematic shell');
+      assert.ok(content.includes('<HeroSignalVisual />'), 'Hero keeps the depth visual');
+      assert.ok(!content.includes('<HeroFloatingLogos />'), 'Hero does not include the removed logo orbit');
+      assert.ok(content.includes('<UniversalSearch />'), 'Functional search remains in the hero');
     });
 
     test('UniversalSearch includes Cmd+K shortcut listener and glowing cyan focus ring', () => {

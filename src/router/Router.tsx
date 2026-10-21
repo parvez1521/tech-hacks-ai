@@ -45,6 +45,9 @@ export function matchRoute(pathname: string): { route: string; params: Record<st
   if (cleanPath === '/ai-tools') {
     return { route: 'ai-tools', params: {} };
   }
+  if (cleanPath === '/community-tools' || cleanPath === '/community') {
+    return { route: 'community-tools', params: {} };
+  }
   if (cleanPath === '/free-ai-sites') {
     return { route: 'free-ai-sites', params: {} };
   }
@@ -134,6 +137,12 @@ export function matchRoute(pathname: string): { route: string; params: Record<st
   const aiToolsMatch = cleanPath.match(/^\/ai-tools\/([^/]+)$/);
   if (aiToolsMatch) {
     return { route: 'ai-tool-detail', params: { slug: aiToolsMatch[1] } };
+  }
+
+  // /community-tools/:slug
+  const communityToolsMatch = cleanPath.match(/^\/community-tools\/([^/]+)$/);
+  if (communityToolsMatch) {
+    return { route: 'community-tool-detail', params: { slug: communityToolsMatch[1] } };
   }
 
   // /guides/:slug

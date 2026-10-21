@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, useRouter, safeScrollTo } from '../router/Router';
-import { filterAndSortAiTools } from '../services/aiCatalogService';
+import { filterAndSortAiTools, getAllAiTools, isCommunityTool } from '../services/aiCatalogService';
 import { aiCategories } from '../data/aiToolsData';
 import { AiToolCard } from '../components/AiToolCard';
 import { Pagination } from '../components/Pagination';
@@ -21,6 +21,7 @@ export const AiToolsPage: React.FC = () => {
   };
 
   const { tools, totalCount, totalPages, currentPage } = filterAndSortAiTools(filterState);
+  const availableCategories = aiCategories.filter((cat) => getAllAiTools().some((tool) => !isCommunityTool(tool) && tool.category === cat.id));
 
   const handleSearchChange = (q: string) => {
     setSearchParams({ q: q || null, page: null }, { replace: true });
@@ -151,7 +152,7 @@ export const AiToolsPage: React.FC = () => {
           >
             All Categories
           </button>
-          {aiCategories.map((cat) => {
+           {availableCategories.map((cat) => {
             const isSelected = filterState.category === cat.id;
             return (
               <button

@@ -116,7 +116,7 @@ describe('Phase 7: Official Brand Logos & Verified Free AI Tools Directory', () 
     }
   });
 
-  test('all AI tools have mapped logo assets in brandLogos and valid SVG files', () => {
+  test('all AI tools have mapped logo assets in brandLogos and valid image files', () => {
     for (const ai of aiToolsData) {
       const entry = getBrandLogo(ai.slug);
       assert.ok(entry, `AI platform ${ai.slug} must be registered in brandLogos`);
@@ -124,8 +124,9 @@ describe('Phase 7: Official Brand Logos & Verified Free AI Tools Directory', () 
       const fullPath = path.resolve('public', entry.assetPath.replace(/^\//, ''));
       assert.ok(fs.existsSync(fullPath), `Asset file ${fullPath} must exist on disk for ${ai.slug}`);
 
-      const content = fs.readFileSync(fullPath, 'utf8');
-      assert.ok(content.includes('<svg'), `Asset ${entry.assetPath} must contain SVG markup`);
+      const content = fs.readFileSync(fullPath);
+      if (/\.svg$/i.test(fullPath)) assert.ok(content.toString('utf8').includes('<svg'), `Asset ${entry.assetPath} must contain SVG markup`);
+      else assert.ok(content.length > 32, `Asset ${entry.assetPath} must contain a valid raster payload`);
     }
   });
 
@@ -203,7 +204,7 @@ describe('Phase 7: Official Brand Logos & Verified Free AI Tools Directory', () 
     assert.ok(html.includes('100% Open Source &amp; Local') || html.includes('100% Open Source & Local'), 'Renders Open Source tab');
     assert.ok(html.includes('Recurring Free Plan'), 'Renders Recurring Free Plan tab');
     assert.ok(html.includes('No Account Required'), 'Renders No Account Required tab');
-    assert.ok(html.includes('src="/logos/ollama.svg"'), 'Renders Ollama official brand logo');
+    assert.ok(html.includes('src="/logos/official-ai/ollama.png"'), 'Renders Ollama official brand logo');
     assert.ok(html.includes('src="/logos/claude.svg"'), 'Renders Claude official brand logo');
     assert.ok(!html.includes('src="/logos/chatgpt.svg"') && html.includes('aria-label="ChatGPT"'), 'Uses a safe ChatGPT fallback when provenance is unresolved');
   });

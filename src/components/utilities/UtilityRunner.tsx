@@ -1,10 +1,107 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { Suspense, useState, useRef, useEffect } from 'react';
 import { FreeToolUtility } from '../../types';
 import { Upload, Download, Copy, Check, RefreshCw, AlertCircle, FileCheck, Sparkles } from 'lucide-react';
+import { createQrMatrix } from '../../lib/utilities/qr';
 
 interface UtilityRunnerProps {
   utility: FreeToolUtility;
 }
+
+interface LazyUtilityProps {
+  slug: string;
+}
+
+const LazyTextUtility = React.lazy(() => import('./UtilityTextTools').then((module) => ({
+  default: ({ slug }: LazyUtilityProps) => {
+    switch (slug) {
+      case 'text-diff': return <module.TextDiffTool />;
+      case 'slug-generator': return <module.SlugGeneratorTool />;
+      case 'markdown-table-builder': return <module.MarkdownTableBuilderTool />;
+      case 'unicode-inspector': return <module.UnicodeInspectorTool />;
+      case 'html-entity-codec': return <module.HtmlEntityCodecTool />;
+      case 'csv-json-converter': return <module.CsvJsonConverterTool />;
+      default: return null;
+    }
+  },
+})));
+
+const LazyCodeUtility = React.lazy(() => import('./UtilityCodeTools').then((module) => ({
+  default: ({ slug }: LazyUtilityProps) => {
+    switch (slug) {
+      case 'json-to-typescript': return <module.JsonToTypeScriptTool />;
+      case 'regex-tester': return <module.RegexTesterTool />;
+      case 'url-query-builder': return <module.UrlQueryBuilderTool />;
+      case 'css-specificity': return <module.CssSpecificityTool />;
+      case 'css-gradient': return <module.CssGradientTool />;
+      default: return null;
+    }
+  },
+})));
+
+const LazySecurityUtility = React.lazy(() => import('./UtilitySecurityTools').then((module) => ({
+  default: ({ slug }: LazyUtilityProps) => {
+    switch (slug) {
+      case 'jwt-decoder': return <module.JwtDecoderTool />;
+      case 'uuid-tool': return <module.UuidTool />;
+      case 'password-generator': return <module.PasswordGeneratorTool />;
+      case 'text-hash': return <module.TextHashTool />;
+      case 'file-checksum': return <module.FileChecksumTool />;
+      default: return null;
+    }
+  },
+})));
+
+const LazyBrowserUtility = React.lazy(() => import('./UtilityBrowserTools').then((module) => ({
+  default: ({ slug }: LazyUtilityProps) => {
+    switch (slug) {
+      case 'timestamp-converter': return <module.TimestampConverterTool />;
+      case 'viewport-inspector': return <module.ViewportInspectorTool />;
+      case 'mime-sniffer': return <module.MimeSnifferTool />;
+      case 'file-metadata': return <module.FileMetadataTool />;
+      case 'youtube-metadata': return <module.YoutubeMetadataTool />;
+      default: return null;
+    }
+  },
+})));
+
+const LazyImageUtility = React.lazy(() => import('./UtilityImageTools').then((module) => ({
+  default: ({ slug }: LazyUtilityProps) => {
+    switch (slug) {
+      case 'image-cropper': return <module.ImageCropperTool />;
+      case 'image-palette': return <module.ImagePaletteTool />;
+      case 'favicon-generator': return <module.FaviconGeneratorTool />;
+      case 'svg-optimizer': return <module.SvgOptimizerTool />;
+      default: return null;
+    }
+  },
+})));
+
+const LazyMediaUtility = React.lazy(() => import('./UtilityMediaTools').then((module) => ({
+  default: ({ slug }: LazyUtilityProps) => {
+    switch (slug) {
+      case 'audio-metadata': return <module.AudioMetadataTool />;
+      case 'video-metadata': return <module.VideoMetadataTool />;
+      case 'audio-trimmer': return <module.AudioTrimmerTool />;
+      case 'video-audio-transcriber': return <module.VideoAudioTranscriberTool />;
+      case 'mp4-to-mp3': return <module.Mp4ToMp3Tool />;
+      case 'youtube-video-downloader': return <module.YoutubeVideoDownloaderTool />;
+      case 'instagram-video-downloader': return <module.InstagramVideoDownloaderTool />;
+      default: return null;
+    }
+  },
+})));
+
+const UtilityLoading: React.FC = () => (
+  <div className="flex min-h-32 items-center justify-center rounded-xl border border-border bg-card/50 text-xs text-muted-foreground" role="status">
+    Loading this local utility…
+  </div>
+);
+
+const renderLazyUtility = (Component: React.ComponentType<LazyUtilityProps>, slug: string) => (
+  <Suspense fallback={<UtilityLoading />}>
+    <Component slug={slug} />
+  </Suspense>
+);
 
 export const UtilityRunner: React.FC<UtilityRunnerProps> = ({ utility }) => {
   switch (utility.slug) {
@@ -20,8 +117,40 @@ export const UtilityRunner: React.FC<UtilityRunnerProps> = ({ utility }) => {
       return <PromptBuilderTool />;
     case 'svg-to-png':
       return <SvgToPngTool />;
+    case 'text-diff':
+    case 'slug-generator':
+    case 'markdown-table-builder':
+    case 'unicode-inspector':
+    case 'html-entity-codec':
+    case 'csv-json-converter': return renderLazyUtility(LazyTextUtility, utility.slug);
+    case 'json-to-typescript':
+    case 'regex-tester':
+    case 'url-query-builder':
+    case 'css-specificity':
+    case 'css-gradient': return renderLazyUtility(LazyCodeUtility, utility.slug);
+    case 'jwt-decoder':
+    case 'uuid-tool':
+    case 'password-generator':
+    case 'text-hash':
+    case 'file-checksum': return renderLazyUtility(LazySecurityUtility, utility.slug);
+    case 'timestamp-converter':
+    case 'viewport-inspector':
+    case 'mime-sniffer':
+    case 'file-metadata':
+    case 'youtube-metadata': return renderLazyUtility(LazyBrowserUtility, utility.slug);
+    case 'image-cropper':
+    case 'image-palette':
+    case 'favicon-generator':
+    case 'svg-optimizer': return renderLazyUtility(LazyImageUtility, utility.slug);
+    case 'audio-metadata':
+    case 'video-metadata':
+    case 'audio-trimmer':
+    case 'video-audio-transcriber':
+    case 'mp4-to-mp3':
+    case 'youtube-video-downloader':
+    case 'instagram-video-downloader': return renderLazyUtility(LazyMediaUtility, utility.slug);
     default:
-      return <GenericToolPlaceholder utility={utility} />;
+      return <MissingUtilityRunner utility={utility} />;
   }
 };
 
@@ -134,7 +263,7 @@ const ImageResizerTool: React.FC = () => {
             {selectedFile ? selectedFile.name : 'Choose an image or drag & drop'}
           </span>
           <span className="text-xs text-muted-foreground">
-            PNG, JPEG, WEBP up to 25MB • Processed 100% locally on your machine
+            PNG, JPEG, WEBP up to 25MB • Processed in this browser
           </span>
         </label>
       </div>
@@ -255,6 +384,7 @@ const QrGeneratorTool: React.FC = () => {
   const [text, setText] = useState('https://techhacksai.com');
   const [qrSize, setQrSize] = useState(256);
   const [copied, setCopied] = useState(false);
+  const [error, setError] = useState('');
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   const drawQrCode = () => {
@@ -262,57 +392,22 @@ const QrGeneratorTool: React.FC = () => {
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
-
-    canvas.width = qrSize;
-    canvas.height = qrSize;
-
-    // Draw background
-    ctx.fillStyle = '#ffffff';
-    ctx.fillRect(0, 0, qrSize, qrSize);
-
-    // Draw deterministic mock/real high-density matrix
-    ctx.fillStyle = '#0f172a';
-    const modules = 25;
-    const cellSize = (qrSize - 32) / modules;
-    const padding = 16;
-
-    // Simple deterministic hash function for consistent aesthetic QR pattern
-    let hash = 0;
-    for (let i = 0; i < text.length; i++) {
-      hash = (hash << 5) - hash + text.charCodeAt(i);
-      hash |= 0;
-    }
-
-    // Corner Finder Patterns
-    const drawFinder = (x: number, y: number) => {
-      ctx.fillStyle = '#0f172a';
-      ctx.fillRect(x, y, cellSize * 7, cellSize * 7);
+    try {
+      const matrix = createQrMatrix(text);
+      canvas.width = qrSize;
+      canvas.height = qrSize;
       ctx.fillStyle = '#ffffff';
-      ctx.fillRect(x + cellSize, y + cellSize, cellSize * 5, cellSize * 5);
+      ctx.fillRect(0, 0, qrSize, qrSize);
+      const quietZone = Math.max(4, Math.floor(qrSize / 64));
+      const cellSize = (qrSize - quietZone * 2) / matrix.length;
       ctx.fillStyle = '#0f172a';
-      ctx.fillRect(x + cellSize * 2, y + cellSize * 2, cellSize * 3, cellSize * 3);
-    };
-
-    drawFinder(padding, padding);
-    drawFinder(padding + cellSize * (modules - 7), padding);
-    drawFinder(padding, padding + cellSize * (modules - 7));
-
-    // Data dots
-    ctx.fillStyle = '#0f172a';
-    for (let r = 0; r < modules; r++) {
-      for (let c = 0; c < modules; c++) {
-        const isCorner =
-          (r < 8 && c < 8) ||
-          (r < 8 && c >= modules - 8) ||
-          (r >= modules - 8 && c < 8);
-        if (isCorner) continue;
-
-        // Bit determination
-        const bit = Math.abs(Math.sin((r * modules + c + hash) * 12.9898) * 43758.5453) % 1 > 0.5;
-        if (bit) {
-          ctx.fillRect(padding + c * cellSize, padding + r * cellSize, cellSize - 0.5, cellSize - 0.5);
-        }
-      }
+      matrix.forEach((row, rowIndex) => row.forEach((filled, columnIndex) => {
+        if (filled) ctx.fillRect(quietZone + columnIndex * cellSize, quietZone + rowIndex * cellSize, Math.ceil(cellSize), Math.ceil(cellSize));
+      }));
+      setError('');
+    } catch (err) {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      setError(err instanceof Error ? err.message : 'Unable to encode this QR payload.');
     }
   };
 
@@ -385,6 +480,7 @@ const QrGeneratorTool: React.FC = () => {
             <span>{copied ? 'Copied!' : 'Copy'}</span>
           </button>
         </div>
+        {error && <div className="flex items-center gap-2 rounded-lg border border-red-500/20 bg-red-500/10 p-2 text-xs text-red-300"><AlertCircle className="h-3.5 w-3.5" />{error}</div>}
       </div>
 
       <div className="p-5 rounded-xl border border-border bg-card/60 flex flex-col items-center justify-center min-h-[300px]">
@@ -806,13 +902,13 @@ const SvgToPngTool: React.FC = () => {
   );
 };
 
-// Fallback Generic Tool Placeholder
-const GenericToolPlaceholder: React.FC<{ utility: FreeToolUtility }> = ({ utility }) => (
-  <div className="p-8 text-center rounded-xl bg-card/60 border border-border">
-    <h3 className="font-bold text-foreground text-base mb-2">{utility.name}</h3>
-    <p className="text-xs text-muted-foreground mb-4">{utility.description}</p>
-    <span className="px-3 py-1 rounded bg-muted text-muted-foreground text-xs">
-      Client-side execution verified
-    </span>
+const MissingUtilityRunner: React.FC<{ utility: FreeToolUtility }> = ({ utility }) => (
+  <div className="rounded-xl border border-amber-500/30 bg-amber-500/10 p-6">
+    <h3 className="mb-2 text-base font-bold text-foreground">{utility.name}</h3>
+    <p className="mb-4 text-xs text-muted-foreground">This utility is registered but its working runner is unavailable in this build.</p>
+    <div className="flex items-center gap-2 text-xs font-medium text-amber-300">
+      <AlertCircle className="h-4 w-4" />
+      <span>Please choose another utility or report this registry mismatch.</span>
+    </div>
   </div>
 );

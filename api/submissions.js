@@ -8,6 +8,19 @@ import {
   isAuthorized,
 } from '../server/submissionsStore.js';
 
+function readJsonBody(req) {
+  if (req.bodyParseError) return null;
+  try {
+    const rawBody = req.body;
+    if (rawBody === undefined || rawBody === null || rawBody === '') return {};
+    const body = typeof rawBody === 'string' ? JSON.parse(rawBody) : rawBody;
+    if (!body || typeof body !== 'object' || Array.isArray(body)) return null;
+    return body;
+  } catch {
+    return null;
+  }
+}
+
 export default async function handler(req, res) {
   const method = req.method;
   const url = new URL(req.url, `http://${req.headers.host || 'localhost'}`);
@@ -71,8 +84,10 @@ export default async function handler(req, res) {
       }
 
       // Public submission
-      const body = req.body || {};
-      const clientIp = req.headers['x-forwarded-for'] || req.socket?.remoteAddress || '127.0.0.1';
+      const body = readJsonBody(req);
+      if (!body) return res.status(400).json({ error: 'InvalidRequest', message: 'Request body must be a valid JSON object.' });
+      const forwarded = req.headers['x-vercel-forwarded-for'] || req.headers['x-forwarded-for'];
+      const clientIp = String(forwarded || req.socket?.remoteAddress || '127.0.0.1').split(',')[0].trim();
 
       if (body.type === 'guide') {
         const result = await createGuideSubmission(body, clientIp);
@@ -93,7 +108,8 @@ export default async function handler(req, res) {
         return res.status(401).json({ error: 'Unauthorized. Moderator access token required.' });
       }
 
-      const body = req.body || {};
+      const body = readJsonBody(req);
+      if (!body) return res.status(400).json({ error: 'InvalidRequest', message: 'Request body must be a valid JSON object.' });
       const result = await updateSubmissionStatusAsync(id, body, req.headers);
       return res.status(result.status).json(result);
     }

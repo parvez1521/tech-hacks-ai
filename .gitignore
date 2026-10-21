@@ -8,5 +8,6 @@ dist
 .env.production
 .env.*
 !.env.example
-
+__pycache__/
+*.pyc
 

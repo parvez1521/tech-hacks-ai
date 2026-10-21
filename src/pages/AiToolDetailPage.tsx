@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useRouter, Link } from '../router/Router';
-import { getAiToolBySlug, filterAndSortAiTools, getAllGuides } from '../services/aiCatalogService';
+import { getAiToolBySlug, filterAndSortAiTools, getAllGuides, getAllCommunityTools, isCommunityTool } from '../services/aiCatalogService';
 import { BookmarkButton } from '../components/BookmarkButton';
 import { AiToolCard } from '../components/AiToolCard';
 import { GuideCard } from '../components/GuideCard';
@@ -10,24 +10,31 @@ import { BrandLogo } from '../components/BrandLogo';
 import { siteConfig } from '../config/siteConfig';
 
 export const AiToolDetailPage: React.FC = () => {
-  const { params } = useRouter();
+  const { params, currentPath } = useRouter();
   const slug = params.slug;
-  const tool = getAiToolBySlug(slug);
+  const [tool, setTool] = useState(() => getAiToolBySlug(slug));
+  useEffect(() => {
+    const refresh = () => setTool(getAiToolBySlug(slug));
+    refresh();
+    window.addEventListener('techhacks:catalog-updated', refresh);
+    return () => window.removeEventListener('techhacks:catalog-updated', refresh);
+  }, [slug]);
+  const isCommunity = Boolean(tool && (currentPath.startsWith('/community-tools/') || isCommunityTool(tool)));
   const [copied, setCopied] = useState(false);
 
   if (!tool) {
     return (
       <div className="max-w-4xl mx-auto px-4 py-16 text-center">
-        <h1 className="text-2xl font-bold text-foreground mb-3">AI Tool Not Found</h1>
+        <h1 className="text-2xl font-bold text-foreground mb-3">{isCommunity ? 'Community Tool Not Found' : 'AI Tool Not Found'}</h1>
         <p className="text-secondary-foreground mb-6">
           We couldn't find an AI tool record matching "{slug}".
         </p>
         <Link
-          to="/ai-tools"
+          to={isCommunity ? '/community-tools' : '/ai-tools'}
           className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-primary text-primary-foreground text-sm font-medium hover:bg-primary-hover transition-colors"
         >
           <ArrowLeft className="w-4 h-4" />
-          <span>Browse All AI Tools</span>
+          <span>{isCommunity ? 'Browse Community Tools' : 'Browse All AI Tools'}</span>
         </Link>
       </div>
     );
@@ -35,7 +42,7 @@ export const AiToolDetailPage: React.FC = () => {
 
   const handleCopyLink = () => {
     if (typeof window !== 'undefined') {
-      const canonicalUrl = `${siteConfig.url}/ai-tools/${tool.slug}`;
+       const canonicalUrl = `${siteConfig.url}${isCommunity ? '/community-tools' : '/ai-tools'}/${tool.slug}`;
       navigator.clipboard.writeText(canonicalUrl);
       setCopied(true);
       setTimeout(() => setCopied(false), 2500);
@@ -48,20 +55,16 @@ export const AiToolDetailPage: React.FC = () => {
     slug: tool.slug,
     title: tool.name,
     subtitle: tool.tagline,
-    url: `/ai-tools/${tool.slug}`,
+     url: `${isCommunity ? '/community-tools' : '/ai-tools'}/${tool.slug}`,
     iconBgColor: tool.iconBgColor,
     iconLetter: tool.iconLetter,
     savedAt: new Date().toISOString(),
   };
 
   // Find related tools in same category
-  const { tools: relatedTools } = filterAndSortAiTools({
-    searchQuery: '',
-    category: tool.category,
-    pricingType: 'all',
-    sortBy: 'popular',
-    page: 1,
-  });
+  const relatedTools = isCommunity
+    ? getAllCommunityTools().filter((candidate) => candidate.category === tool.category)
+    : filterAndSortAiTools({ searchQuery: '', category: tool.category, pricingType: 'all', sortBy: 'popular', page: 1 }).tools;
   const similarTools = relatedTools.filter((t) => t.id !== tool.id).slice(0, 3);
 
   // Find related guides mentioning this tool or category
@@ -86,7 +89,7 @@ export const AiToolDetailPage: React.FC = () => {
     '@type': 'SoftwareApplication',
     name: tool.name,
     description: tool.description,
-    url: `${siteConfig.url}/ai-tools/${tool.slug}`,
+     url: `${siteConfig.url}${isCommunity ? '/community-tools' : '/ai-tools'}/${tool.slug}`,
     applicationCategory: tool.category,
     operatingSystem: tool.isSelfHostable ? 'Cross-platform, Docker, Local' : 'Cloud / Web Browser',
     offers: {
@@ -110,7 +113,7 @@ export const AiToolDetailPage: React.FC = () => {
         <div className="flex items-center gap-2">
           <Link to="/" className="hover:text-foreground">Home</Link>
           <span>/</span>
-          <Link to="/ai-tools" className="hover:text-foreground">AI Tools</Link>
+           <Link to={isCommunity ? '/community-tools' : '/ai-tools'} className="hover:text-foreground">{isCommunity ? 'Community Tools' : 'AI Tools'}</Link>
           <span>/</span>
           <span className="text-foreground font-medium">{tool.name}</span>
         </div>
@@ -166,7 +169,7 @@ export const AiToolDetailPage: React.FC = () => {
                 )}
               </div>
               <p className="text-sm text-muted-foreground mt-1 capitalize">
-                Category: {tool.category} • Released {tool.releaseYear || 2024}
+                 {isCommunity ? 'Community submission' : 'Category'}: {tool.category} • Released {tool.releaseYear || 2024}
               </p>
             </div>
           </div>

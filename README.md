@@ -14,11 +14,13 @@ Target Domain: `https://techhacksai.com`
 - **Side-by-Side Comparison Matrix:** Compare licenses, hosting models, pricing tiers, and capabilities between platforms.
 - **"Help Me Pick" Guided Wizard:** Interactive multi-step recommendation engine tailored to user constraints.
 - **Community Submissions System:** Public submission forms for new AI tools (`/submit-tool`) and tutorials (`/submit-guide`) with built-in client validation, URL normalization, anti-spam honeypots, rate limiting, and duplicate detection.
+- **Separated Product Sections:** AI Tools (`/ai-tools`), Community Tools (`/community-tools`), Open Source (`/tools`), Utility Tools (`/free-tools`), and Alternatives use distinct section-aware filters and search groups.
 - **Editorial Moderation Dashboard:** Protected administration interface (`/moderation`) to inspect, review, approve, edit, and publish community submissions directly to the live catalog.
 - **Interactive AI Assistant:** Holographic floating chatbot with grounded local catalog retrieval and optional serverless LLM generation.
 - **Official Brand Logos Registry:** High-resolution SVG brand icons for 80+ AI products, developer utilities, and open-source projects.
 - **Step-by-Step AI Guides & Prompt Library:** Detailed creator and developer tutorials and copy-ready prompt templates.
-- **Privacy-First Client Utilities:** 100% client-side browser tools including QR Code Generator, Word Counter, JSON Formatter, and Image Resizers.
+- **Utility Tools Directory:** 38 categorized tools across Video & Audio, Image & Graphics, Text & Writing, Developer Tools, Security & Validation, and Files, Data & Browser.
+- **Media Workflows:** Video & Audio Transcriber (configured server provider), local MP4-to-MP3 conversion through lazy FFmpeg WebAssembly, and honest YouTube/Instagram authorized-workflow helpers.
 
 ---
 
@@ -28,12 +30,14 @@ Target Domain: `https://techhacksai.com`
 - **Framework:** React 18 with TypeScript
 - **Bundler & Dev Server:** Vite 5 with manual chunk splitting (`vendor-react`, `vendor-icons`, `catalog-data`, `app-pages`)
 - **Styling & Motion:** Tailwind CSS, Lucide React icons, and hardware-accelerated ambient glow shaders
+- **Media dependencies:** `@ffmpeg/ffmpeg` and `@ffmpeg/util` are dynamically loaded only when MP4 conversion starts; `busboy` parses server-side transcription uploads.
 - **Client Routing:** Custom HTML5 pushState/popstate router with dynamic document titles and metadata
 
 ### Backend & API
 - **Serverless API Routes:**
-  - `api/submissions.js`: Handles community submissions, published catalog overlays, and moderator workflow actions.
-  - `api/chat.js`: Handles live chatbot streaming queries with graceful fallback to grounded client-side catalog retrieval.
+   - `api/submissions.js`: Handles community submissions, published catalog overlays, and moderator workflow actions.
+   - `api/chat.js`: Handles live chatbot streaming queries with graceful fallback to grounded client-side catalog retrieval.
+   - `api/transcribe.js`: Handles optional server-side media transcription with strict file limits, provider host allowlisting, and timeout handling.
 - **Storage Layer (`server/storageAdapter.js`):**
   - **Local Development / Test Mode:** Persists atomically to `data/*.json`.
   - **Durable Production Mode (Supabase):** Connects to Supabase PostgreSQL over HTTPS PostgREST REST API using native Node 18+ `globalThis.fetch` (**zero extra npm dependencies**).
@@ -86,7 +90,8 @@ Open `http://localhost:3000` in your browser.
 | `npm run dev` | Starts the Vite dev server with integrated API middleware at `http://localhost:3000` |
 | `npm run build` | Compiles the production build with bundle optimization into `dist/` |
 | `npm run preview` | Serves the production build locally for verification |
-| `npm test` | Runs the full automated test suite (408 tests across 108 suites) |
+| `npm test` | Runs the full automated test suite serially (458 tests across 116 suites) |
+| `npm run logos:sync` | Copies the bounded official-logo export and recorded workspace-provided assets into the canonical registry and public manifest |
 | `npm run db:migrate -- --dry-run` | Audits local JSON submissions and published additions ready for database sync |
 | `npm run db:migrate -- --sql` | Outputs PostgreSQL INSERT statements ready for the Supabase SQL Editor |
 | `npm run db:migrate` | Syncs local data to Supabase over REST when environment variables are set |
@@ -103,8 +108,11 @@ Configure these variables in your hosting environment (e.g. Vercel Project Setti
 | `ADMIN_SECRET` | Server (Secret) | Bearer token / passkey required for `/moderation` and PATCH `/api/submissions`. |
 | `SUPABASE_URL` | Server (Secret) | Supabase project URL (e.g. `https://<project-ref>.supabase.co`). |
 | `SUPABASE_SERVICE_ROLE_KEY` | Server (Secret) | Supabase secret key with RLS bypass for API storage operations. |
-| `GROQ_API_KEY` | Server (Secret) | *(Optional)* Groq API key for Llama 3.3 live chatbot responses. |
+| `GROQ_API_KEY` | Server (Secret) | *(Optional)* Groq API key for Llama 3.3 live chatbot responses or Groq multilingual speech-to-text when `TRANSCRIPTION_API_URL` points to Groq. |
 | `GEMINI_API_KEY` | Server (Secret) | *(Optional)* Google Gemini API key for multimodal model inference. |
+| `OPENAI_API_KEY` | Server (Secret) | *(Optional)* Server-side OpenAI speech-to-text key for the Video & Audio Transcriber. Never expose it as `VITE_`. The default `whisper-1` model supports multilingual transcription. |
+| `TRANSCRIPTION_API_URL` | Server (Secret) | *(Optional)* Allowlisted OpenAI or Groq transcription endpoint. Defaults to OpenAI's audio transcription endpoint. |
+| `TRANSCRIPTION_MODEL` | Server (Secret) | *(Optional)* Provider model name. Defaults to `whisper-1` for OpenAI and `whisper-large-v3-turbo` for Groq. The selected model must support multilingual transcription. |
 | `VITE_ADSENSE_PUB_ID` | Client (Public) | *(Optional)* Google AdSense Publisher ID (e.g. `ca-pub-XXXXXXXXXXXXXXXX`). |
 
 ---
@@ -143,6 +151,10 @@ To enable persistent community submissions and moderation in production:
 
 - **SPA Rewrites:** [`vercel.json`](vercel.json) rewrites `/((?!api/).*)` to `/index.html`, preserving client-side React routes while leaving serverless functions under `/api/` intact.
 - **Security Headers:** Modern HTTP security headers are configured in `vercel.json` (`X-Frame-Options: DENY`, `X-Content-Type-Options: nosniff`, `Strict-Transport-Security`, `Referrer-Policy`).
+- **Transcription uploads:** Vercel Function request bodies are limited to 4.5 MB, so the transcriber accepts media files up to 4 MB to leave room for multipart overhead. Larger local MP4-to-MP3 conversions remain browser-only.
+- **Multilingual transcription:** The transcriber supports provider auto-detection plus explicit English (`en`) and Hindi (`hi`) guidance. Auto-detect is the recommended mode for Hindi-English mixed speech; output remains in the spoken language and is not translated. OpenAI `whisper-1` and Groq Whisper models are documented as multilingual provider choices.
+- **Logo provenance:** Thirty direct official web-logo assets are integrated under `public/logos/official-ai/`. Eight workspace-provided assets are labelled `provided` and hashed in `exports/official-ai-logos/provided-assets.csv`; favicon fallbacks remain explicit fallbacks.
+- **Production secrets:** `ADMIN_SECRET` must be explicitly configured with a strong random value. The development fallback is disabled in production/serverless environments.
 - **Commercial Use:** If monetizing through Google AdSense or sponsorships, Vercel requires a **Pro** plan. Non-commercial personal usage is supported under the Hobby tier.
 
 ---

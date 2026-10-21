@@ -80,6 +80,7 @@ function chatApiPlugin() {
 
 import submissionsHandler from './api/submissions.js';
 import discoveriesHandler from './api/discoveries.js';
+import transcribeHandler from './api/transcribe.js';
 
 function submissionsApiPlugin() {
   return {
@@ -94,8 +95,10 @@ function submissionsApiPlugin() {
           req.on('end', async () => {
             try {
               req.body = body ? JSON.parse(body) : {};
+              req.bodyParseError = false;
             } catch {
-              req.body = {};
+              req.body = null;
+              req.bodyParseError = true;
             }
             res.status = (code) => {
               res.statusCode = code;
@@ -134,8 +137,10 @@ function discoveriesApiPlugin() {
           req.on('end', async () => {
             try {
               req.body = body ? JSON.parse(body) : {};
+              req.bodyParseError = false;
             } catch {
-              req.body = {};
+              req.body = null;
+              req.bodyParseError = true;
             }
             res.status = (code) => {
               res.statusCode = code;
@@ -161,8 +166,39 @@ function discoveriesApiPlugin() {
   };
 }
 
+function transcribeApiPlugin() {
+  return {
+    name: 'transcribe-api-plugin',
+    configureServer(server) {
+      server.middlewares.use(async (req, res, next) => {
+        if (req.url && req.url.startsWith('/api/transcribe')) {
+          res.status = (code) => {
+            res.statusCode = code;
+            return {
+              json: (payload) => {
+                res.setHeader('Content-Type', 'application/json');
+                res.end(JSON.stringify(payload));
+              },
+            };
+          };
+          res.json = (payload) => {
+            res.setHeader('Content-Type', 'application/json');
+            res.end(JSON.stringify(payload));
+          };
+          await transcribeHandler(req, res);
+          return;
+        }
+        next();
+      });
+    },
+  };
+}
+
 export default defineConfig({
-  plugins: [react(), chatApiPlugin(), submissionsApiPlugin(), discoveriesApiPlugin()],
+  plugins: [react(), chatApiPlugin(), submissionsApiPlugin(), discoveriesApiPlugin(), transcribeApiPlugin()],
+  optimizeDeps: {
+    exclude: ['@ffmpeg/ffmpeg'],
+  },
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),

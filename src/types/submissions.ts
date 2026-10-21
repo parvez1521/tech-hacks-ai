@@ -12,9 +12,11 @@ export interface ToolSubmissionData {
   websiteUrl: string;
   description: string;
   category: string;
+  section?: 'ai' | 'community' | 'open-source';
   pricingType: 'free' | 'freemium' | 'paid' | 'open-source';
   logoUrl?: string;
   features?: string[];
+  tags?: string[];
   platform?: string[];
   alternativeTo?: string;
   submitterName?: string;

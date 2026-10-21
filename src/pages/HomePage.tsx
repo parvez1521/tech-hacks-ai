@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 
 import { Link } from '../router/Router';
@@ -11,10 +11,11 @@ import { Pagination } from '../components/Pagination';
 import { OfferCard } from '../components/OfferCard';
 import { BrandLogo } from '../components/BrandLogo';
 import { DailyDiscoveriesSection } from '../components/DailyDiscoveriesSection';
+import { HeroSignalVisual } from '../components/HeroSignalVisual';
 import { proprietaryTools } from '../data/alternatives';
 import { aiCategories } from '../data/aiToolsData';
 import { getFeaturedOffers } from '../data/offersData';
-import { getAllAiTools, getAllGuides, getAllPrompts, getAllFreeTools } from '../services/aiCatalogService';
+import { getAllAiTools, getAllGuides, getAllPrompts, getAllFreeTools, getCatalogStats } from '../services/aiCatalogService';
 import {
   Sparkles,
   Replace,
@@ -48,7 +49,14 @@ export const HomePage: React.FC = () => {
   const [aiPage, setAiPage] = useState(1);
   const [emailSubscribed, setEmailSubscribed] = useState(false);
   const [emailInput, setEmailInput] = useState('');
+  const [catalogStats, setCatalogStats] = useState(getCatalogStats);
   const allAiTools = getAllAiTools();
+
+  useEffect(() => {
+    const refreshStats = () => setCatalogStats(getCatalogStats());
+    window.addEventListener('techhacks:catalog-updated', refreshStats);
+    return () => window.removeEventListener('techhacks:catalog-updated', refreshStats);
+  }, []);
 
   // 1. Curated Editor's Picks (Section 3)
   const editorsPicks = [
@@ -186,9 +194,13 @@ export const HomePage: React.FC = () => {
       {/* =========================================================================
           SECTION 1: HERO & UNIVERSAL SEARCH
       ========================================================================= */}
-      <section className="relative pt-14 pb-8 sm:pt-16 sm:pb-10 text-center max-w-6xl mx-auto px-4 w-full">
+      <section className="hero-shell relative pt-14 pb-8 sm:pt-16 sm:pb-10 text-center max-w-6xl mx-auto px-4 w-full rounded-b-[2rem]">
+        <div className="hero-ambient-orb one" aria-hidden="true" />
+        <div className="hero-ambient-orb two" aria-hidden="true" />
+        <div className="hero-ambient-orb three" aria-hidden="true" />
+        <HeroSignalVisual />
         {/* A small context line keeps the hero useful without competing with search. */}
-        <div className="animate-fade-in-up [animation-delay:0ms]">
+        <div className="relative z-10 animate-fade-in-up [animation-delay:0ms]">
           <div className="inline-flex items-center gap-2 eyebrow mb-5">
             <Sparkles className="w-3.5 h-3.5" aria-hidden="true" />
             <span>Independent software directory</span>
@@ -196,22 +208,22 @@ export const HomePage: React.FC = () => {
         </div>
 
         {/* H1 Headline */}
-        <h1 className="animate-fade-in-up [animation-delay:60ms] text-4xl sm:text-5xl lg:text-[4.25rem] font-bold text-foreground tracking-[-0.035em] max-w-4xl mx-auto leading-[1.04] text-balance mb-5">
+        <h1 className="relative z-10 animate-fade-in-up [animation-delay:60ms] text-4xl sm:text-5xl lg:text-[4.25rem] font-bold text-foreground tracking-[-0.035em] max-w-4xl mx-auto leading-[1.04] text-balance mb-5">
           Discover the Best AI Tools & Open Source Alternatives
         </h1>
 
         {/* Subtitle */}
-        <p className="animate-fade-in-up [animation-delay:120ms] text-sm sm:text-base text-secondary-foreground max-w-2xl mx-auto mb-8 font-normal leading-relaxed">
+        <p className="relative z-10 animate-fade-in-up [animation-delay:120ms] text-sm sm:text-base text-secondary-foreground max-w-2xl mx-auto mb-8 font-normal leading-relaxed">
           Tech Hacks AI is a practical directory for finding AI products, open-source software, and browser utilities without wading through hype. Search by what you need to make, replace, or learn.
         </p>
 
         {/* Universal Search Bar with Intent Chips */}
-        <div className="animate-fade-in-up [animation-delay:180ms] mb-8">
+        <div className="relative z-10 animate-fade-in-up [animation-delay:180ms] mb-8">
           <UniversalSearch />
         </div>
 
         {/* Quick Route Shortcuts Ribbon */}
-        <div className="animate-fade-in-up [animation-delay:240ms] flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-xs pt-4 border-t border-border/50 max-w-2xl mx-auto">
+        <div className="relative z-10 animate-fade-in-up [animation-delay:240ms] flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-xs pt-4 border-t border-border/50 max-w-2xl mx-auto">
           <Link
             to="/ai-tools"
             className="flex items-center gap-1.5 py-1 text-muted-foreground hover:text-primary transition-colors duration-150"
@@ -247,6 +259,50 @@ export const HomePage: React.FC = () => {
             <Compass className="w-3.5 h-3.5 text-purple-400" />
             <span>Help Me Pick</span>
           </Link>
+        </div>
+
+      </section>
+
+      {/* Truthful catalog proof-point restored below the hero. Counts come from
+          the de-duplicated in-app registries, not inflated marketing claims. */}
+      <section
+        className="catalog-trust-strip max-w-6xl mx-auto w-full px-4 sm:px-6"
+        data-testid="catalog-trust-strip"
+        aria-label="Catalog coverage"
+      >
+        <div className="catalog-trust-strip__inner">
+          <div className="catalog-trust-strip__intro">
+            <span className="catalog-trust-strip__kicker">
+              <ShieldCheck className="w-4 h-4" aria-hidden="true" />
+              Real catalog coverage
+            </span>
+            <h2>Useful tools, counted honestly.</h2>
+            <p>
+              A focused directory of software, AI platforms, alternatives, and browser utilities — without padded duplicate counts.
+            </p>
+          </div>
+          <div className="catalog-trust-strip__metrics">
+            <div>
+              <strong>{catalogStats.catalogIdentities}</strong>
+              <span>catalog identities</span>
+            </div>
+            <div>
+              <strong>{catalogStats.openSourceTools}</strong>
+              <span>open-source projects</span>
+            </div>
+            <div>
+              <strong>{catalogStats.aiPlatforms}</strong>
+              <span>AI platforms</span>
+            </div>
+            <div>
+              <strong>{catalogStats.communityTools}</strong>
+              <span>community tools</span>
+            </div>
+            <div>
+              <strong>{catalogStats.browserUtilities}</strong>
+              <span>local utilities</span>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -287,7 +343,7 @@ export const HomePage: React.FC = () => {
               <Link
                 key={goal.id}
                 to={goal.href}
-               className="group p-5 rounded-lg border border-border bg-card/80 interactive-card flex flex-col justify-between"
+                className="motion-stagger-item group p-5 rounded-lg border border-border bg-card/80 interactive-card flex flex-col justify-between"
               >
                 <div>
                   <div className="flex items-center justify-between mb-3">
@@ -347,7 +403,7 @@ export const HomePage: React.FC = () => {
             <Link
               key={item.tool.id}
               to={`/ai-tools/${item.tool.slug}`}
-               className="group p-5 rounded-lg border border-border bg-card/90 interactive-card flex flex-col justify-between"
+                className="motion-stagger-item group p-5 rounded-lg border border-border bg-card/90 interactive-card flex flex-col justify-between"
             >
               <div>
                 <div className="flex items-center justify-between gap-2 mb-3">
@@ -502,9 +558,11 @@ export const HomePage: React.FC = () => {
         </div>
 
         {/* AI Tools Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {filteredAiTools.map((tool) => (
-            <AiToolCard key={tool.id} tool={tool} />
+            <div key={tool.id} className="motion-stagger-item">
+              <AiToolCard tool={tool} />
+            </div>
           ))}
         </div>
 
@@ -553,7 +611,7 @@ export const HomePage: React.FC = () => {
               <Link
                 key={tool.id}
                 to={`/ai-tools/${tool.slug}`}
-                 className="group p-5 rounded-lg border border-border bg-card/90 interactive-card flex flex-col justify-between"
+                  className="motion-stagger-item group p-5 rounded-lg border border-border bg-card/90 interactive-card flex flex-col justify-between"
               >
                 <div>
                   <div className="flex items-center justify-between mb-3">
@@ -584,13 +642,13 @@ export const HomePage: React.FC = () => {
             <div>
               <div className="inline-flex items-center gap-2 text-rose-400 text-xs font-semibold uppercase tracking-wider mb-2">
                 <Cpu className="w-4 h-4" />
-                <span>100% Client-Side Processing</span>
+                 <span>Privacy-First Browser Utilities</span>
               </div>
               <h3 className="text-xl sm:text-2xl font-extrabold text-foreground tracking-tight">
                 Free Browser-Based Utilities
               </h3>
               <p className="text-sm text-secondary-foreground max-w-xl mt-1">
-                Practical utilities running directly in your browser memory. Zero server uploads, zero accounts, and complete privacy.
+                  Practical browser utilities with clear processing boundaries. Local tools keep supplied input in the browser; service-backed workflows disclose their provider requirement.
               </p>
             </div>
 
@@ -608,7 +666,7 @@ export const HomePage: React.FC = () => {
               <Link
                 key={util.id}
                 to={`/free-tools/${util.slug}`}
-                 className="group p-5 rounded-lg border border-border bg-card/80 interactive-card flex flex-col justify-between"
+                  className="motion-stagger-item group p-5 rounded-lg border border-border bg-card/80 interactive-card flex flex-col justify-between"
               >
                 <div>
                   <div className="flex items-center justify-between text-xs mb-3">
@@ -679,7 +737,7 @@ export const HomePage: React.FC = () => {
               <Link
                 key={idx}
                 to={cat.href}
-                 className="group p-4 rounded-lg border border-border bg-card/80 interactive-card text-center flex flex-col items-center justify-center gap-2"
+                 className="motion-stagger-item group p-4 rounded-lg border border-border bg-card/80 interactive-card text-center flex flex-col items-center justify-center gap-2"
               >
                    <div className="w-10 h-10 rounded-lg bg-primary/10 text-primary flex items-center justify-center">
                   <Icon className="w-5 h-5" />

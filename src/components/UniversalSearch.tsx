@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect, useMemo } from 'react';
 import { useRouter, Link } from '../router/Router';
 import { universalSearch, UniversalSearchResult } from '../services/aiCatalogService';
-import { Search, X, Sparkles, FolderKanban, Replace, BookOpen, MessageSquareCode, Wrench, Video, Image, PenLine, Code2, Zap, Gift, Tag } from 'lucide-react';
+import { Search, X, Sparkles, FolderKanban, Replace, BookOpen, MessageSquareCode, Wrench, Video, Image, PenLine, Code2, Zap, Gift, Tag, Users } from 'lucide-react';
 import { BrandLogo } from './BrandLogo';
 
 export const UniversalSearch: React.FC = () => {
@@ -32,6 +32,9 @@ export const UniversalSearch: React.FC = () => {
     const list: { id: string; name: string; url: string; group: string }[] = [];
     results.aiTools.forEach((t) =>
       list.push({ id: `ai-${t.id}`, name: t.name, url: `/ai-tools/${t.slug}`, group: 'AI Tools' })
+    );
+    results.communityTools.forEach((t) =>
+      list.push({ id: `community-${t.id}`, name: t.name, url: `/community-tools/${t.slug}`, group: 'Community Tools' })
     );
     results.openSourceTools.forEach((t) =>
       list.push({ id: `os-${t.id}`, name: t.name, url: `/tools/${t.slug}`, group: 'Open Source Software' })
@@ -242,6 +245,20 @@ export const UniversalSearch: React.FC = () => {
                           </div>
                         </Link>
                       );
+                    })}
+                  </div>
+                </div>
+              )}
+
+              {/* Open Source Tools Matches */}
+              {results.communityTools.length > 0 && (
+                <div className="pt-2 border-t border-border/50">
+                  <div className="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-emerald-400 mb-2"><Users className="w-3.5 h-3.5" /><span>Community Tools</span></div>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                    {results.communityTools.map((tool) => {
+                      const itemIndex = flatCounter++;
+                      const isSelected = selectedIndex === itemIndex;
+                      return <Link key={tool.id} ref={isSelected ? activeItemRef : undefined} id={`search-item-${itemIndex}`} role="option" aria-selected={isSelected} to={`/community-tools/${tool.slug}`} onClick={() => { setIsOpen(false); setSelectedIndex(-1); }} className={`flex items-center gap-2.5 p-2 rounded-md transition-colors ${isSelected ? 'bg-primary/20 text-primary border border-primary/40 ring-1 ring-primary/40' : 'hover:bg-muted/70 text-foreground'}`}><BrandLogo slug={tool.slug} name={tool.name} size="xs" iconBgColor={tool.iconBgColor} iconLetter={tool.iconLetter} className="w-7 h-7 shrink-0" /><div className="min-w-0"><p className="font-semibold text-foreground text-sm truncate">{tool.name}</p><p className="text-xs text-muted-foreground truncate">{tool.tagline}</p></div></Link>;
                     })}
                   </div>
                 </div>

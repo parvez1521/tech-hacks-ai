@@ -1,3 +1,13 @@
+export type CatalogSection = 'open-source' | 'ai' | 'community' | 'utility' | 'alternative';
+
+export type UtilityCategory =
+  | 'video-audio'
+  | 'image-graphics'
+  | 'text-writing'
+  | 'developer-tools'
+  | 'security-validation'
+  | 'files-data-browser';
+
 export interface Tool {
   id: string;
   name: string;
@@ -177,6 +187,12 @@ export interface AiTool {
   subType?: 'standalone-tool' | 'model-access-platform';
   supportedModels?: string[];
   platformStatus?: 'live' | 'coming-soon' | 'preview';
+  section?: 'ai' | 'community';
+}
+
+export interface CommunityTool extends AiTool {
+  section: 'community';
+  submittedAt?: string;
 }
 
 export interface GuideStep {
@@ -227,7 +243,10 @@ export interface FreeToolUtility {
   slug: string;
   tagline: string;
   description: string;
-  category: 'image' | 'text' | 'code' | 'security' | 'developer';
+  category: 'image' | 'text' | 'code' | 'security' | 'developer' | 'browser' | 'media' | 'productivity';
+  /** Canonical section/category fields are normalized by the utility catalog service. */
+  section?: 'utility';
+  primaryCategory?: UtilityCategory;
   iconName: string;
   isClientSideOnly: boolean;
   acceptedInput: string;
@@ -296,9 +315,9 @@ export interface AiOffer {
   requiresStudentVerification: boolean;
   renewalTerms: string;
   claimSteps: { step: number; title: string; detail: string }[];
+  /** Canonical registry identity used by BrandLogo; never render logoAssetPath directly. */
+  logoSlug: string;
   logoAssetPath: string;
   tags: string[];
   isFeatured?: boolean;
 }
-
-

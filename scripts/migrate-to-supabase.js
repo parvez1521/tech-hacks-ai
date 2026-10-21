@@ -100,7 +100,9 @@ if (isSqlMode) {
   );
 
   console.log('-- End of migration SQL.');
-  process.exit(0);
+  // Let stdout drain before exiting; large local catalogs can exceed the
+  // writable stream buffer and otherwise truncate the final SQL statements.
+  setImmediate(() => process.exit(0));
 }
 
 if (isDryRun) {
@@ -117,7 +119,7 @@ if (isDryRun) {
   console.log(`- Published additions ready for sync: Key 'root' with ${(published.tools || []).length} tools and ${(published.guides || []).length} guides.`);
   console.log('\nTo generate ready-to-run SQL: node scripts/migrate-to-supabase.js --sql');
   console.log('To sync directly over REST: set SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY then run node scripts/migrate-to-supabase.js');
-  process.exit(0);
+  setImmediate(() => process.exit(0));
 }
 
 // Live migration via Supabase REST
@@ -212,4 +214,3 @@ migrateLive().catch((err) => {
   console.error('Migration error:', err);
   process.exit(1);
 });
-

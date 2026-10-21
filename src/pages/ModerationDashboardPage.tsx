@@ -57,17 +57,17 @@ export const ModerationDashboardPage: React.FC = () => {
   useEffect(() => {
     if (selectedSubmission) {
       if (selectedSubmission.type === 'tool') {
-        setEditName(selectedSubmission.data.name || '');
-        setEditCategory(selectedSubmission.data.category || '');
-        setEditPricingType(selectedSubmission.data.pricingType || 'Freemium');
-        setEditSummary(selectedSubmission.data.shortDescription || '');
-        setEditTags((selectedSubmission.data.tags || []).join(', '));
+        setEditName(selectedSubmission.toolData?.name || '');
+        setEditCategory(selectedSubmission.toolData?.category || '');
+        setEditPricingType(selectedSubmission.toolData?.pricingType || 'freemium');
+        setEditSummary(selectedSubmission.toolData?.description || '');
+        setEditTags((selectedSubmission.toolData?.tags || []).join(', '));
       } else {
-        setEditName(selectedSubmission.data.title || '');
-        setEditCategory(selectedSubmission.data.category || '');
+        setEditName(selectedSubmission.guideData?.title || '');
+        setEditCategory(selectedSubmission.guideData?.category || '');
         setEditPricingType('');
-        setEditSummary(selectedSubmission.data.summary || '');
-        setEditTags((selectedSubmission.data.tags || []).join(', '));
+        setEditSummary(selectedSubmission.guideData?.summary || '');
+        setEditTags((selectedSubmission.guideData?.tags || []).join(', '));
       }
       setEditSlug(selectedSubmission.publishedSlug || '');
       setReviewNotes(selectedSubmission.moderatorNotes || '');
@@ -149,9 +149,9 @@ export const ModerationDashboardPage: React.FC = () => {
       if (filterStatus !== 'all' && sub.status !== filterStatus) return false;
       if (searchQuery.trim()) {
         const q = searchQuery.toLowerCase();
-        const title = sub.type === 'tool' ? sub.data.name : sub.data.title;
-        const author = sub.data.submitterName;
-        const category = sub.data.category;
+        const title = sub.type === 'tool' ? sub.toolData?.name : sub.guideData?.title;
+        const author = sub.type === 'tool' ? sub.toolData?.submitterName : sub.guideData?.authorName;
+        const category = sub.type === 'tool' ? sub.toolData?.category : sub.guideData?.category;
         const matchTitle = title?.toLowerCase().includes(q);
         const matchAuthor = author?.toLowerCase().includes(q);
         const matchCat = category?.toLowerCase().includes(q);
@@ -174,28 +174,32 @@ export const ModerationDashboardPage: React.FC = () => {
 
   // Action: Save Edits & Review Notes
   const handleSaveEdits = async () => {
-    if (!token || !selectedSubmission) return;
+    if (!token || !selectedSubmission) return false;
     setIsProcessingAction(true);
     setActionError(null);
 
-    const updatedData: any = { ...selectedSubmission.data };
-    if (selectedSubmission.type === 'tool') {
-      updatedData.name = editName;
-      updatedData.category = editCategory;
-      updatedData.pricingType = editPricingType;
-      updatedData.shortDescription = editSummary;
-      updatedData.tags = editTags.split(',').map((t) => t.trim()).filter(Boolean);
-    } else {
-      updatedData.title = editName;
-      updatedData.category = editCategory;
-      updatedData.summary = editSummary;
-      updatedData.tags = editTags.split(',').map((t) => t.trim()).filter(Boolean);
-    }
+    const tags = editTags.split(',').map((t) => t.trim()).filter(Boolean);
+    const updatedData = selectedSubmission.type === 'tool'
+      ? {
+          ...(selectedSubmission.toolData || {}),
+          name: editName,
+          category: editCategory,
+          pricingType: editPricingType,
+          description: editSummary,
+          tags,
+        }
+      : {
+          ...(selectedSubmission.guideData || {}),
+          title: editName,
+          category: editCategory,
+          summary: editSummary,
+          tags,
+        };
 
     const res = await updateSubmission(
       selectedSubmission.id,
       {
-        data: updatedData,
+        ...(selectedSubmission.type === 'tool' ? { toolData: updatedData } : { guideData: updatedData }),
         moderatorNotes: reviewNotes,
         publishedSlug: editSlug.trim() || undefined,
       },
@@ -209,8 +213,10 @@ export const ModerationDashboardPage: React.FC = () => {
         prev.map((s) => (s.id === res.submission!.id ? res.submission! : s))
       );
       setSuccessToast('Submission fields and notes updated successfully.');
+      return true;
     } else {
       setActionError(res.error || 'Failed to save changes.');
+      return false;
     }
   };
 
@@ -244,12 +250,16 @@ export const ModerationDashboardPage: React.FC = () => {
   // Action: Publish to Live Catalog
   const handlePublish = async () => {
     if (!token || !selectedSubmission) return;
+    if (selectedSubmission.status !== 'approved') {
+      setActionError('Mark this submission approved before publishing it to the catalog.');
+      return;
+    }
     if (
       !confirm(
         `Are you sure you want to publish "${
           selectedSubmission.type === 'tool'
-            ? selectedSubmission.data.name
-            : selectedSubmission.data.title
+            ? selectedSubmission.toolData?.name
+            : selectedSubmission.guideData?.title
         }" to the live catalog? It will immediately appear on public catalog pages.`
       )
     ) {
@@ -260,7 +270,11 @@ export const ModerationDashboardPage: React.FC = () => {
     setActionError(null);
 
     // Save any pending edits first
-    await handleSaveEdits();
+    const saved = await handleSaveEdits();
+    if (!saved) {
+      setIsProcessingAction(false);
+      return;
+    }
 
     const res = await publishSubmission(selectedSubmission.id, token);
     setIsProcessingAction(false);
@@ -356,7 +370,7 @@ export const ModerationDashboardPage: React.FC = () => {
 
           <div className="mt-6 pt-5 border-t border-border/60 text-center">
             <p className="text-xs text-muted-foreground">
-              Local editorial key: <code className="text-foreground bg-muted px-1.5 py-0.5 rounded font-mono text-[11px]">techhacks-admin-2026</code>
+              Use the server-side <code className="text-foreground bg-muted px-1.5 py-0.5 rounded font-mono text-[11px]">ADMIN_SECRET</code> configured for this environment.
             </p>
           </div>
         </div>
@@ -625,8 +639,9 @@ export const ModerationDashboardPage: React.FC = () => {
           ) : (
             filteredSubmissions.map((sub) => {
               const isSelected = selectedSubmission?.id === sub.id;
-              const title = sub.type === 'tool' ? sub.data.name : sub.data.title;
-              const summary = sub.type === 'tool' ? sub.data.shortDescription : sub.data.summary;
+              const title = sub.type === 'tool' ? sub.toolData?.name : sub.guideData?.title;
+              const summary = sub.type === 'tool' ? sub.toolData?.description : sub.guideData?.summary;
+              const author = sub.type === 'tool' ? sub.toolData?.submitterName : sub.guideData?.authorName;
               const dateStr = new Date(sub.createdAt).toLocaleDateString(undefined, {
                 month: 'short',
                 day: 'numeric',
@@ -682,7 +697,7 @@ export const ModerationDashboardPage: React.FC = () => {
 
                   <div className="mt-3 pt-2.5 border-t border-border/40 flex items-center justify-between text-[11px] text-muted-foreground">
                     <span className="truncate">
-                      By <strong className="text-foreground font-medium">{sub.data.submitterName}</strong>
+                      By <strong className="text-foreground font-medium">{author || 'Community Contributor'}</strong>
                     </span>
                     <span className="font-mono text-[10px] text-muted-foreground/80">{sub.id}</span>
                   </div>
@@ -718,8 +733,8 @@ export const ModerationDashboardPage: React.FC = () => {
                 </div>
                 <h2 className="text-xl font-bold text-foreground">
                   {selectedSubmission.type === 'tool'
-                    ? selectedSubmission.data.name
-                    : selectedSubmission.data.title}
+                    ? selectedSubmission.toolData?.name
+                    : selectedSubmission.guideData?.title}
                 </h2>
                 <div className="text-xs text-muted-foreground mt-0.5">
                   ID: <code className="font-mono">{selectedSubmission.id}</code> · Received{' '}
@@ -769,11 +784,17 @@ export const ModerationDashboardPage: React.FC = () => {
               <div>
                 <span className="text-muted-foreground block text-[11px]">Submitted By</span>
                 <span className="font-semibold text-foreground">
-                  {selectedSubmission.data.submitterName}
+                  {selectedSubmission.type === 'tool'
+                    ? selectedSubmission.toolData?.submitterName || 'Community Contributor'
+                    : selectedSubmission.guideData?.authorName || 'Community Contributor'}
                 </span>
-                {selectedSubmission.data.submitterEmail && (
+                {(selectedSubmission.type === 'tool'
+                  ? selectedSubmission.toolData?.submitterEmail
+                  : selectedSubmission.guideData?.contactEmail) && (
                   <span className="text-muted-foreground block">
-                    {selectedSubmission.data.submitterEmail}
+                    {selectedSubmission.type === 'tool'
+                      ? selectedSubmission.toolData?.submitterEmail
+                      : selectedSubmission.guideData?.contactEmail}
                   </span>
                 )}
               </div>
@@ -781,18 +802,20 @@ export const ModerationDashboardPage: React.FC = () => {
               <div>
                 <span className="text-muted-foreground block text-[11px]">Affiliation & Links</span>
                 <span className="text-foreground">
-                  {selectedSubmission.data.submitterRole || 'Community Contributor'}
-                  {selectedSubmission.data.isAffiliated && (
+                  {selectedSubmission.type === 'tool'
+                    ? selectedSubmission.toolData?.notes || 'Community Contributor'
+                    : selectedSubmission.guideData?.difficulty || 'Community Contributor'}
+                  {selectedSubmission.type === 'tool' && selectedSubmission.toolData?.alternativeTo && (
                     <span className="ml-2 px-1.5 py-0.5 rounded text-[10px] bg-primary/10 text-primary border border-primary/20">
-                      Maker / Team
+                      Alternative to {selectedSubmission.toolData.alternativeTo}
                     </span>
                   )}
                 </span>
-                {selectedSubmission.data.submitterGithub && (
+                {selectedSubmission.type === 'tool' && selectedSubmission.toolData?.platform?.length ? (
                   <span className="text-muted-foreground block truncate">
-                    GitHub/X: {selectedSubmission.data.submitterGithub}
+                    Platforms: {selectedSubmission.toolData.platform.join(', ')}
                   </span>
-                )}
+                ) : null}
               </div>
             </div>
 
@@ -800,7 +823,7 @@ export const ModerationDashboardPage: React.FC = () => {
             {selectedSubmission.type === 'tool' && (
               <div className="flex flex-wrap items-center gap-3">
                 <a
-                  href={selectedSubmission.data.websiteUrl}
+                  href={selectedSubmission.toolData?.websiteUrl}
                   target="_blank"
                   rel="noreferrer noopener"
                   className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-primary/10 text-primary border border-primary/20 hover:bg-primary/20 text-xs font-semibold transition-colors"
@@ -811,19 +834,6 @@ export const ModerationDashboardPage: React.FC = () => {
                   </svg>
                 </a>
 
-                {selectedSubmission.data.sourceCodeUrl && (
-                  <a
-                    href={selectedSubmission.data.sourceCodeUrl}
-                    target="_blank"
-                    rel="noreferrer noopener"
-                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-card border border-border hover:bg-muted text-xs font-semibold transition-colors"
-                  >
-                    <span>View Repository</span>
-                    <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                    </svg>
-                  </a>
-                )}
               </div>
             )}
 
@@ -835,11 +845,11 @@ export const ModerationDashboardPage: React.FC = () => {
                     Submitted Guide Article Content
                   </label>
                   <span className="text-xs text-muted-foreground">
-                    ~{selectedSubmission.data.readingTimeMinutes || 5} min read
+                    {selectedSubmission.guideData?.readTime || '5 min read'}
                   </span>
                 </div>
                 <div className="p-4 rounded-xl bg-background border border-border max-h-72 overflow-y-auto text-sm">
-                  <SafeMarkdown content={selectedSubmission.data.content} />
+                  <SafeMarkdown content={selectedSubmission.guideData?.content || ''} />
                 </div>
               </div>
             )}
@@ -885,11 +895,10 @@ export const ModerationDashboardPage: React.FC = () => {
                       onChange={(e) => setEditPricingType(e.target.value)}
                       className="w-full px-3 py-1.5 rounded-lg bg-background border border-border text-foreground text-xs"
                     >
-                      <option value="Free">Free</option>
-                      <option value="Freemium">Freemium</option>
-                      <option value="Open Source">Open Source</option>
-                      <option value="Free Trial">Free Trial</option>
-                      <option value="Paid">Paid</option>
+                      <option value="free">Free</option>
+                      <option value="freemium">Freemium</option>
+                      <option value="open-source">Open Source</option>
+                      <option value="paid">Paid</option>
                     </select>
                   </div>
                 )}
@@ -997,8 +1006,8 @@ export const ModerationDashboardPage: React.FC = () => {
                   <a
                     href={
                       selectedSubmission.type === 'tool'
-                        ? `/ai-tools/${selectedSubmission.publishedSlug || selectedSubmission.data.slug}`
-                        : `/guides/${selectedSubmission.publishedSlug || selectedSubmission.data.slug}`
+                        ? `/ai-tools/${selectedSubmission.publishedSlug || ''}`
+                        : `/guides/${selectedSubmission.publishedSlug || ''}`
                     }
                     target="_blank"
                     rel="noreferrer noopener"
@@ -1013,7 +1022,8 @@ export const ModerationDashboardPage: React.FC = () => {
                   <button
                     type="button"
                     onClick={handlePublish}
-                    disabled={isProcessingAction}
+                    disabled={isProcessingAction || selectedSubmission.status !== 'approved'}
+                    title={selectedSubmission.status === 'approved' ? 'Publish this approved submission' : 'Mark the submission approved before publishing'}
                     className="px-4 py-2 rounded-xl bg-primary hover:bg-primary/90 text-primary-foreground font-bold text-xs transition-colors shadow-lg shadow-primary/20 flex items-center gap-2 disabled:opacity-50"
                   >
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">

@@ -262,14 +262,19 @@ describe('Phase 14: Deep QA, Production Readiness & Trust Audit', () => {
       assert.strictEqual(fhOffer.logoAssetPath, '/logos/microsoft.svg', 'Founders Hub must use microsoft.svg');
     });
 
-    test('every brand logo in manifest has verifiedAt date and valid SVG file', () => {
-      const logosDir = path.resolve(process.cwd(), 'public/logos');
+    test('every brand logo in manifest has verifiedAt date and a valid image file', () => {
+      const publicDir = path.resolve(process.cwd(), 'public');
       for (const [slug, entry] of Object.entries(brandLogos)) {
         assert.ok(entry.verifiedAt, `Logo entry ${slug} must have verifiedAt`);
-        const filePath = path.join(logosDir, path.basename(entry.assetPath));
+        const filePath = path.join(publicDir, entry.assetPath.replace(/^\//, ''));
         assert.ok(fs.existsSync(filePath), `Logo file must exist for ${slug}: ${filePath}`);
-        const content = fs.readFileSync(filePath, 'utf8');
-        assert.ok(content.includes('<svg') && content.includes('</svg>'), `Logo ${slug} must be valid SVG`);
+        const content = fs.readFileSync(filePath);
+        if (/\.svg$/i.test(filePath)) {
+          const svg = content.toString('utf8');
+          assert.ok(svg.includes('<svg') && svg.includes('</svg>'), `Logo ${slug} must be valid SVG`);
+        } else {
+          assert.ok(content.length > 32, `Logo ${slug} must contain a valid raster payload`);
+        }
       }
     });
   });

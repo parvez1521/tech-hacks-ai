@@ -10,36 +10,39 @@ import { offersData } from '../src/data/offersData.ts';
 
 describe('Phase 23: Homepage Logo Fix, Real Brand Assets & Theme Toggle Repair', () => {
   // =========================================================================
-  // 1. Theme Mode & Strictly Dark Enforcement (Updated in Phase 24)
+  // 1. Theme Mode & Dark-First Preference
   // =========================================================================
-  describe('1. Theme Mode & Strictly Dark Enforcement', () => {
-    test('ThemeContext strictly enforces dark theme, data-theme, and colorScheme', () => {
+  describe('1. Theme Mode & Dark-First Preference', () => {
+    test('ThemeContext supports dark-first initialization and explicit light/dark switching', () => {
       const contextPath = path.resolve(process.cwd(), 'src/context/ThemeContext.tsx');
       const content = fs.readFileSync(contextPath, 'utf8');
 
-      assert.ok(content.includes("root.setAttribute('data-theme', targetTheme)"), 'Sets data-theme dark attribute on root');
-      assert.ok(content.includes("root.style.colorScheme = 'dark'"), 'Sets root style colorScheme to dark');
-      assert.ok(content.includes("root.classList.remove('light')"), 'Removes light class');
-      assert.ok(content.includes("root.classList.add('dark')"), 'Adds dark class');
+      assert.ok(content.includes('function getInitialTheme'), 'Has a synchronous initial theme resolver');
+      assert.ok(content.includes("savedTheme === 'light' || savedTheme === 'dark'"), 'Accepts explicit saved preferences');
+      assert.ok(content.includes("return 'dark'"), 'Defaults to dark without a saved preference');
+      assert.ok(content.includes("root.setAttribute('data-theme', theme)"), 'Sets the active data-theme attribute');
+      assert.ok(content.includes('root.style.colorScheme = theme'), 'Synchronizes form control color scheme');
+      assert.ok(content.includes("localStorage.setItem(THEME_STORAGE_KEY, nextTheme)"), 'Persists explicit choices');
     });
 
     test('ThemeContext preserves useTheme contract with dark default', () => {
       const contextPath = path.resolve(process.cwd(), 'src/context/ThemeContext.tsx');
       const content = fs.readFileSync(contextPath, 'utf8');
 
-      assert.ok(content.includes("theme: 'dark'"), 'Provides theme: dark in context value');
+      assert.ok(content.includes('value={{ theme, toggleTheme, setTheme }}'), 'Provides the live theme in context');
       assert.ok(content.includes('toggleTheme'), 'Preserves toggleTheme contract');
       assert.ok(content.includes('setTheme'), 'Preserves setTheme contract');
     });
 
-    test('index.html initializes dark theme synchronously and clears stale light preference', () => {
+    test('index.html initializes dark synchronously while honoring a saved light preference', () => {
       const htmlPath = path.resolve(process.cwd(), 'index.html');
       const content = fs.readFileSync(htmlPath, 'utf8');
 
-      assert.ok(content.includes("document.documentElement.setAttribute('data-theme', 'dark')"), 'Sets dark data-theme');
-      assert.ok(content.includes("document.documentElement.style.colorScheme = 'dark'"), 'Sets dark colorScheme');
-      assert.ok(content.includes("document.documentElement.classList.add('dark')"), 'Sets dark class');
-      assert.ok(content.includes("localStorage.removeItem('theme')"), 'Purges stale light theme preference from localStorage');
+      assert.ok(content.includes("var theme = savedTheme === 'light' ? 'light' : 'dark'"), 'Defaults to dark while honoring light');
+      assert.ok(content.includes("root.setAttribute('data-theme', theme)"), 'Sets data-theme before first paint');
+      assert.ok(content.includes("root.style.colorScheme = theme"), 'Sets colorScheme before first paint');
+      assert.ok(content.includes("root.classList.toggle('dark', theme === 'dark')"), 'Sets dark class before first paint');
+      assert.ok(!content.includes("localStorage.removeItem('theme')"), 'Does not erase explicit preference');
     });
 
     test('src/index.css defines tokens for dark theme', () => {
@@ -48,83 +51,55 @@ describe('Phase 23: Homepage Logo Fix, Real Brand Assets & Theme Toggle Repair',
 
       assert.ok(content.includes('html.dark'), 'Includes html.dark selector');
       assert.ok(content.includes('color-scheme: dark'), 'Dark mode declares color-scheme: dark');
-      assert.ok(content.includes('--color-bg: 11 12 14'), 'Dark background token exists');
+      assert.ok(content.includes('--color-bg: 8 13 24'), 'Midnight-blue dark background token exists');
     });
 
-    test('Header component cleanly removes theme toggle buttons per Phase 24 specifications', () => {
+    test('Header exposes an accessible theme toggle for desktop and mobile', () => {
       const headerPath = path.resolve(process.cwd(), 'src/components/Header.tsx');
       const content = fs.readFileSync(headerPath, 'utf8');
 
-      assert.ok(!content.includes('data-testid="theme-toggle-btn"'), 'Desktop theme button cleanly removed');
-      assert.ok(!content.includes('data-testid="mobile-theme-toggle-btn"'), 'Mobile theme button cleanly removed');
+      assert.ok(content.includes('<ThemeToggle />'), 'Desktop theme control is rendered');
+      assert.ok(content.includes('<ThemeToggle compact />'), 'Mobile theme control is rendered');
+    });
+
+    test('ThemeToggle keeps one playful quote per session and dismisses it on interaction', () => {
+      const togglePath = path.resolve(process.cwd(), 'src/components/ThemeToggle.tsx');
+      const content = fs.readFileSync(togglePath, 'utf8');
+
+      assert.ok(content.includes('THEME_HINT_QUOTE_SESSION_KEY'), 'Stores the selected quote in session storage');
+      assert.ok(content.includes('THEME_HINT_QUOTES'), 'Uses a curated quote list');
+      assert.ok(content.includes('sessionStorage.setItem(THEME_HINT_SESSION_KEY, \'1\')'), 'Dismisses the hint after interaction');
+      assert.ok(content.includes('pointer-events'), 'Hint styling is expected to remain non-blocking');
     });
   });
 
   // =========================================================================
-  // 2. Homepage Floating Brand Logos Verification
+  // 2. Homepage Focused Hero & Truthful Catalog Metrics
   // =========================================================================
-  describe('2. Homepage Floating Brand Logos Verification', () => {
-    test('HeroFloatingLogos uses high contrast opacity and backdrop blur', () => {
-      const compPath = path.resolve(process.cwd(), 'src/components/HeroFloatingLogos.tsx');
-      const content = fs.readFileSync(compPath, 'utf8');
-
-      assert.ok(content.includes('opacity-80 dark:opacity-75'), 'Uses high-contrast 75-80% opacity');
-      assert.ok(content.includes('backdrop-blur-md'), 'Includes backdrop-blur-md for glassy depth');
-      assert.ok(content.includes('shadow-md'), 'Applies elevation shadow to badges');
+  describe('2. Homepage Focused Hero & Truthful Catalog Metrics', () => {
+    test('Homepage removes the unwanted logo orbit but keeps the real discovery controls', () => {
+      const homePath = path.resolve(process.cwd(), 'src/pages/HomePage.tsx');
+      const content = fs.readFileSync(homePath, 'utf8');
+      assert.ok(!content.includes('HeroFloatingLogos'), 'Homepage does not render the removed orbit');
+      assert.ok(content.includes('<HeroSignalVisual />'), 'Keeps the restrained hero visual');
+      assert.ok(content.includes('<UniversalSearch />'), 'Keeps the functional search');
     });
 
-    test('Every floating badge wraps logos in a high-contrast mini tile container', () => {
-      const compPath = path.resolve(process.cwd(), 'src/components/HeroFloatingLogos.tsx');
-      const content = fs.readFileSync(compPath, 'utf8');
-
-      assert.ok(content.includes('rounded-md bg-muted/70 dark:bg-muted/40'), 'Uses high-contrast inner logo tiles');
-      assert.ok(content.includes('overflow-hidden shadow-xs'), 'Inner logo tiles clip cleanly with shadow');
+    test('Homepage restores truthful dynamic catalog metrics', () => {
+      const homePath = path.resolve(process.cwd(), 'src/pages/HomePage.tsx');
+      const servicePath = path.resolve(process.cwd(), 'src/services/aiCatalogService.ts');
+      const content = fs.readFileSync(homePath, 'utf8');
+      const service = fs.readFileSync(servicePath, 'utf8');
+      assert.ok(content.includes('data-testid="catalog-trust-strip"'), 'Trust strip is rendered');
+      assert.ok(content.includes('catalogStats.catalogIdentities'), 'Trust strip uses dynamic counts');
+      assert.ok(service.includes('export function getCatalogStats'), 'Catalog stats are computed in a shared service');
+      assert.ok(!content.includes('10,000+'), 'Does not make an unsupported 10,000+ claim');
     });
 
-    test('All 14 brands featured in HeroFloatingLogos exist in brandLogos and on disk', () => {
-      const featuredSlugs = [
-        'claude-code',
-        'aider',
-        'perplexity',
-        'perplexica',
-        'cursor',
-        'deepseek',
-        'firebase',
-        'supabase',
-        'figma',
-        'penpot',
-        'ollama',
-        'flux-1',
-        'n8n',
-        'kling-ai',
-      ];
-
-      for (const slug of featuredSlugs) {
-        const logo = getBrandLogo(slug);
-        assert.ok(logo, `Brand logo for ${slug} must be registered in brandLogos`);
-        const fullPath = path.resolve(process.cwd(), 'public', logo.assetPath.replace(/^\//, ''));
-        assert.ok(fs.existsSync(fullPath), `Logo asset for ${slug} must exist at ${fullPath}`);
-      }
-    });
-
-    test('HeroFloatingLogos uses perimeter spacing and safe responsive rules', () => {
-      const compPath = path.resolve(process.cwd(), 'src/components/HeroFloatingLogos.tsx');
-      const content = fs.readFileSync(compPath, 'utf8');
-
-      assert.ok(content.includes('hidden sm:flex'), 'Hides outer pairs on extra-small mobile');
-      assert.ok(content.includes('hidden md:flex'), 'Hides ambient singles on narrow mobile');
-      assert.ok(content.includes('hidden xl:flex'), 'Restricts wide pairs to extra-large viewports');
-      assert.ok(content.includes('hidden 2xl:flex'), 'Restricts far outer desks to 2xl screens');
-      assert.ok(!content.includes('light:opacity'), 'Contains no invalid light: Tailwind variant classes');
-    });
-
-    test('Floating logo animations respect prefers-reduced-motion in index.css', () => {
-      const cssPath = path.resolve(process.cwd(), 'src/index.css');
-      const content = fs.readFileSync(cssPath, 'utf8');
-
-      assert.ok(content.includes('@media (prefers-reduced-motion: reduce)'), 'Includes reduced motion media query');
-      assert.ok(content.includes('.animate-float-slow-1'), 'floatSlow1 neutralized');
-      assert.ok(content.includes('.animate-float-slow-2'), 'floatSlow2 neutralized');
+    test('Catalog stats de-duplicate identity slugs', () => {
+      const servicePath = path.resolve(process.cwd(), 'src/services/aiCatalogService.ts');
+      const content = fs.readFileSync(servicePath, 'utf8');
+      assert.ok(content.includes('new Set([...openSourceSlugs, ...aiSlugs, ...alternativeSlugs])'), 'Uses set-based unique identity counting');
     });
   });
 
@@ -163,13 +138,27 @@ describe('Phase 23: Homepage Logo Fix, Real Brand Assets & Theme Toggle Repair',
       }
     });
 
-    test('100% of brand logos in brandLogos manifest have valid SVG files with viewBox', () => {
+    test('official light/dark wordmarks receive contrast tiles without recoloring', () => {
+      const css = fs.readFileSync(path.resolve(process.cwd(), 'src/index.css'), 'utf8');
+      assert.ok(css.includes('.brand-logo-image--anythingllm'), 'Dark wordmarks have an explicit contrast selector');
+      assert.ok(css.includes('.brand-logo-image--google-ai-studio'), 'Light wordmarks have an explicit contrast selector');
+      assert.ok(css.includes('background: #ffffff'), 'Dark wordmarks use a light neutral tile');
+      assert.ok(css.includes('background: #111c2f'), 'Light wordmarks use a dark neutral tile');
+    });
+
+    test('100% of brand logos in brandLogos manifest have valid image assets', () => {
       let count = 0;
       for (const [slug, entry] of Object.entries(brandLogos)) {
         const p = path.resolve(process.cwd(), 'public', entry.assetPath.replace(/^\//, ''));
         assert.ok(fs.existsSync(p), `Logo file for ${slug} must exist on disk at ${p}`);
-        const content = fs.readFileSync(p, 'utf8');
-        assert.ok(content.includes('viewBox'), `Logo SVG for ${slug} must declare a viewBox`);
+        const content = fs.readFileSync(p);
+        if (/\.svg$/i.test(p)) {
+          const svg = content.toString('utf8');
+          assert.ok(svg.includes('<svg'), `Logo SVG for ${slug} must declare an SVG root`);
+          assert.ok(svg.includes('viewBox') || (svg.includes('width') && svg.includes('height')), `Logo SVG for ${slug} must declare viewport dimensions`);
+        } else {
+          assert.ok(content.length > 32, `Raster logo for ${slug} is suspiciously small`);
+        }
         count++;
       }
       assert.ok(count >= 218, 'At least 218 verified brand logos are validated');
@@ -190,6 +179,27 @@ describe('Phase 23: Homepage Logo Fix, Real Brand Assets & Theme Toggle Repair',
         const full = path.resolve(process.cwd(), 'public', o.logoAssetPath.replace(/^\//, ''));
         assert.ok(fs.existsSync(full), `Offer ${o.title} logo must exist on disk at ${full}`);
       });
+    });
+
+    test('BrandLogo only paints traceable assets and exposes a neutral fallback status', () => {
+      const logoCompPath = path.resolve(process.cwd(), 'src/components/BrandLogo.tsx');
+      const content = fs.readFileSync(logoCompPath, 'utf8');
+
+      assert.ok(content.includes('const isTrustedLogo = Boolean(logoEntry?.sourceUrl'), 'Trust is based on provenance, not filename');
+       assert.ok(content.includes('data-logo-status={logoStatus}'), 'Logo provenance status is exposed for QA');
+      assert.ok(content.includes('data-logo-status="neutral-fallback"'), 'Fallback status is exposed for QA');
+    });
+
+    test('Homepage motion uses a lightweight CSS 3D visual with pointer-transparent fallback', () => {
+      const heroPath = path.resolve('src/components/HeroSignalVisual.tsx');
+      const homePath = path.resolve('src/pages/HomePage.tsx');
+      const heroContent = fs.readFileSync(heroPath, 'utf8');
+      const homeContent = fs.readFileSync(homePath, 'utf8');
+
+      assert.ok(homeContent.includes('<HeroSignalVisual />'), 'Homepage renders the hero visual');
+      assert.ok(heroContent.includes('pointer-transparent'), 'Hero visual documents pointer transparency');
+      assert.ok(heroContent.includes('requestAnimationFrame'), 'Hero visual uses a bounded animation frame');
+      assert.ok(heroContent.includes('cancelAnimationFrame'), 'Hero visual cleans up the animation frame');
     });
   });
 });

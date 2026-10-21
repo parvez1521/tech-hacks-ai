@@ -23,19 +23,24 @@ export const BrandLogo: React.FC<BrandLogoProps> = ({
   showContainer = true,
 }) => {
   const logoEntry = getBrandLogo(slug);
+  // A local file is not evidence of brand identity. Only render an asset when
+  // the registry carries traceable provenance; unresolved entries intentionally
+  // use the same neutral monogram fallback as load failures.
+  const isTrustedLogo = Boolean(logoEntry?.sourceUrl && logoEntry.sourceType !== 'fallback');
   const [currentSrc, setCurrentSrc] = useState<string | undefined>(
-    logoEntry?.sourceType === 'fallback' ? undefined : logoEntry?.assetPath
+    isTrustedLogo ? logoEntry?.assetPath : undefined
   );
   const [hasError, setHasError] = useState(false);
+  const logoStatus = logoEntry?.sourceType === 'provided' ? 'provided-asset' : 'verified-asset';
 
   useEffect(() => {
-    if (logoEntry?.sourceType === 'fallback') {
+    if (!isTrustedLogo) {
       setCurrentSrc(undefined);
     } else {
       setCurrentSrc(logoEntry?.assetPath);
     }
     setHasError(false);
-  }, [slug, logoEntry?.assetPath, logoEntry?.sourceType]);
+  }, [slug, logoEntry?.assetPath, logoEntry?.sourceType, logoEntry?.sourceUrl, isTrustedLogo]);
 
   const handleImageError = () => {
     if (logoEntry?.pngAssetPath && currentSrc !== logoEntry.pngAssetPath) {
@@ -102,7 +107,7 @@ export const BrandLogo: React.FC<BrandLogoProps> = ({
   const fallbackBg = iconBgColor || logoEntry?.badgeBg || '#272a30';
   const fallbackText = iconLetter || (name ? name.slice(0, 2).toUpperCase() : '??');
 
-  if (logoEntry && currentSrc && !hasError) {
+  if (logoEntry && isTrustedLogo && currentSrc && !hasError) {
     if (!showContainer) {
       const hasSizeOverride = /\b(w-|h-)/.test(className);
       return (
@@ -110,7 +115,9 @@ export const BrandLogo: React.FC<BrandLogoProps> = ({
           src={currentSrc}
           alt=""
           aria-hidden="true"
-          className={`${hasSizeOverride ? '' : sizeClasses.img} object-contain transition-transform duration-300 group-hover:scale-105 ${className}`}
+          data-brand-slug={slug}
+           data-logo-status={logoStatus}
+           className={`${hasSizeOverride ? '' : sizeClasses.img} object-contain brand-logo-image brand-logo-image--${logoEntry.slug} transition-transform duration-300 group-hover:scale-105 ${className}`}
           loading="lazy"
           decoding="async"
           onError={handleImageError}
@@ -122,11 +129,15 @@ export const BrandLogo: React.FC<BrandLogoProps> = ({
       <div
         className={`${sizeClasses.container} rounded-md flex items-center justify-center shrink-0 overflow-hidden bg-card border border-border/80 shadow-sm transition-transform duration-300 group-hover:scale-105 ${className}`}
         title={`${name} logo`}
+        data-brand-slug={slug}
+        data-logo-status={logoStatus}
       >
         <img
           src={currentSrc}
           alt={`${name} logo`}
-          className={`${sizeClasses.img} object-contain`}
+          data-brand-slug={slug}
+           data-logo-status={logoStatus}
+           className={`${sizeClasses.img} object-contain brand-logo-image brand-logo-image--${logoEntry.slug}`}
           loading="lazy"
           decoding="async"
           onError={handleImageError}
@@ -143,6 +154,8 @@ export const BrandLogo: React.FC<BrandLogoProps> = ({
       title={name}
       role="img"
       aria-label={name}
+      data-brand-slug={slug}
+      data-logo-status="neutral-fallback"
     >
       {fallbackText}
     </div>

@@ -39,7 +39,7 @@ All mutations are guarded by the existing `ADMIN_SECRET` authentication token (`
 - **Community Banner:** Outbound CTA encouraging users to submit their own AI platforms for editorial review.
 
 ### C. Admin Management Dashboard (`AdminDiscoveriesManager.tsx`)
-- **Integrated Admin Experience:** Accessible inside `/moderation` (unlocked using the administrator passkey `techhacks-admin-2026`).
+- **Integrated Admin Experience:** Accessible inside `/moderation` using the server-side `ADMIN_SECRET`; the development fallback is disabled in production/serverless environments.
 - **Tabbed Dashboard:** Added top-level tab switcher to toggle between **Community Submissions Queue** and **Daily Discoveries & Featured Tools**.
 - **Management Capabilities:**
   - Metrics cards: Total Discoveries, Published (Live), Drafts (Hidden), and Featured

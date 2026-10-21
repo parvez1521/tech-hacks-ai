@@ -92,8 +92,8 @@ describe('Phase 19: Floating AI Pet, Glass UI, Theme Repair & UX Bug Fixes', () 
       const content = fs.readFileSync(cssPath, 'utf8');
 
       // Check dark RGB values
-      assert.ok(content.includes('--color-bg: 11 12 14;'), 'Dark background RGB numbers defined');
-      assert.ok(content.includes('--color-card: 17 19 21;'), 'Dark card RGB numbers defined');
+      assert.ok(content.includes('--color-bg: 8 13 24;'), 'Midnight-blue dark background RGB numbers defined');
+      assert.ok(content.includes('--color-card: 17 28 47;'), 'Midnight-blue dark card RGB numbers defined');
 
       // Check light RGB values
       assert.ok(content.includes('--color-bg: 248 250 252;'), 'Light background RGB numbers defined');
@@ -108,8 +108,8 @@ describe('Phase 19: Floating AI Pet, Glass UI, Theme Repair & UX Bug Fixes', () 
       const contextPath = path.resolve(process.cwd(), 'src/context/ThemeContext.tsx');
       const content = fs.readFileSync(contextPath, 'utf8');
 
-      assert.ok(content.includes("root.setAttribute('data-theme', targetTheme);"), 'Sets data-theme attribute on root');
-      assert.ok(content.includes("localStorage.getItem('theme')"), 'Synchronous localStorage initialization');
+      assert.ok(content.includes("root.setAttribute('data-theme', theme)"), 'Sets active data-theme attribute on root');
+      assert.ok(content.includes("window.localStorage.getItem(THEME_STORAGE_KEY)"), 'Synchronous localStorage initialization');
     });
 
     test('index.html anti-FOUC script synchronizes data-theme attribute', () => {
@@ -117,7 +117,7 @@ describe('Phase 19: Floating AI Pet, Glass UI, Theme Repair & UX Bug Fixes', () 
       const content = fs.readFileSync(htmlPath, 'utf8');
 
       assert.ok(
-        content.includes('document.documentElement.setAttribute(\'data-theme\''),
+        content.includes("root.setAttribute('data-theme', theme)"),
         'Anti-FOUC script sets data-theme attribute'
       );
     });

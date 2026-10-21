@@ -7,16 +7,18 @@ import { BrandLogo } from './BrandLogo';
 
 interface AiToolCardProps {
   tool: AiTool;
+  routePrefix?: '/ai-tools' | '/community-tools';
 }
 
-export const AiToolCard: React.FC<AiToolCardProps> = ({ tool }) => {
+export const AiToolCard: React.FC<AiToolCardProps> = ({ tool, routePrefix = '/ai-tools' }) => {
+  const detailUrl = `${routePrefix}/${tool.slug}`;
   const bookmarkItem: BookmarkItem = {
     id: `ai-${tool.id}`,
     type: 'ai-tool',
     slug: tool.slug,
     title: tool.name,
     subtitle: tool.tagline,
-    url: `/ai-tools/${tool.slug}`,
+    url: detailUrl,
     iconBgColor: tool.iconBgColor,
     iconLetter: tool.iconLetter,
     savedAt: new Date().toISOString(),
@@ -94,7 +96,7 @@ export const AiToolCard: React.FC<AiToolCardProps> = ({ tool }) => {
             <div className="min-w-0">
               <div className="flex items-center gap-1.5">
                 <Link
-                  to={`/ai-tools/${tool.slug}`}
+                   to={detailUrl}
                   className="font-bold text-foreground text-base tracking-tight truncate hover:text-primary transition-colors focus:outline-none focus:underline"
                 >
                   {tool.name}
@@ -154,7 +156,7 @@ export const AiToolCard: React.FC<AiToolCardProps> = ({ tool }) => {
 
         <div className="flex items-center gap-2">
           <Link
-            to={`/ai-tools/${tool.slug}`}
+             to={detailUrl}
             className="inline-flex items-center gap-1 text-primary font-medium hover:text-primary-hover group-hover:translate-x-0.5 transition-transform"
           >
             <span>Explore</span>

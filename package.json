@@ -8,14 +8,18 @@
     "build": "vite build",
     "preview": "vite preview",
     "pretest": "./node_modules/.bin/esbuild src/App.tsx --bundle --platform=node --format=esm --external:react --external:react-dom --external:lucide-react --outfile=dist/test-ssr.js",
-    "test": "node --experimental-strip-types --test tests/*.test.js",
+    "test": "node --experimental-strip-types --test --test-concurrency=1 tests/*.test.js",
+    "logos:sync": "node scripts/sync-official-ai-logo-assets.mjs",
     "db:migrate": "node scripts/migrate-to-supabase.js"
   },
   "dependencies": {
+    "@ffmpeg/ffmpeg": "^0.12.15",
+    "@ffmpeg/util": "^0.12.2",
+    "busboy": "^1.6.0",
+    "clsx": "^2.1.0",
+    "lucide-react": "^0.344.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "lucide-react": "^0.344.0",
-    "clsx": "^2.1.0",
     "tailwind-merge": "^2.2.1"
   },
   "devDependencies": {

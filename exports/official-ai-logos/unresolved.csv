@@ -1,0 +1,9 @@
+tool_name,canonical_slug,official_website,source_page_url,direct_asset_url,downloaded_filename,file_format,source_type,verification_status,downloaded_from_web,notes
+DeepSeek,deepseek,https://chat.deepseek.com,https://chat.deepseek.com/,,,,,unresolved,,Official page returned HTTP 403; browser DOM was still inspected. Candidate https://chat.deepseek.com/favicon.ico: HTML response instead of an image asset. Candidate https://chat.deepseek.com/apple-touch-icon.png: HTML response instead of an image asset.
+Dreamina,dreamina,https://dreamina.capcut.com,https://dreamina.capcut.com/,,,,,unresolved,,Candidate https://dreamina.capcut.com/favicon.ico: empty response. Candidate https://dreamina.capcut.com/apple-touch-icon.png: HTML response instead of an image asset.
+Haiper AI,haiper,https://haiper.ai,https://haiper.ai/,,,,,unresolved,,Candidate https://haiper.ai/favicon.ico: HTTP 404. Candidate https://haiper.ai/apple-touch-icon.png: HTTP 404.
+Kokoro TTS,kokoro-tts,https://huggingface.co/hexgrad/Kokoro-82M,https://huggingface.co/hexgrad/Kokoro-82M,,,,,unresolved,,No direct logo or official favicon asset was exposed by the inspected page.
+LTX Video,ltx-video,https://github.com/Lightricks/LTX-Video,https://github.com/Lightricks/LTX-Video,,,,,unresolved,,No direct logo or official favicon asset was exposed by the inspected page.
+Meshy 3D,meshy-3d,https://www.meshy.ai,https://www.meshy.ai/,,,,,unresolved,,No direct logo or official favicon asset was exposed by the inspected page.
+Replit Agent,replit-agent,https://replit.com,https://replit.com/,,,,,unresolved,,Official page returned HTTP 403; browser DOM was still inspected. Candidate https://replit.com/favicon.ico: HTTP 403. Candidate https://replit.com/apple-touch-icon.png: HTTP 403.
+Whisper by OpenAI,whisper,https://github.com/openai/whisper,https://github.com/openai/whisper,,,,,unresolved,,No direct logo or official favicon asset was exposed by the inspected page.
