@@ -42,3 +42,30 @@ claim time.
 - No attempt was made to reach a target number of offers by adding expired,
   duplicate, or unsupported claims. The catalogue contains 17 active sourced
   offers and one explicitly held offer.
+
+## Phase 3 additions — checked 2026-10-22
+
+These are recurring free plans unless marked as a trial. Quotas and region
+availability can change; the record avoids amounts where the provider page
+exposes dynamic limits rather than a stable promise.
+
+| Offer | Official source | Benefit and eligibility/status |
+| --- | --- | --- |
+| ChatGPT Free | [OpenAI pricing](https://openai.com/chatgpt/pricing/) | Active free plan with limited feature and usage access; OpenAI account and supported region. |
+| Claude Free | [Anthropic pricing](https://www.anthropic.com/pricing), [plan help](https://support.anthropic.com/en/articles/11049762-choosing-a-claude-ai-plan) | Active $0 plan with limited usage; supported-region availability. |
+| Perplexity Standard | [Perplexity plan guidance](https://www.perplexity.ai/help-center/en/articles/11187416-which-perplexity-subscription-plan-is-right-for-you) | Active free Standard tier with limits on advanced searches and uploads. |
+| GroqCloud Free Developer Tier | [Groq rate limits](https://console.groq.com/docs/rate-limits) | Free API experimentation subject to model-specific changing rate limits; no fixed credit amount claimed. |
+| Supabase Free | [Supabase pricing](https://supabase.com/pricing), [billing docs](https://supabase.com/docs/guides/platform/billing-on-supabase) | Active free plan with quotas and inactivity pause behavior. |
+| Firebase Spark | [Firebase pricing plans](https://firebase.google.com/docs/projects/billing/firebase-pricing-plans) | Active no-cost quotas for supported products; some services require Blaze billing. |
+| MongoDB Atlas Free Cluster | [Atlas pricing](https://www.mongodb.com/pricing), [free cluster limits](https://www.mongodb.com/docs/atlas/reference/free-shared-limitations/) | Active free shared cluster, 512 MB, with resource limits. |
+| Google Cloud Free Trial | [Free trial terms](https://docs.cloud.google.com/free/docs/free-cloud-features), [eligibility FAQ](https://cloud.google.com/signup-faqs) | New customers may receive $300 for 90 days; billing profile and trial restrictions apply. |
+| Oracle Cloud Free Tier | [Oracle Free Tier](https://www.oracle.com/cloud/free/), [FAQ](https://www.oracle.com/cloud/free/faq/) | Trial credit is time-limited; eligible Always Free services have regional/capacity constraints. |
+| Neon Free | [Neon pricing](https://neon.com/pricing), [1 GB plan announcement](https://neon.com/blog/neon-free-plan-1-gb-per-project) | Active free Postgres plan with 1 GB per project stated by provider; other usage limits apply. |
+| Turso Free | [Turso pricing](https://turso.tech/pricing) | Active no-cost database plan with published quotas; exact quotas remain on the provider page because they can change. |
+| IBM Cloud Lite | [IBM Cloud free overview](https://cloud.ibm.com/docs/overview?topic=overview-tutorial-try-for-free) | Active no-cost Lite service plans; any welcome credit is eligibility-specific and is not promised here. |
+
+The audited catalogue now has 29 active offers (12 Phase 3 additions) and one
+pending-verification offer. This is fewer than the requested 30–40 *additional*
+entries; no unsupported records were added to reach that target. The active
+records include free plans as well as eligibility-gated, paid-discount, and
+credit offers; each is individually labeled in the catalogue.

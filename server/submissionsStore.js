@@ -45,49 +45,8 @@ export function initStore() {
     fs.mkdirSync(DATA_DIR, { recursive: true });
   }
 
-  // In serverless environments, copy initial bundled data to /tmp if not yet present
-  if (DATA_DIR !== BUNDLED_DATA_DIR) {
-    const bundledSub = path.join(BUNDLED_DATA_DIR, 'submissions.json');
-    const bundledPub = path.join(BUNDLED_DATA_DIR, 'published-additions.json');
-    if (!fs.existsSync(SUBMISSIONS_FILE) && fs.existsSync(bundledSub)) {
-      try {
-        fs.copyFileSync(bundledSub, SUBMISSIONS_FILE);
-      } catch {}
-    }
-    if (!fs.existsSync(PUBLISHED_FILE) && fs.existsSync(bundledPub)) {
-      try {
-        fs.copyFileSync(bundledPub, PUBLISHED_FILE);
-      } catch {}
-    }
-  }
-
-
   if (!fs.existsSync(SUBMISSIONS_FILE)) {
-    // Seed with 1 initial sample pending submission so the moderation queue is populated for verification
-    const initialSeed = [
-      {
-        id: 'sub_tool_seed_001',
-        type: 'tool',
-        status: 'pending',
-        createdAt: '2026-10-18T10:00:00.000Z',
-        updatedAt: '2026-10-18T10:00:00.000Z',
-        toolData: {
-          name: 'Jan AI',
-          websiteUrl: 'https://jan.ai',
-          description: 'Open-source local AI alternative to ChatGPT that runs 100% offline on your device with local LLMs.',
-          category: 'assistants',
-          pricingType: 'open-source',
-          features: ['100% Offline Privacy', 'Local GGUF Models', 'Custom System Prompts', 'Multi-Engine Support'],
-          platform: ['macOS', 'Windows', 'Linux'],
-          alternativeTo: 'ChatGPT',
-          submitterName: 'Priya Sharma',
-          submitterEmail: 'priya.dev@example.com',
-          notes: 'Tested on Apple Silicon M2, works smoothly with Llama 3 and Mistral 7B.',
-        },
-        potentialDuplicate: false,
-      },
-    ];
-    fs.writeFileSync(SUBMISSIONS_FILE, JSON.stringify(initialSeed, null, 2), 'utf8');
+    fs.writeFileSync(SUBMISSIONS_FILE, '[]', 'utf8');
   }
 
   if (!fs.existsSync(PUBLISHED_FILE)) {

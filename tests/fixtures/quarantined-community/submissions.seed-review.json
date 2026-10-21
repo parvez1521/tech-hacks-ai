@@ -1,0 +1,1701 @@
+[
+  {
+    "id": "sub_guide_1792347400159_fyj3hl",
+    "type": "guide",
+    "status": "published",
+    "createdAt": "2026-10-18T18:16:40.159Z",
+    "updatedAt": "2026-10-19T07:28:57.610Z",
+    "guideData": {
+      "title": "Building Autonomous Agents with Community Workflows 1792347400158",
+      "summary": "A comprehensive step-by-step tutorial on building autonomous agents using modern AI models.",
+      "content": "## Getting Started with Agents\n\nStep 1: Setup developer environment.\nStep 2: Connect APIs and models.\nStep 3: Run pipeline with safe markdown rendering.\n\nEnjoy the workflow! This tutorial covers all essential architecture points.",
+      "category": "workflow-automation",
+      "tags": [],
+      "relatedTools": [],
+      "difficulty": "intermediate",
+      "readTime": "1 min read",
+      "authorName": "Test Contributor",
+      "contactEmail": "fixture@example.invalid",
+      "referenceUrls": []
+    },
+    "potentialDuplicate": false,
+    "publishedSlug": "building-autonomous-agents-with-community-workflows-1792347400158",
+    "publishedAt": "2026-10-18T18:16:40.161Z",
+    "isVerified": true,
+    "moderatorNotes": "Synthetic fixture only; not a genuine user submission."
+  },
+  {
+    "id": "sub_tool_1792347400144_wtaion",
+    "type": "tool",
+    "status": "published",
+    "createdAt": "2026-10-18T18:16:40.144Z",
+    "updatedAt": "2026-10-18T18:16:40.155Z",
+    "toolData": {
+      "name": "Community Tool 1792347400006",
+      "websiteUrl": "https://community-tool-1792347400006.ai/",
+      "description": "A cutting-edge community-submitted AI assistant for developers with deep workflow integration.",
+      "category": "assistants",
+      "pricingType": "freemium",
+      "features": [
+        "Code autocomplete",
+        "Refactoring agent",
+        "Unit test generator"
+      ],
+      "platform": [
+        "Web",
+        "macOS"
+      ],
+      "submitterName": "Test Contributor",
+      "submitterEmail": "fixture@example.invalid"
+    },
+    "potentialDuplicate": false,
+    "moderatorNotes": "Synthetic fixture only; not a genuine user submission.",
+    "publishedSlug": "community-tool-1792347400006",
+    "publishedAt": "2026-10-18T18:16:40.155Z",
+    "isVerified": true
+  },
+  {
+    "id": "sub_guide_1792347322566_cke8ci",
+    "type": "guide",
+    "status": "published",
+    "createdAt": "2026-10-18T18:15:22.566Z",
+    "updatedAt": "2026-10-18T18:15:22.568Z",
+    "guideData": {
+      "title": "Building Autonomous Agents with Community Workflows 1792347322565",
+      "summary": "A comprehensive step-by-step tutorial on building autonomous agents using modern AI models.",
+      "content": "## Getting Started with Agents\n\nStep 1: Setup developer environment.\nStep 2: Connect APIs and models.\nStep 3: Run pipeline with safe markdown rendering.\n\nEnjoy the workflow! This tutorial covers all essential architecture points.",
+      "category": "workflow-automation",
+      "tags": [],
+      "relatedTools": [],
+      "difficulty": "intermediate",
+      "readTime": "1 min read",
+      "authorName": "Test Contributor",
+      "contactEmail": "fixture@example.invalid",
+      "referenceUrls": []
+    },
+    "potentialDuplicate": false,
+    "publishedSlug": "building-autonomous-agents-with-community-workflows-1792347322565",
+    "publishedAt": "2026-10-18T18:15:22.568Z",
+    "isVerified": true
+  },
+  {
+    "id": "sub_tool_1792347322518_z9mkog",
+    "type": "tool",
+    "status": "published",
+    "createdAt": "2026-10-18T18:15:22.518Z",
+    "updatedAt": "2026-10-18T18:15:22.563Z",
+    "toolData": {
+      "name": "Community Tool 1792347322294",
+      "websiteUrl": "https://community-tool-1792347322294.ai/",
+      "description": "A cutting-edge community-submitted AI assistant for developers with deep workflow integration.",
+      "category": "assistants",
+      "pricingType": "freemium",
+      "features": [
+        "Code autocomplete",
+        "Refactoring agent",
+        "Unit test generator"
+      ],
+      "platform": [
+        "Web",
+        "macOS"
+      ],
+      "submitterName": "Test Contributor",
+      "submitterEmail": "fixture@example.invalid"
+    },
+    "potentialDuplicate": false,
+    "moderatorNotes": "Synthetic fixture only; not a genuine user submission.",
+    "publishedSlug": "community-tool-1792347322294",
+    "publishedAt": "2026-10-18T18:15:22.563Z",
+    "isVerified": true
+  },
+  {
+    "id": "sub_guide_1792347308017_u9x43i",
+    "type": "guide",
+    "status": "published",
+    "createdAt": "2026-10-18T18:15:08.017Z",
+    "updatedAt": "2026-10-18T18:15:08.018Z",
+    "guideData": {
+      "title": "Building Autonomous Agents with Community Workflows 1792347308016",
+      "summary": "A comprehensive step-by-step tutorial on building autonomous agents using modern AI models.",
+      "content": "## Getting Started with Agents\n\nStep 1: Setup developer environment.\nStep 2: Connect APIs and models.\nStep 3: Run pipeline with safe markdown rendering.\n\nEnjoy the workflow! This tutorial covers all essential architecture points.",
+      "category": "workflow-automation",
+      "tags": [],
+      "relatedTools": [],
+      "difficulty": "intermediate",
+      "readTime": "1 min read",
+      "authorName": "Test Contributor",
+      "contactEmail": "fixture@example.invalid",
+      "referenceUrls": []
+    },
+    "potentialDuplicate": false,
+    "publishedSlug": "building-autonomous-agents-with-community-workflows-1792347308016",
+    "publishedAt": "2026-10-18T18:15:08.018Z",
+    "isVerified": true
+  },
+  {
+    "id": "sub_tool_1792347308000_tqiy2y",
+    "type": "tool",
+    "status": "published",
+    "createdAt": "2026-10-18T18:15:08.000Z",
+    "updatedAt": "2026-10-18T18:15:08.013Z",
+    "toolData": {
+      "name": "Community Tool 1792347307803",
+      "websiteUrl": "https://community-tool-1792347307803.ai/",
+      "description": "A cutting-edge community-submitted AI assistant for developers with deep workflow integration.",
+      "category": "assistants",
+      "pricingType": "freemium",
+      "features": [
+        "Code autocomplete",
+        "Refactoring agent",
+        "Unit test generator"
+      ],
+      "platform": [
+        "Web",
+        "macOS"
+      ],
+      "submitterName": "Test Contributor",
+      "submitterEmail": "fixture@example.invalid"
+    },
+    "potentialDuplicate": false,
+    "moderatorNotes": "Synthetic fixture only; not a genuine user submission.",
+    "publishedSlug": "community-tool-1792347307803",
+    "publishedAt": "2026-10-18T18:15:08.013Z",
+    "isVerified": true
+  },
+  {
+    "id": "sub_guide_1792337121454_jflzwy",
+    "type": "guide",
+    "status": "published",
+    "createdAt": "2026-10-18T15:25:21.454Z",
+    "updatedAt": "2026-10-18T15:25:21.456Z",
+    "guideData": {
+      "title": "Building Autonomous Agents with Community Workflows 1792337121451",
+      "summary": "A comprehensive step-by-step tutorial on building autonomous agents using modern AI models.",
+      "content": "## Getting Started with Agents\n\nStep 1: Setup developer environment.\nStep 2: Connect APIs and models.\nStep 3: Run pipeline with safe markdown rendering.\n\nEnjoy the workflow! This tutorial covers all essential architecture points.",
+      "category": "workflow-automation",
+      "tags": [],
+      "relatedTools": [],
+      "difficulty": "intermediate",
+      "readTime": "1 min read",
+      "authorName": "Test Contributor",
+      "contactEmail": "fixture@example.invalid",
+      "referenceUrls": []
+    },
+    "potentialDuplicate": false,
+    "publishedSlug": "building-autonomous-agents-with-community-workflows-1792337121451",
+    "publishedAt": "2026-10-18T15:25:21.456Z",
+    "isVerified": true
+  },
+  {
+    "id": "sub_tool_1792337121448_assooy",
+    "type": "tool",
+    "status": "published",
+    "createdAt": "2026-10-18T15:25:21.448Z",
+    "updatedAt": "2026-10-18T15:25:21.450Z",
+    "toolData": {
+      "name": "Community Tool 1792337121303",
+      "websiteUrl": "https://community-tool-1792337121303.ai/",
+      "description": "A cutting-edge community-submitted AI assistant for developers with deep workflow integration.",
+      "category": "assistants",
+      "pricingType": "freemium",
+      "features": [
+        "Code autocomplete",
+        "Refactoring agent",
+        "Unit test generator"
+      ],
+      "platform": [
+        "Web",
+        "macOS"
+      ],
+      "submitterName": "Test Contributor",
+      "submitterEmail": "fixture@example.invalid"
+    },
+    "potentialDuplicate": false,
+    "moderatorNotes": "Synthetic fixture only; not a genuine user submission.",
+    "publishedSlug": "community-tool-1792337121303",
+    "publishedAt": "2026-10-18T15:25:21.450Z",
+    "isVerified": true
+  },
+  {
+    "id": "sub_guide_1792337092025_51kugr",
+    "type": "guide",
+    "status": "published",
+    "createdAt": "2026-10-18T15:24:52.025Z",
+    "updatedAt": "2026-10-18T15:24:52.026Z",
+    "guideData": {
+      "title": "Building Autonomous Agents with Community Workflows 1792337092024",
+      "summary": "A comprehensive step-by-step tutorial on building autonomous agents using modern AI models.",
+      "content": "## Getting Started with Agents\n\nStep 1: Setup developer environment.\nStep 2: Connect APIs and models.\nStep 3: Run pipeline with safe markdown rendering.\n\nEnjoy the workflow! This tutorial covers all essential architecture points.",
+      "category": "workflow-automation",
+      "tags": [],
+      "relatedTools": [],
+      "difficulty": "intermediate",
+      "readTime": "1 min read",
+      "authorName": "Test Contributor",
+      "contactEmail": "fixture@example.invalid",
+      "referenceUrls": []
+    },
+    "potentialDuplicate": false,
+    "publishedSlug": "building-autonomous-agents-with-community-workflows-1792337092024",
+    "publishedAt": "2026-10-18T15:24:52.026Z",
+    "isVerified": true
+  },
+  {
+    "id": "sub_tool_1792337092015_xo6qd3",
+    "type": "tool",
+    "status": "published",
+    "createdAt": "2026-10-18T15:24:52.015Z",
+    "updatedAt": "2026-10-18T15:24:52.023Z",
+    "toolData": {
+      "name": "Community Tool 1792337091934",
+      "websiteUrl": "https://community-tool-1792337091934.ai/",
+      "description": "A cutting-edge community-submitted AI assistant for developers with deep workflow integration.",
+      "category": "assistants",
+      "pricingType": "freemium",
+      "features": [
+        "Code autocomplete",
+        "Refactoring agent",
+        "Unit test generator"
+      ],
+      "platform": [
+        "Web",
+        "macOS"
+      ],
+      "submitterName": "Test Contributor",
+      "submitterEmail": "fixture@example.invalid"
+    },
+    "potentialDuplicate": false,
+    "moderatorNotes": "Synthetic fixture only; not a genuine user submission.",
+    "publishedSlug": "community-tool-1792337091934",
+    "publishedAt": "2026-10-18T15:24:52.023Z",
+    "isVerified": true
+  },
+  {
+    "id": "sub_guide_1792337072164_ljfopg",
+    "type": "guide",
+    "status": "published",
+    "createdAt": "2026-10-18T15:24:32.164Z",
+    "updatedAt": "2026-10-18T15:24:32.165Z",
+    "guideData": {
+      "title": "Building Autonomous Agents with Community Workflows 1792337072164",
+      "summary": "A comprehensive step-by-step tutorial on building autonomous agents using modern AI models.",
+      "content": "## Getting Started with Agents\n\nStep 1: Setup developer environment.\nStep 2: Connect APIs and models.\nStep 3: Run pipeline with safe markdown rendering.\n\nEnjoy the workflow! This tutorial covers all essential architecture points.",
+      "category": "workflow-automation",
+      "tags": [],
+      "relatedTools": [],
+      "difficulty": "intermediate",
+      "readTime": "1 min read",
+      "authorName": "Test Contributor",
+      "contactEmail": "fixture@example.invalid",
+      "referenceUrls": []
+    },
+    "potentialDuplicate": false,
+    "publishedSlug": "building-autonomous-agents-with-community-workflows-1792337072164",
+    "publishedAt": "2026-10-18T15:24:32.165Z",
+    "isVerified": true
+  },
+  {
+    "id": "sub_tool_1792337072160_4mlf92",
+    "type": "tool",
+    "status": "published",
+    "createdAt": "2026-10-18T15:24:32.160Z",
+    "updatedAt": "2026-10-18T15:24:32.163Z",
+    "toolData": {
+      "name": "Community Tool 1792337072007",
+      "websiteUrl": "https://community-tool-1792337072007.ai/",
+      "description": "A cutting-edge community-submitted AI assistant for developers with deep workflow integration.",
+      "category": "assistants",
+      "pricingType": "freemium",
+      "features": [
+        "Code autocomplete",
+        "Refactoring agent",
+        "Unit test generator"
+      ],
+      "platform": [
+        "Web",
+        "macOS"
+      ],
+      "submitterName": "Test Contributor",
+      "submitterEmail": "fixture@example.invalid"
+    },
+    "potentialDuplicate": false,
+    "moderatorNotes": "Synthetic fixture only; not a genuine user submission.",
+    "publishedSlug": "community-tool-1792337072007",
+    "publishedAt": "2026-10-18T15:24:32.163Z",
+    "isVerified": true
+  },
+  {
+    "id": "sub_guide_1792336994126_f4tp1y",
+    "type": "guide",
+    "status": "published",
+    "createdAt": "2026-10-18T15:23:14.126Z",
+    "updatedAt": "2026-10-18T15:23:14.127Z",
+    "guideData": {
+      "title": "Building Autonomous Agents with Community Workflows 1792336994125",
+      "summary": "A comprehensive step-by-step tutorial on building autonomous agents using modern AI models.",
+      "content": "## Getting Started with Agents\n\nStep 1: Setup developer environment.\nStep 2: Connect APIs and models.\nStep 3: Run pipeline with safe markdown rendering.\n\nEnjoy the workflow! This tutorial covers all essential architecture points.",
+      "category": "workflow-automation",
+      "tags": [],
+      "relatedTools": [],
+      "difficulty": "intermediate",
+      "readTime": "1 min read",
+      "authorName": "Test Contributor",
+      "contactEmail": "fixture@example.invalid",
+      "referenceUrls": []
+    },
+    "potentialDuplicate": false,
+    "publishedSlug": "building-autonomous-agents-with-community-workflows-1792336994125",
+    "publishedAt": "2026-10-18T15:23:14.127Z",
+    "isVerified": true
+  },
+  {
+    "id": "sub_tool_1792336994120_oh48je",
+    "type": "tool",
+    "status": "published",
+    "createdAt": "2026-10-18T15:23:14.120Z",
+    "updatedAt": "2026-10-18T15:23:14.123Z",
+    "toolData": {
+      "name": "Community Tool 1792336994019",
+      "websiteUrl": "https://community-tool-1792336994019.ai/",
+      "description": "A cutting-edge community-submitted AI assistant for developers with deep workflow integration.",
+      "category": "assistants",
+      "pricingType": "freemium",
+      "features": [
+        "Code autocomplete",
+        "Refactoring agent",
+        "Unit test generator"
+      ],
+      "platform": [
+        "Web",
+        "macOS"
+      ],
+      "submitterName": "Test Contributor",
+      "submitterEmail": "fixture@example.invalid"
+    },
+    "potentialDuplicate": false,
+    "moderatorNotes": "Synthetic fixture only; not a genuine user submission.",
+    "publishedSlug": "community-tool-1792336994019",
+    "publishedAt": "2026-10-18T15:23:14.123Z",
+    "isVerified": true
+  },
+  {
+    "id": "sub_guide_1792336691604_ds31ce",
+    "type": "guide",
+    "status": "published",
+    "createdAt": "2026-10-18T15:18:11.604Z",
+    "updatedAt": "2026-10-18T15:18:11.604Z",
+    "guideData": {
+      "title": "Building Autonomous Agents with Community Workflows 1792336691603",
+      "summary": "A comprehensive step-by-step tutorial on building autonomous agents using modern AI models.",
+      "content": "## Getting Started with Agents\n\nStep 1: Setup developer environment.\nStep 2: Connect APIs and models.\nStep 3: Run pipeline with safe markdown rendering.\n\nEnjoy the workflow! This tutorial covers all essential architecture points.",
+      "category": "workflow-automation",
+      "tags": [],
+      "relatedTools": [],
+      "difficulty": "intermediate",
+      "readTime": "1 min read",
+      "authorName": "Test Contributor",
+      "contactEmail": "fixture@example.invalid",
+      "referenceUrls": []
+    },
+    "potentialDuplicate": false,
+    "publishedSlug": "building-autonomous-agents-with-community-workflows-1792336691603",
+    "publishedAt": "2026-10-18T15:18:11.604Z",
+    "isVerified": true
+  },
+  {
+    "id": "sub_tool_1792336691572_qbaa77",
+    "type": "tool",
+    "status": "published",
+    "createdAt": "2026-10-18T15:18:11.572Z",
+    "updatedAt": "2026-10-18T15:18:11.602Z",
+    "toolData": {
+      "name": "Community Tool 1792336691486",
+      "websiteUrl": "https://community-tool-1792336691486.ai/",
+      "description": "A cutting-edge community-submitted AI assistant for developers with deep workflow integration.",
+      "category": "assistants",
+      "pricingType": "freemium",
+      "features": [
+        "Code autocomplete",
+        "Refactoring agent",
+        "Unit test generator"
+      ],
+      "platform": [
+        "Web",
+        "macOS"
+      ],
+      "submitterName": "Test Contributor",
+      "submitterEmail": "fixture@example.invalid"
+    },
+    "potentialDuplicate": false,
+    "moderatorNotes": "Synthetic fixture only; not a genuine user submission.",
+    "publishedSlug": "community-tool-1792336691486",
+    "publishedAt": "2026-10-18T15:18:11.602Z",
+    "isVerified": true
+  },
+  {
+    "id": "sub_guide_1792333984558_szmjr0",
+    "type": "guide",
+    "status": "published",
+    "createdAt": "2026-10-18T14:33:04.558Z",
+    "updatedAt": "2026-10-18T14:33:04.589Z",
+    "guideData": {
+      "title": "Building Autonomous Agents with Community Workflows 1792333984554",
+      "summary": "A comprehensive step-by-step tutorial on building autonomous agents using modern AI models.",
+      "content": "## Getting Started with Agents\n\nStep 1: Setup developer environment.\nStep 2: Connect APIs and models.\nStep 3: Run pipeline with safe markdown rendering.\n\nEnjoy the workflow! This tutorial covers all essential architecture points.",
+      "category": "workflow-automation",
+      "tags": [],
+      "relatedTools": [],
+      "difficulty": "intermediate",
+      "readTime": "1 min read",
+      "authorName": "Test Contributor",
+      "contactEmail": "fixture@example.invalid",
+      "referenceUrls": []
+    },
+    "potentialDuplicate": false,
+    "publishedSlug": "building-autonomous-agents-with-community-workflows-1792333984554",
+    "publishedAt": "2026-10-18T14:33:04.589Z",
+    "isVerified": true
+  },
+  {
+    "id": "sub_tool_1792333984549_nwqtyx",
+    "type": "tool",
+    "status": "published",
+    "createdAt": "2026-10-18T14:33:04.549Z",
+    "updatedAt": "2026-10-18T14:33:04.553Z",
+    "toolData": {
+      "name": "Community Tool 1792333984397",
+      "websiteUrl": "https://community-tool-1792333984397.ai/",
+      "description": "A cutting-edge community-submitted AI assistant for developers with deep workflow integration.",
+      "category": "assistants",
+      "pricingType": "freemium",
+      "features": [
+        "Code autocomplete",
+        "Refactoring agent",
+        "Unit test generator"
+      ],
+      "platform": [
+        "Web",
+        "macOS"
+      ],
+      "submitterName": "Test Contributor",
+      "submitterEmail": "fixture@example.invalid"
+    },
+    "potentialDuplicate": false,
+    "moderatorNotes": "Synthetic fixture only; not a genuine user submission.",
+    "publishedSlug": "community-tool-1792333984397",
+    "publishedAt": "2026-10-18T14:33:04.553Z",
+    "isVerified": true
+  },
+  {
+    "id": "sub_guide_1792333966227_hh8aem",
+    "type": "guide",
+    "status": "published",
+    "createdAt": "2026-10-18T14:32:46.227Z",
+    "updatedAt": "2026-10-18T14:32:46.227Z",
+    "guideData": {
+      "title": "Building Autonomous Agents with Community Workflows 1792333966226",
+      "summary": "A comprehensive step-by-step tutorial on building autonomous agents using modern AI models.",
+      "content": "## Getting Started with Agents\n\nStep 1: Setup developer environment.\nStep 2: Connect APIs and models.\nStep 3: Run pipeline with safe markdown rendering.\n\nEnjoy the workflow! This tutorial covers all essential architecture points.",
+      "category": "workflow-automation",
+      "tags": [],
+      "relatedTools": [],
+      "difficulty": "intermediate",
+      "readTime": "1 min read",
+      "authorName": "Test Contributor",
+      "contactEmail": "fixture@example.invalid",
+      "referenceUrls": []
+    },
+    "potentialDuplicate": false,
+    "publishedSlug": "building-autonomous-agents-with-community-workflows-1792333966226",
+    "publishedAt": "2026-10-18T14:32:46.227Z",
+    "isVerified": true
+  },
+  {
+    "id": "sub_tool_1792333966195_425utb",
+    "type": "tool",
+    "status": "published",
+    "createdAt": "2026-10-18T14:32:46.195Z",
+    "updatedAt": "2026-10-18T14:32:46.225Z",
+    "toolData": {
+      "name": "Community Tool 1792333965961",
+      "websiteUrl": "https://community-tool-1792333965961.ai/",
+      "description": "A cutting-edge community-submitted AI assistant for developers with deep workflow integration.",
+      "category": "assistants",
+      "pricingType": "freemium",
+      "features": [
+        "Code autocomplete",
+        "Refactoring agent",
+        "Unit test generator"
+      ],
+      "platform": [
+        "Web",
+        "macOS"
+      ],
+      "submitterName": "Test Contributor",
+      "submitterEmail": "fixture@example.invalid"
+    },
+    "potentialDuplicate": false,
+    "moderatorNotes": "Synthetic fixture only; not a genuine user submission.",
+    "publishedSlug": "community-tool-1792333965961",
+    "publishedAt": "2026-10-18T14:32:46.225Z",
+    "isVerified": true
+  },
+  {
+    "id": "sub_guide_1792333948015_iufeyx",
+    "type": "guide",
+    "status": "published",
+    "createdAt": "2026-10-18T14:32:28.015Z",
+    "updatedAt": "2026-10-18T14:32:28.015Z",
+    "guideData": {
+      "title": "Building Autonomous Agents with Community Workflows 1792333948014",
+      "summary": "A comprehensive step-by-step tutorial on building autonomous agents using modern AI models.",
+      "content": "## Getting Started with Agents\n\nStep 1: Setup developer environment.\nStep 2: Connect APIs and models.\nStep 3: Run pipeline with safe markdown rendering.\n\nEnjoy the workflow! This tutorial covers all essential architecture points.",
+      "category": "workflow-automation",
+      "tags": [],
+      "relatedTools": [],
+      "difficulty": "intermediate",
+      "readTime": "1 min read",
+      "authorName": "Test Contributor",
+      "contactEmail": "fixture@example.invalid",
+      "referenceUrls": []
+    },
+    "potentialDuplicate": false,
+    "publishedSlug": "building-autonomous-agents-with-community-workflows-1792333948014",
+    "publishedAt": "2026-10-18T14:32:28.015Z",
+    "isVerified": true
+  },
+  {
+    "id": "sub_tool_1792333948011_z07wxu",
+    "type": "tool",
+    "status": "published",
+    "createdAt": "2026-10-18T14:32:28.011Z",
+    "updatedAt": "2026-10-18T14:32:28.013Z",
+    "toolData": {
+      "name": "Community Tool 1792333947932",
+      "websiteUrl": "https://community-tool-1792333947932.ai/",
+      "description": "A cutting-edge community-submitted AI assistant for developers with deep workflow integration.",
+      "category": "assistants",
+      "pricingType": "freemium",
+      "features": [
+        "Code autocomplete",
+        "Refactoring agent",
+        "Unit test generator"
+      ],
+      "platform": [
+        "Web",
+        "macOS"
+      ],
+      "submitterName": "Test Contributor",
+      "submitterEmail": "fixture@example.invalid"
+    },
+    "potentialDuplicate": false,
+    "moderatorNotes": "Synthetic fixture only; not a genuine user submission.",
+    "publishedSlug": "community-tool-1792333947932",
+    "publishedAt": "2026-10-18T14:32:28.013Z",
+    "isVerified": true
+  },
+  {
+    "id": "sub_tool_1792333847406_pa667t",
+    "type": "tool",
+    "status": "published",
+    "createdAt": "2026-10-18T14:30:47.406Z",
+    "updatedAt": "2026-10-19T07:35:04.896Z",
+    "toolData": {
+      "name": "Test Tool Prelaunch",
+      "websiteUrl": "https://test-tool-prelaunch.com/",
+      "description": "A testing tool for prelaunch QA audit verification.",
+      "category": "assistants",
+      "pricingType": "free",
+      "features": [],
+      "platform": [],
+      "submitterName": "Test Contributor",
+      "submitterEmail": "fixture@example.invalid"
+    },
+    "potentialDuplicate": true,
+    "duplicateReason": "A tool named \"Test Tool Prelaunch\" was already submitted (Status: pending).",
+    "duplicateMatches": [
+      "Test Tool Prelaunch"
+    ],
+    "moderatorNotes": "Synthetic fixture only; not a genuine user submission.",
+    "publishedSlug": "test-tool-prelaunch",
+    "publishedAt": "2026-10-19T07:35:04.896Z",
+    "isVerified": true
+  },
+  {
+    "id": "sub_tool_1792333842564_x4o1kn",
+    "type": "tool",
+    "status": "published",
+    "createdAt": "2026-10-18T14:30:42.564Z",
+    "updatedAt": "2026-10-19T07:35:40.073Z",
+    "toolData": {
+      "name": "Test Tool Prelaunch",
+      "websiteUrl": "https://test-tool-prelaunch.com/",
+      "description": "A testing tool for prelaunch QA audit verification.",
+      "category": "assistants",
+      "pricingType": "free",
+      "features": [],
+      "platform": [],
+      "submitterName": "Test Contributor",
+      "submitterEmail": "fixture@example.invalid"
+    },
+    "potentialDuplicate": false,
+    "moderatorNotes": "Synthetic fixture only; not a genuine user submission.",
+    "publishedSlug": "test-tool-prelaunch",
+    "publishedAt": "2026-10-19T07:35:40.073Z",
+    "isVerified": true
+  },
+  {
+    "id": "sub_guide_1792333663530_pl9081",
+    "type": "guide",
+    "status": "published",
+    "createdAt": "2026-10-18T14:27:43.530Z",
+    "updatedAt": "2026-10-18T14:27:43.530Z",
+    "guideData": {
+      "title": "Building Autonomous Agents with Community Workflows 1792333663529",
+      "summary": "A comprehensive step-by-step tutorial on building autonomous agents using modern AI models.",
+      "content": "## Getting Started with Agents\n\nStep 1: Setup developer environment.\nStep 2: Connect APIs and models.\nStep 3: Run pipeline with safe markdown rendering.\n\nEnjoy the workflow! This tutorial covers all essential architecture points.",
+      "category": "workflow-automation",
+      "tags": [],
+      "relatedTools": [],
+      "difficulty": "intermediate",
+      "readTime": "1 min read",
+      "authorName": "Test Contributor",
+      "contactEmail": "fixture@example.invalid",
+      "referenceUrls": []
+    },
+    "potentialDuplicate": false,
+    "publishedSlug": "building-autonomous-agents-with-community-workflows-1792333663529",
+    "publishedAt": "2026-10-18T14:27:43.530Z",
+    "isVerified": true
+  },
+  {
+    "id": "sub_tool_1792333663520_b1xoxu",
+    "type": "tool",
+    "status": "published",
+    "createdAt": "2026-10-18T14:27:43.520Z",
+    "updatedAt": "2026-10-18T14:27:43.527Z",
+    "toolData": {
+      "name": "Community Tool 1792333663271",
+      "websiteUrl": "https://community-tool-1792333663271.ai/",
+      "description": "A cutting-edge community-submitted AI assistant for developers with deep workflow integration.",
+      "category": "assistants",
+      "pricingType": "freemium",
+      "features": [
+        "Code autocomplete",
+        "Refactoring agent",
+        "Unit test generator"
+      ],
+      "platform": [
+        "Web",
+        "macOS"
+      ],
+      "submitterName": "Test Contributor",
+      "submitterEmail": "fixture@example.invalid"
+    },
+    "potentialDuplicate": false,
+    "moderatorNotes": "Synthetic fixture only; not a genuine user submission.",
+    "publishedSlug": "community-tool-1792333663271",
+    "publishedAt": "2026-10-18T14:27:43.527Z",
+    "isVerified": true
+  },
+  {
+    "id": "sub_guide_1792332371517_3qac7x",
+    "type": "guide",
+    "status": "published",
+    "createdAt": "2026-10-18T14:06:11.517Z",
+    "updatedAt": "2026-10-18T14:06:11.528Z",
+    "guideData": {
+      "title": "Building Autonomous Agents with Community Workflows 1792332371516",
+      "summary": "A comprehensive step-by-step tutorial on building autonomous agents using modern AI models.",
+      "content": "## Getting Started with Agents\n\nStep 1: Setup developer environment.\nStep 2: Connect APIs and models.\nStep 3: Run pipeline with safe markdown rendering.\n\nEnjoy the workflow! This tutorial covers all essential architecture points.",
+      "category": "workflow-automation",
+      "tags": [],
+      "relatedTools": [],
+      "difficulty": "intermediate",
+      "readTime": "1 min read",
+      "authorName": "Test Contributor",
+      "contactEmail": "fixture@example.invalid",
+      "referenceUrls": []
+    },
+    "potentialDuplicate": false,
+    "publishedSlug": "building-autonomous-agents-with-community-workflows-1792332371516",
+    "publishedAt": "2026-10-18T14:06:11.528Z",
+    "isVerified": true
+  },
+  {
+    "id": "sub_tool_1792332371508_sq0ttg",
+    "type": "tool",
+    "status": "published",
+    "createdAt": "2026-10-18T14:06:11.508Z",
+    "updatedAt": "2026-10-18T14:06:11.513Z",
+    "toolData": {
+      "name": "Community Tool 1792332371409",
+      "websiteUrl": "https://community-tool-1792332371409.ai/",
+      "description": "A cutting-edge community-submitted AI assistant for developers with deep workflow integration.",
+      "category": "assistants",
+      "pricingType": "freemium",
+      "features": [
+        "Code autocomplete",
+        "Refactoring agent",
+        "Unit test generator"
+      ],
+      "platform": [
+        "Web",
+        "macOS"
+      ],
+      "submitterName": "Test Contributor",
+      "submitterEmail": "fixture@example.invalid"
+    },
+    "potentialDuplicate": false,
+    "moderatorNotes": "Synthetic fixture only; not a genuine user submission.",
+    "publishedSlug": "community-tool-1792332371409",
+    "publishedAt": "2026-10-18T14:06:11.513Z",
+    "isVerified": true
+  },
+  {
+    "id": "sub_guide_1792331636569_qxc90r",
+    "type": "guide",
+    "status": "published",
+    "createdAt": "2026-10-18T13:53:56.569Z",
+    "updatedAt": "2026-10-18T13:53:56.583Z",
+    "guideData": {
+      "title": "Building Autonomous Agents with Community Workflows 1792331636568",
+      "summary": "A comprehensive step-by-step tutorial on building autonomous agents using modern AI models.",
+      "content": "## Getting Started with Agents\n\nStep 1: Setup developer environment.\nStep 2: Connect APIs and models.\nStep 3: Run pipeline with safe markdown rendering.\n\nEnjoy the workflow! This tutorial covers all essential architecture points.",
+      "category": "workflow-automation",
+      "tags": [],
+      "relatedTools": [],
+      "difficulty": "intermediate",
+      "readTime": "1 min read",
+      "authorName": "Test Contributor",
+      "contactEmail": "fixture@example.invalid",
+      "referenceUrls": []
+    },
+    "potentialDuplicate": false,
+    "publishedSlug": "building-autonomous-agents-with-community-workflows-1792331636568",
+    "publishedAt": "2026-10-18T13:53:56.583Z",
+    "isVerified": true
+  },
+  {
+    "id": "sub_tool_1792331636564_7ivxrv",
+    "type": "tool",
+    "status": "published",
+    "createdAt": "2026-10-18T13:53:56.564Z",
+    "updatedAt": "2026-10-18T13:53:56.566Z",
+    "toolData": {
+      "name": "Community Tool 1792331636354",
+      "websiteUrl": "https://community-tool-1792331636354.ai/",
+      "description": "A cutting-edge community-submitted AI assistant for developers with deep workflow integration.",
+      "category": "assistants",
+      "pricingType": "freemium",
+      "features": [
+        "Code autocomplete",
+        "Refactoring agent",
+        "Unit test generator"
+      ],
+      "platform": [
+        "Web",
+        "macOS"
+      ],
+      "submitterName": "Test Contributor",
+      "submitterEmail": "fixture@example.invalid"
+    },
+    "potentialDuplicate": false,
+    "moderatorNotes": "Synthetic fixture only; not a genuine user submission.",
+    "publishedSlug": "community-tool-1792331636354",
+    "publishedAt": "2026-10-18T13:53:56.566Z",
+    "isVerified": true
+  },
+  {
+    "id": "sub_guide_1792331630329_8mfa47",
+    "type": "guide",
+    "status": "published",
+    "createdAt": "2026-10-18T13:53:50.329Z",
+    "updatedAt": "2026-10-18T13:53:50.329Z",
+    "guideData": {
+      "title": "Building Autonomous Agents with Community Workflows 1792331630328",
+      "summary": "A comprehensive step-by-step tutorial on building autonomous agents using modern AI models.",
+      "content": "## Getting Started with Agents\n\nStep 1: Setup developer environment.\nStep 2: Connect APIs and models.\nStep 3: Run pipeline with safe markdown rendering.\n\nEnjoy the workflow! This tutorial covers all essential architecture points.",
+      "category": "workflow-automation",
+      "tags": [],
+      "relatedTools": [],
+      "difficulty": "intermediate",
+      "readTime": "1 min read",
+      "authorName": "Test Contributor",
+      "contactEmail": "fixture@example.invalid",
+      "referenceUrls": []
+    },
+    "potentialDuplicate": false,
+    "publishedSlug": "building-autonomous-agents-with-community-workflows-1792331630328",
+    "publishedAt": "2026-10-18T13:53:50.329Z",
+    "isVerified": true
+  },
+  {
+    "id": "sub_tool_1792331630321_39rzbo",
+    "type": "tool",
+    "status": "published",
+    "createdAt": "2026-10-18T13:53:50.321Z",
+    "updatedAt": "2026-10-18T13:53:50.326Z",
+    "toolData": {
+      "name": "Community Tool 1792331630125",
+      "websiteUrl": "https://community-tool-1792331630125.ai/",
+      "description": "A cutting-edge community-submitted AI assistant for developers with deep workflow integration.",
+      "category": "assistants",
+      "pricingType": "freemium",
+      "features": [
+        "Code autocomplete",
+        "Refactoring agent",
+        "Unit test generator"
+      ],
+      "platform": [
+        "Web",
+        "macOS"
+      ],
+      "submitterName": "Test Contributor",
+      "submitterEmail": "fixture@example.invalid"
+    },
+    "potentialDuplicate": false,
+    "moderatorNotes": "Synthetic fixture only; not a genuine user submission.",
+    "publishedSlug": "community-tool-1792331630125",
+    "publishedAt": "2026-10-18T13:53:50.326Z",
+    "isVerified": true
+  },
+  {
+    "id": "sub_guide_1792331580897_kr7sik",
+    "type": "guide",
+    "status": "published",
+    "createdAt": "2026-10-18T13:53:00.897Z",
+    "updatedAt": "2026-10-18T13:53:00.928Z",
+    "guideData": {
+      "title": "Building Autonomous Agents with Community Workflows 1792331580895",
+      "summary": "A comprehensive step-by-step tutorial on building autonomous agents using modern AI models.",
+      "content": "## Getting Started with Agents\n\nStep 1: Setup developer environment.\nStep 2: Connect APIs and models.\nStep 3: Run pipeline with safe markdown rendering.\n\nEnjoy the workflow! This tutorial covers all essential architecture points.",
+      "category": "workflow-automation",
+      "tags": [],
+      "relatedTools": [],
+      "difficulty": "intermediate",
+      "readTime": "1 min read",
+      "authorName": "Test Contributor",
+      "contactEmail": "fixture@example.invalid",
+      "referenceUrls": []
+    },
+    "potentialDuplicate": false,
+    "publishedSlug": "building-autonomous-agents-with-community-workflows-1792331580895",
+    "publishedAt": "2026-10-18T13:53:00.928Z",
+    "isVerified": true
+  },
+  {
+    "id": "sub_tool_1792331580883_k9k1oj",
+    "type": "tool",
+    "status": "published",
+    "createdAt": "2026-10-18T13:53:00.883Z",
+    "updatedAt": "2026-10-18T13:53:00.891Z",
+    "toolData": {
+      "name": "Community Tool 1792331580653",
+      "websiteUrl": "https://community-tool-1792331580654.ai/",
+      "description": "A cutting-edge community-submitted AI assistant for developers with deep workflow integration.",
+      "category": "assistants",
+      "pricingType": "freemium",
+      "features": [
+        "Code autocomplete",
+        "Refactoring agent",
+        "Unit test generator"
+      ],
+      "platform": [
+        "Web",
+        "macOS"
+      ],
+      "submitterName": "Test Contributor",
+      "submitterEmail": "fixture@example.invalid"
+    },
+    "potentialDuplicate": false,
+    "moderatorNotes": "Synthetic fixture only; not a genuine user submission.",
+    "publishedSlug": "community-tool-1792331580653",
+    "publishedAt": "2026-10-18T13:53:00.891Z",
+    "isVerified": true
+  },
+  {
+    "id": "sub_guide_1792331573780_oi9h6y",
+    "type": "guide",
+    "status": "published",
+    "createdAt": "2026-10-18T13:52:53.780Z",
+    "updatedAt": "2026-10-18T13:52:53.785Z",
+    "guideData": {
+      "title": "Building Autonomous Agents with Community Workflows 1792331573779",
+      "summary": "A comprehensive step-by-step tutorial on building autonomous agents using modern AI models.",
+      "content": "## Getting Started with Agents\n\nStep 1: Setup developer environment.\nStep 2: Connect APIs and models.\nStep 3: Run pipeline with safe markdown rendering.\n\nEnjoy the workflow! This tutorial covers all essential architecture points.",
+      "category": "workflow-automation",
+      "tags": [],
+      "relatedTools": [],
+      "difficulty": "intermediate",
+      "readTime": "1 min read",
+      "authorName": "Test Contributor",
+      "contactEmail": "fixture@example.invalid",
+      "referenceUrls": []
+    },
+    "potentialDuplicate": false,
+    "publishedSlug": "building-autonomous-agents-with-community-workflows-1792331573779",
+    "publishedAt": "2026-10-18T13:52:53.785Z",
+    "isVerified": true
+  },
+  {
+    "id": "sub_tool_1792331573770_o7b82y",
+    "type": "tool",
+    "status": "published",
+    "createdAt": "2026-10-18T13:52:53.770Z",
+    "updatedAt": "2026-10-18T13:52:53.778Z",
+    "toolData": {
+      "name": "Community Tool 1792331573539",
+      "websiteUrl": "https://community-tool-1792331573539.ai/",
+      "description": "A cutting-edge community-submitted AI assistant for developers with deep workflow integration.",
+      "category": "assistants",
+      "pricingType": "freemium",
+      "features": [
+        "Code autocomplete",
+        "Refactoring agent",
+        "Unit test generator"
+      ],
+      "platform": [
+        "Web",
+        "macOS"
+      ],
+      "submitterName": "Test Contributor",
+      "submitterEmail": "fixture@example.invalid"
+    },
+    "potentialDuplicate": false,
+    "moderatorNotes": "Synthetic fixture only; not a genuine user submission.",
+    "publishedSlug": "community-tool-1792331573539",
+    "publishedAt": "2026-10-18T13:52:53.778Z",
+    "isVerified": true
+  },
+  {
+    "id": "sub_guide_1792329847871_mexfn6",
+    "type": "guide",
+    "status": "published",
+    "createdAt": "2026-10-18T13:24:07.871Z",
+    "updatedAt": "2026-10-18T13:24:07.873Z",
+    "guideData": {
+      "title": "Building Autonomous Agents with Community Workflows 1792329847871",
+      "summary": "A comprehensive step-by-step tutorial on building autonomous agents using modern AI models.",
+      "content": "## Getting Started with Agents\n\nStep 1: Setup developer environment.\nStep 2: Connect APIs and models.\nStep 3: Run pipeline with safe markdown rendering.\n\nEnjoy the workflow! This tutorial covers all essential architecture points.",
+      "category": "workflow-automation",
+      "tags": [],
+      "relatedTools": [],
+      "difficulty": "intermediate",
+      "readTime": "1 min read",
+      "authorName": "Test Contributor",
+      "contactEmail": "fixture@example.invalid",
+      "referenceUrls": []
+    },
+    "potentialDuplicate": false,
+    "publishedSlug": "building-autonomous-agents-with-community-workflows-1792329847871",
+    "publishedAt": "2026-10-18T13:24:07.873Z",
+    "isVerified": true
+  },
+  {
+    "id": "sub_tool_1792329847865_ahepm3",
+    "type": "tool",
+    "status": "published",
+    "createdAt": "2026-10-18T13:24:07.865Z",
+    "updatedAt": "2026-10-18T13:24:07.869Z",
+    "toolData": {
+      "name": "Community Tool 1792329847632",
+      "websiteUrl": "https://community-tool-1792329847632.ai/",
+      "description": "A cutting-edge community-submitted AI assistant for developers with deep workflow integration.",
+      "category": "assistants",
+      "pricingType": "freemium",
+      "features": [
+        "Code autocomplete",
+        "Refactoring agent",
+        "Unit test generator"
+      ],
+      "platform": [
+        "Web",
+        "macOS"
+      ],
+      "submitterName": "Test Contributor",
+      "submitterEmail": "fixture@example.invalid"
+    },
+    "potentialDuplicate": false,
+    "moderatorNotes": "Synthetic fixture only; not a genuine user submission.",
+    "publishedSlug": "community-tool-1792329847632",
+    "publishedAt": "2026-10-18T13:24:07.869Z",
+    "isVerified": true
+  },
+  {
+    "id": "sub_guide_1792329818234_nwfzmp",
+    "type": "guide",
+    "status": "published",
+    "createdAt": "2026-10-18T13:23:38.234Z",
+    "updatedAt": "2026-10-18T13:23:38.235Z",
+    "guideData": {
+      "title": "Building Autonomous Agents with Community Workflows 1792329818233",
+      "summary": "A comprehensive step-by-step tutorial on building autonomous agents using modern AI models.",
+      "content": "## Getting Started with Agents\n\nStep 1: Setup developer environment.\nStep 2: Connect APIs and models.\nStep 3: Run pipeline with safe markdown rendering.\n\nEnjoy the workflow! This tutorial covers all essential architecture points.",
+      "category": "workflow-automation",
+      "tags": [],
+      "relatedTools": [],
+      "difficulty": "intermediate",
+      "readTime": "1 min read",
+      "authorName": "Test Contributor",
+      "contactEmail": "fixture@example.invalid",
+      "referenceUrls": []
+    },
+    "potentialDuplicate": false,
+    "publishedSlug": "building-autonomous-agents-with-community-workflows-1792329818233",
+    "publishedAt": "2026-10-18T13:23:38.235Z",
+    "isVerified": true
+  },
+  {
+    "id": "sub_tool_1792329818220_h4uk2i",
+    "type": "tool",
+    "status": "published",
+    "createdAt": "2026-10-18T13:23:38.220Z",
+    "updatedAt": "2026-10-18T13:23:38.231Z",
+    "toolData": {
+      "name": "Community Tool 1792329818084",
+      "websiteUrl": "https://community-tool-1792329818084.ai/",
+      "description": "A cutting-edge community-submitted AI assistant for developers with deep workflow integration.",
+      "category": "assistants",
+      "pricingType": "freemium",
+      "features": [
+        "Code autocomplete",
+        "Refactoring agent",
+        "Unit test generator"
+      ],
+      "platform": [
+        "Web",
+        "macOS"
+      ],
+      "submitterName": "Test Contributor",
+      "submitterEmail": "fixture@example.invalid"
+    },
+    "potentialDuplicate": false,
+    "moderatorNotes": "Synthetic fixture only; not a genuine user submission.",
+    "publishedSlug": "community-tool-1792329818084",
+    "publishedAt": "2026-10-18T13:23:38.231Z",
+    "isVerified": true
+  },
+  {
+    "id": "sub_guide_1792329806034_zqgzxa",
+    "type": "guide",
+    "status": "published",
+    "createdAt": "2026-10-18T13:23:26.034Z",
+    "updatedAt": "2026-10-18T13:23:26.036Z",
+    "guideData": {
+      "title": "Building Autonomous Agents with Community Workflows 1792329806034",
+      "summary": "A comprehensive step-by-step tutorial on building autonomous agents using modern AI models.",
+      "content": "## Getting Started with Agents\n\nStep 1: Setup developer environment.\nStep 2: Connect APIs and models.\nStep 3: Run pipeline with safe markdown rendering.\n\nEnjoy the workflow! This tutorial covers all essential architecture points.",
+      "category": "workflow-automation",
+      "tags": [],
+      "relatedTools": [],
+      "difficulty": "intermediate",
+      "readTime": "1 min read",
+      "authorName": "Test Contributor",
+      "contactEmail": "fixture@example.invalid",
+      "referenceUrls": []
+    },
+    "potentialDuplicate": false,
+    "publishedSlug": "building-autonomous-agents-with-community-workflows-1792329806034",
+    "publishedAt": "2026-10-18T13:23:26.036Z",
+    "isVerified": true
+  },
+  {
+    "id": "sub_tool_1792329806027_tkfmqu",
+    "type": "tool",
+    "status": "published",
+    "createdAt": "2026-10-18T13:23:26.027Z",
+    "updatedAt": "2026-10-18T13:23:26.032Z",
+    "toolData": {
+      "name": "Community Tool 1792329805870",
+      "websiteUrl": "https://community-tool-1792329805870.ai/",
+      "description": "A cutting-edge community-submitted AI assistant for developers with deep workflow integration.",
+      "category": "assistants",
+      "pricingType": "freemium",
+      "features": [
+        "Code autocomplete",
+        "Refactoring agent",
+        "Unit test generator"
+      ],
+      "platform": [
+        "Web",
+        "macOS"
+      ],
+      "submitterName": "Test Contributor",
+      "submitterEmail": "fixture@example.invalid"
+    },
+    "potentialDuplicate": false,
+    "moderatorNotes": "Synthetic fixture only; not a genuine user submission.",
+    "publishedSlug": "community-tool-1792329805870",
+    "publishedAt": "2026-10-18T13:23:26.032Z",
+    "isVerified": true
+  },
+  {
+    "id": "sub_guide_1792329784898_zy20kp",
+    "type": "guide",
+    "status": "published",
+    "createdAt": "2026-10-18T13:23:04.898Z",
+    "updatedAt": "2026-10-18T13:23:04.899Z",
+    "guideData": {
+      "title": "Building Autonomous Agents with Community Workflows 1792329784898",
+      "summary": "A comprehensive step-by-step tutorial on building autonomous agents using modern AI models.",
+      "content": "## Getting Started with Agents\n\nStep 1: Setup developer environment.\nStep 2: Connect APIs and models.\nStep 3: Run pipeline with safe markdown rendering.\n\nEnjoy the workflow! This tutorial covers all essential architecture points.",
+      "category": "workflow-automation",
+      "tags": [],
+      "relatedTools": [],
+      "difficulty": "intermediate",
+      "readTime": "1 min read",
+      "authorName": "Test Contributor",
+      "contactEmail": "fixture@example.invalid",
+      "referenceUrls": []
+    },
+    "potentialDuplicate": false,
+    "publishedSlug": "building-autonomous-agents-with-community-workflows-1792329784898",
+    "publishedAt": "2026-10-18T13:23:04.899Z",
+    "isVerified": true
+  },
+  {
+    "id": "sub_tool_1792329784875_001xgz",
+    "type": "tool",
+    "status": "published",
+    "createdAt": "2026-10-18T13:23:04.875Z",
+    "updatedAt": "2026-10-18T13:23:04.896Z",
+    "toolData": {
+      "name": "Community Tool 1792329784691",
+      "websiteUrl": "https://community-tool-1792329784691.ai/",
+      "description": "A cutting-edge community-submitted AI assistant for developers with deep workflow integration.",
+      "category": "assistants",
+      "pricingType": "freemium",
+      "features": [
+        "Code autocomplete",
+        "Refactoring agent",
+        "Unit test generator"
+      ],
+      "platform": [
+        "Web",
+        "macOS"
+      ],
+      "submitterName": "Test Contributor",
+      "submitterEmail": "fixture@example.invalid"
+    },
+    "potentialDuplicate": false,
+    "moderatorNotes": "Synthetic fixture only; not a genuine user submission.",
+    "publishedSlug": "community-tool-1792329784691",
+    "publishedAt": "2026-10-18T13:23:04.896Z",
+    "isVerified": true
+  },
+  {
+    "id": "sub_guide_1792329695053_lks01x",
+    "type": "guide",
+    "status": "published",
+    "createdAt": "2026-10-18T13:21:35.053Z",
+    "updatedAt": "2026-10-18T13:21:35.054Z",
+    "guideData": {
+      "title": "Building Autonomous Agents with Community Workflows 1792329695052",
+      "summary": "A comprehensive step-by-step tutorial on building autonomous agents using modern AI models.",
+      "content": "## Getting Started with Agents\n\nStep 1: Setup developer environment.\nStep 2: Connect APIs and models.\nStep 3: Run pipeline with safe markdown rendering.\n\nEnjoy the workflow! This tutorial covers all essential architecture points.",
+      "category": "workflow-automation",
+      "tags": [],
+      "relatedTools": [],
+      "difficulty": "intermediate",
+      "readTime": "1 min read",
+      "authorName": "Test Contributor",
+      "contactEmail": "fixture@example.invalid",
+      "referenceUrls": []
+    },
+    "potentialDuplicate": false,
+    "publishedSlug": "building-autonomous-agents-with-community-workflows-1792329695052",
+    "publishedAt": "2026-10-18T13:21:35.054Z",
+    "isVerified": true
+  },
+  {
+    "id": "sub_tool_1792329695046_nghk56",
+    "type": "tool",
+    "status": "published",
+    "createdAt": "2026-10-18T13:21:35.046Z",
+    "updatedAt": "2026-10-18T13:21:35.051Z",
+    "toolData": {
+      "name": "Community Tool 1792329694856",
+      "websiteUrl": "https://community-tool-1792329694856.ai/",
+      "description": "A cutting-edge community-submitted AI assistant for developers with deep workflow integration.",
+      "category": "assistants",
+      "pricingType": "freemium",
+      "features": [
+        "Code autocomplete",
+        "Refactoring agent",
+        "Unit test generator"
+      ],
+      "platform": [
+        "Web",
+        "macOS"
+      ],
+      "submitterName": "Test Contributor",
+      "submitterEmail": "fixture@example.invalid"
+    },
+    "potentialDuplicate": false,
+    "moderatorNotes": "Synthetic fixture only; not a genuine user submission.",
+    "publishedSlug": "community-tool-1792329694856",
+    "publishedAt": "2026-10-18T13:21:35.051Z",
+    "isVerified": true
+  },
+  {
+    "id": "sub_guide_1792327579048_54ack0",
+    "type": "guide",
+    "status": "published",
+    "createdAt": "2026-10-18T12:46:19.048Z",
+    "updatedAt": "2026-10-18T12:46:19.053Z",
+    "guideData": {
+      "title": "Building Autonomous Agents with Community Workflows 1792327579047",
+      "summary": "A comprehensive step-by-step tutorial on building autonomous agents using modern AI models.",
+      "content": "## Getting Started with Agents\n\nStep 1: Setup developer environment.\nStep 2: Connect APIs and models.\nStep 3: Run pipeline with safe markdown rendering.\n\nEnjoy the workflow! This tutorial covers all essential architecture points.",
+      "category": "workflow-automation",
+      "tags": [],
+      "relatedTools": [],
+      "difficulty": "intermediate",
+      "readTime": "1 min read",
+      "authorName": "Test Contributor",
+      "contactEmail": "fixture@example.invalid",
+      "referenceUrls": []
+    },
+    "potentialDuplicate": false,
+    "publishedSlug": "building-autonomous-agents-with-community-workflows-1792327579047",
+    "publishedAt": "2026-10-18T12:46:19.053Z",
+    "isVerified": true
+  },
+  {
+    "id": "sub_tool_1792327579040_5q0fep",
+    "type": "tool",
+    "status": "published",
+    "createdAt": "2026-10-18T12:46:19.040Z",
+    "updatedAt": "2026-10-18T12:46:19.045Z",
+    "toolData": {
+      "name": "Community Tool 1792327578803",
+      "websiteUrl": "https://community-tool-1792327578803.ai/",
+      "description": "A cutting-edge community-submitted AI assistant for developers with deep workflow integration.",
+      "category": "assistants",
+      "pricingType": "freemium",
+      "features": [
+        "Code autocomplete",
+        "Refactoring agent",
+        "Unit test generator"
+      ],
+      "platform": [
+        "Web",
+        "macOS"
+      ],
+      "submitterName": "Test Contributor",
+      "submitterEmail": "fixture@example.invalid"
+    },
+    "potentialDuplicate": false,
+    "moderatorNotes": "Synthetic fixture only; not a genuine user submission.",
+    "publishedSlug": "community-tool-1792327578803",
+    "publishedAt": "2026-10-18T12:46:19.045Z",
+    "isVerified": true
+  },
+  {
+    "id": "sub_guide_1792327553580_ztuwd2",
+    "type": "guide",
+    "status": "published",
+    "createdAt": "2026-10-18T12:45:53.580Z",
+    "updatedAt": "2026-10-18T12:45:53.581Z",
+    "guideData": {
+      "title": "Building Autonomous Agents with Community Workflows 1792327553579",
+      "summary": "A comprehensive step-by-step tutorial on building autonomous agents using modern AI models.",
+      "content": "## Getting Started with Agents\n\nStep 1: Setup developer environment.\nStep 2: Connect APIs and models.\nStep 3: Run pipeline with safe markdown rendering.\n\nEnjoy the workflow! This tutorial covers all essential architecture points.",
+      "category": "workflow-automation",
+      "tags": [],
+      "relatedTools": [],
+      "difficulty": "intermediate",
+      "readTime": "1 min read",
+      "authorName": "Test Contributor",
+      "contactEmail": "fixture@example.invalid",
+      "referenceUrls": []
+    },
+    "potentialDuplicate": false,
+    "publishedSlug": "building-autonomous-agents-with-community-workflows-1792327553579",
+    "publishedAt": "2026-10-18T12:45:53.581Z",
+    "isVerified": true
+  },
+  {
+    "id": "sub_tool_1792327553568_x8anyf",
+    "type": "tool",
+    "status": "published",
+    "createdAt": "2026-10-18T12:45:53.568Z",
+    "updatedAt": "2026-10-18T12:45:53.577Z",
+    "toolData": {
+      "name": "Community Tool 1792327553366",
+      "websiteUrl": "https://community-tool-1792327553366.ai/",
+      "description": "A cutting-edge community-submitted AI assistant for developers with deep workflow integration.",
+      "category": "assistants",
+      "pricingType": "freemium",
+      "features": [
+        "Code autocomplete",
+        "Refactoring agent",
+        "Unit test generator"
+      ],
+      "platform": [
+        "Web",
+        "macOS"
+      ],
+      "submitterName": "Test Contributor",
+      "submitterEmail": "fixture@example.invalid"
+    },
+    "potentialDuplicate": false,
+    "moderatorNotes": "Synthetic fixture only; not a genuine user submission.",
+    "publishedSlug": "community-tool-1792327553366",
+    "publishedAt": "2026-10-18T12:45:53.577Z",
+    "isVerified": true
+  },
+  {
+    "id": "sub_guide_1792327501903_e7wqcr",
+    "type": "guide",
+    "status": "published",
+    "createdAt": "2026-10-18T12:45:01.903Z",
+    "updatedAt": "2026-10-18T12:45:01.904Z",
+    "guideData": {
+      "title": "Building Autonomous Agents with Community Workflows 1792327501901",
+      "summary": "A comprehensive step-by-step tutorial on building autonomous agents using modern AI models.",
+      "content": "## Getting Started with Agents\n\nStep 1: Setup developer environment.\nStep 2: Connect APIs and models.\nStep 3: Run pipeline with safe markdown rendering.\n\nEnjoy the workflow! This tutorial covers all essential architecture points.",
+      "category": "workflow-automation",
+      "tags": [],
+      "relatedTools": [],
+      "difficulty": "intermediate",
+      "readTime": "1 min read",
+      "authorName": "Test Contributor",
+      "contactEmail": "fixture@example.invalid",
+      "referenceUrls": []
+    },
+    "potentialDuplicate": false,
+    "publishedSlug": "building-autonomous-agents-with-community-workflows-1792327501901",
+    "publishedAt": "2026-10-18T12:45:01.904Z",
+    "isVerified": true
+  },
+  {
+    "id": "sub_tool_1792327501884_b0achm",
+    "type": "tool",
+    "status": "published",
+    "createdAt": "2026-10-18T12:45:01.884Z",
+    "updatedAt": "2026-10-18T12:45:01.891Z",
+    "toolData": {
+      "name": "Community Tool 1792327501764",
+      "websiteUrl": "https://community-tool-1792327501764.ai/",
+      "description": "A cutting-edge community-submitted AI assistant for developers with deep workflow integration.",
+      "category": "assistants",
+      "pricingType": "freemium",
+      "features": [
+        "Code autocomplete",
+        "Refactoring agent",
+        "Unit test generator"
+      ],
+      "platform": [
+        "Web",
+        "macOS"
+      ],
+      "submitterName": "Test Contributor",
+      "submitterEmail": "fixture@example.invalid"
+    },
+    "potentialDuplicate": false,
+    "moderatorNotes": "Synthetic fixture only; not a genuine user submission.",
+    "publishedSlug": "community-tool-1792327501764",
+    "publishedAt": "2026-10-18T12:45:01.891Z",
+    "isVerified": true
+  },
+  {
+    "id": "sub_guide_1792326583564_qe3bm1",
+    "type": "guide",
+    "status": "published",
+    "createdAt": "2026-10-18T12:29:43.564Z",
+    "updatedAt": "2026-10-18T12:29:43.565Z",
+    "guideData": {
+      "title": "Building Autonomous Agents with Community Workflows 1792326583563",
+      "summary": "A comprehensive step-by-step tutorial on building autonomous agents using modern AI models.",
+      "content": "## Getting Started with Agents\n\nStep 1: Setup developer environment.\nStep 2: Connect APIs and models.\nStep 3: Run pipeline with safe markdown rendering.\n\nEnjoy the workflow! This tutorial covers all essential architecture points.",
+      "category": "workflow-automation",
+      "tags": [],
+      "relatedTools": [],
+      "difficulty": "intermediate",
+      "readTime": "1 min read",
+      "authorName": "Test Contributor",
+      "contactEmail": "fixture@example.invalid",
+      "referenceUrls": []
+    },
+    "potentialDuplicate": false,
+    "publishedSlug": "building-autonomous-agents-with-community-workflows-1792326583563",
+    "publishedAt": "2026-10-18T12:29:43.565Z",
+    "isVerified": true
+  },
+  {
+    "id": "sub_tool_1792326583557_avbwzn",
+    "type": "tool",
+    "status": "published",
+    "createdAt": "2026-10-18T12:29:43.557Z",
+    "updatedAt": "2026-10-18T12:29:43.559Z",
+    "toolData": {
+      "name": "Community Tool 1792326583367",
+      "websiteUrl": "https://community-tool-1792326583367.ai/",
+      "description": "A cutting-edge community-submitted AI assistant for developers with deep workflow integration.",
+      "category": "assistants",
+      "pricingType": "freemium",
+      "features": [
+        "Code autocomplete",
+        "Refactoring agent",
+        "Unit test generator"
+      ],
+      "platform": [
+        "Web",
+        "macOS"
+      ],
+      "submitterName": "Test Contributor",
+      "submitterEmail": "fixture@example.invalid"
+    },
+    "potentialDuplicate": false,
+    "moderatorNotes": "Synthetic fixture only; not a genuine user submission.",
+    "publishedSlug": "community-tool-1792326583367",
+    "publishedAt": "2026-10-18T12:29:43.559Z",
+    "isVerified": true
+  },
+  {
+    "id": "sub_guide_1792325635632_cyway6",
+    "type": "guide",
+    "status": "published",
+    "createdAt": "2026-10-18T12:13:55.632Z",
+    "updatedAt": "2026-10-18T12:13:55.633Z",
+    "guideData": {
+      "title": "Building Autonomous Agents with Community Workflows 1792325635630",
+      "summary": "A comprehensive step-by-step tutorial on building autonomous agents using modern AI models.",
+      "content": "## Getting Started with Agents\n\nStep 1: Setup developer environment.\nStep 2: Connect APIs and models.\nStep 3: Run pipeline with safe markdown rendering.\n\nEnjoy the workflow! This tutorial covers all essential architecture points.",
+      "category": "workflow-automation",
+      "tags": [],
+      "relatedTools": [],
+      "difficulty": "intermediate",
+      "readTime": "1 min read",
+      "authorName": "Test Contributor",
+      "contactEmail": "fixture@example.invalid",
+      "referenceUrls": []
+    },
+    "potentialDuplicate": false,
+    "publishedSlug": "building-autonomous-agents-with-community-workflows-1792325635630",
+    "publishedAt": "2026-10-18T12:13:55.633Z",
+    "isVerified": true
+  },
+  {
+    "id": "sub_tool_1792325635624_o8qemv",
+    "type": "tool",
+    "status": "published",
+    "createdAt": "2026-10-18T12:13:55.624Z",
+    "updatedAt": "2026-10-18T12:13:55.628Z",
+    "toolData": {
+      "name": "Community Tool 1792325635274",
+      "websiteUrl": "https://community-tool-1792325635274.ai/",
+      "description": "A cutting-edge community-submitted AI assistant for developers with deep workflow integration.",
+      "category": "assistants",
+      "pricingType": "freemium",
+      "features": [
+        "Code autocomplete",
+        "Refactoring agent",
+        "Unit test generator"
+      ],
+      "platform": [
+        "Web",
+        "macOS"
+      ],
+      "submitterName": "Test Contributor",
+      "submitterEmail": "fixture@example.invalid"
+    },
+    "potentialDuplicate": false,
+    "moderatorNotes": "Synthetic fixture only; not a genuine user submission.",
+    "publishedSlug": "community-tool-1792325635274",
+    "publishedAt": "2026-10-18T12:13:55.628Z",
+    "isVerified": true
+  },
+  {
+    "id": "sub_tool_1792325613750_tfg608",
+    "type": "tool",
+    "status": "pending",
+    "createdAt": "2026-10-18T12:13:33.750Z",
+    "updatedAt": "2026-10-18T12:13:33.750Z",
+    "toolData": {
+      "name": "HyperMind Studio",
+      "websiteUrl": "https://hypermindstudio.ai/",
+      "description": "A brand-new decentralized neural workspace for collaborative AI research.",
+      "category": "assistants",
+      "pricingType": "free",
+      "features": [],
+      "platform": [],
+      "submitterName": "Test Contributor",
+      "submitterEmail": "fixture@example.invalid"
+    },
+    "potentialDuplicate": true,
+    "duplicateReason": "\"Udio\" is already cataloged in the AI Tools Directory (/ai-tools/udio).",
+    "duplicateMatches": [
+      "Udio",
+      "udio"
+    ]
+  },
+  {
+    "id": "sub_tool_1792325606758_2dxur8",
+    "type": "tool",
+    "status": "pending",
+    "createdAt": "2026-10-18T12:13:26.758Z",
+    "updatedAt": "2026-10-18T12:13:26.758Z",
+    "toolData": {
+      "name": "Ollama Desktop",
+      "websiteUrl": "https://ollama.com/download",
+      "description": "Run Llama 3, Mistral, and other local models on your Mac or PC with one click.",
+      "category": "assistants",
+      "pricingType": "free",
+      "features": [],
+      "platform": [],
+      "submitterName": "Test Contributor",
+      "submitterEmail": "fixture@example.invalid"
+    },
+    "potentialDuplicate": true,
+    "duplicateReason": "\"Ollama\" is already cataloged in the AI Tools Directory (/ai-tools/ollama).",
+    "duplicateMatches": [
+      "Ollama",
+      "ollama"
+    ]
+  },
+  {
+    "id": "sub_guide_1792325514573_rhm3ra",
+    "type": "guide",
+    "status": "published",
+    "createdAt": "2026-10-18T12:11:54.573Z",
+    "updatedAt": "2026-10-18T12:11:54.574Z",
+    "guideData": {
+      "title": "Building Autonomous Agents with Community Workflows 1792325514573",
+      "summary": "A comprehensive step-by-step tutorial on building autonomous agents using modern AI models.",
+      "content": "## Getting Started with Agents\n\nStep 1: Setup developer environment.\nStep 2: Connect APIs and models.\nStep 3: Run pipeline with safe markdown rendering.\n\nEnjoy the workflow! This tutorial covers all essential architecture points.",
+      "category": "workflow-automation",
+      "tags": [],
+      "relatedTools": [],
+      "difficulty": "intermediate",
+      "readTime": "1 min read",
+      "authorName": "Test Contributor",
+      "contactEmail": "fixture@example.invalid",
+      "referenceUrls": []
+    },
+    "potentialDuplicate": false,
+    "publishedSlug": "building-autonomous-agents-with-community-workflows-1792325514573",
+    "publishedAt": "2026-10-18T12:11:54.574Z",
+    "isVerified": true
+  },
+  {
+    "id": "sub_tool_1792325514569_1gergz",
+    "type": "tool",
+    "status": "published",
+    "createdAt": "2026-10-18T12:11:54.569Z",
+    "updatedAt": "2026-10-18T12:11:54.571Z",
+    "toolData": {
+      "name": "Community Tool 1792325514427",
+      "websiteUrl": "https://community-tool-1792325514427.ai/",
+      "description": "A cutting-edge community-submitted AI assistant for developers with deep workflow integration.",
+      "category": "assistants",
+      "pricingType": "freemium",
+      "features": [
+        "Code autocomplete",
+        "Refactoring agent",
+        "Unit test generator"
+      ],
+      "platform": [
+        "Web",
+        "macOS"
+      ],
+      "submitterName": "Test Contributor",
+      "submitterEmail": "fixture@example.invalid"
+    },
+    "potentialDuplicate": false,
+    "moderatorNotes": "Synthetic fixture only; not a genuine user submission.",
+    "publishedSlug": "community-tool-1792325514427",
+    "publishedAt": "2026-10-18T12:11:54.571Z",
+    "isVerified": true
+  },
+  {
+    "id": "sub_guide_1792325353080_7fjqmd",
+    "type": "guide",
+    "status": "published",
+    "createdAt": "2026-10-18T12:09:13.080Z",
+    "updatedAt": "2026-10-18T12:09:13.081Z",
+    "guideData": {
+      "title": "Building Autonomous Agents with Community Workflows 1792325353080",
+      "summary": "A comprehensive step-by-step tutorial on building autonomous agents using modern AI models.",
+      "content": "## Getting Started with Agents\n\nStep 1: Setup developer environment.\nStep 2: Connect APIs and models.\nStep 3: Run pipeline with safe markdown rendering.\n\nEnjoy the workflow! This tutorial covers all essential architecture points.",
+      "category": "workflow-automation",
+      "tags": [],
+      "relatedTools": [],
+      "difficulty": "intermediate",
+      "readTime": "1 min read",
+      "authorName": "Test Contributor",
+      "contactEmail": "fixture@example.invalid",
+      "referenceUrls": []
+    },
+    "potentialDuplicate": false,
+    "publishedSlug": "building-autonomous-agents-with-community-workflows-1792325353080",
+    "publishedAt": "2026-10-18T12:09:13.081Z",
+    "isVerified": true
+  },
+  {
+    "id": "sub_tool_1792325353064_6dgcyb",
+    "type": "tool",
+    "status": "published",
+    "createdAt": "2026-10-18T12:09:13.064Z",
+    "updatedAt": "2026-10-18T12:09:13.072Z",
+    "toolData": {
+      "name": "Community Tool 1792325352894",
+      "websiteUrl": "https://community-tool-1792325352894.ai/",
+      "description": "A cutting-edge community-submitted AI assistant for developers with deep workflow integration.",
+      "category": "assistants",
+      "pricingType": "freemium",
+      "features": [
+        "Code autocomplete",
+        "Refactoring agent",
+        "Unit test generator"
+      ],
+      "platform": [
+        "Web",
+        "macOS"
+      ],
+      "submitterName": "Test Contributor",
+      "submitterEmail": "fixture@example.invalid"
+    },
+    "potentialDuplicate": false,
+    "moderatorNotes": "Synthetic fixture only; not a genuine user submission.",
+    "publishedSlug": "community-tool-1792325352894",
+    "publishedAt": "2026-10-18T12:09:13.072Z",
+    "isVerified": true
+  },
+  {
+    "id": "sub_tool_seed_001",
+    "type": "tool",
+    "status": "published",
+    "createdAt": "2026-10-18T10:00:00.000Z",
+    "updatedAt": "2026-10-19T07:35:28.939Z",
+    "toolData": {
+      "name": "Jan AI",
+      "websiteUrl": "https://jan.ai",
+      "description": "Open-source local AI alternative to ChatGPT that runs 100% offline on your device with local LLMs.",
+      "category": "assistants",
+      "pricingType": "open-source",
+      "features": [
+        "100% Offline Privacy",
+        "Local GGUF Models",
+        "Custom System Prompts",
+        "Multi-Engine Support"
+      ],
+      "platform": [
+        "macOS",
+        "Windows",
+        "Linux"
+      ],
+      "alternativeTo": "ChatGPT",
+      "submitterName": "Test Contributor",
+      "submitterEmail": "fixture@example.invalid",
+      "notes": "Synthetic fixture only; not a genuine user submission."
+    },
+    "potentialDuplicate": false,
+    "moderatorNotes": "Synthetic fixture only; not a genuine user submission.",
+    "publishedSlug": "jan-ai",
+    "publishedAt": "2026-10-19T07:35:28.939Z",
+    "isVerified": true
+  }
+]

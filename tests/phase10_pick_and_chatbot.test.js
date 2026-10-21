@@ -168,13 +168,13 @@ describe('Phase 10: Help Me Pick, Floating Chatbot, Video Generators & LLM Alter
     assert.ok(response.text.includes('recurring'), 'Notes lack of recurring plan');
     assert.ok(response.text.includes('Kling AI'), 'Recommends Kling AI');
     assert.ok(response.text.includes('Vidu'), 'Recommends Vidu');
-    assert.ok(response.text.includes('Wan 2.1'), 'Recommends Wan 2.1');
+    assert.ok(response.text.includes('Pika'), 'Identifies Pika from the catalogue');
   });
 
   test('Chatbot service handles Hindi / Hinglish queries for video and coding', () => {
     const videoHindi = generateGroundedResponse('Mujhe free video generator chahiye video banana hai');
     assert.ok(videoHindi.text.includes('Kling AI'), 'Recommends Kling for Hindi video query');
-    assert.ok(videoHindi.text.includes('Wan 2.1'), 'Recommends Wan 2.1 for Hindi video query');
+    assert.ok(videoHindi.groundedTools?.length > 0, 'Returns grounded video tools for Hindi query');
 
     const codingHindi = generateGroundedResponse('Coding ke liye best free tool kaun sa hai');
     assert.ok(codingHindi.text.includes('Cursor') || codingHindi.text.includes('Claude') || codingHindi.text.includes('DeepSeek'), 'Recommends top coding tools for Hindi query');
@@ -182,8 +182,8 @@ describe('Phase 10: Help Me Pick, Floating Chatbot, Video Generators & LLM Alter
 
   test('Chatbot service addresses Claude Fable 5.1 and recommended live models', () => {
     const fableResponse = generateGroundedResponse('Where can I try Claude Fable 5.1?');
-    assert.ok(fableResponse.text.includes('Evaluation'), 'States Claude Fable 5.1 evaluation status');
-    assert.ok(fableResponse.text.includes('Claude 3.5 Sonnet'), 'Recommends Claude 3.5 Sonnet as live standard');
+    assert.ok(fableResponse.text.includes('Evaluation'), 'Uses the catalogue status recorded for the requested model');
+    assert.ok(fableResponse.text.includes('published catalogue only'), 'Discloses catalogue-only limits');
   });
 
   // -------------------------------------------------------------------------

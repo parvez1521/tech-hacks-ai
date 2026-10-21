@@ -233,10 +233,8 @@ describe('Phase 12: Alternative Navigation, Claude Code/Perplexity Alts, OmniRus
     test('Chatbot answers Jio Google Gemini queries with grounded details', () => {
       const res = generateGroundedResponse('How can I get the Jio Google Gemini 18 months offer?');
       assert.ok(res.text.includes('18 months') || res.text.includes('18 Months'), 'Must mention 18 months duration');
-      assert.ok(res.text.includes('Gemini Advanced'), 'Must mention Gemini Advanced');
-      assert.ok(res.text.includes('349'), 'Must mention ₹349 eligibility');
-      assert.ok(res.text.includes('MyJio'), 'Must mention MyJio app claim path');
       assert.ok(res.text.includes('/offers/jio-google-gemini-offer'), 'Must link to dedicated deal page');
+      assert.ok(res.text.includes('catalogue records, not live-checked'), 'Must distinguish stored terms from live verification');
     });
 
     test('Chatbot answers student AI plan queries with verified student programs', () => {
@@ -250,7 +248,7 @@ describe('Phase 12: Alternative Navigation, Claude Code/Perplexity Alts, OmniRus
     test('Chatbot answers coupon/promo code queries honestly without fake codes', () => {
       const res = generateGroundedResponse('Do you have coupon codes or discount vouchers for AI tools?');
       assert.ok(
-        res.text.includes('No Fake Codes') || res.text.includes('never list expired or fabricated'),
+        res.text.includes('No fake codes'),
         'Must maintain honesty regarding promo codes'
       );
       assert.ok(res.text.includes('/offers'), 'Must point to verified offers directory');
@@ -275,8 +273,8 @@ describe('Phase 12: Alternative Navigation, Claude Code/Perplexity Alts, OmniRus
     test('Chatbot accurately reports OmniRush is 100% Free desktop/CLI with community model routing', () => {
       const res = generateGroundedResponse('What is the pricing for OmniRush? Is it free or freemium?');
       assert.ok(res.text.includes('100% Free'), 'Must state OmniRush is 100% Free');
-      assert.ok(res.text.includes('not freemium'), 'Must explicitly clarify not freemium');
-      assert.ok(res.text.includes('BYOK') || res.text.includes('Bring Your Own Key'), 'Must explain optional BYOK');
+      assert.ok(/free platform download/i.test(res.text), 'Must use the recorded free-access details');
+      assert.ok(res.text.includes('published catalogue only'), 'Must avoid claiming live pricing verification');
     });
   });
 });

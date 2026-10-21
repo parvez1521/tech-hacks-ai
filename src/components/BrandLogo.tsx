@@ -31,7 +31,7 @@ export const BrandLogo: React.FC<BrandLogoProps> = ({
     isTrustedLogo ? logoEntry?.assetPath : undefined
   );
   const [hasError, setHasError] = useState(false);
-  const logoStatus = logoEntry?.sourceType === 'provided' ? 'provided-asset' : 'verified-asset';
+  const logoStatus = logoEntry?.sourceType === 'provided' ? 'provided-source-recorded' : 'source-recorded';
 
   useEffect(() => {
     if (!isTrustedLogo) {

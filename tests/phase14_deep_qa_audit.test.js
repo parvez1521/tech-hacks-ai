@@ -416,7 +416,7 @@ describe('Phase 14: Deep QA, Production Readiness & Trust Audit', () => {
       const res = generateGroundedResponse('Can I get free Azure credits as a student without a credit card?');
       assert.ok(res.text.includes('Azure for Students'), 'Recommends Azure for Students');
       assert.ok(res.text.includes('$100'), 'Mentions $100 credit');
-      assert.ok(res.text.includes('no credit card required'), 'Confirms no credit card required');
+      assert.ok(res.text.includes('does not require a credit card'), 'Confirms no credit card required');
       assert.ok(res.text.includes('/offers'), 'Links to offers');
     });
   });

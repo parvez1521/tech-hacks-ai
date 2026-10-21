@@ -208,13 +208,13 @@ async function fetchPublishedAdditionsSupabase() {
     headers: getSupabaseHeaders(),
   });
   if (!res.ok) {
-    return readBundledJson(LOCAL_PUBLISHED_FILE, { tools: [], guides: [], lastUpdated: new Date().toISOString() });
+    throw new Error(`Supabase published additions query failed (${res.status})`);
   }
   const rows = await res.json();
   if (Array.isArray(rows) && rows[0]?.data) {
     return rows[0].data;
   }
-  return readBundledJson(LOCAL_PUBLISHED_FILE, { tools: [], guides: [], lastUpdated: new Date().toISOString() });
+  return { tools: [], guides: [], lastUpdated: '' };
 }
 
 async function upsertPublishedAdditionsSupabase(data) {
@@ -302,13 +302,9 @@ async function savePublishedAdditionsUpstash(data) {
 // ---------------------------------------------------------------------------
 export async function getSubmissions() {
   const mode = getStorageMode();
+  if (mode === 'unconfigured_production') return [];
   if (mode === 'supabase') {
-    try {
-      return await fetchSubmissionsSupabase();
-    } catch (err) {
-      console.error('[Storage Error] Failed to fetch from Supabase, falling back to bundled data:', err.message);
-      return readBundledJson(LOCAL_SUBMISSIONS_FILE, []);
-    }
+    return await fetchSubmissionsSupabase();
   }
   if (mode === 'upstash') {
     try {
@@ -415,12 +411,9 @@ export async function updateExistingSubmission(id, patch) {
 
 export async function getPublishedAdditions() {
   const mode = getStorageMode();
+  if (mode === 'unconfigured_production') return { tools: [], guides: [], lastUpdated: '' };
   if (mode === 'supabase') {
-    try {
-      return await fetchPublishedAdditionsSupabase();
-    } catch (err) {
-      return readBundledJson(LOCAL_PUBLISHED_FILE, { tools: [], guides: [], lastUpdated: new Date().toISOString() });
-    }
+    return await fetchPublishedAdditionsSupabase();
   }
   if (mode === 'upstash') {
     return await fetchPublishedAdditionsUpstash();

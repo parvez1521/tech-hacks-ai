@@ -16,12 +16,13 @@ export const brandLogos: Record<string, BrandLogoEntry> = {
     "slug": "adobe",
     "name": "Adobe",
     "assetPath": "/logos/adobe.svg",
-    "sourceType": "official",
+    "sourceType": "simple-icons",
     "verifiedAt": "2026-10-18",
     "badgeBg": "#fa0f00",
     "format": "svg",
     "pngAssetPath": "/logos/png/adobe.png",
-    "sourceUrl": "https://cdn.jsdelivr.net/npm/simple-icons/icons/adobe.svg"
+    "sourceUrl": "https://cdn.jsdelivr.net/npm/simple-icons/icons/adobe.svg",
+    "notes": "Adobe umbrella brand mark from Simple Icons; not a substitute for individual Adobe app icons."
   },
   "adobeaftereffects": {
     "slug": "adobeaftereffects",
@@ -32,7 +33,7 @@ export const brandLogos: Record<string, BrandLogoEntry> = {
     "verifiedAt": "2026-10-18",
     "badgeBg": "#9999ff",
     "sourceUrl": "https://cdn.jsdelivr.net/npm/simple-icons/icons/adobeaftereffects.svg",
-    "notes": "Simple Icons brand mark; not necessarily a full wordmark",
+    "notes": "Adobe product brand mark from Simple Icons; not the Adobe umbrella logo or a full product app icon.",
     "pngAssetPath": "/logos/png/adobeaftereffects.png"
   },
   "adobephotoshop": {
@@ -44,7 +45,7 @@ export const brandLogos: Record<string, BrandLogoEntry> = {
     "verifiedAt": "2026-10-18",
     "badgeBg": "#31a8ff",
     "sourceUrl": "https://cdn.jsdelivr.net/npm/simple-icons/icons/adobephotoshop.svg",
-    "notes": "Simple Icons brand mark; not necessarily a full wordmark",
+    "notes": "Adobe product brand mark from Simple Icons; not the Adobe umbrella logo or a full product app icon.",
     "pngAssetPath": "/logos/png/adobephotoshop.png"
   },
   "adobepremierepro": {
@@ -56,7 +57,7 @@ export const brandLogos: Record<string, BrandLogoEntry> = {
     "verifiedAt": "2026-10-18",
     "badgeBg": "#9999ff",
     "sourceUrl": "https://cdn.jsdelivr.net/npm/simple-icons/icons/adobepremierepro.svg",
-    "notes": "Simple Icons brand mark; not necessarily a full wordmark",
+    "notes": "Adobe product brand mark from Simple Icons; not the Adobe umbrella logo or a full product app icon.",
     "pngAssetPath": "/logos/png/adobepremierepro.png"
   },
   "affine": {
@@ -2457,8 +2458,53 @@ export const brandLogos: Record<string, BrandLogoEntry> = {
     "sourceUrl": "https://cdn.jsdelivr.net/npm/simple-icons/icons/zedindustries.svg",
     "notes": "Simple Icons brand mark; not necessarily a full wordmark",
     "pngAssetPath": "/logos/png/zedindustries.png"
+  },
+  "mongodb": {
+    "slug": "mongodb",
+    "name": "MongoDB",
+    "assetPath": "/logos/fallback-mongodb.svg",
+    "sourceType": "fallback",
+    "verifiedAt": "2026-10-22",
+    "format": "svg",
+    "notes": "Neutral monogram fallback; a sourced provider logo has not been added."
+  },
+  "oracle": {
+    "slug": "oracle",
+    "name": "Oracle Cloud",
+    "assetPath": "/logos/fallback-oracle.svg",
+    "sourceType": "fallback",
+    "verifiedAt": "2026-10-22",
+    "format": "svg",
+    "notes": "Neutral monogram fallback; a sourced provider logo has not been added."
+  },
+  "neon": {
+    "slug": "neon",
+    "name": "Neon",
+    "assetPath": "/logos/fallback-neon.svg",
+    "sourceType": "fallback",
+    "verifiedAt": "2026-10-22",
+    "format": "svg",
+    "notes": "Neutral monogram fallback; a sourced provider logo has not been added."
+  },
+  "turso": {
+    "slug": "turso",
+    "name": "Turso",
+    "assetPath": "/logos/fallback-turso.svg",
+    "sourceType": "fallback",
+    "verifiedAt": "2026-10-22",
+    "format": "svg",
+    "notes": "Neutral monogram fallback; a sourced provider logo has not been added."
+  },
+  "ibmcloud": {
+    "slug": "ibmcloud",
+    "name": "IBM Cloud",
+    "assetPath": "/logos/fallback-ibmcloud.svg",
+    "sourceType": "fallback",
+    "verifiedAt": "2026-10-22",
+    "format": "svg",
+    "notes": "Neutral monogram fallback; a sourced provider logo has not been added."
   }
-};
+}
 
 export const SLUG_ALIASES: Record<string, string> = {
   "amazonaws": "aws",

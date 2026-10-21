@@ -463,6 +463,17 @@
   filter: brightness(0) saturate(100%) invert(58%) sepia(82%) saturate(2081%) hue-rotate(193deg) brightness(100%) contrast(94%);
 }
 
+/* Simple Icons' Adobe product marks are monochrome brand symbols. Preserve
+   their source color while placing them on a neutral tile in dark mode. */
+.brand-logo-image--adobe,
+.brand-logo-image--adobephotoshop,
+.brand-logo-image--adobeaftereffects,
+.brand-logo-image--adobepremierepro {
+  background: #fff;
+  border-radius: 0.28rem;
+  padding: 0.12rem;
+}
+
 .brand-logo-image--githubcopilot {
   filter: none;
 }
@@ -944,6 +955,28 @@
   right: 1rem;
   bottom: calc(1rem + env(safe-area-inset-bottom));
 }
+.chat-welcome-bubble {
+  position: absolute;
+  right: 0;
+  bottom: calc(100% + 0.7rem);
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  width: max-content;
+  max-width: min(18rem, calc(100vw - 2rem));
+  padding: 0.45rem 0.5rem 0.45rem 0.75rem;
+  border: 1px solid rgb(var(--color-border));
+  border-radius: 0.85rem;
+  color: rgb(var(--color-fg));
+  background: rgb(var(--color-card));
+  box-shadow: 0 8px 28px rgb(2 8 23 / 0.18);
+  animation: chatInviteIn 260ms ease-out both;
+}
+.chat-welcome-bubble__open { display: inline-flex; align-items: center; gap: 0.55rem; color: inherit; font-size: 0.75rem; font-weight: 650; }
+.chat-welcome-bubble__dismiss { display: grid; width: 1.6rem; height: 1.6rem; place-items: center; border-radius: 50%; color: rgb(var(--color-muted-fg)); }
+.chat-welcome-bubble__dismiss:hover { background: rgb(var(--color-muted)); color: rgb(var(--color-fg)); }
+.chat-welcome-bubble__indicator { width: 0.4rem; height: 0.4rem; border-radius: 50%; background: #35b779; box-shadow: 0 0 0 3px rgb(53 183 121 / .14); }
+@keyframes chatInviteIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
 @media (min-width: 640px) and (max-width: 899px) {
   .chat-launcher-position { right: auto; left: 1rem; }
 }
@@ -994,6 +1027,7 @@
   .chat-dialog { height: calc(100dvh - env(safe-area-inset-top) - env(safe-area-inset-bottom) - 0.9rem); border-radius: 0.85rem; }
 }
 @media (prefers-reduced-motion: reduce) {
+  .chat-welcome-bubble { animation: none; }
   .hero-redesign__primary-action,
   .hero-redesign__secondary-action,
   .hero-redesign__quick-links a,

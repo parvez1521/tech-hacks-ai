@@ -90,13 +90,14 @@ describe('Phase 24: Restrained UI, Verified Navigation & Chatbot Repair', () => 
   // 4. Task 4: Working proactive chatbot suggestion
   // =========================================================================
   describe('Task 4: Intentional chatbot opening', () => {
-    test('FloatingChatbot starts collapsed without an unsolicited invitation', () => {
+    test('FloatingChatbot starts closed with a compact dismissible session invitation', () => {
       const chatbotPath = path.resolve(process.cwd(), 'src/components/FloatingChatbot.tsx');
       const content = fs.readFileSync(chatbotPath, 'utf8');
 
       assert.ok(content.includes('data-testid="chat-launcher"'), 'Renders the compact launcher');
-      assert.ok(!content.includes('Assistant welcome invitation'), 'Does not cover content with a welcome card');
-      assert.ok(!content.includes('setShowWelcome'), 'No welcome bubble appears on page load');
+      assert.ok(content.includes('data-testid="chat-welcome-bubble"'), 'Shows compact invitation by the launcher');
+      assert.ok(content.includes('techhacks-chat-invite-dismissed'), 'Dismissal is remembered for this session');
+      assert.ok(content.includes('Dismiss assistant invitation'), 'Invitation has an accessible dismiss control');
     });
 
     test('Chat panel opens intentionally and keeps modal semantics', () => {

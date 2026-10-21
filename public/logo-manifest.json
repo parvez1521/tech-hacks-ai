@@ -3,12 +3,13 @@
     "slug": "adobe",
     "name": "Adobe",
     "assetPath": "/logos/adobe.svg",
-    "sourceType": "official",
+    "sourceType": "simple-icons",
     "verifiedAt": "2026-10-18",
     "badgeBg": "#fa0f00",
     "format": "svg",
     "pngAssetPath": "/logos/png/adobe.png",
-    "sourceUrl": "https://cdn.jsdelivr.net/npm/simple-icons/icons/adobe.svg"
+    "sourceUrl": "https://cdn.jsdelivr.net/npm/simple-icons/icons/adobe.svg",
+    "notes": "Adobe umbrella brand mark from Simple Icons; not a substitute for individual Adobe app icons."
   },
   {
     "slug": "adobeaftereffects",
@@ -19,7 +20,7 @@
     "verifiedAt": "2026-10-18",
     "badgeBg": "#9999ff",
     "sourceUrl": "https://cdn.jsdelivr.net/npm/simple-icons/icons/adobeaftereffects.svg",
-    "notes": "Simple Icons brand mark; not necessarily a full wordmark",
+    "notes": "Adobe product brand mark from Simple Icons; not the Adobe umbrella logo or a full product app icon.",
     "pngAssetPath": "/logos/png/adobeaftereffects.png"
   },
   {
@@ -31,7 +32,7 @@
     "verifiedAt": "2026-10-18",
     "badgeBg": "#31a8ff",
     "sourceUrl": "https://cdn.jsdelivr.net/npm/simple-icons/icons/adobephotoshop.svg",
-    "notes": "Simple Icons brand mark; not necessarily a full wordmark",
+    "notes": "Adobe product brand mark from Simple Icons; not the Adobe umbrella logo or a full product app icon.",
     "pngAssetPath": "/logos/png/adobephotoshop.png"
   },
   {
@@ -43,7 +44,7 @@
     "verifiedAt": "2026-10-18",
     "badgeBg": "#9999ff",
     "sourceUrl": "https://cdn.jsdelivr.net/npm/simple-icons/icons/adobepremierepro.svg",
-    "notes": "Simple Icons brand mark; not necessarily a full wordmark",
+    "notes": "Adobe product brand mark from Simple Icons; not the Adobe umbrella logo or a full product app icon.",
     "pngAssetPath": "/logos/png/adobepremierepro.png"
   },
   {
@@ -2444,5 +2445,50 @@
     "sourceUrl": "https://cdn.jsdelivr.net/npm/simple-icons/icons/zedindustries.svg",
     "notes": "Simple Icons brand mark; not necessarily a full wordmark",
     "pngAssetPath": "/logos/png/zedindustries.png"
+  },
+  {
+    "slug": "mongodb",
+    "name": "MongoDB",
+    "assetPath": "/logos/fallback-mongodb.svg",
+    "sourceType": "fallback",
+    "verifiedAt": "2026-10-22",
+    "format": "svg",
+    "notes": "Neutral monogram fallback; a sourced provider logo has not been added."
+  },
+  {
+    "slug": "oracle",
+    "name": "Oracle Cloud",
+    "assetPath": "/logos/fallback-oracle.svg",
+    "sourceType": "fallback",
+    "verifiedAt": "2026-10-22",
+    "format": "svg",
+    "notes": "Neutral monogram fallback; a sourced provider logo has not been added."
+  },
+  {
+    "slug": "neon",
+    "name": "Neon",
+    "assetPath": "/logos/fallback-neon.svg",
+    "sourceType": "fallback",
+    "verifiedAt": "2026-10-22",
+    "format": "svg",
+    "notes": "Neutral monogram fallback; a sourced provider logo has not been added."
+  },
+  {
+    "slug": "turso",
+    "name": "Turso",
+    "assetPath": "/logos/fallback-turso.svg",
+    "sourceType": "fallback",
+    "verifiedAt": "2026-10-22",
+    "format": "svg",
+    "notes": "Neutral monogram fallback; a sourced provider logo has not been added."
+  },
+  {
+    "slug": "ibmcloud",
+    "name": "IBM Cloud",
+    "assetPath": "/logos/fallback-ibmcloud.svg",
+    "sourceType": "fallback",
+    "verifiedAt": "2026-10-22",
+    "format": "svg",
+    "notes": "Neutral monogram fallback; a sourced provider logo has not been added."
   }
 ]

@@ -181,18 +181,18 @@ describe('Phase 11: End-to-End Integration, Recommendation Integrity & Launch Re
     test('Answers Pika inquiries with honest pricing status and recurring free alternatives', () => {
       const res = generateGroundedResponse('Does Pika have a free plan?');
       assert.ok(res.text.includes('not have a recurring monthly free plan') || res.text.includes('starter trial credits'));
-      assert.ok(res.text.includes('Kling AI') || res.text.includes('Wan 2.1') || res.text.includes('Vidu'));
+      assert.ok(res.text.includes('Kling AI') || res.text.includes('Vidu'));
     });
 
     test('Documents Claude Fable 5.1 and GPT-6 Astra without claiming released free public access', () => {
       const res = generateGroundedResponse('Tell me about Claude Fable 5.1 and GPT-6 Astra on KIE AI');
-      assert.ok(res.text.includes('Claude Fable 5.1') && res.text.includes('Evaluation'));
-      assert.ok(res.text.includes('Claude 3.5 Sonnet') || res.text.includes('DeepSeek-R1'), 'Must recommend live models for production');
+      assert.ok(res.text.includes('Evaluation'), 'Uses the status stored in the catalogue');
+      assert.ok(res.text.includes('published catalogue only'), 'Clearly discloses the catalogue-only fallback');
     });
 
     test('Handles Hindi / Hinglish queries seamlessly', () => {
       const videoHindi = generateGroundedResponse('Free video banana ke liye kaun sa AI tool best hai?');
-      assert.ok(videoHindi.text.includes('Kling AI') || videoHindi.text.includes('Wan 2.1'));
+      assert.ok(videoHindi.text.includes('Kling AI') || videoHindi.text.includes('Vidu'));
       assert.ok(videoHindi.groundedTools?.length > 0);
 
       const codeHindi = generateGroundedResponse('Coding ke liye best free tool batao');

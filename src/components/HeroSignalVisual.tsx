@@ -60,10 +60,9 @@ export const HeroSignalVisual: React.FC = () => {
             <span className="discovery-interface__index">01 / 03</span>
           </div>
 
-          <div className="discovery-interface__search" aria-label="Illustrative example query">
+          <div className="discovery-interface__search" aria-label="Static sample query, not a search field">
             <Search size={16} aria-hidden="true" />
-            <span>AI tools for building a website</span>
-            <kbd>⌘ K</kbd>
+            <span><small className="block text-[9px] uppercase tracking-wider text-muted-foreground">Sample query</small>AI tools for building a website</span>
           </div>
 
           <div className="discovery-interface__tabs" role="tablist" aria-label="Preview discovery categories">

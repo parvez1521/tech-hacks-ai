@@ -1,0 +1,1699 @@
+{
+  "tools": [
+    {
+      "id": "jan-ai",
+      "slug": "jan-ai",
+      "name": "Jan AI",
+      "tagline": "Open-source local AI alternative to ChatGPT that runs 100% offline on your device with loc...",
+      "description": "Open-source local AI alternative to ChatGPT that runs 100% offline on your device with local LLMs.",
+      "longDescription": "Open-source local AI alternative to ChatGPT that runs 100% offline on your device with local LLMs.",
+      "websiteUrl": "https://jan.ai",
+      "category": "assistants",
+      "pricingType": "open-source",
+      "pricingDetails": "Open Source",
+      "iconLetter": "JA",
+      "iconBgColor": "#6366f1",
+      "hasFreePlan": true,
+      "freeAccessType": "open-source-local",
+      "freeTierSummary": "Community submission verified by Tech Hacks AI editorial team.",
+      "freeTierLimits": "Verified live on official platform docs.",
+      "features": [
+        "100% Offline Privacy",
+        "Local GGUF Models",
+        "Custom System Prompts",
+        "Multi-Engine Support"
+      ],
+      "tags": [
+        "assistants",
+        "open-source",
+        "community-verified",
+        "macOS",
+        "Windows",
+        "Linux"
+      ],
+      "requiresAccount": false,
+      "pricingSourceUrl": "https://jan.ai",
+      "pricingVerifiedAt": "2026-10-19",
+      "isVerified": true,
+      "alternativesTo": [
+        "ChatGPT"
+      ]
+    },
+    {
+      "id": "test-tool-prelaunch",
+      "slug": "test-tool-prelaunch",
+      "name": "Test Tool Prelaunch",
+      "tagline": "A testing tool for prelaunch QA audit verification.",
+      "description": "A testing tool for prelaunch QA audit verification.",
+      "longDescription": "A testing tool for prelaunch QA audit verification.",
+      "websiteUrl": "https://test-tool-prelaunch.com/",
+      "category": "assistants",
+      "pricingType": "free",
+      "pricingDetails": "Free forever",
+      "iconLetter": "TE",
+      "iconBgColor": "#6366f1",
+      "hasFreePlan": true,
+      "freeAccessType": "recurring-free",
+      "freeTierSummary": "Community submission verified by Tech Hacks AI editorial team.",
+      "freeTierLimits": "Verified live on official platform docs.",
+      "features": [],
+      "tags": [
+        "assistants",
+        "free",
+        "community-verified"
+      ],
+      "requiresAccount": true,
+      "pricingSourceUrl": "https://test-tool-prelaunch.com/",
+      "pricingVerifiedAt": "2026-10-19",
+      "isVerified": true,
+      "alternativesTo": []
+    },
+    {
+      "id": "community-tool-1792347400006",
+      "slug": "community-tool-1792347400006",
+      "name": "Community Tool 1792347400006",
+      "tagline": "A cutting-edge community-submitted AI assistant for developers with deep workflow integrat...",
+      "description": "A cutting-edge community-submitted AI assistant for developers with deep workflow integration.",
+      "longDescription": "A cutting-edge community-submitted AI assistant for developers with deep workflow integration.",
+      "websiteUrl": "https://community-tool-1792347400006.ai/",
+      "category": "assistants",
+      "pricingType": "freemium",
+      "pricingDetails": "Freemium / Free tier available",
+      "iconLetter": "CO",
+      "iconBgColor": "#6366f1",
+      "hasFreePlan": true,
+      "freeAccessType": "limited-free",
+      "freeTierSummary": "Community submission verified by Tech Hacks AI editorial team.",
+      "freeTierLimits": "Verified live on official platform docs.",
+      "features": [
+        "Code autocomplete",
+        "Refactoring agent",
+        "Unit test generator"
+      ],
+      "tags": [
+        "assistants",
+        "freemium",
+        "community-verified",
+        "Web",
+        "macOS"
+      ],
+      "requiresAccount": true,
+      "pricingSourceUrl": "https://community-tool-1792347400006.ai/",
+      "pricingVerifiedAt": "2026-10-18",
+      "isVerified": true,
+      "alternativesTo": []
+    },
+    {
+      "id": "community-tool-1792347322294",
+      "slug": "community-tool-1792347322294",
+      "name": "Community Tool 1792347322294",
+      "tagline": "A cutting-edge community-submitted AI assistant for developers with deep workflow integrat...",
+      "description": "A cutting-edge community-submitted AI assistant for developers with deep workflow integration.",
+      "longDescription": "A cutting-edge community-submitted AI assistant for developers with deep workflow integration.",
+      "websiteUrl": "https://community-tool-1792347322294.ai/",
+      "category": "assistants",
+      "pricingType": "freemium",
+      "pricingDetails": "Freemium / Free tier available",
+      "iconLetter": "CO",
+      "iconBgColor": "#6366f1",
+      "hasFreePlan": true,
+      "freeAccessType": "limited-free",
+      "freeTierSummary": "Community submission verified by Tech Hacks AI editorial team.",
+      "freeTierLimits": "Verified live on official platform docs.",
+      "features": [
+        "Code autocomplete",
+        "Refactoring agent",
+        "Unit test generator"
+      ],
+      "tags": [
+        "assistants",
+        "freemium",
+        "community-verified",
+        "Web",
+        "macOS"
+      ],
+      "requiresAccount": true,
+      "pricingSourceUrl": "https://community-tool-1792347322294.ai/",
+      "pricingVerifiedAt": "2026-10-18",
+      "isVerified": true,
+      "alternativesTo": []
+    },
+    {
+      "id": "community-tool-1792347307803",
+      "slug": "community-tool-1792347307803",
+      "name": "Community Tool 1792347307803",
+      "tagline": "A cutting-edge community-submitted AI assistant for developers with deep workflow integrat...",
+      "description": "A cutting-edge community-submitted AI assistant for developers with deep workflow integration.",
+      "longDescription": "A cutting-edge community-submitted AI assistant for developers with deep workflow integration.",
+      "websiteUrl": "https://community-tool-1792347307803.ai/",
+      "category": "assistants",
+      "pricingType": "freemium",
+      "pricingDetails": "Freemium / Free tier available",
+      "iconLetter": "CO",
+      "iconBgColor": "#6366f1",
+      "hasFreePlan": true,
+      "freeAccessType": "limited-free",
+      "freeTierSummary": "Community submission verified by Tech Hacks AI editorial team.",
+      "freeTierLimits": "Verified live on official platform docs.",
+      "features": [
+        "Code autocomplete",
+        "Refactoring agent",
+        "Unit test generator"
+      ],
+      "tags": [
+        "assistants",
+        "freemium",
+        "community-verified",
+        "Web",
+        "macOS"
+      ],
+      "requiresAccount": true,
+      "pricingSourceUrl": "https://community-tool-1792347307803.ai/",
+      "pricingVerifiedAt": "2026-10-18",
+      "isVerified": true,
+      "alternativesTo": []
+    },
+    {
+      "id": "community-tool-1792337121303",
+      "slug": "community-tool-1792337121303",
+      "name": "Community Tool 1792337121303",
+      "tagline": "A cutting-edge community-submitted AI assistant for developers with deep workflow integrat...",
+      "description": "A cutting-edge community-submitted AI assistant for developers with deep workflow integration.",
+      "longDescription": "A cutting-edge community-submitted AI assistant for developers with deep workflow integration.",
+      "websiteUrl": "https://community-tool-1792337121303.ai/",
+      "category": "assistants",
+      "pricingType": "freemium",
+      "pricingDetails": "Freemium / Free tier available",
+      "iconLetter": "CO",
+      "iconBgColor": "#6366f1",
+      "hasFreePlan": true,
+      "freeAccessType": "limited-free",
+      "freeTierSummary": "Community submission verified by Tech Hacks AI editorial team.",
+      "freeTierLimits": "Verified live on official platform docs.",
+      "features": [
+        "Code autocomplete",
+        "Refactoring agent",
+        "Unit test generator"
+      ],
+      "tags": [
+        "assistants",
+        "freemium",
+        "community-verified",
+        "Web",
+        "macOS"
+      ],
+      "requiresAccount": true,
+      "pricingSourceUrl": "https://community-tool-1792337121303.ai/",
+      "pricingVerifiedAt": "2026-10-18",
+      "isVerified": true,
+      "alternativesTo": []
+    },
+    {
+      "id": "community-tool-1792337091934",
+      "slug": "community-tool-1792337091934",
+      "name": "Community Tool 1792337091934",
+      "tagline": "A cutting-edge community-submitted AI assistant for developers with deep workflow integrat...",
+      "description": "A cutting-edge community-submitted AI assistant for developers with deep workflow integration.",
+      "longDescription": "A cutting-edge community-submitted AI assistant for developers with deep workflow integration.",
+      "websiteUrl": "https://community-tool-1792337091934.ai/",
+      "category": "assistants",
+      "pricingType": "freemium",
+      "pricingDetails": "Freemium / Free tier available",
+      "iconLetter": "CO",
+      "iconBgColor": "#6366f1",
+      "hasFreePlan": true,
+      "freeAccessType": "limited-free",
+      "freeTierSummary": "Community submission verified by Tech Hacks AI editorial team.",
+      "freeTierLimits": "Verified live on official platform docs.",
+      "features": [
+        "Code autocomplete",
+        "Refactoring agent",
+        "Unit test generator"
+      ],
+      "tags": [
+        "assistants",
+        "freemium",
+        "community-verified",
+        "Web",
+        "macOS"
+      ],
+      "requiresAccount": true,
+      "pricingSourceUrl": "https://community-tool-1792337091934.ai/",
+      "pricingVerifiedAt": "2026-10-18",
+      "isVerified": true,
+      "alternativesTo": []
+    },
+    {
+      "id": "community-tool-1792337072007",
+      "slug": "community-tool-1792337072007",
+      "name": "Community Tool 1792337072007",
+      "tagline": "A cutting-edge community-submitted AI assistant for developers with deep workflow integrat...",
+      "description": "A cutting-edge community-submitted AI assistant for developers with deep workflow integration.",
+      "longDescription": "A cutting-edge community-submitted AI assistant for developers with deep workflow integration.",
+      "websiteUrl": "https://community-tool-1792337072007.ai/",
+      "category": "assistants",
+      "pricingType": "freemium",
+      "pricingDetails": "Freemium / Free tier available",
+      "iconLetter": "CO",
+      "iconBgColor": "#6366f1",
+      "hasFreePlan": true,
+      "freeAccessType": "limited-free",
+      "freeTierSummary": "Community submission verified by Tech Hacks AI editorial team.",
+      "freeTierLimits": "Verified live on official platform docs.",
+      "features": [
+        "Code autocomplete",
+        "Refactoring agent",
+        "Unit test generator"
+      ],
+      "tags": [
+        "assistants",
+        "freemium",
+        "community-verified",
+        "Web",
+        "macOS"
+      ],
+      "requiresAccount": true,
+      "pricingSourceUrl": "https://community-tool-1792337072007.ai/",
+      "pricingVerifiedAt": "2026-10-18",
+      "isVerified": true,
+      "alternativesTo": []
+    },
+    {
+      "id": "community-tool-1792336994019",
+      "slug": "community-tool-1792336994019",
+      "name": "Community Tool 1792336994019",
+      "tagline": "A cutting-edge community-submitted AI assistant for developers with deep workflow integrat...",
+      "description": "A cutting-edge community-submitted AI assistant for developers with deep workflow integration.",
+      "longDescription": "A cutting-edge community-submitted AI assistant for developers with deep workflow integration.",
+      "websiteUrl": "https://community-tool-1792336994019.ai/",
+      "category": "assistants",
+      "pricingType": "freemium",
+      "pricingDetails": "Freemium / Free tier available",
+      "iconLetter": "CO",
+      "iconBgColor": "#6366f1",
+      "hasFreePlan": true,
+      "freeAccessType": "limited-free",
+      "freeTierSummary": "Community submission verified by Tech Hacks AI editorial team.",
+      "freeTierLimits": "Verified live on official platform docs.",
+      "features": [
+        "Code autocomplete",
+        "Refactoring agent",
+        "Unit test generator"
+      ],
+      "tags": [
+        "assistants",
+        "freemium",
+        "community-verified",
+        "Web",
+        "macOS"
+      ],
+      "requiresAccount": true,
+      "pricingSourceUrl": "https://community-tool-1792336994019.ai/",
+      "pricingVerifiedAt": "2026-10-18",
+      "isVerified": true,
+      "alternativesTo": []
+    },
+    {
+      "id": "community-tool-1792336691486",
+      "slug": "community-tool-1792336691486",
+      "name": "Community Tool 1792336691486",
+      "tagline": "A cutting-edge community-submitted AI assistant for developers with deep workflow integrat...",
+      "description": "A cutting-edge community-submitted AI assistant for developers with deep workflow integration.",
+      "longDescription": "A cutting-edge community-submitted AI assistant for developers with deep workflow integration.",
+      "websiteUrl": "https://community-tool-1792336691486.ai/",
+      "category": "assistants",
+      "pricingType": "freemium",
+      "pricingDetails": "Freemium / Free tier available",
+      "iconLetter": "CO",
+      "iconBgColor": "#6366f1",
+      "hasFreePlan": true,
+      "freeAccessType": "limited-free",
+      "freeTierSummary": "Community submission verified by Tech Hacks AI editorial team.",
+      "freeTierLimits": "Verified live on official platform docs.",
+      "features": [
+        "Code autocomplete",
+        "Refactoring agent",
+        "Unit test generator"
+      ],
+      "tags": [
+        "assistants",
+        "freemium",
+        "community-verified",
+        "Web",
+        "macOS"
+      ],
+      "requiresAccount": true,
+      "pricingSourceUrl": "https://community-tool-1792336691486.ai/",
+      "pricingVerifiedAt": "2026-10-18",
+      "isVerified": true,
+      "alternativesTo": []
+    },
+    {
+      "id": "community-tool-1792333984397",
+      "slug": "community-tool-1792333984397",
+      "name": "Community Tool 1792333984397",
+      "tagline": "A cutting-edge community-submitted AI assistant for developers with deep workflow integrat...",
+      "description": "A cutting-edge community-submitted AI assistant for developers with deep workflow integration.",
+      "longDescription": "A cutting-edge community-submitted AI assistant for developers with deep workflow integration.",
+      "websiteUrl": "https://community-tool-1792333984397.ai/",
+      "category": "assistants",
+      "pricingType": "freemium",
+      "pricingDetails": "Freemium / Free tier available",
+      "iconLetter": "CO",
+      "iconBgColor": "#6366f1",
+      "hasFreePlan": true,
+      "freeAccessType": "limited-free",
+      "freeTierSummary": "Community submission verified by Tech Hacks AI editorial team.",
+      "freeTierLimits": "Verified live on official platform docs.",
+      "features": [
+        "Code autocomplete",
+        "Refactoring agent",
+        "Unit test generator"
+      ],
+      "tags": [
+        "assistants",
+        "freemium",
+        "community-verified",
+        "Web",
+        "macOS"
+      ],
+      "requiresAccount": true,
+      "pricingSourceUrl": "https://community-tool-1792333984397.ai/",
+      "pricingVerifiedAt": "2026-10-18",
+      "isVerified": true,
+      "alternativesTo": []
+    },
+    {
+      "id": "community-tool-1792333965961",
+      "slug": "community-tool-1792333965961",
+      "name": "Community Tool 1792333965961",
+      "tagline": "A cutting-edge community-submitted AI assistant for developers with deep workflow integrat...",
+      "description": "A cutting-edge community-submitted AI assistant for developers with deep workflow integration.",
+      "longDescription": "A cutting-edge community-submitted AI assistant for developers with deep workflow integration.",
+      "websiteUrl": "https://community-tool-1792333965961.ai/",
+      "category": "assistants",
+      "pricingType": "freemium",
+      "pricingDetails": "Freemium / Free tier available",
+      "iconLetter": "CO",
+      "iconBgColor": "#6366f1",
+      "hasFreePlan": true,
+      "freeAccessType": "limited-free",
+      "freeTierSummary": "Community submission verified by Tech Hacks AI editorial team.",
+      "freeTierLimits": "Verified live on official platform docs.",
+      "features": [
+        "Code autocomplete",
+        "Refactoring agent",
+        "Unit test generator"
+      ],
+      "tags": [
+        "assistants",
+        "freemium",
+        "community-verified",
+        "Web",
+        "macOS"
+      ],
+      "requiresAccount": true,
+      "pricingSourceUrl": "https://community-tool-1792333965961.ai/",
+      "pricingVerifiedAt": "2026-10-18",
+      "isVerified": true,
+      "alternativesTo": []
+    },
+    {
+      "id": "community-tool-1792333947932",
+      "slug": "community-tool-1792333947932",
+      "name": "Community Tool 1792333947932",
+      "tagline": "A cutting-edge community-submitted AI assistant for developers with deep workflow integrat...",
+      "description": "A cutting-edge community-submitted AI assistant for developers with deep workflow integration.",
+      "longDescription": "A cutting-edge community-submitted AI assistant for developers with deep workflow integration.",
+      "websiteUrl": "https://community-tool-1792333947932.ai/",
+      "category": "assistants",
+      "pricingType": "freemium",
+      "pricingDetails": "Freemium / Free tier available",
+      "iconLetter": "CO",
+      "iconBgColor": "#6366f1",
+      "hasFreePlan": true,
+      "freeAccessType": "limited-free",
+      "freeTierSummary": "Community submission verified by Tech Hacks AI editorial team.",
+      "freeTierLimits": "Verified live on official platform docs.",
+      "features": [
+        "Code autocomplete",
+        "Refactoring agent",
+        "Unit test generator"
+      ],
+      "tags": [
+        "assistants",
+        "freemium",
+        "community-verified",
+        "Web",
+        "macOS"
+      ],
+      "requiresAccount": true,
+      "pricingSourceUrl": "https://community-tool-1792333947932.ai/",
+      "pricingVerifiedAt": "2026-10-18",
+      "isVerified": true,
+      "alternativesTo": []
+    },
+    {
+      "id": "community-tool-1792333663271",
+      "slug": "community-tool-1792333663271",
+      "name": "Community Tool 1792333663271",
+      "tagline": "A cutting-edge community-submitted AI assistant for developers with deep workflow integrat...",
+      "description": "A cutting-edge community-submitted AI assistant for developers with deep workflow integration.",
+      "longDescription": "A cutting-edge community-submitted AI assistant for developers with deep workflow integration.",
+      "websiteUrl": "https://community-tool-1792333663271.ai/",
+      "category": "assistants",
+      "pricingType": "freemium",
+      "pricingDetails": "Freemium / Free tier available",
+      "iconLetter": "CO",
+      "iconBgColor": "#6366f1",
+      "hasFreePlan": true,
+      "freeAccessType": "limited-free",
+      "freeTierSummary": "Community submission verified by Tech Hacks AI editorial team.",
+      "freeTierLimits": "Verified live on official platform docs.",
+      "features": [
+        "Code autocomplete",
+        "Refactoring agent",
+        "Unit test generator"
+      ],
+      "tags": [
+        "assistants",
+        "freemium",
+        "community-verified",
+        "Web",
+        "macOS"
+      ],
+      "requiresAccount": true,
+      "pricingSourceUrl": "https://community-tool-1792333663271.ai/",
+      "pricingVerifiedAt": "2026-10-18",
+      "isVerified": true,
+      "alternativesTo": []
+    },
+    {
+      "id": "community-tool-1792332371409",
+      "slug": "community-tool-1792332371409",
+      "name": "Community Tool 1792332371409",
+      "tagline": "A cutting-edge community-submitted AI assistant for developers with deep workflow integrat...",
+      "description": "A cutting-edge community-submitted AI assistant for developers with deep workflow integration.",
+      "longDescription": "A cutting-edge community-submitted AI assistant for developers with deep workflow integration.",
+      "websiteUrl": "https://community-tool-1792332371409.ai/",
+      "category": "assistants",
+      "pricingType": "freemium",
+      "pricingDetails": "Freemium / Free tier available",
+      "iconLetter": "CO",
+      "iconBgColor": "#6366f1",
+      "hasFreePlan": true,
+      "freeAccessType": "limited-free",
+      "freeTierSummary": "Community submission verified by Tech Hacks AI editorial team.",
+      "freeTierLimits": "Verified live on official platform docs.",
+      "features": [
+        "Code autocomplete",
+        "Refactoring agent",
+        "Unit test generator"
+      ],
+      "tags": [
+        "assistants",
+        "freemium",
+        "community-verified",
+        "Web",
+        "macOS"
+      ],
+      "requiresAccount": true,
+      "pricingSourceUrl": "https://community-tool-1792332371409.ai/",
+      "pricingVerifiedAt": "2026-10-18",
+      "isVerified": true,
+      "alternativesTo": []
+    },
+    {
+      "id": "community-tool-1792331636354",
+      "slug": "community-tool-1792331636354",
+      "name": "Community Tool 1792331636354",
+      "tagline": "A cutting-edge community-submitted AI assistant for developers with deep workflow integrat...",
+      "description": "A cutting-edge community-submitted AI assistant for developers with deep workflow integration.",
+      "longDescription": "A cutting-edge community-submitted AI assistant for developers with deep workflow integration.",
+      "websiteUrl": "https://community-tool-1792331636354.ai/",
+      "category": "assistants",
+      "pricingType": "freemium",
+      "pricingDetails": "Freemium / Free tier available",
+      "iconLetter": "CO",
+      "iconBgColor": "#6366f1",
+      "hasFreePlan": true,
+      "freeAccessType": "limited-free",
+      "freeTierSummary": "Community submission verified by Tech Hacks AI editorial team.",
+      "freeTierLimits": "Verified live on official platform docs.",
+      "features": [
+        "Code autocomplete",
+        "Refactoring agent",
+        "Unit test generator"
+      ],
+      "tags": [
+        "assistants",
+        "freemium",
+        "community-verified",
+        "Web",
+        "macOS"
+      ],
+      "requiresAccount": true,
+      "pricingSourceUrl": "https://community-tool-1792331636354.ai/",
+      "pricingVerifiedAt": "2026-10-18",
+      "isVerified": true,
+      "alternativesTo": []
+    },
+    {
+      "id": "community-tool-1792331630125",
+      "slug": "community-tool-1792331630125",
+      "name": "Community Tool 1792331630125",
+      "tagline": "A cutting-edge community-submitted AI assistant for developers with deep workflow integrat...",
+      "description": "A cutting-edge community-submitted AI assistant for developers with deep workflow integration.",
+      "longDescription": "A cutting-edge community-submitted AI assistant for developers with deep workflow integration.",
+      "websiteUrl": "https://community-tool-1792331630125.ai/",
+      "category": "assistants",
+      "pricingType": "freemium",
+      "pricingDetails": "Freemium / Free tier available",
+      "iconLetter": "CO",
+      "iconBgColor": "#6366f1",
+      "hasFreePlan": true,
+      "freeAccessType": "limited-free",
+      "freeTierSummary": "Community submission verified by Tech Hacks AI editorial team.",
+      "freeTierLimits": "Verified live on official platform docs.",
+      "features": [
+        "Code autocomplete",
+        "Refactoring agent",
+        "Unit test generator"
+      ],
+      "tags": [
+        "assistants",
+        "freemium",
+        "community-verified",
+        "Web",
+        "macOS"
+      ],
+      "requiresAccount": true,
+      "pricingSourceUrl": "https://community-tool-1792331630125.ai/",
+      "pricingVerifiedAt": "2026-10-18",
+      "isVerified": true,
+      "alternativesTo": []
+    },
+    {
+      "id": "community-tool-1792331580653",
+      "slug": "community-tool-1792331580653",
+      "name": "Community Tool 1792331580653",
+      "tagline": "A cutting-edge community-submitted AI assistant for developers with deep workflow integrat...",
+      "description": "A cutting-edge community-submitted AI assistant for developers with deep workflow integration.",
+      "longDescription": "A cutting-edge community-submitted AI assistant for developers with deep workflow integration.",
+      "websiteUrl": "https://community-tool-1792331580654.ai/",
+      "category": "assistants",
+      "pricingType": "freemium",
+      "pricingDetails": "Freemium / Free tier available",
+      "iconLetter": "CO",
+      "iconBgColor": "#6366f1",
+      "hasFreePlan": true,
+      "freeAccessType": "limited-free",
+      "freeTierSummary": "Community submission verified by Tech Hacks AI editorial team.",
+      "freeTierLimits": "Verified live on official platform docs.",
+      "features": [
+        "Code autocomplete",
+        "Refactoring agent",
+        "Unit test generator"
+      ],
+      "tags": [
+        "assistants",
+        "freemium",
+        "community-verified",
+        "Web",
+        "macOS"
+      ],
+      "requiresAccount": true,
+      "pricingSourceUrl": "https://community-tool-1792331580654.ai/",
+      "pricingVerifiedAt": "2026-10-18",
+      "isVerified": true,
+      "alternativesTo": []
+    },
+    {
+      "id": "community-tool-1792331573539",
+      "slug": "community-tool-1792331573539",
+      "name": "Community Tool 1792331573539",
+      "tagline": "A cutting-edge community-submitted AI assistant for developers with deep workflow integrat...",
+      "description": "A cutting-edge community-submitted AI assistant for developers with deep workflow integration.",
+      "longDescription": "A cutting-edge community-submitted AI assistant for developers with deep workflow integration.",
+      "websiteUrl": "https://community-tool-1792331573539.ai/",
+      "category": "assistants",
+      "pricingType": "freemium",
+      "pricingDetails": "Freemium / Free tier available",
+      "iconLetter": "CO",
+      "iconBgColor": "#6366f1",
+      "hasFreePlan": true,
+      "freeAccessType": "limited-free",
+      "freeTierSummary": "Community submission verified by Tech Hacks AI editorial team.",
+      "freeTierLimits": "Verified live on official platform docs.",
+      "features": [
+        "Code autocomplete",
+        "Refactoring agent",
+        "Unit test generator"
+      ],
+      "tags": [
+        "assistants",
+        "freemium",
+        "community-verified",
+        "Web",
+        "macOS"
+      ],
+      "requiresAccount": true,
+      "pricingSourceUrl": "https://community-tool-1792331573539.ai/",
+      "pricingVerifiedAt": "2026-10-18",
+      "isVerified": true,
+      "alternativesTo": []
+    },
+    {
+      "id": "community-tool-1792329847632",
+      "slug": "community-tool-1792329847632",
+      "name": "Community Tool 1792329847632",
+      "tagline": "A cutting-edge community-submitted AI assistant for developers with deep workflow integrat...",
+      "description": "A cutting-edge community-submitted AI assistant for developers with deep workflow integration.",
+      "longDescription": "A cutting-edge community-submitted AI assistant for developers with deep workflow integration.",
+      "websiteUrl": "https://community-tool-1792329847632.ai/",
+      "category": "assistants",
+      "pricingType": "freemium",
+      "pricingDetails": "Freemium / Free tier available",
+      "iconLetter": "CO",
+      "iconBgColor": "#6366f1",
+      "hasFreePlan": true,
+      "freeAccessType": "limited-free",
+      "freeTierSummary": "Community submission verified by Tech Hacks AI editorial team.",
+      "freeTierLimits": "Verified live on official platform docs.",
+      "features": [
+        "Code autocomplete",
+        "Refactoring agent",
+        "Unit test generator"
+      ],
+      "tags": [
+        "assistants",
+        "freemium",
+        "community-verified",
+        "Web",
+        "macOS"
+      ],
+      "requiresAccount": true,
+      "pricingSourceUrl": "https://community-tool-1792329847632.ai/",
+      "pricingVerifiedAt": "2026-10-18",
+      "isVerified": true,
+      "alternativesTo": []
+    },
+    {
+      "id": "community-tool-1792329818084",
+      "slug": "community-tool-1792329818084",
+      "name": "Community Tool 1792329818084",
+      "tagline": "A cutting-edge community-submitted AI assistant for developers with deep workflow integrat...",
+      "description": "A cutting-edge community-submitted AI assistant for developers with deep workflow integration.",
+      "longDescription": "A cutting-edge community-submitted AI assistant for developers with deep workflow integration.",
+      "websiteUrl": "https://community-tool-1792329818084.ai/",
+      "category": "assistants",
+      "pricingType": "freemium",
+      "pricingDetails": "Freemium / Free tier available",
+      "iconLetter": "CO",
+      "iconBgColor": "#6366f1",
+      "hasFreePlan": true,
+      "freeAccessType": "limited-free",
+      "freeTierSummary": "Community submission verified by Tech Hacks AI editorial team.",
+      "freeTierLimits": "Verified live on official platform docs.",
+      "features": [
+        "Code autocomplete",
+        "Refactoring agent",
+        "Unit test generator"
+      ],
+      "tags": [
+        "assistants",
+        "freemium",
+        "community-verified",
+        "Web",
+        "macOS"
+      ],
+      "requiresAccount": true,
+      "pricingSourceUrl": "https://community-tool-1792329818084.ai/",
+      "pricingVerifiedAt": "2026-10-18",
+      "isVerified": true,
+      "alternativesTo": []
+    },
+    {
+      "id": "community-tool-1792329805870",
+      "slug": "community-tool-1792329805870",
+      "name": "Community Tool 1792329805870",
+      "tagline": "A cutting-edge community-submitted AI assistant for developers with deep workflow integrat...",
+      "description": "A cutting-edge community-submitted AI assistant for developers with deep workflow integration.",
+      "longDescription": "A cutting-edge community-submitted AI assistant for developers with deep workflow integration.",
+      "websiteUrl": "https://community-tool-1792329805870.ai/",
+      "category": "assistants",
+      "pricingType": "freemium",
+      "pricingDetails": "Freemium / Free tier available",
+      "iconLetter": "CO",
+      "iconBgColor": "#6366f1",
+      "hasFreePlan": true,
+      "freeAccessType": "limited-free",
+      "freeTierSummary": "Community submission verified by Tech Hacks AI editorial team.",
+      "freeTierLimits": "Verified live on official platform docs.",
+      "features": [
+        "Code autocomplete",
+        "Refactoring agent",
+        "Unit test generator"
+      ],
+      "tags": [
+        "assistants",
+        "freemium",
+        "community-verified",
+        "Web",
+        "macOS"
+      ],
+      "requiresAccount": true,
+      "pricingSourceUrl": "https://community-tool-1792329805870.ai/",
+      "pricingVerifiedAt": "2026-10-18",
+      "isVerified": true,
+      "alternativesTo": []
+    },
+    {
+      "id": "community-tool-1792329784691",
+      "slug": "community-tool-1792329784691",
+      "name": "Community Tool 1792329784691",
+      "tagline": "A cutting-edge community-submitted AI assistant for developers with deep workflow integrat...",
+      "description": "A cutting-edge community-submitted AI assistant for developers with deep workflow integration.",
+      "longDescription": "A cutting-edge community-submitted AI assistant for developers with deep workflow integration.",
+      "websiteUrl": "https://community-tool-1792329784691.ai/",
+      "category": "assistants",
+      "pricingType": "freemium",
+      "pricingDetails": "Freemium / Free tier available",
+      "iconLetter": "CO",
+      "iconBgColor": "#6366f1",
+      "hasFreePlan": true,
+      "freeAccessType": "limited-free",
+      "freeTierSummary": "Community submission verified by Tech Hacks AI editorial team.",
+      "freeTierLimits": "Verified live on official platform docs.",
+      "features": [
+        "Code autocomplete",
+        "Refactoring agent",
+        "Unit test generator"
+      ],
+      "tags": [
+        "assistants",
+        "freemium",
+        "community-verified",
+        "Web",
+        "macOS"
+      ],
+      "requiresAccount": true,
+      "pricingSourceUrl": "https://community-tool-1792329784691.ai/",
+      "pricingVerifiedAt": "2026-10-18",
+      "isVerified": true,
+      "alternativesTo": []
+    },
+    {
+      "id": "community-tool-1792329694856",
+      "slug": "community-tool-1792329694856",
+      "name": "Community Tool 1792329694856",
+      "tagline": "A cutting-edge community-submitted AI assistant for developers with deep workflow integrat...",
+      "description": "A cutting-edge community-submitted AI assistant for developers with deep workflow integration.",
+      "longDescription": "A cutting-edge community-submitted AI assistant for developers with deep workflow integration.",
+      "websiteUrl": "https://community-tool-1792329694856.ai/",
+      "category": "assistants",
+      "pricingType": "freemium",
+      "pricingDetails": "Freemium / Free tier available",
+      "iconLetter": "CO",
+      "iconBgColor": "#6366f1",
+      "hasFreePlan": true,
+      "freeAccessType": "limited-free",
+      "freeTierSummary": "Community submission verified by Tech Hacks AI editorial team.",
+      "freeTierLimits": "Verified live on official platform docs.",
+      "features": [
+        "Code autocomplete",
+        "Refactoring agent",
+        "Unit test generator"
+      ],
+      "tags": [
+        "assistants",
+        "freemium",
+        "community-verified",
+        "Web",
+        "macOS"
+      ],
+      "requiresAccount": true,
+      "pricingSourceUrl": "https://community-tool-1792329694856.ai/",
+      "pricingVerifiedAt": "2026-10-18",
+      "isVerified": true,
+      "alternativesTo": []
+    },
+    {
+      "id": "community-tool-1792327578803",
+      "slug": "community-tool-1792327578803",
+      "name": "Community Tool 1792327578803",
+      "tagline": "A cutting-edge community-submitted AI assistant for developers with deep workflow integrat...",
+      "description": "A cutting-edge community-submitted AI assistant for developers with deep workflow integration.",
+      "longDescription": "A cutting-edge community-submitted AI assistant for developers with deep workflow integration.",
+      "websiteUrl": "https://community-tool-1792327578803.ai/",
+      "category": "assistants",
+      "pricingType": "freemium",
+      "pricingDetails": "Freemium / Free tier available",
+      "iconLetter": "CO",
+      "iconBgColor": "#6366f1",
+      "hasFreePlan": true,
+      "freeAccessType": "limited-free",
+      "freeTierSummary": "Community submission verified by Tech Hacks AI editorial team.",
+      "freeTierLimits": "Verified live on official platform docs.",
+      "features": [
+        "Code autocomplete",
+        "Refactoring agent",
+        "Unit test generator"
+      ],
+      "tags": [
+        "assistants",
+        "freemium",
+        "community-verified",
+        "Web",
+        "macOS"
+      ],
+      "requiresAccount": true,
+      "pricingSourceUrl": "https://community-tool-1792327578803.ai/",
+      "pricingVerifiedAt": "2026-10-18",
+      "isVerified": true,
+      "alternativesTo": []
+    },
+    {
+      "id": "community-tool-1792327553366",
+      "slug": "community-tool-1792327553366",
+      "name": "Community Tool 1792327553366",
+      "tagline": "A cutting-edge community-submitted AI assistant for developers with deep workflow integrat...",
+      "description": "A cutting-edge community-submitted AI assistant for developers with deep workflow integration.",
+      "longDescription": "A cutting-edge community-submitted AI assistant for developers with deep workflow integration.",
+      "websiteUrl": "https://community-tool-1792327553366.ai/",
+      "category": "assistants",
+      "pricingType": "freemium",
+      "pricingDetails": "Freemium / Free tier available",
+      "iconLetter": "CO",
+      "iconBgColor": "#6366f1",
+      "hasFreePlan": true,
+      "freeAccessType": "limited-free",
+      "freeTierSummary": "Community submission verified by Tech Hacks AI editorial team.",
+      "freeTierLimits": "Verified live on official platform docs.",
+      "features": [
+        "Code autocomplete",
+        "Refactoring agent",
+        "Unit test generator"
+      ],
+      "tags": [
+        "assistants",
+        "freemium",
+        "community-verified",
+        "Web",
+        "macOS"
+      ],
+      "requiresAccount": true,
+      "pricingSourceUrl": "https://community-tool-1792327553366.ai/",
+      "pricingVerifiedAt": "2026-10-18",
+      "isVerified": true,
+      "alternativesTo": []
+    },
+    {
+      "id": "community-tool-1792327501764",
+      "slug": "community-tool-1792327501764",
+      "name": "Community Tool 1792327501764",
+      "tagline": "A cutting-edge community-submitted AI assistant for developers with deep workflow integrat...",
+      "description": "A cutting-edge community-submitted AI assistant for developers with deep workflow integration.",
+      "longDescription": "A cutting-edge community-submitted AI assistant for developers with deep workflow integration.",
+      "websiteUrl": "https://community-tool-1792327501764.ai/",
+      "category": "assistants",
+      "pricingType": "freemium",
+      "pricingDetails": "Freemium / Free tier available",
+      "iconLetter": "CO",
+      "iconBgColor": "#6366f1",
+      "hasFreePlan": true,
+      "freeAccessType": "limited-free",
+      "freeTierSummary": "Community submission verified by Tech Hacks AI editorial team.",
+      "freeTierLimits": "Verified live on official platform docs.",
+      "features": [
+        "Code autocomplete",
+        "Refactoring agent",
+        "Unit test generator"
+      ],
+      "tags": [
+        "assistants",
+        "freemium",
+        "community-verified",
+        "Web",
+        "macOS"
+      ],
+      "requiresAccount": true,
+      "pricingSourceUrl": "https://community-tool-1792327501764.ai/",
+      "pricingVerifiedAt": "2026-10-18",
+      "isVerified": true,
+      "alternativesTo": []
+    },
+    {
+      "id": "community-tool-1792326583367",
+      "slug": "community-tool-1792326583367",
+      "name": "Community Tool 1792326583367",
+      "tagline": "A cutting-edge community-submitted AI assistant for developers with deep workflow integrat...",
+      "description": "A cutting-edge community-submitted AI assistant for developers with deep workflow integration.",
+      "longDescription": "A cutting-edge community-submitted AI assistant for developers with deep workflow integration.",
+      "websiteUrl": "https://community-tool-1792326583367.ai/",
+      "category": "assistants",
+      "pricingType": "freemium",
+      "pricingDetails": "Freemium / Free tier available",
+      "iconLetter": "CO",
+      "iconBgColor": "#6366f1",
+      "hasFreePlan": true,
+      "freeAccessType": "limited-free",
+      "freeTierSummary": "Community submission verified by Tech Hacks AI editorial team.",
+      "freeTierLimits": "Verified live on official platform docs.",
+      "features": [
+        "Code autocomplete",
+        "Refactoring agent",
+        "Unit test generator"
+      ],
+      "tags": [
+        "assistants",
+        "freemium",
+        "community-verified",
+        "Web",
+        "macOS"
+      ],
+      "requiresAccount": true,
+      "pricingSourceUrl": "https://community-tool-1792326583367.ai/",
+      "pricingVerifiedAt": "2026-10-18",
+      "isVerified": true,
+      "alternativesTo": []
+    },
+    {
+      "id": "community-tool-1792325635274",
+      "slug": "community-tool-1792325635274",
+      "name": "Community Tool 1792325635274",
+      "tagline": "A cutting-edge community-submitted AI assistant for developers with deep workflow integrat...",
+      "description": "A cutting-edge community-submitted AI assistant for developers with deep workflow integration.",
+      "longDescription": "A cutting-edge community-submitted AI assistant for developers with deep workflow integration.",
+      "websiteUrl": "https://community-tool-1792325635274.ai/",
+      "category": "assistants",
+      "pricingType": "freemium",
+      "pricingDetails": "Freemium / Free tier available",
+      "iconLetter": "CO",
+      "iconBgColor": "#6366f1",
+      "hasFreePlan": true,
+      "freeAccessType": "limited-free",
+      "freeTierSummary": "Community submission verified by Tech Hacks AI editorial team.",
+      "freeTierLimits": "Verified live on official platform docs.",
+      "features": [
+        "Code autocomplete",
+        "Refactoring agent",
+        "Unit test generator"
+      ],
+      "tags": [
+        "assistants",
+        "freemium",
+        "community-verified",
+        "Web",
+        "macOS"
+      ],
+      "requiresAccount": true,
+      "pricingSourceUrl": "https://community-tool-1792325635274.ai/",
+      "pricingVerifiedAt": "2026-10-18",
+      "isVerified": true,
+      "alternativesTo": []
+    },
+    {
+      "id": "community-tool-1792325514427",
+      "slug": "community-tool-1792325514427",
+      "name": "Community Tool 1792325514427",
+      "tagline": "A cutting-edge community-submitted AI assistant for developers with deep workflow integrat...",
+      "description": "A cutting-edge community-submitted AI assistant for developers with deep workflow integration.",
+      "longDescription": "A cutting-edge community-submitted AI assistant for developers with deep workflow integration.",
+      "websiteUrl": "https://community-tool-1792325514427.ai/",
+      "category": "assistants",
+      "pricingType": "freemium",
+      "pricingDetails": "Freemium / Free tier available",
+      "iconLetter": "CO",
+      "iconBgColor": "#6366f1",
+      "hasFreePlan": true,
+      "freeAccessType": "limited-free",
+      "freeTierSummary": "Community submission verified by Tech Hacks AI editorial team.",
+      "freeTierLimits": "Verified live on official platform docs.",
+      "features": [
+        "Code autocomplete",
+        "Refactoring agent",
+        "Unit test generator"
+      ],
+      "tags": [
+        "assistants",
+        "freemium",
+        "community-verified",
+        "Web",
+        "macOS"
+      ],
+      "requiresAccount": true,
+      "pricingSourceUrl": "https://community-tool-1792325514427.ai/",
+      "pricingVerifiedAt": "2026-10-18",
+      "isVerified": true,
+      "alternativesTo": []
+    },
+    {
+      "id": "community-tool-1792325352894",
+      "slug": "community-tool-1792325352894",
+      "name": "Community Tool 1792325352894",
+      "tagline": "A cutting-edge community-submitted AI assistant for developers with deep workflow integrat...",
+      "description": "A cutting-edge community-submitted AI assistant for developers with deep workflow integration.",
+      "longDescription": "A cutting-edge community-submitted AI assistant for developers with deep workflow integration.",
+      "websiteUrl": "https://community-tool-1792325352894.ai/",
+      "category": "assistants",
+      "pricingType": "freemium",
+      "pricingDetails": "Freemium / Free tier available",
+      "iconLetter": "CO",
+      "iconBgColor": "#6366f1",
+      "hasFreePlan": true,
+      "freeAccessType": "limited-free",
+      "freeTierSummary": "Community submission verified by Tech Hacks AI editorial team.",
+      "freeTierLimits": "Verified live on official platform docs.",
+      "features": [
+        "Code autocomplete",
+        "Refactoring agent",
+        "Unit test generator"
+      ],
+      "tags": [
+        "assistants",
+        "freemium",
+        "community-verified",
+        "Web",
+        "macOS"
+      ],
+      "requiresAccount": true,
+      "pricingSourceUrl": "https://community-tool-1792325352894.ai/",
+      "pricingVerifiedAt": "2026-10-18",
+      "isVerified": true,
+      "alternativesTo": []
+    }
+  ],
+  "guides": [
+    {
+      "id": "building-autonomous-agents-with-community-workflows-1792347400158",
+      "slug": "building-autonomous-agents-with-community-workflows-1792347400158",
+      "title": "Building Autonomous Agents with Community Workflows 1792347400158",
+      "summary": "A comprehensive step-by-step tutorial on building autonomous agents using modern AI models.",
+      "category": "workflow-automation",
+      "readTime": "1 min read",
+      "author": "Jane Contributor",
+      "publishedDate": "2026-10-18",
+      "tags": [
+        "community-tutorial"
+      ],
+      "steps": [
+        {
+          "stepNumber": 1,
+          "title": "Getting Started with Agents",
+          "description": "Step 1: Setup developer environment.\nStep 2: Connect APIs and models.\nStep 3: Run pipeline with safe markdown rendering.\n\nEnjoy the workflow! This tutorial covers all essential architecture points."
+        }
+      ],
+      "relatedToolSlugs": []
+    },
+    {
+      "id": "building-autonomous-agents-with-community-workflows-1792347322565",
+      "slug": "building-autonomous-agents-with-community-workflows-1792347322565",
+      "title": "Building Autonomous Agents with Community Workflows 1792347322565",
+      "summary": "A comprehensive step-by-step tutorial on building autonomous agents using modern AI models.",
+      "category": "workflow-automation",
+      "readTime": "1 min read",
+      "author": "Jane Contributor",
+      "publishedDate": "2026-10-18",
+      "tags": [
+        "community-tutorial"
+      ],
+      "steps": [
+        {
+          "stepNumber": 1,
+          "title": "Getting Started with Agents",
+          "description": "Step 1: Setup developer environment.\nStep 2: Connect APIs and models.\nStep 3: Run pipeline with safe markdown rendering.\n\nEnjoy the workflow! This tutorial covers all essential architecture points."
+        }
+      ],
+      "relatedToolSlugs": []
+    },
+    {
+      "id": "building-autonomous-agents-with-community-workflows-1792347308016",
+      "slug": "building-autonomous-agents-with-community-workflows-1792347308016",
+      "title": "Building Autonomous Agents with Community Workflows 1792347308016",
+      "summary": "A comprehensive step-by-step tutorial on building autonomous agents using modern AI models.",
+      "category": "workflow-automation",
+      "readTime": "1 min read",
+      "author": "Jane Contributor",
+      "publishedDate": "2026-10-18",
+      "tags": [
+        "community-tutorial"
+      ],
+      "steps": [
+        {
+          "stepNumber": 1,
+          "title": "Getting Started with Agents",
+          "description": "Step 1: Setup developer environment.\nStep 2: Connect APIs and models.\nStep 3: Run pipeline with safe markdown rendering.\n\nEnjoy the workflow! This tutorial covers all essential architecture points."
+        }
+      ],
+      "relatedToolSlugs": []
+    },
+    {
+      "id": "building-autonomous-agents-with-community-workflows-1792337121451",
+      "slug": "building-autonomous-agents-with-community-workflows-1792337121451",
+      "title": "Building Autonomous Agents with Community Workflows 1792337121451",
+      "summary": "A comprehensive step-by-step tutorial on building autonomous agents using modern AI models.",
+      "category": "workflow-automation",
+      "readTime": "1 min read",
+      "author": "Jane Contributor",
+      "publishedDate": "2026-10-18",
+      "tags": [
+        "community-tutorial"
+      ],
+      "steps": [
+        {
+          "stepNumber": 1,
+          "title": "Getting Started with Agents",
+          "description": "Step 1: Setup developer environment.\nStep 2: Connect APIs and models.\nStep 3: Run pipeline with safe markdown rendering.\n\nEnjoy the workflow! This tutorial covers all essential architecture points."
+        }
+      ],
+      "relatedToolSlugs": []
+    },
+    {
+      "id": "building-autonomous-agents-with-community-workflows-1792337092024",
+      "slug": "building-autonomous-agents-with-community-workflows-1792337092024",
+      "title": "Building Autonomous Agents with Community Workflows 1792337092024",
+      "summary": "A comprehensive step-by-step tutorial on building autonomous agents using modern AI models.",
+      "category": "workflow-automation",
+      "readTime": "1 min read",
+      "author": "Jane Contributor",
+      "publishedDate": "2026-10-18",
+      "tags": [
+        "community-tutorial"
+      ],
+      "steps": [
+        {
+          "stepNumber": 1,
+          "title": "Getting Started with Agents",
+          "description": "Step 1: Setup developer environment.\nStep 2: Connect APIs and models.\nStep 3: Run pipeline with safe markdown rendering.\n\nEnjoy the workflow! This tutorial covers all essential architecture points."
+        }
+      ],
+      "relatedToolSlugs": []
+    },
+    {
+      "id": "building-autonomous-agents-with-community-workflows-1792337072164",
+      "slug": "building-autonomous-agents-with-community-workflows-1792337072164",
+      "title": "Building Autonomous Agents with Community Workflows 1792337072164",
+      "summary": "A comprehensive step-by-step tutorial on building autonomous agents using modern AI models.",
+      "category": "workflow-automation",
+      "readTime": "1 min read",
+      "author": "Jane Contributor",
+      "publishedDate": "2026-10-18",
+      "tags": [
+        "community-tutorial"
+      ],
+      "steps": [
+        {
+          "stepNumber": 1,
+          "title": "Getting Started with Agents",
+          "description": "Step 1: Setup developer environment.\nStep 2: Connect APIs and models.\nStep 3: Run pipeline with safe markdown rendering.\n\nEnjoy the workflow! This tutorial covers all essential architecture points."
+        }
+      ],
+      "relatedToolSlugs": []
+    },
+    {
+      "id": "building-autonomous-agents-with-community-workflows-1792336994125",
+      "slug": "building-autonomous-agents-with-community-workflows-1792336994125",
+      "title": "Building Autonomous Agents with Community Workflows 1792336994125",
+      "summary": "A comprehensive step-by-step tutorial on building autonomous agents using modern AI models.",
+      "category": "workflow-automation",
+      "readTime": "1 min read",
+      "author": "Jane Contributor",
+      "publishedDate": "2026-10-18",
+      "tags": [
+        "community-tutorial"
+      ],
+      "steps": [
+        {
+          "stepNumber": 1,
+          "title": "Getting Started with Agents",
+          "description": "Step 1: Setup developer environment.\nStep 2: Connect APIs and models.\nStep 3: Run pipeline with safe markdown rendering.\n\nEnjoy the workflow! This tutorial covers all essential architecture points."
+        }
+      ],
+      "relatedToolSlugs": []
+    },
+    {
+      "id": "building-autonomous-agents-with-community-workflows-1792336691603",
+      "slug": "building-autonomous-agents-with-community-workflows-1792336691603",
+      "title": "Building Autonomous Agents with Community Workflows 1792336691603",
+      "summary": "A comprehensive step-by-step tutorial on building autonomous agents using modern AI models.",
+      "category": "workflow-automation",
+      "readTime": "1 min read",
+      "author": "Jane Contributor",
+      "publishedDate": "2026-10-18",
+      "tags": [
+        "community-tutorial"
+      ],
+      "steps": [
+        {
+          "stepNumber": 1,
+          "title": "Getting Started with Agents",
+          "description": "Step 1: Setup developer environment.\nStep 2: Connect APIs and models.\nStep 3: Run pipeline with safe markdown rendering.\n\nEnjoy the workflow! This tutorial covers all essential architecture points."
+        }
+      ],
+      "relatedToolSlugs": []
+    },
+    {
+      "id": "building-autonomous-agents-with-community-workflows-1792333984554",
+      "slug": "building-autonomous-agents-with-community-workflows-1792333984554",
+      "title": "Building Autonomous Agents with Community Workflows 1792333984554",
+      "summary": "A comprehensive step-by-step tutorial on building autonomous agents using modern AI models.",
+      "category": "workflow-automation",
+      "readTime": "1 min read",
+      "author": "Jane Contributor",
+      "publishedDate": "2026-10-18",
+      "tags": [
+        "community-tutorial"
+      ],
+      "steps": [
+        {
+          "stepNumber": 1,
+          "title": "Getting Started with Agents",
+          "description": "Step 1: Setup developer environment.\nStep 2: Connect APIs and models.\nStep 3: Run pipeline with safe markdown rendering.\n\nEnjoy the workflow! This tutorial covers all essential architecture points."
+        }
+      ],
+      "relatedToolSlugs": []
+    },
+    {
+      "id": "building-autonomous-agents-with-community-workflows-1792333966226",
+      "slug": "building-autonomous-agents-with-community-workflows-1792333966226",
+      "title": "Building Autonomous Agents with Community Workflows 1792333966226",
+      "summary": "A comprehensive step-by-step tutorial on building autonomous agents using modern AI models.",
+      "category": "workflow-automation",
+      "readTime": "1 min read",
+      "author": "Jane Contributor",
+      "publishedDate": "2026-10-18",
+      "tags": [
+        "community-tutorial"
+      ],
+      "steps": [
+        {
+          "stepNumber": 1,
+          "title": "Getting Started with Agents",
+          "description": "Step 1: Setup developer environment.\nStep 2: Connect APIs and models.\nStep 3: Run pipeline with safe markdown rendering.\n\nEnjoy the workflow! This tutorial covers all essential architecture points."
+        }
+      ],
+      "relatedToolSlugs": []
+    },
+    {
+      "id": "building-autonomous-agents-with-community-workflows-1792333948014",
+      "slug": "building-autonomous-agents-with-community-workflows-1792333948014",
+      "title": "Building Autonomous Agents with Community Workflows 1792333948014",
+      "summary": "A comprehensive step-by-step tutorial on building autonomous agents using modern AI models.",
+      "category": "workflow-automation",
+      "readTime": "1 min read",
+      "author": "Jane Contributor",
+      "publishedDate": "2026-10-18",
+      "tags": [
+        "community-tutorial"
+      ],
+      "steps": [
+        {
+          "stepNumber": 1,
+          "title": "Getting Started with Agents",
+          "description": "Step 1: Setup developer environment.\nStep 2: Connect APIs and models.\nStep 3: Run pipeline with safe markdown rendering.\n\nEnjoy the workflow! This tutorial covers all essential architecture points."
+        }
+      ],
+      "relatedToolSlugs": []
+    },
+    {
+      "id": "building-autonomous-agents-with-community-workflows-1792333663529",
+      "slug": "building-autonomous-agents-with-community-workflows-1792333663529",
+      "title": "Building Autonomous Agents with Community Workflows 1792333663529",
+      "summary": "A comprehensive step-by-step tutorial on building autonomous agents using modern AI models.",
+      "category": "workflow-automation",
+      "readTime": "1 min read",
+      "author": "Jane Contributor",
+      "publishedDate": "2026-10-18",
+      "tags": [
+        "community-tutorial"
+      ],
+      "steps": [
+        {
+          "stepNumber": 1,
+          "title": "Getting Started with Agents",
+          "description": "Step 1: Setup developer environment.\nStep 2: Connect APIs and models.\nStep 3: Run pipeline with safe markdown rendering.\n\nEnjoy the workflow! This tutorial covers all essential architecture points."
+        }
+      ],
+      "relatedToolSlugs": []
+    },
+    {
+      "id": "building-autonomous-agents-with-community-workflows-1792332371516",
+      "slug": "building-autonomous-agents-with-community-workflows-1792332371516",
+      "title": "Building Autonomous Agents with Community Workflows 1792332371516",
+      "summary": "A comprehensive step-by-step tutorial on building autonomous agents using modern AI models.",
+      "category": "workflow-automation",
+      "readTime": "1 min read",
+      "author": "Jane Contributor",
+      "publishedDate": "2026-10-18",
+      "tags": [
+        "community-tutorial"
+      ],
+      "steps": [
+        {
+          "stepNumber": 1,
+          "title": "Getting Started with Agents",
+          "description": "Step 1: Setup developer environment.\nStep 2: Connect APIs and models.\nStep 3: Run pipeline with safe markdown rendering.\n\nEnjoy the workflow! This tutorial covers all essential architecture points."
+        }
+      ],
+      "relatedToolSlugs": []
+    },
+    {
+      "id": "building-autonomous-agents-with-community-workflows-1792331636568",
+      "slug": "building-autonomous-agents-with-community-workflows-1792331636568",
+      "title": "Building Autonomous Agents with Community Workflows 1792331636568",
+      "summary": "A comprehensive step-by-step tutorial on building autonomous agents using modern AI models.",
+      "category": "workflow-automation",
+      "readTime": "1 min read",
+      "author": "Jane Contributor",
+      "publishedDate": "2026-10-18",
+      "tags": [
+        "community-tutorial"
+      ],
+      "steps": [
+        {
+          "stepNumber": 1,
+          "title": "Getting Started with Agents",
+          "description": "Step 1: Setup developer environment.\nStep 2: Connect APIs and models.\nStep 3: Run pipeline with safe markdown rendering.\n\nEnjoy the workflow! This tutorial covers all essential architecture points."
+        }
+      ],
+      "relatedToolSlugs": []
+    },
+    {
+      "id": "building-autonomous-agents-with-community-workflows-1792331630328",
+      "slug": "building-autonomous-agents-with-community-workflows-1792331630328",
+      "title": "Building Autonomous Agents with Community Workflows 1792331630328",
+      "summary": "A comprehensive step-by-step tutorial on building autonomous agents using modern AI models.",
+      "category": "workflow-automation",
+      "readTime": "1 min read",
+      "author": "Jane Contributor",
+      "publishedDate": "2026-10-18",
+      "tags": [
+        "community-tutorial"
+      ],
+      "steps": [
+        {
+          "stepNumber": 1,
+          "title": "Getting Started with Agents",
+          "description": "Step 1: Setup developer environment.\nStep 2: Connect APIs and models.\nStep 3: Run pipeline with safe markdown rendering.\n\nEnjoy the workflow! This tutorial covers all essential architecture points."
+        }
+      ],
+      "relatedToolSlugs": []
+    },
+    {
+      "id": "building-autonomous-agents-with-community-workflows-1792331580895",
+      "slug": "building-autonomous-agents-with-community-workflows-1792331580895",
+      "title": "Building Autonomous Agents with Community Workflows 1792331580895",
+      "summary": "A comprehensive step-by-step tutorial on building autonomous agents using modern AI models.",
+      "category": "workflow-automation",
+      "readTime": "1 min read",
+      "author": "Jane Contributor",
+      "publishedDate": "2026-10-18",
+      "tags": [
+        "community-tutorial"
+      ],
+      "steps": [
+        {
+          "stepNumber": 1,
+          "title": "Getting Started with Agents",
+          "description": "Step 1: Setup developer environment.\nStep 2: Connect APIs and models.\nStep 3: Run pipeline with safe markdown rendering.\n\nEnjoy the workflow! This tutorial covers all essential architecture points."
+        }
+      ],
+      "relatedToolSlugs": []
+    },
+    {
+      "id": "building-autonomous-agents-with-community-workflows-1792331573779",
+      "slug": "building-autonomous-agents-with-community-workflows-1792331573779",
+      "title": "Building Autonomous Agents with Community Workflows 1792331573779",
+      "summary": "A comprehensive step-by-step tutorial on building autonomous agents using modern AI models.",
+      "category": "workflow-automation",
+      "readTime": "1 min read",
+      "author": "Jane Contributor",
+      "publishedDate": "2026-10-18",
+      "tags": [
+        "community-tutorial"
+      ],
+      "steps": [
+        {
+          "stepNumber": 1,
+          "title": "Getting Started with Agents",
+          "description": "Step 1: Setup developer environment.\nStep 2: Connect APIs and models.\nStep 3: Run pipeline with safe markdown rendering.\n\nEnjoy the workflow! This tutorial covers all essential architecture points."
+        }
+      ],
+      "relatedToolSlugs": []
+    },
+    {
+      "id": "building-autonomous-agents-with-community-workflows-1792329847871",
+      "slug": "building-autonomous-agents-with-community-workflows-1792329847871",
+      "title": "Building Autonomous Agents with Community Workflows 1792329847871",
+      "summary": "A comprehensive step-by-step tutorial on building autonomous agents using modern AI models.",
+      "category": "workflow-automation",
+      "readTime": "1 min read",
+      "author": "Jane Contributor",
+      "publishedDate": "2026-10-18",
+      "tags": [
+        "community-tutorial"
+      ],
+      "steps": [
+        {
+          "stepNumber": 1,
+          "title": "Getting Started with Agents",
+          "description": "Step 1: Setup developer environment.\nStep 2: Connect APIs and models.\nStep 3: Run pipeline with safe markdown rendering.\n\nEnjoy the workflow! This tutorial covers all essential architecture points."
+        }
+      ],
+      "relatedToolSlugs": []
+    },
+    {
+      "id": "building-autonomous-agents-with-community-workflows-1792329818233",
+      "slug": "building-autonomous-agents-with-community-workflows-1792329818233",
+      "title": "Building Autonomous Agents with Community Workflows 1792329818233",
+      "summary": "A comprehensive step-by-step tutorial on building autonomous agents using modern AI models.",
+      "category": "workflow-automation",
+      "readTime": "1 min read",
+      "author": "Jane Contributor",
+      "publishedDate": "2026-10-18",
+      "tags": [
+        "community-tutorial"
+      ],
+      "steps": [
+        {
+          "stepNumber": 1,
+          "title": "Getting Started with Agents",
+          "description": "Step 1: Setup developer environment.\nStep 2: Connect APIs and models.\nStep 3: Run pipeline with safe markdown rendering.\n\nEnjoy the workflow! This tutorial covers all essential architecture points."
+        }
+      ],
+      "relatedToolSlugs": []
+    },
+    {
+      "id": "building-autonomous-agents-with-community-workflows-1792329806034",
+      "slug": "building-autonomous-agents-with-community-workflows-1792329806034",
+      "title": "Building Autonomous Agents with Community Workflows 1792329806034",
+      "summary": "A comprehensive step-by-step tutorial on building autonomous agents using modern AI models.",
+      "category": "workflow-automation",
+      "readTime": "1 min read",
+      "author": "Jane Contributor",
+      "publishedDate": "2026-10-18",
+      "tags": [
+        "community-tutorial"
+      ],
+      "steps": [
+        {
+          "stepNumber": 1,
+          "title": "Getting Started with Agents",
+          "description": "Step 1: Setup developer environment.\nStep 2: Connect APIs and models.\nStep 3: Run pipeline with safe markdown rendering.\n\nEnjoy the workflow! This tutorial covers all essential architecture points."
+        }
+      ],
+      "relatedToolSlugs": []
+    },
+    {
+      "id": "building-autonomous-agents-with-community-workflows-1792329784898",
+      "slug": "building-autonomous-agents-with-community-workflows-1792329784898",
+      "title": "Building Autonomous Agents with Community Workflows 1792329784898",
+      "summary": "A comprehensive step-by-step tutorial on building autonomous agents using modern AI models.",
+      "category": "workflow-automation",
+      "readTime": "1 min read",
+      "author": "Jane Contributor",
+      "publishedDate": "2026-10-18",
+      "tags": [
+        "community-tutorial"
+      ],
+      "steps": [
+        {
+          "stepNumber": 1,
+          "title": "Getting Started with Agents",
+          "description": "Step 1: Setup developer environment.\nStep 2: Connect APIs and models.\nStep 3: Run pipeline with safe markdown rendering.\n\nEnjoy the workflow! This tutorial covers all essential architecture points."
+        }
+      ],
+      "relatedToolSlugs": []
+    },
+    {
+      "id": "building-autonomous-agents-with-community-workflows-1792329695052",
+      "slug": "building-autonomous-agents-with-community-workflows-1792329695052",
+      "title": "Building Autonomous Agents with Community Workflows 1792329695052",
+      "summary": "A comprehensive step-by-step tutorial on building autonomous agents using modern AI models.",
+      "category": "workflow-automation",
+      "readTime": "1 min read",
+      "author": "Jane Contributor",
+      "publishedDate": "2026-10-18",
+      "tags": [
+        "community-tutorial"
+      ],
+      "steps": [
+        {
+          "stepNumber": 1,
+          "title": "Getting Started with Agents",
+          "description": "Step 1: Setup developer environment.\nStep 2: Connect APIs and models.\nStep 3: Run pipeline with safe markdown rendering.\n\nEnjoy the workflow! This tutorial covers all essential architecture points."
+        }
+      ],
+      "relatedToolSlugs": []
+    },
+    {
+      "id": "building-autonomous-agents-with-community-workflows-1792327579047",
+      "slug": "building-autonomous-agents-with-community-workflows-1792327579047",
+      "title": "Building Autonomous Agents with Community Workflows 1792327579047",
+      "summary": "A comprehensive step-by-step tutorial on building autonomous agents using modern AI models.",
+      "category": "workflow-automation",
+      "readTime": "1 min read",
+      "author": "Jane Contributor",
+      "publishedDate": "2026-10-18",
+      "tags": [
+        "community-tutorial"
+      ],
+      "steps": [
+        {
+          "stepNumber": 1,
+          "title": "Getting Started with Agents",
+          "description": "Step 1: Setup developer environment.\nStep 2: Connect APIs and models.\nStep 3: Run pipeline with safe markdown rendering.\n\nEnjoy the workflow! This tutorial covers all essential architecture points."
+        }
+      ],
+      "relatedToolSlugs": []
+    },
+    {
+      "id": "building-autonomous-agents-with-community-workflows-1792327553579",
+      "slug": "building-autonomous-agents-with-community-workflows-1792327553579",
+      "title": "Building Autonomous Agents with Community Workflows 1792327553579",
+      "summary": "A comprehensive step-by-step tutorial on building autonomous agents using modern AI models.",
+      "category": "workflow-automation",
+      "readTime": "1 min read",
+      "author": "Jane Contributor",
+      "publishedDate": "2026-10-18",
+      "tags": [
+        "community-tutorial"
+      ],
+      "steps": [
+        {
+          "stepNumber": 1,
+          "title": "Getting Started with Agents",
+          "description": "Step 1: Setup developer environment.\nStep 2: Connect APIs and models.\nStep 3: Run pipeline with safe markdown rendering.\n\nEnjoy the workflow! This tutorial covers all essential architecture points."
+        }
+      ],
+      "relatedToolSlugs": []
+    },
+    {
+      "id": "building-autonomous-agents-with-community-workflows-1792327501901",
+      "slug": "building-autonomous-agents-with-community-workflows-1792327501901",
+      "title": "Building Autonomous Agents with Community Workflows 1792327501901",
+      "summary": "A comprehensive step-by-step tutorial on building autonomous agents using modern AI models.",
+      "category": "workflow-automation",
+      "readTime": "1 min read",
+      "author": "Jane Contributor",
+      "publishedDate": "2026-10-18",
+      "tags": [
+        "community-tutorial"
+      ],
+      "steps": [
+        {
+          "stepNumber": 1,
+          "title": "Getting Started with Agents",
+          "description": "Step 1: Setup developer environment.\nStep 2: Connect APIs and models.\nStep 3: Run pipeline with safe markdown rendering.\n\nEnjoy the workflow! This tutorial covers all essential architecture points."
+        }
+      ],
+      "relatedToolSlugs": []
+    },
+    {
+      "id": "building-autonomous-agents-with-community-workflows-1792326583563",
+      "slug": "building-autonomous-agents-with-community-workflows-1792326583563",
+      "title": "Building Autonomous Agents with Community Workflows 1792326583563",
+      "summary": "A comprehensive step-by-step tutorial on building autonomous agents using modern AI models.",
+      "category": "workflow-automation",
+      "readTime": "1 min read",
+      "author": "Jane Contributor",
+      "publishedDate": "2026-10-18",
+      "tags": [
+        "community-tutorial"
+      ],
+      "steps": [
+        {
+          "stepNumber": 1,
+          "title": "Getting Started with Agents",
+          "description": "Step 1: Setup developer environment.\nStep 2: Connect APIs and models.\nStep 3: Run pipeline with safe markdown rendering.\n\nEnjoy the workflow! This tutorial covers all essential architecture points."
+        }
+      ],
+      "relatedToolSlugs": []
+    },
+    {
+      "id": "building-autonomous-agents-with-community-workflows-1792325635630",
+      "slug": "building-autonomous-agents-with-community-workflows-1792325635630",
+      "title": "Building Autonomous Agents with Community Workflows 1792325635630",
+      "summary": "A comprehensive step-by-step tutorial on building autonomous agents using modern AI models.",
+      "category": "workflow-automation",
+      "readTime": "1 min read",
+      "author": "Jane Contributor",
+      "publishedDate": "2026-10-18",
+      "tags": [
+        "community-tutorial"
+      ],
+      "steps": [
+        {
+          "stepNumber": 1,
+          "title": "Getting Started with Agents",
+          "description": "Step 1: Setup developer environment.\nStep 2: Connect APIs and models.\nStep 3: Run pipeline with safe markdown rendering.\n\nEnjoy the workflow! This tutorial covers all essential architecture points."
+        }
+      ],
+      "relatedToolSlugs": []
+    },
+    {
+      "id": "building-autonomous-agents-with-community-workflows-1792325514573",
+      "slug": "building-autonomous-agents-with-community-workflows-1792325514573",
+      "title": "Building Autonomous Agents with Community Workflows 1792325514573",
+      "summary": "A comprehensive step-by-step tutorial on building autonomous agents using modern AI models.",
+      "category": "workflow-automation",
+      "readTime": "1 min read",
+      "author": "Jane Contributor",
+      "publishedDate": "2026-10-18",
+      "tags": [
+        "community-tutorial"
+      ],
+      "steps": [
+        {
+          "stepNumber": 1,
+          "title": "Getting Started with Agents",
+          "description": "Step 1: Setup developer environment.\nStep 2: Connect APIs and models.\nStep 3: Run pipeline with safe markdown rendering.\n\nEnjoy the workflow! This tutorial covers all essential architecture points."
+        }
+      ],
+      "relatedToolSlugs": []
+    },
+    {
+      "id": "building-autonomous-agents-with-community-workflows-1792325353080",
+      "slug": "building-autonomous-agents-with-community-workflows-1792325353080",
+      "title": "Building Autonomous Agents with Community Workflows 1792325353080",
+      "summary": "A comprehensive step-by-step tutorial on building autonomous agents using modern AI models.",
+      "category": "workflow-automation",
+      "readTime": "1 min read",
+      "author": "Jane Contributor",
+      "publishedDate": "2026-10-18",
+      "tags": [
+        "community-tutorial"
+      ],
+      "steps": [
+        {
+          "stepNumber": 1,
+          "title": "Getting Started with Agents",
+          "description": "Step 1: Setup developer environment.\nStep 2: Connect APIs and models.\nStep 3: Run pipeline with safe markdown rendering.\n\nEnjoy the workflow! This tutorial covers all essential architecture points."
+        }
+      ],
+      "relatedToolSlugs": []
+    }
+  ],
+  "lastUpdated": "2026-10-18T11:53:28.528Z"
+}

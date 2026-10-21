@@ -2,6 +2,34 @@
 
 Audit date: 2026-10-21
 
+## Phase 3 verification addendum (2026-10-22)
+
+The four Adobe registry records were inspected against their actual local SVG
+paths and source metadata. The generic Adobe umbrella logo was mislabeled as an
+official asset even though its recorded source was the Simple Icons CDN; that
+provenance is now labeled `simple-icons`. Photoshop, After Effects, and
+Premiere Pro each retain their own matching Simple Icons brand mark and are not
+mapped to the umbrella logo. These symbols are not Adobe-published product app
+tiles. No Illustrator or Express identity exists in the active catalogue or
+logo registry, so no unsupported identity was added. The monochrome SVGs are
+displayed on a small white neutral tile to remain legible in dark theme without
+recoloring the source artwork.
+
+| Brand | Intended identity | Asset | Source | Container | Status |
+| --- | --- | --- | --- | --- | --- |
+| Adobe | Corporate umbrella mark | `/logos/adobe.svg` | [Simple Icons Adobe mark](https://github.com/simple-icons/simple-icons/blob/develop/icons/adobe.svg) | White tile, source color retained | Source recorded; reviewed as umbrella mark |
+| Adobe Photoshop | Photoshop brand symbol | `/logos/adobephotoshop.svg` | [Simple Icons Photoshop mark](https://github.com/simple-icons/simple-icons/blob/develop/icons/adobephotoshop.svg) | White tile, monochrome mark retained | Source recorded; not Adobe app tile |
+| Adobe After Effects | After Effects brand symbol | `/logos/adobeaftereffects.svg` | [Simple Icons After Effects mark](https://github.com/simple-icons/simple-icons/blob/develop/icons/adobeaftereffects.svg) | White tile, monochrome mark retained | Source recorded; not Adobe app tile |
+| Adobe Premiere Pro | Premiere Pro brand symbol | `/logos/adobepremierepro.svg` | [Simple Icons Premiere Pro mark](https://github.com/simple-icons/simple-icons/blob/develop/icons/adobepremierepro.svg) | White tile, monochrome mark retained | Source recorded; not Adobe app tile |
+| Adobe Illustrator / Express | Not present in active catalogue | — | — | Neutral monogram if added before verification | Unresolved; no mapping added |
+
+Adobe's [branding guidelines](https://developer.adobe.com/developer-distribution/creative-cloud/docs/guides/branding_guidelines/)
+and [logo permissions](https://www.adobe.com/in/legal/permissions/icons-web-logos.html)
+were reviewed. This audit does not imply Adobe approval, partnership, or
+authorization to use official product application icons. `BrandLogo` now marks
+an asset as `source-recorded`, rather than claiming that a local image is
+verified solely because it exists.
+
 This report records the logo mappings used by the active catalogue. The
 machine-readable source of truth remains `public/logo-manifest.json`; the
 runtime resolver is `src/data/brandLogos.ts`. Every entry below was checked for

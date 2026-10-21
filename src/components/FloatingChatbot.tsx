@@ -52,6 +52,9 @@ export const WELCOME_QUESTIONS = [
 
 export const FloatingChatbot: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [showWelcomeBubble, setShowWelcomeBubble] = useState(() => {
+    try { return sessionStorage.getItem('techhacks-chat-invite-dismissed') !== '1'; } catch { return true; }
+  });
   const [input, setInput] = useState('');
   const [messages, setMessages] = useState<ChatMessage[]>([INITIAL_MESSAGE]);
   const [isLoading, setIsLoading] = useState(false);
@@ -212,10 +215,7 @@ export const FloatingChatbot: React.FC = () => {
   };
 
   const handleClearHistory = () => {
-    setMessages([
-      INITIAL_MESSAGE,
-      ...(proactiveMessageRef.current ? [proactiveMessageRef.current] : []),
-    ]);
+    setMessages([INITIAL_MESSAGE]);
     setErrorMessage(null);
     setServiceNotice(null);
     setLastQuery(null);
@@ -298,6 +298,17 @@ export const FloatingChatbot: React.FC = () => {
     <>
       {!isOpen && (
         <div className="chat-launcher-position">
+          {showWelcomeBubble && (
+            <div className="chat-welcome-bubble" data-testid="chat-welcome-bubble">
+              <button type="button" className="chat-welcome-bubble__open" onClick={() => setIsOpen(true)}>
+                <span>Need help finding a tool?</span><span className="chat-welcome-bubble__indicator" aria-hidden="true" />
+              </button>
+              <button type="button" className="chat-welcome-bubble__dismiss" aria-label="Dismiss assistant invitation" onClick={() => {
+                setShowWelcomeBubble(false);
+                try { sessionStorage.setItem('techhacks-chat-invite-dismissed', '1'); } catch {}
+              }}><X size={13} aria-hidden="true" /></button>
+            </div>
+          )}
           <button
             type="button"
             ref={launcherRef}
@@ -398,10 +409,13 @@ export const FloatingChatbot: React.FC = () => {
                   {msg.groundedTools && msg.groundedTools.length > 0 && (
                     <div className="mt-3 pt-2.5 border-t border-border/60 space-y-1.5">
                       <span className="text-[10px] font-semibold text-muted-foreground uppercase tracking-wider block">
-                        Verified Catalog Matches:
+                        Published Catalog Matches:
                       </span>
                       <div className="space-y-1.5">
                         {msg.groundedTools.map((t, idx) => (
+                          (() => {
+                            const toolRoute = t.type === 'open-source' ? `/tools/${t.slug}` : t.type === 'community' ? `/community-tools/${t.slug}` : `/ai-tools/${t.slug}`;
+                            return (
                           <div
                             key={idx}
                             className="p-2.5 rounded-md bg-card border border-border/70 flex items-center justify-between gap-2 text-xs"
@@ -410,7 +424,7 @@ export const FloatingChatbot: React.FC = () => {
                               <BrandLogo slug={t.slug} name={t.name} size="xs" />
                               <div className="min-w-0">
                                 <Link
-                                  to={t.type === 'open-source' ? `/tools/${t.slug}` : `/ai-tools/${t.slug}`}
+                                  to={toolRoute}
                                   className="font-semibold text-foreground hover:text-primary transition-colors text-xs truncate block"
                                 >
                                   {t.name}
@@ -421,12 +435,14 @@ export const FloatingChatbot: React.FC = () => {
                               </div>
                             </div>
                             <Link
-                              to={t.type === 'open-source' ? `/tools/${t.slug}` : `/ai-tools/${t.slug}`}
+                              to={toolRoute}
                               className="px-2.5 py-1 rounded-md bg-primary/10 text-primary text-[10px] font-semibold hover:bg-primary/20 shrink-0 transition-colors border border-primary/20"
                             >
                               Explore
                             </Link>
                           </div>
+                            );
+                          })()
                         ))}
                       </div>
                     </div>

@@ -248,9 +248,10 @@ describe('Phase 27: Durable Data Storage & Production Deployment Readiness', () 
         });
         if (output.includes('INSERT INTO public.techhacks_published_additions')) break;
       }
-      assert.ok(output.includes('INSERT INTO public.techhacks_submissions'));
+      assert.ok(output.includes('Found 0 local submissions.'));
+      assert.ok(!output.includes('INSERT INTO public.techhacks_submissions'), 'Empty production data must not create fake migration rows');
       assert.ok(output.includes('INSERT INTO public.techhacks_published_additions'));
-      assert.ok(output.includes('ON CONFLICT (id) DO NOTHING'));
+      assert.ok(output.includes('ON CONFLICT (key)'));
     });
   });
 
