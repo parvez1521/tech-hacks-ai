@@ -51,7 +51,7 @@ export const DownloadButton: React.FC<{ blob: Blob | null; filename: string; lab
     link.href = url;
     link.download = filename;
     link.click();
-    window.setTimeout(() => URL.revokeObjectURL(url), 0);
+    window.setTimeout(() => URL.revokeObjectURL(url), 1000);
   };
 
   return (
@@ -109,5 +109,5 @@ export const downloadText = (text: string, filename: string, type = 'text/plain'
   link.href = url;
   link.download = filename;
   link.click();
-  window.setTimeout(() => URL.revokeObjectURL(url), 0);
+  window.setTimeout(() => URL.revokeObjectURL(url), 1000);
 };

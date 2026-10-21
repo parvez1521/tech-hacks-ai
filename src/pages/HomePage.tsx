@@ -10,6 +10,7 @@ import { PromptCard } from '../components/PromptCard';
 import { Pagination } from '../components/Pagination';
 import { OfferCard } from '../components/OfferCard';
 import { BrandLogo } from '../components/BrandLogo';
+import { AnimatedCount } from '../components/AnimatedCount';
 import { DailyDiscoveriesSection } from '../components/DailyDiscoveriesSection';
 import { HeroSignalVisual } from '../components/HeroSignalVisual';
 import { LazyMotion, useReducedMotion } from 'motion/react';
@@ -262,23 +263,19 @@ export const HomePage: React.FC = () => {
           </div>
           <div className="catalog-trust-strip__metrics">
             <div>
-              <strong>{catalogStats.catalogIdentities}</strong>
+              <AnimatedCount value={catalogStats.catalogIdentities} />
               <span>catalog identities</span>
             </div>
             <div>
-              <strong>{catalogStats.openSourceTools}</strong>
+              <AnimatedCount value={catalogStats.openSourceTools} />
               <span>open-source projects</span>
             </div>
             <div>
-              <strong>{catalogStats.aiPlatforms}</strong>
+              <AnimatedCount value={catalogStats.aiPlatforms} />
               <span>AI platforms</span>
             </div>
             <div>
-              <strong>{catalogStats.communityTools}</strong>
-              <span>community tools</span>
-            </div>
-            <div>
-              <strong>{catalogStats.browserUtilities}</strong>
+              <AnimatedCount value={catalogStats.browserUtilities} />
               <span>local utilities</span>
             </div>
           </div>

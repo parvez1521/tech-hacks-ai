@@ -3,7 +3,8 @@
 The submission API keeps new records pending moderation. It must use durable
 storage in a production/serverless deployment; bundled JSON and `/tmp` are not
 production persistence. When storage is unavailable, public submissions return
-HTTP 503 and published community listings are empty.
+HTTP 503. Approved submissions remain in editorial review; there is no public
+Community Tools directory in the current product.
 
 ## Supabase (PostgreSQL)
 
@@ -15,8 +16,8 @@ HTTP 503 and published community listings are empty.
    The schema must include `techhacks_submissions` and
    `techhacks_published_additions`.
 3. Deploy, submit a test record, verify it appears in the authenticated
-   moderation queue as `pending`, approve it through moderation, and confirm it
-   appears on `/community-tools` after refresh and a new server request.
+   moderation queue as `pending`, and confirm approval does not expose a
+   community-classified record in the public AI directory.
 
 The supported Upstash alternative requires server-side
 `UPSTASH_REDIS_REST_URL` and `UPSTASH_REDIS_REST_TOKEN`. Keep these credentials

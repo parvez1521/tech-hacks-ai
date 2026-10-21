@@ -2,7 +2,6 @@ import { aiToolsData } from '../data/aiToolsData.ts';
 import { toolsData } from '../data/seedData.ts';
 import { getActiveOffers } from '../data/offersData.ts';
 import { proprietaryTools } from '../data/alternatives.ts';
-import { getAllCommunityTools } from './aiCatalogService.ts';
 import type { AiTool, Tool } from '../types/index.ts';
 
 export interface ChatMessage {
@@ -11,7 +10,7 @@ export interface ChatMessage {
   text: string;
   timestamp: number;
   suggestions?: string[];
-  groundedTools?: { name: string; slug: string; type: 'ai' | 'open-source' | 'community'; pricingSummary: string; websiteUrl: string }[];
+  groundedTools?: { name: string; slug: string; type: 'ai' | 'open-source'; pricingSummary: string; websiteUrl: string }[];
 }
 
 const normalize = (value: string) => value.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^\p{L}\p{N}\s-]/gu, ' ').replace(/\s+/g, ' ').trim();
@@ -21,10 +20,10 @@ const isHindi = (q: string) => /\b(kya|kaise|chahiye|batao|koi|hai|mujhe|ke liye
 export function generateGroundedResponse(userQuery: string): ChatMessage {
   const q = normalize(userQuery);
   const now = Date.now();
-  const message = (text: string, groundedTools: ChatMessage['groundedTools'] = [], suggestions = ['Find free AI tools', 'Show community tools', 'Browse current offers']): ChatMessage => ({
+  const message = (text: string, groundedTools: ChatMessage['groundedTools'] = [], suggestions = ['Find free AI tools', 'Find open-source tools', 'Browse current offers']): ChatMessage => ({
     id: `catalog-${now}`, sender: 'assistant', timestamp: now, text, groundedTools, suggestions,
   });
-  if (!q) return message('Please enter a question about tools, community submissions, or offers.');
+  if (!q) return message('Please enter a question about AI tools, open-source software, or current offers.');
 
   if (/\b(compare|versus|\bvs\b)\b/.test(q) && /\b(two|tools|them)\b/.test(q)) {
     return message('Choose two catalogue entries in the [side-by-side comparison tool](/compare). I can also find candidates by task or name before you compare them.', [], ['Find coding tools', 'Find writing tools']);
@@ -43,11 +42,6 @@ export function generateGroundedResponse(userQuery: string): ChatMessage {
     const lines = matched.map((offer) => `• [${offer.title}](/offers/${offer.slug}) — ${offer.benefitSummary} (${offer.offerType === 'free-subscription' ? 'free plan' : offer.offerType.replaceAll('-', ' ')}). Eligibility: ${offer.eligibility}`);
     const couponNote = /coupon|promo code|voucher/.test(q) ? '\n\nNo fake codes: I only show a coupon code when it is explicitly recorded in an offer’s details.' : '';
     return message(`Published offers in the catalogue:\n\n${lines.join('\n')}\n\nBrowse the full [offers directory](/offers). These are catalogue records, not live-checked terms. Open the provider terms on each offer page before claiming.${couponNote}`, [], ['Show student offers', 'Find offers in India', 'Browse all offers']);
-  }
-  if (/\bcommunity\b|\bsubmitted\b/.test(q)) {
-    const community = getAllCommunityTools().filter((tool) => normalize(`${tool.name} ${tool.tagline} ${tool.description} ${tool.tags.join(' ')}`).split(' ').some((word) => word.length > 3 && q.includes(word))).slice(0, 5);
-    if (!community.length) return message('There are no published community tools in the catalogue right now. Submissions require editorial review before they appear.', [], ['Submit a community tool', 'Find AI tools']);
-    return message('Published community catalogue matches:', community.map((t) => ({ name: t.name, slug: t.slug, type: 'community', pricingSummary: t.pricingType, websiteUrl: t.websiteUrl })), ['Browse community tools']);
   }
 
   const alternativeTarget = proprietaryTools.find((target) => q.includes(normalize(target.name)) || q.includes(normalize(target.slug)));

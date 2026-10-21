@@ -302,7 +302,7 @@ describe('Phase 22: Community Contributions (Submit a Tool & Submit a Guide)', (
       assert.strictEqual(approvalRes.submission.status, 'approved');
     });
 
-    test('moderator publishing to catalog makes item live immediately', () => {
+    test('moderated community records stay out of the public AI catalogue', () => {
       const pubRes = publishSubmissionToCatalog(testSubId, ADMIN_TOKEN);
       assert.strictEqual(pubRes.success, true);
       assert.ok(pubRes.publishedSlug);
@@ -317,10 +317,9 @@ describe('Phase 22: Community Contributions (Submit a Tool & Submit a Guide)', (
       // Register dynamically into in-memory catalog
       registerPublishedTool(publishedTool);
 
-      // Verify dynamic catalog query retrieves it
+      // Editorial community records are no longer published in public AI listings or details.
       const catalogQuery = getAiToolBySlug(pubRes.publishedSlug);
-      assert.ok(catalogQuery, 'Catalog query by slug must find dynamically registered tool');
-      assert.strictEqual(catalogQuery.name, testToolName);
+      assert.equal(catalogQuery, undefined, 'Community records must not appear in public AI detail lookup');
 
       // Community submissions are live in their own directory, not the AI filter.
       const filterRes = filterAndSortAiTools({

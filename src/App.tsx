@@ -31,7 +31,6 @@ import { AlternativesPage } from './pages/AlternativesPage';
 import { AlternativeDetailPage } from './pages/AlternativeDetailPage';
 import { CollectionDetailPage } from './pages/CollectionDetailPage';
 import { AiToolsPage } from './pages/AiToolsPage';
-import { CommunityToolsPage } from './pages/CommunityToolsPage';
 import { AiToolDetailPage } from './pages/AiToolDetailPage';
 import { FreeAiSitesPage } from './pages/FreeAiSitesPage';
 import { GuidesPage } from './pages/GuidesPage';
@@ -94,19 +93,11 @@ export function getRouteTitle(route: string, params: Record<string, string> = {}
     }
     case 'ai-tools':
       return formatPageTitle('AI Tools & Generative Platforms Directory');
-    case 'community-tools':
-      return formatPageTitle('Community Tools Directory');
     case 'ai-tool-detail': {
       const aiTool = getAiToolBySlug(params.slug);
       return aiTool
         ? formatPageTitle(`${aiTool.name} (${aiTool.pricingType}) — AI Tool Review & Features`)
          : formatPageTitle('AI Tool Not Found');
-    }
-    case 'community-tool-detail': {
-      const communityTool = getAiToolBySlug(params.slug);
-      return communityTool
-        ? formatPageTitle(`${communityTool.name} — Community Tool Review`)
-        : formatPageTitle('Community Tool Not Found');
     }
     case 'free-ai-sites':
       return formatPageTitle('Free AI Sites & Zero-Cost Generative Tools');
@@ -210,19 +201,11 @@ export function getRouteDescription(route: string, params: Record<string, string
     }
     case 'ai-tools':
       return 'Comprehensive directory of top generative AI platforms, foundation models, code editors, and video generation engines.';
-    case 'community-tools':
-      return 'Browse community-submitted tools published after editorial review. Community Tools are kept separate from the curated AI and open-source directories.';
     case 'ai-tool-detail': {
       const aiTool = getAiToolBySlug(params.slug);
       return aiTool
         ? `${aiTool.name} (${aiTool.pricingType}): ${aiTool.description}`
          : 'Detailed pricing provenance, model capabilities, and verified benchmarks.';
-    }
-    case 'community-tool-detail': {
-      const communityTool = getAiToolBySlug(params.slug);
-      return communityTool
-        ? `${communityTool.name}: ${communityTool.description}`
-        : 'Detailed community tool review.';
     }
     case 'free-ai-sites':
       return 'Curated directory of 100% free AI sites, recurring free plans, zero-cost accounts, and self-hostable open-source models.';
@@ -313,10 +296,17 @@ const AppRoutes: React.FC = () => {
     // Update canonical URL
     const canonicalLink = document.querySelector('link[rel="canonical"]');
     if (canonicalLink && typeof window !== 'undefined') {
-      const canonicalPath = window.location.pathname === '/community' ? '/community-tools' : window.location.pathname;
+      const canonicalPath = route === 'community-redirect' ? '/ai-tools' : window.location.pathname;
       canonicalLink.setAttribute('href', `${siteConfig.url}${canonicalPath}`);
     }
   }, [route, params, currentPath]);
+
+  useEffect(() => {
+    if (route === 'community-redirect') {
+      window.history.replaceState({}, '', '/ai-tools');
+      window.dispatchEvent(new PopStateEvent('popstate'));
+    }
+  }, [route]);
 
   const renderRoute = () => {
     switch (route) {
@@ -338,12 +328,10 @@ const AppRoutes: React.FC = () => {
         return <CollectionDetailPage />;
       case 'ai-tools':
         return <AiToolsPage />;
-      case 'community-tools':
-        return <CommunityToolsPage />;
       case 'ai-tool-detail':
         return <AiToolDetailPage />;
-      case 'community-tool-detail':
-        return <AiToolDetailPage />;
+      case 'community-redirect':
+        return <AiToolsPage />;
       case 'free-ai-sites':
         return <FreeAiSitesPage />;
       case 'guides':

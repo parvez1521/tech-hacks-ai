@@ -1,4 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react';
+import { parseYoutubeUrl } from '../../services/mediaWorkflowService';
 import { FilePicker, UtilityMessage, CopyButton, formatBytes, utilityButtonClass, utilityInputClass, utilityQuietButtonClass } from './UtilityShared';
 
 export const TimestampConverterTool: React.FC = () => {
@@ -63,16 +64,14 @@ export const FileMetadataTool: React.FC = () => {
 };
 
 export const YoutubeMetadataTool: React.FC = () => {
-  const [input, setInput] = useState('https://www.youtube.com/watch?v=dQw4w9WgXcQ');
+  const [input, setInput] = useState('');
   const [videoId, setVideoId] = useState('');
   const [error, setError] = useState('');
   const parse = () => {
     try {
-      const url = new URL(input);
-      const id = url.hostname.includes('youtu.be') ? url.pathname.slice(1) : url.searchParams.get('v');
-      if (!id || !/^[\w-]{11}$/.test(id)) throw new Error('Enter a standard public YouTube URL with an 11-character video ID.');
-      setVideoId(id); setError('');
+      const { videoId } = parseYoutubeUrl(input);
+      setVideoId(videoId); setError('');
     } catch (err) { setVideoId(''); setError(err instanceof Error ? err.message : 'Invalid YouTube URL.'); }
   };
-  return <div className="space-y-4"><UtilityMessage tone="info">Authorized metadata helper only. It does not download videos, bypass access controls, or call an undocumented downloader service.</UtilityMessage><div className="flex gap-2"><input value={input} onChange={(e) => setInput(e.target.value)} className={utilityInputClass} placeholder="https://youtube.com/watch?v=..." /><button type="button" className={utilityButtonClass} onClick={parse}>Inspect</button></div>{error && <UtilityMessage>{error}</UtilityMessage>}{videoId && <div className="space-y-3 rounded-xl border border-border bg-card/50 p-4"><div className="grid gap-3 sm:grid-cols-2"><div><span className="block text-xs text-muted-foreground">Video ID</span><code className="text-sm text-foreground">{videoId}</code></div><div><span className="block text-xs text-muted-foreground">Official watch URL</span><a href={`https://www.youtube.com/watch?v=${videoId}`} target="_blank" rel="noreferrer" className="break-all text-xs text-primary hover:underline">youtube.com/watch?v={videoId}</a></div></div><p className="text-xs text-muted-foreground">Use YouTube's official download or creator tools when you own the content or have permission.</p></div>}</div>;
+  return <div className="space-y-4"><UtilityMessage tone="info">URL recognition only; no video metadata is fetched or downloaded. For your own uploads, use YouTube Studio or Google Takeout.</UtilityMessage><div className="flex flex-col gap-2 sm:flex-row"><input aria-label="YouTube video URL" value={input} onChange={(e) => setInput(e.target.value)} className={utilityInputClass} placeholder="https://youtube.com/watch?v=..." /><button type="button" className={utilityButtonClass} onClick={parse}>Validate URL</button></div>{error && <UtilityMessage>{error}</UtilityMessage>}{videoId && <div className="space-y-3 rounded-xl border border-border bg-card/50 p-4"><div className="grid gap-3 sm:grid-cols-2"><div><span className="block text-xs text-muted-foreground">Video ID</span><code className="text-sm text-foreground">{videoId}</code></div><div><span className="block text-xs text-muted-foreground">Official watch URL</span><a href={`https://www.youtube.com/watch?v=${videoId}`} target="_blank" rel="noreferrer" className="break-all text-xs text-primary hover:underline">youtube.com/watch?v={videoId}</a></div></div><p className="text-xs text-muted-foreground">A valid URL only identifies a video; it does not confirm ownership or grant download access.</p><div className="flex flex-wrap gap-2"><a href="https://studio.youtube.com/" target="_blank" rel="noreferrer" className={utilityQuietButtonClass}>Open YouTube Studio</a><a href="https://takeout.google.com/" target="_blank" rel="noreferrer" className={utilityQuietButtonClass}>Open Google Takeout</a></div></div>}</div>;
 };

@@ -7,11 +7,10 @@ import { BrandLogo } from './BrandLogo';
 
 interface AiToolCardProps {
   tool: AiTool;
-  routePrefix?: '/ai-tools' | '/community-tools';
 }
 
-export const AiToolCard: React.FC<AiToolCardProps> = ({ tool, routePrefix = '/ai-tools' }) => {
-  const detailUrl = `${routePrefix}/${tool.slug}`;
+export const AiToolCard: React.FC<AiToolCardProps> = ({ tool }) => {
+  const detailUrl = `/ai-tools/${tool.slug}`;
   const bookmarkItem: BookmarkItem = {
     id: `ai-${tool.id}`,
     type: 'ai-tool',

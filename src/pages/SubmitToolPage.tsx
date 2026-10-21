@@ -404,11 +404,11 @@ export const SubmitToolPage: React.FC = () => {
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
               <div>
-                <label htmlFor="tool-section" className="block text-xs font-semibold text-foreground mb-1.5">Directory Section <span className="text-rose-400">*</span></label>
+                <label htmlFor="tool-section" className="block text-xs font-semibold text-foreground mb-1.5">Editorial review <span className="text-rose-400">*</span></label>
                 <select id="tool-section" required value={formData.section || 'community'} onChange={(e) => { handleInputChange('section', e.target.value); handleInputChange('category', ''); }} className="w-full px-3.5 py-2.5 rounded-lg bg-card border border-border text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-primary/50">
-                  <option value="community">Community Tools</option><option value="ai">AI Tools</option>
+                  <option value="community">General editorial queue</option><option value="ai">AI Tools</option>
                 </select>
-                <p className="text-[11px] text-muted-foreground mt-1">Choose where the reviewed record should appear. Community is the default.</p>
+                <p className="text-[11px] text-muted-foreground mt-1">Tool submissions are reviewed before any editorial directory placement.</p>
               </div>
               {/* Category */}
               <div>

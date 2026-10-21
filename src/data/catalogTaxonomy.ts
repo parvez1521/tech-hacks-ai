@@ -2,7 +2,6 @@ import type { FreeToolUtility, UtilityCategory } from '../types/index.ts';
 
 export const catalogSections = [
   { id: 'ai', name: 'AI Tools', description: 'AI-powered products, models, platforms, and services.' },
-  { id: 'community', name: 'Community Tools', description: 'Editorially reviewed tools submitted by the Tech Hacks AI community.' },
   { id: 'open-source', name: 'Open Source', description: 'Self-hostable projects and open-source software alternatives.' },
   { id: 'utility', name: 'Utility Tools', description: 'Practical browser tools that help users complete focused tasks.' },
   { id: 'alternative', name: 'Alternatives', description: 'Proprietary products and their open-source replacements.' },

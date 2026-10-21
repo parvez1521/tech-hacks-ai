@@ -6,6 +6,7 @@ import { freeToolsData } from '../src/data/freeToolsData.ts';
 import { getCatalogStats, getFreeToolBySlug } from '../src/services/aiCatalogService.ts';
 import { createQrMatrix } from '../src/lib/utilities/qr.ts';
 import { createLatestRequestGate } from '../src/lib/utilities/requestGate.ts';
+import { getAnimatedCountValue, formatCount } from '../src/lib/counter.ts';
 
 describe('Built-in browser utility registry', () => {
   test('contains at least 20 new distinct utilities with unique IDs and slugs', () => {
@@ -54,9 +55,13 @@ describe('Built-in browser utility registry', () => {
 
   test('Catalog stats are de-duplicated and include the expanded utility count', () => {
     const stats = getCatalogStats();
-    assert.ok(stats.catalogIdentities > 0);
-    assert.ok(stats.openSourceTools > 0);
-    assert.ok(stats.aiPlatforms > 0);
-    assert.ok(stats.browserUtilities >= 30);
+    assert.deepEqual(stats, { catalogIdentities: 104, openSourceTools: 27, aiPlatforms: 65, alternativeTargets: 14, browserUtilities: 38 });
+  });
+
+  test('homepage counter resolves to truthful final values and skips animation for reduced motion', () => {
+    assert.equal(getAnimatedCountValue(104, 1), 104);
+    assert.equal(getAnimatedCountValue(104, 0.5), 91);
+    assert.equal(getAnimatedCountValue(104, 0, true), 104);
+    assert.equal(formatCount(1042), '1,042');
   });
 });

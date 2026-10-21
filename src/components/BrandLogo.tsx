@@ -79,7 +79,7 @@ export const BrandLogo: React.FC<BrandLogoProps> = ({
       case 'md':
         return {
           container: 'w-9 h-9',
-          img: 'w-5.5 h-5.5',
+          img: 'w-6 h-6',
           text: 'text-xs',
         };
       case 'lg':

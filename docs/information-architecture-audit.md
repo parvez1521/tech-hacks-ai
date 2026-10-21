@@ -2,12 +2,11 @@
 
 Audit date: 2026-10-21
 
-## Current source map
+## Source map at the time of this audit
 
 | Section | Source of truth | Public route | Classification rule |
 | --- | --- | --- | --- |
 | AI Tools | `src/data/aiToolsData.ts` plus approved non-community overlays | `/ai-tools` | `AiTool` records that are not marked community and use an AI category slug |
-| Community Tools | approved records from `data/published-additions.json` / `/api/submissions?action=published` | `/community-tools` | Published tool records with `section: community` or the legacy `community-verified` marker |
 | Open Source | `src/data/seedData.ts` | `/tools` | `Tool` records with repository, license, self-hosting, and alternative metadata |
 | Utility Tools | `src/data/freeToolsData.ts`, normalized by `src/data/catalogTaxonomy.ts` | `/free-tools` | `FreeToolUtility` records with one canonical `UtilityCategory` |
 | Alternatives | `src/data/alternatives.ts` | `/alternatives` | Proprietary target records and their open-source relationships |
@@ -53,6 +52,16 @@ These are counts from the checked-in data at audit time:
 - 27 open-source records in `seedData.ts`.
 - 65 curated AI records in `aiToolsData.ts`.
 - 29 published community tool records in `data/published-additions.json`.
+
+## Phase 4 update (2026-10-22)
+
+The public Community Tools directory, navigation, homepage cards/counts, search
+group, and public detail routes have been removed. Legacy `/community-tools/*`
+and `/community` URLs redirect to `/ai-tools`; submissions and the protected
+moderation queue remain available, but records classified as community are not
+added to public AI listings. Earlier statements in this document about a public
+directory and its counts describe the previous implementation and are no longer
+current.
 - 38 browser/service utility records in `freeToolsData.ts`.
 - 14 proprietary alternative targets.
 - 133 unique product identities when the static catalogs and persisted published

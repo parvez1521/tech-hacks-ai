@@ -414,7 +414,7 @@ export const FloatingChatbot: React.FC = () => {
                       <div className="space-y-1.5">
                         {msg.groundedTools.map((t, idx) => (
                           (() => {
-                            const toolRoute = t.type === 'open-source' ? `/tools/${t.slug}` : t.type === 'community' ? `/community-tools/${t.slug}` : `/ai-tools/${t.slug}`;
+                            const toolRoute = t.type === 'open-source' ? `/tools/${t.slug}` : `/ai-tools/${t.slug}`;
                             return (
                           <div
                             key={idx}

@@ -459,8 +459,15 @@
    the site's midnight cards. Keep these selectors outside Tailwind's generated
    utility layer because the canonical slug class is intentionally dynamic. */
 .brand-logo-image--googlegemini,
-.brand-logo-image--googlecloud {
-  filter: brightness(0) saturate(100%) invert(58%) sepia(82%) saturate(2081%) hue-rotate(193deg) brightness(100%) contrast(94%);
+.brand-logo-image--githubcopilot,
+.brand-logo-image--googlecloud,
+.brand-logo-image--vercel,
+.brand-logo-image--openai,
+.brand-logo-image--anthropic,
+.brand-logo-image--cloudflare {
+  background: #ffffff;
+  border-radius: 0.28rem;
+  padding: 0.16rem;
 }
 
 /* Simple Icons' Adobe product marks are monochrome brand symbols. Preserve
@@ -472,14 +479,6 @@
   background: #fff;
   border-radius: 0.28rem;
   padding: 0.12rem;
-}
-
-.brand-logo-image--githubcopilot {
-  filter: none;
-}
-
-[data-theme='dark'] .brand-logo-image--githubcopilot {
-  filter: invert(1);
 }
 
 /* Several first-party export files intentionally ship as light-mode or

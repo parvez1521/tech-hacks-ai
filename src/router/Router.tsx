@@ -46,7 +46,7 @@ export function matchRoute(pathname: string): { route: string; params: Record<st
     return { route: 'ai-tools', params: {} };
   }
   if (cleanPath === '/community-tools' || cleanPath === '/community') {
-    return { route: 'community-tools', params: {} };
+    return { route: 'community-redirect', params: {} };
   }
   if (cleanPath === '/free-ai-sites') {
     return { route: 'free-ai-sites', params: {} };
@@ -139,11 +139,9 @@ export function matchRoute(pathname: string): { route: string; params: Record<st
     return { route: 'ai-tool-detail', params: { slug: aiToolsMatch[1] } };
   }
 
-  // /community-tools/:slug
+  // Legacy community routes redirect to the editorial AI directory
   const communityToolsMatch = cleanPath.match(/^\/community-tools\/([^/]+)$/);
-  if (communityToolsMatch) {
-    return { route: 'community-tool-detail', params: { slug: communityToolsMatch[1] } };
-  }
+  if (communityToolsMatch) return { route: 'community-redirect', params: { slug: communityToolsMatch[1] } };
 
   // /guides/:slug
   const guidesMatch = cleanPath.match(/^\/guides\/([^/]+)$/);

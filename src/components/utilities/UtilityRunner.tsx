@@ -170,27 +170,26 @@ const ImageResizerTool: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const resizeRequestRef = useRef(createLatestRequestGate());
+  const clearOutputs = () => {
+    setSelectedFile(null);
+    setPreviewUrl(null);
+    setResizedBlobUrl(null);
+    setResizedSize(null);
+    setOriginalDimensions(null);
+  };
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setError(null);
     const file = e.target.files?.[0];
     if (!file) return;
 
-    if (!file.type.startsWith('image/')) {
-      setSelectedFile(null);
-      setPreviewUrl(null);
-      setResizedBlobUrl(null);
-      setResizedSize(null);
-      setOriginalDimensions(null);
+    if (!['image/png', 'image/jpeg', 'image/webp'].includes(file.type)) {
+      clearOutputs();
       setError('Please upload a valid image file (PNG, JPEG, WEBP).');
       return;
     }
     if (file.size > 25 * 1024 * 1024) {
-      setSelectedFile(null);
-      setPreviewUrl(null);
-      setResizedBlobUrl(null);
-      setResizedSize(null);
-      setOriginalDimensions(null);
+      clearOutputs();
       setError('File exceeds maximum limit of 25MB.');
       return;
     }
@@ -198,16 +197,24 @@ const ImageResizerTool: React.FC = () => {
     setSelectedFile(file);
     setResizedBlobUrl(null);
     setResizedSize(null);
+    if (previewUrl) URL.revokeObjectURL(previewUrl);
     const objectUrl = URL.createObjectURL(file);
     setPreviewUrl(objectUrl);
 
     const img = new Image();
     img.onload = () => {
+      if (!img.width || !img.height || img.width * img.height > 40000000) {
+        URL.revokeObjectURL(objectUrl);
+        clearOutputs();
+        setError('Image dimensions are invalid or exceed the 40 megapixel limit.');
+        return;
+      }
       setOriginalDimensions({ w: img.width, h: img.height });
       setWidth(img.width);
       setHeight(img.height);
     };
     img.src = objectUrl;
+    e.currentTarget.value = '';
   };
 
   const handleWidthChange = (newW: number) => {
@@ -228,6 +235,12 @@ const ImageResizerTool: React.FC = () => {
 
   useEffect(() => {
     if (!previewUrl || !canvasRef.current) return;
+    if (!Number.isInteger(width) || !Number.isInteger(height) || width < 1 || height < 1 || width > 8192 || height > 8192 || width * height > 40000000) {
+      setError('Output dimensions must be at most 8,192 px per side and 40 megapixels total.');
+      setResizedBlobUrl(null);
+      setResizedSize(null);
+      return;
+    }
     const requestId = resizeRequestRef.current.begin();
     const image = new Image();
     image.onload = () => {
@@ -290,7 +303,7 @@ const ImageResizerTool: React.FC = () => {
         <label htmlFor="image-upload" className="cursor-pointer flex flex-col items-center gap-2">
           <Upload className="w-8 h-8 text-primary" />
           <span className="font-semibold text-foreground text-sm">
-            {selectedFile ? selectedFile.name : 'Choose an image or drag & drop'}
+            {selectedFile ? selectedFile.name : 'Choose an image'}
           </span>
           <span className="text-xs text-muted-foreground">
             PNG, JPEG, WEBP up to 25MB • Processed in this browser

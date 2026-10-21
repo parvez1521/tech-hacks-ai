@@ -45,11 +45,11 @@ describe('Canonical catalog sections and expanded media utilities', () => {
     assert.equal(result.tools.some((tool) => tool.slug === slug), false);
   });
 
-  test('community and utility routes have distinct route identities', async () => {
+  test('legacy community URLs redirect and utility routes retain their distinct route identity', async () => {
     const { matchRoute } = await import('../dist/test-ssr.js');
-    assert.deepEqual(matchRoute('/community-tools'), { route: 'community-tools', params: {} });
-    assert.deepEqual(matchRoute('/community'), { route: 'community-tools', params: {} });
-    assert.deepEqual(matchRoute('/community-tools/example'), { route: 'community-tool-detail', params: { slug: 'example' } });
+    assert.deepEqual(matchRoute('/community-tools'), { route: 'community-redirect', params: {} });
+    assert.deepEqual(matchRoute('/community'), { route: 'community-redirect', params: {} });
+    assert.deepEqual(matchRoute('/community-tools/example'), { route: 'community-redirect', params: { slug: 'example' } });
     assert.deepEqual(matchRoute('/free-tools/mp4-to-mp3'), { route: 'free-tool-detail', params: { slug: 'mp4-to-mp3' } });
   });
 
