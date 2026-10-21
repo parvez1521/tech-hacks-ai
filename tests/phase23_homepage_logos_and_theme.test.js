@@ -190,16 +190,16 @@ describe('Phase 23: Homepage Logo Fix, Real Brand Assets & Theme Toggle Repair',
       assert.ok(content.includes('data-logo-status="neutral-fallback"'), 'Fallback status is exposed for QA');
     });
 
-    test('Homepage motion uses a lightweight CSS 3D visual with pointer-transparent fallback', () => {
+    test('Homepage uses a reduced-motion-aware discovery interface with real logo components', () => {
       const heroPath = path.resolve('src/components/HeroSignalVisual.tsx');
       const homePath = path.resolve('src/pages/HomePage.tsx');
       const heroContent = fs.readFileSync(heroPath, 'utf8');
       const homeContent = fs.readFileSync(homePath, 'utf8');
 
       assert.ok(homeContent.includes('<HeroSignalVisual />'), 'Homepage renders the hero visual');
-      assert.ok(heroContent.includes('pointer-transparent'), 'Hero visual documents pointer transparency');
-      assert.ok(heroContent.includes('requestAnimationFrame'), 'Hero visual uses a bounded animation frame');
-      assert.ok(heroContent.includes('cancelAnimationFrame'), 'Hero visual cleans up the animation frame');
+      assert.ok(heroContent.includes("from 'motion/react'"), 'Hero visual uses the Motion React library');
+      assert.ok(heroContent.includes('useReducedMotion'), 'Hero visual respects reduced motion');
+      assert.ok(heroContent.includes('<BrandLogo'), 'Discovery preview uses provenance-aware local logo assets');
     });
   });
 });

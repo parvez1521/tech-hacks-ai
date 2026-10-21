@@ -110,7 +110,7 @@ export const AiToolCard: React.FC<AiToolCardProps> = ({ tool, routePrefix = '/ai
                   </span>
                 )}
               </div>
-              <span className="text-[11px] text-muted-foreground capitalize block truncate">
+              <span className="text-[11px] text-secondary-foreground capitalize block truncate">
                 {tool.category}
               </span>
             </div>
@@ -142,14 +142,14 @@ export const AiToolCard: React.FC<AiToolCardProps> = ({ tool, routePrefix = '/ai
 
       {/* Footer Area */}
       <div className="relative z-10 pt-3 border-t border-border/50 flex items-center justify-between text-xs">
-        <div className="flex items-center gap-2 text-muted-foreground font-mono">
+        <div className="flex items-center gap-2 text-secondary-foreground font-mono">
           {tool.rating && (
             <div className="flex items-center gap-1 text-foreground font-medium">
               <Star className="w-3.5 h-3.5 text-amber-400 fill-amber-400" />
               <span>{tool.rating.toFixed(1)}</span>
             </div>
           )}
-          <span className="truncate max-w-[140px] text-[11px] text-muted-foreground">
+          <span className="truncate max-w-[140px] text-[11px] text-secondary-foreground">
             {tool.pricingDetails.split(';')[0]}
           </span>
         </div>

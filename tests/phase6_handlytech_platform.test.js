@@ -93,7 +93,7 @@ describe('Phase 6: Homepage Redesign & HandlyTech Platform Integration', () => {
     const html = renderClean(React.createElement(ssrModule.App));
 
     // Hero Section & Universal Search
-    assert.ok(html.includes('Discover the Best AI Tools &amp; Open Source Alternatives') || html.includes('Discover the Best AI Tools & Open Source Alternatives'), 'Hero headline present');
+    assert.ok(html.includes('Find the right tools for the work.') || html.includes('Find the right tools for the work.'), 'Hero headline present');
     assert.ok(html.includes('Search AI tools, open-source alternatives'), 'Universal search bar placeholder');
     assert.ok(html.includes('Make AI videos'), 'Intent chip: Make AI videos');
     assert.ok(html.includes('Replace proprietary SaaS'), 'Intent chip: Replace proprietary SaaS');

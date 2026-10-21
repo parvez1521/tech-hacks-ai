@@ -12,6 +12,10 @@ import { OfferCard } from '../components/OfferCard';
 import { BrandLogo } from '../components/BrandLogo';
 import { DailyDiscoveriesSection } from '../components/DailyDiscoveriesSection';
 import { HeroSignalVisual } from '../components/HeroSignalVisual';
+import { LazyMotion, useReducedMotion } from 'motion/react';
+import * as m from 'motion/react-m';
+
+const loadMotionFeatures = () => import('../lib/motionFeatures').then((module) => module.default);
 import { proprietaryTools } from '../data/alternatives';
 import { aiCategories } from '../data/aiToolsData';
 import { getFeaturedOffers } from '../data/offersData';
@@ -44,6 +48,15 @@ import {
 } from 'lucide-react';
 
 export const HomePage: React.FC = () => {
+  const [motionReady, setMotionReady] = useState(false);
+  const reduceMotion = useReducedMotion();
+  useEffect(() => setMotionReady(true), []);
+  const MotionDiv = (motionReady ? m.div : 'div') as React.ElementType;
+  const heroAnimationProps = motionReady ? {
+    initial: reduceMotion ? false : { opacity: 0.75, y: 10 },
+    animate: { opacity: 1, y: 0 },
+    transition: { duration: reduceMotion ? 0 : 0.42, ease: [0.2, 0.7, 0.2, 1] },
+  } : {};
   const [selectedAiCategory, setSelectedAiCategory] = useState<string>('all');
   const [aiPage, setAiPage] = useState(1);
   const [catalogStats, setCatalogStats] = useState(getCatalogStats);
@@ -186,74 +199,48 @@ export const HomePage: React.FC = () => {
       {/* =========================================================================
           SECTION 1: HERO & UNIVERSAL SEARCH
       ========================================================================= */}
-      <section className="hero-shell relative pt-14 pb-8 sm:pt-16 sm:pb-10 text-center max-w-6xl mx-auto px-4 w-full rounded-b-[2rem]">
-        <div className="hero-ambient-orb one" aria-hidden="true" />
-        <div className="hero-ambient-orb two" aria-hidden="true" />
-        <div className="hero-ambient-orb three" aria-hidden="true" />
-        <HeroSignalVisual />
-        {/* A small context line keeps the hero useful without competing with search. */}
-        <div className="relative z-10 animate-fade-in-up [animation-delay:0ms]">
-          <div className="inline-flex items-center gap-2 eyebrow mb-5">
-            <Sparkles className="w-3.5 h-3.5" aria-hidden="true" />
-            <span>Independent software directory</span>
+      <LazyMotion features={loadMotionFeatures}>
+        <section className="hero-shell w-full" aria-labelledby="home-hero-heading">
+          <div className="hero-redesign max-w-6xl mx-auto px-4 sm:px-6">
+            <MotionDiv
+              className="hero-redesign__copy"
+              {...heroAnimationProps}
+            >
+              <div className="hero-redesign__eyebrow">
+                <span className="hero-redesign__eyebrow-mark" aria-hidden="true"><Sparkles size={13} /></span>
+                Independent software discovery
+              </div>
+              <h1 id="home-hero-heading">Find the right tools for the work.</h1>
+              <p className="hero-redesign__intro">
+                Tech Hacks AI helps you find useful AI products, open-source software, browser utilities, and current offers in one searchable directory.
+              </p>
+
+              <div className="hero-redesign__search">
+                <UniversalSearch />
+              </div>
+
+              <div className="hero-redesign__actions">
+                <Link to="/ai-tools" className="hero-redesign__primary-action">
+                  Browse the directory <ArrowRight size={16} aria-hidden="true" />
+                </Link>
+                <Link to="/alternatives" className="hero-redesign__secondary-action">
+                  Find an alternative <ArrowRight size={15} aria-hidden="true" />
+                </Link>
+              </div>
+
+              <div className="hero-redesign__quick-links" aria-label="Explore Tech Hacks AI">
+                <Link to="/free-tools"><Wrench size={14} aria-hidden="true" /> Utilities</Link>
+                <Link to="/offers"><Tag size={14} aria-hidden="true" /> Offers</Link>
+                <Link to="/pick"><Compass size={14} aria-hidden="true" /> Help me choose</Link>
+              </div>
+            </MotionDiv>
+
+            <div className="hero-redesign__visual">
+              <HeroSignalVisual />
+            </div>
           </div>
-        </div>
-
-        {/* H1 Headline */}
-        <h1 className="relative z-10 animate-fade-in-up [animation-delay:60ms] text-4xl sm:text-5xl lg:text-[4.25rem] font-bold text-foreground tracking-[-0.035em] max-w-4xl mx-auto leading-[1.04] text-balance mb-5">
-          Discover the Best AI Tools & Open Source Alternatives
-        </h1>
-
-        {/* Subtitle */}
-        <p className="relative z-10 animate-fade-in-up [animation-delay:120ms] text-sm sm:text-base text-secondary-foreground max-w-2xl mx-auto mb-8 font-normal leading-relaxed">
-          Tech Hacks AI is a practical directory for finding AI products, open-source software, and browser utilities without wading through hype. Search by what you need to make, replace, or learn.
-        </p>
-
-        {/* Universal Search Bar with Intent Chips */}
-        <div className="relative z-10 animate-fade-in-up [animation-delay:180ms] mb-8">
-          <UniversalSearch />
-        </div>
-
-        {/* Quick Route Shortcuts Ribbon */}
-        <div className="relative z-10 animate-fade-in-up [animation-delay:240ms] flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-xs pt-4 border-t border-border/50 max-w-2xl mx-auto">
-          <Link
-            to="/ai-tools"
-            className="flex items-center gap-1.5 py-1 text-muted-foreground hover:text-primary transition-colors duration-150"
-          >
-            <Sparkles className="w-3.5 h-3.5 text-primary" />
-            <span>AI Directory</span>
-          </Link>
-          <Link
-            to="/free-ai-sites"
-            className="flex items-center gap-1.5 py-1 text-muted-foreground hover:text-primary transition-colors duration-150"
-          >
-            <Gift className="w-3.5 h-3.5 text-emerald-400" />
-            <span>Free AI Tools</span>
-          </Link>
-          <Link
-            to="/alternatives"
-            className="flex items-center gap-1.5 py-1 text-muted-foreground hover:text-primary transition-colors duration-150"
-          >
-            <Replace className="w-3.5 h-3.5 text-primary" />
-            <span>SaaS Alternatives</span>
-          </Link>
-          <Link
-            to="/offers"
-            className="flex items-center gap-1.5 py-1 text-muted-foreground hover:text-primary transition-colors duration-150"
-          >
-            <Tag className="w-3.5 h-3.5 text-amber-400" />
-            <span>AI Deals</span>
-          </Link>
-          <Link
-            to="/pick"
-            className="flex items-center gap-1.5 py-1 text-primary font-medium hover:text-primary-hover transition-colors duration-150"
-          >
-            <Compass className="w-3.5 h-3.5 text-purple-400" />
-            <span>Help Me Pick</span>
-          </Link>
-        </div>
-
-      </section>
+        </section>
+      </LazyMotion>
 
       {/* Truthful catalog proof-point restored below the hero. Counts come from
           the de-duplicated in-app registries, not inflated marketing claims. */}

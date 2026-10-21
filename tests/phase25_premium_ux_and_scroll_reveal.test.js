@@ -72,39 +72,14 @@ describe('Phase 25: Premium UX, Scroll Reveal & Smart Welcome', () => {
   });
 
   // ──────────────────────────────────────────────────────────────────────────
-  // 2. Welcome question chip in the welcome bubble
+  // 2. Intentional assistant opening
   // ──────────────────────────────────────────────────────────────────────────
-  it('FloatingChatbot contains data-testid="welcome-question-chip"', () => {
+  it('FloatingChatbot exposes a compact launcher and accessible dialog', () => {
     const src = read('src/components/FloatingChatbot.tsx');
-    assert.ok(
-      src.includes('data-testid="welcome-question-chip"'),
-      'Welcome bubble should have a clickable question chip with testid'
-    );
-  });
-
-  it('Clicking the welcome question chip calls handleSend with the question', () => {
-    const src = read('src/components/FloatingChatbot.tsx');
-    // The handleSendWelcomeQuestion function should exist and call handleSend
-    assert.ok(
-      src.includes('handleSendWelcomeQuestion'),
-      'handleSendWelcomeQuestion handler should be defined'
-    );
-    assert.ok(
-      src.includes('handleSend(q') || src.includes('handleSend(welcomeQuestion)'),
-      'handleSendWelcomeQuestion should invoke handleSend with the question'
-    );
-  });
-
-  it('welcomeQuestion state is set from the proactive selector', () => {
-    const src = read('src/components/FloatingChatbot.tsx');
-    assert.ok(
-      src.includes('selectProactiveSuggestion()'),
-      'selectProactiveSuggestion() should be called to select the welcome suggestion'
-    );
-    assert.ok(
-      src.includes('setWelcomeQuestion'),
-      'setWelcomeQuestion should be called to store the selected question'
-    );
+    assert.ok(src.includes('data-testid="chat-launcher"'), 'Launcher has a stable QA hook');
+    assert.ok(src.includes('data-testid="chat-dialog"'), 'Dialog has a stable QA hook');
+    assert.ok(src.includes('aria-modal="true"'), 'Open chat is announced as a modal dialog');
+    assert.ok(!src.includes('welcome-question-chip'), 'No unsolicited invitation covers page content');
   });
 
   // ──────────────────────────────────────────────────────────────────────────
@@ -199,7 +174,7 @@ describe('Phase 25: Premium UX, Scroll Reveal & Smart Welcome', () => {
   it('Hero section (Section 1) does NOT have reveal-section class', () => {
     const src = read('src/pages/HomePage.tsx');
     // The first section tag should be the hero with no reveal-section
-    const heroSection = src.slice(src.indexOf('<section className="relative'), src.indexOf('SECTION 2'));
+    const heroSection = src.slice(src.indexOf('<section className="hero-shell'), src.indexOf('data-testid="catalog-trust-strip"'));
     assert.ok(
       !heroSection.includes('reveal-section'),
       'Hero section (above fold) should NOT have scroll-reveal applied'
@@ -222,9 +197,9 @@ describe('Phase 25: Premium UX, Scroll Reveal & Smart Welcome', () => {
   });
 
   // ──────────────────────────────────────────────────────────────────────────
-  // 7. Welcome de-duplication storage key
+  // 7. Retained selector service contract
   // ──────────────────────────────────────────────────────────────────────────
-  it('The proactive selector tracks the previous suggestion in localStorage', () => {
+  it('The proactive selector service still avoids repeating a suggestion', () => {
     const src = read('src/services/proactiveSuggestionService.ts');
     assert.ok(
       src.includes('techhacks_proactive_suggestion_id'),
@@ -232,14 +207,6 @@ describe('Phase 25: Premium UX, Scroll Reveal & Smart Welcome', () => {
     );
   });
 
-  // ──────────────────────────────────────────────────────────────────────────
-  // 8. Immediate suggestion
-  // ──────────────────────────────────────────────────────────────────────────
-  it('FloatingChatbot shows the welcome suggestion without a timer', () => {
-    const src = read('src/components/FloatingChatbot.tsx');
-    assert.ok(
-      src.includes('setShowWelcome(true)') && !src.includes('5000'),
-      'The proactive suggestion should be visible immediately'
-    );
-  });
+  // The assistant remains closed until the visitor opens it.
+
 });

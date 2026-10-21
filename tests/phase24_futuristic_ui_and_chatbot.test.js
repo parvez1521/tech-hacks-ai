@@ -16,13 +16,13 @@ describe('Phase 24: Restrained UI, Verified Navigation & Chatbot Repair', () => 
       assert.ok(!content.includes("from '../components/HeroFloatingLogos'"), 'HomePage does not import HeroFloatingLogos');
     });
 
-    test('Hero section in HomePage maintains clean, focused, centered layout', () => {
+    test('Hero makes search primary in a product-led two-column composition', () => {
       const homePath = path.resolve(process.cwd(), 'src/pages/HomePage.tsx');
       const content = fs.readFileSync(homePath, 'utf8');
 
-      assert.ok(content.includes('Discover the Best AI Tools & Open Source Alternatives'), 'Hero H1 headline intact');
-      assert.ok(content.includes('<UniversalSearch />'), 'Universal search bar prominently centered');
-      assert.ok(content.includes('text-center max-w-6xl mx-auto'), 'Hero remains centered and readable');
+      assert.ok(content.includes('Find the right tools for the work.'), 'Hero uses the concise editorial headline');
+      assert.ok(content.includes('<UniversalSearch />'), 'Universal search remains the primary interaction');
+      assert.ok(content.includes('hero-redesign__visual'), 'Hero pairs the message with a product interface visual');
     });
   });
 
@@ -89,24 +89,23 @@ describe('Phase 24: Restrained UI, Verified Navigation & Chatbot Repair', () => 
   // =========================================================================
   // 4. Task 4: Working proactive chatbot suggestion
   // =========================================================================
-  describe('Task 4: Working proactive chatbot suggestion', () => {
-    test('FloatingChatbot selects and displays a local suggestion immediately', () => {
+  describe('Task 4: Intentional chatbot opening', () => {
+    test('FloatingChatbot starts collapsed without an unsolicited invitation', () => {
       const chatbotPath = path.resolve(process.cwd(), 'src/components/FloatingChatbot.tsx');
       const content = fs.readFileSync(chatbotPath, 'utf8');
 
-      assert.ok(content.includes('selectProactiveSuggestion()'), 'Uses the local proactive selector');
-      assert.ok(content.includes('setShowWelcome(true)'), 'Makes the suggestion bubble visible');
-      assert.ok(!content.includes('5000'), 'Does not delay the first suggestion');
+      assert.ok(content.includes('data-testid="chat-launcher"'), 'Renders the compact launcher');
+      assert.ok(!content.includes('Assistant welcome invitation'), 'Does not cover content with a welcome card');
+      assert.ok(!content.includes('setShowWelcome'), 'No welcome bubble appears on page load');
     });
 
-    test('Welcome popup bubble contains dismiss button and opens chat on click', () => {
+    test('Chat panel opens intentionally and keeps modal semantics', () => {
       const chatbotPath = path.resolve(process.cwd(), 'src/components/FloatingChatbot.tsx');
       const content = fs.readFileSync(chatbotPath, 'utf8');
 
-      assert.ok(content.includes('data-testid="dismiss-welcome-btn"'), 'Has accessible dismiss button');
-      assert.ok(content.includes('onClick={handleOpenFromWelcome}'), 'Bubble body opens chat on click');
-      assert.ok(content.includes('A useful place to start'), 'Has a useful invitation headline');
-      assert.ok(content.includes('bg-card border border-border'), 'Styled with an opaque shared surface');
+      assert.ok(content.includes('onClick={() => setIsOpen(true)}'), 'Launcher opens the panel on click');
+      assert.ok(content.includes('role="dialog"'), 'Open panel is exposed as a dialog');
+      assert.ok(content.includes('chat-overlay'), 'Modal overlay prevents click-through');
     });
   });
 
@@ -118,7 +117,7 @@ describe('Phase 24: Restrained UI, Verified Navigation & Chatbot Repair', () => 
       const chatbotPath = path.resolve(process.cwd(), 'src/components/FloatingChatbot.tsx');
       const content = fs.readFileSync(chatbotPath, 'utf8');
 
-      assert.ok(content.includes('bg-card shadow-xl'), 'Panel uses an opaque elevated surface');
+      assert.ok(content.includes('className="chat-dialog"'), 'Panel uses a responsive opaque surface');
       assert.ok(content.includes('border-border'), 'Panel uses the shared border token');
       assert.ok(content.includes('Catalog'), 'Header displays the catalog assistant status');
       assert.ok(!content.includes('from-cyan-600 to-blue-600'), 'User messages do not use a gradient');
@@ -129,8 +128,8 @@ describe('Phase 24: Restrained UI, Verified Navigation & Chatbot Repair', () => 
       const chatbotPath = path.resolve(process.cwd(), 'src/components/FloatingChatbot.tsx');
       const content = fs.readFileSync(chatbotPath, 'utf8');
 
-      assert.ok(content.includes('Ask Tech Hacks AI'), 'Displays clear Ask Tech Hacks AI label');
-      assert.ok(content.includes('AiOrb3D'), 'Renders 3D companion orb inside launcher');
+      assert.ok(content.includes('aria-label="Open Tech Hacks AI assistant"'), 'Collapsed launcher has a clear accessible name');
+      assert.ok(content.includes('data-testid="chat-launcher"'), 'Renders a compact launcher');
       assert.ok(content.includes('border-border'), 'Launcher uses the shared border token');
     });
   });
@@ -143,7 +142,7 @@ describe('Phase 24: Restrained UI, Verified Navigation & Chatbot Repair', () => 
       const homePath = path.resolve(process.cwd(), 'src/pages/HomePage.tsx');
       const content = fs.readFileSync(homePath, 'utf8');
 
-      assert.ok(content.includes('hero-shell'), 'Hero uses the cinematic shell');
+      assert.ok(content.includes('hero-shell'), 'Hero uses the editorial shell');
       assert.ok(content.includes('<HeroSignalVisual />'), 'Hero keeps the depth visual');
       assert.ok(!content.includes('<HeroFloatingLogos />'), 'Hero does not include the removed logo orbit');
       assert.ok(content.includes('<UniversalSearch />'), 'Functional search remains in the hero');

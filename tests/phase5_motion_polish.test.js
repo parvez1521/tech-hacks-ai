@@ -51,7 +51,9 @@ describe('Phase 5: Premium Interactive UI, Motion Polish & Accessibility', () =>
     if (!ssrModule) ssrModule = await import('../dist/test-ssr.js');
     const html = ReactDOMServer.renderToString(React.createElement(ssrModule.App));
 
-    assert.ok(html.includes('animate-fade-in-up'), 'Hero should include staggered entrance animation');
+    const homeSource = fs.readFileSync(path.join(process.cwd(), 'src/pages/HomePage.tsx'), 'utf8');
+    assert.ok(html.includes('hero-redesign__copy'), 'The editorial hero renders as a readable static server fallback');
+    assert.ok(homeSource.includes("from 'motion/react'") && homeSource.includes('useReducedMotion'), 'Hero entrance uses Motion.dev and respects reduced motion');
   });
 
   test('Header includes refined microinteraction classes', async () => {

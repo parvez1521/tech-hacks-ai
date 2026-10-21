@@ -127,58 +127,51 @@ describe('Phase 19: Floating AI Pet, Glass UI, Theme Repair & UX Bug Fixes', () 
   // 2. Elevated Chat Launcher & Safe-Area Insets (Phase A)
   // =========================================================================
   describe('2. Elevated Launcher Positioning & Safe-Area Inset Handling', () => {
-    test('Floating launcher has elevated coordinates bottom-8 right-5 sm:bottom-10 sm:right-8 and safe-area padding', () => {
+    test('Floating launcher is compact, accessible, and respects the mobile safe area', () => {
       const chatbotPath = path.resolve(process.cwd(), 'src/components/FloatingChatbot.tsx');
       const content = fs.readFileSync(chatbotPath, 'utf8');
 
       assert.ok(
-        content.includes('fixed bottom-8 right-5 sm:bottom-10 sm:right-8 z-50'),
-        'Launcher has elevated bottom-8 / sm:bottom-10 placement'
+        content.includes('aria-label="Open Tech Hacks AI assistant"'),
+        'Collapsed launcher has an accessible name'
       );
-      assert.ok(
-        content.includes('pb-[env(safe-area-inset-bottom)]'),
-        'Launcher has safe-area inset bottom padding'
-      );
+      const css = fs.readFileSync(path.resolve(process.cwd(), 'src/index.css'), 'utf8');
+      assert.ok(content.includes('chat-launcher-position'), 'Launcher has a dedicated compact style');
+      assert.ok(css.includes('bottom: calc(1rem + env(safe-area-inset-bottom))'), 'Launcher respects the device safe area');
     });
 
-    test('Floating chat dialog elevated coordinates avoid bottom collision', () => {
+    test('Floating chat dialog fits the viewport and traps focus', () => {
       const chatbotPath = path.resolve(process.cwd(), 'src/components/FloatingChatbot.tsx');
       const content = fs.readFileSync(chatbotPath, 'utf8');
 
       assert.ok(
-        content.includes('sm:right-8 sm:bottom-10'),
-        'Chat panel desktop coordinates align with elevated launcher'
+        content.includes('chat-dialog') && content.includes("e.key !== 'Tab'"),
+        'Dialog has a viewport-aware surface and keyboard focus management'
       );
     });
   });
 
   // =========================================================================
-  // 3. Immediate Welcome Invitation Popup (Phase B)
+  // 3. Intentional assistant opening (Phase B)
   // =========================================================================
-  describe('3. Immediate Welcome Invitation Popup & Persistence', () => {
-    test('Welcome popup contains exact required copy and accessibility attributes', () => {
+  describe('3. Intentional Assistant Opening', () => {
+    test('Collapsed launcher has no unsolicited welcome invitation', () => {
       const chatbotPath = path.resolve(process.cwd(), 'src/components/FloatingChatbot.tsx');
       const content = fs.readFileSync(chatbotPath, 'utf8');
 
-      assert.ok(content.includes('A useful place to start'), 'Useful welcome header rendered');
-      assert.ok(content.includes('proactiveSuggestion?.description'), 'Catalog-backed suggestion body rendered');
-
-      // Exact button labels
-      assert.ok(content.includes('Open assistant'), "CTA primary label is 'Open assistant'");
-      assert.ok(content.includes('Not now'), "Secondary label is 'Not now'");
-      assert.ok(
-        content.includes('aria-label="Dismiss assistant invitation"'),
-        'Close button has accessible aria-label'
-      );
+      assert.ok(content.includes('data-testid="chat-launcher"'), 'Compact launcher is present');
+      assert.ok(content.includes('aria-label="Open Tech Hacks AI assistant"'), 'Launcher has a descriptive accessible name');
+      assert.ok(!content.includes('Assistant welcome invitation'), 'No invitation overlays page content');
+      assert.ok(!content.includes('data-testid="chat-dialog"') || content.includes('{isOpen &&'), 'Dialog only renders after opening');
     });
 
-    test('Welcome popup selects immediately and avoids duplicate messages', () => {
+    test('Chat panel is intentional and retains starter questions', () => {
       const chatbotPath = path.resolve(process.cwd(), 'src/components/FloatingChatbot.tsx');
       const content = fs.readFileSync(chatbotPath, 'utf8');
 
-      assert.ok(content.includes('selectProactiveSuggestion()'), 'Selects a suggestion on mount');
-      assert.ok(content.includes('proactiveInitializedRef.current'), 'Guards against rerender duplicates');
-      assert.ok(!content.includes('5000'), 'Does not delay the welcome suggestion');
+      assert.ok(content.includes('STARTER_PROMPTS'), 'Curated starter prompts remain available in chat');
+      assert.ok(content.includes('onClick={() => setIsOpen(true)}'), 'Launcher opens the chat on click');
+      assert.ok(content.includes('aria-modal="true"'), 'Open chat is announced as a modal dialog');
     });
   });
 

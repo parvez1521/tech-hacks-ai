@@ -198,7 +198,7 @@ describe('Phase 9: Tech Hacks AI Platform Rebranding', () => {
     const html = renderClean(React.createElement(ssrModule.App));
 
     assert.ok(
-      html.includes('Tech Hacks AI is a practical directory for finding AI products'),
+      html.includes('Tech Hacks AI helps you find useful AI products'),
       'Hero description must mention Tech Hacks AI'
     );
   });

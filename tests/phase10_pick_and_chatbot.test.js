@@ -193,8 +193,9 @@ describe('Phase 10: Help Me Pick, Floating Chatbot, Video Generators & LLM Alter
     setupMockBrowser('https://openalternative.co/');
     const html = renderClean(React.createElement(ssrModule.App));
 
-    assert.ok(html.includes('Ask Tech Hacks AI'), 'Floating launcher button text rendered');
-    assert.ok(!html.includes('aria-label="Ask Tech Hacks AI'), 'Launcher uses its visible child text as its accessible name');
+    assert.ok(html.includes('data-testid="chat-launcher"'), 'Compact floating launcher rendered');
+    assert.ok(html.includes('aria-label="Open Tech Hacks AI assistant"'), 'Launcher has a descriptive accessible name');
+    assert.ok(!html.includes('data-testid="chat-dialog"'), 'Chat panel starts closed');
   });
 
   test('PickPage renders adaptive wizard with verified criteria and step progression', async () => {

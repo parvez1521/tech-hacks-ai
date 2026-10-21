@@ -87,14 +87,13 @@ describe('Phase 18: Pre-Launch Polish & Interactive 3D AI Chatbot Assistant', ()
   // 2. Floating Chatbot Launcher & 5 Official Starter Prompts
   // =========================================================================
   describe('2. Floating Chatbot Launcher & 5 Official Starter Prompts', () => {
-    test('Root App renders FloatingChatbot launcher with 3D orb and accessible contract', () => {
+    test('Root App renders compact, accessible chatbot launcher in the collapsed state', () => {
       setupMockBrowser('https://techhacksai.com/');
       const html = ReactDOMServer.renderToString(React.createElement(ssrModule.App));
 
-      assert.ok(html.includes('Ask Tech Hacks AI'), 'Chatbot launcher must render visible "Ask Tech Hacks AI" prompt');
-      assert.ok(!html.includes('aria-label="Ask Tech Hacks AI'), 'Chatbot launcher uses its visible child text as its accessible name');
-      assert.ok(html.includes('preserve-3d') || html.includes('perspective:'), 'Chatbot launcher embeds the 3D orb component');
-      assert.ok(html.includes('fixed bottom-') && html.includes('right-'), 'Chatbot launcher is anchored to viewport bottom-right');
+      assert.ok(html.includes('data-testid="chat-launcher"'), 'Compact launcher is rendered');
+      assert.ok(html.includes('aria-label="Open Tech Hacks AI assistant"'), 'Launcher has an accessible name');
+      assert.ok(!html.includes('data-testid="chat-dialog"'), 'Chat dialog is closed until requested');
     });
 
     test('FloatingChatbot component source defines all 5 required Phase C.4 starter prompts', () => {

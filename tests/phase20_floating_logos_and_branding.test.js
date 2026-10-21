@@ -38,25 +38,27 @@ describe('Phase 20: Restored focused hero and assistant branding', () => {
     assert.ok(content.includes('<UniversalSearch />'), 'The real search remains in the hero');
   });
 
-  test('Orbit-specific styles and pointer variables are removed', () => {
+  test('Legacy prism, pointer, and scroll visual code is removed', () => {
     const css = fs.readFileSync(path.resolve(process.cwd(), 'src/index.css'), 'utf8');
     const visual = fs.readFileSync(path.resolve(process.cwd(), 'src/components/HeroSignalVisual.tsx'), 'utf8');
-    assert.ok(!css.includes('hero-brand-orbit'), 'No orbit layout styles remain');
-    assert.ok(!css.includes('heroBrandFloat'), 'No orbit animation keyframes remain');
-    assert.ok(!visual.includes('hero-orbit'), 'Hero visual no longer writes orbit variables');
+    assert.ok(!css.includes('hero-visual__prism'), 'No CSS prism styles remain');
+    assert.ok(!css.includes('hero-visual__halo'), 'No obsolete orbit treatment remains');
+    assert.ok(!visual.includes('requestAnimationFrame'), 'Hero visual has no pointer or scroll render loop');
   });
 
   test('Assistant branding remains product-focused', () => {
     const chatbot = fs.readFileSync(path.resolve(process.cwd(), 'src/components/FloatingChatbot.tsx'), 'utf8');
     assert.ok(!chatbot.includes('Interactive 3D Assistant'));
-    assert.ok(chatbot.includes('Find the right AI tool'));
+    assert.ok(chatbot.includes('STARTER_PROMPTS'));
+    assert.ok(chatbot.includes('aria-label="Open Tech Hacks AI assistant"'));
     assert.ok(!chatbot.includes('grounded 3D AI companion'));
   });
 
   test('HomePage renders hero and assistant without SSR exceptions', () => {
     setupMockBrowser('https://techhacksai.com/');
     const html = ReactDOMServer.renderToString(React.createElement(ssrModule.App));
-    assert.ok(html.includes('Discover the Best AI Tools &amp; Open Source Alternatives'));
-    assert.ok(html.includes('Ask Tech Hacks AI'));
+    assert.ok(html.includes('Find the right tools for the work.'));
+    assert.ok(html.includes('data-testid="chat-launcher"'));
+    assert.ok(!html.includes('data-testid="chat-dialog"'));
   });
 });

@@ -2,17 +2,13 @@ import React, { useState, useRef, useEffect } from 'react';
 import {
   X,
   Send,
-  Sparkles,
   RefreshCw,
   ExternalLink,
   ShieldCheck,
   MessageSquare,
   AlertCircle,
-  ArrowRight,
 } from 'lucide-react';
 import { generateGroundedResponse, ChatMessage } from '../services/chatRetrievalService.ts';
-import { selectProactiveSuggestion } from '../services/proactiveSuggestionService.ts';
-import type { ProactiveSuggestion } from '../services/proactiveSuggestionService.ts';
 import { Link } from '../router/Router.tsx';
 import { AiOrb3D } from './AiOrb3D.tsx';
 import { BrandLogo } from './BrandLogo.tsx';
@@ -54,21 +50,8 @@ export const WELCOME_QUESTIONS = [
   'What are some practical AI tools for video editing?',
 ] as const;
 
-function createProactiveAssistantMessage(suggestion: ProactiveSuggestion): ChatMessage {
-  return {
-    id: `proactive-${suggestion.id}`,
-    sender: 'assistant',
-    timestamp: 0,
-    text: `**A useful place to start:**\n\n${suggestion.description}`,
-    suggestions: [suggestion.prompt],
-  };
-}
-
 export const FloatingChatbot: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [showWelcome, setShowWelcome] = useState(false);
-  const [welcomeQuestion, setWelcomeQuestion] = useState('');
-  const [proactiveSuggestion, setProactiveSuggestion] = useState<ProactiveSuggestion | null>(null);
   const [input, setInput] = useState('');
   const [messages, setMessages] = useState<ChatMessage[]>([INITIAL_MESSAGE]);
   const [isLoading, setIsLoading] = useState(false);
@@ -79,8 +62,8 @@ export const FloatingChatbot: React.FC = () => {
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
-  const proactiveMessageRef = useRef<ChatMessage | null>(null);
-  const proactiveInitializedRef = useRef(false);
+  const launcherRef = useRef<HTMLButtonElement>(null);
+  const dialogRef = useRef<HTMLDivElement>(null);
   const isOpenRef = useRef(false);
   const isLoadingRef = useRef(false);
 
@@ -88,53 +71,9 @@ export const FloatingChatbot: React.FC = () => {
     isOpenRef.current = isOpen;
   }, [isOpen]);
 
-  // Select once per mounted assistant. The selection is local, immediate, and
-  // guarded so React StrictMode or route updates cannot duplicate the message.
-  useEffect(() => {
-    if (typeof window === 'undefined' || proactiveInitializedRef.current) return;
-    proactiveInitializedRef.current = true;
-
-    const selected = selectProactiveSuggestion();
-    const proactiveMessage = createProactiveAssistantMessage(selected);
-    proactiveMessageRef.current = proactiveMessage;
-    setProactiveSuggestion(selected);
-    setWelcomeQuestion(selected.prompt);
-    setShowWelcome(true);
-    setMessages((previous) =>
-      previous.some((message) => message.id === proactiveMessage.id)
-        ? previous
-        : [...previous, proactiveMessage]
-    );
-  }, []);
-
-  const dismissWelcome = (e?: React.MouseEvent) => {
-    if (e) {
-      e.stopPropagation();
-      e.preventDefault();
-    }
-    setShowWelcome(false);
-  };
-
-  const handleOpenFromWelcome = () => {
-    dismissWelcome();
-    setIsOpen(true);
-  };
-
-  const handleOpenChat = () => {
-    if (showWelcome) dismissWelcome();
-    setIsOpen(true);
-  };
-
-  /**
-   * Handle user clicking the curated question in the welcome bubble.
-   * Opens the chat panel and sends the question through the real chatbot pipeline.
-   */
-  const handleSendWelcomeQuestion = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    const q = welcomeQuestion;
-    dismissWelcome();
-    setIsOpen(true);
-    void handleSend(q, { suppressUnread: true });
+  const closeChat = () => {
+    setIsOpen(false);
+    window.requestAnimationFrame(() => launcherRef.current?.focus());
   };
 
   const scrollToBottom = () => {
@@ -149,10 +88,30 @@ export const FloatingChatbot: React.FC = () => {
     }
   }, [isOpen, messages, isLoading]);
 
-  // Handle escape key to close
+  // Escape closes the dialog; Tab stays inside while the modal is open.
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape' && isOpen) setIsOpen(false);
+      if (!isOpen || !dialogRef.current) return;
+      if (e.key === 'Escape') {
+        e.preventDefault();
+        closeChat();
+        return;
+      }
+      if (e.key !== 'Tab') return;
+
+      const focusable = Array.from(dialogRef.current.querySelectorAll<HTMLElement>(
+        'button:not([disabled]), input:not([disabled]), textarea:not([disabled]), a[href], [tabindex]:not([tabindex="-1"])'
+      )).filter((element) => element.offsetParent !== null);
+      if (!focusable.length) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
@@ -337,141 +296,38 @@ export const FloatingChatbot: React.FC = () => {
 
   return (
     <>
-      {/* Floating AI Launcher with Elevated Positioning & Safe-Area Padding */}
-      <div className="fixed bottom-8 right-5 sm:bottom-10 sm:right-8 z-50 pb-[env(safe-area-inset-bottom)]">
-        {/* Immediate, compact starting-point suggestion */}
-        {!isOpen && showWelcome && (
-          <div
-            role="region"
-            aria-label="Assistant welcome invitation"
-            onClick={handleOpenFromWelcome}
-            className="group absolute bottom-full right-0 mb-3 w-[min(330px,calc(100vw-2rem))] rounded-lg p-4 bg-card border border-border shadow-lg shadow-black/30 text-foreground animate-fade-in-up z-50 hidden lg:flex flex-col gap-3 cursor-pointer hover:border-primary/50 transition-colors"
-          >
-            {/* Header & Dismiss Button */}
-            <div className="flex items-start justify-between gap-2">
-              <div className="flex items-center gap-2">
-                <span className="p-1 rounded-md bg-primary/10 text-primary border border-primary/20">
-                  <Sparkles className="w-3.5 h-3.5" />
-                </span>
-                <h4 className="font-semibold text-sm text-foreground leading-tight">
-                  A useful place to start
-                </h4>
-              </div>
-              <button
-                type="button"
-                data-testid="dismiss-welcome-btn"
-                onClick={dismissWelcome}
-                aria-label="Dismiss assistant invitation"
-                className="text-muted-foreground hover:text-foreground p-1 rounded-md hover:bg-muted/80 transition-colors cursor-pointer shrink-0"
-              >
-                <X className="w-4 h-4" />
-              </button>
-            </div>
-
-            {/* Recommendations come from the local published catalogue or a real directory route. */}
-            {proactiveSuggestion?.tool ? (
-              <div className="flex items-start gap-2.5 p-2.5 rounded-md bg-muted/50 border border-border/80">
-                <BrandLogo
-                  slug={proactiveSuggestion.tool.slug}
-                  name={proactiveSuggestion.tool.name}
-                  size="sm"
-                />
-                <div className="min-w-0">
-                  <p className="text-xs font-semibold text-foreground truncate">
-                    {proactiveSuggestion.tool.name}
-                  </p>
-                  <p className="text-[11px] text-muted-foreground leading-relaxed line-clamp-2">
-                    {proactiveSuggestion.description}
-                  </p>
-                </div>
-              </div>
-            ) : (
-              <div>
-                <p className="text-xs font-semibold text-foreground">
-                  {proactiveSuggestion?.title || 'Tell me what you need'}
-                </p>
-                <p className="text-xs text-secondary-foreground leading-relaxed mt-1">
-                  {proactiveSuggestion?.description || 'I can help you find a practical tool without the hype.'}
-                </p>
-              </div>
-            )}
-
-            {/* Curated Question Chip — clicking it sends the question */}
-            {welcomeQuestion && (
-              <button
-                type="button"
-                data-testid="welcome-question-chip"
-                onClick={handleSendWelcomeQuestion}
-                className="w-full text-left text-xs px-3 py-2.5 rounded-md border border-primary/25 bg-primary/10 text-primary hover:bg-primary/15 hover:border-primary/45 transition-colors leading-snug font-medium"
-              >
-                {welcomeQuestion}
-              </button>
-            )}
-
-            {/* Quick action buttons inside bubble */}
-            <div className="flex items-center justify-between pt-0.5">
-              <span className="inline-flex items-center gap-1.5 py-1 px-3 rounded-md bg-primary text-primary-foreground text-xs font-semibold">
-                <span>Open assistant</span>
-                <ArrowRight className="w-3 h-3" />
-              </span>
-              <button
-                type="button"
-                onClick={dismissWelcome}
-                className="py-1 px-2.5 rounded-md bg-muted/70 hover:bg-muted text-muted-foreground hover:text-foreground text-xs font-medium transition-colors cursor-pointer"
-              >
-                Not now
-              </button>
-            </div>
-
-            {/* Speech bubble pointer notch */}
-            <div className="absolute -bottom-1.5 right-6 w-3 h-3 bg-card border-r border-b border-border transform rotate-45" />
-          </div>
-        )}
-
-        {!isOpen && (
+      {!isOpen && (
+        <div className="chat-launcher-position">
           <button
             type="button"
-            onClick={handleOpenChat}
-            className="flex items-center gap-3 pl-2.5 pr-4 py-2 rounded-lg bg-card border border-border text-foreground font-semibold text-xs sm:text-sm shadow-lg shadow-black/30 hover:border-primary/50 hover:bg-muted active:scale-[0.98] transition-colors duration-200 group cursor-pointer"
+            ref={launcherRef}
+            onClick={() => setIsOpen(true)}
+            aria-label="Open Tech Hacks AI assistant"
+            title="Open assistant"
+            data-testid="chat-launcher"
+            className="chat-launcher"
           >
-            <div className="relative">
-              <AiOrb3D
-                size="md"
-                isGenerating={isLoading}
-                hasUnread={unreadCount > 0}
-                state={showWelcome ? 'welcome' : undefined}
-              />
-            </div>
-            <div className="flex flex-col text-left pr-1">
-              <span className="font-bold tracking-tight text-foreground flex items-center gap-1.5 leading-none">
-                <span>Ask Tech Hacks AI</span>
-                <Sparkles className="w-3 h-3 text-primary opacity-90" />
-              </span>
-              <span className="text-[10px] text-muted-foreground font-normal mt-0.5 leading-none flex items-center gap-1.5">
-                <span>Find the right AI tool</span>
-                <span className="w-1 h-1 rounded-full bg-primary" />
-                <span className="text-primary font-mono text-[9px] flex items-center gap-1">
-                  Catalog assistant
-                </span>
-              </span>
-            </div>
+            <MessageSquare size={20} aria-hidden="true" />
             {unreadCount > 0 && (
-              <span className="px-2 py-0.5 rounded-md text-[10px] font-extrabold bg-primary text-primary-foreground">
+              <span className="chat-launcher__count" aria-label={`${unreadCount} unread messages`}>
                 {unreadCount}
               </span>
             )}
           </button>
-        )}
-      </div>
+        </div>
+      )}
 
       {/* Floating Chat Panel (Desktop Card / Mobile Bottom Sheet) */}
       {isOpen && (
-        <div
-          role="dialog"
-          aria-modal="true"
-          aria-label="Tech Hacks AI Assistant"
-           className="fixed bottom-3 right-2 left-2 mx-auto sm:left-auto sm:right-8 sm:bottom-10 z-50 w-[96vw] max-w-[440px] sm:w-[440px] max-h-[86vh] h-[min(650px,calc(100vh-5rem))] flex flex-col rounded-xl border border-border bg-card shadow-xl shadow-black/40 overflow-hidden animate-fade-in-up"
-        >
+        <div className="chat-overlay" onMouseDown={(event) => { if (event.target === event.currentTarget) closeChat(); }}>
+          <div
+            ref={dialogRef}
+            role="dialog"
+            aria-modal="true"
+            aria-label="Tech Hacks AI Assistant"
+            data-testid="chat-dialog"
+            className="chat-dialog"
+          >
           {/* Header stays compact and opaque so the conversation remains the focus. */}
           <div className="px-4 py-3 border-b border-border/80 bg-muted/40 flex items-center justify-between shrink-0">
             <div className="flex items-center gap-3">
@@ -506,7 +362,7 @@ export const FloatingChatbot: React.FC = () => {
               </button>
               <button
                 type="button"
-                onClick={() => setIsOpen(false)}
+                onClick={closeChat}
                 title="Minimize assistant"
                 aria-label="Minimize assistant"
                 className="p-1.5 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted active:scale-95 transition-all cursor-pointer"
@@ -684,6 +540,7 @@ export const FloatingChatbot: React.FC = () => {
               <Send className="w-3.5 h-3.5" />
             </button>
           </form>
+          </div>
         </div>
       )}
     </>

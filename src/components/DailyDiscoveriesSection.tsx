@@ -42,25 +42,25 @@ export const DailyDiscoveriesSection: React.FC<DailyDiscoveriesSectionProps> = (
       {/* Header Bar */}
       <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-6">
         <div>
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-primary/15 text-primary border border-primary/25 mb-2.5">
-            <Sparkles className="w-3.5 h-3.5" />
-            <span>Curated Daily by Editors</span>
+          <div className="discoveries-kicker">
+            <Sparkles className="w-3.5 h-3.5" aria-hidden="true" />
+            <span>From the catalog</span>
           </div>
           <h2
             id="daily-discoveries-heading"
-            className="text-2xl sm:text-3xl font-extrabold text-foreground tracking-tight"
+            className="discoveries-heading"
           >
-            Daily Discoveries &amp; Featured AI Tools
+            Tools worth a closer look
           </h2>
-          <p className="text-sm text-secondary-foreground max-w-xl mt-1">
-            Hand-tested breakthroughs, niche developer utilities, and high-impact generative tools discovered by the Tech Hacks AI editorial team.
+          <p className="discoveries-intro">
+            New additions and selected finds across software, AI, and creative work.
           </p>
         </div>
 
         <div className="flex items-center gap-3 shrink-0">
           <Link
             to="/discoveries"
-            className="inline-flex items-center gap-1.5 text-primary text-xs font-semibold hover:text-primary-hover transition-colors"
+            className="discoveries-view-all"
           >
             <span>View All Discoveries</span>
             <ArrowRight className="w-4 h-4" />
@@ -74,7 +74,7 @@ export const DailyDiscoveriesSection: React.FC<DailyDiscoveriesSectionProps> = (
           {[1, 2, 3].map((i) => (
             <div
               key={i}
-              className="h-56 rounded-2xl border border-border/60 bg-card/40 p-6 animate-pulse flex flex-col justify-between"
+              className="h-[18rem] rounded-2xl border border-border/50 bg-card/50 p-6 animate-pulse flex flex-col justify-between"
             >
               <div>
                 <div className="w-24 h-4 bg-muted rounded-full mb-4" />
@@ -95,7 +95,7 @@ export const DailyDiscoveriesSection: React.FC<DailyDiscoveriesSectionProps> = (
 
       {/* Error state */}
       {!isLoading && error && (
-        <div className="p-8 rounded-2xl border border-border/80 bg-card/60 text-center">
+        <div className="p-8 rounded-2xl border border-border/60 bg-card/70 text-center" role="alert">
           <p className="text-sm text-muted-foreground mb-3">{error}</p>
           <button
             onClick={loadDiscoveries}

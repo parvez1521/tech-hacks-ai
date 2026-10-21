@@ -73,7 +73,7 @@ export const Header: React.FC = () => {
           </Link>
 
           {/* Compact, Organized Desktop Navigation */}
-          <nav aria-label="Primary" className="hidden lg:flex items-center gap-0.5 text-sm font-medium">
+          <nav aria-label="Primary" className="hidden xl:flex shrink-0 items-center gap-0.5 whitespace-nowrap text-sm font-medium">
             {/* 1. Discover Dropdown */}
             <div className="relative" ref={discoverRef}>
               <button
@@ -326,7 +326,7 @@ export const Header: React.FC = () => {
 
           {/* The theme hint sits beside the control so it points at a real,
               keyboard-accessible action rather than floating over navigation. */}
-          <div className="hidden lg:flex items-center">
+          <div className="hidden xl:flex items-center">
             <ThemeToggle />
           </div>
 
@@ -334,7 +334,7 @@ export const Header: React.FC = () => {
           <button
             type="button"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="lg:hidden p-2 min-h-[44px] min-w-[44px] flex items-center justify-center rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted cursor-pointer"
+            className="xl:hidden p-2 min-h-[44px] min-w-[44px] flex items-center justify-center rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted cursor-pointer"
             aria-label="Toggle mobile navigation menu"
             aria-expanded={isMobileMenuOpen}
             aria-controls="mobile-nav"
@@ -346,7 +346,7 @@ export const Header: React.FC = () => {
 
       {/* Mobile Backdrop Overlay Menu */}
       {isMobileMenuOpen && (
-        <div id="mobile-nav" className="lg:hidden border-b border-border bg-background px-4 py-5 flex flex-col gap-4 animate-fade-in max-h-[85vh] overflow-y-auto no-scrollbar">
+        <div id="mobile-nav" className="xl:hidden border-b border-border bg-background px-4 py-5 flex flex-col gap-4 animate-fade-in max-h-[85vh] overflow-y-auto no-scrollbar">
           {/* Group 1: Core Directories */}
           <div className="flex flex-col gap-1">
             <span className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground px-2">
