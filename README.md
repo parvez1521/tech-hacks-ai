@@ -1,6 +1,6 @@
-# Tech Hacks AI — Software & Generative AI Discovery Platform
+# SwitchRoute — Software & Generative AI Discovery Platform
 
-**Tech Hacks AI** is a curated, high-performance software discovery platform combining top generative AI tools, verified free software, open-source SaaS alternatives, step-by-step tutorials, model prompt recipes, side-by-side comparisons, community contributions, and an AI-powered assistant.
+**SwitchRoute** is a curated, high-performance software discovery platform combining top generative AI tools, verified free software, open-source SaaS alternatives, step-by-step tutorials, model prompt recipes, side-by-side comparisons, community contributions, and an AI-powered assistant.
 
 Target Domain: `https://techhacksai.com`
 
@@ -147,7 +147,7 @@ To enable persistent community submissions and moderation in production:
 
 ## Prompt Library
 
-The prompt gallery ships original Tech Hacks AI recipes and original locally hosted SVG previews. It supports text, provider/model, category, tag, and sort filters; prompt detail pages provide the full text, model/style/aspect-ratio notes, and local bookmarks. Meigen media and prompt records are not included.
+The prompt gallery ships original SwitchRoute recipes and original locally hosted SVG previews. It supports text, provider/model, category, tag, and sort filters; prompt detail pages provide the full text, model/style/aspect-ratio notes, and local bookmarks. Meigen media and prompt records are not included.
 
 To enable database-backed prompt management, apply the `techhacks_prompts` section at the end of [`server/schema.sql`](server/schema.sql) in Supabase and configure the existing server-only `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`, and `ADMIN_SECRET` variables. Open `/moderation` → **Prompt Library**. The public API returns only published prompts, while every write is protected by the moderator passkey and service-role server storage. Favorites use the existing browser-local bookmark store because the site has no user account system.
 
