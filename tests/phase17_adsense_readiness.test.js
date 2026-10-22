@@ -73,7 +73,7 @@ describe('Phase 17: Google AdSense Readiness & Regulatory Compliance Audit', () 
   describe('1. Legal & Regulatory Compliance Pages Existence & Structure', () => {
     test('AboutPage renders mission, editorial independence, and 4 pillars', () => {
       const html = renderWithRouter(React.createElement(ssrModule.AboutPage));
-      assert.ok(html.includes('About Tech Hacks AI'), 'Must render about title');
+      assert.ok(html.includes('About SwitchRoute'), 'Must render about title');
       assert.ok(html.includes('Editorial Independence'), 'Must explain editorial policy');
       assert.ok(html.includes('Zero Paid Rankings'), 'Must disclose zero pay-for-ranking policy');
       assert.ok(html.includes('href="/contact"'), 'Must link to contact page');
@@ -83,7 +83,7 @@ describe('Phase 17: Google AdSense Readiness & Regulatory Compliance Audit', () 
 
     test('ContactPage renders topic selector, interactive form, and direct email', () => {
       const html = renderWithRouter(React.createElement(ssrModule.ContactPage));
-      assert.ok(html.includes('Contact Tech Hacks AI'), 'Must render contact title');
+      assert.ok(html.includes('Contact SwitchRoute'), 'Must render contact title');
       assert.ok(html.includes('contact@techhacksai.com'), 'Must list contact email');
       assert.ok(html.includes('value="suggest-tool"'), 'Must have suggest-tool option');
       assert.ok(html.includes('value="pricing-correction"'), 'Must have pricing-correction option');
@@ -192,19 +192,19 @@ describe('Phase 17: Google AdSense Readiness & Regulatory Compliance Audit', () 
 
     test('getRouteTitle produces clear, branded titles for legal pages', () => {
       const aboutTitle = ssrModule.getRouteTitle('about');
-      assert.ok(aboutTitle.includes('About Us') && aboutTitle.includes('Tech Hacks AI'));
+      assert.ok(aboutTitle.includes('About Us') && aboutTitle.includes('SwitchRoute'));
 
       const contactTitle = ssrModule.getRouteTitle('contact');
-      assert.ok(contactTitle.includes('Contact Us') && contactTitle.includes('Tech Hacks AI'));
+      assert.ok(contactTitle.includes('Contact Us') && contactTitle.includes('SwitchRoute'));
 
       const privacyTitle = ssrModule.getRouteTitle('privacy');
-      assert.ok(privacyTitle.includes('Privacy Policy') && privacyTitle.includes('Tech Hacks AI'));
+      assert.ok(privacyTitle.includes('Privacy Policy') && privacyTitle.includes('SwitchRoute'));
 
       const termsTitle = ssrModule.getRouteTitle('terms');
-      assert.ok(termsTitle.includes('Terms of Use') && termsTitle.includes('Tech Hacks AI'));
+      assert.ok(termsTitle.includes('Terms of Use') && termsTitle.includes('SwitchRoute'));
 
       const disclosureTitle = ssrModule.getRouteTitle('disclosure');
-      assert.ok(disclosureTitle.includes('Affiliate & Advertising Disclosure') && disclosureTitle.includes('Tech Hacks AI'));
+      assert.ok(disclosureTitle.includes('Affiliate & Advertising Disclosure') && disclosureTitle.includes('SwitchRoute'));
     });
 
     test('getRouteDescription produces informative meta descriptions for legal pages', () => {
@@ -221,7 +221,7 @@ describe('Phase 17: Google AdSense Readiness & Regulatory Compliance Audit', () 
         setupMockBrowser(`https://techhacksai.com${pathname}`);
         const html = renderClean(React.createElement(ssrModule.App));
         assert.ok(html.length > 500, `Page at ${pathname} must render substantive content`);
-        assert.ok(html.includes('Tech Hacks AI'), `Page at ${pathname} must render header with brand`);
+        assert.ok(html.includes('SwitchRoute'), `Page at ${pathname} must render header with brand`);
         assert.ok(html.includes('href="/privacy"'), `Page at ${pathname} must include footer links`);
       }
     });
