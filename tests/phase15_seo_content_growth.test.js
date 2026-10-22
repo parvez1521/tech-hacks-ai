@@ -200,7 +200,7 @@ describe('Phase 15: Organic Growth, Content Quality & SEO Expansion', () => {
     test('getRouteTitle formats descriptive page titles', () => {
       const guideTitle = ssrModule.getRouteTitle('guide-detail', { slug: 'how-to-choose-ai-coding-assistant' });
       assert.ok(guideTitle.includes('How to Choose an AI Coding Assistant'));
-      assert.ok(guideTitle.includes('Tech Hacks AI'));
+      assert.ok(guideTitle.includes('SwitchRoute'));
 
       const compareTitle = ssrModule.getRouteTitle('compare');
       assert.ok(compareTitle.includes('Side-by-Side Tool Comparison'));
