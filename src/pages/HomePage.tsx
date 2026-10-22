@@ -355,7 +355,7 @@ export const HomePage: React.FC = () => {
           <div>
             <div className="inline-flex items-center gap-2 text-primary text-xs font-semibold uppercase tracking-wider mb-2">
               <Star className="w-4 h-4" />
-              <span>Handpicked by Tech Hacks AI Editorial</span>
+              <span>Handpicked by SwitchRoute Editorial</span>
             </div>
             <h2 className="text-2xl sm:text-3xl font-extrabold text-foreground tracking-tight">
               Editor's Picks: Benchmark-Leading Tools
