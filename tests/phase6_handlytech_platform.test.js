@@ -93,10 +93,9 @@ describe('Phase 6: Homepage Redesign & HandlyTech Platform Integration', () => {
     const html = renderClean(React.createElement(ssrModule.App));
 
     // Hero Section & Universal Search
-    assert.ok(html.includes("Stop paying for AI tools you don't need."), 'Hero headline present');
-    assert.ok(html.includes('Search AI tools, open-source alternatives'), 'Universal search bar placeholder');
-    assert.ok(html.includes('Make AI videos'), 'Intent chip: Make AI videos');
-    assert.ok(html.includes('Replace proprietary SaaS'), 'Intent chip: Replace proprietary SaaS');
+    assert.ok(html.includes("Stop paying for AI tools you don't need.") || html.includes("Stop paying for AI tools you don&#x27;t need."), 'Hero headline present');
+    assert.ok(html.includes('Search free AI tools, open-source alternatives, prompts, and utilities...'), 'Universal search bar placeholder');
+    assert.ok(!html.includes('Make AI videos') && !html.includes('Replace proprietary SaaS'), 'Crowded quick-intent chips are removed');
 
     // Section 2: Open Source Alternatives (Proprietary Cards)
     assert.ok(html.includes('Find an open-source alternative'), 'Section 2 badge');
