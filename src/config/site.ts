@@ -46,7 +46,7 @@ export interface SiteConfig {
 }
 
 const configuredUrl =
-  (typeof import.meta !== 'undefined' && import.meta.env?.VITE_SITE_URL) || 'https://techhacksai.com';
+  (typeof import.meta !== 'undefined' && import.meta.env?.VITE_SITE_URL) || 'https://switchroute.in';
 
 export const siteConfig: SiteConfig = {
   name: 'SwitchRoute',
