@@ -1,6 +1,6 @@
 # Phase 27 — Durable Data Storage & Production Deployment Readiness Report
 
-**Project:** Tech Hacks AI  
+**Project:** SwitchRoute  
 **Domain Target:** `https://switchroute.in`  
 **Architecture:** React 18 + TypeScript + Vite 5 + Tailwind CSS + Node.js Serverless Functions  
 **Audit & Execution Date:** October 18, 2026  
@@ -10,7 +10,7 @@
 
 ## Executive Summary
 
-Phase 27 systematically audits, refactors, and hardens the persistence architecture and domain readiness of **Tech Hacks AI** prior to public domain connection. 
+Phase 27 systematically audits, refactors, and hardens the persistence architecture and domain readiness of **SwitchRoute** prior to public domain connection. 
 
 Previously, in Phase 26, the application achieved build stability and 390 passing tests. However, serverless community submissions relied on local JSON files falling back to `/tmp/techhacks-data` in Vercel. In serverless execution environments, `/tmp` is strictly ephemeral and instance-local; writing submissions to `/tmp` in production represents a severe silent data-loss vulnerability.
 
@@ -50,9 +50,9 @@ We evaluated three serverless-compatible persistent storage solutions:
 | **Query Flexibility** | Full relational SQL, JSONB indexing, sorting, filtering | Key-value string/hash lookups, manual index sets | Full relational SQL |
 | **Free Tier Quota** | 500 MB database, 50,000 MAU, 500,000 API requests/mo | 10,000 commands/day, 256 MB storage | Neon: 0.5 GB storage; Turso: 9 GB storage |
 | **Security & RLS** | Built-in Row Level Security (RLS) + Service Role key | Token-based HTTP authorization header | Database users and credentials |
-| **Suitability for Tech Hacks AI** | **Optimal:** Native JSONB support matches submission payload, PostgREST filtering handles moderation queue status filters, zero runtime overhead. | Good for caching, but complex for multi-attribute moderation filtering. | Good, but requires extra SDK dependencies for connection resilience. |
+| **Suitability for SwitchRoute** | **Optimal:** Native JSONB support matches submission payload, PostgREST filtering handles moderation queue status filters, zero runtime overhead. | Good for caching, but complex for multi-attribute moderation filtering. | Good, but requires extra SDK dependencies for connection resilience. |
 
-**Decision:** **Supabase PostgreSQL via REST** is the primary recommended durable storage engine for Tech Hacks AI. It requires zero third-party packages, integrates with standard `fetch`, and natively supports the schema requirements.
+**Decision:** **Supabase PostgreSQL via REST** is the primary recommended durable storage engine for SwitchRoute. It requires zero third-party packages, integrates with standard `fetch`, and natively supports the schema requirements.
 
 ---
 
@@ -64,7 +64,7 @@ A dedicated storage adapter was created at [server/storageAdapter.js](file:///Us
 
 ```
 +-------------------------------------------------------------------------+
-|                       Tech Hacks AI Storage Router                      |
+|                       SwitchRoute Storage Router                      |
 +-------------------------------------------------------------------------+
                                      |
                +---------------------+---------------------+
