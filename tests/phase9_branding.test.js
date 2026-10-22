@@ -3,6 +3,7 @@ import assert from 'node:assert';
 import fs from 'fs';
 import path from 'path';
 import React from 'react';
+import { TechHacksLogo } from '../src/components/TechHacksLogo.tsx';
 import ReactDOMServer from 'react-dom/server';
 import { execSync } from 'child_process';
 import { siteConfig, formatPageTitle } from '../src/config/site.ts';
@@ -176,13 +177,21 @@ describe('Phase 9: SwitchRoute Platform Rebranding', () => {
     assert.ok(html.includes('group-hover:rotate-3'), 'Logo must maintain microinteraction rotate hover');
   });
 
-  test('rendered SwitchRoute logo SVG gradient IDs are unique across repeated instances', async () => {
-    setupMockBrowser('https://switchroute.in/');
-    if (!ssrModule) ssrModule = await import('../dist/test-ssr.js');
-    const html = renderClean(React.createElement(ssrModule.App));
+  test('rendered SwitchRoute logo SVG gradient IDs are unique across repeated instances', () => {
+    const html = ReactDOMServer.renderToStaticMarkup(
+      React.createElement(
+        React.Fragment,
+        null,
+        React.createElement(TechHacksLogo),
+        React.createElement(TechHacksLogo),
+      ),
+    );
     const ids = [...html.matchAll(/id="(switchRoute-[^"]+)"/g)].map((match) => match[1]);
-    assert.ok(ids.length >= 2, 'Expected route-mark gradient definitions in rendered header/footer');
-    assert.strictEqual(new Set(ids).size, ids.length, 'Each SwitchRoute logo instance must have unique gradient IDs');
+    assert.strictEqual(ids.length, 4, 'Each of the two logo instances should define line and glow gradients');
+    assert.strictEqual(new Set(ids).size, ids.length, 'Every SwitchRoute gradient ID must be unique across logo instances');
+    for (const id of ids) {
+      assert.ok(html.includes(`url(#${id})`), `Gradient ${id} must be referenced by the SVG artwork`);
+    }
   });
 
   test('Footer renders SwitchRoute about summary and current year copyright', async () => {
