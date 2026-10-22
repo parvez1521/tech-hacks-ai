@@ -453,7 +453,7 @@ export const OfferDetailPage: React.FC = () => {
       <div className="mt-12 p-4 rounded-xl border border-border bg-card/40 text-[11px] text-muted-foreground leading-relaxed flex items-start gap-2.5">
         <Info className="w-4 h-4 text-primary shrink-0 mt-0.5" />
         <p>
-          <strong>Disclaimer:</strong> This listing is provided strictly for educational and informational purposes. Tech Hacks AI is not affiliated with or endorsed by {offer.provider}. Promotional criteria, billing terms, and validity windows are established by the provider and may change or terminate at their sole discretion.
+          <strong>Disclaimer:</strong> This listing is provided strictly for educational and informational purposes. SwitchRoute is not affiliated with or endorsed by {offer.provider}. Promotional criteria, billing terms, and validity windows are established by the provider and may change or terminate at their sole discretion.
         </p>
       </div>
     </div>
