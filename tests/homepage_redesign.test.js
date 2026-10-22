@@ -76,7 +76,7 @@ describe('Premium homepage redesign regressions', () => {
   it('renders a closed chat launcher by default and no invitation over content', () => {
     const html = ReactDOMServer.renderToString(React.createElement(appModule.App));
     assert.match(html, /data-testid="chat-launcher"/);
-    assert.match(html, /aria-label="Open Tech Hacks AI assistant"/);
+    assert.match(html, /aria-label="Open SwitchRoute assistant"/);
     assert.doesNotMatch(html, /data-testid="chat-dialog"/);
     assert.doesNotMatch(html, /Assistant welcome invitation/);
   });
