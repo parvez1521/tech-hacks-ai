@@ -2,7 +2,7 @@
 
 **SwitchRoute** is a curated, high-performance software discovery platform combining top generative AI tools, verified free software, open-source SaaS alternatives, step-by-step tutorials, model prompt recipes, side-by-side comparisons, community contributions, and an AI-powered assistant.
 
-Target Domain: `https://techhacksai.com`
+Target Domain: `https://switchroute.in`
 
 ---
 
@@ -104,7 +104,7 @@ Configure these variables in your hosting environment (e.g. Vercel Project Setti
 
 | Variable | Environment | Description |
 | :--- | :--- | :--- |
-| `VITE_SITE_URL` | Client (Public) | Canonical site origin (e.g. `https://techhacksai.com`). Defaults to `https://techhacksai.com`. |
+| `VITE_SITE_URL` | Client (Public) | Canonical site origin (e.g. `https://switchroute.in`). Defaults to `https://switchroute.in`. |
 | `ADMIN_SECRET` | Server (Secret) | Bearer token / passkey required for `/moderation` and PATCH `/api/submissions`. |
 | `SUPABASE_URL` | Server (Secret) | Supabase project URL (e.g. `https://<project-ref>.supabase.co`). |
 | `SUPABASE_SERVICE_ROLE_KEY` | Server (Secret) | Supabase secret key with RLS bypass for API storage operations. |
