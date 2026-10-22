@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Tech Hacks AI — Migration Utility to Supabase
+ * SwitchRoute — Migration Utility to Supabase
  *
  * Reads local JSON data and converts it to Supabase records.
  * Modes:
@@ -53,7 +53,7 @@ const published = loadJson(PUBLISHED_FILE, { tools: [], guides: [], lastUpdated:
 const discoveries = loadJson(DISCOVERIES_FILE, []);
 
 console.log('='.repeat(70));
-console.log('Tech Hacks AI — Database Migration Assistant');
+console.log('SwitchRoute — Database Migration Assistant');
 console.log('='.repeat(70));
 console.log(`Found ${submissions.length} local submissions.`);
 console.log(`Found ${(published.tools || []).length} published tools and ${(published.guides || []).length} published guides.`);
