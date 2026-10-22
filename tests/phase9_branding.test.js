@@ -21,7 +21,7 @@ describe('Phase 9: SwitchRoute Platform Rebranding', () => {
     );
   });
 
-  function setupMockBrowser(initialUrl = 'https://techhacksai.com/') {
+  function setupMockBrowser(initialUrl = 'https://switchroute.in/') {
     const parsedUrl = new URL(initialUrl);
     const mockStorage = {};
 
@@ -79,7 +79,7 @@ describe('Phase 9: SwitchRoute Platform Rebranding', () => {
     assert.strictEqual(siteConfig.name, 'SwitchRoute', 'Canonical name must be SwitchRoute');
     assert.strictEqual(siteConfig.shortName, 'SwitchRoute', 'Short name must be SwitchRoute');
     assert.strictEqual(siteConfig.brandMark, 'SR', 'Brand mark must be SR');
-    assert.strictEqual(siteConfig.url, 'https://techhacksai.com', 'Base URL must be techhacksai.com');
+    assert.strictEqual(siteConfig.url, 'https://switchroute.in', 'Base URL must be switchroute.in');
     assert.ok(siteConfig.tagline.length > 10, 'Tagline must be non-empty');
     assert.ok(siteConfig.description.length > 20, 'Description must be non-empty');
 
@@ -130,12 +130,12 @@ describe('Phase 9: SwitchRoute Platform Rebranding', () => {
       'index.html og:site_name must be SwitchRoute'
     );
     assert.ok(
-      indexHtml.includes('href="https://techhacksai.com"'),
-      'index.html canonical link must point to techhacksai.com'
+      indexHtml.includes('href="https://switchroute.in"'),
+      'index.html canonical link must point to switchroute.in'
     );
     assert.ok(
-      indexHtml.includes('content="https://techhacksai.com"'),
-      'index.html og:url must point to techhacksai.com'
+      indexHtml.includes('content="https://switchroute.in"'),
+      'index.html og:url must point to switchroute.in'
     );
     assert.ok(
       !indexHtml.includes('content="@techhacksai"'),
@@ -147,17 +147,17 @@ describe('Phase 9: SwitchRoute Platform Rebranding', () => {
     );
   });
 
-  test('public/robots.txt and public/sitemap.xml point to techhacksai.com', () => {
+  test('public/robots.txt and public/sitemap.xml point to switchroute.in', () => {
     const robotsTxt = fs.readFileSync(path.join(process.cwd(), 'public', 'robots.txt'), 'utf8');
     assert.ok(
-      robotsTxt.includes('Sitemap: https://techhacksai.com/sitemap.xml'),
-      'robots.txt must declare techhacksai.com sitemap'
+      robotsTxt.includes('Sitemap: https://switchroute.in/sitemap.xml'),
+      'robots.txt must declare switchroute.in sitemap'
     );
 
     const sitemapXml = fs.readFileSync(path.join(process.cwd(), 'public', 'sitemap.xml'), 'utf8');
     assert.ok(
-      sitemapXml.includes('<loc>https://techhacksai.com/</loc>'),
-      'sitemap.xml must have techhacksai.com root URL'
+      sitemapXml.includes('<loc>https://switchroute.in/</loc>'),
+      'sitemap.xml must have switchroute.in root URL'
     );
     assert.ok(
       !sitemapXml.includes('openalternative.co'),
@@ -166,7 +166,7 @@ describe('Phase 9: SwitchRoute Platform Rebranding', () => {
   });
 
   test('Header renders SwitchRoute brand mark, wordmark and microinteractions', async () => {
-    setupMockBrowser('https://techhacksai.com/');
+    setupMockBrowser('https://switchroute.in/');
     if (!ssrModule) ssrModule = await import('../dist/test-ssr.js');
     const html = renderClean(React.createElement(ssrModule.App));
 
@@ -177,7 +177,7 @@ describe('Phase 9: SwitchRoute Platform Rebranding', () => {
   });
 
   test('Footer renders SwitchRoute about summary and current year copyright', async () => {
-    setupMockBrowser('https://techhacksai.com/');
+    setupMockBrowser('https://switchroute.in/');
     if (!ssrModule) ssrModule = await import('../dist/test-ssr.js');
     const html = renderClean(React.createElement(ssrModule.App));
 
@@ -193,7 +193,7 @@ describe('Phase 9: SwitchRoute Platform Rebranding', () => {
   });
 
   test('HomePage hero renders SwitchRoute audience description', async () => {
-    setupMockBrowser('https://techhacksai.com/');
+    setupMockBrowser('https://switchroute.in/');
     if (!ssrModule) ssrModule = await import('../dist/test-ssr.js');
     const html = renderClean(React.createElement(ssrModule.App));
 
