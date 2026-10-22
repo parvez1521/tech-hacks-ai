@@ -147,7 +147,7 @@ describe('Phase 27: Durable Data Storage & Production Deployment Readiness', () 
           title: 'Production Guard Test Guide with Comprehensive Workflow Steps',
           category: 'workflow-automation',
           summary: 'A test guide to verify serverless storage safety guard.',
-          content: '## Step 1: Initialize Database\nSetting up production verification tests for Tech Hacks AI.\n\n## Step 2: Test Ephemeral Guards\nEnsure no silent data loss in serverless Vercel environments.',
+          content: '## Step 1: Initialize Database\nSetting up production verification tests for SwitchRoute.\n\n## Step 2: Test Ephemeral Guards\nEnsure no silent data loss in serverless Vercel environments.',
         };
 
         const result = await createGuideSubmission(payload);
@@ -233,7 +233,7 @@ describe('Phase 27: Durable Data Storage & Production Deployment Readiness', () 
         encoding: 'utf8',
         maxBuffer: 10 * 1024 * 1024,
       });
-      assert.ok(output.includes('Tech Hacks AI — Database Migration Assistant'));
+      assert.ok(output.includes('SwitchRoute — Database Migration Assistant'));
       assert.ok(output.includes('[Dry Run] Inspection summary'));
       assert.ok(output.includes('Submissions ready for sync'));
     });
