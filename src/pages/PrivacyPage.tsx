@@ -63,7 +63,7 @@ export const PrivacyPage: React.FC = () => {
             <h2>2. Google Advertising Cookies &amp; Third-Party Ad Technology</h2>
           </div>
           <p>
-            Google is a third-party vendor on our website. Google uses cookies, including the DoubleClick cookie and Google AdSense technologies, to serve advertisements to our site visitors based upon their visit to <strong className="text-slate-900">techhacksai.com</strong> and other sites across the Internet.
+            Google is a third-party vendor on our website. Google uses cookies, including the DoubleClick cookie and Google AdSense technologies, to serve advertisements to our site visitors based upon their visit to <strong className="text-slate-900">switchroute.in</strong> and other sites across the Internet.
           </p>
           <p>
             Third-party ad servers or ad networks use technologies like cookies, JavaScript, or Web Beacons in their respective advertisements and links that appear on SwitchRoute. When an advertisement is delivered to your browser, these vendors automatically receive your IP address. These technologies are used by third-party ad networks to measure the effectiveness of their advertising campaigns and/or to personalize the advertising content that you see on websites that you visit.
