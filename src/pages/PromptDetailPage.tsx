@@ -196,7 +196,7 @@ export const PromptDetailPage: React.FC = () => {
             <span><strong className="text-foreground">Aspect ratio</strong> {prompt.aspectRatio || '1:1'}</span>
             <span><strong className="text-foreground">Model</strong> {prompt.targetModel}</span>
             {prompt.createdAt && <span><strong className="text-foreground">Added</strong> {new Date(prompt.createdAt).toLocaleDateString()}</span>}
-            <span>{prompt.rightsStatus === 'original' ? 'Original Tech Hacks AI preview.' : `${prompt.rightsStatus || 'Source'} content with attribution.`}</span>
+            <span>{prompt.rightsStatus === 'original' ? 'Original SwitchRoute preview.' : `${prompt.rightsStatus || 'Source'} content with attribution.`}</span>
           </figcaption>
         </figure>
 
@@ -205,10 +205,10 @@ export const PromptDetailPage: React.FC = () => {
         {prompt.mediaType === 'video' && prompt.videoDetails && (
           <section className="mb-6 rounded-xl border border-indigo-200 bg-indigo-50/70 p-4 text-sm dark:border-indigo-900 dark:bg-indigo-950/30" aria-labelledby="video-source-title">
             <h2 id="video-source-title" className="font-semibold text-foreground">Suggested video recreation</h2>
-            <p className="mt-1 text-xs leading-5 text-secondary-foreground">This is an original Tech Hacks AI prompt and locally generated poster. It is not an original prompt or video from the linked provider.</p>
+            <p className="mt-1 text-xs leading-5 text-secondary-foreground">This is an original SwitchRoute prompt and locally generated poster. It is not an original prompt or video from the linked provider.</p>
             <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-2 text-xs">
               <span><strong>Preview:</strong> local poster image</span>
-              <span><strong>Rights:</strong> {prompt.videoDetails.permissionStatus || 'Original Tech Hacks AI artwork'}</span>
+              <span><strong>Rights:</strong> {prompt.videoDetails.permissionStatus || 'Original SwitchRoute artwork'}</span>
               {prompt.videoDetails.sourcePageUrl && <a href={prompt.videoDetails.sourcePageUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 font-semibold text-primary hover:underline">Open official provider <ExternalLink size={13} /></a>}
             </div>
           </section>
