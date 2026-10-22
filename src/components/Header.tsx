@@ -68,7 +68,7 @@ export const Header: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 h-[68px] flex items-center justify-between gap-2">
         {/* Left: Brand Logo & Title */}
         <div className="flex items-center gap-5 xl:gap-7">
-          <Link to="/" aria-label="Tech Hacks AI" className="flex items-center shrink-0">
+          <Link to="/" aria-label="SwitchRoute" className="flex items-center shrink-0">
             <TechHacksLogo size="sm" showWordmark={true} />
           </Link>
 
