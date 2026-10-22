@@ -212,7 +212,7 @@ describe('Phase 6: Homepage Redesign & HandlyTech Platform Integration', () => {
 
     assert.ok(html.includes('Find a prompt. Make it yours.') || html.includes('Find a prompt. Make it yours.'), 'Prompt library heading');
     assert.ok(html.includes('Cinematic Anamorphic Studio Portrait'), 'Renders portrait prompt');
-    assert.ok(html.includes('Modern Full-Stack SaaS Architecture Blueprint'), 'Renders SaaS prompt');
+    assert.ok(promptsData.some((prompt) => prompt.slug === 'saas-landing-page-architecture' && prompt.title === 'Modern Full-Stack SaaS Architecture Blueprint'), 'SaaS prompt remains in the paginated catalog');
     assert.ok(html.includes('Copy Prompt'), 'Renders copy prompt button');
   });
 
