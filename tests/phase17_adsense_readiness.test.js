@@ -13,7 +13,7 @@ describe('Phase 17: Google AdSense Readiness & Regulatory Compliance Audit', () 
     ssrModule = await import('../dist/test-ssr.js');
   });
 
-  function setupMockBrowser(initialUrl = 'https://techhacksai.com/') {
+  function setupMockBrowser(initialUrl = 'https://switchroute.in/') {
     const parsedUrl = new URL(initialUrl);
     const mockStorage = {};
 
@@ -63,7 +63,7 @@ describe('Phase 17: Google AdSense Readiness & Regulatory Compliance Audit', () 
     return ReactDOMServer.renderToStaticMarkup(element);
   }
 
-  function renderWithRouter(element, initialUrl = 'https://techhacksai.com/') {
+  function renderWithRouter(element, initialUrl = 'https://switchroute.in/') {
     setupMockBrowser(initialUrl);
     return ReactDOMServer.renderToStaticMarkup(
       React.createElement(ssrModule.RouterProvider, null, element)
@@ -218,7 +218,7 @@ describe('Phase 17: Google AdSense Readiness & Regulatory Compliance Audit', () 
     test('App renders full pages without errors on legal routes in SSR', () => {
       const legalPaths = ['/about', '/contact', '/privacy', '/terms', '/disclosure'];
       for (const pathname of legalPaths) {
-        setupMockBrowser(`https://techhacksai.com${pathname}`);
+        setupMockBrowser(`https://switchroute.in${pathname}`);
         const html = renderClean(React.createElement(ssrModule.App));
         assert.ok(html.length > 500, `Page at ${pathname} must render substantive content`);
         assert.ok(html.includes('SwitchRoute'), `Page at ${pathname} must render header with brand`);
@@ -232,11 +232,11 @@ describe('Phase 17: Google AdSense Readiness & Regulatory Compliance Audit', () 
       const sitemapPath = path.resolve('public/sitemap.xml');
       const content = fs.readFileSync(sitemapPath, 'utf8');
 
-      assert.ok(content.includes('<loc>https://techhacksai.com/about</loc>'), 'Sitemap must contain /about');
-      assert.ok(content.includes('<loc>https://techhacksai.com/contact</loc>'), 'Sitemap must contain /contact');
-      assert.ok(content.includes('<loc>https://techhacksai.com/privacy</loc>'), 'Sitemap must contain /privacy');
-      assert.ok(content.includes('<loc>https://techhacksai.com/terms</loc>'), 'Sitemap must contain /terms');
-      assert.ok(content.includes('<loc>https://techhacksai.com/disclosure</loc>'), 'Sitemap must contain /disclosure');
+      assert.ok(content.includes('<loc>https://switchroute.in/about</loc>'), 'Sitemap must contain /about');
+      assert.ok(content.includes('<loc>https://switchroute.in/contact</loc>'), 'Sitemap must contain /contact');
+      assert.ok(content.includes('<loc>https://switchroute.in/privacy</loc>'), 'Sitemap must contain /privacy');
+      assert.ok(content.includes('<loc>https://switchroute.in/terms</loc>'), 'Sitemap must contain /terms');
+      assert.ok(content.includes('<loc>https://switchroute.in/disclosure</loc>'), 'Sitemap must contain /disclosure');
     });
 
     test('robots.txt allows Google crawlers to index legal and public pages', () => {
@@ -245,7 +245,7 @@ describe('Phase 17: Google AdSense Readiness & Regulatory Compliance Audit', () 
 
       assert.ok(content.includes('User-agent: *'), 'Must target all user agents');
       assert.ok(content.includes('Allow: /'), 'Must allow root access');
-      assert.ok(content.includes('Sitemap: https://techhacksai.com/sitemap.xml'), 'Must declare sitemap location');
+      assert.ok(content.includes('Sitemap: https://switchroute.in/sitemap.xml'), 'Must declare sitemap location');
     });
   });
 });
