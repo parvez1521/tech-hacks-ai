@@ -165,7 +165,7 @@ export const IntelligenceVerificationNetwork: React.FC = () => {
         </div>
         <div className="text-[11px] text-slate-600 flex items-center gap-1">
           <ShieldCheck className="w-3.5 h-3.5 text-blue-600" />
-          <span>Audited by Tech Hacks Editorial Engineering</span>
+          <span>Audited by SwitchRoute Editorial Engineering</span>
         </div>
       </div>
     </div>
