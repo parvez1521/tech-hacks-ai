@@ -26,7 +26,7 @@ test('prompt library recipes have usable metadata and unique original local prev
 });
 
 test('prompt storage rejects missing attribution and invalid image locations', () => {
-  const good = { id: 'original-1', slug: 'original-one', title: 'Original one', description: 'Description', category: 'ai-image-generation', targetModel: 'Flux', promptText: 'An original image recipe.', tags: ['editorial'], authorOrSource: 'Tech Hacks AI', previewImage: '/prompts/generated/gemini-commercial-product-photography.webp', rightsStatus: 'original' };
+  const good = { id: 'original-1', slug: 'original-one', title: 'Original one', description: 'Description', category: 'ai-image-generation', targetModel: 'Flux', promptText: 'An original image recipe.', tags: ['editorial'], authorOrSource: 'SwitchRoute', previewImage: '/prompts/generated/gemini-commercial-product-photography.webp', rightsStatus: 'original' };
   assert.equal(validatePrompt(good), null);
   assert.match(validatePrompt({ ...good, authorOrSource: '' }), /attribution/i);
   assert.match(validatePrompt({ ...good, previewImage: 'http://unsafe.test/preview.jpg' }), /HTTPS/);
