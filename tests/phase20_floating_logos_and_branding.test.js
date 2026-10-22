@@ -50,14 +50,14 @@ describe('Phase 20: Restored focused hero and assistant branding', () => {
     const chatbot = fs.readFileSync(path.resolve(process.cwd(), 'src/components/FloatingChatbot.tsx'), 'utf8');
     assert.ok(!chatbot.includes('Interactive 3D Assistant'));
     assert.ok(chatbot.includes('STARTER_PROMPTS'));
-    assert.ok(chatbot.includes('aria-label="Open Tech Hacks AI assistant"'));
+    assert.ok(chatbot.includes('aria-label="Open SwitchRoute assistant"'));
     assert.ok(!chatbot.includes('grounded 3D AI companion'));
   });
 
   test('HomePage renders hero and assistant without SSR exceptions', () => {
     setupMockBrowser('https://techhacksai.com/');
     const html = ReactDOMServer.renderToString(React.createElement(ssrModule.App));
-    assert.ok(html.includes('Find the right tools for the work.'));
+    assert.ok(html.includes('Stop paying for AI tools you don't need.'));
     assert.ok(html.includes('data-testid="chat-launcher"'));
     assert.ok(!html.includes('data-testid="chat-dialog"'));
   });
