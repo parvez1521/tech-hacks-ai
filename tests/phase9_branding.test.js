@@ -3,7 +3,6 @@ import assert from 'node:assert';
 import fs from 'fs';
 import path from 'path';
 import React from 'react';
-import { TechHacksLogo } from '../src/components/TechHacksLogo.tsx';
 import ReactDOMServer from 'react-dom/server';
 import { execSync } from 'child_process';
 import { siteConfig, formatPageTitle } from '../src/config/site.ts';
@@ -13,11 +12,16 @@ import { toolsData } from '../src/data/seedData.ts';
 
 describe('Phase 9: SwitchRoute Platform Rebranding', () => {
   let ssrModule;
+  let logoModule;
 
   before(() => {
     // Recompile bundle for Node SSR
     execSync(
       './node_modules/.bin/esbuild src/App.tsx --bundle --platform=node --format=esm --external:react --external:react-dom --external:lucide-react --outfile=dist/test-ssr.js',
+      { stdio: 'pipe' }
+    );
+    execSync(
+      './node_modules/.bin/esbuild src/components/TechHacksLogo.tsx --bundle --platform=node --format=esm --external:react --outfile=dist/test-logo.js',
       { stdio: 'pipe' }
     );
   });
@@ -177,13 +181,14 @@ describe('Phase 9: SwitchRoute Platform Rebranding', () => {
     assert.ok(html.includes('group-hover:rotate-3'), 'Logo must maintain microinteraction rotate hover');
   });
 
-  test('rendered SwitchRoute logo SVG gradient IDs are unique across repeated instances', () => {
+  test('rendered SwitchRoute logo SVG gradient IDs are unique across repeated instances', async () => {
+    if (!logoModule) logoModule = await import('../dist/test-logo.js');
     const html = ReactDOMServer.renderToStaticMarkup(
       React.createElement(
         React.Fragment,
         null,
-        React.createElement(TechHacksLogo),
-        React.createElement(TechHacksLogo),
+        React.createElement(logoModule.TechHacksLogo),
+        React.createElement(logoModule.TechHacksLogo),
       ),
     );
     const ids = [...html.matchAll(/id="(switchRoute-[^"]+)"/g)].map((match) => match[1]);
