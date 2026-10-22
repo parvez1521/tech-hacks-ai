@@ -425,7 +425,7 @@ const ImageResizerTool: React.FC = () => {
 
 // 2. Vector QR Code Generator Tool
 const QrGeneratorTool: React.FC = () => {
-  const [text, setText] = useState('https://techhacksai.com');
+  const [text, setText] = useState('https://switchroute.in');
   const [qrSize, setQrSize] = useState(256);
   const [copied, setCopied] = useState(false);
   const [error, setError] = useState('');
