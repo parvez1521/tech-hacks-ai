@@ -116,7 +116,7 @@ export const DiscoveriesPage: React.FC = () => {
           Daily Discoveries &amp; Featured AI Tools
         </h1>
         <p className="text-base sm:text-lg text-[#64748B] leading-relaxed">
-          Explore breakthrough AI utilities, developer sandboxes, frontier models, and creative tools vetted daily by Tech Hacks AI.
+          Explore breakthrough AI utilities, developer sandboxes, frontier models, and creative tools vetted daily by SwitchRoute.
         </p>
       </div>
 
