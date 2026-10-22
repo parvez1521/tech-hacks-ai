@@ -10,7 +10,7 @@ import { proprietaryTools } from '../src/data/alternatives.ts';
 import { aiToolsData } from '../src/data/aiToolsData.ts';
 import { toolsData } from '../src/data/seedData.ts';
 
-describe('Phase 9: Tech Hacks AI Platform Rebranding', () => {
+describe('Phase 9: SwitchRoute Platform Rebranding', () => {
   let ssrModule;
 
   before(() => {
@@ -75,10 +75,10 @@ describe('Phase 9: Tech Hacks AI Platform Rebranding', () => {
     return raw.replace(/<!-- -->/g, '');
   }
 
-  test('siteConfig defines canonical Tech Hacks AI identity and URLs', () => {
-    assert.strictEqual(siteConfig.name, 'Tech Hacks AI', 'Canonical name must be Tech Hacks AI');
-    assert.strictEqual(siteConfig.shortName, 'Tech Hacks', 'Short name must be Tech Hacks');
-    assert.strictEqual(siteConfig.brandMark, 'AI', 'Brand mark must be AI');
+  test('siteConfig defines canonical SwitchRoute identity and URLs', () => {
+    assert.strictEqual(siteConfig.name, 'SwitchRoute', 'Canonical name must be SwitchRoute');
+    assert.strictEqual(siteConfig.shortName, 'SwitchRoute', 'Short name must be SwitchRoute');
+    assert.strictEqual(siteConfig.brandMark, 'SR', 'Brand mark must be SR');
     assert.strictEqual(siteConfig.url, 'https://techhacksai.com', 'Base URL must be techhacksai.com');
     assert.ok(siteConfig.tagline.length > 10, 'Tagline must be non-empty');
     assert.ok(siteConfig.description.length > 20, 'Description must be non-empty');
@@ -86,19 +86,19 @@ describe('Phase 9: Tech Hacks AI Platform Rebranding', () => {
     // formatPageTitle helper
     assert.strictEqual(
       formatPageTitle(),
-      'Tech Hacks AI — Discover AI Tools, Free Software & Open-Source Alternatives'
+      'SwitchRoute — Free AI Tools, Smarter Alternatives & Open Source'
     );
     assert.strictEqual(
       formatPageTitle('All Open Source Tools'),
-      'All Open Source Tools — Tech Hacks AI'
+      'All Open Source Tools — SwitchRoute'
     );
     assert.strictEqual(
       formatPageTitle('Side-by-Side Tool Comparison'),
-      'Side-by-Side Tool Comparison — Tech Hacks AI'
+      'Side-by-Side Tool Comparison — SwitchRoute'
     );
   });
 
-  test('official Tech Hacks AI vector logo assets exist on disk and have valid SVG markup', () => {
+  test('official SwitchRoute vector logo assets exist on disk and have valid SVG markup', () => {
     const rootDir = process.cwd();
     const faviconPath = path.join(rootDir, 'public', 'favicon.svg');
     const logoPath = path.join(rootDir, 'public', 'tech-hacks-ai-logo.svg');
@@ -118,16 +118,16 @@ describe('Phase 9: Tech Hacks AI Platform Rebranding', () => {
     assert.ok(logoContent.includes('linearGradient'), 'logo must include gradient styling');
   });
 
-  test('index.html contains Tech Hacks AI metadata, OG tags, Twitter cards and favicon link', () => {
+  test('index.html contains SwitchRoute metadata, OG tags, Twitter cards and favicon link', () => {
     const indexHtml = fs.readFileSync(path.join(process.cwd(), 'index.html'), 'utf8');
 
     assert.ok(
-      indexHtml.includes('<title>Tech Hacks AI — Discover AI Tools, Free Software &amp; Open-Source Alternatives</title>'),
-      'index.html title must be branded Tech Hacks AI'
+      indexHtml.includes('<title>SwitchRoute — Free AI Tools, Smarter Alternatives &amp; Open Source</title>'),
+      'index.html title must be branded SwitchRoute'
     );
     assert.ok(
-      indexHtml.includes('content="Tech Hacks AI"'),
-      'index.html og:site_name must be Tech Hacks AI'
+      indexHtml.includes('content="SwitchRoute"'),
+      'index.html og:site_name must be SwitchRoute'
     );
     assert.ok(
       indexHtml.includes('href="https://techhacksai.com"'),
@@ -138,8 +138,8 @@ describe('Phase 9: Tech Hacks AI Platform Rebranding', () => {
       'index.html og:url must point to techhacksai.com'
     );
     assert.ok(
-      indexHtml.includes('content="@techhacksai"'),
-      'index.html twitter:site must be @techhacksai'
+      !indexHtml.includes('content="@techhacksai"'),
+      'index.html must not advertise the old Twitter handle after rebranding'
     );
     assert.ok(
       indexHtml.includes('href="/favicon.svg"'),
@@ -165,122 +165,122 @@ describe('Phase 9: Tech Hacks AI Platform Rebranding', () => {
     );
   });
 
-  test('Header renders Tech Hacks AI brand mark, wordmark and microinteractions', async () => {
+  test('Header renders SwitchRoute brand mark, wordmark and microinteractions', async () => {
     setupMockBrowser('https://techhacksai.com/');
     if (!ssrModule) ssrModule = await import('../dist/test-ssr.js');
     const html = renderClean(React.createElement(ssrModule.App));
 
-    assert.ok(html.includes('Tech Hacks'), 'Header must render "Tech Hacks" wordmark');
-    assert.ok(html.includes('AI'), 'Header must render "AI" accent badge');
-    assert.ok(html.includes('aria-label="Tech Hacks AI"'), 'Header logo link accessible name matches visible wordmark');
-    assert.ok(html.includes('group-hover:rotate-12'), 'Logo must maintain microinteraction rotate hover');
+    assert.ok(html.includes('SwitchRoute'), 'Header must render "SwitchRoute" wordmark');
+    assert.ok(html.includes('switchRouteLineGrad'), 'Header must render the SwitchRoute route mark');
+    assert.ok(html.includes('aria-label="SwitchRoute"'), 'Header logo link accessible name matches visible wordmark');
+    assert.ok(html.includes('group-hover:rotate-3'), 'Logo must maintain microinteraction rotate hover');
   });
 
-  test('Footer renders Tech Hacks AI about summary and current year copyright', async () => {
+  test('Footer renders SwitchRoute about summary and current year copyright', async () => {
     setupMockBrowser('https://techhacksai.com/');
     if (!ssrModule) ssrModule = await import('../dist/test-ssr.js');
     const html = renderClean(React.createElement(ssrModule.App));
 
     const currentYear = new Date().getFullYear();
     assert.ok(
-      html.includes(`© ${currentYear} Tech Hacks AI. Built with open web standards.`),
-      'Footer must render Tech Hacks AI copyright'
+      html.includes(`© ${currentYear} SwitchRoute. Built with open web standards.`),
+      'Footer must render SwitchRoute copyright'
     );
     assert.ok(
-      html.includes('Tech Hacks AI is a curated discovery platform'),
-      'Footer must render Tech Hacks AI about text'
+      html.includes('SwitchRoute is an independent discovery directory'),
+      'Footer must render SwitchRoute about text'
     );
   });
 
-  test('HomePage hero renders Tech Hacks AI audience description', async () => {
+  test('HomePage hero renders SwitchRoute audience description', async () => {
     setupMockBrowser('https://techhacksai.com/');
     if (!ssrModule) ssrModule = await import('../dist/test-ssr.js');
     const html = renderClean(React.createElement(ssrModule.App));
 
     assert.ok(
-      html.includes('Tech Hacks AI helps you find useful AI products'),
-      'Hero description must mention Tech Hacks AI'
+      html.includes('Discover free AI plans, open-source alternatives, and practical tools before you add another subscription.'),
+      'Hero description must mention SwitchRoute'
     );
   });
 
-  test('dynamic document.title correctly formats with Tech Hacks AI suffix across all routes', async () => {
+  test('dynamic document.title correctly formats with SwitchRoute suffix across all routes', async () => {
     if (!ssrModule) ssrModule = await import('../dist/test-ssr.js');
 
     const testRoutes = [
       {
         route: 'home',
         params: {},
-        expected: 'Tech Hacks AI — Discover AI Tools, Free Software & Open-Source Alternatives',
+        expected: 'SwitchRoute — Free AI Tools, Smarter Alternatives & Open Source',
       },
       {
         route: 'tools',
         params: {},
-        expected: 'All Open Source Tools — Tech Hacks AI',
+        expected: 'All Open Source Tools — SwitchRoute',
       },
       {
         route: 'ai-tools',
         params: {},
-        expected: 'AI Tools & Generative Platforms Directory — Tech Hacks AI',
+        expected: 'AI Tools & Generative Platforms Directory — SwitchRoute',
       },
       {
         route: 'free-ai-sites',
         params: {},
-        expected: 'Free AI Sites & Zero-Cost Generative Tools — Tech Hacks AI',
+        expected: 'Free AI Sites & Zero-Cost Generative Tools — SwitchRoute',
       },
       {
         route: 'alternatives',
         params: {},
-        expected: 'Browse Proprietary Software Alternatives — Tech Hacks AI',
+        expected: 'Browse Proprietary Software Alternatives — SwitchRoute',
       },
       {
         route: 'guides',
         params: {},
-        expected: 'Step-by-Step AI Workflows & Tutorials — Tech Hacks AI',
+        expected: 'Step-by-Step AI Workflows & Tutorials — SwitchRoute',
       },
       {
         route: 'prompt-library',
         params: {},
-        expected: 'AI Prompt Library & Creative Recipes — Tech Hacks AI',
+        expected: 'AI Prompt Library & Creative Recipes — SwitchRoute',
       },
       {
         route: 'free-tools',
         params: {},
-        expected: 'Free Browser-Based Utilities — Tech Hacks AI',
+        expected: 'Free Browser-Based Utilities — SwitchRoute',
       },
       {
         route: 'compare',
         params: {},
-        expected: 'Side-by-Side Tool Comparison — Tech Hacks AI',
+        expected: 'Side-by-Side Tool Comparison — SwitchRoute',
       },
       {
         route: 'pick',
         params: {},
-        expected: 'Help Me Pick: Guided Tool Discovery — Tech Hacks AI',
+        expected: 'Help Me Pick: Guided Tool Discovery — SwitchRoute',
       },
       {
         route: 'saved',
         params: {},
-        expected: 'Saved Tools & Prompt Recipes — Tech Hacks AI',
+        expected: 'Saved Tools & Prompt Recipes — SwitchRoute',
       },
       {
         route: 'updates',
         params: {},
-        expected: 'Platform & Model Changelog — Tech Hacks AI',
+        expected: 'Platform & Model Changelog — SwitchRoute',
       },
       {
         route: 'not-found',
         params: {},
-        expected: '404 Page Not Found — Tech Hacks AI',
+        expected: '404 Page Not Found — SwitchRoute',
       },
       {
         route: 'tool-detail',
         params: { slug: 'supabase' },
-        expected: 'Supabase: Open Source Alternative to firebase — Tech Hacks AI',
+        expected: 'Supabase: Open Source Alternative to firebase — SwitchRoute',
       },
       {
         route: 'alternative-detail',
         params: { slug: 'notion' },
-        expected: 'Open Source Notion Alternatives — Tech Hacks AI',
+        expected: 'Open Source Notion Alternatives — SwitchRoute',
       },
     ];
 
