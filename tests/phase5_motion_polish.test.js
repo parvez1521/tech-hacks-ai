@@ -60,7 +60,7 @@ describe('Phase 5: Premium Interactive UI, Motion Polish & Accessibility', () =>
     if (!ssrModule) ssrModule = await import('../dist/test-ssr.js');
     const html = ReactDOMServer.renderToString(React.createElement(ssrModule.App));
 
-    assert.ok(html.includes('group-hover:rotate-12'), 'Logo should have refined rotate microinteraction');
+    assert.ok(html.includes('group-hover:rotate-3'), 'Logo should have refined rotate microinteraction');
   });
 
   test('Pagination includes enhanced active button shadow and scaling', async () => {
