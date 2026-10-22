@@ -187,7 +187,8 @@ export function getAllPrompts(): PromptItem[] {
     visualStyle: prompt.visualStyle || inferPromptStyle(prompt),
     aspectRatio: prompt.aspectRatio || inferPromptAspectRatio(prompt),
     status: prompt.status || 'published',
-  }));
+  })).sort((a, b) => Number(Boolean(b.featured)) - Number(Boolean(a.featured))
+    || (a.featuredOrder ?? Number.MAX_SAFE_INTEGER) - (b.featuredOrder ?? Number.MAX_SAFE_INTEGER));
 }
 
 export function getPromptBySlug(slug: string): PromptItem | undefined {

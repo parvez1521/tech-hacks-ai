@@ -24,12 +24,14 @@ test('prompt library recipes have usable metadata and unique original local prev
 });
 
 test('prompt storage rejects missing attribution and invalid image locations', () => {
-  const good = { id: 'original-1', slug: 'original-one', title: 'Original one', description: 'Description', category: 'ai-image-generation', targetModel: 'Flux', promptText: 'An original image recipe.', tags: ['editorial'], authorOrSource: 'Tech Hacks AI', previewImage: '/prompts/generated/gemini-commercial-product-photography.webp' };
+  const good = { id: 'original-1', slug: 'original-one', title: 'Original one', description: 'Description', category: 'ai-image-generation', targetModel: 'Flux', promptText: 'An original image recipe.', tags: ['editorial'], authorOrSource: 'Tech Hacks AI', previewImage: '/prompts/generated/gemini-commercial-product-photography.webp', rightsStatus: 'original' };
   assert.equal(validatePrompt(good), null);
   assert.match(validatePrompt({ ...good, authorOrSource: '' }), /attribution/i);
   assert.match(validatePrompt({ ...good, previewImage: 'http://unsafe.test/preview.jpg' }), /HTTPS/);
   assert.match(validatePrompt({ ...good, previewImage: '' }), /image is required/i);
   assert.match(validatePrompt({ ...good, previewImage: '/prompts/../../index.html' }), /stay inside/i);
+  assert.match(validatePrompt({ ...good, previewImage: 'https://creator.example/image.jpg', rightsStatus: 'original' }), /license or written permission/i);
+  assert.match(validatePrompt({ ...good, previewImage: 'https://creator.example/image.jpg', rightsStatus: 'licensed' }), /source URL, creator attribution, and license/i);
 });
 
 test('prompt read path degrades cleanly when Supabase is not configured', async () => {

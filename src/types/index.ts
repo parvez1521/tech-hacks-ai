@@ -200,6 +200,7 @@ export interface GuideStep {
   title: string;
   description: string;
   promptTemplate?: string;
+  media?: { type: 'image'; src: string; alt: string; caption?: string };
 }
 
 export interface Guide {
@@ -243,6 +244,25 @@ export interface PromptItem {
   visualStyle?: string;
   aspectRatio?: string;
   attributionUrl?: string;
+  sourceUrl?: string;
+  sourceCreator?: string;
+  rightsStatus?: 'original' | 'licensed' | 'permission-granted' | 'pending' | 'unknown';
+  rightsLicense?: string;
+  featured?: boolean;
+  featuredOrder?: number;
+  mediaType?: 'image' | 'video';
+  promptProvenance?: 'original' | 'verified-source' | 'suggested-recreation';
+  videoDetails?: {
+    previewUrl?: string;
+    videoUrl?: string;
+    hostingMethod?: 'local' | 'official-embed' | 'link-only';
+    sourcePageUrl?: string;
+    creatorAttribution?: string;
+    permissionStatus?: string;
+    durationSeconds?: number;
+    aspectRatio?: string;
+    guideSlugs?: string[];
+  };
   status?: 'draft' | 'pending' | 'published' | 'rejected';
 }
 

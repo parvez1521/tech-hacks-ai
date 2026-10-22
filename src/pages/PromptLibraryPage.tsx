@@ -1,10 +1,10 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { getAllPrompts } from '../services/aiCatalogService';
 import { fetchPublishedPrompts } from '../services/promptLibraryService';
-import { promptCategories, promptProviders } from '../data/promptsData';
+import { promptCategories, promptProviders, type PromptCategoryDef } from '../data/promptsData';
 import { PromptCard } from '../components/PromptCard';
 import { EmptyState } from '../components/EmptyState';
-import { MessageSquareCode, Search, X, Sparkles, Filter, ArrowDownWideNarrow } from 'lucide-react';
+import { Search, X, Sparkles, Filter, ArrowDownWideNarrow, ExternalLink, Heart } from 'lucide-react';
 
 type PromptSort = 'featured' | 'title' | 'model';
 
@@ -16,6 +16,7 @@ export const PromptLibraryPage: React.FC = () => {
   const [sort, setSort] = useState<PromptSort>('featured');
 
   const [allPrompts, setAllPrompts] = useState(() => getAllPrompts());
+  const [databaseCategories, setDatabaseCategories] = useState<PromptCategoryDef[]>([]);
   useEffect(() => {
     let active = true;
     fetchPublishedPrompts().then((remote) => {
@@ -28,13 +29,20 @@ export const PromptLibraryPage: React.FC = () => {
     });
     return () => { active = false; };
   }, []);
+  useEffect(() => {
+    let active = true;
+    fetch('/api/prompt-categories').then((response) => response.ok ? response.json() : null).then((body) => {
+      if (active && Array.isArray(body?.categories)) setDatabaseCategories(body.categories.map((category: { slug: string; name: string; description?: string }) => ({ id: category.slug, slug: category.slug, name: category.name, description: category.description || '' })));
+    }).catch(() => {});
+    return () => { active = false; };
+  }, []);
   const popularTags = useMemo(() => {
     const counts = new Map<string, number>();
     allPrompts.forEach((prompt) => prompt.tags.forEach((tag) => counts.set(tag, (counts.get(tag) || 0) + 1)));
     return [...counts.entries()].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0])).slice(0, 10).map(([tag]) => tag);
   }, [allPrompts]);
   const categories = useMemo(() => {
-    const known = new Map(promptCategories.map((category) => [category.slug, category]));
+    const known = new Map([...promptCategories, ...databaseCategories].map((category) => [category.slug, category]));
     allPrompts.forEach((prompt) => {
       if (!known.has(prompt.category)) {
         const name = prompt.category.split('-').map((word) => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
@@ -42,7 +50,7 @@ export const PromptLibraryPage: React.FC = () => {
       }
     });
     return [...known.values()];
-  }, [allPrompts]);
+  }, [allPrompts, databaseCategories]);
 
   const filteredPrompts = useMemo(() => {
     const filtered = allPrompts.filter((p) => {
@@ -61,6 +69,7 @@ export const PromptLibraryPage: React.FC = () => {
     });
     if (sort === 'title') filtered.sort((a, b) => a.title.localeCompare(b.title));
     if (sort === 'model') filtered.sort((a, b) => a.targetModel.localeCompare(b.targetModel) || a.title.localeCompare(b.title));
+    if (sort === 'featured') filtered.sort((a, b) => Number(Boolean(b.featured)) - Number(Boolean(a.featured)) || (a.featuredOrder ?? Number.MAX_SAFE_INTEGER) - (b.featuredOrder ?? Number.MAX_SAFE_INTEGER) || a.title.localeCompare(b.title));
     return filtered;
   }, [allPrompts, search, selectedCat, selectedProvider, selectedTag, sort]);
 
@@ -73,15 +82,20 @@ export const PromptLibraryPage: React.FC = () => {
       <section className="prompt-atlas__intro mb-8 sm:mb-10" aria-labelledby="prompt-library-title">
         <div className="prompt-atlas__heading">
           <div className="inline-flex items-center gap-2 rounded-full border border-teal-200/70 bg-teal-50 px-3 py-1.5 text-xs font-semibold text-teal-900 dark:border-teal-900 dark:bg-teal-950/60 dark:text-teal-200">
-            <MessageSquareCode className="w-4 h-4" aria-hidden="true" /> Original prompt recipes
+            <Heart className="w-4 h-4" aria-hidden="true" /> Portraits, imagery &amp; creative workflows
           </div>
           <h1 id="prompt-library-title" className="mt-5 max-w-3xl text-3xl sm:text-5xl font-extrabold tracking-tight text-slate-950 dark:text-white">AI Prompt Library &amp; Creative Recipes</h1>
-          <p className="mt-3 max-w-2xl text-sm sm:text-base leading-7 text-slate-600 dark:text-slate-300">Browse adaptable recipes for image, video, and creative workflows. Preview the direction, check model notes, then copy and make it yours.</p>
+          <p className="mt-3 max-w-2xl text-sm sm:text-base leading-7 text-slate-600 dark:text-slate-300">Start with the human portrait you have in mind. Personalize the subject and camera direction, then explore product, video, and design prompts.</p>
         </div>
         <div className="prompt-atlas__art" aria-hidden="true">
-          <img src="/prompts/generated/gemini-commercial-product-photography.webp" alt="" width="1254" height="1254" fetchpriority="high" decoding="async" />
-          <div className="prompt-atlas__art-note"><Sparkles size={15} /> Make a prompt your own</div>
+          <img src="/prompts/generated/portrait-editorial-duo.webp" alt="" width="1536" height="1024" fetchpriority="high" decoding="async" />
+          <div className="prompt-atlas__art-note"><Sparkles size={15} /> Original portrait study</div>
         </div>
+      </section>
+
+      <section className="mb-8 flex flex-col gap-3 rounded-2xl border border-slate-200 bg-white px-5 py-4 dark:border-slate-700 dark:bg-slate-900 sm:flex-row sm:items-center sm:justify-between" aria-label="MeiGen inspiration source">
+        <div><h2 className="text-sm font-bold text-slate-900 dark:text-white">Inspired by real prompt collections</h2><p className="mt-1 max-w-3xl text-xs leading-5 text-slate-600 dark:text-slate-300">Explore MeiGen’s original gallery and product-photography examples. Their artwork and prompts are not copied into this library; our recipes and previews are original unless a source and reuse permission are recorded.</p></div>
+        <div className="flex shrink-0 flex-wrap gap-2"><a href="https://www.meigen.ai/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-lg border border-slate-300 px-3 py-2 text-xs font-semibold text-slate-800 hover:border-teal-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-500 dark:border-slate-600 dark:text-slate-100">Open gallery <ExternalLink size={14} aria-hidden="true" /></a><a href="https://www.meigen.ai/prompts/product-photography" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-lg border border-slate-300 px-3 py-2 text-xs font-semibold text-slate-800 hover:border-teal-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-500 dark:border-slate-600 dark:text-slate-100">Product examples <ExternalLink size={14} aria-hidden="true" /></a></div>
       </section>
 
       <section className="prompt-atlas__controls" aria-label="Search and filter prompts">
@@ -123,11 +137,13 @@ export const PromptLibraryPage: React.FC = () => {
           </div>
         </div>
 
+        {(!selectedCat || selectedCat === 'human-portraits') && <div className="mt-4 flex flex-wrap items-center gap-2" role="group" aria-label="Filter portrait subcategories"><span className="mr-1 text-xs font-semibold text-slate-600 dark:text-slate-300">Portraits</span>{['featured-human-portraits', 'womens-portraits', 'mens-portraits', 'couple-portraits', 'professional-headshots', 'cinematic-portraits', 'fashion-editorial', 'street-style-lifestyle', 'full-body-poses', 'character-consistency'].map((tag) => <button key={tag} type="button" aria-pressed={selectedTag === tag} onClick={() => setSelectedTag(selectedTag === tag ? null : tag)} className={`rounded-lg px-2.5 py-1.5 text-xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-500 ${selectedTag === tag ? 'bg-teal-800 text-white dark:bg-teal-300 dark:text-slate-950' : 'bg-slate-100 text-slate-700 hover:bg-slate-200 dark:bg-slate-800 dark:text-slate-200'}`}>{tag.replace(/-/g, ' ')}</button>)}</div>}
+
         {popularTags.length > 0 && <div className="mt-5 flex flex-wrap items-center gap-2" aria-label="Popular tags"><span className="mr-1 text-xs font-semibold text-slate-600 dark:text-slate-300">Popular tags</span>{popularTags.map((tag) => <button key={tag} type="button" aria-pressed={selectedTag === tag} onClick={() => setSelectedTag(selectedTag === tag ? null : tag)} className={`rounded-lg px-2.5 py-1.5 text-xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-500 ${selectedTag === tag ? 'bg-teal-800 text-white dark:bg-teal-300 dark:text-slate-950' : 'bg-slate-100 text-slate-700 hover:bg-slate-200 dark:bg-slate-800 dark:text-slate-200 dark:hover:bg-slate-700'}`}>#{tag}</button>)}</div>}
       </section>
 
       <div className="mb-4 mt-8 flex items-end justify-between gap-4">
-        <div><h2 className="text-xl font-bold tracking-tight text-slate-950 dark:text-white">Prompt gallery</h2><p className="mt-1 text-sm text-slate-500 dark:text-slate-400">Original Tech Hacks AI recipes with locally hosted artwork.</p></div>
+        <div><h2 className="text-xl font-bold tracking-tight text-slate-950 dark:text-white">Prompt gallery</h2><p className="mt-1 text-sm text-slate-500 dark:text-slate-400">Original Tech Hacks AI recipes and locally hosted previews.</p></div>
         {(selectedCat || selectedProvider || selectedTag || search) && <button type="button" onClick={resetFilters} className="text-xs font-semibold text-teal-800 underline underline-offset-4 dark:text-teal-300">Clear filters</button>}
       </div>
 

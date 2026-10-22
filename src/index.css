@@ -1055,8 +1055,9 @@
 .prompt-atlas__art img {
   display: block;
   width: 100%;
-  aspect-ratio: 1;
+  aspect-ratio: 3 / 2;
   object-fit: cover;
+  object-position: 58% center;
 }
 .prompt-atlas__art-note {
   position: absolute;
@@ -1111,6 +1112,7 @@
 @media (max-width: 700px) {
   .prompt-atlas__intro { grid-template-columns: minmax(0, 1fr); }
   .prompt-atlas__art { max-width: 540px; }
+  .prompt-atlas__art img { aspect-ratio: 4 / 3; object-position: 60% center; }
   .prompt-atlas__controls { margin-inline: -.15rem; }
 }
 @media (prefers-reduced-motion: reduce) {

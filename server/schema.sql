@@ -168,3 +168,22 @@ TO service_role
 USING (true)
 WITH CHECK (true);
 
+CREATE TABLE IF NOT EXISTS public.techhacks_prompt_categories (
+    slug VARCHAR(120) PRIMARY KEY,
+    name VARCHAR(120) NOT NULL,
+    description VARCHAR(500) NOT NULL DEFAULT '',
+    display_order INTEGER NOT NULL DEFAULT 100 CHECK (display_order BETWEEN 0 AND 10000),
+    created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+    updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+ALTER TABLE public.techhacks_prompt_categories ENABLE ROW LEVEL SECURITY;
+REVOKE ALL ON public.techhacks_prompt_categories FROM anon, authenticated;
+GRANT SELECT ON public.techhacks_prompt_categories TO anon, authenticated;
+GRANT ALL ON public.techhacks_prompt_categories TO service_role;
+DROP POLICY IF EXISTS "Public can view prompt categories" ON public.techhacks_prompt_categories;
+CREATE POLICY "Public can view prompt categories"
+ON public.techhacks_prompt_categories FOR SELECT TO anon, authenticated USING (true);
+DROP POLICY IF EXISTS "Service role full access on prompt categories" ON public.techhacks_prompt_categories;
+CREATE POLICY "Service role full access on prompt categories"
+ON public.techhacks_prompt_categories FOR ALL TO service_role USING (true) WITH CHECK (true);
+

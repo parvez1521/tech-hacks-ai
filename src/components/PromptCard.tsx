@@ -71,6 +71,8 @@ export const PromptCard: React.FC<PromptCardProps> = ({ prompt }) => {
                 {prompt.placeholders.length} Placeholders
               </span>
             )}
+            {prompt.featured && <span className="px-2 py-0.5 rounded-lg text-[10px] font-semibold bg-rose-50 text-rose-700 border border-rose-200">Featured portrait</span>}
+            {prompt.mediaType === 'video' && <span className="px-2 py-0.5 rounded-lg text-[10px] font-semibold bg-indigo-50 text-indigo-700 border border-indigo-200">Video prompt</span>}
             <span className="text-[11px] text-slate-500 capitalize dark:text-slate-400">
               {prompt.category.replace(/-/g, ' ')}
             </span>

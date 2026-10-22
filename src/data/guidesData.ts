@@ -26,12 +26,14 @@ export const guidesData: Guide[] = [
         title: 'Establish Visual Consistency with a Master Style Prompt',
         description: 'Before animating video, generate high-resolution keyframe reference images in FLUX.1. Specify concrete photographic details: 35mm anamorphic lens, lighting temperature, and aspect ratio --ar 16:9.',
         promptTemplate: 'Cinematic wide angle establishing shot of a futuristic neon cyber-city in heavy rain, shot on 35mm Arri Alexa 65, natural film grain, ISO 400, f/1.8, cinematic anamorphic bokeh, reflections on wet asphalt, photorealistic --ar 16:9',
+        media: { type: 'image', src: '/prompts/generated/slow-dolly-cyberpunk-rain.webp', alt: 'A rain-wet futuristic street with neon reflections and deep perspective, matching the guide’s cinematic keyframe prompt.', caption: 'Original Tech Hacks AI keyframe study for the rainy city scene.' },
       },
       {
         stepNumber: 2,
         title: 'Upload Keyframe to Runway Gen-3 Alpha for Image-to-Video',
         description: 'Navigate to Runway Gen-3 Alpha in Image-to-Video mode. Upload your high-res FLUX image as the first frame. Set camera motion to slow forward dolly with a subtle horizontal pan.',
         promptTemplate: 'Slow forward dolly movement through rainy cyberpunk street, steam rising from grates, vehicle lights streaking smoothly, realistic fluid motion, cinematic 24fps motion blur',
+        media: { type: 'image', src: '/prompts/generated/slow-dolly-cyberpunk-rain.webp', alt: 'The rainy neon street keyframe to use as a matching reference for the slow forward camera move.', caption: 'Use this matching still as the image-to-video source; no generated video clip is included.' },
       },
       {
         stepNumber: 3,
@@ -98,6 +100,7 @@ export const guidesData: Guide[] = [
         title: 'Prime Claude with Architectural Constraints',
         description: 'Begin your session by establishing design standards: Tailwind CSS, modern dark mode palette, lucide-react icons, and interactive chart visualizations.',
         promptTemplate: 'You are an expert React UI architect. In a standalone Artifact, build a responsive SaaS metrics dashboard with dark mode styling, key metric KPI cards, monthly revenue charts, and a filterable transaction table.',
+        media: { type: 'image', src: '/prompts/generated/claude-interactive-saas-dashboard.webp', alt: 'A dark analytics dashboard concept with teal and lavender charts, matching the dashboard Artifact prompt.', caption: 'Original interface concept preview.' },
       },
       {
         stepNumber: 2,
@@ -188,11 +191,13 @@ export const guidesData: Guide[] = [
         title: 'Specify Tangible Optical Equipment and Film Stock',
         description: 'Avoid vague quality descriptors like "photorealistic" or "ultra-detailed". Instead, specify real lenses like Hasselblad 80mm f/2.8 and natural environmental lighting.',
         promptTemplate: 'Intimate editorial studio portrait of a 40-year-old architectural engineer, subtle wrinkles and natural skin pore texture, lit by soft north-facing window light, Hasselblad H6D-100c, 80mm f/2.8 lens, Kodachrome 64 tone, understated authentic expression --ar 4:5 --stylize 150',
+        media: { type: 'image', src: '/prompts/generated/portrait-man-professional.webp', alt: 'A fictional adult man with salt-and-pepper hair and natural expression lines in an architecture studio portrait.', caption: 'Original Tech Hacks AI portrait example illustrating natural skin detail.' },
       },
       {
         stepNumber: 2,
         title: 'Use Inpainting to Perfect Eyes and Hands',
         description: 'Open the Midjourney Vary (Region) editor to brush over any minor asymmetry in iris catchlights or hand anatomy for flawless high-end delivery.',
+        media: { type: 'image', src: '/prompts/generated/portrait-woman-windowlight.webp', alt: 'A fictional adult woman in window light, shown as an example portrait for refining small facial details.', caption: 'Original portrait preview; use a consenting reference image for edits of real people.' },
       },
     ],
   },

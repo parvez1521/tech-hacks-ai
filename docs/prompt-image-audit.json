@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-10-21T21:16:04.383Z",
+  "generatedAt": "2026-10-22T07:01:23.611Z",
   "summary": {
-    "promptCount": 43,
-    "originalGeneratedImages": 43,
+    "promptCount": 48,
+    "originalGeneratedImages": 48,
     "duplicatePromptImages": 0,
     "missingPromptImages": 0,
     "logoCount": 223,
@@ -24,6 +24,116 @@
   },
   "duplicateImages": [],
   "prompts": [
+    {
+      "slug": "portrait-editorial-duo",
+      "title": "Two-Person Editorial Portrait with Natural Skin Detail",
+      "imagePath": "/prompts/generated/portrait-editorial-duo.webp",
+      "dimensions": {
+        "width": 1536,
+        "height": 1024
+      },
+      "actualFileType": "webp",
+      "imageAvailable": true,
+      "sizeBytes": 97006,
+      "sha256": "65edd1951a55df6386ed380bf5ec77422f067fb64ceb8e4f917cc67e95ab98f8",
+      "extensionMatchesContent": true,
+      "altText": "A fictional adult woman with natural curls and a fictional adult man in an ivory knit pose side by side against a dark teal studio backdrop.",
+      "visualDescription": "Original two-subject editorial portrait with dark teal negative space.",
+      "provenance": {
+        "sourceType": "original-ai-generated",
+        "provider": "Codex built-in image_gen",
+        "createdFor": "Tech Hacks AI",
+        "rightsStatus": "Original preview generated for this project; no third-party gallery image used."
+      }
+    },
+    {
+      "slug": "portrait-women-windowlight",
+      "title": "Women’s Portrait in Warm Window Light",
+      "imagePath": "/prompts/generated/portrait-woman-windowlight.webp",
+      "dimensions": {
+        "width": 1122,
+        "height": 1402
+      },
+      "actualFileType": "webp",
+      "imageAvailable": true,
+      "sizeBytes": 133262,
+      "sha256": "6451e98304252469a923ed9c925d66d3338840c8758b8ebb5e63a073baef0cf8",
+      "extensionMatchesContent": true,
+      "altText": "A fictional adult woman with long dark curls and freckles sits beside a sunlit café window in a rust-colored shirt.",
+      "visualDescription": "Original natural-light lifestyle portrait.",
+      "provenance": {
+        "sourceType": "original-ai-generated",
+        "provider": "Codex built-in image_gen",
+        "createdFor": "Tech Hacks AI",
+        "rightsStatus": "Original preview generated for this project; no third-party gallery image used."
+      }
+    },
+    {
+      "slug": "portrait-mens-professional-headshot",
+      "title": "Men’s Professional Headshot with Character",
+      "imagePath": "/prompts/generated/portrait-man-professional.webp",
+      "dimensions": {
+        "width": 1122,
+        "height": 1402
+      },
+      "actualFileType": "webp",
+      "imageAvailable": true,
+      "sizeBytes": 170718,
+      "sha256": "010a15b5b56591dee797ffd5a81364bda6817f982b3095735095ebe788b6d1af",
+      "extensionMatchesContent": true,
+      "altText": "A fictional middle-aged adult man with salt-and-pepper hair wearing a navy blazer in a softly lit architecture studio.",
+      "visualDescription": "Original professional portrait with lived-in detail.",
+      "provenance": {
+        "sourceType": "original-ai-generated",
+        "provider": "Codex built-in image_gen",
+        "createdFor": "Tech Hacks AI",
+        "rightsStatus": "Original preview generated for this project; no third-party gallery image used."
+      }
+    },
+    {
+      "slug": "portrait-couple-courtyard-dusk",
+      "title": "Couple Portrait in a Courtyard at Dusk",
+      "imagePath": "/prompts/generated/portrait-couple-courtyard.webp",
+      "dimensions": {
+        "width": 1122,
+        "height": 1402
+      },
+      "actualFileType": "webp",
+      "imageAvailable": true,
+      "sizeBytes": 148386,
+      "sha256": "e8e1431291bada35049c7f6c78a8dc9d269c812bbd93f4efbb190b91665de733",
+      "extensionMatchesContent": true,
+      "altText": "A fictional East Asian adult woman and Black adult man stand together in a softly lit courtyard at dusk.",
+      "visualDescription": "Original dusk portrait of a fictional adult couple.",
+      "provenance": {
+        "sourceType": "original-ai-generated",
+        "provider": "Codex built-in image_gen",
+        "createdFor": "Tech Hacks AI",
+        "rightsStatus": "Original preview generated for this project; no third-party gallery image used."
+      }
+    },
+    {
+      "slug": "pixverse-cinematic-portrait-motion",
+      "title": "Cinematic Rooftop Portrait with Wind and a Slow Push-In",
+      "imagePath": "/prompts/generated/pixverse-motion-portrait-poster.webp",
+      "dimensions": {
+        "width": 941,
+        "height": 1672
+      },
+      "actualFileType": "webp",
+      "imageAvailable": true,
+      "sizeBytes": 108718,
+      "sha256": "b04c9a61fa2c967c53a24d7743be5035477f22b7d04a0c8209a4abf766191b83",
+      "extensionMatchesContent": true,
+      "altText": "A fictional adult Black woman in a cobalt jacket on a rooftop at blue hour, composed as a vertical cinematic still.",
+      "visualDescription": "Original fictional portrait poster for a suggested image-to-video motion prompt.",
+      "provenance": {
+        "sourceType": "original-ai-generated",
+        "provider": "Codex built-in image_gen",
+        "createdFor": "Tech Hacks AI",
+        "rightsStatus": "Original preview generated for this project; no third-party gallery image used."
+      }
+    },
     {
       "slug": "gemini-commercial-product-photography",
       "title": "Photorealistic Studio Commercial Product Showcase",

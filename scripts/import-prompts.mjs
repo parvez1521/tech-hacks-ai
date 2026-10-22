@@ -4,6 +4,7 @@ import { createHash } from 'node:crypto';
 import { isIP } from 'node:net';
 import { fileURLToPath } from 'node:url';
 import { promptsData } from '../src/data/promptsData.ts';
+import { inspectImage } from './audit-prompt-assets.mjs';
 
 const projectRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const inputFile = process.argv[2];
@@ -26,14 +27,12 @@ async function validateImage(image) {
       const stat = await fs.stat(localFile);
       if (!stat.isFile() || stat.size > 10 * 1024 * 1024) return 'Local preview must be a file smaller than 10 MB.';
       const bytes = await fs.readFile(localFile);
-      const sig = bytes.subarray(0, 12).toString('hex');
       const ext = path.extname(localFile).toLowerCase();
-      const validFormat = ext === '.svg'
-        ? /^\s*(?:<\?xml[^>]*>\s*)?<svg(?:\s|>)/i.test(bytes.subarray(0, 1024).toString('utf8'))
-        : ext === '.png' ? sig.startsWith('89504e470d0a1a0a')
-          : ext === '.jpg' || ext === '.jpeg' ? sig.startsWith('ffd8ff')
-            : ext === '.webp' ? sig.startsWith('52494646') && sig.slice(16, 24) === '57454250' : false;
-      return validFormat ? null : 'Local preview extension does not match a valid SVG, PNG, JPEG, or WebP image.';
+      const inspected = inspectImage(bytes, ext);
+      const expectedFormat = { '.svg': 'svg', '.png': 'png', '.jpg': 'jpg', '.jpeg': 'jpg', '.webp': 'webp' }[ext];
+      if (!expectedFormat || inspected.format !== expectedFormat) return 'Local preview extension does not match a valid SVG, PNG, JPEG, or WebP image.';
+      if (!Number.isFinite(inspected.width) || !Number.isFinite(inspected.height) || inspected.width < 1 || inspected.height < 1 || inspected.width > 12000 || inspected.height > 12000 || inspected.width * inspected.height > 60000000) return 'Local preview must have valid image dimensions under 60 megapixels.';
+      return null;
     } catch { return 'Local preview file does not exist.'; }
   }
   let url;
@@ -104,6 +103,19 @@ for (const [index, prompt] of entries.entries()) {
   for (const field of ['title', 'description', 'category', 'targetModel', 'promptText', 'authorOrSource']) if (typeof prompt?.[field] !== 'string' || !prompt[field].trim()) rowErrors.push(`${field} is required.`);
   if (!Array.isArray(prompt?.tags) || prompt.tags.some((tag) => typeof tag !== 'string')) rowErrors.push('Tags must be an array of strings.');
   if (prompt?.rightsConfirmed !== true) rowErrors.push('Set rightsConfirmed: true only after confirming permission to use the prompt and preview image.');
+  const rightsStatus = String(prompt?.rightsStatus || '');
+  if (!['original', 'licensed', 'permission-granted'].includes(rightsStatus)) rowErrors.push('rightsStatus must be original, licensed, or permission-granted before import.');
+  const externalPreview = typeof prompt?.previewImage === 'string' && /^https:\/\//i.test(prompt.previewImage);
+  if (externalPreview && (!prompt.sourceUrl || !prompt.sourceCreator || !prompt.rightsLicense || !['licensed', 'permission-granted'].includes(rightsStatus))) rowErrors.push('External previews require sourceUrl, sourceCreator, a recorded license or permission, and licensed or permission-granted rightsStatus.');
+  if (prompt?.sourceUrl && !/^https:\/\//i.test(prompt.sourceUrl)) rowErrors.push('sourceUrl must use HTTPS.');
+  if (prompt?.rightsLicense && typeof prompt.rightsLicense !== 'string') rowErrors.push('rightsLicense must be a text value.');
+  if (prompt?.mediaType === 'video') {
+    if (!prompt.videoDetails || typeof prompt.videoDetails !== 'object') rowErrors.push('Video entries require videoDetails.');
+    else {
+      for (const field of ['videoUrl', 'sourcePageUrl']) if (prompt.videoDetails[field] && !/^https:\/\//i.test(prompt.videoDetails[field])) rowErrors.push(`videoDetails.${field} must use HTTPS.`);
+      if (prompt.videoDetails.sourcePageUrl && (!prompt.sourceCreator || !prompt.videoDetails.permissionStatus)) rowErrors.push('Video source pages require creator attribution and permission status.');
+    }
+  }
   if (prompt?.attributionUrl && !/^https:\/\//i.test(prompt.attributionUrl)) rowErrors.push('Attribution URL must use HTTPS.');
   if ((existingSlugs.has(slug) || seenSlugs.has(slug)) || (text && (existingPrompts.has(fingerprint(text)) || seenPrompts.has(fingerprint(text))))) {
     duplicateCount += 1;

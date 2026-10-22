@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { Check, FilePlus2, Loader2, Save, Trash2, X } from 'lucide-react';
 import type { PromptItem } from '../types/index.ts';
+import { PromptCategoryManager } from './PromptCategoryManager';
 
 type PromptStatus = 'draft' | 'pending' | 'published' | 'rejected';
 type ManagedPrompt = PromptItem & { status?: PromptStatus };
@@ -8,7 +9,7 @@ type ManagedPrompt = PromptItem & { status?: PromptStatus };
 const blankPrompt = (): ManagedPrompt => ({
   id: `editorial-${Date.now()}`, title: '', slug: '', description: '', category: 'ai-image-generation',
   targetModel: 'Gemini', provider: 'Google', promptText: '', tags: [], authorOrSource: 'Tech Hacks AI editorial team',
-  previewImage: '', visualStyle: 'Conceptual', aspectRatio: '1:1', status: 'draft',
+  previewImage: '', visualStyle: 'Conceptual', aspectRatio: '1:1', status: 'draft', rightsStatus: 'original', mediaType: 'image',
 });
 
 export const AdminPromptManager: React.FC<{ token: string }> = ({ token }) => {
@@ -19,6 +20,7 @@ export const AdminPromptManager: React.FC<{ token: string }> = ({ token }) => {
   const [saving, setSaving] = useState(false);
   const [notice, setNotice] = useState('');
   const [error, setError] = useState('');
+  const [listFilter, setListFilter] = useState({ category: '', provider: '', featured: '', mediaType: '' });
 
   const load = useCallback(async () => {
     setLoading(true); setError('');
@@ -68,10 +70,13 @@ export const AdminPromptManager: React.FC<{ token: string }> = ({ token }) => {
   };
 
   const inputClass = 'w-full rounded-lg border border-border bg-background px-3 py-2 text-sm text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60';
-  return <section className="grid grid-cols-1 gap-5 xl:grid-cols-[minmax(280px,.7fr)_minmax(0,1.3fr)]" aria-label="Prompt library administration">
+  const visiblePrompts = prompts.filter((prompt) => (!listFilter.category || prompt.category === listFilter.category) && (!listFilter.provider || prompt.provider === listFilter.provider) && (!listFilter.featured || String(Boolean(prompt.featured)) === listFilter.featured) && (!listFilter.mediaType || (prompt.mediaType || 'image') === listFilter.mediaType));
+  return <section aria-label="Prompt library administration">
+  <div className="grid grid-cols-1 gap-5 xl:grid-cols-[minmax(280px,.7fr)_minmax(0,1.3fr)]">
     <div className="rounded-2xl border border-border bg-card p-4 sm:p-5">
       <div className="mb-4 flex items-center justify-between gap-3"><div><h2 className="font-bold text-foreground">Prompt entries</h2><p className="mt-1 text-xs text-muted-foreground">Review drafts and published recipes.</p></div><button type="button" onClick={beginNew} className="inline-flex items-center gap-1.5 rounded-lg bg-primary px-3 py-2 text-xs font-semibold text-primary-foreground"><FilePlus2 size={14} /> New</button></div>
-      {loading ? <p className="flex items-center gap-2 py-6 text-sm text-muted-foreground"><Loader2 className="animate-spin" size={16} />Loading library…</p> : prompts.length ? <ul className="divide-y divide-border">{prompts.map((prompt) => <li key={prompt.id}><button type="button" onClick={() => beginEdit(prompt)} className={`w-full py-3 text-left ${selected?.id === prompt.id ? 'text-primary' : 'text-foreground'}`}><span className="flex items-center justify-between gap-3"><span className="truncate text-sm font-semibold">{prompt.title}</span><span className="rounded-full border border-border px-2 py-0.5 text-[10px] capitalize text-muted-foreground">{prompt.status || 'published'}</span></span><span className="mt-1 block truncate text-xs text-muted-foreground">/{prompt.slug}</span></button></li>)}</ul> : <p className="py-6 text-sm text-muted-foreground">No database entries yet. The curated recipes remain available.</p>}
+      <div className="mb-2 grid grid-cols-2 gap-2"><select aria-label="Filter prompts by category" value={listFilter.category} onChange={(e) => setListFilter({ ...listFilter, category: e.target.value })} className={inputClass}><option value="">All categories</option>{[...new Set(prompts.map((prompt) => prompt.category))].sort().map((value) => <option key={value} value={value}>{value}</option>)}</select><select aria-label="Filter prompts by provider" value={listFilter.provider} onChange={(e) => setListFilter({ ...listFilter, provider: e.target.value })} className={inputClass}><option value="">All providers</option>{[...new Set(prompts.map((prompt) => prompt.provider).filter(Boolean))].sort().map((value) => <option key={value} value={value}>{value}</option>)}</select><select aria-label="Filter prompts by featured status" value={listFilter.featured} onChange={(e) => setListFilter({ ...listFilter, featured: e.target.value })} className={inputClass}><option value="">Featured and regular</option><option value="true">Featured</option><option value="false">Not featured</option></select><select aria-label="Filter prompts by media type" value={listFilter.mediaType} onChange={(e) => setListFilter({ ...listFilter, mediaType: e.target.value })} className={inputClass}><option value="">All media</option><option value="image">Image</option><option value="video">Video</option></select></div>
+      {loading ? <p className="flex items-center gap-2 py-6 text-sm text-muted-foreground"><Loader2 className="animate-spin" size={16} />Loading library…</p> : visiblePrompts.length ? <ul className="divide-y divide-border">{visiblePrompts.map((prompt) => <li key={prompt.id}><button type="button" onClick={() => beginEdit(prompt)} className={`w-full py-3 text-left ${selected?.id === prompt.id ? 'text-primary' : 'text-foreground'}`}><span className="flex items-center justify-between gap-3"><span className="truncate text-sm font-semibold">{prompt.title}</span><span className="rounded-full border border-border px-2 py-0.5 text-[10px] capitalize text-muted-foreground">{prompt.status || 'published'}</span></span><span className="mt-1 block truncate text-xs text-muted-foreground">/{prompt.slug}</span></button></li>)}</ul> : <p className="py-6 text-sm text-muted-foreground">No database entries match these filters. Curated recipes remain available.</p>}
     </div>
     <div className="rounded-2xl border border-border bg-card p-4 sm:p-5">
       <div className="mb-4 flex items-center justify-between"><div><h2 className="font-bold text-foreground">{selected ? 'Edit prompt' : 'Create prompt'}</h2><p className="mt-1 text-xs text-muted-foreground">Add original or authorized content, with source attribution.</p></div>{selected && <button type="button" onClick={beginNew} aria-label="Create new prompt" className="rounded-lg p-2 text-muted-foreground hover:bg-muted"><FilePlus2 size={16} /></button>}</div>
@@ -90,6 +95,18 @@ export const AdminPromptManager: React.FC<{ token: string }> = ({ token }) => {
         <label className="text-xs font-semibold text-muted-foreground">Preview image path<input className={`${inputClass} mt-1`} value={form.previewImage || ''} onChange={(e) => change('previewImage', e.target.value)} placeholder="/prompts/generated/your-image.webp" /></label>
         <label className="text-xs font-semibold text-muted-foreground">Author / attribution<input className={`${inputClass} mt-1`} value={form.authorOrSource || ''} onChange={(e) => change('authorOrSource', e.target.value)} /></label>
         <label className="text-xs font-semibold text-muted-foreground">Attribution URL<input className={`${inputClass} mt-1`} value={form.attributionUrl || ''} onChange={(e) => change('attributionUrl', e.target.value)} placeholder="https://…" /></label>
+        <label className="text-xs font-semibold text-muted-foreground">Source page URL<input className={`${inputClass} mt-1`} value={form.sourceUrl || ''} onChange={(e) => change('sourceUrl', e.target.value)} placeholder="https://…" /></label>
+        <label className="text-xs font-semibold text-muted-foreground">Source creator / author<input className={`${inputClass} mt-1`} value={form.sourceCreator || ''} onChange={(e) => change('sourceCreator', e.target.value)} /></label>
+        <label className="text-xs font-semibold text-muted-foreground">Rights status<select className={`${inputClass} mt-1`} value={form.rightsStatus || 'unknown'} onChange={(e) => change('rightsStatus', e.target.value)}><option value="unknown">Unknown</option><option value="original">Original Tech Hacks AI</option><option value="licensed">Licensed</option><option value="permission-granted">Written permission granted</option><option value="pending">Permission pending</option></select></label>
+        <label className="text-xs font-semibold text-muted-foreground">License / permission notes<input className={`${inputClass} mt-1`} value={form.rightsLicense || ''} onChange={(e) => change('rightsLicense', e.target.value)} placeholder="License name or permission reference" /></label>
+        <label className="flex items-center gap-2 text-xs font-semibold text-muted-foreground"><input type="checkbox" checked={Boolean(form.featured)} onChange={(e) => setForm((current) => ({ ...current, featured: e.target.checked }))} /> Feature in curated order</label>
+        <label className="text-xs font-semibold text-muted-foreground">Featured order<input type="number" min="0" className={`${inputClass} mt-1`} value={form.featuredOrder ?? ''} onChange={(e) => setForm((current) => ({ ...current, featuredOrder: e.target.value ? Number(e.target.value) : undefined }))} /></label>
+        <label className="text-xs font-semibold text-muted-foreground">Media type<select className={`${inputClass} mt-1`} value={form.mediaType || 'image'} onChange={(e) => change('mediaType', e.target.value)}><option value="image">Image</option><option value="video">Video prompt</option></select></label>
+        <label className="text-xs font-semibold text-muted-foreground">Video preview / clip URL<input className={`${inputClass} mt-1`} value={form.videoDetails?.videoUrl || ''} onChange={(e) => setForm((current) => ({ ...current, videoDetails: { ...current.videoDetails, videoUrl: e.target.value, hostingMethod: e.target.value ? 'official-embed' : 'link-only' } }))} placeholder="HTTPS URL; only for authorized media" /></label>
+        <label className="text-xs font-semibold text-muted-foreground">Official source page<input className={`${inputClass} mt-1`} value={form.videoDetails?.sourcePageUrl || ''} onChange={(e) => setForm((current) => ({ ...current, videoDetails: { ...current.videoDetails, sourcePageUrl: e.target.value } }))} placeholder="https://provider.example/" /></label>
+        <label className="text-xs font-semibold text-muted-foreground">Creator / rights permission<input className={`${inputClass} mt-1`} value={form.videoDetails?.permissionStatus || ''} onChange={(e) => setForm((current) => ({ ...current, videoDetails: { ...current.videoDetails, permissionStatus: e.target.value } }))} placeholder="Original local poster; no source clip reused" /></label>
+        <label className="text-xs font-semibold text-muted-foreground">Related guide slugs<input className={`${inputClass} mt-1`} value={(form.videoDetails?.guideSlugs || []).join(', ')} onChange={(e) => setForm((current) => ({ ...current, videoDetails: { ...current.videoDetails, guideSlugs: e.target.value.split(',').map((value) => value.trim()).filter(Boolean) } }))} placeholder="cinematic-ai-video-workflow" /></label>
+        {form.previewImage && <div className="sm:col-span-2"><p className="mb-1 text-xs font-semibold text-muted-foreground">Preview before publication</p><img src={form.previewImage} alt={form.previewImageAlt || 'Prompt preview'} loading="lazy" className="max-h-56 max-w-full rounded-lg border border-border object-contain" />{form.mediaType === 'video' && form.videoDetails?.videoUrl && <video controls preload="none" src={form.videoDetails.videoUrl} className="mt-3 max-h-56 max-w-full rounded-lg border border-border" aria-label={`Video preview for ${form.title || 'prompt'}`}>Video preview could not be loaded.</video>}</div>}
       </div>
       <div className="mt-5 flex flex-wrap items-center gap-2 border-t border-border pt-4">
         <button type="button" disabled={saving} onClick={() => save('draft')} className="inline-flex items-center gap-2 rounded-lg border border-border px-3 py-2 text-xs font-semibold text-foreground disabled:opacity-50"><Save size={14} /> Save draft</button>
@@ -100,5 +117,7 @@ export const AdminPromptManager: React.FC<{ token: string }> = ({ token }) => {
         {!saving && <button type="button" onClick={() => { setNotice(''); setError(''); }} className="rounded-lg p-2 text-muted-foreground hover:bg-muted" aria-label="Dismiss current message"><X size={14} /></button>}
       </div>
     </div>
+  </div>
+  <PromptCategoryManager token={token} />
   </section>;
 };

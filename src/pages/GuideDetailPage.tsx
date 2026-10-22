@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useRouter, Link } from '../router/Router';
-import { getGuideBySlug, getAllGuides, getAiToolBySlug } from '../services/aiCatalogService';
+import { getGuideBySlug, getAllGuides, getAiToolBySlug, getAllPrompts } from '../services/aiCatalogService';
 import { getToolBySlug } from '../services/catalogService';
 import { BookmarkButton } from '../components/BookmarkButton';
 import { BookmarkItem } from '../types';
@@ -35,6 +35,7 @@ export const GuideDetailPage: React.FC = () => {
   }
 
   const allGuides = getAllGuides();
+  const relatedPromptMedia = getAllPrompts().filter((item) => item.videoDetails?.guideSlugs?.includes(guide.slug));
   const currentIndex = allGuides.findIndex((g) => g.id === guide.id);
   const prevGuide = currentIndex > 0 ? allGuides[currentIndex - 1] : null;
   const nextGuide = currentIndex < allGuides.length - 1 ? allGuides[currentIndex + 1] : null;
@@ -178,6 +179,8 @@ export const GuideDetailPage: React.FC = () => {
               {step.description}
             </p>
 
+            {step.media?.type === 'image' && <figure className="ml-11 mt-4 max-w-2xl overflow-hidden rounded-xl border border-border bg-muted"><img src={step.media.src} alt={step.media.alt} loading="lazy" decoding="async" className="block max-h-[420px] w-full object-contain" /><figcaption className="px-3 py-2 text-xs leading-5 text-muted-foreground">{step.media.caption}</figcaption></figure>}
+
             {step.promptTemplate && (
               <div className="ml-11 mt-4 p-4 rounded-xl bg-[#F5F8FF] border border-border space-y-2">
                 <div className="flex items-center justify-between text-xs text-muted-foreground">
@@ -210,6 +213,8 @@ export const GuideDetailPage: React.FC = () => {
           </div>
         ))}
       </div>
+
+      {relatedPromptMedia.length > 0 && <section className="mb-12 rounded-2xl border border-border bg-card p-5" aria-labelledby="guide-media-title"><h2 id="guide-media-title" className="text-lg font-bold text-foreground">Related image-to-video studies</h2><p className="mt-1 text-sm text-muted-foreground">Original Tech Hacks AI prompt recipes and still posters. No third-party video clips are embedded.</p><div className="mt-4 grid gap-4 sm:grid-cols-2">{relatedPromptMedia.map((item) => <Link key={item.slug} to={`/prompt-library/${item.slug}`} className="group overflow-hidden rounded-xl border border-border focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"><img src={item.videoDetails?.previewUrl || item.previewImage} alt={item.previewImageAlt || `${item.title} video prompt poster`} loading="lazy" decoding="async" className="aspect-video w-full object-cover transition-transform group-hover:scale-[1.02]" /><span className="block p-3 text-sm font-semibold text-foreground group-hover:text-primary">{item.title}</span></Link>)}</div></section>}
 
       {/* Featured / Mentioned Tools */}
       {guide.relatedToolSlugs.length > 0 && (

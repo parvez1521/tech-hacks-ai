@@ -96,6 +96,7 @@ describe('Phase 21: Prompt Library Expansion, Creative Workflows & Authentic Bra
   // -------------------------------------------------------------------------
   describe('2. 14 Curated Prompt Categories', () => {
     const requiredCategories = [
+      'human-portraits',
       'ai-image-generation',
       'image-editing-img2img',
       'ai-video-generation',
@@ -112,8 +113,8 @@ describe('Phase 21: Prompt Library Expansion, Creative Workflows & Authentic Bra
       'marketing-content-social',
     ];
 
-    test('promptCategories defines exactly the 14 required categories', () => {
-      assert.strictEqual(promptCategories.length, 14, 'Must have exactly 14 categories');
+    test('promptCategories defines all 15 curated categories', () => {
+      assert.strictEqual(promptCategories.length, 15, 'Must have exactly 15 categories');
       const slugs = promptCategories.map((c) => c.slug);
       for (const req of requiredCategories) {
         assert.ok(slugs.includes(req), `Category ${req} must be registered in promptCategories`);

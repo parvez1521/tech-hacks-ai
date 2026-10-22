@@ -18,8 +18,8 @@ test('prompt artwork audit validates all distinct generated WebP images and prov
   for (const image of audit.prompts) {
     assert.equal(image.actualFileType, 'webp', image.slug);
     assert.equal(image.extensionMatchesContent, true, image.slug);
-    assert.equal(image.dimensions.width, 1254, image.slug);
-    assert.equal(image.dimensions.height, 1254, image.slug);
+    assert.ok(image.dimensions.width >= 900, `${image.slug} width is high enough for a responsive preview`);
+    assert.ok(image.dimensions.height >= 900, `${image.slug} height is high enough for a responsive preview`);
     assert.ok(image.sizeBytes < 1_500_000, `${image.slug} is optimized for gallery use`);
     assert.match(image.provenance.rightsStatus, /generated for this project/i);
     assert.ok(image.altText.length > 20);
@@ -39,11 +39,12 @@ test('every prompt provider and model resolves through explicit canonical logo m
     Google: 'googlegemini',
     Anthropic: 'anthropic',
     Higgsfield: 'higgsfield',
+    PixVerse: 'pixverse',
     'Black Forest Labs': 'flux-1',
     Runway: 'runway',
     Cursor: 'cursor',
   };
-  const expectedFilters = { google: 'googlegemini', anthropic: 'anthropic', higgsfield: 'higgsfield', flux: 'flux-1', runway: 'runway', cursor: 'cursor' };
+  const expectedFilters = { google: 'googlegemini', anthropic: 'anthropic', higgsfield: 'higgsfield', pixverse: 'pixverse', kling: 'kling-ai', flux: 'flux-1', runway: 'runway', cursor: 'cursor' };
   for (const prompt of promptsData) {
     const slug = getPromptProviderLogoSlug(prompt.provider, prompt.targetModel);
     assert.equal(slug, expected[prompt.provider], `${prompt.slug} provider ${prompt.provider}`);

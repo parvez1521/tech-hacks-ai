@@ -191,6 +191,18 @@ export const PromptDetailPage: React.FC = () => {
           </figcaption>
         </figure>
 
+        {prompt.mediaType === 'video' && prompt.videoDetails && (
+          <section className="mb-6 rounded-xl border border-indigo-200 bg-indigo-50/70 p-4 text-sm dark:border-indigo-900 dark:bg-indigo-950/30" aria-labelledby="video-source-title">
+            <h2 id="video-source-title" className="font-semibold text-foreground">Suggested video recreation</h2>
+            <p className="mt-1 text-xs leading-5 text-secondary-foreground">This is an original Tech Hacks AI prompt and locally generated poster. It is not an original prompt or video from the linked provider.</p>
+            <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-2 text-xs">
+              <span><strong>Preview:</strong> local poster image</span>
+              <span><strong>Rights:</strong> {prompt.videoDetails.permissionStatus || 'Original Tech Hacks AI artwork'}</span>
+              {prompt.videoDetails.sourcePageUrl && <a href={prompt.videoDetails.sourcePageUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 font-semibold text-primary hover:underline">Open official provider <ExternalLink size={13} /></a>}
+            </div>
+          </section>
+        )}
+
         {/* Expected Output & Use Case Badges */}
         {(prompt.expectedOutputType || prompt.exampleUseCase || prompt.officialToolUrl) && (
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6 p-4 rounded-xl bg-muted border border-border text-xs">
@@ -346,6 +358,8 @@ export const PromptDetailPage: React.FC = () => {
         <div className="text-xs text-muted-foreground mb-8 px-2 flex items-center gap-2">
           <span>Author / Provenance:</span>
           <span className="font-semibold text-secondary-foreground">{prompt.authorOrSource}</span>
+          {prompt.rightsStatus && <span className="rounded-full border border-border px-2 py-0.5 capitalize">{prompt.rightsStatus.replace(/-/g, ' ')}</span>}
+          {(prompt.sourceUrl || prompt.attributionUrl) && <a href={prompt.sourceUrl || prompt.attributionUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 font-medium text-primary hover:underline">Source <ExternalLink size={12} /></a>}
         </div>
       )}
 
