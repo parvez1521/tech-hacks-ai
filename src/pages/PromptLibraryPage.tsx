@@ -177,7 +177,7 @@ export const PromptLibraryPage: React.FC = () => {
       </section>
 
       <div className="mb-4 mt-8 flex items-end justify-between gap-4">
-        <div><h2 className="text-xl font-bold tracking-tight text-slate-950 dark:text-white">Prompt gallery</h2><p className="mt-1 text-sm text-slate-500 dark:text-slate-400">Original Tech Hacks AI recipes and locally hosted previews.</p></div>
+        <div><h2 className="text-xl font-bold tracking-tight text-slate-950 dark:text-white">Prompt gallery</h2><p className="mt-1 text-sm text-slate-500 dark:text-slate-400">Original SwitchRoute recipes and locally hosted previews.</p></div>
         {(selectedCat || selectedProvider || selectedTag || selectedStyle || selectedAspectRatio || selectedMediaType || showFavorites || search) && <button type="button" onClick={resetFilters} className="text-xs font-semibold text-teal-800 underline underline-offset-4 dark:text-teal-300">Clear filters</button>}
       </div>
 
