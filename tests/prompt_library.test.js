@@ -53,6 +53,7 @@ test('PromptFeed collection is lazy-loaded, attributable, and pagination keeps t
   assert.match(loader, /import\('\.\.\/\.\.\/data\/promptfeed-import\.json'\)/);
   assert.match(loader, /rightsStatus !== 'licensed'/);
   assert.match(gallery, /loadPromptFeedPrompts/);
+  assert.match(gallery, /if \(!merged\.has\(prompt\.slug\)\) merged\.set\(prompt\.slug, prompt\)/, 'reviewed remote versions take precedence over static collection records');
   assert.match(gallery, /selectedCollection/);
   assert.match(gallery, /PROMPTS_PER_PAGE = 24/);
   assert.match(gallery, /visiblePrompts\.map/);

@@ -38,7 +38,7 @@ export const PromptLibraryPage: React.FC = () => {
       if (!active) return;
       setAllPrompts((current) => {
         const merged = new Map(current.map((prompt) => [prompt.slug, prompt]));
-        feedPrompts.forEach((prompt) => merged.set(prompt.slug, prompt));
+        feedPrompts.forEach((prompt) => { if (!merged.has(prompt.slug)) merged.set(prompt.slug, prompt); });
         return [...merged.values()];
       });
       setFeedLoadState('ready');
