@@ -369,9 +369,9 @@ describe('Phase 27: Durable Data Storage & Production Deployment Readiness', () 
 
     test('canonical URL resolver uses configured domain without localhost leak', () => {
       const canonical = getCanonicalUrl('/ai-tools/jan-ai');
-      assert.ok(canonical.startsWith('https://techhacksai.com'));
+      assert.ok(canonical.startsWith('https://switchroute.in'));
       assert.ok(!canonical.includes('localhost'));
-      assert.strictEqual(canonical, 'https://techhacksai.com/ai-tools/jan-ai');
+      assert.strictEqual(canonical, 'https://switchroute.in/ai-tools/jan-ai');
     });
 
     test('robots.txt disallows sensitive administrative and API paths', () => {
@@ -382,7 +382,7 @@ describe('Phase 27: Durable Data Storage & Production Deployment Readiness', () 
       assert.ok(content.includes('Disallow: /moderation'));
       assert.ok(content.includes('Disallow: /admin'));
       assert.ok(content.includes('Disallow: /api/'));
-      assert.ok(content.includes('Sitemap: https://techhacksai.com/sitemap.xml'));
+      assert.ok(content.includes('Sitemap: https://switchroute.in/sitemap.xml'));
     });
 
     test('package.json includes db:migrate script', () => {
