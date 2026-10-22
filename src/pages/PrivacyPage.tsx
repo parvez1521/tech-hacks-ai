@@ -46,7 +46,7 @@ export const PrivacyPage: React.FC = () => {
             1. Introduction &amp; Overview
           </h2>
           <p>
-            At Tech Hacks AI (accessible at <strong className="text-slate-900">{siteConfig.url}</strong>), the privacy of our visitors is one of our core priorities. This Privacy Policy outlines the types of information collected and recorded by Tech Hacks AI and how we utilize it.
+            At SwitchRoute (accessible at <strong className="text-slate-900">{siteConfig.url}</strong>), the privacy of our visitors is one of our core priorities. This Privacy Policy outlines the types of information collected and recorded by SwitchRoute and how we utilize it.
           </p>
           <p>
             If you have additional questions or require further information about our Privacy Policy, please contact our privacy desk at{' '}
@@ -66,10 +66,10 @@ export const PrivacyPage: React.FC = () => {
             Google is a third-party vendor on our website. Google uses cookies, including the DoubleClick cookie and Google AdSense technologies, to serve advertisements to our site visitors based upon their visit to <strong className="text-slate-900">techhacksai.com</strong> and other sites across the Internet.
           </p>
           <p>
-            Third-party ad servers or ad networks use technologies like cookies, JavaScript, or Web Beacons in their respective advertisements and links that appear on Tech Hacks AI. When an advertisement is delivered to your browser, these vendors automatically receive your IP address. These technologies are used by third-party ad networks to measure the effectiveness of their advertising campaigns and/or to personalize the advertising content that you see on websites that you visit.
+            Third-party ad servers or ad networks use technologies like cookies, JavaScript, or Web Beacons in their respective advertisements and links that appear on SwitchRoute. When an advertisement is delivered to your browser, these vendors automatically receive your IP address. These technologies are used by third-party ad networks to measure the effectiveness of their advertising campaigns and/or to personalize the advertising content that you see on websites that you visit.
           </p>
           <p className="text-xs text-slate-500">
-            Please note: Tech Hacks AI does not have access to or control over cookies that are placed or utilized by third-party advertisers.
+            Please note: SwitchRoute does not have access to or control over cookies that are placed or utilized by third-party advertisers.
           </p>
         </section>
 
@@ -153,7 +153,7 @@ export const PrivacyPage: React.FC = () => {
             4. Log Files &amp; Automated Technical Data
           </h2>
           <p>
-            Tech Hacks AI follows standard hosting server logging procedures. These logs capture internet protocol (IP) addresses, browser type, Internet Service Provider (ISP), date and time stamp, referring/exit pages, and basic page interaction metrics. This technical information is not linked to any personally identifiable information and is utilized strictly for analyzing platform traffic, diagnosing errors, preventing malicious cyberattacks, and administering site reliability.
+            SwitchRoute follows standard hosting server logging procedures. These logs capture internet protocol (IP) addresses, browser type, Internet Service Provider (ISP), date and time stamp, referring/exit pages, and basic page interaction metrics. This technical information is not linked to any personally identifiable information and is utilized strictly for analyzing platform traffic, diagnosing errors, preventing malicious cyberattacks, and administering site reliability.
           </p>
         </section>
 
@@ -163,7 +163,7 @@ export const PrivacyPage: React.FC = () => {
             5. Client-Side Storage &amp; Cookies We Set
           </h2>
           <p>
-            To provide a responsive user experience without requiring user accounts or database profiling, Tech Hacks AI uses client-side web storage (HTML5 LocalStorage) for:
+            To provide a responsive user experience without requiring user accounts or database profiling, SwitchRoute uses client-side web storage (HTML5 LocalStorage) for:
           </p>
           <ul className="list-disc list-inside space-y-1.5 text-xs text-slate-600 pl-2">
             <li>
@@ -177,7 +177,7 @@ export const PrivacyPage: React.FC = () => {
             </li>
           </ul>
           <p className="text-xs text-slate-500">
-            This data remains entirely on your physical device. Tech Hacks AI does not transmit your saved bookmarks or UI preferences to external marketing databases.
+            This data remains entirely on your physical device. SwitchRoute does not transmit your saved bookmarks or UI preferences to external marketing databases.
           </p>
         </section>
 
@@ -219,7 +219,7 @@ export const PrivacyPage: React.FC = () => {
             <li>The right to opt out of the sale or sharing of personal data.</li>
           </ul>
           <p className="text-xs">
-            <strong className="text-slate-900">Do Not Sell My Personal Information:</strong> Tech Hacks AI does not sell, rent, or trade your personal information to third-party data brokers.
+            <strong className="text-slate-900">Do Not Sell My Personal Information:</strong> SwitchRoute does not sell, rent, or trade your personal information to third-party data brokers.
           </p>
         </section>
 
@@ -229,7 +229,7 @@ export const PrivacyPage: React.FC = () => {
             8. Children's Privacy (COPPA)
           </h2>
           <p>
-            Protecting children while using the internet is paramount. Tech Hacks AI does not knowingly collect any Personal Identifiable Information from children under the age of 13. If you believe that your child provided personal information on our website, please contact us immediately and we will promptly remove such information from our records.
+            Protecting children while using the internet is paramount. SwitchRoute does not knowingly collect any Personal Identifiable Information from children under the age of 13. If you believe that your child provided personal information on our website, please contact us immediately and we will promptly remove such information from our records.
           </p>
         </section>
 
