@@ -7,6 +7,7 @@ import { PromptPreviewImage } from './PromptPreviewImage';
 import { getPromptProviderLogoSlug } from '../data/promptProviderLogos.ts';
 import { Copy, Check, Sparkles, ArrowRight } from 'lucide-react';
 import { copyText } from '../lib/copyText';
+import { recordPromptCopy } from '../services/promptLibraryService';
 
 interface PromptCardProps {
   prompt: PromptItem;
@@ -25,7 +26,7 @@ export const PromptCard: React.FC<PromptCardProps> = ({ prompt }) => {
     e.preventDefault();
     e.stopPropagation();
     const success = await copyText(prompt.promptText);
-    if (success) { setCopied(true); setTimeout(() => setCopied(false), 2000); }
+    if (success) { recordPromptCopy(prompt.slug); setCopied(true); setTimeout(() => setCopied(false), 2000); }
   };
 
   const bookmarkItem: BookmarkItem = {

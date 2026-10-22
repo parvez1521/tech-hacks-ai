@@ -6,6 +6,8 @@ import { promptsData } from '../src/data/promptsData.ts';
 import { promptArtwork } from '../src/data/promptArtwork.ts';
 import { validatePrompt, listPrompts } from '../server/promptsStore.js';
 import promptApi from '../api/prompts.js';
+import promptSubmissionApi from '../api/prompt-submissions.js';
+import { createPromptDraft } from '../server/promptsStore.js';
 
 test('prompt library recipes have usable metadata and unique original local previews', () => {
   assert.ok(promptsData.length > 0);
@@ -30,8 +32,9 @@ test('prompt storage rejects missing attribution and invalid image locations', (
   assert.match(validatePrompt({ ...good, previewImage: 'http://unsafe.test/preview.jpg' }), /HTTPS/);
   assert.match(validatePrompt({ ...good, previewImage: '' }), /image is required/i);
   assert.match(validatePrompt({ ...good, previewImage: '/prompts/../../index.html' }), /stay inside/i);
-  assert.match(validatePrompt({ ...good, previewImage: 'https://creator.example/image.jpg', rightsStatus: 'original' }), /license or written permission/i);
-  assert.match(validatePrompt({ ...good, previewImage: 'https://creator.example/image.jpg', rightsStatus: 'licensed' }), /source URL, creator attribution, and license/i);
+  assert.match(validatePrompt({ ...good, previewImage: 'https://creator.example/image.jpg', rightsStatus: 'original', sourceCreator: 'Creator' }), /explicit rights confirmation/i);
+  assert.equal(validatePrompt({ ...good, previewImage: 'https://creator.example/image.jpg', rightsStatus: 'original', rightsConfirmed: true, sourceCreator: 'Creator' }), null);
+  assert.match(validatePrompt({ ...good, previewImage: 'https://creator.example/image.jpg', rightsStatus: 'licensed', sourceCreator: 'Creator' }), /source URL and license or permission/i);
 });
 
 test('prompt read path degrades cleanly when Supabase is not configured', async () => {
@@ -64,6 +67,39 @@ test('prompt gallery and detail routes remain discoverable', () => {
   const router = fs.readFileSync(path.resolve('src/router/Router.tsx'), 'utf8');
   assert.match(router, /cleanPath === '\/prompt-library'/);
   assert.match(router, /promptsMatch = cleanPath\.match/);
+  assert.match(router, /cleanPath === '\/submit-prompt'/);
   const sitemap = fs.readFileSync(path.resolve('public/sitemap.xml'), 'utf8');
   assert.match(sitemap, /\/prompt-library\/gemini-commercial-product-photography/);
+});
+
+test('public prompt submissions are validated and always written as drafts', async () => {
+  const oldUrl = process.env.SUPABASE_URL; const oldKey = process.env.SUPABASE_SERVICE_ROLE_KEY; const originalFetch = global.fetch;
+  process.env.SUPABASE_URL = 'https://supabase.example'; process.env.SUPABASE_SERVICE_ROLE_KEY = 'server-only-test-key';
+  let submittedRow;
+  global.fetch = async (_url, init = {}) => {
+    submittedRow = JSON.parse(init.body);
+    assert.equal(init.method, 'POST');
+    assert.equal(init.headers.Prefer, 'return=representation');
+    return new Response(JSON.stringify([{ ...submittedRow, created_at: '2026-10-22T00:00:00Z' }]), { status: 201 });
+  };
+  const response = { code: 200, headers: {}, setHeader(key, value) { this.headers[key] = value; }, status(code) { this.code = code; return this; }, json(body) { this.body = body; return this; } };
+  try {
+    await promptSubmissionApi({ method: 'POST', url: '/api/prompt-submissions', headers: { 'x-vercel-forwarded-for': '203.0.113.5' }, body: { title: 'Original portrait study', promptText: 'A detailed original photographic prompt with light, framing, texture, subject, and background guidance.', category: 'human-portraits', targetModel: 'FLUX.1', provider: 'Black Forest Labs', tags: ['portrait'], previewImage: '/prompts/generated/portrait-editorial-duo.webp', sourceCreator: 'Creator', rightsStatus: 'original', rightsConfirmed: true } }, response);
+    assert.equal(response.code, 201);
+    assert.equal(submittedRow.status, 'draft');
+    assert.equal(response.body.status, 'draft');
+    assert.equal(submittedRow.content.status, 'draft');
+    assert.equal(submittedRow.content.promptText.startsWith('A detailed'), true);
+  } finally {
+    global.fetch = originalFetch;
+    if (oldUrl !== undefined) process.env.SUPABASE_URL = oldUrl; else delete process.env.SUPABASE_URL;
+    if (oldKey !== undefined) process.env.SUPABASE_SERVICE_ROLE_KEY = oldKey; else delete process.env.SUPABASE_SERVICE_ROLE_KEY;
+  }
+});
+
+test('failed Faymas authorization gate prevents any import attempt', async () => {
+  const { spawnSync } = await import('node:child_process');
+  const result = spawnSync(process.execPath, ['scripts/import-faymas-prompts.mjs', '/tmp/nonexistent-faymas-export.json'], { cwd: process.cwd(), env: { ...process.env, FAYMAS_IMPORT_AUTHORIZED: 'false' }, encoding: 'utf8' });
+  assert.equal(result.status, 3);
+  assert.match(result.stderr, /import is disabled/i);
 });

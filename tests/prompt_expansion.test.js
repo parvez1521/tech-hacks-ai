@@ -14,9 +14,23 @@ test('featured human portraits lead the curated prompt order and preserve useful
     'portrait-editorial-duo', 'portrait-women-windowlight', 'portrait-mens-professional-headshot', 'portrait-couple-courtyard-dusk',
   ]);
   assert.equal(promptCategories[0].slug, 'human-portraits');
-  for (const tag of ['womens-portraits', 'mens-portraits', 'couple-portraits', 'professional-headshots']) {
+  for (const tag of ['womens-portraits', 'mens-portraits', 'couple-portraits', 'professional-headshots', 'fashion-editorial', 'cinematic-portraits']) {
     assert.ok(promptsData.some((prompt) => prompt.tags.includes(tag)), `missing portrait subcategory ${tag}`);
   }
+});
+
+test('prompt engagement and recent sorting have real data sources rather than seeded counters', () => {
+  assert.ok(promptsData.every((prompt) => prompt.copyCount === undefined), 'seed catalog must not invent copy totals');
+  assert.ok(promptsData.filter((prompt) => prompt.createdAt).every((prompt) => !Number.isNaN(Date.parse(prompt.createdAt))));
+  const gallery = fs.readFileSync(path.resolve('src/pages/PromptLibraryPage.tsx'), 'utf8');
+  assert.match(gallery, /sourceCreator/);
+  assert.match(gallery, /selectedStyle/);
+  assert.match(gallery, /selectedAspectRatio/);
+  assert.match(gallery, /selectedMediaType/);
+  assert.match(gallery, /copyCount/);
+  assert.match(gallery, /createdAt/);
+  const schema = fs.readFileSync(path.resolve('server/schema.sql'), 'utf8');
+  assert.match(schema, /techhacks_record_prompt_copy/);
 });
 
 test('video prompt examples distinguish suggested recreations from source prompts and third-party clips', () => {

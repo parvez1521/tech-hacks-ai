@@ -227,6 +227,8 @@ export interface PromptItem {
   provider?: string; // e.g. 'Google', 'Anthropic', 'Higgsfield', 'Black Forest Labs', 'Runway', 'Cursor'
   promptText: string;
   copyCount?: number;
+  createdAt?: string;
+  updatedAt?: string;
   tags: string[];
   tips?: string;
   authorOrSource?: string;

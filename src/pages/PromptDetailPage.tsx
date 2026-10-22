@@ -8,7 +8,7 @@ import { PromptPreviewImage } from '../components/PromptPreviewImage';
 import { getPromptProviderLogoSlug } from '../data/promptProviderLogos.ts';
 import { BookmarkItem } from '../types';
 import type { PromptItem } from '../types';
-import { fetchPublishedPrompts } from '../services/promptLibraryService';
+import { fetchPromptCopyStats, fetchPublishedPrompts, recordPromptCopy, recordPromptView } from '../services/promptLibraryService';
 import { copyText } from '../lib/copyText';
 import { formatPageTitle, siteConfig } from '../config/site';
 import {
@@ -30,6 +30,7 @@ export const PromptDetailPage: React.FC = () => {
   const slug = params.slug;
   const [remotePrompt, setRemotePrompt] = useState<PromptItem | undefined>();
   const prompt = remotePrompt?.slug === slug ? remotePrompt : getPromptBySlug(slug);
+  const [recordedCopyCount, setRecordedCopyCount] = useState<number>();
 
   useEffect(() => {
     let active = true;
@@ -42,6 +43,10 @@ export const PromptDetailPage: React.FC = () => {
 
   useEffect(() => {
     if (!prompt || typeof document === 'undefined') return;
+    setRecordedCopyCount(undefined);
+    recordPromptView(prompt);
+    let active = true;
+    fetchPromptCopyStats().then((stats) => { if (active) setRecordedCopyCount(stats.find((item) => item.slug === prompt.slug)?.copyCount); });
     const title = formatPageTitle(`${prompt.title} — AI Prompt Recipe`);
     const description = `${prompt.title} for ${prompt.targetModel}: ${prompt.description}`.slice(0, 300);
     document.title = title;
@@ -49,6 +54,7 @@ export const PromptDetailPage: React.FC = () => {
     document.querySelector('meta[property="og:title"]')?.setAttribute('content', title);
     document.querySelector('meta[property="og:description"]')?.setAttribute('content', description);
     document.querySelector('link[rel="canonical"]')?.setAttribute('href', `${siteConfig.url}/prompt-library/${prompt.slug}`);
+    return () => { active = false; };
   }, [prompt]);
 
   const [copied, setCopied] = useState(false);
@@ -103,6 +109,7 @@ export const PromptDetailPage: React.FC = () => {
 
   const handleCopyCustomized = async () => {
     if (await copyText(customizedText)) {
+      recordPromptCopy(prompt.slug);
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     }
@@ -110,6 +117,7 @@ export const PromptDetailPage: React.FC = () => {
 
   const handleCopyOriginal = async () => {
     if (await copyText(prompt.promptText)) {
+      recordPromptCopy(prompt.slug);
       setCopiedOriginal(true);
       setTimeout(() => setCopiedOriginal(false), 2000);
     }
@@ -187,9 +195,12 @@ export const PromptDetailPage: React.FC = () => {
             <span><strong className="text-foreground">Visual style</strong> {prompt.visualStyle || 'Conceptual'}</span>
             <span><strong className="text-foreground">Aspect ratio</strong> {prompt.aspectRatio || '1:1'}</span>
             <span><strong className="text-foreground">Model</strong> {prompt.targetModel}</span>
-            <span>Original AI-generated preview created for Tech Hacks AI.</span>
+            {prompt.createdAt && <span><strong className="text-foreground">Added</strong> {new Date(prompt.createdAt).toLocaleDateString()}</span>}
+            <span>{prompt.rightsStatus === 'original' ? 'Original Tech Hacks AI preview.' : `${prompt.rightsStatus || 'Source'} content with attribution.`}</span>
           </figcaption>
         </figure>
+
+        {(prompt.authorOrSource || prompt.sourceCreator || prompt.sourceUrl || prompt.attributionUrl) && <div className="mb-6 flex flex-wrap items-center gap-x-4 gap-y-2 rounded-xl border border-border bg-muted/50 px-4 py-3 text-xs text-secondary-foreground"><span><strong className="text-foreground">Creator</strong> {prompt.sourceCreator || prompt.authorOrSource}</span>{(prompt.sourceUrl || prompt.attributionUrl) && <a href={prompt.sourceUrl || prompt.attributionUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 font-semibold text-primary hover:underline">View source / attribution <ExternalLink size={13} /></a>}{prompt.rightsLicense && <span><strong className="text-foreground">Rights</strong> {prompt.rightsLicense}</span>}</div>}
 
         {prompt.mediaType === 'video' && prompt.videoDetails && (
           <section className="mb-6 rounded-xl border border-indigo-200 bg-indigo-50/70 p-4 text-sm dark:border-indigo-900 dark:bg-indigo-950/30" aria-labelledby="video-source-title">
@@ -299,7 +310,7 @@ export const PromptDetailPage: React.FC = () => {
               <Sparkles className="w-3.5 h-3.5 text-primary" />
               <span>{hasCustomizedValues ? 'Customized Output Prompt' : 'Prompt Instructions'}</span>
             </span>
-            <span className="font-mono text-[11px] text-muted-foreground">{prompt.copyCount || 1000}+ copies</span>
+            <span className="font-mono text-[11px] text-muted-foreground">{recordedCopyCount !== undefined ? `${recordedCopyCount.toLocaleString()} copies` : 'Copy count not available'}</span>
           </div>
 
           <pre className="font-mono text-xs sm:text-sm text-foreground whitespace-pre-wrap leading-relaxed select-all selection:bg-blue-100 bg-card p-4 rounded-xl border border-border overflow-x-auto shadow-sm">

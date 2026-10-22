@@ -187,3 +187,36 @@ DROP POLICY IF EXISTS "Service role full access on prompt categories" ON public.
 CREATE POLICY "Service role full access on prompt categories"
 ON public.techhacks_prompt_categories FOR ALL TO service_role USING (true) WITH CHECK (true);
 
+-- Platform-wide copies are counted only after an explicit successful copy action.
+CREATE TABLE IF NOT EXISTS public.techhacks_prompt_stats (
+  slug VARCHAR(180) PRIMARY KEY,
+  copy_count BIGINT NOT NULL DEFAULT 0 CHECK (copy_count >= 0),
+  first_copied_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+  last_copied_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+ALTER TABLE public.techhacks_prompt_stats ENABLE ROW LEVEL SECURITY;
+REVOKE ALL ON public.techhacks_prompt_stats FROM anon, authenticated;
+GRANT SELECT ON public.techhacks_prompt_stats TO anon, authenticated;
+GRANT ALL ON public.techhacks_prompt_stats TO service_role;
+DROP POLICY IF EXISTS "Public can read aggregate prompt copies" ON public.techhacks_prompt_stats;
+CREATE POLICY "Public can read aggregate prompt copies"
+ON public.techhacks_prompt_stats FOR SELECT TO anon, authenticated USING (true);
+DROP POLICY IF EXISTS "Service role manages prompt statistics" ON public.techhacks_prompt_stats;
+CREATE POLICY "Service role manages prompt statistics"
+ON public.techhacks_prompt_stats FOR ALL TO service_role USING (true) WITH CHECK (true);
+
+CREATE OR REPLACE FUNCTION public.techhacks_record_prompt_copy(p_slug TEXT)
+RETURNS VOID AS $$
+BEGIN
+  IF p_slug IS NULL OR p_slug !~ '^[a-z0-9]+(-[a-z0-9]+)*$' THEN
+    RAISE EXCEPTION 'Invalid prompt slug';
+  END IF;
+  INSERT INTO public.techhacks_prompt_stats(slug, copy_count, first_copied_at, last_copied_at)
+  VALUES (p_slug, 1, NOW(), NOW())
+  ON CONFLICT (slug) DO UPDATE
+  SET copy_count = public.techhacks_prompt_stats.copy_count + 1, last_copied_at = NOW();
+END;
+$$ LANGUAGE plpgsql SECURITY DEFINER SET search_path = public;
+REVOKE ALL ON FUNCTION public.techhacks_record_prompt_copy(TEXT) FROM PUBLIC;
+GRANT EXECUTE ON FUNCTION public.techhacks_record_prompt_copy(TEXT) TO service_role;
+
