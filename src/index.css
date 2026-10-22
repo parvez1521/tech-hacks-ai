@@ -1118,3 +1118,20 @@
 @media (prefers-reduced-motion: reduce) {
   .prompt-card__image { transition: none; }
 }
+
+
+/* Prompt gallery polish: calmer cards and image-first browsing. */
+.prompt-card { contain: paint; }
+.prompt-card__excerpt {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  overflow-wrap: anywhere;
+  min-height: 2.6em;
+}
+.prompt-card__image-link { isolation: isolate; }
+.prompt-card__image { aspect-ratio: 4 / 3; }
+@media (max-width: 639px) {
+  .prompt-card__image { aspect-ratio: 1 / 1; }
+}

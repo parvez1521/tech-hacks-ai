@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter, Link } from '../router/Router';
 import { getPromptBySlug, getAllPrompts } from '../services/aiCatalogService';
+import { getPromptFeedPromptBySlug } from '../data/promptfeedPrompts';
 import { BookmarkButton } from '../components/BookmarkButton';
 import { PromptCard } from '../components/PromptCard';
 import { BrandLogo } from '../components/BrandLogo';
@@ -29,7 +30,8 @@ export const PromptDetailPage: React.FC = () => {
   const { params } = useRouter();
   const slug = params.slug;
   const [remotePrompt, setRemotePrompt] = useState<PromptItem | undefined>();
-  const prompt = remotePrompt?.slug === slug ? remotePrompt : getPromptBySlug(slug);
+  const [feedPrompt, setFeedPrompt] = useState<PromptItem | undefined>();
+  const prompt = remotePrompt?.slug === slug ? remotePrompt : feedPrompt?.slug === slug ? feedPrompt : getPromptBySlug(slug);
   const [recordedCopyCount, setRecordedCopyCount] = useState<number>();
 
   useEffect(() => {
@@ -38,6 +40,16 @@ export const PromptDetailPage: React.FC = () => {
     fetchPublishedPrompts(slug).then((prompts) => {
       if (active && prompts[0]) setRemotePrompt(prompts[0]);
     });
+    return () => { active = false; };
+  }, [slug]);
+
+  useEffect(() => {
+    let active = true;
+    setFeedPrompt(undefined);
+    if (!slug.startsWith('promptfeed-')) return () => { active = false; };
+    getPromptFeedPromptBySlug(slug)
+      .then((result) => { if (active) setFeedPrompt(result); })
+      .catch(() => { if (active) setFeedPrompt(undefined); });
     return () => { active = false; };
   }, [slug]);
 
@@ -60,6 +72,10 @@ export const PromptDetailPage: React.FC = () => {
   const [copied, setCopied] = useState(false);
   const [copiedOriginal, setCopiedOriginal] = useState(false);
   const [placeholderValues, setPlaceholderValues] = useState<Record<string, string>>({});
+
+  if (!prompt && slug.startsWith('promptfeed-')) {
+    return <div className="max-w-4xl mx-auto px-4 py-16 text-center" role="status"><div className="mx-auto mb-4 h-8 w-8 animate-spin rounded-full border-2 border-teal-500 border-t-transparent" /><p className="text-sm text-muted-foreground">Loading prompt and matching preview…</p></div>;
+  }
 
   if (!prompt) {
     return (
