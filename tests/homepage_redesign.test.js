@@ -9,7 +9,7 @@ const read = (file) => fs.readFileSync(path.resolve(process.cwd(), file), 'utf8'
 let appModule;
 
 function setupBrowser() {
-  const parsedUrl = new URL('https://techhacksai.com/');
+  const parsedUrl = new URL('https://switchroute.in/');
   global.window = {
     innerWidth: 1440,
     location: { href: parsedUrl.href, origin: parsedUrl.origin, pathname: '/', search: '' },
