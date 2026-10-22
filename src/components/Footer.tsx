@@ -140,7 +140,7 @@ export const Footer: React.FC = () => {
               Editorial &amp; Legal
             </h3>
             <p className="text-xs text-muted-foreground mb-3 leading-relaxed">
-              SwitchRoute is a curated discovery platform indexing the top generative AI tools, verified free software, open-source alternatives, step-by-step guides, and developer utilities.
+              SwitchRoute is an independent discovery directory for free AI plans, open-source software, browser utilities, prompts, practical guides, and current offers.
             </p>
             <ul className="space-y-1.5 text-muted-foreground text-xs mb-3">
               <li>
