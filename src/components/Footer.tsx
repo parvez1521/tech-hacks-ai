@@ -140,7 +140,7 @@ export const Footer: React.FC = () => {
               Editorial &amp; Legal
             </h3>
             <p className="text-xs text-muted-foreground mb-3 leading-relaxed">
-              Tech Hacks AI is a curated discovery platform indexing the top generative AI tools, verified free software, open-source alternatives, step-by-step guides, and developer utilities.
+              SwitchRoute is a curated discovery platform indexing the top generative AI tools, verified free software, open-source alternatives, step-by-step guides, and developer utilities.
             </p>
             <ul className="space-y-1.5 text-muted-foreground text-xs mb-3">
               <li>
@@ -238,7 +238,7 @@ export const Footer: React.FC = () => {
 
         {/* Bottom Copyright */}
         <div className="pt-4 border-t border-border/30 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-muted-foreground">
-          <p>© {new Date().getFullYear()} Tech Hacks AI. Built with open web standards.</p>
+          <p>© {new Date().getFullYear()} SwitchRoute. Built with open web standards.</p>
           <p className="flex items-center gap-1">
             Made with <Heart className="w-3 h-3 text-rose-500 fill-rose-500" /> for the AI &amp; open-source community
           </p>
