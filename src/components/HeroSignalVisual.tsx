@@ -48,7 +48,7 @@ export const HeroSignalVisual: React.FC = () => {
       >
         <div className="discovery-interface__chrome" aria-hidden="true">
           <span /> <span /> <span />
-          <div className="discovery-interface__address"><Command size={12} /> techhacksai.com / discover</div>
+          <div className="discovery-interface__address"><Command size={12} /> switchroute / discover</div>
         </div>
 
         <div className="discovery-interface__body">
