@@ -50,8 +50,10 @@ describe('Premium homepage redesign regressions', () => {
     const home = read('src/pages/HomePage.tsx');
     const visual = read('src/components/HeroSignalVisual.tsx');
 
-    assert.match(home, /Find the right tools for the work\./);
+    assert.match(home, /Stop paying for AI tools you don't need\./);
     assert.match(home, /<UniversalSearch \/>/);
+    const search = read('src/components/UniversalSearch.tsx');
+    assert.doesNotMatch(search, /intentChips|Make AI videos|Create images|Find writing tools|Replace proprietary SaaS|Discover prompts/);
     assert.match(home, /to="\/ai-tools"/);
     assert.match(home, /to="\/alternatives"/);
     assert.match(visual, /role="tablist"/);
