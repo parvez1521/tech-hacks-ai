@@ -44,7 +44,7 @@ To send validated entries to the existing moderation queue, configure these envi
 
 Then run:
 
-```npm
+```bash
 PROMPT_IMPORT_URL="$PROMPT_IMPORT_URL" ADMIN_SECRET="$ADMIN_SECRET" npm run prompts:import -- data/promptfeed-import.json --import
 ```
 
