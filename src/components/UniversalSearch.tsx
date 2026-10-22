@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect, useMemo } from 'react';
 import { useRouter, Link } from '../router/Router';
 import { universalSearch, UniversalSearchResult } from '../services/aiCatalogService';
-import { Search, X, Sparkles, FolderKanban, Replace, BookOpen, MessageSquareCode, Wrench, Video, Image, PenLine, Code2, Zap, Gift, Tag } from 'lucide-react';
+import { Search, X, Sparkles, FolderKanban, Replace, BookOpen, MessageSquareCode, Wrench } from 'lucide-react';
 import { BrandLogo } from './BrandLogo';
 
 export const UniversalSearch: React.FC = () => {
@@ -109,17 +109,6 @@ export const UniversalSearch: React.FC = () => {
     setSelectedIndex(-1);
   };
 
-  const intentChips = [
-    { label: 'Make AI videos', to: '/ai-tools?category=video', icon: Video },
-    { label: 'Create images', to: '/ai-tools?category=image', icon: Image },
-    { label: 'Find writing tools', to: '/ai-tools?category=writing', icon: PenLine },
-    { label: 'Build an app', to: '/tools?category=developer-tools', icon: Code2 },
-    { label: 'Automate work', to: '/tools?category=developer-tools', icon: Zap },
-    { label: 'Free AI tools', to: '/free-ai-sites', icon: Gift },
-    { label: 'AI deals & perks', to: '/offers', icon: Tag },
-    { label: 'Replace proprietary SaaS', to: '/alternatives', icon: Replace },
-    { label: 'Discover prompts', to: '/prompt-library', icon: Sparkles },
-  ];
 
   // Helper to get index within flatResults for an item
   let flatCounter = 0;
@@ -147,7 +136,7 @@ export const UniversalSearch: React.FC = () => {
           onFocus={() => {
             if (query.trim()) setIsOpen(true);
           }}
-          placeholder="Search AI tools, open-source alternatives, guides, prompts, or utilities..."
+          placeholder="Search free AI tools, open-source alternatives, prompts, and utilities..."
           className="w-full pl-12 pr-14 py-3.5 sm:py-4 rounded-lg bg-card border border-border text-foreground placeholder:text-muted-foreground text-sm sm:text-base shadow-sm focus:outline-none focus:ring-2 focus:ring-cyan-500/50 focus:border-cyan-500/60 focus:shadow-[0_0_0_3px_rgba(6,182,212,0.08)] transition-all duration-200"
           aria-label="Universal software and AI discovery search"
         />
@@ -461,22 +450,6 @@ export const UniversalSearch: React.FC = () => {
         </div>
       )}
 
-      {/* Common routes are links, not decorative badges. */}
-      <div className="mt-4 flex flex-wrap items-center justify-center gap-x-4 gap-y-2">
-        {intentChips.map((chip) => {
-          const Icon = chip.icon;
-          return (
-            <Link
-              key={chip.label}
-              to={chip.to}
-              className="inline-flex items-center gap-1.5 text-xs font-medium text-muted-foreground hover:text-primary transition-colors duration-150"
-            >
-              <Icon className="w-3.5 h-3.5" aria-hidden="true" />
-              {chip.label}
-            </Link>
-          );
-        })}
-      </div>
     </div>
   );
 };
