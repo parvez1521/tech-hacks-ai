@@ -171,9 +171,18 @@ describe('Phase 9: SwitchRoute Platform Rebranding', () => {
     const html = renderClean(React.createElement(ssrModule.App));
 
     assert.ok(html.includes('SwitchRoute'), 'Header must render "SwitchRoute" wordmark');
-    assert.ok(html.includes('switchRouteLineGrad'), 'Header must render the SwitchRoute route mark');
+    assert.ok(html.includes('switchRoute-'), 'Header must render unique SwitchRoute route-mark gradients');
     assert.ok(html.includes('aria-label="SwitchRoute"'), 'Header logo link accessible name matches visible wordmark');
     assert.ok(html.includes('group-hover:rotate-3'), 'Logo must maintain microinteraction rotate hover');
+  });
+
+  test('rendered SwitchRoute logo SVG gradient IDs are unique across repeated instances', async () => {
+    setupMockBrowser('https://switchroute.in/');
+    if (!ssrModule) ssrModule = await import('../dist/test-ssr.js');
+    const html = renderClean(React.createElement(ssrModule.App));
+    const ids = [...html.matchAll(/id="(switchRoute-[^"]+)"/g)].map((match) => match[1]);
+    assert.ok(ids.length >= 2, 'Expected route-mark gradient definitions in rendered header/footer');
+    assert.strictEqual(new Set(ids).size, ids.length, 'Each SwitchRoute logo instance must have unique gradient IDs');
   });
 
   test('Footer renders SwitchRoute about summary and current year copyright', async () => {
