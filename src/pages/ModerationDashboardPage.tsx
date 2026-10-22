@@ -401,7 +401,7 @@ export const ModerationDashboardPage: React.FC = () => {
             </span>
           </div>
           <p className="text-sm text-muted-foreground mt-1">
-            Review community submissions, manage discoveries, and curate original prompt recipes for the Tech Hacks AI catalog.
+            Review community submissions, manage discoveries, and curate original prompt recipes for the SwitchRoute catalog.
           </p>
         </div>
 
