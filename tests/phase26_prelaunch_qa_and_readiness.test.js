@@ -49,7 +49,7 @@ describe('Phase 26: Final QA, Production Readiness & Domain Preparation', () => 
     assert.ok(robots.includes('Disallow: /moderation'), 'Must disallow /moderation');
     assert.ok(robots.includes('Disallow: /admin'), 'Must disallow /admin');
     assert.ok(robots.includes('Disallow: /api/'), 'Must disallow /api/');
-    assert.ok(robots.includes('Sitemap: https://techhacksai.com/sitemap.xml'), 'Must declare sitemap');
+    assert.ok(robots.includes('Sitemap: https://switchroute.in/sitemap.xml'), 'Must declare sitemap');
   });
 
   // ──────────────────────────────────────────────────────────────────────────
@@ -62,8 +62,8 @@ describe('Phase 26: Final QA, Production Readiness & Domain Preparation', () => 
       'siteConfig must read VITE_SITE_URL'
     );
     assert.ok(
-      siteConfigSrc.includes('https://techhacksai.com'),
-      'siteConfig must fallback to techhacksai.com'
+      siteConfigSrc.includes('https://switchroute.in'),
+      'siteConfig must fallback to switchroute.in'
     );
   });
 
