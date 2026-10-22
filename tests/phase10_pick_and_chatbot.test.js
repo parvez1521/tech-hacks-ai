@@ -194,7 +194,7 @@ describe('Phase 10: Help Me Pick, Floating Chatbot, Video Generators & LLM Alter
     const html = renderClean(React.createElement(ssrModule.App));
 
     assert.ok(html.includes('data-testid="chat-launcher"'), 'Compact floating launcher rendered');
-    assert.ok(html.includes('aria-label="Open Tech Hacks AI assistant"'), 'Launcher has a descriptive accessible name');
+    assert.ok(html.includes('aria-label="Open SwitchRoute assistant"'), 'Launcher has a descriptive accessible name');
     assert.ok(!html.includes('data-testid="chat-dialog"'), 'Chat panel starts closed');
   });
 
