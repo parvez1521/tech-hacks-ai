@@ -26,7 +26,7 @@ const INITIAL_MESSAGE: ChatMessage = {
   sender: 'assistant',
   timestamp: 0,
   text:
-    '**Welcome to the Tech Hacks AI assistant.**\n\n' +
+    '**Welcome to the SwitchRoute assistant.**\n\n' +
     'I can help you find verified AI tools, open-source alternatives, practical guides, and current student or free-access options. Ask in English or Hindi/Hinglish.',
   suggestions: STARTER_PROMPTS,
 };
@@ -313,7 +313,7 @@ export const FloatingChatbot: React.FC = () => {
             type="button"
             ref={launcherRef}
             onClick={() => setIsOpen(true)}
-            aria-label="Open Tech Hacks AI assistant"
+            aria-label="Open SwitchRoute assistant"
             title="Open assistant"
             data-testid="chat-launcher"
             className="chat-launcher"
@@ -335,7 +335,7 @@ export const FloatingChatbot: React.FC = () => {
             ref={dialogRef}
             role="dialog"
             aria-modal="true"
-            aria-label="Tech Hacks AI Assistant"
+            aria-label="SwitchRoute Assistant"
             data-testid="chat-dialog"
             className="chat-dialog"
           >
@@ -349,7 +349,7 @@ export const FloatingChatbot: React.FC = () => {
               />
               <div>
                 <h3 className="font-bold text-sm text-foreground flex items-center gap-2 leading-none">
-                  <span>Tech Hacks AI Assistant</span>
+                  <span>SwitchRoute Assistant</span>
                   <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded-md bg-primary/10 border border-primary/20 text-[9px] font-mono text-primary">
                     Catalog
                   </span>
@@ -473,7 +473,7 @@ export const FloatingChatbot: React.FC = () => {
                 <AiOrb3D size="sm" isGenerating={true} state="thinking" />
                 <div className="space-y-1">
                   <div className="flex items-center gap-2">
-                    <span className="font-semibold text-foreground block text-xs">Consulting Tech Hacks AI...</span>
+                    <span className="font-semibold text-foreground block text-xs">Consulting SwitchRoute...</span>
                     {/* Animated Pulsing Typing Dots */}
                     <div className="flex items-center gap-1">
                       <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-bounce [animation-delay:0ms]" />
@@ -544,7 +544,7 @@ export const FloatingChatbot: React.FC = () => {
               value={input}
               onChange={(e) => setInput(e.target.value)}
               placeholder="Ask anything in English or Hindi..."
-              aria-label="Type your message to Tech Hacks AI Assistant"
+              aria-label="Type your message to SwitchRoute Assistant"
               className="flex-1 bg-muted/70 border border-border/80 rounded-md px-3.5 py-2.5 text-xs text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/70 transition-colors"
             />
             <button
