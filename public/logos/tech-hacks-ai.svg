@@ -1,24 +1,25 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48" fill="none">
   <defs>
-    <linearGradient id="brandBorder" x1="0" y1="0" x2="48" y2="48" gradientUnits="userSpaceOnUse">
+    <linearGradient id="srBorder" x1="0" y1="0" x2="48" y2="48" gradientUnits="userSpaceOnUse">
       <stop offset="0%" stop-color="#06b6d4" />
       <stop offset="50%" stop-color="#3b82f6" />
       <stop offset="100%" stop-color="#8b5cf6" />
     </linearGradient>
-    <linearGradient id="brandBolt" x1="24" y1="6" x2="24" y2="42" gradientUnits="userSpaceOnUse">
+    <linearGradient id="srRoute" x1="5" y1="5" x2="27" y2="27" gradientUnits="userSpaceOnUse">
       <stop offset="0%" stop-color="#38bdf8" />
-      <stop offset="50%" stop-color="#60a5fa" />
-      <stop offset="100%" stop-color="#c084fc" />
+      <stop offset="52%" stop-color="#60a5fa" />
+      <stop offset="100%" stop-color="#a855f7" />
     </linearGradient>
-    <radialGradient id="brandGlow" cx="50%" cy="50%" r="50%">
-      <stop offset="0%" stop-color="#06b6d4" stop-opacity="0.35" />
+    <radialGradient id="srGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#06b6d4" stop-opacity="0.3" />
       <stop offset="100%" stop-color="#06b6d4" stop-opacity="0" />
     </radialGradient>
   </defs>
-
-  <rect width="48" height="48" rx="12" fill="#0b0f19" />
-  <rect width="48" height="48" rx="12" fill="url(#brandGlow)" />
-  <rect x="1" y="1" width="46" height="46" rx="11" stroke="url(#brandBorder)" stroke-width="2" stroke-opacity="0.75" />
-  <path d="M26 7L10.5 25.5h12l-3 15.5 18-20h-13l3.5-14z" fill="url(#brandBolt)" />
-  <path d="M37 6c0 2.21 1.79 4 4 4-2.21 0-4 1.79-4 4 0-2.21-1.79-4-4-4 2.21 0 4-1.79 4-4z" fill="#38bdf8" />
+  <rect width="48" height="48" rx="12" fill="#0c0e14" />
+  <rect width="48" height="48" rx="12" fill="url(#srGlow)" />
+  <rect x="0.75" y="0.75" width="46.5" height="46.5" rx="11" stroke="url(#srBorder)" stroke-width="2" stroke-opacity="0.8" />
+  <path d="M6 10h18m0 0-4-4m4 4-4 4" stroke="url(#srRoute)" stroke-width="2.35" stroke-linecap="round" stroke-linejoin="round" />
+  <path d="M26 22H8m0 0 4-4m-4 4 4 4" stroke="url(#srRoute)" stroke-width="2.35" stroke-linecap="round" stroke-linejoin="round" />
+  <circle cx="6" cy="10" r="2" fill="#38bdf8" />
+  <circle cx="26" cy="22" r="2" fill="#c084fc" />
 </svg>
