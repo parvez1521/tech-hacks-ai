@@ -87,7 +87,7 @@ describe('Phase 14: Deep QA, Production Readiness & Trust Audit', () => {
       setupMockBrowser('https://switchroute.in/');
       const html = renderClean(React.createElement(ssrModule.App));
 
-      assert.ok(html.includes("Stop paying for AI tools you don't need."), 'Homepage H1 headline');
+      assert.ok(html.includes("Stop paying for AI tools you don't need.") || html.includes("Stop paying for AI tools you don&#x27;t need."), 'Homepage H1 headline');
       assert.ok(html.includes('What do you want to build or replace today?'), 'Goal-driven discovery section');
       assert.ok(html.includes("Editor&#x27;s Picks: Benchmark-Leading Tools") || html.includes("Editor's Picks: Benchmark-Leading Tools"), 'Curated showcase section');
       assert.ok(html.includes('Explore Top Generative AI Platforms'), 'Trending AI models section');
