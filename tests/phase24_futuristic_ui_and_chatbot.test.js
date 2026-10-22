@@ -20,7 +20,7 @@ describe('Phase 24: Restrained UI, Verified Navigation & Chatbot Repair', () => 
       const homePath = path.resolve(process.cwd(), 'src/pages/HomePage.tsx');
       const content = fs.readFileSync(homePath, 'utf8');
 
-      assert.ok(content.includes('Stop paying for AI tools you don't need.'), 'Hero uses the concise editorial headline');
+      assert.ok(content.includes("Stop paying for AI tools you don't need."), 'Hero uses the concise editorial headline');
       assert.ok(content.includes('<UniversalSearch />'), 'Universal search remains the primary interaction');
       assert.ok(content.includes('hero-redesign__visual'), 'Hero pairs the message with a product interface visual');
     });
