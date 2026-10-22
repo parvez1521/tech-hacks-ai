@@ -210,7 +210,7 @@ describe('Phase 6: Homepage Redesign & HandlyTech Platform Integration', () => {
     setupMockBrowser('https://openalternative.co/prompt-library');
     const html = renderClean(React.createElement(ssrModule.App));
 
-    assert.ok(html.includes('AI Prompt Library &amp; Creative Recipes') || html.includes('AI Prompt Library & Creative Recipes'), 'Prompt library heading');
+    assert.ok(html.includes('Find a prompt. Make it yours.') || html.includes('Find a prompt. Make it yours.'), 'Prompt library heading');
     assert.ok(html.includes('Cinematic Anamorphic Studio Portrait'), 'Renders portrait prompt');
     assert.ok(html.includes('Modern Full-Stack SaaS Architecture Blueprint'), 'Renders SaaS prompt');
     assert.ok(html.includes('Copy Prompt'), 'Renders copy prompt button');

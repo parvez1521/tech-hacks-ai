@@ -174,7 +174,7 @@ describe('Phase 14: Deep QA, Production Readiness & Trust Audit', () => {
 
       setupMockBrowser('https://switchroute.in/prompt-library');
       const promptsHtml = renderClean(React.createElement(ssrModule.App));
-      assert.ok(promptsHtml.includes('AI Prompt Library &amp; Creative Recipes') || promptsHtml.includes('AI Prompt Library & Creative Recipes'), 'Prompts title');
+      assert.ok(promptsHtml.includes('Find a prompt. Make it yours.') || promptsHtml.includes('Find a prompt. Make it yours.'), 'Prompts title');
     });
   });
 
