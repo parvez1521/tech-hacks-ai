@@ -209,11 +209,11 @@ export const HomePage: React.FC = () => {
             >
               <div className="hero-redesign__eyebrow">
                 <span className="hero-redesign__eyebrow-mark" aria-hidden="true"><Sparkles size={13} /></span>
-                Independent software discovery
+                Free-first AI discovery
               </div>
-              <h1 id="home-hero-heading">Find the right tools for the work.</h1>
+              <h1 id="home-hero-heading">Stop paying for AI tools you don't need.</h1>
               <p className="hero-redesign__intro">
-                Tech Hacks AI helps you find useful AI products, open-source software, browser utilities, and current offers in one searchable directory.
+                Discover free AI plans, open-source alternatives, and practical tools before you add another subscription.
               </p>
 
               <div className="hero-redesign__search">
@@ -229,7 +229,7 @@ export const HomePage: React.FC = () => {
                 </Link>
               </div>
 
-              <div className="hero-redesign__quick-links" aria-label="Explore Tech Hacks AI">
+              <div className="hero-redesign__quick-links" aria-label="Explore SwitchRoute">
                 <Link to="/free-tools"><Wrench size={14} aria-hidden="true" /> Utilities</Link>
                 <Link to="/offers"><Tag size={14} aria-hidden="true" /> Offers</Link>
                 <Link to="/pick"><Compass size={14} aria-hidden="true" /> Help me choose</Link>
