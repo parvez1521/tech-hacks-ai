@@ -17,6 +17,7 @@ export const TechHacksLogo: React.FC<TechHacksLogoProps> = ({
     lg: { box: 'w-12 h-12', text: 'text-2xl' },
   };
   const current = sizeMap[size];
+  const gradientId = `switchRoute-${React.useId().replace(/[^a-zA-Z0-9_-]/g, '')}`;
 
   return (
     <div className={`flex items-center gap-2.5 group select-none ${className}`}>
@@ -25,19 +26,19 @@ export const TechHacksLogo: React.FC<TechHacksLogoProps> = ({
       >
         <svg viewBox="0 0 32 32" className="w-full h-full p-1" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
           <defs>
-            <linearGradient id="switchRouteLineGrad" x1="5" y1="5" x2="27" y2="27" gradientUnits="userSpaceOnUse">
+            <linearGradient id={`${gradientId}-line`} x1="5" y1="5" x2="27" y2="27" gradientUnits="userSpaceOnUse">
               <stop offset="0%" stopColor="#38bdf8" />
               <stop offset="52%" stopColor="#60a5fa" />
               <stop offset="100%" stopColor="#c084fc" />
             </linearGradient>
-            <radialGradient id="switchRouteGlowGrad" cx="50%" cy="50%" r="50%">
+            <radialGradient id={`${gradientId}-glow`} cx="50%" cy="50%" r="50%">
               <stop offset="0%" stopColor="#06b6d4" stopOpacity="0.32" />
               <stop offset="100%" stopColor="#06b6d4" stopOpacity="0" />
             </radialGradient>
           </defs>
-          <rect width="32" height="32" rx="6" fill="url(#switchRouteGlowGrad)" />
-          <path d="M6 10h18m0 0-4-4m4 4-4 4" stroke="url(#switchRouteLineGrad)" strokeWidth="2.35" strokeLinecap="round" strokeLinejoin="round" />
-          <path d="M26 22H8m0 0 4-4m-4 4 4 4" stroke="url(#switchRouteLineGrad)" strokeWidth="2.35" strokeLinecap="round" strokeLinejoin="round" />
+          <rect width="32" height="32" rx="6" fill={`url(#${gradientId}-glow)`} />
+          <path d="M6 10h18m0 0-4-4m4 4-4 4" stroke={`url(#${gradientId}-line)`} strokeWidth="2.35" strokeLinecap="round" strokeLinejoin="round" />
+          <path d="M26 22H8m0 0 4-4m-4 4 4 4" stroke={`url(#${gradientId}-line)`} strokeWidth="2.35" strokeLinecap="round" strokeLinejoin="round" />
           <circle cx="6" cy="10" r="2" fill="#38bdf8" />
           <circle cx="26" cy="22" r="2" fill="#c084fc" />
         </svg>
