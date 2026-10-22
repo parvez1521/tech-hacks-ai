@@ -8,7 +8,7 @@ import ReactDOMServer from 'react-dom/server';
 describe('Phase 20: Restored focused hero and assistant branding', () => {
   let ssrModule;
 
-  function setupMockBrowser(initialUrl = 'https://techhacksai.com/') {
+  function setupMockBrowser(initialUrl = 'https://switchroute.in/') {
     const parsedUrl = new URL(initialUrl);
     global.window = {
       innerWidth: 1024,
@@ -55,9 +55,9 @@ describe('Phase 20: Restored focused hero and assistant branding', () => {
   });
 
   test('HomePage renders hero and assistant without SSR exceptions', () => {
-    setupMockBrowser('https://techhacksai.com/');
+    setupMockBrowser('https://switchroute.in/');
     const html = ReactDOMServer.renderToString(React.createElement(ssrModule.App));
-    assert.ok(html.includes('Stop paying for AI tools you don't need.'));
+    assert.ok(html.includes("Stop paying for AI tools you don't need."));
     assert.ok(html.includes('data-testid="chat-launcher"'));
     assert.ok(!html.includes('data-testid="chat-dialog"'));
   });
