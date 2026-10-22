@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "npm run prompts:sitemap && vite build",
     "preview": "vite preview",
     "pretest": "./node_modules/.bin/esbuild src/App.tsx --bundle --platform=node --format=esm --external:react --external:react-dom --external:lucide-react --outfile=dist/test-ssr.js",
     "test": "node --experimental-strip-types --test --test-concurrency=1 tests/*.test.js",

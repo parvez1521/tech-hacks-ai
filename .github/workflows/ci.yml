@@ -31,6 +31,12 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Validate licensed PromptFeed prompt/image pairs
+        run: npm run prompts:import -- data/promptfeed-import.json
+
+      - name: Generate sitemap including PromptFeed prompt detail pages
+        run: npm run prompts:sitemap
+
       - name: Run test suite
         run: npm test
 
