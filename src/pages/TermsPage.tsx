@@ -43,7 +43,7 @@ export const TermsPage: React.FC = () => {
             1. Acceptance of Terms
           </h2>
           <p>
-            By accessing or using <strong className="text-slate-900 font-semibold">{siteConfig.url}</strong> (the &quot;Site&quot; or &quot;Tech Hacks AI&quot;), you acknowledge that you have read, understood, and agree to be bound by these Terms of Use and our <Link to="/privacy" className="text-blue-600 hover:text-blue-700 font-medium underline">Privacy Policy</Link>. If you do not agree to these terms, please discontinue use of the Site.
+            By accessing or using <strong className="text-slate-900 font-semibold">{siteConfig.url}</strong> (the &quot;Site&quot; or &quot;SwitchRoute&quot;), you acknowledge that you have read, understood, and agree to be bound by these Terms of Use and our <Link to="/privacy" className="text-blue-600 hover:text-blue-700 font-medium underline">Privacy Policy</Link>. If you do not agree to these terms, please discontinue use of the Site.
           </p>
         </section>
 
@@ -53,7 +53,7 @@ export const TermsPage: React.FC = () => {
             2. Informational &amp; Educational Purpose
           </h2>
           <p>
-            Tech Hacks AI is an independent discovery platform, software review directory, and technology publication. We provide software overviews, open-source alternatives, side-by-side comparison tables, prompt engineering templates, client-side developer utilities, and educational guides.
+            SwitchRoute is an independent discovery platform, software review directory, and technology publication. We provide software overviews, open-source alternatives, side-by-side comparison tables, prompt engineering templates, client-side developer utilities, and educational guides.
           </p>
           <p>
             All content published on the Site is provided strictly for educational, comparative, and informational purposes. While we strive for accuracy, information such as software pricing tiers, quota limits, API availability, and licensing is subject to change at the sole discretion of the respective third-party providers.
@@ -67,10 +67,10 @@ export const TermsPage: React.FC = () => {
             <h2>3. Third-Party Trademarks &amp; Nominative Fair Use</h2>
           </div>
           <p className="text-slate-600 leading-relaxed">
-            All company names, brand names, product logos, registered trademarks, and software names referenced on Tech Hacks AI (including but not limited to Figma, Notion, Firebase, Airtable, Postman, Google, Microsoft, OpenAI, Anthropic, and GitHub) are the property of their respective owners.
+            All company names, brand names, product logos, registered trademarks, and software names referenced on SwitchRoute (including but not limited to Figma, Notion, Firebase, Airtable, Postman, Google, Microsoft, OpenAI, Anthropic, and GitHub) are the property of their respective owners.
           </p>
           <p className="text-slate-600 leading-relaxed">
-            Reference to any specific third-party software, commercial process, or brand is made solely for descriptive, comparative, and identification purposes under nominative fair use principles. Tech Hacks AI is an independent platform and is not sponsored by, endorsed by, or affiliated with any third-party proprietary software providers unless explicitly disclosed.
+            Reference to any specific third-party software, commercial process, or brand is made solely for descriptive, comparative, and identification purposes under nominative fair use principles. SwitchRoute is an independent platform and is not sponsored by, endorsed by, or affiliated with any third-party proprietary software providers unless explicitly disclosed.
           </p>
         </section>
 
@@ -80,7 +80,7 @@ export const TermsPage: React.FC = () => {
             4. External Links &amp; Third-Party Repositories
           </h2>
           <p>
-            The Site contains hyperlinks to external websites, documentation hubs, and code repositories (such as GitHub, GitLab, and official software portals). Tech Hacks AI has no control over the content, security, uptime, or privacy practices of external websites. Following outbound links is done at your own risk, and you should review the terms and policies of any third-party destination you visit.
+            The Site contains hyperlinks to external websites, documentation hubs, and code repositories (such as GitHub, GitLab, and official software portals). SwitchRoute has no control over the content, security, uptime, or privacy practices of external websites. Following outbound links is done at your own risk, and you should review the terms and policies of any third-party destination you visit.
           </p>
         </section>
 
@@ -90,13 +90,13 @@ export const TermsPage: React.FC = () => {
             5. Acceptable Use Policy
           </h2>
           <p>
-            When utilizing Tech Hacks AI and its free browser-based utilities, you agree not to:
+            When utilizing SwitchRoute and its free browser-based utilities, you agree not to:
           </p>
           <ul className="list-disc list-inside space-y-1.5 text-xs pl-2 text-slate-600">
             <li>Engage in automated denial-of-service (DoS) attacks or disrupt site infrastructure.</li>
             <li>Use automated scrapers or bots to harvest catalog records without prior written consent.</li>
             <li>Attempt to bypass client-side security controls or tamper with application scripts.</li>
-            <li>Misrepresent Tech Hacks AI reviews or ratings as commercial product endorsements.</li>
+            <li>Misrepresent SwitchRoute reviews or ratings as commercial product endorsements.</li>
           </ul>
         </section>
 
@@ -107,10 +107,10 @@ export const TermsPage: React.FC = () => {
             <h2>6. Disclaimer of Warranties &amp; Limitation of Liability</h2>
           </div>
           <p className="text-xs leading-relaxed text-slate-700">
-            THE SITE AND ALL CONTENT, DIRECTORIES, GUIDES, AND UTILITIES ARE PROVIDED ON AN &quot;AS IS&quot; AND &quot;AS AVAILABLE&quot; BASIS WITHOUT WARRANTIES OF ANY KIND, WHETHER EXPRESS OR IMPLIED. TECH HACKS AI DISCLAIMS ALL WARRANTIES, INCLUDING MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NON-INFRINGEMENT.
+            THE SITE AND ALL CONTENT, DIRECTORIES, GUIDES, AND UTILITIES ARE PROVIDED ON AN &quot;AS IS&quot; AND &quot;AS AVAILABLE&quot; BASIS WITHOUT WARRANTIES OF ANY KIND, WHETHER EXPRESS OR IMPLIED. SWITCHROUTE DISCLAIMS ALL WARRANTIES, INCLUDING MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NON-INFRINGEMENT.
           </p>
           <p className="text-xs leading-relaxed text-slate-700">
-            IN NO EVENT SHALL TECH HACKS AI, ITS EDITORS, OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES RESULTING FROM YOUR USE OF OR INABILITY TO USE THE SITE, SOFTWARE RECOMMENDATIONS, SELF-HOSTING GUIDELINES, OR THIRD-PARTY API EXPENSES.
+            IN NO EVENT SHALL SWITCHROUTE, ITS EDITORS, OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES RESULTING FROM YOUR USE OF OR INABILITY TO USE THE SITE, SOFTWARE RECOMMENDATIONS, SELF-HOSTING GUIDELINES, OR THIRD-PARTY API EXPENSES.
           </p>
         </section>
 

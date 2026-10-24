@@ -8,6 +8,7 @@ import { Tool, AiTool } from '../types';
 import { Plus, X, ExternalLink, Check, Star, ShieldCheck, HardDrive, RefreshCw, Share2, Compass, BookOpen, CheckCircle2 } from 'lucide-react';
 import { BrandLogo } from '../components/BrandLogo';
 import { siteConfig } from '../config/siteConfig';
+import { AffiliateDisclosure } from '../components/AffiliateDisclosure';
 
 type UnifiedTool =
   | { kind: 'open-source'; data: Tool }
@@ -358,8 +359,10 @@ export const ComparePage: React.FC = () => {
               {/* Action Links */}
               <tr>
                 <td className="p-4 font-semibold text-slate-700 bg-slate-50/50">Explore</td>
-                {resolvedTools.map((t) => (
-                  <td key={t.data.id} className="p-4">
+                {resolvedTools.map((t) => {
+                  const affiliateUrl = t.kind === 'ai' ? t.data.affiliateUrl : undefined;
+                  return (
+                    <td key={t.data.id} className="p-4">
                     <div className="flex flex-col gap-1.5">
                       <Link
                         to={t.kind === 'open-source' ? `/tools/${t.data.slug}` : `/ai-tools/${t.data.slug}`}
@@ -369,17 +372,19 @@ export const ComparePage: React.FC = () => {
                         <span>→</span>
                       </Link>
                       <a
-                        href={t.data.websiteUrl}
+                        href={affiliateUrl || t.data.websiteUrl}
                         target="_blank"
-                        rel="noopener noreferrer"
+                        rel={affiliateUrl ? 'noopener noreferrer sponsored nofollow' : 'noopener noreferrer'}
                         className="inline-flex items-center gap-1 text-slate-500 hover:text-slate-800 text-[11px] transition-colors"
                       >
-                        <span>Official Website</span>
+                        <span>{affiliateUrl ? `Try ${t.data.name}` : 'Official Website'}</span>
                         <ExternalLink className="w-3 h-3" />
                       </a>
+                      {affiliateUrl && <AffiliateDisclosure />}
                     </div>
-                  </td>
-                ))}
+                    </td>
+                  );
+                })}
               </tr>
             </tbody>
           </table>

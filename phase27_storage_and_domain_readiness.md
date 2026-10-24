@@ -1,7 +1,7 @@
 # Phase 27 — Durable Data Storage & Production Deployment Readiness Report
 
-**Project:** Tech Hacks AI  
-**Domain Target:** `https://techhacksai.com`  
+**Project:** SwitchRoute  
+**Domain Target:** `https://switchroute.in`  
 **Architecture:** React 18 + TypeScript + Vite 5 + Tailwind CSS + Node.js Serverless Functions  
 **Audit & Execution Date:** October 18, 2026  
 **Status:** **100% PRODUCTION READY & VERIFIED** (408 / 408 tests passing across 108 test suites)
@@ -10,7 +10,7 @@
 
 ## Executive Summary
 
-Phase 27 systematically audits, refactors, and hardens the persistence architecture and domain readiness of **Tech Hacks AI** prior to public domain connection. 
+Phase 27 systematically audits, refactors, and hardens the persistence architecture and domain readiness of **SwitchRoute** prior to public domain connection. 
 
 Previously, in Phase 26, the application achieved build stability and 390 passing tests. However, serverless community submissions relied on local JSON files falling back to `/tmp/techhacks-data` in Vercel. In serverless execution environments, `/tmp` is strictly ephemeral and instance-local; writing submissions to `/tmp` in production represents a severe silent data-loss vulnerability.
 
@@ -50,9 +50,9 @@ We evaluated three serverless-compatible persistent storage solutions:
 | **Query Flexibility** | Full relational SQL, JSONB indexing, sorting, filtering | Key-value string/hash lookups, manual index sets | Full relational SQL |
 | **Free Tier Quota** | 500 MB database, 50,000 MAU, 500,000 API requests/mo | 10,000 commands/day, 256 MB storage | Neon: 0.5 GB storage; Turso: 9 GB storage |
 | **Security & RLS** | Built-in Row Level Security (RLS) + Service Role key | Token-based HTTP authorization header | Database users and credentials |
-| **Suitability for Tech Hacks AI** | **Optimal:** Native JSONB support matches submission payload, PostgREST filtering handles moderation queue status filters, zero runtime overhead. | Good for caching, but complex for multi-attribute moderation filtering. | Good, but requires extra SDK dependencies for connection resilience. |
+| **Suitability for SwitchRoute** | **Optimal:** Native JSONB support matches submission payload, PostgREST filtering handles moderation queue status filters, zero runtime overhead. | Good for caching, but complex for multi-attribute moderation filtering. | Good, but requires extra SDK dependencies for connection resilience. |
 
-**Decision:** **Supabase PostgreSQL via REST** is the primary recommended durable storage engine for Tech Hacks AI. It requires zero third-party packages, integrates with standard `fetch`, and natively supports the schema requirements.
+**Decision:** **Supabase PostgreSQL via REST** is the primary recommended durable storage engine for SwitchRoute. It requires zero third-party packages, integrates with standard `fetch`, and natively supports the schema requirements.
 
 ---
 
@@ -64,7 +64,7 @@ A dedicated storage adapter was created at [server/storageAdapter.js](file:///Us
 
 ```
 +-------------------------------------------------------------------------+
-|                       Tech Hacks AI Storage Router                      |
+|                       SwitchRoute Storage Router                      |
 +-------------------------------------------------------------------------+
                                      |
                +---------------------+---------------------+
@@ -161,28 +161,28 @@ The configuration at [vercel.json](file:///Users/parvez/.gemini/antigravity/scra
 ### 4.3. Vercel Hobby vs Pro Commercial Terms
 > [!IMPORTANT]
 > **Vercel Hobby Plan Terms Notice:**  
-> Vercel's free Hobby plan is strictly for non-commercial personal projects. If you enable Google AdSense (`VITE_ADSENSE_PUB_ID`), affiliate links, or sponsored placements on `techhacksai.com`, Vercel's Terms of Service require upgrading to **Vercel Pro ($20/seat/month)**. Alternatively, the static frontend build in `dist/` can be deployed on Cloudflare Pages or Netlify with serverless functions.
+> Vercel's free Hobby plan is strictly for non-commercial personal projects. If you enable Google AdSense (`VITE_ADSENSE_PUB_ID`), affiliate links, or sponsored placements on `switchroute.in`, Vercel's Terms of Service require upgrading to **Vercel Pro ($20/seat/month)**. Alternatively, the static frontend build in `dist/` can be deployed on Cloudflare Pages or Netlify with serverless functions.
 
 ---
 
 ## 5. Task 5 — Custom Domain & Deployment Preparation
 
 ### 5.1. Domain DNS Records
-To connect the custom domain `techhacksai.com` to Vercel:
+To connect the custom domain `switchroute.in` to Vercel:
 
 | Type | Name / Host | Target / Value | TTL | Purpose |
 | :--- | :--- | :--- | :--- | :--- |
-| **A** | `@` (Apex) | `76.76.21.21` | Automatic / 3600 | Routes apex `techhacksai.com` to Vercel Anycast IP |
-| **CNAME** | `www` | `cname.vercel-dns.com` | Automatic / 3600 | Routes `www.techhacksai.com` to Vercel edge network |
+| **A** | `@` (Apex) | `76.76.21.21` | Automatic / 3600 | Routes apex `switchroute.in` to Vercel Anycast IP |
+| **CNAME** | `www` | `cname.vercel-dns.com` | Automatic / 3600 | Routes `www.switchroute.in` to Vercel edge network |
 
-*Note: In the Vercel Dashboard under **Project Settings -> Domains**, add both `techhacksai.com` and `www.techhacksai.com`, setting `www.techhacksai.com` to redirect to `techhacksai.com` (recommended canonical approach).*
+*Note: In the Vercel Dashboard under **Project Settings -> Domains**, add both `switchroute.in` and `www.switchroute.in`, setting `www.switchroute.in` to redirect to `switchroute.in` (recommended canonical approach).*
 
 ### 5.2. Automated SSL/TLS Certificates
 Vercel automatically issues and renews free SSL certificates via Let's Encrypt once DNS records resolve. HSTS preload headers are configured in `vercel.json` to enforce HTTPS.
 
 ### 5.3. Canonical URL & Metadata Audit
 - Canonical URL generation is centralized in [src/config/site.ts](file:///Users/parvez/.gemini/antigravity/scratch/open-alternative/src/config/site.ts) via `getCanonicalUrl(path)`.
-- It dynamically reads `VITE_SITE_URL` (defaulting to `https://techhacksai.com`).
+- It dynamically reads `VITE_SITE_URL` (defaulting to `https://switchroute.in`).
 - No hardcoded `localhost` references exist in production metadata or sitemaps.
 - [public/robots.txt](file:///Users/parvez/.gemini/antigravity/scratch/open-alternative/public/robots.txt) disallows `/moderation`, `/admin`, and `/api/`, protecting administrative and backend endpoints from search crawler indexing.
 
@@ -281,14 +281,14 @@ npm run db:migrate
 
 ### Step 3: Configure Vercel Project Settings
 In your Vercel Dashboard under **Project Settings -> Environment Variables**, add:
-- `VITE_SITE_URL`: `https://techhacksai.com`
+- `VITE_SITE_URL`: `https://switchroute.in`
 - `ADMIN_SECRET`: Generate a random 32-character string (e.g. `openssl rand -base64 32`)
 - `SUPABASE_URL`: `https://<your-project-ref>.supabase.co`
 - `SUPABASE_SERVICE_ROLE_KEY`: Your Supabase service role key
 - `GROQ_API_KEY`: *(Optional)* Your Groq API key for GPT-OSS 120B chatbot responses
 
 ### Step 4: Connect Domain DNS
-1. In Vercel, go to **Settings -> Domains** and add `techhacksai.com`.
+1. In Vercel, go to **Settings -> Domains** and add `switchroute.in`.
 2. In your domain registrar (Namecheap, GoDaddy, Cloudflare, Google Domains/Squarespace):
    - Add an **A Record**: Name: `@`, Value: `76.76.21.21`
    - Add a **CNAME Record**: Name: `www`, Value: `cname.vercel-dns.com`

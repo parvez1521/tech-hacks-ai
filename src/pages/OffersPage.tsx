@@ -351,13 +351,13 @@ export const OffersPage: React.FC = () => {
           <Info className="w-5 h-5 text-blue-600 shrink-0 mt-0.5" />
           <div className="space-y-1.5">
             <h2 className="font-semibold text-foreground text-sm">
-              Tech Hacks AI Deal Verification & Transparency Policy
+              SwitchRoute Deal Verification & Transparency Policy
             </h2>
             <p>
               All promotional benefits, telecom bundles, student programs, and cloud credit initiatives listed above are independently curated from official provider websites, press releases, and student verification platforms (such as SheerID and GitHub Education).
             </p>
             <p>
-              Tech Hacks AI does not sell coupons, fabricate promotional codes, or earn hidden commissions from unlisted intermediaries. Third-party terms, academic eligibility verification, geographic restrictions, and automatic subscription renewal terms apply directly with the respective service providers (Reliance Jio, Google, GitHub/Microsoft, Perplexity, AWS, JetBrains, and Notion). Always verify current terms on the official provider portal prior to sharing academic credentials or payment details.
+              SwitchRoute does not sell coupons, fabricate promotional codes, or earn hidden commissions from unlisted intermediaries. Third-party terms, academic eligibility verification, geographic restrictions, and automatic subscription renewal terms apply directly with the respective service providers (Reliance Jio, Google, GitHub/Microsoft, Perplexity, AWS, JetBrains, and Notion). Always verify current terms on the official provider portal prior to sharing academic credentials or payment details.
             </p>
           </div>
         </div>

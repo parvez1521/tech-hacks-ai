@@ -92,7 +92,7 @@ describe('Phase 18: Pre-Launch Polish & Interactive 3D AI Chatbot Assistant', ()
       const html = ReactDOMServer.renderToString(React.createElement(ssrModule.App));
 
       assert.ok(html.includes('data-testid="chat-launcher"'), 'Compact launcher is rendered');
-      assert.ok(html.includes('aria-label="Open Tech Hacks AI assistant"'), 'Launcher has an accessible name');
+      assert.ok(html.includes('aria-label="Open SwitchRoute assistant"'), 'Launcher has an accessible name');
       assert.ok(!html.includes('data-testid="chat-dialog"'), 'Chat dialog is closed until requested');
     });
 

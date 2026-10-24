@@ -157,7 +157,7 @@ export function getRouteTitle(route: string, params: Record<string, string> = {}
     case 'submit-guide':
       return formatPageTitle('Submit an AI Guide & Tutorial — Community Knowledge');
     case 'submit-prompt':
-      return formatPageTitle('Submit an AI Prompt — Tech Hacks AI');
+      return formatPageTitle('Submit an AI Prompt — SwitchRoute');
     case 'discoveries':
       return formatPageTitle('Daily Discoveries & Featured AI Tools');
     case 'moderation':
@@ -253,28 +253,28 @@ export function getRouteDescription(route: string, params: Record<string, string
         : 'Verified AI deal and benefit terms.';
     }
     case 'about':
-      return 'Learn about the mission, editorial methodology, and independent review standards behind Tech Hacks AI.';
+      return 'Learn about the mission, editorial methodology, and independent review standards behind SwitchRoute.';
     case 'contact':
-      return 'Get in touch with the Tech Hacks AI editorial team for tool submissions, pricing corrections, feedback, and partnerships.';
+      return 'Get in touch with the SwitchRoute editorial team for tool submissions, pricing corrections, feedback, and partnerships.';
     case 'privacy':
       return 'Our privacy policy details data handling, Google advertising cookies, DoubleClick opt-out mechanisms, and user rights under GDPR, CCPA, and ePrivacy.';
     case 'terms':
-      return 'Terms of use, intellectual property conditions, acceptable conduct, and disclaimers for Tech Hacks AI visitors.';
+      return 'Terms of use, intellectual property conditions, acceptable conduct, and disclaimers for SwitchRoute visitors.';
     case 'disclosure':
-      return 'Our advertising and affiliate disclosure policy. Learn how Tech Hacks AI maintains 100% editorial independence while funding operations.';
+      return 'Our advertising and affiliate disclosure policy. Learn how SwitchRoute maintains 100% editorial independence while funding operations.';
     case 'submit-tool':
       return 'Submit your AI platform, open-source model, developer tool, or creative application for editorial review and directory inclusion.';
     case 'submit-guide':
-      return 'Share practical technical guides, prompt recipes, or developer workflows with the Tech Hacks AI community.';
+      return 'Share practical technical guides, prompt recipes, or developer workflows with the SwitchRoute community.';
     case 'submit-prompt':
       return 'Submit an original or authorized AI prompt for moderator review.';
     case 'discoveries':
-      return 'Explore hand-curated daily discoveries and featured AI platforms reviewed by the Tech Hacks AI editorial team.';
+      return 'Explore hand-curated daily discoveries and featured AI platforms reviewed by the SwitchRoute editorial team.';
     case 'moderation':
       return 'Editorial moderation queue for reviewing community-submitted AI tools and technical tutorials.';
     case 'not-found':
     default:
-      return 'The requested page could not be found on Tech Hacks AI.';
+      return 'The requested page could not be found on SwitchRoute.';
   }
 }
 

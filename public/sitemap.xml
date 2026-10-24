@@ -1,1207 +1,3987 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://techhacksai.com/</loc>
+    <loc>https://switchroute.in/</loc>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/ai-tools</loc>
+    <loc>https://switchroute.in/ai-tools</loc>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/free-ai-sites</loc>
+    <loc>https://switchroute.in/free-ai-sites</loc>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/alternatives</loc>
+    <loc>https://switchroute.in/alternatives</loc>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/offers</loc>
+    <loc>https://switchroute.in/offers</loc>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/tools</loc>
+    <loc>https://switchroute.in/tools</loc>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/categories</loc>
+    <loc>https://switchroute.in/categories</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/guides</loc>
+    <loc>https://switchroute.in/guides</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/prompt-library</loc>
+    <loc>https://switchroute.in/prompt-library</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/free-tools</loc>
+    <loc>https://switchroute.in/free-tools</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/compare</loc>
+    <loc>https://switchroute.in/compare</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/pick</loc>
+    <loc>https://switchroute.in/pick</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/updates</loc>
+    <loc>https://switchroute.in/updates</loc>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/about</loc>
+    <loc>https://switchroute.in/about</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/contact</loc>
+    <loc>https://switchroute.in/contact</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/privacy</loc>
+    <loc>https://switchroute.in/privacy</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/terms</loc>
+    <loc>https://switchroute.in/terms</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/disclosure</loc>
+    <loc>https://switchroute.in/disclosure</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/categories/developer-tools</loc>
+    <loc>https://switchroute.in/categories/developer-tools</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/categories/api-development</loc>
+    <loc>https://switchroute.in/categories/api-development</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/categories/databases</loc>
+    <loc>https://switchroute.in/categories/databases</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/categories/low-code</loc>
+    <loc>https://switchroute.in/categories/low-code</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/categories/workflow-automation</loc>
+    <loc>https://switchroute.in/categories/workflow-automation</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/categories/ai-machine-learning</loc>
+    <loc>https://switchroute.in/categories/ai-machine-learning</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/categories/ai-web-scraping</loc>
+    <loc>https://switchroute.in/categories/ai-web-scraping</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/categories/vector-search</loc>
+    <loc>https://switchroute.in/categories/vector-search</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/categories/agent-workflows</loc>
+    <loc>https://switchroute.in/categories/agent-workflows</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/categories/productivity</loc>
+    <loc>https://switchroute.in/categories/productivity</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/categories/docs-wikis</loc>
+    <loc>https://switchroute.in/categories/docs-wikis</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/categories/spreadsheets-databases</loc>
+    <loc>https://switchroute.in/categories/spreadsheets-databases</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/categories/scheduling</loc>
+    <loc>https://switchroute.in/categories/scheduling</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/categories/business-software</loc>
+    <loc>https://switchroute.in/categories/business-software</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/categories/social-media</loc>
+    <loc>https://switchroute.in/categories/social-media</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/categories/form-builders</loc>
+    <loc>https://switchroute.in/categories/form-builders</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/categories/notifications</loc>
+    <loc>https://switchroute.in/categories/notifications</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/categories/analytics</loc>
+    <loc>https://switchroute.in/categories/analytics</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/categories/web-analytics</loc>
+    <loc>https://switchroute.in/categories/web-analytics</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/categories/product-analytics</loc>
+    <loc>https://switchroute.in/categories/product-analytics</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/categories/design-media</loc>
+    <loc>https://switchroute.in/categories/design-media</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/categories/ui-ux-design</loc>
+    <loc>https://switchroute.in/categories/ui-ux-design</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/categories/media-storage</loc>
+    <loc>https://switchroute.in/categories/media-storage</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/categories/security-auth</loc>
+    <loc>https://switchroute.in/categories/security-auth</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/categories/auth-sso</loc>
+    <loc>https://switchroute.in/categories/auth-sso</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/categories/secrets-management</loc>
+    <loc>https://switchroute.in/categories/secrets-management</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/categories/remote-access</loc>
+    <loc>https://switchroute.in/categories/remote-access</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/collections/trending</loc>
+    <loc>https://switchroute.in/collections/trending</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/collections/self-hosted</loc>
+    <loc>https://switchroute.in/collections/self-hosted</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/collections/ai-native</loc>
+    <loc>https://switchroute.in/collections/ai-native</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/collections/latest</loc>
+    <loc>https://switchroute.in/collections/latest</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/alternatives/firebase</loc>
+    <loc>https://switchroute.in/alternatives/firebase</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/alternatives/notion</loc>
+    <loc>https://switchroute.in/alternatives/notion</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/alternatives/airtable</loc>
+    <loc>https://switchroute.in/alternatives/airtable</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/alternatives/buffer</loc>
+    <loc>https://switchroute.in/alternatives/buffer</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/alternatives/figma</loc>
+    <loc>https://switchroute.in/alternatives/figma</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/alternatives/zapier</loc>
+    <loc>https://switchroute.in/alternatives/zapier</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/alternatives/google-analytics</loc>
+    <loc>https://switchroute.in/alternatives/google-analytics</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/alternatives/postman</loc>
+    <loc>https://switchroute.in/alternatives/postman</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/alternatives/calendly</loc>
+    <loc>https://switchroute.in/alternatives/calendly</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/alternatives/algolia</loc>
+    <loc>https://switchroute.in/alternatives/algolia</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/alternatives/typeform</loc>
+    <loc>https://switchroute.in/alternatives/typeform</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/alternatives/google-photos</loc>
+    <loc>https://switchroute.in/alternatives/google-photos</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/alternatives/claude-code</loc>
+    <loc>https://switchroute.in/alternatives/claude-code</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/alternatives/perplexity</loc>
+    <loc>https://switchroute.in/alternatives/perplexity</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/ai-tools/claude</loc>
+    <loc>https://switchroute.in/ai-tools/claude</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/ai-tools/chatgpt</loc>
+    <loc>https://switchroute.in/ai-tools/chatgpt</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/ai-tools/perplexity</loc>
+    <loc>https://switchroute.in/ai-tools/perplexity</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/ai-tools/gemini</loc>
+    <loc>https://switchroute.in/ai-tools/gemini</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/ai-tools/deepseek</loc>
+    <loc>https://switchroute.in/ai-tools/deepseek</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/ai-tools/copilot</loc>
+    <loc>https://switchroute.in/ai-tools/copilot</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/ai-tools/mistral-le-chat</loc>
+    <loc>https://switchroute.in/ai-tools/mistral-le-chat</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/ai-tools/qwen-chat</loc>
+    <loc>https://switchroute.in/ai-tools/qwen-chat</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/ai-tools/meta-ai</loc>
+    <loc>https://switchroute.in/ai-tools/meta-ai</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/ai-tools/omnirush</loc>
+    <loc>https://switchroute.in/ai-tools/omnirush</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/ai-tools/kie-ai</loc>
+    <loc>https://switchroute.in/ai-tools/kie-ai</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/ai-tools/notebooklm</loc>
+    <loc>https://switchroute.in/ai-tools/notebooklm</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/ai-tools/huggingchat</loc>
+    <loc>https://switchroute.in/ai-tools/huggingchat</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/ai-tools/groq</loc>
+    <loc>https://switchroute.in/ai-tools/groq</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/ai-tools/google-ai-studio</loc>
+    <loc>https://switchroute.in/ai-tools/google-ai-studio</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/ai-tools/ollama</loc>
+    <loc>https://switchroute.in/ai-tools/ollama</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/ai-tools/open-webui</loc>
+    <loc>https://switchroute.in/ai-tools/open-webui</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/ai-tools/dify</loc>
+    <loc>https://switchroute.in/ai-tools/dify</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/ai-tools/langflow</loc>
+    <loc>https://switchroute.in/ai-tools/langflow</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/ai-tools/localai</loc>
+    <loc>https://switchroute.in/ai-tools/localai</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/ai-tools/librechat</loc>
+    <loc>https://switchroute.in/ai-tools/librechat</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/ai-tools/jan</loc>
+    <loc>https://switchroute.in/ai-tools/jan</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/ai-tools/anythingllm</loc>
+    <loc>https://switchroute.in/ai-tools/anythingllm</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/ai-tools/comfyui</loc>
+    <loc>https://switchroute.in/ai-tools/comfyui</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/ai-tools/vllm</loc>
+    <loc>https://switchroute.in/ai-tools/vllm</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/ai-tools/gpt4all</loc>
+    <loc>https://switchroute.in/ai-tools/gpt4all</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/ai-tools/llama-cpp</loc>
+    <loc>https://switchroute.in/ai-tools/llama-cpp</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/ai-tools/cursor</loc>
+    <loc>https://switchroute.in/ai-tools/cursor</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/ai-tools/v0-vercel</loc>
+    <loc>https://switchroute.in/ai-tools/v0-vercel</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/ai-tools/bolt-new</loc>
+    <loc>https://switchroute.in/ai-tools/bolt-new</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/ai-tools/aider</loc>
+    <loc>https://switchroute.in/ai-tools/aider</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/ai-tools/continue-dev</loc>
+    <loc>https://switchroute.in/ai-tools/continue-dev</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/ai-tools/qwen-coder</loc>
+    <loc>https://switchroute.in/ai-tools/qwen-coder</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/ai-tools/replit-agent</loc>
+    <loc>https://switchroute.in/ai-tools/replit-agent</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/ai-tools/flux-1</loc>
+    <loc>https://switchroute.in/ai-tools/flux-1</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/ai-tools/stable-diffusion-3</loc>
+    <loc>https://switchroute.in/ai-tools/stable-diffusion-3</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/ai-tools/ideogram</loc>
+    <loc>https://switchroute.in/ai-tools/ideogram</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/ai-tools/recraft</loc>
+    <loc>https://switchroute.in/ai-tools/recraft</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/ai-tools/leonardo-ai</loc>
+    <loc>https://switchroute.in/ai-tools/leonardo-ai</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/ai-tools/krea-ai</loc>
+    <loc>https://switchroute.in/ai-tools/krea-ai</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/ai-tools/midjourney</loc>
+    <loc>https://switchroute.in/ai-tools/midjourney</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/ai-tools/runway</loc>
+    <loc>https://switchroute.in/ai-tools/runway</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/ai-tools/luma-dream-machine</loc>
+    <loc>https://switchroute.in/ai-tools/luma-dream-machine</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/ai-tools/kling-ai</loc>
+    <loc>https://switchroute.in/ai-tools/kling-ai</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/ai-tools/pika</loc>
+    <loc>https://switchroute.in/ai-tools/pika</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/ai-tools/haiper</loc>
+    <loc>https://switchroute.in/ai-tools/haiper</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/ai-tools/vidu</loc>
+    <loc>https://switchroute.in/ai-tools/vidu</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/ai-tools/hailuo-ai</loc>
+    <loc>https://switchroute.in/ai-tools/hailuo-ai</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/ai-tools/dreamina</loc>
+    <loc>https://switchroute.in/ai-tools/dreamina</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/ai-tools/pixverse</loc>
+    <loc>https://switchroute.in/ai-tools/pixverse</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/ai-tools/wan-video</loc>
+    <loc>https://switchroute.in/ai-tools/wan-video</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/ai-tools/ltx-video</loc>
+    <loc>https://switchroute.in/ai-tools/ltx-video</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/ai-tools/cogvideox</loc>
+    <loc>https://switchroute.in/ai-tools/cogvideox</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/ai-tools/hedra</loc>
+    <loc>https://switchroute.in/ai-tools/hedra</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/ai-tools/kaiber</loc>
+    <loc>https://switchroute.in/ai-tools/kaiber</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/ai-tools/elevenlabs</loc>
+    <loc>https://switchroute.in/ai-tools/elevenlabs</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/ai-tools/suno</loc>
+    <loc>https://switchroute.in/ai-tools/suno</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/ai-tools/udio</loc>
+    <loc>https://switchroute.in/ai-tools/udio</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/ai-tools/whisper</loc>
+    <loc>https://switchroute.in/ai-tools/whisper</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/ai-tools/kokoro-tts</loc>
+    <loc>https://switchroute.in/ai-tools/kokoro-tts</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/ai-tools/make</loc>
+    <loc>https://switchroute.in/ai-tools/make</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/ai-tools/copy-ai</loc>
+    <loc>https://switchroute.in/ai-tools/copy-ai</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/ai-tools/meshy-3d</loc>
+    <loc>https://switchroute.in/ai-tools/meshy-3d</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/ai-tools/zapier-central</loc>
+    <loc>https://switchroute.in/ai-tools/zapier-central</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/offers/jio-google-gemini-offer</loc>
+    <loc>https://switchroute.in/offers/jio-google-gemini-offer</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/offers/google-gemini-student-offer-india</loc>
+    <loc>https://switchroute.in/offers/google-gemini-student-offer-india</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/offers/github-student-pack-copilot</loc>
+    <loc>https://switchroute.in/offers/github-student-pack-copilot</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/offers/perplexity-education-pro</loc>
+    <loc>https://switchroute.in/offers/perplexity-education-pro</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/offers/microsoft-founders-hub-credits</loc>
+    <loc>https://switchroute.in/offers/microsoft-founders-hub-credits</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/offers/aws-activate-ai-startups</loc>
+    <loc>https://switchroute.in/offers/aws-activate-ai-startups</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/offers/jetbrains-student-pack</loc>
+    <loc>https://switchroute.in/offers/jetbrains-student-pack</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/offers/notion-for-education</loc>
+    <loc>https://switchroute.in/offers/notion-for-education</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/offers/github-copilot-free</loc>
+    <loc>https://switchroute.in/offers/github-copilot-free</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/offers/azure-for-students</loc>
+    <loc>https://switchroute.in/offers/azure-for-students</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/offers/figma-education</loc>
+    <loc>https://switchroute.in/offers/figma-education</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/offers/adobe-cc-student-discount-india</loc>
+    <loc>https://switchroute.in/offers/adobe-cc-student-discount-india</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/offers/google-for-startups-cloud</loc>
+    <loc>https://switchroute.in/offers/google-for-startups-cloud</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/offers/canva-for-campus</loc>
+    <loc>https://switchroute.in/offers/canva-for-campus</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/guides/video-creation</loc>
+    <loc>https://switchroute.in/guides/video-creation</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/guides/prompting</loc>
+    <loc>https://switchroute.in/guides/prompting</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/guides/coding</loc>
+    <loc>https://switchroute.in/guides/coding</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/guides/productivity</loc>
+    <loc>https://switchroute.in/guides/productivity</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/guides/design</loc>
+    <loc>https://switchroute.in/guides/design</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/guides/cinematic-ai-video-workflow</loc>
+    <loc>https://switchroute.in/guides/cinematic-ai-video-workflow</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/guides/building-apps-with-cursor-supabase</loc>
+    <loc>https://switchroute.in/guides/building-apps-with-cursor-supabase</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/guides/mastering-claude-artifacts-dashboards</loc>
+    <loc>https://switchroute.in/guides/mastering-claude-artifacts-dashboards</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/guides/automating-research-perplexity-n8n</loc>
+    <loc>https://switchroute.in/guides/automating-research-perplexity-n8n</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/guides/local-llm-privacy-guide</loc>
+    <loc>https://switchroute.in/guides/local-llm-privacy-guide</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/guides/photorealistic-portraits-midjourney</loc>
+    <loc>https://switchroute.in/guides/photorealistic-portraits-midjourney</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/guides/how-to-choose-ai-coding-assistant</loc>
+    <loc>https://switchroute.in/guides/how-to-choose-ai-coding-assistant</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/guides/free-ai-student-benefits-guide</loc>
+    <loc>https://switchroute.in/guides/free-ai-student-benefits-guide</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/guides/evaluating-free-ai-plans</loc>
+    <loc>https://switchroute.in/guides/evaluating-free-ai-plans</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/prompt-library/image-generation</loc>
+    <loc>https://switchroute.in/prompt-library/image-generation</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/prompt-library/video-direction</loc>
+    <loc>https://switchroute.in/prompt-library/video-direction</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/prompt-library/coding-architecture</loc>
+    <loc>https://switchroute.in/prompt-library/coding-architecture</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/prompt-library/marketing-writing</loc>
+    <loc>https://switchroute.in/prompt-library/marketing-writing</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/prompt-library/productivity-research</loc>
+    <loc>https://switchroute.in/prompt-library/productivity-research</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/prompt-library/cinematic-anamorphic-portrait</loc>
+    <loc>https://switchroute.in/prompt-library/cinematic-anamorphic-portrait</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/prompt-library/saas-landing-page-architecture</loc>
+    <loc>https://switchroute.in/prompt-library/saas-landing-page-architecture</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/prompt-library/slow-dolly-cyberpunk-rain</loc>
+    <loc>https://switchroute.in/prompt-library/slow-dolly-cyberpunk-rain</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/prompt-library/b2b-cold-email-sequence</loc>
+    <loc>https://switchroute.in/prompt-library/b2b-cold-email-sequence</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/prompt-library/isometric-3d-app-icon</loc>
+    <loc>https://switchroute.in/prompt-library/isometric-3d-app-icon</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/prompt-library/deep-competitive-teardown</loc>
+    <loc>https://switchroute.in/prompt-library/deep-competitive-teardown</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/prompt-library/dark-mode-dashboard-ui</loc>
+    <loc>https://switchroute.in/prompt-library/dark-mode-dashboard-ui</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/prompt-library/clean-react-custom-hook</loc>
+    <loc>https://switchroute.in/prompt-library/clean-react-custom-hook</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/free-tools/image-resizer</loc>
+    <loc>https://switchroute.in/free-tools/image-resizer</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/free-tools/qr-generator</loc>
+    <loc>https://switchroute.in/free-tools/qr-generator</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/free-tools/word-counter</loc>
+    <loc>https://switchroute.in/free-tools/word-counter</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/free-tools/json-formatter</loc>
+    <loc>https://switchroute.in/free-tools/json-formatter</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/free-tools/svg-to-png</loc>
+    <loc>https://switchroute.in/free-tools/svg-to-png</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/free-tools/prompt-builder</loc>
+    <loc>https://switchroute.in/free-tools/prompt-builder</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/tools/supabase</loc>
+    <loc>https://switchroute.in/tools/supabase</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/tools/firecrawl</loc>
+    <loc>https://switchroute.in/tools/firecrawl</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/tools/postiz</loc>
+    <loc>https://switchroute.in/tools/postiz</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/tools/baserow</loc>
+    <loc>https://switchroute.in/tools/baserow</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/tools/appflowy</loc>
+    <loc>https://switchroute.in/tools/appflowy</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/tools/penpot</loc>
+    <loc>https://switchroute.in/tools/penpot</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/tools/n8n</loc>
+    <loc>https://switchroute.in/tools/n8n</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/tools/plausible</loc>
+    <loc>https://switchroute.in/tools/plausible</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/tools/meilisearch</loc>
+    <loc>https://switchroute.in/tools/meilisearch</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/tools/hoppscotch</loc>
+    <loc>https://switchroute.in/tools/hoppscotch</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/tools/cal-com</loc>
+    <loc>https://switchroute.in/tools/cal-com</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/tools/typebot</loc>
+    <loc>https://switchroute.in/tools/typebot</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/tools/immich</loc>
+    <loc>https://switchroute.in/tools/immich</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/tools/outline</loc>
+    <loc>https://switchroute.in/tools/outline</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/tools/novu</loc>
+    <loc>https://switchroute.in/tools/novu</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/tools/docmost</loc>
+    <loc>https://switchroute.in/tools/docmost</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/tools/beekeeper-studio</loc>
+    <loc>https://switchroute.in/tools/beekeeper-studio</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/tools/affine</loc>
+    <loc>https://switchroute.in/tools/affine</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/tools/rustdesk</loc>
+    <loc>https://switchroute.in/tools/rustdesk</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/tools/umami</loc>
+    <loc>https://switchroute.in/tools/umami</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/tools/aider</loc>
+    <loc>https://switchroute.in/tools/aider</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/tools/cline</loc>
+    <loc>https://switchroute.in/tools/cline</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/tools/roocode</loc>
+    <loc>https://switchroute.in/tools/roocode</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/tools/opencode</loc>
+    <loc>https://switchroute.in/tools/opencode</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/tools/perplexica</loc>
+    <loc>https://switchroute.in/tools/perplexica</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/tools/khoj</loc>
+    <loc>https://switchroute.in/tools/khoj</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/tools/searxng</loc>
+    <loc>https://switchroute.in/tools/searxng</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/prompt-library/gemini-commercial-product-photography</loc>
+    <loc>https://switchroute.in/prompt-library/gemini-commercial-product-photography</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/prompt-library/gemini-reference-inpainting-replacement</loc>
+    <loc>https://switchroute.in/prompt-library/gemini-reference-inpainting-replacement</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/prompt-library/gemini-consistent-character-multiangle</loc>
+    <loc>https://switchroute.in/prompt-library/gemini-consistent-character-multiangle</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/prompt-library/gemini-macro-material-texture</loc>
+    <loc>https://switchroute.in/prompt-library/gemini-macro-material-texture</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/prompt-library/gemini-cinematic-environmental-establishing</loc>
+    <loc>https://switchroute.in/prompt-library/gemini-cinematic-environmental-establishing</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/prompt-library/gemini-modern-app-isometric-vector</loc>
+    <loc>https://switchroute.in/prompt-library/gemini-modern-app-isometric-vector</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/prompt-library/gemini-minimalist-packaging-mockup</loc>
+    <loc>https://switchroute.in/prompt-library/gemini-minimalist-packaging-mockup</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/prompt-library/gemini-high-contrast-editorial-typography</loc>
+    <loc>https://switchroute.in/prompt-library/gemini-high-contrast-editorial-typography</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/prompt-library/gemini-architectural-interior-natural-light</loc>
+    <loc>https://switchroute.in/prompt-library/gemini-architectural-interior-natural-light</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/prompt-library/gemini-ecommerce-apparel-on-model</loc>
+    <loc>https://switchroute.in/prompt-library/gemini-ecommerce-apparel-on-model</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/prompt-library/claude-interactive-saas-dashboard</loc>
+    <loc>https://switchroute.in/prompt-library/claude-interactive-saas-dashboard</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/prompt-library/claude-realtime-chat-agent-ui</loc>
+    <loc>https://switchroute.in/prompt-library/claude-realtime-chat-agent-ui</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/prompt-library/claude-interactive-node-flowchart</loc>
+    <loc>https://switchroute.in/prompt-library/claude-interactive-node-flowchart</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/prompt-library/claude-responsive-design-system-tokens</loc>
+    <loc>https://switchroute.in/prompt-library/claude-responsive-design-system-tokens</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/prompt-library/claude-microinteraction-motion-playground</loc>
+    <loc>https://switchroute.in/prompt-library/claude-microinteraction-motion-playground</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/prompt-library/claude-sortable-datagrid-csv-export</loc>
+    <loc>https://switchroute.in/prompt-library/claude-sortable-datagrid-csv-export</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/prompt-library/claude-kanban-drag-drop-board</loc>
+    <loc>https://switchroute.in/prompt-library/claude-kanban-drag-drop-board</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/prompt-library/claude-markdown-docs-code-runner</loc>
+    <loc>https://switchroute.in/prompt-library/claude-markdown-docs-code-runner</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/prompt-library/master-autonomous-coding-agent-orchestrator</loc>
+    <loc>https://switchroute.in/prompt-library/master-autonomous-coding-agent-orchestrator</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/prompt-library/modern-landing-page-conversion-engine</loc>
+    <loc>https://switchroute.in/prompt-library/modern-landing-page-conversion-engine</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/prompt-library/fullstack-auth-crud-postgresql-schema</loc>
+    <loc>https://switchroute.in/prompt-library/fullstack-auth-crud-postgresql-schema</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/prompt-library/accessible-form-engine-zod-validation</loc>
+    <loc>https://switchroute.in/prompt-library/accessible-form-engine-zod-validation</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/prompt-library/resilient-rest-trpc-backend-router</loc>
+    <loc>https://switchroute.in/prompt-library/resilient-rest-trpc-backend-router</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/prompt-library/higgsfield-vertical-fashion-reel-motion</loc>
+    <loc>https://switchroute.in/prompt-library/higgsfield-vertical-fashion-reel-motion</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/prompt-library/higgsfield-360-orbital-automotive-sweep</loc>
+    <loc>https://switchroute.in/prompt-library/higgsfield-360-orbital-automotive-sweep</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/prompt-library/higgsfield-whip-pan-architectural-transition</loc>
+    <loc>https://switchroute.in/prompt-library/higgsfield-whip-pan-architectural-transition</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/prompt-library/higgsfield-macro-liquid-pour-commercial</loc>
+    <loc>https://switchroute.in/prompt-library/higgsfield-macro-liquid-pour-commercial</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/prompt-library/higgsfield-drone-descending-push-in-sunset</loc>
+    <loc>https://switchroute.in/prompt-library/higgsfield-drone-descending-push-in-sunset</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/prompt-library/higgsfield-character-emotional-microgesture</loc>
+    <loc>https://switchroute.in/prompt-library/higgsfield-character-emotional-microgesture</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/prompt-library/higgsfield-highspeed-action-parallax-tracking</loc>
+    <loc>https://switchroute.in/prompt-library/higgsfield-highspeed-action-parallax-tracking</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/prompt-library/higgsfield-silhouette-lighting-foggy-glass</loc>
+    <loc>https://switchroute.in/prompt-library/higgsfield-silhouette-lighting-foggy-glass</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/prompt-library/higgsfield-isometric-miniature-stopmotion</loc>
+    <loc>https://switchroute.in/prompt-library/higgsfield-isometric-miniature-stopmotion</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/prompt-library/higgsfield-cyberpunk-neon-rain-chase</loc>
+    <loc>https://switchroute.in/prompt-library/higgsfield-cyberpunk-neon-rain-chase</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/prompt-library/higgsfield-dolly-zoom-vertigo-effect</loc>
+    <loc>https://switchroute.in/prompt-library/higgsfield-dolly-zoom-vertigo-effect</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/prompt-library/higgsfield-seamless-motion-graphic-loop</loc>
+    <loc>https://switchroute.in/prompt-library/higgsfield-seamless-motion-graphic-loop</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/prompt-library/portrait-editorial-duo</loc>
+    <loc>https://switchroute.in/prompt-library/portrait-editorial-duo</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/prompt-library/portrait-women-windowlight</loc>
+    <loc>https://switchroute.in/prompt-library/portrait-women-windowlight</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/prompt-library/portrait-mens-professional-headshot</loc>
+    <loc>https://switchroute.in/prompt-library/portrait-mens-professional-headshot</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/prompt-library/portrait-couple-courtyard-dusk</loc>
+    <loc>https://switchroute.in/prompt-library/portrait-couple-courtyard-dusk</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://techhacksai.com/prompt-library/pixverse-cinematic-portrait-motion</loc>
+    <loc>https://switchroute.in/prompt-library/pixverse-cinematic-portrait-motion</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-urban-metabolism-infographic-atlas</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-football-champion-celebration-poster</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-thematic-silhouette-narrative-poster</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-cosplay-phone-screenshot-mockup</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-science-encyclopedia-infographic-card</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-retro-propaganda-celebration-poster</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-whimsical-hand-drawn-food-map</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-youthful-night-market-poster</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-epic-team-silhouette-poster</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-vr-headset-exploded-view-poster</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-illustrated-city-food-map</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-bureaucratic-infographic-slide-design</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-live-streaming-app-ui-design</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-anime-martial-arts-duel</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-evolutionary-staircase-infographic</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-cosplay-selfie-at-convention</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-vintage-flash-film-portrait</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-character-reference-polaroid-set</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-gothic-portrait-transformation</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-graffiti-sketch-style-portrait</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-character-expression-grid-illustration</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-kawaii-clay-character-render</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-mythological-character-avatar-grid</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-elegant-autumn-portrait-photography</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-basketball-selfie-brand-mockup</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-quirky-animal-sticker-pack</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-graffiti-sketch-portrait-style</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-fantasy-character-portrait-grid</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-dramatic-black-and-white-portrait</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-japanese-ad-banner-grid</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-gothic-hall-ritual-scene</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-weekly-fashion-lookbook-infographic</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-whiteboard-samurai-sketch-photo</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-retro-arcade-repair-photo</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-gothic-woman-on-kiddie-ride</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-golden-flame-city-poster</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-mixed-style-symbolic-panel-collage</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-social-media-school-ad-grid</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-warm-lifestyle-banner-ad-grid</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-social-media-course-ad-grid</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-self-care-tips-infographic</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-ancient-philosophy-infographic-poster</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-fashion-design-process-infographic</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-diabetes-causal-chain-infographic</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-gout-causal-chain-infographic</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-photography-process-infographic-poster</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-camera-imaging-system-breakdown</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-botanical-growth-atlas-poster</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-megacity-urban-systems-atlas</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-modular-encyclopedia-infographic-card</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-optical-table-diagram-setup</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-polarization-optics-setup-diagram</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-character-relationship-map-poster</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-voxel-game-interface-screenshot</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-anime-livestream-thumbnail-design</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-vtuber-debut-stream-poster</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-ai-side-hustle-thumbnail</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-anime-side-hustle-poster</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-livestream-recital-cover-design</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-livestream-video-call-interface</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-live-stream-product-launch-ui</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-unboxing-video-thumbnail-design</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-true-crime-investigation-thumbnail</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-anime-warrior-combat-illustration</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-satirical-ceo-interview-comic</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-manga-clone-crowd-spread</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-manga-spread-game-dev-adventure</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-cartoon-therapy-session-poster</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-manga-katana-draw-portrait</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-anime-movie-pitch-document</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-anime-heroine-shattering-glass</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-futuristic-corporate-manga-page</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-parody-japanese-movie-poster-grid</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-anime-warrior-character-sheet</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-anime-bbq-poster-girls</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-anime-key-animation-layout-sheet</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-romantic-light-novel-cover-art</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-manga-delivery-man-encounter</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-enchanted-forest-restaurant-poster</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-anime-character-brand-collection</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-viral-campaign-landing-page</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-tea-brand-mascot-design-book</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-brand-identity-guideline-poster</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-skincare-landing-page-mockup</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-men-s-skincare-landing-page-mockup</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-skincare-brand-landing-page</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-beauty-serum-landing-page-mockup</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-fashion-catalog-poster-layout</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-ultimate-fun-amusement-park-poster</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-green-tea-product-poster</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-anime-idol-merchandise-flyer</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-custom-block-house-set</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-luxury-cosmetic-jar-poster</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-livestream-shopping-interface-mockup</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-summer-highball-beach-ad</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-multi-industry-2x2-ad-grid</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-livestream-product-launch-ui</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-sports-car-inside-hangar</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-livestream-shopping-app-mockup</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-dark-mode-led-driver-infographic</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-sports-livestream-shopping-interface</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-e-commerce-livestream-interface-mockup</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-open-world-game-ui-mockup</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-concept-character-design-sheet</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-alphabet-grid-infographic</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-sci-fi-folklore-hero-poster</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-galaxy-star-embroidered-ice-dress</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-premium-startup-presentation-cover</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-e-commerce-product-detail-set</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-steampunk-constellation-anatomy-poster</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-surreal-comedy-movie-poster</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-trendy-product-ad-redesign</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-y2k-japanese-school-comedy</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-chinese-fitness-training-infographic</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-pixel-art-rpg-item-grid</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-dark-minimalist-avatar-site-identity</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-summer-dress-e-commerce-photo</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-coffee-machine-product-display</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-smart-glasses-product-shot</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-protein-powder-product-shot</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-giant-scribble-creature-on-exam-page</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-moba-mid-lane-showdown</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-porcelain-doll-beach-selfie</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-anime-inspired-beauty-portrait</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-troll-style-copywriting-graphic</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-animation-storyboard-generator-mockup</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-charming-game-character-poster</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-shy-twin-tail-girl-under-blossoms</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-cute-ai-training-infographic</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-character-photo-book-design</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-classical-open-world-game-screenshot</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-elegant-patterned-fashion-collection</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-candid-flash-portrait-photo</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-scientific-encyclopedia-knowledge-infographic</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-idol-photocard-grid-portrait</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-golden-skyline-fantasy-poster</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-dreamy-film-window-portrait</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-modular-science-encyclopedia-infographic</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-spring-zen-ink-mountain-poster</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-mecha-girl-over-ruined-sea</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-master-artwork-replica</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-poster-matching-reference-style</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-classical-portrait-drinking-cola</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-summer-citrus-soda-ad</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-nebula-koi-and-tiny-figure</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-custom-ui-design-system</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-co-branding-poster-campaign</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-city-skyline-line-art-postcard</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-sports-icon-font-set</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-storybook-space-brand-postcard</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-rainy-garden-daily-calendar</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-solar-term-poster-design</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-film-style-mountains-and-seas-poster</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-livestream-announcement-screenshot</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-crowd-view-of-tech-keynote</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-anime-character-profile-page</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-y2k-cosmetics-ad-design</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-handwritten-notes-on-desk</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-character-reference-sheet</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-ai-generated-character-sheet</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-silhouette-in-orange-gradient</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-hand-drawn-city-foodie-map</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-luxury-beachside-beauty-portrait</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-retro-coastal-travel-poster</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-graffiti-sketch-style-illustration</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-cyberpunk-sci-fi-mandala</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-gentle-anime-cosplay-phone-screenshot</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-retro-devil-game-poster</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-anime-snapshot-transformation</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-radiant-paper-cut-city-skyline</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-poet-holographic-collectible-cards</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-luxury-pachinko-parlor-flyer</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-campus-ai-education-newspaper</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-elegant-regional-restaurant-menu</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-traditional-chinese-almanac-page</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-recipe-to-magazine-spread</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-graffiti-sketch-style-illustration-299</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-classical-text-on-blackboard</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-nine-grid-designer-showcase</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-character-reference-sheet-306</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-leaf-collage-character-portrait</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-snack-brand-technical-breakdown</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-lavender-field-triptych-portrait</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-neon-splash-soda-poster</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-blue-red-city-double-exposure</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-fearless-woman-amid-prehistoric-giants</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-bold-wide-angle-beauty-campaign</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-coral-minimalist-studio-campaign</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-bird-flock-couture-runway</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-fire-and-ice-warriors-poster</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-street-model-bottle-showcase</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-3d-app-post-product-shot</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-woman-in-trench-coat-on-vintage-bus</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-sunny-youth-pixar-style-portrait</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-ember-falconer-and-blazing-phoenix</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-tea-beverage-promotional-poster</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-rag-technology-explainer-diagram</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-premium-wildlife-science-poster</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-red-spider-lily-woman</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-seasonal-packaging-campaign-grid</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-luxury-fashion-magazine-cover</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-streetwear-brand-campaign-poster</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-torn-paper-new-wave-poster</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-embroidered-birds-on-blossoms</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-beard-style-analysis-poster</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-tennis-fashion-campaign-triptych</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-fitness-brand-strength-poster</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-dark-ancient-chinese-style-warrior-poster</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-conceptual-typography-poster-design</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-surreal-self-reflection-street-portrait</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-retro-cafe-fish-eye-portrait</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-strawberry-energy-drink-ad</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-ink-double-exposure-poster</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-long-hair-style-analysis-infographic</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-3d-exploded-assembly-diagram</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-matcha-brand-identity-system</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-magnetic-iron-filings-logo</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-luxury-personal-color-profile-infographic</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-collector-scientist-figure-reveal</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-cafe-portrait-with-cartoon-doodles</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-luxury-perfume-ad-poster</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-appetizing-menu-dish-illustration</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-crumpled-paper-chair-concept</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-scrapbook-portrait-with-mini-alter-egos</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-cute-character-design-sheet</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-premium-meat-seafood-hero</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-colorful-doodle-puppy-redraw</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-ancient-philosophers-timeline-chart</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-spilled-drink-street-photo</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-pastel-flower-street-portrait</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-premium-3d-collectible-figure</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-brand-personality-comic-infographic</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-scientific-scale-zoom-infographic</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-90s-apartment-scene-reference-board</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-golden-field-photo-collage</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-candid-everyday-iphone-snapshot</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-beer-inspired-women-s-fashion-collection</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-streaming-platform-hero-banner-ui</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-retro-1980s-ai-assistant-ad</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-fitness-supplement-campaign-poster</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-felt-diorama-country-world</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-cultural-anchor-fashion-grid</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-miniature-city-in-hair</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-y2k-golden-hour-portrait</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-elven-adventurers-in-medieval-village</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-knight-mage-battles-stone-golem</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-vintage-dragon-species-poster</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-street-dance-character-design-sheet</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-casual-outfits-editorial-collage</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-backstage-stairwell-idol-portrait</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-lost-in-travel-collage-poster</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-luxury-social-media-breakout-ad</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-cute-paper-craft-photo-redraw</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-giant-controller-streetwear-campaign</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-neuro-ai-hybrid-system-infographic</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-cozy-academia-study-scene</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-exaggerated-anime-style-redraw</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-minimalist-architecture-landmark-poster</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-surreal-colorful-button-fashion-campaign</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-contemporary-dance-storyboard</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-candid-morning-bedroom-portrait</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-earth-signs-character-scrapbook</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-vintage-cat-advertisement-poster</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-mid-century-city-travel-poster</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-croissant-baking-process-storyboard</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-low-angle-summer-track-portrait</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-phone-screen-face-covering-portrait</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-winter-survival-thriller-storyboard</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-japanese-hand-drawn-portrait-illustration</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-neon-candy-billboard-explosion</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-fashion-portrait-collage-poster</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-cozy-cafe-couple-portrait</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-nine-frame-fashion-portrait-collage</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-racing-paddock-broadcast-screenshot</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-convenience-store-pink-hoodie-portrait</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-pencil-sketch-fashion-illustration</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-city-name-travel-typography-poster</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-vintage-reef-travel-poster</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-urban-film-street-portrait</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-layered-paper-cut-couple-illustration</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-nostalgic-digicam-screen-portrait</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-luxury-facial-analysis-report</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-miniature-city-jewelry-poster</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-cyberpunk-hacker-character-sheet</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-realistic-video-call-screen-photo</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-giant-tent-adventure-poster</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-cozy-hair-salon-illustration</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-exploded-taco-infographic</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-disco-mirror-3d-app-icon</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-watercolor-travel-postcard-illustration</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-low-poly-paper-portrait</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-futuristic-metro-engineering-infographic</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-retro-warplane-arcade-city</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-luxury-watch-technical-blueprint</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-candlelit-side-room-portrait</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-minimalist-fairy-tale-children-s-illustration</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-corporate-brochure-visual-system</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-travel-food-chips-poster</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-giant-comfort-clog-campaign</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-historical-events-2x2-infographic</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-light-trail-dancer-poster</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-autumn-street-fashion-illustration</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-luxury-chess-fashion-campaign</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-kawaii-paper-cut-family-travel-collage</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-retro-japanese-mini-eraser-packaging</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-watercolor-coastal-city-poster</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-chaotic-cat-chase-snapshot</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-floral-kimono-anime-portrait</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-city-metro-morning-light</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-stealth-action-game-concept-sheet</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-minimalist-four-city-travel-posters</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-industrial-packaging-design-sheet</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-latte-girl-morning-greeting</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-layered-editorial-brand-poster</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-magazine-paper-collage-portrait</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-fan-sketchbook-character-page</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-korean-spring-scrapbook-poster</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-surreal-self-reflection-portrait</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-urban-bird-street-portrait</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-neon-graffiti-portrait-poster</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-fashion-catalog-collage-layout</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-championship-mixed-media-sports-poster</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-french-pharmacy-skincare-storyboard-cover</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-rooftop-sunset-portrait</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-miniature-city-map-travel-poster</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-double-exposure-fashion-portrait</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-13-frame-city-travel-grid</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-futuristic-electric-bus-infographic</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-storybook-woman-in-city-street</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-water-sculpture-brand-logos-grid</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-monochrome-watercolor-city-travel-poster</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-pencil-sketch-3d-avatar</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-minimalist-boutique-fashion-portrait</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-ethereal-floral-crown-portrait</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-summer-hand-in-hand-glance-portrait</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-recursive-king-of-spades-portrait</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-neon-3d-designer-poster</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-chaotic-doodle-portrait-makeover</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-playful-portrait-typography-poster</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-cozy-crochet-character-doll</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-overhead-portrait-in-dappled-light</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-playful-studio-chase-portrait</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-skeuomorphic-macos-app-icon</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-city-landmark-typography-poster</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-brutalist-freestyle-character-sheet</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-handdrawn-travel-sketchbook-illustration</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-hard-edge-modern-art-portrait</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-vintage-mariachi-travel-poster</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-rubber-tubing-brand-sculpture</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-fisheye-summer-drink-advertisement</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-dreamy-summer-flower-field-portrait</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-elegant-perfume-bottle-product-shot</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-astronaut-moon-t-shirt-design</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-storybook-character-portrait</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-watercolor-city-park-travel-poster</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-paper-collage-countryside-portrait</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-cinematic-luxury-fashion-portrait</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-volumetric-laser-black-poster</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-miniature-city-travel-diorama-poster</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-chibi-christmas-city-portrait</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-cloud-balloon-mountain-portrait</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-doodle-character-photo-replacement</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-crystal-frame-country-travel-poster</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-hand-drawn-doodle-fashion-portrait</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-experimental-editorial-portrait-poster</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-same-face-twelve-hairstyles</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-cherry-blossom-cinematic-portrait</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-dark-archive-concept-poster</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-rubber-stamp-travel-field-note</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-raw-sketchy-companion-portrait-poster</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-dreamlike-futuristic-city-poster</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-mixed-media-memory-card</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-black-and-white-profile-poster</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-fruit-vocabulary-learning-card</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-3d-sculptural-city-typography-poster</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-miniature-traveler-food-postcard</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-gourmet-burger-ad-visuals</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-luxury-jewelry-contrast-campaign</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-miniature-running-shoe-universe</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-floral-facial-serum-studio-shot</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-ingredient-callout-ice-cream-ad</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-luxury-chocolate-campaign-poster</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-surreal-brand-world-poster</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-berry-bowl-brand-campaign</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-showroom-merch-drop-still-life</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-futuristic-sneaker-drop-poster</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-luxury-sneaker-editorial-grid</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-grape-reveal-can-product-shot</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-luxury-perfume-bottle-ad</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-explosive-brand-identity-moodboard</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-luxury-brand-campaign-poster</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-viral-food-recipe-poster</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-physics-theorem-poster-grid</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-minimalist-automotive-poster-template</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-trompe-l-oeil-sketch-coffee-portrait</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-original-animated-character-design-sheet</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-origami-food-sculpture-poster</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-3d-pop-out-travel-ticket</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-floating-smartphone-photo-ribbon-mockup</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-recipe-dish-infographic</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-brand-identity-moodboard-system</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-brand-identity-guideline-board</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-luxury-perfume-infographic-advertisement</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-colored-pencil-photo-transformation</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-nine-frame-luxury-product-campaign</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-doner-food-photography-set</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-fluorescent-foam-logo-hero</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-crowd-mosaic-athlete-portrait</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-nordic-cookbook-recipe-spread</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-plush-soda-can-product-shot</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-luxury-chronograph-watch-advertisement</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-gourmet-burger-gravity-poster</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-healthy-breakfast-ad-posters</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-stadium-energy-drink-ad</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-wireless-earbuds-lifestyle-ad</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-invisible-shield-sunscreen-campaign</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-oversized-sunglasses-brand-ad</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-windswept-coastal-film-portrait</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-watercolor-fashion-sketch-portrait</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-retro-1990s-flash-portrait</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-woodcut-style-portrait-engraving</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-fashion-casting-contact-sheet</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-dramatic-chiaroscuro-portrait</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-dreamlike-cloud-face-portrait</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-needle-felted-wool-miniature</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-cyborg-prosthetic-portrait-close-up</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-cinematic-wildlife-infographic-poster</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-miniature-travel-destination-diorama</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-play-doh-city-child-illustration</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-3d-liquid-art-explosion-poster</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-vintage-1960s-beer-ad-poster</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-vintage-watercolor-travel-poster</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-retro-cafe-scrapbook-poster</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-surreal-inner-self-poster</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-torn-can-fruit-explosion</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-brand-identity-oil-painting</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-mid-century-editorial-illustration-system</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-mixed-media-editorial-portrait</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-miniature-landmark-diorama</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-pastel-paper-collage-travel-poster</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-retro-automotive-travel-poster</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-furniture-product-sheet-layout</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-terrain-letters-satellite-typography</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-vintage-wpa-solar-storm-poster</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-editorial-ink-illustration-poster</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-wind-up-miniature-world-scene</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-sculptural-editorial-concept-poster</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-isometric-machine-cutaway-diorama</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-cozy-japanese-lifestyle-illustration</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-watercolor-city-romance-poster</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-stylized-3d-skater-character</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-landscape-architecture-competition-board</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-neo-noir-character-design-board</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-cinematic-contact-sheet-generator</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-embossed-metal-logo-bas-relief</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-sculptural-fruit-packaging-design</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-liver-anatomy-infographic-poster</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-crimson-brand-poster-series</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-architectural-product-catalog-page</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-energy-drink-citrus-explosion</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-fragmented-stone-style-transfer</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-scandinavian-coffee-shop-poster</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-technical-teardown-infographic</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-3d-map-travel-guide-poster</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-logo-shaped-cloud</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-floating-ingredients-food-infographic</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-tabloid-flash-close-up</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-photo-mosaic-sports-tribute-poster</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-product-in-hand-campaign-shot</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-minimal-3d-character-portrait</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-crystal-logo-sculpture-in-the-sky</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-splash-motion-product-bottle-photography</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-you-and-your-animated-twin</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-floating-baklava-commercial-dessert-shot</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-still-in-the-storm-cinematic-street-portrait</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-fictional-world-map-poster</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-stylized-3d-caricature-portrait</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-editorial-look-with-matching-product-lookbook</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-miniature-city-diorama-on-map</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-skincare-product-flat-lay</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-yearbook-style-printed-portrait</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-paper-fragment-portrait-poster</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-streetwear-doodle-portrait</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-color-box-fashion-editorial</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-ink-world-stories-born-from-the-pen</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-heroic-studio-portrait-from-a-selfie</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-product-breakout-ad-composition</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-neon-lit-cinematic-portrait</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-anime-living-room-mashup</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-cinematic-city-crowd-portrait</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-personal-3d-emoji-sticker-sheet</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-blueprint-to-reality-house-visualization</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-surveillance-feed-defiant-shopper</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-everyday-kitchen-moment</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-avant-garde-collage-portrait</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-cultural-metallic-typography</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-windswept-field-portrait</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-cross-section-food-diagram</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-sticker-covered-bubblegum-portrait</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-social-feed-dining-table-flat-lay</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-levitating-product-in-the-void</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-floating-splash-bowl</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-seaside-sharing-candid-film-still</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-food-pull-action-shot</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-doodle-overlay-product-shot</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-felt-doll-character-portrait</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-stylized-3d-cartoon-character-portrait</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-real-and-cartoon-self-street-portrait</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-fruit-jar-assembling-commercial</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-3d-plush-duo-toy-render</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-nine-panel-lifestyle-storyboard</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-streetwear-animal-character-render</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-surreal-luxury-product-advertisement</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-golden-hour-product-still-life</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-juice-box-product-mockup</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-creamy-pasta-bowl-studio-shot</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-fractured-mask-portrait</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-multi-arm-professional-portrait</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-fruit-shaped-cardboard-packaging-concept</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-giant-selfie-in-the-city</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-neon-split-light-cinematic-portrait</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-exploded-component-render</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-cinematic-football-duel-with-your-face</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-scene-to-diorama-miniature</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-plush-beverage-can</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-1970s-cafe-portrait</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-luminous-wave-portrait</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-tiny-planet-city</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-9-panel-flash-photo-party-collage</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-stillness-in-motion-editorial-portrait</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-frutiger-aero-product-render</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-raw-flash-editorial-portrait</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-stylized-3d-character-from-photo</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/promptfeed-stadium-in-your-pocket</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/ai-tools/agnes-video-generator</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/ai-tools/automated-video-generator</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/ai-tools/vuza</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/ai-tools/purffle-shorts</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/ai-tools/open-generative-ai</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/ai-tools/wan-2-2</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/ai-tools/ltx-2-3</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/ai-tools/hunyuanvideo</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/ai-tools/hunyuanvideo-i2v</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/ai-tools/huggingface-video-spaces</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/ai-tools/higgsfield</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/alternatives/invideo-ai</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/alternatives/pictory</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/alternatives/synthesia</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/alternatives/fliki</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/alternatives/opus-clip</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/alternatives/klap</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/alternatives/runway</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/alternatives/kling-ai</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/alternatives/pika</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/alternatives/luma-dream-machine</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/alternatives/github-copilot</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>

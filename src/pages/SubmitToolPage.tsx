@@ -210,7 +210,7 @@ export const SubmitToolPage: React.FC = () => {
           Submit an AI Tool or Alternative
         </h1>
         <p className="text-sm sm:text-base text-slate-600 max-w-2xl leading-relaxed">
-          Help independent developers, creators, and teams discover high-quality software. Submissions are reviewed by the Tech Hacks AI editorial team to verify accurate pricing, legitimate websites, and quality standards before being cataloged.
+          Help independent developers, creators, and teams discover high-quality software. Submissions are reviewed by the SwitchRoute editorial team to verify accurate pricing, legitimate websites, and quality standards before being cataloged.
         </p>
       </div>
 
@@ -224,7 +224,7 @@ export const SubmitToolPage: React.FC = () => {
 
           <h2 className="text-2xl font-bold text-slate-900 mb-2">Submission Successfully Received!</h2>
           <p className="text-sm text-slate-600 max-w-lg mx-auto mb-4 leading-relaxed">
-            Thanks for contributing to Tech Hacks AI! Your submission for <strong className="text-slate-900 font-semibold">{formData.name}</strong> has been saved with reference ID:
+            Thanks for contributing to SwitchRoute! Your submission for <strong className="text-slate-900 font-semibold">{formData.name}</strong> has been saved with reference ID:
           </p>
 
           <div className="inline-block px-4 py-1.5 rounded-lg bg-blue-50 font-mono text-xs text-blue-700 font-bold border border-blue-200 mb-6 shadow-inner">

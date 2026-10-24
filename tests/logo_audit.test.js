@@ -6,11 +6,13 @@ import { toolsData } from '../src/data/seedData.ts';
 import { aiToolsData } from '../src/data/aiToolsData.ts';
 import { proprietaryTools } from '../src/data/alternatives.ts';
 import { offersData } from '../src/data/offersData.ts';
-import { brandLogos, getBrandLogo } from '../src/data/brandLogos.ts';
+import { brandLogos, getBrandLogo, SLUG_ALIASES } from '../src/data/brandLogos.ts';
+import { getBrandLogo as getRuntimeBrandLogo } from '../src/data/runtimeBrandLogos.ts';
 
 const LOGOS_DIR = path.resolve(process.cwd(), 'public/logos');
 const PUBLIC_DIR = path.resolve(process.cwd(), 'public');
 const logoManifest = JSON.parse(fs.readFileSync(path.join(PUBLIC_DIR, 'logo-manifest.json'), 'utf8'));
+const runtimeLogoManifest = JSON.parse(fs.readFileSync(path.resolve(process.cwd(), 'src/data/generated/brandLogos.runtime.json'), 'utf8'));
 const logoAuditReport = fs.readFileSync(path.resolve(process.cwd(), 'docs/logo-audit.md'), 'utf8');
 
 function resolvePublicAsset(assetPath) {
@@ -18,6 +20,28 @@ function resolvePublicAsset(assetPath) {
 }
 
 describe('Phase 13: Global Brand Logo Audit & Verification', () => {
+  test('generated runtime logo registry preserves canonical records and aliases with only UI fields', () => {
+    const runtimeFields = ['slug', 'name', 'assetPath', 'sourceType', 'sourceUrl', 'pngAssetPath'];
+    assert.deepEqual(Object.keys(runtimeLogoManifest.entries).sort(), Object.keys(brandLogos).sort());
+    assert.deepEqual(runtimeLogoManifest.aliases, SLUG_ALIASES);
+
+    for (const entry of logoManifest) {
+      const expected = Object.fromEntries(runtimeFields.filter((field) => entry[field] !== undefined).map((field) => [field, entry[field]]));
+      const runtimeEntry = getRuntimeBrandLogo(entry.slug);
+      const generatedEntry = runtimeLogoManifest.entries[entry.slug];
+      assert.deepEqual(generatedEntry, expected, `Generated logo record for ${entry.slug} must match its canonical UI fields`);
+      assert.deepEqual(Object.keys(generatedEntry).sort(), Object.keys(expected).sort(), `Generated logo record for ${entry.slug} must exclude audit metadata`);
+      assert.deepEqual(runtimeEntry, getBrandLogo(entry.slug) && Object.fromEntries(runtimeFields.filter((field) => getBrandLogo(entry.slug)[field] !== undefined).map((field) => [field, getBrandLogo(entry.slug)[field]])), `Runtime lookup for ${entry.slug} must preserve existing alias behavior`);
+      assert.equal(fs.existsSync(resolvePublicAsset(runtimeEntry.assetPath)), true, `Runtime asset for ${entry.slug} must exist`);
+    }
+
+    for (const [alias, target] of Object.entries(SLUG_ALIASES)) {
+      assert.deepEqual(getRuntimeBrandLogo(alias), getRuntimeBrandLogo(target), `Runtime alias ${alias} must resolve to ${target}`);
+    }
+    assert.equal(getRuntimeBrandLogo('  Supabase  ')?.slug, getBrandLogo('supabase')?.slug);
+    assert.equal(getRuntimeBrandLogo('near-match-not-a-logo'), undefined);
+  });
+
   test('all logo files in public/logos are valid SVG files', () => {
     assert.ok(fs.existsSync(LOGOS_DIR), 'public/logos directory exists');
     const files = fs.readdirSync(LOGOS_DIR).filter((f) => f.endsWith('.svg'));

@@ -1,12 +1,17 @@
 import { aiToolsData, aiCategories } from '../data/aiToolsData.ts';
 import { guidesData, guideCategories } from '../data/guidesData.ts';
 import { promptsData, promptCategories } from '../data/promptsData.ts';
+import imageDimensions from '../../data/prompt-image-dimensions.json' with { type: 'json' };
 import { freeToolsData } from '../data/freeToolsData.ts';
 import { toolsData } from '../data/seedData.ts';
 import { proprietaryTools } from '../data/alternatives.ts';
 import type { AiTool, AiFilterState, Guide, PromptItem, FreeToolUtility, Tool, ProprietaryTool, PickCriteria, MatchedPickResult } from '../types/index.ts';
-import { getUtilityCategory } from '../data/catalogTaxonomy.ts';
+import type { VideoDiscoverySection } from '../types/index.ts';
+import { everydayUtilityOrder, getUtilityCategory } from '../data/catalogTaxonomy.ts';
 import { getPromptArtwork } from '../data/promptArtwork.ts';
+import promptCatalogCount from '../../data/promptfeed-catalog-count.json' with { type: 'json' };
+import promptMediaCounts from '../../data/prompt-media-counts.json' with { type: 'json' };
+import { aiAlternativeMappings } from '../data/aiAlternativeMappings.ts';
 
 export const AI_PAGE_SIZE = 12;
 
@@ -91,13 +96,24 @@ export function filterAndSortAiTools(state: AiFilterState): AiFilterResult {
       const matchDesc = tool.description.toLowerCase().includes(q);
       const matchTags = tool.tags.some((t) => t.toLowerCase().includes(q));
       const matchFeatures = tool.features.some((f) => f.toLowerCase().includes(q));
-      return matchName || matchTagline || matchDesc || matchTags || matchFeatures;
+      const matchContext = [tool.bestFor, tool.executionEnvironment, tool.hardwareRequirements, tool.licenseSummary, tool.accessLabel, ...(tool.useCases || [])]
+        .some((value) => value?.toLowerCase().includes(q));
+      return matchName || matchTagline || matchDesc || matchTags || matchFeatures || matchContext;
     });
   }
 
   // 2. Category
   if (state.category) {
     list = list.filter((tool) => tool.category.toLowerCase() === state.category!.toLowerCase());
+  }
+
+  if (state.alternativesTo) {
+    const alternatives = new Set(getAiAlternativesForTarget(state.alternativesTo).map((tool) => tool.slug));
+    list = list.filter((tool) => alternatives.has(tool.slug));
+  }
+
+  if (state.videoDiscoverySection && state.videoDiscoverySection !== 'all') {
+    list = list.filter((tool) => tool.videoDiscoverySections?.includes(state.videoDiscoverySection as VideoDiscoverySection));
   }
 
   // 3. Pricing
@@ -165,6 +181,39 @@ export function getOpenSourceAiTools(limit?: number): AiTool[] {
   return limit ? os.slice(0, limit) : os;
 }
 
+export function getAiToolsForProprietary(proprietarySlug: string): AiTool[] {
+  if (!proprietarySlug) return [];
+  const mappedSlugs = new Set(aiAlternativeMappings.filter((mapping) => mapping.targetSlug === proprietarySlug).map((mapping) => mapping.alternativeSlug));
+  return getAllAiTools().filter((tool) => !isCommunityTool(tool) && (tool.alternativesTo?.includes(proprietarySlug) || mappedSlugs.has(tool.slug)));
+}
+
+/** Resolve both explicitly listed and reverse-linked catalog alternatives without duplicating product records. */
+export function getAiAlternativesForTarget(targetSlug: string): AiTool[] {
+  if (!targetSlug) return [];
+  const allTools = getAllAiTools().filter((tool) => !isCommunityTool(tool));
+  const target = allTools.find((tool) => tool.slug === targetSlug);
+  const bySlug = new Map(allTools.map((tool) => [tool.slug, tool]));
+  const orderedSlugs = [
+    ...(target?.alternativesTo || []),
+    ...allTools.filter((tool) => tool.alternativesTo?.includes(targetSlug)).map((tool) => tool.slug),
+    ...aiAlternativeMappings.filter((mapping) => mapping.targetSlug === targetSlug && mapping.alternativeType === 'ai').map((mapping) => mapping.alternativeSlug),
+  ];
+  const seen = new Set<string>();
+  return orderedSlugs.flatMap((slug) => {
+    if (slug === targetSlug || seen.has(slug)) return [];
+    seen.add(slug);
+    const tool = bySlug.get(slug);
+    return tool ? [tool] : [];
+  });
+}
+
+export function getVideoDiscoveryTools(section?: VideoDiscoverySection): AiTool[] {
+  return getAllAiTools().filter((tool) =>
+    !isCommunityTool(tool) && tool.category === 'video' &&
+    (!section || tool.videoDiscoverySections?.includes(section))
+  );
+}
+
 export function getAllGuides(): Guide[] {
   const seen = new Set<string>();
   return [...dynamicPublishedGuides, ...guidesData].filter((guide) => {
@@ -184,6 +233,8 @@ export function getAllPrompts(): PromptItem[] {
     ...prompt,
     previewImage: prompt.previewImage || getPromptArtwork(prompt)?.path,
     previewImageAlt: prompt.previewImageAlt || getPromptArtwork(prompt)?.alt,
+    previewImageWidth: imageDimensions[prompt.slug]?.width || undefined,
+    previewImageHeight: imageDimensions[prompt.slug]?.height || undefined,
     visualStyle: prompt.visualStyle || inferPromptStyle(prompt),
     aspectRatio: prompt.aspectRatio || inferPromptAspectRatio(prompt),
     status: prompt.status || 'published',
@@ -212,11 +263,12 @@ function inferPromptAspectRatio(prompt: PromptItem): string {
 }
 
 export function getAllFreeTools(): FreeToolUtility[] {
-  return [...freeToolsData].map((tool) => ({
-    ...tool,
-    section: 'utility' as const,
-    primaryCategory: getUtilityCategory(tool),
-  }));
+  const priority = new Map(everydayUtilityOrder.map((slug, index) => [slug, index]));
+  return [...freeToolsData]
+    .map((tool, originalIndex) => ({ ...tool, section: 'utility' as const, primaryCategory: getUtilityCategory(tool), originalIndex }))
+    .sort((a, b) => (priority.get(a.slug) ?? Number.MAX_SAFE_INTEGER) - (priority.get(b.slug) ?? Number.MAX_SAFE_INTEGER)
+      || a.originalIndex - b.originalIndex)
+    .map(({ originalIndex: _originalIndex, ...tool }) => tool);
 }
 
 export function getFreeToolBySlug(slug: string): FreeToolUtility | undefined {
@@ -229,21 +281,51 @@ export interface CatalogStats {
   aiPlatforms: number;
   alternativeTargets: number;
   browserUtilities: number;
+  alternativeRelationships: number;
+  uniquePrompts: number;
+  proprietaryToolsWithAlternatives: number;
+  imagePrompts: number;
+  videoPrompts: number;
+  nonVisualPrompts: number;
 }
 
 export function getCatalogStats(): CatalogStats {
   const openSourceSlugs = new Set(toolsData.map((tool) => tool.slug));
   const aiSlugs = new Set(getAllAiTools().filter((tool) => !isCommunityTool(tool)).map((tool) => tool.slug));
   const alternativeSlugs = new Set(proprietaryTools.map((tool) => tool.slug));
+  const aiTargetSlugs = new Set(getAllAiTools().map((tool) => tool.slug));
   const coreCatalogSlugs = new Set([...openSourceSlugs, ...aiSlugs, ...alternativeSlugs]);
-
+  const knownTargetSlugs = new Set([...openSourceSlugs, ...aiSlugs, ...alternativeSlugs]);
+  const relationshipPairs = new Set<string>();
+  for (const tool of [...toolsData, ...getAllAiTools()]) {
+    for (const targetSlug of tool.alternativesTo || []) {
+      if (knownTargetSlugs.has(targetSlug)) relationshipPairs.add(`${tool.slug}->${targetSlug}`);
+    }
+  }
+  for (const mapping of aiAlternativeMappings) {
+    if (knownTargetSlugs.has(mapping.targetSlug) && (aiTargetSlugs.has(mapping.alternativeSlug) || openSourceSlugs.has(mapping.alternativeSlug))) {
+      relationshipPairs.add(`${mapping.alternativeSlug}->${mapping.targetSlug}`);
+    }
+  }
   return {
     catalogIdentities: coreCatalogSlugs.size,
     openSourceTools: openSourceSlugs.size,
     aiPlatforms: aiSlugs.size,
     alternativeTargets: alternativeSlugs.size,
     browserUtilities: getAllFreeTools().length,
+    alternativeRelationships: relationshipPairs.size,
+    uniquePrompts: promptCatalogCount,
+    proprietaryToolsWithAlternatives: new Set([...relationshipPairs]
+      .map((pair) => pair.slice(pair.indexOf('->') + 2))
+      .filter((slug) => alternativeSlugs.has(slug))).size,
+    imagePrompts: promptMediaCounts.imagePrompts,
+    videoPrompts: promptMediaCounts.videoPrompts,
+    nonVisualPrompts: promptMediaCounts.nonVisualPrompts,
   };
+}
+
+export function getAiAlternativeMappingsForTarget(targetSlug: string) {
+  return aiAlternativeMappings.filter((mapping) => mapping.targetSlug === targetSlug);
 }
 
 export interface UniversalSearchResult {

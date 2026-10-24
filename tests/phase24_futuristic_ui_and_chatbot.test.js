@@ -20,7 +20,9 @@ describe('Phase 24: Restrained UI, Verified Navigation & Chatbot Repair', () => 
       const homePath = path.resolve(process.cwd(), 'src/pages/HomePage.tsx');
       const content = fs.readFileSync(homePath, 'utf8');
 
-      assert.ok(content.includes('Find the right tools for the work.'), 'Hero uses the concise editorial headline');
+      assert.ok(['Another AI tool?', 'Sure.', 'Another Subscription?', 'Nope.'].every((line) => content.includes(line)), 'Hero contains the four approved headline lines');
+      assert.ok(content.includes('Explore AI Alternatives'), 'Hero links visitors toward paid-tool alternatives');
+      assert.ok(content.includes('Browse Free Utilities'), 'Hero links visitors toward everyday utilities');
       assert.ok(content.includes('<UniversalSearch />'), 'Universal search remains the primary interaction');
       assert.ok(content.includes('hero-redesign__visual'), 'Hero pairs the message with a product interface visual');
     });
@@ -90,14 +92,13 @@ describe('Phase 24: Restrained UI, Verified Navigation & Chatbot Repair', () => 
   // 4. Task 4: Working proactive chatbot suggestion
   // =========================================================================
   describe('Task 4: Intentional chatbot opening', () => {
-    test('FloatingChatbot starts closed with a compact dismissible session invitation', () => {
+    test('FloatingChatbot starts closed without an always-on invitation over page content', () => {
       const chatbotPath = path.resolve(process.cwd(), 'src/components/FloatingChatbot.tsx');
       const content = fs.readFileSync(chatbotPath, 'utf8');
 
       assert.ok(content.includes('data-testid="chat-launcher"'), 'Renders the compact launcher');
-      assert.ok(content.includes('data-testid="chat-welcome-bubble"'), 'Shows compact invitation by the launcher');
-      assert.ok(content.includes('techhacks-chat-invite-dismissed'), 'Dismissal is remembered for this session');
-      assert.ok(content.includes('Dismiss assistant invitation'), 'Invitation has an accessible dismiss control');
+      assert.ok(!content.includes('chat-welcome-bubble'), 'Does not cover page content with an unsolicited bubble');
+      assert.ok(content.includes('aria-label="Open SwitchRoute assistant"'), 'Launcher remains accessible');
     });
 
     test('Chat panel opens intentionally and keeps modal semantics', () => {
@@ -129,7 +130,7 @@ describe('Phase 24: Restrained UI, Verified Navigation & Chatbot Repair', () => 
       const chatbotPath = path.resolve(process.cwd(), 'src/components/FloatingChatbot.tsx');
       const content = fs.readFileSync(chatbotPath, 'utf8');
 
-      assert.ok(content.includes('aria-label="Open Tech Hacks AI assistant"'), 'Collapsed launcher has a clear accessible name');
+      assert.ok(content.includes('aria-label="Open SwitchRoute assistant"'), 'Collapsed launcher has a clear accessible name');
       assert.ok(content.includes('data-testid="chat-launcher"'), 'Renders a compact launcher');
       assert.ok(content.includes('border-border'), 'Launcher uses the shared border token');
     });

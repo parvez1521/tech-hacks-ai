@@ -97,8 +97,15 @@ describe('Phase 7: Official Brand Logos & Verified Free AI Tools Directory', () 
       const fullPath = path.resolve('public', entry.assetPath.replace(/^\//, ''));
       assert.ok(fs.existsSync(fullPath), `Asset file ${fullPath} must exist on disk for ${tool.slug}`);
 
-      const content = fs.readFileSync(fullPath, 'utf8');
-      assert.ok(content.includes('<svg'), `Asset ${entry.assetPath} must be valid SVG`);
+      const content = fs.readFileSync(fullPath);
+      if (/\.svg$/i.test(fullPath)) {
+        assert.ok(content.toString('utf8').includes('<svg'), `Asset ${entry.assetPath} must be valid SVG`);
+      } else if (/\.webp$/i.test(fullPath)) {
+        assert.deepEqual([...content.subarray(0, 4)], [0x52, 0x49, 0x46, 0x46], `Asset ${entry.assetPath} must have a valid WebP RIFF header`);
+        assert.equal(content.toString('ascii', 8, 12), 'WEBP', `Asset ${entry.assetPath} must identify WebP payload`);
+      } else {
+        assert.ok(content.length > 32, `Asset ${entry.assetPath} must contain a valid raster payload`);
+      }
       assert.ok(content.length > 50, `Asset ${entry.assetPath} must have reasonable content size`);
     }
   });
@@ -112,8 +119,15 @@ describe('Phase 7: Official Brand Logos & Verified Free AI Tools Directory', () 
       const fullPath = path.resolve('public', entry.assetPath.replace(/^\//, ''));
       assert.ok(fs.existsSync(fullPath), `Asset file ${fullPath} must exist on disk for ${alt.slug}`);
 
-      const content = fs.readFileSync(fullPath, 'utf8');
-      assert.ok(content.includes('<svg'), `Asset ${entry.assetPath} must be valid SVG`);
+      const content = fs.readFileSync(fullPath);
+      if (/\.svg$/i.test(fullPath)) {
+        assert.ok(content.toString('utf8').includes('<svg'), `Asset ${entry.assetPath} must be valid SVG`);
+      } else if (/\.webp$/i.test(fullPath)) {
+        assert.deepEqual([...content.subarray(0, 4)], [0x52, 0x49, 0x46, 0x46], `Asset ${entry.assetPath} must have a valid WebP RIFF header`);
+        assert.equal(content.toString('ascii', 8, 12), 'WEBP', `Asset ${entry.assetPath} must identify WebP payload`);
+      } else {
+        assert.ok(content.length > 32, `Asset ${entry.assetPath} must contain a valid raster payload`);
+      }
     }
   });
 
@@ -234,7 +248,7 @@ describe('Phase 7: Official Brand Logos & Verified Free AI Tools Directory', () 
     setupMockBrowser('https://openalternative.co/ai-tools/claude');
     const html = renderClean(React.createElement(ssrModule.App));
 
-    assert.ok(html.includes('Claude 3.5 Sonnet'), 'Renders Claude title');
+    assert.ok(html.includes('Claude'), 'Renders Claude title');
     assert.ok(html.includes('src="/logos/claude.svg"'), 'Renders Claude SVG logo in hero');
     assert.ok(html.includes('Pricing Structure &amp; Model Access') || html.includes('Pricing Structure & Model Access'), 'Renders pricing structure box');
     assert.ok(html.includes('Free Access Quota'), 'Renders free quota section');

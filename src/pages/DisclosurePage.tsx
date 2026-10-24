@@ -45,7 +45,7 @@ export const DisclosurePage: React.FC = () => {
             Our Commitment to Editorial Transparency
           </h2>
           <p className="text-slate-700 leading-relaxed">
-            At Tech Hacks AI (<strong className="text-slate-900 font-semibold">{siteConfig.url}</strong>), trust is our most valuable asset. We believe in complete transparency regarding how our research, verification infrastructure, and independent publication are funded. This disclosure explains our advertising policies and affiliate relationships in full compliance with U.S. Federal Trade Commission (FTC) guidelines and international advertising standards.
+            At SwitchRoute (<strong className="text-slate-900 font-semibold">{siteConfig.url}</strong>), trust is our most valuable asset. We believe in complete transparency regarding how our research, verification infrastructure, and independent publication are funded. This disclosure explains our advertising policies and affiliate relationships in full compliance with U.S. Federal Trade Commission (FTC) guidelines and international advertising standards.
           </p>
         </div>
 
@@ -55,14 +55,14 @@ export const DisclosurePage: React.FC = () => {
             1. Programmatic &amp; Contextual Display Advertising
           </h2>
           <p>
-            Tech Hacks AI may display third-party advertisements served by advertising networks, including Google AdSense. These ads help support server hosting, automated repository verification scrapers, and editorial research.
+            SwitchRoute may display third-party advertisements served by advertising networks, including Google AdSense. These ads help support server hosting, automated repository verification scrapers, and editorial research.
           </p>
           <ul className="list-disc list-inside space-y-1.5 text-xs pl-2 text-slate-600">
             <li>
               <strong className="text-slate-900 font-semibold">Clear Identification:</strong> All advertising banners, sponsored slots, and commercial promotions on our site are clearly designated with labels such as &quot;Advertisement&quot; or &quot;Sponsored&quot;.
             </li>
             <li>
-              <strong className="text-slate-900 font-semibold">No Endorsement:</strong> The appearance of an advertisement on Tech Hacks AI does not constitute an endorsement, guarantee, or recommendation of the advertised product or service by our editorial team.
+              <strong className="text-slate-900 font-semibold">No Endorsement:</strong> The appearance of an advertisement on SwitchRoute does not constitute an endorsement, guarantee, or recommendation of the advertised product or service by our editorial team.
             </li>
             <li>
               <strong className="text-slate-900 font-semibold">Ad Standards:</strong> We do not allow deceptive, adult, malicious, or intrusive pop-under advertisements that interfere with software exploration.
@@ -76,10 +76,10 @@ export const DisclosurePage: React.FC = () => {
             2. Affiliate Partnerships &amp; Referral Links
           </h2>
           <p>
-            Some of the external links to third-party software tools, developer platforms, cloud hosting providers, and educational resources on Tech Hacks AI may be affiliate links.
+            Some of the external links to third-party software tools, developer platforms, cloud hosting providers, and educational resources on SwitchRoute may be affiliate links.
           </p>
           <p>
-            If you click on an affiliate link and subsequently purchase a subscription, license, or cloud credit package, Tech Hacks AI may receive a small referral commission from the merchant. <strong className="text-slate-900 font-semibold">This commission comes at zero additional cost to you.</strong> In many instances, our partnership listings and AI Deals directory provide exclusive educational discounts, starter credits, or extended trials that benefit our readers directly.
+            If you click on an affiliate link and subsequently purchase a subscription, license, or cloud credit package, SwitchRoute may receive a small referral commission from the merchant. <strong className="text-slate-900 font-semibold">This commission comes at zero additional cost to you.</strong> In many instances, our partnership listings and AI Deals directory provide exclusive educational discounts, starter credits, or extended trials that benefit our readers directly.
           </p>
         </section>
 

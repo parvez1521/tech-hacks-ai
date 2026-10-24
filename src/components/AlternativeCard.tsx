@@ -2,6 +2,7 @@ import React from 'react';
 import { ProprietaryTool } from '../types';
 import { Link } from '../router/Router';
 import { getToolsForProprietary, getCategoryBySlug } from '../services/catalogService';
+import { getAiToolsForProprietary } from '../services/aiCatalogService';
 import { ArrowRight } from 'lucide-react';
 import { BrandLogo } from './BrandLogo';
 
@@ -11,7 +12,12 @@ interface AlternativeCardProps {
 
 export const AlternativeCard: React.FC<AlternativeCardProps> = ({ alternative }) => {
   const alternativesList = getToolsForProprietary(alternative.slug);
-  const count = alternativesList.length;
+  const aiAlternatives = getAiToolsForProprietary(alternative.slug);
+  const count = alternativesList.length + aiAlternatives.length;
+  const previewLinks = [
+    ...alternativesList.map((tool) => ({ slug: tool.slug, name: tool.name, color: tool.iconBgColor, url: `/tools/${tool.slug}` })),
+    ...aiAlternatives.map((tool) => ({ slug: tool.slug, name: tool.name, color: tool.iconBgColor, url: `/ai-tools/${tool.slug}` })),
+  ];
   const category = getCategoryBySlug(alternative.category);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -23,7 +29,7 @@ export const AlternativeCard: React.FC<AlternativeCardProps> = ({ alternative })
   return (
     <div
       onMouseMove={handleMouseMove}
-       className="group interactive-card relative flex flex-col justify-between h-full p-5 rounded-2xl border border-border bg-card hover:border-cyan-500/40 hover:-translate-y-1.5 hover:shadow-xl hover:shadow-blue-500/5 transition-all duration-300 ease-out focus-within:ring-2 focus-within:ring-[#2563EB]/40 cursor-pointer"
+       className="group interactive-card relative flex flex-col justify-between h-full p-5 rounded-2xl border border-border bg-card hover:border-cyan-500/40 hover:-translate-y-1.5 hover:shadow-xl hover:shadow-blue-500/5 transition-all duration-300 ease-out focus-within:ring-2 focus-within:ring-primary/40 cursor-pointer"
     >
       {/* Decorative Subtle Inner Spotlight on Hover */}
       <div
@@ -39,7 +45,7 @@ export const AlternativeCard: React.FC<AlternativeCardProps> = ({ alternative })
       <Link
         to={`/alternatives/${alternative.slug}`}
         className="absolute inset-0 z-10 rounded-lg focus:outline-none"
-        aria-label={`View open source alternatives to ${alternative.name}`}
+        aria-label={`View alternatives to ${alternative.name}`}
       >
         <span className="sr-only">View alternatives to {alternative.name}</span>
       </Link>
@@ -66,18 +72,18 @@ export const AlternativeCard: React.FC<AlternativeCardProps> = ({ alternative })
               >
                 {alternative.name}
               </Link>
-              {category && (
+              {category ? (
                 <Link
                   to={`/categories/${alternative.category}`}
                   className="text-xs text-secondary-foreground hover:text-foreground block truncate transition-colors focus:outline-none focus:underline"
                 >
                   {category.name}
                 </Link>
-              )}
+              ) : alternative.category === 'video-creation' ? <span className="text-xs text-secondary-foreground">Video creation</span> : null}
             </div>
           </div>
 
-          <span className="inline-flex items-center px-2.5 py-0.5 rounded-full bg-[#EAF2FF] font-semibold text-xs text-primary border border-primary/30 shrink-0 transition-colors">
+          <span className="inline-flex items-center px-2.5 py-0.5 rounded-full bg-accent font-semibold text-xs text-primary border border-primary/30 shrink-0 transition-colors">
             {count} {count === 1 ? 'alternative' : 'alternatives'}
           </span>
         </div>
@@ -93,16 +99,16 @@ export const AlternativeCard: React.FC<AlternativeCardProps> = ({ alternative })
               Popular replacements:
             </span>
             <div className="flex flex-wrap items-center gap-1.5">
-              {alternativesList.slice(0, 3).map((tool) => (
+              {previewLinks.slice(0, 3).map((tool) => (
                 <Link
                   key={tool.slug}
-                  to={`/tools/${tool.slug}`}
-                  className="pointer-events-auto inline-flex items-center gap-1.5 px-2 py-0.5 rounded-md text-[11px] font-medium bg-[#F1F5F9] hover:bg-accent text-slate-700 hover:text-primary border border-slate-200/80 hover:border-primary/30 transition-colors focus:outline-none focus:underline"
+                  to={tool.url}
+                  className="pointer-events-auto inline-flex items-center gap-1.5 px-2 py-0.5 rounded-md text-[11px] font-medium bg-muted hover:bg-accent text-secondary-foreground hover:text-primary border border-border hover:border-primary/30 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
                   title={`View ${tool.name} open source tool`}
                 >
                   <span
                     className="w-2 h-2 rounded-full shrink-0"
-                    style={{ backgroundColor: tool.iconBgColor || '#3b82f6' }}
+                    style={{ backgroundColor: tool.color || '#3b82f6' }}
                   />
                   <span className="truncate max-w-[90px]">{tool.name}</span>
                 </Link>
@@ -123,7 +129,7 @@ export const AlternativeCard: React.FC<AlternativeCardProps> = ({ alternative })
         </span>
         <Link
           to={`/alternatives/${alternative.slug}`}
-          className="pointer-events-auto text-primary hover:text-[#1D4ED8] font-semibold flex items-center gap-1 group-hover:translate-x-1 transition-all duration-200 shrink-0 focus:outline-none focus:underline"
+          className="pointer-events-auto text-primary hover:text-primary-hover font-semibold flex items-center gap-1 group-hover:translate-x-1 transition-all duration-200 shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:underline"
           aria-label={`Explore open source alternatives to ${alternative.name}`}
         >
           <span>Explore</span>

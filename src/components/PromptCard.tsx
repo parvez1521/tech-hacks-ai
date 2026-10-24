@@ -15,6 +15,7 @@ interface PromptCardProps {
 
 export const PromptCard: React.FC<PromptCardProps> = ({ prompt }) => {
   const [copied, setCopied] = useState(false);
+  const [copyFailed, setCopyFailed] = useState(false);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     const rect = e.currentTarget.getBoundingClientRect();
@@ -26,6 +27,7 @@ export const PromptCard: React.FC<PromptCardProps> = ({ prompt }) => {
     e.preventDefault();
     e.stopPropagation();
     const success = await copyText(prompt.promptText);
+    setCopyFailed(!success);
     if (success) { recordPromptCopy(prompt.slug); setCopied(true); setTimeout(() => setCopied(false), 2000); }
   };
 
@@ -42,11 +44,11 @@ export const PromptCard: React.FC<PromptCardProps> = ({ prompt }) => {
   return (
     <div
       onMouseMove={handleMouseMove}
-      className="group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-slate-200 bg-white transition-all duration-200 hover:-translate-y-0.5 hover:border-teal-400 hover:shadow-lg min-h-[390px] focus-within:ring-2 focus-within:ring-teal-500/50 focus-within:border-teal-500 shadow-sm dark:border-slate-700 dark:bg-slate-900"
+      className="prompt-card group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-slate-200 bg-white transition-all duration-200 hover:-translate-y-1 hover:border-teal-400 hover:shadow-xl min-h-[350px] focus-within:ring-2 focus-within:ring-teal-500/50 focus-within:border-teal-500 shadow-sm dark:border-slate-700 dark:bg-slate-900"
     >
       <div className="relative z-10">
         <Link to={`/prompt-library/${prompt.slug}`} className="prompt-card__image-link" aria-label={`Open ${prompt.title}`} tabIndex={-1}>
-          <PromptPreviewImage className="prompt-card__image" src={prompt.previewImage} alt={prompt.previewImageAlt || `${prompt.title} prompt preview`} />
+          <PromptPreviewImage className={`prompt-card__image${prompt.previewImageWidth && prompt.previewImageHeight && prompt.previewImageWidth / prompt.previewImageHeight > 1.2 ? ' prompt-card__image--landscape' : ''}`} src={prompt.previewImage} alt={prompt.previewImageAlt || `${prompt.title} prompt preview`} width={prompt.previewImageWidth} height={prompt.previewImageHeight} />
           <span className="prompt-card__ratio">{prompt.aspectRatio || '1:1'}</span>
         </Link>
         <div className="px-5 pt-4">
@@ -72,7 +74,8 @@ export const PromptCard: React.FC<PromptCardProps> = ({ prompt }) => {
                 {prompt.placeholders.length} Placeholders
               </span>
             )}
-            {prompt.featured && <span className="px-2 py-0.5 rounded-lg text-[10px] font-semibold bg-rose-50 text-rose-700 border border-rose-200">Featured portrait</span>}
+            {prompt.featured && <span className="px-2 py-0.5 rounded-lg text-[10px] font-semibold bg-rose-50 text-rose-700 border border-rose-200">Featured</span>}
+            {prompt.slug.startsWith('promptfeed-') && <span className="px-2 py-0.5 rounded-lg text-[10px] font-semibold bg-emerald-50 text-emerald-800 border border-emerald-200 dark:bg-emerald-950/40 dark:text-emerald-300 dark:border-emerald-900">PromptFeed · MIT</span>}
             {prompt.mediaType === 'video' && <span className="px-2 py-0.5 rounded-lg text-[10px] font-semibold bg-indigo-50 text-indigo-700 border border-indigo-200">Video prompt</span>}
             <span className="text-[11px] text-slate-500 capitalize dark:text-slate-400">
               {prompt.category.replace(/-/g, ' ')}
@@ -92,10 +95,7 @@ export const PromptCard: React.FC<PromptCardProps> = ({ prompt }) => {
           {prompt.description}
         </p>
 
-        {/* Prompt Container */}
-        <div className="relative p-3 rounded-xl bg-slate-50 border border-slate-200 font-mono text-xs text-slate-800 dark:bg-slate-950 dark:border-slate-700 dark:text-slate-200 line-clamp-3 mb-3 leading-relaxed selection:bg-teal-100">
-          "{prompt.promptText}"
-        </div>
+        <p className="prompt-card__excerpt mb-3 text-xs leading-relaxed text-slate-600 dark:text-slate-300 line-clamp-2">{prompt.promptText}</p>
         <div className="mb-3 flex flex-wrap gap-1.5">
           {[prompt.visualStyle, ...(prompt.tags || []).slice(0, 2)].filter(Boolean).map((tag) => <span key={tag} className="rounded-md bg-teal-50 px-2 py-1 text-[10px] font-medium text-teal-900 dark:bg-teal-950 dark:text-teal-200">{tag}</span>)}
           {prompt.aspectRatio && <span className="rounded-md bg-slate-100 px-2 py-1 text-[10px] font-medium text-slate-600 dark:bg-slate-800 dark:text-slate-300">Aspect {prompt.aspectRatio}</span>}
@@ -122,10 +122,13 @@ export const PromptCard: React.FC<PromptCardProps> = ({ prompt }) => {
           ) : (
             <>
               <Copy className="w-3.5 h-3.5" />
-              <span>Copy Prompt</span>
+              <span>{copyFailed ? 'Try again' : 'Copy Prompt'}</span>
             </>
           )}
         </button>
+        <span role="status" aria-live="polite" className={copyFailed ? 'ml-2 text-[11px] text-rose-700 dark:text-rose-300' : 'sr-only'}>
+          {copyFailed ? 'Clipboard unavailable. Open details to copy.' : ''}
+        </span>
 
         <Link
           to={`/prompt-library/${prompt.slug}`}

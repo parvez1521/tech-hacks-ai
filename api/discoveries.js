@@ -6,6 +6,7 @@ import {
   deleteDiscoveryAsync,
   isAuthorized,
 } from '../server/discoveriesStore.js';
+import { getSafeApiFailure, logSanitizedApiError } from '../server/apiErrorHandling.js';
 
 function readJsonBody(req) {
   if (req.bodyParseError) return null;
@@ -106,10 +107,8 @@ export default async function handler(req, res) {
     res.setHeader('Allow', 'GET, POST, PATCH, DELETE');
     return res.status(405).json({ error: `Method ${method} Not Allowed` });
   } catch (err) {
-    console.error('[Discoveries API Error]:', err);
-    return res.status(500).json({
-      error: 'Internal Server Error',
-      message: err?.message || 'An unexpected server error occurred.',
-    });
+    logSanitizedApiError('/api/discoveries', err, req);
+    const failure = getSafeApiFailure(err);
+    return res.status(failure.status).json(failure.body);
   }
 }

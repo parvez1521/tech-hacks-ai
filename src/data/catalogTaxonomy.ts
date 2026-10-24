@@ -25,12 +25,18 @@ export const utilityCategoryDefinitions: Array<{
   name: string;
   description: string;
 }> = [
+  { id: 'image-graphics', name: 'Image & Graphics', description: 'Crop, inspect, sanitize, and generate image assets locally.' },
+  { id: 'video-audio', name: 'Video & Audio', description: 'Inspect, transcribe, trim, convert, and responsibly process local media.' },
+  { id: 'files-data-browser', name: 'Files, Data & Browser', description: 'Inspect files, browser capabilities, MIME signatures, and timestamps.' },
   { id: 'text-writing', name: 'Text & Writing', description: 'Transform, compare, inspect, and format text without a remote utility service.' },
   { id: 'developer-tools', name: 'Developer Tools', description: 'Work with structured data, URLs, regular expressions, and CSS.' },
-  { id: 'image-graphics', name: 'Image & Graphics', description: 'Crop, inspect, sanitize, and generate image assets locally.' },
   { id: 'security-validation', name: 'Security & Validation', description: 'Inspect and validate tokens, identifiers, hashes, and local files.' },
-  { id: 'files-data-browser', name: 'Files, Data & Browser', description: 'Inspect files, browser capabilities, MIME signatures, and timestamps.' },
-  { id: 'video-audio', name: 'Video & Audio', description: 'Inspect, transcribe, trim, convert, and responsibly process local media.' },
+];
+
+/** Practical defaults based on common tasks; this is not usage-analytics ranking. */
+export const everydayUtilityOrder = [
+  'image-resizer', 'image-cropper', 'mp4-to-mp3', 'audio-trimmer',
+  'video-audio-transcriber', 'video-metadata', 'audio-metadata',
 ];
 
 const legacyUtilityCategoryMap: Record<FreeToolUtility['category'], UtilityCategory> = {

@@ -8,7 +8,7 @@ type ManagedPrompt = PromptItem & { status?: PromptStatus };
 
 const blankPrompt = (): ManagedPrompt => ({
   id: `editorial-${Date.now()}`, title: '', slug: '', description: '', category: 'ai-image-generation',
-  targetModel: 'Gemini', provider: 'Google', promptText: '', tags: [], authorOrSource: 'Tech Hacks AI editorial team',
+  targetModel: 'Gemini', provider: 'Google', promptText: '', tags: [], authorOrSource: 'SwitchRoute editorial team',
   previewImage: '', visualStyle: 'Conceptual', aspectRatio: '1:1', status: 'draft', rightsStatus: 'original', mediaType: 'image',
 });
 
@@ -97,7 +97,7 @@ export const AdminPromptManager: React.FC<{ token: string }> = ({ token }) => {
         <label className="text-xs font-semibold text-muted-foreground">Attribution URL<input className={`${inputClass} mt-1`} value={form.attributionUrl || ''} onChange={(e) => change('attributionUrl', e.target.value)} placeholder="https://…" /></label>
         <label className="text-xs font-semibold text-muted-foreground">Source page URL<input className={`${inputClass} mt-1`} value={form.sourceUrl || ''} onChange={(e) => change('sourceUrl', e.target.value)} placeholder="https://…" /></label>
         <label className="text-xs font-semibold text-muted-foreground">Source creator / author<input className={`${inputClass} mt-1`} value={form.sourceCreator || ''} onChange={(e) => change('sourceCreator', e.target.value)} /></label>
-        <label className="text-xs font-semibold text-muted-foreground">Rights status<select className={`${inputClass} mt-1`} value={form.rightsStatus || 'unknown'} onChange={(e) => change('rightsStatus', e.target.value)}><option value="unknown">Unknown</option><option value="original">Original Tech Hacks AI</option><option value="licensed">Licensed</option><option value="permission-granted">Written permission granted</option><option value="pending">Permission pending</option></select></label>
+        <label className="text-xs font-semibold text-muted-foreground">Rights status<select className={`${inputClass} mt-1`} value={form.rightsStatus || 'unknown'} onChange={(e) => change('rightsStatus', e.target.value)}><option value="unknown">Unknown</option><option value="original">Original SwitchRoute</option><option value="licensed">Licensed</option><option value="permission-granted">Written permission granted</option><option value="pending">Permission pending</option></select></label>
         <label className="text-xs font-semibold text-muted-foreground">License / permission notes<input className={`${inputClass} mt-1`} value={form.rightsLicense || ''} onChange={(e) => change('rightsLicense', e.target.value)} placeholder="License name or permission reference" /></label>
         <label className="flex items-center gap-2 text-xs font-semibold text-muted-foreground"><input type="checkbox" checked={Boolean(form.featured)} onChange={(e) => setForm((current) => ({ ...current, featured: e.target.checked }))} /> Feature in curated order</label>
         <label className="text-xs font-semibold text-muted-foreground">Featured order<input type="number" min="0" className={`${inputClass} mt-1`} value={form.featuredOrder ?? ''} onChange={(e) => setForm((current) => ({ ...current, featuredOrder: e.target.value ? Number(e.target.value) : undefined }))} /></label>

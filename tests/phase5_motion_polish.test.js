@@ -47,20 +47,20 @@ describe('Phase 5: Premium Interactive UI, Motion Polish & Accessibility', () =>
     assert.ok(html.includes('interactive-card'), 'ToolCard should use the shared restrained interaction utility');
   });
 
-  test('Hero section keeps motion limited to a short entrance sequence', async () => {
+  test('Hero content is server-rendered immediately without an optional entrance animation', async () => {
     if (!ssrModule) ssrModule = await import('../dist/test-ssr.js');
     const html = ReactDOMServer.renderToString(React.createElement(ssrModule.App));
 
     const homeSource = fs.readFileSync(path.join(process.cwd(), 'src/pages/HomePage.tsx'), 'utf8');
     assert.ok(html.includes('hero-redesign__copy'), 'The editorial hero renders as a readable static server fallback');
-    assert.ok(homeSource.includes("from 'motion/react'") && homeSource.includes('useReducedMotion'), 'Hero entrance uses Motion.dev and respects reduced motion');
+    assert.ok(!homeSource.includes('motionFeatures') && !homeSource.includes('LazyMotion'), 'Hero does not load optional animation features before content is usable');
   });
 
   test('Header includes refined microinteraction classes', async () => {
     if (!ssrModule) ssrModule = await import('../dist/test-ssr.js');
     const html = ReactDOMServer.renderToString(React.createElement(ssrModule.App));
 
-    assert.ok(html.includes('group-hover:rotate-12'), 'Logo should have refined rotate microinteraction');
+    assert.ok(html.includes('group-hover:rotate-3'), 'Logo should have refined rotate microinteraction');
   });
 
   test('Pagination includes enhanced active button shadow and scaling', async () => {

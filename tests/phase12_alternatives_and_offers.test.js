@@ -42,8 +42,8 @@ describe('Phase 12: Alternative Navigation, Claude Code/Perplexity Alts, OmniRus
 
     test('AlternativeCard allows clicking individual alternative tools without navigating to parent card', () => {
       assert.ok(
-        cardContent.includes("to={`/tools/${tool.slug}`}"),
-        'Replacement tool pills must link to individual tool detail pages (/tools/:slug)'
+        cardContent.includes("url: `/tools/${tool.slug}`") && cardContent.includes("url: `/ai-tools/${tool.slug}`"),
+        'Replacement tool pills must link to their individual open-source or AI catalog detail pages'
       );
       assert.ok(
         cardContent.includes("pointer-events-auto") && cardContent.includes("relative z-20"),

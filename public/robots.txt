@@ -5,5 +5,5 @@ Disallow: /moderation
 Disallow: /admin
 Disallow: /api/
 
-Sitemap: https://techhacksai.com/sitemap.xml
+Sitemap: https://switchroute.in/sitemap.xml
 

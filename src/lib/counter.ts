@@ -8,3 +8,7 @@ export function getAnimatedCountValue(value: number, progress: number, reducedMo
 export function formatCount(value: number): string {
   return new Intl.NumberFormat(undefined, { maximumFractionDigits: 0 }).format(value);
 }
+
+export function formatMilestoneCount(value: number, milestone = 1000): string {
+  return value >= milestone ? `${milestone.toLocaleString()}+` : formatCount(value);
+}

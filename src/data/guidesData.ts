@@ -26,7 +26,7 @@ export const guidesData: Guide[] = [
         title: 'Establish Visual Consistency with a Master Style Prompt',
         description: 'Before animating video, generate high-resolution keyframe reference images in FLUX.1. Specify concrete photographic details: 35mm anamorphic lens, lighting temperature, and aspect ratio --ar 16:9.',
         promptTemplate: 'Cinematic wide angle establishing shot of a futuristic neon cyber-city in heavy rain, shot on 35mm Arri Alexa 65, natural film grain, ISO 400, f/1.8, cinematic anamorphic bokeh, reflections on wet asphalt, photorealistic --ar 16:9',
-        media: { type: 'image', src: '/prompts/generated/slow-dolly-cyberpunk-rain.webp', alt: 'A rain-wet futuristic street with neon reflections and deep perspective, matching the guide’s cinematic keyframe prompt.', caption: 'Original Tech Hacks AI keyframe study for the rainy city scene.' },
+        media: { type: 'image', src: '/prompts/generated/slow-dolly-cyberpunk-rain.webp', alt: 'A rain-wet futuristic street with neon reflections and deep perspective, matching the guide’s cinematic keyframe prompt.', caption: 'Original SwitchRoute keyframe study for the rainy city scene.' },
       },
       {
         stepNumber: 2,
@@ -191,7 +191,7 @@ export const guidesData: Guide[] = [
         title: 'Specify Tangible Optical Equipment and Film Stock',
         description: 'Avoid vague quality descriptors like "photorealistic" or "ultra-detailed". Instead, specify real lenses like Hasselblad 80mm f/2.8 and natural environmental lighting.',
         promptTemplate: 'Intimate editorial studio portrait of a 40-year-old architectural engineer, subtle wrinkles and natural skin pore texture, lit by soft north-facing window light, Hasselblad H6D-100c, 80mm f/2.8 lens, Kodachrome 64 tone, understated authentic expression --ar 4:5 --stylize 150',
-        media: { type: 'image', src: '/prompts/generated/portrait-man-professional.webp', alt: 'A fictional adult man with salt-and-pepper hair and natural expression lines in an architecture studio portrait.', caption: 'Original Tech Hacks AI portrait example illustrating natural skin detail.' },
+        media: { type: 'image', src: '/prompts/generated/portrait-man-professional.webp', alt: 'A fictional adult man with salt-and-pepper hair and natural expression lines in an architecture studio portrait.', caption: 'Original SwitchRoute portrait example illustrating natural skin detail.' },
       },
       {
         stepNumber: 2,

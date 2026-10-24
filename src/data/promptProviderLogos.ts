@@ -1,4 +1,4 @@
-import { getBrandLogo } from './brandLogos.ts';
+import { getBrandLogo } from './runtimeBrandLogos.ts';
 
 /** Display-name and model aliases used by the prompt catalog. */
 export const promptProviderLogoAliases: Record<string, string> = {

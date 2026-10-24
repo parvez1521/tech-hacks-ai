@@ -4,6 +4,7 @@ import { getPickRecommendations } from '../services/aiCatalogService.ts';
 import type { PickCriteria, MatchedPickResult } from '../types/index.ts';
 import { Sparkles, ArrowRight, ArrowLeft, RefreshCw, CheckCircle2, ExternalLink, SlidersHorizontal, ShieldCheck, Zap, AlertCircle } from 'lucide-react';
 import { BrandLogo } from '../components/BrandLogo.tsx';
+import { AffiliateDisclosure } from '../components/AffiliateDisclosure.tsx';
 
 export const PickPage: React.FC = () => {
   const [step, setStep] = useState<number>(1);
@@ -463,6 +464,7 @@ export const PickPage: React.FC = () => {
             <div className="space-y-4">
               {recommendations.map((rec, i) => {
                 const { tool, type, matchScore, matchExplanation, tasks, freeAccessSummary, detailUrl, websiteUrl, pricingVerifiedAt } = rec;
+                const affiliateUrl = 'affiliateUrl' in tool ? tool.affiliateUrl : undefined;
 
                 return (
                   <div
@@ -542,15 +544,18 @@ export const PickPage: React.FC = () => {
                         <span>View Details & Limits</span>
                         <ArrowRight className="w-3.5 h-3.5" />
                       </Link>
-                      <a
-                        href={websiteUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1 text-slate-500 hover:text-slate-800 text-xs transition-colors"
-                      >
-                        <span>Official Destination</span>
-                        <ExternalLink className="w-3 h-3" />
-                      </a>
+                      <div className="flex flex-col items-end gap-1">
+                        <a
+                          href={affiliateUrl || websiteUrl}
+                          target="_blank"
+                          rel={affiliateUrl ? 'noopener noreferrer sponsored nofollow' : 'noopener noreferrer'}
+                          className="inline-flex items-center gap-1 text-slate-500 hover:text-slate-800 text-xs transition-colors"
+                        >
+                          <span>{affiliateUrl ? `Try ${tool.name}` : 'Official Destination'}</span>
+                          <ExternalLink className="w-3 h-3" />
+                        </a>
+                        {affiliateUrl && <AffiliateDisclosure />}
+                      </div>
                     </div>
                   </div>
                 );

@@ -1,4 +1,5 @@
 import { canManagePromptCategories, listPromptCategories, removePromptCategory, savePromptCategory } from '../server/promptCategoriesStore.js';
+import { getSafeApiFailure, logSanitizedApiError } from '../server/apiErrorHandling.js';
 
 function readBody(req) {
   try { const body = typeof req.body === 'string' ? JSON.parse(req.body) : req.body; return body && typeof body === 'object' && !Array.isArray(body) ? body : null; }
@@ -26,7 +27,8 @@ export default async function handler(req, res) {
     res.setHeader('Allow', 'GET, POST, PATCH, DELETE');
     return res.status(405).json({ error: 'Method not allowed.' });
   } catch (error) {
-    console.error('Prompt category API error:', error);
-    return res.status(error.status || 500).json({ error: error.message || 'Could not process prompt category request.' });
+    logSanitizedApiError('/api/prompt-categories', error, req);
+    const failure = getSafeApiFailure(error);
+    return res.status(failure.status).json(failure.body);
   }
 }

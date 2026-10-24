@@ -1,5 +1,6 @@
 import fs from 'fs';
 import path from 'path';
+import { timingSafeEqual } from 'node:crypto';
 import {
   getStorageMode,
   isDurable,
@@ -179,23 +180,30 @@ export function isAuthorized(headers = {}) {
   const secret = configuredSecret || (isProductionEnvironment() ? '' : ADMIN_SECRET);
   if (!secret || (isProductionEnvironment() && secret === DEVELOPMENT_ADMIN_SECRET)) return false;
   if (typeof headers === 'string') {
-    return headers === secret;
+    return safelyMatchesSecret(headers, secret);
   }
   const authHeader = headers['authorization'] || headers['Authorization'] || '';
   const tokenHeader = headers['x-admin-token'] || headers['X-Admin-Token'] || '';
 
-  if (tokenHeader === secret) {
+  if (safelyMatchesSecret(tokenHeader, secret)) {
     return true;
   }
 
-  if (authHeader.startsWith('Bearer ')) {
+  if (typeof authHeader === 'string' && authHeader.startsWith('Bearer ')) {
     const token = authHeader.slice(7).trim();
-    if (token === secret) {
+    if (safelyMatchesSecret(token, secret)) {
       return true;
     }
   }
 
   return false;
+}
+
+function safelyMatchesSecret(candidate, secret) {
+  if (typeof candidate !== 'string') return false;
+  const candidateBytes = Buffer.from(candidate);
+  const secretBytes = Buffer.from(secret);
+  return candidateBytes.length === secretBytes.length && timingSafeEqual(candidateBytes, secretBytes);
 }
 
 export function verifyAdminToken(token) {
@@ -436,7 +444,7 @@ export async function createToolSubmission(data, clientIp = '127.0.0.1') {
       success: false,
       status: 503,
       error: 'StorageUnavailable',
-      message: 'Durable database storage is not yet configured for production submissions. Submissions are temporarily paused to prevent data loss. Please configure SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY.',
+      message: 'Durable database storage is not yet configured for production submissions. Submissions are temporarily paused to prevent data loss. Configure SUPABASE_URL with a server-side Supabase secret or service-role key, or a supported Upstash store.',
       storageMode: 'unconfigured_production',
     };
   }
@@ -587,7 +595,7 @@ export async function createGuideSubmission(data, clientIp = '127.0.0.1') {
       success: false,
       status: 503,
       error: 'StorageUnavailable',
-      message: 'Durable database storage is not yet configured for production submissions. Submissions are temporarily paused to prevent data loss. Please configure SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY.',
+      message: 'Durable database storage is not yet configured for production submissions. Submissions are temporarily paused to prevent data loss. Configure SUPABASE_URL with a server-side Supabase secret or service-role key, or a supported Upstash store.',
       storageMode: 'unconfigured_production',
     };
   }

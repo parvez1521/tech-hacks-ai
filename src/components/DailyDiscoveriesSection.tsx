@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import type { ToolDiscovery } from '../types/discoveries';
 import { fetchPublishedDiscoveries } from '../services/discoveryService';
 import { DailyDiscoveryCard } from './DailyDiscoveryCard';
@@ -10,6 +10,8 @@ interface DailyDiscoveriesSectionProps {
 }
 
 export const DailyDiscoveriesSection: React.FC<DailyDiscoveriesSectionProps> = ({ maxItems = 6 }) => {
+  const sectionRef = useRef<HTMLElement>(null);
+  const [shouldLoad, setShouldLoad] = useState(false);
   const [discoveries, setDiscoveries] = useState<ToolDiscovery[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -34,11 +36,29 @@ export const DailyDiscoveriesSection: React.FC<DailyDiscoveriesSectionProps> = (
   };
 
   useEffect(() => {
-    loadDiscoveries();
-  }, [maxItems]);
+    const section = sectionRef.current;
+    if (!section) return;
+    if (typeof IntersectionObserver === 'undefined') {
+      setShouldLoad(true);
+      return;
+    }
+
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        setShouldLoad(true);
+        observer.disconnect();
+      }
+    }, { rootMargin: '600px 0px' });
+    observer.observe(section);
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (shouldLoad) void loadDiscoveries();
+  }, [maxItems, shouldLoad]);
 
   return (
-    <section aria-labelledby="daily-discoveries-heading" className="w-full">
+    <section ref={sectionRef} aria-labelledby="daily-discoveries-heading" className="w-full">
       {/* Header Bar */}
       <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-6">
         <div>

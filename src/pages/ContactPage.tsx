@@ -88,7 +88,7 @@ export const ContactPage: React.FC = () => {
           <span>Get in Touch</span>
         </div>
         <h1 className="text-3xl sm:text-5xl font-extrabold text-slate-900 tracking-tight mb-4 leading-tight">
-          Contact Tech Hacks AI
+          Contact SwitchRoute
         </h1>
         <p className="text-base sm:text-lg text-slate-600 leading-relaxed max-w-2xl">
           Have a tool to suggest, a pricing update to report, a technical bug to flag, or general editorial feedback? We review all submissions and inquiries within 1–2 business days.
@@ -142,7 +142,7 @@ export const ContactPage: React.FC = () => {
             <div className="space-y-1">
               <h3 className="text-lg font-bold text-slate-900">Message Received!</h3>
               <p className="text-sm text-slate-600 max-w-md mx-auto">
-                Thank you for contacting Tech Hacks AI. Our editorial team reviews every message and will respond via email within 1–2 business days.
+                Thank you for contacting SwitchRoute. Our editorial team reviews every message and will respond via email within 1–2 business days.
               </p>
             </div>
             <button

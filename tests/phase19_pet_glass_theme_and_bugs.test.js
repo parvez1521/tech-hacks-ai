@@ -132,7 +132,7 @@ describe('Phase 19: Floating AI Pet, Glass UI, Theme Repair & UX Bug Fixes', () 
       const content = fs.readFileSync(chatbotPath, 'utf8');
 
       assert.ok(
-        content.includes('aria-label="Open Tech Hacks AI assistant"'),
+        content.includes('aria-label="Open SwitchRoute assistant"'),
         'Collapsed launcher has an accessible name'
       );
       const css = fs.readFileSync(path.resolve(process.cwd(), 'src/index.css'), 'utf8');
@@ -160,7 +160,7 @@ describe('Phase 19: Floating AI Pet, Glass UI, Theme Repair & UX Bug Fixes', () 
       const content = fs.readFileSync(chatbotPath, 'utf8');
 
       assert.ok(content.includes('data-testid="chat-launcher"'), 'Compact launcher is present');
-      assert.ok(content.includes('aria-label="Open Tech Hacks AI assistant"'), 'Launcher has a descriptive accessible name');
+      assert.ok(content.includes('aria-label="Open SwitchRoute assistant"'), 'Launcher has a descriptive accessible name');
       assert.ok(!content.includes('Assistant welcome invitation'), 'No invitation overlays page content');
       assert.ok(!content.includes('data-testid="chat-dialog"') || content.includes('{isOpen &&'), 'Dialog only renders after opening');
     });

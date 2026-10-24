@@ -131,6 +131,7 @@ for (const [slug, record] of records) {
 const replacement = `export const brandLogos: Record<string, BrandLogoEntry> = ${JSON.stringify(registry, null, 2)};\n\nexport const SLUG_ALIASES`;
 fs.writeFileSync(registryPath, registrySource.replace(registryMatch[0], replacement));
 fs.writeFileSync(publicManifestPath, `${JSON.stringify(Object.values(registry), null, 2)}\n`);
+execFileSync(process.execPath, [path.join(root, 'scripts', 'generate-runtime-logo-manifest.mjs')], { stdio: 'inherit' });
 
 const providedManifest = Object.entries(providedAssets).map(([slug, value]) => {
   const record = records.get(slug);

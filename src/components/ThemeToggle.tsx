@@ -68,32 +68,34 @@ export const ThemeToggle: React.FC<ThemeToggleProps> = ({ compact = false }) => 
       {showHint && (
         <div className="theme-hint pointer-events-none" role="note" aria-live="polite">
           <span>{hintQuote}</span>
-          <svg width="38" height="22" viewBox="0 0 38 22" fill="none" aria-hidden="true">
-            <path
-              d="M2 5c9-3 17-1 23 5 3 3 5 5 9 6M26 14l8 2-4-7"
-              stroke="currentColor"
-              strokeWidth="1.6"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeDasharray="1 1.5"
-            />
-          </svg>
         </div>
       )}
-      <button
-        type="button"
-        data-testid={compact ? 'mobile-theme-toggle-btn' : 'theme-toggle-btn'}
-        onClick={handleToggle}
-        className="theme-toggle focus-ring"
-        aria-label={theme === 'dark' ? 'Dark' : 'Light'}
-        aria-pressed={theme === 'dark'}
-        title={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
-      >
-        <span className="theme-toggle__icon" aria-hidden="true">
-          {theme === 'dark' ? <Moon className="h-3.5 w-3.5" /> : <Sun className="h-3.5 w-3.5" />}
-        </span>
-        <span className="theme-toggle__label">{theme === 'dark' ? 'Dark' : 'Light'}</span>
-      </button>
+      <div className="theme-control__button-wrap">
+        <svg className="theme-control__arrow" viewBox="0 0 28 18" fill="none" aria-hidden="true">
+          <path
+            d="M2 2c7-1 13 1 16 7l2 5m-5-3 5 4 3-5"
+            stroke="currentColor"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeDasharray="1 1.5"
+          />
+        </svg>
+        <button
+          type="button"
+          data-testid={compact ? 'mobile-theme-toggle-btn' : 'theme-toggle-btn'}
+          onClick={handleToggle}
+          className="theme-toggle focus-ring"
+          aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
+          aria-pressed={theme === 'dark'}
+          title={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
+        >
+          <span className="theme-toggle__icon" aria-hidden="true">
+            {theme === 'dark' ? <Sun className="h-3.5 w-3.5" /> : <Moon className="h-3.5 w-3.5" />}
+          </span>
+          <span className="theme-toggle__label">{theme === 'dark' ? 'Light Mode' : 'Dark Mode'}</span>
+        </button>
+      </div>
     </div>
   );
 };

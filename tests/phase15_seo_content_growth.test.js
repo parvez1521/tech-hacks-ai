@@ -19,7 +19,7 @@ describe('Phase 15: Organic Growth, Content Quality & SEO Expansion', () => {
     ssrModule = await import('../dist/test-ssr.js');
   });
 
-  function setupMockBrowser(initialUrl = 'https://techhacksai.com/') {
+  function setupMockBrowser(initialUrl = 'https://switchroute.in/') {
     const parsedUrl = new URL(initialUrl);
     const mockStorage = {};
 
@@ -96,8 +96,8 @@ describe('Phase 15: Organic Growth, Content Quality & SEO Expansion', () => {
 
   // 2. Proprietary Alternatives Migration Analysis
   describe('2. Proprietary Alternatives Migration Analysis', () => {
-    test('all 14 proprietary software tools have migration drivers and cost reality notes', () => {
-      assert.strictEqual(proprietaryTools.length, 14);
+    test('all proprietary software targets have migration drivers and cost reality notes', () => {
+      assert.strictEqual(proprietaryTools.length, 25);
       proprietaryTools.forEach((tool) => {
         assert.ok(Array.isArray(tool.migrationDrivers), `${tool.name} missing migrationDrivers array`);
         assert.ok(tool.migrationDrivers.length >= 3, `${tool.name} has fewer than 3 migration drivers`);
@@ -154,7 +154,7 @@ describe('Phase 15: Organic Growth, Content Quality & SEO Expansion', () => {
   // 4. Compare Page Architecture & Framework
   describe('4. Compare Page Presets & Decision Framework', () => {
     test('renders comparison presets and decision framework without error', () => {
-      setupMockBrowser('https://techhacksai.com/compare?tools=cursor,claude-code,aider');
+      setupMockBrowser('https://switchroute.in/compare?tools=cursor,claude-code,aider');
       const html = renderClean(React.createElement(ssrModule.App));
       assert.ok(html.includes('Compare Open Source &amp; AI Software') || html.includes('Compare Open Source & AI Software'));
       assert.ok(html.includes('Popular Comparisons:'));
@@ -172,14 +172,14 @@ describe('Phase 15: Organic Growth, Content Quality & SEO Expansion', () => {
     test('robots.txt disallows /saved and lists sitemap', () => {
       const robotsContent = fs.readFileSync(path.resolve('public/robots.txt'), 'utf8');
       assert.ok(robotsContent.includes('Disallow: /saved'), 'robots.txt must disallow /saved');
-      assert.ok(robotsContent.includes('Sitemap: https://techhacksai.com/sitemap.xml'), 'robots.txt must declare sitemap.xml');
+      assert.ok(robotsContent.includes('Sitemap: https://switchroute.in/sitemap.xml'), 'robots.txt must declare sitemap.xml');
     });
 
     test('sitemap.xml contains the 3 new substantive guides', () => {
       const sitemapContent = fs.readFileSync(path.resolve('public/sitemap.xml'), 'utf8');
-      assert.ok(sitemapContent.includes('https://techhacksai.com/guides/how-to-choose-ai-coding-assistant'));
-      assert.ok(sitemapContent.includes('https://techhacksai.com/guides/free-ai-student-benefits-guide'));
-      assert.ok(sitemapContent.includes('https://techhacksai.com/guides/evaluating-free-ai-plans'));
+      assert.ok(sitemapContent.includes('https://switchroute.in/guides/how-to-choose-ai-coding-assistant'));
+      assert.ok(sitemapContent.includes('https://switchroute.in/guides/free-ai-student-benefits-guide'));
+      assert.ok(sitemapContent.includes('https://switchroute.in/guides/evaluating-free-ai-plans'));
     });
 
     test('getRouteDescription generates distinct non-empty descriptions for all route types', () => {
@@ -200,7 +200,7 @@ describe('Phase 15: Organic Growth, Content Quality & SEO Expansion', () => {
     test('getRouteTitle formats descriptive page titles', () => {
       const guideTitle = ssrModule.getRouteTitle('guide-detail', { slug: 'how-to-choose-ai-coding-assistant' });
       assert.ok(guideTitle.includes('How to Choose an AI Coding Assistant'));
-      assert.ok(guideTitle.includes('Tech Hacks AI'));
+      assert.ok(guideTitle.includes('SwitchRoute'));
 
       const compareTitle = ssrModule.getRouteTitle('compare');
       assert.ok(compareTitle.includes('Side-by-Side Tool Comparison'));
@@ -210,7 +210,7 @@ describe('Phase 15: Organic Growth, Content Quality & SEO Expansion', () => {
   // 6. Structured Data & Internal Linking
   describe('6. Structured Data & Internal Linking', () => {
     test('GuideDetailPage renders HowTo schema script and canonical share button', () => {
-      setupMockBrowser('https://techhacksai.com/guides/how-to-choose-ai-coding-assistant');
+      setupMockBrowser('https://switchroute.in/guides/how-to-choose-ai-coding-assistant');
       const html = renderClean(React.createElement(ssrModule.App));
       assert.ok(html.includes('"@type":"HowTo"'));
       assert.ok(html.includes('HowToStep'));
@@ -219,7 +219,7 @@ describe('Phase 15: Organic Growth, Content Quality & SEO Expansion', () => {
     });
 
     test('CategoryDetailPage renders buyer guide editorial sections and related guides', () => {
-      setupMockBrowser('https://techhacksai.com/categories/developer-tools');
+      setupMockBrowser('https://switchroute.in/categories/developer-tools');
       const html = renderClean(React.createElement(ssrModule.App));
       assert.ok(html.includes('Open Source Developer Tools'));
       assert.ok(html.includes('Category Discovery &amp; Buyer Guide') || html.includes('Category Discovery & Buyer Guide'));
@@ -230,7 +230,7 @@ describe('Phase 15: Organic Growth, Content Quality & SEO Expansion', () => {
     });
 
     test('AlternativeDetailPage renders migration drivers, cost reality, and related guides', () => {
-      setupMockBrowser('https://techhacksai.com/alternatives/firebase');
+      setupMockBrowser('https://switchroute.in/alternatives/firebase');
       const html = renderClean(React.createElement(ssrModule.App));
       assert.ok(html.includes('Why Teams Look for Firebase Alternatives'));
       assert.ok(html.includes('Hosting &amp; Inference Reality') || html.includes('Hosting & Inference Reality'));
@@ -240,7 +240,7 @@ describe('Phase 15: Organic Growth, Content Quality & SEO Expansion', () => {
     });
 
     test('AiToolDetailPage renders SoftwareApplication schema, audience, and compare quick-action', () => {
-      setupMockBrowser('https://techhacksai.com/ai-tools/cursor');
+      setupMockBrowser('https://switchroute.in/ai-tools/cursor');
       const html = renderClean(React.createElement(ssrModule.App));
       assert.ok(html.includes('"@type":"SoftwareApplication"'));
       assert.ok(html.includes('Who It&#x27;s Best Suited For') || html.includes("Who It's Best Suited For"));
@@ -250,7 +250,7 @@ describe('Phase 15: Organic Growth, Content Quality & SEO Expansion', () => {
     });
 
     test('OfferDetailPage renders Offer schema, share button, and related educational guides', () => {
-      setupMockBrowser('https://techhacksai.com/offers/jio-google-gemini-offer');
+      setupMockBrowser('https://switchroute.in/offers/jio-google-gemini-offer');
       const html = renderClean(React.createElement(ssrModule.App));
       assert.ok(html.includes('"@type":"Offer"'));
       assert.ok(html.includes('Related Guides &amp; Benefit Tutorials') || html.includes('Related Guides & Benefit Tutorials'));

@@ -17,7 +17,7 @@ test('chat API rejects empty, malformed, and oversized input before provider acc
   try {
     for (const [body, expected] of [[{}, 400], ['not-json', 400], [{ message: 'x'.repeat(8001) }, 413]]) {
       const res = responseRecorder();
-      await handler({ method: 'POST', body }, res);
+      await handler({ method: 'POST', headers: { 'x-vercel-forwarded-for': 'chat-api-invalid-inputs' }, body }, res);
       assert.equal(res.statusCode, expected);
       assert.equal(typeof res.payload.error, 'string');
     }
@@ -31,7 +31,7 @@ test('chat API states when live AI is not configured and signals catalog mode', 
   delete process.env.GROQ_API_KEY;
   try {
     const res = responseRecorder();
-    await handler({ method: 'POST', body: { message: 'Find coding tools' } }, res);
+    await handler({ method: 'POST', headers: { 'x-vercel-forwarded-for': 'chat-api-no-provider' }, body: { message: 'Find coding tools' } }, res);
     assert.equal(res.statusCode, 200);
     assert.equal(res.payload.status, 'grounded_local_mode');
     assert.match(res.payload.message, /not configured/i);
@@ -55,6 +55,7 @@ test('chat API uses the supported Groq model and parses a valid provider respons
     const res = responseRecorder();
     await handler({
       method: 'POST',
+      headers: { 'x-vercel-forwarded-for': 'chat-api-provider-success' },
       body: {
         message: 'Find coding tools',
         conversationHistory: [{ sender: 'user', text: 'I build apps' }, { sender: 'other', text: 'ignore' }],
@@ -86,7 +87,7 @@ test('chat API falls back to catalog mode for provider errors and malformed resp
     for (const failFetch of providerFailures) {
       globalThis.fetch = failFetch;
       const res = responseRecorder();
-      await handler({ method: 'POST', body: { message: 'Find coding tools' } }, res);
+      await handler({ method: 'POST', headers: { 'x-vercel-forwarded-for': 'chat-api-provider-failure' }, body: { message: 'Find coding tools' } }, res);
       assert.equal(res.statusCode, 200);
       assert.equal(res.payload.status, 'grounded_local_mode');
       assert.match(res.payload.message, /temporarily unavailable/i);

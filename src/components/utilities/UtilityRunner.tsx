@@ -425,7 +425,7 @@ const ImageResizerTool: React.FC = () => {
 
 // 2. Vector QR Code Generator Tool
 const QrGeneratorTool: React.FC = () => {
-  const [text, setText] = useState('https://techhacksai.com');
+  const [text, setText] = useState('https://switchroute.in');
   const [qrSize, setQrSize] = useState(256);
   const [copied, setCopied] = useState(false);
   const [error, setError] = useState('');
@@ -675,7 +675,7 @@ const WordCounterTool: React.FC = () => {
 
 // 4. JSON Formatter & Validator Tool
 const JsonFormatterTool: React.FC = () => {
-  const [jsonText, setJsonText] = useState('{"platform":"Tech Hacks AI","features":["ai-tools","free-software","open-source","utilities"],"active":true,"version":2.0}');
+  const [jsonText, setJsonText] = useState('{"platform":"SwitchRoute","features":["ai-tools","free-software","open-source","utilities"],"active":true,"version":2.0}');
   const [isValid, setIsValid] = useState(true);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const [copied, setCopied] = useState(false);

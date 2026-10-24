@@ -9,13 +9,15 @@ import { getBrandLogo } from '../src/data/brandLogos.ts';
 
 test('prompt artwork audit validates all distinct generated WebP images and provenance', async () => {
   const audit = await buildAudit();
-  assert.equal(audit.prompts.length, promptsData.length);
   assert.equal(audit.summary.originalGeneratedImages, promptsData.length);
+  assert.equal(audit.summary.licensedPromptFeedImages, 534);
+  assert.equal(audit.summary.uniqueUsablePromptCount, 582);
   assert.equal(audit.summary.missingPromptImages, 0);
+  assert.equal(audit.summary.duplicatePromptRecords, 0);
   assert.equal(audit.summary.duplicatePromptImages, 0);
   assert.equal(audit.summary.meigenAssetsUsed, false);
   assert.equal(audit.issues.filter((issue) => issue.type.startsWith('missing-prompt')).length, 0);
-  for (const image of audit.prompts) {
+  for (const image of audit.prompts.filter((record) => record.provenance.sourceType === 'original-ai-generated')) {
     assert.equal(image.actualFileType, 'webp', image.slug);
     assert.equal(image.extensionMatchesContent, true, image.slug);
     assert.ok(image.dimensions.width >= 900, `${image.slug} width is high enough for a responsive preview`);
@@ -24,6 +26,9 @@ test('prompt artwork audit validates all distinct generated WebP images and prov
     assert.match(image.provenance.rightsStatus, /generated for this project/i);
     assert.ok(image.altText.length > 20);
   }
+  assert.equal(audit.summary.imagesFlaggedForDetailResolutionReview, 0, 'prompt previews are at least as large as their maximum rendered detail width');
+  assert.ok(audit.promptAssetInventory.length >= 582);
+  assert.equal(audit.prompts.filter((record) => !record.imageAvailable).length, 0);
 });
 
 test('image inspection rejects extension-only claims and reads actual file signatures', () => {
@@ -64,4 +69,24 @@ test('failed or missing preview sources use a clear accessible fallback', () => 
   assert.match(source, /role="img"/);
   assert.match(source, /aria-label=\{alt \|\| 'Preview unavailable'\}/);
   assert.match(source, /setFailedSrc\(src\)/);
+});
+
+test('licensed PromptFeed detail images are not stretched beyond their native thumbnail width', () => {
+  const detail = fs.readFileSync(path.resolve('src/pages/PromptDetailPage.tsx'), 'utf8');
+  assert.match(detail, /slug\.startsWith\('promptfeed-'\)[\s\S]*?max-w-\[380px\]/);
+  assert.match(detail, /<PromptPreviewImage[\s\S]*?priority/);
+});
+
+test('preview dimensions match the local assets and landscape cards retain a wide crop on mobile', async () => {
+  const dimensions = JSON.parse(fs.readFileSync(path.resolve('data/prompt-image-dimensions.json'), 'utf8'));
+  const feed = JSON.parse(fs.readFileSync(path.resolve('data/promptfeed-import.json'), 'utf8'));
+  const landscape = feed.filter((prompt) => dimensions[prompt.slug]?.width / dimensions[prompt.slug]?.height > 1.2);
+  assert.equal(landscape.length, 44);
+  assert.ok(landscape.every((prompt) => dimensions[prompt.slug].width === 380 && dimensions[prompt.slug].height === 254));
+  const component = fs.readFileSync(path.resolve('src/components/PromptPreviewImage.tsx'), 'utf8');
+  const cards = fs.readFileSync(path.resolve('src/components/PromptCard.tsx'), 'utf8');
+  const css = fs.readFileSync(path.resolve('src/index.css'), 'utf8');
+  assert.doesNotMatch(component, /width="1254"|height="1254"/);
+  assert.match(cards, /previewImageWidth[\s\S]*?prompt-card__image--landscape/);
+  assert.match(css, /\.prompt-card__image--landscape\s*\{\s*aspect-ratio:\s*3\s*\/\s*2/s);
 });

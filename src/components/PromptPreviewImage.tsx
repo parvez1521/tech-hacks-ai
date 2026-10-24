@@ -6,10 +6,12 @@ interface PromptPreviewImageProps {
   alt: string;
   className?: string;
   priority?: boolean;
+  width?: number;
+  height?: number;
 }
 
 /** Renders a local preview without exposing a browser broken-image icon. */
-export const PromptPreviewImage: React.FC<PromptPreviewImageProps> = ({ src, alt, className = '', priority = false }) => {
+export const PromptPreviewImage: React.FC<PromptPreviewImageProps> = ({ src, alt, className = '', priority = false, width, height }) => {
   const [failedSrc, setFailedSrc] = useState<string>();
   useEffect(() => setFailedSrc(undefined), [src]);
 
@@ -26,8 +28,8 @@ export const PromptPreviewImage: React.FC<PromptPreviewImageProps> = ({ src, alt
     <img
       src={src}
       alt={alt}
-      width="1254"
-      height="1254"
+      width={width}
+      height={height}
       loading={priority ? 'eager' : 'lazy'}
       fetchpriority={priority ? 'high' : 'auto'}
       decoding="async"
