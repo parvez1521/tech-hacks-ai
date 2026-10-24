@@ -15,6 +15,7 @@ interface PromptCardProps {
 
 export const PromptCard: React.FC<PromptCardProps> = ({ prompt }) => {
   const [copied, setCopied] = useState(false);
+  const [copyFailed, setCopyFailed] = useState(false);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     const rect = e.currentTarget.getBoundingClientRect();
@@ -26,6 +27,7 @@ export const PromptCard: React.FC<PromptCardProps> = ({ prompt }) => {
     e.preventDefault();
     e.stopPropagation();
     const success = await copyText(prompt.promptText);
+    setCopyFailed(!success);
     if (success) { recordPromptCopy(prompt.slug); setCopied(true); setTimeout(() => setCopied(false), 2000); }
   };
 
@@ -46,7 +48,7 @@ export const PromptCard: React.FC<PromptCardProps> = ({ prompt }) => {
     >
       <div className="relative z-10">
         <Link to={`/prompt-library/${prompt.slug}`} className="prompt-card__image-link" aria-label={`Open ${prompt.title}`} tabIndex={-1}>
-          <PromptPreviewImage className="prompt-card__image" src={prompt.previewImage} alt={prompt.previewImageAlt || `${prompt.title} prompt preview`} />
+          <PromptPreviewImage className={`prompt-card__image${prompt.previewImageWidth && prompt.previewImageHeight && prompt.previewImageWidth / prompt.previewImageHeight > 1.2 ? ' prompt-card__image--landscape' : ''}`} src={prompt.previewImage} alt={prompt.previewImageAlt || `${prompt.title} prompt preview`} width={prompt.previewImageWidth} height={prompt.previewImageHeight} />
           <span className="prompt-card__ratio">{prompt.aspectRatio || '1:1'}</span>
         </Link>
         <div className="px-5 pt-4">
@@ -120,10 +122,13 @@ export const PromptCard: React.FC<PromptCardProps> = ({ prompt }) => {
           ) : (
             <>
               <Copy className="w-3.5 h-3.5" />
-              <span>Copy Prompt</span>
+              <span>{copyFailed ? 'Try again' : 'Copy Prompt'}</span>
             </>
           )}
         </button>
+        <span role="status" aria-live="polite" className={copyFailed ? 'ml-2 text-[11px] text-rose-700 dark:text-rose-300' : 'sr-only'}>
+          {copyFailed ? 'Clipboard unavailable. Open details to copy.' : ''}
+        </span>
 
         <Link
           to={`/prompt-library/${prompt.slug}`}

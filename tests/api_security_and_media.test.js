@@ -5,6 +5,7 @@ import { PassThrough } from 'node:stream';
 import transcribeHandler from '../api/transcribe.js';
 import submissionsHandler from '../api/submissions.js';
 import discoveriesHandler from '../api/discoveries.js';
+import chatHandler from '../api/chat.js';
 import { ADMIN_TOKEN, isAuthorized } from '../server/submissionsStore.js';
 
 function createMockResponse() {
@@ -44,6 +45,26 @@ function createMultipartRequest({ language = 'auto', filename = 'sample.mp3', mi
 }
 
 describe('API security and production media boundaries', () => {
+  test('chat applies a per-instance request limit before making provider calls', async () => {
+    const originalGroq = process.env.GROQ_API_KEY;
+    const ip = `chat-test:${Date.now()}`;
+    try {
+      delete process.env.GROQ_API_KEY;
+      for (let attempt = 0; attempt < 5; attempt += 1) {
+        const res = createMockResponse();
+        await chatHandler({ method: 'POST', headers: { 'x-vercel-forwarded-for': ip }, body: { message: 'hello' } }, res);
+        assert.equal(res.statusCode, 200);
+      }
+      const limited = createMockResponse();
+      await chatHandler({ method: 'POST', headers: { 'x-vercel-forwarded-for': ip }, body: { message: 'hello' } }, limited);
+      assert.equal(limited.statusCode, 429);
+      assert.equal(limited.headers['Retry-After'], '600');
+    } finally {
+      if (originalGroq === undefined) delete process.env.GROQ_API_KEY;
+      else process.env.GROQ_API_KEY = originalGroq;
+    }
+  });
+
   test('production/serverless admin authentication fails closed without an explicit secret', () => {
     const originalVercel = process.env.VERCEL;
     const originalSecret = process.env.ADMIN_SECRET;

@@ -174,7 +174,9 @@ describe('Phase 25: Premium UX, Scroll Reveal & Smart Welcome', () => {
   it('Hero section (Section 1) does NOT have reveal-section class', () => {
     const src = read('src/pages/HomePage.tsx');
     // The first section tag should be the hero with no reveal-section
-    const heroSection = src.slice(src.indexOf('<section className="hero-shell'), src.indexOf('data-testid="catalog-trust-strip"'));
+    const heroStart = src.indexOf('<section className="hero-shell');
+    const heroEnd = src.indexOf('</section>', heroStart);
+    const heroSection = src.slice(heroStart, heroEnd);
     assert.ok(
       !heroSection.includes('reveal-section'),
       'Hero section (above fold) should NOT have scroll-reveal applied'
@@ -191,7 +193,10 @@ describe('Phase 25: Premium UX, Scroll Reveal & Smart Welcome', () => {
     assert.ok(src.includes('<ThemeToggle compact />'), 'Mobile theme control is rendered');
 
     const toggleSrc = read('src/components/ThemeToggle.tsx');
-    assert.ok(toggleSrc.includes("aria-label={theme === 'dark' ? 'Dark' : 'Light'}"), 'Theme control name matches its visible state label');
+    assert.ok(toggleSrc.includes("aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}"), 'Theme control name announces the destination theme');
+    assert.ok(toggleSrc.includes("{theme === 'dark' ? 'Light Mode' : 'Dark Mode'}"), 'Visible theme label names the destination theme');
+    assert.ok(toggleSrc.includes("{theme === 'dark' ? <Sun"), 'Icon shows the destination theme');
+    assert.ok(toggleSrc.includes('className="theme-control__arrow"') && toggleSrc.includes('aria-hidden="true"'), 'Decorative arrow is present and hidden from assistive technology');
     assert.ok(toggleSrc.includes('title={`Switch to'), 'Theme control exposes its next action as a tooltip');
     assert.ok(toggleSrc.includes('data-testid={compact ?'), 'Theme control has desktop/mobile test hooks');
   });

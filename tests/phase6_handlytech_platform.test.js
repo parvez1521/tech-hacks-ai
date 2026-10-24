@@ -93,7 +93,7 @@ describe('Phase 6: Homepage Redesign & HandlyTech Platform Integration', () => {
     const html = renderClean(React.createElement(ssrModule.App));
 
     // Hero Section & Universal Search
-    assert.ok(html.includes("Stop paying for AI tools you don't need.") || html.includes("Stop paying for AI tools you don&#x27;t need."), 'Hero headline present');
+    assert.ok(html.includes('id="home-hero-heading"') && ['Another AI tool?', 'Sure.', 'Another Subscription?', 'Nope.'].every((line) => html.includes(line)), 'Hero headline present as four approved lines');
     assert.ok(html.includes('Search free AI tools, open-source alternatives, prompts, and utilities...'), 'Universal search bar placeholder');
     assert.ok(!html.includes('Make AI videos') && !html.includes('Replace proprietary SaaS'), 'Crowded quick-intent chips are removed');
 
@@ -118,9 +118,11 @@ describe('Phase 6: Homepage Redesign & HandlyTech Platform Integration', () => {
     assert.ok(html.includes('Text Inspector &amp; Case Converter') || html.includes('Text Inspector'), 'Text utility preview');
     assert.ok(html.includes('Vector QR Code Generator'), 'QR code generator utility preview');
 
-    // Section 6: Guides & Prompts
-    assert.ok(html.includes('Step-by-Step AI Guides'), 'Guides section heading');
-    assert.ok(html.includes('Curated Prompt Recipes'), 'Prompt recipes heading');
+    // Section 6: Prompt Library workflow and portrait previews
+    assert.ok(html.includes('Step-by-step prompt guide'), 'Homepage prompt workflow heading');
+    assert.ok(html.includes('Browse the Prompt Library'), 'Prompt Library CTA');
+    assert.ok(html.includes('Cinematic Rooftop Portrait with Wind and a Slow Push-In'), 'Featured woman prompt preview');
+    assert.ok(html.includes('Dramatic Vertigo Dolly Zoom Character Reveal'), 'Featured man prompt source route');
 
     // Section 7: Discovery callout
     assert.ok(html.includes('Find tools worth trying'), 'Discovery callout');
@@ -137,7 +139,7 @@ describe('Phase 6: Homepage Redesign & HandlyTech Platform Integration', () => {
     assert.ok(html.includes('Discover Best AI Tools &amp; Generative Platforms') || html.includes('Discover Best AI Tools & Generative Platforms'), 'AI directory title');
     assert.ok(html.includes('Runway Gen-3 Alpha'), 'Renders Runway');
     assert.ok(html.includes('Cursor Editor'), 'Renders Cursor');
-    assert.ok(html.includes('Claude 3.5 Sonnet'), 'Renders Claude');
+    assert.ok(html.includes('Claude'), 'Renders Claude');
     assert.ok(html.includes('href="/ai-tools/cursor"'), 'Links to /ai-tools/cursor');
   });
 
@@ -151,6 +153,37 @@ describe('Phase 6: Homepage Redesign & HandlyTech Platform Integration', () => {
     assert.ok(html.includes('https://cursor.com'), 'Contains link to cursor.com');
     assert.ok(html.includes('Visit Official Website'), 'Official website link text');
     assert.ok(html.includes('Pricing Structure'), 'Pricing structure box');
+  });
+
+  test('KIE AI card and detail CTAs use the affiliate URL with disclosure while preserving canonical URLs', async () => {
+    const affiliateUrl = 'https://kie.ai?ref=db7baff2ed7877243971150d4ea6ade2';
+    const kie = aiToolsData.find((tool) => tool.slug === 'kie-ai');
+    assert.ok(kie, 'KIE AI exists');
+    assert.equal(kie.websiteUrl, 'https://kie.ai', 'Official website remains canonical');
+    assert.equal(kie.affiliateUrl, affiliateUrl, 'Affiliate destination matches exactly');
+    assert.equal(kie.pricingSourceUrl, 'https://kie.ai/pricing', 'Official pricing source remains unchanged');
+
+    ssrModule = await import('../dist/test-ssr.js');
+    setupMockBrowser('https://openalternative.co/ai-tools?q=KIE');
+    const directoryHtml = renderClean(React.createElement(ssrModule.App));
+    assert.match(directoryHtml, new RegExp(`href="${affiliateUrl.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}"[^>]*rel="noopener noreferrer sponsored nofollow"`));
+    assert.match(directoryHtml, /Affiliate link · SwitchRoute may earn a commission from qualifying activity\./);
+
+    setupMockBrowser('https://openalternative.co/ai-tools?q=Cursor');
+    const otherToolHtml = renderClean(React.createElement(ssrModule.App));
+    assert.match(otherToolHtml, /href="https:\/\/cursor\.com"[^>]*rel="noopener noreferrer"/);
+
+    setupMockBrowser('https://openalternative.co/ai-tools/kie-ai');
+    const detailHtml = renderClean(React.createElement(ssrModule.App));
+    assert.match(detailHtml, new RegExp(`href="${affiliateUrl.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}"[^>]*rel="noopener noreferrer sponsored nofollow"`));
+    assert.match(detailHtml, /Try KIE AI/);
+    assert.match(detailHtml, /https:\/\/kie\.ai\/pricing/);
+
+    setupMockBrowser('https://openalternative.co/compare?tools=kie-ai,cursor');
+    const comparisonHtml = renderClean(React.createElement(ssrModule.App));
+    assert.match(comparisonHtml, new RegExp(`href="${affiliateUrl.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}"[^>]*rel="noopener noreferrer sponsored nofollow"`));
+    assert.match(comparisonHtml, /https:\/\/cursor\.com/);
+    assert.match(comparisonHtml, /Affiliate link · SwitchRoute may earn a commission from qualifying activity\./);
   });
 
   test('Unknown AI tool slug renders 404 state', async () => {

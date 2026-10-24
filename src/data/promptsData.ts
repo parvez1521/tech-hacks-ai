@@ -137,7 +137,7 @@ export const promptsData: PromptItem[] = [
     sourceCreator: 'SwitchRoute editorial team',
     promptProvenance: 'original',
     featured: true,
-    featuredOrder: 1,
+    featuredOrder: 2,
     createdAt: '2026-10-22T00:00:00.000Z',
   },
   {
@@ -164,7 +164,7 @@ export const promptsData: PromptItem[] = [
     sourceCreator: 'SwitchRoute editorial team',
     promptProvenance: 'original',
     featured: true,
-    featuredOrder: 2,
+    featuredOrder: 1,
     createdAt: '2026-10-22T00:00:00.000Z',
   },
   {

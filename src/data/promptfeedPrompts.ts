@@ -1,14 +1,15 @@
 import type { PromptItem } from '../types/index.ts';
+import imageDimensions from '../../data/prompt-image-dimensions.json' with { type: 'json' };
 
 type PromptFeedRecord = PromptItem & { rightsConfirmed?: boolean; status?: string };
+const PROMPTFEED_LICENSE_DISPLAY = 'MIT License — https://github.com/ClawLabsAI/awesome-verified-text-to-image-prompts; preserve the source copyright and license notice when redistributing.';
 let promptFeedPromise: Promise<PromptItem[]> | undefined;
 
-/** Load the licensed PromptFeed manifest as an async chunk instead of bloating the first page load. */
+/** Load the compact licensed PromptFeed runtime module only when a PromptFeed route is opened. */
 export function loadPromptFeedPrompts(): Promise<PromptItem[]> {
   if (!promptFeedPromise) {
-    promptFeedPromise = import('../../data/promptfeed-import.json').then((module) => {
-      const payload = module.default as PromptFeedRecord[] | { prompts?: PromptFeedRecord[] };
-      const records = Array.isArray(payload) ? payload : payload.prompts;
+    promptFeedPromise = import('../generated/promptfeedRuntime.generated.ts').then((module) => {
+      const records = module.default() as PromptFeedRecord[];
       if (!Array.isArray(records) || records.length === 0) throw new Error('PromptFeed manifest did not contain any prompt records.');
 
       const seenSlugs = new Set<string>();
@@ -19,8 +20,9 @@ export function loadPromptFeedPrompts(): Promise<PromptItem[]> {
         if (!record.slug.startsWith('promptfeed-') || !record.previewImage?.startsWith('/prompts/promptfeed/')) throw new Error(`PromptFeed preview and slug must use the PromptFeed namespace: ${record.slug}`);
         if (record.rightsStatus !== 'licensed' || !record.rightsLicense?.includes('MIT') || record.rightsConfirmed !== true) throw new Error(`PromptFeed license metadata is missing or invalid for ${record.slug}`);
         if (!record.sourceCreator || !record.sourceUrl?.startsWith('https://') || !record.attributionUrl?.startsWith('https://')) throw new Error(`PromptFeed attribution is incomplete for ${record.slug}`);
-        const { rightsConfirmed: _rightsConfirmed, status: _stagedStatus, ...prompt } = record;
-        return { ...prompt, status: 'published' as const };
+        const { rightsConfirmed: _rightsConfirmed, status: _stagedStatus, rightsLicense: _rightsLicense, ...prompt } = record;
+        const dimensions = imageDimensions[record.slug as keyof typeof imageDimensions];
+        return { ...prompt, rightsLicense: PROMPTFEED_LICENSE_DISPLAY, previewImageWidth: dimensions?.width || undefined, previewImageHeight: dimensions?.height || undefined, status: 'published' as const };
       });
     });
   }

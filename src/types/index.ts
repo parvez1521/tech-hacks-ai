@@ -105,6 +105,8 @@ export interface FilterState {
 export type PricingType = 'free' | 'freemium' | 'paid' | 'free-trial' | 'free-credits';
 
 export type FreeAccessType = 'open-source-local' | 'recurring-free' | 'limited-free' | 'free-credits' | 'none';
+export type VideoDiscoverySection = 'self-hosted' | 'open-weights' | 'browser-demos';
+export type AccountRequirement = 'required' | 'optional' | 'varies';
 
 export type GenerationTask =
   | 'text-to-video'
@@ -154,6 +156,7 @@ export interface AiTool {
   description: string;
   longDescription?: string;
   websiteUrl: string;
+  affiliateUrl?: string;
   category: string; // e.g. 'video', 'image', 'voice', 'assistants', 'writing', 'coding', 'automation', 'productivity', '3d', 'music'
   primaryCategory?: string;
   pricingType: PricingType;
@@ -185,6 +188,13 @@ export interface AiTool {
   requiresInstallation?: boolean;
   alternativesTo?: string[];
   subType?: 'standalone-tool' | 'model-access-platform';
+  videoDiscoverySections?: VideoDiscoverySection[];
+  modelWeightsUrl?: string;
+  relatedDemoUrl?: string;
+  relatedDemoName?: string;
+  licenseSummary?: string;
+  accessLabel?: string;
+  accountRequirement?: AccountRequirement;
   supportedModels?: string[];
   platformStatus?: 'live' | 'coming-soon' | 'preview';
   section?: 'ai' | 'community';
@@ -242,6 +252,9 @@ export interface PromptItem {
   previewImage?: string;
   /** Describes what is visibly present in the prompt preview. */
   previewImageAlt?: string;
+  /** Native pixel size, populated from the local image audit for stable, accurate rendering. */
+  previewImageWidth?: number;
+  previewImageHeight?: number;
   /** Editorial visual treatment to help users find a compatible recipe. */
   visualStyle?: string;
   aspectRatio?: string;
@@ -309,10 +322,12 @@ export interface UpdateItem {
 export interface AiFilterState {
   searchQuery: string;
   category: string | null;
+  alternativesTo?: string | null;
   pricingType: PricingType | 'all';
   freeAccessType?: FreeAccessType | 'all';
   sortBy: 'popular' | 'latest' | 'name_asc' | 'rating';
   page: number;
+  videoDiscoverySection?: VideoDiscoverySection | 'all';
 }
 
 export type OfferType =

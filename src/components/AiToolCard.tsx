@@ -4,6 +4,7 @@ import { Link } from '../router/Router';
 import { BookmarkButton } from './BookmarkButton';
 import { Star, ExternalLink, ArrowRight, Sparkles } from 'lucide-react';
 import { BrandLogo } from './BrandLogo';
+import { AffiliateDisclosure } from './AffiliateDisclosure';
 
 interface AiToolCardProps {
   tool: AiTool;
@@ -24,6 +25,14 @@ export const AiToolCard: React.FC<AiToolCardProps> = ({ tool }) => {
   };
 
   const getPricingBadge = () => {
+    if (tool.videoDiscoverySections?.includes('open-weights')) {
+      return (
+        <span className="px-2 py-0.5 rounded text-[11px] font-semibold bg-violet-50 text-violet-800 border border-violet-200 dark:bg-violet-500/10 dark:text-violet-300 dark:border-violet-500/20">
+          Open Weights
+        </span>
+      );
+    }
+
     if (tool.freeAccessType === 'open-source-local' || tool.isSelfHostable) {
       return (
         <span className="px-2 py-0.5 rounded text-[11px] font-semibold bg-emerald-50 text-emerald-800 border border-emerald-200 dark:bg-emerald-500/10 dark:text-emerald-300 dark:border-emerald-500/20">
@@ -126,6 +135,12 @@ export const AiToolCard: React.FC<AiToolCardProps> = ({ tool }) => {
           {tool.tagline}
         </p>
 
+        {tool.accessLabel && (
+          <p className="mb-3 rounded-md border border-primary/15 bg-primary/5 px-2.5 py-1.5 text-[11px] font-medium leading-snug text-secondary-foreground">
+            {tool.accessLabel}
+          </p>
+        )}
+
         {/* Feature Tags */}
         <div className="flex flex-wrap gap-1.5 mb-4">
           {tool.features.slice(0, 3).map((f) => (
@@ -153,23 +168,29 @@ export const AiToolCard: React.FC<AiToolCardProps> = ({ tool }) => {
           </span>
         </div>
 
-        <div className="flex items-center gap-2">
+        <div className="flex flex-wrap items-center justify-end gap-1.5">
           <Link
              to={detailUrl}
-            className="inline-flex items-center gap-1 text-primary font-medium hover:text-primary-hover group-hover:translate-x-0.5 transition-transform"
+            className="inline-flex items-center gap-1 text-primary font-medium hover:text-primary-hover group-hover:translate-x-0.5 transition-transform focus-visible:outline-none focus-visible:underline"
           >
             <span>Explore</span>
             <ArrowRight className="w-3.5 h-3.5" />
           </Link>
-          <a
-            href={tool.websiteUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="p-1 rounded text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
-            title={`Visit ${tool.name} website`}
-          >
-            <ExternalLink className="w-3.5 h-3.5" />
-          </a>
+          <div className="flex flex-col items-end gap-1">
+            <a
+              href={tool.affiliateUrl || tool.websiteUrl}
+              target="_blank"
+              rel={tool.affiliateUrl ? 'noopener noreferrer sponsored nofollow' : 'noopener noreferrer'}
+              className="rounded-md border border-border px-2 py-1 text-[11px] text-secondary-foreground hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+              aria-label={`Open ${tool.name} ${tool.affiliateUrl ? 'affiliate link' : tool.websiteUrl.includes('github.com') ? 'official repository' : 'official website'}`}
+            >
+              <span>{tool.affiliateUrl ? `Try ${tool.name}` : tool.websiteUrl.includes('github.com') ? 'Source' : 'Website'}</span>
+            </a>
+            {tool.affiliateUrl && <AffiliateDisclosure />}
+          </div>
+          {tool.openSourceRepoUrl && tool.openSourceRepoUrl !== tool.websiteUrl && <a href={tool.openSourceRepoUrl} target="_blank" rel="noopener noreferrer" className="rounded-md border border-border px-2 py-1 text-[11px] text-secondary-foreground hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary" aria-label={`${tool.name} source repository`}>Source</a>}
+          {tool.modelWeightsUrl && <a href={tool.modelWeightsUrl} target="_blank" rel="noopener noreferrer" className="rounded-md border border-border px-2 py-1 text-[11px] text-secondary-foreground hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary" aria-label={`${tool.name} model weights`}>Weights</a>}
+          {tool.relatedDemoUrl && <a href={tool.relatedDemoUrl} target="_blank" rel="noopener noreferrer" className="rounded-md border border-border px-2 py-1 text-[11px] text-secondary-foreground hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary" aria-label={`Open ${tool.relatedDemoName || `${tool.name} related browser demo`} in a new tab`}>Demo</a>}
         </div>
       </div>
     </div>

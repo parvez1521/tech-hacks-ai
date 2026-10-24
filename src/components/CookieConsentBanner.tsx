@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link } from '../router/Router';
 import { Cookie, X, Check, ShieldCheck, Settings2, Info } from 'lucide-react';
 
@@ -45,6 +45,44 @@ export const CookieConsentBanner: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [analytics, setAnalytics] = useState(false);
   const [advertising, setAdvertising] = useState(false);
+  const modalRef = useRef<HTMLDivElement>(null);
+  const modalCloseRef = useRef<HTMLButtonElement>(null);
+  const focusReturnRef = useRef<HTMLElement | null>(null);
+  const restoreFocusAfterCloseRef = useRef(false);
+
+  const openModal = (trigger: HTMLElement | null = null) => {
+    focusReturnRef.current = trigger || (document.activeElement instanceof HTMLElement ? document.activeElement : null);
+    setIsModalOpen(true);
+    window.requestAnimationFrame(() => modalCloseRef.current?.focus());
+  };
+
+  const closeModal = () => {
+    restoreFocusAfterCloseRef.current = true;
+    setIsModalOpen(false);
+  };
+
+  const handleDialogKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
+    if (event.key === 'Escape') {
+      event.preventDefault();
+      closeModal();
+      return;
+    }
+    if (event.key !== 'Tab' || !modalRef.current) return;
+
+    const focusable = Array.from(modalRef.current.querySelectorAll<HTMLElement>(
+      'button:not([disabled]), input:not([disabled]), a[href], [tabindex]:not([tabindex="-1"])'
+    )).filter((element) => element.offsetParent !== null);
+    if (!focusable.length) return;
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+    if (event.shiftKey && document.activeElement === first) {
+      event.preventDefault();
+      last.focus();
+    } else if (!event.shiftKey && document.activeElement === last) {
+      event.preventDefault();
+      first.focus();
+    }
+  };
 
   useEffect(() => {
     // Check if user already set preferences
@@ -57,13 +95,22 @@ export const CookieConsentBanner: React.FC = () => {
   }, []);
 
   useEffect(() => {
+    if (isModalOpen || !restoreFocusAfterCloseRef.current) return;
+    restoreFocusAfterCloseRef.current = false;
+    const returnTarget = focusReturnRef.current?.isConnected
+      ? focusReturnRef.current
+      : document.querySelector<HTMLElement>('[data-cookie-consent-customize]');
+    returnTarget?.focus();
+  }, [isModalOpen, isOpen]);
+
+  useEffect(() => {
     const handleOpenModal = () => {
       const existing = getCookiePreferences();
       if (existing) {
         setAnalytics(existing.analytics);
         setAdvertising(existing.advertising);
       }
-      setIsModalOpen(true);
+      openModal();
     };
 
     window.addEventListener('open_cookie_preferences_modal', handleOpenModal);
@@ -81,7 +128,7 @@ export const CookieConsentBanner: React.FC = () => {
     setAnalytics(true);
     setAdvertising(true);
     setIsOpen(false);
-    setIsModalOpen(false);
+    closeModal();
   };
 
   const handleRejectNonEssential = () => {
@@ -95,7 +142,7 @@ export const CookieConsentBanner: React.FC = () => {
     setAnalytics(false);
     setAdvertising(false);
     setIsOpen(false);
-    setIsModalOpen(false);
+    closeModal();
   };
 
   const handleSaveCustom = () => {
@@ -107,7 +154,7 @@ export const CookieConsentBanner: React.FC = () => {
     };
     saveCookiePreferences(prefs);
     setIsOpen(false);
-    setIsModalOpen(false);
+    closeModal();
   };
 
   return (
@@ -117,49 +164,50 @@ export const CookieConsentBanner: React.FC = () => {
         <div
           role="region"
           aria-label="Cookie consent banner"
-          className="fixed bottom-20 left-4 right-4 sm:bottom-6 sm:left-6 sm:right-auto sm:max-w-md z-40 p-5 rounded-2xl border border-border bg-card/95 backdrop-blur-md shadow-2xl shadow-black/40 animate-slide-up text-xs space-y-3"
+          className="fixed bottom-20 left-3 right-3 box-border max-h-[min(35vh,18rem)] overflow-y-auto overscroll-contain sm:bottom-6 sm:left-6 sm:right-auto sm:w-[26rem] sm:max-w-[calc(100vw-3rem)] sm:max-h-[min(70vh,32rem)] z-40 p-3 sm:p-4 rounded-2xl border border-border bg-card/95 backdrop-blur-md shadow-2xl shadow-black/40 animate-slide-up text-xs space-y-2 sm:space-y-3"
         >
           <div className="flex items-start justify-between gap-3">
-            <div className="flex items-center gap-2 text-primary font-bold text-sm">
+            <div className="flex items-center gap-2 text-primary font-bold text-xs sm:text-sm">
               <Cookie className="w-4 h-4" />
               <span>Cookie &amp; Privacy Notice</span>
             </div>
             <button
               type="button"
               onClick={handleRejectNonEssential}
-              className="text-muted-foreground hover:text-foreground p-1 rounded hover:bg-muted"
+              className="min-h-11 min-w-11 inline-flex shrink-0 items-center justify-center text-muted-foreground hover:text-foreground rounded hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-card"
               aria-label="Close and reject non-essential cookies"
             >
               <X className="w-3.5 h-3.5" />
             </button>
           </div>
 
-          <p className="text-secondary-foreground leading-relaxed">
-            We use cookies and client-side storage to remember your UI preferences, measure site traffic, and support independent research via contextual advertising in accordance with our{' '}
+          <p className="text-secondary-foreground text-[11px] leading-[1.4]">
+            We use cookies and local storage to remember your preferences, measure site traffic, and support independent research with contextual advertising. See our{' '}
             <Link to="/privacy" className="text-primary hover:underline font-medium">
               Privacy Policy
             </Link>.
           </p>
 
-          <div className="flex flex-wrap items-center gap-2 pt-1">
+          <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 pt-0.5 sm:pt-1">
             <button
               type="button"
               onClick={handleAcceptAll}
-              className="px-3.5 py-1.5 rounded-lg bg-primary text-primary-foreground font-semibold hover:bg-primary-hover shadow-sm transition-colors text-xs"
+              className="min-h-11 px-3 rounded-lg bg-primary text-primary-foreground font-semibold hover:bg-primary-hover shadow-sm transition-colors text-[11px] sm:text-xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-card"
             >
               Accept All
             </button>
             <button
               type="button"
               onClick={handleRejectNonEssential}
-              className="px-3.5 py-1.5 rounded-lg bg-muted border border-border text-foreground font-medium hover:bg-muted/80 transition-colors text-xs"
+              className="min-h-11 px-3 rounded-lg bg-muted border border-border text-foreground font-medium hover:bg-muted/80 transition-colors text-[11px] sm:text-xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-card"
             >
               Essential Only
             </button>
             <button
               type="button"
-              onClick={() => setIsModalOpen(true)}
-              className="px-2.5 py-1.5 text-muted-foreground hover:text-foreground underline text-[11px] ml-auto"
+              onClick={(event) => openModal(event.currentTarget)}
+              data-cookie-consent-customize
+              className="min-h-11 px-2.5 text-muted-foreground hover:text-foreground underline text-[11px] ml-auto focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-card rounded-md"
             >
               Customize
             </button>
@@ -173,9 +221,10 @@ export const CookieConsentBanner: React.FC = () => {
           role="dialog"
           aria-modal="true"
           aria-labelledby="cookie-preferences-title"
+          onKeyDown={handleDialogKeyDown}
           className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 animate-fade-in"
         >
-          <div className="max-w-lg w-full rounded-2xl border border-border bg-card p-6 shadow-2xl space-y-5 text-xs max-h-[90vh] overflow-y-auto">
+          <div ref={modalRef} className="max-w-lg w-full rounded-2xl border border-border bg-card p-6 shadow-2xl space-y-5 text-xs max-h-[90vh] overflow-y-auto">
             <div className="flex items-center justify-between pb-3 border-b border-border">
               <div className="flex items-center gap-2">
                 <Settings2 className="w-4 h-4 text-primary" />
@@ -184,8 +233,9 @@ export const CookieConsentBanner: React.FC = () => {
                 </h2>
               </div>
               <button
+                ref={modalCloseRef}
                 type="button"
-                onClick={() => setIsModalOpen(false)}
+                onClick={closeModal}
                 className="text-muted-foreground hover:text-foreground p-1 rounded hover:bg-muted"
                 aria-label="Close modal"
               >
@@ -227,11 +277,12 @@ export const CookieConsentBanner: React.FC = () => {
                 <label className="relative inline-flex items-center cursor-pointer shrink-0 mt-1">
                   <input
                     type="checkbox"
+                    aria-label="Allow analytics and site diagnostics"
                     checked={analytics}
                     onChange={(e) => setAnalytics(e.target.checked)}
                     className="sr-only peer"
                   />
-                  <div className="w-9 h-5 bg-muted peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-primary"></div>
+                  <div className="w-9 h-5 bg-muted peer-focus:outline-none peer-focus-visible:ring-2 peer-focus-visible:ring-primary peer-focus-visible:ring-offset-2 peer-focus-visible:ring-offset-card rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-primary"></div>
                 </label>
               </div>
 
@@ -248,11 +299,12 @@ export const CookieConsentBanner: React.FC = () => {
                 <label className="relative inline-flex items-center cursor-pointer shrink-0 mt-1">
                   <input
                     type="checkbox"
+                    aria-label="Allow advertising and personalization"
                     checked={advertising}
                     onChange={(e) => setAdvertising(e.target.checked)}
                     className="sr-only peer"
                   />
-                  <div className="w-9 h-5 bg-muted peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-primary"></div>
+                  <div className="w-9 h-5 bg-muted peer-focus:outline-none peer-focus-visible:ring-2 peer-focus-visible:ring-primary peer-focus-visible:ring-offset-2 peer-focus-visible:ring-offset-card rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-primary"></div>
                 </label>
               </div>
             </div>

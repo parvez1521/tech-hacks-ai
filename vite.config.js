@@ -252,15 +252,6 @@ export default defineConfig({
           if (id.includes('src/data/')) {
             return 'catalog-data';
           }
-          if (id.includes('src/pages/') && id.includes('Moderation')) {
-            return 'app-admin';
-          }
-          if (id.includes('src/pages/') && id.includes('Free')) {
-            return 'app-free-tools';
-          }
-          if (id.includes('src/pages/')) {
-            return 'app-pages';
-          }
         },
       },
     },

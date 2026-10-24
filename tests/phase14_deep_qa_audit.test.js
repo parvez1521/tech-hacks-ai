@@ -87,7 +87,7 @@ describe('Phase 14: Deep QA, Production Readiness & Trust Audit', () => {
       setupMockBrowser('https://switchroute.in/');
       const html = renderClean(React.createElement(ssrModule.App));
 
-      assert.ok(html.includes("Stop paying for AI tools you don't need.") || html.includes("Stop paying for AI tools you don&#x27;t need."), 'Homepage H1 headline');
+      assert.ok(html.includes('id="home-hero-heading"') && ['Another AI tool?', 'Sure.', 'Another Subscription?', 'Nope.'].every((line) => html.includes(line)), 'Homepage H1 renders the four approved headline lines');
       assert.ok(html.includes('What do you want to build or replace today?'), 'Goal-driven discovery section');
       assert.ok(html.includes("Editor&#x27;s Picks: Benchmark-Leading Tools") || html.includes("Editor's Picks: Benchmark-Leading Tools"), 'Curated showcase section');
       assert.ok(html.includes('Explore Top Generative AI Platforms'), 'Trending AI models section');
@@ -106,7 +106,7 @@ describe('Phase 14: Deep QA, Production Readiness & Trust Audit', () => {
 
       setupMockBrowser('https://switchroute.in/ai-tools/claude');
       const detailHtml = renderClean(React.createElement(ssrModule.App));
-      assert.ok(detailHtml.includes('Claude 3.5 Sonnet'), 'Claude title in detail');
+      assert.ok(detailHtml.includes('Claude'), 'Claude title in detail');
       assert.ok(detailHtml.includes('Pricing Structure &amp; Model Access') || detailHtml.includes('Pricing Structure & Model Access'), 'Pricing structure breakdown');
       assert.ok(detailHtml.includes('https://www.anthropic.com/pricing'), 'Official pricing URL link');
     });
@@ -372,7 +372,7 @@ describe('Phase 14: Deep QA, Production Readiness & Trust Audit', () => {
         id: 'claude',
         type: 'ai',
         slug: 'claude',
-        name: 'Claude 3.5 Sonnet',
+        name: 'Claude',
         tagline: 'Frontier AI model',
       });
       assert.strictEqual(getBookmarks().length, 2, '2 bookmarks stored');

@@ -1,5 +1,42 @@
 import type { ProprietaryTool } from '../types/index.ts';
 
+const videoProprietaryTargets: ProprietaryTool[] = [
+  { id: 'invideo-ai', name: 'InVideo AI', slug: 'invideo-ai', tagline: 'Hosted script-to-video editor', description: 'Cloud video creation service for prompt/script driven videos and editing.', websiteUrl: 'https://invideo.io/ai/', category: 'video-creation', iconLetter: 'IV', iconBgColor: '#5b3df5' },
+  { id: 'pictory', name: 'Pictory', slug: 'pictory', tagline: 'Hosted script and article to video platform', description: 'Cloud video workflow focused on turning scripts and long-form content into narrated videos.', websiteUrl: 'https://pictory.ai/', category: 'video-creation', iconLetter: 'PI', iconBgColor: '#6d28d9' },
+  { id: 'synthesia', name: 'Synthesia', slug: 'synthesia', tagline: 'Hosted AI presenter and avatar video platform', description: 'Cloud presenter-video workflow with generated avatars and narration.', websiteUrl: 'https://www.synthesia.io/', category: 'video-creation', iconLetter: 'SY', iconBgColor: '#2563eb' },
+  { id: 'fliki', name: 'Fliki', slug: 'fliki', tagline: 'Hosted text-to-video and narration platform', description: 'Cloud video creation workflow combining scripts, voice and visuals.', websiteUrl: 'https://fliki.ai/', category: 'video-creation', iconLetter: 'FL', iconBgColor: '#0d9488' },
+  { id: 'opus-clip', name: 'Opus Clip', slug: 'opus-clip', tagline: 'Hosted long-video repurposing and clipping service', description: 'Cloud workflow that finds and formats short clips from longer videos.', websiteUrl: 'https://www.opus.pro/', category: 'video-creation', iconLetter: 'OC', iconBgColor: '#7c3aed' },
+  { id: 'klap', name: 'Klap', slug: 'klap', tagline: 'Hosted long-video to social clips service', description: 'Cloud tool for turning long videos into short social clips.', websiteUrl: 'https://klap.app/', category: 'video-creation', iconLetter: 'KL', iconBgColor: '#ec4899' },
+  { id: 'runway', name: 'Runway', slug: 'runway', tagline: 'Hosted generative video platform', description: 'Cloud text/image-to-video and creative video generation workflows.', websiteUrl: 'https://runwayml.com/', category: 'video-creation', iconLetter: 'R', iconBgColor: '#111827' },
+  { id: 'kling-ai', name: 'Kling AI', slug: 'kling-ai', tagline: 'Hosted generative video service', description: 'Cloud video-generation workflows from text and reference images.', websiteUrl: 'https://klingai.com/', category: 'video-creation', iconLetter: 'K', iconBgColor: '#e11d48' },
+  { id: 'pika', name: 'Pika', slug: 'pika', tagline: 'Hosted creative video generation platform', description: 'Cloud generative video and effects workflows.', websiteUrl: 'https://pika.art/', category: 'video-creation', iconLetter: 'PK', iconBgColor: '#ec4899' },
+  { id: 'luma-dream-machine', name: 'Luma Dream Machine', slug: 'luma-dream-machine', tagline: 'Hosted generative video platform', description: 'Cloud text/image-to-video generation and creative workflows.', websiteUrl: 'https://lumalabs.ai/dream-machine', category: 'video-creation', iconLetter: 'L', iconBgColor: '#090a0f' },
+].map((tool) => ({
+  ...tool,
+  migrationDrivers: ['Compare recurring hosted generation costs with local setup and inference costs.', 'Keep model, license, queue and hardware tradeoffs visible before switching.', 'Retain control over source media and review usage rights before repurposing footage.'],
+  selectionCriteria: ['Choose by task overlap; these recommendations may be partial alternatives.', 'Compare hosted convenience with local hardware, setup and model-specific terms.', 'Check whether each recommendation supports the required narration, avatar, editing or generative-video task.'],
+  hostedCostNote: 'A self-hosted application or downloadable model does not include a hosted generation quota. Local compute, API keys, provider credits, hardware and media licensing may carry separate costs.',
+  replacementsOverview: 'The options below cover related workflows, not guaranteed feature parity. Review each card for whether it opens a hosted service, local app or model weights.',
+}));
+
+const additionalProprietaryTargets: ProprietaryTool[] = [
+  {
+    id: 'github-copilot',
+    name: 'GitHub Copilot',
+    slug: 'github-copilot',
+    tagline: 'AI coding assistant integrated with GitHub and supported editors',
+    description: 'Hosted code completion and agent assistance for developers using GitHub and supported IDEs.',
+    websiteUrl: 'https://github.com/features/copilot',
+    category: 'developer-tools',
+    iconLetter: 'GC',
+    iconBgColor: '#24292f',
+    migrationDrivers: ['Compare subscription costs with open coding tools and model choice.', 'Review editor integration, model access, privacy controls, and repository workflow requirements.', 'Evaluate whether hosted completions or local/BYO-model control better fit the team.'],
+    selectionCriteria: ['Check whether the alternative provides inline completion, chat, or repository-aware editing.', 'Compare hosted model access with BYO API key or local inference setup.', 'Test language coverage, IDE support, team policy controls, and code privacy.'],
+    hostedCostNote: 'Open alternatives may require local hardware, provider API credentials, or paid model usage; similar workflows do not guarantee feature parity.',
+    replacementsOverview: 'These recommendations cover overlapping coding-assistant workflows. Review each product’s integration and model requirements before switching.',
+  },
+];
+
 export const proprietaryTools: ProprietaryTool[] = [
   {
     id: 'firebase',
@@ -360,4 +397,6 @@ export const proprietaryTools: ProprietaryTool[] = [
     replacementsOverview:
       'Perplexica delivers an open-source AI answer engine using SearXNG and local or cloud LLMs with live citations. Khoj extends search to your personal notes and documents alongside live web retrieval.',
   },
+  ...videoProprietaryTargets,
+  ...additionalProprietaryTargets,
 ];

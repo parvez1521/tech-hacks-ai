@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { useRouter, Link, safeScrollTo } from '../router/Router';
 import { getProprietaryToolBySlug, getToolsForProprietary, getCategoryBySlug } from '../services/catalogService';
-import { getAllGuides } from '../services/aiCatalogService';
+import { getAiToolsForProprietary, getAllGuides } from '../services/aiCatalogService';
 import { ReplacementCard } from '../components/ReplacementCard';
+import { AiToolCard } from '../components/AiToolCard';
 import { GuideCard } from '../components/GuideCard';
 import { Pagination } from '../components/Pagination';
 import { EmptyState } from '../components/EmptyState';
@@ -39,7 +40,9 @@ export const AlternativeDetailPage: React.FC = () => {
 
   // All open source tools mapped to this proprietary target
   const allReplacements = getToolsForProprietary(proprietary.slug);
+  const allAiRecommendations = getAiToolsForProprietary(proprietary.slug);
   const category = getCategoryBySlug(proprietary.category);
+  const isVideoTarget = proprietary.category === 'video-creation';
 
   // Distinct licenses among mapped replacements
   const availableLicenses = Array.from(new Set(allReplacements.map((t) => t.license))).sort();
@@ -52,6 +55,7 @@ export const AlternativeDetailPage: React.FC = () => {
 
   // Filter and sort replacements
   let filteredReplacements = [...allReplacements];
+  let filteredAiRecommendations = [...allAiRecommendations];
 
   if (searchQuery.trim()) {
     const q = searchQuery.toLowerCase().trim();
@@ -62,6 +66,10 @@ export const AlternativeDetailPage: React.FC = () => {
       const matchStack = tool.techStack.some((s) => s.toLowerCase().includes(q));
       const matchLicense = tool.license.toLowerCase().includes(q);
       return matchName || matchTagline || matchDesc || matchStack || matchLicense;
+    });
+    filteredAiRecommendations = filteredAiRecommendations.filter((tool) => {
+      const text = [tool.name, tool.tagline, tool.description, tool.bestFor, tool.executionEnvironment, tool.hardwareRequirements, tool.licenseSummary, tool.accessLabel, ...tool.tags, ...(tool.features || [])].join(' ').toLowerCase();
+      return text.includes(q);
     });
   }
 
@@ -152,18 +160,22 @@ export const AlternativeDetailPage: React.FC = () => {
         <div className="lg:col-span-2">
           <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full border border-primary/30 bg-[#EAF2FF] text-primary text-xs font-semibold uppercase tracking-wider mb-3">
             <Replace className="w-3.5 h-3.5 text-primary" />
-            <span>Open Source Replacements</span>
+            <span>{isVideoTarget ? 'Video workflow alternatives' : 'Open Source Replacements'}</span>
           </div>
           <h1 className="text-2xl sm:text-4xl font-extrabold text-foreground tracking-tight mb-3">
-            Open Source {proprietary.name} Alternatives
+            {isVideoTarget ? `Video generation alternatives to ${proprietary.name}` : `Open Source ${proprietary.name} Alternatives`}
           </h1>
           <p className="text-sm sm:text-base text-secondary-foreground leading-relaxed mb-4">
-            Discover community-maintained, privacy-focused open source software tools that can replace {proprietary.name}. Save subscription costs and gain total ownership over your data.
+            {isVideoTarget
+              ? `Compare local video apps and model workflows related to ${proprietary.name}. These are partial alternatives; feature coverage, model terms, hardware needs and hosted costs vary.`
+              : `Discover community-maintained, privacy-focused open source software tools that can replace ${proprietary.name}. Save subscription costs and gain total ownership over your data.`}
           </p>
 
           <div className="flex flex-wrap items-center gap-2 text-xs text-secondary-foreground">
             <span className="inline-flex items-center px-2.5 py-1 rounded-full bg-[#EAF2FF] text-primary border border-primary/30 font-medium">
-              {allReplacements.length} {allReplacements.length === 1 ? 'verified replacement' : 'verified replacements'}
+              {isVideoTarget
+                ? `${allReplacements.length + allAiRecommendations.length} related options`
+                : `${allReplacements.length} ${allReplacements.length === 1 ? 'verified replacement' : 'verified replacements'}`}
             </span>
             {category && (
               <Link
@@ -173,7 +185,7 @@ export const AlternativeDetailPage: React.FC = () => {
                 Category: {category.name}
               </Link>
             )}
-            {allReplacements.length >= 2 && (
+            {!isVideoTarget && allReplacements.length >= 2 && (
               <Link
                 to={`/compare?tools=${allReplacements.slice(0, 3).map((r) => r.slug).join(',')}`}
                 className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-purple-50 text-purple-700 border border-purple-200 font-medium hover:bg-purple-100 transition-colors"
@@ -285,7 +297,7 @@ export const AlternativeDetailPage: React.FC = () => {
       </div>
 
       {/* Local Search and Filter Controls (only if this app has mapped replacements) */}
-      {allReplacements.length > 0 && (
+      {(allReplacements.length > 0 || allAiRecommendations.length > 0) && (
         <div className="mb-6 p-4 rounded-xl bg-card border border-border shadow-sm flex flex-col md:flex-row gap-3 items-stretch md:items-center justify-between">
           {/* Search replacements */}
           <div className="relative flex-1 max-w-sm">
@@ -361,7 +373,7 @@ export const AlternativeDetailPage: React.FC = () => {
       )}
 
       {/* Grid or Empty States */}
-      {allReplacements.length === 0 ? (
+      {allReplacements.length === 0 && allAiRecommendations.length === 0 ? (
         <div className="p-8 rounded-2xl border border-border bg-card text-center max-w-xl mx-auto my-8 shadow-xs">
           <Replace className="w-8 h-8 text-muted-foreground mx-auto mb-3" />
           <h3 className="text-base font-bold text-slate-900 mb-2">
@@ -378,7 +390,9 @@ export const AlternativeDetailPage: React.FC = () => {
             <span>Browse Other Alternatives</span>
           </Link>
         </div>
-      ) : paginatedTools.length > 0 ? (
+      ) : allReplacements.length > 0 && paginatedTools.length > 0 ? (
+        <>
+        {isVideoTarget && <h2 className="mb-4 text-lg font-bold text-foreground">Self-hosted applications</h2>}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
           {paginatedTools.map((tool) => (
             <ReplacementCard
@@ -388,11 +402,28 @@ export const AlternativeDetailPage: React.FC = () => {
             />
           ))}
         </div>
-      ) : (
+        </>
+      ) : allReplacements.length > 0 && filteredAiRecommendations.length === 0 ? (
         <EmptyState
           title={`No open source alternatives matching "${searchQuery}" found for ${proprietary.name}.`}
           onReset={resetSearchParams}
         />
+      ) : null}
+
+      {filteredAiRecommendations.length > 0 && (
+        <section className={allReplacements.length > 0 ? 'mt-10' : 'mt-8'} aria-labelledby="ai-alternatives-heading">
+          <div className="mb-4">
+            <h2 id="ai-alternatives-heading" className="text-lg font-bold text-foreground">{isVideoTarget ? 'Related generators and model workflows' : 'AI tools and models'}</h2>
+            <p className="mt-1 max-w-3xl text-xs leading-relaxed text-secondary-foreground">{isVideoTarget ? 'These recommendations come from the shared AI catalog. A hosted service, self-hosted app and open model have different requirements; review the access label before opening.' : 'Related AI catalog entries are shown with their own access, license and infrastructure details.'}</p>
+          </div>
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {filteredAiRecommendations.map((tool) => <AiToolCard key={tool.id} tool={tool} />)}
+          </div>
+        </section>
+      )}
+
+      {searchQuery && filteredReplacements.length === 0 && filteredAiRecommendations.length === 0 && (
+        <EmptyState title={`No alternatives matching "${searchQuery}" found for ${proprietary.name}.`} onReset={resetSearchParams} />
       )}
 
       {/* Pagination */}

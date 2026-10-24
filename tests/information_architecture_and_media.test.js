@@ -54,7 +54,9 @@ describe('Canonical catalog sections and expanded media utilities', () => {
   });
 
   test('media URL helpers validate and normalize only supported public URL shapes', () => {
+    assert.deepEqual(parseYoutubeUrl('https://www.youtube.com/watch?v=dQw4w9WgXcQ'), { videoId: 'dQw4w9WgXcQ', normalizedUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ' });
     assert.deepEqual(parseYoutubeUrl('https://youtu.be/dQw4w9WgXcQ'), { videoId: 'dQw4w9WgXcQ', normalizedUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ' });
+    assert.deepEqual(parseYoutubeUrl('https://www.youtube.com/watch?v=dQw4w9WgXcQ&list=PL123'), { videoId: 'dQw4w9WgXcQ', normalizedUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ' }, 'Playlist URL is treated as its selected video, not a playlist job');
     assert.deepEqual(parseYoutubeUrl('https://www.youtube.com/shorts/dQw4w9WgXcQ/'), { videoId: 'dQw4w9WgXcQ', normalizedUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ' });
     assert.deepEqual(parseYoutubeUrl('https://www.youtube.com/embed/dQw4w9WgXcQ'), { videoId: 'dQw4w9WgXcQ', normalizedUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ' });
     assert.throws(() => parseYoutubeUrl('https://example.com/watch?v=dQw4w9WgXcQ'), /youtube.com/);

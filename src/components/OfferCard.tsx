@@ -2,7 +2,7 @@ import React from 'react';
 import type { AiOffer } from '../types/index.ts';
 import { Link } from '../router/Router.tsx';
 import { isOfferActive, isOfferPendingVerification } from '../data/offersData.ts';
-import { getBrandLogo } from '../data/brandLogos.ts';
+import { getBrandLogo } from '../data/runtimeBrandLogos.ts';
 import { BrandLogo } from './BrandLogo.tsx';
 import { ExternalLink, ArrowRight, ShieldCheck, GraduationCap, Gift, CheckCircle2, Globe, AlertTriangle } from 'lucide-react';
 

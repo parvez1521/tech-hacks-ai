@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useRouter, Link } from '../router/Router';
 import { getOfferBySlug, offersData, isOfferActive, isOfferPendingVerification } from '../data/offersData';
-import { getBrandLogo } from '../data/brandLogos';
+import { getBrandLogo } from '../data/runtimeBrandLogos';
 import {
   ExternalLink,
   ArrowLeft,

@@ -1,20 +1,19 @@
 import { isAuthorized } from './submissionsStore.js';
+import { getSupabaseConfig, getSupabaseHeaders, redactSupabaseCredential } from './supabaseRest.js';
 
 function getConfig() {
-  const base = process.env.SUPABASE_URL?.replace(/\/+$/, '');
-  const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
-  return base && key ? { base, key } : null;
+  return getSupabaseConfig();
 }
 
-async function request(path, { base, key }, init = {}) {
-  const response = await fetch(`${base}/rest/v1/techhacks_prompt_categories${path}`, {
+async function request(path, config, init = {}) {
+  const response = await fetch(`${config.base}/rest/v1/techhacks_prompt_categories${path}`, {
     ...init,
-    headers: { apikey: key, Authorization: `Bearer ${key}`, 'Content-Type': 'application/json', ...(init.headers || {}) },
+    headers: { ...getSupabaseHeaders(config), ...(init.headers || {}) },
   });
   const body = await response.text();
   let data;
   try { data = body ? JSON.parse(body) : null; } catch { data = null; }
-  if (!response.ok) { const error = new Error(data?.message || `Prompt categories returned HTTP ${response.status}.`); error.status = response.status; throw error; }
+  if (!response.ok) { const error = new Error(redactSupabaseCredential(data?.message || `Prompt categories returned HTTP ${response.status}.`, config)); error.status = response.status; throw error; }
   return data;
 }
 

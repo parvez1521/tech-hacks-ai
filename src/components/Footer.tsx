@@ -1,8 +1,16 @@
 import React from 'react';
 import { Link } from '../router/Router';
-import { Github, Heart, ArrowRight } from 'lucide-react';
+import { Github, Heart, ArrowRight, Instagram, Mail, Phone } from 'lucide-react';
+import { getConfiguredContactOptions } from '../config/contactConfig';
 
 export const Footer: React.FC = () => {
+  const contactOptions = getConfiguredContactOptions();
+  const contactIcons = {
+    phone: Phone,
+    instagram: Instagram,
+    email: Mail,
+  };
+
   return (
     <footer className="border-t border-border bg-card/30 mt-20 pt-12 pb-16 transition-colors">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
@@ -18,6 +26,38 @@ export const Footer: React.FC = () => {
             Browse recent discoveries <ArrowRight className="h-4 w-4" />
           </Link>
         </div>
+
+        {contactOptions.length > 0 && (
+          <section className="mb-8 rounded-xl border border-border/70 bg-card/50 px-5 py-4 sm:px-6" aria-labelledby="footer-contact-heading">
+            <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+              <div>
+                <h2 id="footer-contact-heading" className="text-sm font-bold text-foreground">Contact</h2>
+                <p className="mt-1 text-xs text-muted-foreground">Choose a direct way to reach SwitchRoute.</p>
+              </div>
+              <nav aria-label="Contact options" className="flex min-w-0 flex-col gap-2 sm:flex-row sm:flex-wrap sm:justify-end">
+                {contactOptions.map((option) => {
+                  const Icon = contactIcons[option.id];
+                  return (
+                    <a
+                      key={option.id}
+                      href={option.href}
+                      target={option.external ? '_blank' : undefined}
+                      rel={option.external ? 'noopener noreferrer' : undefined}
+                      aria-label={`${option.label} SwitchRoute: ${option.display}`}
+                      className="inline-flex min-h-11 min-w-0 items-center gap-3 rounded-lg border border-border bg-background/70 px-3.5 py-2 text-foreground transition-colors hover:border-primary/50 hover:bg-primary/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary sm:min-w-48"
+                    >
+                      <Icon className="h-4 w-4 shrink-0 text-primary" aria-hidden="true" />
+                      <span className="min-w-0 text-left">
+                        <span className="block text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">{option.label}</span>
+                        <span className="block break-all text-xs font-medium">{option.display}</span>
+                      </span>
+                    </a>
+                  );
+                })}
+              </nav>
+            </div>
+          </section>
+        )}
 
         {/* Links Grid */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 py-8 border-t border-border/50 text-sm">

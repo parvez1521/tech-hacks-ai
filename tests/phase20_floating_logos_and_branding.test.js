@@ -57,7 +57,7 @@ describe('Phase 20: Restored focused hero and assistant branding', () => {
   test('HomePage renders hero and assistant without SSR exceptions', () => {
     setupMockBrowser('https://switchroute.in/');
     const html = ReactDOMServer.renderToString(React.createElement(ssrModule.App));
-    assert.ok(html.includes("Stop paying for AI tools you don't need.") || html.includes("Stop paying for AI tools you don&#x27;t need."));
+    assert.ok(html.includes('id="home-hero-heading"') && ['Another AI tool?', 'Sure.', 'Another Subscription?', 'Nope.'].every((line) => html.includes(line)));
     assert.ok(html.includes('data-testid="chat-launcher"'));
     assert.ok(!html.includes('data-testid="chat-dialog"'));
   });

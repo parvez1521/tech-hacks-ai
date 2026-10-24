@@ -204,7 +204,14 @@ export const PromptDetailPage: React.FC = () => {
         </p>
 
         <figure className="mb-6 overflow-hidden rounded-2xl border border-border bg-muted">
-          <PromptPreviewImage src={prompt.previewImage} alt={prompt.previewImageAlt || `${prompt.title} prompt preview`} priority className="block max-h-[500px] w-full bg-slate-100 object-contain dark:bg-slate-800" />
+          <PromptPreviewImage
+            src={prompt.previewImage}
+            alt={prompt.previewImageAlt || `${prompt.title} prompt preview`}
+            priority
+            width={prompt.previewImageWidth}
+            height={prompt.previewImageHeight}
+            className={`block max-h-[500px] w-full bg-slate-100 object-contain dark:bg-slate-800${slug.startsWith('promptfeed-') ? ' mx-auto max-w-[380px]' : ''}`}
+          />
           <figcaption className="flex flex-wrap items-center gap-x-4 gap-y-1 px-4 py-3 text-xs text-muted-foreground">
             <span><strong className="text-foreground">Visual style</strong> {prompt.visualStyle || 'Conceptual'}</span>
             <span><strong className="text-foreground">Aspect ratio</strong> {prompt.aspectRatio || '1:1'}</span>
@@ -375,16 +382,6 @@ export const PromptDetailPage: React.FC = () => {
             <h3 className="font-bold text-amber-950 mb-1 text-sm">Optimization Tips & Parameters</h3>
             <p className="text-amber-900/90">{prompt.tips}</p>
           </div>
-        </div>
-      )}
-
-      {/* Author & Source Provenance */}
-      {prompt.authorOrSource && (
-        <div className="text-xs text-muted-foreground mb-8 px-2 flex items-center gap-2">
-          <span>Author / Provenance:</span>
-          <span className="font-semibold text-secondary-foreground">{prompt.authorOrSource}</span>
-          {prompt.rightsStatus && <span className="rounded-full border border-border px-2 py-0.5 capitalize">{prompt.rightsStatus.replace(/-/g, ' ')}</span>}
-          {(prompt.sourceUrl || prompt.attributionUrl) && <a href={prompt.sourceUrl || prompt.attributionUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 font-medium text-primary hover:underline">Source <ExternalLink size={12} /></a>}
         </div>
       )}
 

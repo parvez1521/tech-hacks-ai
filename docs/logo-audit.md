@@ -1,5 +1,23 @@
 # Tech Hacks AI logo audit
 
+## Phase 4 source verification update (2026-10-23)
+
+Five of the 49 active logo verification gaps were confirmed against first-party
+sources and updated: AppFlowy, Cline, Firecrawl, GPT4All, and Immich. The current
+audit now records 44 active gaps and 47 unresolved source records overall (down
+from 49 and 52).
+The other identities remain neutral fallbacks until a first-party source and
+matching local asset can be verified.
+
+| Brand | First-party source | Local asset |
+| --- | --- | --- |
+| AppFlowy | [Official repository logo](https://github.com/AppFlowy-IO/AppFlowy/blob/main/frontend/appflowy_flutter/assets/images/flowy_logo.svg) | `/logos/appflowy.svg` |
+| Cline | [Official docs logo configuration](https://github.com/cline/cline/blob/main/docs/docs.json) | `/logos/cline.svg` |
+| Firecrawl | [Press & Brand assets](https://www.firecrawl.dev/press-brand) | `/logos/official-ai/firecrawl.png` |
+| GPT4All | [Official GPT4All repository logo](https://github.com/nomic-ai/gpt4all/blob/main/gpt4all-chat/icons/nomic_logo.svg) | `/logos/gpt4all.svg` |
+| Immich | [Official repository design logo](https://github.com/immich-app/immich/blob/main/design/immich-logo.svg) | `/logos/immich.svg` |
+| Cline | [Official docs logo configuration](https://github.com/cline/cline/blob/main/docs/docs.json) | `/logos/cline.svg` |
+
 Audit date: 2026-10-21
 
 ## Follow-up: source corrections and fallback policy (2026-10-22)
@@ -112,10 +130,10 @@ the source URL itself.
 | Tool | Slug | Local asset | Status | Provenance |
 | --- | --- | --- | --- | --- |
 | Supabase | `supabase` | `/logos/supabase.svg` | verified | Simple Icons: `cdn.jsdelivr.net/npm/simple-icons/icons/supabase.svg` |
-| Firecrawl | `firecrawl` | `/logos/firecrawl.svg` | unverified | Not recorded |
+| Firecrawl | `firecrawl` | `/logos/official-ai/firecrawl.png` | verified | Official Firecrawl Press & Brand asset |
 | Postiz | `postiz` | `/logos/postiz.svg` | unverified | Not recorded |
 | Baserow | `baserow` | `/logos/baserow.svg` | unverified | Not recorded |
-| AppFlowy | `appflowy` | `/logos/appflowy.svg` | unverified | Not recorded |
+| AppFlowy | `appflowy` | `/logos/appflowy.svg` | verified | Official AppFlowy repository logo |
 | Penpot | `penpot` | `/logos/penpot.svg` | unverified | Not recorded |
 | n8n | `n8n` | `/logos/n8n.svg` | verified | Simple Icons: `cdn.jsdelivr.net/npm/simple-icons/icons/n8n.svg` |
 | Plausible Analytics | `plausible` | `/logos/plausible.svg` | unverified | Not recorded |
@@ -123,7 +141,7 @@ the source URL itself.
 | Hoppscotch | `hoppscotch` | `/logos/hoppscotch.svg` | unverified | Not recorded |
 | Cal.com | `cal-com` | `/logos/cal-com.svg` | unverified | Not recorded |
 | Typebot | `typebot` | `/logos/typebot.svg` | unverified | Not recorded |
-| Immich | `immich` | `/logos/immich.svg` | unverified | Not recorded |
+| Immich | `immich` | `/logos/immich.svg` | verified | Official Immich repository design logo |
 | Outline | `outline` | `/logos/outline.svg` | unverified | Not recorded |
 | Novu | `novu` | `/logos/novu.svg` | unverified | Not recorded |
 | Docmost | `docmost` | `/logos/docmost.svg` | unverified | Not recorded |
@@ -132,13 +150,13 @@ the source URL itself.
 | RustDesk | `rustdesk` | `/logos/rustdesk.svg` | unverified | Not recorded |
 | Umami | `umami` | `/logos/umami.svg` | unverified | Not recorded |
 | Aider | `aider` | `/logos/official-ai/aider.svg` | verified | Official web export; see `manifest.csv` |
-| Cline | `cline` | `/logos/cline.svg` | unverified | Not recorded |
+| Cline | `cline` | `/logos/cline.svg` | verified | Official Cline docs logo configuration |
 | Roo Code | `roocode` | `/logos/roocode.svg` | unverified | Not recorded |
 | OpenCode | `opencode` | `/logos/opencode.svg` | unverified | Not recorded |
 | Perplexica | `perplexica` | `/logos/perplexica.svg` | unverified | Not recorded |
 | Khoj | `khoj` | `/logos/khoj.svg` | unverified | Not recorded |
 | SearXNG | `searxng` | `/logos/searxng.svg` | unverified | Not recorded |
-| Claude 3.5 Sonnet | `claude` | `/logos/claude.svg` | verified | Simple Icons: `cdn.jsdelivr.net/npm/simple-icons/icons/claude.svg` |
+| Claude | `claude` | `/logos/claude.svg` | verified | Simple Icons: `cdn.jsdelivr.net/npm/simple-icons/icons/claude.svg` |
 | ChatGPT | `chatgpt` | `/logos/chatgpt.svg` | unverified | Favicon reference; not treated as original mark |
 | Perplexity AI | `perplexity` | `/logos/perplexity.svg` | verified | Simple Icons: `cdn.jsdelivr.net/npm/simple-icons/icons/perplexity.svg` |
 | Google Gemini | `gemini` | `/logos/gemini.svg` | verified | Official product site: `https://gemini.google.com` |
@@ -163,7 +181,7 @@ the source URL itself.
 | AnythingLLM | `anythingllm` | `/logos/official-ai/anythingllm.svg` | verified | Official web export; see `manifest.csv` |
 | ComfyUI | `comfyui` | `/logos/official-ai/comfyui.svg` | verified | Official web export; see `manifest.csv` |
 | vLLM | `vllm` | `/logos/official-ai/vllm.svg` | verified | Official web export; see `manifest.csv` |
-| GPT4All | `gpt4all` | `/logos/gpt4all.svg` | unverified | Not recorded |
+| GPT4All | `gpt4all` | `/logos/gpt4all.svg` | verified | Official GPT4All application resource |
 | llama.cpp | `llama-cpp` | `/logos/official-ai/llama-cpp.svg` | verified | Official web export; see `manifest.csv` |
 | Cursor Editor | `cursor` | `/logos/cursor.svg` | verified | Simple Icons: `cdn.jsdelivr.net/npm/simple-icons/icons/cursor.svg` |
 | v0 by Vercel | `v0-vercel` | `/logos/official-ai/v0-vercel.svg` | verified | Official web export; see `manifest.csv` |
@@ -320,7 +338,7 @@ The contact sheets were temporary browser artifacts and are not committed. The i
 | Perplexica (perplexica) | No source URL | `/logos/perplexica.svg` | Unresolved; neutral monogram fallback | Visible in light/dark sheet; no targeted change | Unresolved; fallback shown |
 | Khoj (khoj) | No source URL | `/logos/khoj.svg` | Unresolved; neutral monogram fallback | Visible in light/dark sheet; no targeted change | Unresolved; fallback shown |
 | SearXNG (searxng) | No source URL | `/logos/searxng.svg` | Unresolved; neutral monogram fallback | Visible in light/dark sheet; no targeted change | Unresolved; fallback shown |
-| Claude 3.5 Sonnet (claude) | [source recorded](https://cdn.jsdelivr.net/npm/simple-icons/icons/claude.svg) | `/logos/claude.svg` | Asset shown in both contact sheets; identity/source not independently reverified | Visible in light/dark sheet; no targeted change | Source recorded; visual asset loaded |
+| Claude (claude) | [source recorded](https://cdn.jsdelivr.net/npm/simple-icons/icons/claude.svg) | `/logos/claude.svg` | Asset shown in both contact sheets; identity/source not independently reverified | Visible in light/dark sheet; no targeted change | Source recorded; visual asset loaded |
 | ChatGPT (chatgpt) | [source recorded](https://www.google.com/s2/favicons?domain=chatgpt.com&sz=256) | `/logos/chatgpt.svg` | Asset shown in both contact sheets; identity/source not independently reverified | Visible in light/dark sheet; no targeted change | Source recorded; visual asset loaded |
 | Perplexity AI (perplexity) | [source recorded](https://cdn.jsdelivr.net/npm/simple-icons/icons/perplexity.svg) | `/logos/perplexity.svg` | Asset shown in both contact sheets; identity/source not independently reverified | Visible in light/dark sheet; no targeted change | Source recorded; visual asset loaded |
 | Google Gemini (gemini) | No source URL | `/logos/gemini.svg` | Unresolved; neutral monogram fallback | Visible in light/dark sheet; no targeted change | Unresolved; fallback shown |
@@ -415,3 +433,30 @@ The contact sheets were temporary browser artifacts and are not committed. The i
 | Neon (neon) | No source URL | `/logos/fallback-neon.svg` | Unresolved; neutral monogram fallback | Visible in light/dark sheet; no targeted change | Unresolved; fallback shown |
 | Turso (turso) | No source URL | `/logos/fallback-turso.svg` | Unresolved; neutral monogram fallback | Visible in light/dark sheet; no targeted change | Unresolved; fallback shown |
 | IBM Cloud (ibmcloud) | No source URL | `/logos/fallback-ibmcloud.svg` | Unresolved; neutral monogram fallback | Visible in light/dark sheet; no targeted change | Unresolved; fallback shown |
+
+## Video catalog identity follow-up (2026-10-23)
+
+The following newly added video catalog identities use neutral initials fallbacks because no traceable official logo source was confirmed. These assets are not rendered as brand marks.
+
+| Tool | Slug | Local asset | Status | Provenance |
+| --- | --- | --- | --- | --- |
+| Agnes Video Generator (`agnes-video-generator`) | `agnes-video-generator` | `/logos/fallback-agnes-video-generator.svg` | unverified; neutral fallback shown | No source URL recorded |
+| Automated Video Generator (`automated-video-generator`) | `automated-video-generator` | `/logos/fallback-automated-video-generator.svg` | unverified; neutral fallback shown | No source URL recorded |
+| VUZA (`vuza`) | `vuza` | `/logos/fallback-vuza.svg` | unverified; neutral fallback shown | No source URL recorded |
+| PurffleShorts (`purffle-shorts`) | `purffle-shorts` | `/logos/fallback-purffle-shorts.svg` | unverified; neutral fallback shown | No source URL recorded |
+| Open Generative AI (`open-generative-ai`) | `open-generative-ai` | `/logos/fallback-open-generative-ai.svg` | unverified; neutral fallback shown | No source URL recorded |
+| Wan 2.2 (`wan-2-2`) | `wan-2-2` | `/logos/fallback-wan-2-2.svg` | unverified; neutral fallback shown | No source URL recorded |
+| LTX-2.3 (`ltx-2-3`) | `ltx-2-3` | `/logos/fallback-ltx-2-3.svg` | unverified; neutral fallback shown | No source URL recorded |
+| HunyuanVideo (`hunyuanvideo`) | `hunyuanvideo` | `/logos/fallback-hunyuanvideo.svg` | unverified; neutral fallback shown | No source URL recorded |
+| HunyuanVideo-I2V (`hunyuanvideo-i2v`) | `hunyuanvideo-i2v` | `/logos/fallback-hunyuanvideo-i2v.svg` | unverified; neutral fallback shown | No source URL recorded |
+| Hugging Face Video Spaces (`huggingface-video-spaces`) | `huggingface-video-spaces` | `/logos/fallback-huggingface-video-spaces.svg` | unverified; neutral fallback shown | No source URL recorded |
+| InVideo AI (`invideo-ai`) | `invideo-ai` | `/logos/fallback-invideo-ai.svg` | unverified; neutral fallback shown | No source URL recorded |
+| Pictory (`pictory`) | `pictory` | `/logos/fallback-pictory.svg` | unverified; neutral fallback shown | No source URL recorded |
+| Synthesia (`synthesia`) | `synthesia` | `/logos/fallback-synthesia.svg` | unverified; neutral fallback shown | No source URL recorded |
+| Fliki (`fliki`) | `fliki` | `/logos/fallback-fliki.svg` | unverified; neutral fallback shown | No source URL recorded |
+| Opus Clip (`opus-clip`) | `opus-clip` | `/logos/fallback-opus-clip.svg` | unverified; neutral fallback shown | No source URL recorded |
+| Klap (`klap`) | `klap` | `/logos/fallback-klap.svg` | unverified; neutral fallback shown | No source URL recorded |
+
+| GitHub Copilot (`github-copilot`) | Simple Icons GitHub Copilot mark | `/logos/githubcopilot.svg` | Source recorded; verified 2026-10-18 | [Simple Icons asset](https://cdn.jsdelivr.net/npm/simple-icons/icons/githubcopilot.svg); not a full wordmark |
+
+| `github-copilot` | `/logos/githubcopilot.svg` | Simple Icons source recorded; not a full wordmark |

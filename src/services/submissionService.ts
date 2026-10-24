@@ -230,6 +230,7 @@ export async function fetchSubmissions(
     });
 
     if (response.status === 401) {
+      clearStoredModeratorToken();
       return { success: false, submissions: [], error: 'Unauthorized moderator access key.' };
     }
 
@@ -261,6 +262,7 @@ export async function updateSubmission(
     });
 
     if (response.status === 401) {
+      clearStoredModeratorToken();
       return { success: false, error: 'Unauthorized moderator access key.' };
     }
 
@@ -290,6 +292,7 @@ export async function publishSubmission(
     });
 
     if (response.status === 401) {
+      clearStoredModeratorToken();
       return { success: false, error: 'Unauthorized moderator access key.' };
     }
 

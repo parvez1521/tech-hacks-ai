@@ -107,7 +107,12 @@ Configure these variables in your hosting environment (e.g. Vercel Project Setti
 | `VITE_SITE_URL` | Client (Public) | Canonical site origin (e.g. `https://switchroute.in`). Defaults to `https://switchroute.in`. |
 | `ADMIN_SECRET` | Server (Secret) | Bearer token / passkey required for `/moderation` and PATCH `/api/submissions`. |
 | `SUPABASE_URL` | Server (Secret) | Supabase project URL (e.g. `https://<project-ref>.supabase.co`). |
-| `SUPABASE_SERVICE_ROLE_KEY` | Server (Secret) | Supabase secret key with RLS bypass for API storage operations. |
+| `SUPABASE_SECRET_KEY` | Server (Secret) | Preferred Supabase server key for privileged API storage. Takes precedence over the legacy service-role key. Never expose it to the browser. |
+| `SUPABASE_SERVICE_ROLE_KEY` | Server (Secret) | Legacy JWT-based service-role key. Used when `SUPABASE_SECRET_KEY` is absent. |
+| `SUPABASE_PUBLISHABLE_KEY` | Server (Public key) | *(Optional, read-only fallback)* Public Supabase key for published additions/discoveries only; does not enable writes or prompt storage. |
+| `SUPABASE_ANON_KEY` | Server (Public key) | *(Optional, legacy read-only fallback)* Used only when no privileged key or `SUPABASE_PUBLISHABLE_KEY` is configured. Does not enable writes or prompt storage. |
+| `UPSTASH_REDIS_REST_URL` | Server (Secret) | *(Optional)* Upstash REST endpoint for durable submissions, discoveries, and published additions. |
+| `UPSTASH_REDIS_REST_TOKEN` | Server (Secret) | *(Optional)* Upstash REST token; required with `UPSTASH_REDIS_REST_URL`. |
 | `GROQ_API_KEY` | Server (Secret) | *(Optional)* Groq API key for live chatbot responses (`openai/gpt-oss-120b`) or Groq multilingual speech-to-text when `TRANSCRIPTION_API_URL` points to Groq. |
 | `GEMINI_API_KEY` | Server (Secret) | *(Optional)* Google Gemini API key for multimodal model inference. |
 | `OPENAI_API_KEY` | Server (Secret) | *(Optional)* Server-side OpenAI speech-to-text key for the Video & Audio Transcriber. Never expose it as `VITE_`. The default `whisper-1` model supports multilingual transcription. |
@@ -124,14 +129,9 @@ To enable persistent community submissions and moderation in production:
 1. Create a free account at [Supabase](https://supabase.com) and create a new project.
 2. Open the **SQL Editor** in your Supabase project dashboard.
 3. Paste the contents of [`server/schema.sql`](server/schema.sql) and execute it.
-4. Obtain your **Project URL** and **`service_role` Secret Key** from **Project Settings -> API**.
-5. Add `SUPABASE_URL` and `SUPABASE_SERVICE_ROLE_KEY` to your Vercel Environment Variables.
-6. Seed the initial records:
-   ```bash
-   SUPABASE_URL="https://<project-ref>.supabase.co" \
-   SUPABASE_SERVICE_ROLE_KEY="<service-role-key>" \
-   npm run db:migrate
-   ```
+4. Obtain the project URL and a server-only secret key (preferred) or legacy service-role key.
+5. Configure `SUPABASE_URL` and exactly the desired privileged key in the intended server environment. If both key variables are present, `SUPABASE_SECRET_KEY` wins; the application does not fall back after an authentication failure.
+6. To seed local records, run `npm run db:migrate` only in an explicitly intended environment. The migration utility uses the same key precedence and sends opaque secret keys through `apikey` only; review its target before any live run.
 
 ---
 
@@ -149,7 +149,7 @@ To enable persistent community submissions and moderation in production:
 
 The prompt gallery ships original SwitchRoute recipes and original locally hosted SVG previews. It supports text, provider/model, category, tag, and sort filters; prompt detail pages provide the full text, model/style/aspect-ratio notes, and local bookmarks. Meigen media and prompt records are not included.
 
-To enable database-backed prompt management, apply the `techhacks_prompts` section at the end of [`server/schema.sql`](server/schema.sql) in Supabase and configure the existing server-only `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`, and `ADMIN_SECRET` variables. Open `/moderation` → **Prompt Library**. The public API returns only published prompts, while every write is protected by the moderator passkey and service-role server storage. Favorites use the existing browser-local bookmark store because the site has no user account system.
+To enable database-backed prompt management, apply the `techhacks_prompts` section at the end of [`server/schema.sql`](server/schema.sql) in Supabase and configure server-only `SUPABASE_URL`, either `SUPABASE_SECRET_KEY` or `SUPABASE_SERVICE_ROLE_KEY`, and `ADMIN_SECRET`. Public/low-privilege keys do not enable prompt storage. Open `/moderation` → **Prompt Library**. The public API returns only published prompts, while every write is protected by the moderator passkey and privileged server storage. Favorites use the existing browser-local bookmark store because the site has no user account system.
 
 For authorized source imports, prepare a JSON array (or `{ "prompts": [...] }`) with `slug`, `title`, `description`, `category`, `targetModel`, `promptText`, `tags`, `authorOrSource`, `previewImage`, and `rightsConfirmed: true`; `id` is optional and generated if absent. Add `attributionUrl` where required. Local preview files must be under `/prompts/`; remote previews must be HTTPS, return an image content type and known size, and be no larger than 10 MB. The importer checks fields, preview image availability, rights confirmation, and duplicate slugs/prompt text against the bundled catalog, the import batch, and (when importing) saved Supabase entries.
 

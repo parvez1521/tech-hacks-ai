@@ -3,6 +3,8 @@
  * Canonical brand identity, navigation routes, metadata, and social links.
  */
 
+import { contactConfig } from './contactConfig.ts';
+
 export interface NavItem {
   title: string;
   href: string;
@@ -61,7 +63,7 @@ export const siteConfig: SiteConfig = {
   links: {
     github: 'https://github.com',
     twitter: 'https://twitter.com',
-    email: 'contact@techhacksai.com',
+    email: contactConfig.email,
   },
   adsense: {
     enabled: false, // Remains disabled until formal Google AdSense account approval

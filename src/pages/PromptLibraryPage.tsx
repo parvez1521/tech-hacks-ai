@@ -6,8 +6,9 @@ import { getBookmarks, subscribeBookmarks } from '../services/bookmarkService';
 import { promptCategories, promptProviders, type PromptCategoryDef } from '../data/promptsData';
 import { PromptCard } from '../components/PromptCard';
 import { EmptyState } from '../components/EmptyState';
-import { Link } from '../router/Router';
+import { Link, useRouter } from '../router/Router';
 import { PromptPreviewImage } from '../components/PromptPreviewImage';
+import { VideoInspirationSection } from '../components/VideoInspirationSection';
 import { Search, X, Sparkles, Filter, ArrowDownWideNarrow, ExternalLink, Heart } from 'lucide-react';
 
 type PromptSort = 'featured' | 'trending' | 'recent' | 'title' | 'model';
@@ -15,7 +16,8 @@ type PromptCollection = 'all' | 'switchroute' | 'promptfeed';
 const PROMPTS_PER_PAGE = 24;
 
 export const PromptLibraryPage: React.FC = () => {
-  const [search, setSearch] = useState('');
+  const { searchParams, setSearchParam } = useRouter();
+  const [search, setSearch] = useState(() => searchParams.get('q') || '');
   const [selectedCat, setSelectedCat] = useState<string | null>(null);
   const [selectedProvider, setSelectedProvider] = useState<string | null>(null);
   const [selectedTag, setSelectedTag] = useState<string | null>(null);
@@ -89,6 +91,25 @@ export const PromptLibraryPage: React.FC = () => {
     });
     return [...known.values()];
   }, [allPrompts, databaseCategories]);
+  const popularStyles = useMemo(() => {
+    const counts = new Map<string, number>();
+    allPrompts.forEach((prompt) => {
+      if (prompt.visualStyle) counts.set(prompt.visualStyle, (counts.get(prompt.visualStyle) || 0) + 1);
+    });
+    return [...counts.entries()]
+      .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]))
+      .slice(0, 12)
+      .map(([style]) => style);
+  }, [allPrompts]);
+
+  useEffect(() => {
+    setSearch(searchParams.get('q') || '');
+  }, [searchParams]);
+
+  const updateSearch = (value: string) => {
+    setSearch(value);
+    setSearchParam('q', value || null, { replace: true });
+  };
 
   const filteredPrompts = useMemo(() => {
     const filtered = allPrompts.filter((p) => {
@@ -128,7 +149,7 @@ export const PromptLibraryPage: React.FC = () => {
   const switchRouteCount = allPrompts.length - promptFeedCount;
 
   const resetFilters = () => {
-    setSearch(''); setSelectedCat(null); setSelectedProvider(null); setSelectedTag(null); setSelectedStyle(''); setSelectedAspectRatio(''); setSelectedMediaType(''); setShowFavorites(false); setSelectedCollection('all'); setSort('featured'); setPage(1);
+    updateSearch(''); setSelectedCat(null); setSelectedProvider(null); setSelectedTag(null); setSelectedStyle(''); setSelectedAspectRatio(''); setSelectedMediaType(''); setShowFavorites(false); setSelectedCollection('all'); setSort('featured'); setPage(1);
   };
 
   return (
@@ -142,7 +163,7 @@ export const PromptLibraryPage: React.FC = () => {
           <p className="mt-3 max-w-2xl text-sm sm:text-base leading-7 text-slate-600 dark:text-slate-300">Explore 48 SwitchRoute originals and 534 image-matched prompts from the MIT-licensed PromptFeed collection. Preview the result, personalize variables, and copy the full prompt in one click.</p>
         </div>
         <div className="prompt-atlas__art" aria-hidden="true">
-          <img src="/prompts/generated/portrait-editorial-duo.webp" alt="" width="1536" height="1024" fetchpriority="high" decoding="async" />
+          <img src="/prompts/generated/portrait-woman-windowlight.webp" alt="" width="1122" height="1402" fetchpriority="high" decoding="async" />
           <div className="prompt-atlas__art-note"><Sparkles size={15} /> Original portrait study</div>
         </div>
       </section>
@@ -157,6 +178,8 @@ export const PromptLibraryPage: React.FC = () => {
         <a href="https://github.com/ClawLabsAI/awesome-verified-text-to-image-prompts" target="_blank" rel="noopener noreferrer" className="inline-flex shrink-0 items-center justify-center gap-2 rounded-lg border border-slate-300 px-3 py-2 text-xs font-semibold text-slate-800 hover:border-teal-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-500 dark:border-slate-600 dark:text-slate-100">View source &amp; license <ExternalLink size={14} aria-hidden="true" /></a>
       </section>
 
+      <VideoInspirationSection />
+
       <section className="prompt-atlas__controls" aria-label="Search and filter prompts">
         <div className="mb-4 flex flex-wrap items-center gap-2" role="group" aria-label="Filter by collection">
           <span className="mr-1 text-xs font-semibold text-slate-600 dark:text-slate-300">Collection</span>
@@ -170,8 +193,8 @@ export const PromptLibraryPage: React.FC = () => {
           <label className="relative block flex-1">
             <span className="sr-only">Search prompt recipes</span>
             <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" aria-hidden="true" />
-            <input type="search" value={search} onChange={(e) => setSearch(e.target.value)} placeholder="Search prompts, models, styles, or tags" className="w-full h-12 pl-10 pr-10 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-sm text-slate-900 dark:text-white placeholder:text-slate-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-500" />
-            {search && <button type="button" onClick={() => setSearch('')} className="absolute right-3 top-1/2 -translate-y-1/2 rounded-md p-1 text-slate-500 hover:text-slate-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-500" aria-label="Clear search"><X className="w-4 h-4" /></button>}
+            <input type="search" value={search} onChange={(e) => updateSearch(e.target.value)} placeholder="Search prompts, models, styles, or tags" className="w-full h-12 pl-10 pr-10 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-sm text-slate-900 dark:text-white placeholder:text-slate-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-500" />
+            {search && <button type="button" onClick={() => updateSearch('')} className="absolute right-3 top-1/2 -translate-y-1/2 rounded-md p-1 text-slate-500 hover:text-slate-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-500" aria-label="Clear search"><X className="w-4 h-4" /></button>}
           </label>
           <label className="flex h-12 items-center gap-2 rounded-xl border border-slate-200 bg-white px-3 text-sm text-slate-600 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-300">
             <ArrowDownWideNarrow size={16} aria-hidden="true" />
@@ -183,8 +206,8 @@ export const PromptLibraryPage: React.FC = () => {
           <p aria-live="polite" className="text-sm text-slate-500 sm:min-w-[130px] sm:text-right">{filteredPrompts.length} {filteredPrompts.length === 1 ? 'recipe' : 'recipes'}</p>
         </div>
 
-        <div className="mt-4 grid grid-cols-1 gap-2 sm:grid-cols-4">
-          <label className="text-xs font-semibold text-slate-600 dark:text-slate-300">Visual style<select aria-label="Filter by visual style" value={selectedStyle} onChange={(e) => setSelectedStyle(e.target.value)} className="mt-1 h-10 w-full rounded-lg border border-slate-200 bg-white px-2 text-sm text-slate-900 dark:border-slate-700 dark:bg-slate-900 dark:text-white"><option value="">All styles</option>{[...new Set(allPrompts.map((prompt) => prompt.visualStyle).filter(Boolean))].sort().map((style) => <option key={style} value={style}>{style}</option>)}</select></label>
+        <div className="mt-4 grid grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-4">
+          <label className="text-xs font-semibold text-slate-600 dark:text-slate-300">Popular style<select aria-label="Filter by visual style" value={selectedStyle} onChange={(e) => setSelectedStyle(e.target.value)} className="mt-1 h-10 w-full rounded-lg border border-slate-200 bg-white px-2 text-sm text-slate-900 dark:border-slate-700 dark:bg-slate-900 dark:text-white"><option value="">All styles (search any style)</option>{popularStyles.map((style) => <option key={style} value={style}>{style}</option>)}</select></label>
           <label className="text-xs font-semibold text-slate-600 dark:text-slate-300">Aspect ratio<select aria-label="Filter by aspect ratio" value={selectedAspectRatio} onChange={(e) => setSelectedAspectRatio(e.target.value)} className="mt-1 h-10 w-full rounded-lg border border-slate-200 bg-white px-2 text-sm text-slate-900 dark:border-slate-700 dark:bg-slate-900 dark:text-white"><option value="">All ratios</option>{[...new Set(allPrompts.map((prompt) => prompt.aspectRatio).filter(Boolean))].sort().map((ratio) => <option key={ratio} value={ratio}>{ratio}</option>)}</select></label>
           <label className="text-xs font-semibold text-slate-600 dark:text-slate-300">Media type<select aria-label="Filter by media type" value={selectedMediaType} onChange={(e) => setSelectedMediaType(e.target.value)} className="mt-1 h-10 w-full rounded-lg border border-slate-200 bg-white px-2 text-sm text-slate-900 dark:border-slate-700 dark:bg-slate-900 dark:text-white"><option value="">Images and video prompts</option><option value="image">Image prompts</option><option value="video">Video prompts</option></select></label>
           <button type="button" aria-pressed={showFavorites} onClick={() => setShowFavorites(!showFavorites)} className={`mt-4 h-10 rounded-lg border px-3 text-sm font-semibold sm:mt-5 ${showFavorites ? 'border-rose-400 bg-rose-50 text-rose-800 dark:bg-rose-950/40 dark:text-rose-200' : 'border-slate-200 bg-white text-slate-700 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200'}`}>♡ Saved prompts</button>

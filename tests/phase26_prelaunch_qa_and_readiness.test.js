@@ -96,11 +96,13 @@ describe('Phase 26: Final QA, Production Readiness & Domain Preparation', () => 
   // ──────────────────────────────────────────────────────────────────────────
   // 6. Production Bundle Chunk Optimization
   // ──────────────────────────────────────────────────────────────────────────
-  it('vite.config.js splits vendor and page chunks cleanly', () => {
+  it('vite.config.js keeps only stable shared chunks to avoid route/data cycles', () => {
     const viteConfig = read('vite.config.js');
     assert.ok(viteConfig.includes("'vendor-react'"), 'Splits vendor-react');
     assert.ok(viteConfig.includes("'vendor-icons'"), 'Splits vendor-icons');
     assert.ok(viteConfig.includes("'catalog-data'"), 'Splits catalog-data');
-    assert.ok(viteConfig.includes("'app-pages'"), 'Splits app-pages');
+    assert.ok(!viteConfig.includes("'app-pages'"), 'Avoids forcing all route pages into a shared chunk');
+    assert.ok(!viteConfig.includes("'app-free-tools'"), 'Avoids a free-tools/catalog-data cycle');
+    assert.ok(read('src/data/promptfeedPrompts.ts').includes("import('../generated/promptfeedRuntime.generated.ts')"), 'Keeps the generated PromptFeed runtime module dynamically loaded');
   });
 });

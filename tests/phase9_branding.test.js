@@ -221,8 +221,8 @@ describe('Phase 9: SwitchRoute Platform Rebranding', () => {
     const html = renderClean(React.createElement(ssrModule.App));
 
     assert.ok(
-      html.includes('Discover free AI plans, open-source alternatives, and practical tools before you add another subscription.'),
-      'Hero description must mention SwitchRoute'
+      html.includes('Discover paid AI alternatives, creative prompts, verified offers, and practical everyday tools—all in one place.'),
+      'Hero description must explain SwitchRoute’s alternatives, prompts, and utility value'
     );
   });
 

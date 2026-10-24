@@ -13,6 +13,7 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { toDbRow, toDiscoveryDbRow } from '../server/storageAdapter.js';
+import { getSupabaseConfig, getSupabaseHeaders, redactSupabaseCredential } from '../server/supabaseRest.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -121,33 +122,30 @@ if (isDryRun) {
   });
   console.log(`- Published additions ready for sync: Key 'root' with ${(published.tools || []).length} tools and ${(published.guides || []).length} guides.`);
   console.log('\nTo generate ready-to-run SQL: node scripts/migrate-to-supabase.js --sql');
-  console.log('To sync directly over REST: set SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY then run node scripts/migrate-to-supabase.js');
+  console.log('To sync directly over REST: set SUPABASE_URL and either SUPABASE_SECRET_KEY or SUPABASE_SERVICE_ROLE_KEY, then run node scripts/migrate-to-supabase.js');
   setImmediate(() => process.exit(0));
 }
 
 // Live migration via Supabase REST
-const supabaseUrl = process.env.SUPABASE_URL;
-const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+const supabaseConfig = getSupabaseConfig();
 
-if (!supabaseUrl || !supabaseKey) {
-  console.log('\n[Note] Neither SUPABASE_URL nor SUPABASE_SERVICE_ROLE_KEY are set.');
+if (!supabaseConfig) {
+  console.log('\n[Note] SUPABASE_URL and a server-side Supabase secret or service-role key are required.');
   console.log('To dump SQL statements instead, run:');
   console.log('  node scripts/migrate-to-supabase.js --sql');
   process.exit(0);
 }
 
 async function migrateLive() {
-  console.log(`\nConnecting to Supabase at: ${supabaseUrl}...`);
+  console.log(`\nConnecting to Supabase at: ${supabaseConfig.base}...`);
   let syncedSubs = 0;
 
   for (const sub of submissions) {
     const row = toDbRow(sub);
-    const res = await fetch(`${supabaseUrl.replace(/\/+$/, '')}/rest/v1/techhacks_submissions`, {
+    const res = await fetch(`${supabaseConfig.base}/rest/v1/techhacks_submissions`, {
       method: 'POST',
       headers: {
-        apikey: supabaseKey,
-        Authorization: `Bearer ${supabaseKey}`,
-        'Content-Type': 'application/json',
+        ...getSupabaseHeaders(supabaseConfig),
         Prefer: 'resolution=merge-duplicates',
       },
       body: JSON.stringify(row),
@@ -157,7 +155,7 @@ async function migrateLive() {
       syncedSubs++;
     } else {
       const err = await res.text();
-      console.error(`Failed to sync submission ${sub.id}:`, err);
+      console.error(`Failed to sync submission ${sub.id}:`, redactSupabaseCredential(err, supabaseConfig));
     }
   }
 
@@ -167,12 +165,10 @@ async function migrateLive() {
   let syncedDisc = 0;
   for (const disc of discoveries) {
     const row = toDiscoveryDbRow(disc);
-    const res = await fetch(`${supabaseUrl.replace(/\/+$/, '')}/rest/v1/techhacks_discoveries`, {
+    const res = await fetch(`${supabaseConfig.base}/rest/v1/techhacks_discoveries`, {
       method: 'POST',
       headers: {
-        apikey: supabaseKey,
-        Authorization: `Bearer ${supabaseKey}`,
-        'Content-Type': 'application/json',
+        ...getSupabaseHeaders(supabaseConfig),
         Prefer: 'resolution=merge-duplicates',
       },
       body: JSON.stringify(row),
@@ -182,18 +178,16 @@ async function migrateLive() {
       syncedDisc++;
     } else {
       const err = await res.text();
-      console.error(`Failed to sync discovery ${disc.id}:`, err);
+      console.error(`Failed to sync discovery ${disc.id}:`, redactSupabaseCredential(err, supabaseConfig));
     }
   }
   console.log(`Successfully synced ${syncedDisc}/${discoveries.length} daily tool discoveries.`);
 
   // Published additions
-  const pubRes = await fetch(`${supabaseUrl.replace(/\/+$/, '')}/rest/v1/techhacks_published_additions`, {
+  const pubRes = await fetch(`${supabaseConfig.base}/rest/v1/techhacks_published_additions`, {
     method: 'POST',
     headers: {
-      apikey: supabaseKey,
-      Authorization: `Bearer ${supabaseKey}`,
-      'Content-Type': 'application/json',
+      ...getSupabaseHeaders(supabaseConfig),
       Prefer: 'resolution=merge-duplicates',
     },
     body: JSON.stringify({
@@ -207,7 +201,7 @@ async function migrateLive() {
     console.log('Successfully synced published additions.');
   } else {
     const err = await pubRes.text();
-    console.error('Failed to sync published additions:', err);
+    console.error('Failed to sync published additions:', redactSupabaseCredential(err, supabaseConfig));
   }
 
   console.log('\nMigration complete!');
