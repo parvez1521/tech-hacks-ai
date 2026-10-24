@@ -2,16 +2,25 @@
  * Tech Hacks AI — Durable Storage Adapter
  *
  * Provides a unified storage interface supporting:
- * 1. 'supabase': PostgreSQL via PostgREST HTTP REST API using native fetch (zero dependencies).
- * 2. 'upstash': Serverless Redis via REST API.
- * 3. 'local': Local filesystem JSON storage (data/*.json) for local development and test runners.
- * 4. 'unconfigured_production': Safety mode in serverless/production when cloud DB is missing.
+ * 1. 'supabase': PostgreSQL via privileged PostgREST credentials.
+ * 2. 'supabase_readonly': public reads only; no private moderation reads or writes.
+ * 3. 'upstash': Serverless Redis via REST API.
+ * 4. 'local': Local filesystem JSON storage (data/*.json) for local development and test runners.
+ * 5. 'unconfigured_production': Safety mode in serverless/production when cloud DB is missing.
  *    Blocks writes to ephemeral /tmp to eliminate silent data loss.
  */
 
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { logSanitizedApiError } from './apiErrorHandling.js';
+import {
+  getSupabaseConfig,
+  getSupabaseHeaders as buildSupabaseHeaders,
+  hasSupabasePrivilegedConfig,
+  hasSupabasePublicReadConfig,
+  redactSupabaseCredential,
+} from './supabaseRest.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -22,17 +31,24 @@ const LOCAL_DISCOVERIES_FILE = path.join(BUNDLED_DATA_DIR, 'discoveries.json');
 
 // Determine active storage mode
 export function getStorageMode() {
-  if (process.env.SUPABASE_URL && (process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_ANON_KEY)) {
+  if (process.env.SUPABASE_URL && hasSupabasePrivilegedConfig()) {
     return 'supabase';
   }
   if (process.env.UPSTASH_REDIS_REST_URL && process.env.UPSTASH_REDIS_REST_TOKEN) {
     return 'upstash';
+  }
+  if (process.env.SUPABASE_URL && hasSupabasePublicReadConfig()) {
+    return 'supabase_readonly';
   }
   // Production / serverless without configured durable storage
   if (process.env.VERCEL === '1' || process.env.NODE_ENV === 'production') {
     return 'unconfigured_production';
   }
   return 'local';
+}
+
+function isStorageWriteUnavailable(mode = getStorageMode()) {
+  return mode === 'unconfigured_production' || mode === 'supabase_readonly';
 }
 
 export function isDurable() {
@@ -59,6 +75,9 @@ export function getStorageStatus() {
     } catch {}
     provider = 'Upstash (Serverless Redis REST)';
     details = `Connected to Upstash endpoint (${host})`;
+  } else if (mode === 'supabase_readonly') {
+    provider = 'Supabase (public read only)';
+    details = 'A public Supabase key is configured. Privileged writes and prompt storage require a server-side secret or service-role key.';
   } else if (mode === 'unconfigured_production') {
     provider = 'None (Unconfigured Serverless)';
     details = 'Production environment detected without durable storage credentials. Submissions are paused to prevent ephemeral data loss.';
@@ -70,6 +89,11 @@ export function getStorageStatus() {
     isServerless: Boolean(process.env.VERCEL),
     provider,
     readyForProduction: mode === 'supabase' || mode === 'upstash',
+    readyForGenericWrites: mode === 'supabase' || mode === 'upstash',
+    readyForPromptStorage: mode === 'supabase',
+    readyForPromptCategories: mode === 'supabase',
+    readyForPromptCopyStats: mode === 'supabase',
+    supportsPublicReads: mode === 'supabase' || mode === 'supabase_readonly',
     details,
   };
 }
@@ -130,13 +154,13 @@ function readBundledJson(filePath, defaultValue) {
 // ---------------------------------------------------------------------------
 // Supabase REST Implementation
 // ---------------------------------------------------------------------------
-function getSupabaseHeaders() {
-  const key = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_ANON_KEY;
-  return {
-    apikey: key,
-    Authorization: `Bearer ${key}`,
-    'Content-Type': 'application/json',
-  };
+function getSupabaseHeaders({ allowPublic = false, extraHeaders = {} } = {}) {
+  const config = getSupabaseConfig({ allowPublic });
+  return buildSupabaseHeaders(config, extraHeaders);
+}
+
+function supabaseErrorMessage(message, allowPublic = false) {
+  return redactSupabaseCredential(message, getSupabaseConfig({ allowPublic }));
 }
 
 async function fetchSubmissionsSupabase() {
@@ -147,7 +171,7 @@ async function fetchSubmissionsSupabase() {
   });
   if (!res.ok) {
     const errorText = await res.text();
-    throw new Error(`Supabase query failed (${res.status}): ${errorText}`);
+    throw new Error(supabaseErrorMessage(`Supabase query failed (${res.status}): ${errorText}`));
   }
   const rows = await res.json();
   return Array.isArray(rows) ? rows.map(fromDbRow) : [];
@@ -159,14 +183,13 @@ async function insertSubmissionSupabase(submission) {
   const res = await fetch(url, {
     method: 'POST',
     headers: {
-      ...getSupabaseHeaders(),
-      Prefer: 'return=representation',
+      ...getSupabaseHeaders({ extraHeaders: { Prefer: 'return=representation' } }),
     },
     body: JSON.stringify(row),
   });
   if (!res.ok) {
     const errorText = await res.text();
-    throw new Error(`Supabase insert failed (${res.status}): ${errorText}`);
+    throw new Error(supabaseErrorMessage(`Supabase insert failed (${res.status}): ${errorText}`));
   }
   const inserted = await res.json();
   return Array.isArray(inserted) && inserted[0] ? fromDbRow(inserted[0]) : submission;
@@ -188,14 +211,13 @@ async function updateSubmissionSupabase(id, updateData) {
   const res = await fetch(url, {
     method: 'PATCH',
     headers: {
-      ...getSupabaseHeaders(),
-      Prefer: 'return=representation',
+      ...getSupabaseHeaders({ extraHeaders: { Prefer: 'return=representation' } }),
     },
     body: JSON.stringify(patch),
   });
   if (!res.ok) {
     const errorText = await res.text();
-    throw new Error(`Supabase patch failed (${res.status}): ${errorText}`);
+    throw new Error(supabaseErrorMessage(`Supabase patch failed (${res.status}): ${errorText}`));
   }
   const updated = await res.json();
   return Array.isArray(updated) && updated[0] ? fromDbRow(updated[0]) : null;
@@ -203,12 +225,13 @@ async function updateSubmissionSupabase(id, updateData) {
 
 async function fetchPublishedAdditionsSupabase() {
   const url = `${process.env.SUPABASE_URL.replace(/\/+$/, '')}/rest/v1/techhacks_published_additions?key=eq.root&select=data`;
+  const config = getSupabaseConfig({ allowPublic: true });
   const res = await fetch(url, {
     method: 'GET',
-    headers: getSupabaseHeaders(),
+    headers: buildSupabaseHeaders(config),
   });
   if (!res.ok) {
-    throw new Error(`Supabase published additions query failed (${res.status})`);
+    throw new Error(supabaseErrorMessage(`Supabase published additions query failed (${res.status})`, true));
   }
   const rows = await res.json();
   if (Array.isArray(rows) && rows[0]?.data) {
@@ -222,8 +245,7 @@ async function upsertPublishedAdditionsSupabase(data) {
   const res = await fetch(url, {
     method: 'POST',
     headers: {
-      ...getSupabaseHeaders(),
-      Prefer: 'resolution=merge-duplicates,return=representation',
+      ...getSupabaseHeaders({ extraHeaders: { Prefer: 'resolution=merge-duplicates,return=representation' } }),
     },
     body: JSON.stringify({
       key: 'root',
@@ -233,7 +255,7 @@ async function upsertPublishedAdditionsSupabase(data) {
   });
   if (!res.ok) {
     const errorText = await res.text();
-    throw new Error(`Supabase upsert published additions failed (${res.status}): ${errorText}`);
+    throw new Error(supabaseErrorMessage(`Supabase upsert published additions failed (${res.status}): ${errorText}`));
   }
   return data;
 }
@@ -302,7 +324,7 @@ async function savePublishedAdditionsUpstash(data) {
 // ---------------------------------------------------------------------------
 export async function getSubmissions() {
   const mode = getStorageMode();
-  if (mode === 'unconfigured_production') return [];
+  if (mode === 'unconfigured_production' || mode === 'supabase_readonly') return [];
   if (mode === 'supabase') {
     return await fetchSubmissionsSupabase();
   }
@@ -319,14 +341,14 @@ export async function getSubmissions() {
 export async function saveNewSubmission(submission) {
   const mode = getStorageMode();
 
-  if (mode === 'unconfigured_production') {
+  if (isStorageWriteUnavailable(mode)) {
     console.warn('[TechHacks Storage Alert] Write rejected: Serverless/production environment detected without durable storage credentials.');
     return {
       success: false,
       status: 503,
       error: 'StorageUnavailable',
-      message: 'Durable database storage is not yet configured for production submissions. Submissions are temporarily paused to prevent data loss. Please configure SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY.',
-      storageMode: 'unconfigured_production',
+      message: 'Privileged durable storage is not configured. Submissions are temporarily paused to prevent data loss. Configure a server-side Supabase secret or service-role key, or a supported Upstash store.',
+      storageMode: mode,
     };
   }
 
@@ -335,7 +357,7 @@ export async function saveNewSubmission(submission) {
       const inserted = await insertSubmissionSupabase(submission);
       return { success: true, submission: inserted };
     } catch (err) {
-      console.error('[Storage Error] Failed to insert submission to Supabase:', err.message);
+      logSanitizedApiError('storage:insert-submission', err, { body: submission });
       return {
         success: false,
         status: 500,
@@ -352,6 +374,7 @@ export async function saveNewSubmission(submission) {
       await saveSubmissionsUpstash(list);
       return { success: true, submission };
     } catch (err) {
+      logSanitizedApiError('storage:insert-submission', err, { body: submission });
       return { success: false, status: 500, message: err.message };
     }
   }
@@ -368,7 +391,7 @@ export async function saveNewSubmission(submission) {
 export async function updateExistingSubmission(id, patch) {
   const mode = getStorageMode();
 
-  if (mode === 'unconfigured_production') {
+  if (isStorageWriteUnavailable(mode)) {
     return {
       success: false,
       status: 503,
@@ -385,6 +408,7 @@ export async function updateExistingSubmission(id, patch) {
       }
       return { success: true, submission: updated };
     } catch (err) {
+      logSanitizedApiError('storage:update-submission', err, { body: { id, patch } });
       return { success: false, status: 500, message: err.message };
     }
   }
@@ -412,7 +436,7 @@ export async function updateExistingSubmission(id, patch) {
 export async function getPublishedAdditions() {
   const mode = getStorageMode();
   if (mode === 'unconfigured_production') return { tools: [], guides: [], lastUpdated: '' };
-  if (mode === 'supabase') {
+  if (mode === 'supabase' || mode === 'supabase_readonly') {
     return await fetchPublishedAdditionsSupabase();
   }
   if (mode === 'upstash') {
@@ -424,7 +448,7 @@ export async function getPublishedAdditions() {
 export async function savePublishedAdditions(data) {
   const mode = getStorageMode();
 
-  if (mode === 'unconfigured_production') {
+  if (isStorageWriteUnavailable(mode)) {
     return {
       success: false,
       status: 503,
@@ -438,6 +462,7 @@ export async function savePublishedAdditions(data) {
       await upsertPublishedAdditionsSupabase(data);
       return { success: true, data };
     } catch (err) {
+      logSanitizedApiError('storage:publish-additions', err, { body: data });
       return { success: false, status: 500, message: err.message };
     }
   }
@@ -496,11 +521,11 @@ async function fetchDiscoveriesSupabase(onlyPublished = false) {
   }
   const res = await fetch(url, {
     method: 'GET',
-    headers: getSupabaseHeaders(),
+    headers: getSupabaseHeaders({ allowPublic: onlyPublished }),
   });
   if (!res.ok) {
     const errorText = await res.text();
-    throw new Error(`Supabase discoveries query failed (${res.status}): ${errorText}`);
+    throw new Error(supabaseErrorMessage(`Supabase discoveries query failed (${res.status}): ${errorText}`, onlyPublished));
   }
   const rows = await res.json();
   return Array.isArray(rows) ? rows.map(fromDiscoveryDbRow) : [];
@@ -598,13 +623,15 @@ async function saveDiscoveriesUpstash(discoveries) {
 export async function getDiscoveries(onlyPublished = false) {
   const mode = getStorageMode();
   let list = [];
-  if (mode === 'supabase') {
+  if (mode === 'supabase' || (mode === 'supabase_readonly' && onlyPublished)) {
     try {
       return await fetchDiscoveriesSupabase(onlyPublished);
     } catch (err) {
-      console.error('[Storage Error] Failed to fetch discoveries from Supabase, falling back to local file:', err.message);
+      logSanitizedApiError('storage:fetch-discoveries', err);
       list = readBundledJson(LOCAL_DISCOVERIES_FILE, []);
     }
+  } else if (mode === 'supabase_readonly') {
+    return [];
   } else if (mode === 'upstash') {
     try {
       list = await fetchDiscoveriesUpstash();
@@ -627,12 +654,12 @@ export async function getDiscoveries(onlyPublished = false) {
 export async function saveNewDiscovery(discovery) {
   const mode = getStorageMode();
 
-  if (mode === 'unconfigured_production') {
+  if (isStorageWriteUnavailable(mode)) {
     return {
       success: false,
       status: 503,
       error: 'StorageUnavailable',
-      message: 'Durable database storage is not configured for production discoveries. Please configure SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY.',
+      message: 'Privileged durable storage is not configured. Discovery submissions are temporarily paused. Configure a server-side Supabase secret or service-role key, or a supported Upstash store.',
     };
   }
 
@@ -641,7 +668,8 @@ export async function saveNewDiscovery(discovery) {
       const inserted = await insertDiscoverySupabase(discovery);
       return { success: true, discovery: inserted };
     } catch (err) {
-      return { success: false, status: 500, message: err.message };
+      logSanitizedApiError('storage:insert-discovery', err, { body: discovery });
+      return { success: false, status: 500, error: 'DatabaseError', message: 'Could not save discovery. Please try again later.' };
     }
   }
 
@@ -652,7 +680,8 @@ export async function saveNewDiscovery(discovery) {
       await saveDiscoveriesUpstash(list);
       return { success: true, discovery };
     } catch (err) {
-      return { success: false, status: 500, message: err.message };
+      logSanitizedApiError('storage:insert-discovery', err, { body: discovery });
+      return { success: false, status: 500, error: 'DatabaseError', message: 'Could not save discovery. Please try again later.' };
     }
   }
 
@@ -668,7 +697,7 @@ export async function saveNewDiscovery(discovery) {
 export async function updateExistingDiscovery(id, patch) {
   const mode = getStorageMode();
 
-  if (mode === 'unconfigured_production') {
+  if (isStorageWriteUnavailable(mode)) {
     return {
       success: false,
       status: 503,
@@ -685,7 +714,8 @@ export async function updateExistingDiscovery(id, patch) {
       }
       return { success: true, discovery: updated };
     } catch (err) {
-      return { success: false, status: 500, message: err.message };
+      logSanitizedApiError('storage:update-discovery', err, { body: { id, patch } });
+      return { success: false, status: 500, error: 'DatabaseError', message: 'Could not update discovery. Please try again later.' };
     }
   }
 
@@ -712,7 +742,7 @@ export async function updateExistingDiscovery(id, patch) {
 export async function deleteExistingDiscovery(id) {
   const mode = getStorageMode();
 
-  if (mode === 'unconfigured_production') {
+  if (isStorageWriteUnavailable(mode)) {
     return {
       success: false,
       status: 503,
@@ -726,7 +756,8 @@ export async function deleteExistingDiscovery(id) {
       await deleteDiscoverySupabase(id);
       return { success: true };
     } catch (err) {
-      return { success: false, status: 500, message: err.message };
+      logSanitizedApiError('storage:delete-discovery', err, { body: { id } });
+      return { success: false, status: 500, error: 'DatabaseError', message: 'Could not delete discovery. Please try again later.' };
     }
   }
 

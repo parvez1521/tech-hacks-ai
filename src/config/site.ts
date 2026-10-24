@@ -1,7 +1,9 @@
 /**
- * Tech Hacks AI — Central Platform Configuration
+ * SwitchRoute — Central Platform Configuration
  * Canonical brand identity, navigation routes, metadata, and social links.
  */
+
+import { contactConfig } from './contactConfig.ts';
 
 export interface NavItem {
   title: string;
@@ -46,22 +48,22 @@ export interface SiteConfig {
 }
 
 const configuredUrl =
-  (typeof import.meta !== 'undefined' && import.meta.env?.VITE_SITE_URL) || 'https://techhacksai.com';
+  (typeof import.meta !== 'undefined' && import.meta.env?.VITE_SITE_URL) || 'https://switchroute.in';
 
 export const siteConfig: SiteConfig = {
-  name: 'Tech Hacks AI',
-  shortName: 'Tech Hacks',
-  brandMark: 'AI',
-  tagline: 'Discover AI Tools, Free Software & Open-Source Alternatives',
+  name: 'SwitchRoute',
+  shortName: 'SwitchRoute',
+  brandMark: 'SR',
+  tagline: 'Free AI Tools, Smarter Alternatives & Open Source',
   description:
-    'A curated discovery platform for top generative AI tools, verified free software, open-source alternatives, step-by-step guides, and developer utilities.',
+    'Find free AI plans, open-source alternatives, browser utilities, prompts, practical guides, and current offers before adding another subscription.',
   url: configuredUrl.replace(/\/+$/, ''),
   ogImage: `${configuredUrl.replace(/\/+$/, '')}/og-image.png`,
 
   links: {
     github: 'https://github.com',
     twitter: 'https://twitter.com',
-    email: 'contact@techhacksai.com',
+    email: contactConfig.email,
   },
   adsense: {
     enabled: false, // Remains disabled until formal Google AdSense account approval
@@ -106,13 +108,13 @@ export const siteConfig: SiteConfig = {
   },
   footer: {
     about:
-      'Tech Hacks AI is a curated discovery platform indexing the top generative AI tools, verified free software, open-source alternatives, step-by-step guides, and developer utilities.',
-    copyright: `© ${new Date().getFullYear()} Tech Hacks AI. Built with open web standards.`,
+      'SwitchRoute is an independent discovery directory for free AI plans, open-source software, browser utilities, prompts, practical guides, and current offers.',
+    copyright: `© ${new Date().getFullYear()} SwitchRoute. Built with open web standards.`,
   },
 };
 
 /**
- * Format document title with standard Tech Hacks AI suffix
+ * Format document title with standard SwitchRoute suffix
  */
 export function formatPageTitle(pageTitle?: string): string {
   if (!pageTitle) {

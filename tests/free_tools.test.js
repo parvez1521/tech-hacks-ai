@@ -3,10 +3,11 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
 import { freeToolsData } from '../src/data/freeToolsData.ts';
-import { getCatalogStats, getFreeToolBySlug } from '../src/services/aiCatalogService.ts';
+import { getAllFreeTools, getCatalogStats, getFreeToolBySlug } from '../src/services/aiCatalogService.ts';
+import { everydayUtilityOrder, utilityCategoryDefinitions } from '../src/data/catalogTaxonomy.ts';
 import { createQrMatrix } from '../src/lib/utilities/qr.ts';
 import { createLatestRequestGate } from '../src/lib/utilities/requestGate.ts';
-import { getAnimatedCountValue, formatCount } from '../src/lib/counter.ts';
+import { getAnimatedCountValue, formatCount, formatMilestoneCount } from '../src/lib/counter.ts';
 
 describe('Built-in browser utility registry', () => {
   test('contains at least 20 new distinct utilities with unique IDs and slugs', () => {
@@ -27,6 +28,14 @@ describe('Built-in browser utility registry', () => {
       'mp4-to-mp3', 'youtube-video-downloader', 'instagram-video-downloader',
     ];
     expected.forEach((slug) => assert.ok(getFreeToolBySlug(slug), `${slug} must be registered`));
+  });
+
+  test('everyday utility priorities lead the listing without duplicating routes', () => {
+    const tools = getAllFreeTools();
+    assert.equal(utilityCategoryDefinitions[0].id, 'image-graphics');
+    assert.deepEqual(tools.slice(0, everydayUtilityOrder.length).map((tool) => tool.slug), everydayUtilityOrder);
+    assert.equal(new Set(tools.map((tool) => tool.slug)).size, freeToolsData.length);
+    everydayUtilityOrder.forEach((slug) => assert.ok(getFreeToolBySlug(slug), `${slug} retains its detail route`));
   });
 
   test('every registered utility has a real runner case and no generic success placeholder', () => {
@@ -55,7 +64,19 @@ describe('Built-in browser utility registry', () => {
 
   test('Catalog stats are de-duplicated and include the expanded utility count', () => {
     const stats = getCatalogStats();
-    assert.deepEqual(stats, { catalogIdentities: 104, openSourceTools: 27, aiPlatforms: 65, alternativeTargets: 14, browserUtilities: 38 });
+    assert.deepEqual(stats, {
+      catalogIdentities: 121,
+      openSourceTools: 27,
+      aiPlatforms: 75,
+      alternativeTargets: 25,
+      browserUtilities: 38,
+      alternativeRelationships: 224,
+      uniquePrompts: 582,
+      proprietaryToolsWithAlternatives: 25,
+      imagePrompts: 548,
+      videoPrompts: 12,
+      nonVisualPrompts: 22,
+    });
   });
 
   test('homepage counter resolves to truthful final values and skips animation for reduced motion', () => {
@@ -63,5 +84,8 @@ describe('Built-in browser utility registry', () => {
     assert.equal(getAnimatedCountValue(104, 0.5), 91);
     assert.equal(getAnimatedCountValue(104, 0, true), 104);
     assert.equal(formatCount(1042), '1,042');
+    assert.equal(formatMilestoneCount(999), '999');
+    assert.equal(formatMilestoneCount(1000), '1,000+');
+    assert.equal(formatMilestoneCount(1250), '1,000+');
   });
 });

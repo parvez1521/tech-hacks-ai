@@ -8,10 +8,10 @@ import { guidesData } from '../src/data/guidesData.ts';
 import { validatePromptCategory } from '../server/promptCategoriesStore.js';
 import categoryApi from '../api/prompt-categories.js';
 
-test('featured human portraits lead the curated prompt order and preserve useful portrait subcategories', () => {
+test('the single-subject portrait leads the featured order and preserves the other curated portraits', () => {
   const ordered = getAllPrompts();
   assert.deepEqual(ordered.slice(0, 4).map((prompt) => prompt.slug), [
-    'portrait-editorial-duo', 'portrait-women-windowlight', 'portrait-mens-professional-headshot', 'portrait-couple-courtyard-dusk',
+    'portrait-women-windowlight', 'portrait-editorial-duo', 'portrait-mens-professional-headshot', 'portrait-couple-courtyard-dusk',
   ]);
   assert.equal(promptCategories[0].slug, 'human-portraits');
   for (const tag of ['womens-portraits', 'mens-portraits', 'couple-portraits', 'professional-headshots', 'fashion-editorial', 'cinematic-portraits']) {

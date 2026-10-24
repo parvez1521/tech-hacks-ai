@@ -1,11 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useReducedMotion } from 'motion/react';
 
-import { formatCount, getAnimatedCountValue } from '../lib/counter.ts';
+import { formatCount, formatMilestoneCount, getAnimatedCountValue } from '../lib/counter.ts';
 
-
-export const AnimatedCount: React.FC<{ value: number; className?: string; durationMs?: number }> = ({
-  value, className = '', durationMs = 900,
+export const AnimatedCount: React.FC<{ value: number; className?: string; durationMs?: number; milestone?: number }> = ({
+  value, className = '', durationMs = 900, milestone,
 }) => {
   const reducedMotion = useReducedMotion();
   const elementRef = useRef<HTMLElement>(null);
@@ -50,5 +49,6 @@ export const AnimatedCount: React.FC<{ value: number; className?: string; durati
     if (animatedRef.current && !reducedMotion) setDisplayValue(value);
   }, [value, reducedMotion]);
 
-  return <strong ref={elementRef} className={className} aria-label={formatCount(value)}>{formatCount(displayValue)}</strong>;
+  const formatValue = (count: number) => milestone ? formatMilestoneCount(count, milestone) : formatCount(count);
+  return <strong ref={elementRef} className={className} aria-label={formatCount(value)}>{formatValue(displayValue)}</strong>;
 };

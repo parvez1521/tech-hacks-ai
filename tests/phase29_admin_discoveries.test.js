@@ -498,7 +498,7 @@ describe('Phase 29: Admin-Managed Tool Discoveries & Featured Tools', () => {
     test('page title and description format properly for discoveries route', () => {
       const title = getRouteTitle('discoveries');
       assert.ok(title.includes('Daily Discoveries'));
-      assert.ok(title.includes('Tech Hacks AI'));
+      assert.ok(title.includes('SwitchRoute'));
 
       const desc = getRouteDescription('discoveries');
       assert.ok(desc.includes('daily discoveries'));

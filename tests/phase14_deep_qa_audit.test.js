@@ -20,7 +20,7 @@ describe('Phase 14: Deep QA, Production Readiness & Trust Audit', () => {
     ssrModule = await import('../dist/test-ssr.js');
   });
 
-  function setupMockBrowser(initialUrl = 'https://techhacksai.com/') {
+  function setupMockBrowser(initialUrl = 'https://switchroute.in/') {
     const parsedUrl = new URL(initialUrl);
     const mockStorage = {};
 
@@ -84,10 +84,10 @@ describe('Phase 14: Deep QA, Production Readiness & Trust Audit', () => {
   // -------------------------------------------------------------------------
   describe('Route Families & Deep Browser Rendering', () => {
     test('renders Homepage with 10-section hierarchy and valid navigation links', () => {
-      setupMockBrowser('https://techhacksai.com/');
+      setupMockBrowser('https://switchroute.in/');
       const html = renderClean(React.createElement(ssrModule.App));
 
-      assert.ok(html.includes('Find the right tools for the work.') || html.includes('Find the right tools for the work.'), 'Homepage H1 headline');
+      assert.ok(html.includes('id="home-hero-heading"') && ['Another AI tool?', 'Sure.', 'Another Subscription?', 'Nope.'].every((line) => html.includes(line)), 'Homepage H1 renders the four approved headline lines');
       assert.ok(html.includes('What do you want to build or replace today?'), 'Goal-driven discovery section');
       assert.ok(html.includes("Editor&#x27;s Picks: Benchmark-Leading Tools") || html.includes("Editor's Picks: Benchmark-Leading Tools"), 'Curated showcase section');
       assert.ok(html.includes('Explore Top Generative AI Platforms'), 'Trending AI models section');
@@ -100,37 +100,37 @@ describe('Phase 14: Deep QA, Production Readiness & Trust Audit', () => {
     });
 
     test('renders /ai-tools directory and /ai-tools/claude detail page', () => {
-      setupMockBrowser('https://techhacksai.com/ai-tools');
+      setupMockBrowser('https://switchroute.in/ai-tools');
       const listHtml = renderClean(React.createElement(ssrModule.App));
       assert.ok(listHtml.includes('Discover Best AI Tools &amp; Generative Platforms') || listHtml.includes('Discover Best AI Tools & Generative Platforms'), 'AI directory header');
 
-      setupMockBrowser('https://techhacksai.com/ai-tools/claude');
+      setupMockBrowser('https://switchroute.in/ai-tools/claude');
       const detailHtml = renderClean(React.createElement(ssrModule.App));
-      assert.ok(detailHtml.includes('Claude 3.5 Sonnet'), 'Claude title in detail');
+      assert.ok(detailHtml.includes('Claude'), 'Claude title in detail');
       assert.ok(detailHtml.includes('Pricing Structure &amp; Model Access') || detailHtml.includes('Pricing Structure & Model Access'), 'Pricing structure breakdown');
       assert.ok(detailHtml.includes('https://www.anthropic.com/pricing'), 'Official pricing URL link');
     });
 
     test('renders /free-ai-sites with verified free platforms', () => {
-      setupMockBrowser('https://techhacksai.com/free-ai-sites');
+      setupMockBrowser('https://switchroute.in/free-ai-sites');
       const html = renderClean(React.createElement(ssrModule.App));
       assert.ok(html.includes('Free AI Sites &amp; Generative Tools') || html.includes('Free AI Sites & Generative Tools'), 'Free AI heading');
       assert.ok(html.includes('Ollama'), 'Renders Ollama in free directory');
     });
 
     test('renders /alternatives and /alternatives/figma replacement page', () => {
-      setupMockBrowser('https://techhacksai.com/alternatives');
+      setupMockBrowser('https://switchroute.in/alternatives');
       const listHtml = renderClean(React.createElement(ssrModule.App));
       assert.ok(listHtml.includes('Browse Open Source Software Alternatives'), 'Alternatives directory header');
 
-      setupMockBrowser('https://techhacksai.com/alternatives/figma');
+      setupMockBrowser('https://switchroute.in/alternatives/figma');
       const detailHtml = renderClean(React.createElement(ssrModule.App));
       assert.ok(detailHtml.includes('Figma'), 'Figma header');
       assert.ok(detailHtml.includes('Penpot'), 'Penpot replacement card rendered');
     });
 
     test('renders /offers and verified detail pages', () => {
-      setupMockBrowser('https://techhacksai.com/offers');
+      setupMockBrowser('https://switchroute.in/offers');
       const listHtml = renderClean(React.createElement(ssrModule.App));
       assert.ok(listHtml.includes('AI Deals, Student Plans &amp; Exclusive Discounts') || listHtml.includes('AI Deals, Student Plans & Exclusive Discounts'), 'Offers directory header');
       assert.ok(listHtml.includes('Active ('), 'Active status tab');
@@ -138,7 +138,7 @@ describe('Phase 14: Deep QA, Production Readiness & Trust Audit', () => {
       assert.ok(listHtml.includes('aria-label="Sort offers"'), 'Offers have an accessible sorting control');
 
       // Test Azure for Students detail page
-      setupMockBrowser('https://techhacksai.com/offers/azure-for-students');
+      setupMockBrowser('https://switchroute.in/offers/azure-for-students');
       const azureHtml = renderClean(React.createElement(ssrModule.App));
       assert.ok(azureHtml.includes('Microsoft Azure for Students'), 'Azure offer title');
       assert.ok(azureHtml.includes('$100 in Azure credit'), 'Azure benefit summary');
@@ -146,35 +146,35 @@ describe('Phase 14: Deep QA, Production Readiness & Trust Audit', () => {
       assert.ok(azureHtml.includes('Step-by-Step'), 'Claim steps rendered');
 
       // Test Jio Gemini offer detail page
-      setupMockBrowser('https://techhacksai.com/offers/jio-google-gemini-offer');
+      setupMockBrowser('https://switchroute.in/offers/jio-google-gemini-offer');
       const jioHtml = renderClean(React.createElement(ssrModule.App));
       assert.ok(jioHtml.includes('Reliance Jio'), 'Jio provider');
       assert.ok(jioHtml.toLowerCase().includes('18 months'), '18 months duration');
 
-      setupMockBrowser('https://techhacksai.com/offers/figma-education');
+      setupMockBrowser('https://switchroute.in/offers/figma-education');
       const figmaOfferHtml = renderClean(React.createElement(ssrModule.App));
       assert.ok(figmaOfferHtml.includes('Pending Verification'), 'Unverified offer detail is labelled as pending, not expired');
     });
 
     test('renders /compare with multi-tool parameters and /pick wizard', () => {
-      setupMockBrowser('https://techhacksai.com/compare?tools=supabase,firebase');
+      setupMockBrowser('https://switchroute.in/compare?tools=supabase,firebase');
       const compareHtml = renderClean(React.createElement(ssrModule.App));
       assert.ok(compareHtml.includes('Supabase'), 'Supabase in comparison');
       assert.ok(compareHtml.includes('Firebase'), 'Firebase in comparison');
 
-      setupMockBrowser('https://techhacksai.com/pick');
+      setupMockBrowser('https://switchroute.in/pick');
       const pickHtml = renderClean(React.createElement(ssrModule.App));
       assert.ok(pickHtml.includes('Help Me Pick the Right Tool'), 'Pick wizard title');
     });
 
     test('renders /guides and /prompt-library with detail pages', () => {
-      setupMockBrowser('https://techhacksai.com/guides');
+      setupMockBrowser('https://switchroute.in/guides');
       const guidesHtml = renderClean(React.createElement(ssrModule.App));
       assert.ok(guidesHtml.includes('Step-by-Step AI Guides &amp; Workflows') || guidesHtml.includes('Step-by-Step AI Guides & Workflows'), 'Guides title');
 
-      setupMockBrowser('https://techhacksai.com/prompt-library');
+      setupMockBrowser('https://switchroute.in/prompt-library');
       const promptsHtml = renderClean(React.createElement(ssrModule.App));
-      assert.ok(promptsHtml.includes('AI Prompt Library &amp; Creative Recipes') || promptsHtml.includes('AI Prompt Library & Creative Recipes'), 'Prompts title');
+      assert.ok(promptsHtml.includes('Find a prompt. Make it yours.') || promptsHtml.includes('Find a prompt. Make it yours.'), 'Prompts title');
     });
   });
 
@@ -326,22 +326,22 @@ describe('Phase 14: Deep QA, Production Readiness & Trust Audit', () => {
       const content = fs.readFileSync(sitemapPath, 'utf8');
 
       // Core routes
-      assert.ok(content.includes('<loc>https://techhacksai.com/</loc>'), 'Homepage in sitemap');
-      assert.ok(content.includes('<loc>https://techhacksai.com/ai-tools</loc>'), 'AI tools in sitemap');
-      assert.ok(content.includes('<loc>https://techhacksai.com/offers</loc>'), 'Offers in sitemap');
-      assert.ok(content.includes('<loc>https://techhacksai.com/alternatives</loc>'), 'Alternatives in sitemap');
-      assert.ok(content.includes('<loc>https://techhacksai.com/free-ai-sites</loc>'), 'Free AI sites in sitemap');
-      assert.ok(content.includes('<loc>https://techhacksai.com/compare</loc>'), 'Compare in sitemap');
-      assert.ok(content.includes('<loc>https://techhacksai.com/pick</loc>'), 'Pick in sitemap');
+      assert.ok(content.includes('<loc>https://switchroute.in/</loc>'), 'Homepage in sitemap');
+      assert.ok(content.includes('<loc>https://switchroute.in/ai-tools</loc>'), 'AI tools in sitemap');
+      assert.ok(content.includes('<loc>https://switchroute.in/offers</loc>'), 'Offers in sitemap');
+      assert.ok(content.includes('<loc>https://switchroute.in/alternatives</loc>'), 'Alternatives in sitemap');
+      assert.ok(content.includes('<loc>https://switchroute.in/free-ai-sites</loc>'), 'Free AI sites in sitemap');
+      assert.ok(content.includes('<loc>https://switchroute.in/compare</loc>'), 'Compare in sitemap');
+      assert.ok(content.includes('<loc>https://switchroute.in/pick</loc>'), 'Pick in sitemap');
 
       // Offer detail slugs
-      assert.ok(content.includes('https://techhacksai.com/offers/azure-for-students'), 'Azure offer in sitemap');
-      assert.ok(content.includes('https://techhacksai.com/offers/jio-google-gemini-offer'), 'Jio Gemini offer in sitemap');
-      assert.ok(content.includes('https://techhacksai.com/offers/github-copilot-free'), 'Copilot free in sitemap');
+      assert.ok(content.includes('https://switchroute.in/offers/azure-for-students'), 'Azure offer in sitemap');
+      assert.ok(content.includes('https://switchroute.in/offers/jio-google-gemini-offer'), 'Jio Gemini offer in sitemap');
+      assert.ok(content.includes('https://switchroute.in/offers/github-copilot-free'), 'Copilot free in sitemap');
 
       // AI tool detail slugs
-      assert.ok(content.includes('https://techhacksai.com/ai-tools/claude'), 'Claude in sitemap');
-      assert.ok(content.includes('https://techhacksai.com/ai-tools/cursor'), 'Cursor in sitemap');
+      assert.ok(content.includes('https://switchroute.in/ai-tools/claude'), 'Claude in sitemap');
+      assert.ok(content.includes('https://switchroute.in/ai-tools/cursor'), 'Cursor in sitemap');
 
       // Private routes excluded
       assert.ok(!content.includes('/saved'), 'Saved items route must NOT be in sitemap');
@@ -372,7 +372,7 @@ describe('Phase 14: Deep QA, Production Readiness & Trust Audit', () => {
         id: 'claude',
         type: 'ai',
         slug: 'claude',
-        name: 'Claude 3.5 Sonnet',
+        name: 'Claude',
         tagline: 'Frontier AI model',
       });
       assert.strictEqual(getBookmarks().length, 2, '2 bookmarks stored');

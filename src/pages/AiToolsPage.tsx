@@ -1,7 +1,8 @@
 import React from 'react';
 import { Link, useRouter, safeScrollTo } from '../router/Router';
-import { filterAndSortAiTools, getAllAiTools, isCommunityTool } from '../services/aiCatalogService';
+import { filterAndSortAiTools, getAiToolBySlug, getAllAiTools, getVideoDiscoveryTools, isCommunityTool } from '../services/aiCatalogService';
 import { aiCategories } from '../data/aiToolsData';
+import { proprietaryTools } from '../data/alternatives';
 import { AiToolCard } from '../components/AiToolCard';
 import { Pagination } from '../components/Pagination';
 import { EmptyState } from '../components/EmptyState';
@@ -15,21 +16,43 @@ export const AiToolsPage: React.FC = () => {
   const filterState: AiFilterState = {
     searchQuery: searchParams.get('q') || '',
     category: searchParams.get('category') || null,
+    alternativesTo: searchParams.get('alternativesTo') || null,
     pricingType: (searchParams.get('price') as PricingType) || 'all',
     sortBy: (searchParams.get('sort') as any) || 'popular',
     page: parseInt(searchParams.get('page') || '1', 10) || 1,
+    videoDiscoverySection: (['self-hosted', 'open-weights', 'browser-demos'].includes(searchParams.get('video') || '')
+      ? searchParams.get('video') : 'all') as any,
   };
 
   const { tools, totalCount, totalPages, currentPage } = filterAndSortAiTools(filterState);
   const availableCategories = aiCategories.filter((cat) => getAllAiTools().some((tool) => !isCommunityTool(tool) && tool.category === cat.id));
+  const alternativeTargetName = filterState.alternativesTo
+    ? getAiToolBySlug(filterState.alternativesTo)?.name
+      || proprietaryTools.find((tool) => tool.slug === filterState.alternativesTo)?.name
+      || filterState.alternativesTo
+    : null;
 
   const handleSearchChange = (q: string) => {
     setSearchParams({ q: q || null, page: null }, { replace: true });
   };
 
   const handleCategoryChange = (cat: string | null) => {
-    setSearchParams({ category: cat, page: null });
+    setSearchParams({ category: cat, page: null, video: null });
   };
+
+  const handleVideoSectionChange = (section: string | null) => {
+    setSearchParams({ category: 'video', video: section, page: null });
+  };
+
+  const videoCollections = [
+    { id: 'self-hosted', title: 'Truly free & self-hosted', description: 'Run the application locally. Check whether inference uses local hardware, a free API key or an optional paid provider.', count: getVideoDiscoveryTools('self-hosted').length },
+    { id: 'open-weights', title: 'Open-weight models', description: 'Model checkpoints for developers and GPU users, with version-specific licenses and documented hardware needs.', count: getVideoDiscoveryTools('open-weights').length },
+    { id: 'browser-demos', title: 'Browser-based demos', description: 'Try hosted workflows without installing full model weights. Accounts, quotas and queue times vary.', count: getVideoDiscoveryTools('browser-demos').length },
+  ];
+  const selectedVideoCollection = filterState.videoDiscoverySection !== 'all' ? filterState.videoDiscoverySection : null;
+  const visibleVideoCount = selectedVideoCollection
+    ? filterAndSortAiTools({ ...filterState, videoDiscoverySection: selectedVideoCollection, page: 1 }).totalCount
+    : totalCount;
 
   const handlePriceChange = (price: string) => {
     setSearchParams({ price: price === 'all' ? null : price, page: null });
@@ -129,7 +152,7 @@ export const AiToolsPage: React.FC = () => {
               </select>
             </div>
 
-            {(filterState.searchQuery || filterState.category || filterState.pricingType !== 'all') && (
+            {(filterState.searchQuery || filterState.category || filterState.alternativesTo || filterState.pricingType !== 'all') && (
               <button
                 type="button"
                 onClick={resetSearchParams}
@@ -140,6 +163,19 @@ export const AiToolsPage: React.FC = () => {
             )}
           </div>
         </div>
+
+        {filterState.alternativesTo && (
+          <div role="status" className="mb-5 flex flex-wrap items-center justify-between gap-2 rounded-lg border border-primary/20 bg-primary/5 px-3 py-2 text-sm text-secondary-foreground">
+            <span>Showing catalog relationships for <strong className="text-foreground">{alternativeTargetName}</strong>.</span>
+            <button
+              type="button"
+              onClick={() => setSearchParams({ alternativesTo: null, page: null })}
+              className="font-semibold text-primary hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-sm"
+            >
+              Clear relationship filter
+            </button>
+          </div>
+        )}
 
         {/* Category Pills */}
         <div className="flex items-center gap-2 overflow-x-auto no-scrollbar pb-2">
@@ -172,6 +208,36 @@ export const AiToolsPage: React.FC = () => {
             );
           })}
         </div>
+
+        {filterState.category === 'video' && (
+          <section className="mt-5 mb-7" aria-labelledby="video-discovery-heading">
+            <div className="mb-3 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+              <div>
+                <h2 id="video-discovery-heading" className="text-lg font-bold text-foreground">Free video generation, clearly sorted</h2>
+                <p className="mt-1 max-w-3xl text-xs leading-relaxed text-secondary-foreground">Choose a workflow first. Local apps, downloadable weights and hosted demos have different costs, requirements and licenses.</p>
+              </div>
+              {selectedVideoCollection && <button type="button" onClick={() => handleVideoSectionChange(null)} className="self-start rounded-lg border border-border px-3 py-1.5 text-xs font-semibold text-primary hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary">Show all video tools</button>}
+            </div>
+            <div className="grid grid-cols-1 gap-3 md:grid-cols-3">
+              {videoCollections.map((collection) => {
+                const selected = selectedVideoCollection === collection.id;
+                const matchingCount = filterAndSortAiTools({ ...filterState, videoDiscoverySection: collection.id as any, page: 1 }).totalCount;
+                return (
+                  <button key={collection.id} type="button" aria-pressed={selected} onClick={() => handleVideoSectionChange(selected ? null : collection.id)} className={`rounded-xl border p-4 text-left transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary ${selected ? 'border-primary bg-primary/5' : 'border-border bg-card hover:border-primary/50 hover:bg-accent/40'}`}>
+                    <span className="flex items-center justify-between gap-3">
+                      <span className="font-semibold text-foreground">{collection.title}</span>
+                      <span className="rounded-full border border-border bg-background px-2 py-0.5 text-[11px] text-muted-foreground">{matchingCount}</span>
+                    </span>
+                    <span className="mt-2 block text-xs leading-relaxed text-secondary-foreground">{collection.description}</span>
+                  </button>
+                );
+              })}
+            </div>
+            {selectedVideoCollection === 'browser-demos' && <p className="mt-3 rounded-lg border border-amber-300/70 bg-amber-50 px-3 py-2 text-xs leading-relaxed text-amber-900 dark:border-amber-800 dark:bg-amber-950/30 dark:text-amber-200">Hugging Face Spaces is a collection, not one generator. Individual demos may need sign-in and may have queues, account quotas or limited availability.</p>}
+          </section>
+        )}
+
+        <p className="mb-3 text-xs text-secondary-foreground" aria-live="polite">Showing {tools.length} of {visibleVideoCount} matching tools</p>
       </div>
 
       {/* Grid or Empty State */}

@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter, Link } from '../router/Router';
-import { getAiToolBySlug, filterAndSortAiTools, getAllGuides } from '../services/aiCatalogService';
+import { getAiToolBySlug, filterAndSortAiTools, getAllGuides, getAiAlternativesForTarget } from '../services/aiCatalogService';
 import { BookmarkButton } from '../components/BookmarkButton';
 import { AiToolCard } from '../components/AiToolCard';
+import { ToolCard } from '../components/ToolCard';
 import { GuideCard } from '../components/GuideCard';
 import { BookmarkItem } from '../types';
 import { Sparkles, Star, ExternalLink, ArrowLeft, CheckCircle2, ShieldCheck, Tag, Info, Calendar, Lock, Unlock, Server, Scale, Share2, Check, BookOpen, Users, Cpu } from 'lucide-react';
 import { BrandLogo } from '../components/BrandLogo';
 import { siteConfig } from '../config/siteConfig';
+import { getAiAlternativeMapping, getOpenSourceAlternativesForTarget } from '../data/aiAlternativeMappings.ts';
+import { AffiliateDisclosure } from '../components/AffiliateDisclosure';
 
 export const AiToolDetailPage: React.FC = () => {
   const { params } = useRouter();
@@ -63,6 +66,8 @@ export const AiToolDetailPage: React.FC = () => {
   // Find related tools in same category
   const relatedTools = filterAndSortAiTools({ searchQuery: '', category: tool.category, pricingType: 'all', sortBy: 'popular', page: 1 }).tools;
   const similarTools = relatedTools.filter((t) => t.id !== tool.id).slice(0, 3);
+  const mappedAlternatives = getAiAlternativesForTarget(tool.slug).filter((item) => item.slug !== tool.slug).slice(0, 6);
+  const mappedOpenSourceAlternatives = getOpenSourceAlternativesForTarget(tool.slug);
 
   // Find related guides mentioning this tool or category
   const allGuides = getAllGuides();
@@ -173,15 +178,18 @@ export const AiToolDetailPage: React.FC = () => {
 
           <div className="flex items-center gap-3">
             <BookmarkButton item={bookmarkItem} size="md" />
-            <a
-              href={tool.websiteUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-primary text-primary-foreground font-semibold text-sm hover:bg-primary-hover shadow-md transition-all active:scale-98"
-            >
-              <span>Visit Official Website</span>
-              <ExternalLink className="w-4 h-4" />
-            </a>
+            <div className="flex flex-col items-end gap-1">
+              <a
+                href={tool.affiliateUrl || tool.websiteUrl}
+                target="_blank"
+                rel={tool.affiliateUrl ? 'noopener noreferrer sponsored nofollow' : 'noopener noreferrer'}
+                className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-primary text-primary-foreground font-semibold text-sm hover:bg-primary-hover shadow-md transition-all active:scale-98"
+              >
+                <span>{tool.affiliateUrl ? `Try ${tool.name}` : tool.modelWeightsUrl && tool.websiteUrl === tool.openSourceRepoUrl ? 'Official Repository' : 'Visit Official Website'}</span>
+                <ExternalLink className="w-4 h-4" />
+              </a>
+              {tool.affiliateUrl && <AffiliateDisclosure />}
+            </div>
           </div>
         </div>
 
@@ -232,7 +240,12 @@ export const AiToolDetailPage: React.FC = () => {
               <span className="text-muted-foreground block text-[11px] mb-1 font-medium">Requirements & Verification</span>
               <div className="flex flex-col gap-1 text-[11px]">
                 <span className="flex items-center gap-1.5 text-foreground">
-                  {tool.requiresAccount ? (
+                  {tool.accountRequirement === 'varies' ? (
+                    <>
+                      <Lock className="w-3 h-3 text-amber-400" />
+                      <span>Account requirements vary by demo</span>
+                    </>
+                  ) : tool.requiresAccount ? (
                     <>
                       <Lock className="w-3 h-3 text-amber-400" />
                       <span>Account Required</span>
@@ -252,18 +265,14 @@ export const AiToolDetailPage: React.FC = () => {
             </div>
           </div>
 
-          {tool.openSourceRepoUrl && (
-            <div className="pt-2 flex items-center justify-between text-[11px] text-muted-foreground">
-              <span>Open-Source Repository & Local Deployment:</span>
-              <a
-                href={tool.openSourceRepoUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-primary hover:underline font-mono inline-flex items-center gap-1"
-              >
-                <span>GitHub Repository</span>
-                <ExternalLink className="w-3 h-3" />
-              </a>
+          {tool.accessLabel && <p className="rounded-md border border-primary/20 bg-primary/5 px-3 py-2 text-xs font-semibold text-foreground">{tool.accessLabel}</p>}
+          {tool.licenseSummary && <p className="text-xs leading-relaxed text-secondary-foreground"><strong className="text-foreground">License:</strong> {tool.licenseSummary}</p>}
+
+          {(tool.openSourceRepoUrl || tool.modelWeightsUrl || tool.relatedDemoUrl) && (
+            <div className="flex flex-wrap gap-2 pt-1 text-xs">
+              {tool.openSourceRepoUrl && <a href={tool.openSourceRepoUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 rounded-md border border-border bg-card px-2.5 py-1.5 text-primary hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"><span>Source repository</span><ExternalLink className="h-3 w-3" /></a>}
+              {tool.modelWeightsUrl && <a href={tool.modelWeightsUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 rounded-md border border-border bg-card px-2.5 py-1.5 text-primary hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"><span>Model weights</span><ExternalLink className="h-3 w-3" /></a>}
+              {tool.relatedDemoUrl && <a href={tool.relatedDemoUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 rounded-md border border-border bg-card px-2.5 py-1.5 text-primary hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"><span>{tool.relatedDemoName || 'Related browser demo'}</span><ExternalLink className="h-3 w-3" /></a>}
             </div>
           )}
         </div>
@@ -306,11 +315,12 @@ export const AiToolDetailPage: React.FC = () => {
                 <span>Execution Environment</span>
               </div>
               <p className="text-secondary-foreground leading-relaxed">
-                {tool.isSelfHostable
+                {tool.executionEnvironment || (tool.isSelfHostable
                   ? 'Self-hostable via Docker or local GPU (macOS, Linux, Windows).'
                   : tool.requiresInstallation
                   ? 'Desktop/CLI installation required for local workflow execution.'
-                  : 'Web browser cloud SaaS. No local GPU or installation required.'}
+                  : 'Web browser cloud SaaS. No local GPU or installation required.')}
+                {tool.hardwareRequirements && <span className="mt-2 block"><strong className="text-foreground">Hardware / setup:</strong> {tool.hardwareRequirements}</span>}
               </p>
             </div>
           </div>
@@ -354,6 +364,42 @@ export const AiToolDetailPage: React.FC = () => {
           </div>
         </div>
       </div>
+
+      {/* Similar Tools in same category */}
+      {(mappedAlternatives.length > 0 || mappedOpenSourceAlternatives.length > 0) && (
+        <section className="mb-12" aria-labelledby="ai-alternatives-heading">
+          <div className="mb-5 max-w-3xl">
+            <h2 id="ai-alternatives-heading" className="text-lg font-bold text-foreground">Related alternatives to {tool.name}</h2>
+            <p className="mt-1 text-sm text-secondary-foreground">These options overlap with parts of this workflow. Check the fit note, setup, and license before switching.</p>
+          </div>
+          {mappedAlternatives.length > 0 && (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-5">
+              {mappedAlternatives.map((alternative) => {
+                const mapping = getAiAlternativeMapping(alternative.slug, tool.slug);
+                return (
+                  <div key={alternative.slug}>
+                    {mapping && <p className="mb-2 text-xs text-muted-foreground"><strong className="text-foreground">Partial fit:</strong> {mapping.rationale} <a className="text-primary underline underline-offset-2" href={mapping.discoveryUrl} target="_blank" rel="noopener noreferrer">Source</a></p>}
+                    <AiToolCard tool={alternative} />
+                  </div>
+                );
+              })}
+            </div>
+          )}
+          {mappedOpenSourceAlternatives.length > 0 && (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+              {mappedOpenSourceAlternatives.map((alternative) => {
+                const mapping = getAiAlternativeMapping(alternative.slug, tool.slug);
+                return (
+                  <div key={alternative.slug}>
+                    {mapping && <p className="mb-2 text-xs text-muted-foreground"><strong className="text-foreground">Partial fit:</strong> {mapping.rationale} <a className="text-primary underline underline-offset-2" href={mapping.discoveryUrl} target="_blank" rel="noopener noreferrer">Source</a></p>}
+                    <ToolCard tool={alternative} />
+                  </div>
+                );
+              })}
+            </div>
+          )}
+        </section>
+      )}
 
       {/* Similar Tools in same category */}
       {similarTools.length > 0 && (

@@ -91,7 +91,10 @@ describe('Phase 23: Homepage Logo Fix, Real Brand Assets & Theme Toggle Repair',
       const content = fs.readFileSync(homePath, 'utf8');
       const service = fs.readFileSync(servicePath, 'utf8');
       assert.ok(content.includes('data-testid="catalog-trust-strip"'), 'Trust strip is rendered');
-      assert.ok(content.includes('catalogStats.catalogIdentities'), 'Trust strip uses dynamic counts');
+      assert.ok(content.includes('catalogStats.proprietaryToolsWithAlternatives'), 'Trust strip uses a distinct proprietary-tool target count');
+      assert.ok(content.includes('catalogStats.imagePrompts'), 'Trust strip uses an image prompt count');
+      assert.ok(content.includes('catalogStats.videoPrompts'), 'Trust strip uses a video prompt count');
+      assert.ok(content.includes('catalogStats.browserUtilities'), 'Trust strip uses the current utility count');
       assert.ok(service.includes('export function getCatalogStats'), 'Catalog stats are computed in a shared service');
       assert.ok(!content.includes('10,000+'), 'Does not make an unsupported 10,000+ claim');
     });
@@ -190,15 +193,16 @@ describe('Phase 23: Homepage Logo Fix, Real Brand Assets & Theme Toggle Repair',
        assert.ok(content.includes('data-logo-status="intentional-neutral-fallback"'), 'Fallback status is exposed for QA');
     });
 
-    test('Homepage uses a reduced-motion-aware discovery interface with real logo components', () => {
+    test('Homepage uses a catalog-backed discovery interface with real logo components and reduced-motion support', () => {
       const heroPath = path.resolve('src/components/HeroSignalVisual.tsx');
       const homePath = path.resolve('src/pages/HomePage.tsx');
       const heroContent = fs.readFileSync(heroPath, 'utf8');
       const homeContent = fs.readFileSync(homePath, 'utf8');
 
       assert.ok(homeContent.includes('<HeroSignalVisual />'), 'Homepage renders the hero visual');
-      assert.ok(heroContent.includes("from 'motion/react'"), 'Hero visual uses the Motion React library');
-      assert.ok(heroContent.includes('useReducedMotion'), 'Hero visual respects reduced motion');
+      const cssContent = fs.readFileSync(path.resolve('src/index.css'), 'utf8');
+      assert.ok(heroContent.includes('getAllAiTools()'), 'Hero visual uses the real catalog');
+      assert.ok(cssContent.includes('@media (prefers-reduced-motion: reduce)') && cssContent.includes('.discovery-interface__result'), 'Hero interactions respect reduced motion');
       assert.ok(heroContent.includes('<BrandLogo'), 'Discovery preview uses provenance-aware local logo assets');
     });
   });

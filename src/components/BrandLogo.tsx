@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { getBrandLogo } from '../data/brandLogos.ts';
+import { getBrandLogo } from '../data/runtimeBrandLogos.ts';
 
 export type BrandLogoSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | number;
 
@@ -128,7 +128,6 @@ export const BrandLogo: React.FC<BrandLogoProps> = ({
     return (
       <div
         className={`${sizeClasses.container} rounded-md flex items-center justify-center shrink-0 overflow-hidden bg-card border border-border/80 shadow-sm transition-transform duration-300 group-hover:scale-105 ${className}`}
-        title={`${name} logo`}
         data-brand-slug={slug}
         data-logo-status={logoStatus}
       >
@@ -151,7 +150,6 @@ export const BrandLogo: React.FC<BrandLogoProps> = ({
     <div
       className={`${sizeClasses.container} rounded-md flex items-center justify-center font-bold ${sizeClasses.text} text-white shrink-0 shadow-inner group-hover:scale-105 transition-transform duration-300 ${className}`}
       style={{ backgroundColor: fallbackBg }}
-      title={`${name} logo unavailable; showing initials fallback`}
       role="img"
       aria-label={`${name} logo unavailable; showing initials fallback`}
       data-brand-slug={slug}

@@ -49,7 +49,7 @@ describe('Phase 26: Final QA, Production Readiness & Domain Preparation', () => 
     assert.ok(robots.includes('Disallow: /moderation'), 'Must disallow /moderation');
     assert.ok(robots.includes('Disallow: /admin'), 'Must disallow /admin');
     assert.ok(robots.includes('Disallow: /api/'), 'Must disallow /api/');
-    assert.ok(robots.includes('Sitemap: https://techhacksai.com/sitemap.xml'), 'Must declare sitemap');
+    assert.ok(robots.includes('Sitemap: https://switchroute.in/sitemap.xml'), 'Must declare sitemap');
   });
 
   // ──────────────────────────────────────────────────────────────────────────
@@ -62,8 +62,8 @@ describe('Phase 26: Final QA, Production Readiness & Domain Preparation', () => 
       'siteConfig must read VITE_SITE_URL'
     );
     assert.ok(
-      siteConfigSrc.includes('https://techhacksai.com'),
-      'siteConfig must fallback to techhacksai.com'
+      siteConfigSrc.includes('https://switchroute.in'),
+      'siteConfig must fallback to switchroute.in'
     );
   });
 
@@ -96,11 +96,13 @@ describe('Phase 26: Final QA, Production Readiness & Domain Preparation', () => 
   // ──────────────────────────────────────────────────────────────────────────
   // 6. Production Bundle Chunk Optimization
   // ──────────────────────────────────────────────────────────────────────────
-  it('vite.config.js splits vendor and page chunks cleanly', () => {
+  it('vite.config.js keeps only stable shared chunks to avoid route/data cycles', () => {
     const viteConfig = read('vite.config.js');
     assert.ok(viteConfig.includes("'vendor-react'"), 'Splits vendor-react');
     assert.ok(viteConfig.includes("'vendor-icons'"), 'Splits vendor-icons');
     assert.ok(viteConfig.includes("'catalog-data'"), 'Splits catalog-data');
-    assert.ok(viteConfig.includes("'app-pages'"), 'Splits app-pages');
+    assert.ok(!viteConfig.includes("'app-pages'"), 'Avoids forcing all route pages into a shared chunk');
+    assert.ok(!viteConfig.includes("'app-free-tools'"), 'Avoids a free-tools/catalog-data cycle');
+    assert.ok(read('src/data/promptfeedPrompts.ts').includes("import('../generated/promptfeedRuntime.generated.ts')"), 'Keeps the generated PromptFeed runtime module dynamically loaded');
   });
 });

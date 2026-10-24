@@ -1,11 +1,12 @@
 # Prompt artwork and logo provenance audit
 
-Audit date: 2026-10-22
+Audit date: 2026-10-23
 
 ## Prompt artwork
 
-- All 43 curated prompts now have their own original AI-generated WebP preview, saved under `public/prompts/generated/`.
-- Each file is 1254 × 1254 pixels, optimized locally, and mapped by prompt slug in `src/data/promptArtwork.ts`.
+- The 48 original SwitchRoute prompt previews are saved under `public/prompts/generated/`; their dimensions follow each image's composition rather than one fixed square size.
+- Exact native dimensions are recorded by slug in `data/prompt-image-dimensions.json` and used to reserve accurate image geometry in the UI.
+- The 534 MIT-licensed PromptFeed thumbnails are 380 pixels wide. Detail pages cap their display at native width, and landscape thumbnails retain a 3:2 gallery frame on mobile instead of being enlarged into a square crop.
 - The image set has no repeated file hashes, missing assets, extension/signature mismatches, or files over 1.5 MB.
 - The generator was Codex's built-in `image_gen` tool. The previews were made for Tech Hacks AI; no MeiGen images or prompt records were used.
 - The previous five SVG illustrations remain in `public/prompts/` so any existing database records that still reference them do not break. Curated prompts no longer use them.

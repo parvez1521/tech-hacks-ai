@@ -25,8 +25,49 @@ test('prompt library recipes have usable metadata and unique original local prev
   assert.ok(promptsData.every((prompt) => prompt.promptText && prompt.tags.length && prompt.targetModel));
 });
 
+test('PromptFeed MIT collection has 534 unique matching local previews and full attribution', () => {
+  const manifestPath = path.resolve('data/promptfeed-import.json');
+  const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
+  const feed = Array.isArray(manifest) ? manifest : manifest.prompts;
+  assert.ok(Array.isArray(feed), 'PromptFeed manifest must be a prompt array');
+  assert.equal(feed.length, 534, 'expected the checked-in 534-pair PromptFeed collection');
+  assert.equal(new Set(feed.map((prompt) => prompt.slug)).size, feed.length, 'PromptFeed slugs must be unique');
+
+  for (const prompt of feed) {
+    assert.ok(prompt.slug.startsWith('promptfeed-'), prompt.slug);
+    assert.ok(prompt.promptText?.trim(), `${prompt.slug} has prompt text`);
+    assert.ok(prompt.previewImage?.startsWith('/prompts/promptfeed/'), `${prompt.slug} has a local PromptFeed preview`);
+    assert.ok(fs.existsSync(path.resolve('public', prompt.previewImage.slice(1)), prompt.previewImage), `${prompt.slug} preview exists`);
+    assert.equal(prompt.rightsStatus, 'licensed', prompt.slug);
+    assert.equal(prompt.rightsConfirmed, true, prompt.slug);
+    assert.match(prompt.rightsLicense || '', /MIT/i, `${prompt.slug} keeps its MIT license`);
+    assert.ok(prompt.sourceCreator && prompt.sourceUrl?.startsWith('https://') && prompt.attributionUrl?.startsWith('https://'), `${prompt.slug} has source attribution`);
+  }
+});
+
+test('PromptFeed collection is lazy-loaded, attributable, and pagination keeps the gallery lightweight', () => {
+  const loader = fs.readFileSync(path.resolve('src/data/promptfeedPrompts.ts'), 'utf8');
+  const gallery = fs.readFileSync(path.resolve('src/pages/PromptLibraryPage.tsx'), 'utf8');
+  const card = fs.readFileSync(path.resolve('src/components/PromptCard.tsx'), 'utf8');
+  const sitemap = fs.readFileSync(path.resolve('scripts/generate-prompt-sitemap.mjs'), 'utf8');
+  assert.match(loader, /import\('\.\.\/generated\/promptfeedRuntime\.generated\.ts'\)/);
+  assert.match(loader, /rightsStatus !== 'licensed'/);
+  assert.match(gallery, /loadPromptFeedPrompts/);
+  assert.match(gallery, /if \(!merged\.has\(prompt\.slug\)\) merged\.set\(prompt\.slug, prompt\)/, 'reviewed remote versions take precedence over static collection records');
+  assert.match(gallery, /selectedCollection/);
+  assert.match(gallery, /PROMPTS_PER_PAGE = 24/);
+  assert.match(gallery, /visiblePrompts\.map/);
+  assert.match(gallery, /searchParams\.get\('q'\)/, 'prompt tag links restore their search when the library opens');
+  assert.match(gallery, /setSearchParam\('q'/, 'search changes are reflected in a shareable URL');
+  assert.match(gallery, /\.slice\(0, 12\)/, 'the visual-style filter offers a focused shortlist instead of hundreds of raw labels');
+  assert.match(card, /PromptFeed · MIT/);
+  assert.match(card, /Clipboard unavailable\. Open details to copy\./, 'copy failures are explained to the visitor');
+  assert.doesNotMatch(gallery, /MeiGen/);
+  assert.match(sitemap, /promptFeedPrompts/);
+});
+
 test('prompt storage rejects missing attribution and invalid image locations', () => {
-  const good = { id: 'original-1', slug: 'original-one', title: 'Original one', description: 'Description', category: 'ai-image-generation', targetModel: 'Flux', promptText: 'An original image recipe.', tags: ['editorial'], authorOrSource: 'Tech Hacks AI', previewImage: '/prompts/generated/gemini-commercial-product-photography.webp', rightsStatus: 'original' };
+  const good = { id: 'original-1', slug: 'original-one', title: 'Original one', description: 'Description', category: 'ai-image-generation', targetModel: 'Flux', promptText: 'An original image recipe.', tags: ['editorial'], authorOrSource: 'SwitchRoute', previewImage: '/prompts/generated/gemini-commercial-product-photography.webp', rightsStatus: 'original' };
   assert.equal(validatePrompt(good), null);
   assert.match(validatePrompt({ ...good, authorOrSource: '' }), /attribution/i);
   assert.match(validatePrompt({ ...good, previewImage: 'http://unsafe.test/preview.jpg' }), /HTTPS/);

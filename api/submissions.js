@@ -7,6 +7,7 @@ import {
   readPublishedAdditionsAsync,
   isAuthorized,
 } from '../server/submissionsStore.js';
+import { getSafeApiFailure, logSanitizedApiError, safeApiOperationResult } from '../server/apiErrorHandling.js';
 
 function readJsonBody(req) {
   if (req.bodyParseError) return null;
@@ -80,7 +81,8 @@ export default async function handler(req, res) {
           return res.status(401).json({ error: 'Unauthorized. Moderator access token required.' });
         }
         const result = await publishSubmissionToCatalogAsync(id, req.headers);
-        return res.status(result.status || (result.success ? 200 : 400)).json(result);
+        const response = safeApiOperationResult(result);
+        return res.status(response.status).json(response.body);
       }
 
       // Public submission
@@ -91,11 +93,13 @@ export default async function handler(req, res) {
 
       if (body.type === 'guide') {
         const result = await createGuideSubmission(body, clientIp);
-        return res.status(result.status).json(result);
+        const response = safeApiOperationResult(result);
+        return res.status(response.status).json(response.body);
       } else {
         // Default to tool
         const result = await createToolSubmission(body, clientIp);
-        return res.status(result.status).json(result);
+        const response = safeApiOperationResult(result);
+        return res.status(response.status).json(response.body);
       }
     }
 
@@ -111,12 +115,14 @@ export default async function handler(req, res) {
       const body = readJsonBody(req);
       if (!body) return res.status(400).json({ error: 'InvalidRequest', message: 'Request body must be a valid JSON object.' });
       const result = await updateSubmissionStatusAsync(id, body, req.headers);
-      return res.status(result.status).json(result);
+      const response = safeApiOperationResult(result);
+      return res.status(response.status).json(response.body);
     }
 
     return res.status(405).json({ error: 'Method not allowed' });
   } catch (err) {
-    console.error('API Error in /api/submissions:', err);
-    return res.status(500).json({ error: 'Internal server error processing submission.' });
+    logSanitizedApiError('/api/submissions', err, req);
+    const failure = getSafeApiFailure(err);
+    return res.status(failure.status).json(failure.body);
   }
 }

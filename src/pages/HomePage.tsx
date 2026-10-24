@@ -5,22 +5,17 @@ import { Link } from '../router/Router';
 import { UniversalSearch } from '../components/UniversalSearch';
 import { AlternativeCard } from '../components/AlternativeCard';
 import { AiToolCard } from '../components/AiToolCard';
-import { GuideCard } from '../components/GuideCard';
-import { PromptCard } from '../components/PromptCard';
 import { Pagination } from '../components/Pagination';
 import { OfferCard } from '../components/OfferCard';
 import { BrandLogo } from '../components/BrandLogo';
 import { AnimatedCount } from '../components/AnimatedCount';
 import { DailyDiscoveriesSection } from '../components/DailyDiscoveriesSection';
+import { AiAlternativesShowcase } from '../components/AiAlternativesShowcase';
 import { HeroSignalVisual } from '../components/HeroSignalVisual';
-import { LazyMotion, useReducedMotion } from 'motion/react';
-import * as m from 'motion/react-m';
-
-const loadMotionFeatures = () => import('../lib/motionFeatures').then((module) => module.default);
 import { proprietaryTools } from '../data/alternatives';
 import { aiCategories } from '../data/aiToolsData';
-import { getFeaturedOffers } from '../data/offersData';
-import { getAllAiTools, getAllGuides, getAllPrompts, getAllFreeTools, getCatalogStats } from '../services/aiCatalogService';
+import { getActiveOffers, getFeaturedOffers } from '../data/offersData';
+import { getAllAiTools, getAllPrompts, getAllFreeTools, getCatalogStats } from '../services/aiCatalogService';
 import {
   Sparkles,
   Replace,
@@ -28,7 +23,6 @@ import {
   Compass,
   Wrench,
   BookOpen,
-  MessageSquareCode,
   ArrowRight,
   ShieldCheck,
   Zap,
@@ -49,15 +43,6 @@ import {
 } from 'lucide-react';
 
 export const HomePage: React.FC = () => {
-  const [motionReady, setMotionReady] = useState(false);
-  const reduceMotion = useReducedMotion();
-  useEffect(() => setMotionReady(true), []);
-  const MotionDiv = (motionReady ? m.div : 'div') as React.ElementType;
-  const heroAnimationProps = motionReady ? {
-    initial: reduceMotion ? false : { opacity: 0.75, y: 10 },
-    animate: { opacity: 1, y: 0 },
-    transition: { duration: reduceMotion ? 0 : 0.42, ease: [0.2, 0.7, 0.2, 1] },
-  } : {};
   const [selectedAiCategory, setSelectedAiCategory] = useState<string>('all');
   const [aiPage, setAiPage] = useState(1);
   const [catalogStats, setCatalogStats] = useState(getCatalogStats);
@@ -130,7 +115,7 @@ export const HomePage: React.FC = () => {
       id: 'writing',
       title: 'Writing & Research',
       desc: 'Deep research, citations & multimodal reasoning',
-      examples: 'Perplexity, Claude 3.5, Gemini 1.5, Khoj',
+      examples: 'Perplexity, Claude, Gemini, Khoj',
       icon: FileText,
       href: '/ai-tools?category=assistants',
       iconBg: 'text-amber-400 bg-amber-500/10',
@@ -169,9 +154,26 @@ export const HomePage: React.FC = () => {
   // 5. Proprietary targets for Section 9 (Figma, Notion, Firebase, Airtable, Zapier, Google Analytics)
   const featuredProprietary = proprietaryTools.slice(0, 6);
 
-  // 6. Featured Guides & Prompts (Section 8)
-  const previewGuides = getAllGuides().slice(0, 2);
-  const previewPrompts = getAllPrompts().slice(0, 2);
+  // 6. Original portrait prompts used by the homepage visual showcase.
+  const allPrompts = getAllPrompts();
+  const previewPrompts = [
+    allPrompts.find((prompt) => prompt.slug === 'pixverse-cinematic-portrait-motion'),
+    allPrompts.find((prompt) => prompt.slug === 'higgsfield-dolly-zoom-vertigo-effect'),
+  ].filter((prompt): prompt is NonNullable<typeof prompt> => Boolean(prompt));
+  const promptPortraits = previewPrompts.map((prompt, index) => ({
+    prompt,
+    imageSrc: prompt.previewImage,
+    label: index === 0 ? 'Women’s cinematic portrait' : 'Men’s cinematic portrait',
+    alt: prompt.previewImageAlt || `${prompt.title} preview`,
+    objectPosition: index === 0 ? 'center 36%' : 'center 38%',
+  }));
+  const promptSteps = [
+    { title: 'Choose a prompt', description: 'Browse the Prompt Library and open a recipe that fits the image or creative task you have in mind.' },
+    { title: 'Customize the details', description: 'Adjust the subject, style, lighting, composition, and any bracketed placeholders.' },
+    { title: 'Select an AI tool', description: 'Use the model or provider named on the prompt, or check its detail page for compatible options.' },
+    { title: 'Generate and refine', description: 'Try the prompt in your chosen tool, review the result, then refine the wording as needed.' },
+    { title: 'Save and reuse', description: 'Bookmark useful prompts locally and revisit them when you want to adapt a successful idea.' },
+  ];
 
   // 7. Client-side utilities preview (Section 5)
   const featuredUtilityOrder = ['json-formatter', 'word-counter', 'qr-generator'];
@@ -181,11 +183,13 @@ export const HomePage: React.FC = () => {
 
   // 8. Featured AI Deals & Student Benefits (Section 7)
   const previewOffers = getFeaturedOffers().slice(0, 3);
+  const activeOfferCount = getActiveOffers().length;
 
   // Scroll-reveal refs for below-fold sections (Section 1 / hero is above the fold)
   const reveal2 = useScrollReveal<HTMLElement>();
   const reveal3 = useScrollReveal<HTMLElement>();
   const revealDiscoveries = useScrollReveal<HTMLElement>();
+  const revealAiAlternatives = useScrollReveal<HTMLElement>();
   const reveal4 = useScrollReveal<HTMLElement>();
   const reveal5 = useScrollReveal<HTMLElement>();
   const reveal6 = useScrollReveal<HTMLElement>();
@@ -200,20 +204,21 @@ export const HomePage: React.FC = () => {
       {/* =========================================================================
           SECTION 1: HERO & UNIVERSAL SEARCH
       ========================================================================= */}
-      <LazyMotion features={loadMotionFeatures}>
-        <section className="hero-shell w-full" aria-labelledby="home-hero-heading">
-          <div className="hero-redesign max-w-6xl mx-auto px-4 sm:px-6">
-            <MotionDiv
-              className="hero-redesign__copy"
-              {...heroAnimationProps}
-            >
+      <section className="hero-shell w-full" aria-labelledby="home-hero-heading">
+        <div className="hero-redesign max-w-6xl mx-auto px-4 sm:px-6">
+          <div className="hero-redesign__copy">
               <div className="hero-redesign__eyebrow">
                 <span className="hero-redesign__eyebrow-mark" aria-hidden="true"><Sparkles size={13} /></span>
-                Independent software discovery
+                YOUR AI TOOLKIT, ALL IN ONE PLACE
               </div>
-              <h1 id="home-hero-heading">Find the right tools for the work.</h1>
+              <h1 id="home-hero-heading" className="hero-redesign__headline">
+                <span className="hero-redesign__headline-line">Another AI tool?</span>
+                <span className="hero-redesign__headline-line hero-redesign__headline-answer">Sure.</span>
+                <span className="hero-redesign__headline-line">Another Subscription?</span>
+                <span className="hero-redesign__headline-line hero-redesign__headline-answer">Nope.</span>
+              </h1>
               <p className="hero-redesign__intro">
-                Tech Hacks AI helps you find useful AI products, open-source software, browser utilities, and current offers in one searchable directory.
+                Discover paid AI alternatives, creative prompts, verified offers, and practical everyday tools—all in one place.
               </p>
 
               <div className="hero-redesign__search">
@@ -221,65 +226,87 @@ export const HomePage: React.FC = () => {
               </div>
 
               <div className="hero-redesign__actions">
-                <Link to="/ai-tools" className="hero-redesign__primary-action">
-                  Browse the directory <ArrowRight size={16} aria-hidden="true" />
+                <Link to="/alternatives" className="hero-redesign__primary-action">
+                  Explore AI Alternatives <ArrowRight size={16} aria-hidden="true" />
                 </Link>
-                <Link to="/alternatives" className="hero-redesign__secondary-action">
-                  Find an alternative <ArrowRight size={15} aria-hidden="true" />
+                <Link to="/free-tools" className="hero-redesign__secondary-action">
+                  Browse Free Utilities <ArrowRight size={15} aria-hidden="true" />
                 </Link>
               </div>
 
-              <div className="hero-redesign__quick-links" aria-label="Explore Tech Hacks AI">
+              <div className="hero-redesign__quick-links" aria-label="Explore SwitchRoute">
                 <Link to="/free-tools"><Wrench size={14} aria-hidden="true" /> Utilities</Link>
                 <Link to="/offers"><Tag size={14} aria-hidden="true" /> Offers</Link>
                 <Link to="/pick"><Compass size={14} aria-hidden="true" /> Help me choose</Link>
               </div>
-            </MotionDiv>
-
-            <div className="hero-redesign__visual">
-              <HeroSignalVisual />
-            </div>
           </div>
-        </section>
-      </LazyMotion>
 
-      {/* Truthful catalog proof-point restored below the hero. Counts come from
-          the de-duplicated in-app registries, not inflated marketing claims. */}
+          <div className="hero-redesign__visual">
+            <HeroSignalVisual />
+          </div>
+        </div>
+      </section>
+
       <section
         className="catalog-trust-strip max-w-6xl mx-auto w-full px-4 sm:px-6"
         data-testid="catalog-trust-strip"
         aria-label="Catalog coverage"
       >
         <div className="catalog-trust-strip__inner">
-          <div className="catalog-trust-strip__intro">
-            <span className="catalog-trust-strip__kicker">
-              <ShieldCheck className="w-4 h-4" aria-hidden="true" />
-              Real catalog coverage
-            </span>
-            <h2>Useful tools, counted honestly.</h2>
-            <p>
-              A focused directory of software, AI platforms, alternatives, and browser utilities — without padded duplicate counts.
-            </p>
-          </div>
           <div className="catalog-trust-strip__metrics">
-            <div>
-              <AnimatedCount value={catalogStats.catalogIdentities} />
-              <span>catalog identities</span>
-            </div>
-            <div>
-              <AnimatedCount value={catalogStats.openSourceTools} />
-              <span>open-source projects</span>
-            </div>
-            <div>
-              <AnimatedCount value={catalogStats.aiPlatforms} />
-              <span>AI platforms</span>
-            </div>
-            <div>
-              <AnimatedCount value={catalogStats.browserUtilities} />
-              <span>local utilities</span>
-            </div>
+                    <article className="catalog-metric-card" aria-label={`${catalogStats.proprietaryToolsWithAlternatives} paid tools with alternatives. Find replacement tools.`}>
+                      <AnimatedCount className="catalog-metric-card__number" value={catalogStats.proprietaryToolsWithAlternatives} />
+                      <h3>Paid tools with alternatives</h3>
+                      <span>Find replacement tools</span>
+                    </article>
+                    <article className="catalog-metric-card" aria-label={`${catalogStats.alternativeRelationships} alternative matches. Explore similar tools.`}>
+                      <AnimatedCount className="catalog-metric-card__number" value={catalogStats.alternativeRelationships} />
+                      <h3>Alternative matches</h3>
+                      <span>Explore similar tools</span>
+                    </article>
+                    <article className="catalog-metric-card" aria-label={`${activeOfferCount} active offers. Discover deals and discounts.`}>
+                      <AnimatedCount className="catalog-metric-card__number" value={activeOfferCount} />
+                      <h3>Active offers</h3>
+                      <span>Discover deals and discounts</span>
+                    </article>
+                    <article className="catalog-metric-card" aria-label={`${catalogStats.imagePrompts} image prompts. Ideas for AI images.`}>
+                      <AnimatedCount className="catalog-metric-card__number" value={catalogStats.imagePrompts} />
+                      <h3>Image prompts</h3>
+                      <span>Ideas for AI images</span>
+                    </article>
+                    <article className="catalog-metric-card" aria-label={`${catalogStats.videoPrompts} video prompts. Prompts for AI videos.`}>
+                      <AnimatedCount className="catalog-metric-card__number" value={catalogStats.videoPrompts} />
+                      <h3>Video prompts</h3>
+                      <span>Prompts for AI videos</span>
+                    </article>
+                    <article className="catalog-metric-card" aria-label={`${catalogStats.browserUtilities} everyday utilities. Converters and useful tools.`}>
+                      <AnimatedCount className="catalog-metric-card__number" value={catalogStats.browserUtilities} />
+                      <h3>Everyday utilities</h3>
+                      <span>Converters and useful tools</span>
+                    </article>
+                    <article className="catalog-metric-card" aria-label={`${catalogStats.aiPlatforms} AI tools. Explore AI platforms.`}>
+                      <AnimatedCount className="catalog-metric-card__number" value={catalogStats.aiPlatforms} />
+                      <h3>AI tools</h3>
+                      <span>Explore AI platforms</span>
+                    </article>
+                    <article className="catalog-metric-card" aria-label={`${catalogStats.openSourceTools} open-source projects. Discover open projects.`}>
+                      <AnimatedCount className="catalog-metric-card__number" value={catalogStats.openSourceTools} />
+                      <h3>Open-source projects</h3>
+                      <span>Discover open projects</span>
+                    </article>
           </div>
         </div>
+      </section>
+
+
+      {/* AI-specific alternatives complement the broader open-source SaaS directory below. */}
+      <section
+        ref={revealAiAlternatives.ref}
+        className={`max-w-6xl mx-auto px-4 sm:px-6 w-full reveal-section${revealAiAlternatives.isVisible ? ' in-view' : ''}`}
+        aria-labelledby="ai-alternatives-heading"
+        data-testid="ai-alternatives-section"
+      >
+        <AiAlternativesShowcase />
       </section>
 
       {/* =========================================================================
@@ -355,7 +382,7 @@ export const HomePage: React.FC = () => {
           <div>
             <div className="inline-flex items-center gap-2 text-primary text-xs font-semibold uppercase tracking-wider mb-2">
               <Star className="w-4 h-4" />
-              <span>Handpicked by Tech Hacks AI Editorial</span>
+              <span>Handpicked by SwitchRoute Editorial</span>
             </div>
             <h2 className="text-2xl sm:text-3xl font-extrabold text-foreground tracking-tight">
               Editor's Picks: Benchmark-Leading Tools
@@ -752,7 +779,7 @@ export const HomePage: React.FC = () => {
             to="/offers"
             className="inline-flex items-center gap-1.5 text-primary text-xs font-semibold hover:text-primary-hover transition-colors shrink-0"
           >
-            <span>Explore {getFeaturedOffers().length} current offers</span>
+            <span>Explore {activeOfferCount} active offers</span>
             <ArrowRight className="w-4 h-4" />
           </Link>
         </div>
@@ -768,41 +795,60 @@ export const HomePage: React.FC = () => {
           SECTION 8: STEP-BY-STEP GUIDES & PROMPT LIBRARY PREVIEW
       ========================================================================= */}
       <section ref={reveal8.ref} className={`max-w-6xl mx-auto px-4 sm:px-6 w-full reveal-section${reveal8.isVisible ? ' in-view' : ''}`}>
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
-          {/* Guides Preview Column */}
-          <div>
-            <div className="flex items-center justify-between mb-4">
-              <div className="flex items-center gap-2">
-                <BookOpen className="w-4 h-4 text-primary" />
-                <h2 className="text-xl font-bold text-foreground">Step-by-Step AI Guides</h2>
+        <div className="prompt-showcase-grid">
+          <div className="prompt-workflow">
+            <div className="prompt-showcase-heading">
+              <div>
+                <div className="inline-flex items-center gap-2 text-primary text-xs font-semibold uppercase tracking-wider mb-2">
+                  <BookOpen className="w-4 h-4" aria-hidden="true" />
+                  Prompt Library
+                </div>
+                <h2 className="text-2xl sm:text-3xl font-extrabold text-foreground tracking-tight">Step-by-step prompt guide</h2>
               </div>
-              <Link to="/guides" className="text-xs text-primary hover:underline font-semibold">
-                View all guides →
-              </Link>
+              <div className="flex flex-wrap items-center gap-3">
+                <Link to="/guides" className="text-xs font-semibold text-primary hover:underline">View Step-by-Step AI Guides</Link>
+                <Link to="/prompt-library" className="prompt-library-cta">
+                  Browse the Prompt Library <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                </Link>
+              </div>
             </div>
-            <div className="space-y-4">
-              {previewGuides.map((guide) => (
-                <GuideCard key={guide.id} guide={guide} />
+            <ol className="prompt-workflow__steps" aria-label="How to use the Prompt Library">
+              {promptSteps.map((step, index) => (
+                <li className="prompt-workflow__step" key={step.title}>
+                  <span className="prompt-workflow__number" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
+                  <div>
+                    <h3>{step.title}</h3>
+                    <p>{step.description}</p>
+                  </div>
+                </li>
               ))}
-            </div>
+            </ol>
           </div>
 
-          {/* Prompts Preview Column */}
-          <div>
-            <div className="flex items-center justify-between mb-4">
-              <div className="flex items-center gap-2">
-                <MessageSquareCode className="w-4 h-4 text-purple-400" />
-                <h2 className="text-xl font-bold text-foreground">Curated Prompt Recipes</h2>
-              </div>
-              <Link to="/prompt-library" className="text-xs text-primary hover:underline font-semibold">
-                Browse prompt library →
+          <div className="prompt-portrait-list" aria-label="Featured prompt previews">
+            {promptPortraits.map(({ prompt, imageSrc, label, alt, objectPosition }) => (
+              <Link
+                key={prompt.id}
+                to={`/prompt-library/${prompt.slug}`}
+                className="prompt-portrait-card"
+                aria-label={`Open ${prompt.title} prompt details`}
+              >
+                <img
+                  src={imageSrc}
+                  alt={alt}
+                  width={prompt.previewImageWidth || 1200}
+                  height={prompt.previewImageHeight || 900}
+                  loading="lazy"
+                  decoding="async"
+                  style={{ objectPosition }}
+                />
+                <span className="prompt-portrait-card__caption">
+                  <span>{label}</span>
+                  <strong>{prompt.title}</strong>
+                  {prompt.rightsStatus === 'licensed' && <small>Preview by {prompt.sourceCreator || 'third-party creator'} · view attribution</small>}
+                </span>
               </Link>
-            </div>
-            <div className="space-y-4">
-              {previewPrompts.map((prompt) => (
-                <PromptCard key={prompt.id} prompt={prompt} />
-              ))}
-            </div>
+            ))}
           </div>
         </div>
       </section>

@@ -136,7 +136,7 @@ describe('Phase 22: Community Contributions (Submit a Tool & Submit a Guide)', (
     test('getRouteTitle formats titles for all community contribution routes', () => {
       const toolTitle = ssrModule.getRouteTitle('submit-tool');
       assert.ok(toolTitle.includes('Submit an AI Tool'));
-      assert.ok(toolTitle.includes('Tech Hacks AI'));
+      assert.ok(toolTitle.includes('SwitchRoute'));
 
       const guideTitle = ssrModule.getRouteTitle('submit-guide');
       assert.ok(guideTitle.includes('Submit an AI Guide'));

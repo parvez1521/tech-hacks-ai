@@ -10,7 +10,7 @@
 -- 3. Paste this entire file and click "Run" (CMD/CTRL + Enter)
 -- 4. Copy your Project URL & Service Role Key into your Vercel Environment Variables:
 --    - SUPABASE_URL=https://<your-project-ref>.supabase.co
---    - SUPABASE_SERVICE_ROLE_KEY=<your-service-role-secret-key>
+--    - SUPABASE_SECRET_KEY (preferred) or SUPABASE_SERVICE_ROLE_KEY (legacy)
 -- =============================================================================
 
 -- 1. Submissions Queue Table

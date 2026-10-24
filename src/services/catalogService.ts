@@ -3,6 +3,7 @@ import { toolsData } from '../data/seedData.ts';
 import { proprietaryTools } from '../data/alternatives.ts';
 import { categories } from '../data/categories.ts';
 import { collections } from '../data/collections.ts';
+import { aiAlternativeMappings } from '../data/aiAlternativeMappings.ts';
 
 export const PAGE_SIZE = 12;
 
@@ -112,7 +113,10 @@ export function getCollectionBySlug(slug: string): Collection | undefined {
 }
 
 export function getToolsForProprietary(proprietarySlug: string): Tool[] {
-  return toolsData.filter((tool) => tool.alternativesTo.includes(proprietarySlug));
+  const mappedSlugs = new Set(aiAlternativeMappings
+    .filter((mapping) => mapping.targetSlug === proprietarySlug && mapping.alternativeType === 'open-source')
+    .map((mapping) => mapping.alternativeSlug));
+  return toolsData.filter((tool) => tool.alternativesTo.includes(proprietarySlug) || mappedSlugs.has(tool.slug));
 }
 
 export function getSimilarTools(currentTool: Tool, limit = 3): Tool[] {

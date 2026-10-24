@@ -104,7 +104,7 @@ describe('Alternatives Directory & Proprietary vs Replacement Architecture', () 
     const html = renderClean(React.createElement(ssrModule.App));
 
     // Page must have primary heading
-    assert.ok(html.includes('Browse Open Source Software Alternatives'), 'Index has clear heading');
+    assert.ok(html.includes('Browse Open Source Alternatives'), 'Index has clear heading');
     assert.ok(html.includes('Proprietary Replacements'), 'Index has section badge');
 
     // Primary cards must be proprietary apps: Figma, Notion, Firebase, Airtable
@@ -188,6 +188,20 @@ describe('Alternatives Directory & Proprietary vs Replacement Architecture', () 
     // Metadata badges
     assert.ok(html.includes('MPL-2.0'), 'Shows Penpot MPL-2.0 license');
     assert.ok(html.includes('Clojure') || html.includes('Rust'), 'Shows Penpot tech stack');
+  });
+
+  test('video alternative detail uses AI catalog records and labels hosted/local requirements', async () => {
+    ssrModule = await import('../dist/test-ssr.js');
+    setupMockBrowser('https://switchroute.in/alternatives/invideo-ai');
+    const html = renderClean(React.createElement(ssrModule.App));
+
+    assert.ok(html.includes('Video generation alternatives to InVideo AI'));
+    assert.ok(html.includes('These recommendations come from the shared AI catalog'));
+    assert.ok(html.includes('Agnes Video Generator'));
+    assert.ok(html.includes('free Agnes API key required'));
+    assert.ok(html.includes('href="/ai-tools/agnes-video-generator"'));
+    assert.ok(html.includes('Agnes Video Generator source repository'));
+    assert.ok(html.includes('partial alternatives'));
   });
 
   test('Unknown proprietary slug renders Software Not Found state with return link', async () => {

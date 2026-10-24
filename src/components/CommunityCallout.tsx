@@ -29,7 +29,7 @@ export const CommunityCallout: React.FC<CommunityCalloutProps> = ({ type }) => {
 
           <p className="text-xs sm:text-sm text-secondary-foreground leading-relaxed">
             {isTool
-              ? 'Help expand the Tech Hacks AI directory! Anyone can submit a newly launched AI tool or open-source software project. Every submission is fact-checked and verified by our editorial team before publication.'
+              ? 'Help expand the SwitchRoute directory! Anyone can submit a newly launched AI tool or open-source software project. Every submission is fact-checked and verified by our editorial team before publication.'
               : 'Write for developer and creator communities! Submit step-by-step AI workflows, prompt recipes, or integration tutorials. Published guides earn verified author credit and community attribution.'}
           </p>
 

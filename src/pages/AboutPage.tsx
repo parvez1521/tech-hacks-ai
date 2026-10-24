@@ -36,24 +36,24 @@ export const AboutPage: React.FC = () => {
           <span>Our Mission & Editorial Principles</span>
         </div>
         <h1 className="text-3xl sm:text-5xl font-extrabold text-slate-900 tracking-tight mb-4 leading-tight">
-          About Tech Hacks AI
+          About SwitchRoute
         </h1>
         <p className="text-base sm:text-lg text-slate-600 leading-relaxed max-w-3xl">
-          Tech Hacks AI is an independent software discovery directory and educational publication dedicated to helping developers, creators, students, and technology teams navigate the rapidly evolving generative AI and open-source landscape.
+          SwitchRoute is an independent software discovery directory and educational publication dedicated to helping developers, creators, students, and technology teams navigate the rapidly evolving generative AI and open-source landscape.
         </p>
       </div>
 
-      {/* Why We Built Tech Hacks AI */}
+      {/* Why We Built SwitchRoute */}
       <section className="mb-12 space-y-4">
         <h2 className="text-2xl font-bold text-slate-900 tracking-tight">
-          Why Tech Hacks AI Exists
+          Why SwitchRoute Exists
         </h2>
         <div className="text-slate-600 text-sm sm:text-base leading-relaxed space-y-4">
           <p>
             The software industry has reached a turning point. Proprietary SaaS products increasingly rely on per-seat subscription lock-in, aggressive price increases, and opaque telemetry. Meanwhile, the generative AI boom has created thousands of new wrappers, many advertising "free" access that quietly expires after a 24-hour trial or demands immediate credit card details.
           </p>
           <p>
-            We built Tech Hacks AI to cut through this noise. Our directory independently categorizes, tests, and documents open-source software alternatives, genuine recurring free generative tools, side-by-side architecture comparisons, and practical step-by-step engineering workflows.
+            We built SwitchRoute to cut through this noise. Our directory independently categorizes, tests, and documents open-source software alternatives, genuine recurring free generative tools, side-by-side architecture comparisons, and practical step-by-step engineering workflows.
           </p>
         </div>
       </section>
@@ -146,7 +146,7 @@ export const AboutPage: React.FC = () => {
           <li className="flex items-start gap-2.5">
             <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
             <span>
-              <strong className="text-slate-900">Privacy-First Architecture:</strong> Tech Hacks AI does not track visitors across the web, does not sell personal information, and maintains 100% open client-side browser utilities.
+              <strong className="text-slate-900">Privacy-First Architecture:</strong> SwitchRoute does not track visitors across the web, does not sell personal information, and maintains 100% open client-side browser utilities.
             </span>
           </li>
         </ul>

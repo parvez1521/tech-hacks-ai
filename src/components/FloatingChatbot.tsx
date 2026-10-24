@@ -12,6 +12,7 @@ import { generateGroundedResponse, ChatMessage } from '../services/chatRetrieval
 import { Link } from '../router/Router.tsx';
 import { AiOrb3D } from './AiOrb3D.tsx';
 import { BrandLogo } from './BrandLogo.tsx';
+import { pickRandomSuggestions, suggestionsOrFallback } from '../services/chatSuggestionService.ts';
 
 export const STARTER_PROMPTS = [
   'Find free AI tools for video creation.',
@@ -20,16 +21,6 @@ export const STARTER_PROMPTS = [
   'Find AI offers for students in India.',
   'Compare two AI tools.',
 ];
-
-const INITIAL_MESSAGE: ChatMessage = {
-  id: 'bot-welcome',
-  sender: 'assistant',
-  timestamp: 0,
-  text:
-    '**Welcome to the Tech Hacks AI assistant.**\n\n' +
-    'I can help you find verified AI tools, open-source alternatives, practical guides, and current student or free-access options. Ask in English or Hindi/Hinglish.',
-  suggestions: STARTER_PROMPTS,
-};
 
 /**
  * Curated welcome question library (Phase 25).
@@ -50,13 +41,28 @@ export const WELCOME_QUESTIONS = [
   'What are some practical AI tools for video editing?',
 ] as const;
 
+const FOLLOW_UP_PROMPTS = ['Find free AI tools', 'Find open-source tools', 'Browse current offers'];
+
+function createWelcomeMessage(): ChatMessage {
+  return {
+    id: 'bot-welcome',
+    sender: 'assistant',
+    timestamp: 0,
+    text:
+      '**Welcome to the SwitchRoute assistant.**\n\n' +
+      'I can help you find verified AI tools, open-source alternatives, practical guides, and current student or free-access options. Ask in English or Hindi/Hinglish.',
+    suggestions: suggestionsOrFallback(
+      WELCOME_QUESTIONS,
+      STARTER_PROMPTS,
+      (questions) => pickRandomSuggestions(questions, 4),
+    ),
+  };
+}
+
 export const FloatingChatbot: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [showWelcomeBubble, setShowWelcomeBubble] = useState(() => {
-    try { return sessionStorage.getItem('techhacks-chat-invite-dismissed') !== '1'; } catch { return true; }
-  });
   const [input, setInput] = useState('');
-  const [messages, setMessages] = useState<ChatMessage[]>([INITIAL_MESSAGE]);
+  const [messages, setMessages] = useState<ChatMessage[]>(() => [createWelcomeMessage()]);
   const [isLoading, setIsLoading] = useState(false);
   const [unreadCount, setUnreadCount] = useState(0);
   const [lastQuery, setLastQuery] = useState<string | null>(null);
@@ -178,7 +184,7 @@ export const FloatingChatbot: React.FC = () => {
             sender: 'assistant',
             text: data.text.trim(),
             timestamp: Date.now(),
-            suggestions: Array.isArray(data.suggestions) ? data.suggestions : ['Ask about another tool', 'Help me choose an AI tool for coding.'],
+            suggestions: suggestionsOrFallback(data.suggestions, FOLLOW_UP_PROMPTS),
             groundedTools: data.groundedTools,
           };
           setMessages((prev) => [...prev, botMsg]);
@@ -215,7 +221,7 @@ export const FloatingChatbot: React.FC = () => {
   };
 
   const handleClearHistory = () => {
-    setMessages([INITIAL_MESSAGE]);
+    setMessages([createWelcomeMessage()]);
     setErrorMessage(null);
     setServiceNotice(null);
     setLastQuery(null);
@@ -298,22 +304,11 @@ export const FloatingChatbot: React.FC = () => {
     <>
       {!isOpen && (
         <div className="chat-launcher-position">
-          {showWelcomeBubble && (
-            <div className="chat-welcome-bubble" data-testid="chat-welcome-bubble">
-              <button type="button" className="chat-welcome-bubble__open" onClick={() => setIsOpen(true)}>
-                <span>Need help finding a tool?</span><span className="chat-welcome-bubble__indicator" aria-hidden="true" />
-              </button>
-              <button type="button" className="chat-welcome-bubble__dismiss" aria-label="Dismiss assistant invitation" onClick={() => {
-                setShowWelcomeBubble(false);
-                try { sessionStorage.setItem('techhacks-chat-invite-dismissed', '1'); } catch {}
-              }}><X size={13} aria-hidden="true" /></button>
-            </div>
-          )}
           <button
             type="button"
             ref={launcherRef}
             onClick={() => setIsOpen(true)}
-            aria-label="Open Tech Hacks AI assistant"
+            aria-label="Open SwitchRoute assistant"
             title="Open assistant"
             data-testid="chat-launcher"
             className="chat-launcher"
@@ -335,7 +330,7 @@ export const FloatingChatbot: React.FC = () => {
             ref={dialogRef}
             role="dialog"
             aria-modal="true"
-            aria-label="Tech Hacks AI Assistant"
+            aria-label="SwitchRoute Assistant"
             data-testid="chat-dialog"
             className="chat-dialog"
           >
@@ -349,7 +344,7 @@ export const FloatingChatbot: React.FC = () => {
               />
               <div>
                 <h3 className="font-bold text-sm text-foreground flex items-center gap-2 leading-none">
-                  <span>Tech Hacks AI Assistant</span>
+                  <span>SwitchRoute Assistant</span>
                   <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded-md bg-primary/10 border border-primary/20 text-[9px] font-mono text-primary">
                     Catalog
                   </span>
@@ -450,13 +445,15 @@ export const FloatingChatbot: React.FC = () => {
                 </div>
 
                 {/* Suggestions / Prompt Chips */}
-                {msg.suggestions && msg.suggestions.length > 0 && (
+                {msg.suggestions && msg.suggestions.length > 0 && (msg.id !== 'bot-welcome' || messages.length === 1) && (
                   <div className="mt-2.5 flex flex-wrap gap-1.5 max-w-[92%]">
                     {msg.suggestions.map((s, sidx) => (
                       <button
                         key={sidx}
                         type="button"
                         onClick={() => handleSend(s)}
+                        data-testid={msg.id === 'bot-welcome' ? 'chat-welcome-suggestion' : 'chat-followup-suggestion'}
+                        aria-label={`Ask the assistant: ${s}`}
                         className="text-[11px] px-3 py-1.5 rounded-md bg-card hover:bg-primary/10 hover:border-primary/40 border border-border text-secondary-foreground hover:text-primary transition-colors text-left cursor-pointer active:scale-[0.98]"
                       >
                         {s}
@@ -473,7 +470,7 @@ export const FloatingChatbot: React.FC = () => {
                 <AiOrb3D size="sm" isGenerating={true} state="thinking" />
                 <div className="space-y-1">
                   <div className="flex items-center gap-2">
-                    <span className="font-semibold text-foreground block text-xs">Consulting Tech Hacks AI...</span>
+                    <span className="font-semibold text-foreground block text-xs">Consulting SwitchRoute...</span>
                     {/* Animated Pulsing Typing Dots */}
                     <div className="flex items-center gap-1">
                       <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-bounce [animation-delay:0ms]" />
@@ -515,12 +512,12 @@ export const FloatingChatbot: React.FC = () => {
           </div>
 
           {/* Quick Shortcuts Bar */}
-          <div className="px-3.5 py-2 bg-muted/20 border-t border-border/50 flex items-center justify-between text-[11px] text-muted-foreground">
-            <span className="flex items-center gap-1.5 truncate">
+          <div className="chat-shortcuts px-3.5 py-2 bg-muted/20 border-t border-border/50 text-[11px] text-muted-foreground">
+            <span className="chat-shortcuts__context">
               <MessageSquare className="w-3 h-3 text-primary shrink-0" />
               <span>Grounded in the published catalogue</span>
             </span>
-            <div className="flex items-center gap-3 shrink-0 font-medium">
+            <div className="chat-shortcuts__links">
               <Link to="/compare" className="text-primary hover:underline">
                 Compare →
               </Link>
@@ -544,7 +541,7 @@ export const FloatingChatbot: React.FC = () => {
               value={input}
               onChange={(e) => setInput(e.target.value)}
               placeholder="Ask anything in English or Hindi..."
-              aria-label="Type your message to Tech Hacks AI Assistant"
+              aria-label="Type your message to SwitchRoute Assistant"
               className="flex-1 bg-muted/70 border border-border/80 rounded-md px-3.5 py-2.5 text-xs text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/70 transition-colors"
             />
             <button

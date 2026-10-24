@@ -11,6 +11,7 @@ export interface BrandLogoEntry {
   notes?: string;
 }
 
+
 export const brandLogos: Record<string, BrandLogoEntry> = {
   "adobe": {
     "slug": "adobe",
@@ -181,12 +182,12 @@ export const brandLogos: Record<string, BrandLogoEntry> = {
     "slug": "appflowy",
     "name": "AppFlowy",
     "assetPath": "/logos/appflowy.svg",
-    "sourceType": "fallback",
-    "verifiedAt": "2026-10-22",
+    "sourceType": "official",
+    "verifiedAt": "2026-10-23",
     "badgeBg": "#4f46e5",
     "format": "svg",
-    "pngAssetPath": "/logos/png/appflowy.png",
-    "notes": "Verification gap: the existing local mark has no traceable source and is withheld from display. BrandLogo shows its neutral initials fallback until a verified source is recorded."
+    "notes": "Official AppFlowy logo from its AppFlowy-IO GitHub repository.",
+    "sourceUrl": "https://raw.githubusercontent.com/AppFlowy-IO/AppFlowy/main/frontend/appflowy_flutter/assets/images/flowy_logo.svg"
   },
   "apple": {
     "slug": "apple",
@@ -411,7 +412,7 @@ export const brandLogos: Record<string, BrandLogoEntry> = {
   },
   "claude": {
     "slug": "claude",
-    "name": "Claude 3.5 Sonnet",
+    "name": "Claude",
     "assetPath": "/logos/claude.svg",
     "sourceType": "simple-icons",
     "verifiedAt": "2026-10-17",
@@ -447,12 +448,12 @@ export const brandLogos: Record<string, BrandLogoEntry> = {
     "slug": "cline",
     "name": "Cline",
     "assetPath": "/logos/cline.svg",
-    "sourceType": "fallback",
-    "verifiedAt": "2026-10-22",
+    "sourceType": "official",
+    "verifiedAt": "2026-10-23",
     "badgeBg": "#6366f1",
     "format": "svg",
-    "pngAssetPath": "/logos/png/cline.png",
-    "notes": "Verification gap: the existing local mark has no traceable source and is withheld from display. BrandLogo shows its neutral initials fallback until a verified source is recorded."
+    "notes": "Official Cline icon referenced by Cline documentation configuration (light/dark logo and favicon assets). Source: https://github.com/cline/cline/blob/main/docs/docs.json.",
+    "sourceUrl": "https://raw.githubusercontent.com/cline/cline/main/docs/assets/cline-icon-dark.svg"
   },
   "cloudflare": {
     "slug": "cloudflare",
@@ -708,13 +709,13 @@ export const brandLogos: Record<string, BrandLogoEntry> = {
   "firecrawl": {
     "slug": "firecrawl",
     "name": "Firecrawl",
-    "assetPath": "/logos/firecrawl.svg",
-    "sourceType": "fallback",
-    "verifiedAt": "2026-10-22",
+    "assetPath": "/logos/official-ai/firecrawl.png",
+    "sourceType": "official",
+    "verifiedAt": "2026-10-23",
     "badgeBg": "#ff4d00",
-    "format": "svg",
-    "pngAssetPath": "/logos/png/firecrawl.png",
-    "notes": "Verification gap: the existing local mark has no traceable source and is withheld from display. BrandLogo shows its neutral initials fallback until a verified source is recorded."
+    "format": "png",
+    "notes": "Official symbol asset from Firecrawl Press & Brand; source page: https://www.firecrawl.dev/press-brand.",
+    "sourceUrl": "https://www.firecrawl.dev/brand/firecrawl-logo.png"
   },
   "firefox": {
     "slug": "firefox",
@@ -895,12 +896,12 @@ export const brandLogos: Record<string, BrandLogoEntry> = {
     "slug": "gpt4all",
     "name": "GPT4All",
     "assetPath": "/logos/gpt4all.svg",
-    "sourceType": "fallback",
-    "verifiedAt": "2026-10-22",
+    "sourceType": "official",
+    "verifiedAt": "2026-10-23",
     "badgeBg": "#0e7490",
     "format": "svg",
-    "pngAssetPath": "/logos/png/gpt4all.png",
-    "notes": "Verification gap: the existing local mark has no traceable source and is withheld from display. BrandLogo shows its neutral initials fallback until a verified source is recorded."
+    "notes": "Official Nomic logo asset included in the GPT4All application icon resources.",
+    "sourceUrl": "https://raw.githubusercontent.com/nomic-ai/gpt4all/main/gpt4all-chat/icons/nomic_logo.svg"
   },
   "groq": {
     "slug": "groq",
@@ -1006,12 +1007,12 @@ export const brandLogos: Record<string, BrandLogoEntry> = {
     "slug": "immich",
     "name": "Immich",
     "assetPath": "/logos/immich.svg",
-    "sourceType": "fallback",
-    "verifiedAt": "2026-10-22",
+    "sourceType": "official",
+    "verifiedAt": "2026-10-23",
     "badgeBg": "#1e1b4b",
     "format": "svg",
-    "pngAssetPath": "/logos/png/immich.png",
-    "notes": "Verification gap: the existing local mark has no traceable source and is withheld from display. BrandLogo shows its neutral initials fallback until a verified source is recorded."
+    "notes": "Official Immich design logo. Maintainers identify the repository design folder as containing logos; the current vector is hosted in that folder.",
+    "sourceUrl": "https://github.com/immich-app/immich/blob/main/design/immich-logo.svg"
   },
   "instagram": {
     "slug": "instagram",
@@ -2576,6 +2577,150 @@ export const brandLogos: Record<string, BrandLogoEntry> = {
     "verifiedAt": "2026-10-22",
     "format": "svg",
     "notes": "Neutral monogram fallback; a sourced provider logo has not been added."
+  },
+  "agnes-video-generator": {
+    "slug": "agnes-video-generator",
+    "name": "Agnes Video Generator",
+    "assetPath": "/logos/fallback-agnes-video-generator.svg",
+    "sourceType": "fallback",
+    "verifiedAt": "2026-10-23",
+    "format": "svg",
+    "notes": "Verification gap: no traceable official or authorized logo source was confirmed during this catalog update. The local neutral monogram is not rendered as a brand mark; BrandLogo shows its initials fallback."
+  },
+  "automated-video-generator": {
+    "slug": "automated-video-generator",
+    "name": "Automated Video Generator",
+    "assetPath": "/logos/fallback-automated-video-generator.svg",
+    "sourceType": "fallback",
+    "verifiedAt": "2026-10-23",
+    "format": "svg",
+    "notes": "Verification gap: no traceable official or authorized logo source was confirmed during this catalog update. The local neutral monogram is not rendered as a brand mark; BrandLogo shows its initials fallback."
+  },
+  "vuza": {
+    "slug": "vuza",
+    "name": "VUZA",
+    "assetPath": "/logos/fallback-vuza.svg",
+    "sourceType": "fallback",
+    "verifiedAt": "2026-10-23",
+    "format": "svg",
+    "notes": "Verification gap: no traceable official or authorized logo source was confirmed during this catalog update. The local neutral monogram is not rendered as a brand mark; BrandLogo shows its initials fallback."
+  },
+  "purffle-shorts": {
+    "slug": "purffle-shorts",
+    "name": "PurffleShorts",
+    "assetPath": "/logos/fallback-purffle-shorts.svg",
+    "sourceType": "fallback",
+    "verifiedAt": "2026-10-23",
+    "format": "svg",
+    "notes": "Verification gap: no traceable official or authorized logo source was confirmed during this catalog update. The local neutral monogram is not rendered as a brand mark; BrandLogo shows its initials fallback."
+  },
+  "open-generative-ai": {
+    "slug": "open-generative-ai",
+    "name": "Open Generative AI",
+    "assetPath": "/logos/fallback-open-generative-ai.svg",
+    "sourceType": "fallback",
+    "verifiedAt": "2026-10-23",
+    "format": "svg",
+    "notes": "Verification gap: no traceable official or authorized logo source was confirmed during this catalog update. The local neutral monogram is not rendered as a brand mark; BrandLogo shows its initials fallback."
+  },
+  "wan-2-2": {
+    "slug": "wan-2-2",
+    "name": "Wan 2.2",
+    "assetPath": "/logos/fallback-wan-2-2.svg",
+    "sourceType": "fallback",
+    "verifiedAt": "2026-10-23",
+    "format": "svg",
+    "notes": "Verification gap: no traceable official or authorized logo source was confirmed during this catalog update. The local neutral monogram is not rendered as a brand mark; BrandLogo shows its initials fallback."
+  },
+  "ltx-2-3": {
+    "slug": "ltx-2-3",
+    "name": "LTX-2.3",
+    "assetPath": "/logos/fallback-ltx-2-3.svg",
+    "sourceType": "fallback",
+    "verifiedAt": "2026-10-23",
+    "format": "svg",
+    "notes": "Verification gap: no traceable official or authorized logo source was confirmed during this catalog update. The local neutral monogram is not rendered as a brand mark; BrandLogo shows its initials fallback."
+  },
+  "hunyuanvideo": {
+    "slug": "hunyuanvideo",
+    "name": "HunyuanVideo",
+    "assetPath": "/logos/fallback-hunyuanvideo.svg",
+    "sourceType": "fallback",
+    "verifiedAt": "2026-10-23",
+    "format": "svg",
+    "notes": "Verification gap: no traceable official or authorized logo source was confirmed during this catalog update. The local neutral monogram is not rendered as a brand mark; BrandLogo shows its initials fallback."
+  },
+  "hunyuanvideo-i2v": {
+    "slug": "hunyuanvideo-i2v",
+    "name": "HunyuanVideo-I2V",
+    "assetPath": "/logos/fallback-hunyuanvideo-i2v.svg",
+    "sourceType": "fallback",
+    "verifiedAt": "2026-10-23",
+    "format": "svg",
+    "notes": "Verification gap: no traceable official or authorized logo source was confirmed during this catalog update. The local neutral monogram is not rendered as a brand mark; BrandLogo shows its initials fallback."
+  },
+  "huggingface-video-spaces": {
+    "slug": "huggingface-video-spaces",
+    "name": "Hugging Face Video Spaces",
+    "assetPath": "/logos/fallback-huggingface-video-spaces.svg",
+    "sourceType": "fallback",
+    "verifiedAt": "2026-10-23",
+    "format": "svg",
+    "notes": "Verification gap: no traceable official or authorized logo source was confirmed during this catalog update. The local neutral monogram is not rendered as a brand mark; BrandLogo shows its initials fallback."
+  },
+  "invideo-ai": {
+    "slug": "invideo-ai",
+    "name": "InVideo AI",
+    "assetPath": "/logos/fallback-invideo-ai.svg",
+    "sourceType": "fallback",
+    "verifiedAt": "2026-10-23",
+    "format": "svg",
+    "notes": "Verification gap: no traceable official or authorized logo source was confirmed during this catalog update. The local neutral monogram is not rendered as a brand mark; BrandLogo shows its initials fallback."
+  },
+  "pictory": {
+    "slug": "pictory",
+    "name": "Pictory",
+    "assetPath": "/logos/fallback-pictory.svg",
+    "sourceType": "fallback",
+    "verifiedAt": "2026-10-23",
+    "format": "svg",
+    "notes": "Verification gap: no traceable official or authorized logo source was confirmed during this catalog update. The local neutral monogram is not rendered as a brand mark; BrandLogo shows its initials fallback."
+  },
+  "synthesia": {
+    "slug": "synthesia",
+    "name": "Synthesia",
+    "assetPath": "/logos/fallback-synthesia.svg",
+    "sourceType": "fallback",
+    "verifiedAt": "2026-10-23",
+    "format": "svg",
+    "notes": "Verification gap: no traceable official or authorized logo source was confirmed during this catalog update. The local neutral monogram is not rendered as a brand mark; BrandLogo shows its initials fallback."
+  },
+  "fliki": {
+    "slug": "fliki",
+    "name": "Fliki",
+    "assetPath": "/logos/fallback-fliki.svg",
+    "sourceType": "fallback",
+    "verifiedAt": "2026-10-23",
+    "format": "svg",
+    "notes": "Verification gap: no traceable official or authorized logo source was confirmed during this catalog update. The local neutral monogram is not rendered as a brand mark; BrandLogo shows its initials fallback."
+  },
+  "opus-clip": {
+    "slug": "opus-clip",
+    "name": "Opus Clip",
+    "assetPath": "/logos/fallback-opus-clip.svg",
+    "sourceType": "fallback",
+    "verifiedAt": "2026-10-23",
+    "format": "svg",
+    "notes": "Verification gap: no traceable official or authorized logo source was confirmed during this catalog update. The local neutral monogram is not rendered as a brand mark; BrandLogo shows its initials fallback."
+  },
+  "klap": {
+    "slug": "klap",
+    "name": "Klap",
+    "assetPath": "/logos/fallback-klap.svg",
+    "sourceType": "fallback",
+    "verifiedAt": "2026-10-23",
+    "format": "svg",
+    "notes": "Verification gap: no traceable official or authorized logo source was confirmed during this catalog update. The local neutral monogram is not rendered as a brand mark; BrandLogo shows its initials fallback."
   }
 };
 

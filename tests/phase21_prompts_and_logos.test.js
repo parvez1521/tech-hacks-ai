@@ -273,7 +273,7 @@ describe('Phase 21: Prompt Library Expansion, Creative Workflows & Authentic Bra
       setupMockBrowser('https://techhacksai.com/prompt-library');
       const html = renderClean(React.createElement(ssrModule.App));
 
-      assert.ok(html.includes('AI Prompt Library &amp; Creative Recipes') || html.includes('AI Prompt Library & Creative Recipes'), 'Renders page title');
+      assert.ok(html.includes('Find a prompt. Make it yours.') || html.includes('Find a prompt. Make it yours.'), 'Renders page title');
       assert.ok(html.includes('Google (Nano Banana)'), 'Renders Google provider filter');
       assert.ok(html.includes('Anthropic (Claude)'), 'Renders Anthropic provider filter');
       assert.ok(html.includes('Higgsfield AI'), 'Renders Higgsfield provider filter');

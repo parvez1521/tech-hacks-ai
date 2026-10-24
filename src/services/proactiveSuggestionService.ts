@@ -1,6 +1,6 @@
 import { aiToolsData } from '../data/aiToolsData.ts';
 import { toolsData } from '../data/seedData.ts';
-import { getBrandLogo } from '../data/brandLogos.ts';
+import { getBrandLogo } from '../data/runtimeBrandLogos.ts';
 
 export interface ProactiveSuggestion {
   id: string;

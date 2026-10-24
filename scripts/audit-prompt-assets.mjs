@@ -12,6 +12,18 @@ import { proprietaryTools } from '../src/data/alternatives.ts';
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const publicRoot = path.join(root, 'public');
 const reportPath = path.join(root, 'docs', 'prompt-image-audit.json');
+const dimensionsPath = path.join(root, 'data', 'prompt-image-dimensions.json');
+const promptFeedManifestPath = path.join(root, 'data', 'promptfeed-import.json');
+// PromptFeed previews render at no more than 380px wide; this threshold flags
+// assets that would actually need enlargement in the current detail view.
+const DETAIL_PREVIEW_REVIEW_SIZE = { width: 380, height: 254 };
+
+function loadPromptFeedRecords() {
+  const manifest = JSON.parse(fs.readFileSync(promptFeedManifestPath, 'utf8'));
+  const records = Array.isArray(manifest) ? manifest : manifest.prompts;
+  if (!Array.isArray(records)) throw new Error('PromptFeed manifest must contain a prompt array.');
+  return records;
+}
 
 function readUInt24LE(buffer, offset) {
   return buffer[offset] | (buffer[offset + 1] << 8) | (buffer[offset + 2] << 16);
@@ -106,26 +118,43 @@ async function checkRemoteSources(entries) {
 }
 
 export async function buildAudit({ checkRemote = false } = {}) {
-  const prompts = promptsData.map((prompt) => {
+  const promptFeedRecords = loadPromptFeedRecords();
+  const allPromptRecords = [...promptsData, ...promptFeedRecords];
+  const promptRecordDuplicates = [];
+  const slugsSeen = new Map();
+  for (const prompt of allPromptRecords) {
+    const previous = slugsSeen.get(prompt.slug);
+    if (previous) promptRecordDuplicates.push({ slug: prompt.slug, records: [previous, prompt.authorOrSource || 'unknown'] });
+    else slugsSeen.set(prompt.slug, prompt.authorOrSource || 'unknown');
+  }
+  const prompts = allPromptRecords.map((prompt) => {
     const artwork = promptArtwork[prompt.slug];
-    const asset = inspectFile(artwork?.path || '');
+    const imagePath = prompt.previewImage || artwork?.path || '';
+    const asset = inspectFile(imagePath);
+    const sourceType = prompt.rightsStatus === 'licensed' ? 'licensed-third-party' : 'original-ai-generated';
     return {
       slug: prompt.slug,
       title: prompt.title,
-      imagePath: artwork?.path || null,
+      imagePath: imagePath || null,
       dimensions: { width: asset.width, height: asset.height },
+      aspectRatio: asset.width && asset.height ? Number((asset.width / asset.height).toFixed(4)) : null,
       actualFileType: asset.actualFormat,
       imageAvailable: asset.available,
       sizeBytes: asset.sizeBytes,
       sha256: asset.sha256,
       extensionMatchesContent: asset.extensionMatchesContent ?? false,
-      altText: artwork?.alt || null,
+      tooSmallForDetailPreview: Boolean(asset.width && asset.height && (asset.width < DETAIL_PREVIEW_REVIEW_SIZE.width || asset.height < DETAIL_PREVIEW_REVIEW_SIZE.height)),
+      altText: prompt.previewImageAlt || artwork?.alt || null,
       visualDescription: artwork?.description || null,
       provenance: {
-        sourceType: 'original-ai-generated',
-        provider: 'Codex built-in image_gen',
-        createdFor: 'Tech Hacks AI',
-        rightsStatus: 'Original preview generated for this project; no third-party gallery image used.',
+        sourceType,
+        provider: sourceType === 'original-ai-generated' ? 'Codex built-in image_gen' : null,
+        creator: prompt.sourceCreator || prompt.authorOrSource || 'Unspecified',
+        sourceUrl: prompt.sourceUrl || null,
+        license: prompt.rightsLicense || null,
+        rightsStatus: sourceType === 'original-ai-generated'
+          ? 'Original preview generated for this project; no third-party gallery image used.'
+          : 'Licensed third-party prompt/image pair; attribution and license metadata retained.',
       },
     };
   });
@@ -164,6 +193,32 @@ export async function buildAudit({ checkRemote = false } = {}) {
     if (!prompt.altText || prompt.altText.length < 20) issues.push({ type: 'missing-or-short-alt-text', slug: prompt.slug });
     if (prompt.sizeBytes > 1_500_000) issues.push({ type: 'large-prompt-image', slug: prompt.slug, sizeBytes: prompt.sizeBytes });
   }
+
+  const promptImagePaths = new Set(prompts.map((prompt) => prompt.imagePath).filter(Boolean));
+  const promptAssetInventory = [];
+  const visitPromptAssets = (directory) => {
+    if (!fs.existsSync(directory)) return;
+    for (const entry of fs.readdirSync(directory, { withFileTypes: true })) {
+      const absolute = path.join(directory, entry.name);
+      if (entry.isDirectory()) visitPromptAssets(absolute);
+      else {
+        const relative = '/' + path.relative(publicRoot, absolute).split(path.sep).join('/');
+        const parsed = inspectFile(relative);
+        if (parsed.actualFormat !== 'unknown') promptAssetInventory.push({ assetPath: relative, ...parsed, referencedByPrompt: promptImagePaths.has(relative) });
+      }
+    }
+  };
+  visitPromptAssets(path.join(publicRoot, 'prompts'));
+
+  const normalizedPromptTexts = new Map();
+  const duplicatePromptTexts = [];
+  for (const prompt of allPromptRecords) {
+    const normalized = String(prompt.promptText || '').normalize('NFKC').toLowerCase().replace(/\s+/g, ' ').trim();
+    if (!normalized) continue;
+    const previous = normalizedPromptTexts.get(normalized);
+    if (previous) duplicatePromptTexts.push({ prompts: [previous, prompt.slug] });
+    else normalizedPromptTexts.set(normalized, prompt.slug);
+  }
   for (const logo of logoEntries) {
     if (!logo.available || !logo.extensionMatchesContent) issues.push({ type: 'logo-asset-integrity', slug: logo.slug, imagePath: logo.assetPath, available: logo.available, actualFileType: logo.actualFormat });
   }
@@ -172,9 +227,17 @@ export async function buildAudit({ checkRemote = false } = {}) {
     generatedAt: new Date().toISOString(),
     summary: {
       promptCount: prompts.length,
+      uniqueUsablePromptCount: new Set(prompts.filter((prompt) => prompt.imageAvailable && prompt.altText && prompt.slug).map((prompt) => prompt.slug)).size,
+      duplicatePromptRecords: promptRecordDuplicates.length,
+      duplicatePromptTexts: duplicatePromptTexts.length,
       originalGeneratedImages: prompts.filter((prompt) => prompt.provenance.sourceType === 'original-ai-generated').length,
+      licensedPromptFeedImages: prompts.filter((prompt) => prompt.provenance.sourceType === 'licensed-third-party').length,
       duplicatePromptImages: duplicateImages.length,
       missingPromptImages: prompts.filter((prompt) => !prompt.imageAvailable).length,
+      promptImageAssetsInventoried: promptAssetInventory.length,
+      unreferencedPromptAssets: promptAssetInventory.filter((asset) => !asset.referencedByPrompt).length,
+      imagesFlaggedForDetailResolutionReview: prompts.filter((prompt) => prompt.tooSmallForDetailPreview).length,
+      detailPreviewReviewThreshold: DETAIL_PREVIEW_REVIEW_SIZE,
       logoCount: logoEntries.length,
       logoSourcesByType: Object.fromEntries(Object.entries(sourceCounts).map(([key, entries]) => [key, entries.length])),
       logosWithoutRecordedSource: logoEntries.filter((entry) => !entry.provenanceComplete).length,
@@ -187,7 +250,10 @@ export async function buildAudit({ checkRemote = false } = {}) {
       meigenAssetsUsed: false,
     },
     duplicateImages,
+    duplicatePromptRecords: promptRecordDuplicates,
+    duplicatePromptTexts,
     prompts,
+    promptAssetInventory,
     logos: logoEntries,
     unresolvedLogoSources: unresolvedLogoSources.map((entry) => ({ slug: entry.slug, name: entry.name, assetPath: entry.assetPath, note: entry.notes })),
     activeCatalogFallbacks: activeFallbacks.map((tool) => ({ slug: tool.slug, name: tool.name, sourceUrl: getBrandLogo(tool.slug)?.sourceUrl || null, note: getBrandLogo(tool.slug)?.notes || null })),
@@ -201,7 +267,10 @@ if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.me
   if (args.has('--write')) {
     fs.mkdirSync(path.dirname(reportPath), { recursive: true });
     fs.writeFileSync(reportPath, `${JSON.stringify(audit, null, 2)}\n`);
+    const dimensions = Object.fromEntries(audit.prompts.map((prompt) => [prompt.slug, prompt.dimensions]));
+    fs.writeFileSync(dimensionsPath, `${JSON.stringify(dimensions)}\n`);
     console.log(`Wrote ${reportPath}`);
+    console.log(`Wrote ${dimensionsPath}`);
   }
   console.log(JSON.stringify(audit.summary, null, 2));
   if (args.has('--check') && audit.issues.length) process.exitCode = 1;

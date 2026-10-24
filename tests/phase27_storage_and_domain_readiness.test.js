@@ -147,7 +147,7 @@ describe('Phase 27: Durable Data Storage & Production Deployment Readiness', () 
           title: 'Production Guard Test Guide with Comprehensive Workflow Steps',
           category: 'workflow-automation',
           summary: 'A test guide to verify serverless storage safety guard.',
-          content: '## Step 1: Initialize Database\nSetting up production verification tests for Tech Hacks AI.\n\n## Step 2: Test Ephemeral Guards\nEnsure no silent data loss in serverless Vercel environments.',
+          content: '## Step 1: Initialize Database\nSetting up production verification tests for SwitchRoute.\n\n## Step 2: Test Ephemeral Guards\nEnsure no silent data loss in serverless Vercel environments.',
         };
 
         const result = await createGuideSubmission(payload);
@@ -233,7 +233,7 @@ describe('Phase 27: Durable Data Storage & Production Deployment Readiness', () 
         encoding: 'utf8',
         maxBuffer: 10 * 1024 * 1024,
       });
-      assert.ok(output.includes('Tech Hacks AI — Database Migration Assistant'));
+      assert.ok(output.includes('SwitchRoute — Database Migration Assistant'));
       assert.ok(output.includes('[Dry Run] Inspection summary'));
       assert.ok(output.includes('Submissions ready for sync'));
     });
@@ -369,9 +369,9 @@ describe('Phase 27: Durable Data Storage & Production Deployment Readiness', () 
 
     test('canonical URL resolver uses configured domain without localhost leak', () => {
       const canonical = getCanonicalUrl('/ai-tools/jan-ai');
-      assert.ok(canonical.startsWith('https://techhacksai.com'));
+      assert.ok(canonical.startsWith('https://switchroute.in'));
       assert.ok(!canonical.includes('localhost'));
-      assert.strictEqual(canonical, 'https://techhacksai.com/ai-tools/jan-ai');
+      assert.strictEqual(canonical, 'https://switchroute.in/ai-tools/jan-ai');
     });
 
     test('robots.txt disallows sensitive administrative and API paths', () => {
@@ -382,7 +382,7 @@ describe('Phase 27: Durable Data Storage & Production Deployment Readiness', () 
       assert.ok(content.includes('Disallow: /moderation'));
       assert.ok(content.includes('Disallow: /admin'));
       assert.ok(content.includes('Disallow: /api/'));
-      assert.ok(content.includes('Sitemap: https://techhacksai.com/sitemap.xml'));
+      assert.ok(content.includes('Sitemap: https://switchroute.in/sitemap.xml'));
     });
 
     test('package.json includes db:migrate script', () => {

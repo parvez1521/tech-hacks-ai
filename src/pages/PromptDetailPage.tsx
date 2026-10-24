@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter, Link } from '../router/Router';
 import { getPromptBySlug, getAllPrompts } from '../services/aiCatalogService';
+import { getPromptFeedPromptBySlug } from '../data/promptfeedPrompts';
 import { BookmarkButton } from '../components/BookmarkButton';
 import { PromptCard } from '../components/PromptCard';
 import { BrandLogo } from '../components/BrandLogo';
@@ -29,7 +30,8 @@ export const PromptDetailPage: React.FC = () => {
   const { params } = useRouter();
   const slug = params.slug;
   const [remotePrompt, setRemotePrompt] = useState<PromptItem | undefined>();
-  const prompt = remotePrompt?.slug === slug ? remotePrompt : getPromptBySlug(slug);
+  const [feedPrompt, setFeedPrompt] = useState<PromptItem | undefined>();
+  const prompt = remotePrompt?.slug === slug ? remotePrompt : feedPrompt?.slug === slug ? feedPrompt : getPromptBySlug(slug);
   const [recordedCopyCount, setRecordedCopyCount] = useState<number>();
 
   useEffect(() => {
@@ -38,6 +40,14 @@ export const PromptDetailPage: React.FC = () => {
     fetchPublishedPrompts(slug).then((prompts) => {
       if (active && prompts[0]) setRemotePrompt(prompts[0]);
     });
+    return () => { active = false; };
+  }, [slug]);
+
+  useEffect(() => {
+    let active = true;
+    setFeedPrompt(undefined);
+    if (!slug.startsWith('promptfeed-')) return () => { active = false; };
+    getPromptFeedPromptBySlug(slug).then((result) => { if (active) setFeedPrompt(result); }).catch(() => { if (active) setFeedPrompt(undefined); });
     return () => { active = false; };
   }, [slug]);
 
@@ -60,6 +70,10 @@ export const PromptDetailPage: React.FC = () => {
   const [copied, setCopied] = useState(false);
   const [copiedOriginal, setCopiedOriginal] = useState(false);
   const [placeholderValues, setPlaceholderValues] = useState<Record<string, string>>({});
+
+  if (!prompt && slug.startsWith('promptfeed-')) {
+    return <div className="max-w-4xl mx-auto px-4 py-16 text-center" role="status"><div className="mx-auto mb-4 h-8 w-8 animate-spin rounded-full border-2 border-teal-500 border-t-transparent" /><p className="text-sm text-muted-foreground">Loading prompt and matching preview…</p></div>;
+  }
 
   if (!prompt) {
     return (
@@ -190,13 +204,20 @@ export const PromptDetailPage: React.FC = () => {
         </p>
 
         <figure className="mb-6 overflow-hidden rounded-2xl border border-border bg-muted">
-          <PromptPreviewImage src={prompt.previewImage} alt={prompt.previewImageAlt || `${prompt.title} prompt preview`} priority className="block max-h-[500px] w-full bg-slate-100 object-contain dark:bg-slate-800" />
+          <PromptPreviewImage
+            src={prompt.previewImage}
+            alt={prompt.previewImageAlt || `${prompt.title} prompt preview`}
+            priority
+            width={prompt.previewImageWidth}
+            height={prompt.previewImageHeight}
+            className={`block max-h-[500px] w-full bg-slate-100 object-contain dark:bg-slate-800${slug.startsWith('promptfeed-') ? ' mx-auto max-w-[380px]' : ''}`}
+          />
           <figcaption className="flex flex-wrap items-center gap-x-4 gap-y-1 px-4 py-3 text-xs text-muted-foreground">
             <span><strong className="text-foreground">Visual style</strong> {prompt.visualStyle || 'Conceptual'}</span>
             <span><strong className="text-foreground">Aspect ratio</strong> {prompt.aspectRatio || '1:1'}</span>
             <span><strong className="text-foreground">Model</strong> {prompt.targetModel}</span>
             {prompt.createdAt && <span><strong className="text-foreground">Added</strong> {new Date(prompt.createdAt).toLocaleDateString()}</span>}
-            <span>{prompt.rightsStatus === 'original' ? 'Original Tech Hacks AI preview.' : `${prompt.rightsStatus || 'Source'} content with attribution.`}</span>
+            <span>{prompt.rightsStatus === 'original' ? 'Original SwitchRoute preview.' : `${prompt.rightsStatus || 'Source'} content with attribution.`}</span>
           </figcaption>
         </figure>
 
@@ -205,10 +226,10 @@ export const PromptDetailPage: React.FC = () => {
         {prompt.mediaType === 'video' && prompt.videoDetails && (
           <section className="mb-6 rounded-xl border border-indigo-200 bg-indigo-50/70 p-4 text-sm dark:border-indigo-900 dark:bg-indigo-950/30" aria-labelledby="video-source-title">
             <h2 id="video-source-title" className="font-semibold text-foreground">Suggested video recreation</h2>
-            <p className="mt-1 text-xs leading-5 text-secondary-foreground">This is an original Tech Hacks AI prompt and locally generated poster. It is not an original prompt or video from the linked provider.</p>
+            <p className="mt-1 text-xs leading-5 text-secondary-foreground">This is an original SwitchRoute prompt and locally generated poster. It is not an original prompt or video from the linked provider.</p>
             <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-2 text-xs">
               <span><strong>Preview:</strong> local poster image</span>
-              <span><strong>Rights:</strong> {prompt.videoDetails.permissionStatus || 'Original Tech Hacks AI artwork'}</span>
+              <span><strong>Rights:</strong> {prompt.videoDetails.permissionStatus || 'Original SwitchRoute artwork'}</span>
               {prompt.videoDetails.sourcePageUrl && <a href={prompt.videoDetails.sourcePageUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 font-semibold text-primary hover:underline">Open official provider <ExternalLink size={13} /></a>}
             </div>
           </section>
@@ -361,16 +382,6 @@ export const PromptDetailPage: React.FC = () => {
             <h3 className="font-bold text-amber-950 mb-1 text-sm">Optimization Tips & Parameters</h3>
             <p className="text-amber-900/90">{prompt.tips}</p>
           </div>
-        </div>
-      )}
-
-      {/* Author & Source Provenance */}
-      {prompt.authorOrSource && (
-        <div className="text-xs text-muted-foreground mb-8 px-2 flex items-center gap-2">
-          <span>Author / Provenance:</span>
-          <span className="font-semibold text-secondary-foreground">{prompt.authorOrSource}</span>
-          {prompt.rightsStatus && <span className="rounded-full border border-border px-2 py-0.5 capitalize">{prompt.rightsStatus.replace(/-/g, ' ')}</span>}
-          {(prompt.sourceUrl || prompt.attributionUrl) && <a href={prompt.sourceUrl || prompt.attributionUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 font-medium text-primary hover:underline">Source <ExternalLink size={12} /></a>}
         </div>
       )}
 

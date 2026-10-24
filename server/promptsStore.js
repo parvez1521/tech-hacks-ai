@@ -1,9 +1,8 @@
 import { isAuthorized } from './submissionsStore.js';
+import { getSupabaseConfig, getSupabaseHeaders, redactSupabaseCredential } from './supabaseRest.js';
 
 function getConfig() {
-  const base = process.env.SUPABASE_URL?.replace(/\/+$/, '');
-  const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
-  return base && key ? { base, key } : null;
+  return getSupabaseConfig();
 }
 
 export function validatePrompt(value) {
@@ -37,13 +36,11 @@ export function validatePrompt(value) {
   return null;
 }
 
-async function request(path, { key, base }, init = {}) {
-  const response = await fetch(`${base}/rest/v1/techhacks_prompts${path}`, {
+async function request(path, config, init = {}) {
+  const response = await fetch(`${config.base}/rest/v1/techhacks_prompts${path}`, {
     ...init,
     headers: {
-      apikey: key,
-      Authorization: `Bearer ${key}`,
-      'Content-Type': 'application/json',
+      ...getSupabaseHeaders(config),
       ...(init.headers || {}),
     },
   });
@@ -51,7 +48,8 @@ async function request(path, { key, base }, init = {}) {
   let parsed;
   try { parsed = body ? JSON.parse(body) : null; } catch { parsed = null; }
   if (!response.ok) {
-    const error = new Error(parsed?.message || parsed?.details || `Prompt database returned HTTP ${response.status}.`);
+    const detail = parsed?.message || parsed?.details || `Prompt database returned HTTP ${response.status}.`;
+    const error = new Error(redactSupabaseCredential(detail, config));
     error.status = response.status;
     throw error;
   }
@@ -87,7 +85,7 @@ export async function createPromptDraft(prompt) {
 export async function getPromptCopyStats() {
   const config = getConfig();
   if (!config) return { configured: false, stats: [] };
-  const response = await fetch(`${config.base}/rest/v1/techhacks_prompt_stats?select=slug,copy_count`, { headers: { apikey: config.key, Authorization: `Bearer ${config.key}` }, signal: AbortSignal.timeout(10000) });
+  const response = await fetch(`${config.base}/rest/v1/techhacks_prompt_stats?select=slug,copy_count`, { headers: getSupabaseHeaders(config), signal: AbortSignal.timeout(10000) });
   if (!response.ok) return { configured: true, stats: [] };
   const rows = await response.json();
   return { configured: true, stats: (rows || []).map((row) => ({ slug: row.slug, copyCount: Number(row.copy_count) || 0 })) };
@@ -96,7 +94,7 @@ export async function getPromptCopyStats() {
 export async function recordPromptCopy(slug) {
   const config = getConfig();
   if (!config) return { status: 503, error: 'Prompt analytics are not configured.' };
-  const response = await fetch(`${config.base}/rest/v1/rpc/techhacks_record_prompt_copy`, { method: 'POST', headers: { apikey: config.key, Authorization: `Bearer ${config.key}`, 'Content-Type': 'application/json' }, body: JSON.stringify({ p_slug: slug }), signal: AbortSignal.timeout(10000) });
+  const response = await fetch(`${config.base}/rest/v1/rpc/techhacks_record_prompt_copy`, { method: 'POST', headers: getSupabaseHeaders(config), body: JSON.stringify({ p_slug: slug }), signal: AbortSignal.timeout(10000) });
   if (!response.ok) return { status: response.status, error: 'Could not record this copy.' };
   return { status: 200, success: true };
 }
@@ -107,7 +105,7 @@ export async function savePrompt(prompt, status, existingSlug) {
   if (!['draft', 'pending', 'published', 'rejected'].includes(status)) return { status: 400, error: 'Invalid prompt status.' };
   if (['pending', 'published'].includes(status) && ['pending', 'unknown'].includes(prompt.rightsStatus)) return { status: 400, error: 'Content with pending or unknown rights cannot be submitted or published.' };
   const config = getConfig();
-  if (!config) return { status: 503, error: 'Prompt storage is unavailable. Configure SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY.' };
+  if (!config) return { status: 503, error: 'Prompt storage is unavailable. Configure SUPABASE_URL and a server-side Supabase secret or service-role key.' };
   const row = { id: prompt.id, slug: prompt.slug, status, content: { ...prompt, status } };
   const path = existingSlug ? `?slug=eq.${encodeURIComponent(existingSlug)}` : '';
   const result = await request(path, { ...config, headers: { Prefer: 'resolution=merge-duplicates,return=representation' } }, {
@@ -120,7 +118,7 @@ export async function savePrompt(prompt, status, existingSlug) {
 
 export async function removePrompt(slug) {
   const config = getConfig();
-  if (!config) return { status: 503, error: 'Prompt storage is unavailable. Configure SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY.' };
+  if (!config) return { status: 503, error: 'Prompt storage is unavailable. Configure SUPABASE_URL and a server-side Supabase secret or service-role key.' };
   await request(`?slug=eq.${encodeURIComponent(slug)}`, config, { method: 'DELETE', headers: { Prefer: 'return=minimal' } });
   return { status: 200, success: true };
 }

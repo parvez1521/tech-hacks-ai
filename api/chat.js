@@ -1,7 +1,21 @@
 // Production serverless handler for /api/chat
+import { checkRateLimit } from '../server/submissionsStore.js';
+
+function clientIp(req) {
+  const forwarded = req?.headers?.['x-vercel-forwarded-for'] || req?.headers?.['x-forwarded-for'] || req?.socket?.remoteAddress || 'unknown';
+  return String(forwarded).split(',')[0].trim().slice(0, 128) || 'unknown';
+}
+
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
+  }
+
+  // The chat endpoint can proxy paid provider requests. Apply the same
+  // per-instance abuse limit used by public submissions before calling it.
+  if (!checkRateLimit(`chat:${clientIp(req)}`)) {
+    res.setHeader('Retry-After', '600');
+    return res.status(429).json({ error: 'Too many chat requests. Please try again in 10 minutes.' });
   }
 
   const body = typeof req.body === 'string' ? safeJsonParse(req.body) : req.body;

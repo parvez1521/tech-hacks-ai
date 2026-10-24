@@ -1,4 +1,5 @@
 import { canManagePrompts, listPrompts, removePrompt, savePrompt } from '../server/promptsStore.js';
+import { getSafeApiFailure, logSanitizedApiError } from '../server/apiErrorHandling.js';
 
 function readBody(req) {
   try {
@@ -32,7 +33,8 @@ export default async function handler(req, res) {
     res.setHeader('Allow', 'GET, POST, PATCH, DELETE');
     return res.status(405).json({ error: 'Method not allowed.' });
   } catch (error) {
-    console.error('Prompt API error:', error);
-    return res.status(error.status || 500).json({ error: error.message || 'Could not process prompt request.' });
+    logSanitizedApiError('/api/prompts', error, req);
+    const failure = getSafeApiFailure(error);
+    return res.status(failure.status).json(failure.body);
   }
 }
