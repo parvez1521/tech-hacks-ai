@@ -35,7 +35,8 @@ test('chat API states when live AI is not configured and signals catalog mode', 
     assert.equal(res.statusCode, 200);
     assert.equal(res.payload.status, 'grounded_local_mode');
     assert.match(res.payload.message, /not configured/i);
-    assert.equal(res.payload.text, null);
+    assert.equal(typeof res.payload.text, 'string');
+    assert.ok(Array.isArray(res.payload.groundedTools));
   } finally {
     if (priorKey === undefined) delete process.env.GROQ_API_KEY;
     else process.env.GROQ_API_KEY = priorKey;
@@ -49,7 +50,7 @@ test('chat API uses the supported Groq model and parses a valid provider respons
   let request;
   globalThis.fetch = async (url, options) => {
     request = { url, options, body: JSON.parse(options.body) };
-    return { ok: true, json: async () => ({ choices: [{ message: { content: 'Here are coding tools.' } }] }) };
+    return { ok: true, json: async () => ({ choices: [{ message: { content: 'Aider is a listed coding option.' } }] }) };
   };
   try {
     const res = responseRecorder();
@@ -62,8 +63,9 @@ test('chat API uses the supported Groq model and parses a valid provider respons
       },
     }, res);
     assert.equal(res.statusCode, 200);
-    assert.equal(res.payload.text, 'Here are coding tools.');
+    assert.equal(res.payload.text, 'Aider is a listed coding option.');
     assert.equal(res.payload.mode, 'live');
+    assert.ok(res.payload.groundedTools.some((tool) => tool.slug === 'aider'));
     assert.equal(request.body.model, 'openai/gpt-oss-120b');
     assert.equal(request.body.messages.at(-2).content, 'I build apps');
     assert.ok(!request.options.headers.Authorization.includes('test-only-key') === false);
@@ -91,8 +93,27 @@ test('chat API falls back to catalog mode for provider errors and malformed resp
       assert.equal(res.statusCode, 200);
       assert.equal(res.payload.status, 'grounded_local_mode');
       assert.match(res.payload.message, /temporarily unavailable/i);
-      assert.equal(res.payload.text, null);
+      assert.equal(typeof res.payload.text, 'string');
+      assert.ok(Array.isArray(res.payload.groundedTools));
     }
+  } finally {
+    globalThis.fetch = oldFetch;
+    if (priorKey === undefined) delete process.env.GROQ_API_KEY;
+    else process.env.GROQ_API_KEY = priorKey;
+  }
+});
+
+test('chat API discards live recommendations outside the eligible category', async () => {
+  const oldFetch = globalThis.fetch;
+  const priorKey = process.env.GROQ_API_KEY;
+  process.env.GROQ_API_KEY = 'test-only-key';
+  globalThis.fetch = async () => ({ ok: true, json: async () => ({ choices: [{ message: { content: 'Runway and OmniRush are both great video tools.' } }] }) });
+  try {
+    const res = responseRecorder();
+    await handler({ method: 'POST', headers: { 'x-vercel-forwarded-for': 'chat-api-invalid-category-model' }, body: { message: 'Suggest free AI video tools' } }, res);
+    assert.equal(res.payload.status, 'grounded_local_mode');
+    assert.ok(res.payload.groundedTools.every((tool) => tool.slug !== 'omnirush'));
+    assert.ok(!res.payload.text.includes('OmniRush'));
   } finally {
     globalThis.fetch = oldFetch;
     if (priorKey === undefined) delete process.env.GROQ_API_KEY;

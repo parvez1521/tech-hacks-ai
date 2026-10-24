@@ -1,5 +1,6 @@
 // Production serverless handler for /api/chat
 import { checkRateLimit } from '../server/submissionsStore.js';
+import { generateGroundedResponse, validateGroundedText } from '../src/services/chatRetrievalService.ts';
 
 function clientIp(req) {
   const forwarded = req?.headers?.['x-vercel-forwarded-for'] || req?.headers?.['x-forwarded-for'] || req?.socket?.remoteAddress || 'unknown';
@@ -23,6 +24,8 @@ export default async function handler(req, res) {
   if (!message) return res.status(400).json({ error: 'Enter a message to continue.' });
   if (message.length > 8000) return res.status(413).json({ error: 'Message is too long. Keep it under 8,000 characters.' });
   const groqKey = process.env.GROQ_API_KEY;
+  const grounded = generateGroundedResponse(message);
+  const candidates = grounded.groundedTools || [];
 
   if (groqKey) {
     let timeout;
@@ -41,8 +44,7 @@ export default async function handler(req, res) {
           messages: [
             {
               role: 'system',
-              content:
-                'You are the Tech Hacks AI Assistant for techhacksai.com. Ground answers in verified software tools. Differentiate open-source, recurring free plans, starter trial credits, and paid-only tools. Support English and Hindi queries.',
+              content: `You are the SwitchRoute catalogue assistant. Recommend only entries from this eligible catalogue list. Do not invent features, pricing, access, licenses, or integrations. If the list is empty, say no verified catalogue match was found. Support English and Hindi. Eligible catalogue entries: ${JSON.stringify(candidates)}`,
             },
             ...normalizeHistory(body?.conversationHistory),
             { role: 'user', content: message },
@@ -56,7 +58,9 @@ export default async function handler(req, res) {
         const data = await response.json();
         const text = data?.choices?.[0]?.message?.content;
         if (typeof text === 'string' && text.trim()) {
-          return res.status(200).json({ text: text.trim(), mode: 'live' });
+          if (candidates.length && validateGroundedText(text, message, candidates.map((candidate) => candidate.slug))) {
+            return res.status(200).json({ text: text.trim(), mode: 'live', groundedTools: grounded.groundedTools, suggestions: grounded.suggestions });
+          }
         }
       }
     } catch {
@@ -71,7 +75,9 @@ export default async function handler(req, res) {
     message: groqKey
       ? 'Live AI is temporarily unavailable. Showing matches from the published catalogue.'
       : 'Live AI is not configured. Showing matches from the published catalogue.',
-    text: null,
+    text: grounded.text,
+    groundedTools: grounded.groundedTools,
+    suggestions: grounded.suggestions,
   });
 }
 
