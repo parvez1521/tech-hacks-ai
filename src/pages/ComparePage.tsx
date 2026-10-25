@@ -55,6 +55,9 @@ export const ComparePage: React.FC = () => {
     }
   });
 
+  const resolvedSlugSet = new Set(resolvedTools.map((entry) => entry.data.slug.toLowerCase()));
+  const unresolvedSlugs = [...new Set(slugs.filter((slug) => !resolvedSlugSet.has(slug.toLowerCase())))];
+
   const handleRemove = (slugToRemove: string) => {
     const nextSlugs = slugs.filter((s) => s.toLowerCase() !== slugToRemove.toLowerCase());
     setSearchParams({ tools: nextSlugs.length > 0 ? nextSlugs.join(',') : null });
@@ -195,6 +198,27 @@ export const ComparePage: React.FC = () => {
           </div>
         </div>
       </div>
+
+      {unresolvedSlugs.length > 0 && (
+        <div className="mb-5 rounded-xl border border-amber-300 bg-amber-50 p-4 text-amber-950" role="status" aria-live="polite">
+          <p className="text-sm font-semibold">Some requested entries could not be compared.</p>
+          <p className="mt-1 text-xs leading-relaxed">
+            The comparison includes {resolvedTools.length} recognized {resolvedTools.length === 1 ? 'entry' : 'entries'}.
+            Unresolved: {' '}
+            {unresolvedSlugs.map((slug, index) => (
+              <React.Fragment key={slug}>
+                {index > 0 ? ', ' : ''}
+                {slug.toLowerCase() === 'claude-code' ? (
+                  <Link to="/alternatives/claude-code" className="font-semibold underline underline-offset-2">Claude Code (view alternatives)</Link>
+                ) : (
+                  <span className="font-mono">{slug}</span>
+                )}
+              </React.Fragment>
+            ))}
+            . Remove unknown slugs or choose entries from the catalogue to compare them accurately.
+          </p>
+        </div>
+      )}
 
       {/* Comparison Grid Table */}
       {resolvedTools.length === 0 ? (
