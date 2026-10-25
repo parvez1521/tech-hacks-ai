@@ -862,6 +862,8 @@ export const aiToolsData: AiTool[] = [
     hasFreePlan: true,
     releaseYear: 2023,
     generationTasks: ['coding-assistant', 'chat'],
+    executionEnvironment: 'Desktop application built on a VS Code-based editor; code editing, indexing, and agent workflows run locally while selected AI requests may use cloud models.',
+    requiresInstallation: true,
     inputModalities: ['text', 'code'],
     outputModalities: ['code', 'text'],
     useCases: ['Full codebase editing', 'Multi-file refactoring', 'Bug fixing with semantic context'],
