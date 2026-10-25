@@ -1,7 +1,13 @@
 import { aiToolsData } from '../data/aiToolsData.ts';
 import { toolsData } from '../data/seedData.ts';
 import { getActiveOffers } from '../data/offersData.ts';
-import { proprietaryTools } from '../data/alternatives.ts';
+import {
+  detectCatalogSearchIntent,
+  findAlternativeTargetFromQuery,
+  getAiAlternativesForTarget,
+  getAiToolsForSearchIntent,
+  getOpenSourceToolsForProprietary,
+} from './aiCatalogService.ts';
 import type { AiTool, Tool } from '../types/index.ts';
 
 export interface ChatMessage {
@@ -25,6 +31,85 @@ export function generateGroundedResponse(userQuery: string): ChatMessage {
   });
   if (!q) return message('Please enter a question about AI tools, open-source software, or current offers.');
 
+  const alternativeTarget = findAlternativeTargetFromQuery(userQuery);
+  if (alternativeTarget) {
+    const aiMatches = getAiAlternativesForTarget(alternativeTarget.slug);
+    const openSourceMatches = getOpenSourceToolsForProprietary(alternativeTarget.slug);
+    const records = [
+      ...openSourceMatches.map((tool) => ({
+        name: tool.name, slug: tool.slug, type: 'open-source' as const,
+        pricingSummary: `${tool.license} · open source`, websiteUrl: tool.websiteUrl,
+      })),
+      ...aiMatches.map((tool) => ({
+        name: tool.name, slug: tool.slug, type: 'ai' as const,
+        pricingSummary: tool.freeAccessType === 'open-source-local' ? 'Open source / local'
+          : tool.freeAccessType === 'recurring-free' ? 'Free plan / freemium'
+          : tool.pricingType,
+        websiteUrl: tool.websiteUrl,
+      })),
+    ].slice(0, 8);
+    const targetLink = `/alternatives/${alternativeTarget.slug}`;
+    if (!records.length) {
+      return message(`I found ${alternativeTarget.name} in the catalogue, but no mapped replacement records are available yet. Open its [alternatives page](${targetLink}) for the current editorial notes.`, [], ['Find free AI tools', 'Find open-source tools']);
+    }
+    return message(
+      `Catalogue-backed alternatives to ${alternativeTarget.name}:\n\n${records.map((tool) => `• [${tool.name}](${tool.type === 'open-source' ? `/tools/${tool.slug}` : `/ai-tools/${tool.slug}`}) — ${tool.pricingSummary}`).join('\n')}\n\nSee the [${alternativeTarget.name} alternatives page](${targetLink}). These are catalogue relationships, not live-verified price or feature claims.`,
+      records,
+      ['Compare these replacements', 'Find completely free tools', 'Browse open-source tools'],
+    );
+  }
+
+  const intent = detectCatalogSearchIntent(userQuery);
+  if (intent) {
+    const aiMatches = getAiToolsForSearchIntent(userQuery);
+    const aiSlugs = new Set(aiMatches.map((tool) => tool.slug));
+    const openSourceMatches = intent === 'local-llm'
+      ? toolsData.filter((tool) => /\b(ollama|open webui|localai|jan|gpt4all|llama|vllm)\b/.test(normalize(`${tool.name} ${tool.slug} ${tool.description} ${tool.tagline} ${tool.tags.join(' ')} ${tool.techStack.join(' ')}`)))
+      : intent === 'workflow-automation'
+        ? toolsData.filter((tool) => /\b(n8n|activepieces|dify|typebot|langflow)\b/.test(normalize(`${tool.name} ${tool.slug} ${tool.description} ${tool.tagline} ${tool.tags.join(' ')} ${tool.categories.join(' ')}`)))
+        : [];
+    const uniqueOpenSource = openSourceMatches.filter((tool) => !aiSlugs.has(tool.slug));
+    const records = [
+      ...aiMatches.map((tool) => ({
+        name: tool.name, slug: tool.slug, type: 'ai' as const,
+        pricingSummary: tool.freeAccessType === 'open-source-local' ? 'Open source / local'
+          : tool.freeAccessType === 'recurring-free' ? 'Free plan / freemium'
+          : tool.pricingType,
+        websiteUrl: tool.websiteUrl,
+      })),
+      ...uniqueOpenSource.map((tool) => ({
+        name: tool.name, slug: tool.slug, type: 'open-source' as const,
+        pricingSummary: `${tool.license} · open source`, websiteUrl: tool.websiteUrl,
+      })),
+    ].slice(0, 8);
+    if (!records.length) {
+      const missingText = intent === 'video-editing'
+        ? 'I did not find a catalogue entry with explicit video-editor, timeline-editing, or repurposing capability. I will not recommend image generators or voice tools as video editors.'
+        : `I couldn't find a relevant ${intent.replaceAll('-', ' ')} record in the published catalogue.`;
+      return message(`${missingText} Try the [AI Tools directory](/ai-tools) or browse the relevant category directly. This assistant searches the published catalogue only.`, [], ['Browse AI tools', 'Find open-source tools']);
+    }
+
+    const rendered = records.map((tool) => {
+      const details = aiMatches.find((item) => item.slug === tool.slug);
+      const summary = details
+        ? `${details.freeTierSummary} ${details.freeTierLimits || ''}`.trim()
+        : '';
+      const url = tool.type === 'open-source' ? `/tools/${tool.slug}` : `/ai-tools/${tool.slug}`;
+      return `• [${tool.name}](${url}) — ${tool.pricingSummary}${summary ? `. ${summary}` : ''}`;
+    }).join('\n');
+    const title = intent === 'video-editing' ? 'Explicit video-editing matches'
+      : intent === 'video-generation' ? 'Video-generation tools'
+      : intent === 'voice-cloning' ? 'Voice-cloning tools'
+      : intent === 'local-llm' ? 'Local LLM and inference tools'
+      : intent === 'workflow-automation' ? 'Workflow automation tools'
+      : 'Coding assistants and editors';
+    return message(
+      `${title} from the published catalogue:\n\n${rendered}\n\nThese are catalogue records, not live-checked pricing or availability. Open each provider page to verify current limits.`,
+      records,
+      ['Compare tools', 'Find free alternatives', 'Browse the catalogue'],
+    );
+  }
+
   if (/\b(compare|versus|\bvs\b)\b/.test(q) && /\b(two|tools|them)\b/.test(q)) {
     return message('Choose two catalogue entries in the [side-by-side comparison tool](/compare). I can also find candidates by task or name before you compare them.', [], ['Find coding tools', 'Find writing tools']);
   }
@@ -42,15 +127,6 @@ export function generateGroundedResponse(userQuery: string): ChatMessage {
     const lines = matched.map((offer) => `• [${offer.title}](/offers/${offer.slug}) — ${offer.benefitSummary} (${offer.offerType === 'free-subscription' ? 'free plan' : offer.offerType.replaceAll('-', ' ')}). Eligibility: ${offer.eligibility}`);
     const couponNote = /coupon|promo code|voucher/.test(q) ? '\n\nNo fake codes: I only show a coupon code when it is explicitly recorded in an offer’s details.' : '';
     return message(`Published offers in the catalogue:\n\n${lines.join('\n')}\n\nBrowse the full [offers directory](/offers). These are catalogue records, not live-checked terms. Open the provider terms on each offer page before claiming.${couponNote}`, [], ['Show student offers', 'Find offers in India', 'Browse all offers']);
-  }
-
-  const alternativeTarget = proprietaryTools.find((target) => q.includes(normalize(target.name)) || q.includes(normalize(target.slug)));
-  if (alternativeTarget && (/alternative|replace|replacement|open source|open-source|vs|versus/.test(q))) {
-    const alternatives = toolsData.filter((tool) => tool.alternativesTo.includes(alternativeTarget.slug)).slice(0, 5);
-    if (alternatives.length) {
-      const records = alternatives.map((tool) => ({ name: tool.name, slug: tool.slug, type: 'open-source' as const, pricingSummary: `${tool.license} · open source`, websiteUrl: tool.websiteUrl }));
-      return message(`Open-source catalogue alternatives to ${alternativeTarget.name}:\n\n${records.map((tool) => `• [${tool.name}](/tools/${tool.slug}) — ${tool.pricingSummary}`).join('\n')}\n\nSee the [${alternativeTarget.name} alternatives page](/alternatives/${alternativeTarget.slug}) or compare tools side by side with the [comparison tool](/compare).`, records, ['Compare these alternatives', 'Search open-source tools']);
-    }
   }
 
   const all: Array<{ item: AiTool | Tool; type: 'ai' | 'open-source'; text: string }> = [
