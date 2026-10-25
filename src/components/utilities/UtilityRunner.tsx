@@ -68,6 +68,7 @@ const LazyBrowserUtility = React.lazy(() => import('./UtilityBrowserTools').then
 const LazyImageUtility = React.lazy(() => import('./UtilityImageTools').then((module) => ({
   default: ({ slug }: LazyUtilityProps) => {
     switch (slug) {
+      case 'heic-to-png': return <module.HeicToPngTool />;
       case 'image-cropper': return <module.ImageCropperTool />;
       case 'image-palette': return <module.ImagePaletteTool />;
       case 'favicon-generator': return <module.FaviconGeneratorTool />;
@@ -139,6 +140,7 @@ export const UtilityRunner: React.FC<UtilityRunnerProps> = ({ utility }) => {
     case 'mime-sniffer':
     case 'file-metadata':
     case 'youtube-metadata': return renderLazyUtility(LazyBrowserUtility, utility.slug);
+    case 'heic-to-png':
     case 'image-cropper':
     case 'image-palette':
     case 'favicon-generator':
