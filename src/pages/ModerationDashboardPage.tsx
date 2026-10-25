@@ -180,30 +180,38 @@ export const ModerationDashboardPage: React.FC = () => {
     setActionError(null);
 
     const tags = editTags.split(',').map((t) => t.trim()).filter(Boolean);
-    const updatedData = selectedSubmission.type === 'tool'
+    const updateFields = {
+      moderatorNotes: reviewNotes,
+      publishedSlug: editSlug.trim() || undefined,
+    };
+    const updatePayload = selectedSubmission.type === 'tool'
       ? {
-          ...(selectedSubmission.toolData || {}),
-          name: editName,
-          category: editCategory,
-          pricingType: editPricingType,
-          description: editSummary,
-          tags,
+          ...updateFields,
+          toolData: {
+            ...selectedSubmission.toolData,
+            name: editName,
+            websiteUrl: selectedSubmission.toolData?.websiteUrl || '',
+            category: editCategory,
+            pricingType: editPricingType,
+            description: editSummary,
+            tags,
+          },
         }
       : {
-          ...(selectedSubmission.guideData || {}),
-          title: editName,
-          category: editCategory,
-          summary: editSummary,
-          tags,
+          ...updateFields,
+          guideData: {
+            ...selectedSubmission.guideData,
+            title: editName,
+            category: editCategory,
+            summary: editSummary,
+            content: selectedSubmission.guideData?.content || '',
+            tags,
+          },
         };
 
     const res = await updateSubmission(
       selectedSubmission.id,
-      {
-        ...(selectedSubmission.type === 'tool' ? { toolData: updatedData } : { guideData: updatedData }),
-        moderatorNotes: reviewNotes,
-        publishedSlug: editSlug.trim() || undefined,
-      },
+      updatePayload,
       token
     );
 
