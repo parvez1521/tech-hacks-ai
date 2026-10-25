@@ -28,9 +28,7 @@ export function generateGroundedResponse(userQuery: string): ChatMessage {
   if (/\b(compare|versus|\bvs\b)\b/.test(q) && /\b(two|tools|them)\b/.test(q)) {
     return message('Choose two catalogue entries in the [side-by-side comparison tool](/compare). I can also find candidates by task or name before you compare them.', [], ['Find coding tools', 'Find writing tools']);
   }
-  if (/\b(help me choose|help me pick|recommend|choose)\b/.test(q) && /\b(tool|coding|video|image|writing)\b/.test(q)) {
-    return message('I can find matching tools from the published catalogue. For a guided recommendation, use [Help Me Pick](/pick).', [], ['Find coding tools', 'Find free tools']);
-  }
+  const wantsRecommendation = /\b(help me choose|help me pick|recommend|choose|best for me)\b/.test(q);
 
   if (/\b(offer|offers|deal|deals|student|students|college|university|credit|credits|discount|coupon|promo|voucher)\b/.test(q) || /\bछात्र\b/.test(q)) {
     const words = q.split(' ').filter((word) => word.length > 3);
@@ -54,10 +52,51 @@ export function generateGroundedResponse(userQuery: string): ChatMessage {
   }
 
   const all: Array<{ item: AiTool | Tool; type: 'ai' | 'open-source'; text: string }> = [
-    ...aiToolsData.map((item) => ({ item, type: 'ai' as const, text: normalize(`${item.name} ${item.tagline} ${item.description} ${item.category} ${item.tags.join(' ')} ${item.features.join(' ')}`) })),
-    ...toolsData.map((item) => ({ item, type: 'open-source' as const, text: normalize(`${item.name} ${item.tagline} ${item.description} ${item.categories.join(' ')} ${item.tags.join(' ')} ${item.techStack.join(' ')}`) })),
+    ...aiToolsData.map((item) => ({
+      item,
+      type: 'ai' as const,
+      text: normalize([
+        item.name, item.tagline, item.description, item.longDescription, item.category,
+        item.pricingType, item.pricingDetails, item.freeTierSummary, item.freeTierLimits,
+        item.executionEnvironment, item.hardwareRequirements, item.licenseSummary,
+        item.accessLabel, item.modelWeightsUrl, item.openSourceRepoUrl,
+        ...(item.tags || []), ...(item.features || []), ...(item.useCases || []),
+        ...(item.generationTasks || []), ...(item.inputModalities || []),
+        ...(item.outputModalities || []), ...(item.supportedModels || []),
+        item.isSelfHostable ? 'local local llm offline self hosted' : '',
+      ].join(' ')),
+    })),
+    ...toolsData.map((item) => ({
+      item,
+      type: 'open-source' as const,
+      text: normalize([
+        item.name, item.tagline, item.description, item.longDescription,
+        item.categories.join(' '), item.tags.join(' '), item.techStack.join(' '),
+        item.license, item.isSelfHostable ? 'local offline self hosted' : '',
+      ].join(' ')),
+    })),
   ];
-  const tokens = q.split(' ').filter((word) => word.length > 2 && !['the','and','for','with','show','find','best','tool','tools','please','kya','kaise','mujhe','chahiye','hai'].includes(word));
+  const localLlmIntent = /\b(local|locally|offline|self-hosted|self hosted|on-device)\b/.test(q) &&
+    /\b(llm|model|models|inference|ollama|language model)\b/.test(q);
+  const videoEditIntent = /\b(edit|editing|modify|restyle|repaint|transform|change|repurpose)\b/.test(q) &&
+    /\b(video|clip|clips)\b/.test(q);
+  const matchingRecords = all.filter((record) => {
+    if (localLlmIntent) {
+      return record.type === 'ai' &&
+        ((record.item as AiTool).isSelfHostable || (record.item as AiTool).freeAccessType === 'open-source-local' ||
+         /local|offline|ollama|self hosted|local models|on device/.test(record.text));
+    }
+    if (videoEditIntent) {
+      return record.type === 'ai' &&
+        ((record.item as AiTool).generationTasks?.includes('video-to-video') ||
+         /video repainting|video editing|video restyling|modify video|video-to-video/.test(record.text));
+    }
+    return true;
+  });
+  const tokens = q.split(' ').filter((word) => word.length > 2 && ![
+    'the','and','for','with','show','find','best','tool','tools','please','kya','kaise','mujhe','chahiye','hai',
+    'help','choose','recommend','recommendation','please','existing','already','my','some','any','me',
+  ].includes(word));
   if (/\b(video|pika|वीडियो)\b/.test(q) && /\b(free|recurring|plan|credits|generator)\b/.test(q)) {
     const videoMatches = aiToolsData.filter((item) => item.category === 'video' && (item.freeAccessType === 'recurring-free' || item.freeAccessType === 'open-source-local' || normalize(item.name).includes('pika'))).slice(0, 5);
     if (videoMatches.length) {
@@ -65,7 +104,14 @@ export function generateGroundedResponse(userQuery: string): ChatMessage {
       return message(`Video tool records from the published catalogue:\n\n${videoMatches.map((item) => `• [${item.name}](/ai-tools/${item.slug}) — ${item.freeTierSummary} ${item.freeTierLimits}`.trim()).join('\n')}\n\nThese catalogue notes are not live checked. Confirm current access and pricing with each provider.`, records, ['Find video tools with recurring free access', 'Browse AI tools']);
     }
   }
-  const ranked = all.map((record) => ({ ...record, score: tokens.reduce((sum, token) => sum + (record.text.includes(token) ? (normalize(record.item.name).includes(token) ? 3 : 1) : 0), 0) })).filter((x) => x.score > 0).sort((a,b) => b.score - a.score).slice(0, 5);
+  const ranked = matchingRecords
+    .map((record) => ({
+      ...record,
+      score: tokens.reduce((sum, token) => sum + (record.text.includes(token) ? (normalize(record.item.name).includes(token) ? 3 : 1) : 0), 0),
+    }))
+    .filter((record) => record.score > 0 || localLlmIntent || videoEditIntent)
+    .sort((a, b) => b.score - a.score)
+    .slice(0, 5);
   if (!ranked.length) {
     if (/^(hi|hello|hey|namaste|नमस्ते)$/.test(q)) return message('Namaste! Ask me to find a tool by task, category, or name. I can search the published catalogue in English or Hindi/Hinglish.', [], ['Find a coding tool', 'Show free tools', 'Browse offers']);
     return message(`I couldn’t find a relevant record for “${userQuery}” in the published catalogue. I don’t have live web search in this fallback, so I can’t verify current pricing or availability. Try a tool name or task such as coding, video, image, or writing.`);
@@ -79,5 +125,12 @@ export function generateGroundedResponse(userQuery: string): ChatMessage {
     const modelNote = matchedModel ? ` ${aiTool.longDescription || ''}` : '';
     return [item.slug, `${aiTool.freeTierSummary} ${aiTool.freeTierLimits || ''} ${(aiTool.supportedModels || []).join(', ')} ${item.description}${modelNote}`.trim()];
   }));
-  return message(`${isHindi(q) ? 'Catalogue mein mile relevant matches:' : compare ? 'Catalogue comparison candidates:' : 'Relevant published catalogue matches:'}\n\n${records.map((item) => `• [${item.name}](${item.type === 'open-source' ? `/tools/${item.slug}` : `/ai-tools/${item.slug}`}) — ${item.pricingSummary}. ${detailBySlug.get(item.slug) || ''}`).join('\n')}\n\nI searched the published catalogue only. Check each provider’s site for current pricing and availability.${compare ? '\n\nUse the [side-by-side comparison tool](/compare) for a direct feature comparison.' : ''}`, records, ['Open side-by-side comparison', 'Find free alternatives', 'Browse the catalogue']);
+  const intentNote = wantsRecommendation
+    ? '\n\nThese are catalogue-matched suggestions, not a guarantee of best fit. You can refine the task, budget, and hosting preference in [Help Me Pick](/pick).'
+    : localLlmIntent
+    ? '\n\nThese entries are tagged or described as local/self-hosted. Check hardware requirements and model licensing before installing.'
+    : videoEditIntent
+    ? '\n\nThese entries mention video-to-video or editing/repainting workflows. Check each provider’s current input limits and free-tier restrictions.'
+    : '';
+  return message(`${isHindi(q) ? 'Catalogue mein mile relevant matches:' : compare ? 'Catalogue comparison candidates:' : wantsRecommendation ? 'Suggested matches from the published catalogue:' : 'Relevant published catalogue matches:'}\n\n${records.map((item) => `• [${item.name}](${item.type === 'open-source' ? `/tools/${item.slug}` : `/ai-tools/${item.slug}`}) — ${item.pricingSummary}. ${detailBySlug.get(item.slug) || ''}`).join('\n')}\n\nI searched the published catalogue only. Check each provider’s site for current pricing and availability.${compare ? '\n\nUse the [side-by-side comparison tool](/compare) for a direct feature comparison.' : ''}${intentNote}`, records, wantsRecommendation ? ['Find coding tools', 'Find video editing tools', 'Find local LLMs'] : ['Open side-by-side comparison', 'Find free alternatives', 'Browse the catalogue']);
 }
