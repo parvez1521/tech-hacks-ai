@@ -25,15 +25,14 @@ export const BrandLogo: React.FC<BrandLogoProps> = ({
   const logoEntry = getBrandLogo(slug);
   // Prefer traceable local assets. For entries whose only recorded source is a
   // domain favicon, use that sourced favicon rather than a generic placeholder.
+  const isTrustedLogo = Boolean(logoEntry?.sourceUrl && logoEntry.sourceType !== 'fallback');
   const isDomainFaviconFallback = Boolean(
     logoEntry?.sourceType === 'fallback' && logoEntry.sourceUrl?.includes('google.com/s2/favicons')
   );
+  const canRenderLogo = isTrustedLogo || isDomainFaviconFallback;
   const resolvedLogoSrc = isDomainFaviconFallback ? logoEntry?.sourceUrl : logoEntry?.assetPath;
-  const isTrustedLogo = Boolean(
-    logoEntry?.sourceUrl && (logoEntry.sourceType !== 'fallback' || isDomainFaviconFallback)
-  );
   const [currentSrc, setCurrentSrc] = useState<string | undefined>(
-    isTrustedLogo ? resolvedLogoSrc : undefined
+    isTrustedLogo ? logoEntry?.assetPath : undefined
   );
   const [hasError, setHasError] = useState(false);
   const logoStatus = isDomainFaviconFallback
@@ -43,9 +42,15 @@ export const BrandLogo: React.FC<BrandLogoProps> = ({
       : 'source-recorded';
 
   useEffect(() => {
-    setCurrentSrc(isTrustedLogo ? resolvedLogoSrc : undefined);
+    if (!canRenderLogo) {
+      setCurrentSrc(undefined);
+    } else if (isDomainFaviconFallback) {
+      setCurrentSrc(logoEntry?.sourceUrl);
+    } else {
+      setCurrentSrc(logoEntry?.assetPath);
+    }
     setHasError(false);
-  }, [slug, logoEntry?.assetPath, logoEntry?.sourceType, logoEntry?.sourceUrl, resolvedLogoSrc, isTrustedLogo]);
+  }, [slug, logoEntry?.assetPath, logoEntry?.sourceType, logoEntry?.sourceUrl, isTrustedLogo]);
 
   const handleImageError = () => {
     if (logoEntry?.pngAssetPath && currentSrc !== logoEntry.pngAssetPath) {
@@ -112,7 +117,7 @@ export const BrandLogo: React.FC<BrandLogoProps> = ({
   const fallbackBg = '#334155';
   const fallbackText = iconLetter || (name ? name.slice(0, 2).toUpperCase() : '??');
 
-  if (logoEntry && isTrustedLogo && currentSrc && !hasError) {
+  if (logoEntry && canRenderLogo && currentSrc && !hasError) {
     if (!showContainer) {
       const hasSizeOverride = /\b(w-|h-)/.test(className);
       return (
