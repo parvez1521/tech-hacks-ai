@@ -120,7 +120,7 @@ export type CatalogSearchIntent =
 
 export function detectCatalogSearchIntent(query: string): CatalogSearchIntent | null {
   const q = normalizeSearchText(query);
-  if (/\b(edit existing video|edit a video|editing video|video editing|video editor|repurpos(e|ing)|long video to shorts|turn video into shorts|clip editor)\b/.test(q)) {
+  if (/\b(edit existing video|edit an existing video|edit a video|editing video|video editing|video editor|repurpos(e|ing)|long video to shorts|turn video into shorts|clip editor)\b/.test(q)) {
     return 'video-editing';
   }
   if (/\b(voice cloning|voice clone|clone (a )?voice|clone voices)\b/.test(q)) {
@@ -173,7 +173,7 @@ export function matchesAiToolSearchIntent(tool: AiTool, intent: CatalogSearchInt
     case 'video-editing':
       // Only include catalog records with affirmative editor/timeline/repurposing evidence.
       return tool.category === 'video' &&
-        /\bvideo editor|video editing|timeline editing|edit existing video|repurpos(e|ing)|long video to shorts|clip editor|video timeline\b/.test(text);
+        /\bvideo editor|video editing|timeline editing|edit existing video|edit an existing video|repurpos(e|ing)|long video to shorts|clip editor|video timeline\b/.test(text);
     case 'voice-cloning':
       return tool.category === 'voice' &&
         /\bvoice cloning|voice clone|clone voices|clone a voice\b/.test(text);
