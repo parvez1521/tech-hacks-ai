@@ -47,6 +47,15 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   const [theme, setThemeState] = useState<Theme>(getInitialTheme);
 
   useEffect(() => {
+    try {
+      const savedTheme = window.localStorage.getItem(THEME_STORAGE_KEY);
+      if ((savedTheme === 'light' || savedTheme === 'dark') && savedTheme !== theme) {
+        setThemeState(savedTheme);
+        return;
+      }
+    } catch {
+      // Keep the first-render default if storage is unavailable.
+    }
     applyThemeToDocument(theme);
   }, [theme]);
 
