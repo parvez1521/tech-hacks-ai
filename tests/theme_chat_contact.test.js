@@ -57,12 +57,14 @@ describe('Theme, chat suggestions, and contact regression coverage', () => {
     assert.match(consent, /aria-label="Allow advertising and personalization"/);
   });
 
-  it('shows the verified Instagram channel while hiding unconfigured email and phone', () => {
+  it('shows the verified Instagram channel and official support email while hiding unconfigured phone', () => {
     const actual = getConfiguredContactOptions();
-    assert.deepEqual(actual.map(({ id }) => id), ['instagram']);
+    assert.deepEqual(actual.map(({ id }) => id), ['instagram', 'email']);
     assert.equal(actual[0].display, '@tech_hacks.ai');
     assert.equal(actual[0].href, 'https://www.instagram.com/tech_hacks.ai/');
-    assert.equal(contactConfig.email, '');
+    assert.equal(actual[1].display, 'support@switchroute.in');
+    assert.equal(actual[1].href, 'mailto:support@switchroute.in');
+    assert.equal(contactConfig.email, 'support@switchroute.in');
     assert.equal(contactConfig.phone, '');
 
     const complete = getConfiguredContactOptions({

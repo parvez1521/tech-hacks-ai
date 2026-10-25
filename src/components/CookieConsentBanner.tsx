@@ -180,7 +180,7 @@ export const CookieConsentBanner: React.FC = () => {
           </div>
 
           <p className="text-secondary-foreground text-[11px] leading-[1.4]">
-            We use cookies and local storage to remember your preferences, measure site traffic, and support independent research with contextual advertising. See our{' '}
+            This site uses local storage for theme, bookmarks, and your saved preferences. Analytics and advertising are not currently active. Any future advertising will require appropriate setup and disclosures. See our{' '}
             <Link to="/privacy" className="text-primary hover:underline font-medium">
               Privacy Policy
             </Link>.
@@ -242,7 +242,7 @@ export const CookieConsentBanner: React.FC = () => {
             </div>
 
             <p className="text-secondary-foreground leading-relaxed">
-              In accordance with Google AdSense publisher policies, the General Data Protection Regulation (GDPR), and the IAB Europe Transparency and Consent Framework (TCF v2.2), you can select which cookie categories you permit:
+              These controls save your preferences in this browser. This panel is not a Google-certified consent management platform (CMP) and does not send IAB TCF consent signals. SwitchRoute is not currently loading AdSense or analytics scripts. A certified CMP must be in place before ads are enabled for regions where Google requires one.
             </p>
 
             <div className="space-y-3">
@@ -269,7 +269,7 @@ export const CookieConsentBanner: React.FC = () => {
                     Analytics &amp; Site Diagnostics
                   </span>
                   <p className="text-[11px] text-muted-foreground leading-relaxed">
-                    Collects anonymous, aggregated metrics on popular tools and page performance to help us improve catalog discovery.
+                    If analytics is enabled in the future, it may collect usage and performance information to help improve catalog discovery.
                   </p>
                 </div>
                 <label className="relative inline-flex items-center cursor-pointer shrink-0 mt-1">
@@ -291,7 +291,7 @@ export const CookieConsentBanner: React.FC = () => {
                     Advertising &amp; Google AdSense Personalization
                   </span>
                   <p className="text-[11px] text-muted-foreground leading-relaxed">
-                    Permits Google AdSense and third-party advertising partners to deliver contextual and personalized advertisements based on your browsing interests.
+                    If ads are enabled after approval, this choice will be used as a browser-level preference. Regional consent requirements and any certified CMP must also be in place before ad requests are made.
                   </p>
                 </div>
                 <label className="relative inline-flex items-center cursor-pointer shrink-0 mt-1">

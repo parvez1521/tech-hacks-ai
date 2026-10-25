@@ -18,7 +18,7 @@ describe('Built-in browser utility registry', () => {
 
   test('new utilities are discoverable through the real lookup service', () => {
     const expected = [
-      'text-diff', 'slug-generator', 'markdown-table-builder', 'unicode-inspector',
+      'heic-to-png', 'text-diff', 'slug-generator', 'markdown-table-builder', 'unicode-inspector',
       'html-entity-codec', 'csv-json-converter', 'json-to-typescript', 'regex-tester',
       'url-query-builder', 'css-specificity', 'css-gradient', 'jwt-decoder', 'uuid-tool',
       'password-generator', 'text-hash', 'file-checksum', 'timestamp-converter',
@@ -69,7 +69,7 @@ describe('Built-in browser utility registry', () => {
       openSourceTools: 27,
       aiPlatforms: 75,
       alternativeTargets: 25,
-      browserUtilities: 38,
+      browserUtilities: 39,
       alternativeRelationships: 224,
       uniquePrompts: 582,
       proprietaryToolsWithAlternatives: 25,

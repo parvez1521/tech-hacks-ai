@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "npm run logos:runtime && npm run prompts:runtime && vite",
-    "build": "npm run prompts:sitemap && npm run logos:runtime && npm run prompts:runtime && vite build && npm run seo:prerender",
+    "build": "npm run prompts:sitemap && npm run logos:runtime && npm run prompts:runtime && vite build && npm run ads:txt && npm run seo:prerender",
     "preview": "vite preview",
     "pretest": "npm run logos:runtime && npm run prompts:runtime && ./node_modules/.bin/esbuild src/App.tsx --bundle --platform=node --format=esm --external:react --external:react-dom --external:lucide-react --outfile=dist/test-ssr.js",
     "test": "node --experimental-strip-types --test --test-concurrency=1 tests/*.test.js",
@@ -19,7 +19,8 @@
     "prompts:download:promptfeed": "node scripts/download-promptfeed.mjs",
     "prompts:audit": "node --experimental-strip-types scripts/audit-prompt-assets.mjs --write --check",
     "prompts:audit:remote": "node --experimental-strip-types scripts/audit-prompt-assets.mjs --write --check-remote --check",
-    "seo:prerender": "node scripts/prerender-site.mjs"
+    "seo:prerender": "node scripts/prerender-site.mjs",
+    "ads:txt": "node scripts/generate-ads-txt.mjs"
   },
   "dependencies": {
     "@ffmpeg/ffmpeg": "^0.12.15",
@@ -30,7 +31,8 @@
     "motion": "^14.5.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "tailwind-merge": "^2.2.1"
+    "tailwind-merge": "^2.2.1",
+    "heic2any": "0.0.4"
   },
   "devDependencies": {
     "@types/react": "^18.2.56",

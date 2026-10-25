@@ -6,6 +6,7 @@ import { Footer } from './components/Footer';
 import { AmbientGlow } from './components/AmbientGlow';
 import { FloatingChatbot } from './components/FloatingChatbot';
 import { AdSenseBanner } from './components/AdSenseBanner';
+import { AdSenseRuntime } from './components/AdSenseRuntime';
 import { siteConfig, formatPageTitle } from './config/site';
 import {
   getToolBySlug,
@@ -393,10 +394,14 @@ const AppRoutes: React.FC = () => {
     <div className="min-h-screen flex flex-col bg-background text-foreground relative selection:bg-primary/25 selection:text-foreground">
       <AmbientGlow />
       <Header />
-      <main className="flex-1 relative z-10">{renderRoute()}</main>
+      <main className="flex-1 relative z-10">
+        {renderRoute()}
+        {route === 'home' && <AdSenseBanner slot={siteConfig.adsense.slots.homepage} format="auto" />}
+      </main>
       <Footer />
       <FloatingChatbot />
       <CookieConsentBanner />
+      <AdSenseRuntime />
     </div>
   );
 };

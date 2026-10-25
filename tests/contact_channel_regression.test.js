@@ -4,10 +4,10 @@ import { readFile } from 'node:fs/promises';
 
 const read = (path) => readFile(new URL(path, import.meta.url), 'utf8');
 
-test('unverified legacy email addresses are not configured as contact channels', async () => {
+test('official support inbox is configured without legacy contact addresses', async () => {
   const config = await read('../src/config/contactConfig.ts');
-  assert.match(config, /email:\s*''/);
-  assert.doesNotMatch(config, /@techhacksai\.com|@switchroute\.in/i);
+  assert.match(config, /email:\s*'support@switchroute\.in'/);
+  assert.doesNotMatch(config, /@techhacksai\.com/i);
 });
 
 test('contact page gates its form on backend readiness and only confirms a real API success', async () => {
@@ -28,13 +28,20 @@ test('verified Instagram is the only public contact channel while inbox setup is
   const page = await read('../src/pages/ContactPage.tsx');
   assert.match(page, /general, non-sensitive questions/i);
   assert.match(page, /DMs are not saved in the SwitchRoute contact inbox/i);
-  assert.match(page, /Do not send private or formal legal information through social DMs/i);
+  assert.match(page, /support@switchroute\.in/);
+  assert.match(page, /mailto:support@switchroute\.in/);
 });
 
-test('privacy, terms, and disclosure pages do not publish inactive email addresses', async () => {
-  for (const path of ['../src/pages/PrivacyPage.tsx', '../src/pages/TermsPage.tsx', '../src/pages/DisclosurePage.tsx']) {
-    const content = await read(path);
-    assert.doesNotMatch(content, /@techhacksai\.com|@switchroute\.in/i, path);
-    assert.match(content, /to="\/contact"/, path);
-  }
+test('privacy and disclosure pages use the official support channel without legacy addresses', async () => {
+  const privacy = await read('../src/pages/PrivacyPage.tsx');
+  assert.match(privacy, /siteConfig\.links\.email/);
+  assert.doesNotMatch(privacy, /@techhacksai\.com/i);
+
+  const terms = await read('../src/pages/TermsPage.tsx');
+  assert.doesNotMatch(terms, /@techhacksai\.com/i);
+  assert.match(terms, /to="\/contact"/);
+
+  const disclosure = await read('../src/pages/DisclosurePage.tsx');
+  assert.match(disclosure, /support@switchroute\.in/);
+  assert.doesNotMatch(disclosure, /@techhacksai\.com/i);
 });

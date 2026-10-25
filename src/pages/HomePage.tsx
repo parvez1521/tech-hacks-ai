@@ -254,46 +254,46 @@ export const HomePage: React.FC = () => {
       >
         <div className="catalog-trust-strip__inner">
           <div className="catalog-trust-strip__metrics">
-                    <article className="catalog-metric-card" aria-label={`${catalogStats.proprietaryToolsWithAlternatives} paid tools with alternatives. Find replacement tools.`}>
+                    <Link to="/alternatives" className="catalog-metric-card" aria-label={`${catalogStats.proprietaryToolsWithAlternatives} paid tools with alternatives. Find replacement tools.`}>
                       <AnimatedCount className="catalog-metric-card__number" value={catalogStats.proprietaryToolsWithAlternatives} />
                       <h3>Paid tools with alternatives</h3>
                       <span>Find replacement tools</span>
-                    </article>
-                    <article className="catalog-metric-card" aria-label={`${catalogStats.alternativeRelationships} alternative matches. Explore similar tools.`}>
+                    </Link>
+                    <Link to="/alternatives" className="catalog-metric-card" aria-label={`${catalogStats.alternativeRelationships} alternative matches. Explore similar tools.`}>
                       <AnimatedCount className="catalog-metric-card__number" value={catalogStats.alternativeRelationships} />
                       <h3>Alternative matches</h3>
                       <span>Explore similar tools</span>
-                    </article>
-                    <article className="catalog-metric-card" aria-label={`${activeOfferCount} active offers. Discover deals and discounts.`}>
+                    </Link>
+                    <Link to="/offers" className="catalog-metric-card" aria-label={`${activeOfferCount} active offers. Discover deals and discounts.`}>
                       <AnimatedCount className="catalog-metric-card__number" value={activeOfferCount} />
                       <h3>Active offers</h3>
                       <span>Discover deals and discounts</span>
-                    </article>
-                    <article className="catalog-metric-card" aria-label={`${catalogStats.imagePrompts} image prompts. Ideas for AI images.`}>
+                    </Link>
+                    <Link to="/prompt-library" className="catalog-metric-card" aria-label={`${catalogStats.imagePrompts} image prompts. Ideas for AI images.`}>
                       <AnimatedCount className="catalog-metric-card__number" value={catalogStats.imagePrompts} />
                       <h3>Image prompts</h3>
                       <span>Ideas for AI images</span>
-                    </article>
-                    <article className="catalog-metric-card" aria-label={`${catalogStats.videoPrompts} video prompts. Prompts for AI videos.`}>
+                    </Link>
+                    <Link to="/prompt-library" className="catalog-metric-card" aria-label={`${catalogStats.videoPrompts} video prompts. Prompts for AI videos.`}>
                       <AnimatedCount className="catalog-metric-card__number" value={catalogStats.videoPrompts} />
                       <h3>Video prompts</h3>
                       <span>Prompts for AI videos</span>
-                    </article>
-                    <article className="catalog-metric-card" aria-label={`${catalogStats.browserUtilities} everyday utilities. Converters and useful tools.`}>
+                    </Link>
+                    <Link to="/free-tools" className="catalog-metric-card" aria-label={`${catalogStats.browserUtilities} everyday utilities. Converters and useful tools.`}>
                       <AnimatedCount className="catalog-metric-card__number" value={catalogStats.browserUtilities} />
                       <h3>Everyday utilities</h3>
                       <span>Converters and useful tools</span>
-                    </article>
-                    <article className="catalog-metric-card" aria-label={`${catalogStats.aiPlatforms} AI tools. Explore AI platforms.`}>
+                    </Link>
+                    <Link to="/ai-tools" className="catalog-metric-card" aria-label={`${catalogStats.aiPlatforms} AI tools. Explore AI platforms.`}>
                       <AnimatedCount className="catalog-metric-card__number" value={catalogStats.aiPlatforms} />
                       <h3>AI tools</h3>
                       <span>Explore AI platforms</span>
-                    </article>
-                    <article className="catalog-metric-card" aria-label={`${catalogStats.openSourceTools} open-source projects. Discover open projects.`}>
+                    </Link>
+                    <Link to="/tools" className="catalog-metric-card" aria-label={`${catalogStats.openSourceTools} open-source projects. Discover open projects.`}>
                       <AnimatedCount className="catalog-metric-card__number" value={catalogStats.openSourceTools} />
                       <h3>Open-source projects</h3>
                       <span>Discover open projects</span>
-                    </article>
+                    </Link>
           </div>
         </div>
       </section>

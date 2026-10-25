@@ -74,7 +74,8 @@ describe('Homepage prompt showcase and section alignment', () => {
     assert.ok(html.includes('src="/prompts/generated/higgsfield-dolly-zoom-vertigo-effect.webp"'));
     assert.ok(fs.existsSync(path.join(root, 'public/prompts/generated/pixverse-motion-portrait-poster.webp')));
     assert.ok(fs.existsSync(path.join(root, 'public/prompts/generated/higgsfield-dolly-zoom-vertigo-effect.webp')));
-    assert.equal((html.match(/href="\/prompt-library"/g) || []).length, 1, 'Primary CTA links to the existing Prompt Library route');
+    assert.equal((html.match(/href="\/prompt-library"/g) || []).length, 3, 'Primary CTA and image/video prompt metrics link to the Prompt Library');
+    assert.match(home, /to="\/prompt-library"/);
     assert.match(home, /loading="lazy"[\s\S]*?decoding="async"/);
   });
 
