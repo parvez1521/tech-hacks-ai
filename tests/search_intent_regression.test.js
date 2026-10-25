@@ -23,7 +23,7 @@ test('existing-video editing returns only records with explicit editing evidence
   assert.ok(matches.every((tool) => tool.category === 'video'));
   assert.ok(matches.every((tool) => /timeline editing|video editor|video editing|repurpos|clip editor/i.test([
     tool.name, tool.description, tool.longDescription, ...(tool.features || []), ...(tool.useCases || []), ...(tool.tags || []),
-  ].filter(Boolean).join(' ')));
+  ].filter(Boolean).join(' '))));
   assert.ok(!matches.some((tool) => ['cursor', 'leonardo-ai', 'elevenlabs'].includes(tool.slug)));
 });
 
