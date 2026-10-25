@@ -14,6 +14,18 @@ export const freeToolsData: FreeToolUtility[] = [
     outputFormat: 'WEBP, PNG, JPEG with custom dimensions',
   },
   {
+    id: 'heic-to-png',
+    name: 'HEIC to PNG Converter',
+    slug: 'heic-to-png',
+    tagline: 'Convert iPhone HEIC/HEIF photos into a portable PNG in your browser',
+    description: 'Convert HEIC/HEIF photos locally in your browser. Files are processed on-device and are not uploaded; exported PNGs do not preserve source EXIF metadata.',
+    category: 'image',
+    iconName: 'Image',
+    isClientSideOnly: true,
+    acceptedInput: 'HEIC or HEIF image up to 25 MB',
+    outputFormat: 'PNG image; source metadata is not preserved',
+  },
+  {
     id: 'qr-generator',
     name: 'Vector QR Code Generator',
     slug: 'qr-generator',
