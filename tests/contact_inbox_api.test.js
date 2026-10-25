@@ -30,6 +30,16 @@ async function runHandler(options) {
   return { req, res };
 }
 
+const ENV_KEYS = [
+  'SUPABASE_URL',
+  'SUPABASE_SECRET_KEY',
+  'SUPABASE_SERVICE_ROLE_KEY',
+  'ADMIN_SECRET',
+  'VERCEL',
+  'NODE_ENV',
+];
+const initialEnv = Object.fromEntries(ENV_KEYS.map((key) => [key, process.env[key]]));
+
 function setSupabaseEnv() {
   process.env.SUPABASE_URL = 'https://switchroute-test.supabase.co';
   process.env.SUPABASE_SECRET_KEY = 'sb_secret_test_only';
@@ -40,11 +50,10 @@ function setSupabaseEnv() {
 }
 
 function clearSupabaseEnv() {
-  delete process.env.SUPABASE_URL;
-  delete process.env.SUPABASE_SECRET_KEY;
-  delete process.env.SUPABASE_SERVICE_ROLE_KEY;
-  delete process.env.ADMIN_SECRET;
-  delete process.env.VERCEL;
+  for (const key of ENV_KEYS) {
+    if (initialEnv[key] === undefined) delete process.env[key];
+    else process.env[key] = initialEnv[key];
+  }
 }
 
 test('contact status is false when no privileged database credentials exist', async () => {
