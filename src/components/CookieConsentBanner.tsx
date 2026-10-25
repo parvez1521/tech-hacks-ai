@@ -38,10 +38,8 @@ export function openCookiePreferencesModal() {
 }
 
 export const CookieConsentBanner: React.FC = () => {
-  const [isOpen, setIsOpen] = useState(() => {
-    if (typeof window === 'undefined') return true;
-    return !getCookiePreferences();
-  });
+  // Keep the first server/client render identical; persisted choices are applied in useEffect.
+  const [isOpen, setIsOpen] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [analytics, setAnalytics] = useState(false);
   const [advertising, setAdvertising] = useState(false);
