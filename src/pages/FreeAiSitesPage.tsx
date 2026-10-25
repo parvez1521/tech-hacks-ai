@@ -178,7 +178,7 @@ export const FreeAiSitesPage: React.FC = () => {
                   className="py-1.5 px-2.5 rounded-lg bg-white border border-[#DFE7F3] text-[#0F172A] text-xs focus:outline-none focus:ring-2 focus:ring-[#2563EB]/20 focus:border-[#2563EB] cursor-pointer"
                 >
                   <option value="popular">Most Popular</option>
-                  <option value="rating">Highest Rated</option>
+                  <option value="rating">Editorial Picks</option>
                   <option value="latest">Latest Released</option>
                   <option value="name_asc">Name A-Z</option>
                 </select>
