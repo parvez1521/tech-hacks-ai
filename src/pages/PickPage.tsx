@@ -401,11 +401,11 @@ export const PickPage: React.FC = () => {
             <div>
               <div className="inline-flex items-center gap-1.5 text-xs text-emerald-700 font-semibold mb-1 font-mono">
                 <ShieldCheck className="w-4 h-4 text-emerald-600" />
-                <span>Verified Match Calculation</span>
+                <span>Rule-Based Fit Scoring</span>
               </div>
               <h2 className="text-xl font-bold text-slate-900">Recommended Tools for Your Workflow</h2>
               <span className="text-xs text-slate-500">
-                Strictly filtered to eliminate non-matching categories; scored on capabilities and access provenance.
+                Tools are ranked against your selected criteria using capabilities, pricing/access, and available metadata. Scores are comparative, not success probabilities.
               </span>
             </div>
 
@@ -505,7 +505,7 @@ export const PickPage: React.FC = () => {
 
                       <div className="flex flex-col items-end shrink-0">
                         <span className="inline-flex items-center px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 font-mono text-xs font-bold border border-emerald-200">
-                          {Math.min(99, matchScore)}% Match
+                          {Math.min(100, matchScore)}/100 Fit Score
                         </span>
                         <span className="text-[10px] text-slate-400 mt-0.5 font-mono">Rank #{i + 1}</span>
                       </div>
