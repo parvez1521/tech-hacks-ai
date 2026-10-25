@@ -11,6 +11,77 @@ const loadImage = (file: File): Promise<LoadedImage> => new Promise((resolve, re
   image.src = url;
 });
 
+export const HeicToPngTool: React.FC = () => {
+  const [file, setFile] = useState<File | null>(null);
+  const [png, setPng] = useState<Blob | null>(null);
+  const [isConverting, setIsConverting] = useState(false);
+  const [error, setError] = useState('');
+
+  const convertFile = async (selected: File) => {
+    setFile(selected);
+    setPng(null);
+    setError('');
+
+    const looksLikeHeic = /\.(heic|heif)$/i.test(selected.name) || /^image\/hei[cf]/i.test(selected.type);
+    if (!looksLikeHeic) {
+      setError('Choose a .heic or .heif photo to convert.');
+      return;
+    }
+    if (selected.size > 25 * 1024 * 1024) {
+      setError('This file is larger than 25 MB. Choose a smaller HEIC/HEIF photo.');
+      return;
+    }
+
+    setIsConverting(true);
+    try {
+      // Load the converter only when this utility is used, so it does not inflate the main bundle.
+      const { default: heic2any } = await import('heic2any');
+      const converted = await heic2any({ blob: selected, toType: 'image/png' });
+      const output = Array.isArray(converted) ? converted[0] : converted;
+      if (!(output instanceof Blob) || output.size === 0) {
+        throw new Error('The converter returned an empty image.');
+      }
+      setPng(new Blob([output], { type: 'image/png' }));
+    } catch {
+      setError('Could not decode this HEIC/HEIF photo. The file may be damaged or use an unsupported HEIF variant.');
+    } finally {
+      setIsConverting(false);
+    }
+  };
+
+  const outputName = `${file?.name.replace(/\.(heic|heif)$/i, '') || 'converted-image'}.png`;
+
+  return (
+    <div className="space-y-4">
+      <FilePicker
+        accept="image/heic,image/heif,.heic,.heif"
+        onFile={convertFile}
+        label={file ? file.name : 'Choose a HEIC/HEIF photo'}
+        helper="HEIC or HEIF up to 25 MB. Conversion runs in your browser; no file upload."
+      />
+      {isConverting && (
+        <UtilityMessage>Converting to PNG locally… large photos may take a moment.</UtilityMessage>
+      )}
+      {error && <UtilityMessage>{error}</UtilityMessage>}
+      {png && !isConverting && (
+        <div className="space-y-3">
+          <UtilityMessage tone="success">
+            PNG ready — {Math.max(1, Math.round(png.size / 1024))} KB. Image metadata such as EXIF details is not preserved.
+          </UtilityMessage>
+          <DownloadButton blob={png} filename={outputName} />
+          <button
+            type="button"
+            className={utilityQuietButtonClass}
+            onClick={() => { setFile(null); setPng(null); setError(''); }}
+          >
+            Convert another photo
+          </button>
+        </div>
+      )}
+    </div>
+  );
+};
+
 export const ImageCropperTool: React.FC = () => {
   const [image, setImage] = useState<LoadedImage | null>(null);
   const [crop, setCrop] = useState({ x: 0, y: 0, width: 0, height: 0 });
