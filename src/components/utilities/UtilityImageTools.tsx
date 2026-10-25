@@ -16,23 +16,146 @@ export const ImageCropperTool: React.FC = () => {
   const [format, setFormat] = useState<'image/png' | 'image/jpeg' | 'image/webp'>('image/png');
   const [blob, setBlob] = useState<Blob | null>(null);
   const [error, setError] = useState('');
+
   const handleFile = async (file: File) => {
     try {
       if (!file.type.startsWith('image/')) throw new Error('Choose a raster image file.');
       if (file.size > 25 * 1024 * 1024) throw new Error('Images must be 25 MB or smaller.');
-      if (image) URL.revokeObjectURL(image.url);
       const loaded = await loadImage(file);
-      setImage(loaded); setCrop({ x: 0, y: 0, width: loaded.width, height: loaded.height }); setBlob(null); setError('');
-    } catch (err) { setError(err instanceof Error ? err.message : 'Unable to load image.'); }
+      setImage((previous) => {
+        if (previous) URL.revokeObjectURL(previous.url);
+        return loaded;
+      });
+      setCrop({ x: 0, y: 0, width: loaded.width, height: loaded.height });
+      setBlob(null);
+      setError('');
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Unable to load image.');
+    }
   };
+
+  const updateCropValue = (field: 'x' | 'y' | 'width' | 'height', rawValue: string) => {
+    if (!image || rawValue.trim() === '') {
+      setError('Enter a whole-number crop coordinate or size.');
+      return;
+    }
+    const parsed = Number(rawValue);
+    if (!Number.isFinite(parsed)) {
+      setError('Crop values must be valid numbers.');
+      return;
+    }
+
+    setCrop((current) => {
+      const value = Math.round(parsed);
+      const next = { ...current };
+      if (field === 'x') next.x = Math.max(0, Math.min(image.width - current.width, value));
+      if (field === 'y') next.y = Math.max(0, Math.min(image.height - current.height, value));
+      if (field === 'width') next.width = Math.max(1, Math.min(image.width - current.x, value));
+      if (field === 'height') next.height = Math.max(1, Math.min(image.height - current.y, value));
+      return next;
+    });
+    setBlob(null);
+    setError('');
+  };
+
   const render = () => {
     if (!image) return;
-    const canvas = document.createElement('canvas'); canvas.width = crop.width; canvas.height = crop.height;
-    const ctx = canvas.getContext('2d'); if (!ctx) return;
-    const source = new Image(); source.onload = () => { ctx.drawImage(source, crop.x, crop.y, crop.width, crop.height, 0, 0, crop.width, crop.height); canvas.toBlob((value) => setBlob(value), format, 0.9); }; source.src = image.url;
+    if (
+      ![crop.x, crop.y, crop.width, crop.height].every(Number.isInteger) ||
+      crop.width < 1 || crop.height < 1 ||
+      crop.x < 0 || crop.y < 0 ||
+      crop.x + crop.width > image.width ||
+      crop.y + crop.height > image.height
+    ) {
+      setError('Choose a valid crop rectangle that stays inside the image.');
+      setBlob(null);
+      return;
+    }
+
+    const canvas = document.createElement('canvas');
+    canvas.width = crop.width;
+    canvas.height = crop.height;
+    const context = canvas.getContext('2d');
+    if (!context) {
+      setError('Canvas is unavailable in this browser.');
+      return;
+    }
+
+    const source = new Image();
+    source.onload = () => {
+      context.drawImage(source, crop.x, crop.y, crop.width, crop.height, 0, 0, crop.width, crop.height);
+      canvas.toBlob((value) => {
+        if (!value) {
+          setBlob(null);
+          setError('The browser could not export this crop. Try PNG or WebP.');
+          return;
+        }
+        setBlob(value);
+        setError('');
+      }, format, 0.9);
+    };
+    source.onerror = () => {
+      setBlob(null);
+      setError('The selected image could not be decoded for cropping.');
+    };
+    source.src = image.url;
   };
-  useEffect(() => () => { if (image) URL.revokeObjectURL(image.url); }, [image]);
-  return <div className="space-y-4"><FilePicker accept="image/png,image/jpeg,image/webp" onFile={handleFile} label={image ? image.file.name : 'Choose an image to crop'} helper="PNG, JPEG, or WebP up to 25 MB; local Canvas processing." />{error && <UtilityMessage>{error}</UtilityMessage>}{image && <><div className="grid gap-3 sm:grid-cols-2"><label className="space-y-1 text-xs text-muted-foreground">X / Y<input value={`${crop.x}, ${crop.y}`} onChange={(e) => { const [x, y] = e.target.value.split(',').map(Number); setCrop((current) => ({ ...current, x: Math.max(0, Math.min(image.width - current.width, x || 0)), y: Math.max(0, Math.min(image.height - current.height, y || 0)) })); }} className={utilityInputClass} /></label><label className="space-y-1 text-xs text-muted-foreground">Width / height<input value={`${crop.width}, ${crop.height}`} onChange={(e) => { const [width, height] = e.target.value.split(',').map(Number); setCrop((current) => ({ ...current, width: Math.max(1, Math.min(image.width - current.x, width || 1)), height: Math.max(1, Math.min(image.height - current.y, height || 1)) })); }} className={utilityInputClass} /></label></div><div className="flex flex-wrap gap-2"><select value={format} onChange={(e) => setFormat(e.target.value as typeof format)} className={utilityInputClass}><option value="image/png">PNG</option><option value="image/jpeg">JPEG</option><option value="image/webp">WebP</option></select><button type="button" className={utilityButtonClass} onClick={render}>Render crop</button><DownloadButton blob={blob} filename={`crop.${format.split('/')[1]}`} /></div>{blob && <UtilityMessage tone="success">Crop ready: {crop.width} × {crop.height}px.</UtilityMessage>}</>}</div>;
+
+  useEffect(() => () => {
+    if (image) URL.revokeObjectURL(image.url);
+  }, [image]);
+
+  return (
+    <div className="space-y-4">
+      <FilePicker
+        accept="image/png,image/jpeg,image/webp"
+        onFile={handleFile}
+        label={image ? image.file.name : 'Choose an image to crop'}
+        helper="PNG, JPEG, or WebP up to 25 MB; local Canvas processing."
+      />
+      {error && <UtilityMessage>{error}</UtilityMessage>}
+      {image && (
+        <>
+          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+            <label className="space-y-1 text-xs text-muted-foreground">
+              X (left edge)
+              <input type="number" min={0} max={Math.max(0, image.width - crop.width)} step={1} value={crop.x}
+                onChange={(event) => updateCropValue('x', event.target.value)} className={utilityInputClass} />
+            </label>
+            <label className="space-y-1 text-xs text-muted-foreground">
+              Y (top edge)
+              <input type="number" min={0} max={Math.max(0, image.height - crop.height)} step={1} value={crop.y}
+                onChange={(event) => updateCropValue('y', event.target.value)} className={utilityInputClass} />
+            </label>
+            <label className="space-y-1 text-xs text-muted-foreground">
+              Width (px)
+              <input type="number" min={1} max={image.width - crop.x} step={1} value={crop.width}
+                onChange={(event) => updateCropValue('width', event.target.value)} className={utilityInputClass} />
+            </label>
+            <label className="space-y-1 text-xs text-muted-foreground">
+              Height (px)
+              <input type="number" min={1} max={image.height - crop.y} step={1} value={crop.height}
+                onChange={(event) => updateCropValue('height', event.target.value)} className={utilityInputClass} />
+            </label>
+          </div>
+          <p className="text-xs text-muted-foreground">
+            Original image: {image.width} × {image.height}px. Coordinates are clamped to the image bounds and rounded to whole pixels.
+          </p>
+          <div className="flex flex-wrap gap-2">
+            <select value={format} onChange={(event) => { setFormat(event.target.value as typeof format); setBlob(null); }}
+              className={utilityInputClass} aria-label="Crop output format">
+              <option value="image/png">PNG</option>
+              <option value="image/jpeg">JPEG</option>
+              <option value="image/webp">WebP</option>
+            </select>
+            <button type="button" className={utilityButtonClass} onClick={render}>Render crop</button>
+            <DownloadButton blob={blob} filename={`crop.${format.split('/')[1]}`} />
+          </div>
+          {blob && <UtilityMessage tone="success">Crop ready: {crop.width} × {crop.height}px.</UtilityMessage>}
+        </>
+      )}
+    </div>
+  );
 };
 
 export const ImagePaletteTool: React.FC = () => {
