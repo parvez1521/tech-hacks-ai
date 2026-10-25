@@ -187,7 +187,7 @@ export const AlternativeDetailPage: React.FC = () => {
             )}
             {!isVideoTarget && allReplacements.length >= 2 && (
               <Link
-                to={`/compare?tools=${allReplacements.slice(0, 3).map((r) => r.slug).join(',')}`}
+                to={`/compare?tools=${allReplacements.slice(0, 4).map((r) => r.slug).join(',')}`}
                 className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-purple-50 text-purple-700 border border-purple-200 font-medium hover:bg-purple-100 transition-colors"
               >
                 <Scale className="w-3 h-3 text-purple-600" />
