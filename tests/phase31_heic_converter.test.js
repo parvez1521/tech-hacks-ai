@@ -23,7 +23,7 @@ test('HEIC-to-PNG converter is registered, discoverable, locally processed, and 
   assert.match(component, /toType: 'image\/png'/);
   assert.match(component, /25 \* 1024 \* 1024/);
   assert.match(component, /EXIF details is not preserved/);
-  assert.match(component, /No file upload/);
+  assert.match(component, /no file upload/i);
 
   const packageJson = JSON.parse(await read('../package.json'));
   assert.equal(packageJson.dependencies.heic2any, '0.0.4');
