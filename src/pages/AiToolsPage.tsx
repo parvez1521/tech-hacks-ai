@@ -169,7 +169,7 @@ export const AiToolsPage: React.FC = () => {
                 className="bg-white border border-[#DFE7F3] rounded-lg px-2.5 py-1.5 text-xs text-[#0F172A] focus:outline-none focus:ring-2 focus:ring-[#2563EB]/20 focus:border-[#2563EB] cursor-pointer"
               >
                 <option value="popular">Most Popular</option>
-                <option value="rating">Highest Rated</option>
+                <option value="rating">Editorial Picks</option>
                 <option value="latest">Latest Release</option>
                 <option value="name_asc">Name (A-Z)</option>
               </select>

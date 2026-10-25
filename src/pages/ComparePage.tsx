@@ -331,9 +331,9 @@ export const ComparePage: React.FC = () => {
                 ))}
               </tr>
 
-              {/* GitHub Metrics / Rating */}
+              {/* Public repository metrics; AI ratings are hidden until their source is recorded. */}
               <tr>
-                <td className="p-4 font-semibold text-slate-700 bg-slate-50/50">Verified Metrics</td>
+                <td className="p-4 font-semibold text-slate-700 bg-slate-50/50">Public Metrics / Rating</td>
                 {resolvedTools.map((t) => (
                   <td key={t.data.id} className="p-4 text-slate-800 font-mono">
                     {t.kind === 'open-source' ? (
@@ -347,10 +347,9 @@ export const ComparePage: React.FC = () => {
                         </span>
                       </div>
                     ) : (
-                      <div className="flex items-center gap-1.5">
-                        <Star className="w-3.5 h-3.5 text-amber-500 fill-amber-500" />
-                        <span className="font-semibold text-slate-900">{t.data.rating ? `${t.data.rating.toFixed(1)} / 5.0` : 'Curated'}</span>
-                      </div>
+                      <span className="text-[11px] text-slate-500 leading-relaxed">
+                        No sourced third-party rating recorded
+                      </span>
                     )}
                   </td>
                 ))}

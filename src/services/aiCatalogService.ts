@@ -151,7 +151,11 @@ export function filterAndSortAiTools(state: AiFilterState): AiFilterResult {
   list.sort((a, b) => {
     switch (state.sortBy) {
       case 'rating':
-        return (b.rating || 0) - (a.rating || 0);
+        // No third-party rating source is recorded consistently in the catalog.
+        // Use editorial curation signals instead of implying a sourced score.
+        return Number(Boolean(b.isFeatured)) - Number(Boolean(a.isFeatured)) ||
+          Number(Boolean(b.isTrending)) - Number(Boolean(a.isTrending)) ||
+          a.name.localeCompare(b.name);
       case 'name_asc':
         return a.name.localeCompare(b.name);
       case 'latest':
@@ -721,9 +725,7 @@ export function getPickRecommendations(criteria: PickCriteria): MatchedPickResul
         reasons.push('Provides watermark-free output on verified tier');
       }
 
-      // Quality rating bonus
-      score += Math.round((tool.rating || 4.5) * 4);
-
+      // Rank by explicit editorial curation signals rather than unsourced numeric ratings.
       if (tool.isFeatured) score += 5;
       if (tool.isTrending) score += 5;
 
@@ -835,9 +837,13 @@ export function getPickRecommendations(criteria: PickCriteria): MatchedPickResul
     if (b.matchScore !== a.matchScore) {
       return b.matchScore - a.matchScore;
     }
-    const aRating = (a.tool as AiTool).rating || 0;
-    const bRating = (b.tool as AiTool).rating || 0;
-    return bRating - aRating;
+    const aTool = a.tool as AiTool;
+    const bTool = b.tool as AiTool;
+    const featuredDifference = Number(Boolean(bTool.isFeatured)) - Number(Boolean(aTool.isFeatured));
+    if (featuredDifference) return featuredDifference;
+    const trendingDifference = Number(Boolean(bTool.isTrending)) - Number(Boolean(aTool.isTrending));
+    if (trendingDifference) return trendingDifference;
+    return a.tool.name.localeCompare(b.tool.name);
   });
 
   const topResults = results.slice(0, 6);
