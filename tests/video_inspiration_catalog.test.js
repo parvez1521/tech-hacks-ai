@@ -53,7 +53,7 @@ test('homepage catalog metrics match distinct source registry counts', () => {
     openSourceTools: 27,
     alternativeTargets: 25,
     alternativeRelationships: 224,
-    browserUtilities: 38,
+    browserUtilities: 39,
     uniquePrompts: 582,
     imagePrompts: 548,
     videoPrompts: 12,
