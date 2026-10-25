@@ -94,12 +94,16 @@ export const UniversalSearch: React.FC = () => {
       if (flatResults.length === 0) return;
       setSelectedIndex((prev) => (prev > 0 ? prev - 1 : flatResults.length - 1));
     } else if (e.key === 'Enter') {
-      if (selectedIndex >= 0 && flatResults[selectedIndex]) {
-        e.preventDefault();
-        navigate(flatResults[selectedIndex].url);
-        setIsOpen(false);
-        setSelectedIndex(-1);
+      e.preventDefault();
+      const selectedResult = selectedIndex >= 0 ? flatResults[selectedIndex] : undefined;
+      if (selectedResult) {
+        navigate(selectedResult.url);
+      } else if (query.trim()) {
+        // Submit broad or unmatched searches to the AI directory instead of doing nothing.
+        navigate(`/ai-tools?q=${encodeURIComponent(query.trim())}`);
       }
+      setIsOpen(false);
+      setSelectedIndex(-1);
     }
   };
 
