@@ -8,9 +8,9 @@ import { AffiliateDisclosure } from '../components/AffiliateDisclosure.tsx';
 
 export const PickPage: React.FC = () => {
   const [step, setStep] = useState<number>(1);
-  const [goal, setGoal] = useState<string>('video-generation');
-  const [taskDetail, setTaskDetail] = useState<string>('all-video');
-  const [budget, setBudget] = useState<PickCriteria['budget']>('free-credits');
+  const [goal, setGoal] = useState<string>('');
+  const [taskDetail, setTaskDetail] = useState<string>('');
+  const [budget, setBudget] = useState<PickCriteria['budget'] | ''>('');
   const [hostingPreference, setHostingPreference] = useState<'browser' | 'local' | 'any'>('any');
   const [watermarkPreference, setWatermarkPreference] = useState<'no-watermark' | 'any'>('any');
 
@@ -92,19 +92,23 @@ export const PickPage: React.FC = () => {
 
   const handleGoalSelect = (newGoal: string) => {
     setGoal(newGoal);
-    const options = getTaskOptions(newGoal);
-    setTaskDetail(options[0].id);
+    setTaskDetail('');
     // Reset watermark preference when switching to non-media goals
     if (newGoal !== 'video-generation' && newGoal !== 'image-generation') {
       setWatermarkPreference('any');
     }
   };
 
+  const goToStep = (nextStep: number) => {
+    setStep(nextStep);
+    if (typeof window !== 'undefined') window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   // Run recommendation engine with current criteria
   const criteria: PickCriteria = {
     goal,
     taskDetail,
-    budget,
+    budget: budget || 'any',
     hostingPreference,
     watermarkPreference,
   };
@@ -128,7 +132,7 @@ export const PickPage: React.FC = () => {
 
         {/* Step Indicator */}
         <div className="flex items-center justify-center gap-2 mb-6">
-          {[1, 2, 3, 4, 5].map((s) => (
+          {[1, 2, 3, 4].map((s) => (
             <div
               key={s}
               className={`h-1.5 rounded-full transition-all duration-200 ${
@@ -179,8 +183,9 @@ export const PickPage: React.FC = () => {
           <div className="pt-4 flex justify-end">
             <button
               type="button"
-              onClick={() => setStep(2)}
-              className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-xl bg-blue-600 text-white text-sm font-semibold hover:bg-blue-700 shadow-sm transition-all cursor-pointer"
+              onClick={() => goToStep(2)}
+              disabled={!goal}
+              className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-xl bg-blue-600 text-white text-sm font-semibold hover:bg-blue-700 shadow-sm transition-all cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed"
             >
               <span>Next Step</span>
               <ArrowRight className="w-4 h-4" />
@@ -225,7 +230,7 @@ export const PickPage: React.FC = () => {
           <div className="pt-4 flex items-center justify-between">
             <button
               type="button"
-              onClick={() => setStep(1)}
+              onClick={() => goToStep(1)}
               className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-slate-500 hover:text-slate-900 text-xs font-medium transition-colors cursor-pointer"
             >
               <ArrowLeft className="w-3.5 h-3.5" />
@@ -233,8 +238,9 @@ export const PickPage: React.FC = () => {
             </button>
             <button
               type="button"
-              onClick={() => setStep(3)}
-              className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-xl bg-blue-600 text-white text-sm font-semibold hover:bg-blue-700 shadow-sm transition-all cursor-pointer"
+              onClick={() => goToStep(3)}
+              disabled={!taskDetail}
+              className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-xl bg-blue-600 text-white text-sm font-semibold hover:bg-blue-700 shadow-sm transition-all cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed"
             >
               <span>Next: Budget & Access</span>
               <ArrowRight className="w-4 h-4" />
@@ -279,7 +285,7 @@ export const PickPage: React.FC = () => {
           <div className="pt-4 flex items-center justify-between">
             <button
               type="button"
-              onClick={() => setStep(2)}
+              onClick={() => goToStep(2)}
               className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-slate-500 hover:text-slate-900 text-xs font-medium transition-colors cursor-pointer"
             >
               <ArrowLeft className="w-3.5 h-3.5" />
@@ -287,8 +293,9 @@ export const PickPage: React.FC = () => {
             </button>
             <button
               type="button"
-              onClick={() => setStep(4)}
-              className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-xl bg-blue-600 text-white text-sm font-semibold hover:bg-blue-700 shadow-sm transition-all cursor-pointer"
+              onClick={() => goToStep(4)}
+              disabled={!budget}
+              className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-xl bg-blue-600 text-white text-sm font-semibold hover:bg-blue-700 shadow-sm transition-all cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed"
             >
               <span>{showWatermark ? 'Next: Setup & Watermarks' : 'Next: Setup & Preferences'}</span>
               <ArrowRight className="w-4 h-4" />
@@ -369,7 +376,7 @@ export const PickPage: React.FC = () => {
           <div className="pt-4 flex items-center justify-between">
             <button
               type="button"
-              onClick={() => setStep(3)}
+              onClick={() => goToStep(3)}
               className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-slate-500 hover:text-slate-900 text-xs font-medium transition-colors cursor-pointer"
             >
               <ArrowLeft className="w-3.5 h-3.5" />
@@ -377,7 +384,7 @@ export const PickPage: React.FC = () => {
             </button>
             <button
               type="button"
-              onClick={() => setStep(5)}
+              onClick={() => goToStep(5)}
               className="inline-flex items-center gap-1.5 px-6 py-2.5 rounded-xl bg-blue-600 text-white text-sm font-semibold hover:bg-blue-700 shadow-sm transition-all hover:scale-[1.02] cursor-pointer"
             >
               <Sparkles className="w-4 h-4" />
@@ -404,7 +411,7 @@ export const PickPage: React.FC = () => {
 
             <button
               type="button"
-              onClick={() => setStep(1)}
+              onClick={() => goToStep(1)}
               className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-[#DFE7F3] bg-white hover:bg-slate-50 text-slate-700 text-xs font-medium transition-colors shrink-0 self-start sm:self-auto shadow-xs cursor-pointer"
             >
               <RefreshCw className="w-3.5 h-3.5" />
