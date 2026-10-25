@@ -902,7 +902,7 @@ export const HomePage: React.FC = () => {
                 Need Help Choosing the Right Tool?
               </h3>
               <p className="text-sm text-secondary-foreground leading-relaxed mb-6">
-                Answer 3 quick questions about your project goals, budget, and hosting preferences. Our rule-based matching engine will recommend the perfect open-source and AI tools for you.
+                Answer 4 quick questions about your project goals, task, budget, and hosting preferences. Our rule-based matching engine will recommend the perfect open-source and AI tools for you.
               </p>
             </div>
 
