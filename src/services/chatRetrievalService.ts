@@ -1,7 +1,6 @@
 import { aiToolsData } from '../data/aiToolsData.ts';
 import { toolsData } from '../data/seedData.ts';
 import { getActiveOffers } from '../data/offersData.ts';
-import { proprietaryTools } from '../data/alternatives.ts';
 import {
   detectCatalogSearchIntent,
   findAlternativeTargetFromQuery,
@@ -128,15 +127,6 @@ export function generateGroundedResponse(userQuery: string): ChatMessage {
     const lines = matched.map((offer) => `• [${offer.title}](/offers/${offer.slug}) — ${offer.benefitSummary} (${offer.offerType === 'free-subscription' ? 'free plan' : offer.offerType.replaceAll('-', ' ')}). Eligibility: ${offer.eligibility}`);
     const couponNote = /coupon|promo code|voucher/.test(q) ? '\n\nNo fake codes: I only show a coupon code when it is explicitly recorded in an offer’s details.' : '';
     return message(`Published offers in the catalogue:\n\n${lines.join('\n')}\n\nBrowse the full [offers directory](/offers). These are catalogue records, not live-checked terms. Open the provider terms on each offer page before claiming.${couponNote}`, [], ['Show student offers', 'Find offers in India', 'Browse all offers']);
-  }
-
-  const alternativeTarget = proprietaryTools.find((target) => q.includes(normalize(target.name)) || q.includes(normalize(target.slug)));
-  if (alternativeTarget && (/alternative|replace|replacement|open source|open-source|vs|versus/.test(q))) {
-    const alternatives = toolsData.filter((tool) => tool.alternativesTo.includes(alternativeTarget.slug)).slice(0, 5);
-    if (alternatives.length) {
-      const records = alternatives.map((tool) => ({ name: tool.name, slug: tool.slug, type: 'open-source' as const, pricingSummary: `${tool.license} · open source`, websiteUrl: tool.websiteUrl }));
-      return message(`Open-source catalogue alternatives to ${alternativeTarget.name}:\n\n${records.map((tool) => `• [${tool.name}](/tools/${tool.slug}) — ${tool.pricingSummary}`).join('\n')}\n\nSee the [${alternativeTarget.name} alternatives page](/alternatives/${alternativeTarget.slug}) or compare tools side by side with the [comparison tool](/compare).`, records, ['Compare these alternatives', 'Search open-source tools']);
-    }
   }
 
   const all: Array<{ item: AiTool | Tool; type: 'ai' | 'open-source'; text: string }> = [
