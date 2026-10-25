@@ -123,10 +123,8 @@ export const TermsPage: React.FC = () => {
             We reserve the right to update or modify these Terms of Use at any time. Continued use of the Site after modifications constitutes acceptance of the revised terms.
           </p>
           <p className="text-xs text-slate-500">
-            For legal inquiries or notices, contact:{' '}
-            <a href="mailto:contact@techhacksai.com" className="text-blue-600 hover:text-blue-700 underline font-mono font-medium">
-              contact@techhacksai.com
-            </a>
+            For legal inquiries or notices, review the current status on our <Link to="/contact" className="text-blue-600 hover:text-blue-700 underline font-medium">Contact page</Link>.
+            A verified email inbox or connected intake service is not configured yet; this website cannot currently receive formal notices.
           </p>
         </section>
       </div>

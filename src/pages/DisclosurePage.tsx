@@ -137,13 +137,8 @@ export const DisclosurePage: React.FC = () => {
             4. Questions &amp; Feedback
           </h2>
           <p>
-            If you have questions about our affiliate relationships, advertising policies, or editorial guidelines, please contact our team:
-          </p>
-          <p className="font-mono text-xs text-blue-600 font-semibold">
-            Email: editorial@techhacksai.com
-          </p>
-          <p className="text-xs text-slate-500">
-            You can also submit questions directly via our <Link to="/contact" className="text-blue-600 hover:text-blue-700 underline font-medium">Contact Form</Link>.
+            For questions about affiliate relationships, advertising policies, or editorial guidelines, consult our <Link to="/contact" className="text-blue-600 hover:text-blue-700 underline font-medium">Contact page</Link> for current availability.
+            A verified editorial inbox and message-storage service are not currently configured, so inquiries cannot yet be received through this site.
           </p>
         </section>
       </div>

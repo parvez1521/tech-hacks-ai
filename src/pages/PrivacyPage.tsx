@@ -7,7 +7,6 @@ import {
   ExternalLink,
   Globe,
   Sliders,
-  Mail,
   FileText,
   AlertCircle,
 } from 'lucide-react';
@@ -49,10 +48,9 @@ export const PrivacyPage: React.FC = () => {
             At SwitchRoute (accessible at <strong className="text-slate-900">{siteConfig.url}</strong>), the privacy of our visitors is one of our core priorities. This Privacy Policy outlines the types of information collected and recorded by SwitchRoute and how we utilize it.
           </p>
           <p>
-            If you have additional questions or require further information about our Privacy Policy, please contact our privacy desk at{' '}
-            <a href="mailto:privacy@techhacksai.com" className="text-blue-600 hover:text-blue-700 underline font-mono">
-              privacy@techhacksai.com
-            </a>.
+            For privacy questions or data-rights requests, see our <Link to="/contact" className="text-blue-600 hover:text-blue-700 underline">Contact page</Link>.
+            A verified email inbox and message-storage service are not currently configured, so requests cannot yet be received through this site.
+            Please do not send confidential details until a working contact method is published.
           </p>
         </section>
 
@@ -229,7 +227,7 @@ export const PrivacyPage: React.FC = () => {
             8. Children's Privacy (COPPA)
           </h2>
           <p>
-            Protecting children while using the internet is paramount. SwitchRoute does not knowingly collect any Personal Identifiable Information from children under the age of 13. If you believe that your child provided personal information on our website, please contact us immediately and we will promptly remove such information from our records.
+            Protecting children while using the internet is paramount. SwitchRoute does not knowingly collect personal information from children under the age of 13. The site currently has no verified inbox or connected request-receiving service; a working contact method must be published before visitors can submit removal requests.
           </p>
         </section>
 
@@ -239,13 +237,8 @@ export const PrivacyPage: React.FC = () => {
             9. Contacting Our Privacy Officer
           </h2>
           <p>
-            For questions regarding this policy, cookie settings, or data protection rights, reach our designated privacy desk:
-          </p>
-          <p className="font-mono text-xs text-blue-600">
-            Email: privacy@techhacksai.com
-          </p>
-          <p className="text-xs text-slate-500">
-            Or submit a ticket directly through our <Link to="/contact" className="text-blue-600 hover:text-blue-700 underline">Contact Form</Link>.
+            For policy questions, cookie settings, or data-protection requests, consult our <Link to="/contact" className="text-blue-600 hover:text-blue-700 underline">Contact page</Link> for the current status.
+            No verified email inbox or message-storage service is available yet, so this site cannot currently receive requests.
           </p>
         </section>
       </div>

@@ -57,11 +57,10 @@ describe('Theme, chat suggestions, and contact regression coverage', () => {
     assert.match(consent, /aria-label="Allow advertising and personalization"/);
   });
 
-  it('renders only verified configured contact channels with valid destinations', () => {
+  it('hides contact channels when no verified email, phone, or social destination is configured', () => {
     const actual = getConfiguredContactOptions();
-    assert.deepEqual(actual.map(({ id }) => id), ['email']);
-    assert.equal(actual[0].display, 'contact@techhacksai.com');
-    assert.equal(actual[0].href, 'mailto:contact@techhacksai.com');
+    assert.deepEqual(actual, []);
+    assert.equal(contactConfig.email, '');
 
     const complete = getConfiguredContactOptions({
       ...contactConfig,
