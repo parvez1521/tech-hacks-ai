@@ -29,6 +29,10 @@ export interface SiteConfig {
     enabled: boolean;
     publisherId: string;
     autoAds: boolean;
+    privacyReady: boolean;
+    slots: {
+      homepage: string;
+    };
   };
   navigation: {
     main: NavItem[];
@@ -50,6 +54,18 @@ export interface SiteConfig {
 const configuredUrl =
   (typeof import.meta !== 'undefined' && import.meta.env?.VITE_SITE_URL) || 'https://switchroute.in';
 
+const adsensePublisherId = String(
+  (typeof import.meta !== 'undefined' && import.meta.env?.VITE_ADSENSE_PUBLISHER_ID) || ''
+).trim();
+const adsensePublisherIdIsValid = /^ca-pub-\d{16}$/.test(adsensePublisherId);
+const adsensePrivacyReady =
+  typeof import.meta !== 'undefined' && import.meta.env?.VITE_ADSENSE_PRIVACY_READY === 'true';
+const adsenseEnabled =
+  typeof import.meta !== 'undefined' &&
+  import.meta.env?.VITE_ADSENSE_ENABLED === 'true' &&
+  adsensePublisherIdIsValid &&
+  adsensePrivacyReady;
+
 export const siteConfig: SiteConfig = {
   name: 'SwitchRoute',
   shortName: 'SwitchRoute',
@@ -66,9 +82,16 @@ export const siteConfig: SiteConfig = {
     email: contactConfig.email,
   },
   adsense: {
-    enabled: false, // Remains disabled until formal Google AdSense account approval
-    publisherId: '', // To be filled with official ca-pub-XXXXXXXXXXXXXXXX upon approval
-    autoAds: false,
+    // Explicit opt-in only: valid publisher ID + account approval + privacy setup are all required.
+    enabled: adsenseEnabled,
+    publisherId: adsensePublisherIdIsValid ? adsensePublisherId : '',
+    autoAds: adsenseEnabled && import.meta.env?.VITE_ADSENSE_AUTO_ADS === 'true',
+    privacyReady: adsensePrivacyReady,
+    slots: {
+      homepage: adsenseEnabled
+        ? String(import.meta.env?.VITE_ADSENSE_HOME_SLOT || '').trim()
+        : '',
+    },
   },
   navigation: {
     main: [
