@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { getCookiePreferences } from './CookieConsentBanner';
 import { siteConfig } from '../config/siteConfig';
 
 export interface AdSenseBannerProps {
@@ -19,15 +20,40 @@ export interface AdSenseBannerProps {
  * 4. Can render an optional dormant preview frame during site audit/development.
  */
 export const AdSenseBanner: React.FC<AdSenseBannerProps> = ({
-  slot = 'default-slot',
+  slot = '',
   format = 'auto',
   responsive = true,
   className = '',
   showPreviewPlaceholder = false,
 }) => {
-  const isEnabled = siteConfig.adsense?.enabled && !!siteConfig.adsense?.publisherId;
+  const [adConsent, setAdConsent] = useState(false);
+  useEffect(() => {
+    const refreshConsent = () => setAdConsent(getCookiePreferences()?.advertising === true);
+    refreshConsent();
+    window.addEventListener('cookie_consent_updated', refreshConsent);
+    return () => window.removeEventListener('cookie_consent_updated', refreshConsent);
+  }, []);
 
-  // In production with ads enabled (post-approval), render official Google AdSense markup
+  const validSlot = /^\d{5,}$/.test(slot);
+  const isEnabled =
+    siteConfig.adsense?.enabled &&
+    siteConfig.adsense?.privacyReady &&
+    !!siteConfig.adsense?.publisherId &&
+    adConsent &&
+    validSlot;
+
+  useEffect(() => {
+    if (!isEnabled || typeof window === 'undefined') return;
+    const win = window as Window & { adsbygoogle?: Array<Record<string, unknown>> };
+    win.adsbygoogle = win.adsbygoogle || [];
+    try {
+      win.adsbygoogle.push({});
+    } catch {
+      // Do not disrupt the page if an ad request cannot be initialized.
+    }
+  }, [isEnabled, slot]);
+
+  // Do not render until the real account, consent gate, and numeric ad-unit slot are configured.
   if (isEnabled) {
     return (
       <div className={`my-8 text-center ad-container ${className}`}>
