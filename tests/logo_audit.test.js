@@ -216,4 +216,31 @@ describe('Phase 13: Global Brand Logo Audit & Verification', () => {
     assert.strictEqual(getBrandLogo('x-ai'), undefined, 'Near-match slugs require an explicit alias');
     assert.strictEqual(getBrandLogo('not-a-real-brand'), undefined, 'Unknown brands use the component fallback');
   });
+
+  test('named audit identities use traceable official assets or an intentional neutral fallback', () => {
+    const slugs = ['omnirush','google-ai-studio','vllm','claude','invideo-ai','runway','cursor','chatgpt','pictory','agnes-video-generator','automated-video-generator','vuza','pika','kling-ai','luma-dream-machine','copilot','aider'];
+    for (const slug of slugs) {
+      const entry = getBrandLogo(slug);
+      assert.ok(entry, `${slug} has a canonical brand record`);
+      assert.equal(entry.slug, slug, `${slug} resolves to itself`);
+      assert.ok(entry.sourceType === 'fallback' || (entry.sourceUrl && /^https:\/\//.test(entry.sourceUrl)), `${slug} must be traceable or fallback`);
+    }
+    for (const slug of ['invideo-ai','pictory','agnes-video-generator','automated-video-generator','vuza','kling-ai','luma-dream-machine']) {
+      assert.equal(getBrandLogo(slug).sourceType, 'fallback', `${slug} uses the neutral fallback until its mark is verified`);
+    }
+  });
+
+  test('shared logo variants keep compact square frames without hover scaling', () => {
+    const component = fs.readFileSync(path.resolve(process.cwd(), 'src/components/BrandLogo.tsx'), 'utf8');
+    const home = fs.readFileSync(path.resolve(process.cwd(), 'src/pages/HomePage.tsx'), 'utf8');
+    const alternatives = fs.readFileSync(path.resolve(process.cwd(), 'src/components/AiAlternativesShowcase.tsx'), 'utf8');
+    assert.match(component, /case 'xs':[\s\S]*?container: 'w-6 h-6'/);
+    assert.match(component, /case 'sm':[\s\S]*?container: 'w-8 h-8'/);
+    assert.match(component, /case 'md':[\s\S]*?container: 'w-10 h-10'/);
+    assert.match(component, /case 'lg':[\s\S]*?container: 'w-12 h-12'/);
+    assert.match(component, /object-contain/);
+    assert.doesNotMatch(component, /group-hover:scale/);
+    assert.match(home, /<BrandLogo[^>]*size="sm"/);
+    assert.match(alternatives, /<BrandLogo[^>]*size="xs" showContainer=\{false\}/);
+  });
 });

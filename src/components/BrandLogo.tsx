@@ -63,12 +63,12 @@ export const BrandLogo: React.FC<BrandLogoProps> = ({
     }
   };
 
-  // Dimension helpers
+  // Fixed square frames keep row and card geometry stable for every asset ratio.
   const getSizeStyles = () => {
     if (typeof size === 'number') {
       return {
         container: `w-[${size}px] h-[${size}px]`,
-        img: `w-[${Math.round(size * 0.65)}px] h-[${Math.round(size * 0.65)}px]`,
+        img: `w-[${Math.round(size * 0.7)}px] h-[${Math.round(size * 0.7)}px]`,
         text: 'text-xs',
       };
     }
@@ -77,25 +77,25 @@ export const BrandLogo: React.FC<BrandLogoProps> = ({
       case 'xs':
         return {
           container: 'w-6 h-6',
-          img: 'w-3.5 h-3.5',
+          img: 'w-4 h-4',
           text: 'text-[10px]',
         };
       case 'sm':
         return {
           container: 'w-8 h-8',
-          img: 'w-5 h-5',
+          img: 'w-[22px] h-[22px]',
           text: 'text-xs',
         };
       case 'md':
         return {
-          container: 'w-9 h-9',
-          img: 'w-6 h-6',
+          container: 'w-10 h-10',
+          img: 'w-7 h-7',
           text: 'text-xs',
         };
       case 'lg':
         return {
-          container: 'w-10 h-10',
-          img: 'w-6 h-6',
+          container: 'w-12 h-12',
+          img: 'w-8 h-8',
           text: 'text-sm',
         };
       case 'xl':
@@ -119,25 +119,28 @@ export const BrandLogo: React.FC<BrandLogoProps> = ({
 
   if (logoEntry && canRenderLogo && currentSrc && !hasError) {
     if (!showContainer) {
-      const hasSizeOverride = /\b(w-|h-)/.test(className);
       return (
-        <img
-          src={currentSrc}
-          alt=""
-          aria-hidden="true"
+        <span
+          className={`${sizeClasses.container} inline-flex items-center justify-center shrink-0 overflow-hidden ${className}`}
           data-brand-slug={slug}
-           data-logo-status={logoStatus}
-           className={`${hasSizeOverride ? '' : sizeClasses.img} object-contain brand-logo-image brand-logo-image--${logoEntry.slug} transition-transform duration-300 group-hover:scale-105 ${className}`}
-          loading="lazy"
-          decoding="async"
-          onError={handleImageError}
-        />
+          data-logo-status={logoStatus}
+        >
+          <img
+            src={currentSrc}
+            alt=""
+            aria-hidden="true"
+            className={`${sizeClasses.img} max-w-full max-h-full object-contain brand-logo-image brand-logo-image--${logoEntry.slug}`}
+            loading="lazy"
+            decoding="async"
+            onError={handleImageError}
+          />
+        </span>
       );
     }
 
     return (
       <div
-        className={`${sizeClasses.container} rounded-md flex items-center justify-center shrink-0 overflow-hidden bg-card border border-border/80 shadow-sm transition-transform duration-300 group-hover:scale-105 ${className}`}
+        className={`${sizeClasses.container} rounded-md flex items-center justify-center shrink-0 overflow-hidden bg-card border border-border/80 shadow-sm ${className}`}
         data-brand-slug={slug}
         data-logo-status={logoStatus}
       >
@@ -145,8 +148,8 @@ export const BrandLogo: React.FC<BrandLogoProps> = ({
           src={currentSrc}
           alt={`${name} logo`}
           data-brand-slug={slug}
-           data-logo-status={logoStatus}
-           className={`${sizeClasses.img} object-contain brand-logo-image brand-logo-image--${logoEntry.slug}`}
+          data-logo-status={logoStatus}
+          className={`${sizeClasses.img} object-contain brand-logo-image brand-logo-image--${logoEntry.slug}`}
           loading="lazy"
           decoding="async"
           onError={handleImageError}
@@ -158,7 +161,7 @@ export const BrandLogo: React.FC<BrandLogoProps> = ({
   // Explicitly label monograms as a fallback so they cannot be mistaken for brand artwork.
   return (
     <div
-      className={`${sizeClasses.container} rounded-md flex items-center justify-center font-bold ${sizeClasses.text} text-white shrink-0 shadow-inner group-hover:scale-105 transition-transform duration-300 ${className}`}
+      className={`${sizeClasses.container} rounded-md flex items-center justify-center font-bold ${sizeClasses.text} text-white shrink-0 shadow-inner ${className}`}
       style={{ backgroundColor: fallbackBg }}
       role="img"
       aria-label={`${name} logo unavailable; showing initials fallback`}
