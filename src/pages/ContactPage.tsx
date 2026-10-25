@@ -26,7 +26,9 @@ const emptyForm = {
 };
 
 export const ContactPage: React.FC = () => {
-  const instagramContact = getConfiguredContactOptions().find((option) => option.id === 'instagram');
+  const contactOptions = getConfiguredContactOptions();
+  const instagramContact = contactOptions.find((option) => option.id === 'instagram');
+  const emailContact = contactOptions.find((option) => option.id === 'email');
   const [intakeState, setIntakeState] = useState<IntakeState>('checking');
   const [formState, setFormState] = useState<FormState>('idle');
   const [formData, setFormData] = useState(emptyForm);
@@ -106,7 +108,7 @@ export const ContactPage: React.FC = () => {
         </h1>
         <p className="text-base sm:text-lg text-slate-600 leading-relaxed max-w-2xl">
           Send a directory suggestion, report a pricing correction, or share general feedback.
-          Your message is only confirmed after the server has saved it successfully.
+          For support, privacy, copyright, or security enquiries, email us directly. Website-form messages are only confirmed after the server saves them successfully.
         </p>
       </div>
 
@@ -156,6 +158,24 @@ export const ContactPage: React.FC = () => {
         </a>
       )}
 
+      {emailContact && (
+        <a
+          href={emailContact.href}
+          aria-label={`Email SwitchRoute: ${emailContact.display}`}
+          className="mb-8 flex min-w-0 items-center gap-3 rounded-2xl border border-emerald-200 bg-emerald-50/80 p-4 sm:p-5 shadow-invary-card transition-colors hover:border-emerald-400 hover:bg-emerald-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500"
+        >
+          <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl border border-emerald-200 bg-white text-emerald-700">
+            <Mail className="h-5 w-5" aria-hidden="true" />
+          </span>
+          <span className="min-w-0 flex-1">
+            <span className="block text-[11px] font-semibold uppercase tracking-wide text-emerald-700">Official support email</span>
+            <span className="mt-0.5 block break-words text-sm sm:text-base font-bold text-slate-900">{emailContact.display}</span>
+            <span className="mt-1 block text-xs leading-relaxed text-slate-600">For enquiries, factual corrections, privacy requests, copyright notices, and security reports.</span>
+          </span>
+          <ArrowUpRight className="h-5 w-5 shrink-0 text-emerald-700" aria-hidden="true" />
+        </a>
+      )}
+
       <section className="rounded-2xl border border-border bg-card p-5 sm:p-7 shadow-invary-card" aria-labelledby="contact-form-heading">
         <div className="mb-5">
           <h2 id="contact-form-heading" className="text-xl font-bold text-foreground">Send a message</h2>
@@ -178,7 +198,7 @@ export const ContactPage: React.FC = () => {
               <h3 className="text-sm font-bold">Website contact form is not active yet</h3>
               <p className="mt-1 text-xs leading-relaxed">
                 Secure message storage is not configured or reachable, so this page will not collect or pretend to send a message.
-                For general, non-sensitive questions, use the Instagram link above. Do not send private or formal legal information through social DMs.
+                Please email <a className="font-semibold underline underline-offset-2" href={emailContact?.href || 'mailto:support@switchroute.in'}>{emailContact?.display || 'support@switchroute.in'}</a> for support and formal requests. Instagram is available for general, non-sensitive questions only.
               </p>
             </div>
           </div>
