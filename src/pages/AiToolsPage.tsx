@@ -219,7 +219,7 @@ export const AiToolsPage: React.FC = () => {
               {selectedVideoCollection && <button type="button" onClick={() => handleVideoSectionChange(null)} className="self-start rounded-lg border border-border px-3 py-1.5 text-xs font-semibold text-primary hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary">Show all video tools</button>}
             </div>
             <div className="grid grid-cols-1 gap-3 md:grid-cols-3">
-              {videoCollections.map((collection) => {
+              {videoCollections.filter((collection) => collection.count > 0).map((collection) => {
                 const selected = selectedVideoCollection === collection.id;
                 const matchingCount = filterAndSortAiTools({ ...filterState, videoDiscoverySection: collection.id as any, page: 1 }).totalCount;
                 return (
