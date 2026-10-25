@@ -7,7 +7,7 @@ import { AiToolCard } from '../components/AiToolCard';
 import { Pagination } from '../components/Pagination';
 import { EmptyState } from '../components/EmptyState';
 import { CommunityCallout } from '../components/CommunityCallout';
-import { AiFilterState, PricingType } from '../types';
+import { AiFilterState, PricingType, FreeAccessType } from '../types';
 import { Sparkles, Search, X, SlidersHorizontal, PlusCircle } from 'lucide-react';
 
 export const AiToolsPage: React.FC = () => {
@@ -18,6 +18,7 @@ export const AiToolsPage: React.FC = () => {
     category: searchParams.get('category') || null,
     alternativesTo: searchParams.get('alternativesTo') || null,
     pricingType: (searchParams.get('price') as PricingType) || 'all',
+    freeAccessType: (searchParams.get('access') as FreeAccessType) || 'all',
     sortBy: (searchParams.get('sort') as any) || 'popular',
     page: parseInt(searchParams.get('page') || '1', 10) || 1,
     videoDiscoverySection: (['self-hosted', 'open-weights', 'browser-demos'].includes(searchParams.get('video') || '')
@@ -56,6 +57,10 @@ export const AiToolsPage: React.FC = () => {
 
   const handlePriceChange = (price: string) => {
     setSearchParams({ price: price === 'all' ? null : price, page: null });
+  };
+
+  const handleAccessChange = (access: string) => {
+    setSearchParams({ access: access === 'all' ? null : access, page: null });
   };
 
   const handleSortChange = (sort: string) => {
@@ -136,6 +141,24 @@ export const AiToolsPage: React.FC = () => {
               </select>
             </div>
 
+            {/* Access model filter keeps recurring hosted plans distinct from open-source software. */}
+            <div className="flex items-center gap-1.5">
+              <span className="text-[#64748B]">Access:</span>
+              <select
+                aria-label="Filter by access model"
+                value={filterState.freeAccessType || 'all'}
+                onChange={(e) => handleAccessChange(e.target.value)}
+                className="bg-white border border-[#DFE7F3] rounded-lg px-2.5 py-1.5 text-xs text-[#0F172A] focus:outline-none focus:ring-2 focus:ring-[#2563EB]/20 focus:border-[#2563EB] cursor-pointer"
+              >
+                <option value="all">All Access Models</option>
+                <option value="open-source-local">Open Source / Local</option>
+                <option value="recurring-free">Recurring Free</option>
+                <option value="free-credits">Free Credits</option>
+                <option value="limited-free">Limited Free</option>
+                <option value="none">Paid / No Free Access</option>
+              </select>
+            </div>
+
             {/* Sort Select */}
             <div className="flex items-center gap-1.5">
               <span className="text-[#64748B]">Sort:</span>
@@ -152,7 +175,7 @@ export const AiToolsPage: React.FC = () => {
               </select>
             </div>
 
-            {(filterState.searchQuery || filterState.category || filterState.alternativesTo || filterState.pricingType !== 'all') && (
+            {(filterState.searchQuery || filterState.category || filterState.alternativesTo || filterState.pricingType !== 'all' || (filterState.freeAccessType && filterState.freeAccessType !== 'all')) && (
               <button
                 type="button"
                 onClick={resetSearchParams}
