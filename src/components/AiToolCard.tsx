@@ -157,7 +157,7 @@ export const AiToolCard: React.FC<AiToolCardProps> = ({ tool }) => {
       {/* Footer Area */}
       <div className="relative z-10 pt-3 border-t border-border/50 flex items-center justify-between text-xs">
         <div className="flex items-center gap-2 text-secondary-foreground font-mono">
-          <span className="truncate max-w-[180px] text-[11px] text-secondary-foreground">
+          <span className="max-w-[180px] whitespace-normal break-words text-[11px] leading-snug text-secondary-foreground">
             {tool.pricingDetails.split(';')[0]}
           </span>
         </div>

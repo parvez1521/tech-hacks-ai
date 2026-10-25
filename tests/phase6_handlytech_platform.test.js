@@ -94,7 +94,7 @@ describe('Phase 6: Homepage Redesign & HandlyTech Platform Integration', () => {
 
     // Hero Section & Universal Search
     assert.ok(html.includes('id="home-hero-heading"') && ['Another AI tool?', 'Sure.', 'Another Subscription?', 'Nope.'].every((line) => html.includes(line)), 'Hero headline present as four approved lines');
-    assert.ok(html.includes('Search free AI tools, open-source alternatives, prompts, and utilities...'), 'Universal search bar placeholder');
+    assert.ok(html.includes('Search AI tools, alternatives, prompts, and utilities…'), 'Universal search bar placeholder stays concise enough to avoid clipping');
     assert.ok(!html.includes('Make AI videos') && !html.includes('Replace proprietary SaaS'), 'Crowded quick-intent chips are removed');
 
     // Section 2: Open Source Alternatives (Proprietary Cards)

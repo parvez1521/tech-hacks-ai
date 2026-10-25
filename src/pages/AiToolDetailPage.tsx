@@ -210,7 +210,7 @@ export const AiToolDetailPage: React.FC = () => {
               </span>
               <span className="text-secondary-foreground">{tool.pricingDetails}</span>
             </div>
-            <div className="flex items-center gap-2 self-start sm:self-auto">
+            <div className="flex flex-wrap items-center gap-2 self-start sm:self-auto max-w-full">
               <span className="font-mono px-2.5 py-1 rounded bg-card text-foreground border border-border font-medium capitalize">
                 {tool.pricingType}
               </span>
