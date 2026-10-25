@@ -137,8 +137,8 @@ export const DisclosurePage: React.FC = () => {
             4. Questions &amp; Feedback
           </h2>
           <p>
-            For questions about affiliate relationships, advertising policies, or editorial guidelines, consult our <Link to="/contact" className="text-blue-600 hover:text-blue-700 underline font-medium">Contact page</Link> for current availability.
-            A verified editorial inbox and message-storage service are not currently configured, so inquiries cannot yet be received through this site.
+            For general, non-sensitive questions about affiliate relationships, advertising policies, or editorial guidelines, use the Instagram link on our <Link to="/contact" className="text-blue-600 hover:text-blue-700 underline font-medium">Contact page</Link>.
+            DMs are external to SwitchRoute and are not stored in a website ticket system. A dedicated editorial inbox is not configured yet; please do not include confidential information.
           </p>
         </section>
       </div>

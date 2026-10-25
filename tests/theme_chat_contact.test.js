@@ -57,10 +57,13 @@ describe('Theme, chat suggestions, and contact regression coverage', () => {
     assert.match(consent, /aria-label="Allow advertising and personalization"/);
   });
 
-  it('hides contact channels when no verified email, phone, or social destination is configured', () => {
+  it('shows the verified Instagram channel while hiding unconfigured email and phone', () => {
     const actual = getConfiguredContactOptions();
-    assert.deepEqual(actual, []);
+    assert.deepEqual(actual.map(({ id }) => id), ['instagram']);
+    assert.equal(actual[0].display, '@tech_hacks.ai');
+    assert.equal(actual[0].href, 'https://www.instagram.com/tech_hacks.ai/');
     assert.equal(contactConfig.email, '');
+    assert.equal(contactConfig.phone, '');
 
     const complete = getConfiguredContactOptions({
       ...contactConfig,
