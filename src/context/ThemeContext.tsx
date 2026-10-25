@@ -13,17 +13,8 @@ const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 export const THEME_STORAGE_KEY = 'theme';
 
 function getInitialTheme(): Theme {
-  if (typeof window === 'undefined') return 'dark';
-
-  try {
-    const savedTheme = window.localStorage.getItem(THEME_STORAGE_KEY);
-    if (savedTheme === 'light' || savedTheme === 'dark') return savedTheme;
-  } catch {
-    // Private browsing and storage-blocking extensions should not prevent the
-    // shell from rendering. Dark is the intentional first-visit default.
-  }
-
-  return document.documentElement?.dataset?.theme === 'light' ? 'light' : 'dark';
+  // Server and first client render must agree; the saved preference is applied after hydration.
+  return 'dark';
 }
 
 function applyThemeToDocument(theme: Theme) {
@@ -47,6 +38,15 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   const [theme, setThemeState] = useState<Theme>(getInitialTheme);
 
   useEffect(() => {
+    try {
+      const savedTheme = window.localStorage.getItem(THEME_STORAGE_KEY);
+      if ((savedTheme === 'light' || savedTheme === 'dark') && savedTheme !== theme) {
+        setThemeState(savedTheme);
+        return;
+      }
+    } catch {
+      // Keep the first-render default if storage is unavailable.
+    }
     applyThemeToDocument(theme);
   }, [theme]);
 
