@@ -19,7 +19,7 @@ After site approval and required privacy setup, set the following in Vercel → 
 - `VITE_ADSENSE_AUTO_ADS`: `true` only if Auto ads are enabled in your AdSense account.
 - `VITE_ADSENSE_HOME_SLOT`: numeric ad-slot ID from an actual AdSense ad unit for manual homepage placement. Leave blank for Auto ads only.
 
-The build validates publisher ID format and produces `/ads.txt` only when a genuine publisher ID is configured. Do not use example IDs or turn the flags on just to make the ad component appear.
+The build validates publisher ID format when `VITE_ADSENSE_PUBLISHER_ID` is set. If that variable is unset, it preserves an existing `public/ads.txt` file rather than deleting it; this repository already has an owner-added publisher record. Do not use example IDs or turn the flags on just to make the ad component appear.
 
 ## 3. Consent and privacy
 
