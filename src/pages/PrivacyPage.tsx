@@ -7,7 +7,6 @@ import {
   ExternalLink,
   Globe,
   Sliders,
-  Mail,
   FileText,
   AlertCircle,
 } from 'lucide-react';
