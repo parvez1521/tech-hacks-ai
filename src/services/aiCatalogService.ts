@@ -97,7 +97,7 @@ function normalizeSearchText(value: unknown): string {
 
 /** Match all query terms across the full record, rather than requiring the whole phrase verbatim. */
 function matchesSearchQuery(query: string, fields: unknown[]): boolean {
-  const terms = normalizeSearchText(query).split(/\\s+/).filter(Boolean);
+  const terms = normalizeSearchText(query).split(/\s+/).filter(Boolean);
   if (!terms.length) return true;
   const searchableText = normalizeSearchText(fields.filter(Boolean).join(' '));
   return terms.every((term) => {
