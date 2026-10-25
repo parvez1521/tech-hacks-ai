@@ -224,18 +224,21 @@ describe('Phase 11: End-to-End Integration, Recommendation Integrity & Launch Re
       }
     });
 
-    test('vercel.json protects /api/* serverless functions from the SPA fallback', () => {
+    test('vercel.json avoids a catch-all rewrite so missing URLs can return real 404s', () => {
       const vercelJsonPath = path.resolve(process.cwd(), 'vercel.json');
       assert.ok(fs.existsSync(vercelJsonPath), 'vercel.json must exist');
       const config = JSON.parse(fs.readFileSync(vercelJsonPath, 'utf8'));
-      assert.ok(Array.isArray(config.rewrites), 'vercel.json must define rewrites');
-      const rewrite = config.rewrites[0];
-      assert.ok(
-        rewrite.source.includes('api/') || rewrite.source.includes('(?!api/)'),
-        'Rewrite source must exclude api/ from the SPA fallback'
-      );
       assert.strictEqual(config.cleanUrls, true);
-      assert.strictEqual(rewrite.destination, '/', 'With cleanUrls enabled, the SPA fallback should target / rather than /index.html');
+      assert.ok(!config.rewrites || config.rewrites.length === 0, 'Pre-rendered routes must not be hidden behind a global SPA rewrite');
+
+      const packageJson = JSON.parse(fs.readFileSync(path.resolve(process.cwd(), 'package.json'), 'utf8'));
+      assert.ok(packageJson.scripts.build.includes('seo:prerender'), 'Production build must pre-render real routes');
+
+      const prerenderPath = path.resolve(process.cwd(), 'scripts/prerender-site.mjs');
+      assert.ok(fs.existsSync(prerenderPath), 'SEO pre-render script must exist');
+      const prerender = fs.readFileSync(prerenderPath, 'utf8');
+      assert.ok(prerender.includes('404.html'), 'Pre-render must create a custom 404 page');
+      assert.ok(prerender.includes('application/ld+json'), 'Pre-render must emit structured metadata');
     });
 
     test('api/chat.js exists with server-side environment variable access and catalog fallback', () => {
