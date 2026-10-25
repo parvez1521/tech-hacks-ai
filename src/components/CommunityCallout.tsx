@@ -4,13 +4,14 @@ import { Sparkles, ArrowRight, ShieldCheck, PenTool, PlusCircle } from 'lucide-r
 
 interface CommunityCalloutProps {
   type: 'tool' | 'guide';
+  className?: string;
 }
 
-export const CommunityCallout: React.FC<CommunityCalloutProps> = ({ type }) => {
+export const CommunityCallout: React.FC<CommunityCalloutProps> = ({ type, className }) => {
   const isTool = type === 'tool';
 
   return (
-    <div className="relative overflow-hidden p-6 sm:p-8 rounded-2xl border border-border bg-card/80 shadow-md my-10">
+    <div className={`relative overflow-hidden p-6 sm:p-8 rounded-2xl border border-border bg-card/80 shadow-md ${className || 'my-10'}`}>
       <div
         className="pointer-events-none absolute -right-20 -top-20 w-64 h-64 rounded-full bg-primary/10 blur-3xl -z-0"
         aria-hidden="true"
