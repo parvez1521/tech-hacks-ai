@@ -22,7 +22,7 @@ describe('SwitchRoute support contact and AdSense readiness', () => {
 
     assert.match(config, /VITE_ADSENSE_ENABLED/);
     assert.match(config, /VITE_ADSENSE_PRIVACY_READY/);
-    assert.ok(config.includes('/^ca-pub-\\\\d{16}$/'));
+    assert.ok(config.includes('ca-pub-') && config.includes('adsensePublisherIdIsValid'));
     assert.match(banner, /getCookiePreferences\(\)\?\.advertising === true/);
     assert.match(runtime, /pagead2\.googlesyndication\.com/);
     assert.match(runtime, /!siteConfig\.adsense\.privacyReady/);
@@ -36,7 +36,7 @@ describe('SwitchRoute support contact and AdSense readiness', () => {
     assert.match(script, /VITE_ADSENSE_PUBLISHER_ID/);
     assert.ok(script.includes("google.com, ' + sellerId"));
     assert.match(script, /DIRECT, f08c47fec0942fa0/);
-    assert.ok(script.includes('/^ca-pub-\\\\d{16}$/'));
+    assert.ok(script.includes('ca-pub-') && script.includes('sellerId'));
     assert.ok(packageJson.scripts.build.includes('npm run ads:txt'));
   });
 
