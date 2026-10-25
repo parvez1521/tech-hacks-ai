@@ -320,6 +320,16 @@ export function getAiToolsForProprietary(proprietarySlug: string): AiTool[] {
   return getAllAiTools().filter((tool) => !isCommunityTool(tool) && (tool.alternativesTo?.includes(proprietarySlug) || mappedSlugs.has(tool.slug)));
 }
 
+export function getOpenSourceToolsForProprietary(proprietarySlug: string): Tool[] {
+  if (!proprietarySlug) return [];
+  const mappedSlugs = new Set(
+    aiAlternativeMappings
+      .filter((mapping) => mapping.targetSlug === proprietarySlug && mapping.alternativeType === 'open-source')
+      .map((mapping) => mapping.alternativeSlug),
+  );
+  return toolsData.filter((tool) => tool.alternativesTo?.includes(proprietarySlug) || mappedSlugs.has(tool.slug));
+}
+
 /** Resolve both explicitly listed and reverse-linked catalog alternatives without duplicating product records. */
 export function getAiAlternativesForTarget(targetSlug: string): AiTool[] {
   if (!targetSlug) return [];
@@ -487,7 +497,7 @@ export function universalSearch(query: string): UniversalSearchResult {
 
   const alternativeTarget = findAlternativeTargetFromQuery(query);
   if (alternativeTarget) {
-    const openSourceTools = getToolsForProprietary(alternativeTarget.slug).slice(0, 5);
+    const openSourceTools = getOpenSourceToolsForProprietary(alternativeTarget.slug).slice(0, 5);
     const aiTools = getAiAlternativesForTarget(alternativeTarget.slug).slice(0, 5);
     return {
       openSourceTools,
