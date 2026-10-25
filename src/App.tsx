@@ -58,7 +58,7 @@ import { ModerationDashboardPage } from './pages/ModerationDashboardPage';
 import { CookieConsentBanner } from './components/CookieConsentBanner';
 import { NotFoundPage } from './pages/NotFoundPage';
 
-export function getRouteTitle(route: string, params: Record<string, string> = {}): string {
+export export function getRouteTitle(route: string, params: Record<string, string> = {}): string {
   switch (route) {
     case 'home':
       return formatPageTitle();
@@ -168,7 +168,7 @@ export function getRouteTitle(route: string, params: Record<string, string> = {}
   }
 }
 
-export function getRouteDescription(route: string, params: Record<string, string> = {}): string {
+export export function getRouteDescription(route: string, params: Record<string, string> = {}): string {
   switch (route) {
     case 'home':
       return siteConfig.description;
