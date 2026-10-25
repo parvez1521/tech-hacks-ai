@@ -5,8 +5,8 @@
  */
 export const contactConfig = {
   phone: '',
-  instagramHandle: '',
-  instagramUrl: '',
+  instagramHandle: 'tech_hacks.ai',
+  instagramUrl: 'https://www.instagram.com/tech_hacks.ai/',
   email: '',
 } as const;
 
