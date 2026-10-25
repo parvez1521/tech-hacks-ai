@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Download } from 'lucide-react';
+import { validateCropDraft } from '../../services/cropValidation';
 import { FilePicker, UtilityMessage, CopyButton, DownloadButton, utilityButtonClass, utilityInputClass, utilityQuietButtonClass } from './UtilityShared';
 
 type LoadedImage = { file: File; url: string; width: number; height: number };
@@ -51,41 +52,13 @@ export const ImageCropperTool: React.FC = () => {
   const render = () => {
     if (!image) return;
 
-    const parseCoordinate = (value: string, label: string, minimum: number): number => {
-      const trimmed = value.trim();
-      if (!/^\d+$/.test(trimmed)) {
-        throw new Error(`${label} must be a whole number.`);
-      }
-      const parsed = Number(trimmed);
-      if (!Number.isSafeInteger(parsed) || parsed < minimum) {
-        throw new Error(`${label} must be ${minimum === 0 ? 'zero or greater' : 'at least 1'}.`);
-      }
-      return parsed;
-    };
-
-    let nextCrop: typeof crop;
-    try {
-      const x = parseCoordinate(cropDraft.x, 'X', 0);
-      const y = parseCoordinate(cropDraft.y, 'Y', 0);
-      const width = parseCoordinate(cropDraft.width, 'Width', 1);
-      const height = parseCoordinate(cropDraft.height, 'Height', 1);
-
-      if (x >= image.width || y >= image.height) {
-        throw new Error(`X must be 0–${image.width - 1} and Y must be 0–${image.height - 1} for this image.`);
-      }
-      if (x + width > image.width) {
-        throw new Error(`Width is too large at X=${x}. Maximum width is ${image.width - x}px.`);
-      }
-      if (y + height > image.height) {
-        throw new Error(`Height is too large at Y=${y}. Maximum height is ${image.height - y}px.`);
-      }
-
-      nextCrop = { x, y, width, height };
-    } catch (err) {
+    const validation = validateCropDraft(cropDraft, image.width, image.height);
+    if (!validation.valid) {
       setBlob(null);
-      setError(err instanceof Error ? err.message : 'Check the crop coordinates and try again.');
+      setError(validation.error);
       return;
     }
+    const nextCrop = validation.crop;
 
     setCrop(nextCrop);
     setBlob(null);
