@@ -17,6 +17,17 @@ test('contact page does not simulate a successful message submission', async () 
   assert.doesNotMatch(page, /setTimeout\(|Message Received!|<form\b/i);
 });
 
+
+test('verified Instagram is the only public contact channel while inbox setup is pending', async () => {
+  const config = await read('../src/config/contactConfig.ts');
+  assert.match(config, /instagramHandle: 'tech_hacks\.ai'/);
+  assert.match(config, /instagramUrl: 'https:\/\/www\.instagram\.com\/tech_hacks\.ai\//);
+  const page = await read('../src/pages/ContactPage.tsx');
+  assert.match(page, /general, non-sensitive questions/i);
+  assert.match(page, /not stored in a SwitchRoute support ticket system/i);
+  assert.match(page, /formal privacy\/legal requests/i);
+});
+
 test('privacy, terms, and disclosure pages do not publish inactive email addresses', async () => {
   for (const path of ['../src/pages/PrivacyPage.tsx', '../src/pages/TermsPage.tsx', '../src/pages/DisclosurePage.tsx']) {
     const content = await read(path);
