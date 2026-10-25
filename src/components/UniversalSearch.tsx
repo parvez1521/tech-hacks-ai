@@ -140,7 +140,7 @@ export const UniversalSearch: React.FC = () => {
           onFocus={() => {
             if (query.trim()) setIsOpen(true);
           }}
-          placeholder="Search free AI tools, open-source alternatives, prompts, and utilities..."
+          placeholder="Search AI tools, alternatives, prompts, and utilities…"
           className="w-full pl-12 pr-14 py-3.5 sm:py-4 rounded-lg bg-card border border-border text-foreground placeholder:text-muted-foreground text-sm sm:text-base shadow-sm focus:outline-none focus:ring-2 focus:ring-cyan-500/50 focus:border-cyan-500/60 focus:shadow-[0_0_0_3px_rgba(6,182,212,0.08)] transition-all duration-200"
           aria-label="Universal software and AI discovery search"
         />
