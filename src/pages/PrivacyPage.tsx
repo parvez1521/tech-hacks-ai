@@ -59,7 +59,7 @@ export const PrivacyPage: React.FC = () => {
             <h2>2. Google Advertising Cookies &amp; Third-Party Ad Technology</h2>
           </div>
           <p>
-            SwitchRoute is not currently serving Google AdSense advertisements. If advertising is approved and enabled in the future, Google and its advertising partners may use cookies or similar technologies to serve and measure ads, help prevent fraud, limit repeated ads, and—where permitted by your choices and applicable law—personalize advertising.
+            SwitchRoute is not currently serving Google AdSense advertisements. If advertising is approved and enabled in the future, Google may use cookies, including the DoubleClick cookie, and similar technologies to serve and measure ads, help prevent fraud, limit repeated ads, and—where permitted by your choices and applicable law—personalize advertising.
           </p>
           <p>
             Advertising partners may process technical information such as an IP address, browser/device details, and ad interaction information when ads are requested. The exact data use depends on the providers and settings in effect at the time ads are enabled. We will update this policy when advertising technology is activated.
