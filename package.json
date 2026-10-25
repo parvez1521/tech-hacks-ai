@@ -18,7 +18,8 @@
     "prompts:import:faymas": "node scripts/import-faymas-prompts.mjs",
     "prompts:download:promptfeed": "node scripts/download-promptfeed.mjs",
     "prompts:audit": "node --experimental-strip-types scripts/audit-prompt-assets.mjs --write --check",
-    "prompts:audit:remote": "node --experimental-strip-types scripts/audit-prompt-assets.mjs --write --check-remote --check"
+    "prompts:audit:remote": "node --experimental-strip-types scripts/audit-prompt-assets.mjs --write --check-remote --check",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "@ffmpeg/ffmpeg": "^0.12.15",
@@ -39,6 +40,7 @@
     "axe-core": "^4.14.0",
     "postcss": "^8.4.35",
     "tailwindcss": "^3.4.1",
+    "typescript": "^5.9.3",
     "vite": "^5.1.4"
   }
 }
