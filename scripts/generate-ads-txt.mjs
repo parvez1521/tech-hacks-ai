@@ -7,8 +7,16 @@ const outputPath = path.join(root, 'dist', 'ads.txt');
 const publisherId = String(process.env.VITE_ADSENSE_PUBLISHER_ID || '').trim();
 
 if (!publisherId) {
-  await fs.rm(outputPath, { force: true });
-  console.log('[ads.txt] No publisher ID configured; skipping ads.txt generation.');
+  // Vite copies public/ads.txt into dist before this script runs. Preserve an existing
+  // owner-verified seller record instead of deleting it when the optional env var is unset.
+  const existing = await fs.stat(outputPath).catch(() => null);
+  if (existing) {
+    console.log('[ads.txt] Preserving the existing public/ads.txt publisher record.');
+  } else {
+    const publicAdsTxt = path.join(root, 'public', 'ads.txt');
+    await fs.copyFile(publicAdsTxt, outputPath).catch(() => {});
+    console.log('[ads.txt] No publisher env var configured; kept existing public record if present.');
+  }
 } else if (!/^ca-pub-\d{16}$/.test(publisherId)) {
   throw new Error('[ads.txt] VITE_ADSENSE_PUBLISHER_ID must be the genuine ca-pub- ID with 16 digits.');
 } else {
