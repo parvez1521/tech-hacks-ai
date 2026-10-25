@@ -113,9 +113,7 @@ export function generateGroundedResponse(userQuery: string): ChatMessage {
   if (/\b(compare|versus|\bvs\b)\b/.test(q) && /\b(two|tools|them)\b/.test(q)) {
     return message('Choose two catalogue entries in the [side-by-side comparison tool](/compare). I can also find candidates by task or name before you compare them.', [], ['Find coding tools', 'Find writing tools']);
   }
-  if (/\b(help me choose|help me pick|recommend|choose)\b/.test(q) && /\b(tool|coding|video|image|writing)\b/.test(q)) {
-    return message('I can find matching tools from the published catalogue. For a guided recommendation, use [Help Me Pick](/pick).', [], ['Find coding tools', 'Find free tools']);
-  }
+  const wantsRecommendation = /\b(help me choose|help me pick|recommend|choose|best for me)\b/.test(q);
 
   if (/\b(offer|offers|deal|deals|student|students|college|university|credit|credits|discount|coupon|promo|voucher)\b/.test(q) || /\bछात्र\b/.test(q)) {
     const words = q.split(' ').filter((word) => word.length > 3);
@@ -155,5 +153,8 @@ export function generateGroundedResponse(userQuery: string): ChatMessage {
     const modelNote = matchedModel ? ` ${aiTool.longDescription || ''}` : '';
     return [item.slug, `${aiTool.freeTierSummary} ${aiTool.freeTierLimits || ''} ${(aiTool.supportedModels || []).join(', ')} ${item.description}${modelNote}`.trim()];
   }));
-  return message(`${isHindi(q) ? 'Catalogue mein mile relevant matches:' : compare ? 'Catalogue comparison candidates:' : 'Relevant published catalogue matches:'}\n\n${records.map((item) => `• [${item.name}](${item.type === 'open-source' ? `/tools/${item.slug}` : `/ai-tools/${item.slug}`}) — ${item.pricingSummary}. ${detailBySlug.get(item.slug) || ''}`).join('\n')}\n\nI searched the published catalogue only. Check each provider’s site for current pricing and availability.${compare ? '\n\nUse the [side-by-side comparison tool](/compare) for a direct feature comparison.' : ''}`, records, ['Open side-by-side comparison', 'Find free alternatives', 'Browse the catalogue']);
+  const recommendationNote = wantsRecommendation
+    ? '\n\nThese are catalogue-matched suggestions, not a guarantee of best fit. Refine your goal, budget, and hosting preference in [Help Me Pick](/pick).'
+    : '';
+  return message(`${isHindi(q) ? 'Catalogue mein mile relevant matches:' : compare ? 'Catalogue comparison candidates:' : wantsRecommendation ? 'Suggested matches from the published catalogue:' : 'Relevant published catalogue matches:'}\n\n${records.map((item) => `• [${item.name}](${item.type === 'open-source' ? `/tools/${item.slug}` : `/ai-tools/${item.slug}`}) — ${item.pricingSummary}. ${detailBySlug.get(item.slug) || ''}`).join('\n')}\n\nI searched the published catalogue only. Check each provider’s site for current pricing and availability.${compare ? '\n\nUse the [side-by-side comparison tool](/compare) for a direct feature comparison.' : ''}${recommendationNote}`, records, wantsRecommendation ? ['Find coding tools', 'Find video editing tools', 'Find local LLMs'] : ['Open side-by-side comparison', 'Find free alternatives', 'Browse the catalogue']);
 }
