@@ -638,7 +638,7 @@ export function getPickRecommendations(criteria: PickCriteria): MatchedPickResul
       // Hard constraint elimination: MUST match hosting
       if (!matchesHostingAi(tool)) return;
 
-      let score = 50;
+      let score = 30;
       const reasons: string[] = [];
 
       // Task detail bonus
