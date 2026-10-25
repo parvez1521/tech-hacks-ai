@@ -279,7 +279,7 @@ interface LinkProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
   children: ReactNode;
 }
 
-export const Link: React.FC<LinkProps> = ({ to, replace, children, className, onClick, ...rest }) => {
+export const Link = React.forwardRef<HTMLAnchorElement, LinkProps>(({ to, replace, children, className, onClick, ...rest }, ref) => {
   const { navigate, currentPath } = useRouter();
   const isActive = currentPath === to;
 
@@ -300,6 +300,7 @@ export const Link: React.FC<LinkProps> = ({ to, replace, children, className, on
 
   return (
     <a
+      ref={ref}
       href={to}
       onClick={handleClick}
       className={className}
@@ -309,4 +310,5 @@ export const Link: React.FC<LinkProps> = ({ to, replace, children, className, on
       {children}
     </a>
   );
-};
+});
+Link.displayName = 'Link';
