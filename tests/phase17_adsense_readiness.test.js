@@ -86,7 +86,6 @@ describe('Phase 17: Google AdSense Readiness & Regulatory Compliance Audit', () 
       assert.ok(html.includes('Contact SwitchRoute'), 'Must render contact title');
       assert.ok(html.includes('Contact submissions are temporarily unavailable'), 'Must explain current limitation');
       assert.ok(html.includes('No message can be sent or saved'), 'Must not imply that messages are being delivered');
-      assert.ok(html.includes('href="/contact"') === false || html.includes('Contact SwitchRoute'), 'Contact page remains renderable');
       assert.ok(!html.includes('contact@techhacksai.com'), 'Must not publish inactive email');
       assert.ok(!html.includes('Send Message'), 'Must not expose a non-working submit button');
     });
