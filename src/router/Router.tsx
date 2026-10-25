@@ -28,7 +28,7 @@ interface RouterContextType {
 const RouterContext = createContext<RouterContextType | null>(null);
 
 // Avoid useLayoutEffect's server-render warning while keeping route scroll resets before paint in browsers.
-const useIsomorphicLayoutEffect = typeof window !== 'undefined' ? useLayoutEffect : useEffect;
+const useIsomorphicLayoutEffect = typeof window !== 'undefined' && typeof window.document !== 'undefined' ? useLayoutEffect : useEffect;
 
 export function matchRoute(pathname: string): { route: string; params: Record<string, string> } {
   const cleanPath = pathname.replace(/\/+$/, '') || '/';
