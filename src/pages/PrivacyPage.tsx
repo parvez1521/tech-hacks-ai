@@ -48,9 +48,8 @@ export const PrivacyPage: React.FC = () => {
             At SwitchRoute (accessible at <strong className="text-slate-900">{siteConfig.url}</strong>), the privacy of our visitors is one of our core priorities. This Privacy Policy outlines the types of information collected and recorded by SwitchRoute and how we utilize it.
           </p>
           <p>
-            For privacy questions or data-rights requests, see our <Link to="/contact" className="text-blue-600 hover:text-blue-700 underline">Contact page</Link>.
-            A verified email inbox and message-storage service are not currently configured, so requests cannot yet be received through this site.
-            Please do not send confidential details until a working contact method is published.
+            For general, non-sensitive questions, use the Instagram link on our <Link to="/contact" className="text-blue-600 hover:text-blue-700 underline">Contact page</Link>.
+            A dedicated privacy inbox and secure data-rights intake channel are not configured yet. Please do not send confidential details or formal personal-data requests through social DMs.
           </p>
         </section>
 
@@ -227,7 +226,7 @@ export const PrivacyPage: React.FC = () => {
             8. Children's Privacy (COPPA)
           </h2>
           <p>
-            Protecting children while using the internet is paramount. SwitchRoute does not knowingly collect personal information from children under the age of 13. The site currently has no verified inbox or connected request-receiving service; a working contact method must be published before visitors can submit removal requests.
+            Protecting children while using the internet is paramount. SwitchRoute does not knowingly collect personal information from children under the age of 13. If you need to request removal of a child's information, a dedicated privacy-request channel must be configured first; do not send a child's personal information through social DMs.
           </p>
         </section>
 
@@ -237,8 +236,7 @@ export const PrivacyPage: React.FC = () => {
             9. Contacting Our Privacy Officer
           </h2>
           <p>
-            For policy questions, cookie settings, or data-protection requests, consult our <Link to="/contact" className="text-blue-600 hover:text-blue-700 underline">Contact page</Link> for the current status.
-            No verified email inbox or message-storage service is available yet, so this site cannot currently receive requests.
+            For general policy questions, consult the Instagram link on our <Link to="/contact" className="text-blue-600 hover:text-blue-700 underline">Contact page</Link>. A dedicated privacy inbox and secure data-rights intake system are not configured yet; do not send sensitive personal information through social DMs.
           </p>
         </section>
       </div>
