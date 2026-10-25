@@ -23,19 +23,29 @@ export const BrandLogo: React.FC<BrandLogoProps> = ({
   showContainer = true,
 }) => {
   const logoEntry = getBrandLogo(slug);
-  // A local file is not evidence of brand identity. Only render an asset when
-  // the registry carries traceable provenance; unresolved entries intentionally
-  // use the same neutral monogram fallback as load failures.
+  // Prefer traceable local assets. For entries whose only recorded source is a
+  // domain favicon, use that sourced favicon rather than a generic placeholder.
   const isTrustedLogo = Boolean(logoEntry?.sourceUrl && logoEntry.sourceType !== 'fallback');
+  const isDomainFaviconFallback = Boolean(
+    logoEntry?.sourceType === 'fallback' && logoEntry.sourceUrl?.includes('google.com/s2/favicons')
+  );
+  const canRenderLogo = isTrustedLogo || isDomainFaviconFallback;
+  const resolvedLogoSrc = isDomainFaviconFallback ? logoEntry?.sourceUrl : logoEntry?.assetPath;
   const [currentSrc, setCurrentSrc] = useState<string | undefined>(
     isTrustedLogo ? logoEntry?.assetPath : undefined
   );
   const [hasError, setHasError] = useState(false);
-  const logoStatus = logoEntry?.sourceType === 'provided' ? 'provided-source-recorded' : 'source-recorded';
+  const logoStatus = isDomainFaviconFallback
+    ? 'domain-favicon-fallback'
+    : logoEntry?.sourceType === 'provided'
+      ? 'provided-source-recorded'
+      : 'source-recorded';
 
   useEffect(() => {
-    if (!isTrustedLogo) {
+    if (!canRenderLogo) {
       setCurrentSrc(undefined);
+    } else if (isDomainFaviconFallback) {
+      setCurrentSrc(logoEntry?.sourceUrl);
     } else {
       setCurrentSrc(logoEntry?.assetPath);
     }
@@ -107,7 +117,7 @@ export const BrandLogo: React.FC<BrandLogoProps> = ({
   const fallbackBg = '#334155';
   const fallbackText = iconLetter || (name ? name.slice(0, 2).toUpperCase() : '??');
 
-  if (logoEntry && isTrustedLogo && currentSrc && !hasError) {
+  if (logoEntry && canRenderLogo && currentSrc && !hasError) {
     if (!showContainer) {
       const hasSizeOverride = /\b(w-|h-)/.test(className);
       return (
