@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect, useMemo } from 'react';
 import { useRouter, Link } from '../router/Router';
-import { universalSearch, UniversalSearchResult } from '../services/aiCatalogService';
+import { findAlternativeTargetFromQuery, universalSearch, UniversalSearchResult } from '../services/aiCatalogService';
 import { Search, X, Sparkles, FolderKanban, Replace, BookOpen, MessageSquareCode, Wrench } from 'lucide-react';
 import { BrandLogo } from './BrandLogo';
 
@@ -99,8 +99,13 @@ export const UniversalSearch: React.FC = () => {
       if (selectedResult) {
         navigate(selectedResult.url);
       } else if (query.trim()) {
-        // Submit broad or unmatched searches to the AI directory instead of doing nothing.
-        navigate(`/ai-tools?q=${encodeURIComponent(query.trim())}`);
+        // Natural-language "alternative to X" queries should go straight to the matching alternatives page.
+        const target = findAlternativeTargetFromQuery(query.trim());
+        if (target) {
+          navigate(`/alternatives/${target.slug}`);
+        } else {
+          navigate(`/ai-tools?q=${encodeURIComponent(query.trim())}`);
+        }
       }
       setIsOpen(false);
       setSelectedIndex(-1);
@@ -230,7 +235,20 @@ export const UniversalSearch: React.FC = () => {
                             className="w-7 h-7 shrink-0"
                           />
                           <div className="min-w-0">
-                            <p className="font-semibold text-foreground text-sm truncate">{tool.name}</p>
+                            <div className="flex min-w-0 items-center justify-between gap-2">
+                              <p className="font-semibold text-foreground text-sm truncate">{tool.name}</p>
+                              <span className="shrink-0 text-[10px] font-medium text-muted-foreground">
+                                {tool.freeAccessType === 'open-source-local' ? 'Open source / local'
+                                  : tool.freeAccessType === 'recurring-free' ? 'Free plan'
+                                  : tool.freeAccessType === 'limited-free' ? 'Limited free'
+                                  : tool.freeAccessType === 'free-credits' ? 'Free credits'
+                                  : tool.pricingType === 'paid' ? 'Paid'
+                                  : tool.pricingType === 'freemium' ? 'Freemium'
+                                  : tool.pricingType === 'free-trial' ? 'Free trial'
+                                  : tool.pricingType === 'free' ? 'Free'
+                                  : 'See pricing'}
+                              </span>
+                            </div>
                             <p className="text-xs text-muted-foreground truncate">{tool.tagline}</p>
                           </div>
                         </Link>
