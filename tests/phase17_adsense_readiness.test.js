@@ -81,13 +81,12 @@ describe('Phase 17: Google AdSense Readiness & Regulatory Compliance Audit', () 
       assert.ok(html.includes('Open-Source First'), 'Must list OSS pillar');
     });
 
-    test('ContactPage honestly reports unavailable message intake without fake success', () => {
+    test('ContactPage checks secure message intake before exposing the form', () => {
       const html = renderWithRouter(React.createElement(ssrModule.ContactPage));
       assert.ok(html.includes('Contact SwitchRoute'), 'Must render contact title');
-      assert.ok(html.includes('Contact submissions are temporarily unavailable'), 'Must explain current limitation');
-      assert.ok(html.includes('No message can be sent or saved'), 'Must not imply that messages are being delivered');
+      assert.ok(html.includes('Checking secure message intake'), 'Must check server readiness before showing the form');
       assert.ok(!html.includes('contact@techhacksai.com'), 'Must not publish inactive email');
-      assert.ok(!html.includes('Send Message'), 'Must not expose a non-working submit button');
+      assert.ok(!html.includes('Send message'), 'Must not render the form until intake is ready');
     });
 
     test('PrivacyPage contains all mandatory Google AdSense & DoubleClick disclosures', () => {

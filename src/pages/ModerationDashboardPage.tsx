@@ -18,6 +18,7 @@ import { registerPublishedTool, registerPublishedGuide } from '../services/aiCat
 import { useRouter } from '../router/Router';
 import { AdminDiscoveriesManager } from '../components/AdminDiscoveriesManager';
 import { AdminPromptManager } from '../components/AdminPromptManager';
+import { AdminContactInbox } from '../components/AdminContactInbox';
 
 export const ModerationDashboardPage: React.FC = () => {
   const { navigate } = useRouter();
@@ -25,7 +26,7 @@ export const ModerationDashboardPage: React.FC = () => {
   // Authentication State
   const [token, setToken] = useState<string | null>(() => getStoredModeratorToken());
   const [passkeyInput, setPasskeyInput] = useState('');
-  const [activeAdminTab, setActiveAdminTab] = useState<'submissions' | 'discoveries' | 'prompts'>('submissions');
+  const [activeAdminTab, setActiveAdminTab] = useState<'submissions' | 'discoveries' | 'prompts' | 'contact'>('submissions');
   const [authError, setAuthError] = useState<string | null>(null);
   const [isAuthenticating, setIsAuthenticating] = useState(false);
 
@@ -482,12 +483,28 @@ export const ModerationDashboardPage: React.FC = () => {
           </svg>
           <span>Prompt Library</span>
         </button>
+
+        <button
+          onClick={() => setActiveAdminTab('contact')}
+          className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all cursor-pointer whitespace-nowrap ${
+            activeAdminTab === 'contact'
+              ? 'bg-primary text-primary-foreground shadow-sm shadow-primary/20'
+              : 'text-muted-foreground hover:text-foreground hover:bg-muted/60'
+          }`}
+        >
+          <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.8" d="M3 6.75A2.75 2.75 0 0 1 5.75 4h12.5A2.75 2.75 0 0 1 21 6.75v10.5A2.75 2.75 0 0 1 18.25 20H5.75A2.75 2.75 0 0 1 3 17.25V6.75Zm1 .25 7.2 5.4a1.35 1.35 0 0 0 1.6 0L20 7" />
+          </svg>
+          <span>Contact Inbox</span>
+        </button>
       </div>
 
       {activeAdminTab === 'discoveries' ? (
         <AdminDiscoveriesManager token={token} />
       ) : activeAdminTab === 'prompts' ? (
         <AdminPromptManager token={token} />
+      ) : activeAdminTab === 'contact' ? (
+        <AdminContactInbox token={token} />
       ) : (
         <>
           {/* Metrics Counters */}

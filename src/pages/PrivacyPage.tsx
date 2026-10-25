@@ -150,14 +150,36 @@ export const PrivacyPage: React.FC = () => {
             4. Log Files &amp; Automated Technical Data
           </h2>
           <p>
-            SwitchRoute follows standard hosting server logging procedures. These logs capture internet protocol (IP) addresses, browser type, Internet Service Provider (ISP), date and time stamp, referring/exit pages, and basic page interaction metrics. This technical information is not linked to any personally identifiable information and is utilized strictly for analyzing platform traffic, diagnosing errors, preventing malicious cyberattacks, and administering site reliability.
+            SwitchRoute follows standard hosting server logging procedures. These logs capture internet protocol (IP) addresses, browser type, Internet Service Provider (ISP), date and time stamp, referring/exit pages, and basic page interaction metrics. We use the technical information for traffic analysis, error diagnosis, abuse prevention, and site reliability. Hosting providers may process request metadata as part of delivering and protecting the service.
           </p>
         </section>
 
-        {/* 5. Client-Side Storage & Local Preferences */}
+        {/* 5. Contact Form Messages (only when secure intake is configured) */}
         <section className="space-y-3">
           <h2 className="text-xl font-bold text-slate-900 tracking-tight">
-            5. Client-Side Storage &amp; Cookies We Set
+            5. Contact Form Messages (When Available)
+          </h2>
+          <p>
+            When the contact page reports that secure intake is available, the name, reply email address, selected topic,
+            message, and message timestamps are sent to SwitchRoute's server and stored in a private contact-inbox table.
+            These details are used to review, respond to, and manage the inquiry, including identifying spam.
+          </p>
+          <p>
+            The contact inbox is not publicly queryable. Access is restricted to trusted server-side code and the
+            authenticated moderation dashboard. Contact messages are not used for advertising or sold to third parties.
+            No automatic email notification is configured, so new messages must be checked in the admin inbox.
+          </p>
+          <p className="text-xs text-slate-500">
+            Messages can be marked resolved and manually deleted by an administrator. Automated deletion by age is not
+            currently configured. Please do not submit passwords, payment details, or highly sensitive personal data.
+            If contact intake is not configured or reachable, the website form remains disabled and does not save a message.
+          </p>
+        </section>
+
+        {/* 6. Client-Side Storage & Local Preferences */}
+        <section className="space-y-3">
+          <h2 className="text-xl font-bold text-slate-900 tracking-tight">
+            6. Client-Side Storage &amp; Cookies We Set
           </h2>
           <p>
             To provide a responsive user experience without requiring user accounts or database profiling, SwitchRoute uses client-side web storage (HTML5 LocalStorage) for:
@@ -178,11 +200,11 @@ export const PrivacyPage: React.FC = () => {
           </p>
         </section>
 
-        {/* 6. European Privacy Rights (GDPR / UK GDPR / Swiss DPA) & Google-Certified CMP */}
+        {/* 7. European Privacy Rights (GDPR / UK GDPR / Swiss DPA) & Google-Certified CMP */}
         <section className="p-6 rounded-2xl border border-[#DFE7F3] bg-white shadow-invary-card space-y-4">
           <div className="flex items-center gap-2 text-slate-900 font-bold text-base">
             <Globe className="w-5 h-5 text-emerald-600" />
-            <h2>6. European Economic Area (EEA), UK &amp; Swiss Visitors (GDPR Compliance)</h2>
+            <h2>7. European Economic Area (EEA), UK &amp; Swiss Visitors (GDPR Compliance)</h2>
           </div>
           <p>
             If you are located in the EEA, the United Kingdom, or Switzerland, you are entitled to specific rights under the General Data Protection Regulation (GDPR), the UK Data Protection Act, and the Swiss Federal Act on Data Protection (FADP):
@@ -205,7 +227,7 @@ export const PrivacyPage: React.FC = () => {
         {/* 7. California Consumer Privacy Rights (CCPA / CPRA) */}
         <section className="space-y-3">
           <h2 className="text-xl font-bold text-slate-900 tracking-tight">
-            7. California Consumer Privacy Rights (CCPA / CPRA)
+            8. California Consumer Privacy Rights (CCPA / CPRA)
           </h2>
           <p>
             Under the California Consumer Privacy Act (CCPA) and California Privacy Rights Act (CPRA), California residents are entitled to specific privacy protections:
@@ -220,20 +242,20 @@ export const PrivacyPage: React.FC = () => {
           </p>
         </section>
 
-        {/* 8. Children's Information (COPPA) */}
+        {/* 9. Children's Information (COPPA) */}
         <section className="space-y-3">
           <h2 className="text-xl font-bold text-slate-900 tracking-tight">
-            8. Children's Privacy (COPPA)
+            9. Children's Privacy (COPPA)
           </h2>
           <p>
             Protecting children while using the internet is paramount. SwitchRoute does not knowingly collect personal information from children under the age of 13. If you need to request removal of a child's information, a dedicated privacy-request channel must be configured first; do not send a child's personal information through social DMs.
           </p>
         </section>
 
-        {/* 9. Contact Desk */}
+        {/* 10. Contact Desk */}
         <section className="pt-6 border-t border-[#DFE7F3] space-y-3">
           <h2 className="text-lg font-bold text-slate-900">
-            9. Contacting Our Privacy Officer
+            10. Contacting Our Privacy Officer
           </h2>
           <p>
             For general policy questions, consult the Instagram link on our <Link to="/contact" className="text-blue-600 hover:text-blue-700 underline">Contact page</Link>. A dedicated privacy inbox and secure data-rights intake system are not configured yet; do not send sensitive personal information through social DMs.

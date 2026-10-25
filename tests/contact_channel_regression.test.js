@@ -10,11 +10,14 @@ test('unverified legacy email addresses are not configured as contact channels',
   assert.doesNotMatch(config, /@techhacksai\.com|@switchroute\.in/i);
 });
 
-test('contact page does not simulate a successful message submission', async () => {
+test('contact page gates its form on backend readiness and only confirms a real API success', async () => {
   const page = await read('../src/pages/ContactPage.tsx');
-  assert.match(page, /Contact submissions are temporarily unavailable/i);
-  assert.match(page, /No message can be sent or saved/i);
-  assert.doesNotMatch(page, /setTimeout\(|Message Received!|<form\b/i);
+  assert.match(page, /fetch\('\/api\/contact\?action=status'/);
+  assert.match(page, /fetch\('\/api\/contact'/);
+  assert.match(page, /result\.success !== true/);
+  assert.match(page, /Website contact form is not active yet/i);
+  assert.match(page, /will not collect or pretend to send a message/i);
+  assert.doesNotMatch(page, /setTimeout\(|Message Received!/i);
 });
 
 
@@ -24,8 +27,8 @@ test('verified Instagram is the only public contact channel while inbox setup is
   assert.match(config, /instagramUrl: 'https:\/\/www\.instagram\.com\/tech_hacks\.ai\//);
   const page = await read('../src/pages/ContactPage.tsx');
   assert.match(page, /general, non-sensitive questions/i);
-  assert.match(page, /not stored in a SwitchRoute support ticket system/i);
-  assert.match(page, /formal privacy\/legal requests/i);
+  assert.match(page, /DMs are not saved in the SwitchRoute contact inbox/i);
+  assert.match(page, /Do not send private or formal legal information through social DMs/i);
 });
 
 test('privacy, terms, and disclosure pages do not publish inactive email addresses', async () => {
