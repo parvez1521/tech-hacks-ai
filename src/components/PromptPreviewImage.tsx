@@ -31,7 +31,7 @@ export const PromptPreviewImage: React.FC<PromptPreviewImageProps> = ({ src, alt
       width={width}
       height={height}
       loading={priority ? 'eager' : 'lazy'}
-      fetchpriority={priority ? 'high' : 'auto'}
+      fetchPriority={priority ? 'high' : 'auto'}
       decoding="async"
       className={className}
       onError={() => {

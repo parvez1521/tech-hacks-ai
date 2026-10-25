@@ -71,7 +71,7 @@ export const OfferDetailPage: React.FC = () => {
       name: offer.provider,
     },
     eligibleRegion: offer.region,
-    validThrough: offer.expiresAt || undefined,
+    validThrough: offer.validUntil || undefined,
   };
 
   // Related offers (other active offers, excluding current)

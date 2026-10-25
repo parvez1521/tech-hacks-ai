@@ -181,7 +181,9 @@ export const Mp4ToMp3Tool: React.FC = () => {
       await ffmpeg.exec(['-i', 'input.mp4', '-vn', '-codec:a', 'libmp3lame', '-b:a', bitrate, 'output.mp3']);
       const data = await ffmpeg.readFile('output.mp3');
       if (!data || typeof data === 'string' || data.length === 0) throw new Error('The converter produced no MP3 output. The video may have no audio track or use an unsupported codec.');
-      setOutput(new Blob([data], { type: 'audio/mpeg' })); setProgress(100);
+      const outputBytes = new Uint8Array(data.byteLength);
+      outputBytes.set(data);
+      setOutput(new Blob([outputBytes.buffer], { type: 'audio/mpeg' })); setProgress(100);
       await ffmpeg.deleteFile('input.mp4'); await ffmpeg.deleteFile('output.mp3');
     } catch (err) {
       setError(err instanceof Error ? err.message : `MP4 to MP3 conversion failed: ${String(err)}`); setProgress(0);

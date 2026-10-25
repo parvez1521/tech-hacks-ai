@@ -340,8 +340,7 @@ export const OffersPage: React.FC = () => {
         <EmptyState
           title="No deals found matching your criteria"
           description="Try clearing your search filters or browse all global and student plans."
-          actionText="Reset Filters"
-          onAction={resetFilters}
+          onReset={resetFilters}
         />
       )}
 

@@ -4,6 +4,7 @@ import type {
   ModerationFilterState,
   SubmissionStatus,
   SubmissionType,
+  ToolSubmissionData,
 } from '../types/submissions';
 import {
   getStoredModeratorToken,
@@ -49,7 +50,7 @@ export const ModerationDashboardPage: React.FC = () => {
   const [editName, setEditName] = useState('');
   const [editSlug, setEditSlug] = useState('');
   const [editCategory, setEditCategory] = useState('');
-  const [editPricingType, setEditPricingType] = useState('');
+  const [editPricingType, setEditPricingType] = useState<ToolSubmissionData['pricingType']>('freemium');
   const [editSummary, setEditSummary] = useState('');
   const [editTags, setEditTags] = useState('');
   const [reviewNotes, setReviewNotes] = useState('');
@@ -66,7 +67,7 @@ export const ModerationDashboardPage: React.FC = () => {
       } else {
         setEditName(selectedSubmission.guideData?.title || '');
         setEditCategory(selectedSubmission.guideData?.category || '');
-        setEditPricingType('');
+        setEditPricingType('freemium');
         setEditSummary(selectedSubmission.guideData?.summary || '');
         setEditTags((selectedSubmission.guideData?.tags || []).join(', '));
       }
@@ -180,30 +181,38 @@ export const ModerationDashboardPage: React.FC = () => {
     setActionError(null);
 
     const tags = editTags.split(',').map((t) => t.trim()).filter(Boolean);
-    const updatedData = selectedSubmission.type === 'tool'
+    const updateFields = {
+      moderatorNotes: reviewNotes,
+      publishedSlug: editSlug.trim() || undefined,
+    };
+    const updatePayload = selectedSubmission.type === 'tool'
       ? {
-          ...(selectedSubmission.toolData || {}),
-          name: editName,
-          category: editCategory,
-          pricingType: editPricingType,
-          description: editSummary,
-          tags,
+          ...updateFields,
+          toolData: {
+            ...selectedSubmission.toolData,
+            name: editName,
+            websiteUrl: selectedSubmission.toolData?.websiteUrl || '',
+            category: editCategory,
+            pricingType: editPricingType,
+            description: editSummary,
+            tags,
+          },
         }
       : {
-          ...(selectedSubmission.guideData || {}),
-          title: editName,
-          category: editCategory,
-          summary: editSummary,
-          tags,
+          ...updateFields,
+          guideData: {
+            ...selectedSubmission.guideData,
+            title: editName,
+            category: editCategory,
+            summary: editSummary,
+            content: selectedSubmission.guideData?.content || '',
+            tags,
+          },
         };
 
     const res = await updateSubmission(
       selectedSubmission.id,
-      {
-        ...(selectedSubmission.type === 'tool' ? { toolData: updatedData } : { guideData: updatedData }),
-        moderatorNotes: reviewNotes,
-        publishedSlug: editSlug.trim() || undefined,
-      },
+      updatePayload,
       token
     );
 
@@ -909,7 +918,7 @@ export const ModerationDashboardPage: React.FC = () => {
                     </label>
                     <select
                       value={editPricingType}
-                      onChange={(e) => setEditPricingType(e.target.value)}
+                      onChange={(e) => setEditPricingType(e.target.value as ToolSubmissionData['pricingType'])}
                       className="w-full px-3 py-1.5 rounded-lg bg-background border border-border text-foreground text-xs"
                     >
                       <option value="free">Free</option>

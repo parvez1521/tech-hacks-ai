@@ -163,7 +163,7 @@ export const PromptLibraryPage: React.FC = () => {
           <p className="mt-3 max-w-2xl text-sm sm:text-base leading-7 text-slate-600 dark:text-slate-300">Explore 48 SwitchRoute originals and 534 image-matched prompts from the MIT-licensed PromptFeed collection. Preview the result, personalize variables, and copy the full prompt in one click.</p>
         </div>
         <div className="prompt-atlas__art" aria-hidden="true">
-          <img src="/prompts/generated/portrait-woman-windowlight.webp" alt="" width="1122" height="1402" fetchpriority="high" decoding="async" />
+          <img src="/prompts/generated/portrait-woman-windowlight.webp" alt="" width="1122" height="1402" fetchPriority="high" decoding="async" />
           <div className="prompt-atlas__art-note"><Sparkles size={15} /> Original portrait study</div>
         </div>
       </section>

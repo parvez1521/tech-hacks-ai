@@ -27,6 +27,9 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Run TypeScript typecheck
+        run: npm run typecheck
+
       - name: Validate licensed PromptFeed prompt/image pairs
         run: npm run prompts:import -- data/promptfeed-import.json
 
