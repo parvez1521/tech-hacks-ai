@@ -336,9 +336,10 @@ describe('Phase 27: Durable Data Storage & Production Deployment Readiness', () 
       const config = JSON.parse(raw);
 
       assert.strictEqual(config.cleanUrls, true);
-      const spaRewrite = (config.rewrites || []).find((r) => r.destination === '/index.html');
-      assert.ok(spaRewrite, 'Rewrites must contain destination to /index.html');
-      assert.ok(spaRewrite.source.includes('api/'), 'Rewrites must exclude /api/ routes');
+      const spaRewrite = (config.rewrites || []).find((r) => r.destination === '/');
+      assert.ok(spaRewrite, 'With cleanUrls enabled, the SPA fallback must target / rather than /index.html');
+      assert.ok(spaRewrite.source.includes('api/'), 'SPA fallback must exclude /api/ routes');
+      assert.ok(!spaRewrite.destination.endsWith('.html'), 'cleanUrls rewrites must not use a file extension in the destination');
 
       // Security headers check
       const globalHeader = (config.headers || []).find((h) => h.source === '/(.*)');
