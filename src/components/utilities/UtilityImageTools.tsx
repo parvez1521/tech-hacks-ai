@@ -22,10 +22,8 @@ export const ImageCropperTool: React.FC = () => {
       if (!file.type.startsWith('image/')) throw new Error('Choose a raster image file.');
       if (file.size > 25 * 1024 * 1024) throw new Error('Images must be 25 MB or smaller.');
       const loaded = await loadImage(file);
-      setImage((previous) => {
-        if (previous) URL.revokeObjectURL(previous.url);
-        return loaded;
-      });
+      if (image) URL.revokeObjectURL(image.url);
+      setImage(loaded);
       setCrop({ x: 0, y: 0, width: loaded.width, height: loaded.height });
       setBlob(null);
       setError('');
