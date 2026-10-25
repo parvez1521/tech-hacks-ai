@@ -84,7 +84,7 @@ export const ContactPage: React.FC = () => {
             <AlertCircle className="w-5 h-5" />
           </div>
           <div className="space-y-2">
-            <h2 className="text-lg font-bold text-slate-900">Website contact form is unavailable</h2>
+            <h2 className="text-lg font-bold text-slate-900">Contact submissions are temporarily unavailable through the website form</h2>
             <p className="text-sm text-slate-700 leading-relaxed">
               No message can be sent or saved through a form on this page. Instagram DMs are external to SwitchRoute and are not stored in a SwitchRoute support ticket system.
             </p>
