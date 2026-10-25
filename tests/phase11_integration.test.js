@@ -224,7 +224,7 @@ describe('Phase 11: End-to-End Integration, Recommendation Integrity & Launch Re
       }
     });
 
-    test('vercel.json protects /api/* serverless functions from SPA index.html rewrites', () => {
+    test('vercel.json protects /api/* serverless functions from the SPA fallback', () => {
       const vercelJsonPath = path.resolve(process.cwd(), 'vercel.json');
       assert.ok(fs.existsSync(vercelJsonPath), 'vercel.json must exist');
       const config = JSON.parse(fs.readFileSync(vercelJsonPath, 'utf8'));
@@ -232,8 +232,10 @@ describe('Phase 11: End-to-End Integration, Recommendation Integrity & Launch Re
       const rewrite = config.rewrites[0];
       assert.ok(
         rewrite.source.includes('api/') || rewrite.source.includes('(?!api/)'),
-        'Rewrite source must exclude api/ from index.html redirection'
+        'Rewrite source must exclude api/ from the SPA fallback'
       );
+      assert.strictEqual(config.cleanUrls, true);
+      assert.strictEqual(rewrite.destination, '/', 'With cleanUrls enabled, the SPA fallback should target / rather than /index.html');
     });
 
     test('api/chat.js exists with server-side environment variable access and catalog fallback', () => {
