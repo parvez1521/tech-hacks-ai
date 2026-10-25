@@ -43,7 +43,9 @@ export const FreeAiSitesPage: React.FC = () => {
   filteredTools.sort((a, b) => {
     switch (sortBy) {
       case 'rating':
-        return (b.rating || 0) - (a.rating || 0);
+        return Number(Boolean(b.isFeatured)) - Number(Boolean(a.isFeatured)) ||
+          Number(Boolean(b.isTrending)) - Number(Boolean(a.isTrending)) ||
+          a.name.localeCompare(b.name);
       case 'name_asc':
         return a.name.localeCompare(b.name);
       case 'latest':
