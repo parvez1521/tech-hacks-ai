@@ -16,7 +16,7 @@ test('contact page gates its form on backend readiness and only confirms a real 
   assert.match(page, /fetch\('\/api\/contact'/);
   assert.match(page, /result\.success !== true/);
   assert.match(page, /Website contact form is not active yet/i);
-  assert.match(page, /does not save a message/i);
+  assert.match(page, /will not collect or pretend to send a message/i);
   assert.doesNotMatch(page, /setTimeout\(|Message Received!/i);
 });
 
