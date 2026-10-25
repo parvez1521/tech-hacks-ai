@@ -28,7 +28,7 @@ test('verified Instagram is the only public contact channel while inbox setup is
   const page = await read('../src/pages/ContactPage.tsx');
   assert.match(page, /general, non-sensitive questions/i);
   assert.match(page, /DMs are not saved in the SwitchRoute contact inbox/i);
-  assert.match(page, /formal privacy\/legal requests/i);
+  assert.match(page, /Do not send private or formal legal information through social DMs/i);
 });
 
 test('privacy, terms, and disclosure pages do not publish inactive email addresses', async () => {
