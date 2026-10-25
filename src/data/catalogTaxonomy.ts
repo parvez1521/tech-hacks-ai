@@ -35,7 +35,7 @@ export const utilityCategoryDefinitions: Array<{
 
 /** Practical defaults based on common tasks; this is not usage-analytics ranking. */
 export const everydayUtilityOrder = [
-  'image-resizer', 'image-cropper', 'mp4-to-mp3', 'audio-trimmer',
+  'image-resizer', 'heic-to-png', 'image-cropper', 'mp4-to-mp3', 'audio-trimmer',
   'video-audio-transcriber', 'video-metadata', 'audio-metadata',
 ];
 
