@@ -841,6 +841,11 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://switchroute.in/free-tools/heic-to-png</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://switchroute.in/free-tools/image-resizer</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
