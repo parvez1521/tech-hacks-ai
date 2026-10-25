@@ -840,5 +840,23 @@ export function getPickRecommendations(criteria: PickCriteria): MatchedPickResul
     return bRating - aRating;
   });
 
-  return results.slice(0, 6);
+  const topResults = results.slice(0, 6);
+
+  // Keep the recommendation set useful across hosting models: coding workflows
+  // should include at least one genuine open-source coding assistant when one
+  // passed the user's constraints, rather than letting cloud tools crowd it out.
+  if (goal === 'coding-dev' || goal === 'build-app') {
+    const openSourceCodingTool = results.find((result) =>
+      result.type === 'open-source' && ['aider', 'cline'].includes(result.tool.slug)
+    );
+    if (
+      openSourceCodingTool &&
+      !topResults.some((result) => result.tool.slug === openSourceCodingTool.tool.slug) &&
+      topResults.length > 0
+    ) {
+      topResults[topResults.length - 1] = openSourceCodingTool;
+    }
+  }
+
+  return topResults;
 }
