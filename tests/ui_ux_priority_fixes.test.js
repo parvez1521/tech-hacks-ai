@@ -8,7 +8,8 @@ test('cookie consent stays complete while using a compact, scroll-safe responsiv
   const source = read('src/components/CookieConsentBanner.tsx');
   assert.match(source, /max-h-\[min\(35vh,18rem\)\].*overflow-y-auto.*overscroll-contain/);
   assert.match(source, /left-3 right-3.*sm:left-6 sm:right-auto/);
-  assert.match(source, /measure site traffic, and support independent research with contextual advertising/);
+  assert.match(source, /Analytics and advertising are not currently active/);
+  assert.match(source, /not a Google-certified consent management platform/);
   assert.match(source, /Accept All[\s\S]*Essential Only[\s\S]*Customize/);
   assert.match(source, /saveCookiePreferences\(prefs\)/);
   assert.match(source, /role="dialog"[\s\S]*?aria-modal="true"/);
