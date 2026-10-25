@@ -48,8 +48,7 @@ export const PrivacyPage: React.FC = () => {
             At SwitchRoute (accessible at <strong className="text-slate-900">{siteConfig.url}</strong>), the privacy of our visitors is one of our core priorities. This Privacy Policy outlines the types of information collected and recorded by SwitchRoute and how we utilize it.
           </p>
           <p>
-            For general, non-sensitive questions, use the Instagram link on our <Link to="/contact" className="text-blue-600 hover:text-blue-700 underline">Contact page</Link>.
-            A dedicated privacy inbox and secure data-rights intake channel are not configured yet. Please do not send confidential details or formal personal-data requests through social DMs.
+            For support, content corrections, privacy and data-rights requests, copyright notices, or security concerns, email <a href={`mailto:${siteConfig.links.email}`} className="text-blue-600 hover:text-blue-700 underline">{siteConfig.links.email}</a> or visit our <Link to="/contact" className="text-blue-600 hover:text-blue-700 underline">Contact page</Link>. Include the relevant URL and enough detail for us to understand the request; never email passwords or payment credentials.
           </p>
         </section>
 
@@ -60,13 +59,13 @@ export const PrivacyPage: React.FC = () => {
             <h2>2. Google Advertising Cookies &amp; Third-Party Ad Technology</h2>
           </div>
           <p>
-            Google is a third-party vendor on our website. Google uses cookies, including the DoubleClick cookie and Google AdSense technologies, to serve advertisements to our site visitors based upon their visit to <strong className="text-slate-900">switchroute.in</strong> and other sites across the Internet.
+            SwitchRoute is not currently serving Google AdSense advertisements. If advertising is approved and enabled in the future, Google and its advertising partners may use cookies or similar technologies to serve and measure ads, help prevent fraud, limit repeated ads, and—where permitted by your choices and applicable law—personalize advertising.
           </p>
           <p>
-            Third-party ad servers or ad networks use technologies like cookies, JavaScript, or Web Beacons in their respective advertisements and links that appear on SwitchRoute. When an advertisement is delivered to your browser, these vendors automatically receive your IP address. These technologies are used by third-party ad networks to measure the effectiveness of their advertising campaigns and/or to personalize the advertising content that you see on websites that you visit.
+            Advertising partners may process technical information such as an IP address, browser/device details, and ad interaction information when ads are requested. The exact data use depends on the providers and settings in effect at the time ads are enabled. We will update this policy when advertising technology is activated.
           </p>
           <p className="text-xs text-slate-500">
-            Please note: SwitchRoute does not have access to or control over cookies that are placed or utilized by third-party advertisers.
+            We will not enable personalized advertising for visitors in the EEA, United Kingdom, or Switzerland until the required Google-certified consent management setup is configured. See <a href="https://support.google.com/adsense/answer/13554116?hl=en" target="_blank" rel="noopener noreferrer" className="underline">Google's publisher consent guidance</a>.
           </p>
         </section>
 
@@ -219,7 +218,7 @@ export const PrivacyPage: React.FC = () => {
           <div className="p-4 rounded-xl bg-[#F5F8FF] border border-[#DFE7F3] text-xs space-y-2">
             <strong className="block text-slate-900 font-semibold">Google-Certified Consent Management Platform (CMP):</strong>
             <p className="text-slate-600">
-              In compliance with Google's EU User Consent Policy and the IAB Europe Transparency and Consent Framework (TCF v2.2), visitors from the EEA, the UK, and Switzerland are presented with a Google-certified CMP consent dialog. Non-essential advertising cookies and personalized ad targeting are deactivated by default unless affirmative consent is granted. You can review or modify your consent settings at any time by selecting "Cookie Preferences" in our footer.
+              Current status: SwitchRoute's on-site Cookie Preferences panel stores browser-level choices; it is not itself a Google-certified CMP and does not transmit IAB TCF consent signals. Google requires publishers serving personalized ads in the EEA, UK, or Switzerland to use a certified CMP integrated with the TCF. We will configure the required consent flow before enabling ads for those visitors and update this notice when that setup is live.
             </p>
           </div>
         </section>
@@ -248,7 +247,7 @@ export const PrivacyPage: React.FC = () => {
             9. Children's Privacy (COPPA)
           </h2>
           <p>
-            Protecting children while using the internet is paramount. SwitchRoute does not knowingly collect personal information from children under the age of 13. If you need to request removal of a child's information, a dedicated privacy-request channel must be configured first; do not send a child's personal information through social DMs.
+            Protecting children while using the internet is paramount. SwitchRoute does not knowingly collect personal information from children under the age of 13. To report information that may need to be removed, contact <a href={`mailto:${siteConfig.links.email}`} className="underline">{siteConfig.links.email}</a>. Please provide only the minimum information needed to identify the issue; do not send passwords or payment credentials.
           </p>
         </section>
 
@@ -258,7 +257,7 @@ export const PrivacyPage: React.FC = () => {
             10. Contacting Our Privacy Officer
           </h2>
           <p>
-            For general policy questions, consult the Instagram link on our <Link to="/contact" className="text-blue-600 hover:text-blue-700 underline">Contact page</Link>. A dedicated privacy inbox and secure data-rights intake system are not configured yet; do not send sensitive personal information through social DMs.
+            For privacy questions, data-rights requests, or policy concerns, email <a href={`mailto:${siteConfig.links.email}`} className="text-blue-600 hover:text-blue-700 underline">{siteConfig.links.email}</a> or use our <Link to="/contact" className="text-blue-600 hover:text-blue-700 underline">Contact page</Link>. Requests are handled by email; please include enough detail to locate the relevant information and avoid sending passwords or payment credentials.
           </p>
         </section>
       </div>
