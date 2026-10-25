@@ -84,22 +84,43 @@ if (typeof window !== 'undefined' && typeof fetch === 'function') {
     .catch(() => {});
 }
 
+const SEARCH_TERM_VARIANTS: Record<string, string[]> = {
+  generator: ['generator', 'generators', 'generate', 'generates', 'generated', 'generating', 'generation', 'generative'],
+  generate: ['generate', 'generates', 'generated', 'generating', 'generation', 'generative', 'generator'],
+  free: ['free', 'zero-cost', 'no-cost', 'open-source', 'open source'],
+  videos: ['videos', 'video'],
+};
+
+function normalizeSearchText(value: unknown): string {
+  return String(value ?? '').toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
+}
+
+/** Match all query terms across the full record, rather than requiring the whole phrase verbatim. */
+function matchesSearchQuery(query: string, fields: unknown[]): boolean {
+  const terms = normalizeSearchText(query).split(/\s+/).filter(Boolean);
+  if (!terms.length) return true;
+  const searchableText = normalizeSearchText(fields.filter(Boolean).join(' '));
+  return terms.every((term) => {
+    const variants = SEARCH_TERM_VARIANTS[term] || [term];
+    return variants.some((variant) => searchableText.includes(normalizeSearchText(variant)));
+  });
+}
+
 export function filterAndSortAiTools(state: AiFilterState): AiFilterResult {
   let list = getAllAiTools().filter((tool) => !isCommunityTool(tool));
 
   // 1. Text search
   if (state.searchQuery.trim()) {
-    const q = state.searchQuery.toLowerCase().trim();
-    list = list.filter((tool) => {
-      const matchName = tool.name.toLowerCase().includes(q);
-      const matchTagline = tool.tagline.toLowerCase().includes(q);
-      const matchDesc = tool.description.toLowerCase().includes(q);
-      const matchTags = tool.tags.some((t) => t.toLowerCase().includes(q));
-      const matchFeatures = tool.features.some((f) => f.toLowerCase().includes(q));
-      const matchContext = [tool.bestFor, tool.executionEnvironment, tool.hardwareRequirements, tool.licenseSummary, tool.accessLabel, ...(tool.useCases || [])]
-        .some((value) => value?.toLowerCase().includes(q));
-      return matchName || matchTagline || matchDesc || matchTags || matchFeatures || matchContext;
-    });
+    list = list.filter((tool) => matchesSearchQuery(state.searchQuery, [
+      tool.name, tool.tagline, tool.description, tool.category, tool.pricingType,
+      tool.freeTierSummary, tool.freeTierLimits, tool.pricingDetails, tool.bestFor,
+      tool.executionEnvironment, tool.hardwareRequirements, tool.licenseSummary,
+      tool.accessLabel, ...(tool.tags || []), ...(tool.features || []),
+      ...(tool.useCases || []), ...(tool.generationTasks || []), ...(tool.outputModalities || []),
+      tool.hasFreePlan ? 'free recurring free plan' : '',
+      tool.isSelfHostable ? 'open source local self hosted free' : '',
+      tool.category === 'video' ? 'video generator video generation generative video' : '',
+    ]));
   }
 
   // 2. Category
@@ -363,13 +384,14 @@ export function universalSearch(query: string): UniversalSearchResult {
 
   const aiTools = getAllAiTools()
     .filter((tool) => !isCommunityTool(tool))
-    .filter(
-      (t) =>
-        t.name.toLowerCase().includes(q) ||
-        t.tagline.toLowerCase().includes(q) ||
-        t.category.toLowerCase().includes(q) ||
-        t.tags.some((tag) => tag.toLowerCase().includes(q))
-    )
+    .filter((tool) => matchesSearchQuery(q, [
+      tool.name, tool.tagline, tool.description, tool.category, tool.pricingType,
+      tool.freeTierSummary, tool.freeTierLimits, ...(tool.tags || []), ...(tool.features || []),
+      ...(tool.useCases || []), ...(tool.generationTasks || []), ...(tool.outputModalities || []),
+      tool.hasFreePlan ? 'free recurring free plan' : '',
+      tool.isSelfHostable ? 'open source local self hosted free' : '',
+      tool.category === 'video' ? 'video generator video generation generative video' : '',
+    ]))
     .slice(0, 4);
 
   const proprietaryAlternatives = proprietaryTools
@@ -616,7 +638,7 @@ export function getPickRecommendations(criteria: PickCriteria): MatchedPickResul
       // Hard constraint elimination: MUST match hosting
       if (!matchesHostingAi(tool)) return;
 
-      let score = 50;
+      let score = 30;
       const reasons: string[] = [];
 
       // Task detail bonus
@@ -818,5 +840,23 @@ export function getPickRecommendations(criteria: PickCriteria): MatchedPickResul
     return bRating - aRating;
   });
 
-  return results.slice(0, 6);
+  const topResults = results.slice(0, 6);
+
+  // Keep the recommendation set useful across hosting models: coding workflows
+  // should include at least one genuine open-source coding assistant when one
+  // passed the user's constraints, rather than letting cloud tools crowd it out.
+  if (goal === 'coding-dev' || goal === 'build-app') {
+    const openSourceCodingTool = results.find((result) =>
+      result.type === 'open-source' && ['aider', 'cline'].includes(result.tool.slug)
+    );
+    if (
+      openSourceCodingTool &&
+      !topResults.some((result) => result.tool.slug === openSourceCodingTool.tool.slug) &&
+      topResults.length > 0
+    ) {
+      topResults[topResults.length - 1] = openSourceCodingTool;
+    }
+  }
+
+  return topResults;
 }

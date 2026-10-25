@@ -728,12 +728,12 @@ export const HomePage: React.FC = () => {
 
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
           {[
-            { name: 'LLMs & Chat', icon: Bot, count: '30+ Models', href: '/ai-tools?category=assistants' },
-            { name: 'AI Video', icon: Video, count: '14+ Engines', href: '/ai-tools?category=video' },
-            { name: 'Code Agents', icon: Code2, count: '22+ Tools', href: '/ai-tools?category=coding' },
-            { name: 'Image & Art', icon: ImageIcon, count: '18+ Suites', href: '/ai-tools?category=image' },
-            { name: 'Voice & Audio', icon: Volume2, count: '12+ Tools', href: '/ai-tools?category=voice' },
-            { name: 'SaaS Alts', icon: Replace, count: '28+ Stacks', href: '/alternatives' },
+            { name: 'LLMs & Chat', icon: Bot, count: `${allAiTools.filter((tool) => tool.category === 'assistants').length} Models`, href: '/ai-tools?category=assistants' },
+            { name: 'AI Video', icon: Video, count: `${allAiTools.filter((tool) => tool.category === 'video').length} Engines`, href: '/ai-tools?category=video' },
+            { name: 'Code Agents', icon: Code2, count: `${allAiTools.filter((tool) => tool.category === 'coding').length} Tools`, href: '/ai-tools?category=coding' },
+            { name: 'Image & Art', icon: ImageIcon, count: `${allAiTools.filter((tool) => tool.category === 'image').length} Suites`, href: '/ai-tools?category=image' },
+            { name: 'Voice & Audio', icon: Volume2, count: `${allAiTools.filter((tool) => tool.category === 'voice').length} Tools`, href: '/ai-tools?category=voice' },
+            { name: 'SaaS Alts', icon: Replace, count: `${proprietaryTools.length} Targets`, href: '/alternatives' },
           ].map((cat, idx) => {
             const Icon = cat.icon;
             return (
@@ -902,7 +902,7 @@ export const HomePage: React.FC = () => {
                 Need Help Choosing the Right Tool?
               </h3>
               <p className="text-sm text-secondary-foreground leading-relaxed mb-6">
-                Answer 3 quick questions about your project goals, budget, and hosting preferences. Our rule-based matching engine will recommend the perfect open-source and AI tools for you.
+                Answer 4 quick questions about your project goals, task, budget, and hosting preferences. Our rule-based matching engine will recommend the perfect open-source and AI tools for you.
               </p>
             </div>
 

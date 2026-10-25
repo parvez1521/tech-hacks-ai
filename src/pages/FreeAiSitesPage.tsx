@@ -14,33 +14,30 @@ export const FreeAiSitesPage: React.FC = () => {
 
   const allFreeTools = getFreeAiTools();
 
-  const filteredTools = allFreeTools.filter((tool) => {
-    // Category filter
-    if (selectedCat && tool.category !== selectedCat) return false;
-
-    // Access Type filter
+  const matchesAccessType = (tool: (typeof allFreeTools)[number]) => {
     if (selectedAccessType === 'open-source-local') {
-      if (tool.freeAccessType !== 'open-source-local' && !tool.isSelfHostable) return false;
-    } else if (selectedAccessType === 'recurring-free') {
-      if (tool.freeAccessType !== 'recurring-free') return false;
-    } else if (selectedAccessType === 'free-credits') {
-      if (tool.freeAccessType !== 'free-credits') return false;
-    } else if (selectedAccessType === 'no-account') {
-      if (tool.requiresAccount) return false;
+      return tool.freeAccessType === 'open-source-local' || Boolean(tool.isSelfHostable);
     }
-
-    // Search query
-    if (search.trim()) {
-      const q = search.toLowerCase().trim();
-      const matchName = tool.name.toLowerCase().includes(q);
-      const matchTagline = tool.tagline.toLowerCase().includes(q);
-      const matchDesc = tool.description.toLowerCase().includes(q);
-      const matchTags = tool.tags.some((t) => t.toLowerCase().includes(q));
-      const matchFeatures = tool.features.some((f) => f.toLowerCase().includes(q));
-      return matchName || matchTagline || matchDesc || matchTags || matchFeatures;
-    }
+    if (selectedAccessType === 'recurring-free') return tool.freeAccessType === 'recurring-free';
+    if (selectedAccessType === 'free-credits') return tool.freeAccessType === 'free-credits';
+    if (selectedAccessType === 'no-account') return !tool.requiresAccount;
     return true;
-  });
+  };
+
+  const matchesSearch = (tool: (typeof allFreeTools)[number]) => {
+    if (!search.trim()) return true;
+    const q = search.toLowerCase().trim();
+    return [
+      tool.name, tool.tagline, tool.description, ...(tool.tags || []), ...(tool.features || []),
+      tool.category, tool.freeTierSummary, tool.freeTierLimits,
+    ].some((value) => value?.toLowerCase().includes(q));
+  };
+
+  const filteredTools = allFreeTools.filter((tool) =>
+    (!selectedCat || tool.category === selectedCat) &&
+    matchesAccessType(tool) &&
+    matchesSearch(tool)
+  );
 
   // Sort
   filteredTools.sort((a, b) => {
@@ -207,7 +204,7 @@ export const FreeAiSitesPage: React.FC = () => {
               All Categories
             </button>
             {aiCategories.map((cat) => {
-              const count = allFreeTools.filter((t) => t.category === cat.id).length;
+              const count = allFreeTools.filter((tool) => tool.category === cat.id && matchesAccessType(tool) && matchesSearch(tool)).length;
               if (count === 0) return null;
               const isSelected = selectedCat === cat.id;
               return (
