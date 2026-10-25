@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import React, { createContext, useContext, useState, useEffect, useLayoutEffect, ReactNode } from 'react';
 import { getToolBySlug } from '../services/catalogService.ts';
 
 export interface RouteMatch {
@@ -26,6 +26,9 @@ interface RouterContextType {
 }
 
 const RouterContext = createContext<RouterContextType | null>(null);
+
+// Avoid useLayoutEffect's server-render warning while keeping route scroll resets before paint in browsers.
+const useIsomorphicLayoutEffect = typeof window !== 'undefined' ? useLayoutEffect : useEffect;
 
 export function matchRoute(pathname: string): { route: string; params: Record<string, string> } {
   const cleanPath = pathname.replace(/\/+$/, '') || '/';
@@ -185,14 +188,29 @@ export const RouterProvider: React.FC<{ children: ReactNode }> = ({ children }) 
   );
 
   useEffect(() => {
+    const previousScrollRestoration = window.history.scrollRestoration;
+    // The SPA owns route scroll position; don't let the browser restore a stale
+    // position from another route after pushState/popstate.
+    window.history.scrollRestoration = 'manual';
+
     const handlePopState = () => {
       setCurrentPath(window.location.pathname);
       setSearchParamsState(new URLSearchParams(window.location.search));
     };
 
     window.addEventListener('popstate', handlePopState);
-    return () => window.removeEventListener('popstate', handlePopState);
+    return () => {
+      window.removeEventListener('popstate', handlePopState);
+      window.history.scrollRestoration = previousScrollRestoration;
+    };
   }, []);
+
+  useIsomorphicLayoutEffect(() => {
+    // Run after the new route's DOM has committed and before paint.
+    // Use an immediate scroll rather than a smooth animation that can be
+    // interrupted while the previous route is being replaced.
+    safeScrollTo({ top: 0, left: 0, behavior: 'auto' });
+  }, [currentPath]);
 
   const navigate = (to: string, options?: { replace?: boolean }) => {
     if (typeof window === 'undefined') return;
@@ -209,7 +227,7 @@ export const RouterProvider: React.FC<{ children: ReactNode }> = ({ children }) 
 
     setCurrentPath(newPath);
     setSearchParamsState(newSearch);
-    safeScrollTo({ top: 0, behavior: 'smooth' });
+    // Route scroll reset is handled after React commits the new route above.
   };
 
   const setSearchParams = (paramsToUpdate: Record<string, string | null>, options?: { replace?: boolean }) => {
