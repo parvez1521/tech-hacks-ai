@@ -2,7 +2,7 @@ import React from 'react';
 import { AiTool, BookmarkItem } from '../types';
 import { Link } from '../router/Router';
 import { BookmarkButton } from './BookmarkButton';
-import { Star, ExternalLink, ArrowRight, Sparkles } from 'lucide-react';
+import { ExternalLink, ArrowRight, Sparkles } from 'lucide-react';
 import { BrandLogo } from './BrandLogo';
 import { AffiliateDisclosure } from './AffiliateDisclosure';
 
