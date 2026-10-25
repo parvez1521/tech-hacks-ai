@@ -119,6 +119,7 @@ export type GenerationTask =
   | 'speech-to-text'
   | 'music-generation'
   | 'coding-assistant'
+  | 'ide-editor'
   | 'chat'
   | 'research'
   | 'automation'
