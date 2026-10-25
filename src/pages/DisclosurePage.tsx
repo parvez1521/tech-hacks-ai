@@ -55,7 +55,7 @@ export const DisclosurePage: React.FC = () => {
             1. Programmatic &amp; Contextual Display Advertising
           </h2>
           <p>
-            SwitchRoute may display third-party advertisements served by advertising networks, including Google AdSense. These ads help support server hosting, automated repository verification scrapers, and editorial research.
+            Google AdSense advertising is not currently active on SwitchRoute. If the site is accepted into the program and ads are subsequently enabled, display advertising may help support hosting, editorial research, and ongoing directory maintenance.
           </p>
           <ul className="list-disc list-inside space-y-1.5 text-xs pl-2 text-slate-600">
             <li>
@@ -137,8 +137,7 @@ export const DisclosurePage: React.FC = () => {
             4. Questions &amp; Feedback
           </h2>
           <p>
-            For general, non-sensitive questions about affiliate relationships, advertising policies, or editorial guidelines, use the Instagram link on our <Link to="/contact" className="text-blue-600 hover:text-blue-700 underline font-medium">Contact page</Link>.
-            DMs are external to SwitchRoute and are not stored in a website ticket system. A dedicated editorial inbox is not configured yet; please do not include confidential information.
+            For questions about affiliate relationships, advertising policies, or editorial guidelines, email <a href="mailto:support@switchroute.in" className="text-blue-600 hover:text-blue-700 underline font-medium">support@switchroute.in</a> or visit our <Link to="/contact" className="text-blue-600 hover:text-blue-700 underline font-medium">Contact page</Link>. Please include the relevant page URL and do not send passwords or payment credentials.
           </p>
         </section>
       </div>
