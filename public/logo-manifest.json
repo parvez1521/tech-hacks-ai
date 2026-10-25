@@ -276,7 +276,8 @@
     "badgeBg": "#1389fd",
     "format": "svg",
     "pngAssetPath": "/logos/png/bolt-new.png",
-    "notes": "Verification gap: the existing local mark has no traceable source and is withheld from display. BrandLogo shows its neutral initials fallback until a verified source is recorded."
+    "notes": "Domain favicon fallback from the catalogue-listed website URL; this is not verified brand artwork.",
+    "sourceUrl": "https://www.google.com/s2/favicons?domain=bolt.new&sz=256"
   },
   {
     "slug": "brave",
@@ -965,7 +966,8 @@
     "badgeBg": "#ffd21e",
     "format": "svg",
     "pngAssetPath": "/logos/png/huggingchat.png",
-    "notes": "Verification gap: the existing local mark has no traceable source and is withheld from display. BrandLogo shows its neutral initials fallback until a verified source is recorded."
+    "notes": "Domain favicon fallback from the catalogue-listed website URL; this is not verified brand artwork.",
+    "sourceUrl": "https://www.google.com/s2/favicons?domain=huggingface.co&sz=256"
   },
   {
     "slug": "huggingface",
@@ -1091,7 +1093,8 @@
     "badgeBg": "#f59e0b",
     "format": "svg",
     "pngAssetPath": "/logos/png/kaiber.png",
-    "notes": "Verification gap: the existing local mark has no traceable source and is withheld from display. BrandLogo shows its neutral initials fallback until a verified source is recorded."
+    "notes": "Domain favicon fallback from the catalogue-listed website URL; this is not verified brand artwork.",
+    "sourceUrl": "https://www.google.com/s2/favicons?domain=kaiber.ai&sz=256"
   },
   {
     "slug": "keras",
@@ -1136,7 +1139,8 @@
     "badgeBg": "#e11d48",
     "format": "svg",
     "pngAssetPath": "/logos/png/kling-ai.png",
-    "notes": "Verification gap: the existing local mark has no traceable source and is withheld from display. BrandLogo shows its neutral initials fallback until a verified source is recorded."
+    "notes": "Domain favicon fallback from the catalogue-listed website URL; this is not verified brand artwork.",
+    "sourceUrl": "https://www.google.com/s2/favicons?domain=klingai.com&sz=256"
   },
   {
     "slug": "klingai",
@@ -1170,7 +1174,8 @@
     "badgeBg": "#18181b",
     "format": "svg",
     "pngAssetPath": "/logos/png/krea-ai.png",
-    "notes": "Verification gap: the existing local mark has no traceable source and is withheld from display. BrandLogo shows its neutral initials fallback until a verified source is recorded."
+    "notes": "Domain favicon fallback from the catalogue-listed website URL; this is not verified brand artwork.",
+    "sourceUrl": "https://www.google.com/s2/favicons?domain=krea.ai&sz=256"
   },
   {
     "slug": "langchain",
@@ -1331,7 +1336,8 @@
     "badgeBg": "#090a0f",
     "format": "svg",
     "pngAssetPath": "/logos/png/luma-dream-machine.png",
-    "notes": "Verification gap: the existing local mark has no traceable source and is withheld from display. BrandLogo shows its neutral initials fallback until a verified source is recorded."
+    "notes": "Domain favicon fallback from the catalogue-listed website URL; this is not verified brand artwork.",
+    "sourceUrl": "https://www.google.com/s2/favicons?domain=lumalabs.ai&sz=256"
   },
   {
     "slug": "make",
@@ -1435,7 +1441,8 @@
     "badgeBg": "#0f172a",
     "format": "svg",
     "pngAssetPath": "/logos/png/midjourney.png",
-    "notes": "Verification gap: the existing local mark has no traceable source and is withheld from display. BrandLogo shows its neutral initials fallback until a verified source is recorded."
+    "notes": "Domain favicon fallback from the catalogue-listed website URL; this is not verified brand artwork.",
+    "sourceUrl": "https://www.google.com/s2/favicons?domain=midjourney.com&sz=256"
   },
   {
     "slug": "mistral",
@@ -1458,7 +1465,8 @@
     "badgeBg": "#f97316",
     "format": "svg",
     "pngAssetPath": "/logos/png/mistral-le-chat.png",
-    "notes": "Verification gap: the existing local mark has no traceable source and is withheld from display. BrandLogo shows its neutral initials fallback until a verified source is recorded."
+    "notes": "Domain favicon fallback from the catalogue-listed website URL; this is not verified brand artwork.",
+    "sourceUrl": "https://www.google.com/s2/favicons?domain=chat.mistral.ai&sz=256"
   },
   {
     "slug": "modal",
@@ -1745,7 +1753,8 @@
     "badgeBg": "#a855f7",
     "format": "svg",
     "pngAssetPath": "/logos/png/pixverse.png",
-    "notes": "Verification gap: the existing local mark has no traceable source and is withheld from display. BrandLogo shows its neutral initials fallback until a verified source is recorded."
+    "notes": "Domain favicon fallback from the catalogue-listed website URL; this is not verified brand artwork.",
+    "sourceUrl": "https://www.google.com/s2/favicons?domain=pixverse.ai&sz=256"
   },
   {
     "slug": "plausible",
@@ -1897,7 +1906,8 @@
     "badgeBg": "#f43f5e",
     "format": "svg",
     "pngAssetPath": "/logos/png/recraft.png",
-    "notes": "Verification gap: the existing local mark has no traceable source and is withheld from display. BrandLogo shows its neutral initials fallback until a verified source is recorded."
+    "notes": "Domain favicon fallback from the catalogue-listed website URL; this is not verified brand artwork.",
+    "sourceUrl": "https://www.google.com/s2/favicons?domain=recraft.ai&sz=256"
   },
   {
     "slug": "render",
@@ -2096,7 +2106,8 @@
     "badgeBg": "#090d16",
     "format": "svg",
     "pngAssetPath": "/logos/png/stable-diffusion-3.png",
-    "notes": "Verification gap: the existing local mark has no traceable source and is withheld from display. BrandLogo shows its neutral initials fallback until a verified source is recorded."
+    "notes": "Domain favicon fallback from the catalogue-listed website URL; this is not verified brand artwork.",
+    "sourceUrl": "https://www.google.com/s2/favicons?domain=stability.ai&sz=256"
   },
   {
     "slug": "stripe",
@@ -2260,7 +2271,8 @@
     "badgeBg": "#0f172a",
     "format": "svg",
     "pngAssetPath": "/logos/png/udio.png",
-    "notes": "Verification gap: the existing local mark has no traceable source and is withheld from display. BrandLogo shows its neutral initials fallback until a verified source is recorded."
+    "notes": "Domain favicon fallback from the catalogue-listed website URL; this is not verified brand artwork.",
+    "sourceUrl": "https://www.google.com/s2/favicons?domain=udio.com&sz=256"
   },
   {
     "slug": "umami",
@@ -2306,7 +2318,8 @@
     "badgeBg": "#00e5ff",
     "format": "svg",
     "pngAssetPath": "/logos/png/vidu.png",
-    "notes": "Verification gap: the existing local mark has no traceable source and is withheld from display. BrandLogo shows its neutral initials fallback until a verified source is recorded."
+    "notes": "Domain favicon fallback from the catalogue-listed website URL; this is not verified brand artwork.",
+    "sourceUrl": "https://www.google.com/s2/favicons?domain=go.vidu.com&sz=256"
   },
   {
     "slug": "visualstudiocode",
@@ -2505,7 +2518,8 @@
     "badgeBg": "#ff4a00",
     "format": "svg",
     "pngAssetPath": "/logos/png/zapier-central.png",
-    "notes": "Verification gap: the existing local mark has no traceable source and is withheld from display. BrandLogo shows its neutral initials fallback until a verified source is recorded."
+    "notes": "Domain favicon fallback from the catalogue-listed website URL; this is not verified brand artwork.",
+    "sourceUrl": "https://www.google.com/s2/favicons?domain=zapier.com&sz=256"
   },
   {
     "slug": "zedindustries",
@@ -2571,7 +2585,8 @@
     "sourceType": "fallback",
     "verifiedAt": "2026-10-23",
     "format": "svg",
-    "notes": "Verification gap: no traceable official or authorized logo source was confirmed during this catalog update. The local neutral monogram is not rendered as a brand mark; BrandLogo shows its initials fallback."
+    "notes": "Domain favicon fallback from the catalogue-listed website URL; this is not verified brand artwork.",
+    "sourceUrl": "https://www.google.com/s2/favicons?domain=video.lichuanyang.top&sz=256"
   },
   {
     "slug": "automated-video-generator",
@@ -2580,7 +2595,8 @@
     "sourceType": "fallback",
     "verifiedAt": "2026-10-23",
     "format": "svg",
-    "notes": "Verification gap: no traceable official or authorized logo source was confirmed during this catalog update. The local neutral monogram is not rendered as a brand mark; BrandLogo shows its initials fallback."
+    "notes": "Domain favicon fallback from the catalogue-listed website URL; this is not verified brand artwork.",
+    "sourceUrl": "https://www.google.com/s2/favicons?domain=itspremkumar.github.io&sz=256"
   },
   {
     "slug": "vuza",
@@ -2607,7 +2623,8 @@
     "sourceType": "fallback",
     "verifiedAt": "2026-10-23",
     "format": "svg",
-    "notes": "Verification gap: no traceable official or authorized logo source was confirmed during this catalog update. The local neutral monogram is not rendered as a brand mark; BrandLogo shows its initials fallback."
+    "notes": "Domain favicon fallback from the catalogue-listed website URL; this is not verified brand artwork.",
+    "sourceUrl": "https://www.google.com/s2/favicons?domain=muapi.ai&sz=256"
   },
   {
     "slug": "wan-2-2",
@@ -2625,7 +2642,8 @@
     "sourceType": "fallback",
     "verifiedAt": "2026-10-23",
     "format": "svg",
-    "notes": "Verification gap: no traceable official or authorized logo source was confirmed during this catalog update. The local neutral monogram is not rendered as a brand mark; BrandLogo shows its initials fallback."
+    "notes": "Domain favicon fallback from the catalogue-listed website URL; this is not verified brand artwork.",
+    "sourceUrl": "https://www.google.com/s2/favicons?domain=ltx.io&sz=256"
   },
   {
     "slug": "hunyuanvideo",
@@ -2652,7 +2670,8 @@
     "sourceType": "fallback",
     "verifiedAt": "2026-10-23",
     "format": "svg",
-    "notes": "Verification gap: no traceable official or authorized logo source was confirmed during this catalog update. The local neutral monogram is not rendered as a brand mark; BrandLogo shows its initials fallback."
+    "notes": "Domain favicon fallback from the catalogue-listed website URL; this is not verified brand artwork.",
+    "sourceUrl": "https://www.google.com/s2/favicons?domain=huggingface.co&sz=256"
   },
   {
     "slug": "invideo-ai",
