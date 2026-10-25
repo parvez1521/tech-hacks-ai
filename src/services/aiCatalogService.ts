@@ -377,6 +377,105 @@ export function universalSearch(query: string): UniversalSearchResult {
     };
   }
 
+  const alternativeIntent = /\b(alternative|alternatives|replace|replacement|similar|like)\b/.test(q);
+  const namedAlternativeTarget = proprietaryTools.find((target) => {
+    const name = normalizeSearchText(target.name);
+    const slug = normalizeSearchText(target.slug);
+    return (name && normalizeSearchText(q).includes(name)) || (slug && normalizeSearchText(q).includes(slug));
+  });
+
+  // Handle natural-language "alternatives to X" intent explicitly rather than requiring
+  // the entire phrase to match a tool name, tagline, or tag.
+  if (alternativeIntent && namedAlternativeTarget) {
+    const targetSlug = namedAlternativeTarget.slug;
+    const openSourceTools = toolsData
+      .filter((tool) => tool.alternativesTo.includes(targetSlug))
+      .slice(0, 5);
+    const aiTools = getAiAlternativesForTarget(targetSlug).slice(0, 5);
+    return {
+      openSourceTools,
+      aiTools,
+      proprietaryAlternatives: [namedAlternativeTarget],
+      guides: [],
+      prompts: [],
+      utilities: [],
+      totalMatches: openSourceTools.length + aiTools.length + 1,
+    };
+  }
+
+  const localModelIntent =
+    /\b(local|locally|offline|self-hosted|self hosted|on-device)\b/.test(q) &&
+    /\b(llm|model|models|language model|inference|ollama)\b/.test(q);
+  if (localModelIntent) {
+    const searchableLocalText = (tool: AiTool) => normalizeSearchText([
+      tool.name, tool.tagline, tool.description, tool.longDescription,
+      tool.executionEnvironment, tool.hardwareRequirements, tool.licenseSummary,
+      tool.modelWeightsUrl, tool.openSourceRepoUrl, tool.accessLabel,
+      ...(tool.features || []), ...(tool.tags || []), ...(tool.useCases || []),
+      ...(tool.supportedModels || []),
+    ].join(' '));
+    const aiTools = getAllAiTools()
+      .filter((tool) => !isCommunityTool(tool))
+      .filter((tool) => tool.isSelfHostable || tool.freeAccessType === 'open-source-local' ||
+        /\b(local|locally|offline|self hosted|on device|local models)\b/.test(searchableLocalText(tool)))
+      .sort((a, b) => Number(!!b.isSelfHostable) - Number(!!a.isSelfHostable))
+      .slice(0, 6);
+    const openSourceTools = toolsData
+      .filter((tool) => /\b(local llm|local model|inference|ollama|offline ai)\b/.test(
+        normalizeSearchText([tool.name, tool.tagline, tool.description, ...tool.tags, ...tool.techStack].join(' '))
+      ))
+      .slice(0, 4);
+    return {
+      openSourceTools,
+      aiTools,
+      proprietaryAlternatives: [],
+      guides: getAllGuides().filter((guide) => /local|ollama|llm|model/i.test(
+        [guide.title, guide.summary, ...guide.tags].join(' ')
+      )).slice(0, 3),
+      prompts: [],
+      utilities: [],
+      totalMatches: openSourceTools.length + aiTools.length,
+    };
+  }
+
+  const videoEditIntent =
+    /\b(edit|editing|modify|restyle|repaint|transform|change|repurpose)\b/.test(q) &&
+    /\b(video|clip|clips)\b/.test(q);
+  if (videoEditIntent) {
+    const aiTools = getAllAiTools()
+      .filter((tool) => !isCommunityTool(tool))
+      .filter((tool) => {
+        const text = normalizeSearchText([
+          tool.name, tool.tagline, tool.description, tool.longDescription,
+          ...(tool.features || []), ...(tool.useCases || []), ...(tool.tags || []),
+          ...(tool.generationTasks || []),
+        ].join(' '));
+        return tool.generationTasks?.includes('video-to-video') ||
+          /video repainting|video editing|edit existing video|video restyling|modify video/.test(text);
+      })
+      .sort((a, b) => {
+        const textA = normalizeSearchText([a.name, a.tagline, a.description, ...(a.features || []), ...(a.useCases || [])].join(' '));
+        const textB = normalizeSearchText([b.name, b.tagline, b.description, ...(b.features || []), ...(b.useCases || [])].join(' '));
+        const intentA = Number(/edit|repaint|restyl|modify|video-to-video/.test(textA));
+        const intentB = Number(/edit|repaint|restyl|modify|video-to-video/.test(textB));
+        return intentB - intentA;
+      })
+      .slice(0, 5);
+    return {
+      openSourceTools: [],
+      aiTools,
+      proprietaryAlternatives: [],
+      guides: getAllGuides().filter((guide) => /video|edit|repaint/i.test(
+        [guide.title, guide.summary, ...guide.tags].join(' ')
+      )).slice(0, 3),
+      prompts: [],
+      utilities: getAllFreeTools().filter((tool) => /video|audio/i.test(
+        [tool.name, tool.tagline, tool.category, tool.primaryCategory].join(' ')
+      )).slice(0, 3),
+      totalMatches: aiTools.length,
+    };
+  }
+
   const openSourceTools = toolsData
     .filter(
       (t) =>
