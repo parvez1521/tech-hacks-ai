@@ -13,26 +13,190 @@ const loadImage = (file: File): Promise<LoadedImage> => new Promise((resolve, re
 export const ImageCropperTool: React.FC = () => {
   const [image, setImage] = useState<LoadedImage | null>(null);
   const [crop, setCrop] = useState({ x: 0, y: 0, width: 0, height: 0 });
+  const [cropDraft, setCropDraft] = useState({ x: '0', y: '0', width: '0', height: '0' });
   const [format, setFormat] = useState<'image/png' | 'image/jpeg' | 'image/webp'>('image/png');
   const [blob, setBlob] = useState<Blob | null>(null);
   const [error, setError] = useState('');
+
   const handleFile = async (file: File) => {
     try {
       if (!file.type.startsWith('image/')) throw new Error('Choose a raster image file.');
       if (file.size > 25 * 1024 * 1024) throw new Error('Images must be 25 MB or smaller.');
-      if (image) URL.revokeObjectURL(image.url);
       const loaded = await loadImage(file);
-      setImage(loaded); setCrop({ x: 0, y: 0, width: loaded.width, height: loaded.height }); setBlob(null); setError('');
-    } catch (err) { setError(err instanceof Error ? err.message : 'Unable to load image.'); }
+      setImage((previous) => {
+        if (previous) URL.revokeObjectURL(previous.url);
+        return loaded;
+      });
+      const fullCrop = { x: 0, y: 0, width: loaded.width, height: loaded.height };
+      setCrop(fullCrop);
+      setCropDraft({
+        x: String(fullCrop.x),
+        y: String(fullCrop.y),
+        width: String(fullCrop.width),
+        height: String(fullCrop.height),
+      });
+      setBlob(null);
+      setError('');
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Unable to load image.');
+    }
   };
+
+  const updateDraft = (field: keyof typeof cropDraft, value: string) => {
+    setCropDraft((previous) => ({ ...previous, [field]: value }));
+    setBlob(null);
+    setError('');
+  };
+
   const render = () => {
     if (!image) return;
-    const canvas = document.createElement('canvas'); canvas.width = crop.width; canvas.height = crop.height;
-    const ctx = canvas.getContext('2d'); if (!ctx) return;
-    const source = new Image(); source.onload = () => { ctx.drawImage(source, crop.x, crop.y, crop.width, crop.height, 0, 0, crop.width, crop.height); canvas.toBlob((value) => setBlob(value), format, 0.9); }; source.src = image.url;
+
+    const parseCoordinate = (value: string, label: string, minimum: number): number => {
+      const trimmed = value.trim();
+      if (!/^\d+$/.test(trimmed)) {
+        throw new Error(`${label} must be a whole number.`);
+      }
+      const parsed = Number(trimmed);
+      if (!Number.isSafeInteger(parsed) || parsed < minimum) {
+        throw new Error(`${label} must be ${minimum === 0 ? 'zero or greater' : 'at least 1'}.`);
+      }
+      return parsed;
+    };
+
+    let nextCrop: typeof crop;
+    try {
+      const x = parseCoordinate(cropDraft.x, 'X', 0);
+      const y = parseCoordinate(cropDraft.y, 'Y', 0);
+      const width = parseCoordinate(cropDraft.width, 'Width', 1);
+      const height = parseCoordinate(cropDraft.height, 'Height', 1);
+
+      if (x >= image.width || y >= image.height) {
+        throw new Error(`X must be 0–${image.width - 1} and Y must be 0–${image.height - 1} for this image.`);
+      }
+      if (x + width > image.width) {
+        throw new Error(`Width is too large at X=${x}. Maximum width is ${image.width - x}px.`);
+      }
+      if (y + height > image.height) {
+        throw new Error(`Height is too large at Y=${y}. Maximum height is ${image.height - y}px.`);
+      }
+
+      nextCrop = { x, y, width, height };
+    } catch (err) {
+      setBlob(null);
+      setError(err instanceof Error ? err.message : 'Check the crop coordinates and try again.');
+      return;
+    }
+
+    setCrop(nextCrop);
+    setBlob(null);
+    setError('');
+
+    const canvas = document.createElement('canvas');
+    canvas.width = nextCrop.width;
+    canvas.height = nextCrop.height;
+    const context = canvas.getContext('2d');
+    if (!context) {
+      setError('The browser could not create a crop canvas. Try another browser.');
+      return;
+    }
+
+    const source = new Image();
+    source.onload = () => {
+      try {
+        context.drawImage(
+          source,
+          nextCrop.x,
+          nextCrop.y,
+          nextCrop.width,
+          nextCrop.height,
+          0,
+          0,
+          nextCrop.width,
+          nextCrop.height,
+        );
+        canvas.toBlob((value) => {
+          if (!value) {
+            setError('The browser could not export this crop. Try another image format.');
+            return;
+          }
+          setBlob(value);
+          setError('');
+        }, format, 0.9);
+      } catch {
+        setError('The browser could not render this crop. Check the crop values and try again.');
+      }
+    };
+    source.onerror = () => setError('The browser could not decode this image for cropping.');
+    source.src = image.url;
   };
+
   useEffect(() => () => { if (image) URL.revokeObjectURL(image.url); }, [image]);
-  return <div className="space-y-4"><FilePicker accept="image/png,image/jpeg,image/webp" onFile={handleFile} label={image ? image.file.name : 'Choose an image to crop'} helper="PNG, JPEG, or WebP up to 25 MB; local Canvas processing." />{error && <UtilityMessage>{error}</UtilityMessage>}{image && <><div className="grid gap-3 sm:grid-cols-2"><label className="space-y-1 text-xs text-muted-foreground">X / Y<input value={`${crop.x}, ${crop.y}`} onChange={(e) => { const [x, y] = e.target.value.split(',').map(Number); setCrop((current) => ({ ...current, x: Math.max(0, Math.min(image.width - current.width, x || 0)), y: Math.max(0, Math.min(image.height - current.height, y || 0)) })); }} className={utilityInputClass} /></label><label className="space-y-1 text-xs text-muted-foreground">Width / height<input value={`${crop.width}, ${crop.height}`} onChange={(e) => { const [width, height] = e.target.value.split(',').map(Number); setCrop((current) => ({ ...current, width: Math.max(1, Math.min(image.width - current.x, width || 1)), height: Math.max(1, Math.min(image.height - current.y, height || 1)) })); }} className={utilityInputClass} /></label></div><div className="flex flex-wrap gap-2"><select value={format} onChange={(e) => setFormat(e.target.value as typeof format)} className={utilityInputClass}><option value="image/png">PNG</option><option value="image/jpeg">JPEG</option><option value="image/webp">WebP</option></select><button type="button" className={utilityButtonClass} onClick={render}>Render crop</button><DownloadButton blob={blob} filename={`crop.${format.split('/')[1]}`} /></div>{blob && <UtilityMessage tone="success">Crop ready: {crop.width} × {crop.height}px.</UtilityMessage>}</>}</div>;
+
+  const numberField = (
+    label: string,
+    field: keyof typeof cropDraft,
+    minimum: number,
+  ) => (
+    <label className="space-y-1 text-xs text-muted-foreground" key={field}>
+      <span className="block">{label}</span>
+      <input
+        type="number"
+        min={minimum}
+        step="1"
+        inputMode="numeric"
+        value={cropDraft[field]}
+        onChange={(event) => updateDraft(field, event.target.value)}
+        className={utilityInputClass}
+        aria-label={label}
+      />
+    </label>
+  );
+
+  return (
+    <div className="space-y-4">
+      <FilePicker
+        accept="image/png,image/jpeg,image/webp"
+        onFile={handleFile}
+        label={image ? image.file.name : 'Choose an image to crop'}
+        helper="PNG, JPEG, or WebP up to 25 MB; local Canvas processing."
+      />
+      {image && (
+        <p className="text-xs text-muted-foreground">
+          Original image: {image.width} × {image.height}px. Enter X/Y and output width/height separately.
+          Values are kept as typed and validated when you render the crop.
+        </p>
+      )}
+      {error && <UtilityMessage>{error}</UtilityMessage>}
+      {image && (
+        <>
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+            {numberField('X offset (px)', 'x', 0)}
+            {numberField('Y offset (px)', 'y', 0)}
+            {numberField('Crop width (px)', 'width', 1)}
+            {numberField('Crop height (px)', 'height', 1)}
+          </div>
+          <div className="flex flex-wrap gap-2">
+            <select
+              value={format}
+              onChange={(event) => {
+                setFormat(event.target.value as typeof format);
+                setBlob(null);
+              }}
+              className={utilityInputClass}
+              aria-label="Output format"
+            >
+              <option value="image/png">PNG</option>
+              <option value="image/jpeg">JPEG</option>
+              <option value="image/webp">WebP</option>
+            </select>
+            <button type="button" className={utilityButtonClass} onClick={render}>Render crop</button>
+            <DownloadButton blob={blob} filename={`crop.${format.split('/')[1]}`} />
+          </div>
+          {blob && <UtilityMessage tone="success">Crop ready: {crop.width} × {crop.height}px.</UtilityMessage>}
+        </>
+      )}
+    </div>
+  );
 };
 
 export const ImagePaletteTool: React.FC = () => {
