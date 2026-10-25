@@ -328,7 +328,7 @@ describe('Phase 27: Durable Data Storage & Production Deployment Readiness', () 
 
   // 5. Vercel & Domain Deployment Readiness
   describe('5. Vercel & Custom Domain Deployment Readiness', () => {
-    test('vercel.json is valid and contains SPA rewrites and security headers', () => {
+    test('vercel.json uses pre-rendered routing and retains security headers', () => {
       const vercelJsonPath = path.join(ROOT_DIR, 'vercel.json');
       assert.ok(fs.existsSync(vercelJsonPath), 'vercel.json must exist');
 
@@ -336,10 +336,9 @@ describe('Phase 27: Durable Data Storage & Production Deployment Readiness', () 
       const config = JSON.parse(raw);
 
       assert.strictEqual(config.cleanUrls, true);
-      const spaRewrite = (config.rewrites || []).find((r) => r.destination === '/');
-      assert.ok(spaRewrite, 'With cleanUrls enabled, the SPA fallback must target / rather than /index.html');
-      assert.ok(spaRewrite.source.includes('api/'), 'SPA fallback must exclude /api/ routes');
-      assert.ok(!spaRewrite.destination.endsWith('.html'), 'cleanUrls rewrites must not use a file extension in the destination');
+      assert.ok(!config.rewrites || config.rewrites.length === 0, 'Global SPA rewrites must not turn unknown URLs into 200s');
+      const packageJson = JSON.parse(fs.readFileSync(path.join(ROOT_DIR, 'package.json'), 'utf8'));
+      assert.ok(packageJson.scripts.build.includes('seo:prerender'), 'Production build must pre-render route HTML');
 
       // Security headers check
       const globalHeader = (config.headers || []).find((h) => h.source === '/(.*)');
