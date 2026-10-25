@@ -4,6 +4,7 @@ import type {
   ModerationFilterState,
   SubmissionStatus,
   SubmissionType,
+  ToolSubmissionData,
 } from '../types/submissions';
 import {
   getStoredModeratorToken,
@@ -49,7 +50,7 @@ export const ModerationDashboardPage: React.FC = () => {
   const [editName, setEditName] = useState('');
   const [editSlug, setEditSlug] = useState('');
   const [editCategory, setEditCategory] = useState('');
-  const [editPricingType, setEditPricingType] = useState('');
+  const [editPricingType, setEditPricingType] = useState<ToolSubmissionData['pricingType']>('freemium');
   const [editSummary, setEditSummary] = useState('');
   const [editTags, setEditTags] = useState('');
   const [reviewNotes, setReviewNotes] = useState('');
@@ -66,7 +67,7 @@ export const ModerationDashboardPage: React.FC = () => {
       } else {
         setEditName(selectedSubmission.guideData?.title || '');
         setEditCategory(selectedSubmission.guideData?.category || '');
-        setEditPricingType('');
+        setEditPricingType('freemium');
         setEditSummary(selectedSubmission.guideData?.summary || '');
         setEditTags((selectedSubmission.guideData?.tags || []).join(', '));
       }
@@ -917,7 +918,7 @@ export const ModerationDashboardPage: React.FC = () => {
                     </label>
                     <select
                       value={editPricingType}
-                      onChange={(e) => setEditPricingType(e.target.value)}
+                      onChange={(e) => setEditPricingType(e.target.value as ToolSubmissionData['pricingType'])}
                       className="w-full px-3 py-1.5 rounded-lg bg-background border border-border text-foreground text-xs"
                     >
                       <option value="free">Free</option>
