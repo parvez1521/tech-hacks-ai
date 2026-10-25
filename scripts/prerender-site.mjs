@@ -55,13 +55,13 @@ function normalizedPath(pathname) {
 function replaceMeta(html, attribute, key, value) {
   const matcher = new RegExp(`<meta\\s+${attribute}="${escapeRegExp(key)}"[^>]*>`, 'i');
   const tag = `<meta ${attribute}="${key}" content="${escapeHtml(value)}" />`;
-  return matcher.test(html) ? html.replace(matcher, tag) : html.replace('</head>', `  ${tag}\\n</head>`);
+  return matcher.test(html) ? html.replace(matcher, tag) : html.replace('</head>', `  ${tag}\n</head>`);
 }
 
 function replaceCanonical(html, canonical) {
   const matcher = /<link\s+rel="canonical"[^>]*>/i;
   const tag = `<link rel="canonical" href="${escapeHtml(canonical)}" />`;
-  return matcher.test(html) ? html.replace(matcher, tag) : html.replace('</head>', `  ${tag}\\n</head>`);
+  return matcher.test(html) ? html.replace(matcher, tag) : html.replace('</head>', `  ${tag}\n</head>`);
 }
 
 function createRouteHtml(template, pathname, title, description, body, routeName) {
@@ -93,7 +93,7 @@ function createRouteHtml(template, pathname, title, description, body, routeName
     inLanguage: 'en',
   };
   const jsonLd = JSON.stringify(structuredData).replace(/</g, '\\u003c');
-  html = html.replace('</head>', `  <script type="application/ld+json">${jsonLd}</script>\\n</head>`);
+  html = html.replace('</head>', `  <script type="application/ld+json">${jsonLd}</script>\n</head>`);
 
   const rootElement = `<div id="root">${body}</div>`;
   if (!/<div id="root"><\/div>/i.test(html)) {
