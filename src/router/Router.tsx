@@ -81,6 +81,9 @@ export function matchRoute(pathname: string): { route: string; params: Record<st
   if (cleanPath === '/offers') {
     return { route: 'offers', params: {} };
   }
+  if (cleanPath === '/brand-kit') {
+    return { route: 'brand-kit', params: {} };
+  }
   if (cleanPath === '/about' || cleanPath === '/about-us') {
     return { route: 'about', params: {} };
   }
