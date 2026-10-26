@@ -14,6 +14,8 @@ test('dedicated AI video landing page targets a clear search intent with unique 
   assert.match(page, /<AiToolCard key=\{tool\.id\} tool=\{tool\} \/>/);
   assert.match(page, /image-to-video/);
   assert.match(page, /open-weight/i);
+  assert.match(page, /Official pricing \/ access source/);
+  assert.match(page, /formatVerifiedDate\(tool\.pricingVerifiedAt\)/);
   assert.match(page, /AI video generator FAQs/);
   assert.match(app, /case 'ai-video-tools':\s+return formatPageTitle\('AI Video Generators: Free, Open-Source & Text-to-Video Tools'\)/);
   assert.match(app, /case 'ai-video-tools':\s+return 'Compare AI video generators/);
