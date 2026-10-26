@@ -1,18 +1,18 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48" fill="none">
   <defs>
     <linearGradient id="srBorder" x1="0" y1="0" x2="48" y2="48" gradientUnits="userSpaceOnUse">
-      <stop offset="0%" stop-color="#06b6d4" />
-      <stop offset="50%" stop-color="#3b82f6" />
+      <stop offset="0%" stop-color="#22D3EE" />
+      <stop offset="50%" stop-color="#60A5FA" />
       <stop offset="100%" stop-color="#8b5cf6" />
     </linearGradient>
     <linearGradient id="srRoute" x1="7" y1="7" x2="41" y2="41" gradientUnits="userSpaceOnUse">
-      <stop offset="0%" stop-color="#38bdf8" />
-      <stop offset="52%" stop-color="#60a5fa" />
-      <stop offset="100%" stop-color="#a855f7" />
+      <stop offset="0%" stop-color="#22D3EE" />
+      <stop offset="52%" stop-color="#60A5FA" />
+      <stop offset="100%" stop-color="#8B5CF6" />
     </linearGradient>
     <radialGradient id="srGlow" cx="50%" cy="50%" r="50%">
-      <stop offset="0%" stop-color="#06b6d4" stop-opacity="0.3" />
-      <stop offset="100%" stop-color="#06b6d4" stop-opacity="0" />
+      <stop offset="0%" stop-color="#22D3EE" stop-opacity="0.3" />
+      <stop offset="100%" stop-color="#22D3EE" stop-opacity="0" />
     </radialGradient>
   </defs>
   <rect width="48" height="48" rx="12" fill="#0c0e14" />
@@ -20,6 +20,6 @@
   <rect x="1" y="1" width="46" height="46" rx="11" stroke="url(#srBorder)" stroke-width="2" stroke-opacity="0.8" />
   <path d="M9 15h27m0 0-6-6m6 6-6 6" stroke="url(#srRoute)" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round" />
   <path d="M39 33H12m0 0 6-6m-6 6 6 6" stroke="url(#srRoute)" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round" />
-  <circle cx="9" cy="15" r="3" fill="#38bdf8" />
-  <circle cx="39" cy="33" r="3" fill="#c084fc" />
+  <circle cx="9" cy="15" r="3" fill="#22D3EE" />
+  <circle cx="39" cy="33" r="3" fill="#8B5CF6" />
 </svg>

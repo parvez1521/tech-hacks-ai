@@ -106,6 +106,7 @@ export const siteConfig: SiteConfig = {
       { title: 'Free AI Sites', href: '/free-ai-sites', badge: 'Free' },
     ],
     resources: [
+      { title: 'Brand Kit', href: '/brand-kit', description: 'SwitchRoute logo, colours, typography, and usage guidelines.' },
       { title: 'AI Video Generators', href: '/ai-video-tools', description: 'Compare AI video generators by workflow and access model.' },
       { title: 'Help Me Pick', href: '/pick' },
       { title: 'Compare Software', href: '/compare' },
