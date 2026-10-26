@@ -24,6 +24,7 @@ import { getOfferBySlug } from './data/offersData';
 
 // Pages
 import { HomePage } from './pages/HomePage';
+import { BrandKitPage } from './pages/BrandKitPage';
 import { ToolsPage } from './pages/ToolsPage';
 import { ToolDetailPage } from './pages/ToolDetailPage';
 import { CategoriesPage } from './pages/CategoriesPage';
@@ -146,6 +147,8 @@ export function getRouteTitle(route: string, params: Record<string, string> = {}
         ? formatPageTitle(`${offer.title} — AI Deals & Benefits`)
         : formatPageTitle('Offer Not Found');
     }
+    case 'brand-kit':
+      return formatPageTitle('SwitchRoute Brand Kit: Logo, Colours & Typography');
     case 'about':
       return formatPageTitle('About Us — Editorial Mission & Standards');
     case 'contact':
@@ -258,6 +261,8 @@ export function getRouteDescription(route: string, params: Record<string, string
         ? `${offer.title} from ${offer.provider}. ${offer.benefitSummary} Eligibility: ${offer.eligibility}`
         : 'Verified AI deal and benefit terms.';
     }
+    case 'brand-kit':
+      return 'Explore the SwitchRoute digital brand kit: route-mark assets, colour tokens, typography, interface styles, accessibility principles, and brand voice.';
     case 'about':
       return 'Learn about the mission, editorial methodology, and independent review standards behind SwitchRoute.';
     case 'contact':
@@ -371,6 +376,8 @@ const AppRoutes: React.FC = () => {
         return <OffersPage />;
       case 'offer-detail':
         return <OfferDetailPage />;
+      case 'brand-kit':
+        return <BrandKitPage />;
       case 'about':
         return <AboutPage />;
       case 'contact':
