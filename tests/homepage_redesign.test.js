@@ -94,7 +94,7 @@ describe('Premium homepage redesign regressions', () => {
     assert.match(css, /grid-template-columns: repeat\(2, minmax\(0, 1fr\)\)/);
     assert.match(css, /border: 1px solid rgb\(var\(--color-border\)/);
     assert.match(css, /background: rgb\(var\(--color-card\) \/ 0\.78\)/);
-    assert.match(css, /\.catalog-trust-strip__metrics > article \{\s+display: flex;/);
+    assert.match(css, /\.catalog-trust-strip__metrics > \.catalog-metric-card \{\s+display: flex;/);
     assert.match(css, /\.catalog-metric-card__number/);
     assert.ok(home.indexOf('data-testid="catalog-trust-strip"') > home.indexOf('</section>'), 'Metric cards follow the hero as a secondary discovery strip');
   });
