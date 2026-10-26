@@ -184,6 +184,11 @@ export const Footer: React.FC = () => {
             </p>
             <ul className="space-y-1.5 text-muted-foreground text-xs mb-3">
               <li>
+                <Link to="/brand-kit" className="hover:text-foreground">
+                  Brand Kit
+                </Link>
+              </li>
+              <li>
                 <Link to="/about" className="hover:text-foreground">
                   About Us
                 </Link>
