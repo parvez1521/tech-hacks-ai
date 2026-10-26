@@ -136,7 +136,7 @@ describe('Phase 6: Homepage Redesign & HandlyTech Platform Integration', () => {
     setupMockBrowser('https://openalternative.co/ai-tools');
     const html = renderClean(React.createElement(ssrModule.App));
 
-    assert.ok(html.includes('Discover Best AI Tools &amp; Generative Platforms') || html.includes('Discover Best AI Tools & Generative Platforms'), 'AI directory title');
+    assert.ok(html.includes('AI Tools Directory: Discover &amp; Compare AI Platforms') || html.includes('AI Tools Directory: Discover & Compare AI Platforms'), 'AI directory title');
     assert.ok(html.includes('Runway Gen-3 Alpha'), 'Renders Runway');
     assert.ok(html.includes('Cursor Editor'), 'Renders Cursor');
     assert.ok(html.includes('Claude'), 'Renders Claude');
