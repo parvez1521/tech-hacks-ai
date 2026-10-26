@@ -32,6 +32,7 @@ import { AlternativesPage } from './pages/AlternativesPage';
 import { AlternativeDetailPage } from './pages/AlternativeDetailPage';
 import { CollectionDetailPage } from './pages/CollectionDetailPage';
 import { AiToolsPage } from './pages/AiToolsPage';
+import { AiVideoToolsPage } from './pages/AiVideoToolsPage';
 import { AiToolDetailPage } from './pages/AiToolDetailPage';
 import { FreeAiSitesPage } from './pages/FreeAiSitesPage';
 import { GuidesPage } from './pages/GuidesPage';
@@ -95,6 +96,8 @@ export function getRouteTitle(route: string, params: Record<string, string> = {}
     }
     case 'ai-tools':
       return formatPageTitle('AI Tools & Generative Platforms Directory');
+    case 'ai-video-tools':
+      return formatPageTitle('AI Video Generators: Free, Open-Source & Text-to-Video Tools');
     case 'ai-tool-detail': {
       const aiTool = getAiToolBySlug(params.slug);
       return aiTool
@@ -205,6 +208,8 @@ export function getRouteDescription(route: string, params: Record<string, string
     }
     case 'ai-tools':
       return 'Comprehensive directory of top generative AI platforms, foundation models, code editors, and video generation engines.';
+    case 'ai-video-tools':
+      return 'Compare AI video generators for text-to-video, image-to-video, and open-model workflows. Explore access options, hardware needs, licensing, and official tool pages.';
     case 'ai-tool-detail': {
       const aiTool = getAiToolBySlug(params.slug);
       return aiTool
@@ -334,6 +339,8 @@ const AppRoutes: React.FC = () => {
         return <CollectionDetailPage />;
       case 'ai-tools':
         return <AiToolsPage />;
+      case 'ai-video-tools':
+        return <AiVideoToolsPage />;
       case 'ai-tool-detail':
         return <AiToolDetailPage />;
       case 'community-redirect':
