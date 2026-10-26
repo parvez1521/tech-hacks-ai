@@ -82,7 +82,11 @@ function createRouteHtml(template, pathname, title, description, body, routeName
   const noIndex = new Set(['/saved', '/submit-tool', '/submit-guide', '/submit-prompt']);
   if (noIndex.has(pathname)) html = replaceMeta(html, 'name', 'robots', 'noindex,follow');
 
-  const pageType = ['guide-detail', 'prompt-detail'].includes(routeName) ? 'Article' : 'WebPage';
+  const pageType = ['guide-detail', 'prompt-detail'].includes(routeName)
+    ? 'Article'
+    : routeName === 'ai-video-tools'
+      ? 'CollectionPage'
+      : 'WebPage';
   const structuredData = {
     '@context': 'https://schema.org',
     '@type': pageType,
