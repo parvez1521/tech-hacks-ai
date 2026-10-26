@@ -238,6 +238,7 @@ export const HomePage: React.FC = () => {
                 <Link to="/free-tools"><Wrench size={14} aria-hidden="true" /> Utilities</Link>
                 <Link to="/offers"><Tag size={14} aria-hidden="true" /> Offers</Link>
                 <Link to="/pick"><Compass size={14} aria-hidden="true" /> Help me choose</Link>
+                <Link to="/ai-video-tools"><Video size={14} aria-hidden="true" /> AI video tools</Link>
               </div>
           </div>
 
