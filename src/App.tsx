@@ -95,7 +95,7 @@ export function getRouteTitle(route: string, params: Record<string, string> = {}
         : formatPageTitle('Collection Not Found');
     }
     case 'ai-tools':
-      return formatPageTitle('AI Tools & Generative Platforms Directory');
+      return formatPageTitle('AI Tools Directory: Free, Paid & Open Models');
     case 'ai-video-tools':
       return formatPageTitle('AI Video Generators: Free, Open-Source & Text-to-Video Tools');
     case 'ai-tool-detail': {
@@ -207,7 +207,7 @@ export function getRouteDescription(route: string, params: Record<string, string
         : 'Curated software collection.';
     }
     case 'ai-tools':
-      return 'Comprehensive directory of top generative AI platforms, foundation models, code editors, and video generation engines.';
+      return 'Compare AI tools for video generation, image creation, coding, writing, research, and automation. Check free access, trials, open models, key features, and official links.';
     case 'ai-video-tools':
       return 'Compare AI video generators for text-to-video, image-to-video, and open-model workflows. Explore access options, hardware needs, licensing, and official tool pages.';
     case 'ai-tool-detail': {
