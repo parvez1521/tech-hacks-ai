@@ -162,7 +162,7 @@ export const ContactPage: React.FC = () => {
         <a
           href={emailContact.href}
           aria-label={`Email SwitchRoute: ${emailContact.display}`}
-          className="mb-8 flex min-w-0 items-center gap-3 rounded-2xl border border-emerald-200 bg-emerald-50/80 p-4 sm:p-5 shadow-invary-card transition-colors hover:border-emerald-400 hover:bg-emerald-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500"
+          className="mb-8 flex min-w-0 items-center gap-3 rounded-2xl border border-emerald-400/40 bg-card p-4 sm:p-5 shadow-invary-card transition-colors hover:border-emerald-400/70 hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500"
         >
           <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl border border-emerald-200 bg-white text-emerald-700">
             <Mail className="h-5 w-5" aria-hidden="true" />
@@ -192,13 +192,13 @@ export const ContactPage: React.FC = () => {
         )}
 
         {intakeState === 'unavailable' && (
-          <div className="flex items-start gap-3 rounded-xl border border-amber-300 bg-amber-50 p-4 text-amber-950" role="status" aria-live="polite">
-            <AlertCircle className="mt-0.5 h-5 w-5 shrink-0" />
+          <div className="flex items-start gap-3 rounded-xl border border-amber-400/40 bg-amber-500/10 p-4 text-foreground" role="status" aria-live="polite">
+            <AlertCircle className="mt-0.5 h-5 w-5 shrink-0 text-amber-500 dark:text-amber-300" />
             <div>
-              <h3 className="text-sm font-bold">Website contact form is not active yet</h3>
-              <p className="mt-1 text-xs leading-relaxed">
+              <h3 className="text-sm font-bold text-foreground">Website contact form is not active yet</h3>
+              <p className="mt-1 text-xs leading-relaxed text-muted-foreground">
                 Secure message storage is not configured or reachable, so this page will not collect or pretend to send a message.
-                Please email <a className="font-semibold underline underline-offset-2" href={emailContact?.href || 'mailto:support@switchroute.in'}>{emailContact?.display || 'support@switchroute.in'}</a> for support and formal requests. Instagram is available for general, non-sensitive questions only.
+                Please email <a className="font-semibold text-primary underline underline-offset-2" href={emailContact?.href || 'mailto:support@switchroute.in'}>{emailContact?.display || 'support@switchroute.in'}</a> for support and formal requests. Instagram is available for general, non-sensitive questions only.
               </p>
             </div>
           </div>
