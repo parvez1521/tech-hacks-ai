@@ -51,7 +51,7 @@ describe('Phase 23: Homepage Logo Fix, Real Brand Assets & Theme Toggle Repair',
 
       assert.ok(content.includes('html.dark'), 'Includes html.dark selector');
       assert.ok(content.includes('color-scheme: dark'), 'Dark mode declares color-scheme: dark');
-      assert.ok(content.includes('--color-bg: 8 13 24'), 'Midnight-blue dark background token exists');
+      assert.ok(content.includes('--color-bg: var(--brand-midnight)'), 'Midnight-blue dark background token exists');
     });
 
     test('Header exposes an accessible theme toggle for desktop and mobile', () => {
