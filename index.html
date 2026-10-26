@@ -46,6 +46,48 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
+
+    <!-- Google Analytics 4: SwitchRoute -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-YMZP8GNP6B"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      window.gtag = gtag;
+      gtag('js', new Date());
+      // Disable automatic initial page_view so SPA navigation is tracked once below.
+      gtag('config', 'G-YMZP8GNP6B', { send_page_view: false });
+
+      (function () {
+        var lastUrl = location.pathname + location.search + location.hash;
+        function trackPageView() {
+          var currentUrl = location.pathname + location.search + location.hash;
+          if (currentUrl === lastUrl) return;
+          lastUrl = currentUrl;
+          gtag('event', 'page_view', {
+            page_title: document.title,
+            page_location: location.href,
+            page_path: location.pathname + location.search + location.hash
+          });
+        }
+        // Track the initial document load.
+        gtag('event', 'page_view', {
+          page_title: document.title,
+          page_location: location.href,
+          page_path: location.pathname + location.search + location.hash
+        });
+        ['pushState', 'replaceState'].forEach(function (method) {
+          var original = history[method];
+          history[method] = function () {
+            var result = original.apply(this, arguments);
+            trackPageView();
+            return result;
+          };
+        });
+        window.addEventListener('popstate', trackPageView);
+        window.addEventListener('hashchange', trackPageView);
+      })();
+    </script>
+
     <!-- AdSense is injected by AdSenseRuntime only after explicit approval, privacy readiness, and visitor consent. Use the ads.txt verification method while ad serving is disabled. -->
   </head>
   <body class="min-h-screen bg-background text-foreground font-sans antialiased selection:bg-primary/20 selection:text-primary">
