@@ -240,7 +240,7 @@
     gap: 0.75rem;
   }
 
-  .catalog-trust-strip__metrics > article {
+  .catalog-trust-strip__metrics > .catalog-metric-card {
     display: flex;
     min-height: 8.25rem;
     flex-direction: column;
@@ -275,7 +275,7 @@
     letter-spacing: -0.015em;
   }
 
-  .catalog-trust-strip__metrics > article:hover {
+  .catalog-trust-strip__metrics > .catalog-metric-card:hover {
     border-color: rgb(var(--color-primary) / 0.4);
     background: rgb(var(--color-primary) / 0.07);
   }
@@ -297,7 +297,7 @@
       gap: 0.65rem;
     }
 
-    .catalog-trust-strip__metrics > article {
+    .catalog-trust-strip__metrics > .catalog-metric-card {
       padding: 0.7rem;
     }
 
@@ -315,7 +315,7 @@
   }
 
   @media (max-width: 767px) {
-    .catalog-trust-strip__metrics > article {
+    .catalog-trust-strip__metrics > .catalog-metric-card {
       padding: 0.8rem;
     }
   }
@@ -1066,14 +1066,14 @@
   .hero-redesign__primary-action,
   .hero-redesign__secondary-action,
   .hero-redesign__quick-links a,
-  .catalog-trust-strip__metrics > article,
+  .catalog-trust-strip__metrics > .catalog-metric-card,
   .discovery-card,
   .chat-launcher,
   .discovery-interface__tabs button,
   .discovery-interface__samples button,
   .discovery-interface__result { transition: none; }
   .discovery-card:hover,
-  .catalog-trust-strip__metrics > article:hover,
+  .catalog-trust-strip__metrics > .catalog-metric-card:hover,
   .chat-launcher:hover,
   .discovery-interface__result:hover { transform: none; }
 }
