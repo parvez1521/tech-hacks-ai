@@ -45,3 +45,13 @@ test('privacy and disclosure pages use the official support channel without lega
   assert.match(disclosure, /support@switchroute\.in/);
   assert.doesNotMatch(disclosure, /@techhacksai\.com/i);
 });
+
+test('contact page keeps support links readable in dark mode and avoids pale hover fills', async () => {
+  const page = await read('../src/pages/ContactPage.tsx');
+  assert.match(page, /border-emerald-400\/40 bg-card/);
+  assert.match(page, /hover:bg-muted/);
+  assert.doesNotMatch(page, /hover:bg-emerald-50/);
+  assert.match(page, /bg-amber-500\/10 p-4 text-foreground/);
+  assert.match(page, /text-muted-foreground/);
+  assert.match(page, /font-semibold text-primary underline/);
+});
