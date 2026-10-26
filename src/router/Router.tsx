@@ -48,6 +48,9 @@ export function matchRoute(pathname: string): { route: string; params: Record<st
   if (cleanPath === '/ai-tools') {
     return { route: 'ai-tools', params: {} };
   }
+  if (cleanPath === '/ai-video-tools') {
+    return { route: 'ai-video-tools', params: {} };
+  }
   if (cleanPath === '/community-tools' || cleanPath === '/community') {
     return { route: 'community-redirect', params: {} };
   }
