@@ -8,7 +8,7 @@ import { Pagination } from '../components/Pagination';
 import { EmptyState } from '../components/EmptyState';
 import { CommunityCallout } from '../components/CommunityCallout';
 import { AiFilterState, PricingType, FreeAccessType } from '../types';
-import { Sparkles, Search, X, SlidersHorizontal, PlusCircle } from 'lucide-react';
+import { Sparkles, Search, X, SlidersHorizontal, PlusCircle, Video, ArrowRight } from 'lucide-react';
 
 export const AiToolsPage: React.FC = () => {
   const { searchParams, setSearchParam, setSearchParams, resetSearchParams } = useRouter();
@@ -97,6 +97,20 @@ export const AiToolsPage: React.FC = () => {
         <p className="text-sm sm:text-base text-[#64748B] max-w-2xl mb-6">
           Explore top generative video, image, voice, coding, and workflow automation models. Filter by pricing tier, features, and user ratings.
         </p>
+
+        <Link
+          to="/ai-video-tools"
+          className="mb-6 flex items-center gap-3 rounded-xl border border-primary/25 bg-primary/5 p-4 text-sm transition-colors hover:border-primary/50 hover:bg-primary/10"
+        >
+          <span className="grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-primary/10 text-primary">
+            <Video className="h-5 w-5" aria-hidden="true" />
+          </span>
+          <span className="min-w-0 flex-1">
+            <span className="block font-semibold text-foreground">Looking specifically for AI video generators?</span>
+            <span className="mt-1 block text-xs leading-relaxed text-secondary-foreground">Compare text-to-video, image-to-video, free-entry, and open-model options on our focused video tools page.</span>
+          </span>
+          <ArrowRight className="h-4 w-4 shrink-0 text-primary" aria-hidden="true" />
+        </Link>
 
         {/* Search & Main Controls Bar */}
         <div className="p-4 rounded-xl bg-white border border-[#DFE7F3] shadow-sm flex flex-col md:flex-row gap-3 items-stretch md:items-center justify-between mb-6">
