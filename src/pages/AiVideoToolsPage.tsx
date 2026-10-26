@@ -18,6 +18,10 @@ function hasOpenModelAccess(tool: ReturnType<typeof getAiToolsForSearchIntent>[n
     tool.videoDiscoverySections?.includes('open-weights') === true;
 }
 
+function formatVerifiedDate(value: string | undefined): string {
+  return value?.match(/^\\d{4}-\\d{2}-\\d{2}/)?.[0] || 'date not listed';
+}
+
 export const AiVideoToolsPage: React.FC = () => {
   const [filter, setFilter] = useState<VideoFilter>('all');
   const generators = useMemo(() => getAiToolsForSearchIntent('AI video generator'), []);
@@ -115,7 +119,19 @@ export const AiVideoToolsPage: React.FC = () => {
 
         {visibleTools.length > 0 ? (
           <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {visibleTools.map((tool) => <AiToolCard key={tool.id} tool={tool} />)}
+            {visibleTools.map((tool) => (
+              <div key={tool.id} className="min-w-0">
+                <AiToolCard tool={tool} />
+                <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-1 px-1 pt-2 text-[11px] text-muted-foreground">
+                  {tool.pricingSourceUrl ? (
+                    <a href={tool.pricingSourceUrl} target="_blank" rel="noopener noreferrer" className="font-semibold text-primary underline underline-offset-2 hover:text-primary-hover">
+                      Official pricing / access source
+                    </a>
+                  ) : <span>Official pricing source not listed</span>}
+                  <span>Checked: {formatVerifiedDate(tool.pricingVerifiedAt)}</span>
+                </div>
+              </div>
+            ))}
           </div>
         ) : (
           <div className="rounded-xl border border-dashed border-border p-8 text-center text-sm text-muted-foreground">
