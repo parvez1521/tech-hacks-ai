@@ -102,7 +102,7 @@ describe('Phase 14: Deep QA, Production Readiness & Trust Audit', () => {
     test('renders /ai-tools directory and /ai-tools/claude detail page', () => {
       setupMockBrowser('https://switchroute.in/ai-tools');
       const listHtml = renderClean(React.createElement(ssrModule.App));
-      assert.ok(listHtml.includes('Discover Best AI Tools &amp; Generative Platforms') || listHtml.includes('Discover Best AI Tools & Generative Platforms'), 'AI directory header');
+      assert.ok(listHtml.includes('AI Tools Directory: Discover &amp; Compare AI Platforms') || listHtml.includes('AI Tools Directory: Discover & Compare AI Platforms'), 'AI directory header');
 
       setupMockBrowser('https://switchroute.in/ai-tools/claude');
       const detailHtml = renderClean(React.createElement(ssrModule.App));
