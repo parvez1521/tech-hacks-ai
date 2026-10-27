@@ -62,12 +62,14 @@ describe('Phase 23: Homepage Logo Fix, Real Brand Assets & Theme Toggle Repair',
       assert.ok(content.includes('<ThemeToggle compact />'), 'Mobile theme control is rendered');
     });
 
-    test('ThemeToggle keeps one playful quote per session and dismisses it on interaction', () => {
+    test('ThemeToggle hint always suggests the opposite of the active theme', () => {
       const togglePath = path.resolve(process.cwd(), 'src/components/ThemeToggle.tsx');
       const content = fs.readFileSync(togglePath, 'utf8');
 
-      assert.ok(content.includes('THEME_HINT_QUOTE_SESSION_KEY'), 'Stores the selected quote in session storage');
-      assert.ok(content.includes('THEME_HINT_QUOTES'), 'Uses a curated quote list');
+      assert.ok(content.includes("function getThemeHint(theme: 'dark' | 'light')"), 'Hint is derived from the active theme');
+      assert.ok(content.includes("'Curious about the light side?'"), 'Dark mode suggests light mode');
+      assert.ok(content.includes("'Psst… try the dark side.'"), 'Light mode suggests dark mode');
+      assert.ok(content.includes('{getThemeHint(theme)}'), 'Rendered hint reads the current theme');
       assert.ok(content.includes('sessionStorage.setItem(THEME_HINT_SESSION_KEY, \'1\')'), 'Dismisses the hint after interaction');
       assert.ok(content.includes('pointer-events'), 'Hint styling is expected to remain non-blocking');
     });
