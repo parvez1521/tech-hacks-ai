@@ -290,7 +290,7 @@ export const offersData: AiOffer[] = [
       { step: 4, title: 'Review your plan', detail: 'Check the plan and included features shown in your verified account.' },
     ],
     logoSlug: 'figma',
-    logoAssetPath: '/logos/figma.svg',
+    logoAssetPath: '/logos/provided/figma.svg',
     tags: ['Figma', 'UI/UX', 'Students', 'Design', 'Education', 'Global'],
     isFeatured: true,
   },
@@ -543,7 +543,7 @@ export const offersData: AiOffer[] = [
       { step: 1, title: 'Review current plan terms', detail: 'Open the provider pricing and terms pages and confirm that the plan is available for your account and region.' },
       { step: 2, title: 'Create or sign in to your account', detail: 'Follow the official provider flow and check usage limits before enabling paid services.' },
     ],
-    logoSlug: 'firebase', logoAssetPath: '/logos/firebase.svg', tags: ['Google Firebase', 'Free Plan', 'Developer'], isFeatured: false,
+    logoSlug: 'firebase', logoAssetPath: '/logos/provided/firebase.svg', tags: ['Google Firebase', 'Free Plan', 'Developer'], isFeatured: false,
   },
   {
     id: 'mongodb-atlas-m0', slug: 'mongodb-atlas-m0', title: 'MongoDB Atlas Free Cluster', provider: 'MongoDB',

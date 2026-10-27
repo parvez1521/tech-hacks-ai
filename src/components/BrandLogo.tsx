@@ -25,7 +25,7 @@ export const BrandLogo: React.FC<BrandLogoProps> = ({
   const logoEntry = getBrandLogo(slug);
   // Prefer traceable local assets. For entries whose only recorded source is a
   // domain favicon, use that sourced favicon rather than a generic placeholder.
-  const isTrustedLogo = Boolean(logoEntry?.sourceUrl && logoEntry.sourceType !== 'fallback');
+  const isTrustedLogo = Boolean(logoEntry?.assetPath && (logoEntry.sourceType === 'provided' || (logoEntry.sourceUrl && logoEntry.sourceType !== 'fallback')));
   const isDomainFaviconFallback = Boolean(
     logoEntry?.sourceType === 'fallback' && logoEntry.sourceUrl?.includes('google.com/s2/favicons')
   );

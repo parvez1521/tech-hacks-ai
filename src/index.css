@@ -530,7 +530,6 @@
 .brand-logo-image--continue-dev,
 .brand-logo-image--copy-ai,
 .brand-logo-image--notebooklm,
-.brand-logo-image--omnirush,
 .brand-logo-image--open-webui,
 .brand-logo-image--qwen-chat,
 .brand-logo-image--qwen-coder,
@@ -540,6 +539,12 @@
   background: #ffffff;
   border-radius: 0.35rem;
   padding: 0.18rem;
+}
+
+.brand-logo-image--omnirush {
+  background: transparent;
+  border-radius: 0.35rem;
+  padding: 0;
 }
 
 .brand-logo-image--google-ai-studio,

@@ -186,11 +186,27 @@ describe('Phase 23: Homepage Logo Fix, Real Brand Assets & Theme Toggle Repair',
       });
     });
 
+    test('Seven supplied tool logos use local provided artwork in the shared manifest and direct offer cards', () => {
+      const manifestPath = path.resolve(process.cwd(), 'src/data/brandLogos.ts');
+      const manifest = fs.readFileSync(manifestPath, 'utf8');
+      const offersPath = path.resolve(process.cwd(), 'src/data/offersData.ts');
+      const offers = fs.readFileSync(offersPath, 'utf8');
+      const supplied = ['airtable', 'claude-code', 'figma', 'firebase', 'google-photos', 'omnirush', 'invideo-ai'];
+
+      for (const slug of supplied) {
+        assert.ok(manifest.includes(`"assetPath": "/logos/provided/${slug}.svg"`), `${slug} points to its supplied local artwork`);
+        assert.ok(manifest.includes(`"${slug}": {`) && manifest.includes(`"sourceType": "provided"`), `${slug} is recorded as provided artwork`);
+        assert.ok(fs.existsSync(path.resolve(process.cwd(), 'public/logos/provided', `${slug}.svg`)), `${slug} asset exists`);
+      }
+      assert.ok(offers.includes("logoAssetPath: '/logos/provided/figma.svg'"), 'Figma offer card uses the provided logo');
+      assert.ok(offers.includes("logoAssetPath: '/logos/provided/firebase.svg'"), 'Firebase offer card uses the provided logo');
+    });
+
     test('BrandLogo only paints traceable assets and exposes a neutral fallback status', () => {
       const logoCompPath = path.resolve(process.cwd(), 'src/components/BrandLogo.tsx');
       const content = fs.readFileSync(logoCompPath, 'utf8');
 
-      assert.ok(content.includes('const isTrustedLogo = Boolean(logoEntry?.sourceUrl'), 'Trust is based on provenance, not filename');
+      assert.ok(content.includes("logoEntry.sourceType === 'provided'"), 'Explicitly provided local artwork is trusted without a fabricated source URL');
        assert.ok(content.includes('data-logo-status={logoStatus}'), 'Logo provenance status is exposed for QA');
        assert.ok(content.includes('data-logo-status="intentional-neutral-fallback"'), 'Fallback status is exposed for QA');
     });
