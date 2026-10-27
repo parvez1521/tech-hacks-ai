@@ -39,7 +39,7 @@ export function openCookiePreferencesModal() {
 
 export const CookieConsentBanner: React.FC = () => {
   // Keep the first server/client render identical; persisted choices are applied in useEffect.
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(() => getCookiePreferences() === null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [analytics, setAnalytics] = useState(false);
   const [advertising, setAdvertising] = useState(false);
@@ -83,12 +83,14 @@ export const CookieConsentBanner: React.FC = () => {
   };
 
   useEffect(() => {
-    // Check if user already set preferences
+    // Read saved choices after mount to keep server/client rendering consistent.
     const existing = getCookiePreferences();
     if (existing) {
       setIsOpen(false);
       setAnalytics(existing.analytics);
       setAdvertising(existing.advertising);
+    } else {
+      setIsOpen(true);
     }
   }, []);
 
