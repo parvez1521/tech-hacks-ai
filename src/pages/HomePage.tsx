@@ -10,6 +10,7 @@ import { OfferCard } from '../components/OfferCard';
 import { BrandLogo } from '../components/BrandLogo';
 import { AnimatedCount } from '../components/AnimatedCount';
 import { DailyDiscoveriesSection } from '../components/DailyDiscoveriesSection';
+import { FrontierBonusSection } from '../components/FrontierBonusSection';
 import { AiAlternativesShowcase } from '../components/AiAlternativesShowcase';
 import { HeroSignalVisual } from '../components/HeroSignalVisual';
 import { proprietaryTools } from '../data/alternatives';
@@ -309,6 +310,9 @@ export const HomePage: React.FC = () => {
       >
         <AiAlternativesShowcase />
       </section>
+
+      {/* SPECIAL BONUS: FRONTIER MODEL ACCESS */}
+      <FrontierBonusSection />
 
       {/* =========================================================================
           SECTION 2: BROWSE BY GOAL (INTENT-DRIVEN DIRECTORY TILES)
