@@ -96,6 +96,16 @@ export const FrontierBonusSection: React.FC = () => (
                   href={card.href}
                   target="_blank"
                   rel="noopener noreferrer"
+                  onClick={() => {
+                    if (typeof window.gtag === 'function') {
+                      window.gtag('event', 'bonus_outbound_click', {
+                        provider_name: card.name,
+                        link_url: card.href,
+                        link_text: card.cta,
+                        section: 'frontier_bonus'
+                      });
+                    }
+                  }}
                   className="mt-auto inline-flex items-center justify-center gap-2 rounded-lg bg-foreground px-4 py-3 text-sm font-bold text-background transition hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
                 >
                   {card.cta} <ArrowUpRight className="h-4 w-4" />
