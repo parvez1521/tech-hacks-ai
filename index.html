@@ -47,34 +47,58 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 
-    <!-- Google Analytics 4: SwitchRoute -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-YMZP8GNP6B"></script>
+    <!-- Google Analytics 4: load only after the visitor opts into analytics cookies. -->
     <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      window.gtag = gtag;
-      gtag('js', new Date());
-      // Disable automatic initial page_view so SPA navigation is tracked once below.
-      gtag('config', 'G-YMZP8GNP6B', { send_page_view: false });
-
       (function () {
+        var measurementId = 'G-YMZP8GNP6B';
+        var initialized = false;
         var lastUrl = location.pathname + location.search + location.hash;
+
+        function getPreferences() {
+          try {
+            var raw = localStorage.getItem('cookie_consent_preferences');
+            return raw ? JSON.parse(raw) : null;
+          } catch (e) {
+            return null;
+          }
+        }
+
         function trackPageView() {
-          var currentUrl = location.pathname + location.search + location.hash;
-          if (currentUrl === lastUrl) return;
-          lastUrl = currentUrl;
-          gtag('event', 'page_view', {
+          window.setTimeout(function () {
+            var currentUrl = location.pathname + location.search + location.hash;
+            if (currentUrl === lastUrl) return;
+            lastUrl = currentUrl;
+            if (!initialized || typeof window.gtag !== 'function') return;
+            window.gtag('event', 'page_view', {
+              page_title: document.title,
+              page_location: location.href,
+              page_path: currentUrl
+            });
+          }, 0);
+        }
+
+        function enableAnalyticsIfConsented() {
+          var preferences = getPreferences();
+          if (initialized || !preferences || preferences.analytics !== true) return;
+          initialized = true;
+
+          window.dataLayer = window.dataLayer || [];
+          window.gtag = function () { window.dataLayer.push(arguments); };
+          window.gtag('js', new Date());
+          window.gtag('config', measurementId, { send_page_view: false });
+
+          var script = document.createElement('script');
+          script.async = true;
+          script.src = 'https://www.googletagmanager.com/gtag/js?id=' + measurementId;
+          document.head.appendChild(script);
+
+          window.gtag('event', 'page_view', {
             page_title: document.title,
             page_location: location.href,
             page_path: location.pathname + location.search + location.hash
           });
         }
-        // Track the initial document load.
-        gtag('event', 'page_view', {
-          page_title: document.title,
-          page_location: location.href,
-          page_path: location.pathname + location.search + location.hash
-        });
+
         ['pushState', 'replaceState'].forEach(function (method) {
           var original = history[method];
           history[method] = function () {
@@ -85,6 +109,9 @@
         });
         window.addEventListener('popstate', trackPageView);
         window.addEventListener('hashchange', trackPageView);
+        window.addEventListener('cookie_consent_updated', enableAnalyticsIfConsented);
+        window.addEventListener('storage', enableAnalyticsIfConsented);
+        enableAnalyticsIfConsented();
       })();
     </script>
 
