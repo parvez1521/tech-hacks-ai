@@ -86,14 +86,12 @@ export const brandLogos: Record<string, BrandLogoEntry> = {
   "airtable": {
     "slug": "airtable",
     "name": "Airtable",
-    "assetPath": "/logos/airtable.svg",
-    "sourceType": "simple-icons",
-    "verifiedAt": "2026-10-22",
+    "assetPath": "/logos/provided/airtable.svg",
+    "sourceType": "provided",
+    "verifiedAt": "2026-10-27",
     "badgeBg": "#18bfff",
     "format": "svg",
-    "pngAssetPath": "/logos/png/airtable.png",
-    "sourceUrl": "https://cdn.jsdelivr.net/npm/simple-icons/icons/airtable.svg",
-    "notes": "Simple Icons airtable SVG source; local vector paths verified against the maintained source on 2026-10-22, with the local brand color retained."
+    "notes": "Artwork traced from the user-provided image IMG_0839.png uploaded on 2026-10-27; local self-hosted asset, no third-party substitute."
   },
   "algolia": {
     "slug": "algolia",
@@ -425,13 +423,12 @@ export const brandLogos: Record<string, BrandLogoEntry> = {
   "claude-code": {
     "slug": "claude-code",
     "name": "Claude Code",
-    "assetPath": "/logos/claude-code.svg",
-    "sourceType": "fallback",
-    "verifiedAt": "2026-10-22",
-    "badgeBg": "#d97706",
+    "assetPath": "/logos/provided/claude-code.svg",
+    "sourceType": "provided",
+    "verifiedAt": "2026-10-27",
+    "badgeBg": "#d97757",
     "format": "svg",
-    "pngAssetPath": "/logos/png/claude-code.png",
-    "notes": "Verification gap: the existing local mark has no traceable source and is withheld from display. BrandLogo shows its neutral initials fallback until a verified source is recorded."
+    "notes": "Artwork traced from the user-provided image IMG_0842.png uploaded on 2026-10-27; local self-hosted asset, no third-party substitute."
   },
   "clickup": {
     "slug": "clickup",
@@ -688,24 +685,22 @@ export const brandLogos: Record<string, BrandLogoEntry> = {
   "figma": {
     "slug": "figma",
     "name": "Figma",
-    "assetPath": "/logos/figma.svg",
-    "sourceType": "simple-icons",
-    "verifiedAt": "2026-10-17",
+    "assetPath": "/logos/provided/figma.svg",
+    "sourceType": "provided",
+    "verifiedAt": "2026-10-27",
     "badgeBg": "#f24e1e",
     "format": "svg",
-    "pngAssetPath": "/logos/png/figma.png",
-    "sourceUrl": "https://cdn.jsdelivr.net/npm/simple-icons/icons/figma.svg"
+    "notes": "Artwork traced from the user-provided image IMG_0840.png uploaded on 2026-10-27; local self-hosted asset, no third-party substitute."
   },
   "firebase": {
     "slug": "firebase",
     "name": "Firebase",
-    "assetPath": "/logos/firebase.svg",
-    "sourceType": "simple-icons",
-    "verifiedAt": "2026-10-17",
+    "assetPath": "/logos/provided/firebase.svg",
+    "sourceType": "provided",
+    "verifiedAt": "2026-10-27",
     "badgeBg": "#ffca28",
     "format": "svg",
-    "pngAssetPath": "/logos/png/firebase.png",
-    "sourceUrl": "https://cdn.jsdelivr.net/npm/simple-icons/icons/firebase.svg"
+    "notes": "Artwork traced from the user-provided image D1244D91-9AB3-4CE2-903D-83CCF0BBD51B.png uploaded on 2026-10-27; local self-hosted asset, no third-party substitute."
   },
   "firecrawl": {
     "slug": "firecrawl",
@@ -836,14 +831,12 @@ export const brandLogos: Record<string, BrandLogoEntry> = {
   "google-photos": {
     "slug": "google-photos",
     "name": "Google Photos",
-    "assetPath": "/logos/google-photos.svg",
-    "sourceType": "simple-icons",
-    "verifiedAt": "2026-10-22",
+    "assetPath": "/logos/provided/google-photos.svg",
+    "sourceType": "provided",
+    "verifiedAt": "2026-10-27",
     "badgeBg": "#ea4335",
     "format": "svg",
-    "pngAssetPath": "/logos/png/google-photos.png",
-    "sourceUrl": "https://cdn.jsdelivr.net/npm/simple-icons/icons/googlephotos.svg",
-    "notes": "Simple Icons googlephotos SVG source; local vector paths verified against the maintained source on 2026-10-22, with the local brand color retained."
+    "notes": "Artwork traced from the user-provided image IMG_0841.png uploaded on 2026-10-27; local self-hosted asset, no third-party substitute."
   },
   "googlechrome": {
     "slug": "googlechrome",
@@ -1612,13 +1605,12 @@ export const brandLogos: Record<string, BrandLogoEntry> = {
   "omnirush": {
     "slug": "omnirush",
     "name": "OmniRush",
-    "assetPath": "/logos/official-ai/omnirush.webp",
-    "sourceType": "official",
-    "verifiedAt": "2026-10-21",
+    "assetPath": "/logos/provided/omnirush.svg",
+    "sourceType": "provided",
+    "verifiedAt": "2026-10-27",
     "badgeBg": "#38bdf8",
-    "format": "webp",
-    "sourceUrl": "https://omnirush.ai/brand/lockup-ink-240.webp",
-    "notes": "Browser-inspected official logo from https://omnirush.ai/. Page title: Free AI Coding Agent, Desktop App & CLI | OmniRush"
+    "format": "svg",
+    "notes": "Artwork traced from the user-provided image IMG_0838.png uploaded on 2026-10-27; local self-hosted asset, no third-party substitute."
   },
   "open-webui": {
     "slug": "open-webui",
@@ -2690,11 +2682,12 @@ export const brandLogos: Record<string, BrandLogoEntry> = {
   "invideo-ai": {
     "slug": "invideo-ai",
     "name": "InVideo AI",
-    "assetPath": "/logos/fallback-invideo-ai.svg",
-    "sourceType": "fallback",
-    "verifiedAt": "2026-10-23",
+    "assetPath": "/logos/provided/invideo-ai.svg",
+    "sourceType": "provided",
+    "verifiedAt": "2026-10-27",
+    "badgeBg": "#fee32d",
     "format": "svg",
-    "notes": "Verification gap: no traceable official or authorized logo source was confirmed during this catalog update. The local neutral monogram is not rendered as a brand mark; BrandLogo shows its initials fallback."
+    "notes": "Artwork traced from the user-provided image IMG_0844.png uploaded on 2026-10-27; local self-hosted asset, no third-party substitute."
   },
   "pictory": {
     "slug": "pictory",
