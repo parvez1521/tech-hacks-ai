@@ -16,7 +16,7 @@ Audit date: 2026-10-23
 
 - Prompt provider labels now resolve through explicit aliases. Google/Gemini maps to Google Gemini; Anthropic/Claude maps to Anthropic; FLUX, Runway, Cursor, and Higgsfield each map to their canonical registry slug.
 - The FLUX icon now uses Black Forest Labs' symbol from its brand-guidelines page, the Higgsfield icon comes from its official `icon.png`, and ChatGPT uses the app mark shown by the OpenAI Help Center.
-- Google and Cursor are correctly labeled as Simple Icons sources. Eighteen more Simple Icons records now have direct source URLs after their local SVG path geometry was compared with the source.
+- Google remains mapped to its Simple Icons mark. Cursor prompt-provider references now resolve to the site's owner-provided cube SVG through the canonical `cursor` slug; the runtime registry and public manifest share that mapping.
 - Thirty-six registry entries still lack traceable provenance. Their local artwork is retained for audit, but the UI shows an explicit neutral initials fallback for those entries. Thirty-three of those gaps belong to active catalogue identities; the audit JSON lists them.
 - The registry has 223 entries. One hundred eighty recorded source URLs responded to the remote HEAD check; two returned inconclusive results (DeepSeek's site returned 403 to HEAD and Play.ht did not complete the request). These are not classified as invalid. Remaining entries had no source URL or were already marked as fallback.
 - A complete visual inspection of all 223 logo assets was not performed. The targeted corrections above were checked at source and asset level; existing logo tests validate registry parity, local paths, and file signatures.
