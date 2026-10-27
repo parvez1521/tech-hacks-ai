@@ -231,7 +231,7 @@ describe('Phase 7: Official Brand Logos & Verified Free AI Tools Directory', () 
 
     assert.ok(html.includes('Supabase'), 'Renders Supabase title');
     assert.ok(html.includes('src="/logos/supabase.svg"'), 'Renders official Supabase SVG logo in hero');
-    assert.ok(html.includes('src="/logos/firebase.svg"'), 'Renders Firebase SVG logo in alternative chip');
+    assert.ok(html.includes('src="/logos/provided/firebase.svg"'), 'Renders Firebase SVG logo in alternative chip');
   });
 
   test('alternative detail page renders proprietary target brand logo', async () => {
@@ -262,7 +262,7 @@ describe('Phase 7: Official Brand Logos & Verified Free AI Tools Directory', () 
     const html = renderClean(React.createElement(ssrModule.App));
 
     // Section 2 proprietary cards
-    assert.ok(html.includes('src="/logos/figma.svg"') || html.includes('src="/logos/notion.svg"'), 'Proprietary cards render official SVGs');
+    assert.ok(html.includes('src="/logos/provided/figma.svg"') || html.includes('src="/logos/notion.svg"'), 'Proprietary cards render official SVGs');
     // Section 3 AI cards
     assert.ok(html.includes('src="/logos/runway.svg"') || html.includes('src="/logos/claude.svg"'), 'AI cards render official SVGs');
   });
