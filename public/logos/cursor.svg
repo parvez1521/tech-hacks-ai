@@ -1,4 +1,6 @@
-<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <rect width="24" height="24" rx="6" fill="#18181b"/>
-    <path d="M6 5l12 6-5.5 1.5L11 18 6 5z" fill="#ffffff"/>
-  </svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 447 447" width="447" height="447" role="img" aria-labelledby="cursorTitle">
+  <title id="cursorTitle">Cursor logo</title>
+  <rect width="447" height="447" fill="#000000"/>
+  <path fill="#FFFFFF" d="M221 89 C223 88 225 89 228 90 L336 153 C340 155 342 159 342 163 L342 286 C342 290 340 293 337 295 L228 357 C225 359 222 359 219 357 L109 294 C106 292 105 289 105 286 L105 164 C105 160 107 156 110 154 L218 91 C219 90 220 89 221 89 Z"/>
+  <path fill="#000000" d="M118 160 L328 160 C330 160 331 162 329 165 L225 346 C224 348 223 346 223 344 L223 226 C223 223 221 221 218 219 L118 163 C115 161 116 160 118 160 Z"/>
+</svg>

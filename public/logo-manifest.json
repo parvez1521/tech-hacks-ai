@@ -534,12 +534,11 @@
     "slug": "cursor",
     "name": "Cursor Editor",
     "assetPath": "/logos/cursor.svg",
-    "sourceType": "simple-icons",
-    "verifiedAt": "2026-10-17",
-    "badgeBg": "#18181b",
+    "sourceType": "provided",
+    "verifiedAt": "2026-10-27",
+    "badgeBg": "#000000",
     "format": "svg",
-    "pngAssetPath": "/logos/png/cursor.png",
-    "sourceUrl": "https://cdn.jsdelivr.net/npm/simple-icons/icons/cursor.svg"
+    "notes": "Vector-traced from the Cursor logo reference supplied by the site owner on 2026-10-27."
   },
   {
     "slug": "davinciresolve",

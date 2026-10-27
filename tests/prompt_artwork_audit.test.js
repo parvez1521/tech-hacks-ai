@@ -60,7 +60,7 @@ test('every prompt provider and model resolves through explicit canonical logo m
   }
   assert.equal(getBrandLogo('higgsfield').sourceUrl, 'https://higgsfield.ai/icon.png');
   assert.equal(getBrandLogo('flux-1').sourceUrl, 'https://bfl.ai/brand/symbol-black.svg');
-  assert.equal(getBrandLogo('cursor').sourceType, 'simple-icons');
+  assert.equal(getBrandLogo('cursor').sourceType, 'provided');
 });
 
 test('failed or missing preview sources use a clear accessible fallback', () => {
