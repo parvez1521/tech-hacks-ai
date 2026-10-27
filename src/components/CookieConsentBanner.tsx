@@ -180,7 +180,7 @@ export const CookieConsentBanner: React.FC = () => {
           </div>
 
           <p className="text-secondary-foreground text-[11px] leading-[1.4]">
-            This site uses local storage for theme, bookmarks, and your saved preferences. Analytics and advertising are not currently active. Any future advertising will require appropriate setup and disclosures. See our{' '}
+            This site uses local storage for theme, bookmarks, and your saved preferences. Analytics loads only if you allow it. Advertising is not currently active. See our{' '}
             <Link to="/privacy" className="text-primary hover:underline font-medium">
               Privacy Policy
             </Link>.
