@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { getPromptFeedSeoMetadata, renderPromptFeedStaticBody } from '../scripts/promptfeed-seo.mjs';
+import { getPromptFeedSeoMetadata, isPromptFeedDetailPath, renderPromptFeedStaticBody } from '../scripts/promptfeed-seo.mjs';
 
 const samplePrompt = (overrides = {}) => ({
   id: 'promptfeed-city-travel-grid',
@@ -73,4 +73,16 @@ test('PromptFeed static body rejects non-PromptFeed slugs and unsafe image/sourc
   assert.doesNotMatch(body, /<img\s/);
   assert.doesNotMatch(body, /href="javascript:/);
   assert.doesNotMatch(body, /href="https:\/\/attacker\.example/);
+});
+
+
+test('PromptFeed detail routes remain readable on-site but are excluded from search indexing and sitemap discovery', async () => {
+  assert.equal(isPromptFeedDetailPath('/prompt-library/promptfeed-urban-metabolism-infographic-atlas'), true);
+  assert.equal(isPromptFeedDetailPath('/prompt-library/portrait-women-windowlight'), false);
+  assert.equal(isPromptFeedDetailPath('/prompt-library/promptfeed-'), false);
+
+  const prerender = await (await import('node:fs/promises')).readFile(new URL('../scripts/prerender-site.mjs', import.meta.url), 'utf8');
+  assert.match(prerender, /isPromptFeedDetailPath\(pathname\)\)\s*\{/);
+  assert.match(prerender, /isPromptFeedDetailPath\(pathname\)\)\s*validSitemapPaths\.add/);
+  assert.match(prerender, /noindex,follow/);
 });
