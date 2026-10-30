@@ -7,7 +7,7 @@ const section = source.split('/* 4. Log Files & Server Diagnostics */')[1]?.spli
 
 test('privacy policy technical-data section uses sibling paragraphs', () => {
   assert.ok(section, 'Privacy policy technical-data section exists');
-  const tags = section.match(/<\\/?p(?:\\s[^>]*)?>/g) ?? [];
+  const tags = section.match(/<[/]?p>/g) ?? [];
   let depth = 0;
   let openCount = 0;
   let closeCount = 0;
