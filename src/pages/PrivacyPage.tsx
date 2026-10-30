@@ -150,13 +150,12 @@ export const PrivacyPage: React.FC = () => {
           </h2>
           <p>
             SwitchRoute follows standard hosting server logging procedures. These logs capture internet protocol (IP) addresses, browser type, Internet Service Provider (ISP), date and time stamp, referring/exit pages, and basic page interaction metrics. We use the technical information for traffic analysis, error diagnosis, abuse prevention, and site reliability. Hosting providers may process request metadata as part of delivering and protecting the service.
-
+          </p>
           <p>
             Optional Google Analytics 4 measurement is activated only after a visitor explicitly enables Analytics in Cookie Preferences. When enabled, SwitchRoute sends page-view events with the page title, page URL, and page path to Google Analytics (measurement ID G-YMZP8GNP6B). Google may also process technical information such as browser/device details and IP address under its own terms. If a visitor declines or later withdraws Analytics consent, the external Google tag is not loaded before consent, the consent state is updated to denied after withdrawal, and SwitchRoute stops sending future page-view events.
           </p>
           <p>
             Cookie Preferences stores the choice in this browser. It is a basic first-party preference control for optional analytics; it is not a Google-certified CMP and does not, by itself, satisfy regional consent requirements for advertising.
-          </p>
           </p>
         </section>
 
