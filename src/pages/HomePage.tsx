@@ -8,7 +8,7 @@ import { AiToolCard } from '../components/AiToolCard';
 import { Pagination } from '../components/Pagination';
 import { OfferCard } from '../components/OfferCard';
 import { BrandLogo } from '../components/BrandLogo';
-import { AnimatedCount } from '../components/AnimatedCount';
+import { formatCount } from '../lib/counter.ts';
 import { DailyDiscoveriesSection } from '../components/DailyDiscoveriesSection';
 import { FrontierBonusSection } from '../components/FrontierBonusSection';
 import { AiAlternativesShowcase } from '../components/AiAlternativesShowcase';
@@ -257,42 +257,42 @@ export const HomePage: React.FC = () => {
         <div className="catalog-trust-strip__inner">
           <div className="catalog-trust-strip__metrics">
                     <Link to="/alternatives" className="catalog-metric-card" aria-label={`${catalogStats.proprietaryToolsWithAlternatives} paid tools with alternatives. Find replacement tools.`}>
-                      <AnimatedCount className="catalog-metric-card__number" value={catalogStats.proprietaryToolsWithAlternatives} />
+                      <strong className="catalog-metric-card__number" aria-label={formatCount(catalogStats.proprietaryToolsWithAlternatives)}>{formatCount(catalogStats.proprietaryToolsWithAlternatives)}</strong>
                       <h3>Paid tools with alternatives</h3>
                       <span>Find replacement tools</span>
                     </Link>
                     <Link to="/alternatives" className="catalog-metric-card" aria-label={`${catalogStats.alternativeRelationships} alternative matches. Explore similar tools.`}>
-                      <AnimatedCount className="catalog-metric-card__number" value={catalogStats.alternativeRelationships} />
+                      <strong className="catalog-metric-card__number" aria-label={formatCount(catalogStats.alternativeRelationships)}>{formatCount(catalogStats.alternativeRelationships)}</strong>
                       <h3>Alternative matches</h3>
                       <span>Explore similar tools</span>
                     </Link>
                     <Link to="/offers" className="catalog-metric-card" aria-label={`${activeOfferCount} active offers. Discover deals and discounts.`}>
-                      <AnimatedCount className="catalog-metric-card__number" value={activeOfferCount} />
+                      <strong className="catalog-metric-card__number" aria-label={formatCount(activeOfferCount)}>{formatCount(activeOfferCount)}</strong>
                       <h3>Active offers</h3>
                       <span>Discover deals and discounts</span>
                     </Link>
                     <Link to="/prompt-library" className="catalog-metric-card" aria-label={`${catalogStats.imagePrompts} image prompts. Ideas for AI images.`}>
-                      <AnimatedCount className="catalog-metric-card__number" value={catalogStats.imagePrompts} />
+                      <strong className="catalog-metric-card__number" aria-label={formatCount(catalogStats.imagePrompts)}>{formatCount(catalogStats.imagePrompts)}</strong>
                       <h3>Image prompts</h3>
                       <span>Ideas for AI images</span>
                     </Link>
                     <Link to="/prompt-library" className="catalog-metric-card" aria-label={`${catalogStats.videoPrompts} video prompts. Prompts for AI videos.`}>
-                      <AnimatedCount className="catalog-metric-card__number" value={catalogStats.videoPrompts} />
+                      <strong className="catalog-metric-card__number" aria-label={formatCount(catalogStats.videoPrompts)}>{formatCount(catalogStats.videoPrompts)}</strong>
                       <h3>Video prompts</h3>
                       <span>Prompts for AI videos</span>
                     </Link>
                     <Link to="/free-tools" className="catalog-metric-card" aria-label={`${catalogStats.browserUtilities} everyday utilities. Converters and useful tools.`}>
-                      <AnimatedCount className="catalog-metric-card__number" value={catalogStats.browserUtilities} />
+                      <strong className="catalog-metric-card__number" aria-label={formatCount(catalogStats.browserUtilities)}>{formatCount(catalogStats.browserUtilities)}</strong>
                       <h3>Everyday utilities</h3>
                       <span>Converters and useful tools</span>
                     </Link>
                     <Link to="/ai-tools" className="catalog-metric-card" aria-label={`${catalogStats.aiPlatforms} AI tools. Explore AI platforms.`}>
-                      <AnimatedCount className="catalog-metric-card__number" value={catalogStats.aiPlatforms} />
+                      <strong className="catalog-metric-card__number" aria-label={formatCount(catalogStats.aiPlatforms)}>{formatCount(catalogStats.aiPlatforms)}</strong>
                       <h3>AI tools</h3>
                       <span>Explore AI platforms</span>
                     </Link>
                     <Link to="/tools" className="catalog-metric-card" aria-label={`${catalogStats.openSourceTools} open-source projects. Discover open projects.`}>
-                      <AnimatedCount className="catalog-metric-card__number" value={catalogStats.openSourceTools} />
+                      <strong className="catalog-metric-card__number" aria-label={formatCount(catalogStats.openSourceTools)}>{formatCount(catalogStats.openSourceTools)}</strong>
                       <h3>Open-source projects</h3>
                       <span>Discover open projects</span>
                     </Link>
