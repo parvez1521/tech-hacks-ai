@@ -1,3 +1,8 @@
+export function isPromptFeedDetailPath(pathname) {
+  return typeof pathname === 'string'
+    && /^\/prompt-library\/promptfeed-[a-z0-9-]+$/i.test(pathname);
+}
+
 function escapeHtml(value) {
   return String(value ?? '')
     .replace(/&/g, '&amp;')
