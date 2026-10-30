@@ -25,7 +25,7 @@ describe('Theme, chat suggestions, and contact regression coverage', () => {
     assert.match(source, /suggestionsOrFallback\(data\.suggestions, FOLLOW_UP_PROMPTS\)/);
     assert.match(source, /onClick=\{\(\) => handleSend\(s\)\}/);
     assert.match(source, /msg\.id !== 'bot-welcome' \|\| messages\.length === 1/);
-    assert.match(source, /setMessages\(\[createWelcomeMessage\(\)\]\)/);
+    assert.match(source, /setMessages\(\[createWelcomeMessage\(pickRandomSuggestions\(WELCOME_QUESTIONS, 4\)\)\]\)/);
   });
 
   it('labels theme toggle with its destination and keeps the arrow non-interactive', () => {
