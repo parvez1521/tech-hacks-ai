@@ -220,6 +220,37 @@ export const GuideDetailPage: React.FC = () => {
         ))}
       </div>
 
+      {guide.references && guide.references.length > 0 && (
+        <section className="mb-12 rounded-2xl border border-border bg-card p-6 shadow-invary-card" aria-labelledby="guide-references-title">
+          <div className="mb-4">
+            <h2 id="guide-references-title" className="text-lg font-bold text-foreground">
+              Official documentation &amp; further reading
+            </h2>
+            <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
+              These first-party resources help verify product workflows, eligibility, privacy terms, and plan details. Providers can change features and limits, so check the current source before making a purchase or production decision.
+            </p>
+          </div>
+          <ul className="grid gap-2 sm:grid-cols-2">
+            {guide.references.map((reference) => (
+              <li key={reference.url}>
+                <a
+                  href={reference.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group flex h-full items-start justify-between gap-3 rounded-xl border border-border bg-background p-3.5 transition-colors hover:border-primary/40 hover:bg-muted/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+                >
+                  <span className="min-w-0">
+                    <span className="block text-sm font-semibold text-foreground group-hover:text-primary">{reference.title}</span>
+                    <span className="mt-1 block text-xs text-muted-foreground">{reference.publisher} · Official source</span>
+                  </span>
+                  <ExternalLink className="mt-0.5 h-4 w-4 shrink-0 text-muted-foreground group-hover:text-primary" aria-hidden="true" />
+                </a>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
+
       {relatedPromptMedia.length > 0 && <section className="mb-12 rounded-2xl border border-border bg-card p-5" aria-labelledby="guide-media-title"><h2 id="guide-media-title" className="text-lg font-bold text-foreground">Related image-to-video studies</h2><p className="mt-1 text-sm text-muted-foreground">Original SwitchRoute prompt recipes and still posters. No third-party video clips are embedded.</p><div className="mt-4 grid gap-4 sm:grid-cols-2">{relatedPromptMedia.map((item) => <Link key={item.slug} to={`/prompt-library/${item.slug}`} className="group overflow-hidden rounded-xl border border-border focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"><img src={item.videoDetails?.previewUrl || item.previewImage} alt={item.previewImageAlt || `${item.title} video prompt poster`} loading="lazy" decoding="async" className="aspect-video w-full object-cover transition-transform group-hover:scale-[1.02]" /><span className="block p-3 text-sm font-semibold text-foreground group-hover:text-primary">{item.title}</span></Link>)}</div></section>}
 
       {/* Featured / Mentioned Tools */}
