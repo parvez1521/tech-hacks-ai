@@ -427,7 +427,7 @@ export const OfferDetailPage: React.FC = () => {
           >
             <span className="text-[10px] uppercase font-mono font-bold text-primary mb-1 block">Student & Cloud Credits</span>
             <span className="text-xs font-semibold text-foreground group-hover:text-primary transition-colors block mb-1">
-              The Definitive Guide to Free AI & Cloud Credits for Students in 2026
+              How Students Can Evaluate AI and Cloud Benefits in 2026
             </span>
             <p className="text-[11px] text-secondary-foreground line-clamp-2">
               Step-by-step verification blueprints for GitHub Student Pack, Azure $100 no-card, AWS Educate, and carrier bundles.
