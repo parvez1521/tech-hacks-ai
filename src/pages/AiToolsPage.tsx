@@ -215,7 +215,7 @@ export const AiToolsPage: React.FC = () => {
         )}
 
         {/* Category Pills */}
-        <div className="flex items-center gap-2 overflow-x-auto no-scrollbar pb-2">
+        <div className="flex min-w-0 w-full max-w-full items-center gap-2 overflow-x-auto overscroll-x-contain no-scrollbar pb-2">
           <button
             type="button"
             onClick={() => handleCategoryChange(null)}
