@@ -34,7 +34,7 @@ export const DisclosurePage: React.FC = () => {
           Affiliate &amp; Advertising Disclosure
         </h1>
         <p className="text-xs text-slate-500">
-          Last Updated: October 30, 2026 • Advertising and affiliate disclosure
+          Last Updated: October 30, 2026 • FTC endorsements guidance: 16 CFR § 255.5
         </p>
       </div>
 
