@@ -16,7 +16,22 @@ export function getCookiePreferences(): CookiePreferences | null {
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
     if (!raw) return null;
-    return JSON.parse(raw) as CookiePreferences;
+
+    const parsed: unknown = JSON.parse(raw);
+    if (!parsed || typeof parsed !== 'object') return null;
+
+    const value = parsed as Partial<CookiePreferences>;
+    if (
+      value.essential !== true ||
+      typeof value.analytics !== 'boolean' ||
+      typeof value.advertising !== 'boolean' ||
+      typeof value.updatedAt !== 'string' ||
+      Number.isNaN(Date.parse(value.updatedAt))
+    ) {
+      return null;
+    }
+
+    return value as CookiePreferences;
   } catch {
     return null;
   }
@@ -38,9 +53,10 @@ export function openCookiePreferencesModal() {
 }
 
 export const CookieConsentBanner: React.FC = () => {
-  // Always render the same initial banner state on the server and client.
-  // A saved choice is applied after hydration in the effect below.
-  const [isOpen, setIsOpen] = useState(true);
+  // Keep the banner hidden during SSR/hydration. After mount, reveal it only
+  // when there is no valid saved choice. This prevents a one-frame flash for
+  // returning visitors whose consent is already stored in localStorage.
+  const [isOpen, setIsOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [analytics, setAnalytics] = useState(false);
   const [advertising, setAdvertising] = useState(false);
@@ -84,15 +100,15 @@ export const CookieConsentBanner: React.FC = () => {
   };
 
   useEffect(() => {
-    // Read saved choices after mount to keep server/client rendering consistent.
+    // Read saved choices after mount. A returning visitor stays hidden without
+    // ever rendering the banner first; a new visitor sees it once this check completes.
     const existing = getCookiePreferences();
     if (existing) {
-      setIsOpen(false);
       setAnalytics(existing.analytics);
       setAdvertising(existing.advertising);
-    } else {
-      setIsOpen(true);
+      return;
     }
+    setIsOpen(true);
   }, []);
 
   useEffect(() => {
