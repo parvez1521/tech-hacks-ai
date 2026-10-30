@@ -76,13 +76,23 @@ test('PromptFeed static body rejects non-PromptFeed slugs and unsafe image/sourc
 });
 
 
-test('PromptFeed detail routes remain readable on-site but are excluded from search indexing and sitemap discovery', async () => {
+test('PromptFeed detail pages are omitted from the public build while originals remain in the library', async () => {
   assert.equal(isPromptFeedDetailPath('/prompt-library/promptfeed-urban-metabolism-infographic-atlas'), true);
   assert.equal(isPromptFeedDetailPath('/prompt-library/portrait-women-windowlight'), false);
   assert.equal(isPromptFeedDetailPath('/prompt-library/promptfeed-'), false);
 
-  const prerender = await (await import('node:fs/promises')).readFile(new URL('../scripts/prerender-site.mjs', import.meta.url), 'utf8');
-  assert.match(prerender, /isPromptFeedDetailPath\(pathname\)\)\s*\{/);
-  assert.match(prerender, /isPromptFeedDetailPath\(pathname\)\)\s*validSitemapPaths\.add/);
-  assert.match(prerender, /noindex,follow/);
+  const fs = await import('node:fs/promises');
+  const prerender = await fs.readFile(new URL('../scripts/prerender-site.mjs', import.meta.url), 'utf8');
+  assert.match(prerender, /if \(isPromptFeedDetailPath\(pathname\)\) \{\s*omitted\.push\(pathname\);\s*continue;/);
+  assert.match(prerender, /!isPromptFeedDetailPath\(pathname\)/);
+
+  const library = await fs.readFile(new URL('../src/pages/PromptLibraryPage.tsx', import.meta.url), 'utf8');
+  assert.doesNotMatch(library, /loadPromptFeedPrompts/);
+  assert.doesNotMatch(library, /PromptFeed collection/);
+  assert.match(library, /Explore 48 original SwitchRoute prompt recipes/);
+  assert.match(library, /remote\.filter\(\(prompt\) => !prompt\.slug\.startsWith\('promptfeed-'\)\)/);
+
+  const detail = await fs.readFile(new URL('../src/pages/PromptDetailPage.tsx', import.meta.url), 'utf8');
+  assert.doesNotMatch(detail, /getPromptFeedPromptBySlug/);
+  assert.match(detail, /if \(slug\.startsWith\('promptfeed-'\)\) return/);
 });

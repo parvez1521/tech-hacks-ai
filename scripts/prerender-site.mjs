@@ -11,7 +11,7 @@ import path from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import React from 'react';
 import { renderToString } from 'react-dom/server';
-import { getPromptFeedSeoMetadata, isPromptFeedDetailPath, renderPromptFeedStaticBody } from './promptfeed-seo.mjs';
+import { isPromptFeedDetailPath } from './promptfeed-seo.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const dist = path.join(root, 'dist');
@@ -169,20 +169,6 @@ async function main() {
   await fs.mkdir(dist, { recursive: true });
   const template = await fs.readFile(path.join(dist, 'index.html'), 'utf8');
   let sitemap = await fs.readFile(sitemapPath, 'utf8');
-  const promptFeedSourcePath = path.join(root, 'data', 'promptfeed-import.json');
-  const promptFeedPayload = JSON.parse(await fs.readFile(promptFeedSourcePath, 'utf8'));
-  const promptFeedRecords = Array.isArray(promptFeedPayload) ? promptFeedPayload : promptFeedPayload?.prompts;
-  if (!Array.isArray(promptFeedRecords) || promptFeedRecords.length === 0) {
-    throw new Error(`PromptFeed source must contain a non-empty prompt array at ${promptFeedSourcePath}.`);
-  }
-  const promptFeedBySlug = new Map();
-  for (const record of promptFeedRecords) {
-    if (typeof record?.slug !== 'string' || !record.slug.startsWith('promptfeed-')) continue;
-    if (promptFeedBySlug.has(record.slug)) {
-      throw new Error(`Duplicate PromptFeed slug in canonical source: ${record.slug}`);
-    }
-    promptFeedBySlug.set(record.slug, record);
-  }
   runEsbuild();
   const renderer = await import(pathToFileURL(bundlePath).href);
   // The renderer is build-time only, not a public JS asset.
@@ -201,29 +187,25 @@ async function main() {
   const validSitemapPaths = new Set();
   const omitted = [];
   let rendered = 0;
-  let promptFeedRendered = 0;
 
   for (const pathname of routes) {
-    const matched = renderer.matchRoute(pathname);
-    const promptFeedRecord = matched.route === 'prompt-detail'
-      ? promptFeedBySlug.get(matched.params.slug)
-      : undefined;
-    const promptFeedMetadata = promptFeedRecord ? getPromptFeedSeoMetadata(promptFeedRecord) : null;
-    let title = renderer.getRouteTitle(matched.route, matched.params);
-    let description = renderer.getRouteDescription(matched.route, matched.params);
-    if (promptFeedMetadata) {
-      title = promptFeedMetadata.title;
-      description = promptFeedMetadata.description;
+    // PromptFeed imports remain preserved in source control, but their detail pages
+    // are omitted from the public deployment while this temporary restriction is active.
+    if (isPromptFeedDetailPath(pathname)) {
+      omitted.push(pathname);
+      continue;
     }
-    if (matched.route === 'not-found' || (!promptFeedMetadata && /not found/i.test(title))) {
+
+    const matched = renderer.matchRoute(pathname);
+    const title = renderer.getRouteTitle(matched.route, matched.params);
+    const description = renderer.getRouteDescription(matched.route, matched.params);
+    if (matched.route === 'not-found' || /not found/i.test(title)) {
       omitted.push(pathname);
       continue;
     }
 
     installServerBrowser(pathname);
-    const body = promptFeedMetadata
-      ? renderPromptFeedStaticBody(promptFeedRecord)
-      : renderToString(React.createElement(renderer.App));
+    const body = renderToString(React.createElement(renderer.App));
     if (!body) {
       omitted.push(pathname);
       continue;
@@ -233,7 +215,6 @@ async function main() {
     await fs.mkdir(path.dirname(outputPath), { recursive: true });
     await fs.writeFile(outputPath, html, 'utf8');
     rendered += 1;
-    if (promptFeedMetadata) promptFeedRendered += 1;
     if (sitemapUrls.includes(pathname) && !isPromptFeedDetailPath(pathname)) validSitemapPaths.add(pathname);
     if (rendered % 100 === 0) console.log(`Pre-rendered ${rendered} public pages…`);
   }
@@ -251,7 +232,7 @@ async function main() {
   await fs.writeFile(path.join(dist, 'sitemap.xml'), cleanedSitemap, 'utf8');
   await writeNotFoundPage();
 
-  console.log(`Pre-rendered ${rendered} route pages, including ${promptFeedRendered} PromptFeed detail pages. Removed ${omitted.length} dead/unknown routes from the sitemap.`);
+  console.log(`Pre-rendered ${rendered} route pages. Omitted ${omitted.length} hidden or dead routes from the sitemap.`);
   if (omitted.length) console.log(`Omitted routes: ${omitted.slice(0, 30).join(', ')}${omitted.length > 30 ? ', …' : ''}`);
 }
 
