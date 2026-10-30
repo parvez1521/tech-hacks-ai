@@ -53,7 +53,7 @@ export const AboutPage: React.FC = () => {
             The software industry has reached a turning point. Proprietary SaaS products increasingly rely on per-seat subscription lock-in, aggressive price increases, and opaque telemetry. Meanwhile, the generative AI boom has created thousands of new wrappers, many advertising "free" access that quietly expires after a 24-hour trial or demands immediate credit card details.
           </p>
           <p>
-            We built SwitchRoute to cut through this noise. Our directory independently categorizes, tests, and documents open-source software alternatives, genuine recurring free generative tools, side-by-side architecture comparisons, and practical step-by-step engineering workflows.
+            We built SwitchRoute to make software choices easier to compare. The directory organizes open-source projects, AI tools, pricing and access notes, practical utilities, prompts, offers, and step-by-step guides. Individual listings can be based on provider documentation, repository records, source-supplied material, or editorial research; the page identifies its source and verification date where that information is available.
           </p>
         </div>
       </section>
@@ -73,7 +73,7 @@ export const AboutPage: React.FC = () => {
               1. Verified Pricing Provenance
             </h3>
             <p className="text-xs text-slate-600 leading-relaxed">
-              Every indexed AI tool is manually checked to determine its genuine pricing tier: recurring daily/monthly free allowances, one-time starter credits, or strictly paid models. We clearly distinguish between free-forever tools and introductory trials.
+              Pricing notes distinguish recurring free access, limited allowances, starter credits, trials, freemium plans, and paid-only access where the source data supports that distinction. Each provider can change its plans, eligibility rules, and limits; check the official pricing page linked from an individual listing before relying on an allowance.
             </p>
           </div>
 
@@ -97,7 +97,7 @@ export const AboutPage: React.FC = () => {
               3. Practical Engineering Workflows
             </h3>
             <p className="text-xs text-slate-600 leading-relaxed">
-              We author substantive, code-level tutorials covering IDE vs. terminal coding agents (Cursor, Claude Code, Aider, Cline), context-window management, local LLMs with Ollama, and cost-effective prompt engineering recipes.
+              We publish practical tutorials and workflow notes on topics such as IDE and terminal coding agents, local language models, application development, and prompt engineering. Guides include step-by-step instructions and source links where applicable; examples should be checked against current provider documentation.
             </p>
           </div>
 
@@ -109,7 +109,7 @@ export const AboutPage: React.FC = () => {
               4. Verified Student & Developer Perks
             </h3>
             <p className="text-xs text-slate-600 leading-relaxed">
-              We research and verify legitimate cloud credits, student packs (GitHub, Azure, AWS Educate), and carrier telecom bundles (such as Reliance Jio's 18-month Gemini offer in India) so learners can build without upfront capital.
+              We publish student and developer benefit listings with eligibility notes and links to provider terms. Availability can depend on country, institution, account status, and offer dates; readers should confirm eligibility with the provider before applying.
             </p>
           </div>
         </div>
@@ -134,7 +134,7 @@ export const AboutPage: React.FC = () => {
           <li className="flex items-start gap-2.5">
             <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
             <span>
-              <strong className="text-slate-900">Regular Price & Repository Audits:</strong> Pricing models and repository activity (commits, license changes, GitHub stars) are verified periodically to keep catalog entries accurate.
+              <strong className="text-slate-900">Source-led updates:</strong> Listings link to provider pricing pages or public repositories where possible. Verification dates are shown when available, and visitors can report outdated information through the Contact page.
             </span>
           </li>
           <li className="flex items-start gap-2.5">
@@ -146,7 +146,7 @@ export const AboutPage: React.FC = () => {
           <li className="flex items-start gap-2.5">
             <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
             <span>
-              <strong className="text-slate-900">Privacy-First Architecture:</strong> SwitchRoute does not track visitors across the web, does not sell personal information, and maintains 100% open client-side browser utilities.
+              <strong className="text-slate-900">Privacy and processing:</strong> SwitchRoute does not sell personal information. Optional Google Analytics 4 measurement is loaded only after visitors opt in. Utilities explicitly labelled client-side process supplied files or text in the browser; service-backed tools disclose when an external provider is required.
             </span>
           </li>
         </ul>
