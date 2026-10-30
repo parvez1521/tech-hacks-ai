@@ -199,7 +199,7 @@ async function main() {
     const matched = renderer.matchRoute(pathname);
     const title = renderer.getRouteTitle(matched.route, matched.params);
     const description = renderer.getRouteDescription(matched.route, matched.params);
-    if (matched.route === 'not-found' || (!promptFeedMetadata && /not found/i.test(title))) {
+    if (matched.route === 'not-found' || /not found/i.test(title)) {
       omitted.push(pathname);
       continue;
     }
