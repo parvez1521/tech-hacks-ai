@@ -38,8 +38,9 @@ export function openCookiePreferencesModal() {
 }
 
 export const CookieConsentBanner: React.FC = () => {
-  // Keep the first server/client render identical; persisted choices are applied in useEffect.
-  const [isOpen, setIsOpen] = useState(() => getCookiePreferences() === null);
+  // Always render the same initial banner state on the server and client.
+  // A saved choice is applied after hydration in the effect below.
+  const [isOpen, setIsOpen] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [analytics, setAnalytics] = useState(false);
   const [advertising, setAdvertising] = useState(false);
