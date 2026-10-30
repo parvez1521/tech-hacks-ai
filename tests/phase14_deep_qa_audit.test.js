@@ -89,9 +89,9 @@ describe('Phase 14: Deep QA, Production Readiness & Trust Audit', () => {
 
       assert.ok(html.includes('id="home-hero-heading"') && ['Another AI tool?', 'Sure.', 'Another Subscription?', 'Nope.'].every((line) => html.includes(line)), 'Homepage H1 renders the four approved headline lines');
       assert.ok(html.includes('What do you want to build or replace today?'), 'Goal-driven discovery section');
-      assert.ok(html.includes("Editor&#x27;s Picks: Benchmark-Leading Tools") || html.includes("Editor's Picks: Benchmark-Leading Tools"), 'Curated showcase section');
+      assert.ok(html.includes("Editor's Picks: Tools Worth Exploring") || html.includes("Editor's Picks: Benchmark-Leading Tools"), 'Curated showcase section');
       assert.ok(html.includes('Explore Top Generative AI Platforms'), 'Trending AI models section');
-      assert.ok(html.includes('Free AI Tools (No Credit Card Required)'), 'Free AI tools section');
+      assert.ok(html.includes('Free AI Tools to Explore'), 'Free AI tools section');
       assert.ok(html.includes('Explore by Tech Category'), 'Category taxonomy section');
       assert.ok(html.includes('AI Deals, Student Plans &amp; Bundles') || html.includes('AI Deals, Student Plans & Bundles'), 'AI Deals section');
       assert.ok(html.includes('Step-by-Step AI Guides'), 'Guides section');
