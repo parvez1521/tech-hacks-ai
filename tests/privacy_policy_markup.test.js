@@ -7,9 +7,9 @@ const section = source.split('/* 4. Log Files & Server Diagnostics */')[1]?.spli
 
 test('privacy policy technical-data section uses sibling paragraphs', () => {
   assert.ok(section, 'Privacy policy technical-data section exists');
-  const openTags = section.match(/<p(?:\\s|>)/g) ?? [];
-  const closeTags = section.match(/<\\/p>/g) ?? [];
+  const openTags = section.match(/<p(?:\s|>)/g) ?? [];
+  const closeTags = section.match(/<\/p>/g) ?? [];
   assert.equal(openTags.length, 3, 'Expected three standalone paragraphs');
   assert.equal(closeTags.length, 3, 'Every paragraph has one closing tag');
-  assert.doesNotMatch(section, /<p(?:\\s|>)[\\s\\S]*?<p(?:\\s|>)/, 'Paragraph tags must not be nested');
+  assert.doesNotMatch(section, /<p(?:\s|>)[\s\S]*?<p(?:\s|>)/, 'Paragraph tags must not be nested');
 });
