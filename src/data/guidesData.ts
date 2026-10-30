@@ -20,6 +20,11 @@ export const guidesData: Guide[] = [
     publishedDate: '2026-10-10',
     tags: ['video', 'flux', 'runway', 'cinematic', 'storyboarding'],
     relatedToolSlugs: ['flux-1', 'runway', 'elevenlabs'],
+    references: [
+      { title: 'FLUX documentation', publisher: 'Black Forest Labs', url: 'https://docs.bfl.ai/' },
+      { title: 'Image to Video Prompting Guide', publisher: 'Runway', url: 'https://help.runwayml.com/hc/en-us/articles/48324313115155-Image-to-Video-Prompting-Guide' },
+      { title: 'Creating with Gen-4.5', publisher: 'Runway', url: 'https://help.runwayml.com/hc/en-us/articles/46974685288467-Creating-with-Gen-4-5' },
+    ],
     steps: [
       {
         stepNumber: 1,
@@ -59,6 +64,11 @@ export const guidesData: Guide[] = [
     publishedDate: '2026-10-08',
     tags: ['cursor', 'supabase', 'react', 'typescript', 'fullstack'],
     relatedToolSlugs: ['cursor', 'supabase'],
+    references: [
+      { title: 'Project Rules for AI', publisher: 'Cursor', url: 'https://docs.cursor.com/context/rules-for-ai' },
+      { title: 'Use Supabase with React', publisher: 'Supabase', url: 'https://supabase.com/docs/guides/getting-started/quickstarts/reactjs' },
+      { title: 'Row Level Security', publisher: 'Supabase', url: 'https://supabase.com/docs/guides/database/postgres/row-level-security' },
+    ],
     steps: [
       {
         stepNumber: 1,
@@ -94,6 +104,9 @@ export const guidesData: Guide[] = [
     publishedDate: '2026-10-05',
     tags: ['claude', 'artifacts', 'dashboard', 'react', 'tailwind'],
     relatedToolSlugs: ['claude'],
+    references: [
+      { title: 'What are artifacts and how do I use them?', publisher: 'Anthropic', url: 'https://support.claude.com/en/articles/17153992-what-are-artifacts-and-how-do-i-use-them' },
+    ],
     steps: [
       {
         stepNumber: 1,
@@ -125,6 +138,10 @@ export const guidesData: Guide[] = [
     publishedDate: '2026-09-28',
     tags: ['perplexity', 'n8n', 'automation', 'research', 'slack'],
     relatedToolSlugs: ['perplexity', 'n8n'],
+    references: [
+      { title: 'Perplexity API Quickstart', publisher: 'Perplexity', url: 'https://docs.perplexity.ai/docs/getting-started/quickstart' },
+      { title: 'Schedule Trigger node', publisher: 'n8n', url: 'https://docs.n8n.io/integrations/builtin/core-nodes/n8n-nodes-base.scheduletrigger/' },
+    ],
     steps: [
       {
         stepNumber: 1,
@@ -155,6 +172,10 @@ export const guidesData: Guide[] = [
     publishedDate: '2026-09-22',
     tags: ['local-llm', 'privacy', 'ollama', 'security', 'open-weights'],
     relatedToolSlugs: ['cursor'],
+    references: [
+      { title: 'Ollama FAQ', publisher: 'Ollama', url: 'https://docs.ollama.com/faq' },
+      { title: 'Privacy Policy', publisher: 'Ollama', url: 'https://ollama.com/privacy' },
+    ],
     steps: [
       {
         stepNumber: 1,
@@ -185,6 +206,9 @@ export const guidesData: Guide[] = [
     publishedDate: '2026-09-15',
     tags: ['midjourney', 'portraits', 'photorealism', 'lighting', 'photography'],
     relatedToolSlugs: ['midjourney'],
+    references: [
+      { title: 'Prompt Basics', publisher: 'Midjourney', url: 'https://docs.midjourney.com/hc/en-us/articles/32023408776205-Prompt-Basics' },
+    ],
     steps: [
       {
         stepNumber: 1,
@@ -212,6 +236,12 @@ export const guidesData: Guide[] = [
     publishedDate: '2026-10-18',
     tags: ['coding', 'cursor', 'claude-code', 'aider', 'cline', 'comparison', 'terminal'],
     relatedToolSlugs: ['cursor', 'aider', 'claude', 'ollama'],
+    references: [
+      { title: 'Project Rules for AI', publisher: 'Cursor', url: 'https://docs.cursor.com/context/rules-for-ai' },
+      { title: 'Set up Claude Code', publisher: 'Anthropic', url: 'https://docs.anthropic.com/en/docs/claude-code/getting-started' },
+      { title: 'Aider Documentation', publisher: 'Aider', url: 'https://aider.chat/docs/' },
+      { title: 'Cline Overview', publisher: 'Cline', url: 'https://docs.cline.bot/cline-overview' },
+    ],
     steps: [
       {
         stepNumber: 1,
@@ -248,6 +278,10 @@ export const guidesData: Guide[] = [
     publishedDate: '2026-10-18',
     tags: ['students', 'free-credits', 'azure', 'github', 'aws', 'deals', 'education'],
     relatedToolSlugs: ['claude', 'cursor'],
+    references: [
+      { title: 'Student Developer Pack eligibility', publisher: 'GitHub Education', url: 'https://education.github.com/pack/join' },
+      { title: 'Student Developer Pack terms and conditions', publisher: 'GitHub Docs', url: 'https://docs.github.com/en/education/about-github-education/github-education-for-students/github-terms-and-conditions-for-the-student-developer-pack' },
+    ],
     steps: [
       {
         stepNumber: 1,
@@ -282,6 +316,11 @@ export const guidesData: Guide[] = [
     publishedDate: '2026-10-18',
     tags: ['pricing', 'free-tier', 'commercial-rights', 'watermarks', 'rate-limits'],
     relatedToolSlugs: ['kling-ai', 'vidu', 'wan-video'],
+    references: [
+      { title: 'Kling AI official product site', publisher: 'Kling AI', url: 'https://app.klingai.com/global/' },
+      { title: 'Pricing and credit information', publisher: 'Vidu', url: 'https://www.vidu.com/pricing' },
+      { title: 'Wan2.1 open-source model repository', publisher: 'Wan Video', url: 'https://github.com/Wan-Video/Wan2.1' },
+    ],
     steps: [
       {
         stepNumber: 1,
