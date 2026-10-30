@@ -74,8 +74,14 @@ export const GuideDetailPage: React.FC = () => {
     url: `${siteConfig.url}/guides/${guide.slug}`,
     datePublished: guide.publishedDate,
     author: {
-      '@type': 'Person',
+      '@type': 'Organization',
       name: guide.author,
+      url: `${siteConfig.url}/about`,
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: siteConfig.name,
+      url: siteConfig.url,
     },
     step: guide.steps.map((s) => ({
       '@type': 'HowToStep',
