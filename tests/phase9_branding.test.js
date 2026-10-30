@@ -248,7 +248,7 @@ describe('Phase 9: SwitchRoute Platform Rebranding', () => {
       {
         route: 'free-ai-sites',
         params: {},
-        expected: 'Free AI Sites & Zero-Cost Generative Tools — SwitchRoute',
+        expected: 'Free AI Access & Open-Source Tools — SwitchRoute',
       },
       {
         route: 'alternatives',

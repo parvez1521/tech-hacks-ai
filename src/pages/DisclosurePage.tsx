@@ -34,7 +34,7 @@ export const DisclosurePage: React.FC = () => {
           Affiliate &amp; Advertising Disclosure
         </h1>
         <p className="text-xs text-slate-500">
-          Last Updated: October 18, 2026 • Compliant with FTC 16 CFR § 255.5 Guidelines
+          Last Updated: October 30, 2026 • FTC endorsements guidance: 16 CFR § 255.5
         </p>
       </div>
 
@@ -79,7 +79,7 @@ export const DisclosurePage: React.FC = () => {
             Some of the external links to third-party software tools, developer platforms, cloud hosting providers, and educational resources on SwitchRoute may be affiliate links.
           </p>
           <p>
-            If you click on an affiliate link and subsequently purchase a subscription, license, or cloud credit package, SwitchRoute may receive a small referral commission from the merchant. <strong className="text-slate-900 font-semibold">This commission comes at zero additional cost to you.</strong> In many instances, our partnership listings and AI Deals directory provide exclusive educational discounts, starter credits, or extended trials that benefit our readers directly.
+            If you click a link that is part of an affiliate or referral programme and subsequently make a qualifying purchase or signup, SwitchRoute may receive a commission or referral benefit. Where a commission is paid, it does not increase the price charged by the provider. Offer availability, discounts, credits, and eligibility are controlled by the provider; check the linked terms before participating.
           </p>
         </section>
 
@@ -90,7 +90,7 @@ export const DisclosurePage: React.FC = () => {
             <h2>3. Strict Editorial Independence Guarantee</h2>
           </div>
           <p className="text-slate-600 leading-relaxed">
-            Our commercial relationships have <strong className="text-slate-900 font-semibold">zero influence</strong> over our editorial ratings, benchmarks, tool rankings, or recommendation algorithms:
+            Commercial and referral relationships do not purchase a ranking or placement in the directory. Editorial descriptions and recommendations are intended to be based on documented product capabilities, access conditions, licensing, and user needs:
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
             <div className="p-4 rounded-xl bg-slate-50 border border-slate-200 space-y-1.5">
@@ -98,7 +98,7 @@ export const DisclosurePage: React.FC = () => {
                 Objective Evaluation Metrics
               </span>
               <p className="text-[11px] text-slate-600 leading-relaxed">
-                All software profiles are assessed against verified criteria: license transparency, self-hostability, active repository commits, genuine free quota allowances, and data privacy.
+                Profiles may document licence, hosting model, public repository activity, free-tier limits, and privacy information where those details can be confirmed from available sources. The fields and evidence available vary by listing; SwitchRoute is not a certification body.
               </p>
             </div>
 
@@ -116,7 +116,7 @@ export const DisclosurePage: React.FC = () => {
                 Equal Prominence for Free &amp; Open Source
               </span>
               <p className="text-[11px] text-slate-600 leading-relaxed">
-                Self-hosted, copyleft, and non-commercial open-source software (which provides zero referral revenue) receives equal or superior placement compared to paid SaaS platforms.
+                Open-source projects are included alongside commercial software and are not excluded merely because they do not offer referral revenue.
               </p>
             </div>
 
@@ -125,7 +125,7 @@ export const DisclosurePage: React.FC = () => {
                 Critical Honest Reviews
               </span>
               <p className="text-[11px] text-slate-600 leading-relaxed">
-                If a platform limits its free plan, introduces vendor lock-in, or changes licensing terms, we explicitly flag these migration drivers regardless of whether an affiliate program exists.
+                When a source review identifies a free-plan limit, a licensing change, or a hosting constraint, the listing aims to make that limitation visible, regardless of referral relationships.
               </p>
             </div>
           </div>

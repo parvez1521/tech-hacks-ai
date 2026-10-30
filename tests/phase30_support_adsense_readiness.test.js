@@ -26,6 +26,7 @@ describe('SwitchRoute support contact and AdSense readiness', () => {
     assert.match(banner, /getCookiePreferences\(\)\?\.advertising === true/);
     assert.match(runtime, /pagead2\.googlesyndication\.com/);
     assert.match(runtime, /!siteConfig\.adsense\.privacyReady/);
+    assert.match(read('index.html'), /<meta name="google-adsense-account" content="ca-pub-7627022109232156"\s*\/>/);
     assert.match(env, /VITE_ADSENSE_ENABLED=false/);
     assert.match(env, /VITE_ADSENSE_PRIVACY_READY=false/);
   });
@@ -45,5 +46,9 @@ describe('SwitchRoute support contact and AdSense readiness', () => {
     assert.match(read('src/pages/PrivacyPage.tsx'), /not itself a Google-certified CMP/i);
     assert.match(read('src/pages/DisclosurePage.tsx'), /Google AdSense advertising is not currently active/i);
     assert.match(read('src/components/CookieConsentBanner.tsx'), /not a Google-certified consent management platform/i);
+    assert.match(read('src/pages/PrivacyPage.tsx'), /Google Analytics 4 measurement is activated only after/i);
+    assert.match(read('src/pages/PrivacyPage.tsx'), /G-YMZP8GNP6B/);
+    assert.match(read('src/pages/AboutPage.tsx'), /Pricing & Access Notes/);
+    assert.match(read('src/pages/AboutPage.tsx'), /Student & Developer Benefits/);
   });
 });

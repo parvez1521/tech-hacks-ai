@@ -1,3 +1,8 @@
+export function isPromptFeedDetailPath(pathname) {
+  return typeof pathname === 'string'
+    && /^\/prompt-library\/promptfeed-[a-z0-9-]+$/i.test(pathname);
+}
+
 function escapeHtml(value) {
   return String(value ?? '')
     .replace(/&/g, '&amp;')
@@ -25,6 +30,8 @@ export function getPromptFeedSeoMetadata(record) {
   const targetModel = String(record.targetModel || '').trim();
   const promptText = String(record.promptText || '').trim();
   if (!promptTitle || !targetModel || !promptText) return null;
+  if (record.rightsStatus !== 'licensed' || !String(record.rightsLicense || '').includes('MIT')) return null;
+  if (!String(record.sourceCreator || record.authorOrSource || '').trim()) return null;
 
   const details = String(record.description || 'A reusable prompt recipe with a matching example output.')
     .replace(/\s+/g, ' ')
@@ -55,6 +62,15 @@ export function renderPromptFeedStaticBody(record) {
     ? record.previewImage
     : null;
   const previewAlt = escapeHtml(record.previewImageAlt || `${record.title} example output`);
+  const tips = String(record.tips || '').trim();
+  const customizationInstructions = String(record.customizationInstructions || '').trim();
+  const expectedOutputType = String(record.expectedOutputType || '').trim();
+  const exampleUseCase = String(record.exampleUseCase || '').trim();
+  const visualStyle = String(record.visualStyle || '').trim();
+  const rightsLicense = String(record.rightsLicense || '').trim();
+  const placeholders = Array.isArray(record.placeholders)
+    ? record.placeholders.map((value) => String(value || '').trim()).filter(Boolean)
+    : [];
   const attributionUrl = [record.attributionUrl, record.sourceUrl].find(isHttpsPromptFeedUrl);
   const attributionLink = attributionUrl
     ? `<a href="${escapeHtml(attributionUrl)}" rel="nofollow noopener noreferrer">View original prompt source</a>`
@@ -76,7 +92,15 @@ export function renderPromptFeedStaticBody(record) {
     ${previewImage ? `<figure class="mb-8"><img src="${escapeHtml(previewImage)}" alt="${previewAlt}" loading="eager" class="mx-auto max-h-[560px] w-full rounded-xl object-contain" /><figcaption class="mt-2 text-center text-xs text-slate-500 dark:text-slate-400">Example output associated with this prompt.</figcaption></figure>` : ''}
     <h2 class="mb-3 text-xl font-semibold text-slate-950 dark:text-white">Prompt template</h2>
     <pre class="mb-6 overflow-x-auto whitespace-pre-wrap break-words rounded-xl border border-slate-200 bg-slate-50 p-4 text-sm leading-7 text-slate-800 dark:border-slate-700 dark:bg-slate-950 dark:text-slate-100"><code>${promptText}</code></pre>
+    ${visualStyle ? `<section class="mb-6"><h2 class="mb-2 text-lg font-semibold text-slate-950 dark:text-white">Visual style</h2><p class="text-sm leading-6 text-slate-600 dark:text-slate-300">${escapeHtml(visualStyle)}</p></section>` : ''}
+    ${expectedOutputType ? `<section class="mb-6"><h2 class="mb-2 text-lg font-semibold text-slate-950 dark:text-white">Expected output</h2><p class="text-sm leading-6 text-slate-600 dark:text-slate-300">${escapeHtml(expectedOutputType)}</p></section>` : ''}
+    ${exampleUseCase ? `<section class="mb-6"><h2 class="mb-2 text-lg font-semibold text-slate-950 dark:text-white">Example use case</h2><p class="text-sm leading-6 text-slate-600 dark:text-slate-300">${escapeHtml(exampleUseCase)}</p></section>` : ''}
+    ${tips ? `<section class="mb-6"><h2 class="mb-2 text-lg font-semibold text-slate-950 dark:text-white">Prompt tips</h2><p class="text-sm leading-6 text-slate-600 dark:text-slate-300">${escapeHtml(tips)}</p></section>` : ''}
+    ${customizationInstructions ? `<section class="mb-6"><h2 class="mb-2 text-lg font-semibold text-slate-950 dark:text-white">How to customize</h2><p class="whitespace-pre-line text-sm leading-6 text-slate-600 dark:text-slate-300">${escapeHtml(customizationInstructions)}</p></section>` : ''}
+    ${placeholders.length ? `<section class="mb-6"><h2 class="mb-2 text-lg font-semibold text-slate-950 dark:text-white">Editable placeholders</h2><ul class="list-disc space-y-1 pl-5 text-sm leading-6 text-slate-600 dark:text-slate-300">${placeholders.map((value) => `<li>${escapeHtml(value)}</li>`).join('')}</ul></section>` : ''}
     <div class="border-t border-slate-200 pt-5 text-sm text-slate-600 dark:border-slate-700 dark:text-slate-300">
+      <h2 class="mb-2 text-lg font-semibold text-slate-950 dark:text-white">Source &amp; license</h2>
+      <p class="mb-3 leading-6">This entry is from ${creator} and is reproduced under the following source license: ${escapeHtml(rightsLicense)} SwitchRoute is the directory displaying this entry, not the original prompt author.</p>
       <p class="mb-3">Review the prompt, adapt its details to your project, and explore more recipes in the <a href="/prompt-library" class="font-semibold text-teal-700 underline dark:text-teal-300">SwitchRoute Prompt Library</a>.</p>
       ${attributionLink}
     </div>

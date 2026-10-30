@@ -17,11 +17,11 @@ const accessCards = [
   {
     name: 'RusherAI',
     label: 'WEEKLY BONUS',
-    allowance: '50 million tokens / week',
+    allowance: 'Weekly free usage allowance',
     detail: 'Free, ad-supported AI chat workspace with a weekly allowance. Limits and available models may change.',
     models: ['GPT-6 Astra', 'Claude Opus 5.5', 'Claude Fable 5.1'],
     href: 'https://rusherai.com/signup?ref=RUSHQM4N7E',
-    cta: 'Claim 50M weekly tokens',
+    cta: 'Check weekly allowance',
     accent: 'from-violet-500/25 via-fuchsia-500/10 to-transparent',
     border: 'border-violet-400/35',
     icon: Gift,
@@ -116,7 +116,7 @@ export const FrontierBonusSection: React.FC = () => (
         })}
       </div>
       <p className="mt-5 text-[11px] leading-5 text-muted-foreground">
-        Allowances, supported models, account eligibility and prices can change. Tokens are usage limits, not cash value. Provider names belong to their respective owners; SwitchRoute is an independent directory and does not guarantee uninterrupted free access.
+        Allowances, supported models, account eligibility and prices can change. Tokens are usage limits, not cash value. Some provider links contain referral identifiers; SwitchRoute may receive a benefit if a provider pays one, at no extra cost to the visitor. Referral relationships do not determine whether an option is listed. Provider names belong to their respective owners; SwitchRoute does not guarantee uninterrupted free access.
       </p>
     </div>
   </section>

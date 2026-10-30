@@ -56,7 +56,7 @@ describe('Homepage AI alternatives showcase and Claude identity', () => {
     const showcaseSectionIndex = html.indexOf('data-testid="ai-alternatives-section"');
     const trustStripIndex = html.indexOf('data-testid="catalog-trust-strip"');
     const goalsIndex = html.indexOf('What do you want to build or replace today?');
-    const picksIndex = html.indexOf('Editor&#x27;s Picks: Benchmark-Leading Tools');
+    const picksIndex = html.indexOf("Editor&#x27;s Picks: Tools Worth Exploring");
     const discoveriesIndex = html.indexOf('Tools worth a closer look');
     const catalogIndex = html.indexOf('Explore Top Generative AI Platforms');
     const saasAlternativesIndex = html.indexOf('Open Source Alternatives to Popular Software');

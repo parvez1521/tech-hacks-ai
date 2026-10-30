@@ -244,7 +244,7 @@ export const CookieConsentBanner: React.FC = () => {
             </div>
 
             <p className="text-secondary-foreground leading-relaxed">
-              These controls save your preferences in this browser. This panel is not a Google-certified consent management platform (CMP) and does not send IAB TCF consent signals. SwitchRoute is not currently loading AdSense or analytics scripts. A certified CMP must be in place before ads are enabled for regions where Google requires one.
+              These controls save your preferences in this browser. Google Analytics 4 is loaded only after you enable Analytics; switching it off updates the measurement consent state and stops future SwitchRoute page-view events. AdSense is not active. This panel is not a Google-certified consent management platform (CMP) and does not send IAB TCF consent signals. A certified CMP must be in place before ads are enabled for regions where Google requires one.
             </p>
 
             <div className="space-y-3">
