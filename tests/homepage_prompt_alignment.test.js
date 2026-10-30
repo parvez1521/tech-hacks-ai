@@ -42,7 +42,7 @@ describe('Homepage prompt showcase and section alignment', () => {
       html.indexOf('data-testid="catalog-trust-strip"'),
       html.indexOf('data-testid="ai-alternatives-section"'),
       html.indexOf('What do you want to build or replace today?'),
-      html.indexOf('Editor&#x27;s Picks: Benchmark-Leading Tools'),
+      html.indexOf('Editor&#x27;s Picks: Tools Worth Exploring'),
       html.indexOf('Tools worth a closer look'),
     ];
     assert.ok(positions.every((position) => position >= 0));
