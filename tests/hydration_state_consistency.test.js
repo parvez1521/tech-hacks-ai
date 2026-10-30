@@ -24,9 +24,12 @@ test('prompt-library bookmarks and recently viewed items are loaded after hydrat
 
 test('router hydrates without query-string-dependent markup, then restores URL filters', () => {
   const source = read('src/router/Router.tsx');
-  assert.match(source, /const \[searchParams, setSearchParamsState\] = useState\(new URLSearchParams\(\)\)/);
+  assert.match(source, /const isStaticPrerender = typeof document/);
+  assert.match(source, /document\.documentElement\?\.dataset\?\.prerendered === 'true'/);
+  assert.match(source, /isStaticPrerender\s*\?\s*new URLSearchParams\(\)/);
   assert.match(source, /setSearchParamsState\(new URLSearchParams\(window\.location\.search\)\)/);
-  assert.doesNotMatch(source, /useState\(\s*typeof window !== 'undefined' \? new URLSearchParams\(window\.location\.search\)/);
+  const prerender = read('scripts/prerender-site.mjs');
+  assert.match(prerender, /data-prerendered="true"/);
 });
 
 test('chatbot welcome suggestions are deterministic for hydration and randomized after mount', () => {
