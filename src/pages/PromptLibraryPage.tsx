@@ -1,6 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { getAllPrompts } from '../services/aiCatalogService';
-import { loadPromptFeedPrompts } from '../data/promptfeedPrompts';
 import { fetchPromptCopyStats, fetchPublishedPrompts, getRecentlyViewedPrompts } from '../services/promptLibraryService';
 import { getBookmarks, subscribeBookmarks } from '../services/bookmarkService';
 import { promptCategories, promptProviders, type PromptCategoryDef } from '../data/promptsData';
@@ -9,10 +8,9 @@ import { EmptyState } from '../components/EmptyState';
 import { Link, useRouter } from '../router/Router';
 import { PromptPreviewImage } from '../components/PromptPreviewImage';
 import { VideoInspirationSection } from '../components/VideoInspirationSection';
-import { Search, X, Sparkles, Filter, ArrowDownWideNarrow, ExternalLink, Heart } from 'lucide-react';
+import { Search, X, Sparkles, Filter, ArrowDownWideNarrow, Heart } from 'lucide-react';
 
 type PromptSort = 'featured' | 'trending' | 'recent' | 'title' | 'model';
-type PromptCollection = 'all' | 'switchroute' | 'promptfeed';
 const PROMPTS_PER_PAGE = 24;
 
 export const PromptLibraryPage: React.FC = () => {
@@ -26,34 +24,20 @@ export const PromptLibraryPage: React.FC = () => {
   const [selectedMediaType, setSelectedMediaType] = useState('');
   const [showFavorites, setShowFavorites] = useState(false);
   const [favoriteIds, setFavoriteIds] = useState(() => getBookmarks().map((item) => item.id));
-  const [recentlyViewed, setRecentlyViewed] = useState(() => getRecentlyViewedPrompts());
+  const [recentlyViewed, setRecentlyViewed] = useState(() => getRecentlyViewedPrompts().filter((item) => !item.slug.startsWith('promptfeed-')));
   const [sort, setSort] = useState<PromptSort>('featured');
-  const [selectedCollection, setSelectedCollection] = useState<PromptCollection>('all');
   const [page, setPage] = useState(1);
-  const [feedLoadState, setFeedLoadState] = useState<'loading' | 'ready' | 'error'>('loading');
-  const [allPrompts, setAllPrompts] = useState(() => getAllPrompts());
+  const [allPrompts, setAllPrompts] = useState(() => getAllPrompts().filter((prompt) => !prompt.slug.startsWith('promptfeed-')));
   const [databaseCategories, setDatabaseCategories] = useState<PromptCategoryDef[]>([]);
 
   useEffect(() => {
     let active = true;
-    loadPromptFeedPrompts().then((feedPrompts) => {
-      if (!active) return;
-      setAllPrompts((current) => {
-        const merged = new Map(current.map((prompt) => [prompt.slug, prompt]));
-        feedPrompts.forEach((prompt) => { if (!merged.has(prompt.slug)) merged.set(prompt.slug, prompt); });
-        return [...merged.values()];
-      });
-      setFeedLoadState('ready');
-    }).catch(() => { if (active) setFeedLoadState('error'); });
-    return () => { active = false; };
-  }, []);
-  useEffect(() => {
-    let active = true;
     fetchPublishedPrompts().then((remote) => {
-      if (!active || remote.length === 0) return;
+      const originalPrompts = remote.filter((prompt) => !prompt.slug.startsWith('promptfeed-'));
+      if (!active || originalPrompts.length === 0) return;
       setAllPrompts((current) => {
         const merged = new Map(current.map((prompt) => [prompt.slug, prompt]));
-        remote.forEach((prompt) => merged.set(prompt.slug, { ...prompt, status: 'published' }));
+        originalPrompts.forEach((prompt) => merged.set(prompt.slug, { ...prompt, status: 'published' }));
         return [...merged.values()];
       });
     });
@@ -113,9 +97,6 @@ export const PromptLibraryPage: React.FC = () => {
 
   const filteredPrompts = useMemo(() => {
     const filtered = allPrompts.filter((p) => {
-      const isPromptFeed = p.slug.startsWith('promptfeed-');
-      if (selectedCollection === 'switchroute' && isPromptFeed) return false;
-      if (selectedCollection === 'promptfeed' && !isPromptFeed) return false;
       if (selectedCat && p.category !== selectedCat) return false;
       if (selectedTag && !p.tags.includes(selectedTag)) return false;
       if (selectedProvider) {
@@ -139,17 +120,14 @@ export const PromptLibraryPage: React.FC = () => {
     if (sort === 'recent') filtered.sort((a, b) => (Date.parse(b.createdAt || '') || -1) - (Date.parse(a.createdAt || '') || -1) || a.title.localeCompare(b.title));
     if (sort === 'featured') filtered.sort((a, b) => Number(Boolean(b.featured)) - Number(Boolean(a.featured)) || (a.featuredOrder ?? Number.MAX_SAFE_INTEGER) - (b.featuredOrder ?? Number.MAX_SAFE_INTEGER) || a.title.localeCompare(b.title));
     return filtered;
-  }, [allPrompts, search, selectedCat, selectedProvider, selectedTag, selectedStyle, selectedAspectRatio, selectedMediaType, showFavorites, favoriteIds, selectedCollection, sort]);
+  }, [allPrompts, search, selectedCat, selectedProvider, selectedTag, selectedStyle, selectedAspectRatio, selectedMediaType, showFavorites, favoriteIds, sort]);
 
-  useEffect(() => { setPage(1); }, [search, selectedCat, selectedProvider, selectedTag, selectedStyle, selectedAspectRatio, selectedMediaType, showFavorites, selectedCollection, sort]);
+  useEffect(() => { setPage(1); }, [search, selectedCat, selectedProvider, selectedTag, selectedStyle, selectedAspectRatio, selectedMediaType, showFavorites, sort]);
   const pageCount = Math.max(1, Math.ceil(filteredPrompts.length / PROMPTS_PER_PAGE));
   const currentPage = Math.min(page, pageCount);
   const visiblePrompts = filteredPrompts.slice((currentPage - 1) * PROMPTS_PER_PAGE, currentPage * PROMPTS_PER_PAGE);
-  const promptFeedCount = allPrompts.filter((prompt) => prompt.slug.startsWith('promptfeed-')).length;
-  const switchRouteCount = allPrompts.length - promptFeedCount;
-
   const resetFilters = () => {
-    updateSearch(''); setSelectedCat(null); setSelectedProvider(null); setSelectedTag(null); setSelectedStyle(''); setSelectedAspectRatio(''); setSelectedMediaType(''); setShowFavorites(false); setSelectedCollection('all'); setSort('featured'); setPage(1);
+    updateSearch(''); setSelectedCat(null); setSelectedProvider(null); setSelectedTag(null); setSelectedStyle(''); setSelectedAspectRatio(''); setSelectedMediaType(''); setShowFavorites(false); setSort('featured'); setPage(1);
   };
 
   return (
@@ -160,7 +138,7 @@ export const PromptLibraryPage: React.FC = () => {
             <Heart className="w-4 h-4" aria-hidden="true" /> Ready-to-use prompts, paired with previews
           </div>
           <h1 id="prompt-library-title" className="mt-5 max-w-3xl text-3xl sm:text-5xl font-extrabold tracking-tight text-slate-950 dark:text-white">Find a prompt. Make it yours.</h1>
-          <p className="mt-3 max-w-2xl text-sm sm:text-base leading-7 text-slate-600 dark:text-slate-300">Explore 48 SwitchRoute originals and 534 image-matched prompts from the MIT-licensed PromptFeed collection. Preview the result, personalize variables, and copy the full prompt in one click.</p>
+          <p className="mt-3 max-w-2xl text-sm sm:text-base leading-7 text-slate-600 dark:text-slate-300">Explore 48 original SwitchRoute prompt recipes with matching previews, practical customization notes, and one-click copying.</p>
         </div>
         <div className="prompt-atlas__art" aria-hidden="true">
           <img src="/prompts/generated/portrait-woman-windowlight.webp" alt="" width="1122" height="1402" fetchpriority="high" decoding="async" />
@@ -170,25 +148,10 @@ export const PromptLibraryPage: React.FC = () => {
 
       <div className="mb-5 flex flex-wrap items-center justify-between gap-3"><p className="text-xs text-slate-500 dark:text-slate-400">Trending uses recorded copy actions. Recently added uses publication timestamps when available.</p><Link to="/submit-prompt" className="inline-flex items-center rounded-lg bg-teal-800 px-4 py-2.5 text-sm font-semibold text-white hover:bg-teal-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-500">Submit a prompt</Link></div>
 
-      <section className="mb-6 flex flex-col gap-3 rounded-2xl border border-slate-200 bg-white px-4 py-3 dark:border-slate-700 dark:bg-slate-900 sm:flex-row sm:items-center sm:justify-between" aria-label="Prompt collection sources">
-        <div className="min-w-0">
-          <div className="flex flex-wrap items-center gap-2"><h2 className="text-sm font-bold text-slate-900 dark:text-white">PromptFeed collection</h2><span className="rounded-full border border-emerald-200 bg-emerald-50 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-emerald-800 dark:border-emerald-900 dark:bg-emerald-950/50 dark:text-emerald-300">MIT licensed</span></div>
-          <p className="mt-1 max-w-3xl text-xs leading-5 text-slate-600 dark:text-slate-300">{feedLoadState === 'loading' ? 'Loading the 534 matched image + prompt pairs…' : feedLoadState === 'error' ? 'The licensed collection could not be loaded. SwitchRoute originals are still available.' : `${promptFeedCount} image-matched prompt pairs loaded. Source attribution and license details are preserved on each prompt page.`}</p>
-        </div>
-        <a href="https://github.com/ClawLabsAI/awesome-verified-text-to-image-prompts" target="_blank" rel="noopener noreferrer" className="inline-flex shrink-0 items-center justify-center gap-2 rounded-lg border border-slate-300 px-3 py-2 text-xs font-semibold text-slate-800 hover:border-teal-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-500 dark:border-slate-600 dark:text-slate-100">View source &amp; license <ExternalLink size={14} aria-hidden="true" /></a>
-      </section>
 
       <VideoInspirationSection />
 
       <section className="prompt-atlas__controls" aria-label="Search and filter prompts">
-        <div className="mb-4 flex flex-wrap items-center gap-2" role="group" aria-label="Filter by collection">
-          <span className="mr-1 text-xs font-semibold text-slate-600 dark:text-slate-300">Collection</span>
-          {([
-            { value: 'all', label: 'All prompts', count: allPrompts.length },
-            { value: 'switchroute', label: 'SwitchRoute originals', count: switchRouteCount },
-            { value: 'promptfeed', label: 'PromptFeed · MIT', count: promptFeedCount },
-          ] as const).map((collection) => <button key={collection.value} type="button" aria-pressed={selectedCollection === collection.value} onClick={() => setSelectedCollection(collection.value)} className={`rounded-full px-3.5 py-2 text-xs font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-500 ${selectedCollection === collection.value ? 'bg-slate-900 text-white dark:bg-white dark:text-slate-900' : 'border border-slate-200 bg-white text-slate-700 hover:border-teal-500 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200'}`}>{collection.label} <span className="ml-1 opacity-70">{collection.count}</span></button>)}
-        </div>
         <div className="flex flex-col sm:flex-row sm:items-center gap-3">
           <label className="relative block flex-1">
             <span className="sr-only">Search prompt recipes</span>
