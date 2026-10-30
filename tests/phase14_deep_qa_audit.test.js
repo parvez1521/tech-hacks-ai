@@ -116,6 +116,10 @@ describe('Phase 14: Deep QA, Production Readiness & Trust Audit', () => {
       const html = renderClean(React.createElement(ssrModule.App));
       assert.ok(html.includes('Free AI Sites &amp; Generative Tools') || html.includes('Free AI Sites & Generative Tools'), 'Free AI heading');
       assert.ok(html.includes('Ollama'), 'Renders Ollama in free directory');
+      assert.ok(html.includes('free starting option'), 'Explains that listings have different access requirements');
+      assert.ok(html.includes('quotas, eligibility, account or card requirements'), 'Qualifies free-access limits');
+      assert.doesNotMatch(html, /permanent free quotas with no credit card required/i);
+      assert.doesNotMatch(html, /no cloud fees, data logging, or subscriptions/i);
     });
 
     test('renders /alternatives and /alternatives/figma replacement page', () => {
