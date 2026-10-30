@@ -2,7 +2,8 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 
-const source = fs.readFileSync('api/prompt-stats.js', 'utf8');
+const readSource = (path) => fs.readFileSync(path, 'utf8');
+const source = readSource('api/prompt-stats.js');
 
 test('optional prompt copy-stat reads return an empty successful response when storage fails', () => {
   const start = source.indexOf("if (req.method === 'GET')");
@@ -17,4 +18,11 @@ test('prompt-copy writes retain their own validation and explicit storage result
   assert.match(source, /if \(req\.method !== 'POST'\)/);
   assert.match(source, /recordPromptCopy\(slug\)/);
   assert.match(source, /res\.status\(result\.status\)\.json\(result\)/);
+});
+
+test('prompt stats API uses a lightweight slug allowlist, not the full prompt content bundle', () => {
+  assert.doesNotMatch(source, /promptsData\.ts/);
+  assert.match(source, /localPromptSlugs/);
+  const allowlist = readSource('src/data/localPromptSlugs.ts');
+  assert.equal((allowlist.match(/^\s+'[a-z0-9-]+',$/gm) || []).length, 48);
 });
