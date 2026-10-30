@@ -11,7 +11,7 @@ import path from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import React from 'react';
 import { renderToString } from 'react-dom/server';
-import { getPromptFeedSeoMetadata, renderPromptFeedStaticBody } from './promptfeed-seo.mjs';
+import { getPromptFeedSeoMetadata, isPromptFeedDetailPath, renderPromptFeedStaticBody } from './promptfeed-seo.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const dist = path.join(root, 'dist');
@@ -81,7 +81,9 @@ function createRouteHtml(template, pathname, title, description, body, routeName
   html = replaceCanonical(html, canonical);
 
   const noIndex = new Set(['/saved', '/submit-tool', '/submit-guide', '/submit-prompt']);
-  if (noIndex.has(pathname)) html = replaceMeta(html, 'name', 'robots', 'noindex,follow');
+  if (noIndex.has(pathname) || isPromptFeedDetailPath(pathname)) {
+    html = replaceMeta(html, 'name', 'robots', 'noindex,follow');
+  }
 
   const pageType = ['guide-detail', 'prompt-detail'].includes(routeName)
     ? 'Article'
@@ -232,7 +234,7 @@ async function main() {
     await fs.writeFile(outputPath, html, 'utf8');
     rendered += 1;
     if (promptFeedMetadata) promptFeedRendered += 1;
-    if (sitemapUrls.includes(pathname)) validSitemapPaths.add(pathname);
+    if (sitemapUrls.includes(pathname) && !isPromptFeedDetailPath(pathname)) validSitemapPaths.add(pathname);
     if (rendered % 100 === 0) console.log(`Pre-rendered ${rendered} public pages…`);
   }
 
