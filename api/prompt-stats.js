@@ -13,9 +13,15 @@ export default async function handler(req, res) {
   res.setHeader('Cache-Control', req.method === 'GET' ? 'public, s-maxage=60, stale-while-revalidate=300' : 'no-store');
   try {
     if (req.method === 'GET') {
-      const [{ stats }, remote] = await Promise.all([getPromptCopyStats(), listPrompts({ admin: false })]);
-      const allowed = new Set([...promptsData.map((prompt) => prompt.slug), ...remote.prompts.map((prompt) => prompt.slug)]);
-      return res.status(200).json({ stats: stats.filter((item) => allowed.has(item.slug)) });
+      try {
+        const [{ stats }, remote] = await Promise.all([getPromptCopyStats(), listPrompts({ admin: false })]);
+        const allowed = new Set([...promptsData.map((prompt) => prompt.slug), ...remote.prompts.map((prompt) => prompt.slug)]);
+        return res.status(200).json({ stats: stats.filter((item) => allowed.has(item.slug)) });
+      } catch {
+        // Copy counts are optional display metadata. If the analytics store is
+        // temporarily unavailable, do not make public prompt pages fail.
+        return res.status(200).json({ stats: [] });
+      }
     }
     if (req.method !== 'POST') {
       res.setHeader('Allow', 'GET, POST');
