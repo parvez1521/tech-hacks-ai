@@ -331,7 +331,7 @@ export const HomePage: React.FC = () => {
               What do you want to build or replace today?
             </h2>
             <p className="text-sm text-secondary-foreground max-w-xl mt-1">
-              Jump straight into curated workflows and hand-tested platforms categorized by immediate creative or engineering goals.
+              Jump straight into curated workflows and curated listings organized around common creative and engineering workflows.
             </p>
           </div>
 
@@ -390,7 +390,7 @@ export const HomePage: React.FC = () => {
               <span>Handpicked by SwitchRoute Editorial</span>
             </div>
             <h2 className="text-2xl sm:text-3xl font-extrabold text-foreground tracking-tight">
-              Editor's Picks: Benchmark-Leading Tools
+              Editor's Picks: Tools Worth Exploring
             </h2>
             <p className="text-sm text-secondary-foreground max-w-xl mt-1">
               A small editorial shortlist of tools worth a closer look, with the reason each one is here made explicit.
@@ -501,8 +501,8 @@ export const HomePage: React.FC = () => {
             <div className="flex items-center gap-2.5">
                <Video className="w-4 h-4 text-primary shrink-0" aria-hidden="true" />
               <div>
-                <span className="font-bold text-foreground block">Verified AI Video Generators</span>
-                <span className="text-[11px] text-muted-foreground">Kling (66 daily credits), Vidu, Hailuo, Wan 2.1 (Apache 2.0)</span>
+                <span className="font-bold text-foreground block">AI Video Generators to Explore</span>
+                <span className="text-[11px] text-muted-foreground">Kling, Vidu, Hailuo, and open video models. Access, quotas, and licences vary by provider.</span>
               </div>
             </div>
             <Link
@@ -595,13 +595,13 @@ export const HomePage: React.FC = () => {
             <div>
               <div className="inline-flex items-center gap-2 text-emerald-400 text-xs font-semibold uppercase tracking-wider mb-2">
                 <Gift className="w-4 h-4" />
-                <span>100% Free Tiers & Open Source Models</span>
+                <span>Free Tiers & Open-Source Options</span>
               </div>
               <h2 className="text-2xl sm:text-3xl font-extrabold text-foreground tracking-tight">
-                Free AI Tools (No Credit Card Required)
+                Free AI Tools to Explore
               </h2>
               <p className="text-sm text-secondary-foreground max-w-xl mt-1">
-                Zero paywalls to get started. Verified open-source weights, free recurring web allowances, and local models.
+                Explore free plans, limited free allowances, open weights, and local models. Account requirements, quotas, and data terms vary by provider.
               </p>
             </div>
 
@@ -609,7 +609,7 @@ export const HomePage: React.FC = () => {
               to="/free-ai-sites"
               className="inline-flex items-center gap-1.5 text-primary text-xs font-semibold hover:text-primary-hover transition-colors shrink-0"
             >
-              <span>Explore All Verified Free AI Sites</span>
+              <span>Browse Free AI Access Options</span>
               <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
@@ -625,7 +625,7 @@ export const HomePage: React.FC = () => {
                   <div className="flex items-center justify-between mb-3">
                     <BrandLogo slug={tool.slug} name={tool.name} size="sm" />
                     <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-50 text-emerald-800 border border-emerald-200 dark:bg-emerald-500/10 dark:text-emerald-300 dark:border-emerald-500/20">
-                      {tool.pricingType === 'free' ? '100% Free' : 'Free Tier'}
+                      {tool.pricingType === 'free' ? 'Free access' : 'Free plan available'}
                     </span>
                   </div>
                   <h3 className="font-bold text-base text-foreground mb-1 group-hover:text-primary transition-colors">
@@ -637,7 +637,7 @@ export const HomePage: React.FC = () => {
                 </div>
                 <div className="pt-3 border-t border-border/50 text-[11px] text-muted-foreground flex items-center justify-between">
                   <span className="capitalize">{tool.category}</span>
-                  <span className="text-emerald-400 font-semibold">Verified Free</span>
+                  <span className="text-emerald-400 font-semibold">Check provider limits</span>
                 </div>
               </Link>
             ))}
