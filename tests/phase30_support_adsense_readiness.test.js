@@ -48,5 +48,7 @@ describe('SwitchRoute support contact and AdSense readiness', () => {
     assert.match(read('src/components/CookieConsentBanner.tsx'), /not a Google-certified consent management platform/i);
     assert.match(read('src/pages/PrivacyPage.tsx'), /Google Analytics 4 measurement is activated only after/i);
     assert.match(read('src/pages/PrivacyPage.tsx'), /G-YMZP8GNP6B/);
+    assert.match(read('src/pages/AboutPage.tsx'), /Pricing &amp; Access Notes/);
+    assert.match(read('src/pages/AboutPage.tsx'), /Student &amp; Developer Benefits/);
   });
 });
