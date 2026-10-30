@@ -32,6 +32,11 @@ before(async () => {
 describe('Homepage prompt showcase and section alignment', () => {
   it('orders hero, dynamic metric strip, alternatives, goals, picks, and discoveries', () => {
     const html = ReactDOMServer.renderToStaticMarkup(React.createElement(appModule.App));
+    const counterValues = ['25', '224', '30', '548', '12', '39', '75', '27'];
+    for (const value of counterValues) {
+      assert.ok(html.includes(`aria-label="${value}">${value}</strong>`), `SSR includes visible catalogue count ${value}`);
+    }
+    assert.equal((html.match(/class="catalog-metric-card__number"/g) || []).length, 8);
     const positions = [
       html.indexOf('class="hero-shell'),
       html.indexOf('data-testid="catalog-trust-strip"'),
@@ -45,10 +50,11 @@ describe('Homepage prompt showcase and section alignment', () => {
     assert.equal((html.match(/data-testid="catalog-trust-strip"/g) || []).length, 1);
     assert.equal((html.match(/data-testid="ai-alternatives-section"/g) || []).length, 1);
     const home = fs.readFileSync(path.join(root, 'src/pages/HomePage.tsx'), 'utf8');
-    assert.match(home, /AnimatedCount className="catalog-metric-card__number" value=\{catalogStats\.proprietaryToolsWithAlternatives\}/);
-    assert.match(home, /AnimatedCount className="catalog-metric-card__number" value=\{catalogStats\.imagePrompts\}/);
-    assert.match(home, /AnimatedCount className="catalog-metric-card__number" value=\{catalogStats\.videoPrompts\}/);
-    assert.match(home, /AnimatedCount className="catalog-metric-card__number" value=\{catalogStats\.browserUtilities\}/);
+    assert.match(home, /formatCount\(catalogStats\.proprietaryToolsWithAlternatives\)/);
+    assert.match(home, /formatCount\(catalogStats\.imagePrompts\)/);
+    assert.match(home, /formatCount\(catalogStats\.videoPrompts\)/);
+    assert.match(home, /formatCount\(catalogStats\.browserUtilities\)/);
+    assert.doesNotMatch(home, /<AnimatedCount className="catalog-metric-card__number"/);
   });
 
   it('renders a five-step guide, exactly two matching original portraits, and valid library links', () => {
