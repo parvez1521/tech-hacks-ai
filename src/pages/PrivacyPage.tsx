@@ -34,7 +34,7 @@ export const PrivacyPage: React.FC = () => {
           Privacy Policy
         </h1>
         <p className="text-xs text-slate-500">
-          Effective Date: October 18, 2026 • Last Reviewed: October 2026
+          Effective Date: October 30, 2026 • Last Reviewed: October 30, 2026
         </p>
       </div>
 
@@ -75,7 +75,7 @@ export const PrivacyPage: React.FC = () => {
             3. How to Opt Out of Personalized Advertising
           </h2>
           <p>
-            Visitors have full control over advertising cookies and may opt out of personalized advertising at any time through official industry mechanisms:
+            SwitchRoute is not currently serving AdSense advertisements, so this site is not currently setting AdSense advertising cookies. If ads are enabled later, we will update this policy with the controls and consent options available at that time. You can also manage Google ad-personalization settings for your Google Account:
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
             <a
@@ -150,6 +150,13 @@ export const PrivacyPage: React.FC = () => {
           </h2>
           <p>
             SwitchRoute follows standard hosting server logging procedures. These logs capture internet protocol (IP) addresses, browser type, Internet Service Provider (ISP), date and time stamp, referring/exit pages, and basic page interaction metrics. We use the technical information for traffic analysis, error diagnosis, abuse prevention, and site reliability. Hosting providers may process request metadata as part of delivering and protecting the service.
+
+          <p>
+            Optional Google Analytics 4 measurement is activated only after a visitor explicitly enables Analytics in Cookie Preferences. When enabled, SwitchRoute sends page-view events with the page title, page URL, and page path to Google Analytics (measurement ID G-YMZP8GNP6B). Google may also process technical information such as browser/device details and IP address under its own terms. If a visitor declines or later withdraws Analytics consent, the external Google tag is not loaded before consent, the consent state is updated to denied after withdrawal, and SwitchRoute stops sending future page-view events.
+          </p>
+          <p>
+            Cookie Preferences stores the choice in this browser. It is a basic first-party preference control for optional analytics; it is not a Google-certified CMP and does not, by itself, satisfy regional consent requirements for advertising.
+          </p>
           </p>
         </section>
 
@@ -191,7 +198,7 @@ export const PrivacyPage: React.FC = () => {
               <strong className="text-slate-900">Saved Bookmarks:</strong> Persisting tools, guides, and prompt recipes you explicitly bookmark on the site (<code className="text-blue-700 font-mono text-[11px] bg-slate-100 px-1 py-0.5 rounded border border-slate-200">saved_bookmarks</code>).
             </li>
             <li>
-              <strong className="text-slate-900">Cookie Consent Settings:</strong> Recording your consent selections regarding optional analytics or advertising technologies (<code className="text-blue-700 font-mono text-[11px] bg-slate-100 px-1 py-0.5 rounded border border-slate-200">cookie_consent</code>).
+              <strong className="text-slate-900">Cookie Consent Settings:</strong> Recording your consent selections regarding optional analytics or advertising technologies (<code className="text-blue-700 font-mono text-[11px] bg-slate-100 px-1 py-0.5 rounded border border-slate-200">cookie_consent_preferences</code>).
             </li>
           </ul>
           <p className="text-xs text-slate-500">
