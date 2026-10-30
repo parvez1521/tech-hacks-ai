@@ -191,7 +191,13 @@ export const RouterProvider: React.FC<{ children: ReactNode }> = ({ children }) 
   );
   // Static route HTML is rendered without query strings. Start from the same
   // empty state on the server and client, then restore browser filters after hydration.
-  const [searchParams, setSearchParamsState] = useState(new URLSearchParams());
+  const isStaticPrerender = typeof document !== 'undefined'
+    && document.documentElement?.dataset?.prerendered === 'true';
+  const [searchParams, setSearchParamsState] = useState(() => (
+    isStaticPrerender
+      ? new URLSearchParams()
+      : typeof window !== 'undefined' ? new URLSearchParams(window.location.search) : new URLSearchParams()
+  ));
 
   useEffect(() => {
     const previousScrollRestoration = window.history.scrollRestoration;
