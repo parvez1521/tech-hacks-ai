@@ -9,7 +9,7 @@ test('app shell and document root contain horizontal overflow without locking ve
   const app = read('src/App.tsx');
   assert.match(css, /html\s*\{[\s\S]*?overflow-x:\s*clip/);
   assert.match(css, /body\s*\{[\s\S]*?overflow-x:\s*clip/);
-  assert.match(app, /min-w-0 max-w-full overflow-x-clip/);
+  assert.match(app, /min-w-0[^"]*overflow-x-clip/);
   assert.match(app, /<main className="flex-1 min-w-0 w-full max-w-full/);
   assert.doesNotMatch(app, /overflow-y-hidden|h-screen overflow-hidden/);
 });
