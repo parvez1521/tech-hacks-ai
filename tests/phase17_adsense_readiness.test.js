@@ -167,12 +167,15 @@ describe('Phase 17: Google AdSense Readiness & Regulatory Compliance Audit', () 
   });
 
   describe('4. Cookie Consent & GDPR/CMP Readiness', () => {
-    test('CookieConsentBanner renders essential vs non-essential options', () => {
+    test('CookieConsentBanner defers the first-visit prompt until saved consent is resolved after hydration', () => {
       const html = renderWithRouter(React.createElement(ssrModule.CookieConsentBanner));
-      assert.ok(html.includes('Cookie &amp; Privacy Notice') || html.includes('Cookie & Privacy Notice'), 'Banner heading');
-      assert.ok(html.includes('Accept All'), 'Must have Accept All button');
-      assert.ok(html.includes('Essential Only'), 'Must have Essential Only button');
-      assert.ok(html.includes('Customize'), 'Must have Customize button');
+      const source = read('src/components/CookieConsentBanner.tsx');
+      assert.equal(html, '', 'Banner must not flash in server-rendered HTML before local consent has been checked');
+      assert.ok(source.includes('Cookie &amp; Privacy Notice'), 'Banner heading must remain available after mount');
+      assert.match(source, /onClick=\{handleAcceptAll\}/, 'Must retain Accept All action');
+      assert.match(source, /onClick=\{handleRejectNonEssential\}/, 'Must retain Essential Only action');
+      assert.ok(source.includes('Customize'), 'Must retain customizable preferences');
+      assert.match(source, /setIsOpen\(true\)/, 'New visitors must see the banner after consent lookup');
     });
   });
 
