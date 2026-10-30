@@ -71,7 +71,7 @@ function createRouteHtml(template, pathname, title, description, body, routeName
   let html = template;
   // Mark static HTML so the client can hydrate the query-less prerender first,
   // then restore URL filters after hydration without mismatching server markup.
-  html = html.replace(/<html(?=\\s|>)/i, '<html data-prerendered="true"');
+  html = html.replace('<html', '<html data-prerendered="true"');
   html = html.replace(/<title>[\s\S]*?<\/title>/i, `<title>${escapeHtml(title)}</title>`);
   html = replaceMeta(html, 'name', 'description', description);
   html = replaceMeta(html, 'property', 'og:title', title);
