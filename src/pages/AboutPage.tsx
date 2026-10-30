@@ -70,7 +70,7 @@ export const AboutPage: React.FC = () => {
               <ShieldCheck className="w-5 h-5 text-emerald-600" />
             </div>
             <h3 className="text-base font-semibold text-slate-900">
-              1. Verified Pricing Provenance
+              1. Pricing & Access Notes
             </h3>
             <p className="text-xs text-slate-600 leading-relaxed">
               Pricing notes distinguish recurring free access, limited allowances, starter credits, trials, freemium plans, and paid-only access where the source data supports that distinction. Each provider can change its plans, eligibility rules, and limits; check the official pricing page linked from an individual listing before relying on an allowance.
@@ -106,7 +106,7 @@ export const AboutPage: React.FC = () => {
               <GraduationCap className="w-5 h-5 text-amber-600" />
             </div>
             <h3 className="text-base font-semibold text-slate-900">
-              4. Verified Student & Developer Perks
+              4. Student & Developer Benefits
             </h3>
             <p className="text-xs text-slate-600 leading-relaxed">
               We publish student and developer benefit listings with eligibility notes and links to provider terms. Availability can depend on country, institution, account status, and offer dates; readers should confirm eligibility with the provider before applying.
