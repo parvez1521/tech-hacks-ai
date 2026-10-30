@@ -320,7 +320,7 @@ export const aiToolsData: AiTool[] = [
     isFeatured: true,
     isTrending: true,
     rating: 4.8,
-    features: ['Desktop and terminal integration', 'Model routing and fallback', 'Local repository context', 'Agentic coding workflows', 'Optional bring-your-own-key configuration'],
+    features: ['Desktop and terminal integration', 'Model routing and fallback', 'Local repository context', 'Agentic coding workflows', 'Optional BYOK'],
     tags: ['free', 'ide', 'editor', 'frontier-models', 'developer-tools', 'agent', 'desktop', 'cli'],
     hasFreePlan: true,
     releaseYear: 2024,
