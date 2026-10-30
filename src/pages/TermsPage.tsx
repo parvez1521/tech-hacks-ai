@@ -32,7 +32,7 @@ export const TermsPage: React.FC = () => {
           Terms of Use
         </h1>
         <p className="text-xs text-slate-500">
-          Effective Date: October 18, 2026 • Last Reviewed: October 2026
+          Effective Date: October 30, 2026 • Last Reviewed: October 30, 2026
         </p>
       </div>
 
