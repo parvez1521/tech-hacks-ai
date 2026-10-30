@@ -77,7 +77,7 @@ describe('Phase 17: Google AdSense Readiness & Regulatory Compliance Audit', () 
       assert.ok(html.includes('Editorial Independence'), 'Must explain editorial policy');
       assert.ok(html.includes('Zero Paid Rankings'), 'Must disclose zero pay-for-ranking policy');
       assert.ok(html.includes('href="/contact"'), 'Must link to contact page');
-      assert.ok(html.includes('Verified Pricing Provenance'), 'Must list core pillar');
+      assert.ok(html.includes('Pricing & Access Notes'), 'Must list core pillar');
       assert.ok(html.includes('Open-Source First'), 'Must list OSS pillar');
     });
 
