@@ -108,7 +108,7 @@ export const OfferDetailPage: React.FC = () => {
 
       {/* Breadcrumbs */}
       <nav className="mb-6 flex flex-col items-start gap-3 text-xs text-muted-foreground sm:flex-row sm:items-center sm:justify-between" aria-label="Breadcrumb">
-        <div className="flex items-center gap-2">
+        <div className="flex min-w-0 max-w-full flex-wrap items-center gap-2">
           <Link to="/" className="hover:text-foreground transition-colors">
             Home
           </Link>
@@ -117,7 +117,7 @@ export const OfferDetailPage: React.FC = () => {
             AI Deals & Benefits
           </Link>
           <span>/</span>
-          <span className="text-foreground font-medium truncate max-w-[200px] sm:max-w-none">
+          <span className="min-w-0 max-w-[160px] truncate text-foreground font-medium sm:max-w-none">
             {offer.title}
           </span>
         </div>

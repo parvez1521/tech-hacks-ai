@@ -101,12 +101,12 @@ export const GuideDetailPage: React.FC = () => {
 
       {/* Breadcrumbs */}
       <nav className="mb-6 flex flex-col items-start gap-3 text-xs text-muted-foreground sm:flex-row sm:items-center sm:justify-between" aria-label="Breadcrumb">
-        <div className="flex items-center gap-2">
+        <div className="flex min-w-0 max-w-full flex-wrap items-center gap-2">
           <Link to="/" className="hover:text-foreground transition-colors">Home</Link>
           <span className="text-muted-foreground">/</span>
           <Link to="/guides" className="hover:text-foreground transition-colors">Guides</Link>
           <span className="text-muted-foreground">/</span>
-          <span className="text-blue-600 font-medium truncate max-w-[200px] sm:max-w-md">{guide.title}</span>
+          <span className="min-w-0 max-w-[160px] truncate text-blue-600 font-medium sm:max-w-md">{guide.title}</span>
         </div>
 
         <button
