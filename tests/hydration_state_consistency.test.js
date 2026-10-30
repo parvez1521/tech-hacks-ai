@@ -29,7 +29,8 @@ test('router hydrates without query-string-dependent markup, then restores URL f
   assert.match(source, /isStaticPrerender\s*\?\s*new URLSearchParams\(\)/);
   assert.match(source, /setSearchParamsState\(new URLSearchParams\(window\.location\.search\)\)/);
   const prerender = read('scripts/prerender-site.mjs');
-  assert.match(prerender, /data-prerendered="true"/);
+  assert.match(prerender, /html\.replace\('<html', '<html data-prerendered="true"'\)/);
+  assert.doesNotMatch(prerender, /<html\(\?=\\\\s/);
 });
 
 test('chatbot welcome suggestions are deterministic for hydration and randomized after mount', () => {
