@@ -2,12 +2,13 @@
 
 AdSense code is prepared, but **ad serving is disabled by default**. Code cannot guarantee approval; the site and account must be reviewed by Google.
 
-## 1. Apply in AdSense
+## 1. Connect and verify the site
 
-1. Sign in to your own Google AdSense account.
-2. Add `https://switchroute.in` and follow the verification method shown in the account.
-3. Keep the website complete: useful original content, accurate pricing/offer information, working Contact Us, clear navigation, and reachable Privacy, Terms and Disclosure pages.
-4. Request review in AdSense when the account says the site is eligible.
+1. Sign in to the AdSense account that owns publisher ID `pub-7627022109232156`.
+2. Add `https://switchroute.in` in **Sites** if it is not already listed.
+3. In the connection step, choose **Meta tag** and confirm the exact value shown in your account matches the live `<meta name="google-adsense-account">` value in `index.html`.
+4. Click **Verify**, then request a review from the Sites page when the account allows it.
+5. The meta tag verifies site ownership only. It does not load ads. Ad-serving flags remain disabled until approval and privacy requirements are met.
 
 ## 2. Environment variables
 
@@ -23,7 +24,7 @@ The build validates publisher ID format when `VITE_ADSENSE_PUBLISHER_ID` is set.
 
 ## 3. Consent and privacy
 
-The current SwitchRoute Cookie Preferences panel stores browser-level choices. It is **not** a Google-certified consent management platform (CMP) and does not send IAB TCF consent signals. Google requires publishers serving personalized ads in the EEA, UK, and Switzerland to use a Google-certified CMP integrated with the IAB Transparency and Consent Framework.
+The SwitchRoute Cookie Preferences panel stores browser-level choices and is used for basic opt-in Google Analytics 4 measurement. It is **not** a Google-certified consent management platform (CMP) and does not send IAB TCF consent signals. Google requires publishers serving personalized ads in the EEA, UK, and Switzerland to use a Google-certified CMP integrated with the IAB Transparency and Consent Framework.
 
 Before setting `VITE_ADSENSE_PRIVACY_READY=true`, configure a suitable certified CMP through AdSense Privacy & messaging or an eligible CMP provider, test regional consent behavior, and make sure the Privacy Policy describes the real production configuration. Keep this flag false until that is done.
 
@@ -35,9 +36,10 @@ Official guidance:
 ## 4. Verification
 
 After configuration and redeploy:
-- Open `https://switchroute.in/ads.txt` and check the seller record matches the publisher ID in AdSense.
-- Confirm the domain is approved in AdSense.
-- Test on desktop and mobile, watch browser console, and check that ads never mimic buttons or downloads, obscure content, or load before the intended consent setup.
-- Revisit Google AdSense Sites page to ensure site status and `ads.txt` are recognized.
+- Open the homepage HTML and confirm the AdSense site-verification meta tag is present.
+- Open `https://switchroute.in/ads.txt` and check the seller record matches the publisher ID in AdSense. The meta tag and ads.txt serve different purposes; one does not replace the other.
+- Confirm the domain is approved in AdSense before enabling any ad code or Auto ads.
+- Test consent choices on desktop and mobile, including withdrawing Analytics consent after opting in.
+- Keep the AdSense privacy-ready flag false until the required certified CMP and regional consent behaviour are configured and tested.
 
 Account ownership, identity/tax/payment verification, site review, and approval must be completed inside the owner's Google account.
