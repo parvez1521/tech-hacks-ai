@@ -106,7 +106,7 @@ export function getRouteTitle(route: string, params: Record<string, string> = {}
          : formatPageTitle('AI Tool Not Found');
     }
     case 'free-ai-sites':
-      return formatPageTitle('Free AI Sites & Zero-Cost Generative Tools');
+      return formatPageTitle('Free AI Access & Open-Source Tools');
     case 'guides':
       return formatPageTitle('Step-by-Step AI Workflows & Tutorials');
     case 'guide-detail': {
@@ -220,7 +220,7 @@ export function getRouteDescription(route: string, params: Record<string, string
          : 'Detailed pricing provenance, model capabilities, and verified benchmarks.';
     }
     case 'free-ai-sites':
-      return 'Curated directory of 100% free AI sites, recurring free plans, zero-cost accounts, and self-hostable open-source models.';
+      return 'Browse AI services and open-source tools with free plans or local deployment options. Compare access models, account requirements, quotas, licences, and official provider links.';
     case 'guides':
       return 'Actionable, step-by-step AI tutorials and open-source deployment guides written by practitioners.';
     case 'guide-detail': {
