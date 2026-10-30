@@ -65,7 +65,7 @@ export const guidesData: Guide[] = [
     tags: ['cursor', 'supabase', 'react', 'typescript', 'fullstack'],
     relatedToolSlugs: ['cursor', 'supabase'],
     references: [
-      { title: 'Project Rules for AI', publisher: 'Cursor', url: 'https://docs.cursor.com/context/rules-for-ai' },
+      { title: 'Cursor Rules', publisher: 'Cursor', url: 'https://cursor.com/docs/rules' },
       { title: 'Use Supabase with React', publisher: 'Supabase', url: 'https://supabase.com/docs/guides/getting-started/quickstarts/reactjs' },
       { title: 'Row Level Security', publisher: 'Supabase', url: 'https://supabase.com/docs/guides/database/postgres/row-level-security' },
     ],
@@ -237,9 +237,11 @@ export const guidesData: Guide[] = [
     tags: ['coding', 'cursor', 'claude-code', 'aider', 'cline', 'comparison', 'terminal'],
     relatedToolSlugs: ['cursor', 'aider', 'claude', 'ollama'],
     references: [
-      { title: 'Project Rules for AI', publisher: 'Cursor', url: 'https://docs.cursor.com/context/rules-for-ai' },
-      { title: 'Set up Claude Code', publisher: 'Anthropic', url: 'https://docs.anthropic.com/en/docs/claude-code/getting-started' },
-      { title: 'Aider Documentation', publisher: 'Aider', url: 'https://aider.chat/docs/' },
+      { title: 'Cursor Rules', publisher: 'Cursor', url: 'https://cursor.com/docs/rules' },
+      { title: 'Cursor pricing and plans', publisher: 'Cursor', url: 'https://cursor.com/pricing' },
+      { title: 'Get started with Claude Code', publisher: 'Anthropic', url: 'https://code.claude.com/docs/en/getting-started' },
+      { title: 'Claude Code usage and limits', publisher: 'Claude Help Center', url: 'https://support.claude.com/en/articles/14552983-models-usage-and-limits-in-claude-code' },
+      { title: 'Connecting Aider to language models', publisher: 'Aider', url: 'https://aider.chat/docs/llms.html' },
       { title: 'Cline Overview', publisher: 'Cline', url: 'https://docs.cline.bot/cline-overview' },
     ],
     steps: [
@@ -281,6 +283,9 @@ export const guidesData: Guide[] = [
     references: [
       { title: 'Student Developer Pack eligibility', publisher: 'GitHub Education', url: 'https://education.github.com/pack/join' },
       { title: 'Student Developer Pack terms and conditions', publisher: 'GitHub Docs', url: 'https://docs.github.com/en/education/about-github-education/github-education-for-students/github-terms-and-conditions-for-the-student-developer-pack' },
+      { title: 'Azure for Students: eligibility, credits and services', publisher: 'Microsoft Learn', url: 'https://learn.microsoft.com/en-us/azure/education-hub/about-azure-for-students' },
+      { title: 'Azure for Students: credit expiry and renewal', publisher: 'Microsoft Learn', url: 'https://learn.microsoft.com/en-us/azure/education-hub/faq' },
+      { title: 'AWS Educate: free cloud learning and hands-on labs', publisher: 'Amazon Web Services', url: 'https://aws.amazon.com/education/awseducate/' },
     ],
     steps: [
       {
