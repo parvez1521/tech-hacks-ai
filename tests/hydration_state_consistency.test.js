@@ -4,12 +4,12 @@ import fs from 'node:fs';
 
 const read = (path) => fs.readFileSync(path, 'utf8');
 
-test('cookie banner state is identical during SSR and first client render', () => {
+test('cookie banner does not flash before saved consent is resolved', () => {
   const source = read('src/components/CookieConsentBanner.tsx');
-  assert.match(source, /const \[isOpen, setIsOpen\] = useState\(true\)/);
+  assert.match(source, /const \[isOpen, setIsOpen\] = useState\(false\)/);
   assert.doesNotMatch(source, /useState\(\(\) => getCookiePreferences\(\)/);
   assert.match(source, /const existing = getCookiePreferences\(\)/);
-  assert.match(source, /setIsOpen\(false\)/);
+  assert.match(source, /if \(existing\) \{[\s\S]*?return;[\s\S]*?\}\s*setIsOpen\(true\)/);
 });
 
 test('prompt-library bookmarks and recently viewed items are loaded after hydration', () => {
