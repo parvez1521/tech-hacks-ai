@@ -169,7 +169,7 @@ describe('Phase 17: Google AdSense Readiness & Regulatory Compliance Audit', () 
   describe('4. Cookie Consent & GDPR/CMP Readiness', () => {
     test('CookieConsentBanner defers the first-visit prompt until saved consent is resolved after hydration', () => {
       const html = renderWithRouter(React.createElement(ssrModule.CookieConsentBanner));
-      const source = read('src/components/CookieConsentBanner.tsx');
+      const source = fs.readFileSync(path.join(process.cwd(), 'src/components/CookieConsentBanner.tsx'), 'utf8');
       assert.equal(html, '', 'Banner must not flash in server-rendered HTML before local consent has been checked');
       assert.ok(source.includes('Cookie &amp; Privacy Notice'), 'Banner heading must remain available after mount');
       assert.match(source, /onClick=\{handleAcceptAll\}/, 'Must retain Accept All action');
