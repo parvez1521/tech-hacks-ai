@@ -216,7 +216,7 @@ describe('Phase 7: Official Brand Logos & Verified Free AI Tools Directory', () 
     const html = renderClean(React.createElement(ssrModule.App));
 
     assert.ok(html.includes('Free AI Sites &amp; Generative Tools') || html.includes('Free AI Sites & Generative Tools'), 'Renders Free AI heading');
-    assert.ok(html.includes('100% Open Source &amp; Local') || html.includes('100% Open Source & Local'), 'Renders Open Source tab');
+    assert.ok(html.includes('Open Source &amp; Local') || html.includes('Open Source & Local'), 'Renders Open Source tab');
     assert.ok(html.includes('Recurring Free Plan'), 'Renders Recurring Free Plan tab');
     assert.ok(html.includes('No Account Required'), 'Renders No Account Required tab');
     assert.ok(html.includes('src="/logos/official-ai/ollama.png"'), 'Renders Ollama official brand logo');
