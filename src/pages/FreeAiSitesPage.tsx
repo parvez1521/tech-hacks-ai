@@ -68,13 +68,13 @@ export const FreeAiSitesPage: React.FC = () => {
       <div className="mb-8">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-700 text-xs font-semibold uppercase tracking-wider mb-3">
           <Gift className="w-3.5 h-3.5 text-emerald-600" />
-          <span>Independently Verified • Zero Upfront Cost</span>
+          <span>Free Access &amp; Open-Source Options</span>
         </div>
         <h1 className="text-2xl sm:text-4xl font-extrabold text-[#0F172A] tracking-tight mb-3">
           Free AI Sites & Generative Tools
         </h1>
         <p className="text-sm sm:text-base text-[#64748B] max-w-3xl leading-relaxed mb-6">
-          Explore {allFreeTools.length} tested and verified AI platforms you can use at zero cost. Clearly partitioned between self-hosted open-source software and commercial SaaS with recurring free tiers.
+          Explore {allFreeTools.length} AI services and local/open-source tools with a free starting option. Listings are grouped by access model; quotas, eligibility, account or card requirements, and terms vary by provider.
         </p>
 
         {/* Informational Callout: Open Source vs Hosted Commercial */}
@@ -82,15 +82,15 @@ export const FreeAiSitesPage: React.FC = () => {
           <div className="flex items-start gap-2.5">
             <Server className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
             <div>
-              <strong className="text-[#0F172A] font-semibold block mb-0.5">100% Free & Open Source Local AI</strong>
-              <span className="text-[#64748B]">Tools like Ollama, Open WebUI, and ComfyUI run on your own hardware with no cloud fees, data logging, or subscriptions.</span>
+              <strong className="text-[#0F172A] font-semibold block mb-0.5">Open-Source &amp; Self-Hosted Tools</strong>
+              <span className="text-[#64748B]">Tools such as Ollama, Open WebUI, and ComfyUI can be run on hardware you manage. Compute, electricity, hosting, model licences, and telemetry depend on the project and configuration.</span>
             </div>
           </div>
           <div className="flex items-start gap-2.5">
             <CheckCircle2 className="w-4 h-4 text-[#2563EB] shrink-0 mt-0.5" />
             <div>
               <strong className="text-[#0F172A] font-semibold block mb-0.5">Hosted Freemium & Free-Plan SaaS</strong>
-              <span className="text-[#64748B]">Cloud services like Claude, ChatGPT, and Perplexity offer permanent free quotas with no credit card required.</span>
+              <span className="text-[#64748B]">Some hosted services offer limited free plans or usage quotas. Limits, available features, account and payment requirements, and data-use terms vary and can change; check each provider's current terms.</span>
             </div>
           </div>
         </div>
@@ -120,7 +120,7 @@ export const FreeAiSitesPage: React.FC = () => {
               }`}
             >
               <Server className="w-3.5 h-3.5" />
-              <span>100% Open Source & Local ({openSourceCount})</span>
+              <span>Open Source &amp; Local ({openSourceCount})</span>
             </button>
             <button
               type="button"
