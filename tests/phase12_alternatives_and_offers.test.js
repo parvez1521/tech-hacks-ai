@@ -270,10 +270,10 @@ describe('Phase 12: Alternative Navigation, Claude Code/Perplexity Alts, OmniRus
       assert.ok(res.text.includes('/alternatives/perplexity'), 'Must link to /alternatives/perplexity');
     });
 
-    test('Chatbot accurately reports OmniRush is 100% Free desktop/CLI with community model routing', () => {
+    test('Chatbot describes OmniRush local client and community access without an absolute free promise', () => {
       const res = generateGroundedResponse('What is the pricing for OmniRush? Is it free or freemium?');
-      assert.ok(res.text.includes('100% Free'), 'Must state OmniRush is 100% Free');
-      assert.ok(/free platform download/i.test(res.text), 'Must use the recorded free-access details');
+      assert.ok(/free client/i.test(res.text), 'Must describe the client download availability');
+      assert.ok(/community/i.test(res.text), 'Must mention community model access');
       assert.ok(res.text.includes('published catalogue only'), 'Must avoid claiming live pricing verification');
     });
   });

@@ -137,7 +137,7 @@ describe('Phase 6: Homepage Redesign & HandlyTech Platform Integration', () => {
     const html = renderClean(React.createElement(ssrModule.App));
 
     assert.ok(html.includes('AI Tools Directory: Discover &amp; Compare AI Platforms') || html.includes('AI Tools Directory: Discover & Compare AI Platforms'), 'AI directory title');
-    assert.ok(html.includes('Runway Gen-3 Alpha'), 'Renders Runway');
+    assert.ok(html.includes('Runway AI Video'), 'Renders Runway');
     assert.ok(html.includes('Cursor Editor'), 'Renders Cursor');
     assert.ok(html.includes('Claude'), 'Renders Claude');
     assert.ok(html.includes('href="/ai-tools/cursor"'), 'Links to /ai-tools/cursor');
@@ -227,9 +227,9 @@ describe('Phase 6: Homepage Redesign & HandlyTech Platform Integration', () => {
     setupMockBrowser('https://openalternative.co/guides/cinematic-ai-video-workflow');
     const html = renderClean(React.createElement(ssrModule.App));
 
-    assert.ok(html.includes('How to Produce Cinematic 4K AI Videos with FLUX and Runway Gen-3'), 'Renders guide title');
+    assert.ok(html.includes('A Practical Cinematic AI Video Workflow with FLUX and Runway'), 'Renders guide title');
     assert.ok(html.includes('Step-by-Step Instructions'), 'Renders steps heading');
-    assert.ok(html.includes('Establish Visual Consistency with a Master Style Prompt'), 'Renders step 1');
+    assert.ok(html.includes('Build a reference frame before generating motion'), 'Renders step 1');
     assert.ok(html.includes('Recommended Prompt Template'), 'Renders prompt template label');
     assert.ok(html.includes('Copy Prompt'), 'Renders copy prompt button');
     assert.ok(html.includes('Tools &amp; Models Used in this Guide') || html.includes('Tools & Models Used in this Guide'), 'Tools section');

@@ -176,6 +176,36 @@ describe('Phase 7: Official Brand Logos & Verified Free AI Tools Directory', () 
     }
   });
 
+  test('free AI directory claims distinguish plan limits, local compute, and hosted usage', () => {
+    const chatgpt = getAiToolBySlug('chatgpt');
+    assert.equal(chatgpt.requiresAccount, true);
+    assert.match(chatgpt.freeTierLimits, /separate usage limits/i);
+    assert.doesNotMatch(chatgpt.tagline, /GPT-4o/i);
+    assert.match(chatgpt.pricingSourceUrl, /help\.openai\.com/);
+    assert.equal(chatgpt.pricingVerifiedAt, '2026-10-30');
+
+    const perplexity = getAiToolBySlug('perplexity');
+    assert.match(perplexity.freeTierLimits, /3 Pro Searches per day/i);
+    assert.doesNotMatch(perplexity.pricingDetails, /5 Pro Searches every 4 hours/i);
+    assert.match(perplexity.pricingSourceUrl, /perplexity\.ai\/help-center/);
+
+    const ollama = getAiToolBySlug('ollama');
+    assert.match(ollama.pricingDetails, /cloud models consume usage credits/i);
+    assert.match(ollama.pricingDetails, /hardware, electricity, storage/i);
+    assert.match(ollama.freeTierLimits, /RAM, GPU/i);
+
+    const wan = getAiToolBySlug('wan-video');
+    assert.match(wan.freeTierSummary, /Apache 2\.0-licensed model weights/i);
+    assert.match(wan.pricingDetails, /compute and hosted inference are separate costs/i);
+
+    const guides = fs.readFileSync(path.resolve('src/data/guidesData.ts'), 'utf8');
+    assert.doesNotMatch(guides, /\$1,500 in verified free cloud compute/i);
+    assert.doesNotMatch(guides, /zero telemetry or prompt text leaves/i);
+    assert.doesNotMatch(guides, /66 daily credits|5 Pro searches every 4 hours/i);
+    assert.match(guides, /Verify network behavior before using private code/);
+    assert.match(guides, /Set usage budgets and monitor renewals/);
+  });
+
   test('open-source and local self-hostable tools are distinctly classified', () => {
     const openSourceTools = getOpenSourceAiTools();
     assert.ok(openSourceTools.length >= 10, `Should have at least 10 open-source AI tools, found ${openSourceTools.length}`);
