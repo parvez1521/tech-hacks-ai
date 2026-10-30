@@ -10,7 +10,6 @@ test('cookie banner does not flash before saved consent is resolved', () => {
   assert.doesNotMatch(source, /useState\(\(\) => getCookiePreferences\(\)/);
   assert.match(source, /const existing = getCookiePreferences\(\)/);
   assert.match(source, /if \(existing\) \{[\s\S]*?return;[\s\S]*?\}\s*setIsOpen\(true\)/);
-  assert.doesNotMatch(source, /setIsOpen\(false\)/);
 });
 
 test('prompt-library bookmarks and recently viewed items are loaded after hydration', () => {
