@@ -43,7 +43,7 @@ export const WELCOME_QUESTIONS = [
 
 const FOLLOW_UP_PROMPTS = ['Find free AI tools', 'Find open-source tools', 'Browse current offers'];
 
-function createWelcomeMessage(): ChatMessage {
+function createWelcomeMessage(suggestions: readonly string[] = STARTER_PROMPTS): ChatMessage {
   return {
     id: 'bot-welcome',
     sender: 'assistant',
@@ -51,11 +51,7 @@ function createWelcomeMessage(): ChatMessage {
     text:
       '**Welcome to the SwitchRoute assistant.**\n\n' +
       'I can help you find verified AI tools, open-source alternatives, practical guides, and current student or free-access options. Ask in English or Hindi/Hinglish.',
-    suggestions: suggestionsOrFallback(
-      WELCOME_QUESTIONS,
-      STARTER_PROMPTS,
-      (questions) => pickRandomSuggestions(questions, 4),
-    ),
+    suggestions: suggestionsOrFallback(suggestions, STARTER_PROMPTS),
   };
 }
 
@@ -79,6 +75,16 @@ export const FloatingChatbot: React.FC = () => {
   useEffect(() => {
     isOpenRef.current = isOpen;
   }, [isOpen]);
+
+  useEffect(() => {
+    // Keep the first render deterministic for static HTML hydration. Add the
+    // per-session variety only after the browser has hydrated the page.
+    setMessages((current) => current.map((message, index) =>
+      index === 0 && message.id === 'bot-welcome'
+        ? createWelcomeMessage(pickRandomSuggestions(WELCOME_QUESTIONS, 4))
+        : message
+    ));
+  }, []);
 
   const closeChat = () => {
     setIsOpen(false);
@@ -221,7 +227,7 @@ export const FloatingChatbot: React.FC = () => {
   };
 
   const handleClearHistory = () => {
-    setMessages([createWelcomeMessage()]);
+    setMessages([createWelcomeMessage(pickRandomSuggestions(WELCOME_QUESTIONS, 4))]);
     setErrorMessage(null);
     setServiceNotice(null);
     setLastQuery(null);

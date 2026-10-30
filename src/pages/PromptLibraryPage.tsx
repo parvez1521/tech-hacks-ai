@@ -23,8 +23,8 @@ export const PromptLibraryPage: React.FC = () => {
   const [selectedAspectRatio, setSelectedAspectRatio] = useState('');
   const [selectedMediaType, setSelectedMediaType] = useState('');
   const [showFavorites, setShowFavorites] = useState(false);
-  const [favoriteIds, setFavoriteIds] = useState(() => getBookmarks().map((item) => item.id));
-  const [recentlyViewed, setRecentlyViewed] = useState(() => getRecentlyViewedPrompts().filter((item) => !item.slug.startsWith('promptfeed-')));
+  const [favoriteIds, setFavoriteIds] = useState<string[]>([]);
+  const [recentlyViewed, setRecentlyViewed] = useState<ReturnType<typeof getRecentlyViewedPrompts>>([]);
   const [sort, setSort] = useState<PromptSort>('featured');
   const [page, setPage] = useState(1);
   const [allPrompts, setAllPrompts] = useState(() => getAllPrompts().filter((prompt) => !prompt.slug.startsWith('promptfeed-')));
@@ -43,7 +43,12 @@ export const PromptLibraryPage: React.FC = () => {
     });
     return () => { active = false; };
   }, []);
-  useEffect(() => subscribeBookmarks((items) => setFavoriteIds(items.map((item) => item.id))), []);
+  useEffect(() => {
+    // Browser storage is unavailable during static rendering. Read it only after hydration.
+    setFavoriteIds(getBookmarks().map((item) => item.id));
+    setRecentlyViewed(getRecentlyViewedPrompts().filter((item) => !item.slug.startsWith('promptfeed-')));
+    return subscribeBookmarks((items) => setFavoriteIds(items.map((item) => item.id)));
+  }, []);
   useEffect(() => {
     let active = true;
     fetchPromptCopyStats().then((stats) => {

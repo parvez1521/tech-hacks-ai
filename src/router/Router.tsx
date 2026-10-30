@@ -189,15 +189,22 @@ export const RouterProvider: React.FC<{ children: ReactNode }> = ({ children }) 
   const [currentPath, setCurrentPath] = useState(
     typeof window !== 'undefined' ? window.location.pathname : '/'
   );
-  const [searchParams, setSearchParamsState] = useState(
-    typeof window !== 'undefined' ? new URLSearchParams(window.location.search) : new URLSearchParams()
-  );
+  // Static route HTML is rendered without query strings. Start from the same
+  // empty state on the server and client, then restore browser filters after hydration.
+  const isStaticPrerender = typeof document !== 'undefined'
+    && document.documentElement?.dataset?.prerendered === 'true';
+  const [searchParams, setSearchParamsState] = useState(() => (
+    isStaticPrerender
+      ? new URLSearchParams()
+      : typeof window !== 'undefined' ? new URLSearchParams(window.location.search) : new URLSearchParams()
+  ));
 
   useEffect(() => {
     const previousScrollRestoration = window.history.scrollRestoration;
     // The SPA owns route scroll position; don't let the browser restore a stale
     // position from another route after pushState/popstate.
     window.history.scrollRestoration = 'manual';
+    setSearchParamsState(new URLSearchParams(window.location.search));
 
     const handlePopState = () => {
       setCurrentPath(window.location.pathname);

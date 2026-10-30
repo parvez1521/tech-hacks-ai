@@ -20,10 +20,12 @@ describe('Theme, chat suggestions, and contact regression coverage', () => {
   it('renders welcome and follow-up chips through the normal send action', () => {
     const source = read('src/components/FloatingChatbot.tsx');
     assert.match(source, /useState<ChatMessage\[]>\(\(\) => \[createWelcomeMessage\(\)\]\)/);
+    assert.match(source, /suggestions: suggestionsOrFallback\(suggestions, STARTER_PROMPTS\)/);
+    assert.match(source, /createWelcomeMessage\(pickRandomSuggestions\(WELCOME_QUESTIONS, 4\)\)/);
     assert.match(source, /suggestionsOrFallback\(data\.suggestions, FOLLOW_UP_PROMPTS\)/);
     assert.match(source, /onClick=\{\(\) => handleSend\(s\)\}/);
     assert.match(source, /msg\.id !== 'bot-welcome' \|\| messages\.length === 1/);
-    assert.match(source, /setMessages\(\[createWelcomeMessage\(\)\]\)/);
+    assert.match(source, /setMessages\(\[createWelcomeMessage\(pickRandomSuggestions\(WELCOME_QUESTIONS, 4\)\)\]\)/);
   });
 
   it('labels theme toggle with its destination and keeps the arrow non-interactive', () => {
