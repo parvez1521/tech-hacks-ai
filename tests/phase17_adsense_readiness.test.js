@@ -77,8 +77,10 @@ describe('Phase 17: Google AdSense Readiness & Regulatory Compliance Audit', () 
       assert.ok(html.includes('Editorial Independence'), 'Must explain editorial policy');
       assert.ok(html.includes('Zero Paid Rankings'), 'Must disclose zero pay-for-ranking policy');
       assert.ok(html.includes('href="/contact"'), 'Must link to contact page');
-      assert.ok(html.includes('Pricing & Access Notes'), 'Must list core pillar');
+      assert.ok(html.includes('Pricing &amp; Access Notes') || html.includes('Pricing & Access Notes'), 'Must list pricing and access pillar');
       assert.ok(html.includes('Open-Source First'), 'Must list OSS pillar');
+      assert.ok(html.includes('Practical Engineering Workflows'), 'Must list engineering pillar');
+      assert.ok(html.includes('Student &amp; Developer Benefits') || html.includes('Student & Developer Benefits'), 'Must list benefits pillar');
     });
 
     test('ContactPage checks secure message intake before exposing the form', () => {
