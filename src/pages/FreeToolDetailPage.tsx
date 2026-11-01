@@ -91,7 +91,7 @@ export const FreeToolDetailPage: React.FC = () => {
       <div className="p-4 rounded-xl bg-card/40 border border-border/60 text-xs text-muted-foreground flex items-center gap-3">
         <ShieldCheck className="w-4 h-4 text-emerald-400 shrink-0" />
         <span>
-           <strong>Processing policy:</strong> {tool.isClientSideOnly ? 'This runner processes supplied input in browser memory and does not send it to a remote utility-processing service.' : 'This runner sends the selected file to the configured transcription provider only after you start processing. If no provider is configured, it reports that setup is required.'} Normal application resources and optional clipboard/download browser APIs may still be used.
+           <strong>Processing policy:</strong> {tool.processingNote || (tool.isClientSideOnly ? 'This runner processes supplied input in browser memory and does not send it to a remote utility-processing service.' : 'This runner sends the selected file to the configured processing provider only after you start processing. If no provider is configured, it reports that setup is required.')} Normal application resources and optional clipboard/download browser APIs may still be used.
         </span>
       </div>
     </div>
