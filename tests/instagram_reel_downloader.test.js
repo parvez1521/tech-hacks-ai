@@ -27,7 +27,7 @@ describe('Instagram Reel Downloader: authorized media integration', () => {
     assert.throws(() => parseInstagramPermalink('https://example.com/reel/AbC_123/'), /instagram.com/i);
     assert.throws(() => parseInstagramPermalink('http://www.instagram.com/reel/AbC_123/'), /HTTPS/i);
     assert.throws(() => parseInstagramPermalink('https://www.instagram.com/stories/user/123/'), /supported links/i);
-    assert.throws(() => parseInstagramPermalink('https://www.instagram.com/reel/../'), /valid media identifier/i);
+    assert.throws(() => parseInstagramPermalink('https://www.instagram.com/reel/../'), /supported links/i);
   });
 
   test('uses the current, configurable Graph API version', () => {
