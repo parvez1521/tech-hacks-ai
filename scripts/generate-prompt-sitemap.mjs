@@ -5,6 +5,7 @@ import { promptCategories, promptsData } from '../src/data/promptsData.ts';
 import { aiToolsData } from '../src/data/aiToolsData.ts';
 import { proprietaryTools } from '../src/data/alternatives.ts';
 import { offersData } from '../src/data/offersData.ts';
+import { freeToolsData } from '../src/data/freeToolsData.ts';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const sitemapPath = path.join(root, 'public/sitemap.xml');
@@ -63,6 +64,7 @@ const candidates = [
   ...aiToolsData.filter((item) => item?.slug).map((item) => ({ url: `https://switchroute.in/ai-tools/${item.slug}`, priority: '0.7' })),
   ...proprietaryTools.filter((item) => item?.slug).map((item) => ({ url: `https://switchroute.in/alternatives/${item.slug}`, priority: '0.6' })),
   ...offersData.filter((item) => item?.slug).map((item) => ({ url: `https://switchroute.in/offers/${item.slug}`, priority: '0.7' })),
+  ...freeToolsData.filter((item) => item?.slug).map((item) => ({ url: `https://switchroute.in/free-tools/${item.slug}`, priority: '0.6' })),
 ];
 const entries = candidates.filter((item) => !knownUrls.has(item.url)).map((item) => `  <url>\n    <loc>${item.url}</loc>\n    <changefreq>monthly</changefreq>\n    <priority>${item.priority}</priority>\n  </url>`);
 if (entries.length) {
