@@ -32,7 +32,7 @@ before(async () => {
 describe('Homepage prompt showcase and section alignment', () => {
   it('orders hero, dynamic metric strip, alternatives, goals, picks, and discoveries', () => {
     const html = ReactDOMServer.renderToStaticMarkup(React.createElement(appModule.App));
-    const counterValues = ['25', '224', '30', '548', '12', '39', '75', '27'];
+    const counterValues = ['25', '226', '30', '548', '12', '39', '76', '27'];
     for (const value of counterValues) {
       assert.ok(html.includes(`aria-label="${value}">${value}</strong>`), `SSR includes visible catalogue count ${value}`);
     }
