@@ -303,6 +303,7 @@ export interface FreeToolUtility {
   isClientSideOnly: boolean;
   acceptedInput: string;
   outputFormat: string;
+  processingNote?: string;
 }
 
 export interface BookmarkItem {

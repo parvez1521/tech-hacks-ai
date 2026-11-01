@@ -34,7 +34,7 @@ export const PrivacyPage: React.FC = () => {
           Privacy Policy
         </h1>
         <p className="text-xs text-slate-500">
-          Effective Date: October 30, 2026 • Last Reviewed: October 30, 2026
+          Effective Date: November 1, 2026 • Last Reviewed: November 1, 2026
         </p>
       </div>
 
@@ -202,6 +202,26 @@ export const PrivacyPage: React.FC = () => {
           </ul>
           <p className="text-xs text-slate-500">
             This data remains entirely on your physical device. SwitchRoute does not transmit your saved bookmarks or UI preferences to external marketing databases.
+          </p>
+        </section>
+
+
+        {/* Instagram Account Connection & Media Processing */}
+        <section className="space-y-3">
+          <h2 className="text-xl font-bold text-slate-900 tracking-tight">
+            Instagram Account Connection &amp; Media Processing
+          </h2>
+          <p>
+            If you choose to connect an Instagram Professional or Creator account to the Instagram Reel Downloader, SwitchRoute redirects you to Instagram’s official authorization page. After you approve access, SwitchRoute receives an access token and the account identifier, username, account type, media count, and media metadata made available by Meta’s Instagram API. SwitchRoute does not request your Instagram password.
+          </p>
+          <p>
+            The access token is encrypted and held in a Secure, HttpOnly, SameSite cookie in your browser. It is not written to localStorage or SwitchRoute’s database. When you request a download, the selected media is streamed through a server request and is not intentionally stored by SwitchRoute. The token is used only to retrieve media returned for the account you connected.
+          </p>
+          <p>
+            You can disconnect the account from the downloader at any time. Disconnecting clears the session cookie from your browser. Meta separately processes account data under its own terms and privacy policy. This integration does not provide access to private content or media owned by unrelated accounts.
+          </p>
+          <p>
+            See <a href="https://privacycenter.instagram.com/policy/" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-700 underline">Instagram’s Privacy Policy</a> for information about Meta’s processing.
           </p>
         </section>
 
