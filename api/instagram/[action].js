@@ -244,7 +244,7 @@ function normalizeMedia(record) {
     const mediaUrl = isTrustedInstagramMediaUrl(item?.media_url) ? item.media_url : '';
     const thumbnailUrl = isTrustedInstagramMediaUrl(item?.thumbnail_url) ? item.thumbnail_url : '';
     if (!mediaType || !mediaUrl) return null;
-    return { index, mediaType, previewUrl: mediaType === 'VIDEO' ? (thumbnailUrl || mediaUrl) : mediaUrl, mediaUrl };
+    return { index, mediaType, previewUrl: mediaUrl, thumbnailUrl: thumbnailUrl || undefined, mediaUrl };
   }).filter(Boolean);
   if (!items.length) throw new Error('Meta did not return a downloadable media file for this post.');
   return { id: String(record.id || ''), kind: String(record.media_type || 'MEDIA'), permalink: String(record.permalink || ''), items };
@@ -455,6 +455,7 @@ async function mediaLookup(req, res) {
       index,
       mediaType: item.mediaType,
       previewUrl: item.previewUrl,
+      posterUrl: item.thumbnailUrl || null,
       downloadUrl: '/api/instagram/download?shortcode=' + encodeURIComponent(parsed.shortcode) +
         '&mediaId=' + encodeURIComponent(media.id) + '&item=' + String(index),
     }));
