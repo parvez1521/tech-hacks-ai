@@ -94,7 +94,8 @@ describe('Instagram Reel Downloader: authorized media integration', () => {
     }, 'AbC_123', mockFetch);
     assert.equal(media.id, '17900000000000000');
     assert.equal(media.items[0].mediaType, 'VIDEO');
-    assert.equal(media.items[0].previewUrl, 'https://scontent.cdninstagram.com/thumbnail.jpg');
+    assert.equal(media.items[0].previewUrl, 'https://scontent.cdninstagram.com/video.mp4');
+    assert.equal(media.items[0].thumbnailUrl, 'https://scontent.cdninstagram.com/thumbnail.jpg');
     assert.equal(calls.length, 1);
     assert.equal(calls[0].hostname, 'graph.instagram.com');
     assert.match(calls[0].pathname, /\/v26\.0\/17841400000000000\/media$/);
