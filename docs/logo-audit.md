@@ -460,3 +460,10 @@ The following newly added video catalog identities use neutral initials fallback
 | GitHub Copilot (`github-copilot`) | Simple Icons GitHub Copilot mark | `/logos/githubcopilot.svg` | Source recorded; verified 2026-10-18 | [Simple Icons asset](https://cdn.jsdelivr.net/npm/simple-icons/icons/githubcopilot.svg); not a full wordmark |
 
 | `github-copilot` | `/logos/githubcopilot.svg` | Simple Icons source recorded; not a full wordmark |
+
+
+## Ox Alpha logo addition (2026-11-01)
+
+| Slug | Asset | Provenance |
+| --- | --- | --- |
+| `ox-alpha` | `/logos/oxalpha.svg` | User-provided logo artwork recreated as a vector asset for the SwitchRoute directory. |
