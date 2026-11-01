@@ -200,9 +200,185 @@ export const YoutubeVideoDownloaderTool: React.FC = () => {
 };
 
 export const InstagramVideoDownloaderTool: React.FC = () => {
+  type SessionState = { configured: boolean; connected: boolean; username?: string | null; accountType?: string | null; mediaCount?: number | null };
+  type MediaItem = { index: number; mediaType: 'VIDEO' | 'IMAGE'; previewUrl: string; downloadUrl: string };
+  type MediaResult = { id: string; kind: string; permalink: string; items: MediaItem[] };
+
   const [input, setInput] = useState('');
-  const [result, setResult] = useState<{ shortcode: string; normalizedUrl: string; kind: string } | null>(null);
+  const [session, setSession] = useState<SessionState>({ configured: false, connected: false });
+  const [sessionLoading, setSessionLoading] = useState(true);
+  const [lookupLoading, setLookupLoading] = useState(false);
+  const [disconnectLoading, setDisconnectLoading] = useState(false);
+  const [result, setResult] = useState<MediaResult | null>(null);
   const [error, setError] = useState('');
-  const inspect = () => { try { setResult(parseInstagramUrl(input)); setError(''); } catch (err) { setResult(null); setError(err instanceof Error ? err.message : 'Invalid Instagram URL.'); } };
-  return <div className="space-y-4"><UtilityMessage tone="info">Validation and authorized workflow only. This utility does not scrape Instagram, access private posts, store credentials or cookies, or claim to download inaccessible media.</UtilityMessage><div className="flex flex-col gap-2 sm:flex-row"><input aria-label="Instagram post or Reel URL" value={input} onChange={(event) => setInput(event.target.value)} className={utilityInputClass} placeholder="https://www.instagram.com/reel/..." /><button type="button" className={utilityButtonClass} onClick={inspect}>Validate URL</button></div>{error && <UtilityMessage>{error}</UtilityMessage>}{result && <div className="space-y-3 rounded-xl border border-border bg-card/50 p-4"><div className="grid gap-3 sm:grid-cols-2"><div><span className="block text-xs text-muted-foreground">Recognized media</span><strong className="text-sm text-foreground">Instagram {result.kind} · {result.shortcode}</strong></div><div><span className="block text-xs text-muted-foreground">Normalized URL</span><a href={result.normalizedUrl} target="_blank" rel="noreferrer" className="break-all text-xs text-primary hover:underline">{result.normalizedUrl}</a></div></div><p className="text-xs text-muted-foreground">For your own content, use Instagram's official Accounts Center export. A recognized URL does not prove media is accessible or downloadable.</p><a href="https://accountscenter.instagram.com/info_and_permissions/dyi/" target="_blank" rel="noreferrer" className={utilityQuietButtonClass}>Open official data export</a></div>}</div>;
+  const [notice, setNotice] = useState('');
+
+  useEffect(() => {
+    let active = true;
+    const refreshSession = async () => {
+      try {
+        const response = await fetch('/api/instagram/session', { headers: { Accept: 'application/json' } });
+        const payload = await response.json().catch(() => ({}));
+        if (!response.ok) throw new Error(payload.message || 'Instagram connection status could not be checked.');
+        if (active) setSession(payload);
+      } catch (err) {
+        if (active) setError(err instanceof Error ? err.message : 'Instagram connection status could not be checked.');
+      } finally {
+        if (active) setSessionLoading(false);
+      }
+    };
+    refreshSession();
+
+    const params = new URLSearchParams(window.location.search);
+    const authStatus = params.get('instagram');
+    if (authStatus === 'connected') setNotice('Instagram account connected. Paste a Reel or post link from that account.');
+    if (authStatus === 'error') setError('Instagram could not be connected. Check the account type and try again.');
+    if (authStatus) {
+      params.delete('instagram');
+      const query = params.toString();
+      window.history.replaceState({}, '', window.location.pathname + (query ? '?' + query : '') + window.location.hash);
+    }
+    return () => { active = false; };
+  }, []);
+
+  const findMedia = async () => {
+    setError('');
+    setNotice('');
+    setResult(null);
+    let normalizedUrl = '';
+    try {
+      normalizedUrl = parseInstagramUrl(input).normalizedUrl;
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Enter a valid Instagram Reel or post URL.');
+      return;
+    }
+    if (!session.connected) {
+      setError('Connect the Instagram Professional or Creator account that owns this post first.');
+      return;
+    }
+    setLookupLoading(true);
+    try {
+      const response = await fetch('/api/instagram/media', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({ url: normalizedUrl }),
+      });
+      const payload = await response.json().catch(() => ({}));
+      if (!response.ok) throw new Error(payload.message || 'Instagram media could not be found.');
+      setResult(payload.media);
+      setNotice('Media found through Meta’s official Instagram API. Files are streamed only when you request a download.');
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Instagram media could not be found.');
+    } finally {
+      setLookupLoading(false);
+    }
+  };
+
+  const disconnect = async () => {
+    setDisconnectLoading(true);
+    setError('');
+    try {
+      const response = await fetch('/api/instagram/disconnect', { method: 'POST', headers: { Accept: 'application/json' } });
+      const payload = await response.json().catch(() => ({}));
+      if (!response.ok) throw new Error(payload.message || 'Instagram could not be disconnected.');
+      setSession((current) => ({ ...current, connected: false, username: null, accountType: null }));
+      setResult(null);
+      setNotice('Instagram account disconnected. Your session token has been cleared from this browser.');
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Instagram could not be disconnected.');
+    } finally {
+      setDisconnectLoading(false);
+    }
+  };
+
+  return (
+    <div className="space-y-5">
+      <UtilityMessage tone="info">
+        Download media from the Instagram Professional or Creator account you connect. This uses Meta’s official Instagram Login API; it does not scrape Instagram or access posts owned by other accounts.
+      </UtilityMessage>
+
+      <div className="rounded-xl border border-border bg-card/60 p-4 sm:p-5 space-y-3">
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+          <div>
+            <span className="block text-xs uppercase tracking-wide text-muted-foreground">Instagram account</span>
+            {sessionLoading ? <strong className="text-sm text-foreground">Checking connection…</strong> :
+              session.connected ? <strong className="text-sm text-foreground">@{session.username || 'Connected account'}</strong> :
+              <strong className="text-sm text-foreground">Not connected</strong>}
+            {session.connected && session.accountType && (
+              <span className="block text-xs text-muted-foreground mt-1">{session.accountType.replace('_', ' ')} account</span>
+            )}
+          </div>
+          {session.connected ? (
+            <button type="button" onClick={disconnect} disabled={disconnectLoading} className={utilityQuietButtonClass}>
+              {disconnectLoading ? 'Disconnecting…' : 'Disconnect Instagram'}
+            </button>
+          ) : (
+            <a href={session.configured ? '/api/instagram/connect' : undefined}
+              aria-disabled={!session.configured || sessionLoading}
+              className={utilityButtonClass + (!session.configured || sessionLoading ? ' pointer-events-none opacity-50' : '')}>
+              {session.configured ? 'Connect Instagram' : 'Instagram setup required'}
+            </a>
+          )}
+        </div>
+        {!session.configured && !sessionLoading && (
+          <UtilityMessage>
+            Meta app credentials have not been added to SwitchRoute yet. An administrator must configure INSTAGRAM_APP_ID, INSTAGRAM_APP_SECRET, INSTAGRAM_SESSION_SECRET, and SITE_URL in Vercel before account connection can be enabled.
+          </UtilityMessage>
+        )}
+        {session.connected && <p className="text-xs text-muted-foreground">Your Instagram access token is encrypted in a Secure, HttpOnly cookie. SwitchRoute does not ask for or store your Instagram password.</p>}
+      </div>
+
+      <div className="space-y-2">
+        <label htmlFor="instagram-reel-url" className="block text-xs font-semibold text-foreground">Instagram Reel or post URL</label>
+        <div className="flex flex-col gap-2 sm:flex-row">
+          <input id="instagram-reel-url" aria-label="Instagram Reel or post URL" value={input}
+            onChange={(event) => { setInput(event.target.value); setResult(null); setError(''); }}
+            className={utilityInputClass} placeholder="https://www.instagram.com/reel/..."
+            disabled={!session.connected || lookupLoading} />
+          <button type="button" className={utilityButtonClass} onClick={findMedia}
+            disabled={!session.connected || lookupLoading || !input.trim()}>
+            {lookupLoading ? 'Finding media…' : 'Find my media'}
+          </button>
+        </div>
+        <p className="text-xs text-muted-foreground">The link must point to a Reel, post, or IGTV item owned by the account connected above. Meta API access does not include arbitrary personal-account posts.</p>
+      </div>
+
+      {error && <UtilityMessage>{error}</UtilityMessage>}
+      {notice && <UtilityMessage tone="success">{notice}</UtilityMessage>}
+
+      {result && (
+        <div className="space-y-4 rounded-xl border border-border bg-card/50 p-4">
+          <div className="flex flex-wrap items-center justify-between gap-2">
+            <div>
+              <span className="block text-xs text-muted-foreground">Matched Instagram media</span>
+              <strong className="text-sm text-foreground">{result.kind.replace('_', ' ')} · {result.items.length} item{result.items.length === 1 ? '' : 's'}</strong>
+            </div>
+            <a href={result.permalink} target="_blank" rel="noreferrer" className="text-xs text-primary hover:underline">Open on Instagram ↗</a>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {result.items.map((item) => (
+              <div key={item.index} className="overflow-hidden rounded-lg border border-border bg-background">
+                {item.mediaType === 'VIDEO' ? (
+                  <video src={item.previewUrl} controls preload="metadata" playsInline className="w-full max-h-[440px] bg-black object-contain" />
+                ) : (
+                  <img src={item.previewUrl} alt={'Instagram media item ' + (item.index + 1)} loading="lazy" className="w-full max-h-[440px] object-contain bg-black/5" />
+                )}
+                <div className="flex flex-wrap items-center justify-between gap-2 p-3">
+                  <span className="text-xs text-muted-foreground">Item {item.index + 1} · {item.mediaType === 'VIDEO' ? 'Video' : 'Image'}</span>
+                  <a href={item.downloadUrl} className={utilityButtonClass}>{item.mediaType === 'VIDEO' ? 'Download MP4' : 'Download image'}</a>
+                </div>
+              </div>
+            ))}
+          </div>
+          {result.items.some((item) => item.mediaType === 'VIDEO') && (
+            <p className="text-xs text-muted-foreground">Need MP3 audio? Download the MP4 first, then use the <a href="/free-tools/mp4-to-mp3" className="text-primary underline">MP4 to MP3 converter</a>.</p>
+          )}
+        </div>
+      )}
+
+      <div className="border-t border-border/60 pt-4 text-xs text-muted-foreground">
+        <strong className="text-foreground">Supported account:</strong> Instagram Business or Creator account. Only media returned for the connected account can be downloaded. Private accounts, other creators’ posts, and posts unavailable through the official API are not supported.
+      </div>
+    </div>
+  );
 };
