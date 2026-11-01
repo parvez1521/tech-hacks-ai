@@ -201,7 +201,7 @@ export const YoutubeVideoDownloaderTool: React.FC = () => {
 
 export const InstagramVideoDownloaderTool: React.FC = () => {
   type SessionState = { configured: boolean; connected: boolean; username?: string | null; accountType?: string | null; mediaCount?: number | null };
-  type MediaItem = { index: number; mediaType: 'VIDEO' | 'IMAGE'; previewUrl: string; downloadUrl: string };
+  type MediaItem = { index: number; mediaType: 'VIDEO' | 'IMAGE'; previewUrl: string; posterUrl?: string | null; downloadUrl: string };
   type MediaResult = { id: string; kind: string; permalink: string; items: MediaItem[] };
 
   const [input, setInput] = useState('');
@@ -359,7 +359,7 @@ export const InstagramVideoDownloaderTool: React.FC = () => {
             {result.items.map((item) => (
               <div key={item.index} className="overflow-hidden rounded-lg border border-border bg-background">
                 {item.mediaType === 'VIDEO' ? (
-                  <video src={item.previewUrl} controls preload="metadata" playsInline className="w-full max-h-[440px] bg-black object-contain" />
+                  <video src={item.previewUrl} poster={item.posterUrl || undefined} controls preload="metadata" playsInline className="w-full max-h-[440px] bg-black object-contain" />
                 ) : (
                   <img src={item.previewUrl} alt={'Instagram media item ' + (item.index + 1)} loading="lazy" className="w-full max-h-[440px] object-contain bg-black/5" />
                 )}
