@@ -2763,7 +2763,17 @@ export const SLUG_ALIASES: Record<string, string> = {
   "adobe-premiere": "adobepremierepro",
   "adobe-premiere-pro": "adobepremierepro",
   "after-effects": "adobeaftereffects",
-  "googleanalytics": "google-analytics",
+  "googleanalytics": "google-analytics",,
+  "ox-alpha": {
+    "slug": "ox-alpha",
+    "name": "Ox Alpha",
+    "assetPath": "/logos/oxalpha.svg",
+    "sourceType": "provided",
+    "verifiedAt": "2026-11-01",
+    "badgeBg": "#050505",
+    "format": "svg",
+    "notes": "Ox Alpha emblem recreated as a vector from the logo artwork supplied for the directory."
+  }
 };
 
 export function getBrandLogo(slug: string): BrandLogoEntry | undefined {
