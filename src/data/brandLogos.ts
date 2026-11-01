@@ -2732,10 +2732,21 @@ export const brandLogos: Record<string, BrandLogoEntry> = {
     "verifiedAt": "2026-10-23",
     "format": "svg",
     "notes": "Verification gap: no traceable official or authorized logo source was confirmed during this catalog update. The local neutral monogram is not rendered as a brand mark; BrandLogo shows its initials fallback."
+  },
+  "ox-alpha": {
+    "slug": "ox-alpha",
+    "name": "Ox Alpha",
+    "assetPath": "/logos/oxalpha.svg",
+    "sourceType": "provided",
+    "verifiedAt": "2026-11-01",
+    "badgeBg": "#050505",
+    "format": "svg",
+    "notes": "Ox Alpha emblem recreated as a vector from the logo artwork supplied for the directory."
   }
 };
 
 export const SLUG_ALIASES: Record<string, string> = {
+  "oxalpha": "ox-alpha",
   "amazonaws": "aws",
   "amazon-web-services": "aws",
   "microsoftazure": "azure",
@@ -2763,17 +2774,7 @@ export const SLUG_ALIASES: Record<string, string> = {
   "adobe-premiere": "adobepremierepro",
   "adobe-premiere-pro": "adobepremierepro",
   "after-effects": "adobeaftereffects",
-  "googleanalytics": "google-analytics",,
-  "ox-alpha": {
-    "slug": "ox-alpha",
-    "name": "Ox Alpha",
-    "assetPath": "/logos/oxalpha.svg",
-    "sourceType": "provided",
-    "verifiedAt": "2026-11-01",
-    "badgeBg": "#050505",
-    "format": "svg",
-    "notes": "Ox Alpha emblem recreated as a vector from the logo artwork supplied for the directory."
-  }
+  "googleanalytics": "google-analytics"
 };
 
 export function getBrandLogo(slug: string): BrandLogoEntry | undefined {
