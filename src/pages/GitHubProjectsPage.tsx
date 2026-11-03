@@ -117,7 +117,7 @@ export const GitHubProjectsPage: React.FC = () => {
 
     <section aria-label="Filter projects" className="mb-6 space-y-4 rounded-lg border border-border bg-card p-4">
       <div className="relative"><Search aria-hidden="true" className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" /><label htmlFor="project-search" className="sr-only">Search GitHub projects by name or use case</label><input id="project-search" value={query} onChange={(event) => resetPage(() => setQuery(event.target.value))} placeholder="Search by project or use case" className="min-h-11 w-full rounded-md border border-border bg-background pl-9 pr-3 text-sm text-foreground placeholder:text-muted-foreground" /></div>
-      <div className="flex gap-2 overflow-x-auto pb-1" role="group" aria-label="Filter projects by category">
+      <div className="filter-chip-rail flex gap-2 overflow-x-auto pb-1" role="group" aria-label="Filter projects by category">
         <button type="button" onClick={() => resetPage(() => setCategory('all'))} aria-pressed={category === 'all'} className={`shrink-0 rounded-md border px-3 py-2 text-sm ${category === 'all' ? 'border-primary bg-primary text-primary-foreground' : 'border-border text-muted-foreground hover:bg-muted'}`}>All categories ({publicGitHubProjects.length})</button>
         {githubProjectCategories.map((item) => {
           const count = publicGitHubProjects.filter((project) => project.primaryCategory === item.id || project.secondaryCategories.includes(item.id)).length;

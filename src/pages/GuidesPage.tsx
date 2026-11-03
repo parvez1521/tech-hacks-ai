@@ -79,7 +79,7 @@ export const GuidesPage: React.FC = () => {
         </div>
 
         {/* Category Pills */}
-        <div className="flex items-center gap-2 overflow-x-auto no-scrollbar pb-2">
+        <div className="filter-chip-rail flex items-center gap-2 overflow-x-auto no-scrollbar pb-2">
           <button
             type="button"
             onClick={() => setSelectedCat(null)}

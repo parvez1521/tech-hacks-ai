@@ -102,14 +102,12 @@ export const HomePage: React.FC = () => {
 
   return (
     <main className="pb-12 sm:pb-16">
-      <section className="mx-auto grid max-w-7xl items-center gap-8 px-4 pb-12 pt-12 sm:px-6 sm:pb-16 sm:pt-16 lg:grid-cols-[1.05fr_.95fr] lg:gap-12" aria-labelledby="home-hero-heading">
+      <section className="home-hero mx-auto grid max-w-7xl items-center gap-8 px-4 pb-12 pt-12 sm:px-6 sm:pb-16 sm:pt-16 lg:grid-cols-[1.15fr_.85fr] lg:gap-10" aria-labelledby="home-hero-heading">
         <div className="max-w-2xl">
-          <p className="mb-4 text-sm font-medium text-primary">A practical map to AI</p>
-          <h1 id="home-hero-heading" className="max-w-[21ch] text-[2.25rem] font-semibold leading-[1.04] tracking-[-0.035em] text-foreground sm:text-5xl lg:text-[3.5rem]">
-            <span className="block">Another AI tool?</span>
-            <span className="block">Sure.</span>
-            <span className="block">Another Subscription?</span>
-            <span className="block">Nope.</span>
+          <p className="home-hero__context mb-3 text-sm font-medium text-primary">A practical map to AI</p>
+          <h1 id="home-hero-heading" className="max-w-[24ch] text-[2.25rem] font-semibold leading-[1.04] tracking-[-0.035em] text-foreground sm:text-5xl lg:text-[3.5rem]">
+            <span className="block">Another AI tool? Sure.</span>
+            <span className="block">Another Subscription? Nope.</span>
           </h1>
           <p className="mt-5 max-w-[34rem] text-base leading-7 text-muted-foreground sm:text-lg sm:leading-8">
             Compare AI tools by task, check current access routes, and find reviewed open-source projects.
@@ -126,12 +124,12 @@ export const HomePage: React.FC = () => {
             </Link>
           </div>
         </div>
-        <div className="hidden min-w-0 lg:block">
+        <div className="home-hero__preview min-w-0">
           <HeroSignalVisual />
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-4 py-10 sm:px-6 sm:py-12" aria-labelledby="collections-heading">
+      <section className="home-section mx-auto max-w-7xl px-4 py-10 sm:px-6 sm:py-12" aria-labelledby="collections-heading">
         <div className="mb-5 flex items-end justify-between gap-4">
           <div>
             <p className="text-sm text-muted-foreground">Start exploring</p>
@@ -143,7 +141,7 @@ export const HomePage: React.FC = () => {
             <Link
               to={item.href}
               key={item.href}
-              className={`group flex min-h-40 flex-col rounded-xl border border-border bg-card p-5 transition-colors hover:border-primary/45 hover:bg-muted/40 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary sm:p-6 ${item.tone === 'model' ? 'border-t-2 border-t-primary' : item.tone === 'access' ? 'border-t-2 border-t-emerald-600 dark:border-t-emerald-400' : ''}`}
+              className={`home-collection-card group flex min-h-40 flex-col rounded-xl border border-border bg-card p-5 transition-colors hover:border-primary/45 hover:bg-muted/40 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary sm:p-6 ${item.tone === 'model' ? 'border-t-2 border-t-primary' : item.tone === 'access' ? 'border-t-2 border-t-emerald-600 dark:border-t-emerald-400' : ''}`}
             >
               <p className="text-xs font-medium text-muted-foreground">{item.eyebrow}</p>
               <div className="mt-3 flex items-center justify-between gap-3">
@@ -157,7 +155,7 @@ export const HomePage: React.FC = () => {
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl border-t border-border/70 px-4 py-10 sm:px-6 sm:py-12" aria-labelledby="frontier-access-heading">
+      <section className="home-section mx-auto max-w-7xl border-t border-border/70 px-4 py-10 sm:px-6 sm:py-12" aria-labelledby="frontier-access-heading">
         <div className="mb-5 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
           <div>
             <p className="text-sm text-muted-foreground">Frontier access highlights · checked 3 Nov 2026</p>
@@ -188,7 +186,7 @@ export const HomePage: React.FC = () => {
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl border-t border-border/70 px-4 py-10 sm:px-6 sm:py-12" aria-labelledby="categories-heading">
+      <section className="home-section mx-auto max-w-7xl border-t border-border/70 px-4 py-10 sm:px-6 sm:py-12" aria-labelledby="categories-heading">
         <div className="mb-5 flex items-end justify-between gap-4">
           <div>
             <p className="text-sm text-muted-foreground">Browse by task</p>
@@ -212,7 +210,7 @@ export const HomePage: React.FC = () => {
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl border-t border-border/70 px-4 py-10 sm:px-6 sm:py-12" aria-labelledby="task-categories-heading">
+      <section className="home-section mx-auto max-w-7xl border-t border-border/70 px-4 py-10 sm:px-6 sm:py-12" aria-labelledby="task-categories-heading">
         <div className="mb-5 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
           <div>
             <p className="text-sm text-muted-foreground">Popular starting points</p>
@@ -248,7 +246,7 @@ export const HomePage: React.FC = () => {
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl border-t border-border/70 px-4 py-10 sm:px-6 sm:py-12" aria-labelledby="discoveries-heading">
+      <section className="home-section mx-auto max-w-7xl border-t border-border/70 px-4 py-10 sm:px-6 sm:py-12" aria-labelledby="discoveries-heading">
         <div className="mb-5">
           <p className="text-sm text-muted-foreground">Recently reviewed</p>
           <h2 id="discoveries-heading" className="mt-1 text-2xl font-semibold tracking-tight text-foreground">Daily discoveries</h2>
@@ -256,7 +254,7 @@ export const HomePage: React.FC = () => {
         <DailyDiscoveriesSection maxItems={3} />
       </section>
 
-      <section className="mx-auto max-w-7xl border-t border-border/70 px-4 py-10 sm:px-6 sm:py-12" aria-labelledby="offers-heading">
+      <section className="home-section mx-auto max-w-7xl border-t border-border/70 px-4 py-10 sm:px-6 sm:py-12" aria-labelledby="offers-heading">
         <div className="mb-5 flex items-end justify-between gap-4">
           <div>
             <p className="text-sm text-muted-foreground">Eligibility and terms apply</p>
@@ -278,7 +276,7 @@ export const HomePage: React.FC = () => {
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl border-t border-border/70 px-4 py-10 sm:px-6 sm:py-12" aria-labelledby="resources-heading">
+      <section className="home-section mx-auto max-w-7xl border-t border-border/70 px-4 py-10 sm:px-6 sm:py-12" aria-labelledby="resources-heading">
         <p className="text-sm text-muted-foreground">More ways to explore</p>
         <h2 id="resources-heading" className="mb-5 mt-1 text-2xl font-semibold tracking-tight text-foreground">Resources and directories</h2>
         <div className="grid gap-x-5 sm:grid-cols-2 lg:grid-cols-4">

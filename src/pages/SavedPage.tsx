@@ -84,7 +84,7 @@ export const SavedPage: React.FC = () => {
 
         {/* Filter Pills */}
         {items.length > 0 && (
-          <div className="flex items-center gap-2 overflow-x-auto no-scrollbar pt-6">
+          <div className="filter-chip-rail flex items-center gap-2 overflow-x-auto no-scrollbar pt-6">
             {['all', 'ai-tool', 'open-source-tool', 'guide', 'prompt'].map((t) => {
               const count = t === 'all' ? items.length : items.filter((i) => i.type === t).length;
               if (t !== 'all' && count === 0) return null;

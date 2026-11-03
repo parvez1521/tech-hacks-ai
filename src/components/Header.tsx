@@ -56,18 +56,19 @@ export const Header: React.FC = () => {
   }, []);
   const active = (href: string) => currentPath === href.split('?')[0] || currentPath.startsWith(`${href.split('?')[0]}/`);
   const closeOnEscape = (event: React.KeyboardEvent) => {
-    if (event.key !== 'Escape') return;
-    if (open) {
-      event.preventDefault();
-      setOpen(false);
-      menuButtonRef.current?.focus();
-      return;
-    }
-    if (desktopOpenGroup) {
-      event.preventDefault();
-      const openGroup = desktopOpenGroup;
-      setDesktopOpenGroup(null);
-      desktopTriggerRefs.current[openGroup]?.focus();
+    if (event.key === 'Escape') {
+      if (open) {
+        event.preventDefault();
+        setOpen(false);
+        menuButtonRef.current?.focus();
+        return;
+      }
+      if (desktopOpenGroup) {
+        event.preventDefault();
+        const openGroup = desktopOpenGroup;
+        setDesktopOpenGroup(null);
+        desktopTriggerRefs.current[openGroup]?.focus();
+      }
     }
   };
   const renderGroup = (group: typeof groups[number]) => (
@@ -94,11 +95,11 @@ export const Header: React.FC = () => {
           aria-expanded={isOpen}
           aria-controls={menuId}
           onClick={() => setDesktopOpenGroup((current) => current === group.name ? null : group.name)}
-          className={`min-h-10 rounded-md px-3 text-sm list-none cursor-pointer select-none font-medium transition-colors flex items-center justify-between gap-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary ${isOpen || group.links.some(([, href]) => active(href)) ? 'bg-muted/70 text-foreground' : 'text-muted-foreground hover:bg-muted/60 hover:text-foreground'}`}
+          className={`site-header__group-trigger rounded-md text-sm list-none cursor-pointer select-none font-medium transition-colors flex items-center justify-between gap-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary ${isOpen || group.links.some(([, href]) => active(href)) ? 'bg-muted/70 text-foreground' : 'text-muted-foreground hover:bg-muted/60 hover:text-foreground'}`}
         >
           {group.name}<span aria-hidden="true" className={`text-xs transition-transform ${isOpen ? 'rotate-180' : ''}`}>⌄</span>
         </button>
-        <div id={menuId} hidden={!isOpen} aria-hidden={!isOpen} className={`absolute top-full ${alignment} mt-1 min-w-56 rounded-lg border border-border bg-card p-1.5 shadow-lg z-50`}>
+        <div id={menuId} hidden={!isOpen} aria-hidden={!isOpen} className={`site-header__dropdown absolute top-full ${alignment} mt-1 min-w-56 rounded-lg border border-border bg-card p-1.5 shadow-lg z-50`}>
           {group.links.map(([label, href]) => <Link key={href + label} to={href} aria-current={active(href) ? 'page' : undefined} onClick={() => setDesktopOpenGroup(null)} className={`flex items-center justify-between gap-5 min-h-11 rounded-md px-3 py-2 text-sm transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-primary ${active(href) ? 'text-foreground bg-muted font-medium' : 'text-muted-foreground hover:text-foreground hover:bg-muted/60'}`}>
             {label}<ArrowUpRight className="w-3.5 h-3.5 opacity-50" />
           </Link>)}
@@ -107,10 +108,10 @@ export const Header: React.FC = () => {
     );
   };
 
-  return <header onKeyDown={closeOnEscape} className="sticky top-0 z-50 border-b border-border bg-background/95 backdrop-blur-sm">
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-3 lg:gap-6">
+  return <header onKeyDown={closeOnEscape} className="site-header sticky top-0 z-50 border-b border-border bg-background/95 backdrop-blur-sm">
+    <div className="site-header__inner max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-3 lg:gap-6">
       <Link to="/" aria-label="SwitchRoute home" className="shrink-0"><TechHacksLogo size="sm" showWordmark /></Link>
-      <nav ref={desktopNavRef} aria-label="Primary" className="hidden lg:flex items-center gap-1">{groups.map((group) => renderDesktopGroup(group))}</nav>
+      <nav ref={desktopNavRef} aria-label="Primary" className="site-header__desktop-nav hidden lg:flex items-center gap-1">{groups.map((group) => renderDesktopGroup(group))}</nav>
       <div className="flex items-center gap-1">
         <button type="button" onClick={() => navigate('/ai-tools')} aria-label="Search AI tools" className="min-h-11 min-w-11 rounded-md text-muted-foreground transition-colors hover:bg-muted hover:text-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"><Search className="mx-auto h-4 w-4" /></button>
         <Link to="/saved" aria-label={`Saved items${savedCount ? ` (${savedCount})` : ''}`} className="relative flex min-h-11 min-w-11 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-muted hover:text-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"><Bookmark className="h-4 w-4" />{savedCount > 0 && <span className="absolute right-0 top-0 flex h-4 min-w-4 items-center justify-center rounded-full bg-primary px-1 text-[10px] text-primary-foreground">{savedCount}</span>}</Link>
@@ -119,6 +120,6 @@ export const Header: React.FC = () => {
         <button ref={menuButtonRef} type="button" onClick={() => setOpen(!open)} aria-label={open ? 'Close navigation menu' : 'Open navigation menu'} aria-expanded={open} aria-controls="mobile-navigation" className="lg:hidden min-h-11 min-w-11 rounded-md flex items-center justify-center text-muted-foreground hover:bg-muted"><span className="sr-only">Menu</span>{open ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}</button>
       </div>
     </div>
-    {open && <nav id="mobile-navigation" aria-label="Mobile primary" className="lg:hidden max-h-[80vh] overflow-y-auto border-t border-border bg-background px-4 py-2" onKeyDown={closeOnEscape}>{groups.map((group) => renderGroup(group))}<div className="pt-3"><ThemeToggle /></div></nav>}
+    {open && <nav id="mobile-navigation" aria-label="Mobile primary" className="site-header__mobile-panel lg:hidden max-h-[80vh] overflow-y-auto border-t border-border bg-background px-4 py-2" onKeyDown={closeOnEscape}>{groups.map((group) => renderGroup(group))}<div className="pt-3"><ThemeToggle /></div></nav>}
   </header>;
 };

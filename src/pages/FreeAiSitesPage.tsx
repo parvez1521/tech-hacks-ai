@@ -101,7 +101,7 @@ export const FreeAiSitesPage: React.FC = () => {
         {/* Filter Bar & Controls */}
         <div className="space-y-4">
           {/* Access Type Tabs */}
-          <div className="flex items-center gap-2 overflow-x-auto no-scrollbar pb-1">
+          <div className="filter-chip-rail flex items-center gap-2 overflow-x-auto no-scrollbar pb-1">
             <button
               type="button"
               onClick={() => setSelectedAccessType('all')}
@@ -196,7 +196,7 @@ export const FreeAiSitesPage: React.FC = () => {
           </div>
 
           {/* Category Pills */}
-          <div className="flex items-center gap-2 overflow-x-auto no-scrollbar pb-1">
+          <div className="filter-chip-rail flex items-center gap-2 overflow-x-auto no-scrollbar pb-1">
             <button
               type="button"
               onClick={() => setSelectedCat(null)}

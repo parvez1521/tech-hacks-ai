@@ -12,7 +12,7 @@ export const Footer: React.FC = () => {
   };
 
   return (
-    <footer className="border-t border-border bg-card/30 mt-20 pt-12 pb-16 transition-colors">
+    <footer className="site-footer border-t border-border bg-card/30 mt-20 pt-12 pb-16 transition-colors">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         {/* Discovery callout */}
         <div className="max-w-xl mx-auto text-center mb-12 p-8 rounded-xl border border-border bg-card/60">

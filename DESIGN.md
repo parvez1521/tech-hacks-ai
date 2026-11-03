@@ -51,6 +51,25 @@ The site also defines semantic tokens such as `--color-bg`, `--color-fg`, `--col
 - Motion already exists in the dependency graph through `motion`. Use purposeful, short state transitions; respect reduced motion.
 - Icons should use the existing `lucide-react` dependency. Brand marks should use `BrandLogo`.
 
+### Product-wide refinement tokens
+
+The overhaul adds a shared spacing and type scale in `src/index.css` while keeping the brand palette, Inter/system stack and dark-first theme above unchanged:
+
+| Token | Role |
+|---|---|
+| `--space-page` | Responsive page inset, 16–48px |
+| `--space-section` | Large section interval, 48–88px |
+| `--radius-control` | Shared field and control corner, 10px |
+| `--radius-surface` | Directory, collection and content surface corner, 14px |
+| `--type-page-title` | Responsive page-title scale, 32–52px |
+| `--type-section-title` | Responsive section-title scale, 22–29px |
+| `--type-body` | Body copy, 16px |
+| `--type-meta` | Supporting metadata, 13px |
+
+Directory and collection pages use neutral surfaces and quiet borders; primary blue is reserved for route selection, links, and focus. Forms, dashboards, utilities, and comparison screens keep their task controls as the primary visual objects. Editorial routes use a narrower reading measure. All route families retain their existing content and data structure.
+
+Taste Skill's **Product Performs** direction informed the live catalog search preview in the homepage hero. No stock photos, generated illustrations, or fake product data were added. Its suggested architecture photography, pinned scroll scene, and drag interaction were adapted out because they do not represent a real SwitchRoute capability. UI/UX Pro Max suggested a green marketplace palette, which was rejected to preserve the established route-blue brand.
+
 ## Intended quality bar
 
 - Distinct hierarchy and page-specific composition rather than a repeated card template.

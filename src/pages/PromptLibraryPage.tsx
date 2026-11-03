@@ -183,7 +183,7 @@ export const PromptLibraryPage: React.FC = () => {
 
         <div className="mt-5">
           <div className="mb-2 flex items-center gap-2 text-xs font-semibold text-slate-600 dark:text-slate-300"><Sparkles size={14} aria-hidden="true" /> Explore by model</div>
-          <div className="flex gap-2 overflow-x-auto pb-1" role="group" aria-label="Filter by model or provider">
+          <div className="filter-chip-rail flex gap-2 overflow-x-auto pb-1" role="group" aria-label="Filter by model or provider">
             {promptProviders.map((prov) => {
               const active = (!prov.filterValue && !selectedProvider) || selectedProvider === prov.filterValue;
               return <button key={prov.id} type="button" aria-pressed={active} onClick={() => setSelectedProvider(prov.filterValue)} className={`shrink-0 rounded-full px-3.5 py-2 text-xs font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-500 ${active ? 'bg-teal-800 text-white dark:bg-teal-300 dark:text-slate-950' : 'border border-slate-200 bg-white text-slate-700 hover:border-teal-500 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200'}`}>{prov.name}</button>;
@@ -193,7 +193,7 @@ export const PromptLibraryPage: React.FC = () => {
 
         <div className="mt-5">
           <div className="mb-2 flex items-center gap-2 text-xs font-semibold text-slate-600 dark:text-slate-300"><Filter size={14} aria-hidden="true" /> Browse a category</div>
-          <div className="flex gap-2 overflow-x-auto pb-1" role="group" aria-label="Filter by category">
+          <div className="filter-chip-rail flex gap-2 overflow-x-auto pb-1" role="group" aria-label="Filter by category">
             <button type="button" aria-pressed={!selectedCat} onClick={() => setSelectedCat(null)} className={`shrink-0 rounded-full px-3.5 py-2 text-xs font-semibold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-500 ${!selectedCat ? 'bg-slate-900 text-white dark:bg-white dark:text-slate-900' : 'border border-slate-200 bg-white text-slate-700 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200'}`}>Everything <span className="ml-1 opacity-70">{allPrompts.length}</span></button>
             {categories.map((cat) => {
               const count = allPrompts.filter((p) => p.category === cat.slug).length;

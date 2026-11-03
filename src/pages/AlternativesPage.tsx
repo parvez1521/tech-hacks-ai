@@ -95,7 +95,7 @@ export const AlternativesPage: React.FC = () => {
         </div>
 
         {/* Category Pills */}
-        <div className="flex items-center gap-2 overflow-x-auto no-scrollbar pb-2" role="group" aria-label="Filter alternatives by category">
+        <div className="filter-chip-rail flex items-center gap-2 overflow-x-auto no-scrollbar pb-2" role="group" aria-label="Filter alternatives by category">
           <button
             type="button"
             aria-pressed={!selectedCategory}
