@@ -87,3 +87,10 @@ Follow-up verification: `npm test` — 616 passed, 0 failed, 0 cancelled, 0 skip
 Original decorative workflow illustrations were prepared under `public/images/generated-ui/` for collection, category and task cards. These are original category illustrations, not official product logos, tool screenshots, model badges or capability claims.
 
 The homepage uses artwork-led collection and category cards, matching Lucide pictograms, local canonical provider logos for frontier-model cards, and offer logos from the existing `BrandLogo` registry. Images are lazy-loaded and decorative images have empty alt text. Reduced-motion users do not receive image-zoom transitions. Generated artwork never replaces the canonical brand-logo registry.
+
+
+## Homepage art and frontier-card layout correction
+
+The previous lower-resolution raster art has been replaced with 20 individual 960×540 SVG illustrations in `public/images/home/`: four collection visuals, ten unique AI-category visuals, and six separate task-card visuals. These are original, text-free vector illustrations and do not imitate or replace third-party brand marks.
+
+The model-access cards now place provider identity and model name in a full-width row, with the free-access chip on its own row below. This prevents the chip from squeezing the provider/title area at desktop, tablet, and mobile widths. Artwork panels no longer use opacity fades, zoom transforms, or overlay gradients that softened the previous artwork.

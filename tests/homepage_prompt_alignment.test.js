@@ -37,6 +37,7 @@ describe('Homepage prompt showcase and section alignment', () => {
     assert.deepEqual([...positions].sort((a, b) => a - b), positions);
     assert.ok(html.includes('type="search"') || html.includes('role="combobox"'), 'Global search is in the hero');
     const home = fs.readFileSync(path.join(root, 'src/pages/HomePage.tsx'), 'utf8');
+    const css = fs.readFileSync(path.join(root, 'src/index.css'), 'utf8');
     assert.match(home, /featuredCollections/);
     assert.match(home, /href: '\/frontier-models'/);
     assert.match(home, /href: '\/free-ai-sites'/);
@@ -57,10 +58,13 @@ describe('Homepage prompt showcase and section alignment', () => {
     assert.match(html, /home-category-card__art/);
     assert.match(html, /home-task-card__art/);
     assert.match(html, /home-resource-card__icon/);
-    for (const asset of ['video.webp', 'image.webp', 'coding.webp', 'voice.webp', 'writing.webp', 'research.webp', 'automation.webp', 'music.webp']) {
-      assert.ok(fs.existsSync(path.join(root, 'public/images/generated-ui', asset)), `Generated visual asset exists: ${asset}`);
-      assert.ok(html.includes(`/images/generated-ui/${asset}`), `Homepage references ${asset}`);
+    for (const asset of ['collection-frontier-models.svg', 'collection-free-access.svg', 'collection-all-tools.svg', 'collection-github-projects.svg', 'category-assistants.svg', 'category-writing.svg', 'category-image.svg', 'category-video.svg', 'category-voice.svg', 'category-music.svg', 'category-coding.svg', 'category-productivity.svg', 'category-automation.svg', 'category-design-3d.svg', 'task-video-generators.svg', 'task-image-generators.svg', 'task-voice-speech.svg', 'task-coding-agents.svg', 'task-research-search.svg', 'task-open-source-ai.svg']) {
+      assert.ok(fs.existsSync(path.join(root, 'public/images/home', asset)), `Dedicated homepage art exists: ${asset}`);
+      assert.ok(home.includes(`/images/home/${asset}`), `Homepage references dedicated art ${asset}`);
     }
+    assert.match(home, /home-model-access-card__header/);
+    assert.match(home, /home-model-access-card__badge/);
+    assert.match(css, /home-model-access-card__badge\s*\{/);
     const videoPage = fs.readFileSync(path.join(root, 'src/pages/AiVideoToolsPage.tsx'), 'utf8');
     assert.match(videoPage, /searchParams\.get\('filter'\)/);
     assert.match(videoPage, /initialFilter === 'free-entry'/);

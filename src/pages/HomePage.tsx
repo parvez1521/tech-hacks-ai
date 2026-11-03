@@ -11,10 +11,10 @@ import { getActiveOffers, getFeaturedOffers } from '../data/offersData';
 import { getAllAiTools, getAiToolsForSearchIntent } from '../services/aiCatalogService';
 
 const featuredCollections = [
-  { title: 'Frontier Models', href: '/frontier-models', description: 'Compare capabilities, official pricing and places to try leading models.', eyebrow: 'Model index', tone: 'model', art: '/images/generated-ui/automation.webp', Icon: Layers3, highlights: ['GPT-6 Astra', 'Claude Opus 5.5', 'Seedance 2.5'] },
-  { title: 'Free Access', href: '/free-ai-sites', description: 'Find daily credits, weekly shared allowances, free plans and local software.', eyebrow: 'Checked routes', tone: 'access', art: null, Icon: Gift, highlights: ['Daily allowances', 'Weekly token pools', 'Free local tools'] },
-  { title: 'All AI Tools', href: '/ai-tools', description: 'Explore tools for writing, coding, image, video, audio and research.', eyebrow: 'Platform directory', tone: 'catalog', art: '/images/generated-ui/image.webp', Icon: ImageIcon, highlights: ['By task', 'By category', 'By pricing'] },
-  { title: 'GitHub Projects', href: '/github-projects', description: 'Explore useful community and open-source projects with clear review labels.', eyebrow: 'Open source', tone: 'catalog', art: '/images/generated-ui/coding.webp', Icon: Code2, highlights: ['Self-hosted apps', 'Developer tools', 'AI projects'] },
+  { title: 'Frontier Models', href: '/frontier-models', description: 'Compare capabilities, official pricing and places to try leading models.', eyebrow: 'Model index', tone: 'model', art: '/images/home/collection-frontier-models.svg', Icon: Layers3, highlights: ['GPT-6 Astra', 'Claude Opus 5.5', 'Seedance 2.5'] },
+  { title: 'Free Access', href: '/free-ai-sites', description: 'Find daily credits, weekly shared allowances, free plans and local software.', eyebrow: 'Checked routes', tone: 'access', art: '/images/home/collection-free-access.svg', Icon: Gift, highlights: ['Daily allowances', 'Weekly token pools', 'Free local tools'] },
+  { title: 'All AI Tools', href: '/ai-tools', description: 'Explore tools for writing, coding, image, video, audio and research.', eyebrow: 'Platform directory', tone: 'catalog', art: '/images/home/collection-all-tools.svg', Icon: ImageIcon, highlights: ['By task', 'By category', 'By pricing'] },
+  { title: 'GitHub Projects', href: '/github-projects', description: 'Explore useful community and open-source projects with clear review labels.', eyebrow: 'Open source', tone: 'catalog', art: '/images/home/collection-github-projects.svg', Icon: Code2, highlights: ['Self-hosted apps', 'Developer tools', 'AI projects'] },
 ];
 
 const resources = [
@@ -25,16 +25,16 @@ const resources = [
 ] as const;
 
 const categoryVisuals = {
-  assistants: { art: '/images/generated-ui/automation.webp', Icon: Bot },
-  writing: { art: '/images/generated-ui/writing.webp', Icon: PenTool },
-  image: { art: '/images/generated-ui/image.webp', Icon: ImageIcon },
-  video: { art: '/images/generated-ui/video.webp', Icon: Film },
-  voice: { art: '/images/generated-ui/voice.webp', Icon: AudioLines },
-  music: { art: '/images/generated-ui/music.webp', Icon: Music2 },
-  coding: { art: '/images/generated-ui/coding.webp', Icon: Code2 },
-  productivity: { art: '/images/generated-ui/research.webp', Icon: Search },
-  automation: { art: '/images/generated-ui/automation.webp', Icon: Bot },
-  '3d': { art: '/images/generated-ui/image.webp', Icon: Palette },
+  assistants: { art: '/images/home/category-assistants.svg', Icon: Bot },
+  writing: { art: '/images/home/category-writing.svg', Icon: PenTool },
+  image: { art: '/images/home/category-image.svg', Icon: ImageIcon },
+  video: { art: '/images/home/category-video.svg', Icon: Film },
+  voice: { art: '/images/home/category-voice.svg', Icon: AudioLines },
+  music: { art: '/images/home/category-music.svg', Icon: Music2 },
+  coding: { art: '/images/home/category-coding.svg', Icon: Code2 },
+  productivity: { art: '/images/home/category-productivity.svg', Icon: Search },
+  automation: { art: '/images/home/category-automation.svg', Icon: Bot },
+  '3d': { art: '/images/home/category-design-3d.svg', Icon: Palette },
 } as const;
 
 const modelBrandSlugs: Record<string, string> = {
@@ -65,7 +65,7 @@ export const HomePage: React.FC = () => {
       countLabel: 'free or trial entries',
       accessLabel: 'Credits and limits vary',
       Icon: Film,
-      art: '/images/generated-ui/video.webp',
+      art: '/images/home/task-video-generators.svg',
       logos: [{ slug: 'runway', name: 'Runway' }, { slug: 'dreamina', name: 'Dreamina' }, { slug: 'pika', name: 'Pika' }, { slug: 'hailuo-ai', name: 'Hailuo' }],
     },
     {
@@ -76,7 +76,7 @@ export const HomePage: React.FC = () => {
       countLabel: 'tools listed',
       accessLabel: 'Hosted and local options',
       Icon: ImageIcon,
-      art: '/images/generated-ui/image.webp',
+      art: '/images/home/task-image-generators.svg',
       logos: [{ slug: 'ideogram', name: 'Ideogram' }, { slug: 'leonardo-ai', name: 'Leonardo AI' }, { slug: 'comfyui', name: 'ComfyUI' }],
     },
     {
@@ -87,7 +87,7 @@ export const HomePage: React.FC = () => {
       countLabel: 'tools listed',
       accessLabel: 'Free and paid plans',
       Icon: Mic,
-      art: '/images/generated-ui/voice.webp',
+      art: '/images/home/task-voice-speech.svg',
       logos: [{ slug: 'elevenlabs', name: 'ElevenLabs' }, { slug: 'whisper', name: 'Whisper' }, { slug: 'kokoro-tts', name: 'Kokoro TTS' }],
     },
     {
@@ -98,7 +98,7 @@ export const HomePage: React.FC = () => {
       countLabel: 'tools listed',
       accessLabel: 'Free tiers and open source',
       Icon: Code2,
-      art: '/images/generated-ui/coding.webp',
+      art: '/images/home/task-coding-agents.svg',
       logos: [{ slug: 'cursor', name: 'Cursor' }, { slug: 'aider', name: 'Aider' }, { slug: 'google-ai-studio', name: 'Google AI Studio' }],
     },
     {
@@ -109,7 +109,7 @@ export const HomePage: React.FC = () => {
       countLabel: 'tools listed',
       accessLabel: 'Research and knowledge tools',
       Icon: Search,
-      art: '/images/generated-ui/research.webp',
+      art: '/images/home/task-research-search.svg',
       logos: [{ slug: 'perplexity', name: 'Perplexity' }, { slug: 'notebooklm', name: 'NotebookLM' }, { slug: 'anythingllm', name: 'AnythingLLM' }],
     },
     {
@@ -120,7 +120,7 @@ export const HomePage: React.FC = () => {
       countLabel: 'open-source / local options',
       accessLabel: 'Check model and code licenses',
       Icon: Server,
-      art: '/images/generated-ui/automation.webp',
+      art: '/images/home/task-open-source-ai.svg',
       logos: [{ slug: 'comfyui', name: 'ComfyUI' }, { slug: 'vllm', name: 'vLLM' }, { slug: 'aider', name: 'Aider' }],
     },
   ];
@@ -200,10 +200,16 @@ export const HomePage: React.FC = () => {
             const provider = modelAccessProviders.find((item) => item.id === route.providerId);
             if (!model || !provider) return null;
             const accessLabel = route.accessType === 'free-weekly-shared' ? 'Free weekly · shared pool' : route.accessType === 'free-daily-allowance' ? 'Free daily allowance' : 'Free daily credits';
-            return <article key={route.id} className="flex min-h-40 flex-col rounded-xl border border-border bg-card p-4 transition-colors hover:border-primary/40">
-              <div className="flex items-start justify-between gap-2">
-                <div className="flex min-w-0 items-center gap-3"><BrandLogo slug={modelBrandSlugs[model.id] || 'openai'} name={model.organization} size="lg" /><div className="min-w-0"><p className="text-xs text-muted-foreground">{model.organization}</p><h3 className="mt-1 text-base font-semibold text-foreground">{model.name}</h3></div></div>
-                <span className="shrink-0 rounded-md border border-emerald-500/25 bg-emerald-500/10 px-2 py-1 text-[10px] font-semibold text-emerald-700 dark:text-emerald-300">{accessLabel}</span>
+            return <article key={route.id} className="home-model-access-card flex min-h-64 flex-col rounded-xl border border-border bg-card p-4 transition-colors hover:border-primary/40">
+              <div className="home-model-access-card__header flex min-w-0 flex-col items-start gap-3">
+                <div className="flex w-full min-w-0 items-center gap-3">
+                  <BrandLogo slug={modelBrandSlugs[model.id] || 'openai'} name={model.organization} size="lg" />
+                  <div className="min-w-0 flex-1">
+                    <p className="text-xs font-medium text-muted-foreground">{model.organization}</p>
+                    <h3 className="mt-1 break-words text-lg font-semibold leading-tight tracking-tight text-foreground">{model.name}</h3>
+                  </div>
+                </div>
+                <span className="home-model-access-card__badge inline-flex max-w-full items-center rounded-md border border-emerald-500/25 bg-emerald-500/10 px-2.5 py-1.5 text-xs font-semibold leading-4 text-emerald-700 dark:text-emerald-300">{accessLabel}</span>
               </div>
               <p className="mt-3 text-sm font-medium leading-5 text-foreground">{route.allowance}</p>
               <p className="mt-2 text-xs leading-5 text-muted-foreground">{provider.name} · {route.quickNote || route.conditions}</p>
