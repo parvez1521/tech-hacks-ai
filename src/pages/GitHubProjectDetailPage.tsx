@@ -63,7 +63,7 @@ export const GitHubProjectDetailPage: React.FC = () => {
     </section>
 
     {community && <aside role="note" className="mt-5 flex gap-3 rounded-lg border border-amber-500/30 bg-amber-500/5 p-4 text-sm leading-6 text-muted-foreground">
-      <CircleAlert className="mt-0.5 h-5 w-5 shrink-0 text-amber-600 dark:text-amber-300" />
+      <AlertCircle className="mt-0.5 h-5 w-5 shrink-0 text-amber-600 dark:text-amber-300" />
       <div><strong className="text-foreground">Unverified community project.</strong> This is an independent project, not an official Higgsfield product. GitHub does not detect a license and no root LICENSE file was found; the README's MIT claim therefore needs independent verification. The documented local setup routes inference through MuAPI and requires its API key. Review the source, license, security posture, and service terms before installing.</div>
     </aside>}
 
