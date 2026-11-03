@@ -20,6 +20,7 @@ import {
   getFreeToolBySlug,
 } from './services/aiCatalogService';
 import { getOfferBySlug } from './data/offersData';
+import { githubProjects } from './data/githubProjectsData';
 
 // Pages
 import { HomePage } from './pages/HomePage';
@@ -37,6 +38,7 @@ import { AiToolDetailPage } from './pages/AiToolDetailPage';
 import { FreeAiSitesPage } from './pages/FreeAiSitesPage';
 import { FrontierModelsPage } from './pages/FrontierModelsPage';
 import { GitHubProjectsPage } from './pages/GitHubProjectsPage';
+import { GitHubProjectDetailPage } from './pages/GitHubProjectDetailPage';
 import { GuidesPage } from './pages/GuidesPage';
 import { GuideDetailPage } from './pages/GuideDetailPage';
 import { PromptLibraryPage } from './pages/PromptLibraryPage';
@@ -112,6 +114,10 @@ export function getRouteTitle(route: string, params: Record<string, string> = {}
       return formatPageTitle('Frontier AI Models: Capabilities & Access Routes');
     case 'github-projects':
       return formatPageTitle('Curated GitHub Projects: Free & Open Source Software');
+    case 'github-project-detail': {
+      const project = githubProjects.find((item) => item.slug === params.slug);
+      return project ? formatPageTitle(`${project.name} — GitHub Project Details`) : formatPageTitle('GitHub Project Not Found');
+    }
     case 'guides':
       return formatPageTitle('Step-by-Step AI Workflows & Tutorials');
     case 'guide-detail': {
@@ -230,6 +236,10 @@ export function getRouteDescription(route: string, params: Record<string, string
       return 'Explore frontier AI models by capability, official documentation and model access route. Provider relationships and pricing are identified separately.';
     case 'github-projects':
       return 'Discover curated free and open-source GitHub projects across AI, development, automation, and productivity, with license and setup details.';
+    case 'github-project-detail': {
+      const project = githubProjects.find((item) => item.slug === params.slug);
+      return project ? `${project.name}: ${project.description} Repository ${project.fullName}. Review its license, setup requirements, supported platforms, and current metadata.` : 'Detailed information about a curated GitHub repository.';
+    }
     case 'guides':
       return 'Actionable, step-by-step AI tutorials and open-source deployment guides written by practitioners.';
     case 'guide-detail': {
@@ -365,6 +375,8 @@ const AppRoutes: React.FC = () => {
         return <FrontierModelsPage />;
       case 'github-projects':
         return <GitHubProjectsPage />;
+      case 'github-project-detail':
+        return <GitHubProjectDetailPage />;
       case 'guides':
         return <GuidesPage />;
       case 'guide-detail':
@@ -431,6 +443,8 @@ const AppRoutes: React.FC = () => {
     </div>
   );
 };
+
+export const githubProjectDetailPaths = githubProjects.map((project) => `/github-projects/${project.slug}`);
 
 export const App: React.FC = () => {
   return (
