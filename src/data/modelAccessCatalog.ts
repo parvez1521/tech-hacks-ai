@@ -46,7 +46,7 @@ export const aiModels: AiModelRecord[] = [
     id: 'gpt-6-astra', name: 'GPT-6 Astra', organization: 'OpenAI',
     documentationUrl: 'https://developers.openai.com/api/docs/models/gpt-6-astra', family: 'GPT-6', category: 'assistants',
     capabilities: ['Reasoning', 'Coding', 'Computer use', 'Research', 'Document creation'],
-    summary: 'A high-end work model for complex reasoning, software engineering, browser/computer use, and research.'
+    summary: 'A high-end work model for complex reasoning, software engineering, browser/computer use, and research.',
     officialApi: { available: true, url: 'https://developers.openai.com/api/docs/models/gpt-6-astra', pricing: '$10 / 1M input tokens; $50 / 1M output tokens' },
     lastVerifiedAt: '2026-11-03',
   },
@@ -54,7 +54,7 @@ export const aiModels: AiModelRecord[] = [
     id: 'claude-opus-5-5', name: 'Claude Opus 5.5', organization: 'Anthropic',
     documentationUrl: 'https://www.anthropic.com/claude/opus', family: 'Claude 5', category: 'assistants',
     capabilities: ['Reasoning', 'Coding', 'Long-context analysis', 'Research'],
-    summary: 'Built for long-running agentic coding, large codebase work, and detailed knowledge tasks.'
+    summary: 'Built for long-running agentic coding, large codebase work, and detailed knowledge tasks.',
     officialApi: { available: true, url: 'https://docs.anthropic.com/en/docs/about-claude/models/overview', pricing: '$4 / 1M input tokens; $20 / 1M output tokens' },
     lastVerifiedAt: '2026-11-03',
   },
@@ -62,7 +62,7 @@ export const aiModels: AiModelRecord[] = [
     id: 'seedance-2-5', name: 'Seedance 2.5', organization: 'ByteDance',
     documentationUrl: 'https://seed.bytedance.com/en/seedance2_5', family: 'Seedance', category: 'video',
     capabilities: ['Text-to-video', 'Reference-guided generation', 'Audio and video generation'],
-    summary: 'A native audio-video generator for up to 30-second scenes, multi-reference direction, and precise edits.'
+    summary: 'A native audio-video generator for up to 30-second scenes, multi-reference direction, and precise edits.',
     officialApi: { available: true, url: 'https://docs.volcengine.com/docs/ark/seedance-2-5?lang=en' },
     lastVerifiedAt: '2026-11-03',
   },
