@@ -45,7 +45,15 @@ describe('Homepage prompt showcase and section alignment', () => {
     assert.match(html, /Frontier access highlights/);
     assert.match(html, /GPT-6 Astra/);
     assert.match(html, /Claude Opus 5\.5/);
+    assert.match(html, /Seedance 2\.0/);
     assert.match(html, /Seedance 2\.5/);
+    assert.match(html, /Fable 5/);
+    assert.match(html, /Fable 5\.1/);
+    assert.match(html, /Free AI Video Models/);
+    assert.match(html, /Google Flow/);
+    assert.match(html, /PixVerse/);
+    assert.match(html, /Viggle/);
+    assert.match(html, /Bing/);
     assert.match(home, /category\.subcategories\.map/);
     assert.match(html, /Free &amp; Trial AI Video Generators/);
     assert.match(html, /AI Image Generators/);
@@ -58,7 +66,7 @@ describe('Homepage prompt showcase and section alignment', () => {
     assert.match(html, /home-category-card__art/);
     assert.match(html, /home-task-card__art/);
     assert.match(html, /home-resource-card__icon/);
-    for (const asset of ['collection-frontier-models.svg', 'collection-free-access.svg', 'collection-all-tools.svg', 'collection-github-projects.svg', 'category-assistants.svg', 'category-writing.svg', 'category-image.svg', 'category-video.svg', 'category-voice.svg', 'category-music.svg', 'category-coding.svg', 'category-productivity.svg', 'category-automation.svg', 'category-design-3d.svg', 'task-video-generators.svg', 'task-image-generators.svg', 'task-voice-speech.svg', 'task-coding-agents.svg', 'task-research-search.svg', 'task-open-source-ai.svg']) {
+    for (const asset of ['collection-frontier-models.svg', 'collection-free-video-models.svg', 'collection-all-tools.svg', 'collection-github-projects.svg', 'category-assistants.svg', 'category-writing.svg', 'category-image.svg', 'category-video.svg', 'category-voice.svg', 'category-music.svg', 'category-coding.svg', 'category-productivity.svg', 'category-automation.svg', 'category-design-3d.svg', 'task-video-generators.svg', 'task-image-generators.svg', 'task-voice-speech.svg', 'task-coding-agents.svg', 'task-research-search.svg', 'task-open-source-ai.svg']) {
       assert.ok(fs.existsSync(path.join(root, 'public/images/home', asset)), `Dedicated homepage art exists: ${asset}`);
       assert.ok(home.includes(`/images/home/${asset}`), `Homepage references dedicated art ${asset}`);
     }
