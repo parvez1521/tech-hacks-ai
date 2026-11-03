@@ -55,9 +55,11 @@ describe('Homepage prompt showcase and section alignment', () => {
     assert.match(html, /data-brand-slug="anthropic"/);
     assert.match(html, /data-brand-slug="openai"/);
     assert.match(html, /data-brand-slug="dreamina"/);
-    assert.match(html, /collection-model-grid/);
-    assert.match(html, /collection-video-models/);
-    assert.match(html, /collection-tools-grid/);
+    assert.match(home, /collection-frontier-models\.webp/);
+    assert.match(home, /collection-free-ai-video-models\.webp/);
+    assert.match(home, /collection-all-ai-tools\.webp/);
+    assert.match(home, /collection-github-projects\.webp/);
+    assert.match(html, /home-collection-card--image/);
     assert.match(html, /data-brand-slug="perplexity"/);
     assert.match(html, /data-brand-slug="runway"/);
     assert.match(html, /data-brand-slug="elevenlabs"/);
@@ -74,17 +76,14 @@ describe('Homepage prompt showcase and section alignment', () => {
     assert.match(html, /AI Research &amp; Search/);
     assert.match(html, /data-brand-slug="runway"/);
     assert.match(html, /data-brand-slug="dreamina"/);
-    assert.match(html, /home-collection-card__visual/);
+    assert.match(html, /home-collection-card--image/);
     assert.match(html, /home-category-card__art/);
     assert.match(html, /home-task-card__art/);
     assert.match(html, /home-resource-card__icon/);
-    for (const asset of ['collection-all-tools.svg', 'collection-github-projects.svg', 'category-assistants.svg', 'category-writing.svg', 'category-image.svg', 'category-video.svg', 'category-voice.svg', 'category-music.svg', 'category-coding.svg', 'category-productivity.svg', 'category-automation.svg', 'category-design-3d.svg', 'task-video-generators.svg', 'task-image-generators.svg', 'task-voice-speech.svg', 'task-coding-agents.svg', 'task-research-search.svg', 'task-open-source-ai.svg']) {
+    for (const asset of ['collection-frontier-models.webp', 'collection-free-ai-video-models.webp', 'collection-all-ai-tools.webp', 'collection-github-projects.webp', 'category-assistants.svg', 'category-writing.svg', 'category-image.svg', 'category-video.svg', 'category-voice.svg', 'category-music.svg', 'category-coding.svg', 'category-productivity.svg', 'category-automation.svg', 'category-design-3d.svg', 'task-video-generators.svg', 'task-image-generators.svg', 'task-voice-speech.svg', 'task-coding-agents.svg', 'task-research-search.svg', 'task-open-source-ai.svg']) {
       assert.ok(fs.existsSync(path.join(root, 'public/images/home', asset)), `Dedicated homepage art exists: ${asset}`);
       assert.ok(home.includes(`/images/home/${asset}`), `Homepage references dedicated art ${asset}`);
     }
-    assert.match(home, /frontierModelLogos/);
-    assert.match(home, /videoModelLogos/);
-    assert.match(home, /popularToolLogos/);
     assert.doesNotMatch(home, /Fable 5', 'Fable 5\.1'/);
     assert.match(home, /home-model-access-card__header/);
     assert.match(home, /home-model-access-card__badge/);

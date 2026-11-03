@@ -11,41 +11,30 @@ import { getActiveOffers, getFeaturedOffers } from '../data/offersData';
 import { getAllAiTools, getAiToolsForSearchIntent } from '../services/aiCatalogService';
 
 const featuredCollections = [
-  { title: 'Frontier Models', href: '/frontier-models', description: 'Explore the latest models from OpenAI and Anthropic, with the real provider logos and model names.', eyebrow: 'OpenAI · Anthropic', tone: 'model', visual: 'models', Icon: Layers3, highlights: ['GPT-6 Astra', 'Claude Opus 5.5', 'Claude Fable 5.1', 'Claude Sonnet 5.5', 'Claude Haiku 5.5', 'Claude Mythos 5'] },
-  { title: 'Free AI Video Models', href: '/free-ai-sites', description: 'Find places to try leading video models with free credits, starter generations and limited free tiers.', eyebrow: 'Seedance · video models', tone: 'video', visual: 'video', Icon: Video, highlights: ['Seedance 2.0', 'Seedance 2.5', 'Dreamina', 'Google Flow', 'PixVerse', 'Viggle'] },
-  { title: 'All AI Tools', href: '/ai-tools', description: 'Discover popular free and paid AI tools for chat, coding, image, video, audio and productivity.', eyebrow: 'Free · Freemium · Paid', tone: 'catalog', visual: 'tools', Icon: ImageIcon, highlights: ['ChatGPT', 'Claude', 'Gemini', 'DeepSeek', 'Runway', 'Perplexity'] },
-  { title: 'GitHub Projects', href: '/github-projects', description: 'Explore useful community and open-source projects with clear review labels.', eyebrow: 'Open source', tone: 'catalog', art: '/images/home/collection-github-projects.svg', Icon: Code2, highlights: ['Self-hosted apps', 'Developer tools', 'AI projects'] },
-];
-
-const frontierModelLogos = [
-  { name: 'GPT-6 Astra', provider: 'OpenAI', slug: 'openai' },
-  { name: 'Claude Opus 5.5', provider: 'Anthropic', slug: 'anthropic' },
-  { name: 'Claude Fable 5', provider: 'Anthropic', slug: 'anthropic' },
-  { name: 'Claude Fable 5.1', provider: 'Anthropic', slug: 'anthropic' },
-  { name: 'Claude Sonnet 5.5', provider: 'Anthropic', slug: 'anthropic' },
-  { name: 'Claude Haiku 5.5', provider: 'Anthropic', slug: 'anthropic' },
-  { name: 'Claude Mythos 5', provider: 'Anthropic', slug: 'anthropic' },
-];
-
-const videoModelLogos = [
-  { name: 'Seedance 2.0', provider: 'Dreamina', slug: 'dreamina' },
-  { name: 'Seedance 2.5', provider: 'Dreamina', slug: 'dreamina' },
-];
-
-const popularToolLogos = [
-  { name: 'ChatGPT', slug: 'openai' },
-  { name: 'Claude', slug: 'anthropic' },
-  { name: 'Gemini', slug: 'gemini' },
-  { name: 'DeepSeek', slug: 'deepseek' },
-  { name: 'Perplexity', slug: 'perplexity' },
-  { name: 'Cursor', slug: 'cursor' },
-  { name: 'Runway', slug: 'runway' },
-  { name: 'Pika', slug: 'pika' },
-  { name: 'Canva', slug: 'canva' },
-  { name: 'ElevenLabs', slug: 'elevenlabs' },
-  { name: 'Adobe', slug: 'adobe' },
-  { name: 'Notion', slug: 'notion' },
-  { name: 'Meta AI', slug: 'meta-ai' },
+  {
+    title: 'Frontier Models',
+    href: '/frontier-models',
+    image: '/images/home/collection-frontier-models.webp',
+    imageAlt: 'Frontier Models: GPT-6 Astra, Claude Opus 5.5, Claude Fable 5 and Claude Fable 5.1. Compare frontier models from OpenAI and Anthropic.',
+  },
+  {
+    title: 'Free AI Video Models',
+    href: '/free-ai-sites',
+    image: '/images/home/collection-free-ai-video-models.webp',
+    imageAlt: 'Free AI Video Models: Seedance 2.0 and 2.5, Dreamina, Google Flow, PixVerse, Viggle and Vidu.',
+  },
+  {
+    title: 'All AI Tools',
+    href: '/ai-tools',
+    image: '/images/home/collection-all-ai-tools.webp',
+    imageAlt: 'All AI Tools: ChatGPT, Claude, Gemini, Midjourney, Runway, Canva, Notion, ElevenLabs, Adobe and DeepSeek.',
+  },
+  {
+    title: 'GitHub Projects',
+    href: '/github-projects',
+    image: '/images/home/collection-github-projects.webp',
+    imageAlt: 'GitHub Projects: explore self-hosted apps, developer tools, open-source AI projects and community picks.',
+  },
 ];
 
 const resources = [
@@ -192,41 +181,22 @@ export const HomePage: React.FC = () => {
             <h2 id="collections-heading" className="mt-1 text-2xl font-semibold tracking-tight text-foreground">Choose a collection</h2>
           </div>
         </div>
-        <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
+        <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
           {featuredCollections.map((item) => (
             <Link
               to={item.href}
               key={item.href}
-              className={`home-collection-card group flex min-h-56 flex-col overflow-hidden rounded-xl border border-border bg-card p-0 transition-colors hover:border-primary/45 hover:bg-muted/40 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary sm:p-0 ${item.tone === 'model' ? 'border-t-2 border-t-primary' : item.tone === 'access' ? 'border-t-2 border-t-emerald-600 dark:border-t-emerald-400' : item.tone === 'video' ? 'border-t-2 border-t-violet-500 dark:border-t-violet-400' : ''}`}
+              aria-label={`Explore ${item.title}`}
+              className="home-collection-card home-collection-card--image group block min-w-0 overflow-hidden rounded-xl border border-border bg-[#081426] transition-colors hover:border-primary/55 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
             >
-              <div className={`home-collection-card__visual home-collection-card__visual--${item.visual || 'github'}`} aria-label={item.title + ' logos and featured models'}>
-                {item.visual === 'models' ? (
-                  <div className="collection-model-grid">
-                    {frontierModelLogos.map((model) => <div className="collection-model-chip" key={model.name}><BrandLogo slug={model.slug} name={model.provider} size="md" /><span><strong>{model.name}</strong><small>{model.provider}</small></span></div>)}
-                  </div>
-                ) : item.visual === 'video' ? (
-                  <div className="collection-video-visual">
-                    <div className="collection-video-heading"><BrandLogo slug="dreamina" name="Dreamina" size="xl" /><div><strong>Seedance</strong><small>ByteDance video models</small></div></div>
-                    <div className="collection-video-models">
-                      {videoModelLogos.map((model) => <div className="collection-video-model" key={model.name}><BrandLogo slug={model.slug} name={model.provider} size="md" /><span>{model.name}</span></div>)}
-                    </div>
-                    <div className="collection-video-platforms">{['runway','pika','canva'].map((slug) => <BrandLogo key={slug} slug={slug} name={slug} size="sm" />)}</div>
-                  </div>
-                ) : item.visual === 'tools' ? (
-                  <div className="collection-tools-grid">
-                    {popularToolLogos.map((tool) => <div className="collection-tool-chip" key={tool.slug}><BrandLogo slug={tool.slug} name={tool.name} size="md" /><span>{tool.name}</span></div>)}
-                  </div>
-                ) : item.art ? <img src={item.art} alt="" loading="lazy" decoding="async" /> : <div className="home-collection-card__visual-icon"><item.Icon className="h-10 w-10" /></div>}
-                <span className="home-collection-card__eyebrow">{item.eyebrow}</span>
-              </div>
-              <div className="home-collection-card__body">
-              <div className="mt-3 flex items-center justify-between gap-3">
-                <h3 className="text-lg font-semibold tracking-tight text-foreground">{item.title}</h3>
-                <ArrowRight className="h-4 w-4 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-0.5 group-hover:text-primary" aria-hidden="true" />
-              </div>
-              <p className="mt-2 text-sm leading-6 text-muted-foreground">{item.description}</p>
-              <div className="mt-4 flex flex-wrap gap-1.5">{item.highlights.map((highlight) => <span key={highlight} className="rounded-md border border-border/80 bg-muted/50 px-2 py-1 text-[11px] font-medium text-secondary-foreground">{highlight}</span>)}</div>
-              </div>
+              <img
+                src={item.image}
+                alt={item.imageAlt}
+                width="320"
+                height="213"
+                loading="lazy"
+                decoding="async"
+              />
             </Link>
           ))}
         </div>
