@@ -37,6 +37,7 @@ describe('Homepage prompt showcase and section alignment', () => {
     assert.deepEqual([...positions].sort((a, b) => a - b), positions);
     assert.ok(html.includes('type="search"') || html.includes('role="combobox"'), 'Global search is in the hero');
     const home = fs.readFileSync(path.join(root, 'src/pages/HomePage.tsx'), 'utf8');
+    const css = fs.readFileSync(path.join(root, 'src/index.css'), 'utf8');
     assert.match(home, /featuredCollections/);
     assert.match(home, /href: '\/frontier-models'/);
     assert.match(home, /href: '\/free-ai-sites'/);
@@ -44,7 +45,29 @@ describe('Homepage prompt showcase and section alignment', () => {
     assert.match(html, /Frontier access highlights/);
     assert.match(html, /GPT-6 Astra/);
     assert.match(html, /Claude Opus 5\.5/);
+    assert.match(html, /Seedance 2\.0/);
     assert.match(html, /Seedance 2\.5/);
+    assert.match(html, /Claude Fable 5/);
+    assert.match(html, /Claude Fable 5\.1/);
+    assert.match(html, /Claude Sonnet 5\.5/);
+    assert.match(html, /Claude Haiku 5\.5/);
+    assert.match(html, /Claude Mythos 5/);
+    assert.match(html, /data-brand-slug="anthropic"/);
+    assert.match(html, /data-brand-slug="openai"/);
+    assert.match(html, /data-brand-slug="dreamina"/);
+    assert.match(home, /collection-frontier-models\.webp/);
+    assert.match(home, /collection-free-ai-video-models\.webp/);
+    assert.match(home, /collection-all-ai-tools\.webp/);
+    assert.match(home, /collection-github-projects\.webp/);
+    assert.match(html, /home-collection-card--image/);
+    assert.match(html, /data-brand-slug="perplexity"/);
+    assert.match(html, /data-brand-slug="runway"/);
+    assert.match(html, /data-brand-slug="elevenlabs"/);
+    assert.match(html, /Free AI Video Models/);
+    assert.match(html, /Google Flow/);
+    assert.match(html, /PixVerse/);
+    assert.match(html, /Viggle/);
+    assert.match(html, /Bing/);
     assert.match(home, /category\.subcategories\.map/);
     assert.match(html, /Free &amp; Trial AI Video Generators/);
     assert.match(html, /AI Image Generators/);
@@ -53,6 +76,18 @@ describe('Homepage prompt showcase and section alignment', () => {
     assert.match(html, /AI Research &amp; Search/);
     assert.match(html, /data-brand-slug="runway"/);
     assert.match(html, /data-brand-slug="dreamina"/);
+    assert.match(html, /home-collection-card--image/);
+    assert.match(html, /home-category-card__art/);
+    assert.match(html, /home-task-card__art/);
+    assert.match(html, /home-resource-card__icon/);
+    for (const asset of ['collection-frontier-models.webp', 'collection-free-ai-video-models.webp', 'collection-all-ai-tools.webp', 'collection-github-projects.webp', 'category-assistants.svg', 'category-writing.svg', 'category-image.svg', 'category-video.svg', 'category-voice.svg', 'category-music.svg', 'category-coding.svg', 'category-productivity.svg', 'category-automation.svg', 'category-design-3d.svg', 'task-video-generators.svg', 'task-image-generators.svg', 'task-voice-speech.svg', 'task-coding-agents.svg', 'task-research-search.svg', 'task-open-source-ai.svg']) {
+      assert.ok(fs.existsSync(path.join(root, 'public/images/home', asset)), `Dedicated homepage art exists: ${asset}`);
+      assert.ok(home.includes(`/images/home/${asset}`), `Homepage references dedicated art ${asset}`);
+    }
+    assert.doesNotMatch(home, /Fable 5', 'Fable 5\.1'/);
+    assert.match(home, /home-model-access-card__header/);
+    assert.match(home, /home-model-access-card__badge/);
+    assert.match(css, /home-model-access-card__badge\s*\{/);
     const videoPage = fs.readFileSync(path.join(root, 'src/pages/AiVideoToolsPage.tsx'), 'utf8');
     assert.match(videoPage, /searchParams\.get\('filter'\)/);
     assert.match(videoPage, /initialFilter === 'free-entry'/);

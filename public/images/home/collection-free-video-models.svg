@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540" fill="none">
+<defs>
+<linearGradient id="bg" x1="50" y1="10" x2="900" y2="530"><stop stop-color="#09142f"/><stop offset=".52" stop-color="#15153c"/><stop offset="1" stop-color="#091329"/></linearGradient>
+<linearGradient id="cyan" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#39e1e8"/><stop offset="1" stop-color="#426eff"/></linearGradient>
+<linearGradient id="purple" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#e48cff"/><stop offset="1" stop-color="#626bff"/></linearGradient>
+<linearGradient id="glass" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#273d7d" stop-opacity=".88"/><stop offset="1" stop-color="#101b3e" stop-opacity=".95"/></linearGradient>
+<pattern id="dots" width="26" height="26" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1" fill="#9bbcff" opacity=".26"/></pattern>
+</defs>
+<rect width="960" height="540" rx="28" fill="url(#bg)"/><rect width="960" height="540" rx="28" fill="url(#dots)"/>
+<path d="M0 430c140-80 270 42 410-8 165-58 300 65 550-26v144H0z" fill="#070e22" opacity=".65"/>
+<g>
+<rect x="75" y="86" width="370" height="300" rx="30" fill="url(#glass)" stroke="#b05fff" stroke-width="3"/>
+<rect x="515" y="86" width="370" height="300" rx="30" fill="url(#glass)" stroke="#3cd6ff" stroke-width="3"/>
+<path d="M75 148h370M515 148h370" stroke="#b9c9ff" stroke-opacity=".24" stroke-width="2"/>
+<g transform="translate(130 184)">
+<rect x="0" y="0" width="260" height="145" rx="18" fill="#111c3d" stroke="#a6b9ff" stroke-opacity=".5" stroke-width="2"/>
+<path d="M0 0l45-42h172l43 42" fill="#243c79" stroke="#b8c7ff" stroke-width="3"/>
+<path d="M115 34l65 38-65 38z" fill="url(#purple)" stroke="#f2dfff" stroke-width="3" stroke-linejoin="round"/>
+<path d="M18 120c40-25 55-62 89-62 34 0 52 42 86 42 24 0 40-18 67-41" stroke="#65dfff" stroke-width="5" opacity=".8" fill="none"/>
+</g>
+<g transform="translate(570 184)">
+<rect x="0" y="0" width="260" height="145" rx="18" fill="#111c3d" stroke="#a6b9ff" stroke-opacity=".5" stroke-width="2"/>
+<path d="M0 0l45-42h172l43 42" fill="#1c4778" stroke="#a8e9ff" stroke-width="3"/>
+<path d="M20 112l50-68 55 48 50-62 65 82z" fill="url(#cyan)" opacity=".9"/>
+<circle cx="196" cy="36" r="18" fill="#f6d58a"/>
+<path d="M115 32l18 28-18 28-18-28z" fill="#f7fbff" opacity=".9"/>
+</g>
+<g fill="#f3f7ff" font-family="Arial,sans-serif" font-weight="700" font-size="24" letter-spacing="1">
+<text x="260" y="125" text-anchor="middle">SEEDANCE 2.0</text>
+<text x="700" y="125" text-anchor="middle">SEEDANCE 2.5</text>
+</g>
+<g stroke="url(#cyan)" stroke-width="5" stroke-linecap="round">
+<path d="M240 420h480"/><path d="M300 438h360"/>
+</g>
+<g fill="#e7f4ff" font-family="Arial,sans-serif" font-size="17" font-weight="600">
+<text x="480" y="478" text-anchor="middle" letter-spacing="2">TEXT TO VIDEO · IMAGE TO VIDEO · FREE STARTER CREDITS</text>
+</g>
+<circle cx="480" cy="57" r="7" fill="#f1a4ff"/><circle cx="45" cy="276" r="5" fill="#40d9ff"/><circle cx="918" cy="260" r="5" fill="#bc8dff"/>
+<rect x="1.5" y="1.5" width="957" height="537" rx="26" stroke="#91bdff" stroke-opacity=".25" stroke-width="3"/>
+</svg>

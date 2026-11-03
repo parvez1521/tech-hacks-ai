@@ -62,10 +62,6 @@ export const DailyDiscoveriesSection: React.FC<DailyDiscoveriesSectionProps> = (
       {/* Header Bar */}
       <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-6">
         <div>
-          <div className="discoveries-kicker">
-            <Sparkles className="w-3.5 h-3.5" aria-hidden="true" />
-            <span>From the catalog</span>
-          </div>
           <h2
             id="daily-discoveries-heading"
             className="discoveries-heading"

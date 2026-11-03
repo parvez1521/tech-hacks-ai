@@ -14,10 +14,21 @@ test('app shell and document root contain horizontal overflow without locking ve
   assert.doesNotMatch(app, /overflow-y-hidden|h-screen overflow-hidden/);
 });
 
-test('floating assistant stays inside narrow phone viewports and the decorative glow is contained', () => {
+test('mobile assistant launcher lives in navigation and cannot overlay page content', () => {
   const css = read('src/index.css');
-  assert.match(css, /\.chat-launcher-position\s*\{[\s\S]*?max-width:\s*calc\(100vw\s*-\s*2rem\)/);
-  assert.match(css, /@media\s*\(max-width:\s*360px\)[\s\S]*?\.chat-launcher-position\s*\{\s*right:\s*2\.25rem/);
+  const header = read('src/components/Header.tsx');
+  assert.match(css, /\.chat-launcher-position\s*\{\s*display:\s*none;\s*\}/);
+  assert.match(css, /@media\s*\(min-width:\s*1024px\)\s*\{[\s\S]*?\.chat-launcher-position\s*\{[\s\S]*?position:\s*fixed;[\s\S]*?bottom:\s*calc\(1rem \+ env\(safe-area-inset-bottom\)\)/);
+  assert.match(header, /aria-label="Open SwitchRoute assistant"[\s\S]*?switchroute:open-chat/);
+  const chatbot = read('src/components/FloatingChatbot.tsx');
+  assert.match(chatbot, /focusReturnRef\.current = trigger \?\? null/);
+  assert.match(chatbot, /if \(focusTarget\?\.isConnected\) focusTarget\.focus\(\);[\s\S]*?else launcherRef\.current\?\.focus\(\)/);
+});
+
+test('floating assistant preserves the existing desktop safe-area offset and the decorative glow stays contained', () => {
+  const css = read('src/index.css');
+  assert.match(css, /max-width:\s*calc\(100vw\s*-\s*2rem\)/);
+  assert.match(css, /bottom:\s*calc\(1rem \+ env\(safe-area-inset-bottom\)\)/);
   assert.match(css, /\.ambient-glow-container\s*\{[\s\S]*?contain:\s*paint/);
 });
 

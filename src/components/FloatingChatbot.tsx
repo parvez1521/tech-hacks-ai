@@ -68,6 +68,7 @@ export const FloatingChatbot: React.FC = () => {
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const launcherRef = useRef<HTMLButtonElement>(null);
+  const focusReturnRef = useRef<HTMLElement | null>(null);
   const dialogRef = useRef<HTMLDivElement>(null);
   const isOpenRef = useRef(false);
   const isLoadingRef = useRef(false);
@@ -86,9 +87,24 @@ export const FloatingChatbot: React.FC = () => {
     ));
   }, []);
 
+  useEffect(() => {
+    const handleMobileChatRequest = (event: Event) => {
+      const trigger = (event as CustomEvent<{ trigger?: HTMLElement }>).detail?.trigger;
+      focusReturnRef.current = trigger ?? null;
+      setIsOpen(true);
+    };
+    window.addEventListener('switchroute:open-chat', handleMobileChatRequest);
+    return () => window.removeEventListener('switchroute:open-chat', handleMobileChatRequest);
+  }, []);
+
   const closeChat = () => {
     setIsOpen(false);
-    window.requestAnimationFrame(() => launcherRef.current?.focus());
+    window.requestAnimationFrame(() => {
+      const focusTarget = focusReturnRef.current;
+      if (focusTarget?.isConnected) focusTarget.focus();
+      else launcherRef.current?.focus();
+      focusReturnRef.current = null;
+    });
   };
 
   const scrollToBottom = () => {
@@ -313,6 +329,7 @@ export const FloatingChatbot: React.FC = () => {
           <button
             type="button"
             ref={launcherRef}
+            onFocus={(event) => { focusReturnRef.current = event.currentTarget; }}
             onClick={() => setIsOpen(true)}
             aria-label="Open SwitchRoute assistant"
             title="Open assistant"
