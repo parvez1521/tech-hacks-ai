@@ -66,10 +66,14 @@ describe('Homepage prompt showcase and section alignment', () => {
     assert.match(html, /home-category-card__art/);
     assert.match(html, /home-task-card__art/);
     assert.match(html, /home-resource-card__icon/);
-    for (const asset of ['collection-frontier-models.svg', 'collection-free-video-models.svg', 'collection-all-tools.svg', 'collection-github-projects.svg', 'category-assistants.svg', 'category-writing.svg', 'category-image.svg', 'category-video.svg', 'category-voice.svg', 'category-music.svg', 'category-coding.svg', 'category-productivity.svg', 'category-automation.svg', 'category-design-3d.svg', 'task-video-generators.svg', 'task-image-generators.svg', 'task-voice-speech.svg', 'task-coding-agents.svg', 'task-research-search.svg', 'task-open-source-ai.svg']) {
+    for (const asset of ['collection-all-tools.svg', 'collection-github-projects.svg', 'category-assistants.svg', 'category-writing.svg', 'category-image.svg', 'category-video.svg', 'category-voice.svg', 'category-music.svg', 'category-coding.svg', 'category-productivity.svg', 'category-automation.svg', 'category-design-3d.svg', 'task-video-generators.svg', 'task-image-generators.svg', 'task-voice-speech.svg', 'task-coding-agents.svg', 'task-research-search.svg', 'task-open-source-ai.svg']) {
       assert.ok(fs.existsSync(path.join(root, 'public/images/home', asset)), `Dedicated homepage art exists: ${asset}`);
       assert.ok(home.includes(`/images/home/${asset}`), `Homepage references dedicated art ${asset}`);
     }
+    assert.match(home, /\/images\/generated-ui\/frontier-illustration\.webp/);
+    assert.match(home, /\/images\/generated-ui\/video-collection-illustration\.webp/);
+    assert.ok(fs.existsSync(path.join(root, 'public/images/generated-ui/frontier-illustration.webp')));
+    assert.ok(fs.existsSync(path.join(root, 'public/images/generated-ui/video-collection-illustration.webp')));
     assert.match(home, /home-model-access-card__header/);
     assert.match(home, /home-model-access-card__badge/);
     assert.match(css, /home-model-access-card__badge\s*\{/);
