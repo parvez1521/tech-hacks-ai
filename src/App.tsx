@@ -237,7 +237,7 @@ export function getRouteDescription(route: string, params: Record<string, string
     case 'github-projects':
       return 'Discover curated free and open-source GitHub projects across AI, development, automation, and productivity, with license and setup details.';
     case 'github-project-detail': {
-      const project = githubProjects.find((item) => item.slug === params.slug);
+      const project = listedGitHubProjects.find((item) => item.slug === params.slug);
       return project ? `${project.name}: ${project.description} Repository ${project.fullName}. Review its license, setup requirements, supported platforms, and current metadata.` : 'Detailed information about a curated GitHub repository.';
     }
     case 'guides':
