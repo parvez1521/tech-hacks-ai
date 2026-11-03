@@ -7,7 +7,7 @@ Checked: 2026-11-03. No repositories were cloned or executed, and no deployment 
 - Added `/github-projects` as a dedicated indexable route, with route title/description handling, canonical URL handling through the existing app, JSON-LD `CollectionPage`/`ItemList`, and a sitemap entry.
 - Added a Discover navigation link for desktop and mobile, plus a homepage featured-collection entry. The existing Open Source Catalog remains at `/tools`.
 - Added ten task-oriented categories: AI Video Generation, AI Image & Design, AI Coding Agents, Local AI & LLMs, AI Automation & Agents, Speech & Voice, AI Research & RAG, Scraping & Browser Automation, Developer Utilities, and Self-hosted Apps. Projects may appear under secondary categories; they remain a single repository record.
-- Added search, category and license/language/self-hosting/GPU/API-key filters, featured/recently-updated/newest-curated sorting, and nine-item pagination. Only records with `verified` status are shown by default.
+- Added search, category and license/language/self-hosting/GPU/API-key filters, featured/recently-updated/newest-curated sorting, and nine-item pagination. The main results contain only `verified` entries; one explicitly labelled community candidate appears in a separate unverified section.
 - Editorial summaries, requirements, categories, review notes, and verification state are stored separately from GitHub repository metadata snapshots. Live repository descriptions are displayed in a distinct field and cannot overwrite editorial copy.
 - The unauthenticated GET metadata endpoint accepts only the verified-repository allowlist. It reads GitHub's public REST API, caches responses in memory for 15 minutes and at the CDN for five minutes, limits forced refresh to one request per repository per five minutes, checks the API rate-limit header, and serves stale data when available. README excerpts are stripped to plain text and length-limited before React renders them. There is no scheduled refresh mechanism in this application; refresh is user-initiated. No GitHub token is required.
 
@@ -31,9 +31,12 @@ All 17 supplied repository URLs were checked for public availability and archive
 - [Handy](https://github.com/cjpais/Handy) — MIT; local speech-to-text desktop utility; performance depends on hardware/model choice.
 - [MarkItDown](https://github.com/microsoft/markitdown) — MIT; document-to-Markdown utility; optional model integrations may require credentials.
 
-**Held out pending review (4):**
+**Community project shown separately as unverified (1):**
 
-- [Open-Higgsfield-AI](https://github.com/Autom8AI/Open-Higgsfield-AI) — `license-unclear`. README claims MIT, but GitHub detects no license and no root `LICENSE` file was found. It sends generation requests through MuAPI and requires its API key in the documented local setup; README privacy and request-flow claims conflict. README also says installers are unsigned/not notarized and describes bypassing OS warnings. It is clearly labeled an independent community project, not a Higgsfield product. Hosted costs/availability are unresolved, so paid-service requirement is unknown rather than asserted. No promotion until license, security, and service terms are independently resolved.
+- [Open-Higgsfield-AI](https://github.com/Autom8AI/Open-Higgsfield-AI) — independent community UI, not an official Higgsfield product. It appears outside the verified directory because GitHub detects no license and no root LICENSE file was found despite the README MIT claim. Local setup sends generation requests through MuAPI and requires its API key; README privacy/request-flow claims conflict. README describes installers as unsigned/not notarized. Hosted costs and service terms remain unresolved.
+
+**Held out pending review (3):**
+
 - [Continue](https://github.com/continuedev/continue) — `needs-review`. Current README says the repository is read-only and no longer actively maintained, despite Apache-2.0 metadata.
 - [n8n](https://github.com/n8n-io/n8n) — `needs-review`. Sustainable Use License 1.0 and separately licensed Enterprise files do not support describing the project as OSI open source.
 - [WhisperSpeech](https://github.com/collabora/WhisperSpeech) — `needs-review`. MIT metadata, but commit history showed its most recent commit on 2025-06-08; current maintenance/readiness needs review.
@@ -59,3 +62,8 @@ Browser QA at 1440px and 390px: route/title render, 9 first-page cards render, s
 - `git diff --check`: passes.
 - No `lint` or `typecheck` script is defined in `package.json`; the production build transpiles the app but is not a standalone TypeScript typecheck.
 - Repository/license claims are an editorial snapshot as of the checked date, not legal advice or a security audit. Recheck README/license/activity and provider pricing before changing a held-out status or making a stronger cost/security claim. Hardware and inference cost can vary by selected model/provider.
+
+
+## Community listing follow-up — 2026-11-03
+
+Open-Higgsfield-AI is now displayed in a separate **Community Projects — Unverified** section. It remains excluded from the verified result set, verified filters/counts, structured verified ItemList, and verified metadata-refresh allowlist. The card prominently discloses its independent status, unclear license, MuAPI dependency, conflicting privacy/request-flow statements, and unsigned/notarized installer warning. It is not described as official, verified, or definitively free.

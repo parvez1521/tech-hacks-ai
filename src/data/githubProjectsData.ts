@@ -32,6 +32,7 @@ export const githubProjects: GitHubProject[] = githubProjectEditorialRecords.fla
 });
 
 export const publicGitHubProjects = githubProjects.filter((project) => project.verificationStatus === 'verified');
+export const communityGitHubProjects = githubProjects.filter((project) => project.verificationStatus === 'community-unverified');
 export const getProjectCategoryNames = (project: GitHubProject): string[] => [project.primaryCategory, ...project.secondaryCategories]
   .map((id) => githubProjectCategories.find((category) => category.id === id)?.name)
   .filter((name): name is string => Boolean(name));

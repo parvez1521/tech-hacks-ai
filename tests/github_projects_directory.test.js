@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import handler, { readmeExcerpt } from '../api/github-projects.js';
-import { githubProjectCategories, githubProjects, githubProjectSources, publicGitHubProjects } from '../src/data/githubProjectsData.ts';
+import { communityGitHubProjects, githubProjectCategories, githubProjects, githubProjectSources, publicGitHubProjects } from '../src/data/githubProjectsData.ts';
 import { filterAndSortGitHubProjects, refreshGitHubProjectMetadata } from '../src/services/githubProjectsService.ts';
 
 function responseMock() {
@@ -22,9 +22,15 @@ test('candidate records are unique, categories resolve, and only verified projec
   for (const project of githubProjects) {
     assert.ok(githubProjectCategories.some((category) => category.id === project.primaryCategory));
     for (const categoryId of project.secondaryCategories) assert.ok(githubProjectCategories.some((category) => category.id === categoryId));
-    assert.ok(['verified', 'needs-review', 'archived-unavailable', 'license-unclear'].includes(project.verificationStatus));
+    assert.ok(['verified', 'community-unverified', 'needs-review', 'archived-unavailable', 'license-unclear'].includes(project.verificationStatus));
   }
   assert.ok(publicGitHubProjects.every((project) => project.verificationStatus === 'verified'));
+  assert.equal(communityGitHubProjects.length, 1);
+  assert.equal(communityGitHubProjects[0].fullName, 'Autom8AI/Open-Higgsfield-AI');
+  assert.equal(communityGitHubProjects[0].verificationStatus, 'community-unverified');
+  assert.equal(communityGitHubProjects[0].licenseSpdxId, null);
+  assert.equal(publicGitHubProjects.includes(communityGitHubProjects[0]), false);
+  assert.match(communityGitHubProjects[0].verificationNotes, /MuAPI/);
   assert.equal(publicGitHubProjects.some((project) => project.fullName === 'Autom8AI/Open-Higgsfield-AI'), false);
   assert.equal(publicGitHubProjects.some((project) => project.fullName === 'n8n-io/n8n'), false);
   assert.equal(githubProjects.find((project) => project.fullName === 'n8n-io/n8n').verificationStatus, 'needs-review');

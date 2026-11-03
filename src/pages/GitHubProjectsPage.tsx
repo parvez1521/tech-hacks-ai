@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { ArrowUpRight, ExternalLink, RefreshCw, Search, ShieldCheck } from 'lucide-react';
-import { githubProjectCategories, githubProjectSources, publicGitHubProjects } from '../data/githubProjectsData';
+import { communityGitHubProjects, githubProjectCategories, githubProjectSources, publicGitHubProjects } from '../data/githubProjectsData';
 import { filterAndSortGitHubProjects, refreshGitHubProjectMetadata } from '../services/githubProjectsService';
 import type { GitHubProject, GitHubProjectCategory, GitHubProjectLiveMetadata } from '../types/githubProjects';
 
@@ -10,22 +10,24 @@ type RequirementFilter = 'all' | 'required' | 'not-required' | 'unknown';
 const formatDate = (value: string | null) => value ? new Intl.DateTimeFormat('en', { dateStyle: 'medium', timeZone: 'UTC' }).format(new Date(value)) : 'Not available';
 const requirementText = (value: boolean | null) => value === null ? 'Unknown' : value ? 'Required' : 'Not required';
 
-function ProjectCard({ project, live, onRefresh, refreshing, refreshError, needsReview }: {
+function ProjectCard({ project, live, onRefresh, refreshing, refreshError, needsReview, showRefresh = true }: {
   project: GitHubProject;
   live?: GitHubProjectLiveMetadata;
-  onRefresh: () => void;
-  refreshing: boolean;
+  onRefresh?: () => void;
+  refreshing?: boolean;
   refreshError?: string;
   needsReview?: boolean;
+  showRefresh?: boolean;
 }) {
   return <article className="flex flex-col rounded-lg border border-border bg-card p-5">
       <div className="flex items-start justify-between gap-4">
-      <div><p className="text-xs text-muted-foreground">{githubProjectCategories.find((category) => category.id === project.primaryCategory)?.name}</p><h3 className="mt-1 text-lg font-semibold text-foreground">{project.name}{project.featured && <span className="ml-2 text-xs font-normal text-primary">Featured</span>}</h3><p className="mt-1 text-xs text-muted-foreground">{project.fullName}</p></div>
+      <div><p className="text-xs text-muted-foreground">{githubProjectCategories.find((category) => category.id === project.primaryCategory)?.name}</p><h3 className="mt-1 text-lg font-semibold text-foreground">{project.name}{project.featured && <span className="ml-2 text-xs font-normal text-primary">Featured</span>}</h3><p className="mt-1 text-xs text-muted-foreground">{project.fullName}</p>{project.verificationStatus === 'community-unverified' && <span className="mt-2 inline-flex rounded-md border border-border px-2 py-1 text-[11px] font-medium text-muted-foreground">Community · Unverified</span>}</div>
       <a href={project.repositoryUrl} target="_blank" rel="noreferrer" aria-label={`Open ${project.fullName} on GitHub`} className="shrink-0 rounded-md p-2 text-muted-foreground hover:bg-muted hover:text-foreground"><ArrowUpRight className="h-4 w-4" /></a>
     </div>
     <p className="mt-4 text-sm leading-6 text-foreground/90">{project.description}</p>
     {(live?.githubDescription || project.githubDescription) && <p className="mt-2 text-xs leading-5 text-muted-foreground"><span className="font-medium">GitHub repository description:</span> {live?.githubDescription ?? project.githubDescription}</p>}
     <p className="mt-2 text-xs leading-5 text-muted-foreground">{project.longDescription}</p>
+    {project.verificationStatus === 'community-unverified' && <div role="note" className="mt-3 rounded-md border border-border bg-muted/40 px-3 py-3 text-xs leading-5 text-muted-foreground"><strong className="text-foreground">Unverified community project.</strong> This is not an official Higgsfield product. The README claims MIT, but GitHub does not detect a license and no root LICENSE file was found. Local setup routes generation through MuAPI and requires its API key; the README's privacy and request-flow statements conflict. The README also describes its installers as unsigned/not notarized. Review the repository, license, security, and service terms before installing.</div>}
     {live?.readmeExcerpt && <details className="mt-3 rounded-md border border-border px-3 py-2"><summary className="cursor-pointer text-xs font-medium">Latest README excerpt</summary><p className="mt-2 text-xs leading-5 text-muted-foreground">{live.readmeExcerpt}</p></details>}
     {project.secondaryCategories.length > 0 && <p className="mt-2 text-xs text-muted-foreground">Also in: {project.secondaryCategories.map((id) => githubProjectCategories.find((category) => category.id === id)?.name).filter(Boolean).join(' · ')}</p>}
     <div className="mt-4 flex flex-wrap gap-1.5">{project.tags.map((tag) => <span key={tag} className="rounded-md border border-border px-2 py-1 text-[11px] text-muted-foreground">{tag}</span>)}</div>
@@ -45,7 +47,7 @@ function ProjectCard({ project, live, onRefresh, refreshing, refreshError, needs
     {refreshError && <p role="status" className="mt-3 text-xs text-muted-foreground">{refreshError}</p>}
     <div className="mt-auto flex items-center justify-between gap-3 pt-4">
       <a href={project.repositoryUrl} target="_blank" rel="noreferrer" className="inline-flex min-h-10 items-center gap-2 rounded-md bg-primary px-3 py-2 text-sm font-medium text-primary-foreground hover:opacity-90">Open GitHub <ExternalLink className="h-3.5 w-3.5" /></a>
-      <button type="button" onClick={onRefresh} disabled={refreshing} className="inline-flex min-h-10 items-center gap-2 rounded-md px-2 text-xs text-muted-foreground hover:bg-muted hover:text-foreground disabled:opacity-50" aria-label={`Refresh GitHub metadata for ${project.name}`}><RefreshCw className={`h-3.5 w-3.5 ${refreshing ? 'animate-spin' : ''}`} />{refreshing ? 'Checking…' : 'Refresh metadata'}</button>
+      {showRefresh && onRefresh && <button type="button" onClick={onRefresh} disabled={Boolean(refreshing)} className="inline-flex min-h-10 items-center gap-2 rounded-md px-2 text-xs text-muted-foreground hover:bg-muted hover:text-foreground disabled:opacity-50" aria-label={`Refresh GitHub metadata for ${project.name}`}><RefreshCw className={`h-3.5 w-3.5 ${refreshing ? 'animate-spin' : ''}`} />{refreshing ? 'Checking…' : 'Refresh metadata'}</button>}
     </div>
   </article>;
 }
@@ -135,9 +137,14 @@ export const GitHubProjectsPage: React.FC = () => {
 
     {result.projects.length ? <section aria-label="GitHub project results" className="grid md:grid-cols-2 xl:grid-cols-3 gap-4">{result.projects.map((project) => <ProjectCard key={project.id} project={project} live={liveMetadata[project.fullName]} onRefresh={() => refreshProject(project)} refreshing={Boolean(refreshing[project.fullName])} refreshError={refreshErrors[project.fullName] || undefined} needsReview={reviewRequired[project.fullName]} />)}</section> : <div className="rounded-lg border border-border p-10 text-center"><p className="font-medium">No verified projects match those filters.</p><p className="mt-2 text-sm text-muted-foreground">Try another category or search term.</p></div>}
     {result.pageCount > 1 && <nav aria-label="GitHub projects pagination" className="mt-8 flex items-center justify-center gap-3"><button type="button" disabled={page <= 1} onClick={() => setPage((value) => Math.max(1, value - 1))} className="min-h-10 rounded-md border border-border px-3 text-sm disabled:opacity-40">Previous</button><span aria-live="polite" className="text-sm text-muted-foreground">Page {result.page} of {result.pageCount}</span><button type="button" disabled={page >= result.pageCount} onClick={() => setPage((value) => Math.min(result.pageCount, value + 1))} className="min-h-10 rounded-md border border-border px-3 text-sm disabled:opacity-40">Next</button></nav>}
+    
+    {communityGitHubProjects.length > 0 && <section aria-label="Community projects pending verification" className="mt-12 border-t border-border pt-8">
+      <div className="mb-5 max-w-3xl"><p className="text-xs tracking-wide text-muted-foreground">Separate from verified listings</p><h2 className="mt-1 text-2xl font-semibold text-foreground">Community Projects — Unverified</h2><p className="mt-2 text-sm leading-6 text-muted-foreground">Independent community-built projects that may be useful to explore, but have unresolved license, security, or service-term questions. They are not endorsements and are excluded from verified counts, filters, and recommendations.</p></div>
+      <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-4">{communityGitHubProjects.map((project) => <ProjectCard key={project.id} project={project} showRefresh={false} />)}</div>
+    </section>}
 
     <section className="mt-12 border-t border-border pt-7">
-      <div className="flex gap-3"><ShieldCheck className="mt-0.5 h-5 w-5 shrink-0 text-muted-foreground" /><div><h2 className="font-semibold">How we select projects</h2><p className="mt-2 max-w-3xl text-sm leading-6 text-muted-foreground">Listings are reviewed for public availability, current repository status, a clear license, recent maintenance, and a README that supports the stated use. We record hardware, credentials, and paid-service dependencies when documented. This is an editorial selection, not an endorsement, security audit, or guarantee of future maintenance. Only Verified projects appear by default; candidates needing review stay out of the public results.</p></div></div>
+      <div className="flex gap-3"><ShieldCheck className="mt-0.5 h-5 w-5 shrink-0 text-muted-foreground" /><div><h2 className="font-semibold">How we select projects</h2><p className="mt-2 max-w-3xl text-sm leading-6 text-muted-foreground">Listings are reviewed for public availability, current repository status, a clear license, recent maintenance, and a README that supports the stated use. We record hardware, credentials, and paid-service dependencies when documented. This is an editorial selection, not an endorsement, security audit, or guarantee of future maintenance. Verified projects appear in the main results. The separate community section is explicitly unverified and is not an endorsement.</p></div></div>
       <details className="mt-5 rounded-lg border border-border p-4"><summary className="cursor-pointer text-sm font-medium">Research lists used as discovery sources</summary><ul className="mt-3 space-y-2 text-sm">{githubProjectSources.map((source) => <li key={source.fullName}><a href={source.url} target="_blank" rel="noreferrer" className="underline">{source.fullName}</a><span className="text-muted-foreground"> — Research source only; license {source.licenseSpdxId || 'unclear'}; checked {source.updatedAt}.</span></li>)}</ul></details>
       <p className="mt-4 text-xs text-muted-foreground">Repository metadata is fetched from GitHub on request and cached server-side. Editorial categories, requirements, and verification notes are held separately; live metadata does not automatically promote or reclassify projects.</p>
     </section>

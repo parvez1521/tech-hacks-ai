@@ -10,7 +10,7 @@ export type GitHubProjectCategory =
   | 'developer-utilities'
   | 'self-hosted-apps';
 
-export type GitHubProjectVerificationStatus = 'verified' | 'needs-review' | 'archived-unavailable' | 'license-unclear';
+export type GitHubProjectVerificationStatus = 'verified' | 'community-unverified' | 'needs-review' | 'archived-unavailable' | 'license-unclear';
 export type InstallationDifficulty = 'beginner' | 'intermediate' | 'advanced' | null;
 
 export interface GitHubProjectEditorialRecord {
