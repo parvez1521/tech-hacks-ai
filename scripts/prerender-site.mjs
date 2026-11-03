@@ -176,13 +176,13 @@ async function main() {
   const renderer = await import(pathToFileURL(bundlePath).href);
   // Give every curated repository its own crawlable, statically rendered profile URL.
   const githubProjectDetailPaths = Array.isArray(renderer.githubProjectDetailPaths) ? renderer.githubProjectDetailPaths : [];
-  const existingSitemapPaths = new Set([...sitemap.matchAll(/<loc>([^<]+)<\\/loc>/g)].map((match) => {
+  const existingSitemapPaths = new Set([...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => {
     try { return normalizedPath(new URL(match[1]).pathname); } catch { return ''; }
   }));
   const missingGitHubProjectPaths = githubProjectDetailPaths.filter((pathname) => !existingSitemapPaths.has(pathname));
   if (missingGitHubProjectPaths.length) {
-    const newEntries = missingGitHubProjectPaths.map((pathname) => `  <url><loc>${baseUrl}${pathname}</loc></url>`).join('\\n');
-    sitemap = sitemap.replace('</urlset>', `${newEntries}\\n</urlset>`);
+    const newEntries = missingGitHubProjectPaths.map((pathname) => `  <url><loc>${baseUrl}${pathname}</loc></url>`).join('\n');
+    sitemap = sitemap.replace('</urlset>', `${newEntries}\n</urlset>`);
   }
   // The renderer is build-time only, not a public JS asset.
   await fs.rm(bundlePath, { force: true });
