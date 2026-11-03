@@ -3,7 +3,7 @@ import { Link, useRouter } from '../router/Router';
 import { getBookmarks, subscribeBookmarks } from '../services/bookmarkService';
 import { TechHacksLogo } from './TechHacksLogo';
 import { ThemeToggle } from './ThemeToggle';
-import { ArrowUpRight, Bookmark, Menu, Plus, Search, X } from 'lucide-react';
+import { ArrowUpRight, Bookmark, Menu, MessageSquare, Plus, Search, X } from 'lucide-react';
 
 const groups = [
   { name: 'Discover', links: [
@@ -120,6 +120,8 @@ export const Header: React.FC = () => {
         <button ref={menuButtonRef} type="button" onClick={() => setOpen(!open)} aria-label={open ? 'Close navigation menu' : 'Open navigation menu'} aria-expanded={open} aria-controls="mobile-navigation" className="lg:hidden min-h-11 min-w-11 rounded-md flex items-center justify-center text-muted-foreground hover:bg-muted"><span className="sr-only">Menu</span>{open ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}</button>
       </div>
     </div>
-    {open && <nav id="mobile-navigation" aria-label="Mobile primary" className="site-header__mobile-panel lg:hidden max-h-[80vh] overflow-y-auto border-t border-border bg-background px-4 py-2" onKeyDown={closeOnEscape}>{groups.map((group) => renderGroup(group))}<div className="pt-3"><ThemeToggle /></div></nav>}
+    {open && <nav id="mobile-navigation" aria-label="Mobile primary" className="site-header__mobile-panel lg:hidden max-h-[80vh] overflow-y-auto border-t border-border bg-background px-4 py-2" onKeyDown={closeOnEscape}>
+      <button type="button" aria-label="Open SwitchRoute assistant" onClick={(event) => window.dispatchEvent(new CustomEvent('switchroute:open-chat', { detail: { trigger: event.currentTarget } }))} className="mb-2 inline-flex min-h-11 w-full items-center gap-3 rounded-lg border border-primary/25 bg-primary/10 px-3 text-left font-medium text-foreground transition-colors hover:bg-primary/15 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"><MessageSquare className="h-4 w-4 text-primary" aria-hidden="true" />Ask the SwitchRoute assistant<ArrowUpRight className="ml-auto h-4 w-4 text-muted-foreground" aria-hidden="true" /></button>
+      {groups.map((group) => renderGroup(group))}<div className="pt-3"><ThemeToggle /></div></nav>}
   </header>;
 };

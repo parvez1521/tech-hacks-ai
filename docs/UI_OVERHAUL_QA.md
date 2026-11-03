@@ -57,10 +57,26 @@ No TypeScript typecheck is claimed. This repository does not currently expose a 
 
 ## Remaining issues
 
-1. The persistent floating chat launcher can overlap content at mobile widths while scrolling; it is visible near the lower right on the utility detail and homepage captures. Moving or hiding it needs a product decision because it is a global support affordance.
-2. The production build still emits the large `heic2any` chunk warning; code splitting is outside this visual-only scope.
-3. The build environment has no production `ADMIN_SECRET`, so the existing security guard warns and disables privileged admin access. No environment configuration was changed.
-4. The Impeccable source detector still flags retained brand/context patterns: gradient wordmark/Brand Kit treatment, purple moderator status, SafeMarkdown's semantic left border, Inter as the existing product font, an existing decorative grid rule, the incumbent FrontierBonusSection heading and homepage collection top accents; the existing chatbot also uses bounce animation. These were not removed wholesale because they are brand, state, markdown, non-home legacy, or functional activity treatments. Taste's final homepage metrics reported zero gradients, zero gradient text, zero micro-labels and no contrast/overflow/broken-image findings; its detector's low-picture signal is not a fit for a real catalog directory, and no arbitrary stock art was added.
-5. The build's sitemap generator appended 534 blank lines after the closing `</urlset>` in `public/sitemap.xml`. I verified that file had no pre-existing worktree edits, then restored only this build-generated, whitespace-only output to its committed contents. Sitemap source logic and committed sitemap content are unchanged.
+1. The production build still emits the large `heic2any` chunk warning; code splitting is outside this visual-only scope.
+2. The build environment has no production `ADMIN_SECRET`, so the existing security guard warns and disables privileged admin access. No environment configuration was changed.
+3. The Impeccable source detector still flags retained brand/context patterns: gradient wordmark/Brand Kit treatment, purple moderator status, SafeMarkdown's semantic left border, Inter as the existing product font, an existing decorative grid rule, the incumbent FrontierBonusSection heading and homepage collection top accents; the existing chatbot also uses bounce animation. These were not removed wholesale because they are brand, state, markdown, non-home legacy, or functional activity treatments. Taste's final homepage metrics reported zero gradients, zero gradient text, zero micro-labels and no contrast/overflow/broken-image findings; its detector's low-picture signal is not a fit for a real catalog directory, and no arbitrary stock art was added.
+4. The build's sitemap generator appended blank whitespace after the closing `</urlset>` in `public/sitemap.xml`. I verified that file had no pre-existing worktree edits, then restored only this build-generated output to its committed contents. Sitemap source logic and committed sitemap content are unchanged.
 
 No deployment was performed.
+
+## Mobile chat launcher repair follow-up
+
+The original floating launcher was fixed to the viewport on phones and could overlap the live catalog preview or utility content while scrolling. It is now hidden below 1024px; the expanded mobile navigation provides a full-width, 44px “Ask the SwitchRoute assistant” action instead. This uses a local browser event to open the existing chat component; no chat API or backend behavior changed. The open dialog keeps its existing keyboard trap and Escape behavior. The mobile navigation action remains mounted behind the modal so Escape restores focus to that action. On desktop, the fixed launcher remains in the same bottom-right location and safe-area offset; focus returns to the newly rendered launcher after close. Mobile navigation retains its safe-area bottom padding, and the chat dialog retains its viewport/safe-area height. Reduced-motion behavior remains unchanged.
+
+Built-preview QA at 390px in dark and light themes scrolled the full homepage and Image Resizer route from top to bottom, and separately scrolled the upload workspace and processing policy into view. The launcher wrapper computed to `display:none` at every scroll checkpoint on both routes/themes. The upload control and full processing-policy text remained visible. Opening chat from the keyboard-accessible mobile menu worked in both themes; Escape closed it and restored focus. At 1440px, the launcher remained fixed at the previous bottom-right location, opened the same dialog, and returned focus on Escape.
+
+| Before | After |
+|---|---|
+| [Homepage, 390px dark](ui-overhaul-screenshots/before/home-mobile-dark.jpg) | [Homepage, 390px dark](ui-overhaul-screenshots/after/home-390-dark.jpg) · [full scroll](ui-overhaul-screenshots/after/home-fullpage-390-dark.jpg) |
+| [Utility detail, 390px dark](ui-overhaul-screenshots/before/utility-detail-mobile-dark.jpg) | [Image Resizer, 390px dark](ui-overhaul-screenshots/after/image-resizer-390-dark.jpg) · [full scroll](ui-overhaul-screenshots/after/image-resizer-fullpage-390-dark.jpg) |
+| — | [Upload workspace](ui-overhaul-screenshots/after/image-resizer-upload-390-dark.jpg) · [processing policy](ui-overhaul-screenshots/after/image-resizer-policy-390-dark.jpg) |
+| — | [Mobile chat entry, dark](ui-overhaul-screenshots/after/chat-mobile-nav-dark.jpg) · [desktop launcher](ui-overhaul-screenshots/after/chat-desktop-1440-dark.jpg) · [desktop chat open](ui-overhaul-screenshots/after/chat-desktop-open-1440-dark.jpg) |
+
+The same homepage, utility route, upload workspace, policy, and mobile-chat navigation captures are included for light theme. The regression check in `tests/mobile_viewport_overflow.test.js` requires the mobile launcher to be non-rendered, verifies the fixed launcher exists only at the desktop breakpoint with safe-area positioning, and checks the mobile nav open action and focus return path.
+
+Follow-up verification: `npm test` — 616 passed, 0 failed, 0 cancelled, 0 skipped. `npm run build` — passed. `git diff --check` — passed. The build retains the existing `heic2any` size warning and fail-closed missing-admin-secret warning described above.

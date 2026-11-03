@@ -1002,7 +1002,6 @@ main[data-route] [class*="overflow-x-auto"] {
   scrollbar-color: rgb(var(--color-muted-fg) / 0.5) transparent;
 }
 main[data-route] [class*="overflow-x-auto"]::-webkit-scrollbar { height: 0.25rem; }
-.app-shell[data-active-route="free-tool-detail"] .chat-launcher-position { bottom: 1.25rem; }
 main[data-route] [class*="overflow-x-auto"]::-webkit-scrollbar-thumb {
   border-radius: 99px;
   background: rgb(var(--color-muted-fg) / 0.5);
@@ -1178,17 +1177,18 @@ main[data-route] [class*="overflow-x-auto"]::-webkit-scrollbar-thumb {
 .discovery-card__unavailable { color: rgb(var(--color-muted-fg)); font-size: 0.8125rem; }
 
  .chat-launcher-position {
-  position: fixed;
-  z-index: 49;
-  right: max(1rem, env(safe-area-inset-right));
-  bottom: calc(1rem + env(safe-area-inset-bottom));
-  max-width: calc(100vw - 2rem);
+  display: none;
 }
-@media (max-width: 360px) {
-  .chat-launcher-position { right: 2.25rem; }
-}
-@media (min-width: 640px) and (max-width: 899px) {
-  .chat-launcher-position { right: auto; left: 1rem; }
+@media (min-width: 1024px) {
+  .chat-launcher-position {
+    position: fixed;
+    z-index: 49;
+    right: max(1rem, env(safe-area-inset-right));
+    bottom: calc(1rem + env(safe-area-inset-bottom));
+    display: block;
+    max-width: calc(100vw - 2rem);
+  }
+  .app-shell[data-active-route="free-tool-detail"] .chat-launcher-position { bottom: 1.25rem; }
 }
 .chat-launcher {
   position: relative;
