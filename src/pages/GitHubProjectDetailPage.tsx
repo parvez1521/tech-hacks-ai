@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowLeft, ArrowUpRight, ExternalLink, GitFork, Github, Star, CircleAlert } from 'lucide-react';
+import { ArrowLeft, ArrowUpRight, ExternalLink, GitFork, Github, Star, AlertCircle } from 'lucide-react';
 import { Link, useRouter } from '../router/Router';
 import { githubProjectCategories, listedGitHubProjects } from '../data/githubProjectsData';
 
