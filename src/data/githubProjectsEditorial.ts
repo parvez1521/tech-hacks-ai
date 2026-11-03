@@ -33,8 +33,8 @@ export const githubProjectEditorialRecords: GitHubProjectEditorialRecord[] = [
     ],
     "screenshots": [],
     "verifiedAt": null,
-    "verificationStatus": "license-unclear",
-    "verificationNotes": "Not shown publicly. GitHub API license is null and no root LICENSE file exists, despite the README MIT claim. README routes inference through MuAPI and requires its key for local setup; its data-privacy claim conflicts with that documented request flow. Installers are described as unsigned/not notarized and README tells users to bypass OS warnings. Treat as independent and review security, license, and hosted-cost claims before promotion.",
+    "verificationStatus": "community-unverified",
+    "verificationNotes": "Shown only in the separate Community Projects — Unverified section. GitHub API license is null and no root LICENSE file exists, despite the README MIT claim. README routes inference through MuAPI and requires its key for local setup; its data-privacy claim conflicts with that documented request flow. Installers are described as unsigned/not notarized and README tells users to bypass OS warnings. Treat as independent; license, security, and hosted-service terms remain unresolved.",
     "featured": false,
     "editorialRank": null
   },
