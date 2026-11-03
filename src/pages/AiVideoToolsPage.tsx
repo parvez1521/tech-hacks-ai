@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from 'react';
-import { Link } from '../router/Router';
+import { Link, useRouter } from '../router/Router';
 import { AiToolCard } from '../components/AiToolCard';
 import { getAiToolsForSearchIntent } from '../services/aiCatalogService';
 import { ArrowRight, Film, Gauge, MonitorPlay, Sparkles } from 'lucide-react';
@@ -23,7 +23,11 @@ function formatVerifiedDate(value: string | undefined): string {
 }
 
 export const AiVideoToolsPage: React.FC = () => {
-  const [filter, setFilter] = useState<VideoFilter>('all');
+  const { searchParams } = useRouter();
+  const [filter, setFilter] = useState<VideoFilter>(() => {
+    const initialFilter = searchParams.get('filter');
+    return initialFilter === 'free-entry' || initialFilter === 'open-models' ? initialFilter : 'all';
+  });
   const generators = useMemo(() => getAiToolsForSearchIntent('AI video generator'), []);
   const freeEntryCount = generators.filter(hasFreeEntry).length;
   const openModelCount = generators.filter(hasOpenModelAccess).length;

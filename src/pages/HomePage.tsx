@@ -1,12 +1,14 @@
 import React from 'react';
-import { ArrowRight, BookOpen, Code2, Gift, Layers3, Video, Wrench } from 'lucide-react';
+import { ArrowRight, BookOpen, Code2, Film, Gift, Image as ImageIcon, Layers3, Mic, Search, Server, Video, Wrench } from 'lucide-react';
 import { Link } from '../router/Router';
 import { UniversalSearch } from '../components/UniversalSearch';
 import { HeroSignalVisual } from '../components/HeroSignalVisual';
 import { DailyDiscoveriesSection } from '../components/DailyDiscoveriesSection';
+import { BrandLogo } from '../components/BrandLogo';
 import { aiCategories } from '../data/aiToolsData';
 import { aiModels, getCurrentModelAccessRoutes, modelAccessProviders } from '../data/modelAccessCatalog';
 import { getActiveOffers, getFeaturedOffers } from '../data/offersData';
+import { getAllAiTools, getAiToolsForSearchIntent } from '../services/aiCatalogService';
 
 const featuredCollections = [
   { title: 'Frontier Models', href: '/frontier-models', description: 'Compare capabilities, official pricing and places to try leading models.', eyebrow: 'Model index', tone: 'model', highlights: ['GPT-6 Astra', 'Claude Opus 5.5', 'Seedance 2.5'] },
@@ -26,6 +28,77 @@ export const HomePage: React.FC = () => {
   const activeOffers = getActiveOffers();
   const offers = getFeaturedOffers().filter((offer) => activeOffers.some((active) => active.slug === offer.slug)).slice(0, 2);
   const freeModelRoutes = getCurrentModelAccessRoutes().filter((route) => ['free-weekly-shared', 'free-daily-allowance', 'free-daily-credits'].includes(route.accessType));
+  const allCatalogTools = getAllAiTools();
+  const videoGenerators = getAiToolsForSearchIntent('AI video generator');
+  const freeVideoGeneratorCount = videoGenerators.filter((tool) =>
+    tool.hasFreePlan ||
+    ['free', 'freemium', 'free-credits', 'free-trial'].includes(tool.pricingType) ||
+    ['recurring-free', 'limited-free', 'free-credits', 'open-source-local'].includes(tool.freeAccessType)
+  ).length;
+  const categoryCount = (category: string) => allCatalogTools.filter((tool) => tool.category === category).length;
+  const openSourceAiCount = allCatalogTools.filter((tool) => tool.isSelfHostable || tool.freeAccessType === 'open-source-local').length;
+  const taskCategories = [
+    {
+      title: 'Free & Trial AI Video Generators',
+      description: 'Text-to-video, image-to-video and creator workflows with a free plan, credits or a trial listed.',
+      href: '/ai-video-tools?filter=free-entry',
+      count: freeVideoGeneratorCount,
+      countLabel: 'free or trial entries',
+      accessLabel: 'Credits and limits vary',
+      Icon: Film,
+      logos: [{ slug: 'runway', name: 'Runway' }, { slug: 'dreamina', name: 'Dreamina' }, { slug: 'pika', name: 'Pika' }, { slug: 'hailuo-ai', name: 'Hailuo' }],
+    },
+    {
+      title: 'AI Image Generators',
+      description: 'Create visuals, edit images, build product shots and explore open image models.',
+      href: '/ai-tools?category=image',
+      count: categoryCount('image'),
+      countLabel: 'tools listed',
+      accessLabel: 'Hosted and local options',
+      Icon: ImageIcon,
+      logos: [{ slug: 'ideogram', name: 'Ideogram' }, { slug: 'leonardo-ai', name: 'Leonardo AI' }, { slug: 'comfyui', name: 'ComfyUI' }],
+    },
+    {
+      title: 'AI Voice & Speech',
+      description: 'Text-to-speech, voice cloning, transcription and local speech models.',
+      href: '/ai-tools?category=voice',
+      count: categoryCount('voice'),
+      countLabel: 'tools listed',
+      accessLabel: 'Free and paid plans',
+      Icon: Mic,
+      logos: [{ slug: 'elevenlabs', name: 'ElevenLabs' }, { slug: 'whisper', name: 'Whisper' }, { slug: 'kokoro-tts', name: 'Kokoro TTS' }],
+    },
+    {
+      title: 'AI Coding Agents',
+      description: 'Code editors, terminal agents, app builders and coding assistants.',
+      href: '/ai-tools?category=coding',
+      count: categoryCount('coding'),
+      countLabel: 'tools listed',
+      accessLabel: 'Free tiers and open source',
+      Icon: Code2,
+      logos: [{ slug: 'cursor', name: 'Cursor' }, { slug: 'aider', name: 'Aider' }, { slug: 'google-ai-studio', name: 'Google AI Studio' }],
+    },
+    {
+      title: 'AI Research & Search',
+      description: 'Search the web, research sources, summarize documents and organize knowledge.',
+      href: '/ai-tools?category=productivity',
+      count: categoryCount('productivity'),
+      countLabel: 'tools listed',
+      accessLabel: 'Research and knowledge tools',
+      Icon: Search,
+      logos: [{ slug: 'perplexity', name: 'Perplexity' }, { slug: 'notebooklm', name: 'NotebookLM' }, { slug: 'anythingllm', name: 'AnythingLLM' }],
+    },
+    {
+      title: 'Free & Open-source AI',
+      description: 'Self-hostable apps, open models and local workflows without a hosted subscription.',
+      href: '/ai-tools?access=open-source-local',
+      count: openSourceAiCount,
+      countLabel: 'open-source / local options',
+      accessLabel: 'Check model and code licenses',
+      Icon: Server,
+      logos: [{ slug: 'comfyui', name: 'ComfyUI' }, { slug: 'vllm', name: 'vLLM' }, { slug: 'aider', name: 'Aider' }],
+    },
+  ];
 
   return (
     <main className="pb-12 sm:pb-16">
@@ -133,6 +206,42 @@ export const HomePage: React.FC = () => {
               <p className="mt-2 text-xs leading-5 text-muted-foreground">{category.description}</p>
               <div className="mt-auto flex flex-wrap gap-1.5 pt-3">
                 {category.subcategories.map((subcategory) => <span key={subcategory} className="rounded-md border border-border/80 bg-muted/50 px-2 py-1 text-[10px] font-medium text-secondary-foreground">{subcategory}</span>)}
+              </div>
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-7xl border-t border-border/70 px-4 py-10 sm:px-6 sm:py-12" aria-labelledby="task-categories-heading">
+        <div className="mb-5 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+          <div>
+            <p className="text-sm text-muted-foreground">Popular starting points</p>
+            <h2 id="task-categories-heading" className="mt-1 text-2xl font-semibold tracking-tight text-foreground">Explore AI by what you want to do</h2>
+            <p className="mt-2 max-w-2xl text-sm leading-6 text-muted-foreground">Jump straight into focused collections, from free-entry video generators to image, voice, coding and research tools.</p>
+          </div>
+          <Link to="/ai-tools" className="inline-flex min-h-11 shrink-0 items-center gap-1 text-sm font-medium text-primary hover:underline">Browse full directory <ArrowRight className="h-4 w-4" aria-hidden="true" /></Link>
+        </div>
+        <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
+          {taskCategories.map(({ title, description, href, count, countLabel, accessLabel, Icon, logos }) => (
+            <Link key={title} to={href} className="group flex min-h-52 flex-col rounded-xl border border-border bg-card p-4 transition-colors hover:border-primary/45 hover:bg-muted/30 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary sm:p-5">
+              <div className="flex items-start justify-between gap-3">
+                <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl border border-primary/15 bg-primary/10 text-primary">
+                  <Icon className="h-5 w-5" aria-hidden="true" />
+                </span>
+                <span className="rounded-full border border-border bg-muted/60 px-2.5 py-1 text-[10px] font-semibold text-secondary-foreground">{accessLabel}</span>
+              </div>
+              <div className="mt-4 flex items-start justify-between gap-3">
+                <div>
+                  <h3 className="text-base font-semibold tracking-tight text-foreground">{title}</h3>
+                  <p className="mt-2 text-xs leading-5 text-muted-foreground">{description}</p>
+                </div>
+                <ArrowRight className="mt-0.5 h-4 w-4 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-0.5 group-hover:text-primary" aria-hidden="true" />
+              </div>
+              <div className="mt-auto flex items-end justify-between gap-3 pt-4">
+                <div className="flex items-center -space-x-1.5" aria-label={"Example tools: " + logos.map((logo) => logo.name).join(", ")}>
+                  {logos.map((logo) => <BrandLogo key={logo.slug} slug={logo.slug} name={logo.name} size="sm" className="ring-2 ring-card" />)}
+                </div>
+                <span className="text-right text-[11px] font-medium text-muted-foreground"><strong className="text-foreground">{count}</strong> {countLabel}</span>
               </div>
             </Link>
           ))}
