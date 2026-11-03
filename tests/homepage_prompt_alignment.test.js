@@ -32,7 +32,7 @@ before(async () => {
 describe('Homepage prompt showcase and section alignment', () => {
   it('orders the compact homepage discovery sections', () => {
     const html = ReactDOMServer.renderToStaticMarkup(React.createElement(appModule.App));
-    const positions = ['home-hero-heading', 'collections-heading', 'categories-heading', 'discoveries-heading', 'offers-heading', 'resources-heading'].map((id) => html.indexOf(`id="${id}"`));
+    const positions = ['home-hero-heading', 'collections-heading', 'categories-heading', 'task-categories-heading', 'discoveries-heading', 'offers-heading', 'resources-heading'].map((id) => html.indexOf('id="' + id + '"'));
     assert.ok(positions.every((position) => position >= 0));
     assert.deepEqual([...positions].sort((a, b) => a - b), positions);
     assert.ok(html.includes('type="search"') || html.includes('role="combobox"'), 'Global search is in the hero');
@@ -46,6 +46,16 @@ describe('Homepage prompt showcase and section alignment', () => {
     assert.match(html, /Claude Opus 5\.5/);
     assert.match(html, /Seedance 2\.5/);
     assert.match(home, /category\.subcategories\.map/);
+    assert.match(html, /Free &amp; Trial AI Video Generators/);
+    assert.match(html, /AI Image Generators/);
+    assert.match(html, /AI Voice &amp; Speech/);
+    assert.match(html, /AI Coding Agents/);
+    assert.match(html, /AI Research &amp; Search/);
+    assert.match(html, /data-brand-slug="runway"/);
+    assert.match(html, /data-brand-slug="dreamina"/);
+    const videoPage = fs.readFileSync(path.join(root, 'src/pages/AiVideoToolsPage.tsx'), 'utf8');
+    assert.match(videoPage, /searchParams\.get\('filter'\)/);
+    assert.match(videoPage, /initialFilter === 'free-entry'/);
   });
 
   it('keeps the Prompt Library and its featured prompt assets available outside the homepage', () => {
