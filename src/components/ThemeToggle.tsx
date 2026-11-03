@@ -3,14 +3,12 @@ import { Moon, Sun } from 'lucide-react';
 import { useTheme } from '../context/ThemeContext';
 
 const THEME_HINT_SESSION_KEY = 'techhacks_theme_hint_dismissed_v2';
-const THEME_HINT_QUOTE_SESSION_KEY = 'techhacks_theme_hint_quote';
-const THEME_HINT_QUOTES = [
-  'Need a darker vibe?',
-  'Team midnight? 🌙',
-  'Light or dark — your call.',
-  'Psst… try the dark side.',
-  'Your theme, your rules.',
-];
+
+function getThemeHint(theme: 'dark' | 'light'): string {
+  return theme === 'dark'
+    ? 'Curious about the light side?'
+    : 'Psst… try the dark side.';
+}
 
 interface ThemeToggleProps {
   compact?: boolean;
@@ -24,28 +22,13 @@ interface ThemeToggleProps {
 export const ThemeToggle: React.FC<ThemeToggleProps> = ({ compact = false }) => {
   const { theme, toggleTheme } = useTheme();
   const [showHint, setShowHint] = useState(true);
-  const [hintQuote, setHintQuote] = useState(() => {
-    try {
-      if (typeof window !== 'undefined') {
-        return sessionStorage.getItem(THEME_HINT_QUOTE_SESSION_KEY) || THEME_HINT_QUOTES[Math.floor(Math.random() * THEME_HINT_QUOTES.length)];
-      }
-    } catch {
-      // Fall through to a deterministic first-render quote for SSR.
-    }
-    return THEME_HINT_QUOTES[0];
-  });
 
   useEffect(() => {
     try {
       const dismissed = sessionStorage.getItem(THEME_HINT_SESSION_KEY) === '1';
       setShowHint(!dismissed);
-      const savedQuote = sessionStorage.getItem(THEME_HINT_QUOTE_SESSION_KEY);
-      const quote = savedQuote || THEME_HINT_QUOTES[Math.floor(Math.random() * THEME_HINT_QUOTES.length)];
-      setHintQuote(quote);
-      if (!savedQuote) sessionStorage.setItem(THEME_HINT_QUOTE_SESSION_KEY, quote);
     } catch {
       setShowHint(true);
-      setHintQuote(THEME_HINT_QUOTES[Math.floor(Math.random() * THEME_HINT_QUOTES.length)]);
     }
   }, []);
 
@@ -67,7 +50,7 @@ export const ThemeToggle: React.FC<ThemeToggleProps> = ({ compact = false }) => 
     <div className={`theme-control ${compact ? 'theme-control--compact' : ''}`}>
       {showHint && (
         <div className="theme-hint pointer-events-none" role="note" aria-live="polite">
-          <span>{hintQuote}</span>
+          <span>{getThemeHint(theme)}</span>
         </div>
       )}
       <div className="theme-control__button-wrap">

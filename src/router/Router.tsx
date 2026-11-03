@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import React, { createContext, useContext, useState, useEffect, useLayoutEffect, ReactNode } from 'react';
 import { getToolBySlug } from '../services/catalogService.ts';
 
 export interface RouteMatch {
@@ -27,6 +27,9 @@ interface RouterContextType {
 
 const RouterContext = createContext<RouterContextType | null>(null);
 
+// Avoid useLayoutEffect's server-render warning while keeping route scroll resets before paint in browsers.
+const useIsomorphicLayoutEffect = typeof window !== 'undefined' && typeof window.document !== 'undefined' ? useLayoutEffect : useEffect;
+
 export function matchRoute(pathname: string): { route: string; params: Record<string, string> } {
   const cleanPath = pathname.replace(/\/+$/, '') || '/';
 
@@ -50,6 +53,9 @@ export function matchRoute(pathname: string): { route: string; params: Record<st
   }
   if (cleanPath === '/github-projects') {
     return { route: 'github-projects', params: {} };
+  }
+  if (cleanPath === '/ai-video-tools') {
+    return { route: 'ai-video-tools', params: {} };
   }
   if (cleanPath === '/community-tools' || cleanPath === '/community') {
     return { route: 'community-redirect', params: {} };
@@ -80,6 +86,9 @@ export function matchRoute(pathname: string): { route: string; params: Record<st
   }
   if (cleanPath === '/offers') {
     return { route: 'offers', params: {} };
+  }
+  if (cleanPath === '/brand-kit') {
+    return { route: 'brand-kit', params: {} };
   }
   if (cleanPath === '/about' || cleanPath === '/about-us') {
     return { route: 'about', params: {} };
@@ -186,19 +195,41 @@ export const RouterProvider: React.FC<{ children: ReactNode }> = ({ children }) 
   const [currentPath, setCurrentPath] = useState(
     typeof window !== 'undefined' ? window.location.pathname : '/'
   );
-  const [searchParams, setSearchParamsState] = useState(
-    typeof window !== 'undefined' ? new URLSearchParams(window.location.search) : new URLSearchParams()
-  );
+  // Static route HTML is rendered without query strings. Start from the same
+  // empty state on the server and client, then restore browser filters after hydration.
+  const isStaticPrerender = typeof document !== 'undefined'
+    && document.documentElement?.dataset?.prerendered === 'true';
+  const [searchParams, setSearchParamsState] = useState(() => (
+    isStaticPrerender
+      ? new URLSearchParams()
+      : typeof window !== 'undefined' ? new URLSearchParams(window.location.search) : new URLSearchParams()
+  ));
 
   useEffect(() => {
+    const previousScrollRestoration = window.history.scrollRestoration;
+    // The SPA owns route scroll position; don't let the browser restore a stale
+    // position from another route after pushState/popstate.
+    window.history.scrollRestoration = 'manual';
+    setSearchParamsState(new URLSearchParams(window.location.search));
+
     const handlePopState = () => {
       setCurrentPath(window.location.pathname);
       setSearchParamsState(new URLSearchParams(window.location.search));
     };
 
     window.addEventListener('popstate', handlePopState);
-    return () => window.removeEventListener('popstate', handlePopState);
+    return () => {
+      window.removeEventListener('popstate', handlePopState);
+      window.history.scrollRestoration = previousScrollRestoration;
+    };
   }, []);
+
+  useIsomorphicLayoutEffect(() => {
+    // Run after the new route's DOM has committed and before paint.
+    // Use an immediate scroll rather than a smooth animation that can be
+    // interrupted while the previous route is being replaced.
+    safeScrollTo({ top: 0, left: 0, behavior: 'auto' });
+  }, [currentPath]);
 
   const navigate = (to: string, options?: { replace?: boolean }) => {
     if (typeof window === 'undefined') return;
@@ -215,7 +246,7 @@ export const RouterProvider: React.FC<{ children: ReactNode }> = ({ children }) 
 
     setCurrentPath(newPath);
     setSearchParamsState(newSearch);
-    safeScrollTo({ top: 0, behavior: 'smooth' });
+    // Route scroll reset is handled after React commits the new route above.
   };
 
   const setSearchParams = (paramsToUpdate: Record<string, string | null>, options?: { replace?: boolean }) => {

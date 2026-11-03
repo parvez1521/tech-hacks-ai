@@ -2,24 +2,42 @@
 @tailwind components;
 @tailwind utilities;
 
+/* SwitchRoute brand tokens — single source of truth for the digital identity. */
+:root {
+  --brand-midnight: 8 13 24;
+  --brand-navy: 19 41 74;
+  --brand-blue: 96 165 250;
+  --brand-cyan: 34 211 238;
+  --brand-violet: 139 92 246;
+  --brand-ice: 241 245 249;
+  --brand-slate: 148 163 184;
+  --brand-border: 41 56 79;
+  --brand-light-bg: 248 250 252;
+  --brand-light-surface: 255 255 255;
+  --brand-light-ink: 15 23 42;
+  --brand-light-blue: 29 78 216;
+  --brand-light-border: 218 226 235;
+  --brand-route-gradient: linear-gradient(90deg, #22D3EE 0%, #60A5FA 52%, #8B5CF6 100%);
+}
+
 @layer base {
   :root,
   html.dark,
   body.dark,
   [data-theme='dark'] {
     color-scheme: dark;
-    --color-bg: 8 13 24;
-    --color-fg: 241 245 249;
+    --color-bg: var(--brand-midnight);
+    --color-fg: var(--brand-ice);
     --color-card: 17 28 47;
     --color-card-fg: 241 245 249;
     --color-muted: 23 36 58;
-    --color-muted-fg: 148 163 184;
+    --color-muted-fg: var(--brand-slate);
     --color-accent: 37 56 79;
     --color-accent-fg: 241 245 249;
-    --color-border: 41 56 79;
+    --color-border: var(--brand-border);
     --color-secondary: 23 36 58;
     --color-secondary-fg: 203 213 225;
-    --color-primary: 96 165 250;
+    --color-primary: var(--brand-blue);
     --color-primary-fg: 15 23 42;
     --color-primary-hover: 59 130 246;
     --glow-spotlight: rgba(59, 130, 246, 0.16);
@@ -32,18 +50,18 @@
   .light,
   [data-theme='light'] {
     color-scheme: light;
-    --color-bg: 248 250 252;
-    --color-fg: 15 23 42;
+    --color-bg: var(--brand-light-bg);
+    --color-fg: var(--brand-light-ink);
     --color-card: 255 255 255;
     --color-card-fg: 15 23 42;
     --color-muted: 241 245 249;
     --color-muted-fg: 80 95 118;
     --color-accent: 226 232 240;
     --color-accent-fg: 15 23 42;
-    --color-border: 218 226 235;
+    --color-border: var(--brand-light-border);
     --color-secondary: 241 245 249;
     --color-secondary-fg: 51 65 85;
-    --color-primary: 29 78 216;
+    --color-primary: var(--brand-light-blue);
     --color-primary-fg: 255 255 255;
     --color-primary-hover: 30 64 175;
     --glow-spotlight: rgba(37, 99, 235, 0.04);
@@ -51,11 +69,15 @@
     --grid-color: rgba(15, 23, 42, 0.04);
   }
 
+  html {
+    overflow-x: clip;
+  }
+
   body {
     background-color: rgb(var(--color-bg));
     color: rgb(var(--color-fg));
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    overflow-x: hidden;
+    overflow-x: clip;
     text-rendering: optimizeLegibility;
   }
 
@@ -240,7 +262,7 @@
     gap: 0.75rem;
   }
 
-  .catalog-trust-strip__metrics > article {
+  .catalog-trust-strip__metrics > .catalog-metric-card {
     display: flex;
     min-height: 8.25rem;
     flex-direction: column;
@@ -275,7 +297,7 @@
     letter-spacing: -0.015em;
   }
 
-  .catalog-trust-strip__metrics > article:hover {
+  .catalog-trust-strip__metrics > .catalog-metric-card:hover {
     border-color: rgb(var(--color-primary) / 0.4);
     background: rgb(var(--color-primary) / 0.07);
   }
@@ -297,7 +319,7 @@
       gap: 0.65rem;
     }
 
-    .catalog-trust-strip__metrics > article {
+    .catalog-trust-strip__metrics > .catalog-metric-card {
       padding: 0.7rem;
     }
 
@@ -315,7 +337,7 @@
   }
 
   @media (max-width: 767px) {
-    .catalog-trust-strip__metrics > article {
+    .catalog-trust-strip__metrics > .catalog-metric-card {
       padding: 0.8rem;
     }
   }
@@ -415,6 +437,9 @@
   }
 
   .ambient-glow-container {
+    width: 100%;
+    max-width: 100%;
+    contain: paint;
     opacity: 0.72;
     background:
       radial-gradient(42rem 26rem at 50% -8%, rgb(var(--color-primary) / 0.075), transparent 70%),
@@ -512,7 +537,6 @@
 .brand-logo-image--continue-dev,
 .brand-logo-image--copy-ai,
 .brand-logo-image--notebooklm,
-.brand-logo-image--omnirush,
 .brand-logo-image--open-webui,
 .brand-logo-image--qwen-chat,
 .brand-logo-image--qwen-coder,
@@ -522,6 +546,12 @@
   background: #ffffff;
   border-radius: 0.35rem;
   padding: 0.18rem;
+}
+
+.brand-logo-image--omnirush {
+  background: transparent;
+  border-radius: 0.35rem;
+  padding: 0;
 }
 
 .brand-logo-image--google-ai-studio,
@@ -1003,11 +1033,15 @@
 .discovery-card__link:focus-visible { outline: 2px solid rgb(var(--color-primary)); outline-offset: 3px; }
 .discovery-card__unavailable { color: rgb(var(--color-muted-fg)); font-size: 0.7rem; }
 
-.chat-launcher-position {
+ .chat-launcher-position {
   position: fixed;
   z-index: 49;
-  right: 1rem;
+  right: max(1rem, env(safe-area-inset-right));
   bottom: calc(1rem + env(safe-area-inset-bottom));
+  max-width: calc(100vw - 2rem);
+}
+@media (max-width: 360px) {
+  .chat-launcher-position { right: 2.25rem; }
 }
 @media (min-width: 640px) and (max-width: 899px) {
   .chat-launcher-position { right: auto; left: 1rem; }
@@ -1066,14 +1100,14 @@
   .hero-redesign__primary-action,
   .hero-redesign__secondary-action,
   .hero-redesign__quick-links a,
-  .catalog-trust-strip__metrics > article,
+  .catalog-trust-strip__metrics > .catalog-metric-card,
   .discovery-card,
   .chat-launcher,
   .discovery-interface__tabs button,
   .discovery-interface__samples button,
   .discovery-interface__result { transition: none; }
   .discovery-card:hover,
-  .catalog-trust-strip__metrics > article:hover,
+  .catalog-trust-strip__metrics > .catalog-metric-card:hover,
   .chat-launcher:hover,
   .discovery-interface__result:hover { transform: none; }
 }

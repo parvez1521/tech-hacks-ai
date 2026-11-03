@@ -26,7 +26,7 @@ The [prompt artwork and logo provenance audit](./prompt-artwork-audit.md) and
 [`prompt-image-audit.json`](./prompt-image-audit.json) supersede earlier registry
 counts in this historical report. The current registry contains 223 entries.
 ChatGPT, FLUX, and Higgsfield now reference locally stored assets from direct
-official sources. Google and Cursor are classified as Simple Icons marks, and
+official sources. Google uses its Simple Icons mark; Cursor now uses the site-owner-provided cube mark, and
 18 further Simple Icons source URLs were recorded after checking the local SVG
 geometry against those sources. Thirty-six entries with no traceable source are
 now explicitly marked as verification gaps; their local marks are not rendered,
@@ -183,7 +183,7 @@ the source URL itself.
 | vLLM | `vllm` | `/logos/official-ai/vllm.svg` | verified | Official web export; see `manifest.csv` |
 | GPT4All | `gpt4all` | `/logos/gpt4all.svg` | verified | Official GPT4All application resource |
 | llama.cpp | `llama-cpp` | `/logos/official-ai/llama-cpp.svg` | verified | Official web export; see `manifest.csv` |
-| Cursor Editor | `cursor` | `/logos/cursor.svg` | verified | Simple Icons: `cdn.jsdelivr.net/npm/simple-icons/icons/cursor.svg` |
+| Cursor Editor | `cursor` | `/logos/cursor.svg` | verified | Site-owner-provided vector traced from the supplied Cursor cube reference (2026-10-27) |
 | v0 by Vercel | `v0-vercel` | `/logos/official-ai/v0-vercel.svg` | verified | Official web export; see `manifest.csv` |
 | Bolt.new | `bolt-new` | `/logos/bolt-new.svg` | unverified | Not recorded |
 | Continue | `continue-dev` | `/logos/official-ai/continue-dev.svg` | verified | Official web export; see `manifest.csv` |
@@ -365,7 +365,7 @@ The contact sheets were temporary browser artifacts and are not committed. The i
 | vLLM (vllm) | [source recorded](https://vllm.ai/vLLM-Full-Logo.svg) | `/logos/official-ai/vllm.svg` | Asset shown in both contact sheets; identity/source not independently reverified | Visible in light/dark sheet; no targeted change | Source recorded; visual asset loaded |
 | GPT4All (gpt4all) | No source URL | `/logos/gpt4all.svg` | Unresolved; neutral monogram fallback | Visible in light/dark sheet; no targeted change | Unresolved; fallback shown |
 | llama.cpp (llama-cpp) | [source recorded](https://raw.githubusercontent.com/ggml-org/llama.brand/refs/heads/master/cover/llama-cpp/cover-llama-cpp-dark.svg) | `/logos/official-ai/llama-cpp.svg` | Asset shown in both contact sheets; identity/source not independently reverified | Visible in light/dark sheet; no targeted change | Source recorded; visual asset loaded |
-| Cursor Editor (cursor) | [source recorded](https://cdn.jsdelivr.net/npm/simple-icons/icons/cursor.svg) | `/logos/cursor.svg` | Asset shown in both contact sheets; identity/source not independently reverified | Visible in light/dark sheet; no targeted change | Source recorded; visual asset loaded |
+| Cursor Editor (cursor) | Site-owner-provided reference | `/logos/cursor.svg` | Replaced the old pointer glyph with a vector trace of the supplied Cursor cube mark on 2026-10-27 | Visible in the central registry and catalog; obsolete PNG fallback removed from runtime mapping | Updated asset is loaded; source is recorded as provided |
 | v0 by Vercel (v0-vercel) | [source recorded](https://v0.app/chat-static/_next/static/immutable/media/logo-v0-light.442nx-e-yl-x_.svg) | `/logos/official-ai/v0-vercel.svg` | Asset shown in both contact sheets; identity/source not independently reverified | Visible in light/dark sheet; no targeted change | Source recorded; visual asset loaded |
 | Bolt.new (bolt-new) | No source URL | `/logos/bolt-new.svg` | Unresolved; neutral monogram fallback | Visible in light/dark sheet; no targeted change | Unresolved; fallback shown |
 | Continue (continue-dev) | [source recorded](https://continue.dev/continue-logo-black.svg) | `/logos/official-ai/continue-dev.svg` | Asset shown in both contact sheets; identity/source not independently reverified | Visible in light/dark sheet; no targeted change | Source recorded; visual asset loaded |
@@ -460,3 +460,10 @@ The following newly added video catalog identities use neutral initials fallback
 | GitHub Copilot (`github-copilot`) | Simple Icons GitHub Copilot mark | `/logos/githubcopilot.svg` | Source recorded; verified 2026-10-18 | [Simple Icons asset](https://cdn.jsdelivr.net/npm/simple-icons/icons/githubcopilot.svg); not a full wordmark |
 
 | `github-copilot` | `/logos/githubcopilot.svg` | Simple Icons source recorded; not a full wordmark |
+
+
+## Ox Alpha logo addition (2026-11-01)
+
+| Slug | Asset | Provenance |
+| --- | --- | --- |
+| `ox-alpha` | `/logos/oxalpha.svg` | User-provided logo artwork recreated as a vector asset for the SwitchRoute directory. |

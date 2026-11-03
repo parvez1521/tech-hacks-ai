@@ -231,7 +231,7 @@ describe('Phase 7: Official Brand Logos & Verified Free AI Tools Directory', () 
 
     assert.ok(html.includes('Supabase'), 'Renders Supabase title');
     assert.ok(html.includes('src="/logos/supabase.svg"'), 'Renders official Supabase SVG logo in hero');
-    assert.ok(html.includes('src="/logos/firebase.svg"'), 'Renders Firebase SVG logo in alternative chip');
+    assert.ok(html.includes('src="/logos/provided/firebase.svg"'), 'Renders the user-provided Firebase SVG logo in the alternative chip');
   });
 
   test('alternative detail page renders proprietary target brand logo', async () => {

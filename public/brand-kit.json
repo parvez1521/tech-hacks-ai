@@ -1,0 +1,163 @@
+{
+  "name": "SwitchRoute",
+  "version": "1.0",
+  "updated": "2026-10",
+  "purpose": "A clear, useful route through AI tools, software alternatives, open-source projects, and browser utilities.",
+  "tagline": "Free AI Tools, Smarter Alternatives & Open Source",
+  "brandPromise": "Find a smarter route to your tools.",
+  "personality": [
+    "Useful",
+    "Clear",
+    "Curious",
+    "Independent",
+    "Transparent",
+    "Modern"
+  ],
+  "typography": {
+    "family": "Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif",
+    "display": {
+      "size": "48–60px",
+      "weight": 800,
+      "tracking": "tight"
+    },
+    "heading": {
+      "size": "24–32px",
+      "weight": 700
+    },
+    "body": {
+      "size": "14–18px",
+      "weight": 400,
+      "lineHeight": 1.6
+    },
+    "metadata": {
+      "size": "11–12px",
+      "weight": 600,
+      "letterSpacing": "0.08–0.14em",
+      "transform": "uppercase"
+    }
+  },
+  "colors": {
+    "midnight": {
+      "hex": "#080D18",
+      "rgb": "8 13 24",
+      "role": "Dark page canvas"
+    },
+    "deepNavy": {
+      "hex": "#13294A",
+      "rgb": "19 41 74",
+      "role": "Depth and large surfaces"
+    },
+    "routeBlue": {
+      "hex": "#60A5FA",
+      "rgb": "96 165 250",
+      "role": "Primary accent in dark theme"
+    },
+    "routeCyan": {
+      "hex": "#22D3EE",
+      "rgb": "34 211 238",
+      "role": "Gradient start and supporting accent"
+    },
+    "routeViolet": {
+      "hex": "#8B5CF6",
+      "rgb": "139 92 246",
+      "role": "Gradient end and secondary accent"
+    },
+    "mist": {
+      "hex": "#F1F5F9",
+      "rgb": "241 245 249",
+      "role": "Primary dark-theme text"
+    },
+    "slate": {
+      "hex": "#94A3B8",
+      "rgb": "148 163 184",
+      "role": "Secondary dark-theme text"
+    },
+    "darkBorder": {
+      "hex": "#29384F",
+      "rgb": "41 56 79",
+      "role": "Dark-theme card and divider border"
+    },
+    "lightCanvas": {
+      "hex": "#F8FAFC",
+      "rgb": "248 250 252",
+      "role": "Light-theme page canvas"
+    },
+    "lightSurface": {
+      "hex": "#FFFFFF",
+      "rgb": "255 255 255",
+      "role": "Light-theme cards and controls"
+    },
+    "lightInk": {
+      "hex": "#0F172A",
+      "rgb": "15 23 42",
+      "role": "Light-theme primary text"
+    },
+    "lightBlue": {
+      "hex": "#1D4ED8",
+      "rgb": "29 78 216",
+      "role": "Accessible primary accent in light theme"
+    },
+    "lightBorder": {
+      "hex": "#DAE2EB",
+      "rgb": "218 226 235",
+      "role": "Light-theme card and divider border"
+    }
+  },
+  "gradient": {
+    "name": "Route gradient",
+    "css": "linear-gradient(90deg, #22D3EE 0%, #60A5FA 52%, #8B5CF6 100%)"
+  },
+  "layout": {
+    "spacingBase": "4px",
+    "spacingScalePx": [
+      4,
+      8,
+      12,
+      16,
+      24,
+      32,
+      48,
+      64
+    ],
+    "radius": {
+      "control": "8–10px",
+      "card": "16px",
+      "feature": "24px"
+    },
+    "borderWidth": "1px",
+    "motion": "Subtle 160–220ms transitions; respect prefers-reduced-motion."
+  },
+  "logo": {
+    "preferred": "Use the supplied SwitchRoute route-mark SVG and keep its original proportions and gradient.",
+    "clearSpace": "At least the width of one route endpoint around the mark.",
+    "doNot": [
+      "Stretch or redraw the mark",
+      "Add shadows or effects to static logo files",
+      "Use the old Tech Hacks AI name as the current wordmark"
+    ]
+  },
+  "voice": {
+    "use": [
+      "Direct, useful language",
+      "Explain free access and limits precisely",
+      "Link to official pricing, product, and licensing sources",
+      "State uncertainty or dated verification clearly"
+    ],
+    "avoid": [
+      "Unsupported #1/best claims",
+      "Calling a trial unlimited or completely free",
+      "Implying endorsement without evidence"
+    ]
+  },
+  "accessibility": {
+    "contrast": "Meet WCAG contrast guidance for text and controls.",
+    "focus": "Keep keyboard focus visible.",
+    "color": "Do not use colour alone to communicate status.",
+    "motion": "Respect prefers-reduced-motion."
+  },
+  "assets": {
+    "routeMark": "/favicon.svg",
+    "socialCard": "/social-card.svg",
+    "brandKitPage": "https://switchroute.in/brand-kit"
+  }
+}

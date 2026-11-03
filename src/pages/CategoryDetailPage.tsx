@@ -92,9 +92,9 @@ export const CategoryDetailPage: React.FC = () => {
   ).slice(0, 2);
 
   return (
-    <div className="max-w-6xl mx-auto px-4 sm:px-6 py-8">
+    <div className="mx-auto w-full min-w-0 max-w-6xl px-4 py-8 sm:px-6">
       {/* Breadcrumb */}
-      <nav className="flex items-center gap-2 text-xs text-slate-500 mb-6" aria-label="Breadcrumb">
+      <nav className="mb-6 flex min-w-0 max-w-full flex-wrap items-center gap-2 text-xs text-slate-500" aria-label="Breadcrumb">
         <Link to="/" className="hover:text-slate-900 transition-colors">
           Home
         </Link>
@@ -103,7 +103,7 @@ export const CategoryDetailPage: React.FC = () => {
           Categories
         </Link>
         <span>/</span>
-        <span className="text-slate-900 font-semibold">{category.name}</span>
+        <span className="min-w-0 break-words text-slate-900 font-semibold">{category.name}</span>
       </nav>
 
       {/* Hero Header */}
@@ -119,7 +119,7 @@ export const CategoryDetailPage: React.FC = () => {
             </h1>
           </div>
 
-          <div className="flex items-center gap-2">
+          <div className="flex max-w-full flex-wrap items-center gap-2">
             <button
               type="button"
               onClick={handleCopyLink}

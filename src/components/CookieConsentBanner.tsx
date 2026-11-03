@@ -16,7 +16,22 @@ export function getCookiePreferences(): CookiePreferences | null {
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
     if (!raw) return null;
-    return JSON.parse(raw) as CookiePreferences;
+
+    const parsed: unknown = JSON.parse(raw);
+    if (!parsed || typeof parsed !== 'object') return null;
+
+    const value = parsed as Partial<CookiePreferences>;
+    if (
+      value.essential !== true ||
+      typeof value.analytics !== 'boolean' ||
+      typeof value.advertising !== 'boolean' ||
+      typeof value.updatedAt !== 'string' ||
+      Number.isNaN(Date.parse(value.updatedAt))
+    ) {
+      return null;
+    }
+
+    return value as CookiePreferences;
   } catch {
     return null;
   }
@@ -38,10 +53,10 @@ export function openCookiePreferencesModal() {
 }
 
 export const CookieConsentBanner: React.FC = () => {
-  const [isOpen, setIsOpen] = useState(() => {
-    if (typeof window === 'undefined') return true;
-    return !getCookiePreferences();
-  });
+  // Keep the banner hidden during SSR/hydration. After mount, reveal it only
+  // when there is no valid saved choice. This prevents a one-frame flash for
+  // returning visitors whose consent is already stored in localStorage.
+  const [isOpen, setIsOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [analytics, setAnalytics] = useState(false);
   const [advertising, setAdvertising] = useState(false);
@@ -85,13 +100,15 @@ export const CookieConsentBanner: React.FC = () => {
   };
 
   useEffect(() => {
-    // Check if user already set preferences
+    // Read saved choices after mount. A returning visitor stays hidden without
+    // ever rendering the banner first; a new visitor sees it once this check completes.
     const existing = getCookiePreferences();
     if (existing) {
-      setIsOpen(false);
       setAnalytics(existing.analytics);
       setAdvertising(existing.advertising);
+      return;
     }
+    setIsOpen(true);
   }, []);
 
   useEffect(() => {
@@ -182,7 +199,7 @@ export const CookieConsentBanner: React.FC = () => {
           </div>
 
           <p className="text-secondary-foreground text-[11px] leading-[1.4]">
-            We use cookies and local storage to remember your preferences, measure site traffic, and support independent research with contextual advertising. See our{' '}
+            This site uses local storage for theme, bookmarks, and your saved preferences. Analytics loads only if you allow it. Advertising is not currently active. See our{' '}
             <Link to="/privacy" className="text-primary hover:underline font-medium">
               Privacy Policy
             </Link>.
@@ -244,7 +261,7 @@ export const CookieConsentBanner: React.FC = () => {
             </div>
 
             <p className="text-secondary-foreground leading-relaxed">
-              In accordance with Google AdSense publisher policies, the General Data Protection Regulation (GDPR), and the IAB Europe Transparency and Consent Framework (TCF v2.2), you can select which cookie categories you permit:
+              These controls save your preferences in this browser. Google Analytics 4 is loaded only after you enable Analytics; switching it off updates the measurement consent state and stops future SwitchRoute page-view events. AdSense is not active. This panel is not a Google-certified consent management platform (CMP) and does not send IAB TCF consent signals. A certified CMP must be in place before ads are enabled for regions where Google requires one.
             </p>
 
             <div className="space-y-3">
@@ -271,7 +288,7 @@ export const CookieConsentBanner: React.FC = () => {
                     Analytics &amp; Site Diagnostics
                   </span>
                   <p className="text-[11px] text-muted-foreground leading-relaxed">
-                    Collects anonymous, aggregated metrics on popular tools and page performance to help us improve catalog discovery.
+                    If analytics is enabled in the future, it may collect usage and performance information to help improve catalog discovery.
                   </p>
                 </div>
                 <label className="relative inline-flex items-center cursor-pointer shrink-0 mt-1">
@@ -293,7 +310,7 @@ export const CookieConsentBanner: React.FC = () => {
                     Advertising &amp; Google AdSense Personalization
                   </span>
                   <p className="text-[11px] text-muted-foreground leading-relaxed">
-                    Permits Google AdSense and third-party advertising partners to deliver contextual and personalized advertisements based on your browsing interests.
+                    If ads are enabled after approval, this choice will be used as a browser-level preference. Regional consent requirements and any certified CMP must also be in place before ad requests are made.
                   </p>
                 </div>
                 <label className="relative inline-flex items-center cursor-pointer shrink-0 mt-1">

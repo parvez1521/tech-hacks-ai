@@ -77,17 +77,18 @@ describe('Phase 17: Google AdSense Readiness & Regulatory Compliance Audit', () 
       assert.ok(html.includes('Editorial Independence'), 'Must explain editorial policy');
       assert.ok(html.includes('Zero Paid Rankings'), 'Must disclose zero pay-for-ranking policy');
       assert.ok(html.includes('href="/contact"'), 'Must link to contact page');
-      assert.ok(html.includes('Verified Pricing Provenance'), 'Must list core pillar');
+      assert.ok(html.includes('Pricing &amp; Access Notes') || html.includes('Pricing & Access Notes'), 'Must list pricing and access pillar');
       assert.ok(html.includes('Open-Source First'), 'Must list OSS pillar');
+      assert.ok(html.includes('Practical Engineering Workflows'), 'Must list engineering pillar');
+      assert.ok(html.includes('Student &amp; Developer Benefits') || html.includes('Student & Developer Benefits'), 'Must list benefits pillar');
     });
 
-    test('ContactPage renders topic selector, interactive form, and direct email', () => {
+    test('ContactPage checks secure message intake before exposing the form', () => {
       const html = renderWithRouter(React.createElement(ssrModule.ContactPage));
       assert.ok(html.includes('Contact SwitchRoute'), 'Must render contact title');
-      assert.ok(html.includes('contact@techhacksai.com'), 'Must list contact email');
-      assert.ok(html.includes('value="suggest-tool"'), 'Must have suggest-tool option');
-      assert.ok(html.includes('value="pricing-correction"'), 'Must have pricing-correction option');
-      assert.ok(html.includes('Send Message'), 'Must have submit button');
+      assert.ok(html.includes('Checking secure message intake'), 'Must check server readiness before showing the form');
+      assert.ok(!html.includes('contact@techhacksai.com'), 'Must not publish inactive email');
+      assert.ok(!html.includes('Send message'), 'Must not render the form until intake is ready');
     });
 
     test('PrivacyPage contains all mandatory Google AdSense & DoubleClick disclosures', () => {
@@ -166,12 +167,15 @@ describe('Phase 17: Google AdSense Readiness & Regulatory Compliance Audit', () 
   });
 
   describe('4. Cookie Consent & GDPR/CMP Readiness', () => {
-    test('CookieConsentBanner renders essential vs non-essential options', () => {
+    test('CookieConsentBanner defers the first-visit prompt until saved consent is resolved after hydration', () => {
       const html = renderWithRouter(React.createElement(ssrModule.CookieConsentBanner));
-      assert.ok(html.includes('Cookie &amp; Privacy Notice') || html.includes('Cookie & Privacy Notice'), 'Banner heading');
-      assert.ok(html.includes('Accept All'), 'Must have Accept All button');
-      assert.ok(html.includes('Essential Only'), 'Must have Essential Only button');
-      assert.ok(html.includes('Customize'), 'Must have Customize button');
+      const source = fs.readFileSync(path.join(process.cwd(), 'src/components/CookieConsentBanner.tsx'), 'utf8');
+      assert.equal(html, '', 'Banner must not flash in server-rendered HTML before local consent has been checked');
+      assert.ok(source.includes('Cookie &amp; Privacy Notice'), 'Banner heading must remain available after mount');
+      assert.match(source, /onClick=\{handleAcceptAll\}/, 'Must retain Accept All action');
+      assert.match(source, /onClick=\{handleRejectNonEssential\}/, 'Must retain Essential Only action');
+      assert.ok(source.includes('Customize'), 'Must retain customizable preferences');
+      assert.match(source, /setIsOpen\(true\)/, 'New visitors must see the banner after consent lookup');
     });
   });
 

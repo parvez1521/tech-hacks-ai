@@ -51,7 +51,7 @@ describe('Phase 23: Homepage Logo Fix, Real Brand Assets & Theme Toggle Repair',
 
       assert.ok(content.includes('html.dark'), 'Includes html.dark selector');
       assert.ok(content.includes('color-scheme: dark'), 'Dark mode declares color-scheme: dark');
-      assert.ok(content.includes('--color-bg: 8 13 24'), 'Midnight-blue dark background token exists');
+      assert.ok(content.includes('--color-bg: var(--brand-midnight)'), 'Midnight-blue dark background token exists');
     });
 
     test('Header exposes an accessible theme toggle for desktop and mobile', () => {
@@ -63,12 +63,14 @@ describe('Phase 23: Homepage Logo Fix, Real Brand Assets & Theme Toggle Repair',
       assert.ok(content.includes('<ThemeToggle /></div></nav>'), 'Mobile theme control is rendered inside the expanded menu');
     });
 
-    test('ThemeToggle keeps one playful quote per session and dismisses it on interaction', () => {
+    test('ThemeToggle hint always suggests the opposite of the active theme', () => {
       const togglePath = path.resolve(process.cwd(), 'src/components/ThemeToggle.tsx');
       const content = fs.readFileSync(togglePath, 'utf8');
 
-      assert.ok(content.includes('THEME_HINT_QUOTE_SESSION_KEY'), 'Stores the selected quote in session storage');
-      assert.ok(content.includes('THEME_HINT_QUOTES'), 'Uses a curated quote list');
+      assert.ok(content.includes("function getThemeHint(theme: 'dark' | 'light')"), 'Hint is derived from the active theme');
+      assert.ok(content.includes("'Curious about the light side?'"), 'Dark mode suggests light mode');
+      assert.ok(content.includes("'Psst… try the dark side.'"), 'Light mode suggests dark mode');
+      assert.ok(content.includes('{getThemeHint(theme)}'), 'Rendered hint reads the current theme');
       assert.ok(content.includes('sessionStorage.setItem(THEME_HINT_SESSION_KEY, \'1\')'), 'Dismisses the hint after interaction');
       assert.ok(content.includes('pointer-events'), 'Hint styling is expected to remain non-blocking');
     });
@@ -183,11 +185,27 @@ describe('Phase 23: Homepage Logo Fix, Real Brand Assets & Theme Toggle Repair',
       });
     });
 
+    test('Seven supplied tool logos use local provided artwork in the shared manifest and direct offer cards', () => {
+      const manifestPath = path.resolve(process.cwd(), 'src/data/brandLogos.ts');
+      const manifest = fs.readFileSync(manifestPath, 'utf8');
+      const offersPath = path.resolve(process.cwd(), 'src/data/offersData.ts');
+      const offers = fs.readFileSync(offersPath, 'utf8');
+      const supplied = ['airtable', 'claude-code', 'figma', 'firebase', 'google-photos', 'omnirush', 'invideo-ai'];
+
+      for (const slug of supplied) {
+        assert.ok(manifest.includes(`"assetPath": "/logos/provided/${slug}.svg"`), `${slug} points to its supplied local artwork`);
+        assert.ok(manifest.includes(`"${slug}": {`) && manifest.includes(`"sourceType": "provided"`), `${slug} is recorded as provided artwork`);
+        assert.ok(fs.existsSync(path.resolve(process.cwd(), 'public/logos/provided', `${slug}.svg`)), `${slug} asset exists`);
+      }
+      assert.ok(offers.includes("logoAssetPath: '/logos/provided/figma.svg'"), 'Figma offer card uses the provided logo');
+      assert.ok(offers.includes("logoAssetPath: '/logos/provided/firebase.svg'"), 'Firebase offer card uses the provided logo');
+    });
+
     test('BrandLogo only paints traceable assets and exposes a neutral fallback status', () => {
       const logoCompPath = path.resolve(process.cwd(), 'src/components/BrandLogo.tsx');
       const content = fs.readFileSync(logoCompPath, 'utf8');
 
-      assert.ok(content.includes('const isTrustedLogo = Boolean(logoEntry?.sourceUrl'), 'Trust is based on provenance, not filename');
+      assert.ok(content.includes("logoEntry.sourceType === 'provided'"), 'Explicitly provided local artwork is trusted without a fabricated source URL');
        assert.ok(content.includes('data-logo-status={logoStatus}'), 'Logo provenance status is exposed for QA');
        assert.ok(content.includes('data-logo-status="intentional-neutral-fallback"'), 'Fallback status is exposed for QA');
     });

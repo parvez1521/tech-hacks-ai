@@ -223,9 +223,9 @@ describe('Phase 13: Global Brand Logo Audit & Verification', () => {
       const entry = getBrandLogo(slug);
       assert.ok(entry, `${slug} has a canonical brand record`);
       assert.equal(entry.slug, slug, `${slug} resolves to itself`);
-      assert.ok(entry.sourceType === 'fallback' || (entry.sourceUrl && /^https:\/\//.test(entry.sourceUrl)), `${slug} must be traceable or fallback`);
+      assert.ok(entry.sourceType === 'fallback' || entry.sourceType === 'provided' || (entry.sourceUrl && /^https:\/\//.test(entry.sourceUrl)), `${slug} must have a traceable upstream or user-provided source, or use the intentional neutral fallback`);
     }
-    for (const slug of ['invideo-ai','pictory','agnes-video-generator','automated-video-generator','vuza','kling-ai','luma-dream-machine']) {
+    for (const slug of ['pictory','agnes-video-generator','automated-video-generator','vuza','kling-ai','luma-dream-machine']) {
       assert.equal(getBrandLogo(slug).sourceType, 'fallback', `${slug} uses the neutral fallback until its mark is verified`);
     }
   });

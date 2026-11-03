@@ -132,7 +132,7 @@ describe('Phase 15: Organic Growth, Content Quality & SEO Expansion', () => {
       const studentGuide = guidesData.find((g) => g.slug === 'free-ai-student-benefits-guide');
       assert.ok(studentGuide, 'Missing free-ai-student-benefits-guide');
       assert.ok(studentGuide.steps.length >= 4, 'Student guide has fewer than 4 steps');
-      assert.ok(studentGuide.summary.toLowerCase().includes('cloud compute') || studentGuide.title.toLowerCase().includes('credits'));
+      assert.ok(studentGuide.summary.toLowerCase().includes('eligibility') && studentGuide.summary.toLowerCase().includes('post-credit billing'));
 
       const freePlansGuide = guidesData.find((g) => g.slug === 'evaluating-free-ai-plans');
       assert.ok(freePlansGuide, 'Missing evaluating-free-ai-plans guide');
@@ -254,7 +254,7 @@ describe('Phase 15: Organic Growth, Content Quality & SEO Expansion', () => {
       const html = renderClean(React.createElement(ssrModule.App));
       assert.ok(html.includes('"@type":"Offer"'));
       assert.ok(html.includes('Related Guides &amp; Benefit Tutorials') || html.includes('Related Guides & Benefit Tutorials'));
-      assert.ok(html.includes('The Definitive Guide to Free AI &amp; Cloud Credits') || html.includes('The Definitive Guide to Free AI & Cloud Credits'));
+      assert.ok(html.includes('How Students Can Evaluate AI and Cloud Benefits in 2026') || html.includes('The Definitive Guide to Free AI & Cloud Credits'));
     });
   });
 });

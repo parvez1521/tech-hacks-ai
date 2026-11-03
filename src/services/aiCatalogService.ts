@@ -84,22 +84,151 @@ if (typeof window !== 'undefined' && typeof fetch === 'function') {
     .catch(() => {});
 }
 
+const SEARCH_TERM_VARIANTS: Record<string, string[]> = {
+  generator: ['generator', 'generators', 'generate', 'generates', 'generated', 'generating', 'generation', 'generative'],
+  generate: ['generate', 'generates', 'generated', 'generating', 'generation', 'generative', 'generator'],
+  free: ['free', 'zero-cost', 'no-cost', 'open-source', 'open source'],
+  videos: ['videos', 'video'],
+};
+
+function normalizeSearchText(value: unknown): string {
+  return String(value ?? '').toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
+}
+
+/** Match all query terms across the full record, rather than requiring the whole phrase verbatim. */
+function matchesSearchQuery(query: string, fields: unknown[]): boolean {
+  const terms = normalizeSearchText(query).split(/\s+/).filter(Boolean);
+  if (!terms.length) return true;
+  const searchableText = normalizeSearchText(fields.filter(Boolean).join(' '));
+  return terms.every((term) => {
+    const variants = SEARCH_TERM_VARIANTS[term] || [term];
+    return variants.some((variant) => searchableText.includes(normalizeSearchText(variant)));
+  });
+}
+
+/**
+ * Narrow task intent prevents a phrase like "free AI video generator" from returning
+ * image and voice products just because their descriptions mention video.
+ */
+export type CatalogSearchIntent =
+  | 'video-editing'
+  | 'video-generation'
+  | 'voice-cloning'
+  | 'local-llm'
+  | 'workflow-automation'
+  | 'coding-assistant';
+
+export function detectCatalogSearchIntent(query: string): CatalogSearchIntent | null {
+  const q = normalizeSearchText(query);
+  if (/\b(edit existing video|edit an existing video|edit a video|editing video|video editing|video editor|repurpos(e|ing)|long video to shorts|turn video into shorts|clip editor)\b/.test(q)) {
+    return 'video-editing';
+  }
+  if (/\b(voice cloning|voice clone|clone (a )?voice|clone voices)\b/.test(q)) {
+    return 'voice-cloning';
+  }
+  if (/\b(local llm|local llms|local language models?|run (an? )?llm locally|run ai locally|offline llm|self hosted llm)\b/.test(q)) {
+    return 'local-llm';
+  }
+  if (/\b(workflow automation|automate (a |my |your )?workflow|automate workflows|workflow tools)\b/.test(q)) {
+    return 'workflow-automation';
+  }
+  if (/\b(video generator|video generation|generate video|text to video|image to video|free ai video)\b/.test(q)) {
+    return 'video-generation';
+  }
+  if (/\b(coding assistant|ai code editor|code editor|coding tools|terminal coding agent)\b/.test(q)) {
+    return 'coding-assistant';
+  }
+  return null;
+}
+
+export function findAlternativeTargetFromQuery(query: string): ProprietaryTool | undefined {
+  const q = normalizeSearchText(query);
+  if (!q || !/\b(alternative|alternatives|replacement|replace|replacing|similar|instead of)\b/.test(q)) return undefined;
+  return proprietaryTools.find((target) => {
+    const name = normalizeSearchText(target.name);
+    const slug = normalizeSearchText(target.slug);
+    return (name.length >= 3 && q.includes(name)) || (slug.length >= 3 && q.includes(slug));
+  });
+}
+
+function searchableAiToolText(tool: AiTool): string {
+  return normalizeSearchText([
+    tool.name, tool.slug, tool.tagline, tool.description, tool.longDescription,
+    tool.category, tool.primaryCategory, tool.bestFor, tool.executionEnvironment,
+    tool.hardwareRequirements, ...(tool.tags || []), ...(tool.features || []),
+    ...(tool.useCases || []), ...(tool.generationTasks || []),
+    ...(tool.outputModalities || []), tool.licenseSummary,
+  ].filter(Boolean).join(' '));
+}
+
+export function matchesAiToolSearchIntent(tool: AiTool, intent: CatalogSearchIntent): boolean {
+  const text = searchableAiToolText(tool);
+  switch (intent) {
+    case 'video-generation':
+      // Intent is generation, not voice-over or image tools that happen to mention video.
+      return tool.category === 'video' &&
+        (tool.outputModalities?.includes('video') === true ||
+          (tool.generationTasks || []).some((task) => task.includes('video')) ||
+          /\bvideo generator|video generation|text to video|image to video\b/.test(text));
+    case 'video-editing':
+      // Only include catalog records with affirmative editor/timeline/repurposing evidence.
+      return tool.category === 'video' &&
+        /\bvideo editor|video editing|timeline editing|edit existing video|edit an existing video|repurpos(e|ing)|long video to shorts|clip editor|video timeline\b/.test(text);
+    case 'voice-cloning':
+      return tool.category === 'voice' &&
+        /\bvoice cloning|voice clone|clone voices|clone a voice\b/.test(text);
+    case 'local-llm':
+      return Boolean(tool.isSelfHostable || tool.freeAccessType === 'open-source-local') &&
+        /\b(ollama|open webui|localai|jan|gpt4all|llama|gguf|vllm|local llm|local language model|local ai|offline execution|model serving|model inference)\b/.test(text) &&
+        !/\bworkflow framework|visual workflow builder\b/.test(text);
+    case 'workflow-automation':
+      return tool.category === 'automation' || tool.generationTasks?.includes('automation') === true ||
+        /\bworkflow automation|workflow builder|automation platform|automate workflows\b/.test(text);
+    case 'coding-assistant':
+      return tool.category === 'coding' || tool.generationTasks?.includes('coding-assistant') === true ||
+        tool.generationTasks?.includes('ide-editor') === true;
+  }
+}
+
+export function getAiToolsForSearchIntent(query: string): AiTool[] {
+  const intent = detectCatalogSearchIntent(query);
+  if (!intent) return [];
+  let matching = getAllAiTools().filter((tool) => matchesAiToolSearchIntent(tool, intent));
+
+  // "Free" discovery excludes paid-only records, but retains freemium and credit-based starts.
+  if (/\bfree\b/.test(normalizeSearchText(query))) {
+    matching = matching.filter((tool) =>
+      tool.hasFreePlan ||
+      ['free', 'freemium', 'free-credits'].includes(tool.pricingType) ||
+      ['recurring-free', 'open-source-local', 'limited-free', 'free-credits'].includes(tool.freeAccessType)
+    );
+  }
+  return matching;
+}
+
 export function filterAndSortAiTools(state: AiFilterState): AiFilterResult {
   let list = getAllAiTools().filter((tool) => !isCommunityTool(tool));
 
-  // 1. Text search
-  if (state.searchQuery.trim()) {
-    const q = state.searchQuery.toLowerCase().trim();
-    list = list.filter((tool) => {
-      const matchName = tool.name.toLowerCase().includes(q);
-      const matchTagline = tool.tagline.toLowerCase().includes(q);
-      const matchDesc = tool.description.toLowerCase().includes(q);
-      const matchTags = tool.tags.some((t) => t.toLowerCase().includes(q));
-      const matchFeatures = tool.features.some((f) => f.toLowerCase().includes(q));
-      const matchContext = [tool.bestFor, tool.executionEnvironment, tool.hardwareRequirements, tool.licenseSummary, tool.accessLabel, ...(tool.useCases || [])]
-        .some((value) => value?.toLowerCase().includes(q));
-      return matchName || matchTagline || matchDesc || matchTags || matchFeatures || matchContext;
-    });
+  // 1. Task-aware intent first; broad keyword matching is only the fallback.
+  const intent = state.searchQuery.trim() ? detectCatalogSearchIntent(state.searchQuery) : null;
+  const alternativeTarget = state.searchQuery.trim() ? findAlternativeTargetFromQuery(state.searchQuery) : undefined;
+  if (intent) {
+    const intentMatches = new Set(getAiToolsForSearchIntent(state.searchQuery).map((tool) => tool.slug));
+    list = list.filter((tool) => intentMatches.has(tool.slug));
+  } else if (alternativeTarget) {
+    const alternatives = new Set(getAiAlternativesForTarget(alternativeTarget.slug).map((tool) => tool.slug));
+    list = list.filter((tool) => alternatives.has(tool.slug));
+  } else if (state.searchQuery.trim()) {
+    list = list.filter((tool) => matchesSearchQuery(state.searchQuery, [
+      tool.name, tool.tagline, tool.description, tool.category, tool.pricingType,
+      tool.freeTierSummary, tool.freeTierLimits, tool.pricingDetails, tool.bestFor,
+      tool.executionEnvironment, tool.hardwareRequirements, tool.licenseSummary,
+      tool.accessLabel, ...(tool.tags || []), ...(tool.features || []),
+      ...(tool.useCases || []), ...(tool.generationTasks || []), ...(tool.outputModalities || []),
+      tool.hasFreePlan ? 'free recurring free plan' : '',
+      tool.isSelfHostable ? 'open source local self hosted free' : '',
+      tool.category === 'video' ? 'video generator video generation generative video' : '',
+    ]));
   }
 
   // 2. Category
@@ -130,7 +259,11 @@ export function filterAndSortAiTools(state: AiFilterState): AiFilterResult {
   list.sort((a, b) => {
     switch (state.sortBy) {
       case 'rating':
-        return (b.rating || 0) - (a.rating || 0);
+        // No third-party rating source is recorded consistently in the catalog.
+        // Use editorial curation signals instead of implying a sourced score.
+        return Number(Boolean(b.isFeatured)) - Number(Boolean(a.isFeatured)) ||
+          Number(Boolean(b.isTrending)) - Number(Boolean(a.isTrending)) ||
+          a.name.localeCompare(b.name);
       case 'name_asc':
         return a.name.localeCompare(b.name);
       case 'latest':
@@ -185,6 +318,16 @@ export function getAiToolsForProprietary(proprietarySlug: string): AiTool[] {
   if (!proprietarySlug) return [];
   const mappedSlugs = new Set(aiAlternativeMappings.filter((mapping) => mapping.targetSlug === proprietarySlug).map((mapping) => mapping.alternativeSlug));
   return getAllAiTools().filter((tool) => !isCommunityTool(tool) && (tool.alternativesTo?.includes(proprietarySlug) || mappedSlugs.has(tool.slug)));
+}
+
+export function getOpenSourceToolsForProprietary(proprietarySlug: string): Tool[] {
+  if (!proprietarySlug) return [];
+  const mappedSlugs = new Set(
+    aiAlternativeMappings
+      .filter((mapping) => mapping.targetSlug === proprietarySlug && mapping.alternativeType === 'open-source')
+      .map((mapping) => mapping.alternativeSlug),
+  );
+  return toolsData.filter((tool) => tool.alternativesTo?.includes(proprietarySlug) || mappedSlugs.has(tool.slug));
 }
 
 /** Resolve both explicitly listed and reverse-linked catalog alternatives without duplicating product records. */
@@ -352,6 +495,40 @@ export function universalSearch(query: string): UniversalSearchResult {
     };
   }
 
+  const alternativeTarget = findAlternativeTargetFromQuery(query);
+  if (alternativeTarget) {
+    const openSourceTools = getOpenSourceToolsForProprietary(alternativeTarget.slug).slice(0, 5);
+    const aiTools = getAiAlternativesForTarget(alternativeTarget.slug).slice(0, 5);
+    return {
+      openSourceTools,
+      aiTools,
+      proprietaryAlternatives: [alternativeTarget],
+      guides: [],
+      prompts: [],
+      utilities: [],
+      totalMatches: openSourceTools.length + aiTools.length + 1,
+    };
+  }
+
+  const intent = detectCatalogSearchIntent(query);
+  if (intent) {
+    const aiTools = getAiToolsForSearchIntent(query).slice(0, 5);
+    const openSourceTools = intent === 'local-llm'
+      ? toolsData.filter((tool) => /\b(ollama|open webui|localai|jan|gpt4all|llama|vllm)\b/.test(normalizeSearchText(`${tool.name} ${tool.slug} ${tool.description} ${tool.tagline} ${tool.tags.join(' ')} ${tool.techStack.join(' ')}`))).slice(0, 5)
+      : intent === 'workflow-automation'
+        ? toolsData.filter((tool) => /\b(n8n|activepieces|dify|typebot|langflow)\b/.test(normalizeSearchText(`${tool.name} ${tool.slug} ${tool.description} ${tool.tagline} ${tool.tags.join(' ')} ${tool.categories.join(' ')}`))).slice(0, 5)
+        : [];
+    return {
+      openSourceTools,
+      aiTools,
+      proprietaryAlternatives: [],
+      guides: [],
+      prompts: [],
+      utilities: [],
+      totalMatches: openSourceTools.length + aiTools.length,
+    };
+  }
+
   const openSourceTools = toolsData
     .filter(
       (t) =>
@@ -363,13 +540,14 @@ export function universalSearch(query: string): UniversalSearchResult {
 
   const aiTools = getAllAiTools()
     .filter((tool) => !isCommunityTool(tool))
-    .filter(
-      (t) =>
-        t.name.toLowerCase().includes(q) ||
-        t.tagline.toLowerCase().includes(q) ||
-        t.category.toLowerCase().includes(q) ||
-        t.tags.some((tag) => tag.toLowerCase().includes(q))
-    )
+    .filter((tool) => matchesSearchQuery(q, [
+      tool.name, tool.tagline, tool.description, tool.category, tool.pricingType,
+      tool.freeTierSummary, tool.freeTierLimits, ...(tool.tags || []), ...(tool.features || []),
+      ...(tool.useCases || []), ...(tool.generationTasks || []), ...(tool.outputModalities || []),
+      tool.hasFreePlan ? 'free recurring free plan' : '',
+      tool.isSelfHostable ? 'open source local self hosted free' : '',
+      tool.category === 'video' ? 'video generator video generation generative video' : '',
+    ]))
     .slice(0, 4);
 
   const proprietaryAlternatives = proprietaryTools
@@ -616,7 +794,7 @@ export function getPickRecommendations(criteria: PickCriteria): MatchedPickResul
       // Hard constraint elimination: MUST match hosting
       if (!matchesHostingAi(tool)) return;
 
-      let score = 50;
+      let score = 30;
       const reasons: string[] = [];
 
       // Task detail bonus
@@ -699,9 +877,7 @@ export function getPickRecommendations(criteria: PickCriteria): MatchedPickResul
         reasons.push('Provides watermark-free output on verified tier');
       }
 
-      // Quality rating bonus
-      score += Math.round((tool.rating || 4.5) * 4);
-
+      // Rank by explicit editorial curation signals rather than unsourced numeric ratings.
       if (tool.isFeatured) score += 5;
       if (tool.isTrending) score += 5;
 
@@ -813,10 +989,32 @@ export function getPickRecommendations(criteria: PickCriteria): MatchedPickResul
     if (b.matchScore !== a.matchScore) {
       return b.matchScore - a.matchScore;
     }
-    const aRating = (a.tool as AiTool).rating || 0;
-    const bRating = (b.tool as AiTool).rating || 0;
-    return bRating - aRating;
+    const aTool = a.tool as AiTool;
+    const bTool = b.tool as AiTool;
+    const featuredDifference = Number(Boolean(bTool.isFeatured)) - Number(Boolean(aTool.isFeatured));
+    if (featuredDifference) return featuredDifference;
+    const trendingDifference = Number(Boolean(bTool.isTrending)) - Number(Boolean(aTool.isTrending));
+    if (trendingDifference) return trendingDifference;
+    return a.tool.name.localeCompare(b.tool.name);
   });
 
-  return results.slice(0, 6);
+  const topResults = results.slice(0, 6);
+
+  // Keep the recommendation set useful across hosting models: coding workflows
+  // should include at least one genuine open-source coding assistant when one
+  // passed the user's constraints, rather than letting cloud tools crowd it out.
+  if (goal === 'coding-dev' || goal === 'build-app') {
+    const openSourceCodingTool = results.find((result) =>
+      result.type === 'open-source' && ['aider', 'cline'].includes(result.tool.slug)
+    );
+    if (
+      openSourceCodingTool &&
+      !topResults.some((result) => result.tool.slug === openSourceCodingTool.tool.slug) &&
+      topResults.length > 0
+    ) {
+      topResults[topResults.length - 1] = openSourceCodingTool;
+    }
+  }
+
+  return topResults;
 }

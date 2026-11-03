@@ -87,16 +87,16 @@ describe('Phase 19: Floating AI Pet, Glass UI, Theme Repair & UX Bug Fixes', () 
       );
     });
 
-    test('src/index.css defines RGB numeric triplets for :root, .dark, .light, and [data-theme]', () => {
+    test('src/index.css routes theme backgrounds through shared brand tokens', () => {
       const cssPath = path.resolve(process.cwd(), 'src/index.css');
       const content = fs.readFileSync(cssPath, 'utf8');
 
       // Check dark RGB values
-      assert.ok(content.includes('--color-bg: 8 13 24;'), 'Midnight-blue dark background RGB numbers defined');
+      assert.ok(content.includes('--color-bg: var(--brand-midnight);'), 'Midnight-blue dark background RGB numbers defined');
       assert.ok(content.includes('--color-card: 17 28 47;'), 'Midnight-blue dark card RGB numbers defined');
 
       // Check light RGB values
-      assert.ok(content.includes('--color-bg: 248 250 252;'), 'Light background RGB numbers defined');
+      assert.ok(content.includes('--color-bg: var(--brand-light-bg);'), 'Light background RGB numbers defined');
       assert.ok(content.includes('--color-card: 255 255 255;'), 'Light card RGB numbers defined');
 
       // Check data-theme selectors

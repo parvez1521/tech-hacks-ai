@@ -119,6 +119,7 @@ export type GenerationTask =
   | 'speech-to-text'
   | 'music-generation'
   | 'coding-assistant'
+  | 'ide-editor'
   | 'chat'
   | 'research'
   | 'automation'
@@ -213,6 +214,12 @@ export interface GuideStep {
   media?: { type: 'image'; src: string; alt: string; caption?: string };
 }
 
+export interface GuideReference {
+  title: string;
+  publisher: string;
+  url: string;
+}
+
 export interface Guide {
   id: string;
   title: string;
@@ -225,6 +232,7 @@ export interface Guide {
   tags: string[];
   steps: GuideStep[];
   relatedToolSlugs: string[];
+  references?: GuideReference[];
 }
 
 export interface PromptItem {

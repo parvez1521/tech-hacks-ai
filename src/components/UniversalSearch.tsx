@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect, useMemo } from 'react';
 import { useRouter, Link } from '../router/Router';
-import { universalSearch, UniversalSearchResult } from '../services/aiCatalogService';
+import { findAlternativeTargetFromQuery, universalSearch, UniversalSearchResult } from '../services/aiCatalogService';
 import { Search, X, Sparkles, FolderKanban, Replace, BookOpen, MessageSquareCode, Wrench } from 'lucide-react';
 import { BrandLogo } from './BrandLogo';
 
@@ -94,12 +94,21 @@ export const UniversalSearch: React.FC = () => {
       if (flatResults.length === 0) return;
       setSelectedIndex((prev) => (prev > 0 ? prev - 1 : flatResults.length - 1));
     } else if (e.key === 'Enter') {
-      if (selectedIndex >= 0 && flatResults[selectedIndex]) {
-        e.preventDefault();
-        navigate(flatResults[selectedIndex].url);
-        setIsOpen(false);
-        setSelectedIndex(-1);
+      e.preventDefault();
+      const selectedResult = selectedIndex >= 0 ? flatResults[selectedIndex] : undefined;
+      if (selectedResult) {
+        navigate(selectedResult.url);
+      } else if (query.trim()) {
+        // Natural-language "alternative to X" queries should go straight to the matching alternatives page.
+        const target = findAlternativeTargetFromQuery(query.trim());
+        if (target) {
+          navigate(`/alternatives/${target.slug}`);
+        } else {
+          navigate(`/ai-tools?q=${encodeURIComponent(query.trim())}`);
+        }
       }
+      setIsOpen(false);
+      setSelectedIndex(-1);
     }
   };
 
@@ -136,7 +145,7 @@ export const UniversalSearch: React.FC = () => {
           onFocus={() => {
             if (query.trim()) setIsOpen(true);
           }}
-          placeholder="Search free AI tools, open-source alternatives, prompts, and utilities..."
+          placeholder="Search AI tools, alternatives, prompts, and utilities…"
           className="w-full pl-12 pr-14 py-3.5 sm:py-4 rounded-lg bg-card border border-border text-foreground placeholder:text-muted-foreground text-sm sm:text-base shadow-sm focus:outline-none focus:ring-2 focus:ring-cyan-500/50 focus:border-cyan-500/60 focus:shadow-[0_0_0_3px_rgba(6,182,212,0.08)] transition-all duration-200"
           aria-label="Universal software and AI discovery search"
         />
@@ -226,7 +235,20 @@ export const UniversalSearch: React.FC = () => {
                             className="w-7 h-7 shrink-0"
                           />
                           <div className="min-w-0">
-                            <p className="font-semibold text-foreground text-sm truncate">{tool.name}</p>
+                            <div className="flex min-w-0 items-center justify-between gap-2">
+                              <p className="font-semibold text-foreground text-sm truncate">{tool.name}</p>
+                              <span className="shrink-0 text-[10px] font-medium text-muted-foreground">
+                                {tool.freeAccessType === 'open-source-local' ? 'Open source / local'
+                                  : tool.freeAccessType === 'recurring-free' ? 'Free plan'
+                                  : tool.freeAccessType === 'limited-free' ? 'Limited free'
+                                  : tool.freeAccessType === 'free-credits' ? 'Free credits'
+                                  : tool.pricingType === 'paid' ? 'Paid'
+                                  : tool.pricingType === 'freemium' ? 'Freemium'
+                                  : tool.pricingType === 'free-trial' ? 'Free trial'
+                                  : tool.pricingType === 'free' ? 'Free'
+                                  : 'See pricing'}
+                              </span>
+                            </div>
                             <p className="text-xs text-muted-foreground truncate">{tool.tagline}</p>
                           </div>
                         </Link>

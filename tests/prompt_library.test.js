@@ -45,25 +45,31 @@ test('PromptFeed MIT collection has 534 unique matching local previews and full 
   }
 });
 
-test('PromptFeed collection is lazy-loaded, attributable, and pagination keeps the gallery lightweight', () => {
+test('PromptFeed source archive is retained while the public Prompt Library shows SwitchRoute originals only', () => {
   const loader = fs.readFileSync(path.resolve('src/data/promptfeedPrompts.ts'), 'utf8');
   const gallery = fs.readFileSync(path.resolve('src/pages/PromptLibraryPage.tsx'), 'utf8');
+  const detail = fs.readFileSync(path.resolve('src/pages/PromptDetailPage.tsx'), 'utf8');
   const card = fs.readFileSync(path.resolve('src/components/PromptCard.tsx'), 'utf8');
   const sitemap = fs.readFileSync(path.resolve('scripts/generate-prompt-sitemap.mjs'), 'utf8');
+  const prerender = fs.readFileSync(path.resolve('scripts/prerender-site.mjs'), 'utf8');
   assert.match(loader, /import\('\.\.\/generated\/promptfeedRuntime\.generated\.ts'\)/);
   assert.match(loader, /rightsStatus !== 'licensed'/);
-  assert.match(gallery, /loadPromptFeedPrompts/);
-  assert.match(gallery, /if \(!merged\.has\(prompt\.slug\)\) merged\.set\(prompt\.slug, prompt\)/, 'reviewed remote versions take precedence over static collection records');
-  assert.match(gallery, /selectedCollection/);
+  assert.doesNotMatch(gallery, /loadPromptFeedPrompts/);
+  assert.doesNotMatch(gallery, /PromptFeed collection/);
+  assert.doesNotMatch(gallery, /selectedCollection/);
+  assert.match(gallery, /Explore 48 original SwitchRoute prompt recipes/);
+  assert.match(gallery, /remote\.filter\(\(prompt\) => !prompt\.slug\.startsWith\('promptfeed-'\)\)/);
   assert.match(gallery, /PROMPTS_PER_PAGE = 24/);
   assert.match(gallery, /visiblePrompts\.map/);
   assert.match(gallery, /searchParams\.get\('q'\)/, 'prompt tag links restore their search when the library opens');
   assert.match(gallery, /setSearchParam\('q'/, 'search changes are reflected in a shareable URL');
   assert.match(gallery, /\.slice\(0, 12\)/, 'the visual-style filter offers a focused shortlist instead of hundreds of raw labels');
-  assert.match(card, /PromptFeed · MIT/);
+  assert.doesNotMatch(detail, /getPromptFeedPromptBySlug/);
+  assert.match(detail, /if \(slug\.startsWith\('promptfeed-'\)\) return/);
   assert.match(card, /Clipboard unavailable\. Open details to copy\./, 'copy failures are explained to the visitor');
   assert.doesNotMatch(gallery, /MeiGen/);
-  assert.match(sitemap, /promptFeedPrompts/);
+  assert.match(sitemap, /promptFeedPrompts/, 'the source sitemap generator retains the imported slug archive');
+  assert.match(prerender, /if \(isPromptFeedDetailPath\(pathname\)\) \{\s*omitted\.push\(pathname\);\s*continue;/);
 });
 
 test('prompt storage rejects missing attribution and invalid image locations', () => {

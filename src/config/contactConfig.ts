@@ -5,9 +5,9 @@
  */
 export const contactConfig = {
   phone: '',
-  instagramHandle: '',
-  instagramUrl: '',
-  email: 'contact@techhacksai.com',
+  instagramHandle: 'tech_hacks.ai',
+  instagramUrl: 'https://www.instagram.com/tech_hacks.ai/',
+  email: 'support@switchroute.in',
 } as const;
 
 export interface ContactOption {

@@ -4,6 +4,7 @@ import { getToolBySlug } from '../services/catalogService';
 import { getAiToolBySlug } from '../services/aiCatalogService';
 import { toolsData } from '../data/seedData';
 import { aiToolsData } from '../data/aiToolsData';
+import { proprietaryTools } from '../data/alternatives';
 import { Tool, AiTool } from '../types';
 import { Plus, X, ExternalLink, Check, Star, ShieldCheck, HardDrive, RefreshCw, Share2, Compass, BookOpen, CheckCircle2 } from 'lucide-react';
 import { BrandLogo } from '../components/BrandLogo';
@@ -54,6 +55,14 @@ export const ComparePage: React.FC = () => {
       resolvedTools.push({ kind: 'ai', data: ai });
     }
   });
+
+  const resolvedSlugs = new Set(resolvedTools.map((tool) => tool.data.slug.toLowerCase()));
+  const unresolvedSlugs = slugs.filter((slug) => !resolvedSlugs.has(slug.toLowerCase()));
+  const getUnresolvedToolName = (slug: string) =>
+    toolsData.find((tool) => tool.slug.toLowerCase() === slug.toLowerCase())?.name ||
+    aiToolsData.find((tool) => tool.slug.toLowerCase() === slug.toLowerCase())?.name ||
+    proprietaryTools.find((tool) => tool.slug.toLowerCase() === slug.toLowerCase())?.name ||
+    slug.split('-').filter(Boolean).map((part) => part.charAt(0).toUpperCase() + part.slice(1)).join(' ');
 
   const handleRemove = (slugToRemove: string) => {
     const nextSlugs = slugs.filter((s) => s.toLowerCase() !== slugToRemove.toLowerCase());
@@ -196,6 +205,35 @@ export const ComparePage: React.FC = () => {
         </div>
       </div>
 
+      {unresolvedSlugs.length > 0 && (
+        <section
+          className="mb-6 rounded-xl border border-amber-300 bg-amber-50 p-4 sm:p-5"
+          role="status"
+          aria-live="polite"
+        >
+          <h2 className="text-sm font-bold text-amber-950">
+            {unresolvedSlugs.length} selected {unresolvedSlugs.length === 1 ? 'tool is' : 'tools are'} not included
+          </h2>
+          <p className="mt-1 text-xs leading-relaxed text-amber-900">
+            These slugs do not have a comparable catalogue record yet. They were not silently treated as part of the comparison.
+          </p>
+          <ul className="mt-3 space-y-2">
+            {unresolvedSlugs.map((slug) => (
+              <li key={slug} className="flex flex-wrap items-center justify-between gap-2 text-xs text-amber-950">
+                <span><strong>{getUnresolvedToolName(slug)}</strong> <span className="font-mono text-amber-800">({slug})</span> — not compared</span>
+                <button
+                  type="button"
+                  onClick={() => handleRemove(slug)}
+                  className="rounded-md border border-amber-400 px-2.5 py-1 font-semibold hover:bg-amber-100"
+                >
+                  Remove
+                </button>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
+
       {/* Comparison Grid Table */}
       {resolvedTools.length === 0 ? (
         <div className="p-12 text-center rounded-2xl bg-white border border-[#DFE7F3] shadow-invary-card max-w-md mx-auto my-8">
@@ -331,9 +369,9 @@ export const ComparePage: React.FC = () => {
                 ))}
               </tr>
 
-              {/* GitHub Metrics / Rating */}
+              {/* Public repository metrics; AI ratings are hidden until their source is recorded. */}
               <tr>
-                <td className="p-4 font-semibold text-slate-700 bg-slate-50/50">Verified Metrics</td>
+                <td className="p-4 font-semibold text-slate-700 bg-slate-50/50">Public Metrics / Rating</td>
                 {resolvedTools.map((t) => (
                   <td key={t.data.id} className="p-4 text-slate-800 font-mono">
                     {t.kind === 'open-source' ? (
@@ -347,10 +385,9 @@ export const ComparePage: React.FC = () => {
                         </span>
                       </div>
                     ) : (
-                      <div className="flex items-center gap-1.5">
-                        <Star className="w-3.5 h-3.5 text-amber-500 fill-amber-500" />
-                        <span className="font-semibold text-slate-900">{t.data.rating ? `${t.data.rating.toFixed(1)} / 5.0` : 'Curated'}</span>
-                      </div>
+                      <span className="text-[11px] text-slate-500 leading-relaxed">
+                        No sourced third-party rating recorded
+                      </span>
                     )}
                   </td>
                 ))}

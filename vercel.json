@@ -1,10 +1,11 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "cleanUrls": true,
-  "rewrites": [
+  "redirects": [
     {
-      "source": "/((?!api/).*)",
-      "destination": "/index.html"
+      "source": "/ai-tools/claude-code",
+      "destination": "/alternatives/claude-code",
+      "permanent": true
     }
   ],
   "headers": [

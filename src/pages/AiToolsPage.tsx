@@ -7,8 +7,8 @@ import { AiToolCard } from '../components/AiToolCard';
 import { Pagination } from '../components/Pagination';
 import { EmptyState } from '../components/EmptyState';
 import { CommunityCallout } from '../components/CommunityCallout';
-import { AiFilterState, PricingType } from '../types';
-import { Sparkles, Search, X, SlidersHorizontal, PlusCircle } from 'lucide-react';
+import { AiFilterState, PricingType, FreeAccessType } from '../types';
+import { Sparkles, Search, X, SlidersHorizontal, PlusCircle, Video, ArrowRight } from 'lucide-react';
 
 export const AiToolsPage: React.FC = () => {
   const { searchParams, setSearchParam, setSearchParams, resetSearchParams } = useRouter();
@@ -18,6 +18,7 @@ export const AiToolsPage: React.FC = () => {
     category: searchParams.get('category') || null,
     alternativesTo: searchParams.get('alternativesTo') || null,
     pricingType: (searchParams.get('price') as PricingType) || 'all',
+    freeAccessType: (searchParams.get('access') as FreeAccessType) || 'all',
     sortBy: (searchParams.get('sort') as any) || 'popular',
     page: parseInt(searchParams.get('page') || '1', 10) || 1,
     videoDiscoverySection: (['self-hosted', 'open-weights', 'browser-demos'].includes(searchParams.get('video') || '')
@@ -58,6 +59,10 @@ export const AiToolsPage: React.FC = () => {
     setSearchParams({ price: price === 'all' ? null : price, page: null });
   };
 
+  const handleAccessChange = (access: string) => {
+    setSearchParams({ access: access === 'all' ? null : access, page: null });
+  };
+
   const handleSortChange = (sort: string) => {
     setSearchParams({ sort: sort === 'popular' ? null : sort, page: null });
   };
@@ -78,7 +83,7 @@ export const AiToolsPage: React.FC = () => {
               <span>Curated AI Catalog</span>
             </div>
             <h1 className="text-2xl sm:text-4xl font-extrabold text-[#0F172A] tracking-tight">
-              Discover Best AI Tools & Generative Platforms
+              AI Tools Directory: Discover & Compare AI Platforms
             </h1>
           </div>
           <Link
@@ -90,8 +95,22 @@ export const AiToolsPage: React.FC = () => {
           </Link>
         </div>
         <p className="text-sm sm:text-base text-[#64748B] max-w-2xl mb-6">
-          Explore top generative video, image, voice, coding, and workflow automation models. Filter by pricing tier, features, and user ratings.
+          Search and compare AI tools for video, images, voice, coding, research, and automation. Review each tool's use case, free-access model, features, and official source before choosing a platform.
         </p>
+
+        <Link
+          to="/ai-video-tools"
+          className="mb-6 flex items-center gap-3 rounded-xl border border-primary/25 bg-primary/5 p-4 text-sm transition-colors hover:border-primary/50 hover:bg-primary/10"
+        >
+          <span className="grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-primary/10 text-primary">
+            <Video className="h-5 w-5" aria-hidden="true" />
+          </span>
+          <span className="min-w-0 flex-1">
+            <span className="block font-semibold text-foreground">Looking specifically for AI video generators?</span>
+            <span className="mt-1 block text-xs leading-relaxed text-secondary-foreground">Compare text-to-video, image-to-video, free-entry, and open-model options on our focused video tools page.</span>
+          </span>
+          <ArrowRight className="h-4 w-4 shrink-0 text-primary" aria-hidden="true" />
+        </Link>
 
         {/* Search & Main Controls Bar */}
         <div className="p-4 rounded-xl bg-white border border-[#DFE7F3] shadow-sm flex flex-col md:flex-row gap-3 items-stretch md:items-center justify-between mb-6">
@@ -136,6 +155,24 @@ export const AiToolsPage: React.FC = () => {
               </select>
             </div>
 
+            {/* Access model filter keeps recurring hosted plans distinct from open-source software. */}
+            <div className="flex items-center gap-1.5">
+              <span className="text-[#64748B]">Access:</span>
+              <select
+                aria-label="Filter by access model"
+                value={filterState.freeAccessType || 'all'}
+                onChange={(e) => handleAccessChange(e.target.value)}
+                className="bg-white border border-[#DFE7F3] rounded-lg px-2.5 py-1.5 text-xs text-[#0F172A] focus:outline-none focus:ring-2 focus:ring-[#2563EB]/20 focus:border-[#2563EB] cursor-pointer"
+              >
+                <option value="all">All Access Models</option>
+                <option value="open-source-local">Open Source / Local</option>
+                <option value="recurring-free">Recurring Free</option>
+                <option value="free-credits">Free Credits</option>
+                <option value="limited-free">Limited Free</option>
+                <option value="none">Paid / No Free Access</option>
+              </select>
+            </div>
+
             {/* Sort Select */}
             <div className="flex items-center gap-1.5">
               <span className="text-[#64748B]">Sort:</span>
@@ -146,13 +183,13 @@ export const AiToolsPage: React.FC = () => {
                 className="bg-white border border-[#DFE7F3] rounded-lg px-2.5 py-1.5 text-xs text-[#0F172A] focus:outline-none focus:ring-2 focus:ring-[#2563EB]/20 focus:border-[#2563EB] cursor-pointer"
               >
                 <option value="popular">Most Popular</option>
-                <option value="rating">Highest Rated</option>
+                <option value="rating">Editorial Picks</option>
                 <option value="latest">Latest Release</option>
                 <option value="name_asc">Name (A-Z)</option>
               </select>
             </div>
 
-            {(filterState.searchQuery || filterState.category || filterState.alternativesTo || filterState.pricingType !== 'all') && (
+            {(filterState.searchQuery || filterState.category || filterState.alternativesTo || filterState.pricingType !== 'all' || (filterState.freeAccessType && filterState.freeAccessType !== 'all')) && (
               <button
                 type="button"
                 onClick={resetSearchParams}
@@ -178,7 +215,7 @@ export const AiToolsPage: React.FC = () => {
         )}
 
         {/* Category Pills */}
-        <div className="flex items-center gap-2 overflow-x-auto no-scrollbar pb-2">
+        <div className="flex min-w-0 w-full max-w-full items-center gap-2 overflow-x-auto overscroll-x-contain no-scrollbar pb-2">
           <button
             type="button"
             onClick={() => handleCategoryChange(null)}
@@ -219,7 +256,7 @@ export const AiToolsPage: React.FC = () => {
               {selectedVideoCollection && <button type="button" onClick={() => handleVideoSectionChange(null)} className="self-start rounded-lg border border-border px-3 py-1.5 text-xs font-semibold text-primary hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary">Show all video tools</button>}
             </div>
             <div className="grid grid-cols-1 gap-3 md:grid-cols-3">
-              {videoCollections.map((collection) => {
+              {videoCollections.filter((collection) => collection.count > 0).map((collection) => {
                 const selected = selectedVideoCollection === collection.id;
                 const matchingCount = filterAndSortAiTools({ ...filterState, videoDiscoverySection: collection.id as any, page: 1 }).totalCount;
                 return (
@@ -262,6 +299,40 @@ export const AiToolsPage: React.FC = () => {
           onPageChange={handlePageChange}
         />
       )}
+
+      <section className="mt-14 grid gap-5 lg:grid-cols-2" aria-labelledby="ai-tool-selection-heading">
+        <div className="rounded-2xl border border-border bg-card/80 p-5 sm:p-6">
+          <h2 id="ai-tool-selection-heading" className="text-xl font-bold text-foreground">How to choose the right AI tool</h2>
+          <p className="mt-3 text-sm leading-relaxed text-secondary-foreground">
+            Start with the task, not the brand name. Compare what the tool actually does, the inputs and outputs it supports, and whether it runs in a browser, through an API, or on your own hardware.
+          </p>
+          <ul className="mt-4 list-disc space-y-2 pl-5 text-sm leading-relaxed text-secondary-foreground marker:text-primary">
+            <li><strong className="text-foreground">Check access carefully:</strong> a free plan, one-time trial credits, open weights, and paid-only access are different things.</li>
+            <li><strong className="text-foreground">Read the constraints:</strong> review usage limits, account requirements, license terms, hardware needs, and privacy policies before relying on a tool.</li>
+            <li><strong className="text-foreground">Verify at the source:</strong> plans and features change. Follow the official product or pricing link on each listing for current terms.</li>
+          </ul>
+        </div>
+        <div className="rounded-2xl border border-border bg-card/80 p-5 sm:p-6">
+          <h2 className="text-xl font-bold text-foreground">Browse AI tools by task</h2>
+          <p className="mt-3 text-sm leading-relaxed text-secondary-foreground">
+            If you already know what you want to make, use a focused directory instead of searching every category.
+          </p>
+          <div className="mt-4 grid gap-2">
+            <Link to="/ai-video-tools" className="flex items-center justify-between gap-3 rounded-xl border border-border bg-background p-3 text-sm font-semibold text-foreground transition-colors hover:border-primary/50 hover:bg-accent/40">
+              <span>AI video generators and text-to-video tools</span><span className="text-primary" aria-hidden="true">→</span>
+            </Link>
+            <Link to="/free-ai-sites" className="flex items-center justify-between gap-3 rounded-xl border border-border bg-background p-3 text-sm font-semibold text-foreground transition-colors hover:border-primary/50 hover:bg-accent/40">
+              <span>Free AI sites and free-access options</span><span className="text-primary" aria-hidden="true">→</span>
+            </Link>
+            <Link to="/alternatives" className="flex items-center justify-between gap-3 rounded-xl border border-border bg-background p-3 text-sm font-semibold text-foreground transition-colors hover:border-primary/50 hover:bg-accent/40">
+              <span>Alternatives to popular software</span><span className="text-primary" aria-hidden="true">→</span>
+            </Link>
+            <Link to="/guides" className="flex items-center justify-between gap-3 rounded-xl border border-border bg-background p-3 text-sm font-semibold text-foreground transition-colors hover:border-primary/50 hover:bg-accent/40">
+              <span>Practical AI guides and workflows</span><span className="text-primary" aria-hidden="true">→</span>
+            </Link>
+          </div>
+        </div>
+      </section>
 
       {/* Community Contribution Callout */}
       <CommunityCallout type="tool" className="mt-12" />

@@ -86,14 +86,12 @@ export const brandLogos: Record<string, BrandLogoEntry> = {
   "airtable": {
     "slug": "airtable",
     "name": "Airtable",
-    "assetPath": "/logos/airtable.svg",
-    "sourceType": "simple-icons",
-    "verifiedAt": "2026-10-22",
+    "assetPath": "/logos/provided/airtable.svg",
+    "sourceType": "provided",
+    "verifiedAt": "2026-10-27",
     "badgeBg": "#18bfff",
     "format": "svg",
-    "pngAssetPath": "/logos/png/airtable.png",
-    "sourceUrl": "https://cdn.jsdelivr.net/npm/simple-icons/icons/airtable.svg",
-    "notes": "Simple Icons airtable SVG source; local vector paths verified against the maintained source on 2026-10-22, with the local brand color retained."
+    "notes": "Artwork traced from the user-provided image IMG_0839.png uploaded on 2026-10-27; local self-hosted asset, no third-party substitute."
   },
   "algolia": {
     "slug": "algolia",
@@ -286,11 +284,12 @@ export const brandLogos: Record<string, BrandLogoEntry> = {
     "name": "Bolt.new",
     "assetPath": "/logos/bolt-new.svg",
     "sourceType": "fallback",
+    "sourceUrl": "https://www.google.com/s2/favicons?domain=bolt.new&sz=256",
     "verifiedAt": "2026-10-22",
     "badgeBg": "#1389fd",
     "format": "svg",
     "pngAssetPath": "/logos/png/bolt-new.png",
-    "notes": "Verification gap: the existing local mark has no traceable source and is withheld from display. BrandLogo shows its neutral initials fallback until a verified source is recorded."
+    "notes": "Domain favicon fallback from the catalogue-listed website URL; this is not verified brand artwork."
   },
   "brave": {
     "slug": "brave",
@@ -424,13 +423,12 @@ export const brandLogos: Record<string, BrandLogoEntry> = {
   "claude-code": {
     "slug": "claude-code",
     "name": "Claude Code",
-    "assetPath": "/logos/claude-code.svg",
-    "sourceType": "fallback",
-    "verifiedAt": "2026-10-22",
-    "badgeBg": "#d97706",
+    "assetPath": "/logos/provided/claude-code.svg",
+    "sourceType": "provided",
+    "verifiedAt": "2026-10-27",
+    "badgeBg": "#d97757",
     "format": "svg",
-    "pngAssetPath": "/logos/png/claude-code.png",
-    "notes": "Verification gap: the existing local mark has no traceable source and is withheld from display. BrandLogo shows its neutral initials fallback until a verified source is recorded."
+    "notes": "Artwork traced from the user-provided image IMG_0842.png uploaded on 2026-10-27; local self-hosted asset, no third-party substitute."
   },
   "clickup": {
     "slug": "clickup",
@@ -550,12 +548,11 @@ export const brandLogos: Record<string, BrandLogoEntry> = {
     "slug": "cursor",
     "name": "Cursor Editor",
     "assetPath": "/logos/cursor.svg",
-    "sourceType": "simple-icons",
-    "verifiedAt": "2026-10-17",
-    "badgeBg": "#18181b",
+    "sourceType": "provided",
+    "verifiedAt": "2026-10-27",
+    "badgeBg": "#000000",
     "format": "svg",
-    "pngAssetPath": "/logos/png/cursor.png",
-    "sourceUrl": "https://cdn.jsdelivr.net/npm/simple-icons/icons/cursor.svg"
+    "notes": "Vector-traced from the Cursor logo reference supplied by the site owner on 2026-10-27."
   },
   "davinciresolve": {
     "slug": "davinciresolve",
@@ -687,24 +684,22 @@ export const brandLogos: Record<string, BrandLogoEntry> = {
   "figma": {
     "slug": "figma",
     "name": "Figma",
-    "assetPath": "/logos/figma.svg",
-    "sourceType": "simple-icons",
-    "verifiedAt": "2026-10-17",
+    "assetPath": "/logos/provided/figma.svg",
+    "sourceType": "provided",
+    "verifiedAt": "2026-10-27",
     "badgeBg": "#f24e1e",
     "format": "svg",
-    "pngAssetPath": "/logos/png/figma.png",
-    "sourceUrl": "https://cdn.jsdelivr.net/npm/simple-icons/icons/figma.svg"
+    "notes": "Artwork traced from the user-provided image IMG_0840.png uploaded on 2026-10-27; local self-hosted asset, no third-party substitute."
   },
   "firebase": {
     "slug": "firebase",
     "name": "Firebase",
-    "assetPath": "/logos/firebase.svg",
-    "sourceType": "simple-icons",
-    "verifiedAt": "2026-10-17",
+    "assetPath": "/logos/provided/firebase.svg",
+    "sourceType": "provided",
+    "verifiedAt": "2026-10-27",
     "badgeBg": "#ffca28",
     "format": "svg",
-    "pngAssetPath": "/logos/png/firebase.png",
-    "sourceUrl": "https://cdn.jsdelivr.net/npm/simple-icons/icons/firebase.svg"
+    "notes": "Artwork traced from the user-provided image D1244D91-9AB3-4CE2-903D-83CCF0BBD51B.png uploaded on 2026-10-27; local self-hosted asset, no third-party substitute."
   },
   "firecrawl": {
     "slug": "firecrawl",
@@ -835,14 +830,12 @@ export const brandLogos: Record<string, BrandLogoEntry> = {
   "google-photos": {
     "slug": "google-photos",
     "name": "Google Photos",
-    "assetPath": "/logos/google-photos.svg",
-    "sourceType": "simple-icons",
-    "verifiedAt": "2026-10-22",
+    "assetPath": "/logos/provided/google-photos.svg",
+    "sourceType": "provided",
+    "verifiedAt": "2026-10-27",
     "badgeBg": "#ea4335",
     "format": "svg",
-    "pngAssetPath": "/logos/png/google-photos.png",
-    "sourceUrl": "https://cdn.jsdelivr.net/npm/simple-icons/icons/googlephotos.svg",
-    "notes": "Simple Icons googlephotos SVG source; local vector paths verified against the maintained source on 2026-10-22, with the local brand color retained."
+    "notes": "Artwork traced from the user-provided image IMG_0841.png uploaded on 2026-10-27; local self-hosted asset, no third-party substitute."
   },
   "googlechrome": {
     "slug": "googlechrome",
@@ -975,11 +968,12 @@ export const brandLogos: Record<string, BrandLogoEntry> = {
     "name": "HuggingChat",
     "assetPath": "/logos/huggingchat.svg",
     "sourceType": "fallback",
+    "sourceUrl": "https://www.google.com/s2/favicons?domain=huggingface.co&sz=256",
     "verifiedAt": "2026-10-22",
     "badgeBg": "#ffd21e",
     "format": "svg",
     "pngAssetPath": "/logos/png/huggingchat.png",
-    "notes": "Verification gap: the existing local mark has no traceable source and is withheld from display. BrandLogo shows its neutral initials fallback until a verified source is recorded."
+    "notes": "Domain favicon fallback from the catalogue-listed website URL; this is not verified brand artwork."
   },
   "huggingface": {
     "slug": "huggingface",
@@ -1101,11 +1095,12 @@ export const brandLogos: Record<string, BrandLogoEntry> = {
     "name": "Kaiber",
     "assetPath": "/logos/kaiber.svg",
     "sourceType": "fallback",
+    "sourceUrl": "https://www.google.com/s2/favicons?domain=kaiber.ai&sz=256",
     "verifiedAt": "2026-10-22",
     "badgeBg": "#f59e0b",
     "format": "svg",
     "pngAssetPath": "/logos/png/kaiber.png",
-    "notes": "Verification gap: the existing local mark has no traceable source and is withheld from display. BrandLogo shows its neutral initials fallback until a verified source is recorded."
+    "notes": "Domain favicon fallback from the catalogue-listed website URL; this is not verified brand artwork."
   },
   "keras": {
     "slug": "keras",
@@ -1146,11 +1141,12 @@ export const brandLogos: Record<string, BrandLogoEntry> = {
     "name": "Kling AI",
     "assetPath": "/logos/kling-ai.svg",
     "sourceType": "fallback",
+    "sourceUrl": "https://www.google.com/s2/favicons?domain=klingai.com&sz=256",
     "verifiedAt": "2026-10-22",
     "badgeBg": "#e11d48",
     "format": "svg",
     "pngAssetPath": "/logos/png/kling-ai.png",
-    "notes": "Verification gap: the existing local mark has no traceable source and is withheld from display. BrandLogo shows its neutral initials fallback until a verified source is recorded."
+    "notes": "Domain favicon fallback from the catalogue-listed website URL; this is not verified brand artwork."
   },
   "klingai": {
     "slug": "klingai",
@@ -1180,11 +1176,12 @@ export const brandLogos: Record<string, BrandLogoEntry> = {
     "name": "Krea AI",
     "assetPath": "/logos/krea-ai.svg",
     "sourceType": "fallback",
+    "sourceUrl": "https://www.google.com/s2/favicons?domain=krea.ai&sz=256",
     "verifiedAt": "2026-10-22",
     "badgeBg": "#18181b",
     "format": "svg",
     "pngAssetPath": "/logos/png/krea-ai.png",
-    "notes": "Verification gap: the existing local mark has no traceable source and is withheld from display. BrandLogo shows its neutral initials fallback until a verified source is recorded."
+    "notes": "Domain favicon fallback from the catalogue-listed website URL; this is not verified brand artwork."
   },
   "langchain": {
     "slug": "langchain",
@@ -1341,11 +1338,12 @@ export const brandLogos: Record<string, BrandLogoEntry> = {
     "name": "Luma Dream Machine",
     "assetPath": "/logos/luma-dream-machine.svg",
     "sourceType": "fallback",
+    "sourceUrl": "https://www.google.com/s2/favicons?domain=lumalabs.ai&sz=256",
     "verifiedAt": "2026-10-22",
     "badgeBg": "#090a0f",
     "format": "svg",
     "pngAssetPath": "/logos/png/luma-dream-machine.png",
-    "notes": "Verification gap: the existing local mark has no traceable source and is withheld from display. BrandLogo shows its neutral initials fallback until a verified source is recorded."
+    "notes": "Domain favicon fallback from the catalogue-listed website URL; this is not verified brand artwork."
   },
   "make": {
     "slug": "make",
@@ -1445,11 +1443,12 @@ export const brandLogos: Record<string, BrandLogoEntry> = {
     "name": "Midjourney v6.1",
     "assetPath": "/logos/midjourney.svg",
     "sourceType": "fallback",
+    "sourceUrl": "https://www.google.com/s2/favicons?domain=midjourney.com&sz=256",
     "verifiedAt": "2026-10-22",
     "badgeBg": "#0f172a",
     "format": "svg",
     "pngAssetPath": "/logos/png/midjourney.png",
-    "notes": "Verification gap: the existing local mark has no traceable source and is withheld from display. BrandLogo shows its neutral initials fallback until a verified source is recorded."
+    "notes": "Domain favicon fallback from the catalogue-listed website URL; this is not verified brand artwork."
   },
   "mistral": {
     "slug": "mistral",
@@ -1468,11 +1467,12 @@ export const brandLogos: Record<string, BrandLogoEntry> = {
     "name": "Mistral Le Chat",
     "assetPath": "/logos/mistral-le-chat.svg",
     "sourceType": "fallback",
+    "sourceUrl": "https://www.google.com/s2/favicons?domain=chat.mistral.ai&sz=256",
     "verifiedAt": "2026-10-22",
     "badgeBg": "#f97316",
     "format": "svg",
     "pngAssetPath": "/logos/png/mistral-le-chat.png",
-    "notes": "Verification gap: the existing local mark has no traceable source and is withheld from display. BrandLogo shows its neutral initials fallback until a verified source is recorded."
+    "notes": "Domain favicon fallback from the catalogue-listed website URL; this is not verified brand artwork."
   },
   "modal": {
     "slug": "modal",
@@ -1604,13 +1604,12 @@ export const brandLogos: Record<string, BrandLogoEntry> = {
   "omnirush": {
     "slug": "omnirush",
     "name": "OmniRush",
-    "assetPath": "/logos/official-ai/omnirush.webp",
-    "sourceType": "official",
-    "verifiedAt": "2026-10-21",
+    "assetPath": "/logos/provided/omnirush.svg",
+    "sourceType": "provided",
+    "verifiedAt": "2026-10-27",
     "badgeBg": "#38bdf8",
-    "format": "webp",
-    "sourceUrl": "https://omnirush.ai/brand/lockup-ink-240.webp",
-    "notes": "Browser-inspected official logo from https://omnirush.ai/. Page title: Free AI Coding Agent, Desktop App & CLI | OmniRush"
+    "format": "svg",
+    "notes": "Artwork traced from the user-provided image IMG_0838.png uploaded on 2026-10-27; local self-hosted asset, no third-party substitute."
   },
   "open-webui": {
     "slug": "open-webui",
@@ -1755,11 +1754,12 @@ export const brandLogos: Record<string, BrandLogoEntry> = {
     "name": "PixVerse",
     "assetPath": "/logos/pixverse.svg",
     "sourceType": "fallback",
+    "sourceUrl": "https://www.google.com/s2/favicons?domain=pixverse.ai&sz=256",
     "verifiedAt": "2026-10-22",
     "badgeBg": "#a855f7",
     "format": "svg",
     "pngAssetPath": "/logos/png/pixverse.png",
-    "notes": "Verification gap: the existing local mark has no traceable source and is withheld from display. BrandLogo shows its neutral initials fallback until a verified source is recorded."
+    "notes": "Domain favicon fallback from the catalogue-listed website URL; this is not verified brand artwork."
   },
   "plausible": {
     "slug": "plausible",
@@ -1907,11 +1907,12 @@ export const brandLogos: Record<string, BrandLogoEntry> = {
     "name": "Recraft AI",
     "assetPath": "/logos/recraft.svg",
     "sourceType": "fallback",
+    "sourceUrl": "https://www.google.com/s2/favicons?domain=recraft.ai&sz=256",
     "verifiedAt": "2026-10-22",
     "badgeBg": "#f43f5e",
     "format": "svg",
     "pngAssetPath": "/logos/png/recraft.png",
-    "notes": "Verification gap: the existing local mark has no traceable source and is withheld from display. BrandLogo shows its neutral initials fallback until a verified source is recorded."
+    "notes": "Domain favicon fallback from the catalogue-listed website URL; this is not verified brand artwork."
   },
   "render": {
     "slug": "render",
@@ -2106,11 +2107,12 @@ export const brandLogos: Record<string, BrandLogoEntry> = {
     "name": "Stable Diffusion 3.5",
     "assetPath": "/logos/stable-diffusion-3.svg",
     "sourceType": "fallback",
+    "sourceUrl": "https://www.google.com/s2/favicons?domain=stability.ai&sz=256",
     "verifiedAt": "2026-10-22",
     "badgeBg": "#090d16",
     "format": "svg",
     "pngAssetPath": "/logos/png/stable-diffusion-3.png",
-    "notes": "Verification gap: the existing local mark has no traceable source and is withheld from display. BrandLogo shows its neutral initials fallback until a verified source is recorded."
+    "notes": "Domain favicon fallback from the catalogue-listed website URL; this is not verified brand artwork."
   },
   "stripe": {
     "slug": "stripe",
@@ -2270,11 +2272,12 @@ export const brandLogos: Record<string, BrandLogoEntry> = {
     "name": "Udio",
     "assetPath": "/logos/udio.svg",
     "sourceType": "fallback",
+    "sourceUrl": "https://www.google.com/s2/favicons?domain=udio.com&sz=256",
     "verifiedAt": "2026-10-22",
     "badgeBg": "#0f172a",
     "format": "svg",
     "pngAssetPath": "/logos/png/udio.png",
-    "notes": "Verification gap: the existing local mark has no traceable source and is withheld from display. BrandLogo shows its neutral initials fallback until a verified source is recorded."
+    "notes": "Domain favicon fallback from the catalogue-listed website URL; this is not verified brand artwork."
   },
   "umami": {
     "slug": "umami",
@@ -2316,11 +2319,12 @@ export const brandLogos: Record<string, BrandLogoEntry> = {
     "name": "Vidu",
     "assetPath": "/logos/vidu.svg",
     "sourceType": "fallback",
+    "sourceUrl": "https://www.google.com/s2/favicons?domain=go.vidu.com&sz=256",
     "verifiedAt": "2026-10-22",
     "badgeBg": "#00e5ff",
     "format": "svg",
     "pngAssetPath": "/logos/png/vidu.png",
-    "notes": "Verification gap: the existing local mark has no traceable source and is withheld from display. BrandLogo shows its neutral initials fallback until a verified source is recorded."
+    "notes": "Domain favicon fallback from the catalogue-listed website URL; this is not verified brand artwork."
   },
   "visualstudiocode": {
     "slug": "visualstudiocode",
@@ -2515,11 +2519,12 @@ export const brandLogos: Record<string, BrandLogoEntry> = {
     "name": "Zapier Central",
     "assetPath": "/logos/zapier-central.svg",
     "sourceType": "fallback",
+    "sourceUrl": "https://www.google.com/s2/favicons?domain=zapier.com&sz=256",
     "verifiedAt": "2026-10-22",
     "badgeBg": "#ff4a00",
     "format": "svg",
     "pngAssetPath": "/logos/png/zapier-central.png",
-    "notes": "Verification gap: the existing local mark has no traceable source and is withheld from display. BrandLogo shows its neutral initials fallback until a verified source is recorded."
+    "notes": "Domain favicon fallback from the catalogue-listed website URL; this is not verified brand artwork."
   },
   "zedindustries": {
     "slug": "zedindustries",
@@ -2583,18 +2588,20 @@ export const brandLogos: Record<string, BrandLogoEntry> = {
     "name": "Agnes Video Generator",
     "assetPath": "/logos/fallback-agnes-video-generator.svg",
     "sourceType": "fallback",
+    "sourceUrl": "https://www.google.com/s2/favicons?domain=video.lichuanyang.top&sz=256",
     "verifiedAt": "2026-10-23",
     "format": "svg",
-    "notes": "Verification gap: no traceable official or authorized logo source was confirmed during this catalog update. The local neutral monogram is not rendered as a brand mark; BrandLogo shows its initials fallback."
+    "notes": "Domain favicon fallback from the catalogue-listed website URL; this is not verified brand artwork."
   },
   "automated-video-generator": {
     "slug": "automated-video-generator",
     "name": "Automated Video Generator",
     "assetPath": "/logos/fallback-automated-video-generator.svg",
     "sourceType": "fallback",
+    "sourceUrl": "https://www.google.com/s2/favicons?domain=itspremkumar.github.io&sz=256",
     "verifiedAt": "2026-10-23",
     "format": "svg",
-    "notes": "Verification gap: no traceable official or authorized logo source was confirmed during this catalog update. The local neutral monogram is not rendered as a brand mark; BrandLogo shows its initials fallback."
+    "notes": "Domain favicon fallback from the catalogue-listed website URL; this is not verified brand artwork."
   },
   "vuza": {
     "slug": "vuza",
@@ -2619,9 +2626,10 @@ export const brandLogos: Record<string, BrandLogoEntry> = {
     "name": "Open Generative AI",
     "assetPath": "/logos/fallback-open-generative-ai.svg",
     "sourceType": "fallback",
+    "sourceUrl": "https://www.google.com/s2/favicons?domain=muapi.ai&sz=256",
     "verifiedAt": "2026-10-23",
     "format": "svg",
-    "notes": "Verification gap: no traceable official or authorized logo source was confirmed during this catalog update. The local neutral monogram is not rendered as a brand mark; BrandLogo shows its initials fallback."
+    "notes": "Domain favicon fallback from the catalogue-listed website URL; this is not verified brand artwork."
   },
   "wan-2-2": {
     "slug": "wan-2-2",
@@ -2637,9 +2645,10 @@ export const brandLogos: Record<string, BrandLogoEntry> = {
     "name": "LTX-2.3",
     "assetPath": "/logos/fallback-ltx-2-3.svg",
     "sourceType": "fallback",
+    "sourceUrl": "https://www.google.com/s2/favicons?domain=ltx.io&sz=256",
     "verifiedAt": "2026-10-23",
     "format": "svg",
-    "notes": "Verification gap: no traceable official or authorized logo source was confirmed during this catalog update. The local neutral monogram is not rendered as a brand mark; BrandLogo shows its initials fallback."
+    "notes": "Domain favicon fallback from the catalogue-listed website URL; this is not verified brand artwork."
   },
   "hunyuanvideo": {
     "slug": "hunyuanvideo",
@@ -2664,18 +2673,20 @@ export const brandLogos: Record<string, BrandLogoEntry> = {
     "name": "Hugging Face Video Spaces",
     "assetPath": "/logos/fallback-huggingface-video-spaces.svg",
     "sourceType": "fallback",
+    "sourceUrl": "https://www.google.com/s2/favicons?domain=huggingface.co&sz=256",
     "verifiedAt": "2026-10-23",
     "format": "svg",
-    "notes": "Verification gap: no traceable official or authorized logo source was confirmed during this catalog update. The local neutral monogram is not rendered as a brand mark; BrandLogo shows its initials fallback."
+    "notes": "Domain favicon fallback from the catalogue-listed website URL; this is not verified brand artwork."
   },
   "invideo-ai": {
     "slug": "invideo-ai",
     "name": "InVideo AI",
-    "assetPath": "/logos/fallback-invideo-ai.svg",
-    "sourceType": "fallback",
-    "verifiedAt": "2026-10-23",
+    "assetPath": "/logos/provided/invideo-ai.svg",
+    "sourceType": "provided",
+    "verifiedAt": "2026-10-27",
+    "badgeBg": "#fee32d",
     "format": "svg",
-    "notes": "Verification gap: no traceable official or authorized logo source was confirmed during this catalog update. The local neutral monogram is not rendered as a brand mark; BrandLogo shows its initials fallback."
+    "notes": "Artwork traced from the user-provided image IMG_0844.png uploaded on 2026-10-27; local self-hosted asset, no third-party substitute."
   },
   "pictory": {
     "slug": "pictory",
@@ -2721,10 +2732,21 @@ export const brandLogos: Record<string, BrandLogoEntry> = {
     "verifiedAt": "2026-10-23",
     "format": "svg",
     "notes": "Verification gap: no traceable official or authorized logo source was confirmed during this catalog update. The local neutral monogram is not rendered as a brand mark; BrandLogo shows its initials fallback."
+  },
+  "ox-alpha": {
+    "slug": "ox-alpha",
+    "name": "Ox Alpha",
+    "assetPath": "/logos/oxalpha.svg",
+    "sourceType": "provided",
+    "verifiedAt": "2026-11-01",
+    "badgeBg": "#050505",
+    "format": "svg",
+    "notes": "Ox Alpha emblem recreated as a vector from the logo artwork supplied for the directory."
   }
 };
 
 export const SLUG_ALIASES: Record<string, string> = {
+  "oxalpha": "ox-alpha",
   "amazonaws": "aws",
   "amazon-web-services": "aws",
   "microsoftazure": "azure",
@@ -2752,7 +2774,7 @@ export const SLUG_ALIASES: Record<string, string> = {
   "adobe-premiere": "adobepremierepro",
   "adobe-premiere-pro": "adobepremierepro",
   "after-effects": "adobeaftereffects",
-  "googleanalytics": "google-analytics",
+  "googleanalytics": "google-analytics"
 };
 
 export function getBrandLogo(slug: string): BrandLogoEntry | undefined {

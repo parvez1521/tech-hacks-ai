@@ -18,7 +18,7 @@ describe('Built-in browser utility registry', () => {
 
   test('new utilities are discoverable through the real lookup service', () => {
     const expected = [
-      'text-diff', 'slug-generator', 'markdown-table-builder', 'unicode-inspector',
+      'heic-to-png', 'text-diff', 'slug-generator', 'markdown-table-builder', 'unicode-inspector',
       'html-entity-codec', 'csv-json-converter', 'json-to-typescript', 'regex-tester',
       'url-query-builder', 'css-specificity', 'css-gradient', 'jwt-decoder', 'uuid-tool',
       'password-generator', 'text-hash', 'file-checksum', 'timestamp-converter',
@@ -65,12 +65,12 @@ describe('Built-in browser utility registry', () => {
   test('Catalog stats are de-duplicated and include the expanded utility count', () => {
     const stats = getCatalogStats();
     assert.deepEqual(stats, {
-      catalogIdentities: 121,
+      catalogIdentities: 122,
       openSourceTools: 27,
-      aiPlatforms: 75,
+      aiPlatforms: 76,
       alternativeTargets: 25,
-      browserUtilities: 38,
-      alternativeRelationships: 224,
+      browserUtilities: 39,
+      alternativeRelationships: 226,
       uniquePrompts: 582,
       proprietaryToolsWithAlternatives: 25,
       imagePrompts: 548,

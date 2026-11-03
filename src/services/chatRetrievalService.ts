@@ -55,7 +55,7 @@ export function getEligibleChatTools(userQuery: string, limit = 5) {
     if (automation && !video && !image && !voice && !coding && (type !== 'ai' || (item as AiTool).category !== 'automation')) return false;
 
     if (textToVideo && !(item as AiTool).generationTasks?.includes('text-to-video')) return false;
-    if (editing && video && !containsAny(searchable, ['edit', 'editing', 'repurpose', 'clip', 'clipping', 'video-to-video'])) return false;
+    if (editing && video && !containsAny(searchable, ['video editor', 'video editing', 'timeline editing', 'video-to-video editing', 'video repurposing'])) return false;
     if (voiceClone && !containsAny(searchable, ['voice cloning', 'voice clone', 'clone voice', 'voice-cloning', 'speech cloning'])) return false;
     if (requestedAlternative && containsAny(q, ['alternative', 'replace', 'replacement']) && !(item as AiTool | Tool).alternativesTo?.includes(requestedAlternative.slug)) return false;
     if (free) {
@@ -100,6 +100,7 @@ export function validateGroundedText(text: string, userQuery: string, allowedSlu
 /** Catalogue-only fallback. It never invents current pricing or claims to browse the web. */
 export function generateGroundedResponse(userQuery: string): ChatMessage {
   const q = normalize(userQuery);
+  const videoEditingRequest = containsAny(q, ['edit existing video', 'edit an existing video', 'edit a video', 'video editing', 'video editor', 'edit videos', 'repurpose video', 'clip video']);
   const now = Date.now();
   const message = (text: string, groundedTools: ChatMessage['groundedTools'] = [], suggestions = ['Find free AI tools', 'Find open-source tools', 'Browse current offers']): ChatMessage => ({ id: `catalog-${now}`, sender: 'assistant', timestamp: now, text, groundedTools, suggestions });
   if (!q) return message('Please enter a question about AI tools, open-source software, or current offers.');
@@ -152,11 +153,14 @@ export function generateGroundedResponse(userQuery: string): ChatMessage {
 
   const results = getEligibleChatTools(userQuery);
   const records = results.map(({ item, type }) => ({ name: item.name, slug: item.slug, type, pricingSummary: type === 'ai' ? ((item as AiTool).pricingType || 'See tool details for pricing') : `${(item as Tool).license} · open source`, websiteUrl: item.websiteUrl }));
-  if (!records.length) return message(`I couldn’t find a verified match for “${userQuery}” in the published catalogue. Try a broader task or category.`);
+  if (!records.length) return message(videoEditingRequest
+    ? 'I could not verify a video-editing match in the published catalogue. Video-generation tools are not presented as editors without a documented editing workflow.'
+    : `I couldn’t find a verified match for “${userQuery}” in the published catalogue. Try a broader task or category.`);
   const lines = results.map(({ item, type }) => {
     const path = type === 'open-source' ? `/tools/${item.slug}` : `/ai-tools/${item.slug}`;
     const summary = type === 'ai' ? `${(item as AiTool).freeTierSummary} ${(item as AiTool).freeTierLimits || ''}` : `${(item as Tool).license} · ${item.tagline}`;
     return `• [${item.name}](${path}) — ${summary}`;
   });
-  return message(`${isHindi(q) ? 'Catalogue mein mile relevant matches:' : 'Relevant published catalogue matches:'}\n\n${lines.join('\n')}\n\nI searched the published catalogue only. Check each provider’s site for current pricing and availability.`, records, ['Open side-by-side comparison', 'Find free alternatives', 'Browse the catalogue']);
+  const heading = videoEditingRequest ? 'Video-editing matches' : isHindi(q) ? 'Catalogue mein mile relevant matches:' : 'Relevant published catalogue matches:';
+  return message(`${heading}\n\n${lines.join('\n')}\n\nI searched the published catalogue only. Check each provider’s site for current pricing and availability.`, records, ['Open side-by-side comparison', 'Find free alternatives', 'Browse the catalogue']);
 }

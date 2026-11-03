@@ -7,7 +7,6 @@ import {
   ExternalLink,
   Globe,
   Sliders,
-  Mail,
   FileText,
   AlertCircle,
 } from 'lucide-react';
@@ -35,7 +34,7 @@ export const PrivacyPage: React.FC = () => {
           Privacy Policy
         </h1>
         <p className="text-xs text-slate-500">
-          Effective Date: October 18, 2026 • Last Reviewed: October 2026
+          Effective Date: October 30, 2026 • Last Reviewed: October 30, 2026
         </p>
       </div>
 
@@ -49,10 +48,7 @@ export const PrivacyPage: React.FC = () => {
             At SwitchRoute (accessible at <strong className="text-slate-900">{siteConfig.url}</strong>), the privacy of our visitors is one of our core priorities. This Privacy Policy outlines the types of information collected and recorded by SwitchRoute and how we utilize it.
           </p>
           <p>
-            If you have additional questions or require further information about our Privacy Policy, please contact our privacy desk at{' '}
-            <a href="mailto:privacy@techhacksai.com" className="text-blue-600 hover:text-blue-700 underline font-mono">
-              privacy@techhacksai.com
-            </a>.
+            For support, content corrections, privacy and data-rights requests, copyright notices, or security concerns, email <a href={`mailto:${siteConfig.links.email}`} className="text-blue-600 hover:text-blue-700 underline">{siteConfig.links.email}</a> or visit our <Link to="/contact" className="text-blue-600 hover:text-blue-700 underline">Contact page</Link>. Include the relevant URL and enough detail for us to understand the request; never email passwords or payment credentials.
           </p>
         </section>
 
@@ -63,13 +59,13 @@ export const PrivacyPage: React.FC = () => {
             <h2>2. Google Advertising Cookies &amp; Third-Party Ad Technology</h2>
           </div>
           <p>
-            Google is a third-party vendor on our website. Google uses cookies, including the DoubleClick cookie and Google AdSense technologies, to serve advertisements to our site visitors based upon their visit to <strong className="text-slate-900">switchroute.in</strong> and other sites across the Internet.
+            SwitchRoute is not currently serving Google AdSense advertisements. If advertising is approved and enabled in the future, Google may use cookies, including the DoubleClick cookie, and similar technologies to serve and measure ads, help prevent fraud, limit repeated ads, and—where permitted by your choices and applicable law—personalize advertising.
           </p>
           <p>
-            Third-party ad servers or ad networks use technologies like cookies, JavaScript, or Web Beacons in their respective advertisements and links that appear on SwitchRoute. When an advertisement is delivered to your browser, these vendors automatically receive your IP address. These technologies are used by third-party ad networks to measure the effectiveness of their advertising campaigns and/or to personalize the advertising content that you see on websites that you visit.
+            Advertising partners may process technical information such as an IP address, browser/device details, and ad interaction information when ads are requested. The exact data use depends on the providers and settings in effect at the time ads are enabled. We will update this policy when advertising technology is activated.
           </p>
           <p className="text-xs text-slate-500">
-            Please note: SwitchRoute does not have access to or control over cookies that are placed or utilized by third-party advertisers.
+            We will not enable personalized advertising for visitors in the EEA, United Kingdom, or Switzerland until the required Google-certified consent management setup is configured. See <a href="https://support.google.com/adsense/answer/13554116?hl=en" target="_blank" rel="noopener noreferrer" className="underline">Google's publisher consent guidance</a>.
           </p>
         </section>
 
@@ -79,7 +75,7 @@ export const PrivacyPage: React.FC = () => {
             3. How to Opt Out of Personalized Advertising
           </h2>
           <p>
-            Visitors have full control over advertising cookies and may opt out of personalized advertising at any time through official industry mechanisms:
+            SwitchRoute is not currently serving AdSense advertisements, so this site is not currently setting AdSense advertising cookies. If ads are enabled later, we will update this policy with the controls and consent options available at that time. You can also manage Google ad-personalization settings for your Google Account:
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
             <a
@@ -153,14 +149,42 @@ export const PrivacyPage: React.FC = () => {
             4. Log Files &amp; Automated Technical Data
           </h2>
           <p>
-            SwitchRoute follows standard hosting server logging procedures. These logs capture internet protocol (IP) addresses, browser type, Internet Service Provider (ISP), date and time stamp, referring/exit pages, and basic page interaction metrics. This technical information is not linked to any personally identifiable information and is utilized strictly for analyzing platform traffic, diagnosing errors, preventing malicious cyberattacks, and administering site reliability.
+            SwitchRoute follows standard hosting server logging procedures. These logs capture internet protocol (IP) addresses, browser type, Internet Service Provider (ISP), date and time stamp, referring/exit pages, and basic page interaction metrics. We use the technical information for traffic analysis, error diagnosis, abuse prevention, and site reliability. Hosting providers may process request metadata as part of delivering and protecting the service.
+          </p>
+          <p>
+            Optional Google Analytics 4 measurement is activated only after a visitor explicitly enables Analytics in Cookie Preferences. When enabled, SwitchRoute sends page-view events with the page title, page URL, and page path to Google Analytics (measurement ID G-YMZP8GNP6B). Google may also process technical information such as browser/device details and IP address under its own terms. If a visitor declines or later withdraws Analytics consent, the external Google tag is not loaded before consent, the consent state is updated to denied after withdrawal, and SwitchRoute stops sending future page-view events.
+          </p>
+          <p>
+            Cookie Preferences stores the choice in this browser. It is a basic first-party preference control for optional analytics; it is not a Google-certified CMP and does not, by itself, satisfy regional consent requirements for advertising.
           </p>
         </section>
 
-        {/* 5. Client-Side Storage & Local Preferences */}
+        {/* 5. Contact Form Messages (only when secure intake is configured) */}
         <section className="space-y-3">
           <h2 className="text-xl font-bold text-slate-900 tracking-tight">
-            5. Client-Side Storage &amp; Cookies We Set
+            5. Contact Form Messages (When Available)
+          </h2>
+          <p>
+            When the contact page reports that secure intake is available, the name, reply email address, selected topic,
+            message, and message timestamps are sent to SwitchRoute's server and stored in a private contact-inbox table.
+            These details are used to review, respond to, and manage the inquiry, including identifying spam.
+          </p>
+          <p>
+            The contact inbox is not publicly queryable. Access is restricted to trusted server-side code and the
+            authenticated moderation dashboard. Contact messages are not used for advertising or sold to third parties.
+            No automatic email notification is configured, so new messages must be checked in the admin inbox.
+          </p>
+          <p className="text-xs text-slate-500">
+            Messages can be marked resolved and manually deleted by an administrator. Automated deletion by age is not
+            currently configured. Please do not submit passwords, payment details, or highly sensitive personal data.
+            If contact intake is not configured or reachable, the website form remains disabled and does not save a message.
+          </p>
+        </section>
+
+        {/* 6. Client-Side Storage & Local Preferences */}
+        <section className="space-y-3">
+          <h2 className="text-xl font-bold text-slate-900 tracking-tight">
+            6. Client-Side Storage &amp; Cookies We Set
           </h2>
           <p>
             To provide a responsive user experience without requiring user accounts or database profiling, SwitchRoute uses client-side web storage (HTML5 LocalStorage) for:
@@ -173,7 +197,7 @@ export const PrivacyPage: React.FC = () => {
               <strong className="text-slate-900">Saved Bookmarks:</strong> Persisting tools, guides, and prompt recipes you explicitly bookmark on the site (<code className="text-blue-700 font-mono text-[11px] bg-slate-100 px-1 py-0.5 rounded border border-slate-200">saved_bookmarks</code>).
             </li>
             <li>
-              <strong className="text-slate-900">Cookie Consent Settings:</strong> Recording your consent selections regarding optional analytics or advertising technologies (<code className="text-blue-700 font-mono text-[11px] bg-slate-100 px-1 py-0.5 rounded border border-slate-200">cookie_consent</code>).
+              <strong className="text-slate-900">Cookie Consent Settings:</strong> Recording your consent selections regarding optional analytics or advertising technologies (<code className="text-blue-700 font-mono text-[11px] bg-slate-100 px-1 py-0.5 rounded border border-slate-200">cookie_consent_preferences</code>).
             </li>
           </ul>
           <p className="text-xs text-slate-500">
@@ -181,11 +205,11 @@ export const PrivacyPage: React.FC = () => {
           </p>
         </section>
 
-        {/* 6. European Privacy Rights (GDPR / UK GDPR / Swiss DPA) & Google-Certified CMP */}
+        {/* 7. European Privacy Rights (GDPR / UK GDPR / Swiss DPA) & Google-Certified CMP */}
         <section className="p-6 rounded-2xl border border-[#DFE7F3] bg-white shadow-invary-card space-y-4">
           <div className="flex items-center gap-2 text-slate-900 font-bold text-base">
             <Globe className="w-5 h-5 text-emerald-600" />
-            <h2>6. European Economic Area (EEA), UK &amp; Swiss Visitors (GDPR Compliance)</h2>
+            <h2>7. European Economic Area (EEA), UK &amp; Swiss Visitors (GDPR Compliance)</h2>
           </div>
           <p>
             If you are located in the EEA, the United Kingdom, or Switzerland, you are entitled to specific rights under the General Data Protection Regulation (GDPR), the UK Data Protection Act, and the Swiss Federal Act on Data Protection (FADP):
@@ -200,7 +224,7 @@ export const PrivacyPage: React.FC = () => {
           <div className="p-4 rounded-xl bg-[#F5F8FF] border border-[#DFE7F3] text-xs space-y-2">
             <strong className="block text-slate-900 font-semibold">Google-Certified Consent Management Platform (CMP):</strong>
             <p className="text-slate-600">
-              In compliance with Google's EU User Consent Policy and the IAB Europe Transparency and Consent Framework (TCF v2.2), visitors from the EEA, the UK, and Switzerland are presented with a Google-certified CMP consent dialog. Non-essential advertising cookies and personalized ad targeting are deactivated by default unless affirmative consent is granted. You can review or modify your consent settings at any time by selecting "Cookie Preferences" in our footer.
+              Current status: SwitchRoute's on-site Cookie Preferences panel stores browser-level choices; it is not itself a Google-certified CMP and does not transmit IAB TCF consent signals. Google requires publishers serving personalized ads in the EEA, UK, or Switzerland to use a certified CMP integrated with the TCF. We will configure the required consent flow before enabling ads for those visitors and update this notice when that setup is live.
             </p>
           </div>
         </section>
@@ -208,7 +232,7 @@ export const PrivacyPage: React.FC = () => {
         {/* 7. California Consumer Privacy Rights (CCPA / CPRA) */}
         <section className="space-y-3">
           <h2 className="text-xl font-bold text-slate-900 tracking-tight">
-            7. California Consumer Privacy Rights (CCPA / CPRA)
+            8. California Consumer Privacy Rights (CCPA / CPRA)
           </h2>
           <p>
             Under the California Consumer Privacy Act (CCPA) and California Privacy Rights Act (CPRA), California residents are entitled to specific privacy protections:
@@ -223,29 +247,23 @@ export const PrivacyPage: React.FC = () => {
           </p>
         </section>
 
-        {/* 8. Children's Information (COPPA) */}
+        {/* 9. Children's Information (COPPA) */}
         <section className="space-y-3">
           <h2 className="text-xl font-bold text-slate-900 tracking-tight">
-            8. Children's Privacy (COPPA)
+            9. Children's Privacy (COPPA)
           </h2>
           <p>
-            Protecting children while using the internet is paramount. SwitchRoute does not knowingly collect any Personal Identifiable Information from children under the age of 13. If you believe that your child provided personal information on our website, please contact us immediately and we will promptly remove such information from our records.
+            Protecting children while using the internet is paramount. SwitchRoute does not knowingly collect personal information from children under the age of 13. To report information that may need to be removed, contact <a href={`mailto:${siteConfig.links.email}`} className="underline">{siteConfig.links.email}</a>. Please provide only the minimum information needed to identify the issue; do not send passwords or payment credentials.
           </p>
         </section>
 
-        {/* 9. Contact Desk */}
+        {/* 10. Contact Desk */}
         <section className="pt-6 border-t border-[#DFE7F3] space-y-3">
           <h2 className="text-lg font-bold text-slate-900">
-            9. Contacting Our Privacy Officer
+            10. Contacting Our Privacy Officer
           </h2>
           <p>
-            For questions regarding this policy, cookie settings, or data protection rights, reach our designated privacy desk:
-          </p>
-          <p className="font-mono text-xs text-blue-600">
-            Email: privacy@techhacksai.com
-          </p>
-          <p className="text-xs text-slate-500">
-            Or submit a ticket directly through our <Link to="/contact" className="text-blue-600 hover:text-blue-700 underline">Contact Form</Link>.
+            For privacy questions, data-rights requests, or policy concerns, email <a href={`mailto:${siteConfig.links.email}`} className="text-blue-600 hover:text-blue-700 underline">{siteConfig.links.email}</a> or use our <Link to="/contact" className="text-blue-600 hover:text-blue-700 underline">Contact page</Link>. Requests are handled by email; please include enough detail to locate the relevant information and avoid sending passwords or payment credentials.
           </p>
         </section>
       </div>

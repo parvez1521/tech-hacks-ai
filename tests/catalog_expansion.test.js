@@ -13,7 +13,7 @@ test('catalog statistics count unique identities, mapped pairs, and prompt slugs
   const stats = getCatalogStats();
   assert.equal(stats.catalogIdentities, new Set([...toolsData, ...aiToolsData, ...proprietaryTools].map((item) => item.slug)).size);
   assert.equal(stats.openSourceTools, new Set(toolsData.map((item) => item.slug)).size);
-  assert.equal(stats.alternativeRelationships, 224);
+  assert.equal(stats.alternativeRelationships, 226);
   assert.equal(stats.uniquePrompts, 582);
   assert.equal(stats.proprietaryToolsWithAlternatives, 25);
   assert.equal(stats.imagePrompts, 548);

@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
+  content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}', './scripts/**/*.mjs'],
   darkMode: 'class',
   theme: {
     extend: {
@@ -25,6 +25,21 @@ export default {
         secondary: {
           DEFAULT: 'rgb(var(--color-secondary) / <alpha-value>)',
           foreground: 'rgb(var(--color-secondary-fg) / <alpha-value>)',
+        },
+        brand: {
+          midnight: 'rgb(var(--brand-midnight) / <alpha-value>)',
+          navy: 'rgb(var(--brand-navy) / <alpha-value>)',
+          blue: 'rgb(var(--brand-blue) / <alpha-value>)',
+          cyan: 'rgb(var(--brand-cyan) / <alpha-value>)',
+          violet: 'rgb(var(--brand-violet) / <alpha-value>)',
+          ice: 'rgb(var(--brand-ice) / <alpha-value>)',
+          slate: 'rgb(var(--brand-slate) / <alpha-value>)',
+          border: 'rgb(var(--brand-border) / <alpha-value>)',
+          'light-bg': 'rgb(var(--brand-light-bg) / <alpha-value>)',
+          'light-surface': 'rgb(var(--brand-light-surface) / <alpha-value>)',
+          'light-ink': 'rgb(var(--brand-light-ink) / <alpha-value>)',
+          'light-blue': 'rgb(var(--brand-light-blue) / <alpha-value>)',
+          'light-border': 'rgb(var(--brand-light-border) / <alpha-value>)',
         },
         invary: {
           blue: '#2563eb',

@@ -6,6 +6,7 @@ import { Footer } from './components/Footer';
 import { AmbientGlow } from './components/AmbientGlow';
 import { FloatingChatbot } from './components/FloatingChatbot';
 import { AdSenseBanner } from './components/AdSenseBanner';
+import { AdSenseRuntime } from './components/AdSenseRuntime';
 import { siteConfig, formatPageTitle } from './config/site';
 import {
   getToolBySlug,
@@ -23,6 +24,7 @@ import { getOfferBySlug } from './data/offersData';
 
 // Pages
 import { HomePage } from './pages/HomePage';
+import { BrandKitPage } from './pages/BrandKitPage';
 import { ToolsPage } from './pages/ToolsPage';
 import { ToolDetailPage } from './pages/ToolDetailPage';
 import { CategoriesPage } from './pages/CategoriesPage';
@@ -31,6 +33,7 @@ import { AlternativesPage } from './pages/AlternativesPage';
 import { AlternativeDetailPage } from './pages/AlternativeDetailPage';
 import { CollectionDetailPage } from './pages/CollectionDetailPage';
 import { AiToolsPage } from './pages/AiToolsPage';
+import { AiVideoToolsPage } from './pages/AiVideoToolsPage';
 import { AiToolDetailPage } from './pages/AiToolDetailPage';
 import { FreeAiSitesPage } from './pages/FreeAiSitesPage';
 import { FrontierModelsPage } from './pages/FrontierModelsPage';
@@ -95,7 +98,9 @@ export function getRouteTitle(route: string, params: Record<string, string> = {}
         : formatPageTitle('Collection Not Found');
     }
     case 'ai-tools':
-      return formatPageTitle('AI Tools & Generative Platforms Directory');
+      return formatPageTitle('AI Tools Directory: Free, Paid & Open Models');
+    case 'ai-video-tools':
+      return formatPageTitle('AI Video Generators: Free, Open-Source & Text-to-Video Tools');
     case 'ai-tool-detail': {
       const aiTool = getAiToolBySlug(params.slug);
       return aiTool
@@ -148,6 +153,8 @@ export function getRouteTitle(route: string, params: Record<string, string> = {}
         ? formatPageTitle(`${offer.title} — AI Deals & Benefits`)
         : formatPageTitle('Offer Not Found');
     }
+    case 'brand-kit':
+      return formatPageTitle('SwitchRoute Brand Kit: Logo, Colours & Typography');
     case 'about':
       return formatPageTitle('About Us — Editorial Mission & Standards');
     case 'contact':
@@ -209,7 +216,9 @@ export function getRouteDescription(route: string, params: Record<string, string
         : 'Curated software collection.';
     }
     case 'ai-tools':
-      return 'Comprehensive directory of top generative AI platforms, foundation models, code editors, and video generation engines.';
+      return 'Compare AI tools for video generation, image creation, coding, writing, research, and automation. Check free access, trials, open models, key features, and official links.';
+    case 'ai-video-tools':
+      return 'Compare AI video generators for text-to-video, image-to-video, and open-model workflows. Explore access options, hardware needs, licensing, and official tool pages.';
     case 'ai-tool-detail': {
       const aiTool = getAiToolBySlug(params.slug);
       return aiTool
@@ -262,6 +271,8 @@ export function getRouteDescription(route: string, params: Record<string, string
         ? `${offer.title} from ${offer.provider}. ${offer.benefitSummary} Eligibility: ${offer.eligibility}`
         : 'Verified AI deal and benefit terms.';
     }
+    case 'brand-kit':
+      return 'Explore the SwitchRoute digital brand kit: route-mark assets, colour tokens, typography, interface styles, accessibility principles, and brand voice.';
     case 'about':
       return 'Learn about the mission, editorial methodology, and independent review standards behind SwitchRoute.';
     case 'contact':
@@ -343,6 +354,8 @@ const AppRoutes: React.FC = () => {
         return <CollectionDetailPage />;
       case 'ai-tools':
         return <AiToolsPage />;
+      case 'ai-video-tools':
+        return <AiVideoToolsPage />;
       case 'ai-tool-detail':
         return <AiToolDetailPage />;
       case 'community-redirect':
@@ -377,6 +390,8 @@ const AppRoutes: React.FC = () => {
         return <OffersPage />;
       case 'offer-detail':
         return <OfferDetailPage />;
+      case 'brand-kit':
+        return <BrandKitPage />;
       case 'about':
         return <AboutPage />;
       case 'contact':
@@ -404,13 +419,17 @@ const AppRoutes: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-background text-foreground relative selection:bg-primary/25 selection:text-foreground">
+    <div className="min-h-screen flex w-full min-w-0 max-w-full flex-col overflow-x-clip bg-background text-foreground relative selection:bg-primary/25 selection:text-foreground">
       <AmbientGlow />
       <Header />
-      <main className="flex-1 relative z-10">{renderRoute()}</main>
+      <main className="flex-1 min-w-0 w-full max-w-full relative z-10">
+        {renderRoute()}
+        {route === 'home' && <AdSenseBanner slot={siteConfig.adsense.slots.homepage} format="auto" />}
+      </main>
       <Footer />
       <FloatingChatbot />
       <CookieConsentBanner />
+      <AdSenseRuntime />
     </div>
   );
 };
