@@ -2,6 +2,14 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { ArrowUpRight, Check, ExternalLink } from 'lucide-react';
 import { aiModels, getCurrentModelAccessRoutes, modelAccessProviders } from '../data/modelAccessCatalog';
 
+const accessTypeLabels: Record<string, string> = {
+  'free-weekly-shared': 'Free weekly · shared pool',
+  'free-daily-allowance': 'Free daily allowance',
+  'free-daily-credits': 'Free daily credits',
+  'paid-api': 'Paid API',
+  'browser-plan': 'Subscription plan',
+};
+
 export const FrontierModelsPage: React.FC = () => {
   const [category, setCategory] = useState('all');
   const [query, setQuery] = useState('');
@@ -32,7 +40,12 @@ export const FrontierModelsPage: React.FC = () => {
     <header className="max-w-3xl mb-10 sm:mb-12">
       <p className="text-xs font-semibold tracking-[.16em] uppercase text-primary mb-3">Model index · reviewed 3 Nov 2026</p>
       <h1 className="text-4xl sm:text-5xl font-semibold tracking-tight text-foreground">Frontier models</h1>
-      <p className="mt-4 max-w-2xl text-base leading-7 text-muted-foreground">A model-first guide to leading releases, what they do, and where they can be accessed. Provider routes are labeled by relationship; listing a route does not imply affiliation.</p>
+      <p className="mt-4 max-w-2xl text-base leading-7 text-muted-foreground">A model-first guide to leading releases, what they are good at, official API pricing, and current ways to try them. Community routes are separate from official provider access and may have shared limits.</p>
+      <div className="mt-6 grid gap-3 sm:grid-cols-3">
+        <div className="rounded-xl border border-border bg-card p-4"><p className="text-xs text-muted-foreground">Reasoning & work</p><p className="mt-1 font-semibold text-foreground">GPT-6 Astra</p><p className="mt-1 text-xs leading-5 text-muted-foreground">Coding, computer use, research and complex tasks</p></div>
+        <div className="rounded-xl border border-border bg-card p-4"><p className="text-xs text-muted-foreground">Agentic coding</p><p className="mt-1 font-semibold text-foreground">Claude Opus 5.5</p><p className="mt-1 text-xs leading-5 text-muted-foreground">Long-running codebase work and analysis</p></div>
+        <div className="rounded-xl border border-border bg-card p-4"><p className="text-xs text-muted-foreground">Video & storytelling</p><p className="mt-1 font-semibold text-foreground">Seedance 2.5</p><p className="mt-1 text-xs leading-5 text-muted-foreground">Native audio-video generation and reference control</p></div>
+      </div>
     </header>
     <div className="flex flex-col sm:flex-row gap-3 sm:items-center justify-between border-y border-border py-4 mb-6">
       <div className="flex flex-wrap gap-2" aria-label="Filter models by category">
@@ -49,6 +62,7 @@ export const FrontierModelsPage: React.FC = () => {
               <p className="text-xs tracking-wide text-muted-foreground">{model.family} · {model.category === 'video' ? 'Video generation' : 'AI assistants & reasoning'}</p>
               <h2 className="text-2xl font-semibold mt-2">{model.name}</h2>
               <p className="text-sm text-muted-foreground mt-1">Model owner: <strong className="text-foreground font-medium">{model.organization}</strong></p>
+              <p className="mt-3 text-sm leading-6 text-secondary-foreground">{model.summary}</p>
               <div className="flex flex-wrap gap-2 mt-4">{model.capabilities.map((capability) => <span key={capability} className="text-xs px-2.5 py-1 rounded-full border border-border text-muted-foreground">{capability}</span>)}</div>
               <p className="mt-5 text-sm"><span className="font-medium">Official API:</span> {model.officialApi.available ? 'Available' : 'Not listed'}{model.officialApi.pricing ? ` · ${model.officialApi.pricing}` : ''}</p>
               <p className="text-xs text-muted-foreground mt-2">Last checked {model.lastVerifiedAt}</p>
@@ -56,14 +70,16 @@ export const FrontierModelsPage: React.FC = () => {
             <a href={model.documentationUrl} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 text-sm text-primary hover:underline shrink-0">Official model documentation <ExternalLink className="w-4 h-4" /></a>
           </div>
           <div className="mt-6 pt-5 border-t border-border">
-            <h3 className="text-sm font-semibold mb-3">Access routes</h3>
+            <h3 className="text-sm font-semibold mb-3">Where to try it · access routes and pricing</h3>
             <div className="grid md:grid-cols-2 gap-3">
               {routes.map((route) => {
                 const provider = modelAccessProviders.find((item) => item.id === route.providerId)!;
                 const relationship = provider.mode === 'official' ? 'Official provider access' : provider.mode === 'third-party-api' ? 'Third-party API route' : 'Community / promotional access';
                 return <div key={route.id} className="border border-border rounded-lg p-4">
                   <div className="flex justify-between items-start gap-3"><div><p className="font-medium text-sm">{provider.name}</p><p className="text-xs text-muted-foreground mt-1">{relationship}</p></div><a href={route.claimUrl} target="_blank" rel="noreferrer" aria-label={`Open ${provider.name}`} className="text-primary"><ArrowUpRight className="w-4 h-4" /></a></div>
-                  <p className="text-sm mt-3">{route.accessType === 'free-weekly-shared' ? route.allowance : route.accessType === 'paid-api' ? 'Paid access' : 'Subscription plan'}</p>
+                  <span className={`inline-flex mt-3 rounded-md border px-2 py-1 text-[10px] font-semibold ${route.accessType.startsWith('free-') ? 'border-emerald-500/25 bg-emerald-500/10 text-emerald-700 dark:text-emerald-300' : 'border-border bg-muted text-muted-foreground'}`}>{accessTypeLabels[route.accessType] || 'Access route'}</span>
+                  <p className="text-sm mt-2">{route.allowance || (route.accessType === 'paid-api' ? 'Paid usage; account billing required.' : 'Requires a paid subscription plan.')}</p>
+                  {route.quickNote && <p className="text-xs font-medium leading-5 text-secondary-foreground mt-2">{route.quickNote}</p>}
                   <p className="text-xs text-muted-foreground mt-2">{route.conditions}</p>
                   <p className="text-xs text-muted-foreground mt-2">Region: {route.region} · Account required: {route.requiresAccount ? 'Yes' : 'No'}</p>
                   <p className="text-xs text-muted-foreground mt-1">Verified {route.lastVerifiedAt}{route.expiryDate ? ` · Expires ${route.expiryDate}` : ''} · <a className="underline" href={route.sourceUrl} target="_blank" rel="noreferrer">Source and terms</a></p>

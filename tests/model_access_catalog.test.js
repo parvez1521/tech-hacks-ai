@@ -16,10 +16,19 @@ test('model access catalog keeps models, providers and routes distinct and conne
   assert.equal(aiToolsData.some((tool) => tool.slug === 'rusherai'), false);
 });
 
-test('Seedance has no free access listing and Rusher routes link the two documented models', () => {
-  assert.equal(getCurrentModelAccessRoutes('seedance-2-5').some((route) => route.accessType === 'free-weekly-shared'), false);
+test('free routes distinguish daily model allowance, weekly shared tokens, and daily Seedance credits', () => {
+  const seedanceFreeRoutes = getCurrentModelAccessRoutes('seedance-2-5').filter((route) => route.accessType === 'free-daily-credits');
+  assert.equal(seedanceFreeRoutes.length, 1);
+  assert.equal(seedanceFreeRoutes[0].providerId, 'dreamina');
+  assert.match(seedanceFreeRoutes[0].quickNote, /region- and account-dependent/);
+
   const rusherRoutes = getCurrentModelAccessRoutes().filter((route) => route.providerId === 'rusherai');
   assert.deepEqual(rusherRoutes.map((route) => route.modelId).sort(), ['claude-opus-5-5', 'gpt-6-astra']);
+
+  const omniRoute = getCurrentModelAccessRoutes('gpt-6-astra').find((route) => route.providerId === 'omnirush');
+  assert.equal(omniRoute.accessType, 'free-daily-allowance');
+  assert.match(omniRoute.conditions, /at least 7 days old/);
+  assert.equal(modelAccessProviders.find((provider) => provider.id === 'dreamina').mode, 'official');
 });
 
 test('expired and unverified routes never appear in current access results', () => {

@@ -63,6 +63,7 @@ export const FreeAiSitesPage: React.FC = () => {
   const openSourceCount = allFreeTools.filter((t) => t.freeAccessType === 'open-source-local' || t.isSelfHostable).length;
   const recurringCount = allFreeTools.filter((t) => t.freeAccessType === 'recurring-free').length;
   const noAccountCount = allFreeTools.filter((t) => !t.requiresAccount).length;
+  const freeModelRoutes = getCurrentModelAccessRoutes().filter((route) => ['free-weekly-shared', 'free-daily-allowance', 'free-daily-credits'].includes(route.accessType));
 
   return (
     <div className="max-w-6xl mx-auto px-4 sm:px-6 py-8">
@@ -232,23 +233,25 @@ export const FreeAiSitesPage: React.FC = () => {
 
       <section className="mb-10" aria-labelledby="verified-routes-heading">
         <div className="flex items-end justify-between gap-4 mb-4">
-          <div><p className="text-xs tracking-wide text-muted-foreground">Model access · provider-published quota</p><h2 id="verified-routes-heading" className="text-xl font-semibold text-foreground mt-1">Verified free model routes</h2></div>
+          <div><p className="text-xs tracking-wide text-muted-foreground">Model access · provider-published allowances</p><h2 id="verified-routes-heading" className="text-xl font-semibold text-foreground mt-1">Free frontier model routes</h2><p className="mt-1 text-xs text-muted-foreground">Daily credits and weekly pools are different kinds of free access; neither means unlimited use.</p></div>
           <a href="/frontier-models" className="text-sm text-primary hover:underline">Browse frontier models</a>
         </div>
         <div className="grid md:grid-cols-2 gap-3">
-          {getCurrentModelAccessRoutes().filter((route) => route.accessType === 'free-weekly-shared').map((route) => {
+          {freeModelRoutes.map((route) => {
             const model = aiModels.find((item) => item.id === route.modelId)!;
             const provider = modelAccessProviders.find((item) => item.id === route.providerId)!;
             return <article key={route.id} className="rounded-lg border border-border bg-card p-4">
               <div className="flex justify-between gap-3"><div><p className="text-xs text-muted-foreground">{model.organization} model</p><h3 className="font-semibold text-foreground">{model.name}</h3></div><span className="text-xs text-emerald-700 dark:text-emerald-300">Verified active</span></div>
-              <p className="text-sm mt-3">{route.allowance}; refreshes weekly.</p>
-              <p className="text-xs text-muted-foreground mt-2">Via {provider.name} · third-party community access, not affiliated with {model.organization}. Account required. Region not published.</p>
+              <span className={`inline-flex mt-3 rounded-md border px-2 py-1 text-[10px] font-semibold ${route.accessType.startsWith('free-') ? 'border-emerald-500/25 bg-emerald-500/10 text-emerald-700 dark:text-emerald-300' : 'border-border bg-muted text-muted-foreground'}`}>{route.accessType === 'free-weekly-shared' ? 'Free weekly · shared pool' : route.accessType === 'free-daily-allowance' ? 'Free daily allowance' : 'Free daily credits'}</span>
+              <p className="text-sm mt-2">{route.allowance}</p>
+              {route.quickNote && <p className="text-xs font-medium leading-5 text-secondary-foreground mt-2">{route.quickNote}</p>}
+              <p className="text-xs text-muted-foreground mt-2">Via {provider.name} · {provider.mode === 'official' ? 'official product access' : 'independent third-party access'} · {route.region}.</p>
               <p className="text-xs text-muted-foreground mt-2">{route.conditions}</p>
               <div className="flex gap-4 text-xs mt-3"><a className="underline" href={route.claimUrl} target="_blank" rel="noreferrer">Claim at provider</a><a className="underline" href={route.sourceUrl} target="_blank" rel="noreferrer">Source and terms</a><span>Checked {route.lastVerifiedAt}</span></div>
             </article>;
           })}
         </div>
-        <p className="text-xs text-muted-foreground mt-3">The provider describes the quota as shared across its listed models. No expiry date is published; continued availability is not guaranteed. Seedance 2.5 is not included because a qualifying free route was not verified.</p>
+        <p className="text-xs text-muted-foreground mt-3">Provider allowances can change and may be shared across several models. Daily credits do not promise a fixed number of clips; check the generation quote, region, account eligibility and export rules before relying on a route.</p>
       </section>
 
       {/* Grid or Empty State */}
