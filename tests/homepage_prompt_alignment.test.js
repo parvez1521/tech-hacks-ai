@@ -41,6 +41,11 @@ describe('Homepage prompt showcase and section alignment', () => {
     assert.match(home, /href: '\/frontier-models'/);
     assert.match(home, /href: '\/free-ai-sites'/);
     assert.match(home, /href: '\/github-projects'/);
+    assert.match(html, /Frontier access highlights/);
+    assert.match(html, /GPT-6 Astra/);
+    assert.match(html, /Claude Opus 5\.5/);
+    assert.match(html, /Seedance 2\.5/);
+    assert.match(home, /category\.subcategories\.map/);
   });
 
   it('keeps the Prompt Library and its featured prompt assets available outside the homepage', () => {

@@ -5,13 +5,14 @@ import { UniversalSearch } from '../components/UniversalSearch';
 import { HeroSignalVisual } from '../components/HeroSignalVisual';
 import { DailyDiscoveriesSection } from '../components/DailyDiscoveriesSection';
 import { aiCategories } from '../data/aiToolsData';
+import { aiModels, getCurrentModelAccessRoutes, modelAccessProviders } from '../data/modelAccessCatalog';
 import { getActiveOffers, getFeaturedOffers } from '../data/offersData';
 
 const featuredCollections = [
-  { title: 'Frontier Models', href: '/frontier-models', description: 'Model capabilities, official docs and access routes.', eyebrow: 'Model index', tone: 'model' },
-  { title: 'Free Access', href: '/free-ai-sites', description: 'Free tiers, trials and current promotional access.', eyebrow: 'Checked routes', tone: 'access' },
-  { title: 'All AI Tools', href: '/ai-tools', description: 'Search platforms, products and services by task.', eyebrow: 'Platform directory', tone: 'catalog' },
-  { title: 'GitHub Projects', href: '/github-projects', description: 'Reviewed open-source projects for AI and software workflows.', eyebrow: 'Open source', tone: 'catalog' },
+  { title: 'Frontier Models', href: '/frontier-models', description: 'Compare capabilities, official pricing and places to try leading models.', eyebrow: 'Model index', tone: 'model', highlights: ['GPT-6 Astra', 'Claude Opus 5.5', 'Seedance 2.5'] },
+  { title: 'Free Access', href: '/free-ai-sites', description: 'Find daily credits, weekly shared allowances, free plans and local software.', eyebrow: 'Checked routes', tone: 'access', highlights: ['Daily allowances', 'Weekly token pools', 'Free local tools'] },
+  { title: 'All AI Tools', href: '/ai-tools', description: 'Explore tools for writing, coding, image, video, audio and research.', eyebrow: 'Platform directory', tone: 'catalog', highlights: ['By task', 'By category', 'By pricing'] },
+  { title: 'GitHub Projects', href: '/github-projects', description: 'Explore useful community and open-source projects with clear review labels.', eyebrow: 'Open source', tone: 'catalog', highlights: ['Self-hosted apps', 'Developer tools', 'AI projects'] },
 ];
 
 const resources = [
@@ -24,6 +25,7 @@ const resources = [
 export const HomePage: React.FC = () => {
   const activeOffers = getActiveOffers();
   const offers = getFeaturedOffers().filter((offer) => activeOffers.some((active) => active.slug === offer.slug)).slice(0, 2);
+  const freeModelRoutes = getCurrentModelAccessRoutes().filter((route) => ['free-weekly-shared', 'free-daily-allowance', 'free-daily-credits'].includes(route.accessType));
 
   return (
     <main className="pb-12 sm:pb-16">
@@ -76,8 +78,40 @@ export const HomePage: React.FC = () => {
                 <ArrowRight className="h-4 w-4 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-0.5 group-hover:text-primary" aria-hidden="true" />
               </div>
               <p className="mt-2 text-sm leading-6 text-muted-foreground">{item.description}</p>
+              <div className="mt-4 flex flex-wrap gap-1.5">{item.highlights.map((highlight) => <span key={highlight} className="rounded-md border border-border/80 bg-muted/50 px-2 py-1 text-[11px] font-medium text-secondary-foreground">{highlight}</span>)}</div>
             </Link>
           ))}
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-7xl border-t border-border/70 px-4 py-10 sm:px-6 sm:py-12" aria-labelledby="frontier-access-heading">
+        <div className="mb-5 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+          <div>
+            <p className="text-sm text-muted-foreground">Frontier access highlights · checked 3 Nov 2026</p>
+            <h2 id="frontier-access-heading" className="mt-1 text-2xl font-semibold tracking-tight text-foreground">Try frontier models without starting with a subscription</h2>
+            <p className="mt-2 max-w-2xl text-sm leading-6 text-muted-foreground">These are provider-specific routes, not unlimited model access. Check the quota, account rules and region before you begin.</p>
+          </div>
+          <Link to="/frontier-models" className="inline-flex min-h-11 items-center gap-1 text-sm font-medium text-primary hover:underline">Compare all models <ArrowRight className="h-4 w-4" aria-hidden="true" /></Link>
+        </div>
+        <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
+          {freeModelRoutes.map((route) => {
+            const model = aiModels.find((item) => item.id === route.modelId);
+            const provider = modelAccessProviders.find((item) => item.id === route.providerId);
+            if (!model || !provider) return null;
+            const accessLabel = route.accessType === 'free-weekly-shared' ? 'Free weekly · shared pool' : route.accessType === 'free-daily-allowance' ? 'Free daily allowance' : 'Free daily credits';
+            return <article key={route.id} className="flex min-h-40 flex-col rounded-xl border border-border bg-card p-4 transition-colors hover:border-primary/40">
+              <div className="flex items-start justify-between gap-2">
+                <div><p className="text-xs text-muted-foreground">{model.organization}</p><h3 className="mt-1 text-base font-semibold text-foreground">{model.name}</h3></div>
+                <span className="shrink-0 rounded-md border border-emerald-500/25 bg-emerald-500/10 px-2 py-1 text-[10px] font-semibold text-emerald-700 dark:text-emerald-300">{accessLabel}</span>
+              </div>
+              <p className="mt-3 text-sm font-medium leading-5 text-foreground">{route.allowance}</p>
+              <p className="mt-2 text-xs leading-5 text-muted-foreground">{provider.name} · {route.quickNote || route.conditions}</p>
+              <div className="mt-auto flex items-center justify-between gap-2 pt-4">
+                <span className="text-[11px] text-muted-foreground">Checked {route.lastVerifiedAt}</span>
+                <a href={route.claimUrl} target="_blank" rel="noreferrer" className="text-xs font-semibold text-primary hover:underline">Try route ↗</a>
+              </div>
+            </article>;
+          })}
         </div>
       </section>
 
@@ -89,11 +123,17 @@ export const HomePage: React.FC = () => {
           </div>
           <Link to="/ai-tools" className="inline-flex min-h-11 items-center gap-1 text-sm font-medium text-primary hover:underline">All tools <ArrowRight className="h-4 w-4" aria-hidden="true" /></Link>
         </div>
-        <div className="grid grid-cols-2 gap-x-5 sm:grid-cols-3 lg:grid-cols-5">
+        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {aiCategories.map((category) => (
-            <Link key={category.id} to={`/ai-tools?category=${encodeURIComponent(category.id)}`} className="group flex min-h-12 items-center justify-between gap-2 border-b border-border/70 px-2 text-sm text-secondary-foreground transition-colors hover:text-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-primary">
-              <span>{category.name}</span>
-              <ArrowRight className="h-3.5 w-3.5 shrink-0 text-muted-foreground opacity-0 transition-[opacity,transform] group-hover:translate-x-0.5 group-hover:opacity-100" aria-hidden="true" />
+            <Link key={category.id} to={`/ai-tools?category=${encodeURIComponent(category.id)}`} className="group flex min-h-40 flex-col rounded-xl border border-border bg-card p-4 transition-colors hover:border-primary/45 hover:bg-muted/30 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+              <div className="flex items-center justify-between gap-3">
+                <h3 className="text-sm font-semibold text-foreground">{category.name}</h3>
+                <ArrowRight className="h-4 w-4 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-0.5 group-hover:text-primary" aria-hidden="true" />
+              </div>
+              <p className="mt-2 text-xs leading-5 text-muted-foreground">{category.description}</p>
+              <div className="mt-auto flex flex-wrap gap-1.5 pt-3">
+                {category.subcategories.map((subcategory) => <span key={subcategory} className="rounded-md border border-border/80 bg-muted/50 px-2 py-1 text-[10px] font-medium text-secondary-foreground">{subcategory}</span>)}
+              </div>
             </Link>
           ))}
         </div>

@@ -8,16 +8,16 @@ export const catalogSections = [
 ] as const;
 
 export const aiSectionCategories = [
-  { id: 'assistants', name: 'AI Assistants & Reasoning', iconName: 'Bot', description: 'General intelligence assistants, reasoning models, and research agents.' },
-  { id: 'writing', name: 'Writing & Content', iconName: 'PenTool', description: 'Copywriting, long-form articles, summarization, and tone enhancement.' },
-  { id: 'image', name: 'Image Generation', iconName: 'Image', description: 'Text-to-image synthesis, upscaling, editing, and style transfer.' },
-  { id: 'video', name: 'Video Generation & Editing', iconName: 'Video', description: 'Generative video models, video editing, and text-to-video tools.' },
-  { id: 'voice', name: 'Audio & Voice', iconName: 'Mic', description: 'AI voice generation, speech cloning, text-to-speech, and audio isolation.' },
-  { id: 'music', name: 'Music', iconName: 'Music', description: 'Full song composition, instrumental tracks, and stems generation.' },
-  { id: 'coding', name: 'Coding & Development', iconName: 'Code', description: 'AI code editors, UI scaffolding, code completion, and terminal agents.' },
-  { id: 'productivity', name: 'Productivity & Research', iconName: 'Search', description: 'Neural search engines, meeting transcribers, and knowledge synthesizers.' },
-  { id: 'automation', name: 'Automation & Agents', iconName: 'Zap', description: 'Connecting AI models to databases, webhooks, and multi-step processes.' },
-  { id: '3d', name: 'Design & Creativity', iconName: 'Palette', description: '3D generation, visual design, and creative production workflows.' },
+  { id: 'assistants', name: 'AI Assistants & Reasoning', iconName: 'Bot', description: 'General chat, advanced reasoning, math, multimodal analysis, and research agents.', subcategories: ['Chat assistants', 'Reasoning & math', 'Deep research', 'Multimodal analysis'] },
+  { id: 'writing', name: 'Writing & Content', iconName: 'PenTool', description: 'Create, edit, rewrite, summarize, and repurpose content for every channel.', subcategories: ['Copywriting', 'Blogs & SEO', 'Social content', 'Summarizers'] },
+  { id: 'image', name: 'Image Generation', iconName: 'Image', description: 'Generate visuals, edit existing images, upscale, and build product creatives.', subcategories: ['Text-to-image', 'Image editing', 'Upscaling', 'Product visuals'] },
+  { id: 'video', name: 'Video Generation & Editing', iconName: 'Video', description: 'Make clips, animate images, edit footage, and build creator-ready videos.', subcategories: ['Text-to-video', 'Image-to-video', 'AI video editing', 'Avatars & captions'] },
+  { id: 'voice', name: 'Audio & Voice', iconName: 'Mic', description: 'Generate speech, clone voices, transcribe recordings, and clean audio.', subcategories: ['Text-to-speech', 'Voice cloning', 'Transcription', 'Audio cleanup'] },
+  { id: 'music', name: 'Music', iconName: 'Music', description: 'Compose songs, create instrumentals, and separate or remix audio stems.', subcategories: ['Song generation', 'Instrumentals', 'Music editing', 'Stem separation'] },
+  { id: 'coding', name: 'Coding & Development', iconName: 'Code', description: 'Build apps, write code, debug projects, and work with terminal agents.', subcategories: ['AI code editors', 'CLI agents', 'App builders', 'Debugging & review'] },
+  { id: 'productivity', name: 'Productivity & Research', iconName: 'Search', description: 'Find answers, research sources, summarize documents, and organize work.', subcategories: ['Web search', 'PDF & documents', 'Meeting notes', 'Knowledge bases'] },
+  { id: 'automation', name: 'Automation & Agents', iconName: 'Zap', description: 'Connect apps and models with workflows, browser actions, and agent teams.', subcategories: ['Workflow builders', 'Browser agents', 'App integrations', 'Multi-agent systems'] },
+  { id: '3d', name: 'Design & Creativity', iconName: 'Palette', description: 'Explore visual concepts, 3D assets, interface design, and creative production.', subcategories: ['3D generation', 'UI & web design', 'Presentations', 'Brand assets'] },
 ] as const;
 
 export const utilityCategoryDefinitions: Array<{
