@@ -43,3 +43,17 @@ test('header marks exact and nested current routes in desktop and mobile navigat
   assert.match(source, /groups\.map\(\(group\) => renderGroup\(group, true\)\)/, 'The mobile menu uses the same route-aware groups');
   assert.match(source, /min-h-11/, 'Mobile links keep a 44px touch target');
 });
+
+
+test('desktop navigation keeps dropdowns mutually exclusive and closes them on outside interaction or Escape', () => {
+  const source = read('src/components/Header.tsx');
+  assert.match(source, /const \[desktopOpenGroup, setDesktopOpenGroup\] = useState<string \| null>\(null\)/);
+  assert.match(source, /setDesktopOpenGroup\(\(current\) => current === group\.name \? null : group\.name\)/);
+  assert.match(source, /aria-expanded=\{isOpen\}/);
+  assert.match(source, /aria-controls=\{menuId\}/);
+  assert.match(source, /hidden=\{!isOpen\}/);
+  assert.match(source, /document\.addEventListener\('pointerdown', closeOnOutsidePointer\)/);
+  assert.match(source, /document\.addEventListener\('focusin', closeOnOutsideFocus\)/);
+  assert.match(source, /desktopTriggerRefs\.current\[openGroup\]\?\.focus\(\)/);
+  assert.match(source, /setDesktopOpenGroup\(null\)/);
+});
