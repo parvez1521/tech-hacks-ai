@@ -20,7 +20,7 @@ import {
   getFreeToolBySlug,
 } from './services/aiCatalogService';
 import { getOfferBySlug } from './data/offersData';
-import { githubProjects } from './data/githubProjectsData';
+import { listedGitHubProjects } from './data/githubProjectsData';
 
 // Pages
 import { HomePage } from './pages/HomePage';
@@ -115,7 +115,7 @@ export function getRouteTitle(route: string, params: Record<string, string> = {}
     case 'github-projects':
       return formatPageTitle('Curated GitHub Projects: Free & Open Source Software');
     case 'github-project-detail': {
-      const project = githubProjects.find((item) => item.slug === params.slug);
+      const project = listedGitHubProjects.find((item) => item.slug === params.slug);
       return project ? formatPageTitle(`${project.name} — GitHub Project Details`) : formatPageTitle('GitHub Project Not Found');
     }
     case 'guides':
@@ -444,7 +444,7 @@ const AppRoutes: React.FC = () => {
   );
 };
 
-export const githubProjectDetailPaths = githubProjects.map((project) => `/github-projects/${project.slug}`);
+export const githubProjectDetailPaths = listedGitHubProjects.map((project) => `/github-projects/${project.slug}`);
 
 export const App: React.FC = () => {
   return (
