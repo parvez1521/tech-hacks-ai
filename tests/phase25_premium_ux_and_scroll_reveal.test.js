@@ -143,40 +143,32 @@ describe('Phase 25: Premium UX, Scroll Reveal & Smart Welcome', () => {
   });
 
   // ──────────────────────────────────────────────────────────────────────────
-  // 5. HomePage imports and uses useScrollReveal
+  // 5. Homepage keeps the discovery flow static and readable
   // ──────────────────────────────────────────────────────────────────────────
-  it('HomePage imports useScrollReveal', () => {
+  it('HomePage does not depend on scroll reveal for content visibility', () => {
     const src = read('src/pages/HomePage.tsx');
-    assert.ok(
-      src.includes("from '../hooks/useScrollReveal'"),
-      "HomePage should import useScrollReveal from hooks"
-    );
+    assert.match(src, /aria-labelledby="home-hero-heading"/);
+    assert.doesNotMatch(src, /from '\.\.\/hooks\/useScrollReveal'/);
   });
 
-  it('HomePage declares multiple useScrollReveal instances for below-fold sections', () => {
+  it('HomePage exposes below-fold sections without animation hooks', () => {
     const src = read('src/pages/HomePage.tsx');
-    // Should have at least 5 reveal hooks for below-fold sections
-    const matches = src.match(/useScrollReveal/g) || [];
-    assert.ok(
-      matches.length >= 6,
-      `Expected at least 6 useScrollReveal calls (import + 5+ sections), got ${matches.length}`
-    );
+    for (const id of ['collections-heading', 'categories-heading', 'discoveries-heading', 'offers-heading', 'resources-heading']) assert.ok(src.includes(id), `${id} remains in the document flow`);
+    assert.doesNotMatch(src, /useScrollReveal/);
   });
 
-  it('HomePage sections use reveal-section class', () => {
+  it('HomePage does not hide sections behind reveal classes', () => {
     const src = read('src/pages/HomePage.tsx');
-    assert.ok(
-      src.includes('reveal-section'),
-      'HomePage should apply reveal-section class to below-fold sections'
-    );
+    assert.doesNotMatch(src, /reveal-section/);
   });
 
   it('Hero section (Section 1) does NOT have reveal-section class', () => {
     const src = read('src/pages/HomePage.tsx');
     // The first section tag should be the hero with no reveal-section
-    const heroStart = src.indexOf('<section className="hero-shell');
+    const heroStart = src.indexOf('aria-labelledby="home-hero-heading"');
     const heroEnd = src.indexOf('</section>', heroStart);
     const heroSection = src.slice(heroStart, heroEnd);
+    assert.ok(heroStart >= 0 && heroEnd > heroStart, 'Hero section is present');
     assert.ok(
       !heroSection.includes('reveal-section'),
       'Hero section (above fold) should NOT have scroll-reveal applied'
@@ -190,7 +182,7 @@ describe('Phase 25: Premium UX, Scroll Reveal & Smart Welcome', () => {
     const src = read('src/components/Header.tsx');
     assert.ok(src.includes("import { ThemeToggle } from './ThemeToggle'"), 'Header imports the shared theme control');
     assert.ok(src.includes('<ThemeToggle />'), 'Desktop theme control is rendered');
-    assert.ok(src.includes('<ThemeToggle compact />'), 'Mobile theme control is rendered');
+    assert.ok(src.includes('<ThemeToggle /></div></nav>'), 'Mobile theme control is rendered in the expanded menu');
 
     const toggleSrc = read('src/components/ThemeToggle.tsx');
     assert.ok(toggleSrc.includes("aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}"), 'Theme control name announces the destination theme');

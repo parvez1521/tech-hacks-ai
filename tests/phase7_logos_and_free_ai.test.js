@@ -215,7 +215,7 @@ describe('Phase 7: Official Brand Logos & Verified Free AI Tools Directory', () 
     setupMockBrowser('https://openalternative.co/free-ai-sites');
     const html = renderClean(React.createElement(ssrModule.App));
 
-    assert.ok(html.includes('Free AI Sites &amp; Generative Tools') || html.includes('Free AI Sites & Generative Tools'), 'Renders Free AI heading');
+    assert.ok(html.includes('Free AI Access'), 'Renders the free access collection heading');
     assert.ok(html.includes('100% Open Source &amp; Local') || html.includes('100% Open Source & Local'), 'Renders Open Source tab');
     assert.ok(html.includes('Recurring Free Plan'), 'Renders Recurring Free Plan tab');
     assert.ok(html.includes('No Account Required'), 'Renders No Account Required tab');
@@ -256,14 +256,14 @@ describe('Phase 7: Official Brand Logos & Verified Free AI Tools Directory', () 
     assert.ok(html.includes('https://www.anthropic.com/pricing'), 'Links to official Anthropic pricing URL');
   });
 
-  test('homepage renders official logos on open-source and proprietary software cards', async () => {
+  test('open-source and proprietary directories render official logos on their cards', async () => {
     ssrModule = await import('../dist/test-ssr.js');
-    setupMockBrowser('https://openalternative.co/');
-    const html = renderClean(React.createElement(ssrModule.App));
+    setupMockBrowser('https://openalternative.co/alternatives');
+    const alternativesHtml = renderClean(React.createElement(ssrModule.App));
+    assert.ok(alternativesHtml.includes('src="/logos/figma.svg"') || alternativesHtml.includes('src="/logos/notion.svg"'), 'Alternative cards render official SVGs');
 
-    // Section 2 proprietary cards
-    assert.ok(html.includes('src="/logos/figma.svg"') || html.includes('src="/logos/notion.svg"'), 'Proprietary cards render official SVGs');
-    // Section 3 AI cards
-    assert.ok(html.includes('src="/logos/runway.svg"') || html.includes('src="/logos/claude.svg"'), 'AI cards render official SVGs');
+    setupMockBrowser('https://openalternative.co/tools');
+    const toolsHtml = renderClean(React.createElement(ssrModule.App));
+    assert.ok(toolsHtml.includes('src="/logos/supabase.svg"'), 'Open-source tool cards render the mapped SVG logo');
   });
 });

@@ -33,6 +33,8 @@ import { CollectionDetailPage } from './pages/CollectionDetailPage';
 import { AiToolsPage } from './pages/AiToolsPage';
 import { AiToolDetailPage } from './pages/AiToolDetailPage';
 import { FreeAiSitesPage } from './pages/FreeAiSitesPage';
+import { FrontierModelsPage } from './pages/FrontierModelsPage';
+import { GitHubProjectsPage } from './pages/GitHubProjectsPage';
 import { GuidesPage } from './pages/GuidesPage';
 import { GuideDetailPage } from './pages/GuideDetailPage';
 import { PromptLibraryPage } from './pages/PromptLibraryPage';
@@ -101,7 +103,11 @@ export function getRouteTitle(route: string, params: Record<string, string> = {}
          : formatPageTitle('AI Tool Not Found');
     }
     case 'free-ai-sites':
-      return formatPageTitle('Free AI Sites & Zero-Cost Generative Tools');
+      return formatPageTitle('Free AI Access: Current Tiers, Trials & Credits');
+    case 'frontier-models':
+      return formatPageTitle('Frontier AI Models: Capabilities & Access Routes');
+    case 'github-projects':
+      return formatPageTitle('Curated GitHub Projects: Free & Open Source Software');
     case 'guides':
       return formatPageTitle('Step-by-Step AI Workflows & Tutorials');
     case 'guide-detail': {
@@ -211,7 +217,11 @@ export function getRouteDescription(route: string, params: Record<string, string
          : 'Detailed pricing provenance, model capabilities, and verified benchmarks.';
     }
     case 'free-ai-sites':
-      return 'Curated directory of 100% free AI sites, recurring free plans, zero-cost accounts, and self-hostable open-source models.';
+      return 'Browse free model access routes, trials, promotional credits and AI platforms. Compare current allowances, conditions and verification dates.';
+    case 'frontier-models':
+      return 'Explore frontier AI models by capability, official documentation and model access route. Provider relationships and pricing are identified separately.';
+    case 'github-projects':
+      return 'Discover curated free and open-source GitHub projects across AI, development, automation, and productivity, with license and setup details.';
     case 'guides':
       return 'Actionable, step-by-step AI tutorials and open-source deployment guides written by practitioners.';
     case 'guide-detail': {
@@ -339,6 +349,10 @@ const AppRoutes: React.FC = () => {
         return <AiToolsPage />;
       case 'free-ai-sites':
         return <FreeAiSitesPage />;
+      case 'frontier-models':
+        return <FrontierModelsPage />;
+      case 'github-projects':
+        return <GitHubProjectsPage />;
       case 'guides':
         return <GuidesPage />;
       case 'guide-detail':

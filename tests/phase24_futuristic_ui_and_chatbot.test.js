@@ -16,15 +16,15 @@ describe('Phase 24: Restrained UI, Verified Navigation & Chatbot Repair', () => 
       assert.ok(!content.includes("from '../components/HeroFloatingLogos'"), 'HomePage does not import HeroFloatingLogos');
     });
 
-    test('Hero makes search primary in a product-led two-column composition', () => {
+    test('Hero makes search primary in the compact product-led composition', () => {
       const homePath = path.resolve(process.cwd(), 'src/pages/HomePage.tsx');
       const content = fs.readFileSync(homePath, 'utf8');
 
-      assert.ok(['Another AI tool?', 'Sure.', 'Another Subscription?', 'Nope.'].every((line) => content.includes(line)), 'Hero contains the four approved headline lines');
-      assert.ok(content.includes('Explore AI Alternatives'), 'Hero links visitors toward paid-tool alternatives');
-      assert.ok(content.includes('Browse Free Utilities'), 'Hero links visitors toward everyday utilities');
+      assert.ok(content.includes('Find the right AI route for the work.'), 'Hero has the current approved heading');
+      assert.ok(content.includes('Explore AI video'), 'Hero preserves a task-specific discovery link');
+      assert.ok(content.includes('Help me pick'), 'Hero preserves guided discovery');
       assert.ok(content.includes('<UniversalSearch />'), 'Universal search remains the primary interaction');
-      assert.ok(content.includes('hero-redesign__visual'), 'Hero pairs the message with a product interface visual');
+      assert.ok(content.includes('<HeroSignalVisual />'), 'Hero pairs the message with a product interface visual');
     });
   });
 
@@ -37,7 +37,8 @@ describe('Phase 24: Restrained UI, Verified Navigation & Chatbot Repair', () => 
       const content = fs.readFileSync(headerPath, 'utf8');
 
       assert.ok(content.includes('<ThemeToggle />'), 'Desktop theme button is present in Header');
-      assert.ok(content.includes('<ThemeToggle compact />'), 'Mobile theme button is present in Header');
+      assert.ok(content.includes('{open && <nav id="mobile-navigation"'), 'Mobile navigation can be opened');
+      assert.ok(content.includes('<ThemeToggle /></div></nav>'), 'Mobile theme button is present in the expanded navigation');
     });
 
     test('ThemeContext synchronizes both theme modes and explicit storage choices', () => {
@@ -144,7 +145,7 @@ describe('Phase 24: Restrained UI, Verified Navigation & Chatbot Repair', () => 
       const homePath = path.resolve(process.cwd(), 'src/pages/HomePage.tsx');
       const content = fs.readFileSync(homePath, 'utf8');
 
-      assert.ok(content.includes('hero-shell'), 'Hero uses the editorial shell');
+      assert.ok(content.includes('aria-labelledby="home-hero-heading"'), 'Hero has a semantic heading association');
       assert.ok(content.includes('<HeroSignalVisual />'), 'Hero keeps the depth visual');
       assert.ok(!content.includes('<HeroFloatingLogos />'), 'Hero does not include the removed logo orbit');
       assert.ok(content.includes('<UniversalSearch />'), 'Functional search remains in the hero');
@@ -163,14 +164,13 @@ describe('Phase 24: Restrained UI, Verified Navigation & Chatbot Repair', () => 
     test('AiToolCard and AlternativeCard use shared restrained interaction styles', () => {
       const aiCardPath = path.resolve(process.cwd(), 'src/components/AiToolCard.tsx');
       const aiContent = fs.readFileSync(aiCardPath, 'utf8');
-      assert.ok(aiContent.includes('hover:-translate-y-1.5'), 'AiToolCard has refined hover elevation');
-      assert.ok(aiContent.includes('hover:border-cyan-500/40'), 'AiToolCard illuminates with cyan border on hover');
+      assert.ok(aiContent.includes('hover:border-primary/50'), 'AiToolCard uses the restrained semantic hover border');
+      assert.ok(aiContent.includes('focus-within:ring-2'), 'AiToolCard provides keyboard focus visibility');
       assert.ok(aiContent.includes('interactive-card'), 'AiToolCard uses the shared interaction utility');
 
       const altCardPath = path.resolve(process.cwd(), 'src/components/AlternativeCard.tsx');
       const altContent = fs.readFileSync(altCardPath, 'utf8');
-      assert.ok(altContent.includes('hover:-translate-y-1.5'), 'AlternativeCard has refined hover elevation');
-      assert.ok(altContent.includes('hover:border-cyan-500/40'), 'AlternativeCard illuminates with cyan border on hover');
+      assert.ok(altContent.includes('focus-within:ring-2'), 'AlternativeCard provides keyboard focus visibility');
       assert.ok(altContent.includes('interactive-card'), 'AlternativeCard uses the shared interaction utility');
     });
   });

@@ -35,11 +35,9 @@ test('Alternatives page and cards use semantic theme tokens and accessible searc
 
 test('header marks exact and nested current routes in desktop and mobile navigation', () => {
   const source = read('src/components/Header.tsx');
-  assert.match(source, /const isRouteActive = \(to: string\) => currentPath === to \|\| currentPath\.startsWith\(`\$\{to\}\/`\)/);
-  assert.match(source, /aria-current=\{isRouteActive\('\/alternatives'\) \? 'page' : undefined\}/);
-  assert.match(source, /aria-current=\{isRouteActive\('\/free-tools'\) \? 'page' : undefined\}/);
-  assert.match(source, /aria-current=\{isRouteActive\('\/prompt-library'\) \? 'page' : undefined\}/);
-  assert.match(source, /mobileNavLinkClass\('\/alternatives'\)/);
-  assert.match(source, /activeDiscoverRoute/);
-  assert.match(source, /activeLearnRoute/);
+  assert.match(source, /const active = \(href: string\) => currentPath === href\.split\('\?'\)\[0\] \|\| currentPath\.startsWith\(`\$\{href\.split\('\?'\)\[0\]\}\/`\)/);
+  assert.match(source, /aria-current=\{active\(href\) \? 'page' : undefined\}/);
+  assert.match(source, /group\.links\.map/);
+  assert.match(source, /groups\.map\(\(group\) => renderGroup\(group, true\)\)/, 'The mobile menu uses the same route-aware groups');
+  assert.match(source, /mobile \? 'min-h-11' : 'min-h-10'/, 'Mobile links keep a 44px touch target');
 });

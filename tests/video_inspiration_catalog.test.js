@@ -31,10 +31,9 @@ test('video inspiration is loaded only by the Prompt Library and links out safel
   assert.match(component, /target="_blank" rel="noopener noreferrer"/);
   assert.doesNotMatch(component, /<iframe|<video(?:\s|>)/);
   assert.doesNotMatch(home, /video-inspiration\.json|VideoInspirationSection/);
-  assert.ok(['Another AI tool?', 'Sure.', 'Another Subscription?', 'Nope.'].every((line) => home.includes(line)));
-  assert.match(home, /hero-redesign__headline-line/);
-  assert.match(home, /catalogStats\.alternativeRelationships/);
-  assert.match(home, /activeOfferCount/);
+  assert.match(home, /Find the right AI route for the work\./);
+  assert.match(home, /href: '\/github-projects'/);
+  assert.doesNotMatch(home, /catalogStats|activeOfferCount|VideoInspirationSection/);
 });
 
 test('homepage catalog metrics match distinct source registry counts', () => {

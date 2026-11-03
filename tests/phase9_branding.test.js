@@ -177,7 +177,7 @@ describe('Phase 9: SwitchRoute Platform Rebranding', () => {
 
     assert.ok(html.includes('SwitchRoute'), 'Header must render "SwitchRoute" wordmark');
     assert.ok(html.includes('switchRoute-'), 'Header must render unique SwitchRoute route-mark gradients');
-    assert.ok(html.includes('aria-label="SwitchRoute"'), 'Header logo link accessible name matches visible wordmark');
+    assert.ok(html.includes('aria-label="SwitchRoute home"'), 'Header logo link identifies both the brand and home destination');
     assert.ok(html.includes('group-hover:rotate-3'), 'Logo must maintain microinteraction rotate hover');
   });
 
@@ -221,8 +221,8 @@ describe('Phase 9: SwitchRoute Platform Rebranding', () => {
     const html = renderClean(React.createElement(ssrModule.App));
 
     assert.ok(
-      html.includes('Discover paid AI alternatives, creative prompts, verified offers, and practical everyday tools—all in one place.'),
-      'Hero description must explain SwitchRoute’s alternatives, prompts, and utility value'
+      html.includes('Compare tools, models, and ways to access them. Start with what you need to do.'),
+      'Hero description explains the current product discovery scope'
     );
   });
 
@@ -248,7 +248,7 @@ describe('Phase 9: SwitchRoute Platform Rebranding', () => {
       {
         route: 'free-ai-sites',
         params: {},
-        expected: 'Free AI Sites & Zero-Cost Generative Tools — SwitchRoute',
+        expected: 'Free AI Access: Current Tiers, Trials & Credits — SwitchRoute',
       },
       {
         route: 'alternatives',

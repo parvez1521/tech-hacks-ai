@@ -30,32 +30,24 @@ before(async () => {
 });
 
 describe('Homepage prompt showcase and section alignment', () => {
-  it('orders hero, dynamic metric strip, alternatives, goals, picks, and discoveries', () => {
+  it('orders the compact homepage discovery sections', () => {
     const html = ReactDOMServer.renderToStaticMarkup(React.createElement(appModule.App));
-    const positions = [
-      html.indexOf('class="hero-shell'),
-      html.indexOf('data-testid="catalog-trust-strip"'),
-      html.indexOf('data-testid="ai-alternatives-section"'),
-      html.indexOf('What do you want to build or replace today?'),
-      html.indexOf('Editor&#x27;s Picks: Benchmark-Leading Tools'),
-      html.indexOf('Tools worth a closer look'),
-    ];
+    const positions = ['home-hero-heading', 'collections-heading', 'categories-heading', 'discoveries-heading', 'offers-heading', 'resources-heading'].map((id) => html.indexOf(`id="${id}"`));
     assert.ok(positions.every((position) => position >= 0));
     assert.deepEqual([...positions].sort((a, b) => a - b), positions);
-    assert.equal((html.match(/data-testid="catalog-trust-strip"/g) || []).length, 1);
-    assert.equal((html.match(/data-testid="ai-alternatives-section"/g) || []).length, 1);
+    assert.ok(html.includes('type="search"') || html.includes('role="combobox"'), 'Global search is in the hero');
     const home = fs.readFileSync(path.join(root, 'src/pages/HomePage.tsx'), 'utf8');
-    assert.match(home, /AnimatedCount className="catalog-metric-card__number" value=\{catalogStats\.proprietaryToolsWithAlternatives\}/);
-    assert.match(home, /AnimatedCount className="catalog-metric-card__number" value=\{catalogStats\.imagePrompts\}/);
-    assert.match(home, /AnimatedCount className="catalog-metric-card__number" value=\{catalogStats\.videoPrompts\}/);
-    assert.match(home, /AnimatedCount className="catalog-metric-card__number" value=\{catalogStats\.browserUtilities\}/);
+    assert.match(home, /featuredCollections/);
+    assert.match(home, /href: '\/frontier-models'/);
+    assert.match(home, /href: '\/free-ai-sites'/);
+    assert.match(home, /href: '\/github-projects'/);
   });
 
-  it('renders a five-step guide, exactly two matching original portraits, and valid library links', () => {
+  it('keeps the Prompt Library and its featured prompt assets available outside the homepage', () => {
     const html = ReactDOMServer.renderToStaticMarkup(React.createElement(appModule.App));
     const home = fs.readFileSync(path.join(root, 'src/pages/HomePage.tsx'), 'utf8');
-    assert.equal((html.match(/class="prompt-workflow__step"/g) || []).length, 5);
-    assert.ok(html.includes('Choose a prompt') && html.includes('Customize the details') && html.includes('Select an AI tool') && html.includes('Generate and refine') && html.includes('Save and reuse'));
+    assert.ok(!home.includes('prompt-workflow__step'), 'Prompt workflow detail is not duplicated in the discovery homepage');
+    assert.ok(html.includes('href="/guides"') || html.includes('href="/prompt-library"'), 'Homepage links to learning resources');
 
     const women = getPromptBySlug('pixverse-cinematic-portrait-motion');
     const man = getPromptBySlug('higgsfield-dolly-zoom-vertigo-effect');
@@ -64,18 +56,11 @@ describe('Homepage prompt showcase and section alignment', () => {
       assert.ok(prompt.previewImage);
       assert.ok(fs.existsSync(path.join(root, 'public', prompt.previewImage.replace(/^\//, ''))), `${prompt.previewImage} exists locally`);
       assert.ok(fs.existsSync(path.join(root, 'src/pages/PromptDetailPage.tsx')), 'Prompt detail route implementation remains present');
-      assert.ok(home.includes(`prompt.slug === '${prompt.slug}'`));
-      assert.ok(html.includes(`href="/prompt-library/${prompt.slug}"`));
+      assert.ok(fs.existsSync(path.join(root, 'src/pages/PromptDetailPage.tsx')));
     }
-    assert.equal((html.match(/class="prompt-portrait-card"/g) || []).length, 2);
-    assert.match(html, /alt="A fictional adult Black woman in a cobalt jacket on a rooftop at blue hour[^"]*"/);
-    assert.match(html, /alt="A fictional man stands in a dark hallway with distorted perspective[^"]*"/);
-    assert.ok(html.includes('src="/prompts/generated/pixverse-motion-portrait-poster.webp"'));
-    assert.ok(html.includes('src="/prompts/generated/higgsfield-dolly-zoom-vertigo-effect.webp"'));
     assert.ok(fs.existsSync(path.join(root, 'public/prompts/generated/pixverse-motion-portrait-poster.webp')));
     assert.ok(fs.existsSync(path.join(root, 'public/prompts/generated/higgsfield-dolly-zoom-vertigo-effect.webp')));
-    assert.equal((html.match(/href="\/prompt-library"/g) || []).length, 1, 'Primary CTA links to the existing Prompt Library route');
-    assert.match(home, /loading="lazy"[\s\S]*?decoding="async"/);
+    assert.ok(home.includes('Guides & Prompt Library'));
   });
 
   it('keeps the prompt showcase in a responsive two-column desktop and stacked mobile layout', () => {

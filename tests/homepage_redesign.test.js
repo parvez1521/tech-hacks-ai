@@ -46,21 +46,13 @@ before(async () => {
 });
 
 describe('Premium homepage redesign regressions', () => {
-  it('keeps the working universal search beside a live, catalog-backed discovery preview', () => {
+  it('keeps global search in the product-led hero and links the core discovery collections', () => {
     const home = read('src/pages/HomePage.tsx');
     const visual = read('src/components/HeroSignalVisual.tsx');
 
-    assert.match(home, /YOUR AI TOOLKIT, ALL IN ONE PLACE/);
-    const headlineLines = [...home.matchAll(/className="hero-redesign__headline-line(?: hero-redesign__headline-answer)?">([^<]+)<\/span>/g)].map((match) => match[1]);
-    assert.deepEqual(headlineLines, ['Another AI tool?', 'Sure.', 'Another Subscription?', 'Nope.']);
-    assert.match(home, /<h1 id="home-hero-heading" className="hero-redesign__headline">/);
-    assert.match(home, /Discover paid AI alternatives, creative prompts, verified offers, and practical everyday tools—all in one place\./);
+    assert.match(home, /Find the right AI route for the work\./);
     assert.match(home, /<UniversalSearch \/>/);
-    const search = read('src/components/UniversalSearch.tsx');
-    assert.doesNotMatch(search, /intentChips|Make AI videos|Create images|Find writing tools|Replace proprietary SaaS|Discover prompts/);
-    assert.match(home, /to="\/ai-tools"/);
-    assert.match(home, /to="\/alternatives" className="hero-redesign__primary-action"/);
-    assert.match(home, /to="\/free-tools" className="hero-redesign__secondary-action"/);
+    for (const route of ['/frontier-models', '/free-ai-sites', '/ai-tools', '/github-projects']) assert.ok(home.includes(`href: '${route}'`));
     assert.match(home, /<HeroSignalVisual \/>/);
     assert.match(visual, /getAllAiTools\(\)/);
     assert.match(visual, /isCommunityTool\(tool\)/);
@@ -69,34 +61,18 @@ describe('Premium homepage redesign regressions', () => {
     assert.match(visual, /aria-pressed=\{activeMode === mode\}/);
     assert.match(visual, /to=\{`\/ai-tools\/\$\{tool\.slug\}`\}/);
     assert.match(visual, /discovery-interface__empty/);
-    assert.doesNotMatch(visual, /discoveryExamples|AI code editor|Generative video platform/);
     assert.match(visual, /<BrandLogo/);
     assert.doesNotMatch(visual, /requestAnimationFrame|hero-visual__prism|hero-tilt-x|hero-scroll/);
   });
 
-  it('presents canonical catalog metrics as eight independent, responsive cards', () => {
+  it('avoids repeating catalog metrics as a large homepage section', () => {
     const home = read('src/pages/HomePage.tsx');
     const css = read('src/index.css');
-    assert.equal((home.match(/className="catalog-metric-card"/g) || []).length, 8);
-    for (const text of [
-      'Paid tools with alternatives', 'Find replacement tools',
-      'Alternative matches', 'Explore similar tools',
-      'Active offers', 'Discover deals and discounts',
-      'Image prompts', 'Ideas for AI images',
-      'Video prompts', 'Prompts for AI videos',
-      'Everyday utilities', 'Converters and useful tools',
-      'AI tools', 'Explore AI platforms',
-      'Open-source projects', 'Discover open projects',
-    ]) assert.ok(home.includes(text), `metric text exists: ${text}`);
-    assert.match(home, /getActiveOffers\(\)\.length/);
-    assert.doesNotMatch(home, /Counts reflect distinct catalog records/);
-    assert.match(css, /grid-template-columns: repeat\(4, minmax\(0, 1fr\)\)/);
-    assert.match(css, /grid-template-columns: repeat\(2, minmax\(0, 1fr\)\)/);
-    assert.match(css, /border: 1px solid rgb\(var\(--color-border\)/);
-    assert.match(css, /background: rgb\(var\(--color-card\) \/ 0\.78\)/);
-    assert.match(css, /\.catalog-trust-strip__metrics > article \{\s+display: flex;/);
-    assert.match(css, /\.catalog-metric-card__number/);
-    assert.ok(home.indexOf('data-testid="catalog-trust-strip"') > home.indexOf('</section>'), 'Metric cards follow the hero as a secondary discovery strip');
+    assert.doesNotMatch(home, /catalog-metric-card|catalog-trust-strip/);
+    assert.match(home, /Choose a collection/);
+    assert.match(home, /Browse by task/);
+    assert.match(home, /Selected offers/);
+    assert.ok(css.length > 0);
   });
 
   it('uses sourced brand marks or monogram fallbacks instead of discovery screenshot thumbnails', () => {
@@ -109,6 +85,13 @@ describe('Premium homepage redesign regressions', () => {
     assert.match(card, /Visit website/);
     assert.doesNotMatch(card, /Verified Link|Verified website/);
     assert.ok(data.every((item) => item.createdAt), 'All published fixture dates remain intact');
+  });
+
+  it('keeps the home hero server-rendered and statically readable', () => {
+    const home = read('src/pages/HomePage.tsx');
+    assert.match(home, /Find the right AI route for the work\./);
+    assert.match(home, /<UniversalSearch \/>/);
+    assert.doesNotMatch(home, /LazyMotion|motionFeatures/);
   });
 
   it('renders a closed chat launcher by default and no invitation over content', () => {
@@ -133,7 +116,9 @@ describe('Premium homepage redesign regressions', () => {
   it('keeps the above-the-fold hero static without downloading optional Motion features', () => {
     const home = read('src/pages/HomePage.tsx');
     assert.doesNotMatch(home, /motionFeatures|LazyMotion|motion\/react-m/);
-    assert.match(home, /<div className="hero-redesign__copy">/);
+    assert.match(home, /<section[^>]+aria-labelledby="home-hero-heading"/);
+    assert.match(home, /<h1 id="home-hero-heading"/);
+    assert.match(home, /<UniversalSearch \/>/);
   });
 
   it('waits until Daily Discoveries approaches the viewport before fetching', () => {

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { offersData, isOfferActive, isOfferArchived, isOfferPendingVerification } from '../data/offersData';
 import { OfferCard } from '../components/OfferCard';
 import { EmptyState } from '../components/EmptyState';
@@ -17,10 +17,17 @@ import {
   Archive,
 } from 'lucide-react';
 import type { OfferType } from '../types';
+import { useRouter } from '../router/Router';
 
 export const OffersPage: React.FC = () => {
+  const { searchParams } = useRouter();
+  const requestedType = searchParams.get('type');
+  const validTypes: OfferType[] = ['student-plan', 'startup-credits', 'discount'];
   const [search, setSearch] = useState('');
-  const [selectedType, setSelectedType] = useState<OfferType | 'all'>('all');
+  const [selectedType, setSelectedType] = useState<OfferType | 'all'>(validTypes.includes(requestedType as OfferType) ? requestedType as OfferType : 'all');
+  useEffect(() => {
+    setSelectedType(validTypes.includes(requestedType as OfferType) ? requestedType as OfferType : 'all');
+  }, [requestedType]);
   const [selectedRegion, setSelectedRegion] = useState<'all' | 'India' | 'Global'>('all');
   const [statusFilter, setStatusFilter] = useState<'active' | 'archived' | 'pending' | 'all'>('active');
   const [sortBy, setSortBy] = useState<'recommended' | 'name' | 'ending'>('recommended');

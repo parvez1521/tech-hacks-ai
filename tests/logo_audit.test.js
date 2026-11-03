@@ -240,7 +240,9 @@ describe('Phase 13: Global Brand Logo Audit & Verification', () => {
     assert.match(component, /case 'lg':[\s\S]*?container: 'w-12 h-12'/);
     assert.match(component, /object-contain/);
     assert.doesNotMatch(component, /group-hover:scale/);
-    assert.match(home, /<BrandLogo[^>]*size="sm"/);
+    assert.match(home, /<HeroSignalVisual \/>/);
+    const heroVisual = fs.readFileSync(path.resolve(process.cwd(), 'src/components/HeroSignalVisual.tsx'), 'utf8');
+    assert.match(heroVisual, /<BrandLogo/);
     assert.match(alternatives, /<BrandLogo[^>]*size="xs" showContainer=\{false\}/);
   });
 });

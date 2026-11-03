@@ -217,8 +217,8 @@ describe('Phase 18: Pre-Launch Polish & Interactive 3D AI Chatbot Assistant', ()
 
     test('Header component enforces 44px minimum touch targets on mobile interactive items', () => {
       const headerContent = fs.readFileSync(path.resolve('src/components/Header.tsx'), 'utf8');
-      assert.ok(headerContent.includes('min-h-[44px] min-w-[44px]'), 'Mobile toggle button must have min-h-[44px] min-w-[44px]');
-      assert.ok(headerContent.includes('min-h-[44px] rounded-md'), 'Mobile navigation links must have min-h-[44px]');
+      assert.ok(headerContent.includes('min-h-11 min-w-11'), 'Mobile toggle button has a 44px minimum target');
+      assert.ok(headerContent.includes("mobile ? 'min-h-11' : 'min-h-10'"), 'Mobile navigation links have a 44px minimum target');
     });
   });
 });

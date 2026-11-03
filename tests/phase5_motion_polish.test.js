@@ -39,12 +39,9 @@ describe('Phase 5: Premium Interactive UI, Motion Polish & Accessibility', () =>
   });
 
   test('ToolCard includes restrained interaction markup and accessible keyboard focus states', async () => {
-    if (!ssrModule) ssrModule = await import('../dist/test-ssr.js');
-    const html = ReactDOMServer.renderToString(React.createElement(ssrModule.App));
-
-    // ToolCards expose a shared interaction utility and focus ring.
-    assert.ok(html.includes('focus-within:ring-2'), 'ToolCard must contain focus-within ring for keyboard access');
-    assert.ok(html.includes('interactive-card'), 'ToolCard should use the shared restrained interaction utility');
+    const card = fs.readFileSync(path.join(process.cwd(), 'src/components/ToolCard.tsx'), 'utf8');
+    assert.ok(card.includes('focus-within:ring-2'), 'ToolCard must contain focus-within ring for keyboard access');
+    assert.ok(card.includes('focus-within:border-'), 'ToolCard focus is distinguishable from its default state');
   });
 
   test('Hero content is server-rendered immediately without an optional entrance animation', async () => {
@@ -52,7 +49,7 @@ describe('Phase 5: Premium Interactive UI, Motion Polish & Accessibility', () =>
     const html = ReactDOMServer.renderToString(React.createElement(ssrModule.App));
 
     const homeSource = fs.readFileSync(path.join(process.cwd(), 'src/pages/HomePage.tsx'), 'utf8');
-    assert.ok(html.includes('hero-redesign__copy'), 'The editorial hero renders as a readable static server fallback');
+    assert.ok(html.includes('id="home-hero-heading"') && html.includes('Find the right AI route for the work.'), 'The editorial hero renders as a readable static server fallback');
     assert.ok(!homeSource.includes('motionFeatures') && !homeSource.includes('LazyMotion'), 'Hero does not load optional animation features before content is usable');
   });
 
@@ -64,9 +61,9 @@ describe('Phase 5: Premium Interactive UI, Motion Polish & Accessibility', () =>
   });
 
   test('Pagination includes enhanced active button shadow and scaling', async () => {
-    if (!ssrModule) ssrModule = await import('../dist/test-ssr.js');
-    const html = ReactDOMServer.renderToString(React.createElement(ssrModule.App));
-
-    assert.ok(html.includes('shadow-md shadow-primary/20'), 'Active page number should feature primary glow shadow');
+    const pagination = fs.readFileSync(path.join(process.cwd(), 'src/components/Pagination.tsx'), 'utf8');
+    assert.ok(pagination.includes('aria-label="Pagination"'), 'Pagination has a named navigation landmark');
+    assert.ok(pagination.includes('aria-current={isCurrent ? \'page\' : undefined}'), 'Current page is programmatically identified');
+    assert.ok(pagination.includes('Go to page ${pageNum}'), 'Page buttons have descriptive accessible names');
   });
 });

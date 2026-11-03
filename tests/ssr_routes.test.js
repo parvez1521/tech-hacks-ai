@@ -24,10 +24,10 @@ describe('Task 3 & 5: Component & Page Rendering Audit', () => {
 
     assert.ok(html.length > 1000, 'Rendered HTML should have content');
     assert.ok(html.includes('SwitchRoute'), 'HTML should include brand title');
-    assert.ok(html.includes('Open Source Alternatives'), 'HTML should include headline');
-    assert.ok(html.includes('Filters'), 'HTML should render filter drawer trigger');
-    assert.ok(html.includes('Supabase'), 'HTML should render tool cards');
-    assert.ok(html.includes('Order by'), 'HTML should render sort combobox');
+    assert.ok(html.includes('Find the right AI route for the work.'), 'HTML should include the homepage headline');
+    assert.ok(html.includes('Choose a collection'), 'HTML should render the featured collection entry points');
+    assert.ok(html.includes('Browse by task'), 'HTML should render task categories');
+    assert.ok(html.includes('Daily discoveries'), 'HTML should render recent discoveries');
   });
 
   test('rendered page includes accessible ARIA landmarks', async () => {

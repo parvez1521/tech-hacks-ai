@@ -125,7 +125,7 @@ test('homepage and footer do not fake a newsletter signup without delivery', asy
   const { readFile } = await import('node:fs/promises');
   const home = await readFile(new URL('../src/pages/HomePage.tsx', import.meta.url), 'utf8');
   const footer = await readFile(new URL('../src/components/Footer.tsx', import.meta.url), 'utf8');
-  assert.match(home, /Browse recent discoveries/);
+  assert.match(home, /Daily discoveries/);
   assert.doesNotMatch(home, /Newsletter delivery is not available yet/);
   assert.doesNotMatch(footer, /setIsSubscribed|handleSubscribe|Thanks — your interest is saved/);
   assert.match(footer, /Browse recent discoveries/);

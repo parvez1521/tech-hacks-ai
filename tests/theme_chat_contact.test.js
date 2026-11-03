@@ -41,12 +41,12 @@ describe('Theme, chat suggestions, and contact regression coverage', () => {
   it('closes open navigation and consent dialogs with Escape and preserves keyboard focus', () => {
     const header = read('src/components/Header.tsx');
     const consent = read('src/components/CookieConsentBanner.tsx');
-    assert.match(header, /onKeyDown=\{handleHeaderKeyDown\}/);
-    assert.match(header, /event\.key !== 'Escape'/);
-    assert.match(header, /discoverButtonRef\.current\?\.focus\(\)/);
-    assert.match(header, /learnButtonRef\.current\?\.focus\(\)/);
-    assert.match(header, /mobileMenuButtonRef\.current\?\.focus\(\)/);
-    assert.match(header, /aria-controls=\{isDiscoverOpen \? 'discover-menu' : undefined\}/);
+    assert.match(header, /onKeyDown=\{closeOnEscape\}/);
+    assert.match(header, /event\.key === 'Escape'/);
+    assert.match(header, /menuButtonRef\.current\?\.focus\(\)/);
+    assert.match(header, /aria-expanded=\{open\}/);
+    assert.match(header, /<details key=\{group\.name\}/);
+    assert.match(header, /<summary className=/);
     assert.match(consent, /role="dialog"[\s\S]*?aria-modal="true"[\s\S]*?onKeyDown=\{handleDialogKeyDown\}/);
     assert.match(consent, /event\.key === 'Escape'/);
     assert.match(consent, /event\.shiftKey && document\.activeElement === first/);

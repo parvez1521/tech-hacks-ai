@@ -83,20 +83,14 @@ describe('Phase 14: Deep QA, Production Readiness & Trust Audit', () => {
   // 1. Browser QA Across All Major Route Families
   // -------------------------------------------------------------------------
   describe('Route Families & Deep Browser Rendering', () => {
-    test('renders Homepage with 10-section hierarchy and valid navigation links', () => {
+    test('renders the decluttered homepage hierarchy and valid collection links', () => {
       setupMockBrowser('https://switchroute.in/');
       const html = renderClean(React.createElement(ssrModule.App));
 
-      assert.ok(html.includes('id="home-hero-heading"') && ['Another AI tool?', 'Sure.', 'Another Subscription?', 'Nope.'].every((line) => html.includes(line)), 'Homepage H1 renders the four approved headline lines');
-      assert.ok(html.includes('What do you want to build or replace today?'), 'Goal-driven discovery section');
-      assert.ok(html.includes("Editor&#x27;s Picks: Benchmark-Leading Tools") || html.includes("Editor's Picks: Benchmark-Leading Tools"), 'Curated showcase section');
-      assert.ok(html.includes('Explore Top Generative AI Platforms'), 'Trending AI models section');
-      assert.ok(html.includes('Free AI Tools (No Credit Card Required)'), 'Free AI tools section');
-      assert.ok(html.includes('Explore by Tech Category'), 'Category taxonomy section');
-      assert.ok(html.includes('AI Deals, Student Plans &amp; Bundles') || html.includes('AI Deals, Student Plans & Bundles'), 'AI Deals section');
-      assert.ok(html.includes('Step-by-Step AI Guides'), 'Guides section');
-      assert.ok(html.includes('Open Source Alternatives to Popular Software'), 'Proprietary alternatives section');
-      assert.ok(html.includes('Find tools worth trying'), 'Discovery callout');
+      assert.ok(html.includes('id="home-hero-heading"') && html.includes('Find the right AI route for the work.'), 'Homepage renders the current approved headline');
+      for (const collection of ['Frontier Models', 'Free Access', 'All AI Tools', 'GitHub Projects']) assert.ok(html.includes(collection), `${collection} collection is discoverable`);
+      for (const section of ['Browse by task', 'Daily discoveries', 'Selected offers', 'Resources and directories']) assert.ok(html.includes(section), `${section} section exists`);
+      assert.ok(html.includes('href="/alternatives"') && html.includes('href="/free-tools"'), 'Alternatives and utilities remain available from resources/navigation');
     });
 
     test('renders /ai-tools directory and /ai-tools/claude detail page', () => {
@@ -114,7 +108,7 @@ describe('Phase 14: Deep QA, Production Readiness & Trust Audit', () => {
     test('renders /free-ai-sites with verified free platforms', () => {
       setupMockBrowser('https://switchroute.in/free-ai-sites');
       const html = renderClean(React.createElement(ssrModule.App));
-      assert.ok(html.includes('Free AI Sites &amp; Generative Tools') || html.includes('Free AI Sites & Generative Tools'), 'Free AI heading');
+      assert.ok(html.includes('Free AI Access'), 'Free access collection heading');
       assert.ok(html.includes('Ollama'), 'Renders Ollama in free directory');
     });
 

@@ -87,45 +87,15 @@ describe('Phase 6: Homepage Redesign & HandlyTech Platform Integration', () => {
   // -------------------------------------------------------------------------
   // 1. Redesigned Homepage
   // -------------------------------------------------------------------------
-  test('Redesigned Homepage renders all major sections and distinct content', async () => {
+  test('Redesigned Homepage renders the compact discovery architecture', async () => {
     ssrModule = await import('../dist/test-ssr.js');
     setupMockBrowser('https://openalternative.co/');
     const html = renderClean(React.createElement(ssrModule.App));
 
-    // Hero Section & Universal Search
-    assert.ok(html.includes('id="home-hero-heading"') && ['Another AI tool?', 'Sure.', 'Another Subscription?', 'Nope.'].every((line) => html.includes(line)), 'Hero headline present as four approved lines');
-    assert.ok(html.includes('Search free AI tools, open-source alternatives, prompts, and utilities...'), 'Universal search bar placeholder');
-    assert.ok(!html.includes('Make AI videos') && !html.includes('Replace proprietary SaaS'), 'Crowded quick-intent chips are removed');
-
-    // Section 2: Open Source Alternatives (Proprietary Cards)
-    assert.ok(html.includes('Find an open-source alternative'), 'Section 2 badge');
-    assert.ok(html.includes('Open Source Alternatives to Popular Software'), 'Section 2 heading');
-    assert.ok(html.includes('Figma'), 'Figma proprietary card rendered');
-    assert.ok(html.includes('Notion'), 'Notion proprietary card rendered');
-    assert.ok(html.includes('href="/alternatives/figma"'), 'Card links to /alternatives/figma');
-
-    // Section 3: AI Tools Discovery
-    assert.ok(html.includes('Explore Top Generative AI Platforms'), 'Section 3 heading');
-    assert.ok(html.includes('Runway Gen-3 Alpha') || html.includes('Midjourney v6.1') || html.includes('FLUX.1'), 'Featured AI tools rendered');
-    assert.ok(html.includes('Freemium') || html.includes('Free') || html.includes('Paid'), 'Pricing badges rendered');
-
-    // Section 4: Bento CTAs
-    assert.ok(html.includes('Need Help Choosing the Right Tool?'), 'Help Me Pick CTA');
-    assert.ok(html.includes('Compare Any Two Platforms'), 'Compare CTA');
-
-    // Section 5: Client-side Utilities
-    assert.ok(html.includes('Free Browser-Based Utilities'), 'Utilities section');
-    assert.ok(html.includes('Text Inspector &amp; Case Converter') || html.includes('Text Inspector'), 'Text utility preview');
-    assert.ok(html.includes('Vector QR Code Generator'), 'QR code generator utility preview');
-
-    // Section 6: Prompt Library workflow and portrait previews
-    assert.ok(html.includes('Step-by-step prompt guide'), 'Homepage prompt workflow heading');
-    assert.ok(html.includes('Browse the Prompt Library'), 'Prompt Library CTA');
-    assert.ok(html.includes('Cinematic Rooftop Portrait with Wind and a Slow Push-In'), 'Featured woman prompt preview');
-    assert.ok(html.includes('Dramatic Vertigo Dolly Zoom Character Reveal'), 'Featured man prompt source route');
-
-    // Section 7: Discovery callout
-    assert.ok(html.includes('Find tools worth trying'), 'Discovery callout');
+    assert.ok(html.includes('id="home-hero-heading"') && html.includes('Find the right AI route for the work.'), 'Current hero heading renders');
+    assert.ok(html.includes('type="search"') || html.includes('role="combobox"'), 'Universal search renders in the hero');
+    for (const name of ['Frontier Models', 'Free Access', 'All AI Tools', 'GitHub Projects', 'AI categories', 'Daily discoveries', 'Selected offers', 'Resources and directories']) assert.ok(html.includes(name), `${name} is discoverable`);
+    for (const route of ['/alternatives', '/free-tools', '/guides']) assert.ok(html.includes(`href="${route}"`), `${route} remains linked`);
   });
 
   // -------------------------------------------------------------------------
@@ -203,7 +173,7 @@ describe('Phase 6: Homepage Redesign & HandlyTech Platform Integration', () => {
     setupMockBrowser('https://openalternative.co/free-ai-sites');
     const html = renderClean(React.createElement(ssrModule.App));
 
-    assert.ok(html.includes('Free AI Sites &amp; Generative Tools') || html.includes('Free AI Sites & Generative Tools'), 'Free AI heading');
+    assert.ok(html.includes('Free AI Access'), 'Free access heading');
     assert.ok(html.includes('FLUX.1 by Black Forest Labs'), 'FLUX is listed as free/freemium');
     // Midjourney is paid only and should not appear in 100% free catalog
     assert.ok(!html.includes('Midjourney v6.1'), 'Paid-only tools like Midjourney are excluded from free sites');

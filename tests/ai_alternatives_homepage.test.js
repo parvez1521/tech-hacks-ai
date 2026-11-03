@@ -47,47 +47,19 @@ describe('Homepage AI alternatives showcase and Claude identity', () => {
     assert.deepEqual(getAiAlternativesForTarget('claude').slice(0, 3).map((tool) => tool.slug), ['chatgpt', 'gemini', 'mistral-le-chat']);
   });
 
-  it('renders the metric cards directly after the hero and before the showcase, with six real targets and valid routes', () => {
+  it('renders the decluttered hero, featured collections, task categories, discoveries, offers, and resources', () => {
     setHomeLocation();
     const html = ReactDOMServer.renderToStaticMarkup(React.createElement(appModule.App));
-    const heroIndex = html.indexOf('class="hero-shell');
-    const heroEndIndex = html.indexOf('</section>', heroIndex);
-    const showcaseIndex = html.indexOf('FIND YOUR BETTER ALTERNATIVE');
-    const showcaseSectionIndex = html.indexOf('data-testid="ai-alternatives-section"');
-    const trustStripIndex = html.indexOf('data-testid="catalog-trust-strip"');
-    const goalsIndex = html.indexOf('What do you want to build or replace today?');
-    const picksIndex = html.indexOf('Editor&#x27;s Picks: Benchmark-Leading Tools');
-    const discoveriesIndex = html.indexOf('Tools worth a closer look');
-    const catalogIndex = html.indexOf('Explore Top Generative AI Platforms');
-    const saasAlternativesIndex = html.indexOf('Open Source Alternatives to Popular Software');
-
-    assert.ok(heroIndex >= 0 && heroIndex < heroEndIndex && heroEndIndex < trustStripIndex && trustStripIndex < showcaseSectionIndex, 'Metric cards follow the original two-column hero and precede the alternatives showcase');
-    assert.ok(html.includes('href="/alternatives"'), 'Primary hero CTA opens the alternatives directory');
-    assert.ok(html.includes('href="/free-tools"'), 'Utilities CTA opens the canonical Utility Tools directory');
-    assert.ok(trustStripIndex < goalsIndex && goalsIndex < picksIndex && picksIndex < discoveriesIndex && discoveriesIndex < catalogIndex && catalogIndex < saasAlternativesIndex, 'Remaining homepage sections retain their requested order');
-    assert.equal((html.match(/data-testid="ai-alternatives-card"/g) || []).length, 6, 'Exactly six showcase cards are rendered');
-    assert.equal((html.match(/id="ai-alternatives-heading"/g) || []).length, 1, 'There is exactly one showcase on the homepage');
-    assert.ok(html.includes('Love the tool. Not the price?'));
-    assert.ok(html.includes('Discover AI alternatives that fit your budget, workflow, and privacy needs. Compare free options, open-source projects, and hosted tools.'));
-    assert.ok(html.includes('Browse all alternatives'));
-    assert.ok(html.includes('an AI alternative to Claude'));
-    assert.ok(html.includes('href="/ai-tools/chatgpt"'));
-    assert.ok(html.includes('href="/ai-tools/gemini"'));
-    assert.ok(html.includes('href="/ai-tools/mistral-le-chat"'));
-    assert.ok(html.includes('href="https://invideo.io/ai/"'));
-    assert.ok(html.includes('href="/ai-tools/runway"'));
-    assert.ok(html.includes('href="/ai-tools/pika"'));
-    assert.ok(html.includes('href="/ai-tools?category=assistants&amp;alternativesTo=claude"'));
-    for (const target of ['invideo-ai', 'runway', 'cursor', 'chatgpt']) {
-      const category = target === 'cursor' ? 'coding' : ['invideo-ai', 'runway'].includes(target) ? 'video' : 'assistants';
-      assert.ok(html.includes(`alternativesTo=${target}`), `${target} has a working filtered-catalog CTA`);
-      assert.ok(html.includes(`href="/ai-tools?category=${category}&amp;alternativesTo=${target}"`));
-    }
-    assert.ok(html.includes('href="https://pictory.ai/"'));
-    assert.ok(html.includes('href="/ai-tools?category=video&amp;alternativesTo=pictory"'));
-    assert.ok(html.includes('src="/logos/claude.svg"'));
-    assert.ok(html.includes('Open Source Alternatives to Popular Software'), 'Existing SaaS alternatives section remains present');
-    assert.equal((html.match(/data-testid="catalog-trust-strip"/g) || []).length, 1, 'Homepage has exactly one dynamic counting section');
+    const home = fs.readFileSync(path.resolve(process.cwd(), 'src/pages/HomePage.tsx'), 'utf8');
+    assert.ok(html.includes('Find the right AI route for the work.'));
+    assert.ok(html.includes('href="/frontier-models"') && html.includes('href="/free-ai-sites"') && html.includes('href="/ai-tools"') && html.includes('href="/github-projects"'));
+    assert.ok(html.includes('Browse by task') && html.includes('Daily discoveries') && html.includes('Selected offers') && html.includes('Resources and directories'));
+    assert.ok(home.indexOf('aria-labelledby="home-hero-heading"') < home.indexOf('aria-labelledby="collections-heading"'));
+    assert.ok(home.indexOf('aria-labelledby="collections-heading"') < home.indexOf('aria-labelledby="categories-heading"'));
+    assert.ok(home.indexOf('aria-labelledby="categories-heading"') < home.indexOf('aria-labelledby="discoveries-heading"'));
+    assert.ok(home.indexOf('aria-labelledby="discoveries-heading"') < home.indexOf('aria-labelledby="offers-heading"'));
+    assert.ok(home.indexOf('aria-labelledby="offers-heading"') < home.indexOf('aria-labelledby="resources-heading"'));
+    assert.ok(!html.includes('data-testid="ai-alternatives-section"'), 'The full alternatives showcase is no longer duplicated on the homepage');
   });
 
   it('uses only catalog relationships and filters the existing AI directory by target', () => {
@@ -116,7 +88,8 @@ describe('Homepage AI alternatives showcase and Claude identity', () => {
     const showcase = fs.readFileSync(path.resolve(process.cwd(), 'src/components/AiAlternativesShowcase.tsx'), 'utf8');
     assert.match(showcase, /grid-cols-1 auto-rows-fr sm:grid-cols-2 xl:grid-cols-3/);
     const html = ReactDOMServer.renderToStaticMarkup(React.createElement(appModule.App));
-    assert.ok(html.includes('Daily Discoveries'));
-    assert.ok(html.includes('Open Source Alternatives to Popular Software'));
+    assert.ok(html.includes('Daily discoveries'));
+    assert.ok(html.includes('GitHub Projects'));
+    assert.ok(html.includes('Browse offers'));
   });
 });

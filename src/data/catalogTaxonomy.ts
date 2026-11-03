@@ -8,16 +8,16 @@ export const catalogSections = [
 ] as const;
 
 export const aiSectionCategories = [
-  { id: 'assistants', name: 'AI Chatbots & Assistants', iconName: 'Bot', description: 'General intelligence assistants, reasoning models, and research agents.' },
-  { id: 'writing', name: 'AI Writing & Content', iconName: 'PenTool', description: 'Copywriting, long-form articles, summarization, and tone enhancement.' },
-  { id: 'image', name: 'AI Image Generation', iconName: 'Image', description: 'Text-to-image synthesis, upscaling, editing, and style transfer.' },
-  { id: 'video', name: 'AI Video Generation & Editing', iconName: 'Video', description: 'Generative video models, video editing, and text-to-video tools.' },
-  { id: 'voice', name: 'AI Audio & Voice', iconName: 'Mic', description: 'AI voice generation, speech cloning, text-to-speech, and audio isolation.' },
-  { id: 'music', name: 'AI Music & Audio', iconName: 'Music', description: 'Full song composition, instrumental tracks, and stems generation.' },
-  { id: 'coding', name: 'AI Coding & Development', iconName: 'Code', description: 'AI code editors, UI scaffolding, code completion, and terminal agents.' },
-  { id: 'productivity', name: 'AI Productivity & Research', iconName: 'Search', description: 'Neural search engines, meeting transcribers, and knowledge synthesizers.' },
-  { id: 'automation', name: 'AI Automation & Agents', iconName: 'Zap', description: 'Connecting AI models to databases, webhooks, and multi-step processes.' },
-  { id: '3d', name: 'AI Design & Creativity', iconName: 'Palette', description: '3D generation, visual design, and creative production workflows.' },
+  { id: 'assistants', name: 'AI Assistants & Reasoning', iconName: 'Bot', description: 'General intelligence assistants, reasoning models, and research agents.' },
+  { id: 'writing', name: 'Writing & Content', iconName: 'PenTool', description: 'Copywriting, long-form articles, summarization, and tone enhancement.' },
+  { id: 'image', name: 'Image Generation', iconName: 'Image', description: 'Text-to-image synthesis, upscaling, editing, and style transfer.' },
+  { id: 'video', name: 'Video Generation & Editing', iconName: 'Video', description: 'Generative video models, video editing, and text-to-video tools.' },
+  { id: 'voice', name: 'Audio & Voice', iconName: 'Mic', description: 'AI voice generation, speech cloning, text-to-speech, and audio isolation.' },
+  { id: 'music', name: 'Music', iconName: 'Music', description: 'Full song composition, instrumental tracks, and stems generation.' },
+  { id: 'coding', name: 'Coding & Development', iconName: 'Code', description: 'AI code editors, UI scaffolding, code completion, and terminal agents.' },
+  { id: 'productivity', name: 'Productivity & Research', iconName: 'Search', description: 'Neural search engines, meeting transcribers, and knowledge synthesizers.' },
+  { id: 'automation', name: 'Automation & Agents', iconName: 'Zap', description: 'Connecting AI models to databases, webhooks, and multi-step processes.' },
+  { id: '3d', name: 'Design & Creativity', iconName: 'Palette', description: '3D generation, visual design, and creative production workflows.' },
 ] as const;
 
 export const utilityCategoryDefinitions: Array<{

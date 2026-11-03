@@ -78,18 +78,8 @@ export const AiToolCard: React.FC<AiToolCardProps> = ({ tool }) => {
 
   return (
     <div
-      className="group relative flex flex-col justify-between p-5 rounded-lg border border-border bg-card/90 interactive-card hover:-translate-y-1.5 hover:border-cyan-500/40 min-h-[250px] focus-within:ring-2 focus-within:ring-cyan-500/60 focus-within:border-cyan-500/60"
+      className="group relative flex flex-col justify-between p-5 rounded-lg border border-border bg-card interactive-card hover:border-primary/50 min-h-[250px] focus-within:ring-2 focus-within:ring-primary/50 focus-within:border-primary/60"
     >
-      {/* A quiet accent wash keeps the hover state legible without turning the card into a light source. */}
-      <div
-        className="pointer-events-none absolute inset-0 rounded-lg opacity-0 transition-opacity duration-200 group-hover:opacity-100 group-focus-within:opacity-100 -z-0"
-        style={{
-          background:
-            'radial-gradient(280px circle at 50% 0%, rgba(6, 182, 212, 0.03), transparent 70%)',
-        }}
-        aria-hidden="true"
-      />
-
       <div className="relative z-10">
         {/* Top Header Row */}
         <div className="flex items-start justify-between gap-3 mb-2.5">

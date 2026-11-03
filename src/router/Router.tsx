@@ -45,6 +45,12 @@ export function matchRoute(pathname: string): { route: string; params: Record<st
   if (cleanPath === '/ai-tools') {
     return { route: 'ai-tools', params: {} };
   }
+  if (cleanPath === '/frontier-models') {
+    return { route: 'frontier-models', params: {} };
+  }
+  if (cleanPath === '/github-projects') {
+    return { route: 'github-projects', params: {} };
+  }
   if (cleanPath === '/community-tools' || cleanPath === '/community') {
     return { route: 'community-redirect', params: {} };
   }

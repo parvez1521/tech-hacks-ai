@@ -106,16 +106,15 @@ describe('Phase 4: Interactive Browser Simulation & Route Navigation', () => {
     return raw.replace(/<!-- -->/g, '');
   }
 
-  test('Homepage direct navigation renders brand, hero, and tool catalog', () => {
-    const { mockWindow } = setupMockBrowser('https://openalternative.co/');
+  test('Homepage direct navigation renders brand, hero, and discovery collections', () => {
+    setupMockBrowser('https://openalternative.co/');
     const html = renderClean(React.createElement(ssrModule.App));
 
     assert.ok(html.includes('SwitchRoute'), 'Should render platform brand');
-    assert.ok(html.includes('YOUR AI TOOLKIT, ALL IN ONE PLACE'), 'Should render the hero context line');
-    assert.ok(html.includes('id="home-hero-heading"') && ['Another AI tool?', 'Sure.', 'Another Subscription?', 'Nope.'].every((line) => html.includes(line)), 'Should render the four approved headline lines in one heading');
-    assert.ok(html.includes('Supabase'), 'Should render seed tools');
-    assert.ok(html.includes('Filters'), 'Should render filter drawer trigger');
-    assert.ok(html.includes('Most Popular'), 'Should render default sort');
+    assert.ok(html.includes('A practical map to AI'), 'Should render the hero context line');
+    assert.ok(html.includes('Find the right AI route for the work.'), 'Should render the current approved hero heading');
+    for (const collection of ['Frontier Models', 'Free Access', 'All AI Tools', 'GitHub Projects']) assert.ok(html.includes(collection));
+    assert.ok(html.includes('Choose a collection') && html.includes('Browse by task'));
   });
 
   test('Tools directory route /tools renders full directory view', () => {
@@ -233,7 +232,7 @@ describe('Phase 4: Interactive Browser Simulation & Route Navigation', () => {
   });
 
   test('Simulated search query with combined filters maintains URL state', () => {
-    const { mockWindow } = setupMockBrowser('https://openalternative.co/?q=data&category=developer-tools&sort=stars');
+    const { mockWindow } = setupMockBrowser('https://openalternative.co/tools?q=data&category=developer-tools&sort=stars');
     const html = renderClean(React.createElement(ssrModule.App));
 
     assert.ok(html.includes('Supabase'), 'Supabase matches developer-tools');
@@ -266,9 +265,9 @@ describe('Phase 4: Interactive Browser Simulation & Route Navigation', () => {
     setupMockBrowser('https://openalternative.co/');
     const html = renderClean(React.createElement(ssrModule.App));
 
-    assert.ok(html.includes('aria-label="Toggle mobile navigation menu"'), 'Should render mobile menu button');
-    assert.ok(html.includes('Tools'), 'Should render navigation item');
-    assert.ok(html.includes('Categories'), 'Should render navigation item');
+    assert.ok(html.includes('aria-label="Open navigation menu"'), 'Should render mobile menu button');
+    assert.ok(html.includes('Discover') && html.includes('Build') && html.includes('Learn') && html.includes('Offers'), 'Should render the shared navigation groups');
+    assert.ok(html.includes('GitHub Projects'), 'Should render the project directory navigation item');
     assert.ok(html.includes('Alternatives'), 'Should render navigation item');
   });
 });

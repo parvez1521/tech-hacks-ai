@@ -59,7 +59,8 @@ describe('Phase 23: Homepage Logo Fix, Real Brand Assets & Theme Toggle Repair',
       const content = fs.readFileSync(headerPath, 'utf8');
 
       assert.ok(content.includes('<ThemeToggle />'), 'Desktop theme control is rendered');
-      assert.ok(content.includes('<ThemeToggle compact />'), 'Mobile theme control is rendered');
+      assert.ok(content.includes('{open && <nav id="mobile-navigation"'), 'Mobile navigation opens on demand');
+      assert.ok(content.includes('<ThemeToggle /></div></nav>'), 'Mobile theme control is rendered inside the expanded menu');
     });
 
     test('ThemeToggle keeps one playful quote per session and dismisses it on interaction', () => {
@@ -85,16 +86,14 @@ describe('Phase 23: Homepage Logo Fix, Real Brand Assets & Theme Toggle Repair',
       assert.ok(content.includes('<UniversalSearch />'), 'Keeps the functional search');
     });
 
-    test('Homepage restores truthful dynamic catalog metrics', () => {
+    test('Homepage avoids duplicating catalog metrics in the compact discovery flow', () => {
       const homePath = path.resolve(process.cwd(), 'src/pages/HomePage.tsx');
       const servicePath = path.resolve(process.cwd(), 'src/services/aiCatalogService.ts');
       const content = fs.readFileSync(homePath, 'utf8');
       const service = fs.readFileSync(servicePath, 'utf8');
-      assert.ok(content.includes('data-testid="catalog-trust-strip"'), 'Trust strip is rendered');
-      assert.ok(content.includes('catalogStats.proprietaryToolsWithAlternatives'), 'Trust strip uses a distinct proprietary-tool target count');
-      assert.ok(content.includes('catalogStats.imagePrompts'), 'Trust strip uses an image prompt count');
-      assert.ok(content.includes('catalogStats.videoPrompts'), 'Trust strip uses a video prompt count');
-      assert.ok(content.includes('catalogStats.browserUtilities'), 'Trust strip uses the current utility count');
+      assert.ok(content.includes('Choose a collection'), 'Collection entry points are the primary discovery shortcuts');
+      assert.ok(content.includes('Browse by task'), 'Task categories remain discoverable');
+      assert.ok(!content.includes('data-testid="catalog-trust-strip"'), 'The old large metric strip is not repeated on the homepage');
       assert.ok(service.includes('export function getCatalogStats'), 'Catalog stats are computed in a shared service');
       assert.ok(!content.includes('10,000+'), 'Does not make an unsupported 10,000+ claim');
     });
