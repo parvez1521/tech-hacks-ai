@@ -11,7 +11,7 @@ import { getActiveOffers, getFeaturedOffers } from '../data/offersData';
 import { getAllAiTools, getAiToolsForSearchIntent } from '../services/aiCatalogService';
 
 const featuredCollections = [
-  { title: 'Frontier Models', href: '/frontier-models', description: 'Compare capabilities, official pricing and places to try leading models.', eyebrow: 'Model index', tone: 'model', art: '/images/generated-ui/frontier-illustration.webp', Icon: Layers3, highlights: ['GPT-6 Astra', 'Claude Opus 5.5', 'Seedance 2.5'] },
+  { title: 'Frontier Models', href: '/frontier-models', description: 'Compare capabilities, official pricing and places to try leading models.', eyebrow: 'Model index', tone: 'model', art: '/images/generated-ui/automation.webp', Icon: Layers3, highlights: ['GPT-6 Astra', 'Claude Opus 5.5', 'Seedance 2.5'] },
   { title: 'Free Access', href: '/free-ai-sites', description: 'Find daily credits, weekly shared allowances, free plans and local software.', eyebrow: 'Checked routes', tone: 'access', art: null, Icon: Gift, highlights: ['Daily allowances', 'Weekly token pools', 'Free local tools'] },
   { title: 'All AI Tools', href: '/ai-tools', description: 'Explore tools for writing, coding, image, video, audio and research.', eyebrow: 'Platform directory', tone: 'catalog', art: '/images/generated-ui/image.webp', Icon: ImageIcon, highlights: ['By task', 'By category', 'By pricing'] },
   { title: 'GitHub Projects', href: '/github-projects', description: 'Explore useful community and open-source projects with clear review labels.', eyebrow: 'Open source', tone: 'catalog', art: '/images/generated-ui/coding.webp', Icon: Code2, highlights: ['Self-hosted apps', 'Developer tools', 'AI projects'] },
@@ -166,14 +166,13 @@ export const HomePage: React.FC = () => {
             <Link
               to={item.href}
               key={item.href}
-              className={`home-collection-card group flex min-h-56 flex-col overflow-hidden rounded-xl border border-border bg-card p-0 transition-colors hover:border-primary/45 hover:bg-muted/40 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary sm:p-6 ${item.tone === 'model' ? 'border-t-2 border-t-primary' : item.tone === 'access' ? 'border-t-2 border-t-emerald-600 dark:border-t-emerald-400' : ''}`}
+              className={`home-collection-card group flex min-h-56 flex-col overflow-hidden rounded-xl border border-border bg-card p-0 transition-colors hover:border-primary/45 hover:bg-muted/40 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary sm:p-0 ${item.tone === 'model' ? 'border-t-2 border-t-primary' : item.tone === 'access' ? 'border-t-2 border-t-emerald-600 dark:border-t-emerald-400' : ''}`}
             >
               <div className="home-collection-card__visual" aria-hidden="true">
                 {item.art ? <img src={item.art} alt="" loading="lazy" decoding="async" /> : <div className="home-collection-card__visual-icon"><item.Icon className="h-10 w-10" /></div>}
                 <span className="home-collection-card__eyebrow">{item.eyebrow}</span>
               </div>
               <div className="home-collection-card__body">
-              <p className="text-xs font-medium text-muted-foreground">{item.eyebrow}</p>
               <div className="mt-3 flex items-center justify-between gap-3">
                 <h3 className="text-lg font-semibold tracking-tight text-foreground">{item.title}</h3>
                 <ArrowRight className="h-4 w-4 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-0.5 group-hover:text-primary" aria-hidden="true" />
