@@ -1,7 +1,7 @@
 import React from 'react';
 import { ArrowLeft, ArrowUpRight, ExternalLink, GitFork, Github, Star, CircleAlert } from 'lucide-react';
 import { Link, useRouter } from '../router/Router';
-import { githubProjectCategories, githubProjects } from '../data/githubProjectsData';
+import { githubProjectCategories, listedGitHubProjects } from '../data/githubProjectsData';
 
 const formatDate = (value: string | null) => value
   ? new Intl.DateTimeFormat('en', { dateStyle: 'medium', timeZone: 'UTC' }).format(new Date(value))
@@ -10,7 +10,7 @@ const valueText = (value: boolean | null, yes: string, no: string) => value === 
 
 export const GitHubProjectDetailPage: React.FC = () => {
   const { params } = useRouter();
-  const project = githubProjects.find((item) => item.slug === params.slug);
+  const project = listedGitHubProjects.find((item) => item.slug === params.slug);
 
   if (!project) {
     return <main className="mx-auto max-w-4xl px-4 py-16 sm:px-6">
