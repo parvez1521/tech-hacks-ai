@@ -1470,3 +1470,14 @@ main[data-route] [class*="overflow-x-auto"]::-webkit-scrollbar-thumb {
 .home-offer-card>[data-brand-slug]{flex:0 0 auto}
 .home-resource-card__icon{display:grid;width:2.8rem;height:2.8rem;flex:0 0 auto;place-items:center;border:1px solid rgb(var(--color-primary)/.22);border-radius:.85rem;color:rgb(var(--color-primary));background:linear-gradient(145deg,rgb(var(--color-primary)/.12),rgb(var(--color-accent)/.1))}
 @media(max-width:639px){.home-task-card__body{min-height:10.5rem}}
+
+/* Distinct accents for the free video collection. */
+.home-collection-card:has(.home-collection-card__eyebrow) { min-width: 0; }
+.home-collection-card.border-t-violet-500 .home-collection-card__eyebrow {
+  border-color: rgb(167 139 250 / .48);
+}
+.home-collection-card__body .flex.flex-wrap.gap-1\.5 > span {
+  max-width: 100%;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
