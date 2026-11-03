@@ -174,6 +174,16 @@ async function main() {
   let sitemap = await fs.readFile(sitemapPath, 'utf8');
   runEsbuild();
   const renderer = await import(pathToFileURL(bundlePath).href);
+  // Give every curated repository its own crawlable, statically rendered profile URL.
+  const githubProjectDetailPaths = Array.isArray(renderer.githubProjectDetailPaths) ? renderer.githubProjectDetailPaths : [];
+  const existingSitemapPaths = new Set([...sitemap.matchAll(/<loc>([^<]+)<\\/loc>/g)].map((match) => {
+    try { return normalizedPath(new URL(match[1]).pathname); } catch { return ''; }
+  }));
+  const missingGitHubProjectPaths = githubProjectDetailPaths.filter((pathname) => !existingSitemapPaths.has(pathname));
+  if (missingGitHubProjectPaths.length) {
+    const newEntries = missingGitHubProjectPaths.map((pathname) => `  <url><loc>${baseUrl}${pathname}</loc></url>`).join('\\n');
+    sitemap = sitemap.replace('</urlset>', `${newEntries}\\n</urlset>`);
+  }
   // The renderer is build-time only, not a public JS asset.
   await fs.rm(bundlePath, { force: true });
 
@@ -185,6 +195,7 @@ async function main() {
     .map((value) => normalizedPath(new URL(value).pathname));
   const extraPaths = [
     '/saved', '/submit-tool', '/submit-guide', '/submit-prompt', '/discoveries', '/updates',
+    ...githubProjectDetailPaths,
   ];
   const routes = [...new Set([...sitemapUrls, ...extraPaths])].sort((a, b) => a.localeCompare(b));
   const validSitemapPaths = new Set();
