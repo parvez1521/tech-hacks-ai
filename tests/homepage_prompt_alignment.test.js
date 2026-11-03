@@ -47,8 +47,20 @@ describe('Homepage prompt showcase and section alignment', () => {
     assert.match(html, /Claude Opus 5\.5/);
     assert.match(html, /Seedance 2\.0/);
     assert.match(html, /Seedance 2\.5/);
-    assert.match(html, /Fable 5/);
-    assert.match(html, /Fable 5\.1/);
+    assert.match(html, /Claude Fable 5/);
+    assert.match(html, /Claude Fable 5\.1/);
+    assert.match(html, /Claude Sonnet 5\.5/);
+    assert.match(html, /Claude Haiku 5\.5/);
+    assert.match(html, /Claude Mythos 5/);
+    assert.match(html, /data-brand-slug="anthropic"/);
+    assert.match(html, /data-brand-slug="openai"/);
+    assert.match(html, /data-brand-slug="dreamina"/);
+    assert.match(html, /collection-model-grid/);
+    assert.match(html, /collection-video-models/);
+    assert.match(html, /collection-tools-grid/);
+    assert.match(html, /data-brand-slug="perplexity"/);
+    assert.match(html, /data-brand-slug="runway"/);
+    assert.match(html, /data-brand-slug="elevenlabs"/);
     assert.match(html, /Free AI Video Models/);
     assert.match(html, /Google Flow/);
     assert.match(html, /PixVerse/);
@@ -70,10 +82,10 @@ describe('Homepage prompt showcase and section alignment', () => {
       assert.ok(fs.existsSync(path.join(root, 'public/images/home', asset)), `Dedicated homepage art exists: ${asset}`);
       assert.ok(home.includes(`/images/home/${asset}`), `Homepage references dedicated art ${asset}`);
     }
-    assert.match(home, /\/images\/generated-ui\/frontier-illustration\.webp/);
-    assert.match(home, /\/images\/generated-ui\/video-collection-illustration\.webp/);
-    assert.ok(fs.existsSync(path.join(root, 'public/images/generated-ui/frontier-illustration.webp')));
-    assert.ok(fs.existsSync(path.join(root, 'public/images/generated-ui/video-collection-illustration.webp')));
+    assert.match(home, /frontierModelLogos/);
+    assert.match(home, /videoModelLogos/);
+    assert.match(home, /popularToolLogos/);
+    assert.doesNotMatch(home, /Fable 5', 'Fable 5\.1'/);
     assert.match(home, /home-model-access-card__header/);
     assert.match(home, /home-model-access-card__badge/);
     assert.match(css, /home-model-access-card__badge\s*\{/);
