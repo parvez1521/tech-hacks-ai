@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowRight, BookOpen, Code2, Film, Gift, Image as ImageIcon, Layers3, Mic, Search, Server, Video, Wrench } from 'lucide-react';
+import { ArrowRight, AudioLines, BookOpen, Bot, Code2, Film, Gift, Image as ImageIcon, Layers3, Mic, Music2, Palette, PenTool, Search, Server, Video, Wrench } from 'lucide-react';
 import { Link } from '../router/Router';
 import { UniversalSearch } from '../components/UniversalSearch';
 import { HeroSignalVisual } from '../components/HeroSignalVisual';
@@ -11,10 +11,10 @@ import { getActiveOffers, getFeaturedOffers } from '../data/offersData';
 import { getAllAiTools, getAiToolsForSearchIntent } from '../services/aiCatalogService';
 
 const featuredCollections = [
-  { title: 'Frontier Models', href: '/frontier-models', description: 'Compare capabilities, official pricing and places to try leading models.', eyebrow: 'Model index', tone: 'model', highlights: ['GPT-6 Astra', 'Claude Opus 5.5', 'Seedance 2.5'] },
-  { title: 'Free Access', href: '/free-ai-sites', description: 'Find daily credits, weekly shared allowances, free plans and local software.', eyebrow: 'Checked routes', tone: 'access', highlights: ['Daily allowances', 'Weekly token pools', 'Free local tools'] },
-  { title: 'All AI Tools', href: '/ai-tools', description: 'Explore tools for writing, coding, image, video, audio and research.', eyebrow: 'Platform directory', tone: 'catalog', highlights: ['By task', 'By category', 'By pricing'] },
-  { title: 'GitHub Projects', href: '/github-projects', description: 'Explore useful community and open-source projects with clear review labels.', eyebrow: 'Open source', tone: 'catalog', highlights: ['Self-hosted apps', 'Developer tools', 'AI projects'] },
+  { title: 'Frontier Models', href: '/frontier-models', description: 'Compare capabilities, official pricing and places to try leading models.', eyebrow: 'Model index', tone: 'model', art: '/images/generated-ui/frontier-illustration.webp', Icon: Layers3, highlights: ['GPT-6 Astra', 'Claude Opus 5.5', 'Seedance 2.5'] },
+  { title: 'Free Access', href: '/free-ai-sites', description: 'Find daily credits, weekly shared allowances, free plans and local software.', eyebrow: 'Checked routes', tone: 'access', art: null, Icon: Gift, highlights: ['Daily allowances', 'Weekly token pools', 'Free local tools'] },
+  { title: 'All AI Tools', href: '/ai-tools', description: 'Explore tools for writing, coding, image, video, audio and research.', eyebrow: 'Platform directory', tone: 'catalog', art: '/images/generated-ui/image.webp', Icon: ImageIcon, highlights: ['By task', 'By category', 'By pricing'] },
+  { title: 'GitHub Projects', href: '/github-projects', description: 'Explore useful community and open-source projects with clear review labels.', eyebrow: 'Open source', tone: 'catalog', art: '/images/generated-ui/coding.webp', Icon: Code2, highlights: ['Self-hosted apps', 'Developer tools', 'AI projects'] },
 ];
 
 const resources = [
@@ -23,6 +23,25 @@ const resources = [
   ['Alternatives & Compare', '/alternatives', Code2],
   ['Guides & Prompt Library', '/guides', BookOpen],
 ] as const;
+
+const categoryVisuals = {
+  assistants: { art: '/images/generated-ui/automation.webp', Icon: Bot },
+  writing: { art: '/images/generated-ui/writing.webp', Icon: PenTool },
+  image: { art: '/images/generated-ui/image.webp', Icon: ImageIcon },
+  video: { art: '/images/generated-ui/video.webp', Icon: Film },
+  voice: { art: '/images/generated-ui/voice.webp', Icon: AudioLines },
+  music: { art: '/images/generated-ui/music.webp', Icon: Music2 },
+  coding: { art: '/images/generated-ui/coding.webp', Icon: Code2 },
+  productivity: { art: '/images/generated-ui/research.webp', Icon: Search },
+  automation: { art: '/images/generated-ui/automation.webp', Icon: Bot },
+  '3d': { art: '/images/generated-ui/image.webp', Icon: Palette },
+} as const;
+
+const modelBrandSlugs: Record<string, string> = {
+  'gpt-6-astra': 'openai',
+  'claude-opus-5-5': 'anthropic',
+  'seedance-2-5': 'dreamina',
+};
 
 export const HomePage: React.FC = () => {
   const activeOffers = getActiveOffers();
@@ -46,6 +65,7 @@ export const HomePage: React.FC = () => {
       countLabel: 'free or trial entries',
       accessLabel: 'Credits and limits vary',
       Icon: Film,
+      art: '/images/generated-ui/video.webp',
       logos: [{ slug: 'runway', name: 'Runway' }, { slug: 'dreamina', name: 'Dreamina' }, { slug: 'pika', name: 'Pika' }, { slug: 'hailuo-ai', name: 'Hailuo' }],
     },
     {
@@ -56,6 +76,7 @@ export const HomePage: React.FC = () => {
       countLabel: 'tools listed',
       accessLabel: 'Hosted and local options',
       Icon: ImageIcon,
+      art: '/images/generated-ui/image.webp',
       logos: [{ slug: 'ideogram', name: 'Ideogram' }, { slug: 'leonardo-ai', name: 'Leonardo AI' }, { slug: 'comfyui', name: 'ComfyUI' }],
     },
     {
@@ -66,6 +87,7 @@ export const HomePage: React.FC = () => {
       countLabel: 'tools listed',
       accessLabel: 'Free and paid plans',
       Icon: Mic,
+      art: '/images/generated-ui/voice.webp',
       logos: [{ slug: 'elevenlabs', name: 'ElevenLabs' }, { slug: 'whisper', name: 'Whisper' }, { slug: 'kokoro-tts', name: 'Kokoro TTS' }],
     },
     {
@@ -76,6 +98,7 @@ export const HomePage: React.FC = () => {
       countLabel: 'tools listed',
       accessLabel: 'Free tiers and open source',
       Icon: Code2,
+      art: '/images/generated-ui/coding.webp',
       logos: [{ slug: 'cursor', name: 'Cursor' }, { slug: 'aider', name: 'Aider' }, { slug: 'google-ai-studio', name: 'Google AI Studio' }],
     },
     {
@@ -86,6 +109,7 @@ export const HomePage: React.FC = () => {
       countLabel: 'tools listed',
       accessLabel: 'Research and knowledge tools',
       Icon: Search,
+      art: '/images/generated-ui/research.webp',
       logos: [{ slug: 'perplexity', name: 'Perplexity' }, { slug: 'notebooklm', name: 'NotebookLM' }, { slug: 'anythingllm', name: 'AnythingLLM' }],
     },
     {
@@ -96,6 +120,7 @@ export const HomePage: React.FC = () => {
       countLabel: 'open-source / local options',
       accessLabel: 'Check model and code licenses',
       Icon: Server,
+      art: '/images/generated-ui/automation.webp',
       logos: [{ slug: 'comfyui', name: 'ComfyUI' }, { slug: 'vllm', name: 'vLLM' }, { slug: 'aider', name: 'Aider' }],
     },
   ];
@@ -141,8 +166,13 @@ export const HomePage: React.FC = () => {
             <Link
               to={item.href}
               key={item.href}
-              className={`home-collection-card group flex min-h-40 flex-col rounded-xl border border-border bg-card p-5 transition-colors hover:border-primary/45 hover:bg-muted/40 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary sm:p-6 ${item.tone === 'model' ? 'border-t-2 border-t-primary' : item.tone === 'access' ? 'border-t-2 border-t-emerald-600 dark:border-t-emerald-400' : ''}`}
+              className={`home-collection-card group flex min-h-56 flex-col overflow-hidden rounded-xl border border-border bg-card p-0 transition-colors hover:border-primary/45 hover:bg-muted/40 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary sm:p-6 ${item.tone === 'model' ? 'border-t-2 border-t-primary' : item.tone === 'access' ? 'border-t-2 border-t-emerald-600 dark:border-t-emerald-400' : ''}`}
             >
+              <div className="home-collection-card__visual" aria-hidden="true">
+                {item.art ? <img src={item.art} alt="" loading="lazy" decoding="async" /> : <div className="home-collection-card__visual-icon"><item.Icon className="h-10 w-10" /></div>}
+                <span className="home-collection-card__eyebrow">{item.eyebrow}</span>
+              </div>
+              <div className="home-collection-card__body">
               <p className="text-xs font-medium text-muted-foreground">{item.eyebrow}</p>
               <div className="mt-3 flex items-center justify-between gap-3">
                 <h3 className="text-lg font-semibold tracking-tight text-foreground">{item.title}</h3>
@@ -150,6 +180,7 @@ export const HomePage: React.FC = () => {
               </div>
               <p className="mt-2 text-sm leading-6 text-muted-foreground">{item.description}</p>
               <div className="mt-4 flex flex-wrap gap-1.5">{item.highlights.map((highlight) => <span key={highlight} className="rounded-md border border-border/80 bg-muted/50 px-2 py-1 text-[11px] font-medium text-secondary-foreground">{highlight}</span>)}</div>
+              </div>
             </Link>
           ))}
         </div>
@@ -172,7 +203,7 @@ export const HomePage: React.FC = () => {
             const accessLabel = route.accessType === 'free-weekly-shared' ? 'Free weekly · shared pool' : route.accessType === 'free-daily-allowance' ? 'Free daily allowance' : 'Free daily credits';
             return <article key={route.id} className="flex min-h-40 flex-col rounded-xl border border-border bg-card p-4 transition-colors hover:border-primary/40">
               <div className="flex items-start justify-between gap-2">
-                <div><p className="text-xs text-muted-foreground">{model.organization}</p><h3 className="mt-1 text-base font-semibold text-foreground">{model.name}</h3></div>
+                <div className="flex min-w-0 items-center gap-3"><BrandLogo slug={modelBrandSlugs[model.id] || 'openai'} name={model.organization} size="lg" /><div className="min-w-0"><p className="text-xs text-muted-foreground">{model.organization}</p><h3 className="mt-1 text-base font-semibold text-foreground">{model.name}</h3></div></div>
                 <span className="shrink-0 rounded-md border border-emerald-500/25 bg-emerald-500/10 px-2 py-1 text-[10px] font-semibold text-emerald-700 dark:text-emerald-300">{accessLabel}</span>
               </div>
               <p className="mt-3 text-sm font-medium leading-5 text-foreground">{route.allowance}</p>
@@ -196,7 +227,12 @@ export const HomePage: React.FC = () => {
         </div>
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {aiCategories.map((category) => (
-            <Link key={category.id} to={`/ai-tools?category=${encodeURIComponent(category.id)}`} className="group flex min-h-40 flex-col rounded-xl border border-border bg-card p-4 transition-colors hover:border-primary/45 hover:bg-muted/30 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+            <Link key={category.id} to={`/ai-tools?category=${encodeURIComponent(category.id)}`} className="home-category-card group flex min-h-56 flex-col overflow-hidden rounded-xl border border-border bg-card p-0 transition-colors hover:border-primary/45 hover:bg-muted/30 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+              <div className="home-category-card__art">
+                <img src={categoryVisuals[category.id as keyof typeof categoryVisuals]?.art || '/images/generated-ui/image.webp'} alt="" aria-hidden="true" loading="lazy" decoding="async" />
+                {(() => { const CategoryIcon = categoryVisuals[category.id as keyof typeof categoryVisuals]?.Icon || ImageIcon; return <span className="home-category-card__icon"><CategoryIcon className="h-5 w-5" aria-hidden="true" /></span>; })()}
+              </div>
+              <div className="home-category-card__body">
               <div className="flex items-center justify-between gap-3">
                 <h3 className="text-sm font-semibold text-foreground">{category.name}</h3>
                 <ArrowRight className="h-4 w-4 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-0.5 group-hover:text-primary" aria-hidden="true" />
@@ -204,6 +240,7 @@ export const HomePage: React.FC = () => {
               <p className="mt-2 text-xs leading-5 text-muted-foreground">{category.description}</p>
               <div className="mt-auto flex flex-wrap gap-1.5 pt-3">
                 {category.subcategories.map((subcategory) => <span key={subcategory} className="rounded-md border border-border/80 bg-muted/50 px-2 py-1 text-[10px] font-medium text-secondary-foreground">{subcategory}</span>)}
+              </div>
               </div>
             </Link>
           ))}
@@ -220,8 +257,10 @@ export const HomePage: React.FC = () => {
           <Link to="/ai-tools" className="inline-flex min-h-11 shrink-0 items-center gap-1 text-sm font-medium text-primary hover:underline">Browse full directory <ArrowRight className="h-4 w-4" aria-hidden="true" /></Link>
         </div>
         <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
-          {taskCategories.map(({ title, description, href, count, countLabel, accessLabel, Icon, logos }) => (
-            <Link key={title} to={href} className="group flex min-h-52 flex-col rounded-xl border border-border bg-card p-4 transition-colors hover:border-primary/45 hover:bg-muted/30 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary sm:p-5">
+          {taskCategories.map(({ title, description, href, count, countLabel, accessLabel, Icon, logos, art }) => (
+            <Link key={title} to={href} className="home-task-card group flex min-h-72 flex-col rounded-xl border border-border bg-card transition-colors hover:border-primary/45 hover:bg-muted/30 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+              <div className="home-task-card__art"><img src={art} alt="" aria-hidden="true" loading="lazy" decoding="async" /></div>
+              <div className="home-task-card__body">
               <div className="flex items-start justify-between gap-3">
                 <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl border border-primary/15 bg-primary/10 text-primary">
                   <Icon className="h-5 w-5" aria-hidden="true" />
@@ -240,6 +279,7 @@ export const HomePage: React.FC = () => {
                   {logos.map((logo) => <BrandLogo key={logo.slug} slug={logo.slug} name={logo.name} size="sm" className="ring-2 ring-card" />)}
                 </div>
                 <span className="text-right text-[11px] font-medium text-muted-foreground"><strong className="text-foreground">{count}</strong> {countLabel}</span>
+              </div>
               </div>
             </Link>
           ))}
@@ -264,13 +304,14 @@ export const HomePage: React.FC = () => {
         </div>
         <div className="grid gap-3 md:grid-cols-2">
           {offers.map((offer) => (
-            <Link key={offer.slug} to={`/offers/${offer.slug}`} className="group flex min-h-28 items-center justify-between gap-4 rounded-lg border border-border bg-card p-4 transition-colors hover:bg-muted/40 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
-              <div>
+            <Link key={offer.slug} to={`/offers/${offer.slug}`} className="home-offer-card group flex min-h-36 items-center gap-4 rounded-xl border border-border bg-card p-4 transition-colors hover:border-primary/40 hover:bg-muted/40 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+              <BrandLogo slug={offer.logoSlug} name={offer.provider} size="lg" />
+              <div className="min-w-0 flex-1">
                 <p className="text-xs text-muted-foreground">{offer.provider} · {offer.region}</p>
                 <h3 className="mt-1 font-medium text-foreground">{offer.title}</h3>
                 <p className="mt-1 text-sm leading-5 text-muted-foreground">{offer.benefitSummary}</p>
               </div>
-              <Gift className="h-4 w-4 shrink-0 text-muted-foreground transition-colors group-hover:text-primary" aria-hidden="true" />
+              <ArrowRight className="h-4 w-4 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-0.5 group-hover:text-primary" aria-hidden="true" />
             </Link>
           ))}
         </div>
@@ -279,12 +320,12 @@ export const HomePage: React.FC = () => {
       <section className="home-section mx-auto max-w-7xl border-t border-border/70 px-4 py-10 sm:px-6 sm:py-12" aria-labelledby="resources-heading">
         <p className="text-sm text-muted-foreground">More ways to explore</p>
         <h2 id="resources-heading" className="mb-5 mt-1 text-2xl font-semibold tracking-tight text-foreground">Resources and directories</h2>
-        <div className="grid gap-x-5 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
           {resources.map(([label, href, Icon]) => (
-            <Link key={href} to={href} className="group flex min-h-12 items-center gap-3 border-b border-border/70 px-2 text-sm font-medium text-secondary-foreground transition-colors hover:text-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-primary">
-              <Icon className="h-4 w-4 shrink-0 text-muted-foreground group-hover:text-primary" aria-hidden="true" />
-              <span>{label}</span>
-              <ArrowRight className="ml-auto h-3.5 w-3.5 shrink-0 text-muted-foreground opacity-0 transition-[opacity,transform] group-hover:translate-x-0.5 group-hover:opacity-100" aria-hidden="true" />
+            <Link key={href} to={href} className="home-resource-card group flex min-h-28 items-center gap-3 rounded-xl border border-border bg-card p-4 text-sm font-semibold text-secondary-foreground transition-colors hover:border-primary/40 hover:text-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+              <span className="home-resource-card__icon"><Icon className="h-5 w-5" aria-hidden="true" /></span>
+              <span className="min-w-0 flex-1">{label}</span>
+              <ArrowRight className="ml-auto h-4 w-4 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-0.5 group-hover:text-primary" aria-hidden="true" />
             </Link>
           ))}
         </div>

@@ -53,6 +53,14 @@ describe('Homepage prompt showcase and section alignment', () => {
     assert.match(html, /AI Research &amp; Search/);
     assert.match(html, /data-brand-slug="runway"/);
     assert.match(html, /data-brand-slug="dreamina"/);
+    assert.match(html, /home-collection-card__visual/);
+    assert.match(html, /home-category-card__art/);
+    assert.match(html, /home-task-card__art/);
+    assert.match(html, /home-resource-card__icon/);
+    for (const asset of ['video.webp', 'image.webp', 'coding.webp', 'voice.webp', 'writing.webp', 'research.webp', 'automation.webp', 'music.webp', 'frontier-illustration.webp']) {
+      assert.ok(fs.existsSync(path.join(root, 'public/images/generated-ui', asset)), `Generated visual asset exists: ${asset}`);
+      assert.ok(html.includes(`/images/generated-ui/${asset}`), `Homepage references ${asset}`);
+    }
     const videoPage = fs.readFileSync(path.join(root, 'src/pages/AiVideoToolsPage.tsx'), 'utf8');
     assert.match(videoPage, /searchParams\.get\('filter'\)/);
     assert.match(videoPage, /initialFilter === 'free-entry'/);

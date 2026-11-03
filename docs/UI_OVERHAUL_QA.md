@@ -80,3 +80,10 @@ Built-preview QA at 390px in dark and light themes scrolled the full homepage an
 The same homepage, utility route, upload workspace, policy, and mobile-chat navigation captures are included for light theme. The regression check in `tests/mobile_viewport_overflow.test.js` requires the mobile launcher to be non-rendered, verifies the fixed launcher exists only at the desktop breakpoint with safe-area positioning, and checks the mobile nav open action and focus return path.
 
 Follow-up verification: `npm test` — 616 passed, 0 failed, 0 cancelled, 0 skipped. `npm run build` — passed. `git diff --check` — passed. The build retains the existing `heic2any` size warning and fail-closed missing-admin-secret warning described above.
+
+
+## Generated homepage visual-art pass
+
+Original decorative workflow illustrations were prepared under `public/images/generated-ui/` for collection, category and task cards. These are original category illustrations, not official product logos, tool screenshots, model badges or capability claims.
+
+The homepage uses artwork-led collection and category cards, matching Lucide pictograms, local canonical provider logos for frontier-model cards, and offer logos from the existing `BrandLogo` registry. Images are lazy-loaded and decorative images have empty alt text. Reduced-motion users do not receive image-zoom transitions. Generated artwork never replaces the canonical brand-logo registry.
