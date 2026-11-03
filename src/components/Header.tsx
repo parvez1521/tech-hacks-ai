@@ -119,6 +119,6 @@ export const Header: React.FC = () => {
         <button ref={menuButtonRef} type="button" onClick={() => setOpen(!open)} aria-label={open ? 'Close navigation menu' : 'Open navigation menu'} aria-expanded={open} aria-controls="mobile-navigation" className="lg:hidden min-h-11 min-w-11 rounded-md flex items-center justify-center text-muted-foreground hover:bg-muted"><span className="sr-only">Menu</span>{open ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}</button>
       </div>
     </div>
-    {open && <nav id="mobile-navigation" aria-label="Mobile primary" className="lg:hidden max-h-[80vh] overflow-y-auto border-t border-border bg-background px-4 py-2" onKeyDown={closeOnEscape}>{groups.map((group) => renderGroup(group, true))}<div className="pt-3"><ThemeToggle /></div></nav>}
+    {open && <nav id="mobile-navigation" aria-label="Mobile primary" className="lg:hidden max-h-[80vh] overflow-y-auto border-t border-border bg-background px-4 py-2" onKeyDown={closeOnEscape}>{groups.map((group) => renderGroup(group))}<div className="pt-3"><ThemeToggle /></div></nav>}
   </header>;
 };
