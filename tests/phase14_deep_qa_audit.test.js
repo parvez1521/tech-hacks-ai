@@ -87,7 +87,7 @@ describe('Phase 14: Deep QA, Production Readiness & Trust Audit', () => {
       setupMockBrowser('https://switchroute.in/');
       const html = renderClean(React.createElement(ssrModule.App));
 
-      assert.ok(html.includes('id="home-hero-heading"') && html.includes('Find the right AI route for the work.'), 'Homepage renders the current approved headline');
+      assert.ok(html.includes('id="home-hero-heading"') && html.includes('Another AI tool?'), 'Homepage renders the current approved headline');
       for (const collection of ['Frontier Models', 'Free Access', 'All AI Tools', 'GitHub Projects']) assert.ok(html.includes(collection), `${collection} collection is discoverable`);
       for (const section of ['Browse by task', 'Daily discoveries', 'Selected offers', 'Resources and directories']) assert.ok(html.includes(section), `${section} section exists`);
       assert.ok(html.includes('href="/alternatives"') && html.includes('href="/free-tools"'), 'Alternatives and utilities remain available from resources/navigation');

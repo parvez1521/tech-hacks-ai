@@ -6,6 +6,8 @@ import React from 'react';
 import ReactDOMServer from 'react-dom/server';
 
 const read = (file) => fs.readFileSync(path.resolve(process.cwd(), file), 'utf8');
+const exactHomeTitle = 'Another AI tool? Sure. Another Subscription? Nope.';
+const extractedHomeTitle = (source) => source.match(/<h1 id="home-hero-heading"[\s\S]*?<\/h1>/)?.[0].replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
 let appModule;
 
 function setupBrowser() {
@@ -50,7 +52,7 @@ describe('Premium homepage redesign regressions', () => {
     const home = read('src/pages/HomePage.tsx');
     const visual = read('src/components/HeroSignalVisual.tsx');
 
-    assert.match(home, /Find the right AI route for the work\./);
+    assert.equal(extractedHomeTitle(home), exactHomeTitle);
     assert.match(home, /<UniversalSearch \/>/);
     for (const route of ['/frontier-models', '/free-ai-sites', '/ai-tools', '/github-projects']) assert.ok(home.includes(`href: '${route}'`));
     assert.match(home, /<HeroSignalVisual \/>/);
@@ -89,7 +91,7 @@ describe('Premium homepage redesign regressions', () => {
 
   it('keeps the home hero server-rendered and statically readable', () => {
     const home = read('src/pages/HomePage.tsx');
-    assert.match(home, /Find the right AI route for the work\./);
+    assert.equal(extractedHomeTitle(home), exactHomeTitle);
     assert.match(home, /<UniversalSearch \/>/);
     assert.doesNotMatch(home, /LazyMotion|motionFeatures/);
   });

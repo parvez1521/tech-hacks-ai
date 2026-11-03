@@ -34,9 +34,8 @@ describe('Theme, chat suggestions, and contact regression coverage', () => {
     assert.match(component, /theme === 'dark' \? 'Light Mode' : 'Dark Mode'/);
     assert.match(component, /aria-label=\{`Switch to \$\{theme === 'dark' \? 'light' : 'dark'\} mode`\}/);
     assert.match(component, /theme === 'dark' \? <Sun/);
-    assert.match(component, /onClick=\{handleToggle\}/);
-    assert.match(component, /className="theme-control__arrow"[\s\S]*?aria-hidden="true"/);
-    assert.match(styles, /\.theme-control__arrow\s*\{[^}]*pointer-events:\s*none/s);
+    assert.match(component, /onClick=\{toggleTheme\}/);
+    assert.doesNotMatch(component, /theme-control__arrow|theme-hint/);
     assert.match(styles, /@media \(prefers-reduced-motion: reduce\)/);
   });
 

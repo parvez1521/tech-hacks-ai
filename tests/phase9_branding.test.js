@@ -221,7 +221,7 @@ describe('Phase 9: SwitchRoute Platform Rebranding', () => {
     const html = renderClean(React.createElement(ssrModule.App));
 
     assert.ok(
-      html.includes('Compare tools, models, and ways to access them. Start with what you need to do.'),
+      html.includes('Compare AI tools by task, check current access routes, and find reviewed open-source projects.'),
       'Hero description explains the current product discovery scope'
     );
   });

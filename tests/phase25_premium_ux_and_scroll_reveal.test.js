@@ -188,7 +188,7 @@ describe('Phase 25: Premium UX, Scroll Reveal & Smart Welcome', () => {
     assert.ok(toggleSrc.includes("aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}"), 'Theme control name announces the destination theme');
     assert.ok(toggleSrc.includes("{theme === 'dark' ? 'Light Mode' : 'Dark Mode'}"), 'Visible theme label names the destination theme');
     assert.ok(toggleSrc.includes("{theme === 'dark' ? <Sun"), 'Icon shows the destination theme');
-    assert.ok(toggleSrc.includes('className="theme-control__arrow"') && toggleSrc.includes('aria-hidden="true"'), 'Decorative arrow is present and hidden from assistive technology');
+    assert.ok(toggleSrc.includes('onClick={toggleTheme}'), 'Theme control remains interactive without decorative hint markup');
     assert.ok(toggleSrc.includes('title={`Switch to'), 'Theme control exposes its next action as a tooltip');
     assert.ok(toggleSrc.includes('data-testid={compact ?'), 'Theme control has desktop/mobile test hooks');
   });

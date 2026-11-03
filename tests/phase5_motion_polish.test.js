@@ -18,13 +18,11 @@ describe('Phase 5: Premium Interactive UI, Motion Polish & Accessibility', () =>
     );
   });
 
-  test('AmbientGlow renders with pointer-events-none and aria-hidden="true"', async () => {
+  test('Global ambient glow is omitted from the content shell', async () => {
     ssrModule = await import('../dist/test-ssr.js');
     const html = ReactDOMServer.renderToString(React.createElement(ssrModule.App));
 
-    assert.ok(html.includes('ambient-glow-container'), 'Should render ambient glow container');
-    assert.ok(html.includes('pointer-events-none'), 'Ambient glow must be pointer-events-none');
-    assert.ok(html.includes('aria-hidden="true"'), 'Ambient glow must be aria-hidden for screen readers');
+    assert.ok(!html.includes('ambient-glow-container'), 'Global glow should not compete with discovery content');
   });
 
   test('CSS stylesheet contains strict prefers-reduced-motion definitions', () => {
@@ -49,7 +47,7 @@ describe('Phase 5: Premium Interactive UI, Motion Polish & Accessibility', () =>
     const html = ReactDOMServer.renderToString(React.createElement(ssrModule.App));
 
     const homeSource = fs.readFileSync(path.join(process.cwd(), 'src/pages/HomePage.tsx'), 'utf8');
-    assert.ok(html.includes('id="home-hero-heading"') && html.includes('Find the right AI route for the work.'), 'The editorial hero renders as a readable static server fallback');
+    assert.ok(html.includes('id="home-hero-heading"') && html.includes('Another AI tool?'), 'The editorial hero renders as a readable static server fallback');
     assert.ok(!homeSource.includes('motionFeatures') && !homeSource.includes('LazyMotion'), 'Hero does not load optional animation features before content is usable');
   });
 

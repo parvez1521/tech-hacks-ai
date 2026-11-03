@@ -346,65 +346,30 @@
     .catalog-trust-strip__metrics { grid-template-columns: 1fr; }
   }
 
-  .theme-hint {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.35rem;
-    color: rgb(var(--color-muted-fg));
-    font-family: 'Comic Sans MS', 'Bradley Hand', cursive;
-    font-size: 0.68rem;
-    white-space: nowrap;
-    transform: rotate(-2deg);
-    pointer-events: none;
-  }
-
-  .theme-hint svg {
-    color: rgb(var(--color-primary));
-    animation: hintFloat 3.6s ease-in-out infinite;
-  }
-
   .theme-control {
     display: inline-flex;
     align-items: center;
     gap: 0.55rem;
   }
 
-  .theme-control__button-wrap {
-    position: relative;
-    display: inline-flex;
-    align-items: center;
-  }
-
-  .theme-control__arrow {
-    position: absolute;
-    z-index: 1;
-    top: -0.72rem;
-    right: 0.7rem;
-    width: 1.45rem;
-    height: 0.95rem;
-    color: rgb(var(--color-primary));
-    pointer-events: none;
-  }
-
   .theme-toggle {
     display: inline-flex;
     align-items: center;
     gap: 0.4rem;
-    min-height: 2.25rem;
-    padding: 0.42rem 0.62rem;
+    min-height: 2.75rem;
+    padding: 0.5rem 0.75rem;
     border: 1px solid rgb(var(--color-border) / 0.9);
     border-radius: 0.65rem;
     background: rgb(var(--color-card) / 0.72);
     color: rgb(var(--color-fg));
-    font-size: 0.7rem;
-    font-weight: 700;
-    transition: border-color 180ms ease, background-color 180ms ease, transform 180ms ease;
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: border-color 160ms ease, background-color 160ms ease;
   }
 
   .theme-toggle:hover {
     border-color: rgb(var(--color-primary) / 0.7);
     background: rgb(var(--color-muted) / 0.8);
-    transform: translateY(-1px);
   }
 
   .theme-toggle:active {
@@ -423,17 +388,8 @@
   }
 
   .theme-control--compact {
-    justify-content: space-between;
+    justify-content: flex-start;
     width: 100%;
-  }
-
-  .theme-control--compact .theme-hint {
-    font-size: 0.66rem;
-  }
-
-  .theme-control--compact .theme-hint svg {
-    width: 30px;
-    height: 18px;
   }
 
   .ambient-glow-container {
@@ -683,11 +639,6 @@
   }
 }
 
-@keyframes hintFloat {
-  0%, 100% { transform: translate3d(0, 0, 0) rotate(3deg); }
-  50% { transform: translate3d(2px, -2px, 0) rotate(-2deg); }
-}
-
 @keyframes globalAmbientDrift {
   from { transform: translate3d(-1%, -1%, 0) scale(1); opacity: 0.5; }
   to { transform: translate3d(1%, 1%, 0) scale(1.05); opacity: 0.9; }
@@ -728,8 +679,7 @@
     filter: none !important;
   }
 
-  .ambient-glow-container::after,
-  .theme-hint svg {
+  .ambient-glow-container::after {
     animation: none !important;
   }
 
@@ -898,9 +848,9 @@
   max-width: 38rem;
   margin-inline: auto;
   border: 1px solid rgb(var(--color-border) / 0.78);
-  border-radius: 1.2rem;
+  border-radius: 1rem;
   background: rgb(var(--color-card));
-  box-shadow: 0 28px 70px rgb(2 8 23 / 0.17), 0 2px 5px rgb(2 8 23 / 0.08), inset 0 1px 0 rgb(255 255 255 / 0.32);
+  box-shadow: 0 12px 32px rgb(2 8 23 / 0.08), inset 0 1px 0 rgb(255 255 255 / 0.2);
 }
 .discovery-interface__chrome {
   display: flex;

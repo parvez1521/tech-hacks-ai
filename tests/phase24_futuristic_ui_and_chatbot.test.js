@@ -20,8 +20,8 @@ describe('Phase 24: Restrained UI, Verified Navigation & Chatbot Repair', () => 
       const homePath = path.resolve(process.cwd(), 'src/pages/HomePage.tsx');
       const content = fs.readFileSync(homePath, 'utf8');
 
-      assert.ok(content.includes('Find the right AI route for the work.'), 'Hero has the current approved heading');
-      assert.ok(content.includes('Explore AI video'), 'Hero preserves a task-specific discovery link');
+      assert.ok(content.includes('Another AI tool?'), 'Hero has the current approved heading');
+      assert.ok(content.includes('AI video generators'), 'Hero preserves a task-specific discovery link');
       assert.ok(content.includes('Help me pick'), 'Hero preserves guided discovery');
       assert.ok(content.includes('<UniversalSearch />'), 'Universal search remains the primary interaction');
       assert.ok(content.includes('<HeroSignalVisual />'), 'Hero pairs the message with a product interface visual');
@@ -69,23 +69,12 @@ describe('Phase 24: Restrained UI, Verified Navigation & Chatbot Repair', () => 
   // 3. Task 3: Restrained global background treatment
   // =========================================================================
   describe('Task 3: Restrained global background treatment', () => {
-    test('AmbientGlow paints a restrained global field behind the content shell', () => {
-      const glowPath = path.resolve(process.cwd(), 'src/components/AmbientGlow.tsx');
-      const content = fs.readFileSync(glowPath, 'utf8');
+    test('Global ambient glow is not mounted in the app shell', () => {
+      const appPath = path.resolve(process.cwd(), 'src/App.tsx');
+      const content = fs.readFileSync(appPath, 'utf8');
 
-      assert.ok(content.includes('const ENABLE_AMBIENT_GLOW = true'), 'Global ambient painting is enabled');
-      assert.ok(content.includes('ambient-glow-container'), 'Global field uses a dedicated visual layer');
-    });
-
-    test('AmbientGlow container is non-blocking, behind content, and accessible', () => {
-      const glowPath = path.resolve(process.cwd(), 'src/components/AmbientGlow.tsx');
-      const content = fs.readFileSync(glowPath, 'utf8');
-
-      assert.ok(content.includes('pointer-events-none'), 'Container has pointer-events-none');
-      assert.ok(content.includes('z-0'), 'Container positioned behind interactive content');
-      assert.ok(content.includes('aria-hidden="true"'), 'Container hidden from screen readers');
-      assert.ok(content.includes('prefers-reduced-motion'), 'Respects prefers-reduced-motion');
-      assert.ok(content.includes('pointer: fine'), 'Disabled on coarse touch pointers');
+      assert.ok(!content.includes("import { AmbientGlow }"), 'Global decorative field is not imported');
+      assert.ok(!content.includes('<AmbientGlow'), 'Global decorative field is not rendered');
     });
   });
 
