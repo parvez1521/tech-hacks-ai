@@ -1,6 +1,8 @@
 import type { GitHubProject, GitHubProjectCategory } from '../types/githubProjects.ts';
 import { githubProjectEditorialRecords } from './githubProjectsEditorial.ts';
 import { githubRepositorySnapshots } from './githubRepositorySnapshots.ts';
+import { openHiggsfieldCommunityEditorialRecords } from './openHiggsfieldCommunityEditorial.ts';
+import { openHiggsfieldCommunitySnapshots } from './openHiggsfieldCommunitySnapshots.ts';
 
 export const githubProjectCategories: Array<{ id: GitHubProjectCategory; name: string; description: string }> = [
   { id: 'ai-video-generation', name: 'AI Video Generation', description: 'Open video-generation workflows, models, and tooling.' },
@@ -22,11 +24,13 @@ export const githubProjectSources = [
 ];
 
 /**
- * Curated decisions live in githubProjectsEditorial.ts; observed GitHub data
- * lives in githubRepositorySnapshots.ts. Runtime joins them by canonical fullName.
+ * Curated decisions live in editorial files; observed GitHub data lives in
+ * snapshot files. Runtime joins them by canonical fullName.
  */
-const snapshotsByRepository = new Map(githubRepositorySnapshots.map((snapshot) => [snapshot.fullName, snapshot]));
-export const githubProjects: GitHubProject[] = githubProjectEditorialRecords.flatMap((editorial) => {
+const allEditorialRecords = [...githubProjectEditorialRecords, ...openHiggsfieldCommunityEditorialRecords];
+const allRepositorySnapshots = [...githubRepositorySnapshots, ...openHiggsfieldCommunitySnapshots];
+const snapshotsByRepository = new Map(allRepositorySnapshots.map((snapshot) => [snapshot.fullName, snapshot]));
+export const githubProjects: GitHubProject[] = allEditorialRecords.flatMap((editorial) => {
   const snapshot = snapshotsByRepository.get(editorial.fullName);
   return snapshot ? [{ ...editorial, ...snapshot }] : [];
 });
