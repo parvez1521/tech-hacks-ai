@@ -3,6 +3,7 @@ import { ArrowUpRight, ExternalLink, RefreshCw, Search, ShieldCheck } from 'luci
 import { communityGitHubProjects, githubProjectCategories, githubProjectSources, publicGitHubProjects } from '../data/githubProjectsData';
 import { filterAndSortGitHubProjects, refreshGitHubProjectMetadata } from '../services/githubProjectsService';
 import type { GitHubProject, GitHubProjectCategory, GitHubProjectLiveMetadata } from '../types/githubProjects';
+import { Link } from '../router/Router';
 
 const PAGE_SIZE = 9;
 type RequirementFilter = 'all' | 'required' | 'not-required' | 'unknown';
@@ -21,7 +22,7 @@ function ProjectCard({ project, live, onRefresh, refreshing, refreshError, needs
 }) {
   return <article className="flex flex-col rounded-lg border border-border bg-card p-5">
       <div className="flex items-start justify-between gap-4">
-      <div><p className="text-xs text-muted-foreground">{githubProjectCategories.find((category) => category.id === project.primaryCategory)?.name}</p><h3 className="mt-1 text-lg font-semibold text-foreground">{project.name}{project.featured && <span className="ml-2 text-xs font-normal text-primary">Featured</span>}</h3><p className="mt-1 text-xs text-muted-foreground">{project.fullName}</p>{project.verificationStatus === 'community-unverified' && <span className="mt-2 inline-flex rounded-md border border-border px-2 py-1 text-[11px] font-medium text-muted-foreground">Community · Unverified</span>}</div>
+      <div><p className="text-xs text-muted-foreground">{githubProjectCategories.find((category) => category.id === project.primaryCategory)?.name}</p><h3 className="mt-1 text-lg font-semibold text-foreground"><Link to={`/github-projects/${project.slug}`} className="hover:text-primary hover:underline underline-offset-4">{project.name}</Link>{project.featured && <span className="ml-2 text-xs font-normal text-primary">Featured</span>}</h3><p className="mt-1 text-xs text-muted-foreground">{project.fullName}</p>{project.verificationStatus === 'community-unverified' && <span className="mt-2 inline-flex rounded-md border border-border px-2 py-1 text-[11px] font-medium text-muted-foreground">Community · Unverified</span>}</div>
       <a href={project.repositoryUrl} target="_blank" rel="noreferrer" aria-label={`Open ${project.fullName} on GitHub`} className="shrink-0 rounded-md p-2 text-muted-foreground hover:bg-muted hover:text-foreground"><ArrowUpRight className="h-4 w-4" /></a>
     </div>
     <p className="mt-4 text-sm leading-6 text-foreground/90">{project.description}</p>
@@ -45,8 +46,8 @@ function ProjectCard({ project, live, onRefresh, refreshing, refreshError, needs
     {live?.archived && <p role="alert" className="mt-3 rounded-md border border-border px-3 py-2 text-xs">GitHub now reports this repository archived. Editorial review is needed before any status change.</p>}
     {needsReview && <p role="alert" className="mt-3 rounded-md border border-border px-3 py-2 text-xs">GitHub metadata differs from the reviewed license or archive status. Editorial review is needed before changing this listing.</p>}
     {refreshError && <p role="status" className="mt-3 text-xs text-muted-foreground">{refreshError}</p>}
-    <div className="mt-auto flex items-center justify-between gap-3 pt-4">
-      <a href={project.repositoryUrl} target="_blank" rel="noreferrer" className="inline-flex min-h-10 items-center gap-2 rounded-md bg-primary px-3 py-2 text-sm font-medium text-primary-foreground hover:opacity-90">Open GitHub <ExternalLink className="h-3.5 w-3.5" /></a>
+    <div className="mt-auto flex flex-wrap items-center justify-between gap-3 pt-4">
+      <div className="flex flex-wrap items-center gap-2"><Link to={`/github-projects/${project.slug}`} className="inline-flex min-h-10 items-center gap-2 rounded-md border border-border px-3 py-2 text-sm font-medium text-foreground hover:bg-muted">View full profile <ArrowUpRight className="h-3.5 w-3.5" /></Link><a href={project.repositoryUrl} target="_blank" rel="noreferrer" className="inline-flex min-h-10 items-center gap-2 rounded-md bg-primary px-3 py-2 text-sm font-medium text-primary-foreground hover:opacity-90">Open GitHub <ExternalLink className="h-3.5 w-3.5" /></a></div>
       {showRefresh && onRefresh && <button type="button" onClick={onRefresh} disabled={Boolean(refreshing)} className="inline-flex min-h-10 items-center gap-2 rounded-md px-2 text-xs text-muted-foreground hover:bg-muted hover:text-foreground disabled:opacity-50" aria-label={`Refresh GitHub metadata for ${project.name}`}><RefreshCw className={`h-3.5 w-3.5 ${refreshing ? 'animate-spin' : ''}`} />{refreshing ? 'Checking…' : 'Refresh metadata'}</button>}
     </div>
   </article>;
