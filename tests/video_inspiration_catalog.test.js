@@ -31,7 +31,7 @@ test('video inspiration is loaded only by the Prompt Library and links out safel
   assert.match(component, /target="_blank" rel="noopener noreferrer"/);
   assert.doesNotMatch(component, /<iframe|<video(?:\s|>)/);
   assert.doesNotMatch(home, /video-inspiration\.json|VideoInspirationSection/);
-  assert.match(home, /Find the right AI route for the work\./);
+  assert.match(home, /Another AI tool\?/);
   assert.match(home, /href: '\/github-projects'/);
   assert.doesNotMatch(home, /catalogStats|activeOfferCount|VideoInspirationSection/);
 });

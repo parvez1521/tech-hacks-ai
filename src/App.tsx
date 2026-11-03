@@ -3,7 +3,6 @@ import { RouterProvider, useRouter, matchRoute } from './router/Router';
 import { ThemeProvider } from './context/ThemeContext';
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
-import { AmbientGlow } from './components/AmbientGlow';
 import { FloatingChatbot } from './components/FloatingChatbot';
 import { AdSenseBanner } from './components/AdSenseBanner';
 import { AdSenseRuntime } from './components/AdSenseRuntime';
@@ -420,7 +419,6 @@ const AppRoutes: React.FC = () => {
 
   return (
     <div className="min-h-screen flex w-full min-w-0 max-w-full flex-col overflow-x-clip bg-background text-foreground relative selection:bg-primary/25 selection:text-foreground">
-      <AmbientGlow />
       <Header />
       <main className="flex-1 min-w-0 w-full max-w-full relative z-10">
         {renderRoute()}

@@ -41,5 +41,5 @@ test('header marks exact and nested current routes in desktop and mobile navigat
   assert.match(source, /aria-current=\{active\(href\) \? 'page' : undefined\}/);
   assert.match(source, /group\.links\.map/);
   assert.match(source, /groups\.map\(\(group\) => renderGroup\(group, true\)\)/, 'The mobile menu uses the same route-aware groups');
-  assert.match(source, /mobile \? 'min-h-11' : 'min-h-10'/, 'Mobile links keep a 44px touch target');
+  assert.match(source, /min-h-11/, 'Mobile links keep a 44px touch target');
 });

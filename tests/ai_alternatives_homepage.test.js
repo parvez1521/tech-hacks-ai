@@ -51,7 +51,7 @@ describe('Homepage AI alternatives showcase and Claude identity', () => {
     setHomeLocation();
     const html = ReactDOMServer.renderToStaticMarkup(React.createElement(appModule.App));
     const home = fs.readFileSync(path.resolve(process.cwd(), 'src/pages/HomePage.tsx'), 'utf8');
-    assert.ok(html.includes('Find the right AI route for the work.'));
+    assert.ok(html.includes('Another AI tool?'));
     assert.ok(html.includes('href="/frontier-models"') && html.includes('href="/free-ai-sites"') && html.includes('href="/ai-tools"') && html.includes('href="/github-projects"'));
     assert.ok(html.includes('Browse by task') && html.includes('Daily discoveries') && html.includes('Selected offers') && html.includes('Resources and directories'));
     assert.ok(home.indexOf('aria-labelledby="home-hero-heading"') < home.indexOf('aria-labelledby="collections-heading"'));

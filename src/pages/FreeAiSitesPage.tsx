@@ -68,7 +68,7 @@ export const FreeAiSitesPage: React.FC = () => {
     <div className="max-w-6xl mx-auto px-4 sm:px-6 py-8">
       {/* Header Banner */}
       <div className="mb-8">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-700 text-xs font-semibold tracking-wide mb-3">
+        <div className="inline-flex min-h-9 items-center gap-2 border-l-2 border-emerald-600 pl-3 text-xs font-semibold tracking-wide text-muted-foreground mb-3 dark:border-emerald-400">
           <Gift className="w-3.5 h-3.5 text-emerald-600" />
           <span>Free access routes · checked 3 Nov 2026</span>
         </div>
@@ -80,7 +80,7 @@ export const FreeAiSitesPage: React.FC = () => {
         </p>
 
         {/* Informational Callout: Open Source vs Hosted Commercial */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5 p-4 sm:p-5 rounded-xl bg-card border border-border shadow-sm mb-6 text-xs text-muted-foreground">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5 p-4 sm:p-5 rounded-lg bg-muted/30 border border-border mb-6 text-sm text-muted-foreground">
           <div className="flex items-start gap-2.5">
             <Server className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
             <div>

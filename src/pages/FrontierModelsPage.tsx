@@ -29,21 +29,21 @@ export const FrontierModelsPage: React.FC = () => {
   }, []);
 
   return <main className="max-w-6xl mx-auto px-4 sm:px-6 py-10 sm:py-14">
-    <header className="max-w-3xl mb-9">
+    <header className="max-w-3xl mb-10 sm:mb-12">
       <p className="text-xs font-semibold tracking-[.16em] uppercase text-primary mb-3">Model index · reviewed 3 Nov 2026</p>
-      <h1 className="text-3xl sm:text-5xl font-semibold tracking-tight text-foreground">Frontier models</h1>
-      <p className="mt-4 text-muted-foreground leading-7">A model-first guide to leading releases, what they do, and where they can be accessed. Provider routes are labeled by relationship; listing a route does not imply affiliation.</p>
+      <h1 className="text-4xl sm:text-5xl font-semibold tracking-tight text-foreground">Frontier models</h1>
+      <p className="mt-4 max-w-2xl text-base leading-7 text-muted-foreground">A model-first guide to leading releases, what they do, and where they can be accessed. Provider routes are labeled by relationship; listing a route does not imply affiliation.</p>
     </header>
     <div className="flex flex-col sm:flex-row gap-3 sm:items-center justify-between border-y border-border py-4 mb-6">
       <div className="flex flex-wrap gap-2" aria-label="Filter models by category">
-        {[['all', 'All models'], ['assistants', 'Reasoning'], ['video', 'Video']].map(([id, label]) => <button key={id} onClick={() => setCategory(id)} aria-pressed={category === id} className={`px-3 py-2 rounded-md text-sm border ${category === id ? 'bg-primary text-primary-foreground border-primary' : 'border-border text-muted-foreground hover:text-foreground'}`}>{label}</button>)}
+        {[['all', 'All models'], ['assistants', 'Reasoning'], ['video', 'Video']].map(([id, label]) => <button key={id} onClick={() => setCategory(id)} aria-pressed={category === id} className={`min-h-11 rounded-md border px-3 text-sm transition-colors ${category === id ? 'border-primary bg-primary text-primary-foreground' : 'border-border text-muted-foreground hover:bg-muted hover:text-foreground'}`}>{label}</button>)}
       </div>
-      <input value={query} onChange={(event) => setQuery(event.target.value)} aria-label="Search models" placeholder="Search models or capabilities" className="w-full sm:w-72 rounded-md border border-border bg-background px-3 py-2 text-sm" />
+      <input value={query} onChange={(event) => setQuery(event.target.value)} aria-label="Search models" placeholder="Search models or capabilities" className="min-h-11 w-full rounded-md border border-border bg-background px-3 text-sm sm:w-72" />
     </div>
     <div className="space-y-5">
       {models.map((model) => {
         const routes = getCurrentModelAccessRoutes(model.id);
-        return <article key={model.id} className="rounded-xl border border-border bg-card p-5 sm:p-7">
+        return <article key={model.id} className="rounded-lg border border-border bg-card p-5 sm:p-7">
           <div className="flex flex-col md:flex-row md:justify-between gap-5">
             <div className="max-w-2xl">
               <p className="text-xs tracking-wide text-muted-foreground">{model.family} · {model.category === 'video' ? 'Video generation' : 'AI assistants & reasoning'}</p>

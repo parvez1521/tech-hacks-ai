@@ -112,7 +112,7 @@ describe('Phase 4: Interactive Browser Simulation & Route Navigation', () => {
 
     assert.ok(html.includes('SwitchRoute'), 'Should render platform brand');
     assert.ok(html.includes('A practical map to AI'), 'Should render the hero context line');
-    assert.ok(html.includes('Find the right AI route for the work.'), 'Should render the current approved hero heading');
+    assert.ok(html.includes('Another AI tool?'), 'Should render the current approved hero heading');
     for (const collection of ['Frontier Models', 'Free Access', 'All AI Tools', 'GitHub Projects']) assert.ok(html.includes(collection));
     assert.ok(html.includes('Choose a collection') && html.includes('Browse by task'));
   });

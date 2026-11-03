@@ -63,16 +63,14 @@ describe('Phase 23: Homepage Logo Fix, Real Brand Assets & Theme Toggle Repair',
       assert.ok(content.includes('<ThemeToggle /></div></nav>'), 'Mobile theme control is rendered inside the expanded menu');
     });
 
-    test('ThemeToggle hint always suggests the opposite of the active theme', () => {
+    test('ThemeToggle exposes the active theme through its accessible control', () => {
       const togglePath = path.resolve(process.cwd(), 'src/components/ThemeToggle.tsx');
       const content = fs.readFileSync(togglePath, 'utf8');
 
-      assert.ok(content.includes("function getThemeHint(theme: 'dark' | 'light')"), 'Hint is derived from the active theme');
-      assert.ok(content.includes("'Curious about the light side?'"), 'Dark mode suggests light mode');
-      assert.ok(content.includes("'Psst… try the dark side.'"), 'Light mode suggests dark mode');
-      assert.ok(content.includes('{getThemeHint(theme)}'), 'Rendered hint reads the current theme');
-      assert.ok(content.includes('sessionStorage.setItem(THEME_HINT_SESSION_KEY, \'1\')'), 'Dismisses the hint after interaction');
-      assert.ok(content.includes('pointer-events'), 'Hint styling is expected to remain non-blocking');
+      assert.match(content, /aria-label=\{`Switch to \$\{theme === 'dark' \? 'light' : 'dark'\} mode`\}/, 'Control announces the destination theme');
+      assert.match(content, /aria-pressed=\{theme === 'dark'\}/, 'Control exposes the active theme state');
+      assert.ok(content.includes('onClick={toggleTheme}'), 'Control keeps theme switching functional');
+      assert.ok(!content.includes('theme-hint'), 'Decorative hint is not repeated in the navigation');
     });
   });
 

@@ -92,7 +92,7 @@ describe('Phase 6: Homepage Redesign & HandlyTech Platform Integration', () => {
     setupMockBrowser('https://openalternative.co/');
     const html = renderClean(React.createElement(ssrModule.App));
 
-    assert.ok(html.includes('id="home-hero-heading"') && html.includes('Find the right AI route for the work.'), 'Current hero heading renders');
+    assert.ok(html.includes('id="home-hero-heading"') && html.includes('Another AI tool?'), 'Current hero heading renders');
     assert.ok(html.includes('type="search"') || html.includes('role="combobox"'), 'Universal search renders in the hero');
     for (const name of ['Frontier Models', 'Free Access', 'All AI Tools', 'GitHub Projects', 'AI categories', 'Daily discoveries', 'Selected offers', 'Resources and directories']) assert.ok(html.includes(name), `${name} is discoverable`);
     for (const route of ['/alternatives', '/free-tools', '/guides']) assert.ok(html.includes(`href="${route}"`), `${route} remains linked`);

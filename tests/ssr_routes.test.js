@@ -24,7 +24,7 @@ describe('Task 3 & 5: Component & Page Rendering Audit', () => {
 
     assert.ok(html.length > 1000, 'Rendered HTML should have content');
     assert.ok(html.includes('SwitchRoute'), 'HTML should include brand title');
-    assert.ok(html.includes('Find the right AI route for the work.'), 'HTML should include the homepage headline');
+    assert.ok(html.includes('Another AI tool?'), 'HTML should include the homepage headline');
     assert.ok(html.includes('Choose a collection'), 'HTML should render the featured collection entry points');
     assert.ok(html.includes('Browse by task'), 'HTML should render task categories');
     assert.ok(html.includes('Daily discoveries'), 'HTML should render recent discoveries');
