@@ -41,16 +41,16 @@ const frontierAccessBanners: Record<string, { src: string; alt: string }> = {
 const frontierAccessRouteOrder = Object.keys(frontierAccessBanners);
 
 const categoryArtwork: Record<string, { src: string; alt: string }> = {
-  assistants: { src: '/images/ai-categories/01-ai-assistants-reasoning.webp', alt: 'Neon AI assistant interface with a reasoning brain and conversational signals.' },
-  writing: { src: '/images/ai-categories/02-writing-content.webp', alt: 'Glowing document, typography tools, and pen for writing and content work.' },
-  image: { src: '/images/ai-categories/03-image-generation.webp', alt: 'Layered image-generation canvases with a landscape and visual editing controls.' },
-  video: { src: '/images/ai-categories/04-video-generation-editing.webp', alt: 'Video editing screen with a clapperboard, play control, and editing sliders.' },
-  voice: { src: '/images/ai-categories/05-audio-voice.webp', alt: 'Studio microphone surrounded by voice waveforms and audio controls.' },
-  music: { src: '/images/ai-categories/06-music.webp', alt: 'Headphones around a music record with sound-level and music-note controls.' },
-  coding: { src: '/images/ai-categories/07-coding-development.webp', alt: 'Code editor window with code brackets and developer-tool symbols.' },
-  productivity: { src: '/images/ai-categories/08-productivity-research.webp', alt: 'Research search interface with a document and reference books.' },
-  automation: { src: '/images/ai-categories/09-automation-agents.webp', alt: 'Automation agent interface with workflow and settings symbols.' },
-  '3d': { src: '/images/ai-categories/10-design-creativity.webp', alt: 'Creative design cube with brush and color-palette tools.' },
+  assistants: { src: '/images/ai-categories/01-ai-assistants-reasoning.webp', alt: 'ChatGPT, Claude and Gemini logos on minimal light tiles over a deep navy backdrop.' },
+  writing: { src: '/images/ai-categories/02-writing-content.webp', alt: 'Copy.ai logo on a minimal light tile over a deep navy backdrop.' },
+  image: { src: '/images/ai-categories/03-image-generation.webp', alt: 'Midjourney, Ideogram and Leonardo AI logos on minimal light tiles over a deep navy backdrop.' },
+  video: { src: '/images/ai-categories/04-video-generation-editing.webp', alt: 'Runway, Kling AI and Pika logos on minimal light tiles over a deep navy backdrop.' },
+  voice: { src: '/images/ai-categories/05-audio-voice.webp', alt: 'ElevenLabs, Whisper and Kokoro TTS logos on minimal light tiles over a deep navy backdrop.' },
+  music: { src: '/images/ai-categories/06-music.webp', alt: 'Suno and Udio logos on minimal light tiles over a deep navy backdrop.' },
+  coding: { src: '/images/ai-categories/07-coding-development.webp', alt: 'Cursor, v0 and Google AI Studio logos on minimal light tiles over a deep navy backdrop.' },
+  productivity: { src: '/images/ai-categories/08-productivity-research.webp', alt: 'Perplexity, NotebookLM and AnythingLLM logos on minimal light tiles over a deep navy backdrop.' },
+  automation: { src: '/images/ai-categories/09-automation-agents.webp', alt: 'Zapier, Make and Dify logos on minimal light tiles over a deep navy backdrop.' },
+  '3d': { src: '/images/ai-categories/10-design-creativity.webp', alt: 'Meshy logo on a minimal light tile over a deep navy backdrop.' },
 };
 
 const resources = [
