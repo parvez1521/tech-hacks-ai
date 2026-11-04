@@ -51,12 +51,12 @@ export const AlternativesPage: React.FC = () => {
   return (
     <div className="max-w-6xl mx-auto px-4 sm:px-6 py-8">
       {/* Header */}
-      <div className="mb-8">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent border border-border text-primary text-xs font-semibold uppercase tracking-wider mb-3">
+      <div className="mb-8 border-b border-border/70 pb-8">
+        <div className="kicker mb-3 inline-flex items-center gap-2">
           <Replace className="w-3.5 h-3.5 text-primary" />
           <span>Proprietary Replacements</span>
         </div>
-        <h1 className="text-2xl sm:text-4xl font-extrabold text-foreground tracking-tight mb-2">
+        <h1 className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl">
           Browse Open Source Alternatives
         </h1>
         <p className="text-sm sm:text-base text-secondary-foreground max-w-2xl mb-6">
@@ -64,7 +64,7 @@ export const AlternativesPage: React.FC = () => {
         </p>
 
         {/* Search & Filter Controls Bar */}
-        <div className="p-3.5 sm:p-4 rounded-xl bg-card border border-border shadow-sm flex flex-col sm:flex-row gap-3 items-stretch sm:items-center justify-between mb-6">
+        <div className="p-3.5 sm:p-4 glass rounded-[1.25rem] border border-border flex flex-col sm:flex-row gap-3 items-stretch sm:items-center justify-between mb-6">
           {/* Quick Search */}
           <div className="relative flex-1 max-w-md">
             <Search className="w-4 h-4 text-muted-foreground absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
@@ -132,7 +132,7 @@ export const AlternativesPage: React.FC = () => {
 
       {/* Grid or Empty State */}
       {filteredAlternatives.length > 0 ? (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {filteredAlternatives.map((alt) => (
             <AlternativeCard key={alt.id} alternative={alt} />
           ))}
