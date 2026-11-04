@@ -24,6 +24,7 @@ export const Header: React.FC = () => {
   const [open, setOpen] = useState(false);
   const [desktopOpenGroup, setDesktopOpenGroup] = useState<string | null>(null);
   const [savedCount, setSavedCount] = useState(0);
+  const [scrolled, setScrolled] = useState(false);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
   const desktopNavRef = useRef<HTMLElement>(null);
   const desktopTriggerRefs = useRef<Record<string, HTMLButtonElement | null>>({});
@@ -36,6 +37,13 @@ export const Header: React.FC = () => {
     setOpen(false);
     setDesktopOpenGroup(null);
   }, [currentPath]);
+  useEffect(() => {
+    // Visual only: deepens the glass header surface once the page scrolls.
+    const onScroll = () => setScrolled(window.scrollY > 8);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
   useEffect(() => {
     const closeOnOutsidePointer = (event: PointerEvent) => {
       if (desktopNavRef.current && !desktopNavRef.current.contains(event.target as Node)) {
@@ -56,18 +64,19 @@ export const Header: React.FC = () => {
   }, []);
   const active = (href: string) => currentPath === href.split('?')[0] || currentPath.startsWith(`${href.split('?')[0]}/`);
   const closeOnEscape = (event: React.KeyboardEvent) => {
-    if (event.key !== 'Escape') return;
-    if (open) {
-      event.preventDefault();
-      setOpen(false);
-      menuButtonRef.current?.focus();
-      return;
-    }
-    if (desktopOpenGroup) {
-      event.preventDefault();
-      const openGroup = desktopOpenGroup;
-      setDesktopOpenGroup(null);
-      desktopTriggerRefs.current[openGroup]?.focus();
+    if (event.key === 'Escape') {
+      if (open) {
+        event.preventDefault();
+        setOpen(false);
+        menuButtonRef.current?.focus();
+        return;
+      }
+      if (desktopOpenGroup) {
+        event.preventDefault();
+        const openGroup = desktopOpenGroup;
+        setDesktopOpenGroup(null);
+        desktopTriggerRefs.current[openGroup]?.focus();
+      }
     }
   };
   const renderGroup = (group: typeof groups[number]) => (
@@ -107,7 +116,7 @@ export const Header: React.FC = () => {
     );
   };
 
-  return <header onKeyDown={closeOnEscape} className="sticky top-0 z-50 border-b border-border bg-background/95 backdrop-blur-sm">
+  return <header onKeyDown={closeOnEscape} className={`site-header sticky top-0 z-50 border-b border-border ${scrolled ? 'site-header--scrolled' : ''}`}>
     <div className="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-3 lg:gap-6">
       <Link to="/" aria-label="SwitchRoute home" className="shrink-0"><TechHacksLogo size="sm" showWordmark /></Link>
       <nav ref={desktopNavRef} aria-label="Primary" className="hidden lg:flex items-center gap-1">{groups.map((group) => renderDesktopGroup(group))}</nav>
@@ -116,7 +125,7 @@ export const Header: React.FC = () => {
         <Link to="/saved" aria-label={`Saved items${savedCount ? ` (${savedCount})` : ''}`} className="relative flex min-h-11 min-w-11 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-muted hover:text-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"><Bookmark className="h-4 w-4" />{savedCount > 0 && <span className="absolute right-0 top-0 flex h-4 min-w-4 items-center justify-center rounded-full bg-primary px-1 text-[10px] text-primary-foreground">{savedCount}</span>}</Link>
         <Link to="/submit-tool" className="hidden min-h-11 items-center gap-1 rounded-md border border-border px-3 text-sm font-medium hover:bg-muted md:inline-flex"><Plus className="w-3.5 h-3.5" /> Submit</Link>
         <div className="hidden lg:block"><ThemeToggle /></div>
-        <button ref={menuButtonRef} type="button" onClick={() => setOpen(!open)} aria-label={open ? 'Close navigation menu' : 'Open navigation menu'} aria-expanded={open} aria-controls="mobile-navigation" className="lg:hidden min-h-11 min-w-11 rounded-md flex items-center justify-center text-muted-foreground hover:bg-muted"><span className="sr-only">Menu</span>{open ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}</button>
+        <button ref={menuButtonRef} type="button" onClick={() => setOpen(!open)} aria-label={open ? 'Close navigation menu' : 'Open navigation menu'} aria-expanded={open} aria-controls="mobile-navigation" className="lg:hidden min-h-11 min-w-11 rounded-md flex items-center justify-center text-muted-foreground hover:bg-muted focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"><span className="sr-only">Menu</span>{open ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}</button>
       </div>
     </div>
     {open && <nav id="mobile-navigation" aria-label="Mobile primary" className="lg:hidden max-h-[80vh] overflow-y-auto border-t border-border bg-background px-4 py-2" onKeyDown={closeOnEscape}>{groups.map((group) => renderGroup(group))}<div className="pt-3"><ThemeToggle /></div></nav>}

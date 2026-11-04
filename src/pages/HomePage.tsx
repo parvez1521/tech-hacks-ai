@@ -102,14 +102,14 @@ export const HomePage: React.FC = () => {
 
   return (
     <main className="pb-12 sm:pb-16">
-      <section className="mx-auto grid max-w-7xl items-center gap-8 px-4 pb-12 pt-12 sm:px-6 sm:pb-16 sm:pt-16 lg:grid-cols-[1.05fr_.95fr] lg:gap-12" aria-labelledby="home-hero-heading">
+      <section className="hero-aurora mx-auto grid max-w-7xl items-center gap-8 px-4 pb-12 pt-12 sm:px-6 sm:pb-16 sm:pt-16 lg:grid-cols-[1.05fr_.95fr] lg:gap-12" aria-labelledby="home-hero-heading">
         <div className="max-w-2xl">
-          <p className="mb-4 text-sm font-medium text-primary">A practical map to AI</p>
+          <p className="eyebrow mb-4">A practical map to AI</p>
           <h1 id="home-hero-heading" className="max-w-[21ch] text-[2.25rem] font-semibold leading-[1.04] tracking-[-0.035em] text-foreground sm:text-5xl lg:text-[3.5rem]">
             <span className="block">Another AI tool?</span>
             <span className="block">Sure.</span>
             <span className="block">Another Subscription?</span>
-            <span className="block">Nope.</span>
+            <span className="text-brand-gradient block">Nope.</span>
           </h1>
           <p className="mt-5 max-w-[34rem] text-base leading-7 text-muted-foreground sm:text-lg sm:leading-8">
             Compare AI tools by task, check current access routes, and find reviewed open-source projects.
@@ -118,7 +118,7 @@ export const HomePage: React.FC = () => {
             <UniversalSearch />
           </div>
           <div className="mt-4 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm">
-            <Link to="/pick" className="inline-flex min-h-11 items-center gap-2 rounded-md bg-primary px-4 font-medium text-primary-foreground transition-colors hover:bg-primary-hover focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+            <Link to="/pick" className="inline-flex min-h-11 items-center gap-2 rounded-md bg-primary px-4 font-medium text-primary-foreground shadow-md shadow-primary/25 transition-all hover:bg-primary-hover hover:shadow-lg hover:shadow-primary/30 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
               Help me pick <ArrowRight className="h-4 w-4" aria-hidden="true" />
             </Link>
             <Link to="/ai-video-tools" className="inline-flex min-h-11 items-center gap-2 text-muted-foreground transition-colors hover:text-foreground focus-visible:rounded-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
