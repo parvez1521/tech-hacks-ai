@@ -36,7 +36,7 @@ export const FilterBar: React.FC<FilterBarProps> = ({
   ].reduce((a, b) => a + b, 0);
 
   return (
-    <div className="w-full min-w-0 max-w-full flex flex-col gap-3 mb-6 glass-blur rounded-[1.25rem] p-3 sm:p-4">
+    <div className="w-full min-w-0 max-w-full flex flex-col gap-3 mb-6 glass-blur rounded-2xl p-3 sm:p-4">
       {/* Top Search & Filter Bar */}
       <div className="flex min-w-0 flex-col sm:flex-row items-stretch sm:items-center gap-2.5">
         {/* Search Input Container */}

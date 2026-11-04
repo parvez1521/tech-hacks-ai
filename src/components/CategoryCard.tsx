@@ -36,7 +36,7 @@ export const CategoryCard: React.FC<CategoryCardProps> = ({ category }) => {
   return (
     <Link
       to={`/categories/${category.slug}`}
-      className="group surface-card interactive-card press-feedback relative flex flex-col justify-between p-4 rounded-[1.25rem] focus-visible:ring-2 focus-visible:ring-primary/60 focus-visible:outline-none"
+      className="group surface-card interactive-card press-feedback relative flex flex-col justify-between p-4 rounded-2xl focus-visible:ring-2 focus-visible:ring-primary/60 focus-visible:outline-none"
     >
       <div className="relative z-10">
         <div className="flex items-center gap-3 mb-3">

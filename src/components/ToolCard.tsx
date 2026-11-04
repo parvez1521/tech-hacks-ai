@@ -25,11 +25,11 @@ export const ToolCard: React.FC<ToolCardProps> = ({ tool, headingLevel = 3 }) =>
   return (
     <div
       onMouseMove={handleMouseMove}
-      className="group surface-card interactive-card relative flex flex-col justify-between h-full p-4 rounded-[1.25rem] min-h-[220px] focus-within:ring-2 focus-within:ring-primary/60 focus-within:border-primary/60"
+      className="group surface-card interactive-card relative flex flex-col justify-between h-full p-4 rounded-2xl min-h-[220px] focus-within:ring-2 focus-within:ring-primary/60 focus-within:border-primary/60"
     >
       {/* Interactive Radial Spotlight Inner Glow */}
       <div
-        className="pointer-events-none absolute -inset-px rounded-[1.25rem] opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-focus-within:opacity-100 -z-0"
+        className="pointer-events-none absolute -inset-px rounded-2xl opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-focus-within:opacity-100 -z-0"
         style={{
           background:
             'radial-gradient(280px circle at var(--card-x, 50%) var(--card-y, 50%), rgb(var(--color-primary) / 0.09), transparent 80%)',
@@ -40,7 +40,7 @@ export const ToolCard: React.FC<ToolCardProps> = ({ tool, headingLevel = 3 }) =>
       {/* Primary Card Stretch Link */}
       <Link
         to={`/tools/${tool.slug}`}
-        className="absolute inset-0 z-10 rounded-[1.25rem] focus:outline-none"
+        className="absolute inset-0 z-10 rounded-2xl focus:outline-none"
         aria-label={`View details for ${tool.name}`}
       >
         <span className="sr-only">View {tool.name}</span>

@@ -174,7 +174,7 @@ export const UniversalSearch: React.FC = () => {
           id="universal-search-results"
           role="listbox"
           aria-label="Universal search suggestions"
-          className="absolute top-full left-0 right-0 mt-2 glass-strong rounded-[1.25rem] p-3 sm:p-4 max-h-[75vh] overflow-y-auto no-scrollbar z-50 flex flex-col gap-4 animate-fade-in"
+          className="absolute top-full left-0 right-0 mt-2 glass-strong rounded-2xl p-3 sm:p-4 max-h-[75vh] overflow-y-auto no-scrollbar z-50 flex flex-col gap-4 animate-fade-in"
         >
           {results.totalMatches === 0 ? (
             <div className="py-8 text-center text-muted-foreground text-sm">

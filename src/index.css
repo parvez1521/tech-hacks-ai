@@ -18,9 +18,10 @@
   --brand-light-blue: 29 78 216;
   --brand-light-border: 218 226 235;
   --brand-route-gradient: linear-gradient(90deg, #22D3EE 0%, #60A5FA 52%, #8B5CF6 100%);
-  /* The one card/panel radius for the whole site (20px). Referenced by the
-     homepage image cards; every shared card component resolves to it too. */
-  --radius-surface: 1.25rem;
+  /* The one card/panel radius for the whole site (16px). It matches the
+     frame baked into the homepage artwork, so image cards read as one
+     box; every shared card component resolves to the same radius. */
+  --radius-surface: 1rem;
 }
 
 @layer base {
@@ -458,12 +459,12 @@
   }
 
   /* Liquid Glass frame for the hero search: a 1px gradient hairline around
-     the existing search control (concentric radius: panel 1.25rem, input
-     1.125rem), layered shadow, and a full glass field inside — strong
+     the existing search control (concentric radius: panel 1rem, input
+     0.875rem), layered shadow, and a full glass field inside — strong
      translucent fill with real blur over the hero aurora. The search
      component itself is untouched; only its hero wrapper carries this. */
   .search-panel {
-    border-radius: 1.25rem;
+    border-radius: 1rem;
     padding: 1px;
     background: linear-gradient(120deg, rgb(var(--brand-cyan) / 0.55), rgb(var(--color-primary) / 0.32) 48%, rgb(var(--brand-violet) / 0.55));
     box-shadow:
@@ -472,7 +473,7 @@
   }
   .search-panel input {
     border-color: transparent;
-    border-radius: 1.125rem;
+    border-radius: 0.875rem;
     background: var(--glass-fill-strong);
     -webkit-backdrop-filter: blur(18px) saturate(160%);
     backdrop-filter: blur(18px) saturate(160%);
@@ -622,9 +623,9 @@
     background: rgb(var(--color-primary) / 0.07);
     box-shadow:
       inset 0 1px 0 rgb(255 255 255 / 0.035),
-      0 0 0 1px rgb(var(--color-primary) / 0.25),
-      0 12px 34px -8px rgb(var(--brand-cyan) / 0.3),
-      0 24px 54px -12px rgb(var(--brand-violet) / 0.26);
+      0 0 0 1px rgb(var(--color-primary) / 0.38),
+      0 12px 38px -8px rgb(var(--brand-cyan) / 0.48),
+      0 26px 60px -12px rgb(var(--brand-violet) / 0.42);
   }
 
   .catalog-trust-strip__metrics h3 + span {
@@ -1185,7 +1186,7 @@
   max-width: 38rem;
   margin-inline: auto;
   border: 1px solid var(--glass-border);
-  border-radius: 1.25rem;
+  border-radius: 1rem;
   /* The hero visual is a single panel floating over the aurora, so it
      earns real backdrop blur. */
   background: var(--glass-fill-strong);
@@ -1200,9 +1201,9 @@
   transform: perspective(1100px) rotateX(1.6deg) rotateY(-1.8deg) translateY(-3px);
   box-shadow:
     0 34px 64px -20px rgb(2 8 23 / 0.34),
-    0 0 0 1px rgb(var(--color-primary) / 0.25),
-    0 18px 44px -10px rgb(var(--brand-cyan) / 0.3),
-    0 30px 70px -14px rgb(var(--brand-violet) / 0.28),
+    0 0 0 1px rgb(var(--color-primary) / 0.35),
+    0 18px 46px -10px rgb(var(--brand-cyan) / 0.45),
+    0 30px 72px -14px rgb(var(--brand-violet) / 0.4),
     inset 0 1px 0 var(--glass-highlight);
 }
 .discovery-interface__chrome {
@@ -1313,12 +1314,12 @@
   padding: 1.2rem;
   overflow: hidden;
   border: 1px solid var(--glass-border);
-  border-radius: 1.25rem;
+  border-radius: 1rem;
   background: var(--glass-fill);
   box-shadow: inset 0 1px 0 var(--glass-highlight), inset 0 -1px 0 rgb(255 255 255 / 0.04), var(--glass-shadow);
   transition: border-color 180ms ease, background-color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
 }
-.discovery-card:hover { transform: translateY(-2px); border-color: rgb(var(--color-primary) / 0.36); box-shadow: inset 0 1px 0 var(--glass-highlight), 0 0 0 1px rgb(var(--color-primary) / 0.25), 0 14px 38px -8px rgb(var(--brand-cyan) / 0.32), 0 26px 58px -12px rgb(var(--brand-violet) / 0.28), 0 18px 36px -16px rgb(var(--color-primary) / 0.3), var(--glass-shadow); }
+.discovery-card:hover { transform: translateY(-2px); border-color: rgb(var(--color-primary) / 0.36); box-shadow: inset 0 1px 0 var(--glass-highlight), 0 0 0 1px rgb(var(--color-primary) / 0.38), 0 14px 40px -8px rgb(var(--brand-cyan) / 0.48), 0 28px 62px -12px rgb(var(--brand-violet) / 0.42), 0 18px 36px -16px rgb(var(--color-primary) / 0.3), var(--glass-shadow); }
 .discovery-card:focus-within { outline: 2px solid rgb(var(--color-primary) / 0.82); outline-offset: 3px; }
 .discovery-card__meta { display: flex; min-height: 1.2rem; align-items: center; justify-content: space-between; gap: 0.5rem; }
 .discovery-card__category { color: rgb(var(--color-muted-fg)); font-size: 0.65rem; font-weight: 560; }
@@ -1338,25 +1339,28 @@
 .discovery-card__link:focus-visible { outline: 2px solid rgb(var(--color-primary)); outline-offset: 3px; }
 .discovery-card__unavailable { color: rgb(var(--color-muted-fg)); font-size: 0.7rem; }
 
-/* Sitewide card halo: one unlayered hover glow for every card surface.
-   Unlayered on purpose — it must win over per-component utility shadows so
-   the glow reads identically on every box. Focus rings are left to the
-   components (their ring utilities compose box-shadow too). */
-.interactive-card:hover {
+/* Sitewide card halo: one hover glow for every card surface. The class is
+   doubled in each selector on purpose: a Tailwind hover: shadow utility is
+   specificity (0,3,0) (class + :hover + the utility class itself), so a
+   plain .card-glow:hover at (0,2,0) silently loses to it — verified by
+   computed-style probes. Doubled, the halo ties and wins on source order.
+   Focus rings are left to the components (their ring utilities compose
+   box-shadow too). */
+.interactive-card.interactive-card:hover {
   box-shadow:
     inset 0 1px 0 var(--glass-highlight),
     inset 0 -1px 0 rgb(255 255 255 / 0.04),
-    0 0 0 1px rgb(var(--color-primary) / 0.28),
-    0 12px 36px -8px rgb(var(--brand-cyan) / 0.34),
-    0 26px 60px -12px rgb(var(--brand-violet) / 0.3),
+    0 0 0 1px rgb(var(--color-primary) / 0.38),
+    0 12px 38px -8px rgb(var(--brand-cyan) / 0.48),
+    0 28px 64px -12px rgb(var(--brand-violet) / 0.42),
     var(--glass-shadow);
 }
-.card-glow:hover {
+.card-glow.card-glow:hover {
   box-shadow:
-    0 0 0 1px rgb(var(--color-primary) / 0.28),
-    0 12px 36px -8px rgb(var(--brand-cyan) / 0.34),
-    0 26px 60px -12px rgb(var(--brand-violet) / 0.3),
-    0 4px 16px -4px rgb(var(--color-primary) / 0.25);
+    0 0 0 1px rgb(var(--color-primary) / 0.38),
+    0 12px 38px -8px rgb(var(--brand-cyan) / 0.48),
+    0 28px 64px -12px rgb(var(--brand-violet) / 0.42),
+    0 4px 16px -4px rgb(var(--color-primary) / 0.3);
 }
 .home-collection-card,
 .frontier-access-card,
@@ -1374,10 +1378,10 @@
   /* Brand-colour halo behind the card: cyan core glow + violet outer bloom,
      layered over a soft contact shadow. Token-based, reads in both themes. */
   box-shadow:
-    0 0 0 1px rgb(var(--color-primary) / 0.32),
-    0 10px 34px -6px rgb(var(--brand-cyan) / 0.38),
-    0 24px 64px -10px rgb(var(--brand-violet) / 0.34),
-    0 4px 16px -4px rgb(var(--color-primary) / 0.28);
+    0 0 0 1px rgb(var(--color-primary) / 0.38),
+    0 12px 38px -8px rgb(var(--brand-cyan) / 0.48),
+    0 28px 64px -12px rgb(var(--brand-violet) / 0.42),
+    0 4px 16px -4px rgb(var(--color-primary) / 0.3);
 }
 .frontier-access-card__image,
 .home-category-card__image { transform-origin: center; }
@@ -1451,7 +1455,7 @@
   .discovery-interface__footer { align-items: flex-start; flex-direction: column; }
   .discovery-card { min-height: 16.75rem; }
   .chat-overlay { padding: max(0.45rem, env(safe-area-inset-top)) 0.45rem max(0.45rem, env(safe-area-inset-bottom)); }
-  .chat-dialog { height: calc(100dvh - env(safe-area-inset-top) - env(safe-area-inset-bottom) - 0.9rem); border-radius: 1.25rem; }
+  .chat-dialog { height: calc(100dvh - env(safe-area-inset-top) - env(safe-area-inset-bottom) - 0.9rem); border-radius: 1rem; }
 }
 @media (prefers-reduced-motion: reduce) {
   .site-header,
@@ -1482,7 +1486,7 @@
   position: relative;
   min-width: 0;
   overflow: hidden;
-  border-radius: 1.25rem;
+  border-radius: 1rem;
   border: 1px solid rgba(45, 125, 123, .24);
   background: #102b3b;
   box-shadow: 0 16px 48px rgba(10, 40, 49, .15);

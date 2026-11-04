@@ -109,8 +109,10 @@ soft concentric glass radii. This section supersedes Direction A's
 - **Depth:** glass floats — resting cards carry a soft shadow
   (`--glass-shadow`); floating chrome carries `--glass-shadow-lg`.
 - **Shapes:** primary buttons and chips are capsules (`rounded-full`);
-  cards and panels are ~20px (`rounded-[1.25rem]`) with concentric inner
-  tiles; inputs on glass are capsules or glass fields (`.glass-field`).
+  cards and panels are 16px (`rounded-2xl`) with concentric inner
+  tiles — 16px because the homepage artwork carries a baked-in frame at
+  that radius; a larger card radius makes the two curves read as a
+  double frame; inputs on glass are capsules or glass fields (`.glass-field`).
 - **Colour behind glass:** a fixed ambient wash (`--page-wash`, brand
   cyan/blue/violet at 3–6%) sits behind every page, and the hero aurora
   was enriched, so the translucency has something to refract.

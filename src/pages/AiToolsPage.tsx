@@ -113,7 +113,7 @@ export const AiToolsPage: React.FC = () => {
         </Link>
 
         {/* Search & Main Controls Bar */}
-        <div className="p-4 glass rounded-[1.25rem] border border-border flex flex-col md:flex-row gap-3 items-stretch md:items-center justify-between mb-6">
+        <div className="p-4 glass rounded-2xl border border-border flex flex-col md:flex-row gap-3 items-stretch md:items-center justify-between mb-6">
           {/* Search Input */}
           <div className="relative flex-1 max-w-md">
             <Search className="w-4 h-4 text-muted-foreground absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
@@ -301,7 +301,7 @@ export const AiToolsPage: React.FC = () => {
       )}
 
       <section className="mt-14 grid gap-5 lg:grid-cols-2" aria-labelledby="ai-tool-selection-heading">
-        <div className="glass rounded-[1.25rem] border border-border p-5 sm:p-6">
+        <div className="glass rounded-2xl border border-border p-5 sm:p-6">
           <h2 id="ai-tool-selection-heading" className="text-xl font-bold text-foreground">How to choose the right AI tool</h2>
           <p className="mt-3 text-sm leading-relaxed text-secondary-foreground">
             Start with the task, not the brand name. Compare what the tool actually does, the inputs and outputs it supports, and whether it runs in a browser, through an API, or on your own hardware.
@@ -312,7 +312,7 @@ export const AiToolsPage: React.FC = () => {
             <li><strong className="text-foreground">Verify at the source:</strong> plans and features change. Follow the official product or pricing link on each listing for current terms.</li>
           </ul>
         </div>
-        <div className="glass rounded-[1.25rem] border border-border p-5 sm:p-6">
+        <div className="glass rounded-2xl border border-border p-5 sm:p-6">
           <h2 className="text-xl font-bold text-foreground">Browse AI tools by task</h2>
           <p className="mt-3 text-sm leading-relaxed text-secondary-foreground">
             If you already know what you want to make, use a focused directory instead of searching every category.

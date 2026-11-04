@@ -181,7 +181,7 @@ export const CookieConsentBanner: React.FC = () => {
         <div
           role="region"
           aria-label="Cookie consent banner"
-          className="fixed bottom-20 left-3 right-3 box-border max-h-[min(35vh,18rem)] overflow-y-auto overscroll-contain sm:bottom-6 sm:left-6 sm:right-auto sm:w-[26rem] sm:max-w-[calc(100vw-3rem)] sm:max-h-[min(70vh,32rem)] z-40 p-3 sm:p-4 glass-strong rounded-[1.25rem] animate-slide-up text-xs space-y-2 sm:space-y-3"
+          className="fixed bottom-20 left-3 right-3 box-border max-h-[min(35vh,18rem)] overflow-y-auto overscroll-contain sm:bottom-6 sm:left-6 sm:right-auto sm:w-[26rem] sm:max-w-[calc(100vw-3rem)] sm:max-h-[min(70vh,32rem)] z-40 p-3 sm:p-4 glass-strong rounded-2xl animate-slide-up text-xs space-y-2 sm:space-y-3"
         >
           <div className="flex items-start justify-between gap-3">
             <div className="flex items-center gap-2 text-primary font-bold text-xs sm:text-sm">

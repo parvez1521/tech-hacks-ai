@@ -106,7 +106,7 @@ export const Header: React.FC = () => {
         >
           {group.name}<span aria-hidden="true" className={`text-xs transition-transform ${isOpen ? 'rotate-180' : ''}`}>⌄</span>
         </button>
-        <div id={menuId} hidden={!isOpen} aria-hidden={!isOpen} className={`absolute top-full ${alignment} mt-1 min-w-56 glass-strong rounded-[1.25rem] p-1.5 z-50`}>
+        <div id={menuId} hidden={!isOpen} aria-hidden={!isOpen} className={`absolute top-full ${alignment} mt-1 min-w-56 glass-strong rounded-2xl p-1.5 z-50`}>
           {group.links.map(([label, href]) => <Link key={href + label} to={href} aria-current={active(href) ? 'page' : undefined} onClick={() => setDesktopOpenGroup(null)} className={`flex items-center justify-between gap-5 min-h-11 rounded-md px-3 py-2 text-sm transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-primary ${active(href) ? 'text-primary bg-primary/10 font-medium' : 'text-muted-foreground hover:text-foreground hover:bg-muted/60'}`}>
             {label}<ArrowUpRight className="w-3.5 h-3.5 opacity-50" />
           </Link>)}
