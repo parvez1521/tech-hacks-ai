@@ -1714,3 +1714,46 @@
     background: rgb(var(--color-card));
   }
 }
+
+  /* ---- Background motion preview (bgfx switcher, BackgroundFX.tsx) ---- */
+  .bgfx-blob {
+    position: absolute;
+    border-radius: 9999px;
+    will-change: transform;
+  }
+  .bgfx-drift-a { animation: bgfxDriftA 52s ease-in-out infinite alternate; }
+  .bgfx-drift-b { animation: bgfxDriftB 64s ease-in-out infinite alternate; }
+  .bgfx-drift-c { animation: bgfxDriftC 74s ease-in-out infinite alternate; }
+  @keyframes bgfxDriftA {
+    from { transform: translate3d(0, 0, 0) scale(1); }
+    to { transform: translate3d(9rem, 6rem, 0) scale(1.15); }
+  }
+  @keyframes bgfxDriftB {
+    from { transform: translate3d(0, 0, 0) scale(1.1); }
+    to { transform: translate3d(-8rem, 9rem, 0) scale(0.95); }
+  }
+  @keyframes bgfxDriftC {
+    from { transform: translate3d(0, 0, 0) scale(0.95); }
+    to { transform: translate3d(6rem, -7rem, 0) scale(1.12); }
+  }
+  .bgfx-grid {
+    background-image:
+      linear-gradient(to right, var(--grid-color) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--grid-color) 1px, transparent 1px);
+    background-size: 44px 44px;
+    -webkit-mask-image: linear-gradient(to bottom, black, transparent 88%);
+    mask-image: linear-gradient(to bottom, black, transparent 88%);
+  }
+  .bgfx-sweep {
+    position: absolute;
+    width: 38rem;
+    height: 38rem;
+    border-radius: 9999px;
+    background: radial-gradient(circle, rgb(var(--color-primary) / 0.08) 0%, transparent 65%);
+    animation: bgfxSweep 26s ease-in-out infinite alternate;
+    will-change: transform;
+  }
+  @keyframes bgfxSweep {
+    from { transform: translate3d(-10rem, -8rem, 0); }
+    to { transform: translate3d(72vw, 46vh, 0); }
+  }

@@ -6,6 +6,7 @@ import { Footer } from './components/Footer';
 import { FloatingChatbot } from './components/FloatingChatbot';
 import { AdSenseBanner } from './components/AdSenseBanner';
 import { AdSenseRuntime } from './components/AdSenseRuntime';
+import { BackgroundFX } from './components/BackgroundFX';
 import { siteConfig, formatPageTitle } from './config/site';
 import {
   getToolBySlug,
@@ -431,6 +432,7 @@ const AppRoutes: React.FC = () => {
 
   return (
     <div className="min-h-screen flex w-full min-w-0 max-w-full flex-col overflow-x-clip bg-background text-foreground relative selection:bg-primary/25 selection:text-foreground">
+      <BackgroundFX />
       <Header />
       <main className="flex-1 min-w-0 w-full max-w-full relative z-10">
         {renderRoute()}
