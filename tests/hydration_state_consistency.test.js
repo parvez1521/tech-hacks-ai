@@ -40,3 +40,10 @@ test('chatbot welcome suggestions are deterministic for hydration and randomized
   assert.doesNotMatch(factory, /pickRandomSuggestions|Math\.random/);
   assert.match(source, /createWelcomeMessage\(pickRandomSuggestions\(WELCOME_QUESTIONS, 4\)\)/);
 });
+test('prerender emits clean-URL aliases alongside nested route index files', () => {
+  const source = read('scripts/prerender-site.mjs');
+  assert.match(source, /const outputPath = outputPathFor\(pathname\)/);
+  assert.match(source, /if \(pathname !== '\/'\) \{/);
+  assert.match(source, /const cleanUrlOutputPath = path\.join\(dist, `\$\{pathname\.slice\(1\)\}\.html`\)/);
+  assert.match(source, /await fs\.writeFile\(cleanUrlOutputPath, html, 'utf8'\)/);
+});
