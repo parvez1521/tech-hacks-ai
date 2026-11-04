@@ -10,8 +10,10 @@ import { TechHacksLogo } from './TechHacksLogo';
  * Paid tools travel in from the left along curved dotted trails,
  * shrink into the SwitchRoute hub, and come out on the right as their
  * real free / open-source alternatives (emerald FREE badge). Each of
- * the three lanes rotates through a queue of pairs — fifteen famous
- * paid tools in total — one pair per cycle.
+ * the three lanes rotates through a queue of pairs — eighteen famous
+ * paid tools in total — one pair per cycle. ChatGPT, Claude and
+ * Gemini ride the same flow with the free alternatives the site's
+ * own AI catalogue maps to them (LibreChat, Khoj, Open WebUI).
  *
  * The pair queues hold every proprietary target in the catalogue that
  * has a real open-source replacement, first-listed per the same
@@ -47,6 +49,7 @@ const LANE_PAIRS: ReadonlyArray<
 > = [
   [
     { paid: { slug: 'figma', name: 'Figma' }, free: { slug: 'penpot', name: 'Penpot' } },
+    { paid: { slug: 'chatgpt', name: 'ChatGPT' }, free: { slug: 'librechat', name: 'LibreChat' } },
     { paid: { slug: 'notion', name: 'Notion' }, free: { slug: 'appflowy', name: 'AppFlowy' } },
     { paid: { slug: 'zapier', name: 'Zapier' }, free: { slug: 'n8n', name: 'n8n' } },
     { paid: { slug: 'perplexity', name: 'Perplexity AI' }, free: { slug: 'perplexica', name: 'Perplexica' } },
@@ -54,6 +57,7 @@ const LANE_PAIRS: ReadonlyArray<
   ],
   [
     { paid: { slug: 'google-analytics', name: 'Google Analytics' }, free: { slug: 'plausible', name: 'Plausible Analytics' } },
+    { paid: { slug: 'claude', name: 'Claude' }, free: { slug: 'khoj', name: 'Khoj' } },
     { paid: { slug: 'github-copilot', name: 'GitHub Copilot' }, free: { slug: 'cline', name: 'Cline' } },
     { paid: { slug: 'firebase', name: 'Firebase' }, free: { slug: 'supabase', name: 'Supabase' } },
     { paid: { slug: 'calendly', name: 'Calendly' }, free: { slug: 'cal-com', name: 'Cal.com' } },
@@ -61,6 +65,7 @@ const LANE_PAIRS: ReadonlyArray<
   ],
   [
     { paid: { slug: 'claude-code', name: 'Claude Code' }, free: { slug: 'aider', name: 'Aider' } },
+    { paid: { slug: 'gemini', name: 'Gemini' }, free: { slug: 'open-webui', name: 'Open WebUI' } },
     { paid: { slug: 'postman', name: 'Postman' }, free: { slug: 'hoppscotch', name: 'Hoppscotch' } },
     { paid: { slug: 'buffer', name: 'Buffer' }, free: { slug: 'postiz', name: 'Postiz' } },
     { paid: { slug: 'algolia', name: 'Algolia' }, free: { slug: 'firecrawl', name: 'Firecrawl' } },
@@ -68,7 +73,11 @@ const LANE_PAIRS: ReadonlyArray<
   ],
 ];
 
-const CYCLE_MS = 5200;
+const CYCLE_MS = 6000;
+/** The paid chip owns the first 45% of the cycle; only once it has been
+ * absorbed does the free chip emerge (with a small crossfade overlap). */
+const SPLIT = 0.45;
+const OUT_START = SPLIT - 0.04;
 
 const clamp01 = (v: number) => Math.min(1, Math.max(0, v));
 /** Smooth 0→1 ramp of x between a and b. */
@@ -134,14 +143,15 @@ export const SwitchFlow: React.FC = () => {
             }
             activeQueue[lane] = queueIdx;
           }
-          const eased = seg(p, 0, 1);
           const inChip = chips.get(`${lane}:${queueIdx}:in`);
           const outChip = chips.get(`${lane}:${queueIdx}:out`);
           if (inChip) {
-            place(inChip, `in-${lane}`, eased, seg(p, 0.02, 0.1) * (1 - seg(p, 0.9, 1)), 1 - 0.45 * seg(p, 0.85, 1));
+            const q = clamp01(p / SPLIT);
+            place(inChip, `in-${lane}`, seg(q, 0, 1), seg(q, 0.03, 0.12) * (1 - seg(q, 0.88, 1)), 1 - 0.45 * seg(q, 0.82, 1));
           }
           if (outChip) {
-            place(outChip, `out-${lane}`, eased, seg(p, 0, 0.1) * (1 - seg(p, 0.9, 1)), 0.55 + 0.45 * seg(p, 0, 0.16));
+            const r = clamp01((p - OUT_START) / (1 - OUT_START));
+            place(outChip, `out-${lane}`, seg(r, 0, 1), seg(r, 0, 0.12) * (1 - seg(r, 0.9, 1)), 0.55 + 0.45 * seg(r, 0, 0.18));
           }
         }
       }
@@ -166,7 +176,7 @@ export const SwitchFlow: React.FC = () => {
       ref={rootRef}
       className="relative mb-10 overflow-hidden rounded-2xl border border-border/70 bg-card/40"
       role="img"
-      aria-label="Animation: fifteen famous paid tools — Figma, Notion, Zapier, Perplexity AI, Google Analytics, GitHub Copilot, Firebase, Claude Code, Postman and more — flow into SwitchRoute one after another and come out as their free alternatives, including Penpot, AppFlowy, n8n, Perplexica, Plausible Analytics, Cline, Supabase and Aider."
+      aria-label="Animation: eighteen famous paid tools — ChatGPT, Claude, Gemini, Figma, Notion, Zapier, Perplexity AI, Google Analytics, GitHub Copilot, Firebase, Claude Code, Postman and more — flow into SwitchRoute one after another and come out as their free alternatives, including LibreChat, Khoj, Open WebUI, Penpot, AppFlowy, n8n, Perplexica, Plausible Analytics, Cline, Supabase and Aider."
     >
       <span className="absolute left-4 top-3 z-10 inline-flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
         <span className="h-1.5 w-1.5 rounded-full bg-rose-400/80" aria-hidden="true" /> Paid tools
