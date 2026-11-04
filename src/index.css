@@ -1715,45 +1715,100 @@
   }
 }
 
-  /* ---- Background motion preview (bgfx switcher, BackgroundFX.tsx) ---- */
-  .bgfx-blob {
-    position: absolute;
-    border-radius: 9999px;
-    will-change: transform;
+
+  /* ---- Background motion preview round 2 (bgfx switcher) ---- */
+  /* 1 · Mesh gradient flow */
+  .bgfx2-mesh-a, .bgfx2-mesh-b, .bgfx2-mesh-c, .bgfx2-mesh-d {
+    position: absolute; border-radius: 9999px; filter: blur(70px); will-change: transform;
   }
-  .bgfx-drift-a { animation: bgfxDriftA 52s ease-in-out infinite alternate; }
-  .bgfx-drift-b { animation: bgfxDriftB 64s ease-in-out infinite alternate; }
-  .bgfx-drift-c { animation: bgfxDriftC 74s ease-in-out infinite alternate; }
-  @keyframes bgfxDriftA {
-    from { transform: translate3d(0, 0, 0) scale(1); }
-    to { transform: translate3d(9rem, 6rem, 0) scale(1.15); }
+  .bgfx2-mesh-a { width: 36rem; height: 36rem; left: 2%; top: 4%; background: radial-gradient(circle, rgb(var(--brand-cyan) / 0.26) 0%, transparent 65%); animation: bgfx2Orbit 11s ease-in-out infinite; }
+  .bgfx2-mesh-b { width: 32rem; height: 32rem; right: 2%; top: 26%; background: radial-gradient(circle, rgb(var(--brand-violet) / 0.24) 0%, transparent 65%); animation: bgfx2Orbit 13s ease-in-out infinite reverse; }
+  .bgfx2-mesh-c { width: 28rem; height: 28rem; left: 38%; bottom: -6%; background: radial-gradient(circle, rgb(var(--color-primary) / 0.22) 0%, transparent 65%); animation: bgfx2Orbit 9s ease-in-out infinite; animation-delay: -4s; }
+  .bgfx2-mesh-d { width: 19rem; height: 19rem; right: 30%; top: 2%; background: radial-gradient(circle, rgb(45 212 191 / 0.18) 0%, transparent 65%); animation: bgfx2Orbit 12s ease-in-out infinite reverse; animation-delay: -7s; }
+  @keyframes bgfx2Orbit {
+    0% { transform: translate3d(0, 0, 0) scale(1); }
+    25% { transform: translate3d(4.5rem, 2.5rem, 0) scale(1.12); }
+    50% { transform: translate3d(0.5rem, 5.5rem, 0) scale(0.94); }
+    75% { transform: translate3d(-4.5rem, 2rem, 0) scale(1.08); }
+    100% { transform: translate3d(0, 0, 0) scale(1); }
   }
-  @keyframes bgfxDriftB {
-    from { transform: translate3d(0, 0, 0) scale(1.1); }
-    to { transform: translate3d(-8rem, 9rem, 0) scale(0.95); }
+  /* 2 · Aurora ribbons */
+  .bgfx2-ribbon {
+    position: absolute; top: -15vh; height: 135vh; filter: blur(38px); will-change: transform;
+    background: linear-gradient(to bottom, transparent 4%, rgb(var(--brand-cyan) / 0.16) 34%, rgb(var(--brand-violet) / 0.15) 62%, transparent 96%);
   }
-  @keyframes bgfxDriftC {
-    from { transform: translate3d(0, 0, 0) scale(0.95); }
-    to { transform: translate3d(6rem, -7rem, 0) scale(1.12); }
+  .bgfx2-ribbon-a { left: 6%; width: 17rem; transform: rotate(9deg); animation: bgfx2Sway 7s ease-in-out infinite alternate; }
+  .bgfx2-ribbon-b { left: 42%; width: 21rem; transform: rotate(9deg); animation: bgfx2Sway 9s ease-in-out infinite alternate-reverse; }
+  .bgfx2-ribbon-c { right: 5%; width: 15rem; transform: rotate(9deg); animation: bgfx2Sway 6s ease-in-out infinite alternate; animation-delay: -3s; }
+  @keyframes bgfx2Sway {
+    from { transform: rotate(9deg) translateX(-4.5rem); }
+    to { transform: rotate(5deg) translateX(4.5rem); }
   }
-  .bgfx-grid {
+  /* 3 · Beam network pulses */
+  .bgfx2-beam-pulse { animation: bgfx2Pulse 3.4s linear infinite; }
+  .bgfx2-beam-pulse-h { animation: bgfx2PulseH 4.4s linear infinite; }
+  @keyframes bgfx2Pulse { from { stroke-dashoffset: 1300; } to { stroke-dashoffset: 0; } }
+  @keyframes bgfx2PulseH { from { stroke-dashoffset: 1450; } to { stroke-dashoffset: 0; } }
+  /* 4 · Layered waves */
+  .bgfx2-wave { position: absolute; bottom: 0; left: 0; display: flex; width: 200%; height: 100%; will-change: transform; }
+  .bgfx2-wave svg { width: 50%; height: 100%; flex: none; }
+  .bgfx2-wave-a { animation: bgfx2Slide 9s linear infinite; }
+  .bgfx2-wave-b { animation: bgfx2Slide 14s linear infinite reverse; opacity: 0.85; }
+  .bgfx2-wave-c { animation: bgfx2Slide 19s linear infinite; opacity: 0.7; }
+  @keyframes bgfx2Slide { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  /* 7 · Orbit rings HUD */
+  .bgfx2-rings { position: absolute; right: -11rem; top: -13rem; width: 46rem; height: 46rem; }
+  .bgfx2-ring { position: absolute; border-radius: 9999px; will-change: transform; }
+  .bgfx2-ring-a { inset: 0; border: 1px dashed rgb(var(--brand-cyan) / 0.20); animation: bgfx2Spin 46s linear infinite; }
+  .bgfx2-ring-b { inset: 4.5rem; border: 1px solid rgb(var(--brand-violet) / 0.14); border-top-color: rgb(var(--brand-violet) / 0.45); animation: bgfx2Spin 30s linear infinite reverse; }
+  .bgfx2-ring-c { inset: 9rem; border: 1px dashed rgb(var(--color-primary) / 0.18); animation: bgfx2Spin 62s linear infinite; }
+  .bgfx2-orbit { position: absolute; will-change: transform; }
+  .bgfx2-orbit span { position: absolute; left: 50%; top: -3px; width: 7px; height: 7px; margin-left: -3.5px; border-radius: 9999px; background: rgb(var(--brand-cyan)); box-shadow: 0 0 12px 2px rgb(var(--brand-cyan) / 0.55); }
+  .bgfx2-orbit-a { inset: 0; animation: bgfx2Spin 17s linear infinite; }
+  .bgfx2-orbit-b { inset: 4.5rem; animation: bgfx2Spin 24s linear infinite reverse; }
+  .bgfx2-orbit-b span { background: rgb(var(--brand-violet)); box-shadow: 0 0 12px 2px rgb(var(--brand-violet) / 0.55); }
+  @keyframes bgfx2Spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+  /* 8 · God rays */
+  .bgfx2-rays {
+    position: absolute; left: 50%; top: -118vmax; width: 160vmax; height: 160vmax; margin-left: -80vmax; border-radius: 9999px;
+    background: repeating-conic-gradient(from 0deg, rgb(var(--color-primary) / 0.07) 0deg 8deg, transparent 8deg 22deg);
+    -webkit-mask-image: radial-gradient(circle, black 0%, transparent 60%);
+    mask-image: radial-gradient(circle, black 0%, transparent 60%);
+    animation: bgfx2Spin 80s linear infinite; will-change: transform;
+  }
+  /* 9 · Meteors */
+  .bgfx2-meteor {
+    position: absolute; width: 130px; height: 2px; border-radius: 9999px;
+    background: linear-gradient(to left, rgba(255,255,255,0.9), rgba(56,189,248,0.35), transparent);
+    transform: rotate(-32deg); opacity: 0; animation: bgfx2Meteor 7s linear infinite; will-change: transform, opacity;
+  }
+  .bgfx2-meteor::before {
+    content: ""; position: absolute; right: 0; top: 50%; width: 6px; height: 6px; margin-top: -3px;
+    border-radius: 9999px; background: #fff; box-shadow: 0 0 10px 2px rgba(125, 211, 252, 0.8);
+  }
+  @keyframes bgfx2Meteor {
+    0% { transform: rotate(-32deg) translateX(0); opacity: 0; }
+    6% { opacity: 1; }
+    26% { transform: rotate(-32deg) translateX(-34vw); opacity: 0; }
+    100% { transform: rotate(-32deg) translateX(-34vw); opacity: 0; }
+  }
+  .bgfx2-star { position: absolute; width: 3px; height: 3px; border-radius: 9999px; background: rgba(186, 230, 253, 0.9); animation: bgfx2Twinkle 2.8s ease-in-out infinite alternate; }
+  @keyframes bgfx2Twinkle { from { opacity: 0.15; } to { opacity: 0.85; } }
+  /* 10 · Infinite grid floor */
+  .bgfx2-floor-wrap { position: absolute; inset-inline: 0; bottom: 0; height: 44vh; overflow: hidden; perspective: 320px; }
+  .bgfx2-floor {
+    position: absolute; left: -50%; right: -50%; bottom: -12%; height: 135%;
     background-image:
-      linear-gradient(to right, var(--grid-color) 1px, transparent 1px),
-      linear-gradient(to bottom, var(--grid-color) 1px, transparent 1px);
-    background-size: 44px 44px;
-    -webkit-mask-image: linear-gradient(to bottom, black, transparent 88%);
-    mask-image: linear-gradient(to bottom, black, transparent 88%);
+      linear-gradient(to right, rgb(var(--brand-cyan) / 0.13) 1px, transparent 1px),
+      linear-gradient(to top, rgb(var(--brand-cyan) / 0.13) 1px, transparent 1px);
+    background-size: 46px 46px;
+    transform: rotateX(63deg); transform-origin: bottom;
+    -webkit-mask-image: linear-gradient(to top, black 52%, transparent 98%);
+    mask-image: linear-gradient(to top, black 52%, transparent 98%);
+    animation: bgfx2Floor 1.15s linear infinite; will-change: background-position;
   }
-  .bgfx-sweep {
-    position: absolute;
-    width: 38rem;
-    height: 38rem;
-    border-radius: 9999px;
-    background: radial-gradient(circle, rgb(var(--color-primary) / 0.08) 0%, transparent 65%);
-    animation: bgfxSweep 26s ease-in-out infinite alternate;
-    will-change: transform;
-  }
-  @keyframes bgfxSweep {
-    from { transform: translate3d(-10rem, -8rem, 0); }
-    to { transform: translate3d(72vw, 46vh, 0); }
+  @keyframes bgfx2Floor { from { background-position: 0 0, 0 0; } to { background-position: 0 0, 0 46px; } }
+  .bgfx2-horizon {
+    position: absolute; left: 0; right: 0; top: 12%; height: 90px;
+    background: radial-gradient(60% 100% at 50% 0%, rgb(var(--color-primary) / 0.16), transparent 70%);
   }
