@@ -78,7 +78,7 @@ export const AiToolCard: React.FC<AiToolCardProps> = ({ tool }) => {
 
   return (
     <div
-      className="group relative flex flex-col justify-between p-4 rounded-[1.25rem] border border-border interactive-card hover:border-primary/50 min-h-[250px] focus-within:ring-2 focus-within:ring-primary/50 focus-within:border-primary/60"
+      className="group relative flex flex-col justify-between p-4 rounded-2xl border border-border interactive-card hover:border-primary/50 min-h-[250px] focus-within:ring-2 focus-within:ring-primary/50 focus-within:border-primary/60"
     >
       <div className="relative z-10">
         {/* Top Header Row */}

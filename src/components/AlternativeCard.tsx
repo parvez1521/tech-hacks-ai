@@ -29,11 +29,11 @@ export const AlternativeCard: React.FC<AlternativeCardProps> = ({ alternative })
   return (
     <div
       onMouseMove={handleMouseMove}
-       className="group interactive-card relative flex flex-col justify-between h-full p-4 rounded-[1.25rem] border border-border hover:border-cyan-500/40 hover:-translate-y-1.5 hover:shadow-xl hover:shadow-blue-500/5 transition-all duration-300 ease-out focus-within:ring-2 focus-within:ring-primary/40 cursor-pointer"
+       className="group interactive-card relative flex flex-col justify-between h-full p-4 rounded-2xl border border-border hover:border-cyan-500/40 hover:-translate-y-1.5 hover:shadow-xl hover:shadow-blue-500/5 transition-all duration-300 ease-out focus-within:ring-2 focus-within:ring-primary/40 cursor-pointer"
     >
       {/* Decorative Subtle Inner Spotlight on Hover */}
       <div
-        className="pointer-events-none absolute -inset-px rounded-[1.25rem] opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-focus-within:opacity-100 -z-0"
+        className="pointer-events-none absolute -inset-px rounded-2xl opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-focus-within:opacity-100 -z-0"
         style={{
           background:
             'radial-gradient(260px circle at var(--card-x, 50%) var(--card-y, 30%), rgba(6, 182, 212, 0.08), transparent 75%)',

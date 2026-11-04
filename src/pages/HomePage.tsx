@@ -283,7 +283,7 @@ export const HomePage: React.FC = () => {
         </div>
         <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
           {taskCategories.map(({ title, description, href, count, countLabel, accessLabel, Icon, logos }) => (
-            <Link key={title} to={href} className="group glass flex min-h-52 flex-col rounded-[1.25rem] border border-border p-4 transition-[border-color,background-color,box-shadow,transform] duration-200 hover:-translate-y-0.5 hover:border-primary/45 hover:bg-muted/30 hover:shadow-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary sm:p-5">
+            <Link key={title} to={href} className="card-glow group glass flex min-h-52 flex-col rounded-2xl border border-border p-4 transition-[border-color,background-color,box-shadow,transform] duration-200 hover:-translate-y-0.5 hover:border-primary/45 hover:bg-muted/30 hover:shadow-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary sm:p-5">
               <div className="flex items-start justify-between gap-3">
                 <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl border border-primary/15 bg-primary/10 text-primary">
                   <Icon className="h-5 w-5" aria-hidden="true" />
@@ -328,7 +328,7 @@ export const HomePage: React.FC = () => {
         </div>
         <div className="grid gap-4 md:grid-cols-2">
           {offers.map((offer) => (
-            <Link key={offer.slug} to={`/offers/${offer.slug}`} className="group glass flex min-h-28 items-center justify-between gap-4 rounded-[1.25rem] border border-border p-4 transition-[border-color,background-color,box-shadow,transform] duration-200 hover:-translate-y-0.5 hover:bg-muted/40 hover:shadow-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary sm:p-5">
+            <Link key={offer.slug} to={`/offers/${offer.slug}`} className="card-glow group glass flex min-h-28 items-center justify-between gap-4 rounded-2xl border border-border p-4 transition-[border-color,background-color,box-shadow,transform] duration-200 hover:-translate-y-0.5 hover:bg-muted/40 hover:shadow-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary sm:p-5">
               <div>
                 <p className="meta-label">{offer.provider} · {offer.region}</p>
                 <h3 className="mt-1 font-medium text-foreground">{offer.title}</h3>

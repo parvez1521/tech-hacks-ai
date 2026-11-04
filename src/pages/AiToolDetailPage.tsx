@@ -141,7 +141,7 @@ export const AiToolDetailPage: React.FC = () => {
       </nav>
 
       {/* Hero Overview */}
-      <div className="p-6 sm:p-8 glass rounded-[1.25rem] border border-border mb-8">
+      <div className="p-6 sm:p-8 glass rounded-2xl border border-border mb-8">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
           <div className="flex items-center gap-4">
             <BrandLogo
@@ -280,7 +280,7 @@ export const AiToolDetailPage: React.FC = () => {
 
       {/* Features, Persona & Specifications */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-        <div className="md:col-span-2 p-6 glass rounded-[1.25rem] border border-border">
+        <div className="md:col-span-2 p-6 glass rounded-2xl border border-border">
           <h2 className="text-base font-bold text-foreground mb-4 flex items-center gap-2">
             <ShieldCheck className="w-4 h-4 text-primary" />
             <span>Core Capabilities & Features</span>
@@ -327,7 +327,7 @@ export const AiToolDetailPage: React.FC = () => {
         </div>
 
         <div className="space-y-4">
-          <div className="p-6 glass rounded-[1.25rem] border border-border space-y-4">
+          <div className="p-6 glass rounded-2xl border border-border space-y-4">
             <h3 className="text-sm font-bold text-foreground flex items-center gap-2">
               <Tag className="w-4 h-4 text-primary" />
               <span>Tags & Keywords</span>
