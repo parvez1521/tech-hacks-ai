@@ -395,6 +395,11 @@
       radial-gradient(52rem 28rem at 94% -12%, rgb(var(--brand-violet) / 0.19), transparent 65%),
       radial-gradient(44rem 24rem at 52% -6%, rgb(var(--color-primary) / 0.16), transparent 70%),
       radial-gradient(58rem 26rem at 50% 118%, rgb(var(--color-primary) / 0.09), transparent 70%);
+    /* Melt the colour field into the page at the bottom: unmasked, the
+       layer is clipped at the section's bottom edge and the tint steps
+       hard against the next section (a visible horizontal cut). */
+    -webkit-mask-image: linear-gradient(to bottom, black 70%, transparent 99%);
+    mask-image: linear-gradient(to bottom, black 70%, transparent 99%);
   }
 
   /* Fine grid field layered over the hero aurora, faded at the edges with a
@@ -474,7 +479,10 @@
   .search-panel input {
     border-color: transparent;
     border-radius: 0.875rem;
-    background: var(--glass-fill-strong);
+    /* Near-opaque on purpose: at glass alpha the hero aurora bleeds through
+       the field unevenly (strong cyan at the left), and the bright band
+       reads as a second inner frame around the search box. */
+    background: rgb(var(--color-card) / 0.94);
     -webkit-backdrop-filter: blur(18px) saturate(160%);
     backdrop-filter: blur(18px) saturate(160%);
   }
