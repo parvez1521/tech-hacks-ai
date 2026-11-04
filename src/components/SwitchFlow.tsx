@@ -7,39 +7,66 @@ import { TechHacksLogo } from './TechHacksLogo';
  * on the owner's reference: streams flow along dotted trails into a
  * centre point and emerge transformed on the other side.
  *
- * Paid tools travel in from the left along curved dotted trails, shrink
- * into the SwitchRoute hub, and come out on the right as their real
- * free / open-source alternatives (emerald FREE badge), paired from the
- * live catalogue: Figma → Penpot, Google Analytics → Plausible,
- * Claude Code → Aider.
+ * Paid tools travel in from the left along curved dotted trails,
+ * shrink into the SwitchRoute hub, and come out on the right as their
+ * real free / open-source alternatives (emerald FREE badge). Each of
+ * the three lanes rotates through a queue of pairs — fifteen famous
+ * paid tools in total — one pair per cycle.
+ *
+ * The pair queues hold every proprietary target in the catalogue that
+ * has a real open-source replacement, first-listed per the same
+ * service the detail pages use (getToolsForProprietary). Targets whose
+ * only matches are other hosted AI tools (Runway, Kling, …) are NOT
+ * here: nothing emerges marked FREE unless the catalogue backs it.
  *
  * Motion is driven in JS from the trails' own SVG geometry
  * (getPointAtLength), so chip positions are mathematically exact:
  * chips stay upright, travel is eased (gentle arrival at the hub,
  * gentle release), and the paid→free handoff crossfades at the hub
- * with no jumps. The loop pauses off-screen; prefers-reduced-motion
- * parks the chips mid-path so the composition still reads as a still.
+ * with no jumps. Pair swaps happen at the cycle wrap, when both chips
+ * are invisible. The loop pauses off-screen; prefers-reduced-motion
+ * parks each lane's first pair mid-path as a still.
  */
-const LANES = [
+const LANE_PATHS = [
   {
-    paid: { slug: 'figma', name: 'Figma' },
-    free: { slug: 'penpot', name: 'Penpot' },
     inPath: 'M -140,42 C 240,38 380,94 594,114',
     outPath: 'M 606,114 C 820,94 960,38 1340,42',
   },
   {
-    paid: { slug: 'google-analytics', name: 'Google Analytics' },
-    free: { slug: 'plausible', name: 'Plausible' },
     inPath: 'M -140,120 C 240,120 400,120 594,120',
     outPath: 'M 606,120 C 800,120 960,120 1340,120',
   },
   {
-    paid: { slug: 'claude-code', name: 'Claude Code' },
-    free: { slug: 'aider', name: 'Aider' },
     inPath: 'M -140,198 C 240,202 380,146 594,126',
     outPath: 'M 606,126 C 820,146 960,202 1340,198',
   },
 ] as const;
+
+const LANE_PAIRS: ReadonlyArray<
+  ReadonlyArray<{ paid: { slug: string; name: string }; free: { slug: string; name: string } }>
+> = [
+  [
+    { paid: { slug: 'figma', name: 'Figma' }, free: { slug: 'penpot', name: 'Penpot' } },
+    { paid: { slug: 'notion', name: 'Notion' }, free: { slug: 'appflowy', name: 'AppFlowy' } },
+    { paid: { slug: 'zapier', name: 'Zapier' }, free: { slug: 'n8n', name: 'n8n' } },
+    { paid: { slug: 'perplexity', name: 'Perplexity AI' }, free: { slug: 'perplexica', name: 'Perplexica' } },
+    { paid: { slug: 'google-photos', name: 'Google Photos' }, free: { slug: 'immich', name: 'Immich' } },
+  ],
+  [
+    { paid: { slug: 'google-analytics', name: 'Google Analytics' }, free: { slug: 'plausible', name: 'Plausible Analytics' } },
+    { paid: { slug: 'github-copilot', name: 'GitHub Copilot' }, free: { slug: 'cline', name: 'Cline' } },
+    { paid: { slug: 'firebase', name: 'Firebase' }, free: { slug: 'supabase', name: 'Supabase' } },
+    { paid: { slug: 'calendly', name: 'Calendly' }, free: { slug: 'cal-com', name: 'Cal.com' } },
+    { paid: { slug: 'airtable', name: 'Airtable' }, free: { slug: 'baserow', name: 'Baserow' } },
+  ],
+  [
+    { paid: { slug: 'claude-code', name: 'Claude Code' }, free: { slug: 'aider', name: 'Aider' } },
+    { paid: { slug: 'postman', name: 'Postman' }, free: { slug: 'hoppscotch', name: 'Hoppscotch' } },
+    { paid: { slug: 'buffer', name: 'Buffer' }, free: { slug: 'postiz', name: 'Postiz' } },
+    { paid: { slug: 'algolia', name: 'Algolia' }, free: { slug: 'firecrawl', name: 'Firecrawl' } },
+    { paid: { slug: 'typeform', name: 'Typeform' }, free: { slug: 'typebot', name: 'Typebot' } },
+  ],
+];
 
 const CYCLE_MS = 5200;
 
@@ -59,79 +86,63 @@ export const SwitchFlow: React.FC = () => {
   useEffect(() => {
     const root = rootRef.current;
     if (!root) return;
-    const trails = new Map<string, SVGPathElement>();
+    const trails = new Map<string, { path: SVGPathElement; len: number }>();
     root.querySelectorAll<SVGPathElement>('path[data-trail]').forEach((p) => {
-      trails.set(p.dataset.trail || '', p);
+      trails.set(p.dataset.trail || '', { path: p, len: p.getTotalLength() });
     });
-    const chips = [...root.querySelectorAll<HTMLElement>('[data-chip]')].map((el) => ({
-      el,
-      lane: Number(el.dataset.lane || 0),
-      dir: el.dataset.chip || 'in',
-    }));
-    if (trails.size === 0 || chips.length === 0) return;
-    const lengths = new Map<string, number>();
-    trails.forEach((p, key) => lengths.set(key, p.getTotalLength()));
+    const chips = new Map<string, HTMLElement>();
+    root.querySelectorAll<HTMLElement>('[data-chip]').forEach((el) => {
+      chips.set(`${el.dataset.lane}:${el.dataset.queue}:${el.dataset.chip}`, el);
+    });
+    if (trails.size === 0 || chips.size === 0) return;
 
-    const place = (
-      chip: (typeof chips)[number],
-      p: number,
-      eased: number,
-      opacity: number,
-      scale: number,
-    ) => {
-      const path = trails.get(`${chip.dir}-${chip.lane}`);
-      const len = lengths.get(`${chip.dir}-${chip.lane}`);
-      if (!path || !len) return;
-      const pt = path.getPointAtLength(eased * len);
-      chip.el.style.opacity = opacity.toFixed(3);
-      chip.el.style.transform = `translate3d(${pt.x.toFixed(1)}px, ${pt.y.toFixed(1)}px, 0) translate(-50%, -50%) scale(${scale.toFixed(3)})`;
-    };
-
-    const frame = (pIn: number, lane: number) => {
-      const eased = seg(pIn, 0, 1);
-      place(
-        chips.find((c) => c.dir === 'in' && c.lane === lane)!,
-        pIn,
-        eased,
-        seg(pIn, 0.02, 0.1) * (1 - seg(pIn, 0.9, 1)),
-        1 - 0.45 * seg(pIn, 0.85, 1),
-      );
-      place(
-        chips.find((c) => c.dir === 'out' && c.lane === lane)!,
-        pIn,
-        eased,
-        seg(pIn, 0, 0.1) * (1 - seg(pIn, 0.9, 1)),
-        0.55 + 0.45 * seg(pIn, 0, 0.16),
-      );
+    const place = (el: HTMLElement, trailKey: string, eased: number, opacity: number, scale: number) => {
+      const trail = trails.get(trailKey);
+      if (!trail) return;
+      const pt = trail.path.getPointAtLength(eased * trail.len);
+      el.style.opacity = opacity.toFixed(3);
+      el.style.transform = `translate3d(${pt.x.toFixed(1)}px, ${pt.y.toFixed(1)}px, 0) translate(-50%, -50%) scale(${scale.toFixed(3)})`;
     };
 
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      for (let lane = 0; lane < LANES.length; lane += 1) {
-        const inChip = chips.find((c) => c.dir === 'in' && c.lane === lane)!;
-        const outChip = chips.find((c) => c.dir === 'out' && c.lane === lane)!;
-        const inPath = trails.get(`in-${lane}`);
-        const outPath = trails.get(`out-${lane}`);
-        if (inPath) {
-          const pt = inPath.getPointAtLength(0.38 * (lengths.get(`in-${lane}`) || 0));
-          inChip.el.style.opacity = '1';
-          inChip.el.style.transform = `translate3d(${pt.x}px, ${pt.y}px, 0) translate(-50%, -50%)`;
-        }
-        if (outPath) {
-          const pt = outPath.getPointAtLength(0.34 * (lengths.get(`out-${lane}`) || 0));
-          outChip.el.style.opacity = '1';
-          outChip.el.style.transform = `translate3d(${pt.x}px, ${pt.y}px, 0) translate(-50%, -50%)`;
-        }
+      for (let lane = 0; lane < LANE_PAIRS.length; lane += 1) {
+        const inChip = chips.get(`${lane}:0:in`);
+        const outChip = chips.get(`${lane}:0:out`);
+        if (inChip) place(inChip, `in-${lane}`, 0.38, 1, 1);
+        if (outChip) place(outChip, `out-${lane}`, 0.34, 1, 1);
       }
       return;
     }
 
+    const activeQueue = [-1, -1, -1];
     let raf = 0;
     let inView = true;
     const loop = (now: number) => {
       if (inView) {
-        for (let lane = 0; lane < LANES.length; lane += 1) {
-          const p = ((now % CYCLE_MS) / CYCLE_MS + lane / LANES.length) % 1;
-          frame(p, lane);
+        for (let lane = 0; lane < LANE_PAIRS.length; lane += 1) {
+          const queue = LANE_PAIRS[lane];
+          const shifted = now / CYCLE_MS + lane / LANE_PAIRS.length;
+          const cycle = Math.floor(shifted);
+          const p = shifted - cycle;
+          const queueIdx = cycle % queue.length;
+          if (activeQueue[lane] !== queueIdx) {
+            if (activeQueue[lane] >= 0) {
+              const oldIn = chips.get(`${lane}:${activeQueue[lane]}:in`);
+              const oldOut = chips.get(`${lane}:${activeQueue[lane]}:out`);
+              if (oldIn) oldIn.style.opacity = '0';
+              if (oldOut) oldOut.style.opacity = '0';
+            }
+            activeQueue[lane] = queueIdx;
+          }
+          const eased = seg(p, 0, 1);
+          const inChip = chips.get(`${lane}:${queueIdx}:in`);
+          const outChip = chips.get(`${lane}:${queueIdx}:out`);
+          if (inChip) {
+            place(inChip, `in-${lane}`, eased, seg(p, 0.02, 0.1) * (1 - seg(p, 0.9, 1)), 1 - 0.45 * seg(p, 0.85, 1));
+          }
+          if (outChip) {
+            place(outChip, `out-${lane}`, eased, seg(p, 0, 0.1) * (1 - seg(p, 0.9, 1)), 0.55 + 0.45 * seg(p, 0, 0.16));
+          }
         }
       }
       raf = window.requestAnimationFrame(loop);
@@ -155,7 +166,7 @@ export const SwitchFlow: React.FC = () => {
       ref={rootRef}
       className="relative mb-10 overflow-hidden rounded-2xl border border-border/70 bg-card/40"
       role="img"
-      aria-label="Animation: paid tools Figma, Google Analytics and Claude Code flow into SwitchRoute and come out as their free alternatives Penpot, Plausible and Aider."
+      aria-label="Animation: fifteen famous paid tools — Figma, Notion, Zapier, Perplexity AI, Google Analytics, GitHub Copilot, Firebase, Claude Code, Postman and more — flow into SwitchRoute one after another and come out as their free alternatives, including Penpot, AppFlowy, n8n, Perplexica, Plausible Analytics, Cline, Supabase and Aider."
     >
       <span className="absolute left-4 top-3 z-10 inline-flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
         <span className="h-1.5 w-1.5 rounded-full bg-rose-400/80" aria-hidden="true" /> Paid tools
@@ -167,27 +178,31 @@ export const SwitchFlow: React.FC = () => {
       <div className="flex justify-center">
         <div className="switch-flow__stage">
           <svg className="absolute inset-0 h-full w-full" viewBox="0 0 1200 240" preserveAspectRatio="none" aria-hidden="true">
-            {LANES.map((lane, i) => (
-              <path key={`in-${lane.paid.slug}`} data-trail={`in-${i}`} d={lane.inPath} fill="none" stroke="rgb(var(--brand-cyan) / 0.28)" strokeWidth="2" strokeLinecap="round" strokeDasharray="0.5 8" />
+            {LANE_PATHS.map((lane, i) => (
+              <path key={`in-${i}`} data-trail={`in-${i}`} d={lane.inPath} fill="none" stroke="rgb(var(--brand-cyan) / 0.28)" strokeWidth="2" strokeLinecap="round" strokeDasharray="0.5 8" />
             ))}
-            {LANES.map((lane, i) => (
-              <path key={`out-${lane.free.slug}`} data-trail={`out-${i}`} d={lane.outPath} fill="none" stroke="rgb(52 211 153 / 0.32)" strokeWidth="2" strokeLinecap="round" strokeDasharray="0.5 8" />
+            {LANE_PATHS.map((lane, i) => (
+              <path key={`out-${i}`} data-trail={`out-${i}`} d={lane.outPath} fill="none" stroke="rgb(52 211 153 / 0.32)" strokeWidth="2" strokeLinecap="round" strokeDasharray="0.5 8" />
             ))}
           </svg>
 
-          {LANES.map((lane, i) => (
-            <span key={`chip-in-${lane.paid.slug}`} data-chip="in" data-lane={i} className={chipClass} aria-hidden="true">
-              <BrandLogo slug={lane.paid.slug} name={lane.paid.name} size="xs" showContainer={false} />
-              {lane.paid.name}
-            </span>
-          ))}
-          {LANES.map((lane, i) => (
-            <span key={`chip-out-${lane.free.slug}`} data-chip="out" data-lane={i} className={chipClass} aria-hidden="true">
-              <BrandLogo slug={lane.free.slug} name={lane.free.name} size="xs" showContainer={false} />
-              {lane.free.name}
-              <span className="rounded-full bg-emerald-500/15 px-1.5 py-0.5 text-[10px] font-bold tracking-wide text-emerald-500 dark:text-emerald-400">FREE</span>
-            </span>
-          ))}
+          {LANE_PAIRS.map((queue, laneIdx) =>
+            queue.map((pair, queueIdx) => (
+              <span key={`in-${laneIdx}-${queueIdx}`} data-chip="in" data-lane={laneIdx} data-queue={queueIdx} className={chipClass} aria-hidden="true">
+                <BrandLogo slug={pair.paid.slug} name={pair.paid.name} size="xs" showContainer={false} />
+                {pair.paid.name}
+              </span>
+            )),
+          )}
+          {LANE_PAIRS.map((queue, laneIdx) =>
+            queue.map((pair, queueIdx) => (
+              <span key={`out-${laneIdx}-${queueIdx}`} data-chip="out" data-lane={laneIdx} data-queue={queueIdx} className={chipClass} aria-hidden="true">
+                <BrandLogo slug={pair.free.slug} name={pair.free.name} size="xs" showContainer={false} />
+                {pair.free.name}
+                <span className="rounded-full bg-emerald-500/15 px-1.5 py-0.5 text-[10px] font-bold tracking-wide text-emerald-500 dark:text-emerald-400">FREE</span>
+              </span>
+            )),
+          )}
 
           <div className="switch-flow__hub" aria-hidden="true">
             <span className="switch-flow__ring" />
