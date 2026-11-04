@@ -139,19 +139,19 @@ export const HomePage: React.FC = () => {
             <h2 id="collections-heading" className="mt-3 text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">Choose a collection</h2>
           </div>
         </div>
-        <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-          {featuredCollections.map((item) => (
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {featuredCollections.map((item, index) => (
             <Link
               to={item.href}
               key={item.href}
-              className={`group flex min-h-40 flex-col rounded-2xl border border-border bg-card p-5 shadow-sm transition-[border-color,background-color,box-shadow,transform] duration-200 hover:-translate-y-0.5 hover:border-primary/45 hover:bg-muted/40 hover:shadow-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary sm:p-6 ${item.tone === 'model' ? 'border-t-2 border-t-primary' : item.tone === 'access' ? 'border-t-2 border-t-emerald-600 dark:border-t-emerald-400' : ''}`}
+              className={`group flex min-h-40 flex-col rounded-xl border border-border bg-card p-5 transition-[border-color,background-color,box-shadow,transform] duration-200 hover:-translate-y-0.5 hover:border-primary/45 hover:bg-muted/40 hover:shadow-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary sm:p-6 ${index === 0 ? 'sm:col-span-2 lg:row-span-2' : index === 3 ? 'sm:col-span-2 lg:col-span-3' : ''} ${item.tone === 'model' ? 'border-t-2 border-t-primary' : item.tone === 'access' ? 'border-t-2 border-t-emerald-600 dark:border-t-emerald-400' : ''}`}
             >
-              <p className="text-xs font-medium text-muted-foreground">{item.eyebrow}</p>
+              <p className="meta-label">{item.eyebrow}</p>
               <div className="mt-3 flex items-center justify-between gap-3">
-                <h3 className="text-lg font-semibold tracking-tight text-foreground">{item.title}</h3>
+                <h3 className={index === 0 ? 'text-2xl font-semibold tracking-tight text-foreground' : 'text-lg font-semibold tracking-tight text-foreground'}>{item.title}</h3>
                 <ArrowRight className="h-4 w-4 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-0.5 group-hover:text-primary" aria-hidden="true" />
               </div>
-              <p className="mt-2 text-sm leading-6 text-muted-foreground">{item.description}</p>
+              <p className={index === 0 ? 'mt-2 max-w-md text-base leading-7 text-muted-foreground' : 'mt-2 text-sm leading-6 text-muted-foreground'}>{item.description}</p>
               <div className="mt-4 flex flex-wrap gap-1.5">{item.highlights.map((highlight) => <span key={highlight} className="rounded-md border border-border/80 bg-muted/50 px-2 py-1 text-[11px] font-medium text-secondary-foreground">{highlight}</span>)}</div>
             </Link>
           ))}
@@ -174,15 +174,15 @@ export const HomePage: React.FC = () => {
             const provider = modelAccessProviders.find((item) => item.id === route.providerId);
             if (!model || !provider) return null;
             const accessLabel = route.accessType === 'free-weekly-shared' ? 'Free weekly · shared pool' : route.accessType === 'free-daily-allowance' ? 'Free daily allowance' : 'Free daily credits';
-            return <article key={route.id} className="flex min-h-40 flex-col rounded-2xl border border-border bg-card p-4 shadow-sm transition-[border-color,box-shadow,transform] duration-200 hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-lg sm:p-5">
+            return <article key={route.id} className="flex min-h-40 flex-col rounded-xl border border-border bg-card p-4 transition-[border-color,box-shadow,transform] duration-200 hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-lg sm:p-5">
               <div className="flex items-start justify-between gap-2">
-                <div><p className="text-xs text-muted-foreground">{model.organization}</p><h3 className="mt-1 text-base font-semibold text-foreground">{model.name}</h3></div>
+                <div><p className="meta-label">{model.organization}</p><h3 className="mt-1 text-base font-semibold text-foreground">{model.name}</h3></div>
                 <span className="shrink-0 rounded-md border border-emerald-500/25 bg-emerald-500/10 px-2 py-1 text-[10px] font-semibold text-emerald-700 dark:text-emerald-300">{accessLabel}</span>
               </div>
               <p className="mt-3 text-sm font-medium leading-5 text-foreground">{route.allowance}</p>
               <p className="mt-2 text-xs leading-5 text-muted-foreground">{provider.name} · {route.quickNote || route.conditions}</p>
               <div className="mt-auto flex items-center justify-between gap-2 pt-4">
-                <span className="text-[11px] text-muted-foreground">Checked {route.lastVerifiedAt}</span>
+                <span className="meta-label">Checked {route.lastVerifiedAt}</span>
                 <a href={route.claimUrl} target="_blank" rel="noreferrer" className="text-xs font-semibold text-primary hover:underline">Try route ↗</a>
               </div>
             </article>;
@@ -199,17 +199,14 @@ export const HomePage: React.FC = () => {
           </div>
           <Link to="/ai-tools" className="inline-flex min-h-11 items-center gap-1 text-sm font-medium text-primary hover:underline">All tools <ArrowRight className="h-4 w-4" aria-hidden="true" /></Link>
         </div>
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {aiCategories.map((category) => (
-            <Link key={category.id} to={`/ai-tools?category=${encodeURIComponent(category.id)}`} className="group flex min-h-40 flex-col rounded-2xl border border-border bg-card p-4 shadow-sm transition-[border-color,background-color,box-shadow,transform] duration-200 hover:-translate-y-0.5 hover:border-primary/45 hover:bg-muted/30 hover:shadow-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary sm:p-5">
-              <div className="flex items-center justify-between gap-3">
-                <h3 className="text-sm font-semibold text-foreground">{category.name}</h3>
-                <ArrowRight className="h-4 w-4 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-0.5 group-hover:text-primary" aria-hidden="true" />
-              </div>
-              <p className="mt-2 text-xs leading-5 text-muted-foreground">{category.description}</p>
-              <div className="mt-auto flex flex-wrap gap-1.5 pt-3">
-                {category.subcategories.map((subcategory) => <span key={subcategory} className="rounded-md border border-border/80 bg-muted/50 px-2 py-1 text-[10px] font-medium text-secondary-foreground">{subcategory}</span>)}
-              </div>
+        <div className="overflow-hidden rounded-xl border border-border bg-card">
+          {aiCategories.map((category, index) => (
+            <Link key={category.id} to={`/ai-tools?category=${encodeURIComponent(category.id)}`} className={`group flex min-h-12 items-center gap-3 px-4 py-3 transition-colors duration-200 hover:bg-muted/40 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-primary sm:px-5 ${index > 0 ? 'border-t border-border/70' : ''}`}>
+              <h3 className="shrink-0 text-sm font-semibold text-foreground transition-colors group-hover:text-primary">{category.name}</h3>
+              <p className="hidden min-w-0 flex-1 truncate text-xs text-muted-foreground md:block">{category.description}</p>
+              <span className="meta-label hidden max-w-64 truncate lg:block">{category.subcategories.map((subcategory) => subcategory).join(' · ')}</span>
+              <span className="meta-label ml-auto shrink-0 tabular-nums md:ml-0">{categoryCount(category.id)} tools</span>
+              <ArrowRight className="h-4 w-4 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-0.5 group-hover:text-primary" aria-hidden="true" />
             </Link>
           ))}
         </div>
@@ -226,9 +223,9 @@ export const HomePage: React.FC = () => {
         </div>
         <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
           {taskCategories.map(({ title, description, href, count, countLabel, accessLabel, Icon, logos }) => (
-            <Link key={title} to={href} className="group flex min-h-52 flex-col rounded-2xl border border-border bg-card p-4 shadow-sm transition-[border-color,background-color,box-shadow,transform] duration-200 hover:-translate-y-0.5 hover:border-primary/45 hover:bg-muted/30 hover:shadow-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary sm:p-5">
+            <Link key={title} to={href} className="group flex min-h-52 flex-col rounded-xl border border-border bg-card p-4 transition-[border-color,background-color,box-shadow,transform] duration-200 hover:-translate-y-0.5 hover:border-primary/45 hover:bg-muted/30 hover:shadow-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary sm:p-5">
               <div className="flex items-start justify-between gap-3">
-                <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl border border-primary/15 bg-primary/10 text-primary">
+                <span className="grid h-10 w-10 shrink-0 place-items-center rounded-md border border-primary/15 bg-primary/10 text-primary">
                   <Icon className="h-5 w-5" aria-hidden="true" />
                 </span>
                 <span className="rounded-full border border-border bg-muted/60 px-2.5 py-1 text-[10px] font-semibold text-secondary-foreground">{accessLabel}</span>
@@ -271,9 +268,9 @@ export const HomePage: React.FC = () => {
         </div>
         <div className="grid gap-4 md:grid-cols-2">
           {offers.map((offer) => (
-            <Link key={offer.slug} to={`/offers/${offer.slug}`} className="group flex min-h-28 items-center justify-between gap-4 rounded-2xl border border-border bg-card p-4 shadow-sm transition-[border-color,background-color,box-shadow,transform] duration-200 hover:-translate-y-0.5 hover:bg-muted/40 hover:shadow-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary sm:p-5">
+            <Link key={offer.slug} to={`/offers/${offer.slug}`} className="group flex min-h-28 items-center justify-between gap-4 rounded-xl border border-border bg-card p-4 transition-[border-color,background-color,box-shadow,transform] duration-200 hover:-translate-y-0.5 hover:bg-muted/40 hover:shadow-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary sm:p-5">
               <div>
-                <p className="text-xs text-muted-foreground">{offer.provider} · {offer.region}</p>
+                <p className="meta-label">{offer.provider} · {offer.region}</p>
                 <h3 className="mt-1 font-medium text-foreground">{offer.title}</h3>
                 <p className="mt-1 text-sm leading-5 text-muted-foreground">{offer.benefitSummary}</p>
               </div>

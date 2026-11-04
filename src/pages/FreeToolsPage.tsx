@@ -33,9 +33,9 @@ export const FreeToolsPage: React.FC = () => {
         <Link to="/" className="hover:text-foreground">Home</Link><span>/</span><span className="font-medium text-foreground">Utility Tools</span>
       </nav>
 
-      <div className="mb-8">
-        <div className="inline-flex items-center gap-2 text-rose-400 text-xs font-semibold uppercase tracking-wider mb-2"><Wrench className="w-4 h-4" /><span>Utility Tools · Free Browser-Based Utilities</span></div>
-        <h1 className="text-2xl sm:text-4xl font-extrabold text-foreground tracking-tight mb-2">Utility Tools</h1>
+      <div className="mb-8 border-b border-border/70 pb-8">
+        <div className="kicker mb-2 inline-flex items-center gap-2"><Wrench className="w-4 h-4" /><span>Utility Tools · Free Browser-Based Utilities</span></div>
+        <h1 className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl">Utility Tools</h1>
         <p className="text-sm sm:text-base text-secondary-foreground max-w-2xl mb-6">Perform common text, data, media, image, security, and browser tasks directly with focused tools. Client-Side utilities explain local processing, while service-backed tools clearly disclose their configured provider requirement.</p>
         <div className="p-4 rounded-xl bg-primary/5 border border-primary/20 flex items-start gap-3 text-xs text-secondary-foreground mb-8"><ShieldCheck className="w-5 h-5 text-primary shrink-0" /><span><strong>Privacy-first processing:</strong> Browser utilities keep their input local. Service-backed transcription sends a file only after you start it and reports when server configuration is unavailable.</span></div>
 
@@ -53,7 +53,7 @@ export const FreeToolsPage: React.FC = () => {
       {groupedTools.length > 0 ? groupedTools.map(({ definition, tools: groupTools }) => (
         <section key={definition.id} aria-labelledby={`utility-group-${definition.id}`} className="mb-10">
           <div className="mb-4 flex items-end justify-between gap-4"><div><h2 id={`utility-group-${definition.id}`} className="text-xl font-bold text-foreground">{definition.name}</h2><p className="mt-1 text-xs text-muted-foreground">{definition.description}</p></div><span className="text-xs text-muted-foreground">{groupTools.length} {groupTools.length === 1 ? 'tool' : 'tools'}</span></div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {groupTools.map((tool) => <Link key={tool.id} to={`/free-tools/${tool.slug}`} className="group relative flex flex-col justify-between rounded-lg border border-border bg-card/90 p-5 transition-all duration-300 ease-out hover:-translate-y-1 hover:border-primary/40 hover:bg-card hover:shadow-xl hover:shadow-black/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60">
               <div><div className="mb-3 flex items-center justify-between gap-3"><span className="rounded border border-border bg-muted px-2 py-0.5 text-[11px] font-semibold text-secondary-foreground">{definition.name}</span><span className="inline-flex items-center gap-1 text-[11px] font-mono text-emerald-700 dark:text-emerald-400"><Cpu className="h-3 w-3" />{tool.isClientSideOnly ? 'In browser' : 'Configured service'}</span></div><h3 className="mb-2 text-base font-bold tracking-tight text-foreground group-hover:text-primary">{tool.name}</h3><p className="mb-4 line-clamp-3 text-xs leading-relaxed text-secondary-foreground">{tool.tagline}</p></div>
               <div className="flex items-center justify-between border-t border-border/50 pt-3 text-xs"><span className="mr-2 truncate text-[11px] text-muted-foreground">{tool.outputFormat.split('&')[0]}</span><span className="flex shrink-0 items-center gap-1 font-medium text-primary group-hover:translate-x-1"><span>Launch</span><ArrowRight className="h-3.5 w-3.5" /></span></div>

@@ -230,14 +230,17 @@
     text-wrap: balance;
   }
 
+  /* Direction A: resting state is border-led (Linear-style) — the 1px token
+     border plus inset top highlight separate surface levels; shadows recede
+     to a single soft contact layer and return only on hover. */
   .surface-card {
     background-color: rgb(var(--color-card) / 0.92);
     border: 1px solid rgb(var(--color-border) / 0.92);
-    box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.04), 0 1px 2px rgb(2 8 23 / 0.05), 0 4px 14px -6px rgb(2 8 23 / 0.08);
+    box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.04), 0 1px 2px rgb(2 8 23 / 0.05);
   }
 
   .interactive-card {
-    box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.04), 0 1px 2px rgb(2 8 23 / 0.05), 0 4px 14px -6px rgb(2 8 23 / 0.08);
+    box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.04), 0 1px 2px rgb(2 8 23 / 0.05);
     transition: border-color 160ms ease, background-color 160ms ease, box-shadow 200ms ease, transform 160ms ease;
   }
 
@@ -334,7 +337,7 @@
      1rem), layered shadow, translucent card surface with blur. The search
      component itself is untouched; only its hero wrapper carries this. */
   .search-panel {
-    border-radius: 1.125rem;
+    border-radius: 0.875rem;
     padding: 1px;
     background: linear-gradient(120deg, rgb(var(--brand-cyan) / 0.55), rgb(var(--color-primary) / 0.32) 48%, rgb(var(--brand-violet) / 0.55));
     box-shadow:
@@ -343,7 +346,7 @@
   }
   .search-panel input {
     border-color: transparent;
-    border-radius: 1rem;
+    border-radius: 0.75rem;
     background-color: rgb(var(--color-card) / 0.88);
     -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
@@ -387,11 +390,35 @@
     color: transparent;
   }
 
+  /* Direction A signature: mono technical kickers. Section eyebrows, page
+     kickers, card meta labels and data chips use the system monospace stack
+     (no webfont) at 11px with wide tracking — see DESIGN.md. */
   .eyebrow {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
     color: rgb(var(--color-primary));
     font-size: 0.6875rem;
     font-weight: 600;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.18em;
+    line-height: 1rem;
+    text-transform: uppercase;
+  }
+
+  .kicker {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    color: rgb(var(--color-primary));
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    line-height: 1rem;
+    text-transform: uppercase;
+  }
+
+  .meta-label {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    color: rgb(var(--color-muted-fg));
+    font-size: 0.6875rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
     line-height: 1rem;
     text-transform: uppercase;
   }
@@ -436,7 +463,7 @@
     min-width: 0;
     padding: 0.9rem 1rem;
     border: 1px solid rgb(var(--color-border) / 0.9);
-    border-radius: 0.85rem;
+    border-radius: 0.75rem;
     background: rgb(var(--color-card) / 0.78);
     box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.035);
     transition: border-color 180ms ease, background-color 180ms ease, transform 180ms ease;
@@ -1026,7 +1053,7 @@
   max-width: 38rem;
   margin-inline: auto;
   border: 1px solid rgb(var(--color-border) / 0.78);
-  border-radius: 1.25rem;
+  border-radius: 1rem;
   background: rgb(var(--color-card));
   box-shadow: 0 28px 56px -20px rgb(2 8 23 / 0.28), 0 12px 28px -12px rgb(var(--color-primary) / 0.18), inset 0 1px 0 rgb(255 255 255 / 0.2);
 }
@@ -1138,7 +1165,7 @@
   padding: 1.2rem;
   overflow: hidden;
   border: 1px solid rgb(var(--color-border) / 0.62);
-  border-radius: 0.95rem;
+  border-radius: 0.75rem;
   background: linear-gradient(145deg, rgb(var(--color-card)), rgb(var(--color-card) / 0.82));
   box-shadow: 0 2px 8px rgb(2 8 23 / 0.035);
   transition: border-color 180ms ease, background-color 180ms ease, box-shadow 180ms ease, transform 180ms ease;

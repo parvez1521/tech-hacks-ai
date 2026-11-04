@@ -27,7 +27,7 @@ export const AiToolCard: React.FC<AiToolCardProps> = ({ tool }) => {
   const getPricingBadge = () => {
     if (tool.videoDiscoverySections?.includes('open-weights')) {
       return (
-        <span className="px-2 py-0.5 rounded text-[11px] font-semibold bg-violet-50 text-violet-800 border border-violet-200 dark:bg-violet-500/10 dark:text-violet-300 dark:border-violet-500/20">
+        <span className="px-2 py-0.5 rounded text-[11px] font-semibold bg-sky-50 text-sky-800 border border-sky-200 dark:bg-sky-500/10 dark:text-sky-300 dark:border-sky-500/20">
           Open Weights
         </span>
       );
@@ -62,7 +62,7 @@ export const AiToolCard: React.FC<AiToolCardProps> = ({ tool }) => {
         );
       case 'free-trial':
         return (
-          <span className="px-2 py-0.5 rounded text-[11px] font-semibold bg-purple-50 text-purple-800 border border-purple-200 dark:bg-purple-500/10 dark:text-purple-300 dark:border-purple-500/20">
+          <span className="px-2 py-0.5 rounded text-[11px] font-semibold bg-slate-100 text-slate-700 border border-slate-200 dark:bg-slate-500/10 dark:text-slate-300 dark:border-slate-500/20">
             Free Trial
           </span>
         );
@@ -78,7 +78,7 @@ export const AiToolCard: React.FC<AiToolCardProps> = ({ tool }) => {
 
   return (
     <div
-      className="group relative flex flex-col justify-between p-5 rounded-2xl border border-border bg-card interactive-card hover:border-primary/50 min-h-[250px] focus-within:ring-2 focus-within:ring-primary/50 focus-within:border-primary/60"
+      className="group relative flex flex-col justify-between p-4 rounded-xl border border-border bg-card interactive-card hover:border-primary/50 min-h-[250px] focus-within:ring-2 focus-within:ring-primary/50 focus-within:border-primary/60"
     >
       <div className="relative z-10">
         {/* Top Header Row */}
@@ -90,7 +90,7 @@ export const AiToolCard: React.FC<AiToolCardProps> = ({ tool }) => {
               size="md"
               iconBgColor={tool.iconBgColor}
               iconLetter={tool.iconLetter}
-              className="rounded-xl ring-1 ring-border/50"
+              className="rounded-md ring-1 ring-border/50"
             />
             <div className="min-w-0">
               <div className="flex items-center gap-1.5">
@@ -109,7 +109,7 @@ export const AiToolCard: React.FC<AiToolCardProps> = ({ tool }) => {
                   </span>
                 )}
               </div>
-              <span className="text-[11px] text-secondary-foreground capitalize block truncate">
+              <span className="meta-label block truncate">
                 {tool.category}
               </span>
             </div>

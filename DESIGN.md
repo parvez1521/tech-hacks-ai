@@ -61,3 +61,27 @@ The site also defines semantic tokens such as `--color-bg`, `--color-fg`, `--col
 - Accessible keyboard operation, visible focus, readable contrast, touch targets, and responsive layouts.
 
 Any token change must be deliberate, documented here, and applied consistently to both themes. Do not silently replace the current brand identity.
+
+## Direction A — Dark precision (Phase 1, Nov 2026)
+
+An evolution of the language above, not a new identity: brand tokens, the
+route gradient, and Inter are unchanged. Direction A borrows Linear/Raycast
+discipline:
+
+- **Borders over shadows.** Surface levels are separated by the crisp 1px
+  token border plus the inset top highlight. Resting card shadows are reduced
+  to a single soft contact layer (`surface-card`, `interactive-card`); the
+  hover glow remains the only expressive shadow.
+- **One accent family.** Cyan→blue (`--color-primary`) is the accent. Violet
+  appears only inside `--brand-route-gradient` (logo mark, gradient headline
+  line, primary CTA) — never as a flat accent, badge, or panel tint.
+- **Mono technical kickers.** `.eyebrow`, `.kicker`, and `.meta-label` use the
+  system monospace stack (`ui-monospace, SFMono-Regular, Menlo, monospace` —
+  no webfont) at 11px, uppercase, 0.14–0.18em tracking for section eyebrows,
+  page-header kickers, card meta labels, and data chips.
+- **Sharper radius scale.** Cards and panels: 12px (`rounded-xl`). Buttons,
+  inputs, and chips: 8–10px (`rounded-lg`/`rounded-md`). Inner tiles and
+  controls stay concentric with their container.
+- **Density with air.** Listing grids use `gap-4`; cards follow a 3-row
+  anatomy — header (logo tile + title + primary chip), 2-line description,
+  footer meta row of mono micro-labels.

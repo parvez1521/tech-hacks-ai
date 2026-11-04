@@ -158,11 +158,11 @@ export const AlternativeDetailPage: React.FC = () => {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8 items-start">
         {/* Left Headline */}
         <div className="lg:col-span-2">
-          <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full border border-primary/30 bg-[#EAF2FF] text-primary text-xs font-semibold uppercase tracking-wider mb-3">
+          <div className="kicker mb-3 inline-flex items-center gap-2">
             <Replace className="w-3.5 h-3.5 text-primary" />
             <span>{isVideoTarget ? 'Video workflow alternatives' : 'Open Source Replacements'}</span>
           </div>
-          <h1 className="text-2xl sm:text-4xl font-extrabold text-foreground tracking-tight mb-3">
+          <h1 className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl mb-3">
             {isVideoTarget ? `Video generation alternatives to ${proprietary.name}` : `Open Source ${proprietary.name} Alternatives`}
           </h1>
           <p className="text-sm sm:text-base text-secondary-foreground leading-relaxed mb-4">
@@ -172,7 +172,7 @@ export const AlternativeDetailPage: React.FC = () => {
           </p>
 
           <div className="flex flex-wrap items-center gap-2 text-xs text-secondary-foreground">
-            <span className="inline-flex items-center px-2.5 py-1 rounded-full bg-[#EAF2FF] text-primary border border-primary/30 font-medium">
+            <span className="inline-flex items-center px-2.5 py-1 rounded-full bg-primary/10 text-primary border border-primary/30 font-medium">
               {isVideoTarget
                 ? `${allReplacements.length + allAiRecommendations.length} related options`
                 : `${allReplacements.length} ${allReplacements.length === 1 ? 'verified replacement' : 'verified replacements'}`}
@@ -188,9 +188,9 @@ export const AlternativeDetailPage: React.FC = () => {
             {!isVideoTarget && allReplacements.length >= 2 && (
               <Link
                 to={`/compare?tools=${allReplacements.slice(0, 4).map((r) => r.slug).join(',')}`}
-                className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-purple-50 text-purple-700 border border-purple-200 font-medium hover:bg-purple-100 transition-colors"
+                className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-primary/10 text-primary border border-primary/25 font-medium hover:bg-primary/15 transition-colors"
               >
-                <Scale className="w-3 h-3 text-purple-600" />
+                <Scale className="w-3 h-3 text-primary" />
                 <span>Compare Top Replacements</span>
               </Link>
             )}
@@ -198,7 +198,7 @@ export const AlternativeDetailPage: React.FC = () => {
         </div>
 
         {/* Right Sticky Proprietary Profile Card */}
-        <div className="p-6 rounded-2xl border border-border bg-card shadow-sm flex flex-col justify-between">
+        <div className="p-6 rounded-xl border border-border bg-card flex flex-col justify-between">
           <div>
             <div className="flex items-center justify-between mb-3">
               <div className="flex items-center gap-3">
@@ -238,7 +238,7 @@ export const AlternativeDetailPage: React.FC = () => {
             href={proprietary.websiteUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl bg-[#2563EB] hover:bg-[#1D4ED8] text-white text-xs font-semibold shadow-md shadow-blue-500/20 transition-all cursor-pointer"
+            className="inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-lg bg-primary hover:bg-primary-hover text-primary-foreground text-xs font-semibold transition-all cursor-pointer"
           >
             <span>Visit {proprietary.name} Official Website</span>
             <ExternalLink className="w-3.5 h-3.5" />
@@ -247,7 +247,7 @@ export const AlternativeDetailPage: React.FC = () => {
       </div>
 
       {/* Migration Analysis & Honest Cost Architecture */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 p-6 rounded-2xl border border-border bg-card text-xs mb-8 shadow-sm">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 p-6 rounded-xl border border-border bg-card text-xs mb-8">
         <div>
           <span className="font-semibold text-foreground uppercase tracking-wider block text-[11px] mb-3">
             Why Teams Look for {proprietary.name} Alternatives
@@ -286,7 +286,7 @@ export const AlternativeDetailPage: React.FC = () => {
               <ul className="space-y-1.5 text-secondary-foreground text-[11px]">
                 {proprietary.selectionCriteria.map((c, idx) => (
                   <li key={idx} className="flex items-center gap-2">
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#2563EB] shrink-0" />
+                    <span className="w-1.5 h-1.5 rounded-full bg-primary shrink-0" />
                     <span>{c}</span>
                   </li>
                 ))}
@@ -307,7 +307,7 @@ export const AlternativeDetailPage: React.FC = () => {
               value={searchQuery}
               onChange={(e) => handleSearchChange(e.target.value)}
               placeholder={`Search ${proprietary.name} alternatives...`}
-              className="w-full pl-9 pr-8 py-2 rounded-lg bg-card border border-border text-foreground placeholder:text-secondary-foreground text-xs focus:outline-none focus:ring-2 focus:ring-[#2563EB]/20 focus:border-[#2563EB]"
+              className="w-full pl-9 pr-8 py-2 rounded-lg bg-card border border-border text-foreground placeholder:text-secondary-foreground text-xs focus:outline-none focus:ring-2 focus:ring-primary/25 focus:border-primary"
             />
             {searchQuery && (
               <button
@@ -374,7 +374,7 @@ export const AlternativeDetailPage: React.FC = () => {
 
       {/* Grid or Empty States */}
       {allReplacements.length === 0 && allAiRecommendations.length === 0 ? (
-        <div className="p-8 rounded-2xl border border-border bg-card text-center max-w-xl mx-auto my-8 shadow-xs">
+        <div className="p-8 rounded-xl border border-border bg-card text-center max-w-xl mx-auto my-8">
           <Replace className="w-8 h-8 text-muted-foreground mx-auto mb-3" />
           <h3 className="text-base font-bold text-slate-900 mb-2">
             No Alternatives Mapped Yet

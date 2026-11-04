@@ -49,15 +49,15 @@ export const ToolsPage: React.FC = () => {
   return (
     <div className="max-w-6xl mx-auto px-4 sm:px-6 py-8">
       {/* Header */}
-      <div className="mb-8">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 border border-blue-200 text-blue-700 text-xs font-semibold uppercase tracking-wider mb-3">
-          <FolderKanban className="w-3.5 h-3.5 text-blue-600" />
+      <div className="mb-8 border-b border-border/70 pb-8">
+        <div className="kicker mb-3 inline-flex items-center gap-2">
+          <FolderKanban className="w-3.5 h-3.5 text-primary" />
           <span>Full Directory</span>
         </div>
-        <h1 className="text-2xl sm:text-4xl font-extrabold text-[#0F172A] tracking-tight mb-2">
+        <h1 className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl">
           All Open Source Software Tools
         </h1>
-        <p className="text-sm sm:text-base text-[#475569] max-w-2xl">
+        <p className="mt-3 text-sm text-muted-foreground max-w-2xl sm:text-base">
           Search and filter the complete index of hand-picked open-source software, developer tools, and privacy-respecting platforms.
         </p>
       </div>
@@ -74,7 +74,7 @@ export const ToolsPage: React.FC = () => {
 
       {/* Results Grid */}
       {tools.length > 0 ? (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {tools.map((tool) => (
             <ToolCard key={tool.id} tool={tool} headingLevel={2} />
           ))}

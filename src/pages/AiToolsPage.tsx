@@ -75,26 +75,26 @@ export const AiToolsPage: React.FC = () => {
   return (
     <div className="max-w-6xl mx-auto px-4 sm:px-6 py-8">
       {/* Header */}
-      <div className="mb-8">
+      <div className="mb-8 border-b border-border/70 pb-8">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-2">
           <div>
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#EAF2FF] border border-[#BFDBFE] text-[#2563EB] text-xs font-semibold uppercase tracking-wider mb-3">
-              <Sparkles className="w-3.5 h-3.5 text-[#2563EB]" />
+            <div className="kicker mb-3 inline-flex items-center gap-2">
+              <Sparkles className="w-3.5 h-3.5 text-primary" />
               <span>Curated AI Catalog</span>
             </div>
-            <h1 className="text-2xl sm:text-4xl font-extrabold text-[#0F172A] tracking-tight">
+            <h1 className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl">
               AI Tools Directory: Discover & Compare AI Platforms
             </h1>
           </div>
           <Link
             to="/submit-tool"
-            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[#2563EB] hover:bg-[#1D4ED8] text-white font-semibold text-xs shadow-md shadow-blue-500/20 transition-all shrink-0 self-start sm:self-auto cursor-pointer"
+            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-primary hover:bg-primary-hover text-primary-foreground font-semibold text-xs transition-all shrink-0 self-start sm:self-auto cursor-pointer"
           >
             <PlusCircle className="w-4 h-4" />
             <span>Submit a Tool</span>
           </Link>
         </div>
-        <p className="text-sm sm:text-base text-[#64748B] max-w-2xl mb-6">
+        <p className="text-sm sm:text-base text-muted-foreground max-w-2xl mb-6">
           Search and compare AI tools for video, images, voice, coding, research, and automation. Review each tool's use case, free-access model, features, and official source before choosing a platform.
         </p>
 
@@ -113,22 +113,22 @@ export const AiToolsPage: React.FC = () => {
         </Link>
 
         {/* Search & Main Controls Bar */}
-        <div className="p-4 rounded-xl bg-white border border-[#DFE7F3] shadow-sm flex flex-col md:flex-row gap-3 items-stretch md:items-center justify-between mb-6">
+        <div className="p-4 rounded-xl bg-card border border-border flex flex-col md:flex-row gap-3 items-stretch md:items-center justify-between mb-6">
           {/* Search Input */}
           <div className="relative flex-1 max-w-md">
-            <Search className="w-4 h-4 text-[#64748B] absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
+            <Search className="w-4 h-4 text-muted-foreground absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
             <input
               type="text"
               value={filterState.searchQuery}
               onChange={(e) => handleSearchChange(e.target.value)}
               placeholder="Search AI tools by name, features, or tags..."
-              className="w-full pl-9 pr-8 py-2 rounded-lg bg-white border border-[#DFE7F3] text-[#0F172A] placeholder:text-[#64748B] text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-[#2563EB]/20 focus:border-[#2563EB]"
+              className="w-full pl-9 pr-8 py-2 rounded-lg bg-background border border-border text-foreground placeholder:text-muted-foreground text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-primary/25 focus:border-primary"
             />
             {filterState.searchQuery && (
               <button
                 type="button"
                 onClick={() => handleSearchChange('')}
-                className="absolute right-2.5 top-1/2 -translate-y-1/2 text-[#64748B] hover:text-[#0F172A]"
+                className="absolute right-2.5 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
                 aria-label="Clear search"
               >
                 <X className="w-4 h-4" />
@@ -140,12 +140,12 @@ export const AiToolsPage: React.FC = () => {
           <div className="flex flex-wrap items-center gap-2 text-xs">
             {/* Pricing Select */}
             <div className="flex items-center gap-1.5">
-              <span className="text-[#64748B]">Price:</span>
+              <span className="meta-label">Price:</span>
               <select
                 aria-label="Filter by pricing tier"
                 value={filterState.pricingType}
                 onChange={(e) => handlePriceChange(e.target.value)}
-                className="bg-white border border-[#DFE7F3] rounded-lg px-2.5 py-1.5 text-xs text-[#0F172A] focus:outline-none focus:ring-2 focus:ring-[#2563EB]/20 focus:border-[#2563EB] cursor-pointer"
+                className="bg-background border border-border rounded-lg px-2.5 py-1.5 text-xs text-foreground focus:outline-none focus:ring-2 focus:ring-primary/25 focus:border-primary cursor-pointer"
               >
                 <option value="all">All Tiers</option>
                 <option value="free">100% Free</option>
@@ -157,12 +157,12 @@ export const AiToolsPage: React.FC = () => {
 
             {/* Access model filter keeps recurring hosted plans distinct from open-source software. */}
             <div className="flex items-center gap-1.5">
-              <span className="text-[#64748B]">Access:</span>
+              <span className="meta-label">Access:</span>
               <select
                 aria-label="Filter by access model"
                 value={filterState.freeAccessType || 'all'}
                 onChange={(e) => handleAccessChange(e.target.value)}
-                className="bg-white border border-[#DFE7F3] rounded-lg px-2.5 py-1.5 text-xs text-[#0F172A] focus:outline-none focus:ring-2 focus:ring-[#2563EB]/20 focus:border-[#2563EB] cursor-pointer"
+                className="bg-background border border-border rounded-lg px-2.5 py-1.5 text-xs text-foreground focus:outline-none focus:ring-2 focus:ring-primary/25 focus:border-primary cursor-pointer"
               >
                 <option value="all">All Access Models</option>
                 <option value="open-source-local">Open Source / Local</option>
@@ -175,12 +175,12 @@ export const AiToolsPage: React.FC = () => {
 
             {/* Sort Select */}
             <div className="flex items-center gap-1.5">
-              <span className="text-[#64748B]">Sort:</span>
+              <span className="meta-label">Sort:</span>
               <select
                 aria-label="Sort AI tools"
                 value={filterState.sortBy}
                 onChange={(e) => handleSortChange(e.target.value)}
-                className="bg-white border border-[#DFE7F3] rounded-lg px-2.5 py-1.5 text-xs text-[#0F172A] focus:outline-none focus:ring-2 focus:ring-[#2563EB]/20 focus:border-[#2563EB] cursor-pointer"
+                className="bg-background border border-border rounded-lg px-2.5 py-1.5 text-xs text-foreground focus:outline-none focus:ring-2 focus:ring-primary/25 focus:border-primary cursor-pointer"
               >
                 <option value="popular">Most Popular</option>
                 <option value="rating">Editorial Picks</option>
@@ -193,7 +193,7 @@ export const AiToolsPage: React.FC = () => {
               <button
                 type="button"
                 onClick={resetSearchParams}
-                className="text-[#2563EB] hover:text-[#1D4ED8] hover:underline ml-1 cursor-pointer font-medium"
+                className="text-primary hover:text-primary-hover hover:underline ml-1 cursor-pointer font-medium"
               >
                 Reset
               </button>
@@ -221,8 +221,8 @@ export const AiToolsPage: React.FC = () => {
             onClick={() => handleCategoryChange(null)}
             className={`px-3.5 py-1.5 rounded-full text-xs font-medium shrink-0 transition-all cursor-pointer ${
               !filterState.category
-                ? 'bg-[#2563EB] text-white shadow-sm'
-                : 'bg-white text-[#64748B] hover:bg-[#EAF2FF] hover:text-[#2563EB] border border-[#DFE7F3]'
+                ? 'bg-primary text-primary-foreground'
+                : 'bg-card text-muted-foreground hover:bg-primary/10 hover:text-primary border border-border'
             }`}
           >
             All Categories
@@ -236,8 +236,8 @@ export const AiToolsPage: React.FC = () => {
                 onClick={() => handleCategoryChange(isSelected ? null : cat.id)}
                 className={`px-3.5 py-1.5 rounded-full text-xs font-medium shrink-0 transition-all cursor-pointer ${
                   isSelected
-                    ? 'bg-[#2563EB] text-white shadow-sm'
-                    : 'bg-white text-[#64748B] hover:bg-[#EAF2FF] hover:text-[#2563EB] border border-[#DFE7F3]'
+                    ? 'bg-primary text-primary-foreground'
+                    : 'bg-card text-muted-foreground hover:bg-primary/10 hover:text-primary border border-border'
                 }`}
               >
                 {cat.name}
@@ -279,7 +279,7 @@ export const AiToolsPage: React.FC = () => {
 
       {/* Grid or Empty State */}
       {tools.length > 0 ? (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {tools.map((tool) => (
             <AiToolCard key={tool.id} tool={tool} />
           ))}

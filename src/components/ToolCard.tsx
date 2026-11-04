@@ -25,11 +25,11 @@ export const ToolCard: React.FC<ToolCardProps> = ({ tool, headingLevel = 3 }) =>
   return (
     <div
       onMouseMove={handleMouseMove}
-      className="group surface-card interactive-card relative flex flex-col justify-between h-full p-5 rounded-2xl min-h-[220px] focus-within:ring-2 focus-within:ring-primary/60 focus-within:border-primary/60"
+      className="group surface-card interactive-card relative flex flex-col justify-between h-full p-4 rounded-xl min-h-[220px] focus-within:ring-2 focus-within:ring-primary/60 focus-within:border-primary/60"
     >
       {/* Interactive Radial Spotlight Inner Glow */}
       <div
-        className="pointer-events-none absolute -inset-px rounded-2xl opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-focus-within:opacity-100 -z-0"
+        className="pointer-events-none absolute -inset-px rounded-xl opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-focus-within:opacity-100 -z-0"
         style={{
           background:
             'radial-gradient(280px circle at var(--card-x, 50%) var(--card-y, 50%), rgb(var(--color-primary) / 0.09), transparent 80%)',
@@ -40,7 +40,7 @@ export const ToolCard: React.FC<ToolCardProps> = ({ tool, headingLevel = 3 }) =>
       {/* Primary Card Stretch Link */}
       <Link
         to={`/tools/${tool.slug}`}
-        className="absolute inset-0 z-10 rounded-2xl focus:outline-none"
+        className="absolute inset-0 z-10 rounded-xl focus:outline-none"
         aria-label={`View details for ${tool.name}`}
       >
         <span className="sr-only">View {tool.name}</span>
@@ -57,7 +57,7 @@ export const ToolCard: React.FC<ToolCardProps> = ({ tool, headingLevel = 3 }) =>
               size="sm"
               iconBgColor={tool.iconBgColor}
               iconLetter={tool.iconLetter}
-              className="rounded-lg ring-1 ring-border/50"
+              className="rounded-md ring-1 ring-border/50"
             />
             <Heading className="font-bold text-foreground text-base tracking-tight truncate group-hover:text-primary transition-colors duration-200">
               {tool.name}
