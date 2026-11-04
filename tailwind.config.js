@@ -22,11 +22,6 @@ export default {
           foreground: 'rgb(var(--color-primary-fg) / <alpha-value>)',
           hover: 'rgb(var(--color-primary-hover) / <alpha-value>)',
         },
-        action: {
-          DEFAULT: 'rgb(var(--color-action) / <alpha-value>)',
-          foreground: 'rgb(var(--color-action-fg) / <alpha-value>)',
-          hover: 'rgb(var(--color-action-hover) / <alpha-value>)',
-        },
         secondary: {
           DEFAULT: 'rgb(var(--color-secondary) / <alpha-value>)',
           foreground: 'rgb(var(--color-secondary-fg) / <alpha-value>)',
