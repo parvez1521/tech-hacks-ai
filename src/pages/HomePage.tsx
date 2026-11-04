@@ -3,6 +3,7 @@ import { ArrowRight, BookOpen, Code2, Film, Gift, Image as ImageIcon, Layers3, M
 import { Link } from '../router/Router';
 import { UniversalSearch } from '../components/UniversalSearch';
 import { HeroSignalVisual } from '../components/HeroSignalVisual';
+import { FeaturedToolCard } from '../components/FeaturedToolCard';
 import { DailyDiscoveriesSection } from '../components/DailyDiscoveriesSection';
 import { BrandLogo } from '../components/BrandLogo';
 import { aiCategories } from '../data/aiToolsData';
@@ -37,6 +38,31 @@ export const HomePage: React.FC = () => {
   ).length;
   const categoryCount = (category: string) => allCatalogTools.filter((tool) => tool.category === category).length;
   const openSourceAiCount = allCatalogTools.filter((tool) => tool.isSelfHostable || tool.freeAccessType === 'open-source-local').length;
+  /* AIxploria-look homepage data: featured picks, ranked columns, and
+     trending category tiles — all derived from the live catalog. */
+  const featuredTools = allCatalogTools.filter((tool) => tool.isFeatured).slice(0, 8);
+  const categoriesByCount = aiCategories
+    .map((category) => ({ category, tools: allCatalogTools.filter((tool) => tool.category === category.id) }))
+    .filter((entry) => entry.tools.length > 0)
+    .sort((a, b) => b.tools.length - a.tools.length);
+  const trendingTools = allCatalogTools.filter((tool) => tool.isTrending);
+  const featuredRankedTools = allCatalogTools.filter((tool) => tool.isFeatured);
+  const rankingColumns = [
+    ...categoriesByCount.slice(0, 2).map((entry) => ({
+      title: entry.category.name,
+      href: `/ai-tools?category=${encodeURIComponent(entry.category.id)}`,
+      tools: entry.tools.slice(0, 10),
+      total: entry.tools.length,
+    })),
+    { title: 'Trending now', href: '/ai-tools', tools: trendingTools.slice(0, 10), total: trendingTools.length },
+    { title: 'Featured picks', href: '/ai-tools', tools: featuredRankedTools.slice(0, 10), total: featuredRankedTools.length },
+  ];
+  const pricingPills = [
+    { label: 'Free', href: '/ai-tools?price=free', className: 'text-emerald-600 dark:text-emerald-400' },
+    { label: 'Freemium', href: '/ai-tools?price=freemium', className: 'text-amber-600 dark:text-amber-400' },
+    { label: 'Free Trial', href: '/ai-tools?price=free-trial', className: 'text-purple-600 dark:text-purple-400' },
+    { label: 'Paid', href: '/ai-tools?price=paid', className: 'text-rose-600 dark:text-rose-400' },
+  ];
   const taskCategories = [
     {
       title: 'Free & Trial AI Video Generators',
@@ -102,128 +128,209 @@ export const HomePage: React.FC = () => {
 
   return (
     <main className="pb-12 sm:pb-16">
-      <section className="mx-auto grid max-w-7xl items-center gap-8 px-4 pb-12 pt-12 sm:px-6 sm:pb-16 sm:pt-16 lg:grid-cols-[1.05fr_.95fr] lg:gap-12" aria-labelledby="home-hero-heading">
-        <div className="max-w-2xl">
-          <p className="mb-4 text-sm font-medium text-primary">A practical map to AI</p>
-          <h1 id="home-hero-heading" className="max-w-[21ch] text-[2.25rem] font-semibold leading-[1.04] tracking-[-0.035em] text-foreground sm:text-5xl lg:text-[3.5rem]">
-            <span className="block">Another AI tool?</span>
-            <span className="block">Sure.</span>
-            <span className="block">Another Subscription?</span>
-            <span className="block">Nope.</span>
+      <section className="hero-aurora relative overflow-hidden" aria-labelledby="home-hero-heading">
+        <div className="hero-grid" aria-hidden="true" />
+        <div className="hero-stagger mx-auto flex max-w-3xl flex-col items-center px-4 pb-16 pt-14 text-center sm:px-6 sm:pb-20 sm:pt-16">
+          <p className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-3.5 py-1.5 text-[11px] font-bold uppercase tracking-[0.14em] text-muted-foreground shadow-sm">
+            <span className="text-sm font-extrabold normal-case tracking-normal text-violet-600 dark:text-violet-400">{allCatalogTools.length}</span>
+            AI tools listed · A practical map to AI
+          </p>
+          <h1 id="home-hero-heading" className="mt-6 text-balance text-[2.6rem] font-extrabold leading-[1.05] tracking-[-0.03em] text-foreground sm:text-6xl sm:leading-[1.04] lg:text-[4.2rem]">
+            <span className="block">Another AI tool? Sure.</span>
+            <span className="block"><span className="gradient-underline">Another Subscription?</span> Nope.</span>
           </h1>
-          <p className="mt-5 max-w-[34rem] text-base leading-7 text-muted-foreground sm:text-lg sm:leading-8">
+          <p className="mt-6 max-w-[36rem] text-lg leading-8 text-muted-foreground sm:text-xl sm:leading-9">
             Compare AI tools by task, check current access routes, and find reviewed open-source projects.
           </p>
-          <div className="mt-6 max-w-xl">
+          <div className="search-panel mt-9 w-full max-w-2xl text-left">
             <UniversalSearch />
+            <div className="flex flex-wrap items-center justify-center gap-2 px-1 pb-1 pt-3">
+              <span className="meta-label mr-1">Pricing</span>
+              {pricingPills.map((pill) => (
+                <Link
+                  key={pill.label}
+                  to={pill.href}
+                  className={`inline-flex min-h-8 items-center rounded-full border border-border/70 bg-card px-3 py-1 text-xs font-bold shadow-sm transition-[box-shadow,transform] duration-200 hover:-translate-y-px hover:shadow focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary ${pill.className}`}
+                >
+                  {pill.label}
+                </Link>
+              ))}
+            </div>
           </div>
-          <div className="mt-4 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm">
-            <Link to="/pick" className="inline-flex min-h-11 items-center gap-2 rounded-md bg-primary px-4 font-medium text-primary-foreground transition-colors hover:bg-primary-hover focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+          <div className="mt-7 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-sm">
+            <Link to="/pick" className="btn-primary inline-flex min-h-11 items-center gap-2 px-5 font-semibold focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
               Help me pick <ArrowRight className="h-4 w-4" aria-hidden="true" />
             </Link>
-            <Link to="/ai-video-tools" className="inline-flex min-h-11 items-center gap-2 text-muted-foreground transition-colors hover:text-foreground focus-visible:rounded-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+            <Link to="/ai-video-tools" className="inline-flex min-h-11 items-center gap-2 rounded-full border border-border bg-card px-4 font-semibold text-secondary-foreground shadow-sm transition-colors duration-200 hover:text-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
               <Video className="h-4 w-4" aria-hidden="true" /> AI video generators
             </Link>
           </div>
-        </div>
-        <div className="hidden min-w-0 lg:block">
-          <HeroSignalVisual />
+          <p className="mt-8 text-sm text-muted-foreground">
+            <strong className="font-bold text-foreground">{allCatalogTools.length}</strong> AI tools
+            {' · '}<strong className="font-bold text-foreground">{aiCategories.length}</strong> categories
+            {' · '}<strong className="font-bold text-foreground">{openSourceAiCount}</strong> open-source &amp; local options
+          </p>
+          <div className="mt-12 hidden w-full max-w-3xl lg:block">
+            <HeroSignalVisual />
+          </div>
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-4 py-10 sm:px-6 sm:py-12" aria-labelledby="collections-heading">
-        <div className="mb-5 flex items-end justify-between gap-4">
+      <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20" aria-labelledby="featured-tools-heading">
+        <div className="mb-10 text-center">
+          <p className="eyebrow">Featured</p>
+          <h2 id="featured-tools-heading" className="mt-3 text-3xl font-bold tracking-tight text-foreground sm:text-4xl"><span className="gradient-underline">Featured</span> AI tools</h2>
+          <p className="mx-auto mt-3 max-w-2xl text-base leading-7 text-muted-foreground">Start with the platforms flagged as featured in the directory — then compare their alternatives before you commit.</p>
+        </div>
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {featuredTools.map((tool) => <FeaturedToolCard key={tool.id} tool={tool} />)}
+        </div>
+      </section>
+
+      <section className="section-band" aria-labelledby="rankings-heading">
+       <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20">
+        <div className="mb-10">
+          <p className="eyebrow">Rankings</p>
+          <h2 id="rankings-heading" className="mt-3 text-3xl font-bold tracking-tight text-foreground sm:text-4xl">Top tools, <span className="gradient-underline">ranked by category</span></h2>
+        </div>
+        <div className="grid gap-x-6 gap-y-10 sm:grid-cols-2 xl:grid-cols-4">
+          {rankingColumns.map((column) => (
+            <div key={column.title}>
+              <h3 className="text-base font-bold tracking-tight text-foreground"><span className="gradient-underline">{column.title}</span></h3>
+              <ol className="mt-4 space-y-1">
+                {column.tools.map((tool, index) => (
+                  <li key={tool.id}>
+                    <Link to={`/ai-tools/${tool.slug}`} className="group flex min-h-10 items-center gap-2.5 rounded-lg px-1.5 py-1 transition-colors duration-200 hover:bg-card focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+                      <span className="w-5 shrink-0 text-right text-xs font-bold tabular-nums text-muted-foreground">{index + 1}</span>
+                      <BrandLogo slug={tool.slug} name={tool.name} size={28} iconBgColor={tool.iconBgColor} iconLetter={tool.iconLetter} className="rounded-md ring-1 ring-border/50" />
+                      <span className="min-w-0 truncate text-sm font-semibold text-foreground transition-colors group-hover:text-primary">{tool.name}</span>
+                    </Link>
+                  </li>
+                ))}
+              </ol>
+              <Link to={column.href} className="mt-3 inline-flex min-h-9 items-center gap-1 px-1.5 text-sm font-semibold text-primary hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+                See all ({column.total}) <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
+              </Link>
+            </div>
+          ))}
+        </div>
+       </div>
+      </section>
+
+      <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20" aria-labelledby="collections-heading">
+        <div className="mb-10 flex items-end justify-between gap-4">
           <div>
-            <p className="text-sm text-muted-foreground">Start exploring</p>
-            <h2 id="collections-heading" className="mt-1 text-2xl font-semibold tracking-tight text-foreground">Choose a collection</h2>
+            <p className="eyebrow">Start exploring</p>
+            <h2 id="collections-heading" className="mt-3 text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">Choose a collection</h2>
           </div>
         </div>
-        <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
-          {featuredCollections.map((item) => (
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {featuredCollections.map((item, index) => (
             <Link
               to={item.href}
               key={item.href}
-              className={`group flex min-h-40 flex-col rounded-xl border border-border bg-card p-5 transition-colors hover:border-primary/45 hover:bg-muted/40 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary sm:p-6 ${item.tone === 'model' ? 'border-t-2 border-t-primary' : item.tone === 'access' ? 'border-t-2 border-t-emerald-600 dark:border-t-emerald-400' : ''}`}
+              className={`group glass flex min-h-40 flex-col rounded-[1.25rem] border border-border p-5 transition-[border-color,background-color,box-shadow,transform] duration-200 hover:-translate-y-0.5 hover:border-primary/45 hover:bg-muted/40 hover:shadow-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary sm:p-6 ${index === 0 ? 'sm:col-span-2 lg:row-span-2' : index === 3 ? 'sm:col-span-2 lg:col-span-3' : ''} ${item.tone === 'model' ? 'border-t-2 border-t-primary' : item.tone === 'access' ? 'border-t-2 border-t-emerald-600 dark:border-t-emerald-400' : ''}`}
             >
-              <p className="text-xs font-medium text-muted-foreground">{item.eyebrow}</p>
+              <p className="meta-label">{item.eyebrow}</p>
               <div className="mt-3 flex items-center justify-between gap-3">
-                <h3 className="text-lg font-semibold tracking-tight text-foreground">{item.title}</h3>
+                <h3 className={index === 0 ? 'text-2xl font-semibold tracking-tight text-foreground' : 'text-lg font-semibold tracking-tight text-foreground'}>{item.title}</h3>
                 <ArrowRight className="h-4 w-4 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-0.5 group-hover:text-primary" aria-hidden="true" />
               </div>
-              <p className="mt-2 text-sm leading-6 text-muted-foreground">{item.description}</p>
-              <div className="mt-4 flex flex-wrap gap-1.5">{item.highlights.map((highlight) => <span key={highlight} className="rounded-md border border-border/80 bg-muted/50 px-2 py-1 text-[11px] font-medium text-secondary-foreground">{highlight}</span>)}</div>
+              <p className={index === 0 ? 'mt-2 max-w-md text-base leading-7 text-muted-foreground' : 'mt-2 text-sm leading-6 text-muted-foreground'}>{item.description}</p>
+              <div className="mt-4 flex flex-wrap gap-1.5">{item.highlights.map((highlight) => <span key={highlight} className="glass-chip px-2.5 py-1 text-[11px] font-medium text-secondary-foreground">{highlight}</span>)}</div>
             </Link>
           ))}
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl border-t border-border/70 px-4 py-10 sm:px-6 sm:py-12" aria-labelledby="frontier-access-heading">
-        <div className="mb-5 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+      <section className="section-band" aria-labelledby="frontier-access-heading">
+       <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20">
+        <div className="mb-10 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
           <div>
-            <p className="text-sm text-muted-foreground">Frontier access highlights · checked 3 Nov 2026</p>
-            <h2 id="frontier-access-heading" className="mt-1 text-2xl font-semibold tracking-tight text-foreground">Try frontier models without starting with a subscription</h2>
-            <p className="mt-2 max-w-2xl text-sm leading-6 text-muted-foreground">These are provider-specific routes, not unlimited model access. Check the quota, account rules and region before you begin.</p>
+            <p className="eyebrow">Frontier access highlights · checked 3 Nov 2026</p>
+            <h2 id="frontier-access-heading" className="mt-3 text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">Try frontier models without starting with a subscription</h2>
+            <p className="mt-3 max-w-2xl text-base leading-7 text-muted-foreground">These are provider-specific routes, not unlimited model access. Check the quota, account rules and region before you begin.</p>
           </div>
           <Link to="/frontier-models" className="inline-flex min-h-11 items-center gap-1 text-sm font-medium text-primary hover:underline">Compare all models <ArrowRight className="h-4 w-4" aria-hidden="true" /></Link>
         </div>
-        <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
+        <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
           {freeModelRoutes.map((route) => {
             const model = aiModels.find((item) => item.id === route.modelId);
             const provider = modelAccessProviders.find((item) => item.id === route.providerId);
             if (!model || !provider) return null;
             const accessLabel = route.accessType === 'free-weekly-shared' ? 'Free weekly · shared pool' : route.accessType === 'free-daily-allowance' ? 'Free daily allowance' : 'Free daily credits';
-            return <article key={route.id} className="flex min-h-40 flex-col rounded-xl border border-border bg-card p-4 transition-colors hover:border-primary/40">
+            return <article key={route.id} className="glass flex min-h-40 flex-col rounded-[1.25rem] border border-border p-4 transition-[border-color,box-shadow,transform] duration-200 hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-lg sm:p-5">
               <div className="flex items-start justify-between gap-2">
-                <div><p className="text-xs text-muted-foreground">{model.organization}</p><h3 className="mt-1 text-base font-semibold text-foreground">{model.name}</h3></div>
-                <span className="shrink-0 rounded-md border border-emerald-500/25 bg-emerald-500/10 px-2 py-1 text-[10px] font-semibold text-emerald-700 dark:text-emerald-300">{accessLabel}</span>
+                <div><p className="meta-label">{model.organization}</p><h3 className="mt-1 text-base font-semibold text-foreground">{model.name}</h3></div>
+                <span className="shrink-0 rounded-full border border-emerald-500/25 bg-emerald-500/10 px-2 py-1 text-[10px] font-semibold text-emerald-700 dark:text-emerald-300">{accessLabel}</span>
               </div>
               <p className="mt-3 text-sm font-medium leading-5 text-foreground">{route.allowance}</p>
               <p className="mt-2 text-xs leading-5 text-muted-foreground">{provider.name} · {route.quickNote || route.conditions}</p>
               <div className="mt-auto flex items-center justify-between gap-2 pt-4">
-                <span className="text-[11px] text-muted-foreground">Checked {route.lastVerifiedAt}</span>
+                <span className="meta-label">Checked {route.lastVerifiedAt}</span>
                 <a href={route.claimUrl} target="_blank" rel="noreferrer" className="text-xs font-semibold text-primary hover:underline">Try route ↗</a>
               </div>
             </article>;
           })}
         </div>
+       </div>
       </section>
 
-      <section className="mx-auto max-w-7xl border-t border-border/70 px-4 py-10 sm:px-6 sm:py-12" aria-labelledby="categories-heading">
-        <div className="mb-5 flex items-end justify-between gap-4">
+      <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20" aria-labelledby="categories-heading">
+        <div className="mb-10 flex items-end justify-between gap-4">
           <div>
-            <p className="text-sm text-muted-foreground">Browse by task</p>
-            <h2 id="categories-heading" className="mt-1 text-2xl font-semibold tracking-tight text-foreground">AI categories</h2>
+            <p className="eyebrow">Browse by task</p>
+            <h2 id="categories-heading" className="mt-3 text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">AI categories</h2>
           </div>
           <Link to="/ai-tools" className="inline-flex min-h-11 items-center gap-1 text-sm font-medium text-primary hover:underline">All tools <ArrowRight className="h-4 w-4" aria-hidden="true" /></Link>
         </div>
-        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-          {aiCategories.map((category) => (
-            <Link key={category.id} to={`/ai-tools?category=${encodeURIComponent(category.id)}`} className="group flex min-h-40 flex-col rounded-xl border border-border bg-card p-4 transition-colors hover:border-primary/45 hover:bg-muted/30 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
-              <div className="flex items-center justify-between gap-3">
-                <h3 className="text-sm font-semibold text-foreground">{category.name}</h3>
-                <ArrowRight className="h-4 w-4 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-0.5 group-hover:text-primary" aria-hidden="true" />
-              </div>
-              <p className="mt-2 text-xs leading-5 text-muted-foreground">{category.description}</p>
-              <div className="mt-auto flex flex-wrap gap-1.5 pt-3">
-                {category.subcategories.map((subcategory) => <span key={subcategory} className="rounded-md border border-border/80 bg-muted/50 px-2 py-1 text-[10px] font-medium text-secondary-foreground">{subcategory}</span>)}
+        <div className="glass overflow-hidden rounded-[1.25rem] border border-border">
+          {aiCategories.map((category, index) => (
+            <Link key={category.id} to={`/ai-tools?category=${encodeURIComponent(category.id)}`} className={`group flex min-h-12 items-center gap-3 px-4 py-3 transition-colors duration-200 hover:bg-muted/40 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-primary sm:px-5 ${index > 0 ? 'border-t border-border/70' : ''}`}>
+              <h3 className="shrink-0 text-sm font-semibold text-foreground transition-colors group-hover:text-primary">{category.name}</h3>
+              <p className="hidden min-w-0 flex-1 truncate text-xs text-muted-foreground md:block">{category.description}</p>
+              <span className="meta-label hidden max-w-64 truncate lg:block">{category.subcategories.map((subcategory) => subcategory).join(' · ')}</span>
+              <span className="meta-label ml-auto shrink-0 tabular-nums md:ml-0">{categoryCount(category.id)} tools</span>
+              <ArrowRight className="h-4 w-4 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-0.5 group-hover:text-primary" aria-hidden="true" />
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-7xl px-4 pb-16 sm:px-6 sm:pb-20" aria-labelledby="trending-categories-heading">
+        <div className="mb-10">
+          <p className="eyebrow">Trending categories</p>
+          <h2 id="trending-categories-heading" className="mt-3 text-3xl font-bold tracking-tight text-foreground sm:text-4xl">Explore <span className="gradient-underline">trending categories</span></h2>
+        </div>
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {categoriesByCount.slice(0, 8).map((entry, index) => (
+            <Link
+              key={entry.category.id}
+              to={`/ai-tools?category=${encodeURIComponent(entry.category.id)}`}
+              className="group surface-card block overflow-hidden rounded-[1.25rem] transition-[border-color,box-shadow,transform] duration-200 hover:-translate-y-0.5 hover:border-primary/45 hover:shadow-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+            >
+              <div className={`tile-pastel tile-pastel-${index % 6} h-24`} aria-hidden="true" />
+              <div className="p-4 sm:p-5">
+                <h3 className="text-base font-bold tracking-tight text-foreground transition-colors group-hover:text-primary">{entry.category.name}</h3>
+                <p className="mt-1.5 line-clamp-2 text-sm leading-6 text-muted-foreground">{entry.category.description}</p>
               </div>
             </Link>
           ))}
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl border-t border-border/70 px-4 py-10 sm:px-6 sm:py-12" aria-labelledby="task-categories-heading">
-        <div className="mb-5 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+      <section className="mx-auto max-w-7xl border-t border-border/70 px-4 py-16 sm:px-6 sm:py-20" aria-labelledby="task-categories-heading">
+        <div className="mb-10 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
           <div>
-            <p className="text-sm text-muted-foreground">Popular starting points</p>
-            <h2 id="task-categories-heading" className="mt-1 text-2xl font-semibold tracking-tight text-foreground">Explore AI by what you want to do</h2>
-            <p className="mt-2 max-w-2xl text-sm leading-6 text-muted-foreground">Jump straight into focused collections, from free-entry video generators to image, voice, coding and research tools.</p>
+            <p className="eyebrow">Popular starting points</p>
+            <h2 id="task-categories-heading" className="mt-3 text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">Explore AI by what you want to do</h2>
+            <p className="mt-3 max-w-2xl text-base leading-7 text-muted-foreground">Jump straight into focused collections, from free-entry video generators to image, voice, coding and research tools.</p>
           </div>
           <Link to="/ai-tools" className="inline-flex min-h-11 shrink-0 items-center gap-1 text-sm font-medium text-primary hover:underline">Browse full directory <ArrowRight className="h-4 w-4" aria-hidden="true" /></Link>
         </div>
-        <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
+        <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
           {taskCategories.map(({ title, description, href, count, countLabel, accessLabel, Icon, logos }) => (
-            <Link key={title} to={href} className="group flex min-h-52 flex-col rounded-xl border border-border bg-card p-4 transition-colors hover:border-primary/45 hover:bg-muted/30 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary sm:p-5">
+            <Link key={title} to={href} className="group glass flex min-h-52 flex-col rounded-[1.25rem] border border-border p-4 transition-[border-color,background-color,box-shadow,transform] duration-200 hover:-translate-y-0.5 hover:border-primary/45 hover:bg-muted/30 hover:shadow-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary sm:p-5">
               <div className="flex items-start justify-between gap-3">
                 <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl border border-primary/15 bg-primary/10 text-primary">
                   <Icon className="h-5 w-5" aria-hidden="true" />
@@ -241,34 +348,36 @@ export const HomePage: React.FC = () => {
                 <div className="flex items-center -space-x-1.5" aria-label={"Example tools: " + logos.map((logo) => logo.name).join(", ")}>
                   {logos.map((logo) => <BrandLogo key={logo.slug} slug={logo.slug} name={logo.name} size="sm" className="ring-2 ring-card" />)}
                 </div>
-                <span className="text-right text-[11px] font-medium text-muted-foreground"><strong className="text-foreground">{count}</strong> {countLabel}</span>
+                <span className="text-right text-[11px] font-medium tabular-nums text-muted-foreground"><strong className="text-foreground">{count}</strong> {countLabel}</span>
               </div>
             </Link>
           ))}
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl border-t border-border/70 px-4 py-10 sm:px-6 sm:py-12" aria-labelledby="discoveries-heading">
-        <div className="mb-5">
-          <p className="text-sm text-muted-foreground">Recently reviewed</p>
-          <h2 id="discoveries-heading" className="mt-1 text-2xl font-semibold tracking-tight text-foreground">Daily discoveries</h2>
+      <section className="section-band" aria-labelledby="discoveries-heading">
+       <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20">
+        <div className="mb-10">
+          <p className="eyebrow">Recently reviewed</p>
+          <h2 id="discoveries-heading" className="mt-3 text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">Daily discoveries</h2>
         </div>
         <DailyDiscoveriesSection maxItems={3} />
+       </div>
       </section>
 
-      <section className="mx-auto max-w-7xl border-t border-border/70 px-4 py-10 sm:px-6 sm:py-12" aria-labelledby="offers-heading">
-        <div className="mb-5 flex items-end justify-between gap-4">
+      <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20" aria-labelledby="offers-heading">
+        <div className="mb-10 flex items-end justify-between gap-4">
           <div>
-            <p className="text-sm text-muted-foreground">Eligibility and terms apply</p>
-            <h2 id="offers-heading" className="mt-1 text-2xl font-semibold tracking-tight text-foreground">Selected offers</h2>
+            <p className="eyebrow">Eligibility and terms apply</p>
+            <h2 id="offers-heading" className="mt-3 text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">Selected offers</h2>
           </div>
           <Link to="/offers" className="inline-flex min-h-11 items-center gap-1 text-sm font-medium text-primary hover:underline">Browse offers <ArrowRight className="h-4 w-4" aria-hidden="true" /></Link>
         </div>
-        <div className="grid gap-3 md:grid-cols-2">
+        <div className="grid gap-4 md:grid-cols-2">
           {offers.map((offer) => (
-            <Link key={offer.slug} to={`/offers/${offer.slug}`} className="group flex min-h-28 items-center justify-between gap-4 rounded-lg border border-border bg-card p-4 transition-colors hover:bg-muted/40 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+            <Link key={offer.slug} to={`/offers/${offer.slug}`} className="group glass flex min-h-28 items-center justify-between gap-4 rounded-[1.25rem] border border-border p-4 transition-[border-color,background-color,box-shadow,transform] duration-200 hover:-translate-y-0.5 hover:bg-muted/40 hover:shadow-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary sm:p-5">
               <div>
-                <p className="text-xs text-muted-foreground">{offer.provider} · {offer.region}</p>
+                <p className="meta-label">{offer.provider} · {offer.region}</p>
                 <h3 className="mt-1 font-medium text-foreground">{offer.title}</h3>
                 <p className="mt-1 text-sm leading-5 text-muted-foreground">{offer.benefitSummary}</p>
               </div>
@@ -278,9 +387,9 @@ export const HomePage: React.FC = () => {
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl border-t border-border/70 px-4 py-10 sm:px-6 sm:py-12" aria-labelledby="resources-heading">
-        <p className="text-sm text-muted-foreground">More ways to explore</p>
-        <h2 id="resources-heading" className="mb-5 mt-1 text-2xl font-semibold tracking-tight text-foreground">Resources and directories</h2>
+      <section className="mx-auto max-w-7xl border-t border-border/70 px-4 py-16 sm:px-6 sm:py-20" aria-labelledby="resources-heading">
+        <p className="eyebrow">More ways to explore</p>
+        <h2 id="resources-heading" className="mb-10 mt-3 text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">Resources and directories</h2>
         <div className="grid gap-x-5 sm:grid-cols-2 lg:grid-cols-4">
           {resources.map(([label, href, Icon]) => (
             <Link key={href} to={href} className="group flex min-h-12 items-center gap-3 border-b border-border/70 px-2 text-sm font-medium text-secondary-foreground transition-colors hover:text-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-primary">
