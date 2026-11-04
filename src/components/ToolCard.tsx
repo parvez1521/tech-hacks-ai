@@ -25,11 +25,11 @@ export const ToolCard: React.FC<ToolCardProps> = ({ tool, headingLevel = 3 }) =>
   return (
     <div
       onMouseMove={handleMouseMove}
-      className="group surface-card interactive-card relative flex flex-col justify-between h-full p-4 rounded-xl min-h-[220px] focus-within:ring-2 focus-within:ring-primary/60 focus-within:border-primary/60"
+      className="group surface-card interactive-card relative flex flex-col justify-between h-full p-4 rounded-[1.25rem] min-h-[220px] focus-within:ring-2 focus-within:ring-primary/60 focus-within:border-primary/60"
     >
       {/* Interactive Radial Spotlight Inner Glow */}
       <div
-        className="pointer-events-none absolute -inset-px rounded-xl opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-focus-within:opacity-100 -z-0"
+        className="pointer-events-none absolute -inset-px rounded-[1.25rem] opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-focus-within:opacity-100 -z-0"
         style={{
           background:
             'radial-gradient(280px circle at var(--card-x, 50%) var(--card-y, 50%), rgb(var(--color-primary) / 0.09), transparent 80%)',
@@ -40,7 +40,7 @@ export const ToolCard: React.FC<ToolCardProps> = ({ tool, headingLevel = 3 }) =>
       {/* Primary Card Stretch Link */}
       <Link
         to={`/tools/${tool.slug}`}
-        className="absolute inset-0 z-10 rounded-xl focus:outline-none"
+        className="absolute inset-0 z-10 rounded-[1.25rem] focus:outline-none"
         aria-label={`View details for ${tool.name}`}
       >
         <span className="sr-only">View {tool.name}</span>
@@ -57,7 +57,7 @@ export const ToolCard: React.FC<ToolCardProps> = ({ tool, headingLevel = 3 }) =>
               size="sm"
               iconBgColor={tool.iconBgColor}
               iconLetter={tool.iconLetter}
-              className="rounded-md ring-1 ring-border/50"
+              className="rounded-lg ring-1 ring-border/50"
             />
             <Heading className="font-bold text-foreground text-base tracking-tight truncate group-hover:text-primary transition-colors duration-200">
               {tool.name}
@@ -110,7 +110,7 @@ export const ToolCard: React.FC<ToolCardProps> = ({ tool, headingLevel = 3 }) =>
 
           <div className="flex items-center gap-1">
             <FileCode className="w-3.5 h-3.5 opacity-60" />
-            <span className="font-mono text-[11px] px-1.5 py-0.5 rounded bg-muted text-secondary-foreground border border-border">
+            <span className="font-mono text-[11px] px-2 py-0.5 rounded-full bg-muted text-secondary-foreground border border-border">
               {tool.license}
             </span>
           </div>

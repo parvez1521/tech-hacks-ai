@@ -64,7 +64,7 @@ export const AlternativesPage: React.FC = () => {
         </p>
 
         {/* Search & Filter Controls Bar */}
-        <div className="p-3.5 sm:p-4 rounded-xl bg-card border border-border shadow-sm flex flex-col sm:flex-row gap-3 items-stretch sm:items-center justify-between mb-6">
+        <div className="p-3.5 sm:p-4 glass rounded-[1.25rem] border border-border flex flex-col sm:flex-row gap-3 items-stretch sm:items-center justify-between mb-6">
           {/* Quick Search */}
           <div className="relative flex-1 max-w-md">
             <Search className="w-4 h-4 text-muted-foreground absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />

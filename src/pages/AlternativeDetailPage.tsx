@@ -198,7 +198,7 @@ export const AlternativeDetailPage: React.FC = () => {
         </div>
 
         {/* Right Sticky Proprietary Profile Card */}
-        <div className="p-6 rounded-xl border border-border bg-card flex flex-col justify-between">
+        <div className="p-6 glass rounded-[1.25rem] border border-border flex flex-col justify-between">
           <div>
             <div className="flex items-center justify-between mb-3">
               <div className="flex items-center gap-3">
@@ -247,7 +247,7 @@ export const AlternativeDetailPage: React.FC = () => {
       </div>
 
       {/* Migration Analysis & Honest Cost Architecture */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 p-6 rounded-xl border border-border bg-card text-xs mb-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 p-6 glass rounded-[1.25rem] border border-border text-xs mb-8">
         <div>
           <span className="font-semibold text-foreground uppercase tracking-wider block text-[11px] mb-3">
             Why Teams Look for {proprietary.name} Alternatives
@@ -298,7 +298,7 @@ export const AlternativeDetailPage: React.FC = () => {
 
       {/* Local Search and Filter Controls (only if this app has mapped replacements) */}
       {(allReplacements.length > 0 || allAiRecommendations.length > 0) && (
-        <div className="mb-6 p-4 rounded-xl bg-card border border-border shadow-sm flex flex-col md:flex-row gap-3 items-stretch md:items-center justify-between">
+        <div className="mb-6 p-4 glass rounded-[1.25rem] border border-border flex flex-col md:flex-row gap-3 items-stretch md:items-center justify-between">
           {/* Search replacements */}
           <div className="relative flex-1 max-w-sm">
             <Search className="w-4 h-4 text-secondary-foreground absolute left-3 top-1/2 -translate-y-1/2" />
@@ -374,7 +374,7 @@ export const AlternativeDetailPage: React.FC = () => {
 
       {/* Grid or Empty States */}
       {allReplacements.length === 0 && allAiRecommendations.length === 0 ? (
-        <div className="p-8 rounded-xl border border-border bg-card text-center max-w-xl mx-auto my-8">
+        <div className="p-8 glass rounded-[1.25rem] border border-border text-center max-w-xl mx-auto my-8">
           <Replace className="w-8 h-8 text-muted-foreground mx-auto mb-3" />
           <h3 className="text-base font-bold text-slate-900 mb-2">
             No Alternatives Mapped Yet

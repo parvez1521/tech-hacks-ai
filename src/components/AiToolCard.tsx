@@ -27,7 +27,7 @@ export const AiToolCard: React.FC<AiToolCardProps> = ({ tool }) => {
   const getPricingBadge = () => {
     if (tool.videoDiscoverySections?.includes('open-weights')) {
       return (
-        <span className="px-2 py-0.5 rounded text-[11px] font-semibold bg-sky-50 text-sky-800 border border-sky-200 dark:bg-sky-500/10 dark:text-sky-300 dark:border-sky-500/20">
+        <span className="px-2 py-0.5 rounded-full text-[11px] font-semibold bg-sky-50 text-sky-800 border border-sky-200 dark:bg-sky-500/10 dark:text-sky-300 dark:border-sky-500/20">
           Open Weights
         </span>
       );
@@ -35,7 +35,7 @@ export const AiToolCard: React.FC<AiToolCardProps> = ({ tool }) => {
 
     if (tool.freeAccessType === 'open-source-local' || tool.isSelfHostable) {
       return (
-        <span className="px-2 py-0.5 rounded text-[11px] font-semibold bg-emerald-50 text-emerald-800 border border-emerald-200 dark:bg-emerald-500/10 dark:text-emerald-300 dark:border-emerald-500/20">
+        <span className="px-2 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-50 text-emerald-800 border border-emerald-200 dark:bg-emerald-500/10 dark:text-emerald-300 dark:border-emerald-500/20">
           Open Source
         </span>
       );
@@ -44,32 +44,32 @@ export const AiToolCard: React.FC<AiToolCardProps> = ({ tool }) => {
     switch (tool.pricingType) {
       case 'free':
         return (
-          <span className="px-2 py-0.5 rounded text-[11px] font-semibold bg-emerald-50 text-emerald-800 border border-emerald-200 dark:bg-emerald-500/10 dark:text-emerald-300 dark:border-emerald-500/20">
+          <span className="px-2 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-50 text-emerald-800 border border-emerald-200 dark:bg-emerald-500/10 dark:text-emerald-300 dark:border-emerald-500/20">
             Free
           </span>
         );
       case 'freemium':
         return (
-          <span className="px-2 py-0.5 rounded text-[11px] font-semibold bg-blue-50 text-blue-800 border border-blue-200 dark:bg-blue-500/10 dark:text-blue-300 dark:border-blue-500/20">
+          <span className="px-2 py-0.5 rounded-full text-[11px] font-semibold bg-blue-50 text-blue-800 border border-blue-200 dark:bg-blue-500/10 dark:text-blue-300 dark:border-blue-500/20">
             Freemium
           </span>
         );
       case 'free-credits':
         return (
-          <span className="px-2 py-0.5 rounded text-[11px] font-semibold bg-cyan-50 text-cyan-900 border border-cyan-200 dark:bg-cyan-500/10 dark:text-cyan-300 dark:border-cyan-500/20">
+          <span className="px-2 py-0.5 rounded-full text-[11px] font-semibold bg-cyan-50 text-cyan-900 border border-cyan-200 dark:bg-cyan-500/10 dark:text-cyan-300 dark:border-cyan-500/20">
             Credits
           </span>
         );
       case 'free-trial':
         return (
-          <span className="px-2 py-0.5 rounded text-[11px] font-semibold bg-slate-100 text-slate-700 border border-slate-200 dark:bg-slate-500/10 dark:text-slate-300 dark:border-slate-500/20">
+          <span className="px-2 py-0.5 rounded-full text-[11px] font-semibold bg-slate-100 text-slate-700 border border-slate-200 dark:bg-slate-500/10 dark:text-slate-300 dark:border-slate-500/20">
             Free Trial
           </span>
         );
       case 'paid':
       default:
         return (
-          <span className="px-2 py-0.5 rounded text-[11px] font-semibold bg-amber-50 text-amber-800 border border-amber-200 dark:bg-amber-500/10 dark:text-amber-300 dark:border-amber-500/20">
+          <span className="px-2 py-0.5 rounded-full text-[11px] font-semibold bg-amber-50 text-amber-800 border border-amber-200 dark:bg-amber-500/10 dark:text-amber-300 dark:border-amber-500/20">
             Paid
           </span>
         );
@@ -78,7 +78,7 @@ export const AiToolCard: React.FC<AiToolCardProps> = ({ tool }) => {
 
   return (
     <div
-      className="group relative flex flex-col justify-between p-4 rounded-xl border border-border bg-card interactive-card hover:border-primary/50 min-h-[250px] focus-within:ring-2 focus-within:ring-primary/50 focus-within:border-primary/60"
+      className="group relative flex flex-col justify-between p-4 rounded-[1.25rem] border border-border interactive-card hover:border-primary/50 min-h-[250px] focus-within:ring-2 focus-within:ring-primary/50 focus-within:border-primary/60"
     >
       <div className="relative z-10">
         {/* Top Header Row */}
@@ -90,7 +90,7 @@ export const AiToolCard: React.FC<AiToolCardProps> = ({ tool }) => {
               size="md"
               iconBgColor={tool.iconBgColor}
               iconLetter={tool.iconLetter}
-              className="rounded-md ring-1 ring-border/50"
+              className="rounded-lg ring-1 ring-border/50"
             />
             <div className="min-w-0">
               <div className="flex items-center gap-1.5">
@@ -127,7 +127,7 @@ export const AiToolCard: React.FC<AiToolCardProps> = ({ tool }) => {
         </p>
 
         {tool.accessLabel && (
-          <p className="mb-3 rounded-md border border-primary/15 bg-primary/5 px-2.5 py-1.5 text-[11px] font-medium leading-snug text-secondary-foreground">
+          <p className="mb-3 rounded-xl border border-primary/15 bg-primary/5 px-2.5 py-1.5 text-[11px] font-medium leading-snug text-secondary-foreground">
             {tool.accessLabel}
           </p>
         )}
@@ -137,7 +137,7 @@ export const AiToolCard: React.FC<AiToolCardProps> = ({ tool }) => {
           {tool.features.slice(0, 3).map((f) => (
             <span
               key={f}
-              className="px-2 py-0.5 rounded text-[11px] font-medium bg-muted/70 text-secondary-foreground border border-border/50"
+              className="px-2 py-0.5 rounded-full text-[11px] font-medium bg-muted/70 text-secondary-foreground border border-border/50"
             >
               {f}
             </span>
@@ -166,16 +166,16 @@ export const AiToolCard: React.FC<AiToolCardProps> = ({ tool }) => {
               href={tool.affiliateUrl || tool.websiteUrl}
               target="_blank"
               rel={tool.affiliateUrl ? 'noopener noreferrer sponsored nofollow' : 'noopener noreferrer'}
-              className="rounded-md border border-border px-2 py-1 text-[11px] text-secondary-foreground hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+              className="rounded-full border border-border px-2.5 py-1 text-[11px] text-secondary-foreground hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
               aria-label={`Open ${tool.name} ${tool.affiliateUrl ? 'affiliate link' : tool.websiteUrl.includes('github.com') ? 'official repository' : 'official website'}`}
             >
               <span>{tool.affiliateUrl ? `Try ${tool.name}` : tool.websiteUrl.includes('github.com') ? 'Source' : 'Website'}</span>
             </a>
             {tool.affiliateUrl && <AffiliateDisclosure />}
           </div>
-          {tool.openSourceRepoUrl && tool.openSourceRepoUrl !== tool.websiteUrl && <a href={tool.openSourceRepoUrl} target="_blank" rel="noopener noreferrer" className="rounded-md border border-border px-2 py-1 text-[11px] text-secondary-foreground hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary" aria-label={`${tool.name} source repository`}>Source</a>}
-          {tool.modelWeightsUrl && <a href={tool.modelWeightsUrl} target="_blank" rel="noopener noreferrer" className="rounded-md border border-border px-2 py-1 text-[11px] text-secondary-foreground hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary" aria-label={`${tool.name} model weights`}>Weights</a>}
-          {tool.relatedDemoUrl && <a href={tool.relatedDemoUrl} target="_blank" rel="noopener noreferrer" className="rounded-md border border-border px-2 py-1 text-[11px] text-secondary-foreground hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary" aria-label={`Open ${tool.relatedDemoName || `${tool.name} related browser demo`} in a new tab`}>Demo</a>}
+          {tool.openSourceRepoUrl && tool.openSourceRepoUrl !== tool.websiteUrl && <a href={tool.openSourceRepoUrl} target="_blank" rel="noopener noreferrer" className="rounded-full border border-border px-2.5 py-1 text-[11px] text-secondary-foreground hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary" aria-label={`${tool.name} source repository`}>Source</a>}
+          {tool.modelWeightsUrl && <a href={tool.modelWeightsUrl} target="_blank" rel="noopener noreferrer" className="rounded-full border border-border px-2.5 py-1 text-[11px] text-secondary-foreground hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary" aria-label={`${tool.name} model weights`}>Weights</a>}
+          {tool.relatedDemoUrl && <a href={tool.relatedDemoUrl} target="_blank" rel="noopener noreferrer" className="rounded-full border border-border px-2.5 py-1 text-[11px] text-secondary-foreground hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary" aria-label={`Open ${tool.relatedDemoName || `${tool.name} related browser demo`} in a new tab`}>Demo</a>}
         </div>
       </div>
     </div>

@@ -43,6 +43,19 @@
     --glow-spotlight: rgba(59, 130, 246, 0.16);
     --dot-color: rgba(148, 163, 184, 0.1);
     --grid-color: rgba(148, 163, 184, 0.055);
+    /* Liquid Glass (dark): smoky translucent fills over the midnight base. */
+    --glass-fill: rgb(255 255 255 / 0.055);
+    --glass-fill-hover: rgb(255 255 255 / 0.09);
+    --glass-fill-strong: rgb(var(--color-card) / 0.68);
+    --glass-border: rgb(255 255 255 / 0.13);
+    --glass-highlight: rgb(255 255 255 / 0.22);
+    --glass-shadow: 0 16px 40px -20px rgb(2 8 23 / 0.55);
+    --glass-shadow-lg: 0 32px 64px -28px rgb(2 8 23 / 0.62);
+    /* Ambient colour field fixed behind every page so glass has colour to refract. */
+    --page-wash:
+      radial-gradient(56rem 30rem at 88% -8%, rgb(var(--brand-cyan) / 0.055), transparent 62%),
+      radial-gradient(64rem 34rem at 6% -10%, rgb(var(--color-primary) / 0.06), transparent 62%),
+      radial-gradient(52rem 30rem at 50% 112%, rgb(var(--brand-violet) / 0.04), transparent 65%);
   }
 
   html.light,
@@ -67,6 +80,18 @@
     --glow-spotlight: rgba(37, 99, 235, 0.04);
     --dot-color: rgba(15, 23, 42, 0.08);
     --grid-color: rgba(15, 23, 42, 0.04);
+    /* Liquid Glass (light): bright translucent white fills, soft gray edge. */
+    --glass-fill: rgb(255 255 255 / 0.55);
+    --glass-fill-hover: rgb(255 255 255 / 0.72);
+    --glass-fill-strong: rgb(var(--color-card) / 0.78);
+    --glass-border: rgb(15 23 42 / 0.09);
+    --glass-highlight: rgb(255 255 255 / 0.85);
+    --glass-shadow: 0 16px 40px -22px rgb(15 23 42 / 0.2);
+    --glass-shadow-lg: 0 32px 64px -28px rgb(15 23 42 / 0.22);
+    --page-wash:
+      radial-gradient(56rem 30rem at 88% -8%, rgb(var(--brand-cyan) / 0.05), transparent 62%),
+      radial-gradient(64rem 34rem at 6% -10%, rgb(var(--color-primary) / 0.045), transparent 62%),
+      radial-gradient(52rem 30rem at 50% 112%, rgb(var(--brand-violet) / 0.03), transparent 65%);
   }
 
   html {
@@ -75,6 +100,11 @@
 
   body {
     background-color: rgb(var(--color-bg));
+    /* Fixed ambient wash: the colour field the glass surfaces refract.
+       Themes where background-attachment: fixed degrades (mobile Safari)
+       simply scroll the wash with the page — still tasteful, never broken. */
+    background-image: var(--page-wash);
+    background-attachment: fixed;
     color: rgb(var(--color-fg));
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     overflow-x: clip;
@@ -230,41 +260,107 @@
     text-wrap: balance;
   }
 
-  /* Direction A: resting state is border-led (Linear-style) — the 1px token
-     border plus inset top highlight separate surface levels; shadows recede
-     to a single soft contact layer and return only on hover. */
+  /* Liquid Glass material system (see DESIGN.md). The glass edge is an
+     inset box-shadow ring rather than the border property, so a component's
+     own border utilities (tone top borders, hover border colours) keep
+     working on glass surfaces. Real backdrop blur is reserved for chrome
+     and floating panels (.glass-blur / .glass-strong / header / dialogs);
+     grid cards use the fill-only tiers for scroll performance. */
+  .glass {
+    background: var(--glass-fill);
+    box-shadow:
+      inset 0 0 0 1px var(--glass-border),
+      inset 0 1px 0 var(--glass-highlight),
+      inset 0 -1px 0 rgb(255 255 255 / 0.04),
+      var(--glass-shadow);
+  }
+
+  .glass-blur {
+    background: var(--glass-fill);
+    box-shadow:
+      inset 0 0 0 1px var(--glass-border),
+      inset 0 1px 0 var(--glass-highlight),
+      inset 0 -1px 0 rgb(255 255 255 / 0.04),
+      var(--glass-shadow);
+    -webkit-backdrop-filter: blur(20px) saturate(160%);
+    backdrop-filter: blur(20px) saturate(160%);
+  }
+
+  .glass-strong {
+    background: var(--glass-fill-strong);
+    box-shadow:
+      inset 0 0 0 1px var(--glass-border),
+      inset 0 1px 0 var(--glass-highlight),
+      inset 0 -1px 0 rgb(255 255 255 / 0.04),
+      var(--glass-shadow-lg);
+    -webkit-backdrop-filter: blur(22px) saturate(160%);
+    backdrop-filter: blur(22px) saturate(160%);
+  }
+
+  /* Capsule chip material: translucent fill + specular top edge. */
+  .glass-chip {
+    background: var(--glass-fill);
+    border: 1px solid var(--glass-border);
+    border-radius: 999px;
+    box-shadow: inset 0 1px 0 var(--glass-highlight);
+  }
+
+  /* Translucent field material for inputs sitting on glass panels. */
+  .glass-field {
+    background: rgb(var(--color-card) / 0.5);
+    -webkit-backdrop-filter: blur(14px) saturate(150%);
+    backdrop-filter: blur(14px) saturate(150%);
+  }
+
+  /* Card material is now glass: translucent fill, specular top edge, and a
+     soft floating shadow (glass floats — this supersedes Direction A's
+     flat border-led resting state; the structure stays Direction A). The
+     real border stays on .surface-card because the shared cards rely on
+     this class for their edge. */
   .surface-card {
-    background-color: rgb(var(--color-card) / 0.92);
-    border: 1px solid rgb(var(--color-border) / 0.92);
-    box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.04), 0 1px 2px rgb(2 8 23 / 0.05);
+    background: var(--glass-fill);
+    border: 1px solid var(--glass-border);
+    box-shadow:
+      inset 0 1px 0 var(--glass-highlight),
+      inset 0 -1px 0 rgb(255 255 255 / 0.04),
+      var(--glass-shadow);
   }
 
   .interactive-card {
-    box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.04), 0 1px 2px rgb(2 8 23 / 0.05);
+    background: var(--glass-fill);
+    box-shadow:
+      inset 0 1px 0 var(--glass-highlight),
+      inset 0 -1px 0 rgb(255 255 255 / 0.04),
+      var(--glass-shadow);
     transition: border-color 160ms ease, background-color 160ms ease, box-shadow 200ms ease, transform 160ms ease;
   }
 
   .interactive-card:hover,
   .interactive-card:focus-within {
-    background-color: rgb(var(--color-card));
-    border-color: rgb(var(--color-primary) / 0.42);
-    box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.05), 0 10px 24px -12px rgb(var(--color-primary) / 0.28), 0 4px 10px rgb(2 8 23 / 0.07);
+    background: var(--glass-fill-hover);
+    border-color: rgb(var(--color-primary) / 0.45);
+    box-shadow:
+      inset 0 1px 0 var(--glass-highlight),
+      0 18px 36px -16px rgb(var(--color-primary) / 0.32),
+      var(--glass-shadow);
     transform: translateY(-2px);
   }
 
-  /* Premium glass site header: translucent token surface with blur; the
-     scrolled modifier deepens the surface and adds elevation once the page
-     moves. Both themes resolve through the semantic tokens. */
+  /* Liquid Glass site header: a floating glass bar — translucent fill and
+     real backdrop blur are always on (not only on scroll), with a specular
+     bottom edge; the scrolled modifier deepens the fill and adds a soft
+     tinted elevation. Both themes resolve through the semantic tokens. */
   .site-header {
-    background-color: rgb(var(--color-bg) / 0.82);
-    -webkit-backdrop-filter: blur(14px) saturate(1.5);
-    backdrop-filter: blur(14px) saturate(1.5);
+    background-color: rgb(var(--color-bg) / 0.58);
+    -webkit-backdrop-filter: blur(20px) saturate(160%);
+    backdrop-filter: blur(20px) saturate(160%);
+    box-shadow: inset 0 -1px 0 rgb(255 255 255 / 0.05);
     transition: background-color 200ms ease, box-shadow 200ms ease, border-color 200ms ease;
   }
 
   .site-header--scrolled {
-    background-color: rgb(var(--color-bg) / 0.94);
-    box-shadow: 0 10px 30px -18px rgb(2 8 23 / 0.45);
+    background-color: rgb(var(--color-bg) / 0.78);
+    box-shadow: inset 0 -1px 0 rgb(255 255 255 / 0.05), 0 16px 36px -20px rgb(2 8 23 / 0.5);
   }
 
   /* Hero aurora: a real field of brand colour behind the homepage hero —
@@ -274,10 +370,10 @@
     position: relative;
     isolation: isolate;
     background:
-      radial-gradient(48rem 26rem at 6% -10%, rgb(var(--brand-cyan) / 0.17), transparent 65%),
-      radial-gradient(52rem 28rem at 94% -12%, rgb(var(--brand-violet) / 0.16), transparent 65%),
-      radial-gradient(44rem 24rem at 52% -6%, rgb(var(--color-primary) / 0.13), transparent 70%),
-      radial-gradient(58rem 26rem at 50% 118%, rgb(var(--color-primary) / 0.07), transparent 70%);
+      radial-gradient(48rem 26rem at 6% -10%, rgb(var(--brand-cyan) / 0.21), transparent 65%),
+      radial-gradient(52rem 28rem at 94% -12%, rgb(var(--brand-violet) / 0.19), transparent 65%),
+      radial-gradient(44rem 24rem at 52% -6%, rgb(var(--color-primary) / 0.16), transparent 70%),
+      radial-gradient(58rem 26rem at 50% 118%, rgb(var(--color-primary) / 0.09), transparent 70%);
   }
 
   /* Fine grid field layered over the hero aurora, faded at the edges with a
@@ -314,8 +410,12 @@
   .btn-primary {
     background: var(--brand-route-gradient);
     color: rgb(var(--brand-midnight));
+    /* Liquid Glass shape: a glossy capsule — bright specular top edge,
+       shaded bottom edge, soft coloured float shadow. */
+    border-radius: 999px;
     box-shadow:
-      inset 0 1px 0 rgb(255 255 255 / 0.28),
+      inset 0 1px 0 rgb(255 255 255 / 0.38),
+      inset 0 -1px 0 rgb(2 8 23 / 0.15),
       0 14px 28px -12px rgb(var(--color-primary) / 0.55),
       0 4px 10px -4px rgb(2 8 23 / 0.25);
     transition: transform 160ms ease, box-shadow 200ms ease, filter 160ms ease;
@@ -324,7 +424,8 @@
     filter: brightness(1.07);
     transform: translateY(-1px);
     box-shadow:
-      inset 0 1px 0 rgb(255 255 255 / 0.28),
+      inset 0 1px 0 rgb(255 255 255 / 0.38),
+      inset 0 -1px 0 rgb(2 8 23 / 0.15),
       0 18px 34px -12px rgb(var(--color-primary) / 0.6),
       0 6px 14px -4px rgb(2 8 23 / 0.28);
   }
@@ -332,12 +433,13 @@
     transform: scale(0.96);
   }
 
-  /* Elevated glass frame for the hero search: a 1px gradient hairline around
-     the existing search control (concentric radius: panel 1.125rem, input
-     1rem), layered shadow, translucent card surface with blur. The search
+  /* Liquid Glass frame for the hero search: a 1px gradient hairline around
+     the existing search control (concentric radius: panel 1.25rem, input
+     1.125rem), layered shadow, and a full glass field inside — strong
+     translucent fill with real blur over the hero aurora. The search
      component itself is untouched; only its hero wrapper carries this. */
   .search-panel {
-    border-radius: 0.875rem;
+    border-radius: 1.25rem;
     padding: 1px;
     background: linear-gradient(120deg, rgb(var(--brand-cyan) / 0.55), rgb(var(--color-primary) / 0.32) 48%, rgb(var(--brand-violet) / 0.55));
     box-shadow:
@@ -346,10 +448,10 @@
   }
   .search-panel input {
     border-color: transparent;
-    border-radius: 0.75rem;
-    background-color: rgb(var(--color-card) / 0.88);
-    -webkit-backdrop-filter: blur(10px);
-    backdrop-filter: blur(10px);
+    border-radius: 1.125rem;
+    background: var(--glass-fill-strong);
+    -webkit-backdrop-filter: blur(18px) saturate(160%);
+    backdrop-filter: blur(18px) saturate(160%);
   }
 
   /* Alternate chapter field for homepage sections: a subtly different token
@@ -552,9 +654,10 @@
     gap: 0.4rem;
     min-height: 2.75rem;
     padding: 0.5rem 0.75rem;
-    border: 1px solid rgb(var(--color-border) / 0.9);
-    border-radius: 0.65rem;
-    background: rgb(var(--color-card) / 0.72);
+    border: 1px solid var(--glass-border);
+    border-radius: 999px;
+    background: var(--glass-fill);
+    box-shadow: inset 0 1px 0 var(--glass-highlight);
     color: rgb(var(--color-fg));
     font-size: 0.875rem;
     font-weight: 500;
@@ -1052,10 +1155,14 @@
   width: 100%;
   max-width: 38rem;
   margin-inline: auto;
-  border: 1px solid rgb(var(--color-border) / 0.78);
-  border-radius: 1rem;
-  background: rgb(var(--color-card));
-  box-shadow: 0 28px 56px -20px rgb(2 8 23 / 0.28), 0 12px 28px -12px rgb(var(--color-primary) / 0.18), inset 0 1px 0 rgb(255 255 255 / 0.2);
+  border: 1px solid var(--glass-border);
+  border-radius: 1.25rem;
+  /* The hero visual is a single panel floating over the aurora, so it
+     earns real backdrop blur. */
+  background: var(--glass-fill-strong);
+  -webkit-backdrop-filter: blur(18px) saturate(160%);
+  backdrop-filter: blur(18px) saturate(160%);
+  box-shadow: 0 28px 56px -20px rgb(2 8 23 / 0.28), 0 12px 28px -12px rgb(var(--color-primary) / 0.18), inset 0 1px 0 var(--glass-highlight);
 }
 .discovery-interface__chrome {
   display: flex;
@@ -1092,9 +1199,9 @@
   margin-top: 1.05rem;
   padding: 0.55rem 0.75rem;
   border: 1px solid rgb(var(--color-primary) / 0.33);
-  border-radius: 0.65rem;
+  border-radius: 999px;
   color: rgb(var(--color-muted-fg));
-  background: rgb(var(--color-bg) / 0.78);
+  background: rgb(var(--color-card) / 0.45);
   box-shadow: 0 0 0 3px rgb(var(--color-primary) / 0.045);
   font-size: 0.75rem;
 }
@@ -1164,13 +1271,13 @@
   flex-direction: column;
   padding: 1.2rem;
   overflow: hidden;
-  border: 1px solid rgb(var(--color-border) / 0.62);
-  border-radius: 0.75rem;
-  background: linear-gradient(145deg, rgb(var(--color-card)), rgb(var(--color-card) / 0.82));
-  box-shadow: 0 2px 8px rgb(2 8 23 / 0.035);
+  border: 1px solid var(--glass-border);
+  border-radius: 1.25rem;
+  background: var(--glass-fill);
+  box-shadow: inset 0 1px 0 var(--glass-highlight), inset 0 -1px 0 rgb(255 255 255 / 0.04), var(--glass-shadow);
   transition: border-color 180ms ease, background-color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
 }
-.discovery-card:hover { transform: translateY(-2px); border-color: rgb(var(--color-primary) / 0.36); box-shadow: 0 12px 28px rgb(2 8 23 / 0.09); }
+.discovery-card:hover { transform: translateY(-2px); border-color: rgb(var(--color-primary) / 0.36); box-shadow: inset 0 1px 0 var(--glass-highlight), 0 18px 36px -16px rgb(var(--color-primary) / 0.3), var(--glass-shadow); }
 .discovery-card:focus-within { outline: 2px solid rgb(var(--color-primary) / 0.82); outline-offset: 3px; }
 .discovery-card__meta { display: flex; min-height: 1.2rem; align-items: center; justify-content: space-between; gap: 0.5rem; }
 .discovery-card__category { color: rgb(var(--color-muted-fg)); font-size: 0.65rem; font-weight: 560; }
@@ -1185,7 +1292,7 @@
 .discovery-card__description { margin-top: 0.82rem; color: rgb(var(--color-secondary-fg)); font-size: 0.78rem; line-height: 1.62; }
 .discovery-card__footer { display: flex; align-items: center; justify-content: space-between; gap: 0.6rem; margin-top: auto; padding-top: 1rem; }
 .discovery-card__date { color: rgb(var(--color-muted-fg)); font-size: 0.65rem; }
-.discovery-card__link { display: inline-flex; min-height: 2.35rem; align-items: center; gap: 0.34rem; padding: 0.45rem 0.65rem; border: 1px solid rgb(var(--color-border) / 0.82); border-radius: 0.58rem; color: rgb(var(--color-fg)); background: rgb(var(--color-bg) / 0.4); font-size: 0.7rem; font-weight: 650; white-space: nowrap; transition: color 160ms ease, border-color 160ms ease, background-color 160ms ease; }
+.discovery-card__link { display: inline-flex; min-height: 2.35rem; align-items: center; gap: 0.34rem; padding: 0.45rem 0.65rem; border: 1px solid var(--glass-border); border-radius: 999px; color: rgb(var(--color-fg)); background: var(--glass-fill); box-shadow: inset 0 1px 0 var(--glass-highlight); font-size: 0.7rem; font-weight: 650; white-space: nowrap; transition: color 160ms ease, border-color 160ms ease, background-color 160ms ease; }
 .discovery-card__link:hover { border-color: rgb(var(--color-primary) / 0.38); color: rgb(var(--color-primary)); background: rgb(var(--color-primary) / 0.06); }
 .discovery-card__link:focus-visible { outline: 2px solid rgb(var(--color-primary)); outline-offset: 3px; }
 .discovery-card__unavailable { color: rgb(var(--color-muted-fg)); font-size: 0.7rem; }
@@ -1213,14 +1320,17 @@
   border-radius: 50%;
   color: rgb(var(--color-primary-fg));
   background: rgb(var(--color-primary));
-  box-shadow: 0 8px 24px rgb(2 8 23 / 0.23);
+  /* Glossy floating orb: specular top edge + primary-tinted float shadow. */
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.35), inset 0 -1px 0 rgb(2 8 23 / 0.15), 0 14px 30px -10px rgb(var(--color-primary) / 0.55);
   transition: background-color 160ms ease, transform 160ms ease;
 }
 .chat-launcher:hover { transform: translateY(-2px); background: rgb(var(--color-primary-hover)); }
 .chat-launcher:focus-visible { outline: 3px solid rgb(var(--color-primary) / 0.46); outline-offset: 3px; }
 .chat-launcher__count { position: absolute; top: -0.2rem; right: -0.2rem; display: grid; min-width: 1.15rem; height: 1.15rem; place-items: center; padding-inline: 0.2rem; border: 2px solid rgb(var(--color-card)); border-radius: 999px; color: rgb(var(--color-primary-fg)); background: #d44336; font-size: 0.55rem; font-weight: 750; }
-.chat-overlay { position: fixed; z-index: 60; inset: 0; display: flex; align-items: flex-end; justify-content: center; padding: 0.65rem; background: rgb(2 8 23 / 0.38); }
-.chat-dialog { display: flex; width: min(28rem, 100%); height: min(42rem, calc(100dvh - 1.3rem - env(safe-area-inset-top) - env(safe-area-inset-bottom))); max-height: 100%; flex-direction: column; overflow: hidden; border: 1px solid rgb(var(--color-border)); border-radius: 1rem; background: rgb(var(--color-card)); box-shadow: 0 24px 70px rgb(2 8 23 / 0.32); }
+.chat-overlay { position: fixed; z-index: 60; inset: 0; display: flex; align-items: flex-end; justify-content: center; padding: 0.65rem; background: rgb(2 8 23 / 0.38); -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px); }
+/* Liquid Glass strong panel: translucent strong fill + real blur + specular
+   edges + a large soft tinted shadow, floating over the dimmed page. */
+.chat-dialog { display: flex; width: min(28rem, 100%); height: min(42rem, calc(100dvh - 1.3rem - env(safe-area-inset-top) - env(safe-area-inset-bottom))); max-height: 100%; flex-direction: column; overflow: hidden; border: 1px solid var(--glass-border); border-radius: 1.5rem; background: var(--glass-fill-strong); -webkit-backdrop-filter: blur(22px) saturate(160%); backdrop-filter: blur(22px) saturate(160%); box-shadow: inset 0 1px 0 var(--glass-highlight), var(--glass-shadow-lg); }
 .chat-shortcuts { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.35rem 0.75rem; }
 .chat-shortcuts__context { display: flex; min-width: 0; flex: 1 1 11rem; align-items: center; gap: 0.375rem; }
 .chat-shortcuts__context > span { min-width: 0; }
@@ -1251,7 +1361,7 @@
   .discovery-interface__footer { align-items: flex-start; flex-direction: column; }
   .discovery-card { min-height: 16.75rem; }
   .chat-overlay { padding: max(0.45rem, env(safe-area-inset-top)) 0.45rem max(0.45rem, env(safe-area-inset-bottom)); }
-  .chat-dialog { height: calc(100dvh - env(safe-area-inset-top) - env(safe-area-inset-bottom) - 0.9rem); border-radius: 0.85rem; }
+  .chat-dialog { height: calc(100dvh - env(safe-area-inset-top) - env(safe-area-inset-bottom) - 0.9rem); border-radius: 1.25rem; }
 }
 @media (prefers-reduced-motion: reduce) {
   .site-header,
@@ -1449,4 +1559,54 @@
   .prompt-library-cta,
   .prompt-portrait-card img { transition: none; }
   .prompt-portrait-card:hover img { transform: none; }
+}
+
+/* Liquid Glass fallbacks. These rules are intentionally unlayered so they
+   win over the layered glass utilities whenever they apply.
+   - No backdrop-filter support: blurred glass chrome falls back to a
+     near-opaque token surface so text never sits on a see-through panel.
+   - prefers-reduced-transparency: every glass tier rises to a solid token
+     surface and blur is removed. */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .glass-blur,
+  .glass-strong,
+  .glass-field,
+  .site-header,
+  .chat-dialog,
+  .discovery-interface {
+    background: rgb(var(--color-card) / 0.97);
+  }
+  .search-panel input {
+    background: rgb(var(--color-card));
+  }
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .glass,
+  .glass-blur,
+  .glass-strong,
+  .surface-card,
+  .interactive-card,
+  .chat-dialog,
+  .discovery-interface,
+  .discovery-card {
+    background: rgb(var(--color-card));
+  }
+  .glass-blur,
+  .glass-strong,
+  .glass-field,
+  .site-header,
+  .chat-dialog,
+  .chat-overlay,
+  .discovery-interface,
+  .search-panel input {
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+  .site-header {
+    background-color: rgb(var(--color-bg));
+  }
+  .search-panel input {
+    background: rgb(var(--color-card));
+  }
 }

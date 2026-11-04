@@ -181,7 +181,7 @@ export const CookieConsentBanner: React.FC = () => {
         <div
           role="region"
           aria-label="Cookie consent banner"
-          className="fixed bottom-20 left-3 right-3 box-border max-h-[min(35vh,18rem)] overflow-y-auto overscroll-contain sm:bottom-6 sm:left-6 sm:right-auto sm:w-[26rem] sm:max-w-[calc(100vw-3rem)] sm:max-h-[min(70vh,32rem)] z-40 p-3 sm:p-4 rounded-2xl border border-border bg-card/95 backdrop-blur-md shadow-2xl shadow-black/40 animate-slide-up text-xs space-y-2 sm:space-y-3"
+          className="fixed bottom-20 left-3 right-3 box-border max-h-[min(35vh,18rem)] overflow-y-auto overscroll-contain sm:bottom-6 sm:left-6 sm:right-auto sm:w-[26rem] sm:max-w-[calc(100vw-3rem)] sm:max-h-[min(70vh,32rem)] z-40 p-3 sm:p-4 glass-strong rounded-[1.25rem] animate-slide-up text-xs space-y-2 sm:space-y-3"
         >
           <div className="flex items-start justify-between gap-3">
             <div className="flex items-center gap-2 text-primary font-bold text-xs sm:text-sm">
@@ -191,7 +191,7 @@ export const CookieConsentBanner: React.FC = () => {
             <button
               type="button"
               onClick={handleRejectNonEssential}
-              className="min-h-11 min-w-11 inline-flex shrink-0 items-center justify-center text-muted-foreground hover:text-foreground rounded hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-card"
+              className="min-h-11 min-w-11 inline-flex shrink-0 items-center justify-center text-muted-foreground hover:text-foreground rounded-full hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-card"
               aria-label="Close and reject non-essential cookies"
             >
               <X className="w-3.5 h-3.5" />
@@ -209,14 +209,14 @@ export const CookieConsentBanner: React.FC = () => {
             <button
               type="button"
               onClick={handleAcceptAll}
-              className="min-h-11 px-3 rounded-lg bg-primary text-primary-foreground font-semibold hover:bg-primary-hover shadow-sm transition-colors text-[11px] sm:text-xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-card"
+              className="min-h-11 px-4 rounded-full bg-primary text-primary-foreground font-semibold hover:bg-primary-hover shadow-sm transition-colors text-[11px] sm:text-xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-card"
             >
               Accept All
             </button>
             <button
               type="button"
               onClick={handleRejectNonEssential}
-              className="min-h-11 px-3 rounded-lg bg-muted border border-border text-foreground font-medium hover:bg-muted/80 transition-colors text-[11px] sm:text-xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-card"
+              className="min-h-11 px-4 rounded-full bg-muted border border-border text-foreground font-medium hover:bg-muted/80 transition-colors text-[11px] sm:text-xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-card"
             >
               Essential Only
             </button>
@@ -241,7 +241,7 @@ export const CookieConsentBanner: React.FC = () => {
           onKeyDown={handleDialogKeyDown}
           className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 animate-fade-in"
         >
-          <div ref={modalRef} className="max-w-lg w-full rounded-2xl border border-border bg-card p-6 shadow-2xl space-y-5 text-xs max-h-[90vh] overflow-y-auto">
+          <div ref={modalRef} className="max-w-lg w-full glass-strong rounded-[1.5rem] p-6 space-y-5 text-xs max-h-[90vh] overflow-y-auto">
             <div className="flex items-center justify-between pb-3 border-b border-border">
               <div className="flex items-center gap-2">
                 <Settings2 className="w-4 h-4 text-primary" />
@@ -266,7 +266,7 @@ export const CookieConsentBanner: React.FC = () => {
 
             <div className="space-y-3">
               {/* Essential */}
-              <div className="p-3.5 rounded-xl border border-border bg-muted/30 flex items-start justify-between gap-3">
+              <div className="p-3.5 rounded-2xl border border-border/70 bg-muted/30 flex items-start justify-between gap-3">
                 <div className="space-y-1">
                   <div className="flex items-center gap-1.5 font-bold text-foreground text-xs">
                     <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
@@ -282,7 +282,7 @@ export const CookieConsentBanner: React.FC = () => {
               </div>
 
               {/* Analytics */}
-              <div className="p-3.5 rounded-xl border border-border bg-card flex items-start justify-between gap-3">
+              <div className="p-3.5 rounded-2xl border border-border/70 bg-background/50 flex items-start justify-between gap-3">
                 <div className="space-y-1">
                   <span className="font-bold text-foreground text-xs block">
                     Analytics &amp; Site Diagnostics
@@ -304,7 +304,7 @@ export const CookieConsentBanner: React.FC = () => {
               </div>
 
               {/* Advertising */}
-              <div className="p-3.5 rounded-xl border border-border bg-card flex items-start justify-between gap-3">
+              <div className="p-3.5 rounded-2xl border border-border/70 bg-background/50 flex items-start justify-between gap-3">
                 <div className="space-y-1">
                   <span className="font-bold text-foreground text-xs block">
                     Advertising &amp; Google AdSense Personalization
@@ -337,21 +337,21 @@ export const CookieConsentBanner: React.FC = () => {
               <button
                 type="button"
                 onClick={handleRejectNonEssential}
-                className="px-3.5 py-2 rounded-lg bg-muted hover:bg-muted/80 text-foreground font-medium text-xs transition-colors"
+                className="px-4 py-2 rounded-full bg-muted hover:bg-muted/80 text-foreground font-medium text-xs transition-colors"
               >
                 Reject All
               </button>
               <button
                 type="button"
                 onClick={handleSaveCustom}
-                className="px-4 py-2 rounded-lg bg-secondary text-secondary-foreground font-semibold text-xs hover:bg-secondary/80 border border-border transition-colors"
+                className="px-4 py-2 rounded-full bg-secondary text-secondary-foreground font-semibold text-xs hover:bg-secondary/80 border border-border transition-colors"
               >
                 Save Preferences
               </button>
               <button
                 type="button"
                 onClick={handleAcceptAll}
-                className="px-4 py-2 rounded-lg bg-primary text-primary-foreground font-semibold text-xs hover:bg-primary-hover shadow-sm transition-colors"
+                className="px-4 py-2 rounded-full bg-primary text-primary-foreground font-semibold text-xs hover:bg-primary-hover shadow-sm transition-colors"
               >
                 Accept All
               </button>

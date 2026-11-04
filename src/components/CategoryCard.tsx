@@ -36,11 +36,11 @@ export const CategoryCard: React.FC<CategoryCardProps> = ({ category }) => {
   return (
     <Link
       to={`/categories/${category.slug}`}
-      className="group surface-card interactive-card press-feedback relative flex flex-col justify-between p-4 rounded-xl focus-visible:ring-2 focus-visible:ring-primary/60 focus-visible:outline-none"
+      className="group surface-card interactive-card press-feedback relative flex flex-col justify-between p-4 rounded-[1.25rem] focus-visible:ring-2 focus-visible:ring-primary/60 focus-visible:outline-none"
     >
       <div className="relative z-10">
         <div className="flex items-center gap-3 mb-3">
-          <div className="w-10 h-10 rounded-md bg-primary/10 text-primary flex items-center justify-center shrink-0 border border-primary/20 ring-1 ring-border/40 group-hover:bg-primary/15 group-hover:scale-105 transition-[background-color,transform] duration-200">
+          <div className="w-10 h-10 rounded-lg bg-primary/10 text-primary flex items-center justify-center shrink-0 border border-primary/20 ring-1 ring-border/40 group-hover:bg-primary/15 group-hover:scale-105 transition-[background-color,transform] duration-200">
             <IconComponent className="w-5 h-5" />
           </div>
           <div>
@@ -62,7 +62,7 @@ export const CategoryCard: React.FC<CategoryCardProps> = ({ category }) => {
           {category.subcategories.slice(0, 3).map((sub) => (
             <span
               key={sub.slug}
-              className="px-2.5 py-0.5 rounded-md text-[11px] bg-muted/60 text-secondary-foreground border border-border group-hover:border-primary/30 transition-colors duration-200"
+              className="px-2.5 py-0.5 rounded-full text-[11px] bg-muted/60 text-secondary-foreground border border-border group-hover:border-primary/30 transition-colors duration-200"
             >
               {sub.name}
             </span>

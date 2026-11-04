@@ -167,13 +167,14 @@ export const UniversalSearch: React.FC = () => {
         )}
       </div>
 
-      {/* Grouped results stay opaque so the directory remains easy to scan. */}
+      {/* Grouped results use the strong glass tier (near-opaque fill + blur)
+          so the directory remains easy to scan over the hero aurora. */}
       {isOpen && query.trim() && (
         <div
           id="universal-search-results"
           role="listbox"
           aria-label="Universal search suggestions"
-          className="absolute top-full left-0 right-0 mt-2 rounded-lg bg-card border border-border p-3 sm:p-4 shadow-lg shadow-black/30 max-h-[75vh] overflow-y-auto no-scrollbar z-50 flex flex-col gap-4 animate-fade-in"
+          className="absolute top-full left-0 right-0 mt-2 glass-strong rounded-[1.25rem] p-3 sm:p-4 max-h-[75vh] overflow-y-auto no-scrollbar z-50 flex flex-col gap-4 animate-fade-in"
         >
           {results.totalMatches === 0 ? (
             <div className="py-8 text-center text-muted-foreground text-sm">
@@ -182,14 +183,14 @@ export const UniversalSearch: React.FC = () => {
                 <Link
                   to={`/tools?q=${encodeURIComponent(query)}`}
                   onClick={() => setIsOpen(false)}
-                  className="px-3 py-1.5 rounded-lg bg-muted/80 text-foreground text-xs hover:bg-muted"
+                  className="px-3 py-1.5 rounded-full bg-muted/80 text-foreground text-xs hover:bg-muted"
                 >
                   Search Open Source Catalog →
                 </Link>
                 <Link
                   to={`/ai-tools?q=${encodeURIComponent(query)}`}
                   onClick={() => setIsOpen(false)}
-                  className="px-3 py-1.5 rounded-lg bg-muted/80 text-foreground text-xs hover:bg-muted"
+                  className="px-3 py-1.5 rounded-full bg-muted/80 text-foreground text-xs hover:bg-muted"
                 >
                   Search AI Directory →
                 </Link>
