@@ -6,7 +6,6 @@ import { HeroSignalVisual } from '../components/HeroSignalVisual';
 import { DailyDiscoveriesSection } from '../components/DailyDiscoveriesSection';
 import { BrandLogo } from '../components/BrandLogo';
 import { SwitchFlow } from '../components/SwitchFlow';
-import { CredibilityMarquee } from '../components/CredibilityMarquee';
 import { getBrandLogo } from '../data/runtimeBrandLogos.ts';
 import { aiCategories } from '../data/aiToolsData';
 import { aiModels, getCurrentModelAccessRoutes, modelAccessProviders } from '../data/modelAccessCatalog';
@@ -285,7 +284,6 @@ export const HomePage: React.FC = () => {
           <Link to="/alternatives" className="inline-flex min-h-11 items-center gap-1 text-sm font-medium text-primary hover:underline">Browse all alternatives <ArrowRight className="h-4 w-4" aria-hidden="true" /></Link>
         </div>
         <SwitchFlow />
-        <CredibilityMarquee />
         <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
           {popularAlternativeCards.map(({ target, count, samples }) => (
             <Link
