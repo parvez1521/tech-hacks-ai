@@ -983,7 +983,27 @@
 .discovery-card__link:focus-visible { outline: 2px solid rgb(var(--color-primary)); outline-offset: 3px; }
 .discovery-card__unavailable { color: rgb(var(--color-muted-fg)); font-size: 0.7rem; }
 
- .chat-launcher-position {
+.home-collection-card,
+.frontier-access-card,
+.home-category-card {
+  border-radius: var(--radius-surface);
+  transition: border-color 180ms ease, box-shadow 180ms ease;
+}
+.home-collection-card:hover,
+.frontier-access-card:hover,
+.home-category-card:hover {
+  border-color: rgb(var(--color-primary) / 0.68);
+  box-shadow: 0 10px 26px rgb(30 64 175 / 0.1), 0 2px 10px rgb(124 58 237 / 0.07);
+}
+.frontier-access-card__image,
+.home-category-card__image { transform-origin: center; }
+@media (prefers-reduced-motion: reduce) {
+  .home-collection-card,
+  .frontier-access-card,
+  .home-category-card { transition: none; }
+}
+
+.chat-launcher-position {
   position: fixed;
   z-index: 49;
   right: max(1rem, env(safe-area-inset-right));

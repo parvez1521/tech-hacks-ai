@@ -43,7 +43,7 @@ describe('Theme, chat suggestions, and contact regression coverage', () => {
     const header = read('src/components/Header.tsx');
     const consent = read('src/components/CookieConsentBanner.tsx');
     assert.match(header, /onKeyDown=\{closeOnEscape\}/);
-    assert.match(header, /event\.key === 'Escape'/);
+    assert.match(header, /if \(event\.key !== 'Escape'\) return/);
     assert.match(header, /menuButtonRef\.current\?\.focus\(\)/);
     assert.match(header, /aria-expanded=\{open\}/);
     assert.match(header, /<details key=\{group\.name\}/);
