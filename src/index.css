@@ -1743,3 +1743,15 @@
   .switch-flow__ring { animation: none; opacity: 0; }
 }
 
+
+/* ---- CredibilityMarquee (Alternatives section logo row) ---- */
+.cred-marquee {
+  -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+  mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+}
+.cred-marquee__track { animation: credMarquee 46s linear infinite; will-change: transform; }
+.cred-marquee:hover .cred-marquee__track { animation-play-state: paused; }
+@keyframes credMarquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+@media (prefers-reduced-motion: reduce) {
+  .cred-marquee__track { animation: none; }
+}
