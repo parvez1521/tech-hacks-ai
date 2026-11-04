@@ -233,11 +233,11 @@
   .surface-card {
     background-color: rgb(var(--color-card) / 0.92);
     border: 1px solid rgb(var(--color-border) / 0.92);
-    box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.04), 0 1px 2px rgb(2 8 23 / 0.05);
+    box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.04), 0 1px 2px rgb(2 8 23 / 0.05), 0 4px 14px -6px rgb(2 8 23 / 0.08);
   }
 
   .interactive-card {
-    box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.04), 0 1px 2px rgb(2 8 23 / 0.05);
+    box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.04), 0 1px 2px rgb(2 8 23 / 0.05), 0 4px 14px -6px rgb(2 8 23 / 0.08);
     transition: border-color 160ms ease, background-color 160ms ease, box-shadow 200ms ease, transform 160ms ease;
   }
 
@@ -264,13 +264,119 @@
     box-shadow: 0 10px 30px -18px rgb(2 8 23 / 0.45);
   }
 
-  /* Restrained hero aurora: three soft brand-token glows behind the homepage
-     hero. Static (no animation), so nothing to gate for reduced motion. */
+  /* Hero aurora: a real field of brand colour behind the homepage hero —
+     larger, richer token glows. Static (no animation), so nothing to gate
+     for reduced motion. Token-based in both themes. */
   .hero-aurora {
+    position: relative;
+    isolation: isolate;
     background:
-      radial-gradient(36rem 18rem at 10% -12%, rgb(var(--brand-cyan) / 0.1), transparent 65%),
-      radial-gradient(40rem 20rem at 90% -14%, rgb(var(--brand-violet) / 0.1), transparent 65%),
-      radial-gradient(34rem 16rem at 55% -8%, rgb(var(--color-primary) / 0.08), transparent 70%);
+      radial-gradient(48rem 26rem at 6% -10%, rgb(var(--brand-cyan) / 0.17), transparent 65%),
+      radial-gradient(52rem 28rem at 94% -12%, rgb(var(--brand-violet) / 0.16), transparent 65%),
+      radial-gradient(44rem 24rem at 52% -6%, rgb(var(--color-primary) / 0.13), transparent 70%),
+      radial-gradient(58rem 26rem at 50% 118%, rgb(var(--color-primary) / 0.07), transparent 70%);
+  }
+
+  /* Fine grid field layered over the hero aurora, faded at the edges with a
+     mask so it reads as a designed backdrop rather than a table. Hero only. */
+  .hero-grid {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background-image:
+      linear-gradient(to right, var(--grid-color) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--grid-color) 1px, transparent 1px);
+    background-size: 44px 44px;
+    -webkit-mask-image: radial-gradient(ellipse 85% 78% at 50% 0%, black 25%, transparent 78%);
+    mask-image: radial-gradient(ellipse 85% 78% at 50% 0%, black 25%, transparent 78%);
+    pointer-events: none;
+  }
+
+  /* Pure-CSS hero entrance: children rise and fade in a short stagger.
+     Content is fully rendered in the DOM (server-readable, no JS library),
+     and the global reduced-motion block collapses all animation durations,
+     so reduced-motion users get the static hero. Total run ≈ 500ms. */
+  .hero-stagger > * {
+    animation: heroEnter 260ms ease-out both;
+  }
+  .hero-stagger > *:nth-child(2) { animation-delay: 60ms; }
+  .hero-stagger > *:nth-child(3) { animation-delay: 120ms; }
+  .hero-stagger > *:nth-child(4) { animation-delay: 180ms; }
+  .hero-stagger > *:nth-child(5) { animation-delay: 240ms; }
+
+  /* Shared primary action: brand route gradient, layered elevation, and a
+     press response. The gradient is theme-invariant, so the label uses the
+     fixed midnight ink token for contrast on the bright gradient in both
+     themes. Specific transition properties only — never transition: all. */
+  .btn-primary {
+    background: var(--brand-route-gradient);
+    color: rgb(var(--brand-midnight));
+    box-shadow:
+      inset 0 1px 0 rgb(255 255 255 / 0.28),
+      0 14px 28px -12px rgb(var(--color-primary) / 0.55),
+      0 4px 10px -4px rgb(2 8 23 / 0.25);
+    transition: transform 160ms ease, box-shadow 200ms ease, filter 160ms ease;
+  }
+  .btn-primary:hover {
+    filter: brightness(1.07);
+    transform: translateY(-1px);
+    box-shadow:
+      inset 0 1px 0 rgb(255 255 255 / 0.28),
+      0 18px 34px -12px rgb(var(--color-primary) / 0.6),
+      0 6px 14px -4px rgb(2 8 23 / 0.28);
+  }
+  .btn-primary:active {
+    transform: scale(0.96);
+  }
+
+  /* Elevated glass frame for the hero search: a 1px gradient hairline around
+     the existing search control (concentric radius: panel 1.125rem, input
+     1rem), layered shadow, translucent card surface with blur. The search
+     component itself is untouched; only its hero wrapper carries this. */
+  .search-panel {
+    border-radius: 1.125rem;
+    padding: 1px;
+    background: linear-gradient(120deg, rgb(var(--brand-cyan) / 0.55), rgb(var(--color-primary) / 0.32) 48%, rgb(var(--brand-violet) / 0.55));
+    box-shadow:
+      0 24px 48px -20px rgb(var(--color-primary) / 0.38),
+      0 10px 24px -12px rgb(2 8 23 / 0.35);
+  }
+  .search-panel input {
+    border-color: transparent;
+    border-radius: 1rem;
+    background-color: rgb(var(--color-card) / 0.88);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+  }
+
+  /* Alternate chapter field for homepage sections: a subtly different token
+     surface band with hairline rules above and below, so the page reads as
+     composed chapters instead of one flat scroll. */
+  .section-band {
+    background: linear-gradient(180deg, rgb(var(--color-muted) / 0.5), rgb(var(--color-muted) / 0.28));
+    border-top: 1px solid rgb(var(--color-border) / 0.7);
+    border-bottom: 1px solid rgb(var(--color-border) / 0.7);
+  }
+
+  /* Brand-gradient hairline used in place of a plain top border (footer). */
+  .gradient-hairline {
+    position: relative;
+  }
+  .gradient-hairline::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgb(var(--brand-cyan) / 0.5) 22%, rgb(var(--color-primary) / 0.55) 50%, rgb(var(--brand-violet) / 0.5) 78%, transparent);
+    pointer-events: none;
+  }
+
+  /* Press feedback for whole-card links. Declared after .interactive-card so
+     the pressed state wins over the hover lift while both apply. */
+  .press-feedback:active {
+    transform: translateY(0) scale(0.96);
   }
 
   /* Single gradient accent for headline words, using the canonical route gradient. */
@@ -605,6 +711,17 @@
   }
 }
 
+@keyframes heroEnter {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 @keyframes pulseSubtle {
   0%, 100% {
     opacity: 1;
@@ -909,9 +1026,9 @@
   max-width: 38rem;
   margin-inline: auto;
   border: 1px solid rgb(var(--color-border) / 0.78);
-  border-radius: 1rem;
+  border-radius: 1.25rem;
   background: rgb(var(--color-card));
-  box-shadow: 0 12px 32px rgb(2 8 23 / 0.08), inset 0 1px 0 rgb(255 255 255 / 0.2);
+  box-shadow: 0 28px 56px -20px rgb(2 8 23 / 0.28), 0 12px 28px -12px rgb(var(--color-primary) / 0.18), inset 0 1px 0 rgb(255 255 255 / 0.2);
 }
 .discovery-interface__chrome {
   display: flex;
@@ -966,14 +1083,16 @@
 .discovery-interface__search input::placeholder { color: rgb(var(--color-muted-fg)); opacity: 0.9; }
 .discovery-interface__search:focus-within { outline: 2px solid rgb(var(--color-primary) / 0.55); outline-offset: 2px; }
 .discovery-interface__search kbd { margin-left: auto; padding: 0.18rem 0.36rem; border: 1px solid rgb(var(--color-border)); border-radius: 0.32rem; color: rgb(var(--color-muted-fg)); font-size: 0.58rem; }
-.discovery-interface__tabs { display: flex; align-items: center; gap: 1.15rem; margin-top: 1rem; border-bottom: 1px solid rgb(var(--color-border) / 0.68); }
-.discovery-interface__tabs button { position: relative; min-height: 2.75rem; padding: 0 0.05rem; color: rgb(var(--color-muted-fg)); font-size: 0.7rem; font-weight: 600; transition: color 150ms ease; }
-.discovery-interface__tabs button:hover,
-.discovery-interface__tabs button[aria-pressed='true'] { color: rgb(var(--color-fg)); }
-.discovery-interface__tab-indicator { position: absolute; right: 0; bottom: -1px; left: 0; height: 2px; border-radius: 99px; background: rgb(var(--color-primary)); }
+.discovery-interface__tabs { display: flex; align-items: center; flex-wrap: wrap; gap: 0.45rem; margin-top: 1rem; }
+.discovery-interface__tabs button { position: relative; min-height: 2.3rem; padding: 0.35rem 0.85rem; border: 1px solid rgb(var(--color-border) / 0.75); border-radius: 999px; color: rgb(var(--color-muted-fg)); background: rgb(var(--color-bg) / 0.45); font-size: 0.7rem; font-weight: 600; transition: color 180ms ease, background-color 180ms ease, border-color 180ms ease, transform 160ms ease; }
+.discovery-interface__tabs button:hover { color: rgb(var(--color-fg)); border-color: rgb(var(--color-primary) / 0.5); }
+.discovery-interface__tabs button:active { transform: scale(0.96); }
+.discovery-interface__tabs button[aria-pressed='true'] { color: rgb(var(--brand-midnight)); background: var(--brand-route-gradient); border-color: transparent; }
+.discovery-interface__tab-indicator { display: none; }
 .discovery-interface__samples { display: flex; align-items: center; flex-wrap: wrap; gap: 0.35rem; margin-top: 0.65rem; color: rgb(var(--color-muted-fg)); font-size: 0.62rem; }
-.discovery-interface__samples button { min-height: 2.75rem; padding: 0.35rem 0.65rem; border: 1px solid rgb(var(--color-border) / 0.72); border-radius: 999px; color: rgb(var(--color-muted-fg)); background: rgb(var(--color-bg) / 0.42); transition: color 150ms ease, border-color 150ms ease, background-color 150ms ease; }
+.discovery-interface__samples button { min-height: 2.75rem; padding: 0.35rem 0.65rem; border: 1px solid rgb(var(--color-border) / 0.72); border-radius: 999px; color: rgb(var(--color-muted-fg)); background: rgb(var(--color-bg) / 0.42); transition: color 150ms ease, border-color 150ms ease, background-color 150ms ease, transform 160ms ease; }
 .discovery-interface__samples button:hover { color: rgb(var(--color-fg)); border-color: rgb(var(--color-primary) / 0.45); background: rgb(var(--color-primary) / 0.07); }
+.discovery-interface__samples button:active { transform: scale(0.96); }
 .discovery-interface__results { display: grid; gap: 0.55rem; padding-top: 0.8rem; }
 .discovery-interface__result {
   display: flex;
