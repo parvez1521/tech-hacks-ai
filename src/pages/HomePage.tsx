@@ -9,7 +9,9 @@ import { getBrandLogo } from '../data/runtimeBrandLogos.ts';
 import { aiCategories } from '../data/aiToolsData';
 import { aiModels, getCurrentModelAccessRoutes, modelAccessProviders } from '../data/modelAccessCatalog';
 import { getActiveOffers, getFeaturedOffers } from '../data/offersData';
-import { getAllAiTools, getAiToolsForSearchIntent } from '../services/aiCatalogService';
+import { getAllAiTools, getAiToolsForProprietary, getAiToolsForSearchIntent } from '../services/aiCatalogService';
+import { proprietaryTools } from '../data/alternatives.ts';
+import { getToolsForProprietary } from '../services/catalogService';
 import { publicGitHubProjects } from '../data/githubProjectsData';
 
 const featuredCollections = [
@@ -67,6 +69,31 @@ export const HomePage: React.FC = () => {
     .filter((route) => ['free-weekly-shared', 'free-daily-allowance', 'free-daily-credits'].includes(route.accessType) && frontierAccessBanners[route.id])
     .sort((a, b) => frontierAccessRouteOrder.indexOf(a.id) - frontierAccessRouteOrder.indexOf(b.id));
   const allCatalogTools = getAllAiTools();
+  const alternativeEntries = proprietaryTools.map((target) => {
+    const replacements = getToolsForProprietary(target.slug);
+    const aiPicks = getAiToolsForProprietary(target.slug);
+    return { target, count: replacements.length + aiPicks.length, samples: [...replacements, ...aiPicks].slice(0, 3) };
+  }).filter((entry) => entry.count > 0);
+  // One showcase card per category (the most-matched target in it), so the
+  // grid stays diverse instead of filling with near-identical video tools
+  // that all recommend each other; backfill by count if categories run out.
+  const bestByCategory = new Map<string, (typeof alternativeEntries)[number]>();
+  for (const entry of alternativeEntries) {
+    const current = bestByCategory.get(entry.target.category);
+    if (!current || entry.count > current.count) bestByCategory.set(entry.target.category, entry);
+  }
+  const popularAlternatives = [...bestByCategory.values()].sort((a, b) => b.count - a.count);
+  if (popularAlternatives.length < 6) {
+    const chosen = new Set(popularAlternatives.map((entry) => entry.target.slug));
+    for (const entry of [...alternativeEntries].sort((a, b) => b.count - a.count)) {
+      if (popularAlternatives.length >= 6) break;
+      if (!chosen.has(entry.target.slug)) {
+        popularAlternatives.push(entry);
+        chosen.add(entry.target.slug);
+      }
+    }
+  }
+  const popularAlternativeCards = popularAlternatives.slice(0, 6);
   const videoGenerators = getAiToolsForSearchIntent('AI video generator');
   const freeVideoGeneratorCount = videoGenerators.filter((tool) =>
     tool.hasFreePlan ||
@@ -197,6 +224,40 @@ export const HomePage: React.FC = () => {
                 <div className="mt-4 flex flex-wrap gap-2">
                   {item.samples.map((sample) => <span key={sample.name} className="inline-flex min-h-8 max-w-full items-center gap-1.5 rounded-full border border-border/80 bg-muted/35 py-1 pl-1 pr-2.5 text-xs font-medium text-secondary-foreground"><BrandLogo slug={sample.slug} name={sample.name} size="xs" showContainer={false} /><span className="truncate">{sample.name}</span></span>)}
                 </div>
+              </div>
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20" aria-labelledby="alternatives-heading">
+        <div className="mb-10 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+          <div>
+            <p className="eyebrow">Alternatives</p>
+            <h2 id="alternatives-heading" className="mt-3 text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">Free alternatives to paid tools</h2>
+            <p className="mt-3 max-w-2xl text-base leading-7 text-muted-foreground">The paid tools people switch away from most, each matched with free and open-source alternatives from the live catalogue of {proprietaryTools.length} paid tools.</p>
+          </div>
+          <Link to="/alternatives" className="inline-flex min-h-11 items-center gap-1 text-sm font-medium text-primary hover:underline">Browse all alternatives <ArrowRight className="h-4 w-4" aria-hidden="true" /></Link>
+        </div>
+        <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+          {popularAlternativeCards.map(({ target, count, samples }) => (
+            <Link
+              to={`/alternatives/${target.slug}`}
+              key={target.slug}
+              className="card-glow group flex min-w-0 flex-col rounded-2xl border border-border bg-card p-4 sm:p-5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+            >
+              <div className="flex items-start gap-3">
+                <BrandLogo slug={target.slug} name={target.name} size="sm" />
+                <div className="min-w-0 flex-1">
+                  <h3 className="truncate text-base font-semibold tracking-tight text-foreground">{target.name}</h3>
+                  <p className="mt-0.5 line-clamp-2 text-sm leading-5 text-muted-foreground">{target.tagline}</p>
+                </div>
+                <span className="shrink-0 rounded-full border border-border/80 bg-muted/35 px-2.5 py-1 text-xs font-semibold text-secondary-foreground">{count} alternatives</span>
+              </div>
+              <div className="mt-4 flex flex-wrap items-center gap-2">
+                {samples.map((sample) => <span key={sample.slug} className="inline-flex min-h-8 max-w-full items-center gap-1.5 rounded-full border border-border/80 bg-muted/35 py-1 pl-1 pr-2.5 text-xs font-medium text-secondary-foreground"><BrandLogo slug={sample.slug} name={sample.name} size="xs" showContainer={false} /><span className="truncate">{sample.name}</span></span>)}
+                {count > samples.length && <span className="text-xs font-medium text-muted-foreground">+{count - samples.length} more</span>}
+                <ArrowRight className="ml-auto h-4 w-4 shrink-0 text-primary transition-transform duration-200 group-hover:translate-x-1 motion-reduce:transition-none" aria-hidden="true" />
               </div>
             </Link>
           ))}
