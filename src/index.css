@@ -1717,23 +1717,6 @@
 
 /* ---- SwitchFlow (Alternatives section switch animation) ---- */
 .switch-flow__stage { position: relative; flex: none; width: 1200px; height: 240px; }
-.switch-flow__chip-in, .switch-flow__chip-out {
-  translate: -50% -50%; will-change: offset-distance, opacity, scale;
-}
-.switch-flow__chip-in { animation: switchFlowIn 4.6s linear infinite; }
-.switch-flow__chip-out { animation: switchFlowOut 4.6s linear infinite; }
-@keyframes switchFlowIn {
-  0% { offset-distance: 0%; opacity: 0; scale: 1; }
-  7% { opacity: 1; }
-  86% { opacity: 1; scale: 1; }
-  100% { offset-distance: 100%; opacity: 0; scale: 0.5; }
-}
-@keyframes switchFlowOut {
-  0% { offset-distance: 0%; opacity: 0; scale: 0.5; }
-  12% { opacity: 1; scale: 1; }
-  93% { opacity: 1; }
-  100% { offset-distance: 100%; opacity: 0; scale: 1; }
-}
 .switch-flow__hub {
   position: absolute; left: 600px; top: 120px; translate: -50% -50%;
   width: 84px; height: 84px; display: grid; place-items: center;
@@ -1757,8 +1740,6 @@
   to { transform: scale(1.65); opacity: 0; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .switch-flow__chip-in { animation: none; offset-distance: 58%; opacity: 1; }
-  .switch-flow__chip-out { animation: none; offset-distance: 42%; opacity: 1; }
   .switch-flow__ring { animation: none; opacity: 0; }
 }
 
