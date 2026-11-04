@@ -12,7 +12,7 @@ export const Footer: React.FC = () => {
   };
 
   return (
-    <footer className="border-t border-border bg-card/30 mt-20 pt-12 pb-16 transition-colors">
+    <footer className="gradient-hairline bg-card/30 mt-20 pt-16 pb-16 transition-colors">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         {/* Discovery callout */}
         <div className="max-w-xl mx-auto text-center mb-12 p-8 rounded-xl border border-border bg-card/60">
@@ -22,7 +22,7 @@ export const Footer: React.FC = () => {
           <p className="text-sm text-secondary-foreground mb-5">
             Explore recent discoveries, practical utilities, and open-source alternatives in one directory.
           </p>
-          <Link to="/discoveries" className="inline-flex items-center gap-2 rounded-lg bg-primary px-4 py-2.5 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary">
+          <Link to="/discoveries" className="btn-primary inline-flex items-center gap-2 rounded-lg px-4 py-2.5 text-sm font-semibold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary">
             Browse recent discoveries <ArrowRight className="h-4 w-4" />
           </Link>
         </div>
@@ -60,9 +60,9 @@ export const Footer: React.FC = () => {
         )}
 
         {/* Links Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 py-8 border-t border-border/50 text-sm">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 py-10 border-t border-border/50 text-sm">
           <div>
-            <h3 className="font-semibold text-foreground mb-3 text-xs uppercase tracking-wider">
+            <h3 className="font-semibold text-foreground mb-4 text-xs uppercase tracking-widest">
               Browse Software
             </h3>
             <ul className="space-y-2 text-muted-foreground text-xs">
@@ -72,32 +72,32 @@ export const Footer: React.FC = () => {
                 </Link>
               </li>
               <li>
-                <Link to="/tools" className="hover:text-foreground">
+                <Link to="/tools" className="transition-colors duration-200 hover:text-primary">
                   All Open Source Tools
                 </Link>
               </li>
               <li>
-                <Link to="/ai-tools" className="hover:text-foreground">
+                <Link to="/ai-tools" className="transition-colors duration-200 hover:text-primary">
                   AI Tools Directory
                 </Link>
               </li>
               <li>
-                <Link to="/free-tools" className="hover:text-foreground">
+                <Link to="/free-tools" className="transition-colors duration-200 hover:text-primary">
                   Utility Tools
                 </Link>
               </li>
               <li>
-                <Link to="/alternatives" className="hover:text-foreground">
+                <Link to="/alternatives" className="transition-colors duration-200 hover:text-primary">
                   Proprietary Alternatives
                 </Link>
               </li>
               <li>
-                <Link to="/categories" className="hover:text-foreground">
+                <Link to="/categories" className="transition-colors duration-200 hover:text-primary">
                   Browse by Category
                 </Link>
               </li>
               <li>
-                <Link to="/collections/trending" className="hover:text-foreground">
+                <Link to="/collections/trending" className="transition-colors duration-200 hover:text-primary">
                   Trending Projects
                 </Link>
               </li>
@@ -112,7 +112,7 @@ export const Footer: React.FC = () => {
                 </Link>
               </li>
               <li>
-                <Link to="/submit-guide" className="hover:text-foreground">
+                <Link to="/submit-guide" className="transition-colors duration-200 hover:text-primary">
                   Submit a Guide
                 </Link>
               </li>
@@ -120,27 +120,27 @@ export const Footer: React.FC = () => {
           </div>
 
           <div>
-            <h3 className="font-semibold text-foreground mb-3 text-xs uppercase tracking-wider">
+            <h3 className="font-semibold text-foreground mb-4 text-xs uppercase tracking-widest">
               Popular Categories
             </h3>
             <ul className="space-y-2 text-muted-foreground text-xs">
               <li>
-                <Link to="/categories/developer-tools" className="hover:text-foreground">
+                <Link to="/categories/developer-tools" className="transition-colors duration-200 hover:text-primary">
                   Developer Tools
                 </Link>
               </li>
               <li>
-                <Link to="/categories/ai-machine-learning" className="hover:text-foreground">
+                <Link to="/categories/ai-machine-learning" className="transition-colors duration-200 hover:text-primary">
                   AI & Machine Learning
                 </Link>
               </li>
               <li>
-                <Link to="/categories/productivity" className="hover:text-foreground">
+                <Link to="/categories/productivity" className="transition-colors duration-200 hover:text-primary">
                   Productivity & Notes
                 </Link>
               </li>
               <li>
-                <Link to="/categories/analytics" className="hover:text-foreground">
+                <Link to="/categories/analytics" className="transition-colors duration-200 hover:text-primary">
                   Analytics & Metrics
                 </Link>
               </li>
@@ -148,27 +148,27 @@ export const Footer: React.FC = () => {
           </div>
 
           <div>
-            <h3 className="font-semibold text-foreground mb-3 text-xs uppercase tracking-wider">
+            <h3 className="font-semibold text-foreground mb-4 text-xs uppercase tracking-widest">
               Alternatives
             </h3>
             <ul className="space-y-2 text-muted-foreground text-xs">
               <li>
-                <Link to="/alternatives/notion" className="hover:text-foreground">
+                <Link to="/alternatives/notion" className="transition-colors duration-200 hover:text-primary">
                   Notion Alternatives
                 </Link>
               </li>
               <li>
-                <Link to="/alternatives/firebase" className="hover:text-foreground">
+                <Link to="/alternatives/firebase" className="transition-colors duration-200 hover:text-primary">
                   Firebase Alternatives
                 </Link>
               </li>
               <li>
-                <Link to="/alternatives/airtable" className="hover:text-foreground">
+                <Link to="/alternatives/airtable" className="transition-colors duration-200 hover:text-primary">
                   Airtable Alternatives
                 </Link>
               </li>
               <li>
-                <Link to="/alternatives/figma" className="hover:text-foreground">
+                <Link to="/alternatives/figma" className="transition-colors duration-200 hover:text-primary">
                   Figma Alternatives
                 </Link>
               </li>
@@ -176,7 +176,7 @@ export const Footer: React.FC = () => {
           </div>
 
           <div>
-            <h3 className="font-semibold text-foreground mb-3 text-xs uppercase tracking-wider">
+            <h3 className="font-semibold text-foreground mb-4 text-xs uppercase tracking-widest">
               Editorial &amp; Legal
             </h3>
             <p className="text-xs text-muted-foreground mb-3 leading-relaxed">
@@ -184,32 +184,32 @@ export const Footer: React.FC = () => {
             </p>
             <ul className="space-y-1.5 text-muted-foreground text-xs mb-3">
               <li>
-                <Link to="/brand-kit" className="hover:text-foreground">
+                <Link to="/brand-kit" className="transition-colors duration-200 hover:text-primary">
                   Brand Kit
                 </Link>
               </li>
               <li>
-                <Link to="/about" className="hover:text-foreground">
+                <Link to="/about" className="transition-colors duration-200 hover:text-primary">
                   About Us
                 </Link>
               </li>
               <li>
-                <Link to="/contact" className="hover:text-foreground">
+                <Link to="/contact" className="transition-colors duration-200 hover:text-primary">
                   Contact Us
                 </Link>
               </li>
               <li>
-                <Link to="/privacy" className="hover:text-foreground">
+                <Link to="/privacy" className="transition-colors duration-200 hover:text-primary">
                   Privacy Policy
                 </Link>
               </li>
               <li>
-                <Link to="/terms" className="hover:text-foreground">
+                <Link to="/terms" className="transition-colors duration-200 hover:text-primary">
                   Terms of Use
                 </Link>
               </li>
               <li>
-                <Link to="/disclosure" className="hover:text-foreground">
+                <Link to="/disclosure" className="transition-colors duration-200 hover:text-primary">
                   Affiliate &amp; Ad Disclosure
                 </Link>
               </li>
@@ -221,13 +221,13 @@ export const Footer: React.FC = () => {
                       window.dispatchEvent(new Event('open_cookie_preferences_modal'));
                     }
                   }}
-                  className="hover:text-foreground text-left cursor-pointer transition-colors"
+                  className="hover:text-primary text-left cursor-pointer transition-colors duration-200"
                 >
                   Cookie Preferences
                 </button>
               </li>
               <li>
-                <Link to="/moderation" className="hover:text-foreground text-[11px] text-muted-foreground">
+                <Link to="/moderation" className="transition-colors duration-200 hover:text-primary text-[11px] text-muted-foreground">
                   Moderation Queue
                 </Link>
               </li>
@@ -237,7 +237,7 @@ export const Footer: React.FC = () => {
                 href="https://github.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-muted-foreground hover:text-foreground transition-colors"
+                className="text-muted-foreground hover:text-primary transition-colors duration-200"
                 aria-label="GitHub"
               >
                 <Github className="w-4 h-4" />
@@ -248,23 +248,23 @@ export const Footer: React.FC = () => {
 
         {/* Legal & Policy Navigation Strip */}
         <div className="py-4 border-t border-border/40 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-[11px] text-muted-foreground">
-          <Link to="/about" className="hover:text-foreground transition-colors">
+          <Link to="/about" className="hover:text-primary transition-colors duration-200">
             About Us
           </Link>
           <span>•</span>
-          <Link to="/contact" className="hover:text-foreground transition-colors">
+          <Link to="/contact" className="hover:text-primary transition-colors duration-200">
             Contact
           </Link>
           <span>•</span>
-          <Link to="/privacy" className="hover:text-foreground transition-colors">
+          <Link to="/privacy" className="hover:text-primary transition-colors duration-200">
             Privacy Policy
           </Link>
           <span>•</span>
-          <Link to="/terms" className="hover:text-foreground transition-colors">
+          <Link to="/terms" className="hover:text-primary transition-colors duration-200">
             Terms of Use
           </Link>
           <span>•</span>
-          <Link to="/disclosure" className="hover:text-foreground transition-colors">
+          <Link to="/disclosure" className="hover:text-primary transition-colors duration-200">
             Affiliate Disclosure
           </Link>
           <span>•</span>
@@ -275,7 +275,7 @@ export const Footer: React.FC = () => {
                 window.dispatchEvent(new Event('open_cookie_preferences_modal'));
               }
             }}
-            className="hover:text-foreground transition-colors underline cursor-pointer"
+            className="hover:text-primary transition-colors duration-200 underline cursor-pointer"
           >
             Cookie Preferences
           </button>

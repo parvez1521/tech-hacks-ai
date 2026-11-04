@@ -61,3 +61,79 @@ The site also defines semantic tokens such as `--color-bg`, `--color-fg`, `--col
 - Accessible keyboard operation, visible focus, readable contrast, touch targets, and responsive layouts.
 
 Any token change must be deliberate, documented here, and applied consistently to both themes. Do not silently replace the current brand identity.
+
+## Direction A — Dark precision (Phase 1, Nov 2026)
+
+An evolution of the language above, not a new identity: brand tokens, the
+route gradient, and Inter are unchanged. Direction A borrows Linear/Raycast
+discipline:
+
+- **Borders over shadows.** Surface levels are separated by the crisp 1px
+  token border plus the inset top highlight. Resting card shadows are reduced
+  to a single soft contact layer (`surface-card`, `interactive-card`); the
+  hover glow remains the only expressive shadow.
+- **One accent family.** Cyan→blue (`--color-primary`) is the accent. Violet
+  appears only inside `--brand-route-gradient` (logo mark, gradient headline
+  line, primary CTA) — never as a flat accent, badge, or panel tint.
+- **Mono technical kickers.** `.eyebrow`, `.kicker`, and `.meta-label` use the
+  system monospace stack (`ui-monospace, SFMono-Regular, Menlo, monospace` —
+  no webfont) at 11px, uppercase, 0.14–0.18em tracking for section eyebrows,
+  page-header kickers, card meta labels, and data chips.
+- **Sharper radius scale.** Cards and panels: 12px (`rounded-xl`). Buttons,
+  inputs, and chips: 8–10px (`rounded-lg`/`rounded-md`). Inner tiles and
+  controls stay concentric with their container.
+- **Density with air.** Listing grids use `gap-4`; cards follow a 3-row
+  anatomy — header (logo tile + title + primary chip), 2-line description,
+  footer meta row of mono micro-labels.
+
+## Liquid Glass surface pass (Nov 2026)
+
+Direction A's structure stays — bento homepage, Raycast category rows, mono
+kickers, shared page-header pattern, cyan→blue accent discipline. What
+changes is the material: flat border-led surfaces become translucent glass
+(Apple's Liquid Glass language), and the sharp 12px radius scale relaxes to
+soft concentric glass radii. This section supersedes Direction A's
+"borders over shadows" and radius bullets for surface material only.
+
+### Material recipe (tokens in `src/index.css`)
+
+- **Fills:** `--glass-fill` (dark: white 5.5% over midnight; light: white
+  55%), `--glass-fill-hover`, and `--glass-fill-strong` (card token at
+  68% dark / 78% light) for floating panels.
+- **Specular edge light:** inset top highlight (`--glass-highlight`),
+  a faint inset bottom edge, and a 1px glass edge (`--glass-border`) —
+  drawn as an inset box-shadow ring on the `.glass` utilities so a
+  component's own border utilities (tone top borders, hover border
+  colours) keep working; `.surface-card` keeps a real border because the
+  shared cards rely on it for their edge.
+- **Depth:** glass floats — resting cards carry a soft shadow
+  (`--glass-shadow`); floating chrome carries `--glass-shadow-lg`.
+- **Shapes:** primary buttons and chips are capsules (`rounded-full`);
+  cards and panels are ~20px (`rounded-[1.25rem]`) with concentric inner
+  tiles; inputs on glass are capsules or glass fields (`.glass-field`).
+- **Colour behind glass:** a fixed ambient wash (`--page-wash`, brand
+  cyan/blue/violet at 3–6%) sits behind every page, and the hero aurora
+  was enriched, so the translucency has something to refract.
+
+### Where real backdrop blur is used vs fill-only
+
+- **Real blur** (`blur(18–24px) saturate(160%)`): site header,
+  `.glass-blur` (FilterBar toolbar), `.glass-strong` (header dropdowns,
+  search results, cookie banner/modal), hero search field, hero
+  discovery panel, chat dialog. These are chrome or single floating
+  panels over coloured/scrolling content.
+- **Fill-only glass** (`.glass`, `.surface-card`, `.interactive-card`,
+  discovery cards): translucent fill + specular edges + soft shadow, no
+  backdrop filter. Grid pages render dozens of cards; per-card blur is a
+  scroll-performance risk on low-end mobile GPUs, and the ambient wash
+  gives the fill its colour.
+
+### Fallbacks and accessibility
+
+- `@supports not (backdrop-filter: …)`: blurred glass chrome falls back
+  to a near-opaque card surface.
+- `prefers-reduced-transparency: reduce`: every glass tier rises to a
+  solid token surface and blur is removed.
+- Body text never sits on the most translucent tier; copy stays on the
+  foreground token, and the strong tier backs anything text-heavy that
+  floats (dialogs, dropdowns, search results).

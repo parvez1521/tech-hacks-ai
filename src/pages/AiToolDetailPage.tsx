@@ -123,7 +123,7 @@ export const AiToolDetailPage: React.FC = () => {
         <button
           type="button"
           onClick={handleCopyLink}
-          className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg border border-border bg-card/80 hover:bg-card text-foreground transition-colors"
+          className="glass-chip inline-flex items-center gap-1.5 px-3 py-1 hover:bg-card text-foreground transition-colors"
           aria-label="Share tool link"
         >
           {copied ? (
@@ -141,7 +141,7 @@ export const AiToolDetailPage: React.FC = () => {
       </nav>
 
       {/* Hero Overview */}
-      <div className="p-6 sm:p-8 rounded-xl border border-border bg-card/80 shadow-md mb-8">
+      <div className="p-6 sm:p-8 glass rounded-[1.25rem] border border-border mb-8">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
           <div className="flex items-center gap-4">
             <BrandLogo
@@ -150,11 +150,11 @@ export const AiToolDetailPage: React.FC = () => {
               size="xl"
               iconBgColor={tool.iconBgColor}
               iconLetter={tool.iconLetter}
-              className="w-14 h-14 rounded-xl shadow-md"
+              className="w-14 h-14 rounded-xl ring-1 ring-border/50"
             />
             <div>
               <div className="flex items-center gap-2 flex-wrap">
-                <h1 className="text-2xl sm:text-3xl font-extrabold text-foreground tracking-tight">
+                <h1 className="text-3xl sm:text-4xl font-bold text-foreground tracking-tight">
                   {tool.name}
                 </h1>
                 {tool.isFeatured && (
@@ -170,7 +170,7 @@ export const AiToolDetailPage: React.FC = () => {
                   </span>
                 )}
               </div>
-              <p className="text-sm text-muted-foreground mt-1 capitalize">
+              <p className="meta-label mt-2">
                  Category: {tool.category} • Released {tool.releaseYear || 2024}
               </p>
             </div>
@@ -280,7 +280,7 @@ export const AiToolDetailPage: React.FC = () => {
 
       {/* Features, Persona & Specifications */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-        <div className="md:col-span-2 p-6 rounded-xl border border-border bg-card/60">
+        <div className="md:col-span-2 p-6 glass rounded-[1.25rem] border border-border">
           <h2 className="text-base font-bold text-foreground mb-4 flex items-center gap-2">
             <ShieldCheck className="w-4 h-4 text-primary" />
             <span>Core Capabilities & Features</span>
@@ -327,7 +327,7 @@ export const AiToolDetailPage: React.FC = () => {
         </div>
 
         <div className="space-y-4">
-          <div className="p-6 rounded-xl border border-border bg-card/60 space-y-4">
+          <div className="p-6 glass rounded-[1.25rem] border border-border space-y-4">
             <h3 className="text-sm font-bold text-foreground flex items-center gap-2">
               <Tag className="w-4 h-4 text-primary" />
               <span>Tags & Keywords</span>
@@ -346,8 +346,8 @@ export const AiToolDetailPage: React.FC = () => {
           </div>
 
           {/* Comparison CTA Box */}
-          <div className="p-5 rounded-xl border border-purple-500/20 bg-purple-500/5 text-xs">
-            <div className="flex items-center gap-1.5 text-purple-800 dark:text-purple-300 font-semibold uppercase text-[11px] tracking-wider mb-1.5">
+          <div className="p-5 rounded-xl border border-primary/25 bg-primary/5 text-xs">
+            <div className="meta-label flex items-center gap-1.5 mb-1.5">
               <Scale className="w-3.5 h-3.5" />
               <span>Side-by-Side Comparison</span>
             </div>
@@ -356,10 +356,10 @@ export const AiToolDetailPage: React.FC = () => {
             </p>
             <Link
               to={`/compare?tools=${comparisonSlugs.join(',')}`}
-              className="inline-flex items-center justify-center gap-1.5 w-full px-3 py-2 rounded-lg bg-card border border-purple-500/30 hover:bg-muted text-foreground font-semibold text-xs transition-colors"
+              className="inline-flex items-center justify-center gap-1.5 w-full px-3 py-2 rounded-lg bg-card border border-primary/30 hover:bg-muted text-foreground font-semibold text-xs transition-colors"
             >
               <span>Compare {tool.name}</span>
-              <Scale className="w-3.5 h-3.5 text-purple-400" />
+              <Scale className="w-3.5 h-3.5 text-primary" />
             </Link>
           </div>
         </div>
