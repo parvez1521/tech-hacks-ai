@@ -369,6 +369,23 @@
   .hero-aurora {
     position: relative;
     isolation: isolate;
+  }
+
+  /* The colour field bleeds to the full viewport width via ::before: the
+     hero section itself is a centred max-w-7xl column, and painting the
+     glows on the section box cut them off at the container edges (a hard
+     vertical step in the top corners on wide screens). The app shell
+     already clips horizontal overflow, so the 100vw layer is safe. */
+  .hero-aurora::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    width: 100vw;
+    transform: translateX(-50%);
+    z-index: -1;
+    pointer-events: none;
     background:
       radial-gradient(48rem 26rem at 6% -10%, rgb(var(--brand-cyan) / 0.21), transparent 65%),
       radial-gradient(52rem 28rem at 94% -12%, rgb(var(--brand-violet) / 0.19), transparent 65%),
@@ -380,7 +397,11 @@
      mask so it reads as a designed backdrop rather than a table. Hero only. */
   .hero-grid {
     position: absolute;
-    inset: 0;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    width: 100vw;
+    transform: translateX(-50%);
     z-index: -1;
     background-image:
       linear-gradient(to right, var(--grid-color) 1px, transparent 1px),
