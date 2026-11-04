@@ -230,39 +230,7 @@ export const HomePage: React.FC = () => {
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20" aria-labelledby="alternatives-heading">
-        <div className="mb-10 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
-          <div>
-            <p className="eyebrow">Alternatives</p>
-            <h2 id="alternatives-heading" className="mt-3 text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">Free alternatives to paid tools</h2>
-            <p className="mt-3 max-w-2xl text-base leading-7 text-muted-foreground">The paid tools people switch away from most, each matched with free and open-source alternatives from the live catalogue of {proprietaryTools.length} paid tools.</p>
-          </div>
-          <Link to="/alternatives" className="inline-flex min-h-11 items-center gap-1 text-sm font-medium text-primary hover:underline">Browse all alternatives <ArrowRight className="h-4 w-4" aria-hidden="true" /></Link>
-        </div>
-        <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
-          {popularAlternativeCards.map(({ target, count, samples }) => (
-            <Link
-              to={`/alternatives/${target.slug}`}
-              key={target.slug}
-              className="card-glow group flex min-w-0 flex-col rounded-2xl border border-border bg-card p-4 sm:p-5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
-            >
-              <div className="flex items-start gap-3">
-                <BrandLogo slug={target.slug} name={target.name} size="sm" />
-                <div className="min-w-0 flex-1">
-                  <h3 className="truncate text-base font-semibold tracking-tight text-foreground">{target.name}</h3>
-                  <p className="mt-0.5 line-clamp-2 text-sm leading-5 text-muted-foreground">{target.tagline}</p>
-                </div>
-                <span className="shrink-0 rounded-full border border-border/80 bg-muted/35 px-2.5 py-1 text-xs font-semibold text-secondary-foreground">{count} alternatives</span>
-              </div>
-              <div className="mt-4 flex flex-wrap items-center gap-2">
-                {samples.map((sample) => <span key={sample.slug} className="inline-flex min-h-8 max-w-full items-center gap-1.5 rounded-full border border-border/80 bg-muted/35 py-1 pl-1 pr-2.5 text-xs font-medium text-secondary-foreground"><BrandLogo slug={sample.slug} name={sample.name} size="xs" showContainer={false} /><span className="truncate">{sample.name}</span></span>)}
-                {count > samples.length && <span className="text-xs font-medium text-muted-foreground">+{count - samples.length} more</span>}
-                <ArrowRight className="ml-auto h-4 w-4 shrink-0 text-primary transition-transform duration-200 group-hover:translate-x-1 motion-reduce:transition-none" aria-hidden="true" />
-              </div>
-            </Link>
-          ))}
-        </div>
-      </section>
+      
 
       <section className="section-band" aria-labelledby="frontier-access-heading">
        <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20">
@@ -303,6 +271,40 @@ export const HomePage: React.FC = () => {
           })}
         </div>
        </div>
+      </section>
+
+      <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20" aria-labelledby="alternatives-heading">
+        <div className="mb-10 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+          <div>
+            <p className="eyebrow">Alternatives</p>
+            <h2 id="alternatives-heading" className="mt-3 text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">Free alternatives to paid tools</h2>
+            <p className="mt-3 max-w-2xl text-base leading-7 text-muted-foreground">The paid tools people switch away from most, each matched with free and open-source alternatives from the live catalogue of {proprietaryTools.length} paid tools.</p>
+          </div>
+          <Link to="/alternatives" className="inline-flex min-h-11 items-center gap-1 text-sm font-medium text-primary hover:underline">Browse all alternatives <ArrowRight className="h-4 w-4" aria-hidden="true" /></Link>
+        </div>
+        <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+          {popularAlternativeCards.map(({ target, count, samples }) => (
+            <Link
+              to={`/alternatives/${target.slug}`}
+              key={target.slug}
+              className="card-glow group flex min-w-0 flex-col rounded-2xl border border-border bg-card p-4 sm:p-5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+            >
+              <div className="flex items-start gap-3">
+                <BrandLogo slug={target.slug} name={target.name} size="sm" />
+                <div className="min-w-0 flex-1">
+                  <h3 className="truncate text-base font-semibold tracking-tight text-foreground">{target.name}</h3>
+                  <p className="mt-0.5 line-clamp-2 text-sm leading-5 text-muted-foreground">{target.tagline}</p>
+                </div>
+                <span className="shrink-0 rounded-full border border-border/80 bg-muted/35 px-2.5 py-1 text-xs font-semibold text-secondary-foreground">{count} alternatives</span>
+              </div>
+              <div className="mt-4 flex flex-wrap items-center gap-2">
+                {samples.map((sample) => <span key={sample.slug} className="inline-flex min-h-8 max-w-full items-center gap-1.5 rounded-full border border-border/80 bg-muted/35 py-1 pl-1 pr-2.5 text-xs font-medium text-secondary-foreground"><BrandLogo slug={sample.slug} name={sample.name} size="xs" showContainer={false} /><span className="truncate">{sample.name}</span></span>)}
+                {count > samples.length && <span className="text-xs font-medium text-muted-foreground">+{count - samples.length} more</span>}
+                <ArrowRight className="ml-auto h-4 w-4 shrink-0 text-primary transition-transform duration-200 group-hover:translate-x-1 motion-reduce:transition-none" aria-hidden="true" />
+              </div>
+            </Link>
+          ))}
+        </div>
       </section>
 
       <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20" aria-labelledby="categories-heading">
