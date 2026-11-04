@@ -1326,9 +1326,18 @@
 }
 .home-collection-card:hover,
 .frontier-access-card:hover,
-.home-category-card:hover {
+.home-category-card:hover,
+.home-collection-card:focus-visible,
+.frontier-access-card:focus-visible,
+.home-category-card:focus-visible {
   border-color: rgb(var(--color-primary) / 0.68);
-  box-shadow: 0 10px 26px rgb(30 64 175 / 0.1), 0 2px 10px rgb(124 58 237 / 0.07);
+  /* Brand-colour halo behind the card: cyan core glow + violet outer bloom,
+     layered over a soft contact shadow. Token-based, reads in both themes. */
+  box-shadow:
+    0 0 0 1px rgb(var(--color-primary) / 0.32),
+    0 10px 34px -6px rgb(var(--brand-cyan) / 0.38),
+    0 24px 64px -10px rgb(var(--brand-violet) / 0.34),
+    0 4px 16px -4px rgb(var(--color-primary) / 0.28);
 }
 .frontier-access-card__image,
 .home-category-card__image { transform-origin: center; }
