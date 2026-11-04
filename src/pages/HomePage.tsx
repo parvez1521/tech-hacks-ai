@@ -3,6 +3,7 @@ import { ArrowRight, BookOpen, Code2, Film, Gift, Image as ImageIcon, Layers3, M
 import { Link } from '../router/Router';
 import { UniversalSearch } from '../components/UniversalSearch';
 import { HeroSignalVisual } from '../components/HeroSignalVisual';
+import { FeaturedToolCard } from '../components/FeaturedToolCard';
 import { DailyDiscoveriesSection } from '../components/DailyDiscoveriesSection';
 import { BrandLogo } from '../components/BrandLogo';
 import { aiCategories } from '../data/aiToolsData';
@@ -37,6 +38,31 @@ export const HomePage: React.FC = () => {
   ).length;
   const categoryCount = (category: string) => allCatalogTools.filter((tool) => tool.category === category).length;
   const openSourceAiCount = allCatalogTools.filter((tool) => tool.isSelfHostable || tool.freeAccessType === 'open-source-local').length;
+  /* AIxploria-look homepage data: featured picks, ranked columns, and
+     trending category tiles — all derived from the live catalog. */
+  const featuredTools = allCatalogTools.filter((tool) => tool.isFeatured).slice(0, 8);
+  const categoriesByCount = aiCategories
+    .map((category) => ({ category, tools: allCatalogTools.filter((tool) => tool.category === category.id) }))
+    .filter((entry) => entry.tools.length > 0)
+    .sort((a, b) => b.tools.length - a.tools.length);
+  const trendingTools = allCatalogTools.filter((tool) => tool.isTrending);
+  const featuredRankedTools = allCatalogTools.filter((tool) => tool.isFeatured);
+  const rankingColumns = [
+    ...categoriesByCount.slice(0, 2).map((entry) => ({
+      title: entry.category.name,
+      href: `/ai-tools?category=${encodeURIComponent(entry.category.id)}`,
+      tools: entry.tools.slice(0, 10),
+      total: entry.tools.length,
+    })),
+    { title: 'Trending now', href: '/ai-tools', tools: trendingTools.slice(0, 10), total: trendingTools.length },
+    { title: 'Featured picks', href: '/ai-tools', tools: featuredRankedTools.slice(0, 10), total: featuredRankedTools.length },
+  ];
+  const pricingPills = [
+    { label: 'Free', href: '/ai-tools?price=free', className: 'text-emerald-600 dark:text-emerald-400' },
+    { label: 'Freemium', href: '/ai-tools?price=freemium', className: 'text-amber-600 dark:text-amber-400' },
+    { label: 'Free Trial', href: '/ai-tools?price=free-trial', className: 'text-purple-600 dark:text-purple-400' },
+    { label: 'Paid', href: '/ai-tools?price=paid', className: 'text-rose-600 dark:text-rose-400' },
+  ];
   const taskCategories = [
     {
       title: 'Free & Trial AI Video Generators',
@@ -102,34 +128,93 @@ export const HomePage: React.FC = () => {
 
   return (
     <main className="pb-12 sm:pb-16">
-      <section className="hero-aurora mx-auto grid max-w-7xl items-center gap-8 px-4 pb-16 pt-14 sm:px-6 sm:pb-20 sm:pt-20 lg:grid-cols-[1.05fr_.95fr] lg:gap-12" aria-labelledby="home-hero-heading">
+      <section className="hero-aurora relative overflow-hidden" aria-labelledby="home-hero-heading">
         <div className="hero-grid" aria-hidden="true" />
-        <div className="hero-stagger max-w-2xl">
-          <p className="eyebrow mb-5">A practical map to AI</p>
-          <h1 id="home-hero-heading" className="text-balance text-[2.6rem] font-bold leading-[1.03] tracking-[-0.04em] text-foreground sm:text-6xl sm:leading-[1.02] lg:text-[4rem]">
-            <span className="block">Another AI tool?</span>
-            <span className="block">Sure.</span>
-            <span className="text-brand-gradient block">Another Subscription?</span>
-            <span className="text-brand-gradient block">Nope.</span>
+        <div className="hero-stagger mx-auto flex max-w-3xl flex-col items-center px-4 pb-16 pt-14 text-center sm:px-6 sm:pb-20 sm:pt-16">
+          <p className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-3.5 py-1.5 text-[11px] font-bold uppercase tracking-[0.14em] text-muted-foreground shadow-sm">
+            <span className="text-sm font-extrabold normal-case tracking-normal text-violet-600 dark:text-violet-400">{allCatalogTools.length}</span>
+            AI tools listed · A practical map to AI
+          </p>
+          <h1 id="home-hero-heading" className="mt-6 text-balance text-[2.6rem] font-extrabold leading-[1.05] tracking-[-0.03em] text-foreground sm:text-6xl sm:leading-[1.04] lg:text-[4.2rem]">
+            <span className="block">Another AI tool? Sure.</span>
+            <span className="block"><span className="gradient-underline">Another Subscription?</span> Nope.</span>
           </h1>
           <p className="mt-6 max-w-[36rem] text-lg leading-8 text-muted-foreground sm:text-xl sm:leading-9">
             Compare AI tools by task, check current access routes, and find reviewed open-source projects.
           </p>
-          <div className="search-panel mt-8 max-w-xl">
+          <div className="search-panel mt-9 w-full max-w-2xl text-left">
             <UniversalSearch />
+            <div className="flex flex-wrap items-center justify-center gap-2 px-1 pb-1 pt-3">
+              <span className="meta-label mr-1">Pricing</span>
+              {pricingPills.map((pill) => (
+                <Link
+                  key={pill.label}
+                  to={pill.href}
+                  className={`inline-flex min-h-8 items-center rounded-full border border-border/70 bg-card px-3 py-1 text-xs font-bold shadow-sm transition-[box-shadow,transform] duration-200 hover:-translate-y-px hover:shadow focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary ${pill.className}`}
+                >
+                  {pill.label}
+                </Link>
+              ))}
+            </div>
           </div>
-          <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm">
-            <Link to="/pick" className="btn-primary inline-flex min-h-11 items-center gap-2 rounded-full px-5 font-semibold focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+          <div className="mt-7 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-sm">
+            <Link to="/pick" className="btn-primary inline-flex min-h-11 items-center gap-2 px-5 font-semibold focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
               Help me pick <ArrowRight className="h-4 w-4" aria-hidden="true" />
             </Link>
-            <Link to="/ai-video-tools" className="inline-flex min-h-11 items-center gap-2 text-muted-foreground transition-colors duration-200 hover:text-foreground focus-visible:rounded-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+            <Link to="/ai-video-tools" className="inline-flex min-h-11 items-center gap-2 rounded-full border border-border bg-card px-4 font-semibold text-secondary-foreground shadow-sm transition-colors duration-200 hover:text-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
               <Video className="h-4 w-4" aria-hidden="true" /> AI video generators
             </Link>
           </div>
+          <p className="mt-8 text-sm text-muted-foreground">
+            <strong className="font-bold text-foreground">{allCatalogTools.length}</strong> AI tools
+            {' · '}<strong className="font-bold text-foreground">{aiCategories.length}</strong> categories
+            {' · '}<strong className="font-bold text-foreground">{openSourceAiCount}</strong> open-source &amp; local options
+          </p>
+          <div className="mt-12 hidden w-full max-w-3xl lg:block">
+            <HeroSignalVisual />
+          </div>
         </div>
-        <div className="hidden min-w-0 lg:block">
-          <HeroSignalVisual />
+      </section>
+
+      <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20" aria-labelledby="featured-tools-heading">
+        <div className="mb-10 text-center">
+          <p className="eyebrow">Featured</p>
+          <h2 id="featured-tools-heading" className="mt-3 text-3xl font-bold tracking-tight text-foreground sm:text-4xl"><span className="gradient-underline">Featured</span> AI tools</h2>
+          <p className="mx-auto mt-3 max-w-2xl text-base leading-7 text-muted-foreground">Start with the platforms flagged as featured in the directory — then compare their alternatives before you commit.</p>
         </div>
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {featuredTools.map((tool) => <FeaturedToolCard key={tool.id} tool={tool} />)}
+        </div>
+      </section>
+
+      <section className="section-band" aria-labelledby="rankings-heading">
+       <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20">
+        <div className="mb-10">
+          <p className="eyebrow">Rankings</p>
+          <h2 id="rankings-heading" className="mt-3 text-3xl font-bold tracking-tight text-foreground sm:text-4xl">Top tools, <span className="gradient-underline">ranked by category</span></h2>
+        </div>
+        <div className="grid gap-x-6 gap-y-10 sm:grid-cols-2 xl:grid-cols-4">
+          {rankingColumns.map((column) => (
+            <div key={column.title}>
+              <h3 className="text-base font-bold tracking-tight text-foreground"><span className="gradient-underline">{column.title}</span></h3>
+              <ol className="mt-4 space-y-1">
+                {column.tools.map((tool, index) => (
+                  <li key={tool.id}>
+                    <Link to={`/ai-tools/${tool.slug}`} className="group flex min-h-10 items-center gap-2.5 rounded-lg px-1.5 py-1 transition-colors duration-200 hover:bg-card focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+                      <span className="w-5 shrink-0 text-right text-xs font-bold tabular-nums text-muted-foreground">{index + 1}</span>
+                      <BrandLogo slug={tool.slug} name={tool.name} size={28} iconBgColor={tool.iconBgColor} iconLetter={tool.iconLetter} className="rounded-md ring-1 ring-border/50" />
+                      <span className="min-w-0 truncate text-sm font-semibold text-foreground transition-colors group-hover:text-primary">{tool.name}</span>
+                    </Link>
+                  </li>
+                ))}
+              </ol>
+              <Link to={column.href} className="mt-3 inline-flex min-h-9 items-center gap-1 px-1.5 text-sm font-semibold text-primary hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+                See all ({column.total}) <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
+              </Link>
+            </div>
+          ))}
+        </div>
+       </div>
       </section>
 
       <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20" aria-labelledby="collections-heading">
@@ -207,6 +292,28 @@ export const HomePage: React.FC = () => {
               <span className="meta-label hidden max-w-64 truncate lg:block">{category.subcategories.map((subcategory) => subcategory).join(' · ')}</span>
               <span className="meta-label ml-auto shrink-0 tabular-nums md:ml-0">{categoryCount(category.id)} tools</span>
               <ArrowRight className="h-4 w-4 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-0.5 group-hover:text-primary" aria-hidden="true" />
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-7xl px-4 pb-16 sm:px-6 sm:pb-20" aria-labelledby="trending-categories-heading">
+        <div className="mb-10">
+          <p className="eyebrow">Trending categories</p>
+          <h2 id="trending-categories-heading" className="mt-3 text-3xl font-bold tracking-tight text-foreground sm:text-4xl">Explore <span className="gradient-underline">trending categories</span></h2>
+        </div>
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {categoriesByCount.slice(0, 8).map((entry, index) => (
+            <Link
+              key={entry.category.id}
+              to={`/ai-tools?category=${encodeURIComponent(entry.category.id)}`}
+              className="group surface-card block overflow-hidden rounded-[1.25rem] transition-[border-color,box-shadow,transform] duration-200 hover:-translate-y-0.5 hover:border-primary/45 hover:shadow-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+            >
+              <div className={`tile-pastel tile-pastel-${index % 6} h-24`} aria-hidden="true" />
+              <div className="p-4 sm:p-5">
+                <h3 className="text-base font-bold tracking-tight text-foreground transition-colors group-hover:text-primary">{entry.category.name}</h3>
+                <p className="mt-1.5 line-clamp-2 text-sm leading-6 text-muted-foreground">{entry.category.description}</p>
+              </div>
             </Link>
           ))}
         </div>

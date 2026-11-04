@@ -38,7 +38,7 @@ export const Header: React.FC = () => {
     setDesktopOpenGroup(null);
   }, [currentPath]);
   useEffect(() => {
-    // Visual only: deepens the glass header surface once the page scrolls.
+    // Visual only: deepens the header shadow once the page scrolls.
     const onScroll = () => setScrolled(window.scrollY > 8);
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
@@ -103,11 +103,11 @@ export const Header: React.FC = () => {
           aria-expanded={isOpen}
           aria-controls={menuId}
           onClick={() => setDesktopOpenGroup((current) => current === group.name ? null : group.name)}
-          className={`min-h-9 rounded-full px-3 text-[13px] list-none cursor-pointer select-none font-medium transition-colors flex items-center justify-between gap-1.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary ${group.links.some(([, href]) => active(href)) ? 'bg-primary/15 text-primary shadow-[inset_0_1px_0_rgb(255_255_255/0.18)]' : isOpen ? 'bg-muted/70 text-foreground' : 'text-muted-foreground hover:bg-muted/60 hover:text-foreground'}`}
+          className={`min-h-9 rounded-full px-3 text-[13px] list-none cursor-pointer select-none font-medium transition-colors flex items-center justify-between gap-1.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary ${group.links.some(([, href]) => active(href)) ? 'bg-primary/15 text-primary' : isOpen ? 'bg-muted/70 text-foreground' : 'text-muted-foreground hover:bg-muted/60 hover:text-foreground'}`}
         >
           {group.name}<span aria-hidden="true" className={`text-xs transition-transform ${isOpen ? 'rotate-180' : ''}`}>⌄</span>
         </button>
-        <div id={menuId} hidden={!isOpen} aria-hidden={!isOpen} className={`absolute top-full ${alignment} mt-1 min-w-56 glass-strong rounded-[1.25rem] p-1.5 z-50`}>
+        <div id={menuId} hidden={!isOpen} aria-hidden={!isOpen} className={`absolute top-full ${alignment} mt-1 min-w-56 glass-strong rounded-2xl p-1.5 z-50`}>
           {group.links.map(([label, href]) => <Link key={href + label} to={href} aria-current={active(href) ? 'page' : undefined} onClick={() => setDesktopOpenGroup(null)} className={`flex items-center justify-between gap-5 min-h-11 rounded-md px-3 py-2 text-sm transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-primary ${active(href) ? 'text-primary bg-primary/10 font-medium' : 'text-muted-foreground hover:text-foreground hover:bg-muted/60'}`}>
             {label}<ArrowUpRight className="w-3.5 h-3.5 opacity-50" />
           </Link>)}
@@ -123,7 +123,7 @@ export const Header: React.FC = () => {
       <div className="flex items-center gap-1">
         <button type="button" onClick={() => navigate('/ai-tools')} aria-label="Search AI tools" className="min-h-11 min-w-11 rounded-full text-muted-foreground transition-colors hover:bg-muted hover:text-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"><Search className="mx-auto h-4 w-4" /></button>
         <Link to="/saved" aria-label={`Saved items${savedCount ? ` (${savedCount})` : ''}`} className="relative flex min-h-11 min-w-11 items-center justify-center rounded-full text-muted-foreground transition-colors hover:bg-muted hover:text-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"><Bookmark className="h-4 w-4" />{savedCount > 0 && <span className="absolute right-0 top-0 flex h-4 min-w-4 items-center justify-center rounded-full bg-primary px-1 text-[10px] text-primary-foreground">{savedCount}</span>}</Link>
-        <Link to="/submit-tool" className="glass-chip hidden min-h-11 items-center gap-1 px-3.5 text-[13px] font-medium hover:bg-muted md:inline-flex"><Plus className="w-3.5 h-3.5" /> Submit</Link>
+        <Link to="/submit-tool" className="hidden min-h-11 items-center gap-1 rounded-full bg-action px-4 text-[13px] font-semibold text-action-foreground shadow-sm transition-colors hover:bg-action-hover md:inline-flex"><Plus className="w-3.5 h-3.5" /> Submit</Link>
         <div className="hidden lg:block"><ThemeToggle /></div>
         <button ref={menuButtonRef} type="button" onClick={() => setOpen(!open)} aria-label={open ? 'Close navigation menu' : 'Open navigation menu'} aria-expanded={open} aria-controls="mobile-navigation" className="lg:hidden min-h-11 min-w-11 rounded-full flex items-center justify-center text-muted-foreground hover:bg-muted focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"><span className="sr-only">Menu</span>{open ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}</button>
       </div>

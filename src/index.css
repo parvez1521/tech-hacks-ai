@@ -18,6 +18,9 @@
   --brand-light-blue: 29 78 216;
   --brand-light-border: 218 226 235;
   --brand-route-gradient: linear-gradient(90deg, #22D3EE 0%, #60A5FA 52%, #8B5CF6 100%);
+  /* AIxploria-look pass: solid steel-blue action colour (see DESIGN.md). */
+  --brand-steel: 47 127 193;
+  --brand-steel-hover: 37 105 168;
 }
 
 @layer base {
@@ -43,14 +46,21 @@
     --glow-spotlight: rgba(59, 130, 246, 0.16);
     --dot-color: rgba(148, 163, 184, 0.1);
     --grid-color: rgba(148, 163, 184, 0.055);
-    /* Liquid Glass (dark): smoky translucent fills over the midnight base. */
-    --glass-fill: rgb(255 255 255 / 0.055);
-    --glass-fill-hover: rgb(255 255 255 / 0.09);
-    --glass-fill-strong: rgb(var(--color-card) / 0.68);
-    --glass-border: rgb(255 255 255 / 0.13);
-    --glass-highlight: rgb(255 255 255 / 0.22);
-    --glass-shadow: 0 16px 40px -20px rgb(2 8 23 / 0.55);
-    --glass-shadow-lg: 0 32px 64px -28px rgb(2 8 23 / 0.62);
+    /* AIxploria-look pass (dark): clean deep-navy surfaces, solid fills.
+       The --glass-* names are retained because components consume them;
+       the material is now the clean panel/card material (see DESIGN.md). */
+    --glass-fill: rgb(var(--color-card));
+    --glass-fill-hover: rgb(var(--color-muted));
+    --glass-fill-strong: rgb(var(--color-card));
+    --glass-border: rgb(var(--color-border));
+    --glass-highlight: rgb(255 255 255 / 0.05);
+    --glass-shadow: 0 14px 34px -16px rgb(2 8 23 / 0.55);
+    --glass-shadow-lg: 0 30px 60px -24px rgb(2 8 23 / 0.6);
+    --color-action: 64 142 214;
+    --color-action-hover: var(--brand-steel);
+    --color-action-fg: 255 255 255;
+    --color-wash: 13 23 40;
+    --header-shadow: 0 12px 32px -14px rgb(2 8 23 / 0.5);
     /* Ambient colour field fixed behind every page so glass has colour to refract. */
     --page-wash:
       radial-gradient(56rem 30rem at 88% -8%, rgb(var(--brand-cyan) / 0.055), transparent 62%),
@@ -80,14 +90,20 @@
     --glow-spotlight: rgba(37, 99, 235, 0.04);
     --dot-color: rgba(15, 23, 42, 0.08);
     --grid-color: rgba(15, 23, 42, 0.04);
-    /* Liquid Glass (light): bright translucent white fills, soft gray edge. */
-    --glass-fill: rgb(255 255 255 / 0.55);
-    --glass-fill-hover: rgb(255 255 255 / 0.72);
-    --glass-fill-strong: rgb(var(--color-card) / 0.78);
-    --glass-border: rgb(15 23 42 / 0.09);
-    --glass-highlight: rgb(255 255 255 / 0.85);
-    --glass-shadow: 0 16px 40px -22px rgb(15 23 42 / 0.2);
-    --glass-shadow-lg: 0 32px 64px -28px rgb(15 23 42 / 0.22);
+    /* AIxploria-look pass (light): clean white surfaces, thin light border,
+       very soft pale blue-grey diffuse shadow. --glass-* names retained. */
+    --glass-fill: rgb(var(--color-card));
+    --glass-fill-hover: rgb(var(--color-muted));
+    --glass-fill-strong: rgb(var(--color-card));
+    --glass-border: rgb(var(--color-border));
+    --glass-highlight: rgb(255 255 255 / 0.6);
+    --glass-shadow: 0 12px 32px -14px rgb(47 84 122 / 0.16), 0 2px 6px -2px rgb(47 84 122 / 0.06);
+    --glass-shadow-lg: 0 28px 56px -20px rgb(47 84 122 / 0.22), 0 4px 10px -4px rgb(47 84 122 / 0.07);
+    --color-action: var(--brand-steel);
+    --color-action-hover: var(--brand-steel-hover);
+    --color-action-fg: 255 255 255;
+    --color-wash: 242 247 251;
+    --header-shadow: 0 8px 28px -12px rgb(31 78 121 / 0.14);
     --page-wash:
       radial-gradient(56rem 30rem at 88% -8%, rgb(var(--brand-cyan) / 0.05), transparent 62%),
       radial-gradient(64rem 34rem at 6% -10%, rgb(var(--color-primary) / 0.045), transparent 62%),
@@ -109,6 +125,14 @@
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     overflow-x: clip;
     text-rendering: optimizeLegibility;
+  }
+
+  /* AIxploria-look pass: Poppins is the display family for headings only;
+     Inter remains the UI/body family (see DESIGN.md). */
+  h1,
+  h2,
+  h3 {
+    font-family: 'Poppins', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   }
 
   ::selection {
@@ -260,107 +284,76 @@
     text-wrap: balance;
   }
 
-  /* Liquid Glass material system (see DESIGN.md). The glass edge is an
-     inset box-shadow ring rather than the border property, so a component's
-     own border utilities (tone top borders, hover border colours) keep
-     working on glass surfaces. Real backdrop blur is reserved for chrome
-     and floating panels (.glass-blur / .glass-strong / header / dialogs);
-     grid cards use the fill-only tiers for scroll performance. */
+  /* AIxploria-look material system (see DESIGN.md). The .glass* class names
+     are retained from the Liquid Glass pass because components consume
+     them, but the material is now clean and solid: card-token fill, a thin
+     token border, and a very soft diffuse shadow — no translucency, no
+     backdrop blur, no specular glass edges. */
   .glass {
-    background: var(--glass-fill);
-    box-shadow:
-      inset 0 0 0 1px var(--glass-border),
-      inset 0 1px 0 var(--glass-highlight),
-      inset 0 -1px 0 rgb(255 255 255 / 0.04),
-      var(--glass-shadow);
+    background: rgb(var(--color-card));
+    box-shadow: var(--glass-shadow);
   }
 
   .glass-blur {
-    background: var(--glass-fill);
-    box-shadow:
-      inset 0 0 0 1px var(--glass-border),
-      inset 0 1px 0 var(--glass-highlight),
-      inset 0 -1px 0 rgb(255 255 255 / 0.04),
-      var(--glass-shadow);
-    -webkit-backdrop-filter: blur(20px) saturate(160%);
-    backdrop-filter: blur(20px) saturate(160%);
+    background: rgb(var(--color-card));
+    border: 1px solid rgb(var(--color-border));
+    box-shadow: var(--glass-shadow);
   }
 
   .glass-strong {
-    background: var(--glass-fill-strong);
-    box-shadow:
-      inset 0 0 0 1px var(--glass-border),
-      inset 0 1px 0 var(--glass-highlight),
-      inset 0 -1px 0 rgb(255 255 255 / 0.04),
-      var(--glass-shadow-lg);
-    -webkit-backdrop-filter: blur(22px) saturate(160%);
-    backdrop-filter: blur(22px) saturate(160%);
+    background: rgb(var(--color-card));
+    border: 1px solid rgb(var(--color-border));
+    box-shadow: var(--glass-shadow-lg);
   }
 
-  /* Capsule chip material: translucent fill + specular top edge. */
+  /* Capsule chip material: solid card fill, thin border, soft shadow. */
   .glass-chip {
-    background: var(--glass-fill);
-    border: 1px solid var(--glass-border);
+    background: rgb(var(--color-card));
+    border: 1px solid rgb(var(--color-border));
     border-radius: 999px;
-    box-shadow: inset 0 1px 0 var(--glass-highlight);
+    box-shadow: 0 3px 10px -4px rgb(2 8 23 / 0.22);
   }
 
-  /* Translucent field material for inputs sitting on glass panels. */
+  /* Field material for inputs sitting on panels: solid card fill. */
   .glass-field {
-    background: rgb(var(--color-card) / 0.5);
-    -webkit-backdrop-filter: blur(14px) saturate(150%);
-    backdrop-filter: blur(14px) saturate(150%);
+    background: rgb(var(--color-card));
   }
 
-  /* Card material is now glass: translucent fill, specular top edge, and a
-     soft floating shadow (glass floats — this supersedes Direction A's
-     flat border-led resting state; the structure stays Direction A). The
-     real border stays on .surface-card because the shared cards rely on
-     this class for their edge. */
+  /* Card material: clean solid surface (white in light, deep navy in dark)
+     with a thin token border and a soft diffuse shadow. The real border
+     stays on .surface-card because the shared cards rely on this class
+     for their edge. */
   .surface-card {
-    background: var(--glass-fill);
-    border: 1px solid var(--glass-border);
-    box-shadow:
-      inset 0 1px 0 var(--glass-highlight),
-      inset 0 -1px 0 rgb(255 255 255 / 0.04),
-      var(--glass-shadow);
+    background: rgb(var(--color-card));
+    border: 1px solid rgb(var(--color-border));
+    box-shadow: var(--glass-shadow);
   }
 
   .interactive-card {
-    background: var(--glass-fill);
-    box-shadow:
-      inset 0 1px 0 var(--glass-highlight),
-      inset 0 -1px 0 rgb(255 255 255 / 0.04),
-      var(--glass-shadow);
+    background: rgb(var(--color-card));
+    box-shadow: var(--glass-shadow);
     transition: border-color 160ms ease, background-color 160ms ease, box-shadow 200ms ease, transform 160ms ease;
   }
 
   .interactive-card:hover,
   .interactive-card:focus-within {
-    background: var(--glass-fill-hover);
+    background: rgb(var(--color-card));
     border-color: rgb(var(--color-primary) / 0.45);
-    box-shadow:
-      inset 0 1px 0 var(--glass-highlight),
-      0 18px 36px -16px rgb(var(--color-primary) / 0.32),
-      var(--glass-shadow);
+    box-shadow: var(--glass-shadow-lg);
     transform: translateY(-2px);
   }
 
-  /* Liquid Glass site header: a floating glass bar — translucent fill and
-     real backdrop blur are always on (not only on scroll), with a specular
-     bottom edge; the scrolled modifier deepens the fill and adds a soft
-     tinted elevation. Both themes resolve through the semantic tokens. */
+  /* AIxploria-look site header: a flat clean bar — solid surface (white in
+     light, navy card in dark) with a faint soft shadow instead of glass
+     blur; the scrolled modifier deepens the shadow only. */
   .site-header {
-    background-color: rgb(var(--color-bg) / 0.58);
-    -webkit-backdrop-filter: blur(20px) saturate(160%);
-    backdrop-filter: blur(20px) saturate(160%);
-    box-shadow: inset 0 -1px 0 rgb(255 255 255 / 0.05);
-    transition: background-color 200ms ease, box-shadow 200ms ease, border-color 200ms ease;
+    background-color: rgb(var(--color-card));
+    box-shadow: var(--header-shadow);
+    transition: box-shadow 200ms ease;
   }
 
   .site-header--scrolled {
-    background-color: rgb(var(--color-bg) / 0.78);
-    box-shadow: inset 0 -1px 0 rgb(255 255 255 / 0.05), 0 16px 36px -20px rgb(2 8 23 / 0.5);
+    box-shadow: var(--glass-shadow-lg);
   }
 
   /* Hero aurora: a real field of brand colour behind the homepage hero —
@@ -370,10 +363,10 @@
     position: relative;
     isolation: isolate;
     background:
-      radial-gradient(48rem 26rem at 6% -10%, rgb(var(--brand-cyan) / 0.21), transparent 65%),
-      radial-gradient(52rem 28rem at 94% -12%, rgb(var(--brand-violet) / 0.19), transparent 65%),
-      radial-gradient(44rem 24rem at 52% -6%, rgb(var(--color-primary) / 0.16), transparent 70%),
-      radial-gradient(58rem 26rem at 50% 118%, rgb(var(--color-primary) / 0.09), transparent 70%);
+      radial-gradient(48rem 26rem at 6% -10%, rgb(var(--brand-cyan) / 0.1), transparent 65%),
+      radial-gradient(52rem 28rem at 94% -12%, rgb(var(--brand-violet) / 0.08), transparent 65%),
+      radial-gradient(44rem 24rem at 52% -6%, rgb(var(--color-primary) / 0.08), transparent 70%),
+      radial-gradient(58rem 26rem at 50% 118%, rgb(var(--color-primary) / 0.05), transparent 70%);
   }
 
   /* Fine grid field layered over the hero aurora, faded at the edges with a
@@ -407,58 +400,47 @@
      press response. The gradient is theme-invariant, so the label uses the
      fixed midnight ink token for contrast on the bright gradient in both
      themes. Specific transition properties only — never transition: all. */
+  /* AIxploria-look primary action: solid steel blue, white label, soft
+     10px radius and a quiet coloured shadow. The brand route-gradient is
+     reserved for the logo mark and headline accents. */
   .btn-primary {
-    background: var(--brand-route-gradient);
-    color: rgb(var(--brand-midnight));
-    /* Liquid Glass shape: a glossy capsule — bright specular top edge,
-       shaded bottom edge, soft coloured float shadow. */
-    border-radius: 999px;
-    box-shadow:
-      inset 0 1px 0 rgb(255 255 255 / 0.38),
-      inset 0 -1px 0 rgb(2 8 23 / 0.15),
-      0 14px 28px -12px rgb(var(--color-primary) / 0.55),
-      0 4px 10px -4px rgb(2 8 23 / 0.25);
-    transition: transform 160ms ease, box-shadow 200ms ease, filter 160ms ease;
+    background: rgb(var(--color-action));
+    color: rgb(var(--color-action-fg));
+    border-radius: 0.625rem;
+    box-shadow: 0 10px 22px -10px rgb(var(--color-action) / 0.6);
+    transition: transform 160ms ease, box-shadow 200ms ease, background-color 160ms ease;
   }
   .btn-primary:hover {
-    filter: brightness(1.07);
+    background: rgb(var(--color-action-hover));
     transform: translateY(-1px);
-    box-shadow:
-      inset 0 1px 0 rgb(255 255 255 / 0.38),
-      inset 0 -1px 0 rgb(2 8 23 / 0.15),
-      0 18px 34px -12px rgb(var(--color-primary) / 0.6),
-      0 6px 14px -4px rgb(2 8 23 / 0.28);
+    box-shadow: 0 14px 26px -10px rgb(var(--color-action) / 0.65);
   }
   .btn-primary:active {
     transform: scale(0.96);
   }
 
-  /* Liquid Glass frame for the hero search: a 1px gradient hairline around
-     the existing search control (concentric radius: panel 1.25rem, input
-     1.125rem), layered shadow, and a full glass field inside — strong
-     translucent fill with real blur over the hero aurora. The search
+  /* AIxploria-look hero search container: a wide pale wash panel holding
+     the white search field (and the pricing pills beneath it). The search
      component itself is untouched; only its hero wrapper carries this. */
   .search-panel {
     border-radius: 1.25rem;
-    padding: 1px;
-    background: linear-gradient(120deg, rgb(var(--brand-cyan) / 0.55), rgb(var(--color-primary) / 0.32) 48%, rgb(var(--brand-violet) / 0.55));
-    box-shadow:
-      0 24px 48px -20px rgb(var(--color-primary) / 0.38),
-      0 10px 24px -12px rgb(2 8 23 / 0.35);
+    padding: 0.625rem;
+    background: rgb(var(--color-wash));
+    border: 1px solid rgb(var(--color-border) / 0.55);
+    box-shadow: 0 18px 36px -24px rgb(31 78 121 / 0.25);
   }
   .search-panel input {
-    border-color: transparent;
-    border-radius: 1.125rem;
-    background: var(--glass-fill-strong);
-    -webkit-backdrop-filter: blur(18px) saturate(160%);
-    backdrop-filter: blur(18px) saturate(160%);
+    border: 1px solid rgb(var(--color-border));
+    border-radius: 0.875rem;
+    background: rgb(var(--color-card));
+    box-shadow: 0 6px 18px -8px rgb(31 78 121 / 0.18);
   }
 
   /* Alternate chapter field for homepage sections: a subtly different token
      surface band with hairline rules above and below, so the page reads as
      composed chapters instead of one flat scroll. */
   .section-band {
-    background: linear-gradient(180deg, rgb(var(--color-muted) / 0.5), rgb(var(--color-muted) / 0.28));
+    background: rgb(var(--color-wash));
     border-top: 1px solid rgb(var(--color-border) / 0.7);
     border-bottom: 1px solid rgb(var(--color-border) / 0.7);
   }
@@ -492,38 +474,88 @@
     color: transparent;
   }
 
-  /* Direction A signature: mono technical kickers. Section eyebrows, page
-     kickers, card meta labels and data chips use the system monospace stack
-     (no webfont) at 11px with wide tracking — see DESIGN.md. */
+  /* AIxploria-look labels: bold small-caps sans in muted grey — section
+     eyebrows, page kickers, card meta labels and data chips. Class names
+     retained from the Direction A mono-kicker pass; the typeface is now
+     the UI sans (no monospace). */
   .eyebrow {
-    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-    color: rgb(var(--color-primary));
+    color: rgb(var(--color-muted-fg));
     font-size: 0.6875rem;
-    font-weight: 600;
-    letter-spacing: 0.18em;
+    font-weight: 700;
+    letter-spacing: 0.16em;
     line-height: 1rem;
     text-transform: uppercase;
   }
 
   .kicker {
-    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-    color: rgb(var(--color-primary));
+    color: rgb(var(--color-muted-fg));
     font-size: 0.6875rem;
-    font-weight: 600;
-    letter-spacing: 0.18em;
+    font-weight: 700;
+    letter-spacing: 0.16em;
     line-height: 1rem;
     text-transform: uppercase;
   }
 
   .meta-label {
-    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
     color: rgb(var(--color-muted-fg));
     font-size: 0.6875rem;
-    font-weight: 500;
-    letter-spacing: 0.14em;
+    font-weight: 600;
+    letter-spacing: 0.1em;
     line-height: 1rem;
     text-transform: uppercase;
   }
+
+  /* AIxploria signature accent: a thin multicolour gradient underline
+     (blue → pink → orange) drawn under a span of headline text. Kept
+     independent of the brand route-gradient, which stays reserved for
+     the logo mark. */
+  .gradient-underline {
+    background-image: linear-gradient(90deg, #38bdf8 0%, #60a5fa 30%, #f472b6 62%, #fb923c 100%);
+    background-repeat: no-repeat;
+    background-size: 100% 0.11em;
+    background-position: 0 97%;
+    padding-bottom: 0.1em;
+  }
+
+  /* Trending category tiles: pure-CSS pastel visual areas (no imagery).
+     Light pastels in the light theme; deeper muted versions in dark so
+     the tiles keep the same composition without glowing. */
+  .tile-pastel {
+    position: relative;
+    overflow: hidden;
+  }
+  .tile-pastel::before {
+    content: "";
+    position: absolute;
+    width: 9rem;
+    height: 9rem;
+    right: -3rem;
+    top: -4.5rem;
+    border-radius: 999px;
+    background: rgb(255 255 255 / 0.45);
+  }
+  .tile-pastel::after {
+    content: "";
+    position: absolute;
+    width: 5rem;
+    height: 5rem;
+    left: -1.5rem;
+    bottom: -2.5rem;
+    border-radius: 999px;
+    background: rgb(255 255 255 / 0.3);
+  }
+  .tile-pastel-0 { background: linear-gradient(135deg, #dbeafe, #e0e7ff); }
+  .tile-pastel-1 { background: linear-gradient(135deg, #fce7f3, #ffe4e6); }
+  .tile-pastel-2 { background: linear-gradient(135deg, #fef3c7, #ffedd5); }
+  .tile-pastel-3 { background: linear-gradient(135deg, #d1fae5, #ccfbf1); }
+  .tile-pastel-4 { background: linear-gradient(135deg, #ede9fe, #fce7f3); }
+  .tile-pastel-5 { background: linear-gradient(135deg, #e0f2fe, #cffafe); }
+  .dark .tile-pastel-0 { background: linear-gradient(135deg, #1e3a5f, #27356b); }
+  .dark .tile-pastel-1 { background: linear-gradient(135deg, #4a2545, #51303a); }
+  .dark .tile-pastel-2 { background: linear-gradient(135deg, #4d3d1c, #54381f); }
+  .dark .tile-pastel-3 { background: linear-gradient(135deg, #17453c, #173f4d); }
+  .dark .tile-pastel-4 { background: linear-gradient(135deg, #352a5e, #472a4d); }
+  .dark .tile-pastel-5 { background: linear-gradient(135deg, #174466, #16424e); }
 
   .focus-ring:focus-visible {
     outline: 2px solid rgb(var(--color-primary) / 0.9);
@@ -1157,12 +1189,10 @@
   margin-inline: auto;
   border: 1px solid var(--glass-border);
   border-radius: 1.25rem;
-  /* The hero visual is a single panel floating over the aurora, so it
-     earns real backdrop blur. */
+  /* Clean solid panel (AIxploria-look pass): the strong fill token now
+     resolves to the solid card surface in both themes. */
   background: var(--glass-fill-strong);
-  -webkit-backdrop-filter: blur(18px) saturate(160%);
-  backdrop-filter: blur(18px) saturate(160%);
-  box-shadow: 0 28px 56px -20px rgb(2 8 23 / 0.28), 0 12px 28px -12px rgb(var(--color-primary) / 0.18), inset 0 1px 0 var(--glass-highlight);
+  box-shadow: 0 28px 56px -20px rgb(2 8 23 / 0.28), 0 12px 28px -12px rgb(var(--color-primary) / 0.18);
 }
 .discovery-interface__chrome {
   display: flex;

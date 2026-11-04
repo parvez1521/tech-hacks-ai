@@ -29,7 +29,7 @@ export const AlternativeCard: React.FC<AlternativeCardProps> = ({ alternative })
   return (
     <div
       onMouseMove={handleMouseMove}
-       className="group interactive-card relative flex flex-col justify-between h-full p-4 rounded-[1.25rem] border border-border hover:border-cyan-500/40 hover:-translate-y-1.5 hover:shadow-xl hover:shadow-blue-500/5 transition-all duration-300 ease-out focus-within:ring-2 focus-within:ring-primary/40 cursor-pointer"
+       className="group interactive-card relative flex flex-col justify-between h-full p-4 rounded-[1.25rem] border border-border hover:border-primary/40 hover:-translate-y-1.5 hover:shadow-xl transition-all duration-300 ease-out focus-within:ring-2 focus-within:ring-primary/40 cursor-pointer"
     >
       {/* Decorative Subtle Inner Spotlight on Hover */}
       <div
