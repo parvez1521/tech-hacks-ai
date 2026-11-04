@@ -5,17 +5,53 @@ import { UniversalSearch } from '../components/UniversalSearch';
 import { HeroSignalVisual } from '../components/HeroSignalVisual';
 import { DailyDiscoveriesSection } from '../components/DailyDiscoveriesSection';
 import { BrandLogo } from '../components/BrandLogo';
+import { getBrandLogo } from '../data/runtimeBrandLogos.ts';
 import { aiCategories } from '../data/aiToolsData';
 import { aiModels, getCurrentModelAccessRoutes, modelAccessProviders } from '../data/modelAccessCatalog';
 import { getActiveOffers, getFeaturedOffers } from '../data/offersData';
 import { getAllAiTools, getAiToolsForSearchIntent } from '../services/aiCatalogService';
+import { publicGitHubProjects } from '../data/githubProjectsData';
 
 const featuredCollections = [
-  { title: 'Frontier Models', href: '/frontier-models', description: 'Compare capabilities, official pricing and places to try leading models.', eyebrow: 'Model index', tone: 'model', highlights: ['GPT-6 Astra', 'Claude Opus 5.5', 'Seedance 2.5'] },
-  { title: 'Free Access', href: '/free-ai-sites', description: 'Find daily credits, weekly shared allowances, free plans and local software.', eyebrow: 'Checked routes', tone: 'access', highlights: ['Daily allowances', 'Weekly token pools', 'Free local tools'] },
-  { title: 'All AI Tools', href: '/ai-tools', description: 'Explore tools for writing, coding, image, video, audio and research.', eyebrow: 'Platform directory', tone: 'catalog', highlights: ['By task', 'By category', 'By pricing'] },
-  { title: 'GitHub Projects', href: '/github-projects', description: 'Explore useful community and open-source projects with clear review labels.', eyebrow: 'Open source', tone: 'catalog', highlights: ['Self-hosted apps', 'Developer tools', 'AI projects'] },
+  { title: 'Frontier Models', href: '/frontier-models', description: 'Compare capabilities, official pricing and places to try leading models.', image: '/images/collections/frontier-models.webp', imageAlt: 'Neon model showcase featuring GPT-6 Astra and Claude model cards', samples: [{ slug: 'chatgpt', name: 'GPT-6 Astra' }, { slug: 'claude', name: 'Claude Opus 5.5' }] },
+  { title: 'Free AI Video Models', href: '/ai-video-tools', description: 'Explore video generators with free plans, daily credits or limited trials.', image: '/images/collections/free-ai-video-models.webp', imageAlt: 'Neon video generation showcase featuring Seedance and AI video tools', samples: [{ slug: 'dreamina', name: 'Seedance 2.5 · Dreamina' }, { slug: 'runway', name: 'Runway' }, { slug: 'pika', name: 'Pika' }] },
+  { title: 'All AI Tools', href: '/ai-tools', description: 'Explore tools for writing, coding, image, video, audio and research.', image: '/images/collections/all-ai-tools.webp', imageAlt: 'Neon showcase of popular AI tools and platforms', samples: [{ slug: 'chatgpt', name: 'ChatGPT' }, { slug: 'claude', name: 'Claude' }, { slug: 'gemini', name: 'Gemini' }] },
+  { title: 'GitHub Projects', href: '/github-projects', description: 'Explore useful community and open-source projects with clear review labels.', image: '/images/collections/github-projects.webp', imageAlt: 'Neon GitHub projects directory shown on a laptop and app tile', samples: publicGitHubProjects.slice(0, 3).map((project) => ({ slug: 'github', name: project.name })) },
 ];
+
+const frontierAccessBanners: Record<string, { src: string; alt: string }> = {
+  'astra-rusherai': {
+    src: '/images/frontier-access/01-gpt-6-astra-weekly-shared-pool.webp',
+    alt: 'OpenAI GPT-6 Astra with a free weekly shared pool of 50 million tokens across 9 listed models.',
+  },
+  'opus-rusherai': {
+    src: '/images/frontier-access/02-claude-opus-5-5-weekly-shared-pool.webp',
+    alt: 'Anthropic Claude Opus 5.5 with a free weekly shared pool of 50 million tokens across 9 listed models.',
+  },
+  'astra-omnirush-daily': {
+    src: '/images/frontier-access/03-gpt-6-astra-daily-allowance.webp',
+    alt: 'OpenAI GPT-6 Astra with a daily free frontier-model allowance; a fixed token amount is not published.',
+  },
+  'seedance-dreamina-daily': {
+    src: '/images/frontier-access/04-seedance-2-5-daily-credits.webp',
+    alt: 'ByteDance Seedance 2.5 with free daily credits; credit cost varies by generation settings.',
+  },
+};
+
+const frontierAccessRouteOrder = Object.keys(frontierAccessBanners);
+
+const categoryArtwork: Record<string, { src: string; alt: string }> = {
+  assistants: { src: '/images/ai-categories/01-ai-assistants-reasoning.webp', alt: 'Neon AI assistant interface with a reasoning brain and conversational signals.' },
+  writing: { src: '/images/ai-categories/02-writing-content.webp', alt: 'Glowing document, typography tools, and pen for writing and content work.' },
+  image: { src: '/images/ai-categories/03-image-generation.webp', alt: 'Layered image-generation canvases with a landscape and visual editing controls.' },
+  video: { src: '/images/ai-categories/04-video-generation-editing.webp', alt: 'Video editing screen with a clapperboard, play control, and editing sliders.' },
+  voice: { src: '/images/ai-categories/05-audio-voice.webp', alt: 'Studio microphone surrounded by voice waveforms and audio controls.' },
+  music: { src: '/images/ai-categories/06-music.webp', alt: 'Headphones around a music record with sound-level and music-note controls.' },
+  coding: { src: '/images/ai-categories/07-coding-development.webp', alt: 'Code editor window with code brackets and developer-tool symbols.' },
+  productivity: { src: '/images/ai-categories/08-productivity-research.webp', alt: 'Research search interface with a document and reference books.' },
+  automation: { src: '/images/ai-categories/09-automation-agents.webp', alt: 'Automation agent interface with workflow and settings symbols.' },
+  '3d': { src: '/images/ai-categories/10-design-creativity.webp', alt: 'Creative design cube with brush and color-palette tools.' },
+};
 
 const resources = [
   ['Open Source Catalog', '/tools', Layers3],
@@ -27,7 +63,9 @@ const resources = [
 export const HomePage: React.FC = () => {
   const activeOffers = getActiveOffers();
   const offers = getFeaturedOffers().filter((offer) => activeOffers.some((active) => active.slug === offer.slug)).slice(0, 2);
-  const freeModelRoutes = getCurrentModelAccessRoutes().filter((route) => ['free-weekly-shared', 'free-daily-allowance', 'free-daily-credits'].includes(route.accessType));
+  const freeModelRoutes = getCurrentModelAccessRoutes()
+    .filter((route) => ['free-weekly-shared', 'free-daily-allowance', 'free-daily-credits'].includes(route.accessType) && frontierAccessBanners[route.id])
+    .sort((a, b) => frontierAccessRouteOrder.indexOf(a.id) - frontierAccessRouteOrder.indexOf(b.id));
   const allCatalogTools = getAllAiTools();
   const videoGenerators = getAiToolsForSearchIntent('AI video generator');
   const freeVideoGeneratorCount = videoGenerators.filter((tool) =>
@@ -138,20 +176,27 @@ export const HomePage: React.FC = () => {
             <h2 id="collections-heading" className="mt-1 text-2xl font-semibold tracking-tight text-foreground">Choose a collection</h2>
           </div>
         </div>
-        <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
+        <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
           {featuredCollections.map((item) => (
             <Link
               to={item.href}
               key={item.href}
-              className={`group flex min-h-40 flex-col rounded-xl border border-border bg-card p-5 transition-colors hover:border-primary/45 hover:bg-muted/40 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary sm:p-6 ${item.tone === 'model' ? 'border-t-2 border-t-primary' : item.tone === 'access' ? 'border-t-2 border-t-emerald-600 dark:border-t-emerald-400' : ''}`}
+              className="home-collection-card group flex min-w-0 flex-col overflow-hidden rounded-2xl border border-border bg-card focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
             >
-              <p className="text-xs font-medium text-muted-foreground">{item.eyebrow}</p>
-              <div className="mt-3 flex items-center justify-between gap-3">
-                <h3 className="text-lg font-semibold tracking-tight text-foreground">{item.title}</h3>
-                <ArrowRight className="h-4 w-4 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-0.5 group-hover:text-primary" aria-hidden="true" />
+              <div className="relative aspect-[3/2] overflow-hidden bg-[#071126]">
+                <img src={item.image} alt={item.imageAlt} width={1536} height={1024} loading="lazy" decoding="async" className="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.025] motion-reduce:transform-none motion-reduce:transition-none" />
+                <span className="pointer-events-none absolute inset-x-0 bottom-0 h-12 bg-gradient-to-t from-[#071126]/35 to-transparent" aria-hidden="true" />
               </div>
-              <p className="mt-2 text-sm leading-6 text-muted-foreground">{item.description}</p>
-              <div className="mt-4 flex flex-wrap gap-1.5">{item.highlights.map((highlight) => <span key={highlight} className="rounded-md border border-border/80 bg-muted/50 px-2 py-1 text-[11px] font-medium text-secondary-foreground">{highlight}</span>)}</div>
+              <div className="flex flex-1 flex-col p-4 sm:p-5">
+                <div className="flex items-start justify-between gap-3">
+                  <h3 className="text-lg font-semibold tracking-tight text-foreground">{item.title}</h3>
+                  <ArrowRight className="mt-1 h-4 w-4 shrink-0 text-primary transition-transform duration-200 group-hover:translate-x-1 motion-reduce:transition-none" aria-hidden="true" />
+                </div>
+                <p className="mt-2 text-sm leading-6 text-muted-foreground">{item.description}</p>
+                <div className="mt-4 flex flex-wrap gap-2">
+                  {item.samples.map((sample) => <span key={sample.name} className="inline-flex min-h-8 max-w-full items-center gap-1.5 rounded-full border border-border/80 bg-muted/35 py-1 pl-1 pr-2.5 text-xs font-medium text-secondary-foreground"><BrandLogo slug={sample.slug} name={sample.name} size="xs" showContainer={false} /><span className="truncate">{sample.name}</span></span>)}
+                </div>
+              </div>
             </Link>
           ))}
         </div>
@@ -166,22 +211,30 @@ export const HomePage: React.FC = () => {
           </div>
           <Link to="/frontier-models" className="inline-flex min-h-11 items-center gap-1 text-sm font-medium text-primary hover:underline">Compare all models <ArrowRight className="h-4 w-4" aria-hidden="true" /></Link>
         </div>
-        <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
+        <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
           {freeModelRoutes.map((route) => {
             const model = aiModels.find((item) => item.id === route.modelId);
             const provider = modelAccessProviders.find((item) => item.id === route.providerId);
             if (!model || !provider) return null;
             const accessLabel = route.accessType === 'free-weekly-shared' ? 'Free weekly · shared pool' : route.accessType === 'free-daily-allowance' ? 'Free daily allowance' : 'Free daily credits';
-            return <article key={route.id} className="flex min-h-40 flex-col rounded-xl border border-border bg-card p-4 transition-colors hover:border-primary/40">
-              <div className="flex items-start justify-between gap-2">
-                <div><p className="text-xs text-muted-foreground">{model.organization}</p><h3 className="mt-1 text-base font-semibold text-foreground">{model.name}</h3></div>
-                <span className="shrink-0 rounded-md border border-emerald-500/25 bg-emerald-500/10 px-2 py-1 text-[10px] font-semibold text-emerald-700 dark:text-emerald-300">{accessLabel}</span>
-              </div>
-              <p className="mt-3 text-sm font-medium leading-5 text-foreground">{route.allowance}</p>
-              <p className="mt-2 text-xs leading-5 text-muted-foreground">{provider.name} · {route.quickNote || route.conditions}</p>
-              <div className="mt-auto flex items-center justify-between gap-2 pt-4">
-                <span className="text-[11px] text-muted-foreground">Checked {route.lastVerifiedAt}</span>
-                <a href={route.claimUrl} target="_blank" rel="noreferrer" className="text-xs font-semibold text-primary hover:underline">Try route ↗</a>
+            const banner = frontierAccessBanners[route.id];
+            const providerTool = allCatalogTools.find((tool) => tool.slug === (provider.existingToolSlug || provider.id));
+            const providerLogo = providerTool ? getBrandLogo(providerTool.slug) : undefined;
+            const hasVerifiedProviderLogo = Boolean(providerLogo?.assetPath && (providerLogo.sourceType === 'provided' || (providerLogo.sourceUrl && providerLogo.sourceType !== 'fallback')));
+            return <article key={route.id} aria-labelledby={`frontier-access-${route.id}`} className="frontier-access-card group flex min-w-0 flex-col overflow-hidden rounded-2xl border border-border bg-card transition-colors motion-reduce:transition-none">
+              <h3 id={`frontier-access-${route.id}`} className="sr-only">{model.organization} {model.name} · {accessLabel}</h3>
+              <img src={banner.src} alt={banner.alt} width={808} height={444} loading="lazy" decoding="async" className="frontier-access-card__image aspect-[1.82/1] w-full bg-[#071126] object-cover transition-transform duration-500 ease-out group-hover:scale-[1.015] motion-reduce:transform-none motion-reduce:transition-none" />
+              <div className="flex flex-1 flex-col p-4">
+                <div className="flex items-center gap-2 text-xs font-medium text-foreground">
+                  {hasVerifiedProviderLogo && <BrandLogo slug={providerTool!.slug} name={provider.name} size="xs" />}
+                  <span>Access via {provider.name}</span>
+                </div>
+                <p className="mt-3 text-sm font-medium leading-5 text-foreground">{route.allowance}</p>
+                <p className="mt-2 text-xs leading-5 text-muted-foreground">{route.quickNote || route.conditions}</p>
+                <div className="mt-auto flex items-center justify-between gap-2 pt-4">
+                  <span className="text-[11px] text-muted-foreground">Checked {route.lastVerifiedAt}</span>
+                  <a href={route.claimUrl} target="_blank" rel="noreferrer" className="text-xs font-semibold text-primary hover:underline">Try route ↗</a>
+                </div>
               </div>
             </article>;
           })}
@@ -196,19 +249,23 @@ export const HomePage: React.FC = () => {
           </div>
           <Link to="/ai-tools" className="inline-flex min-h-11 items-center gap-1 text-sm font-medium text-primary hover:underline">All tools <ArrowRight className="h-4 w-4" aria-hidden="true" /></Link>
         </div>
-        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-          {aiCategories.map((category) => (
-            <Link key={category.id} to={`/ai-tools?category=${encodeURIComponent(category.id)}`} className="group flex min-h-40 flex-col rounded-xl border border-border bg-card p-4 transition-colors hover:border-primary/45 hover:bg-muted/30 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
-              <div className="flex items-center justify-between gap-3">
-                <h3 className="text-sm font-semibold text-foreground">{category.name}</h3>
-                <ArrowRight className="h-4 w-4 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-0.5 group-hover:text-primary" aria-hidden="true" />
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {aiCategories.map((category) => {
+            const artwork = categoryArtwork[category.id];
+            return <Link key={category.id} to={`/ai-tools?category=${encodeURIComponent(category.id)}`} className="home-category-card group flex min-h-40 min-w-0 flex-col overflow-hidden rounded-2xl border border-border bg-card focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+              <img src={artwork.src} alt={artwork.alt} width={495} height={236} loading="lazy" decoding="async" className="home-category-card__image aspect-[2.08/1] w-full bg-[#071126] object-cover transition-transform duration-500 ease-out group-hover:scale-[1.02] motion-reduce:transform-none motion-reduce:transition-none" />
+              <div className="flex flex-1 flex-col p-4">
+                <div className="flex items-center justify-between gap-3">
+                  <h3 className="text-sm font-semibold text-foreground">{category.name}</h3>
+                  <ArrowRight className="h-4 w-4 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-0.5 group-hover:text-primary motion-reduce:transition-none" aria-hidden="true" />
+                </div>
+                <p className="mt-2 text-xs leading-5 text-muted-foreground">{category.description}</p>
+                <div className="mt-auto flex flex-wrap gap-1.5 pt-3">
+                  {category.subcategories.map((subcategory) => <span key={subcategory} className="rounded-md border border-border/80 bg-muted/50 px-2 py-1 text-[10px] font-medium text-secondary-foreground">{subcategory}</span>)}
+                </div>
               </div>
-              <p className="mt-2 text-xs leading-5 text-muted-foreground">{category.description}</p>
-              <div className="mt-auto flex flex-wrap gap-1.5 pt-3">
-                {category.subcategories.map((subcategory) => <span key={subcategory} className="rounded-md border border-border/80 bg-muted/50 px-2 py-1 text-[10px] font-medium text-secondary-foreground">{subcategory}</span>)}
-              </div>
-            </Link>
-          ))}
+            </Link>;
+          })}
         </div>
       </section>
 

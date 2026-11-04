@@ -39,7 +39,7 @@ describe('Homepage prompt showcase and section alignment', () => {
     const home = fs.readFileSync(path.join(root, 'src/pages/HomePage.tsx'), 'utf8');
     assert.match(home, /featuredCollections/);
     assert.match(home, /href: '\/frontier-models'/);
-    assert.match(home, /href: '\/free-ai-sites'/);
+    assert.match(home, /href: '\/ai-video-tools'/);
     assert.match(home, /href: '\/github-projects'/);
     assert.match(html, /Frontier access highlights/);
     assert.match(html, /GPT-6 Astra/);

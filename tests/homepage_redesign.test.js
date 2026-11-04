@@ -54,7 +54,7 @@ describe('Premium homepage redesign regressions', () => {
 
     assert.equal(extractedHomeTitle(home), exactHomeTitle);
     assert.match(home, /<UniversalSearch \/>/);
-    for (const route of ['/frontier-models', '/free-ai-sites', '/ai-tools', '/github-projects']) assert.ok(home.includes(`href: '${route}'`));
+    for (const route of ['/frontier-models', '/ai-video-tools', '/ai-tools', '/github-projects']) assert.ok(home.includes(`href: '${route}'`));
     assert.match(home, /<HeroSignalVisual \/>/);
     assert.match(visual, /getAllAiTools\(\)/);
     assert.match(visual, /isCommunityTool\(tool\)/);
