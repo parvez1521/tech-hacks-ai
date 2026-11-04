@@ -40,13 +40,13 @@ export const OfferCard: React.FC<OfferCardProps> = ({ offer }) => {
   return (
     <div
       onMouseMove={handleMouseMove}
-      className={`group relative flex flex-col justify-between h-full p-5 rounded-xl border border-border bg-card/90 hover:bg-card transition-all duration-300 ease-out hover:-translate-y-1 hover:border-primary/40 hover:shadow-xl hover:shadow-black/20 focus-within:ring-2 focus-within:ring-primary/60 cursor-pointer ${
+      className={`card-glow group relative flex flex-col justify-between h-full p-5 rounded-[1.25rem] border border-border bg-card/90 hover:bg-card transition-all duration-300 ease-out hover:-translate-y-1 hover:border-primary/40 hover:shadow-xl hover:shadow-black/20 focus-within:ring-2 focus-within:ring-primary/60 cursor-pointer ${
         !active ? 'opacity-80 border-dashed' : ''
       }`}
     >
       {/* Decorative Subtle Inner Spotlight on Hover */}
       <div
-        className="pointer-events-none absolute -inset-px rounded-xl opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-focus-within:opacity-100 -z-0"
+        className="pointer-events-none absolute -inset-px rounded-[1.25rem] opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-focus-within:opacity-100 -z-0"
         style={{
           background:
             'radial-gradient(280px circle at var(--card-x, 50%) var(--card-y, 30%), rgba(59, 130, 246, 0.12), transparent 75%)',
@@ -57,7 +57,7 @@ export const OfferCard: React.FC<OfferCardProps> = ({ offer }) => {
       {/* Primary Card Stretch Link for whole-card navigation */}
       <Link
         to={`/offers/${offer.slug}`}
-        className="absolute inset-0 z-10 rounded-xl focus:outline-none"
+        className="absolute inset-0 z-10 rounded-[1.25rem] focus:outline-none"
         aria-label={`View details for ${offer.title}`}
       >
         <span className="sr-only">View details for {offer.title}</span>

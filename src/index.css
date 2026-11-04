@@ -18,6 +18,9 @@
   --brand-light-blue: 29 78 216;
   --brand-light-border: 218 226 235;
   --brand-route-gradient: linear-gradient(90deg, #22D3EE 0%, #60A5FA 52%, #8B5CF6 100%);
+  /* The one card/panel radius for the whole site (20px). Referenced by the
+     homepage image cards; every shared card component resolves to it too. */
+  --radius-surface: 1.25rem;
 }
 
 @layer base {
@@ -586,10 +589,10 @@
     min-width: 0;
     padding: 0.9rem 1rem;
     border: 1px solid rgb(var(--color-border) / 0.9);
-    border-radius: 0.75rem;
+    border-radius: var(--radius-surface);
     background: rgb(var(--color-card) / 0.78);
     box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.035);
-    transition: border-color 180ms ease, background-color 180ms ease, transform 180ms ease;
+    transition: border-color 180ms ease, background-color 180ms ease, transform 180ms ease, box-shadow 180ms ease;
   }
 
   .catalog-trust-strip__metrics .catalog-metric-card__number,
@@ -617,6 +620,11 @@
   .catalog-trust-strip__metrics > .catalog-metric-card:hover {
     border-color: rgb(var(--color-primary) / 0.4);
     background: rgb(var(--color-primary) / 0.07);
+    box-shadow:
+      inset 0 1px 0 rgb(255 255 255 / 0.035),
+      0 0 0 1px rgb(var(--color-primary) / 0.25),
+      0 12px 34px -8px rgb(var(--brand-cyan) / 0.3),
+      0 24px 54px -12px rgb(var(--brand-violet) / 0.26);
   }
 
   .catalog-trust-strip__metrics h3 + span {
@@ -1184,6 +1192,18 @@
   -webkit-backdrop-filter: blur(18px) saturate(160%);
   backdrop-filter: blur(18px) saturate(160%);
   box-shadow: 0 28px 56px -20px rgb(2 8 23 / 0.28), 0 12px 28px -12px rgb(var(--color-primary) / 0.18), inset 0 1px 0 var(--glass-highlight);
+  transition: transform 350ms ease, box-shadow 350ms ease;
+}
+/* Interactive 3D lift on hover: a slight perspective tilt plus the brand
+   halo, so the panel feels like the site's cards. Pure CSS, no JS. */
+.discovery-interface:hover {
+  transform: perspective(1100px) rotateX(1.6deg) rotateY(-1.8deg) translateY(-3px);
+  box-shadow:
+    0 34px 64px -20px rgb(2 8 23 / 0.34),
+    0 0 0 1px rgb(var(--color-primary) / 0.25),
+    0 18px 44px -10px rgb(var(--brand-cyan) / 0.3),
+    0 30px 70px -14px rgb(var(--brand-violet) / 0.28),
+    inset 0 1px 0 var(--glass-highlight);
 }
 .discovery-interface__chrome {
   display: flex;
@@ -1242,7 +1262,7 @@
 .discovery-interface__tabs button { position: relative; min-height: 2.3rem; padding: 0.35rem 0.85rem; border: 1px solid rgb(var(--color-border) / 0.75); border-radius: 999px; color: rgb(var(--color-muted-fg)); background: rgb(var(--color-bg) / 0.45); font-size: 0.7rem; font-weight: 600; transition: color 180ms ease, background-color 180ms ease, border-color 180ms ease, transform 160ms ease; }
 .discovery-interface__tabs button:hover { color: rgb(var(--color-fg)); border-color: rgb(var(--color-primary) / 0.5); }
 .discovery-interface__tabs button:active { transform: scale(0.96); }
-.discovery-interface__tabs button[aria-pressed='true'] { color: rgb(var(--brand-midnight)); background: var(--brand-route-gradient); border-color: transparent; }
+.discovery-interface__tabs button[aria-pressed='true'] { color: rgb(var(--brand-midnight)); background: var(--brand-route-gradient); background-repeat: no-repeat; background-size: 100% 100%; border-color: transparent; }
 .discovery-interface__tab-indicator { display: none; }
 .discovery-interface__samples { display: flex; align-items: center; flex-wrap: wrap; gap: 0.35rem; margin-top: 0.65rem; color: rgb(var(--color-muted-fg)); font-size: 0.62rem; }
 .discovery-interface__samples button { min-height: 2.75rem; padding: 0.35rem 0.65rem; border: 1px solid rgb(var(--color-border) / 0.72); border-radius: 999px; color: rgb(var(--color-muted-fg)); background: rgb(var(--color-bg) / 0.42); transition: color 150ms ease, border-color 150ms ease, background-color 150ms ease, transform 160ms ease; }
@@ -1260,10 +1280,10 @@
   background: rgb(var(--color-bg) / 0.5);
   color: inherit;
   text-decoration: none;
-  transition: border-color 150ms ease, background-color 150ms ease, transform 150ms ease;
+  transition: border-color 150ms ease, background-color 150ms ease, transform 150ms ease, box-shadow 150ms ease;
 }
 .discovery-interface__result:hover,
-.discovery-interface__result:focus-visible { border-color: rgb(var(--color-primary) / 0.35); background: rgb(var(--color-muted) / 0.48); }
+.discovery-interface__result:focus-visible { border-color: rgb(var(--color-primary) / 0.35); background: rgb(var(--color-muted) / 0.48); box-shadow: 0 8px 22px -8px rgb(var(--color-primary) / 0.45), 0 4px 14px -6px rgb(var(--brand-cyan) / 0.3); }
 .discovery-interface__result:hover { transform: translateY(-1px); }
 .discovery-interface__result:focus-visible { outline: 2px solid rgb(var(--color-primary)); outline-offset: 2px; }
 .discovery-interface__result-copy { display: grid; min-width: 0; gap: 0.16rem; }
@@ -1298,7 +1318,7 @@
   box-shadow: inset 0 1px 0 var(--glass-highlight), inset 0 -1px 0 rgb(255 255 255 / 0.04), var(--glass-shadow);
   transition: border-color 180ms ease, background-color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
 }
-.discovery-card:hover { transform: translateY(-2px); border-color: rgb(var(--color-primary) / 0.36); box-shadow: inset 0 1px 0 var(--glass-highlight), 0 18px 36px -16px rgb(var(--color-primary) / 0.3), var(--glass-shadow); }
+.discovery-card:hover { transform: translateY(-2px); border-color: rgb(var(--color-primary) / 0.36); box-shadow: inset 0 1px 0 var(--glass-highlight), 0 0 0 1px rgb(var(--color-primary) / 0.25), 0 14px 38px -8px rgb(var(--brand-cyan) / 0.32), 0 26px 58px -12px rgb(var(--brand-violet) / 0.28), 0 18px 36px -16px rgb(var(--color-primary) / 0.3), var(--glass-shadow); }
 .discovery-card:focus-within { outline: 2px solid rgb(var(--color-primary) / 0.82); outline-offset: 3px; }
 .discovery-card__meta { display: flex; min-height: 1.2rem; align-items: center; justify-content: space-between; gap: 0.5rem; }
 .discovery-card__category { color: rgb(var(--color-muted-fg)); font-size: 0.65rem; font-weight: 560; }
@@ -1318,6 +1338,26 @@
 .discovery-card__link:focus-visible { outline: 2px solid rgb(var(--color-primary)); outline-offset: 3px; }
 .discovery-card__unavailable { color: rgb(var(--color-muted-fg)); font-size: 0.7rem; }
 
+/* Sitewide card halo: one unlayered hover glow for every card surface.
+   Unlayered on purpose — it must win over per-component utility shadows so
+   the glow reads identically on every box. Focus rings are left to the
+   components (their ring utilities compose box-shadow too). */
+.interactive-card:hover {
+  box-shadow:
+    inset 0 1px 0 var(--glass-highlight),
+    inset 0 -1px 0 rgb(255 255 255 / 0.04),
+    0 0 0 1px rgb(var(--color-primary) / 0.28),
+    0 12px 36px -8px rgb(var(--brand-cyan) / 0.34),
+    0 26px 60px -12px rgb(var(--brand-violet) / 0.3),
+    var(--glass-shadow);
+}
+.card-glow:hover {
+  box-shadow:
+    0 0 0 1px rgb(var(--color-primary) / 0.28),
+    0 12px 36px -8px rgb(var(--brand-cyan) / 0.34),
+    0 26px 60px -12px rgb(var(--brand-violet) / 0.3),
+    0 4px 16px -4px rgb(var(--color-primary) / 0.25);
+}
 .home-collection-card,
 .frontier-access-card,
 .home-category-card {
@@ -1421,12 +1461,14 @@
   .catalog-trust-strip__metrics > .catalog-metric-card,
   .discovery-card,
   .chat-launcher,
+  .discovery-interface,
   .discovery-interface__tabs button,
   .discovery-interface__samples button,
   .discovery-interface__result { transition: none; }
   .discovery-card:hover,
   .catalog-trust-strip__metrics > .catalog-metric-card:hover,
   .chat-launcher:hover,
+  .discovery-interface:hover,
   .discovery-interface__result:hover { transform: none; }
 }
 /* Prompt atlas: a quiet catalog frame with one oversized editorial artwork. */

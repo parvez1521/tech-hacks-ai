@@ -182,7 +182,7 @@ export const HomePage: React.FC = () => {
             <Link
               to={item.href}
               key={item.href}
-              className="home-collection-card group flex min-w-0 flex-col overflow-hidden rounded-2xl border border-border bg-card focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+              className="home-collection-card group flex min-w-0 flex-col overflow-hidden rounded-[1.25rem] border border-border bg-card focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
             >
               <div className="relative aspect-[3/2] overflow-hidden bg-[#071126]">
                 <img src={item.image} alt={item.imageAlt} width={1536} height={1024} loading="lazy" decoding="async" className="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.025] motion-reduce:transform-none motion-reduce:transition-none" />
@@ -223,7 +223,7 @@ export const HomePage: React.FC = () => {
             const providerTool = allCatalogTools.find((tool) => tool.slug === (provider.existingToolSlug || provider.id));
             const providerLogo = providerTool ? getBrandLogo(providerTool.slug) : undefined;
             const hasVerifiedProviderLogo = Boolean(providerLogo?.assetPath && (providerLogo.sourceType === 'provided' || (providerLogo.sourceUrl && providerLogo.sourceType !== 'fallback')));
-            return <article key={route.id} aria-labelledby={`frontier-access-${route.id}`} className="frontier-access-card group flex min-w-0 flex-col overflow-hidden rounded-2xl border border-border bg-card transition-colors motion-reduce:transition-none">
+            return <article key={route.id} aria-labelledby={`frontier-access-${route.id}`} className="frontier-access-card group flex min-w-0 flex-col overflow-hidden rounded-[1.25rem] border border-border bg-card transition-colors motion-reduce:transition-none">
               <h3 id={`frontier-access-${route.id}`} className="sr-only">{model.organization} {model.name} · {accessLabel}</h3>
               <img src={banner.src} alt={banner.alt} width={808} height={444} loading="lazy" decoding="async" className="frontier-access-card__image aspect-[1.82/1] w-full bg-[#071126] object-cover transition-transform duration-500 ease-out group-hover:scale-[1.015] motion-reduce:transform-none motion-reduce:transition-none" />
               <div className="flex flex-1 flex-col p-4">
@@ -255,7 +255,7 @@ export const HomePage: React.FC = () => {
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {aiCategories.map((category) => {
             const artwork = categoryArtwork[category.id];
-            return <Link key={category.id} to={`/ai-tools?category=${encodeURIComponent(category.id)}`} className="home-category-card group flex min-h-40 min-w-0 flex-col overflow-hidden rounded-2xl border border-border bg-card focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+            return <Link key={category.id} to={`/ai-tools?category=${encodeURIComponent(category.id)}`} className="home-category-card group flex min-h-40 min-w-0 flex-col overflow-hidden rounded-[1.25rem] border border-border bg-card focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
               <img src={artwork.src} alt={artwork.alt} width={495} height={236} loading="lazy" decoding="async" className="home-category-card__image aspect-[2.08/1] w-full bg-[#071126] object-cover transition-transform duration-500 ease-out group-hover:scale-[1.02] motion-reduce:transform-none motion-reduce:transition-none" />
               <div className="flex flex-1 flex-col p-4">
                 <div className="flex items-center justify-between gap-3">
@@ -283,7 +283,7 @@ export const HomePage: React.FC = () => {
         </div>
         <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
           {taskCategories.map(({ title, description, href, count, countLabel, accessLabel, Icon, logos }) => (
-            <Link key={title} to={href} className="group glass flex min-h-52 flex-col rounded-[1.25rem] border border-border p-4 transition-[border-color,background-color,box-shadow,transform] duration-200 hover:-translate-y-0.5 hover:border-primary/45 hover:bg-muted/30 hover:shadow-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary sm:p-5">
+            <Link key={title} to={href} className="card-glow group glass flex min-h-52 flex-col rounded-[1.25rem] border border-border p-4 transition-[border-color,background-color,box-shadow,transform] duration-200 hover:-translate-y-0.5 hover:border-primary/45 hover:bg-muted/30 hover:shadow-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary sm:p-5">
               <div className="flex items-start justify-between gap-3">
                 <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl border border-primary/15 bg-primary/10 text-primary">
                   <Icon className="h-5 w-5" aria-hidden="true" />
@@ -328,7 +328,7 @@ export const HomePage: React.FC = () => {
         </div>
         <div className="grid gap-4 md:grid-cols-2">
           {offers.map((offer) => (
-            <Link key={offer.slug} to={`/offers/${offer.slug}`} className="group glass flex min-h-28 items-center justify-between gap-4 rounded-[1.25rem] border border-border p-4 transition-[border-color,background-color,box-shadow,transform] duration-200 hover:-translate-y-0.5 hover:bg-muted/40 hover:shadow-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary sm:p-5">
+            <Link key={offer.slug} to={`/offers/${offer.slug}`} className="card-glow group glass flex min-h-28 items-center justify-between gap-4 rounded-[1.25rem] border border-border p-4 transition-[border-color,background-color,box-shadow,transform] duration-200 hover:-translate-y-0.5 hover:bg-muted/40 hover:shadow-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary sm:p-5">
               <div>
                 <p className="meta-label">{offer.provider} · {offer.region}</p>
                 <h3 className="mt-1 font-medium text-foreground">{offer.title}</h3>

@@ -16,7 +16,7 @@ export const ReplacementCard: React.FC<ReplacementCardProps> = ({ tool, propriet
 
   return (
     <div
-      className="group relative flex flex-col justify-between h-full p-5 rounded-2xl border border-border bg-card transition-all duration-300 ease-out hover:-translate-y-1 hover:border-primary/50 hover:shadow-invary-blue min-h-[250px] shadow-xs focus-within:ring-2 focus-within:ring-primary/60 focus-within:border-primary/60"
+      className="card-glow group relative flex flex-col justify-between h-full p-5 rounded-[1.25rem] border border-border bg-card transition-all duration-300 ease-out hover:-translate-y-1 hover:border-primary/50 hover:shadow-invary-blue min-h-[250px] shadow-xs focus-within:ring-2 focus-within:ring-primary/60 focus-within:border-primary/60"
     >
       <div className="relative z-10">
         {/* Top Header: Logo, Name, Badges, Category */}

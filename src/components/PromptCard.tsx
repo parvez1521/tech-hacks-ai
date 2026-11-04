@@ -44,7 +44,7 @@ export const PromptCard: React.FC<PromptCardProps> = ({ prompt }) => {
   return (
     <div
       onMouseMove={handleMouseMove}
-      className="prompt-card group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-slate-200 bg-white transition-all duration-200 hover:-translate-y-1 hover:border-teal-400 hover:shadow-xl min-h-[350px] focus-within:ring-2 focus-within:ring-teal-500/50 focus-within:border-teal-500 shadow-sm dark:border-slate-700 dark:bg-slate-900"
+      className="prompt-card card-glow group relative flex flex-col justify-between overflow-hidden rounded-[1.25rem] border border-slate-200 bg-white transition-all duration-200 hover:-translate-y-1 hover:border-teal-400 hover:shadow-xl min-h-[350px] focus-within:ring-2 focus-within:ring-teal-500/50 focus-within:border-teal-500 shadow-sm dark:border-slate-700 dark:bg-slate-900"
     >
       <div className="relative z-10">
         <Link to={`/prompt-library/${prompt.slug}`} className="prompt-card__image-link" aria-label={`Open ${prompt.title}`} tabIndex={-1}>

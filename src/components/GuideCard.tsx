@@ -21,7 +21,7 @@ export const GuideCard: React.FC<GuideCardProps> = ({ guide }) => {
 
   return (
     <div
-      className="group relative flex flex-col justify-between p-5 rounded-2xl border border-[#DFE7F3] bg-white transition-all duration-300 ease-out hover:-translate-y-1 hover:border-blue-400 hover:shadow-invary-blue min-h-[230px] shadow-xs focus-within:ring-2 focus-within:ring-blue-500/60 focus-within:border-blue-500/60"
+      className="card-glow group relative flex flex-col justify-between p-5 rounded-[1.25rem] border border-[#DFE7F3] bg-white transition-all duration-300 ease-out hover:-translate-y-1 hover:border-blue-400 hover:shadow-invary-blue min-h-[230px] shadow-xs focus-within:ring-2 focus-within:ring-blue-500/60 focus-within:border-blue-500/60"
     >
       <div className="relative z-10">
         <div className="flex items-start justify-between gap-3 mb-2.5">
