@@ -228,6 +228,14 @@ async function main() {
     const outputPath = outputPathFor(pathname);
     await fs.mkdir(path.dirname(outputPath), { recursive: true });
     await fs.writeFile(outputPath, html, 'utf8');
+
+    // Match Vercel cleanUrls and extensionless preview lookups for slashless URLs.
+    // Keep the clean-URL alias byte-identical to the nested prerendered document.
+    if (pathname !== '/') {
+      const cleanUrlOutputPath = path.join(dist, `${pathname.slice(1)}.html`);
+      await fs.mkdir(path.dirname(cleanUrlOutputPath), { recursive: true });
+      await fs.writeFile(cleanUrlOutputPath, html, 'utf8');
+    }
     rendered += 1;
     if (sitemapUrls.includes(pathname) && !isPromptFeedDetailPath(pathname)) validSitemapPaths.add(pathname);
     if (rendered % 100 === 0) console.log(`Pre-rendered ${rendered} public pages…`);
