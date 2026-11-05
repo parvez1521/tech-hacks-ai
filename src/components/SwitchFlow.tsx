@@ -175,6 +175,7 @@ export const SwitchFlow: React.FC = () => {
     <div
       ref={rootRef}
       className="relative mb-10 overflow-hidden rounded-2xl border border-border/70 bg-card/40"
+      data-no-reveal
       role="img"
       aria-label="Animation: eighteen famous paid tools — ChatGPT, Claude, Gemini, Figma, Notion, Zapier, Perplexity AI, Google Analytics, GitHub Copilot, Firebase, Claude Code, Postman and more — flow into SwitchRoute one after another and come out as their free alternatives, including LibreChat, Khoj, Open WebUI, Penpot, AppFlowy, n8n, Perplexica, Plausible Analytics, Cline, Supabase and Aider."
     >

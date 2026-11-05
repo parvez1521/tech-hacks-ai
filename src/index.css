@@ -1807,3 +1807,34 @@ html {
   opacity: 0.6;
   pointer-events: none;
 }
+
+/* Scroll morph reveals (ScrollMorph): blocks scale up and straighten
+   into place as they enter the viewport — starting smaller, lower and
+   tilted -5deg, settling to full size and level. The hidden state is
+   gated on html.js so no-JS and prerendered snapshots always show
+   content, and reduced motion switches the whole system off. */
+html.js .morph-reveal {
+  opacity: 0;
+  transform: translateY(30px) scale(0.78) rotate(-5deg);
+  transition:
+    opacity 0.6s ease,
+    transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+html.js .morph-reveal.is-revealed {
+  opacity: 1;
+  transform: none;
+}
+
+html.js .morph-reveal.is-settled {
+  transition: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.js .morph-reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
