@@ -1808,36 +1808,23 @@ html {
   pointer-events: none;
 }
 
-/* Scroll morph reveals (ScrollMorph): blocks settle into place as they
-   enter the viewport — rise + settle scale + unblur, and on cards the
-   corner radius morphs from a softer blob to the card's own radius
-   (--reveal-radius, captured per element). The hidden state is gated on
-   html.js so no-JS and prerendered snapshots always show content, and
-   reduced motion switches the whole system off. */
+/* Scroll morph reveals (ScrollMorph): blocks scale up and straighten
+   into place as they enter the viewport — starting smaller, lower and
+   tilted -5deg, settling to full size and level. The hidden state is
+   gated on html.js so no-JS and prerendered snapshots always show
+   content, and reduced motion switches the whole system off. */
 html.js .morph-reveal {
   opacity: 0;
-  transform: translateY(26px) scale(0.965);
-  filter: blur(6px);
+  transform: translateY(30px) scale(0.78) rotate(-5deg);
   transition:
-    opacity 0.7s ease,
-    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1),
-    filter 0.7s ease,
-    border-radius 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+    opacity 0.6s ease,
+    transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
   transition-delay: var(--reveal-delay, 0ms);
-}
-
-html.js .morph-reveal--card {
-  border-radius: calc(var(--reveal-radius, 16px) + 14px);
 }
 
 html.js .morph-reveal.is-revealed {
   opacity: 1;
   transform: none;
-  filter: blur(0);
-}
-
-html.js .morph-reveal--card.is-revealed {
-  border-radius: var(--reveal-radius, var(--radius-surface));
 }
 
 html.js .morph-reveal.is-settled {
@@ -1848,11 +1835,6 @@ html.js .morph-reveal.is-settled {
   html.js .morph-reveal {
     opacity: 1;
     transform: none;
-    filter: none;
     transition: none;
-  }
-
-  html.js .morph-reveal--card {
-    border-radius: var(--reveal-radius, var(--radius-surface));
   }
 }
