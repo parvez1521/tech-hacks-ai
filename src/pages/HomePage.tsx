@@ -43,24 +43,24 @@ const frontierAccessBanners: Record<string, { src: string; alt: string }> = {
 
 const frontierAccessRouteOrder = Object.keys(frontierAccessBanners);
 
-const categoryArtwork: Record<string, { src: string; alt: string }> = {
-  assistants: { src: '/images/ai-categories/01-ai-assistants-reasoning.webp', alt: 'Neon AI assistant interface with a reasoning brain and conversational signals.' },
-  writing: { src: '/images/ai-categories/02-writing-content.webp', alt: 'Glowing document, typography tools, and pen for writing and content work.' },
-  image: { src: '/images/ai-categories/03-image-generation.webp', alt: 'Layered image-generation canvases with a landscape and visual editing controls.' },
-  video: { src: '/images/ai-categories/04-video-generation-editing.webp', alt: 'Video editing screen with a clapperboard, play control, and editing sliders.' },
-  voice: { src: '/images/ai-categories/05-audio-voice.webp', alt: 'Studio microphone surrounded by voice waveforms and audio controls.' },
-  music: { src: '/images/ai-categories/06-music.webp', alt: 'Headphones around a music record with sound-level and music-note controls.' },
-  coding: { src: '/images/ai-categories/07-coding-development.webp', alt: 'Code editor window with code brackets and developer-tool symbols.' },
-  productivity: { src: '/images/ai-categories/08-productivity-research.webp', alt: 'Research search interface with a document and reference books.' },
-  automation: { src: '/images/ai-categories/09-automation-agents.webp', alt: 'Automation agent interface with workflow and settings symbols.' },
-  '3d': { src: '/images/ai-categories/10-design-creativity.webp', alt: 'Creative design cube with brush and color-palette tools.' },
+const categoryShowcase: Record<string, { logos: { slug: string; name: string }[]; label: string }> = {
+  assistants: { logos: [{ slug: 'chatgpt', name: 'ChatGPT' }, { slug: 'claude', name: 'Claude' }, { slug: 'gemini', name: 'Gemini' }], label: 'AI assistants and reasoning tools, including ChatGPT, Claude and Gemini.' },
+  writing: { logos: [{ slug: 'copy-ai', name: 'Copy.ai' }], label: 'Writing and content tools, including Copy.ai.' },
+  image: { logos: [{ slug: 'midjourney', name: 'Midjourney' }, { slug: 'ideogram', name: 'Ideogram' }, { slug: 'leonardo-ai', name: 'Leonardo AI' }], label: 'Image generation tools, including Midjourney, Ideogram and Leonardo AI.' },
+  video: { logos: [{ slug: 'runway', name: 'Runway' }, { slug: 'kling-ai', name: 'Kling AI' }, { slug: 'pika', name: 'Pika' }], label: 'Video generation and editing tools, including Runway, Kling AI and Pika.' },
+  voice: { logos: [{ slug: 'elevenlabs', name: 'ElevenLabs' }, { slug: 'whisper', name: 'Whisper' }, { slug: 'kokoro-tts', name: 'Kokoro TTS' }], label: 'Audio and voice tools, including ElevenLabs, Whisper and Kokoro TTS.' },
+  music: { logos: [{ slug: 'suno', name: 'Suno' }, { slug: 'udio', name: 'Udio' }], label: 'Music tools, including Suno and Udio.' },
+  coding: { logos: [{ slug: 'cursor', name: 'Cursor' }, { slug: 'v0-vercel', name: 'v0' }, { slug: 'google-ai-studio', name: 'Google AI Studio' }], label: 'Coding and development tools, including Cursor, v0 and Google AI Studio.' },
+  productivity: { logos: [{ slug: 'perplexity', name: 'Perplexity' }, { slug: 'notebooklm', name: 'NotebookLM' }, { slug: 'anythingllm', name: 'AnythingLLM' }], label: 'Productivity and research tools, including Perplexity, NotebookLM and AnythingLLM.' },
+  automation: { logos: [{ slug: 'zapier-central', name: 'Zapier Central' }, { slug: 'make', name: 'Make' }, { slug: 'dify', name: 'Dify' }], label: 'Automation and agent tools, including Zapier Central, Make and Dify.' },
+  '3d': { logos: [{ slug: 'meshy-3d', name: 'Meshy' }], label: 'Design and 3D tools, including Meshy.' },
 };
 
 const resources = [
-  ['Open Source Catalog', '/tools', Layers3],
-  ['Utility Tools', '/free-tools', Wrench],
-  ['Alternatives & Compare', '/alternatives', Code2],
-  ['Guides & Prompt Library', '/guides', BookOpen],
+  { label: 'Open Source Catalog', href: '/tools', Icon: Layers3, blurb: 'Reviewed open-source AI projects — what they do, what they cost to run, and where they fit.', meta: 'Project directory' },
+  { label: 'Utility Tools', href: '/free-tools', Icon: Wrench, blurb: 'Small utilities for files, text, images and media that run right in your browser.', meta: 'Browser utilities' },
+  { label: 'Alternatives & Compare', href: '/alternatives', Icon: Code2, blurb: 'Paid tools matched with free and open-source replacements, compared side by side.', meta: 'Head-to-head' },
+  { label: 'Guides & Prompt Library', href: '/guides', Icon: BookOpen, blurb: 'Step-by-step guides and a copy-ready prompt library for everyday AI work.', meta: 'Guides & prompts' },
 ] as const;
 
 export const HomePage: React.FC = () => {
@@ -319,9 +319,17 @@ export const HomePage: React.FC = () => {
         </div>
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {aiCategories.map((category) => {
-            const artwork = categoryArtwork[category.id];
+            const showcase = categoryShowcase[category.id];
             return <Link key={category.id} to={`/ai-tools?category=${encodeURIComponent(category.id)}`} className="home-category-card group flex min-h-40 min-w-0 flex-col overflow-hidden rounded-2xl border border-border bg-card focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
-              <img src={artwork.src} alt={artwork.alt} width={495} height={236} loading="lazy" decoding="async" className="home-category-card__image aspect-[2.08/1] w-full bg-[#071126] object-cover transition-transform duration-500 ease-out group-hover:scale-[1.02] motion-reduce:transform-none motion-reduce:transition-none" />
+              <div className="category-art" role="img" aria-label={showcase.label}>
+                <div className="category-art__tiles">
+                  {showcase.logos.map((logo) => (
+                    <span key={logo.slug} className="category-art__tile">
+                      <BrandLogo slug={logo.slug} name={logo.name} size={showcase.logos.length === 1 ? 'lg' : 'md'} showContainer={false} />
+                    </span>
+                  ))}
+                </div>
+              </div>
               <div className="flex flex-1 flex-col p-4">
                 <div className="flex items-center justify-between gap-3">
                   <h3 className="text-sm font-semibold text-foreground">{category.name}</h3>
@@ -408,12 +416,18 @@ export const HomePage: React.FC = () => {
       <section className="mx-auto max-w-7xl border-t border-border/70 px-4 py-16 sm:px-6 sm:py-20" aria-labelledby="resources-heading">
         <p className="eyebrow">More ways to explore</p>
         <h2 id="resources-heading" className="mb-10 mt-3 text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">Resources and directories</h2>
-        <div className="grid gap-x-5 sm:grid-cols-2 lg:grid-cols-4">
-          {resources.map(([label, href, Icon]) => (
-            <Link key={href} to={href} className="group flex min-h-12 items-center gap-3 border-b border-border/70 px-2 text-sm font-medium text-secondary-foreground transition-colors hover:text-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-primary">
-              <Icon className="h-4 w-4 shrink-0 text-muted-foreground group-hover:text-primary" aria-hidden="true" />
-              <span>{label}</span>
-              <ArrowRight className="ml-auto h-3.5 w-3.5 shrink-0 text-muted-foreground opacity-0 transition-[opacity,transform] group-hover:translate-x-0.5 group-hover:opacity-100" aria-hidden="true" />
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {resources.map(({ label, href, Icon, blurb, meta }) => (
+            <Link key={href} to={href} className="card-glow glass group relative flex flex-col rounded-2xl border border-border p-5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+              <div className="flex items-start justify-between gap-3">
+                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[image:var(--brand-route-gradient)] text-[rgb(var(--brand-midnight))] shadow-[0_10px_20px_-8px_rgb(var(--color-primary)/0.55)]">
+                  <Icon className="h-5 w-5" aria-hidden="true" />
+                </span>
+                <ArrowRight className="h-4 w-4 shrink-0 text-muted-foreground transition-[transform,color] group-hover:translate-x-0.5 group-hover:text-primary motion-reduce:transition-none" aria-hidden="true" />
+              </div>
+              <h3 className="mt-4 text-base font-semibold text-foreground">{label}</h3>
+              <p className="mt-1.5 text-sm leading-6 text-muted-foreground">{blurb}</p>
+              <p className="meta-label mt-auto pt-4">{meta}</p>
             </Link>
           ))}
         </div>
