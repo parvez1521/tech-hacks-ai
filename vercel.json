@@ -6,6 +6,11 @@
       "source": "/ai-tools/claude-code",
       "destination": "/alternatives/claude-code",
       "permanent": true
+    },
+    {
+      "source": "/privacy-policy",
+      "destination": "/privacy",
+      "permanent": true
     }
   ],
   "headers": [
