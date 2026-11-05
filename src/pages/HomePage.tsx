@@ -6,6 +6,7 @@ import { HeroSignalVisual } from '../components/HeroSignalVisual';
 import { DailyDiscoveriesSection } from '../components/DailyDiscoveriesSection';
 import { BrandLogo } from '../components/BrandLogo';
 import { SwitchFlow } from '../components/SwitchFlow';
+import { TumblePanel } from '../components/TumblePanel';
 import { getBrandLogo } from '../data/runtimeBrandLogos.ts';
 import { aiCategories } from '../data/aiToolsData';
 import { aiModels, getCurrentModelAccessRoutes, modelAccessProviders } from '../data/modelAccessCatalog';
@@ -197,6 +198,7 @@ export const HomePage: React.FC = () => {
           <HeroSignalVisual />
         </div>
       </section>
+      <TumblePanel />
 
       <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20" aria-labelledby="collections-heading">
         <div className="mb-10 flex items-end justify-between gap-4">
