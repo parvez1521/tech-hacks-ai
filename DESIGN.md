@@ -18,9 +18,9 @@ Source of truth: `src/index.css`.
 |---|---|---|
 | `--brand-midnight` | `8 13 24` / `#080D18` | Dark theme background |
 | `--brand-navy` | `19 41 74` / `#13294A` | Deep brand navy |
-| `--brand-blue` | `96 165 250` / `#60A5FA` | Dark theme primary |
-| `--brand-cyan` | `34 211 238` / `#22D3EE` | Secondary accent; use sparingly |
-| `--brand-violet` | `139 92 246` / `#8B5CF6` | Secondary accent; use sparingly |
+| `--brand-blue` | `255 106 61` / `#FF6A3D` | Dark theme primary |
+| `--brand-cyan` | `255 106 0` / `#FF6A00` | Secondary accent; use sparingly |
+| `--brand-violet` | `249 58 18` / `#F93A12` | Secondary accent; use sparingly |
 | `--brand-ice` | `241 245 249` / `#F1F5F9` | Dark theme foreground |
 | `--brand-slate` | `148 163 184` / `#94A3B8` | Muted foreground |
 | `--brand-border` | `41 56 79` | Dark theme border |

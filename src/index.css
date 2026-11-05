@@ -4,20 +4,20 @@
 
 /* SwitchRoute brand tokens — single source of truth for the digital identity. */
 :root {
-  --brand-midnight: 8 13 24;
-  --brand-navy: 19 41 74;
-  --brand-blue: 96 165 250;
-  --brand-cyan: 34 211 238;
-  --brand-violet: 139 92 246;
-  --brand-ice: 241 245 249;
-  --brand-slate: 148 163 184;
-  --brand-border: 41 56 79;
-  --brand-light-bg: 248 250 252;
+  --brand-midnight: 22 10 7;
+  --brand-navy: 46 20 13;
+  --brand-blue: 255 106 61;
+  --brand-cyan: 255 106 0;
+  --brand-violet: 249 58 18;
+  --brand-ice: 255 243 234;
+  --brand-slate: 196 164 148;
+  --brand-border: 74 36 26;
+  --brand-light-bg: 255 247 238;
   --brand-light-surface: 255 255 255;
-  --brand-light-ink: 15 23 42;
-  --brand-light-blue: 29 78 216;
-  --brand-light-border: 218 226 235;
-  --brand-route-gradient: linear-gradient(90deg, #22D3EE 0%, #60A5FA 52%, #8B5CF6 100%);
+  --brand-light-ink: 29 19 12;
+  --brand-light-blue: 216 44 10;
+  --brand-light-border: 240 220 200;
+  --brand-route-gradient: linear-gradient(90deg, #FF6A00 0%, #F93A12 52%, #FFB800 100%);
   /* The one card/panel radius for the whole site (16px). It matches the
      frame baked into the homepage artwork, so image cards read as one
      box; every shared card component resolves to the same radius. */
@@ -32,29 +32,29 @@
     color-scheme: dark;
     --color-bg: var(--brand-midnight);
     --color-fg: var(--brand-ice);
-    --color-card: 17 28 47;
-    --color-card-fg: 241 245 249;
-    --color-muted: 23 36 58;
+    --color-card: 34 17 12;
+    --color-card-fg: 255 243 234;
+    --color-muted: 40 20 14;
     --color-muted-fg: var(--brand-slate);
-    --color-accent: 37 56 79;
-    --color-accent-fg: 241 245 249;
+    --color-accent: 56 27 18;
+    --color-accent-fg: 255 243 234;
     --color-border: var(--brand-border);
-    --color-secondary: 23 36 58;
-    --color-secondary-fg: 203 213 225;
+    --color-secondary: 40 20 14;
+    --color-secondary-fg: 240 214 196;
     --color-primary: var(--brand-blue);
-    --color-primary-fg: 15 23 42;
-    --color-primary-hover: 59 130 246;
-    --glow-spotlight: rgba(59, 130, 246, 0.16);
-    --dot-color: rgba(148, 163, 184, 0.1);
-    --grid-color: rgba(148, 163, 184, 0.055);
+    --color-primary-fg: 29 19 12;
+    --color-primary-hover: 255 138 92;
+    --glow-spotlight: rgba(249, 58, 18, 0.17);
+    --dot-color: rgba(196, 164, 148, 0.1);
+    --grid-color: rgba(196, 164, 148, 0.055);
     /* Liquid Glass (dark): smoky translucent fills over the midnight base. */
     --glass-fill: rgb(255 255 255 / 0.055);
     --glass-fill-hover: rgb(255 255 255 / 0.09);
     --glass-fill-strong: rgb(var(--color-card) / 0.68);
     --glass-border: rgb(255 255 255 / 0.13);
     --glass-highlight: rgb(255 255 255 / 0.22);
-    --glass-shadow: 0 16px 40px -20px rgb(2 8 23 / 0.55);
-    --glass-shadow-lg: 0 32px 64px -28px rgb(2 8 23 / 0.62);
+    --glass-shadow: 0 16px 40px -20px rgb(24 8 3 / 0.55);
+    --glass-shadow-lg: 0 32px 64px -28px rgb(24 8 3 / 0.62);
     /* Ambient colour field fixed behind every page so glass has colour to refract. */
     --page-wash:
       radial-gradient(56rem 30rem at 88% -8%, rgb(var(--brand-cyan) / 0.055), transparent 62%),
@@ -70,28 +70,28 @@
     --color-bg: var(--brand-light-bg);
     --color-fg: var(--brand-light-ink);
     --color-card: 255 255 255;
-    --color-card-fg: 15 23 42;
-    --color-muted: 241 245 249;
-    --color-muted-fg: 80 95 118;
-    --color-accent: 226 232 240;
-    --color-accent-fg: 15 23 42;
+    --color-card-fg: 29 19 12;
+    --color-muted: 255 241 226;
+    --color-muted-fg: 133 112 92;
+    --color-accent: 255 232 214;
+    --color-accent-fg: 29 19 12;
     --color-border: var(--brand-light-border);
-    --color-secondary: 241 245 249;
-    --color-secondary-fg: 51 65 85;
+    --color-secondary: 255 241 226;
+    --color-secondary-fg: 94 72 56;
     --color-primary: var(--brand-light-blue);
     --color-primary-fg: 255 255 255;
-    --color-primary-hover: 30 64 175;
-    --glow-spotlight: rgba(37, 99, 235, 0.04);
-    --dot-color: rgba(15, 23, 42, 0.08);
-    --grid-color: rgba(15, 23, 42, 0.04);
+    --color-primary-hover: 185 35 6;
+    --glow-spotlight: rgba(249, 58, 18, 0.05);
+    --dot-color: rgba(29, 19, 12, 0.07);
+    --grid-color: rgba(29, 19, 12, 0.045);
     /* Liquid Glass (light): bright translucent white fills, soft gray edge. */
     --glass-fill: rgb(255 255 255 / 0.55);
     --glass-fill-hover: rgb(255 255 255 / 0.72);
     --glass-fill-strong: rgb(var(--color-card) / 0.78);
-    --glass-border: rgb(15 23 42 / 0.09);
+    --glass-border: rgb(29 19 12 / 0.09);
     --glass-highlight: rgb(255 255 255 / 0.85);
-    --glass-shadow: 0 16px 40px -22px rgb(15 23 42 / 0.2);
-    --glass-shadow-lg: 0 32px 64px -28px rgb(15 23 42 / 0.22);
+    --glass-shadow: 0 16px 40px -22px rgb(29 19 12 / 0.2);
+    --glass-shadow-lg: 0 32px 64px -28px rgb(29 19 12 / 0.22);
     --page-wash:
       radial-gradient(56rem 30rem at 88% -8%, rgb(var(--brand-cyan) / 0.05), transparent 62%),
       radial-gradient(64rem 34rem at 6% -10%, rgb(var(--color-primary) / 0.045), transparent 62%),
@@ -113,6 +113,13 @@
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     overflow-x: clip;
     text-rendering: optimizeLegibility;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: 'Bricolage Grotesque', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    letter-spacing: -0.015em;
   }
 
   ::selection {
@@ -390,16 +397,42 @@
     transform: translateX(-50%);
     z-index: -1;
     pointer-events: none;
+    /* Loud Block: one vermilion colour field owns the hero (Jeton-style).
+       A warm amber bloom sits top-right; the bottom edge is a deliberate
+       hard cut against the page, so no melt mask here. */
     background:
-      radial-gradient(48rem 26rem at 6% -10%, rgb(var(--brand-cyan) / 0.21), transparent 65%),
-      radial-gradient(52rem 28rem at 94% -12%, rgb(var(--brand-violet) / 0.19), transparent 65%),
-      radial-gradient(44rem 24rem at 52% -6%, rgb(var(--color-primary) / 0.16), transparent 70%),
-      radial-gradient(58rem 26rem at 50% 118%, rgb(var(--color-primary) / 0.09), transparent 70%);
-    /* Melt the colour field into the page at the bottom: unmasked, the
-       layer is clipped at the section's bottom edge and the tint steps
-       hard against the next section (a visible horizontal cut). */
-    -webkit-mask-image: linear-gradient(to bottom, black 70%, transparent 99%);
-    mask-image: linear-gradient(to bottom, black 70%, transparent 99%);
+      radial-gradient(48rem 26rem at 88% -12%, rgb(255 184 0 / 0.38), transparent 62%),
+      linear-gradient(155deg, #FF7A29 0%, #F93A12 55%, #DE2A06 100%);
+  }
+
+  /* On the vermilion block the hero copy is warm white: the gradient
+     headline lines flatten to solid, and supporting copy goes peach. */
+  .hero-aurora {
+    --grid-color: rgb(255 255 255 / 0.13);
+  }
+
+  .hero-aurora h1 {
+    color: #FFF7EE;
+  }
+
+  .hero-aurora .text-brand-gradient {
+    background: none;
+    -webkit-background-clip: initial;
+    background-clip: initial;
+    -webkit-text-fill-color: #FFF7EE;
+    color: #FFF7EE;
+  }
+
+  .hero-aurora .eyebrow {
+    color: rgb(255 233 220 / 0.92);
+  }
+
+  .hero-aurora .hero-stagger > p {
+    color: rgb(255 233 220 / 0.9);
+  }
+
+  .hero-aurora .hero-stagger a:not(.btn-primary) {
+    color: rgb(255 233 220 / 0.92);
   }
 
   /* Fine grid field layered over the hero aurora, faded at the edges with a
@@ -1743,3 +1776,34 @@
   .switch-flow__ring { animation: none; opacity: 0; }
 }
 
+
+/* Loud Block finishing touches: vermilion selection + warm scrollbar. */
+::selection {
+  background: #F93A12;
+  color: #FFF7EE;
+}
+
+html {
+  scrollbar-color: rgb(249 58 18 / 0.55) transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgb(249 58 18 / 0.45);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(249 58 18 / 0.7);
+}
+
+/* Gradient hairline under the header, in the route sunset. */
+.site-header::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 2px;
+  background: var(--brand-route-gradient);
+  opacity: 0.6;
+  pointer-events: none;
+}
