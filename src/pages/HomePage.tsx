@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowRight, BookOpen, Code2, Film, Gift, Image as ImageIcon, Layers3, Mic, Search, Server, Video, Wrench } from 'lucide-react';
+import { ArrowRight, BookOpen, Bot, Box, Braces, Camera, Clapperboard, Code2, Compass, Disc, FileText, Film, Gift, Headphones, Image as ImageIcon, Layers3, MessageSquare, Mic, Music, Palette, PenLine, PenTool, Play, Radio, Scissors, Search, Server, Shapes, Sparkles, Terminal, Type, Video, Volume2, Workflow, Wrench, Zap } from 'lucide-react';
 import { Link } from '../router/Router';
 import { UniversalSearch } from '../components/UniversalSearch';
 import { HeroSignalVisual } from '../components/HeroSignalVisual';
@@ -43,17 +43,17 @@ const frontierAccessBanners: Record<string, { src: string; alt: string }> = {
 
 const frontierAccessRouteOrder = Object.keys(frontierAccessBanners);
 
-const categoryShowcase: Record<string, { logos: { slug: string; name: string }[]; label: string }> = {
-  assistants: { logos: [{ slug: 'chatgpt', name: 'ChatGPT' }, { slug: 'claude', name: 'Claude' }, { slug: 'gemini', name: 'Gemini' }], label: 'AI assistants and reasoning tools, including ChatGPT, Claude and Gemini.' },
-  writing: { logos: [{ slug: 'copy-ai', name: 'Copy.ai' }], label: 'Writing and content tools, including Copy.ai.' },
-  image: { logos: [{ slug: 'midjourney', name: 'Midjourney' }, { slug: 'ideogram', name: 'Ideogram' }, { slug: 'leonardo-ai', name: 'Leonardo AI' }], label: 'Image generation tools, including Midjourney, Ideogram and Leonardo AI.' },
-  video: { logos: [{ slug: 'runway', name: 'Runway' }, { slug: 'kling-ai', name: 'Kling AI' }, { slug: 'pika', name: 'Pika' }], label: 'Video generation and editing tools, including Runway, Kling AI and Pika.' },
-  voice: { logos: [{ slug: 'elevenlabs', name: 'ElevenLabs' }, { slug: 'whisper', name: 'Whisper' }, { slug: 'kokoro-tts', name: 'Kokoro TTS' }], label: 'Audio and voice tools, including ElevenLabs, Whisper and Kokoro TTS.' },
-  music: { logos: [{ slug: 'suno', name: 'Suno' }, { slug: 'udio', name: 'Udio' }], label: 'Music tools, including Suno and Udio.' },
-  coding: { logos: [{ slug: 'cursor', name: 'Cursor' }, { slug: 'v0-vercel', name: 'v0' }, { slug: 'google-ai-studio', name: 'Google AI Studio' }], label: 'Coding and development tools, including Cursor, v0 and Google AI Studio.' },
-  productivity: { logos: [{ slug: 'perplexity', name: 'Perplexity' }, { slug: 'notebooklm', name: 'NotebookLM' }, { slug: 'anythingllm', name: 'AnythingLLM' }], label: 'Productivity and research tools, including Perplexity, NotebookLM and AnythingLLM.' },
-  automation: { logos: [{ slug: 'zapier-central', name: 'Zapier Central' }, { slug: 'make', name: 'Make' }, { slug: 'dify', name: 'Dify' }], label: 'Automation and agent tools, including Zapier Central, Make and Dify.' },
-  '3d': { logos: [{ slug: 'meshy-3d', name: 'Meshy' }], label: 'Design and 3D tools, including Meshy.' },
+const categoryArt: Record<string, { icons: typeof Bot[]; label: string }> = {
+  assistants: { icons: [MessageSquare, Sparkles, Bot], label: 'AI assistants and reasoning tools.' },
+  writing: { icons: [PenLine, FileText, Type], label: 'Writing and content tools.' },
+  image: { icons: [ImageIcon, Palette, Camera], label: 'Image generation tools.' },
+  video: { icons: [Clapperboard, Play, Scissors], label: 'Video generation and editing tools.' },
+  voice: { icons: [Mic, Radio, Volume2], label: 'Audio and voice tools.' },
+  music: { icons: [Music, Headphones, Disc], label: 'Music tools.' },
+  coding: { icons: [Code2, Terminal, Braces], label: 'Coding and development tools.' },
+  productivity: { icons: [Search, BookOpen, Compass], label: 'Productivity and research tools.' },
+  automation: { icons: [Workflow, Zap, Bot], label: 'Automation and agent tools.' },
+  '3d': { icons: [Box, Shapes, PenTool], label: 'Design and 3D tools.' },
 };
 
 const resources = [
@@ -319,13 +319,13 @@ export const HomePage: React.FC = () => {
         </div>
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {aiCategories.map((category) => {
-            const showcase = categoryShowcase[category.id];
+            const art = categoryArt[category.id];
             return <Link key={category.id} to={`/ai-tools?category=${encodeURIComponent(category.id)}`} className="home-category-card group flex min-h-40 min-w-0 flex-col overflow-hidden rounded-2xl border border-border bg-card focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
-              <div className="category-art" role="img" aria-label={showcase.label}>
+              <div className="category-art" role="img" aria-label={art.label}>
                 <div className="category-art__tiles">
-                  {showcase.logos.map((logo) => (
-                    <span key={logo.slug} className="category-art__tile">
-                      <BrandLogo slug={logo.slug} name={logo.name} size={showcase.logos.length === 1 ? 'lg' : 'md'} showContainer={false} />
+                  {art.icons.map((Icon, i) => (
+                    <span key={i} className="category-art__tile">
+                      <Icon className="h-7 w-7 text-[#8a2e0e]" strokeWidth={1.9} aria-hidden="true" />
                     </span>
                   ))}
                 </div>

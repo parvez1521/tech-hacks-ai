@@ -57,20 +57,20 @@ test('frontier access images match the four catalog routes in the required displ
   assert.match(home, /object-cover/);
 });
 
-test('all ten existing AI categories use real-logo showcase bands and catalog-driven links/content', () => {
+test('all ten existing AI categories use icon showcase bands and catalog-driven links/content', () => {
   const categories = [
-    ['assistants', ['chatgpt', 'claude', 'gemini']],
-    ['writing', ['copy-ai']],
-    ['image', ['midjourney', 'ideogram', 'leonardo-ai']],
-    ['video', ['runway', 'kling-ai', 'pika']],
-    ['voice', ['elevenlabs', 'whisper', 'kokoro-tts']],
-    ['music', ['suno', 'udio']],
-    ['coding', ['cursor', 'v0-vercel', 'google-ai-studio']],
-    ['productivity', ['perplexity', 'notebooklm', 'anythingllm']],
-    ['automation', ['zapier-central', 'make', 'dify']],
-    ["'3d'", ['meshy-3d']],
+    ['assistants', ['MessageSquare', 'Sparkles', 'Bot']],
+    ['writing', ['PenLine', 'FileText', 'Type']],
+    ['image', ['ImageIcon', 'Palette', 'Camera']],
+    ['video', ['Clapperboard', 'Play', 'Scissors']],
+    ['voice', ['Mic', 'Radio', 'Volume2']],
+    ['music', ['Music', 'Headphones', 'Disc']],
+    ['coding', ['Code2', 'Terminal', 'Braces']],
+    ['productivity', ['Search', 'BookOpen', 'Compass']],
+    ['automation', ['Workflow', 'Zap', 'Bot']],
+    ["'3d'", ['Box', 'Shapes', 'PenTool']],
   ];
-  const start = home.indexOf('const categoryShowcase');
+  const start = home.indexOf('const categoryArt');
   const end = home.indexOf('const resources', start);
   const mapping = home.slice(start, end);
   assert.equal((home.match(/aria-labelledby="categories-heading"/g) || []).length, 1);
@@ -79,15 +79,14 @@ test('all ten existing AI categories use real-logo showcase bands and catalog-dr
   assert.match(home, /category\.description/);
   assert.match(home, /category\.subcategories\.map/);
   assert.match(home, /to=\{`\/ai-tools\?category=\$\{encodeURIComponent\(category\.id\)\}`\}/);
-  assert.match(home, /className="category-art" role="img" aria-label=\{showcase\.label\}/);
-  assert.match(home, /<BrandLogo slug=\{logo\.slug\} name=\{logo\.name\}/);
+  assert.match(home, /className="category-art" role="img" aria-label=\{art\.label\}/);
+  assert.match(home, /art\.icons\.map\(\(Icon, i\)/);
+  assert.ok(!mapping.includes('BrandLogo'), 'category bands use icons, not brand logos');
   assert.ok(!home.includes('/images/ai-categories/'), 'generated category artwork is gone');
-  for (const [key, slugs] of categories) {
-    assert.ok(mapping.includes(`${key}: { logos: [`), `${key} has a showcase entry`);
-    for (const slug of slugs) {
-      assert.ok(mapping.includes(`slug: '${slug}'`), `${key} showcases ${slug}`);
-      const logoFiles = fs.readdirSync(path.join(root, 'public', 'logos'));
-      assert.ok(logoFiles.some((file) => file.startsWith(`${slug}.`)), `${slug} has a real logo asset`);
+  for (const [key, icons] of categories) {
+    assert.ok(mapping.includes(`${key}: { icons: [`), `${key} has an icon band entry`);
+    for (const icon of icons) {
+      assert.ok(mapping.includes(icon), `${key} band uses the ${icon} icon`);
     }
   }
 });
