@@ -1,7 +1,7 @@
 {
   "name": "SwitchRoute",
-  "version": "1.0",
-  "updated": "2026-10",
+  "version": "2.0",
+  "updated": "2026-11",
   "purpose": "A clear, useful route through AI tools, software alternatives, open-source projects, and browser utilities.",
   "tagline": "Free AI Tools, Smarter Alternatives & Open Source",
   "brandPromise": "Find a smarter route to your tools.",
@@ -14,72 +14,72 @@
     "Modern"
   ],
   "typography": {
-    "family": "Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif",
+    "family": "Space Grotesk (display/headings), Inter (UI/body), -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif",
     "display": {
-      "size": "48–60px",
+      "size": "48\u201360px",
       "weight": 800,
       "tracking": "tight"
     },
     "heading": {
-      "size": "24–32px",
+      "size": "24\u201332px",
       "weight": 700
     },
     "body": {
-      "size": "14–18px",
+      "size": "14\u201318px",
       "weight": 400,
       "lineHeight": 1.6
     },
     "metadata": {
-      "size": "11–12px",
+      "size": "11\u201312px",
       "weight": 600,
-      "letterSpacing": "0.08–0.14em",
+      "letterSpacing": "0.08\u20130.14em",
       "transform": "uppercase"
     }
   },
   "colors": {
     "midnight": {
-      "hex": "#080D18",
-      "rgb": "8 13 24",
+      "hex": "#0D0716",
+      "rgb": "13 7 22",
       "role": "Dark page canvas"
     },
     "deepNavy": {
-      "hex": "#13294A",
-      "rgb": "19 41 74",
+      "hex": "#1E1034",
+      "rgb": "30 16 52",
       "role": "Depth and large surfaces"
     },
     "routeBlue": {
-      "hex": "#60A5FA",
-      "rgb": "96 165 250",
+      "hex": "#FF2E9A",
+      "rgb": "255 46 154",
       "role": "Primary accent in dark theme"
     },
     "routeCyan": {
       "hex": "#22D3EE",
       "rgb": "34 211 238",
-      "role": "Gradient start and supporting accent"
+      "role": "Gradient end and supporting accent"
     },
     "routeViolet": {
-      "hex": "#8B5CF6",
-      "rgb": "139 92 246",
-      "role": "Gradient end and secondary accent"
+      "hex": "#A855F7",
+      "rgb": "168 85 247",
+      "role": "Gradient middle and secondary accent"
     },
     "mist": {
-      "hex": "#F1F5F9",
-      "rgb": "241 245 249",
+      "hex": "#F3EEFF",
+      "rgb": "243 238 255",
       "role": "Primary dark-theme text"
     },
     "slate": {
-      "hex": "#94A3B8",
-      "rgb": "148 163 184",
+      "hex": "#AC9ECD",
+      "rgb": "172 158 205",
       "role": "Secondary dark-theme text"
     },
     "darkBorder": {
-      "hex": "#29384F",
-      "rgb": "41 56 79",
+      "hex": "#382258",
+      "rgb": "56 34 88",
       "role": "Dark-theme card and divider border"
     },
     "lightCanvas": {
-      "hex": "#F8FAFC",
-      "rgb": "248 250 252",
+      "hex": "#FAF8FF",
+      "rgb": "250 248 255",
       "role": "Light-theme page canvas"
     },
     "lightSurface": {
@@ -88,24 +88,24 @@
       "role": "Light-theme cards and controls"
     },
     "lightInk": {
-      "hex": "#0F172A",
-      "rgb": "15 23 42",
+      "hex": "#1D1030",
+      "rgb": "29 16 48",
       "role": "Light-theme primary text"
     },
     "lightBlue": {
-      "hex": "#1D4ED8",
-      "rgb": "29 78 216",
+      "hex": "#BE187A",
+      "rgb": "190 24 122",
       "role": "Accessible primary accent in light theme"
     },
     "lightBorder": {
-      "hex": "#DAE2EB",
-      "rgb": "218 226 235",
+      "hex": "#E4DBF5",
+      "rgb": "228 219 245",
       "role": "Light-theme card and divider border"
     }
   },
   "gradient": {
     "name": "Route gradient",
-    "css": "linear-gradient(90deg, #22D3EE 0%, #60A5FA 52%, #8B5CF6 100%)"
+    "css": "linear-gradient(90deg, #FF2E9A 0%, #A855F7 52%, #22D3EE 100%)"
   },
   "layout": {
     "spacingBase": "4px",
@@ -120,12 +120,12 @@
       64
     ],
     "radius": {
-      "control": "8–10px",
+      "control": "8\u201310px",
       "card": "16px",
       "feature": "24px"
     },
     "borderWidth": "1px",
-    "motion": "Subtle 160–220ms transitions; respect prefers-reduced-motion."
+    "motion": "Subtle 160\u2013220ms transitions; respect prefers-reduced-motion."
   },
   "logo": {
     "preferred": "Use the supplied SwitchRoute route-mark SVG and keep its original proportions and gradient.",

@@ -16,11 +16,11 @@ Source of truth: `src/index.css`.
 
 | Token | Current value | Role |
 |---|---|---|
-| `--brand-midnight` | `8 13 24` / `#080D18` | Dark theme background |
+| `--brand-midnight` | `13 7 22` / `#0D0716` | Dark theme background |
 | `--brand-navy` | `19 41 74` / `#13294A` | Deep brand navy |
-| `--brand-blue` | `96 165 250` / `#60A5FA` | Dark theme primary |
+| `--brand-blue` | `255 46 154` / `#FF2E9A` | Dark theme primary |
 | `--brand-cyan` | `34 211 238` / `#22D3EE` | Secondary accent; use sparingly |
-| `--brand-violet` | `139 92 246` / `#8B5CF6` | Secondary accent; use sparingly |
+| `--brand-violet` | `168 85 247` / `#A855F7` | Secondary accent; use sparingly |
 | `--brand-ice` | `241 245 249` / `#F1F5F9` | Dark theme foreground |
 | `--brand-slate` | `148 163 184` / `#94A3B8` | Muted foreground |
 | `--brand-border` | `41 56 79` | Dark theme border |

@@ -27,20 +27,20 @@ export const TechHacksLogo: React.FC<TechHacksLogoProps> = ({
         <svg viewBox="0 0 32 32" className="w-full h-full p-1" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
           <defs>
             <linearGradient id={`${gradientId}-line`} x1="5" y1="5" x2="27" y2="27" gradientUnits="userSpaceOnUse">
-              <stop offset="0%" stopColor="#22d3ee" />
-              <stop offset="52%" stopColor="#60a5fa" />
-              <stop offset="100%" stopColor="#8b5cf6" />
+              <stop offset="0%" stopColor="#ff2e9a" />
+              <stop offset="52%" stopColor="#a855f7" />
+              <stop offset="100%" stopColor="#22d3ee" />
             </linearGradient>
             <radialGradient id={`${gradientId}-glow`} cx="50%" cy="50%" r="50%">
-              <stop offset="0%" stopColor="#22d3ee" stopOpacity="0.32" />
+              <stop offset="0%" stopColor="#ff2e9a" stopOpacity="0.32" />
               <stop offset="100%" stopColor="#06b6d4" stopOpacity="0" />
             </radialGradient>
           </defs>
           <rect width="32" height="32" rx="6" fill={`url(#${gradientId}-glow)`} />
           <path d="M6 10h18m0 0-4-4m4 4-4 4" stroke={`url(#${gradientId}-line)`} strokeWidth="2.35" strokeLinecap="round" strokeLinejoin="round" />
           <path d="M26 22H8m0 0 4-4m-4 4 4 4" stroke={`url(#${gradientId}-line)`} strokeWidth="2.35" strokeLinecap="round" strokeLinejoin="round" />
-          <circle cx="6" cy="10" r="2" fill="#22d3ee" />
-          <circle cx="26" cy="22" r="2" fill="#8b5cf6" />
+          <circle cx="6" cy="10" r="2" fill="#ff2e9a" />
+          <circle cx="26" cy="22" r="2" fill="#22d3ee" />
         </svg>
       </div>
       {showWordmark && (

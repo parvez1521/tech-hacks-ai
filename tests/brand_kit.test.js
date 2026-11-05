@@ -13,7 +13,7 @@ test('public Brand Kit page documents the existing SwitchRoute identity and is r
 
   assert.match(page, /Brand Kit/);
   assert.match(page, /TechHacksLogo/);
-  assert.match(page, /Route Blue/);
+  assert.match(page, /Route Magenta/);
   assert.match(page, /Route Cyan/);
   assert.match(page, /Route Violet/);
   assert.match(page, /Typography/);
@@ -42,11 +42,11 @@ test('brand tokens are shared between CSS, Tailwind, logo assets, and downloadab
   }
   assert.match(logo, /from-brand-cyan via-brand-blue to-brand-violet/);
   assert.match(favicon, /#22D3EE/);
-  assert.match(favicon, /#60A5FA/);
-  assert.match(favicon, /#8B5CF6/);
-  assert.match(socialCard, /#8B5CF6/);
+  assert.match(favicon, /#A855F7/);
+  assert.match(favicon, /#FF2E9A/);
+  assert.match(socialCard, /#FF2E9A/);
   assert.equal(tokens.name, 'SwitchRoute');
-  assert.equal(tokens.colors.routeBlue.hex, '#60A5FA');
+  assert.equal(tokens.colors.routeBlue.hex, '#FF2E9A');
   assert.equal(tokens.colors.routeCyan.hex, '#22D3EE');
-  assert.equal(tokens.colors.routeViolet.hex, '#8B5CF6');
+  assert.equal(tokens.colors.routeViolet.hex, '#A855F7');
 });

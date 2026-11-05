@@ -16,22 +16,22 @@ import { Link } from '../router/Router';
 import { TechHacksLogo } from '../components/TechHacksLogo';
 
 const brandColors = [
-  { name: 'Midnight', hex: '#080D18', rgb: '8, 13, 24', role: 'Primary canvas', guidance: 'Use for the dark-mode page background and high-contrast brand moments.' },
-  { name: 'Deep Navy', hex: '#13294A', rgb: '19, 41, 74', role: 'Depth & surfaces', guidance: 'Use in hero gradients and large background surfaces, not for small text.' },
-  { name: 'Route Blue', hex: '#60A5FA', rgb: '96, 165, 250', role: 'Primary accent · dark UI', guidance: 'Use for primary links, focus rings, active states, and key actions on dark surfaces.' },
+  { name: 'Void Plum', hex: '#0D0716', rgb: '13, 7, 22', role: 'Primary canvas', guidance: 'Use for the dark-mode page background and high-contrast brand moments.' },
+  { name: 'Deep Ultraviolet', hex: '#1E1034', rgb: '30, 16, 52', role: 'Depth & surfaces', guidance: 'Use in hero gradients and large background surfaces, not for small text.' },
+  { name: 'Route Magenta', hex: '#FF2E9A', rgb: '255, 46, 154', role: 'Primary accent · dark UI', guidance: 'Use for primary links, focus rings, active states, and key actions on dark surfaces.' },
   { name: 'Route Cyan', hex: '#22D3EE', rgb: '34, 211, 238', role: 'Route gradient start', guidance: 'Use as a supporting accent in the route mark, data visuals, and subtle highlights.' },
-  { name: 'Route Violet', hex: '#8B5CF6', rgb: '139, 92, 246', role: 'Route gradient end', guidance: 'Use sparingly as the gradient endpoint for distinctive brand artwork.' },
-  { name: 'Mist', hex: '#F1F5F9', rgb: '241, 245, 249', role: 'Primary text · dark UI', guidance: 'Use for important headings and body text against dark surfaces.' },
-  { name: 'Slate', hex: '#94A3B8', rgb: '148, 163, 184', role: 'Supporting text · dark UI', guidance: 'Use for descriptions, metadata, secondary labels, and quiet interface text.' },
-  { name: 'Border', hex: '#29384F', rgb: '41, 56, 79', role: 'Dark UI structure', guidance: 'Use for card outlines, dividers, input borders, and low-emphasis separation.' },
+  { name: 'Route Violet', hex: '#A855F7', rgb: '168, 85, 247', role: 'Route gradient middle', guidance: 'Use sparingly as the gradient midpoint for distinctive brand artwork.' },
+  { name: 'Mist', hex: '#F3EEFF', rgb: '243, 238, 255', role: 'Primary text · dark UI', guidance: 'Use for important headings and body text against dark surfaces.' },
+  { name: 'Lavender Slate', hex: '#AC9ECD', rgb: '172, 158, 205', role: 'Supporting text · dark UI', guidance: 'Use for descriptions, metadata, secondary labels, and quiet interface text.' },
+  { name: 'Border', hex: '#382258', rgb: '56, 34, 88', role: 'Dark UI structure', guidance: 'Use for card outlines, dividers, input borders, and low-emphasis separation.' },
 ] as const;
 
 const lightColors = [
-  { name: 'Light canvas', hex: '#F8FAFC', role: 'Page background' },
+  { name: 'Light canvas', hex: '#FAF8FF', role: 'Page background' },
   { name: 'White surface', hex: '#FFFFFF', role: 'Cards and inputs' },
-  { name: 'Ink', hex: '#0F172A', role: 'Headings and main text' },
-  { name: 'Accessible blue', hex: '#1D4ED8', role: 'Primary actions and links' },
-  { name: 'Light border', hex: '#DAE2EB', role: 'Borders and dividers' },
+  { name: 'Ink', hex: '#1D1030', role: 'Headings and main text' },
+  { name: 'Accessible magenta', hex: '#BE187A', role: 'Primary actions and links' },
+  { name: 'Light border', hex: '#E4DBF5', role: 'Borders and dividers' },
 ] as const;
 
 const spacing = [
@@ -233,8 +233,8 @@ export const BrandKitPage: React.FC = () => {
           </span>
           <div>
             <p className="eyebrow">04 / Typography</p>
-            <h2 id="type-heading" className="mt-1 text-2xl font-bold tracking-tight text-foreground sm:text-3xl">Inter, with room to breathe</h2>
-            <p className="mt-2 max-w-3xl text-sm leading-relaxed text-secondary-foreground">Use Inter across the product. Strong headings guide scanning; regular-weight body text keeps technical detail easy to read.</p>
+            <h2 id="type-heading" className="mt-1 text-2xl font-bold tracking-tight text-foreground sm:text-3xl">Space Grotesk display, Inter utility</h2>
+            <p className="mt-2 max-w-3xl text-sm leading-relaxed text-secondary-foreground">Headings and display moments use Space Grotesk for a modern, techy voice; Inter carries body text and dense UI, where its clarity keeps technical detail easy to read. Labels and metadata use JetBrains Mono.</p>
           </div>
         </div>
         <div className="overflow-hidden rounded-2xl border border-border bg-card">

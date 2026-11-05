@@ -4,20 +4,20 @@
 
 /* SwitchRoute brand tokens — single source of truth for the digital identity. */
 :root {
-  --brand-midnight: 8 13 24;
-  --brand-navy: 19 41 74;
-  --brand-blue: 96 165 250;
+  --brand-midnight: 13 7 22;
+  --brand-navy: 30 16 52;
+  --brand-blue: 255 46 154;
   --brand-cyan: 34 211 238;
-  --brand-violet: 139 92 246;
-  --brand-ice: 241 245 249;
-  --brand-slate: 148 163 184;
-  --brand-border: 41 56 79;
-  --brand-light-bg: 248 250 252;
+  --brand-violet: 168 85 247;
+  --brand-ice: 243 238 255;
+  --brand-slate: 172 158 205;
+  --brand-border: 56 34 88;
+  --brand-light-bg: 250 248 255;
   --brand-light-surface: 255 255 255;
-  --brand-light-ink: 15 23 42;
-  --brand-light-blue: 29 78 216;
-  --brand-light-border: 218 226 235;
-  --brand-route-gradient: linear-gradient(90deg, #22D3EE 0%, #60A5FA 52%, #8B5CF6 100%);
+  --brand-light-ink: 29 16 48;
+  --brand-light-blue: 190 24 122;
+  --brand-light-border: 228 219 245;
+  --brand-route-gradient: linear-gradient(90deg, #FF2E9A 0%, #A855F7 52%, #22D3EE 100%);
   /* The one card/panel radius for the whole site (16px). It matches the
      frame baked into the homepage artwork, so image cards read as one
      box; every shared card component resolves to the same radius. */
@@ -32,21 +32,21 @@
     color-scheme: dark;
     --color-bg: var(--brand-midnight);
     --color-fg: var(--brand-ice);
-    --color-card: 17 28 47;
-    --color-card-fg: 241 245 249;
-    --color-muted: 23 36 58;
+    --color-card: 23 13 38;
+    --color-card-fg: 243 238 255;
+    --color-muted: 30 18 48;
     --color-muted-fg: var(--brand-slate);
-    --color-accent: 37 56 79;
-    --color-accent-fg: 241 245 249;
+    --color-accent: 43 24 68;
+    --color-accent-fg: 243 238 255;
     --color-border: var(--brand-border);
-    --color-secondary: 23 36 58;
-    --color-secondary-fg: 203 213 225;
+    --color-secondary: 30 18 48;
+    --color-secondary-fg: 216 205 240;
     --color-primary: var(--brand-blue);
-    --color-primary-fg: 15 23 42;
-    --color-primary-hover: 59 130 246;
-    --glow-spotlight: rgba(59, 130, 246, 0.16);
-    --dot-color: rgba(148, 163, 184, 0.1);
-    --grid-color: rgba(148, 163, 184, 0.055);
+    --color-primary-fg: 255 255 255;
+    --color-primary-hover: 219 39 119;
+    --glow-spotlight: rgba(255, 46, 154, 0.17);
+    --dot-color: rgba(196, 181, 253, 0.1);
+    --grid-color: rgba(196, 181, 253, 0.06);
     /* Liquid Glass (dark): smoky translucent fills over the midnight base. */
     --glass-fill: rgb(255 255 255 / 0.055);
     --glass-fill-hover: rgb(255 255 255 / 0.09);
@@ -57,9 +57,9 @@
     --glass-shadow-lg: 0 32px 64px -28px rgb(2 8 23 / 0.62);
     /* Ambient colour field fixed behind every page so glass has colour to refract. */
     --page-wash:
-      radial-gradient(56rem 30rem at 88% -8%, rgb(var(--brand-cyan) / 0.055), transparent 62%),
-      radial-gradient(64rem 34rem at 6% -10%, rgb(var(--color-primary) / 0.06), transparent 62%),
-      radial-gradient(52rem 30rem at 50% 112%, rgb(var(--brand-violet) / 0.04), transparent 65%);
+      radial-gradient(56rem 30rem at 88% -8%, rgb(var(--brand-cyan) / 0.05), transparent 62%),
+      radial-gradient(64rem 34rem at 6% -10%, rgb(var(--color-primary) / 0.09), transparent 62%),
+      radial-gradient(52rem 30rem at 50% 112%, rgb(var(--brand-violet) / 0.07), transparent 65%);
   }
 
   html.light,
@@ -70,20 +70,20 @@
     --color-bg: var(--brand-light-bg);
     --color-fg: var(--brand-light-ink);
     --color-card: 255 255 255;
-    --color-card-fg: 15 23 42;
-    --color-muted: 241 245 249;
-    --color-muted-fg: 80 95 118;
-    --color-accent: 226 232 240;
-    --color-accent-fg: 15 23 42;
+    --color-card-fg: 29 16 48;
+    --color-muted: 243 238 250;
+    --color-muted-fg: 96 78 128;
+    --color-accent: 237 230 250;
+    --color-accent-fg: 29 16 48;
     --color-border: var(--brand-light-border);
-    --color-secondary: 241 245 249;
-    --color-secondary-fg: 51 65 85;
+    --color-secondary: 243 238 250;
+    --color-secondary-fg: 62 44 92;
     --color-primary: var(--brand-light-blue);
     --color-primary-fg: 255 255 255;
-    --color-primary-hover: 30 64 175;
-    --glow-spotlight: rgba(37, 99, 235, 0.04);
-    --dot-color: rgba(15, 23, 42, 0.08);
-    --grid-color: rgba(15, 23, 42, 0.04);
+    --color-primary-hover: 157 18 96;
+    --glow-spotlight: rgba(190, 24, 122, 0.05);
+    --dot-color: rgba(29, 16, 48, 0.07);
+    --grid-color: rgba(29, 16, 48, 0.04);
     /* Liquid Glass (light): bright translucent white fills, soft gray edge. */
     --glass-fill: rgb(255 255 255 / 0.55);
     --glass-fill-hover: rgb(255 255 255 / 0.72);
@@ -111,6 +111,15 @@
     background-attachment: fixed;
     color: rgb(var(--color-fg));
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+
+  /* Neon Circuit display type: Space Grotesk carries every heading;
+     Inter stays for body/UI text where density matters. */
+  h1,
+  h2,
+  h3 {
+    font-family: 'Space Grotesk', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    letter-spacing: -0.02em;
     overflow-x: clip;
     text-rendering: optimizeLegibility;
   }
@@ -529,7 +538,7 @@
      kickers, card meta labels and data chips use the system monospace stack
      (no webfont) at 11px with wide tracking — see DESIGN.md. */
   .eyebrow {
-    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
     color: rgb(var(--color-primary));
     font-size: 0.6875rem;
     font-weight: 600;
@@ -539,7 +548,7 @@
   }
 
   .kicker {
-    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
     color: rgb(var(--color-primary));
     font-size: 0.6875rem;
     font-weight: 600;
@@ -549,7 +558,7 @@
   }
 
   .meta-label {
-    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
     color: rgb(var(--color-muted-fg));
     font-size: 0.6875rem;
     font-weight: 500;
@@ -1743,3 +1752,31 @@
   .switch-flow__ring { animation: none; opacity: 0; }
 }
 
+
+/* ---- Neon Circuit finishing touches ---- */
+::selection {
+  background: #ff2e9a;
+  color: #ffffff;
+}
+html {
+  scrollbar-color: rgb(var(--brand-violet) / 0.55) transparent;
+}
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-thumb {
+  background: rgb(var(--brand-violet) / 0.45);
+  border-radius: 8px;
+  border: 2px solid rgb(var(--color-bg));
+}
+::-webkit-scrollbar-thumb:hover { background: rgb(var(--brand-violet) / 0.7); }
+::-webkit-scrollbar-track { background: transparent; }
+/* A hairline of the route gradient under the glass header. */
+.site-header { position: relative; }
+.site-header::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0; bottom: -1px;
+  height: 1px;
+  background: var(--brand-route-gradient);
+  opacity: 0.55;
+  pointer-events: none;
+}
