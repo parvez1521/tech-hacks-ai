@@ -16,22 +16,22 @@ import { Link } from '../router/Router';
 import { TechHacksLogo } from '../components/TechHacksLogo';
 
 const brandColors = [
-  { name: 'Midnight', hex: '#080D18', rgb: '8, 13, 24', role: 'Primary canvas', guidance: 'Use for the dark-mode page background and high-contrast brand moments.' },
-  { name: 'Deep Navy', hex: '#13294A', rgb: '19, 41, 74', role: 'Depth & surfaces', guidance: 'Use in hero gradients and large background surfaces, not for small text.' },
-  { name: 'Route Blue', hex: '#60A5FA', rgb: '96, 165, 250', role: 'Primary accent · dark UI', guidance: 'Use for primary links, focus rings, active states, and key actions on dark surfaces.' },
-  { name: 'Route Cyan', hex: '#22D3EE', rgb: '34, 211, 238', role: 'Route gradient start', guidance: 'Use as a supporting accent in the route mark, data visuals, and subtle highlights.' },
-  { name: 'Route Violet', hex: '#8B5CF6', rgb: '139, 92, 246', role: 'Route gradient end', guidance: 'Use sparingly as the gradient endpoint for distinctive brand artwork.' },
-  { name: 'Mist', hex: '#F1F5F9', rgb: '241, 245, 249', role: 'Primary text · dark UI', guidance: 'Use for important headings and body text against dark surfaces.' },
-  { name: 'Slate', hex: '#94A3B8', rgb: '148, 163, 184', role: 'Supporting text · dark UI', guidance: 'Use for descriptions, metadata, secondary labels, and quiet interface text.' },
-  { name: 'Border', hex: '#29384F', rgb: '41, 56, 79', role: 'Dark UI structure', guidance: 'Use for card outlines, dividers, input borders, and low-emphasis separation.' },
+  { name: 'Ember Midnight', hex: '#160A07', rgb: '22, 10, 7', role: 'Primary canvas', guidance: 'Use for the dark-mode page background and high-contrast brand moments.' },
+  { name: 'Deep Ember', hex: '#2E140D', rgb: '46, 20, 13', role: 'Depth & surfaces', guidance: 'Use in hero gradients and large background surfaces, not for small text.' },
+  { name: 'Route Ember', hex: '#FF6A3D', rgb: '255, 106, 61', role: 'Primary accent · dark UI', guidance: 'Use for primary links, focus rings, active states, and key actions on dark surfaces.' },
+  { name: 'Route Orange', hex: '#FF6A00', rgb: '255, 106, 0', role: 'Route gradient start', guidance: 'Use as a supporting accent in the route mark, data visuals, and subtle highlights.' },
+  { name: 'Route Vermilion', hex: '#F93A12', rgb: '249, 58, 18', role: 'Hero block & gradient core', guidance: 'The loud brand colour: hero colour block, gradient core, and distinctive brand artwork.' },
+  { name: 'Mist', hex: '#FFF3EA', rgb: '255, 243, 234', role: 'Primary text · dark UI', guidance: 'Use for important headings and body text against dark surfaces.' },
+  { name: 'Slate', hex: '#C4A494', rgb: '196, 164, 148', role: 'Supporting text · dark UI', guidance: 'Use for descriptions, metadata, secondary labels, and quiet interface text.' },
+  { name: 'Border', hex: '#4A241A', rgb: '74, 36, 26', role: 'Dark UI structure', guidance: 'Use for card outlines, dividers, input borders, and low-emphasis separation.' },
 ] as const;
 
 const lightColors = [
-  { name: 'Light canvas', hex: '#F8FAFC', role: 'Page background' },
+  { name: 'Light canvas', hex: '#FFF7EE', role: 'Page background' },
   { name: 'White surface', hex: '#FFFFFF', role: 'Cards and inputs' },
-  { name: 'Ink', hex: '#0F172A', role: 'Headings and main text' },
-  { name: 'Accessible blue', hex: '#1D4ED8', role: 'Primary actions and links' },
-  { name: 'Light border', hex: '#DAE2EB', role: 'Borders and dividers' },
+  { name: 'Ink', hex: '#1D130C', role: 'Headings and main text' },
+  { name: 'Accessible vermilion', hex: '#D82C0A', role: 'Primary actions and links' },
+  { name: 'Light border', hex: '#F0DCC8', role: 'Borders and dividers' },
 ] as const;
 
 const spacing = [

@@ -93,7 +93,7 @@ describe('Phase 19: Floating AI Pet, Glass UI, Theme Repair & UX Bug Fixes', () 
 
       // Check dark RGB values
       assert.ok(content.includes('--color-bg: var(--brand-midnight);'), 'Midnight-blue dark background RGB numbers defined');
-      assert.ok(content.includes('--color-card: 17 28 47;'), 'Midnight-blue dark card RGB numbers defined');
+      assert.ok(content.includes('--color-card: 34 17 12;'), 'Midnight-blue dark card RGB numbers defined');
 
       // Check light RGB values
       assert.ok(content.includes('--color-bg: var(--brand-light-bg);'), 'Light background RGB numbers defined');
