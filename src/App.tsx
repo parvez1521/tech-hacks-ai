@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { RouterProvider, useRouter, matchRoute } from './router/Router';
 import { ThemeProvider } from './context/ThemeContext';
 import { Header } from './components/Header';
+import { ScrollMorph } from './components/ScrollMorph';
 import { Footer } from './components/Footer';
 import { FloatingChatbot } from './components/FloatingChatbot';
 import { AdSenseBanner } from './components/AdSenseBanner';
@@ -432,6 +433,7 @@ const AppRoutes: React.FC = () => {
   return (
     <div className="min-h-screen flex w-full min-w-0 max-w-full flex-col overflow-x-clip bg-background text-foreground relative selection:bg-primary/25 selection:text-foreground">
       <Header />
+      <ScrollMorph />
       <main className="flex-1 min-w-0 w-full max-w-full relative z-10">
         {renderRoute()}
         {route === 'home' && <AdSenseBanner slot={siteConfig.adsense.slots.homepage} format="auto" />}
