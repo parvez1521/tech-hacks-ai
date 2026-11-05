@@ -45,7 +45,7 @@ export const ScrollMorph: React.FC = () => {
           observer.unobserve(el);
           el.classList.add('is-revealed');
           const delay = Number(el.dataset.revealDelay || 0);
-          window.setTimeout(() => el.classList.add('is-settled'), 820 + delay);
+          window.setTimeout(() => el.classList.add('is-settled'), 1300 + delay);
         }
       },
       { threshold: 0.1, rootMargin: '0px 0px -6% 0px' },

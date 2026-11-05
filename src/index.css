@@ -1957,3 +1957,173 @@ html.js .morph-reveal.is-settled {
     display: none;
   }
 }
+
+/* Category art band: replaces the generated artwork on AI category
+   cards with a designed ember stage carrying the category's real tool
+   logos on light app tiles — no AI imagery, all first-party assets. */
+.category-art {
+  position: relative;
+  display: flex;
+  aspect-ratio: 2.08 / 1;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background:
+    radial-gradient(120% 130% at 18% 0%, rgb(255 122 41 / 0.32), transparent 55%),
+    radial-gradient(90% 120% at 88% 110%, rgb(249 58 18 / 0.28), transparent 55%),
+    linear-gradient(140deg, #2a130c 0%, #1d0f0a 55%, #170b07 100%);
+}
+
+.category-art::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgb(255 255 255 / 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(255 255 255 / 0.045) 1px, transparent 1px);
+  background-size: 34px 34px;
+}
+
+.category-art__tiles {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  transition: transform 0.5s ease-out;
+}
+
+.home-category-card:hover .category-art__tiles {
+  transform: scale(1.04);
+}
+
+.category-art__tile {
+  display: grid;
+  width: 62px;
+  height: 62px;
+  place-items: center;
+  border-radius: 18px;
+  background: #fff9f2;
+  box-shadow:
+    0 14px 28px -10px rgb(0 0 0 / 0.5),
+    inset 0 1px 0 rgb(255 255 255 / 0.8);
+}
+
+.category-art__tile:first-child {
+  transform: rotate(-5deg);
+}
+
+.category-art__tile:last-child {
+  transform: rotate(5deg);
+}
+
+.category-art__tile:only-child {
+  width: 80px;
+  height: 80px;
+  border-radius: 22px;
+  transform: none;
+}
+
+/* Sweep discipline: the reveal sweep plays exactly once. After the
+   block settles, the band's animation is switched off for good, so
+   hovering away and back can only ever trigger the hover sweep — the
+   reveal sweep never replays. */
+.glass-card.morph-reveal.is-settled::after,
+.card-glow.morph-reveal.is-settled::after,
+.interactive-card.morph-reveal.is-settled::after,
+.discovery-card.morph-reveal.is-settled::after,
+.home-collection-card.morph-reveal.is-settled::after,
+.frontier-access-card.morph-reveal.is-settled::after,
+.home-category-card.morph-reveal.is-settled::after {
+  animation: none;
+}
+
+/* Gentle hover scale-up on boxes, on top of their glow. The settled
+   state restates the transition so the scale animates instead of
+   snapping once ScrollMorph removes the reveal transition. */
+.glass-card,
+.card-glow,
+.interactive-card,
+.discovery-card,
+.home-collection-card,
+.frontier-access-card,
+.home-category-card {
+  transition:
+    transform 0.35s ease,
+    box-shadow 0.3s ease,
+    border-color 0.18s ease;
+}
+
+html.js .glass-card.morph-reveal.is-settled,
+html.js .card-glow.morph-reveal.is-settled,
+html.js .interactive-card.morph-reveal.is-settled,
+html.js .discovery-card.morph-reveal.is-settled,
+html.js .home-collection-card.morph-reveal.is-settled,
+html.js .frontier-access-card.morph-reveal.is-settled,
+html.js .home-category-card.morph-reveal.is-settled {
+  transition:
+    transform 0.35s ease,
+    box-shadow 0.3s ease,
+    border-color 0.18s ease;
+}
+
+.glass-card:hover,
+.card-glow:hover,
+.interactive-card:hover,
+.discovery-card:hover,
+.home-collection-card:hover,
+.frontier-access-card:hover,
+.home-category-card:hover {
+  transform: scale(1.02);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .glass-card:hover,
+  .card-glow:hover,
+  .interactive-card:hover,
+  .discovery-card:hover,
+  .home-collection-card:hover,
+  .frontier-access-card:hover,
+  .home-category-card:hover {
+    transform: none;
+  }
+
+  .home-category-card:hover .category-art__tiles {
+    transform: none;
+  }
+}
+
+/* Settled-state hover must outrank two standing rules: the revealed
+   state's transform: none on the element, and the sweep kill-switch on
+   its ::after. These combined selectors carry both classes so a settled
+   box still scales and sweeps on hover — and only on hover. */
+html.js .glass-card.morph-reveal.is-settled:hover,
+html.js .card-glow.morph-reveal.is-settled:hover,
+html.js .interactive-card.morph-reveal.is-settled:hover,
+html.js .discovery-card.morph-reveal.is-settled:hover,
+html.js .home-collection-card.morph-reveal.is-settled:hover,
+html.js .frontier-access-card.morph-reveal.is-settled:hover,
+html.js .home-category-card.morph-reveal.is-settled:hover {
+  transform: scale(1.02);
+}
+
+.glass-card.glass-card.morph-reveal.is-settled:hover::after,
+.card-glow.card-glow.morph-reveal.is-settled:hover::after,
+.interactive-card.interactive-card.morph-reveal.is-settled:hover::after,
+.discovery-card.discovery-card.morph-reveal.is-settled:hover::after,
+.home-collection-card.home-collection-card.morph-reveal.is-settled:hover::after,
+.frontier-access-card.frontier-access-card.morph-reveal.is-settled:hover::after,
+.home-category-card.home-category-card.morph-reveal.is-settled:hover::after {
+  animation: lightSweepHover 0.9s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.js .glass-card.morph-reveal.is-settled:hover,
+  html.js .card-glow.morph-reveal.is-settled:hover,
+  html.js .interactive-card.morph-reveal.is-settled:hover,
+  html.js .discovery-card.morph-reveal.is-settled:hover,
+  html.js .home-collection-card.morph-reveal.is-settled:hover,
+  html.js .frontier-access-card.morph-reveal.is-settled:hover,
+  html.js .home-category-card.morph-reveal.is-settled:hover {
+    transform: none;
+  }
+}
