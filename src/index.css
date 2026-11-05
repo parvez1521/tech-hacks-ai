@@ -1838,3 +1838,122 @@ html.js .morph-reveal.is-settled {
     transition: none;
   }
 }
+
+/* Hero CTA on the vermilion block: the sunset gradient merged into the
+   hero colour, so the primary action is a black capsule instead — it
+   stands off the block in both themes. Scoped to the hero; every other
+   .btn-primary (e.g. the footer) keeps the route gradient. */
+.hero-aurora .btn-primary {
+  background: #171009;
+  color: #FFF7EE;
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.14),
+    inset 0 -1px 0 rgb(0 0 0 / 0.35),
+    0 14px 28px -12px rgb(23 10 4 / 0.65),
+    0 4px 10px -4px rgb(23 10 4 / 0.4);
+}
+
+.hero-aurora .btn-primary:hover {
+  background: #251610;
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.16),
+    inset 0 -1px 0 rgb(0 0 0 / 0.35),
+    0 18px 34px -12px rgb(23 10 4 / 0.7),
+    0 6px 14px -4px rgb(23 10 4 / 0.45);
+}
+
+/* Light sweep: a soft shine band crosses every box once as it
+   morph-reveals, and again whenever it is hovered. The band lives on
+   ::after (unused by these hosts — their halos are box-shadows) and is
+   clipped by the host's own radius via overflow: hidden. */
+.glass-card,
+.card-glow,
+.interactive-card,
+.discovery-card,
+.home-collection-card,
+.frontier-access-card,
+.home-category-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.glass-card::after,
+.card-glow::after,
+.interactive-card::after,
+.discovery-card::after,
+.home-collection-card::after,
+.frontier-access-card::after,
+.home-category-card::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 55%;
+  z-index: 2;
+  pointer-events: none;
+  background: linear-gradient(100deg, transparent, rgb(255 255 255 / 0.16), transparent);
+  transform: translateX(-240%) skewX(-14deg);
+}
+
+.glass-card.morph-reveal.is-revealed::after,
+.card-glow.morph-reveal.is-revealed::after,
+.interactive-card.morph-reveal.is-revealed::after,
+.discovery-card.morph-reveal.is-revealed::after,
+.home-collection-card.morph-reveal.is-revealed::after,
+.frontier-access-card.morph-reveal.is-revealed::after,
+.home-category-card.morph-reveal.is-revealed::after {
+  animation: lightSweep 0.9s ease;
+}
+
+.home-collection-card.morph-reveal.is-revealed::after,
+.frontier-access-card.morph-reveal.is-revealed::after,
+.home-category-card.morph-reveal.is-revealed::after,
+.glass-card.morph-reveal.is-revealed::after,
+.card-glow.morph-reveal.is-revealed::after,
+.interactive-card.morph-reveal.is-revealed::after,
+.discovery-card.morph-reveal.is-revealed::after {
+  animation-delay: 0.25s;
+}
+
+/* Doubled classes: the reveal-state rule above carries three classes,
+   so the hover trigger must outrank it or the sweep never restarts. */
+.glass-card.glass-card:hover::after,
+.card-glow.card-glow:hover::after,
+.interactive-card.interactive-card:hover::after,
+.discovery-card.discovery-card:hover::after,
+.home-collection-card.home-collection-card:hover::after,
+.frontier-access-card.frontier-access-card:hover::after,
+.home-category-card.home-category-card:hover::after {
+  animation: lightSweepHover 0.9s ease;
+}
+
+@keyframes lightSweepHover {
+  from {
+    transform: translateX(-240%) skewX(-14deg);
+  }
+  to {
+    transform: translateX(340%) skewX(-14deg);
+  }
+}
+
+@keyframes lightSweep {
+  from {
+    transform: translateX(-240%) skewX(-14deg);
+  }
+  to {
+    transform: translateX(340%) skewX(-14deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .glass-card::after,
+  .card-glow::after,
+  .interactive-card::after,
+  .discovery-card::after,
+  .home-collection-card::after,
+  .frontier-access-card::after,
+  .home-category-card::after {
+    display: none;
+  }
+}
