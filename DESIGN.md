@@ -139,3 +139,5 @@ soft concentric glass radii. This section supersedes Direction A's
 - Body text never sits on the most translucent tier; copy stays on the
   foreground token, and the strong tier backs anything text-heavy that
   floats (dialogs, dropdowns, search results).
+
+<!-- Production deployment trigger: Loud Block theme merged via PR #63 (769557d); Vercel created no deployment for the merge commit, so this inert note re-fires the main-branch webhook. -->
