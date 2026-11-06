@@ -61,8 +61,6 @@ const utilityCategoryOverrides: Record<string, UtilityCategory> = {
   'json-formatter': 'developer-tools',
   'prompt-builder': 'text-writing',
   'svg-to-png': 'image-graphics',
-  'youtube-video-downloader': 'video-downloaders',
-  'instagram-video-downloader': 'video-downloaders',
 };
 
 export function getUtilityCategory(tool: FreeToolUtility): UtilityCategory {
