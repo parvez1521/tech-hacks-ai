@@ -27,6 +27,7 @@ export const utilityCategoryDefinitions: Array<{
 }> = [
   { id: 'image-graphics', name: 'Image & Graphics', description: 'Crop, inspect, sanitize, and generate image assets locally.' },
   { id: 'video-audio', name: 'Video & Audio', description: 'Inspect, transcribe, trim, convert, and responsibly process local media.' },
+  { id: 'video-downloaders', name: 'Video Downloaders', description: 'Find official export workflows for videos you own or are authorized to save. These guides do not bypass platform restrictions.' },
   { id: 'files-data-browser', name: 'Files, Data & Browser', description: 'Inspect files, browser capabilities, MIME signatures, and timestamps.' },
   { id: 'text-writing', name: 'Text & Writing', description: 'Transform, compare, inspect, and format text without a remote utility service.' },
   { id: 'developer-tools', name: 'Developer Tools', description: 'Work with structured data, URLs, regular expressions, and CSS.' },
@@ -60,6 +61,8 @@ const utilityCategoryOverrides: Record<string, UtilityCategory> = {
   'json-formatter': 'developer-tools',
   'prompt-builder': 'text-writing',
   'svg-to-png': 'image-graphics',
+  'youtube-video-downloader': 'video-downloaders',
+  'instagram-video-downloader': 'video-downloaders',
 };
 
 export function getUtilityCategory(tool: FreeToolUtility): UtilityCategory {
