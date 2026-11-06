@@ -316,6 +316,21 @@
     box-shadow: inset 0 1px 0 var(--glass-highlight);
   }
 
+  /* Free-tools icon tile (Style B — single brand orange): a small glass
+     tile in the one brand accent, with the Liquid Glass specular top edge
+     and a soft vermilion glow. Both themes resolve through the primary
+     token (bright orange on dark, deep vermilion on light), so the tile
+     stays brand-orange everywhere without a hard-coded hex. */
+  .free-tool-tile {
+    background: linear-gradient(145deg, rgb(var(--color-primary) / 0.2), rgb(var(--brand-violet) / 0.06));
+    border: 1px solid rgb(var(--color-primary) / 0.38);
+    box-shadow:
+      inset 0 1px 0 var(--glass-highlight),
+      inset 0 -8px 14px rgb(0 0 0 / 0.12),
+      0 6px 16px -6px rgb(var(--brand-violet) / 0.35);
+    color: rgb(var(--color-primary));
+  }
+
   /* Translucent field material for inputs sitting on glass panels. */
   .glass-field {
     background: rgb(var(--color-card) / 0.5);
