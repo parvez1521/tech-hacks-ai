@@ -14,16 +14,11 @@ describe('Canonical catalog sections and expanded media utilities', () => {
     freeToolsData.forEach((tool) => assert.ok(categories.has(getUtilityCategory(tool)), `${tool.slug} needs a canonical utility category`));
   });
 
-  test('video downloader utilities have a dedicated, permission-conscious section', () => {
-    const section = utilityCategoryDefinitions.find((category) => category.id === 'video-downloaders');
-    assert.ok(section, 'Video Downloaders section must be available on Utility Tools');
-    assert.match(section.description, /own or are authorized to save/i);
-
-    const downloaderSlugs = freeToolsData
-      .filter((tool) => getUtilityCategory(tool) === 'video-downloaders')
-      .map((tool) => tool.slug)
-      .sort();
-    assert.deepEqual(downloaderSlugs, ['instagram-video-downloader', 'youtube-video-downloader']);
+  test('Video Downloaders is a standalone directory route, not a Utility Tools category', async () => {
+    const { matchRoute } = await import('../dist/test-ssr.js');
+    assert.deepEqual(matchRoute('/video-downloaders'), { route: 'video-downloaders', params: {} });
+    assert.equal(utilityCategoryDefinitions.some((category) => category.id === 'video-downloaders'), false);
+    assert.equal(freeToolsData.some((tool) => getUtilityCategory(tool) === 'video-downloaders'), false);
   });
 
   test('AI and community records remain separate in catalog filters', () => {
