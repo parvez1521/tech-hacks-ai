@@ -39,6 +39,15 @@ export const FreeToolsPage: React.FC = () => {
         <p className="text-sm sm:text-base text-secondary-foreground max-w-2xl mb-6">Perform common text, data, media, image, security, and browser tasks directly with focused tools. Client-Side utilities explain local processing, while service-backed tools clearly disclose their configured provider requirement.</p>
         <div className="p-4 rounded-xl bg-primary/5 border border-primary/20 flex items-start gap-3 text-xs text-secondary-foreground mb-8"><ShieldCheck className="w-5 h-5 text-primary shrink-0" /><span><strong>Privacy-first processing:</strong> Browser utilities keep their input local. Service-backed transcription sends a file only after you start it and reports when server configuration is unavailable.</span></div>
 
+        <section aria-labelledby="video-downloaders-feature" className="mb-6 flex flex-col gap-4 rounded-xl border border-border bg-card p-5 sm:flex-row sm:items-center sm:justify-between">
+          <div className="max-w-2xl">
+            <p className="text-xs font-medium uppercase tracking-wide text-primary">Curated desktop app</p>
+            <h2 id="video-downloaders-feature" className="mt-1 text-lg font-semibold text-foreground">Video Downloaders</h2>
+            <p className="mt-1 text-sm leading-6 text-muted-foreground">Explore our dedicated video downloader directory. It currently features OmniGet, a free and open-source desktop app for supported sites.</p>
+          </div>
+          <Link to="/video-downloaders" className="inline-flex min-h-10 shrink-0 items-center justify-center gap-2 rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:opacity-90">Explore directory <ArrowRight className="h-4 w-4" /></Link>
+        </section>
+
         <div className="mb-5 grid gap-3 glass rounded-2xl border border-border p-4 sm:grid-cols-[1fr_auto] sm:items-center">
           <div className="relative"><Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" /><label className="sr-only" htmlFor="utility-search">Search Utility Tools</label><input id="utility-search" value={query} onChange={(event) => updateQuery(event.target.value)} placeholder="Search Utility Tools, formats, or tasks…" className="w-full rounded-lg border border-border bg-muted py-2 pl-9 pr-9 text-sm text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20" />{query && <button type="button" onClick={() => updateQuery('')} aria-label="Clear utility search" className="absolute right-2.5 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"><X className="h-4 w-4" /></button>}</div>
           <span className="text-xs text-muted-foreground">Showing <strong className="text-foreground">{filteredTools.length}</strong> of {tools.length} utilities</span>

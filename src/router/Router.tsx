@@ -54,6 +54,9 @@ export function matchRoute(pathname: string): { route: string; params: Record<st
   if (cleanPath === '/github-projects') {
     return { route: 'github-projects', params: {} };
   }
+  if (cleanPath === '/video-downloaders') {
+    return { route: 'video-downloaders', params: {} };
+  }
   const githubProjectDetailMatch = cleanPath.match(/^\/github-projects\/([^/]+)$/);
   if (githubProjectDetailMatch) {
     return { route: 'github-project-detail', params: { slug: githubProjectDetailMatch[1] } };

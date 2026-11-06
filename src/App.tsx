@@ -39,6 +39,7 @@ import { AiToolDetailPage } from './pages/AiToolDetailPage';
 import { FreeAiSitesPage } from './pages/FreeAiSitesPage';
 import { FrontierModelsPage } from './pages/FrontierModelsPage';
 import { GitHubProjectsPage } from './pages/GitHubProjectsPage';
+import { VideoDownloadersPage } from './pages/VideoDownloadersPage';
 import { GitHubProjectDetailPage } from './pages/GitHubProjectDetailPage';
 import { GuidesPage } from './pages/GuidesPage';
 import { GuideDetailPage } from './pages/GuideDetailPage';
@@ -115,6 +116,8 @@ export function getRouteTitle(route: string, params: Record<string, string> = {}
       return formatPageTitle('Frontier AI Models: Capabilities & Access Routes');
     case 'github-projects':
       return formatPageTitle('Curated GitHub Projects: Free & Open Source Software');
+    case 'video-downloaders':
+      return formatPageTitle('Video Downloaders: OmniGet Desktop App');
     case 'github-project-detail': {
       const project = listedGitHubProjects.find((item) => item.slug === params.slug);
       return project ? formatPageTitle(`${project.name} — GitHub Project Details`) : formatPageTitle('GitHub Project Not Found');
@@ -237,6 +240,8 @@ export function getRouteDescription(route: string, params: Record<string, string
       return 'Explore frontier AI models by capability, official documentation and model access route. Provider relationships and pricing are identified separately.';
     case 'github-projects':
       return 'Discover curated free and open-source GitHub projects across AI, development, automation, and productivity, with license and setup details.';
+    case 'video-downloaders':
+      return 'Explore OmniGet, a free and open-source desktop video downloader for Windows, macOS, and Linux. Review supported sites, formats, privacy notes, and official downloads.';
     case 'github-project-detail': {
       const project = listedGitHubProjects.find((item) => item.slug === params.slug);
       return project ? `${project.name}: ${project.description} Repository ${project.fullName}. Review its license, setup requirements, supported platforms, and current metadata.` : 'Detailed information about a curated GitHub repository.';
@@ -376,6 +381,8 @@ const AppRoutes: React.FC = () => {
         return <FrontierModelsPage />;
       case 'github-projects':
         return <GitHubProjectsPage />;
+      case 'video-downloaders':
+        return <VideoDownloadersPage />;
       case 'github-project-detail':
         return <GitHubProjectDetailPage />;
       case 'guides':
