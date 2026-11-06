@@ -2,6 +2,7 @@ import React, { useMemo } from 'react';
 import { getAllFreeTools } from '../services/aiCatalogService';
 import { Link, useRouter } from '../router/Router';
 import { getUtilityCategory, getUtilityCategoryDefinition, utilityCategoryDefinitions } from '../data/catalogTaxonomy';
+import { freeToolIcons } from '../data/freeToolIcons';
 import { Wrench, ArrowRight, ShieldCheck, Cpu, Search, X } from 'lucide-react';
 
 export const FreeToolsPage: React.FC = () => {
@@ -63,10 +64,13 @@ export const FreeToolsPage: React.FC = () => {
         <section key={definition.id} aria-labelledby={`utility-group-${definition.id}`} className="mb-10">
           <div className="mb-4 flex items-end justify-between gap-4"><div><h2 id={`utility-group-${definition.id}`} className="text-xl font-bold text-foreground">{definition.name}</h2><p className="mt-1 text-xs text-muted-foreground">{definition.description}</p></div><span className="text-xs text-muted-foreground">{groupTools.length} {groupTools.length === 1 ? 'tool' : 'tools'}</span></div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {groupTools.map((tool) => <Link key={tool.id} to={`/free-tools/${tool.slug}`} className="group relative flex flex-col justify-between glass rounded-2xl border border-border p-5 transition-all duration-300 ease-out hover:-translate-y-1 hover:border-primary/40 hover:shadow-xl hover:shadow-black/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60">
-              <div><div className="mb-3 flex items-center justify-between gap-3"><span className="rounded border border-border bg-muted px-2 py-0.5 text-[11px] font-semibold text-secondary-foreground">{definition.name}</span><span className="inline-flex items-center gap-1 text-[11px] font-mono text-emerald-700 dark:text-emerald-400"><Cpu className="h-3 w-3" />{tool.isClientSideOnly ? 'In browser' : 'Configured service'}</span></div><h3 className="mb-2 text-base font-bold tracking-tight text-foreground group-hover:text-primary">{tool.name}</h3><p className="mb-4 line-clamp-3 text-xs leading-relaxed text-secondary-foreground">{tool.tagline}</p></div>
+            {groupTools.map((tool) => {
+              const ToolIcon = freeToolIcons[tool.id] ?? Wrench;
+              return <Link key={tool.id} to={`/free-tools/${tool.slug}`} className="group relative flex flex-col justify-between glass rounded-2xl border border-border p-5 transition-all duration-300 ease-out hover:-translate-y-1 hover:border-primary/40 hover:shadow-xl hover:shadow-black/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60">
+              <div><div className="mb-3 flex items-start gap-3"><span aria-hidden="true" className="free-tool-tile flex h-[46px] w-[46px] shrink-0 items-center justify-center rounded-[13px] transition-transform duration-300 ease-out group-hover:scale-105"><ToolIcon className="h-[23px] w-[23px]" strokeWidth={1.8} /></span><h3 className="pt-0.5 text-base font-bold tracking-tight text-foreground group-hover:text-primary">{tool.name}</h3></div><div className="mb-3 flex items-center justify-between gap-3"><span className="rounded border border-border bg-muted px-2 py-0.5 text-[11px] font-semibold text-secondary-foreground">{definition.name}</span><span className="inline-flex items-center gap-1 text-[11px] font-mono text-emerald-700 dark:text-emerald-400"><Cpu className="h-3 w-3" />{tool.isClientSideOnly ? 'In browser' : 'Configured service'}</span></div><p className="mb-4 line-clamp-3 text-xs leading-relaxed text-secondary-foreground">{tool.tagline}</p></div>
               <div className="flex items-center justify-between border-t border-border/50 pt-3 text-xs"><span className="mr-2 truncate text-[11px] text-muted-foreground">{tool.outputFormat.split('&')[0]}</span><span className="flex shrink-0 items-center gap-1 font-medium text-primary group-hover:translate-x-1"><span>Launch</span><ArrowRight className="h-3.5 w-3.5" /></span></div>
-            </Link>)}
+            </Link>;
+            })}
           </div>
         </section>
       )) : <div className="mt-8 rounded-xl border border-dashed border-border p-10 text-center text-sm text-muted-foreground"><p>No Utility Tools match that search.</p><button type="button" onClick={resetSearchParams} className="mt-3 text-primary hover:underline">Clear filters</button></div>}
