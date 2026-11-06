@@ -158,7 +158,7 @@ export const PickPage: React.FC = () => {
             {goals.map((g) => (
               <label
                 key={g.id}
-                className={`p-4 rounded-xl border flex items-center justify-between cursor-pointer transition-all has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-blue-500 ${
+                className={`p-4 rounded-xl border flex items-center justify-between cursor-pointer transition-all has-[:focus-visible]:[outline:2px_solid_rgb(var(--color-primary)/0.85)] has-[:focus-visible]:[outline-offset:2px] ${
                   goal === g.id
                     ? 'border-blue-500 bg-blue-50/70 shadow-xs ring-1 ring-blue-500'
                     : 'border-[#DFE7F3] bg-[#F5F8FF] hover:bg-white hover:border-blue-300'
@@ -213,7 +213,7 @@ export const PickPage: React.FC = () => {
             {getTaskOptions(goal).map((opt) => (
               <label
                 key={opt.id}
-                className={`p-4 rounded-xl border flex items-center justify-between cursor-pointer transition-all has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-blue-500 ${
+                className={`p-4 rounded-xl border flex items-center justify-between cursor-pointer transition-all has-[:focus-visible]:[outline:2px_solid_rgb(var(--color-primary)/0.85)] has-[:focus-visible]:[outline-offset:2px] ${
                   taskDetail === opt.id
                     ? 'border-blue-500 bg-blue-50/70 shadow-xs ring-1 ring-blue-500'
                     : 'border-[#DFE7F3] bg-[#F5F8FF] hover:bg-white hover:border-blue-300'
@@ -276,7 +276,7 @@ export const PickPage: React.FC = () => {
             {budgets.map((b) => (
               <label
                 key={b.id}
-                className={`p-4 rounded-xl border flex items-center justify-between cursor-pointer transition-all has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-blue-500 ${
+                className={`p-4 rounded-xl border flex items-center justify-between cursor-pointer transition-all has-[:focus-visible]:[outline:2px_solid_rgb(var(--color-primary)/0.85)] has-[:focus-visible]:[outline-offset:2px] ${
                   budget === b.id
                     ? 'border-blue-500 bg-blue-50/70 shadow-xs ring-1 ring-blue-500'
                     : 'border-[#DFE7F3] bg-[#F5F8FF] hover:bg-white hover:border-blue-300'

@@ -17,6 +17,7 @@ describe('Full-card click & touch selection', () => {
     assert.ok(page.includes('checked={taskDetail === opt.id}') && page.includes('onChange={() => setTaskDetail(opt.id)}'), 'Task radios keep the original selection logic');
     assert.ok(page.includes('checked={budget === b.id}') && page.includes("onChange={() => setBudget(b.id as PickCriteria['budget'])}"), 'Budget radios keep the original selection logic');
     assert.equal((page.match(/role="radiogroup"/g) || []).length, 3, 'Each Pick step list is a labelled radiogroup');
+    assert.equal((page.match(/has-\[:focus-visible\]:\[outline:2px_solid/g) || []).length, 3, 'Each Pick card mirrors the site focus outline (primary token) while its radio is keyboard-focused — a blue ring would be invisible against the blue selected state');
   });
 
   test('Pick wizard step 4 option buttons expose their pressed state', () => {
