@@ -154,22 +154,30 @@ export const PickPage: React.FC = () => {
             <h2 className="text-lg font-bold text-slate-900">Step 1 of 4: What is your primary objective?</h2>
             <span className="text-xs text-slate-500 font-mono">1/4</span>
           </div>
-          <div className="space-y-2.5">
+          <div className="space-y-2.5" role="radiogroup" aria-label="Primary objective">
             {goals.map((g) => (
               <label
                 key={g.id}
-                onClick={() => handleGoalSelect(g.id)}
-                className={`p-4 rounded-xl border flex items-center justify-between cursor-pointer transition-all ${
+                className={`p-4 rounded-xl border flex items-center justify-between cursor-pointer transition-all has-[:focus-visible]:[outline:2px_solid_rgb(var(--color-primary)/0.85)] has-[:focus-visible]:[outline-offset:2px] ${
                   goal === g.id
                     ? 'border-blue-500 bg-blue-50/70 shadow-xs ring-1 ring-blue-500'
                     : 'border-[#DFE7F3] bg-[#F5F8FF] hover:bg-white hover:border-blue-300'
                 }`}
               >
+                <input
+                  type="radio"
+                  name="pick-goal"
+                  value={g.id}
+                  checked={goal === g.id}
+                  onChange={() => handleGoalSelect(g.id)}
+                  className="sr-only"
+                />
                 <div>
                   <span className="font-semibold text-slate-900 text-sm block">{g.label}</span>
                   <span className="text-xs text-slate-600">{g.desc}</span>
                 </div>
                 <div
+                  aria-hidden="true"
                   className={`w-4 h-4 rounded-full border flex items-center justify-center shrink-0 ml-3 ${
                     goal === g.id ? 'border-blue-600 bg-blue-600 text-white' : 'border-slate-300'
                   }`}
@@ -201,22 +209,30 @@ export const PickPage: React.FC = () => {
             <h2 className="text-lg font-bold text-slate-900">Step 2 of 4: Which specific task do you need?</h2>
             <span className="text-xs text-slate-500 font-mono">2/4</span>
           </div>
-          <div className="space-y-2.5">
+          <div className="space-y-2.5" role="radiogroup" aria-label="Specific task">
             {getTaskOptions(goal).map((opt) => (
               <label
                 key={opt.id}
-                onClick={() => setTaskDetail(opt.id)}
-                className={`p-4 rounded-xl border flex items-center justify-between cursor-pointer transition-all ${
+                className={`p-4 rounded-xl border flex items-center justify-between cursor-pointer transition-all has-[:focus-visible]:[outline:2px_solid_rgb(var(--color-primary)/0.85)] has-[:focus-visible]:[outline-offset:2px] ${
                   taskDetail === opt.id
                     ? 'border-blue-500 bg-blue-50/70 shadow-xs ring-1 ring-blue-500'
                     : 'border-[#DFE7F3] bg-[#F5F8FF] hover:bg-white hover:border-blue-300'
                 }`}
               >
+                <input
+                  type="radio"
+                  name="pick-task"
+                  value={opt.id}
+                  checked={taskDetail === opt.id}
+                  onChange={() => setTaskDetail(opt.id)}
+                  className="sr-only"
+                />
                 <div>
                   <span className="font-semibold text-slate-900 text-sm block">{opt.label}</span>
                   <span className="text-xs text-slate-600">{opt.desc}</span>
                 </div>
                 <div
+                  aria-hidden="true"
                   className={`w-4 h-4 rounded-full border flex items-center justify-center shrink-0 ml-3 ${
                     taskDetail === opt.id ? 'border-blue-600 bg-blue-600 text-white' : 'border-slate-300'
                   }`}
@@ -256,22 +272,30 @@ export const PickPage: React.FC = () => {
             <h2 className="text-lg font-bold text-slate-900">Step 3 of 4: What is your budget and access model?</h2>
             <span className="text-xs text-slate-500 font-mono">3/4</span>
           </div>
-          <div className="space-y-2.5">
+          <div className="space-y-2.5" role="radiogroup" aria-label="Budget and access model">
             {budgets.map((b) => (
               <label
                 key={b.id}
-                onClick={() => setBudget(b.id as PickCriteria['budget'])}
-                className={`p-4 rounded-xl border flex items-center justify-between cursor-pointer transition-all ${
+                className={`p-4 rounded-xl border flex items-center justify-between cursor-pointer transition-all has-[:focus-visible]:[outline:2px_solid_rgb(var(--color-primary)/0.85)] has-[:focus-visible]:[outline-offset:2px] ${
                   budget === b.id
                     ? 'border-blue-500 bg-blue-50/70 shadow-xs ring-1 ring-blue-500'
                     : 'border-[#DFE7F3] bg-[#F5F8FF] hover:bg-white hover:border-blue-300'
                 }`}
               >
+                <input
+                  type="radio"
+                  name="pick-budget"
+                  value={b.id}
+                  checked={budget === b.id}
+                  onChange={() => setBudget(b.id as PickCriteria['budget'])}
+                  className="sr-only"
+                />
                 <div>
                   <span className="font-semibold text-slate-900 text-sm block">{b.label}</span>
                   <span className="text-xs text-slate-600">{b.desc}</span>
                 </div>
                 <div
+                  aria-hidden="true"
                   className={`w-4 h-4 rounded-full border flex items-center justify-center shrink-0 ml-3 ${
                     budget === b.id ? 'border-blue-600 bg-blue-600 text-white' : 'border-slate-300'
                   }`}
@@ -331,6 +355,7 @@ export const PickPage: React.FC = () => {
                   key={h.id}
                   type="button"
                   onClick={() => setHostingPreference(h.id as any)}
+                  aria-pressed={hostingPreference === h.id}
                   className={`p-3.5 rounded-xl border text-left transition-all cursor-pointer ${
                     hostingPreference === h.id
                       ? 'border-blue-500 bg-blue-50/70 ring-1 ring-blue-500'
@@ -359,6 +384,7 @@ export const PickPage: React.FC = () => {
                     key={w.id}
                     type="button"
                     onClick={() => setWatermarkPreference(w.id as any)}
+                    aria-pressed={watermarkPreference === w.id}
                     className={`p-3.5 rounded-xl border text-left transition-all cursor-pointer ${
                       watermarkPreference === w.id
                         ? 'border-blue-500 bg-blue-50/70 ring-1 ring-blue-500'

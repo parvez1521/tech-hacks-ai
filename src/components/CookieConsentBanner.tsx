@@ -282,7 +282,7 @@ export const CookieConsentBanner: React.FC = () => {
               </div>
 
               {/* Analytics */}
-              <div className="p-3.5 rounded-2xl border border-border/70 bg-background/50 flex items-start justify-between gap-3">
+              <label htmlFor="cookie-consent-analytics" className="p-3.5 rounded-2xl border border-border/70 bg-background/50 flex items-start justify-between gap-3 cursor-pointer">
                 <div className="space-y-1">
                   <span className="font-bold text-foreground text-xs block">
                     Analytics &amp; Site Diagnostics
@@ -291,20 +291,21 @@ export const CookieConsentBanner: React.FC = () => {
                     If analytics is enabled in the future, it may collect usage and performance information to help improve catalog discovery.
                   </p>
                 </div>
-                <label className="relative inline-flex items-center cursor-pointer shrink-0 mt-1">
+                <span className="relative inline-flex items-center shrink-0 mt-1">
                   <input
+                    id="cookie-consent-analytics"
                     type="checkbox"
                     aria-label="Allow analytics and site diagnostics"
                     checked={analytics}
                     onChange={(e) => setAnalytics(e.target.checked)}
                     className="sr-only peer"
                   />
-                  <div className="w-9 h-5 bg-muted peer-focus:outline-none peer-focus-visible:ring-2 peer-focus-visible:ring-primary peer-focus-visible:ring-offset-2 peer-focus-visible:ring-offset-card rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-primary"></div>
-                </label>
-              </div>
+                  <span className="block w-9 h-5 bg-muted peer-focus:outline-none peer-focus-visible:ring-2 peer-focus-visible:ring-primary peer-focus-visible:ring-offset-2 peer-focus-visible:ring-offset-card rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-primary"></span>
+                </span>
+              </label>
 
               {/* Advertising */}
-              <div className="p-3.5 rounded-2xl border border-border/70 bg-background/50 flex items-start justify-between gap-3">
+              <label htmlFor="cookie-consent-advertising" className="p-3.5 rounded-2xl border border-border/70 bg-background/50 flex items-start justify-between gap-3 cursor-pointer">
                 <div className="space-y-1">
                   <span className="font-bold text-foreground text-xs block">
                     Advertising &amp; Google AdSense Personalization
@@ -313,17 +314,18 @@ export const CookieConsentBanner: React.FC = () => {
                     If ads are enabled after approval, this choice will be used as a browser-level preference. Regional consent requirements and any certified CMP must also be in place before ad requests are made.
                   </p>
                 </div>
-                <label className="relative inline-flex items-center cursor-pointer shrink-0 mt-1">
+                <span className="relative inline-flex items-center shrink-0 mt-1">
                   <input
+                    id="cookie-consent-advertising"
                     type="checkbox"
                     aria-label="Allow advertising and personalization"
                     checked={advertising}
                     onChange={(e) => setAdvertising(e.target.checked)}
                     className="sr-only peer"
                   />
-                  <div className="w-9 h-5 bg-muted peer-focus:outline-none peer-focus-visible:ring-2 peer-focus-visible:ring-primary peer-focus-visible:ring-offset-2 peer-focus-visible:ring-offset-card rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-primary"></div>
-                </label>
-              </div>
+                  <span className="block w-9 h-5 bg-muted peer-focus:outline-none peer-focus-visible:ring-2 peer-focus-visible:ring-primary peer-focus-visible:ring-offset-2 peer-focus-visible:ring-offset-card rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-primary"></span>
+                </span>
+              </label>
             </div>
 
             <div className="p-3 rounded-lg bg-muted/60 border border-border/80 flex items-start gap-2 text-[11px] text-muted-foreground">
