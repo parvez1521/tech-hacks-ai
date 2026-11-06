@@ -10,7 +10,7 @@ const groups = [
     ['All AI Tools', '/ai-tools'], ['Frontier Models', '/frontier-models'], ['Free Access', '/free-ai-sites'], ['GitHub Projects', '/github-projects'], ['AI Video', '/ai-tools?category=video'], ['Browse Categories', '/ai-tools'], ['Daily Discoveries', '/discoveries'], ['Help Me Pick', '/pick'],
   ] },
   { name: 'Build', links: [
-    ['Open Source Catalog', '/tools'], ['Utility Tools', '/free-tools'], ['Alternatives', '/alternatives'], ['Compare', '/compare'],
+    ['Open Source Catalog', '/tools'], ['Utility Tools', '/free-tools'], ['Video Downloaders', '/video-downloaders'], ['Alternatives', '/alternatives'], ['Compare', '/compare'],
   ] },
   { name: 'Learn', links: [
     ['Guides & Tutorials', '/guides'], ['Prompt Library', '/prompt-library'], ['Changelog & Updates', '/updates'],
