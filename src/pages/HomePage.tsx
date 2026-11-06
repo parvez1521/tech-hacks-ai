@@ -253,7 +253,7 @@ export const HomePage: React.FC = () => {
             const providerTool = allCatalogTools.find((tool) => tool.slug === (provider.existingToolSlug || provider.id));
             const providerLogo = providerTool ? getBrandLogo(providerTool.slug) : undefined;
             const hasVerifiedProviderLogo = Boolean(providerLogo?.assetPath && (providerLogo.sourceType === 'provided' || (providerLogo.sourceUrl && providerLogo.sourceType !== 'fallback')));
-            return <article key={route.id} aria-labelledby={`frontier-access-${route.id}`} className="frontier-access-card group flex min-w-0 flex-col overflow-hidden rounded-2xl border border-border bg-card transition-colors motion-reduce:transition-none">
+            return <article key={route.id} aria-labelledby={`frontier-access-${route.id}`} className="frontier-access-card group relative flex min-w-0 flex-col overflow-hidden rounded-2xl border border-border bg-card transition-colors motion-reduce:transition-none has-[:focus-visible]:[outline:2px_solid_rgb(var(--color-primary)/0.85)] has-[:focus-visible]:[outline-offset:2px]">
               <h3 id={`frontier-access-${route.id}`} className="sr-only">{model.organization} {model.name} · {accessLabel}</h3>
               <img src={banner.src} alt={banner.alt} width={808} height={444} loading="lazy" decoding="async" className="frontier-access-card__image aspect-[1.82/1] w-full bg-[#071126] object-cover transition-transform duration-500 ease-out group-hover:scale-[1.015] motion-reduce:transform-none motion-reduce:transition-none" />
               <div className="flex flex-1 flex-col p-4">
@@ -265,7 +265,7 @@ export const HomePage: React.FC = () => {
                 <p className="mt-2 text-xs leading-5 text-muted-foreground">{route.quickNote || route.conditions}</p>
                 <div className="mt-auto flex items-center justify-between gap-2 pt-4">
                   <span className="text-[11px] text-muted-foreground">Checked {route.lastVerifiedAt}</span>
-                  <a href={route.claimUrl} target="_blank" rel="noreferrer" className="text-xs font-semibold text-primary hover:underline">Try route ↗</a>
+                  <a href={route.claimUrl} target="_blank" rel="noreferrer" aria-label={`Try route: ${model.organization} ${model.name} via ${provider.name} (opens in a new tab)`} className="text-xs font-semibold text-primary hover:underline after:absolute after:inset-0 after:content-['']">Try route ↗</a>
                 </div>
               </div>
             </article>;
