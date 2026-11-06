@@ -16,6 +16,11 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://switchroute.in/video-downloaders</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://switchroute.in/frontier-models</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
