@@ -1,7 +1,6 @@
 export type CatalogSection = 'open-source' | 'ai' | 'community' | 'utility' | 'alternative';
 
 export type UtilityCategory =
-  | 'video-downloaders'
   | 'video-audio'
   | 'image-graphics'
   | 'text-writing'
