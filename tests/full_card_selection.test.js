@@ -61,6 +61,14 @@ describe('Full-card click & touch selection', () => {
     assert.ok(network.includes('aria-pressed={isActive}'), 'Active node card needs aria-pressed');
   });
 
+  test('homepage Frontier Access cards are fully clickable through their Try route link (stretched link)', () => {
+    const home = read('src/pages/HomePage.tsx');
+    assert.ok(home.includes('frontier-access-card group relative'), 'Frontier card must be the positioned ancestor for its stretched link');
+    assert.ok(home.includes("after:absolute after:inset-0 after:content-['']"), 'The Try route link must stretch over the whole card');
+    assert.ok(home.includes('has-[:focus-visible]:[outline:2px_solid'), 'Keyboard focus on the stretched link must outline the whole card, not just the link text');
+    assert.ok(home.includes('href={route.claimUrl} target="_blank" rel="noreferrer"'), 'The card keeps the original route URL, new-tab behaviour and rel');
+  });
+
   test('no clickable divs remain anywhere in src (allowlist: decorative AiOrb3D only)', () => {
     const offenders = [];
     const walk = (dir) => {
