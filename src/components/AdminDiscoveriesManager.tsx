@@ -261,19 +261,23 @@ export const AdminDiscoveriesManager: React.FC<AdminDiscoveriesManagerProps> = (
 
       {/* Metrics Row */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-        <div
+        <button
+          type="button"
+          aria-pressed={statusFilter === 'all'}
           onClick={() => setStatusFilter('all')}
-          className={`cursor-pointer p-4 rounded-xl border bg-white transition-all shadow-xs ${
+          className={`w-full text-left cursor-pointer p-4 rounded-xl border bg-white transition-all shadow-xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 ${
             statusFilter === 'all' ? 'border-blue-500 ring-2 ring-blue-500/20' : 'border-[#DFE7F3] hover:border-slate-300'
           }`}
         >
           <div className="text-xs text-slate-500 font-semibold tracking-wide">Total Discoveries</div>
           <div className="text-2xl font-bold mt-1 text-slate-900">{stats.total}</div>
-        </div>
+        </button>
 
-        <div
+        <button
+          type="button"
+          aria-pressed={statusFilter === 'published'}
           onClick={() => setStatusFilter('published')}
-          className={`cursor-pointer p-4 rounded-xl border bg-white transition-all shadow-xs ${
+          className={`w-full text-left cursor-pointer p-4 rounded-xl border bg-white transition-all shadow-xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 ${
             statusFilter === 'published' ? 'border-emerald-500 ring-2 ring-emerald-500/20' : 'border-[#DFE7F3] hover:border-slate-300'
           }`}
         >
@@ -282,11 +286,13 @@ export const AdminDiscoveriesManager: React.FC<AdminDiscoveriesManagerProps> = (
             Published (Live)
           </div>
           <div className="text-2xl font-bold mt-1 text-emerald-700">{stats.published}</div>
-        </div>
+        </button>
 
-        <div
+        <button
+          type="button"
+          aria-pressed={statusFilter === 'draft'}
           onClick={() => setStatusFilter('draft')}
-          className={`cursor-pointer p-4 rounded-xl border bg-white transition-all shadow-xs ${
+          className={`w-full text-left cursor-pointer p-4 rounded-xl border bg-white transition-all shadow-xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 ${
             statusFilter === 'draft' ? 'border-amber-500 ring-2 ring-amber-500/20' : 'border-[#DFE7F3] hover:border-slate-300'
           }`}
         >
@@ -295,7 +301,7 @@ export const AdminDiscoveriesManager: React.FC<AdminDiscoveriesManagerProps> = (
             Drafts (Hidden)
           </div>
           <div className="text-2xl font-bold mt-1 text-amber-700">{stats.drafts}</div>
-        </div>
+        </button>
 
         <div className="p-4 rounded-xl border border-[#DFE7F3] bg-white shadow-xs">
           <div className="text-xs text-purple-700 font-semibold flex items-center gap-1.5">
@@ -322,6 +328,8 @@ export const AdminDiscoveriesManager: React.FC<AdminDiscoveriesManagerProps> = (
 
           <div className="flex items-center gap-1 border border-slate-200 rounded-xl p-0.5 bg-slate-100">
             <button
+              type="button"
+              aria-pressed={statusFilter === 'all'}
               onClick={() => setStatusFilter('all')}
               className={`px-2.5 py-1 rounded-lg text-xs font-medium transition-colors cursor-pointer ${
                 statusFilter === 'all' ? 'bg-white text-slate-900 shadow-xs font-semibold' : 'text-slate-600 hover:text-slate-900'
@@ -330,6 +338,8 @@ export const AdminDiscoveriesManager: React.FC<AdminDiscoveriesManagerProps> = (
               All
             </button>
             <button
+              type="button"
+              aria-pressed={statusFilter === 'published'}
               onClick={() => setStatusFilter('published')}
               className={`px-2.5 py-1 rounded-lg text-xs font-medium transition-colors cursor-pointer ${
                 statusFilter === 'published' ? 'bg-emerald-600 text-white shadow-xs font-semibold' : 'text-slate-600 hover:text-slate-900'
@@ -338,6 +348,8 @@ export const AdminDiscoveriesManager: React.FC<AdminDiscoveriesManagerProps> = (
               Published
             </button>
             <button
+              type="button"
+              aria-pressed={statusFilter === 'draft'}
               onClick={() => setStatusFilter('draft')}
               className={`px-2.5 py-1 rounded-lg text-xs font-medium transition-colors cursor-pointer ${
                 statusFilter === 'draft' ? 'bg-amber-600 text-white shadow-xs font-semibold' : 'text-slate-600 hover:text-slate-900'

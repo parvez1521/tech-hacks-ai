@@ -509,19 +509,23 @@ export const ModerationDashboardPage: React.FC = () => {
         <>
           {/* Metrics Counters */}
           <div className="grid grid-cols-2 sm:grid-cols-5 gap-3 my-6">
-        <div
+        <button
+          type="button"
+          aria-pressed={filterStatus === 'all'}
           onClick={() => setFilterStatus('all')}
-          className={`cursor-pointer p-4 rounded-xl border bg-card/60 transition-all ${
+          className={`w-full text-left cursor-pointer p-4 rounded-xl border bg-card/60 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary ${
             filterStatus === 'all' ? 'border-primary ring-1 ring-primary/40' : 'border-border hover:border-border/80'
           }`}
         >
           <div className="text-xs text-muted-foreground font-semibold">Total Submissions</div>
           <div className="text-2xl font-bold mt-1 text-foreground">{stats.total}</div>
-        </div>
+        </button>
 
-        <div
+        <button
+          type="button"
+          aria-pressed={filterStatus === 'pending'}
           onClick={() => setFilterStatus('pending')}
-          className={`cursor-pointer p-4 rounded-xl border bg-card/60 transition-all ${
+          className={`w-full text-left cursor-pointer p-4 rounded-xl border bg-card/60 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary ${
             filterStatus === 'pending' ? 'border-amber-500 ring-1 ring-amber-500/40' : 'border-border hover:border-border/80'
           }`}
         >
@@ -530,11 +534,13 @@ export const ModerationDashboardPage: React.FC = () => {
             Pending Review
           </div>
           <div className="text-2xl font-bold mt-1 text-amber-400">{stats.pending}</div>
-        </div>
+        </button>
 
-        <div
+        <button
+          type="button"
+          aria-pressed={filterStatus === 'in_review'}
           onClick={() => setFilterStatus('in_review')}
-          className={`cursor-pointer p-4 rounded-xl border bg-card/60 transition-all ${
+          className={`w-full text-left cursor-pointer p-4 rounded-xl border bg-card/60 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary ${
             filterStatus === 'in_review' ? 'border-blue-500 ring-1 ring-blue-500/40' : 'border-border hover:border-border/80'
           }`}
         >
@@ -543,11 +549,13 @@ export const ModerationDashboardPage: React.FC = () => {
             In Review
           </div>
           <div className="text-2xl font-bold mt-1 text-blue-400">{stats.inReview}</div>
-        </div>
+        </button>
 
-        <div
+        <button
+          type="button"
+          aria-pressed={filterStatus === 'published'}
           onClick={() => setFilterStatus('published')}
-          className={`cursor-pointer p-4 rounded-xl border bg-card/60 transition-all ${
+          className={`w-full text-left cursor-pointer p-4 rounded-xl border bg-card/60 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary ${
             filterStatus === 'published' ? 'border-emerald-500 ring-1 ring-emerald-500/40' : 'border-border hover:border-border/80'
           }`}
         >
@@ -556,11 +564,13 @@ export const ModerationDashboardPage: React.FC = () => {
             Published Live
           </div>
           <div className="text-2xl font-bold mt-1 text-emerald-400">{stats.approved}</div>
-        </div>
+        </button>
 
-        <div
+        <button
+          type="button"
+          aria-pressed={filterStatus === 'rejected'}
           onClick={() => setFilterStatus('rejected')}
-          className={`cursor-pointer p-4 rounded-xl border bg-card/60 transition-all ${
+          className={`w-full text-left cursor-pointer p-4 rounded-xl border bg-card/60 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary ${
             filterStatus === 'rejected' ? 'border-rose-500 ring-1 ring-rose-500/40' : 'border-border hover:border-border/80'
           }`}
         >
@@ -569,7 +579,7 @@ export const ModerationDashboardPage: React.FC = () => {
             Rejected
           </div>
           <div className="text-2xl font-bold mt-1 text-rose-400">{stats.rejected}</div>
-        </div>
+        </button>
       </div>
 
       {/* Filter and Search Bar */}
@@ -683,10 +693,12 @@ export const ModerationDashboardPage: React.FC = () => {
               });
 
               return (
-                <div
+                <button
+                  type="button"
                   key={sub.id}
+                  aria-pressed={isSelected}
                   onClick={() => setSelectedSubmission(sub)}
-                  className={`p-4 rounded-xl border transition-all cursor-pointer relative ${
+                  className={`block w-full text-left p-4 rounded-xl border transition-all cursor-pointer relative focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60 ${
                     isSelected
                       ? 'bg-card border-primary ring-2 ring-primary/20 shadow-lg'
                       : 'bg-card/60 border-border hover:border-border/80 hover:bg-card'
@@ -716,7 +728,7 @@ export const ModerationDashboardPage: React.FC = () => {
                     <span className="text-[11px] text-muted-foreground">{dateStr}</span>
                   </div>
 
-                  <h3 className="text-base font-bold text-foreground line-clamp-1">{title}</h3>
+                  <span className="block text-base font-bold text-foreground line-clamp-1">{title}</span>
                   <p className="text-xs text-muted-foreground line-clamp-2 mt-1">{summary}</p>
 
                   {/* Duplicate warning tag if present */}
@@ -735,7 +747,7 @@ export const ModerationDashboardPage: React.FC = () => {
                     </span>
                     <span className="font-mono text-[10px] text-muted-foreground/80">{sub.id}</span>
                   </div>
-                </div>
+                </button>
               );
             })
           )}

@@ -107,6 +107,7 @@ export const IntelligenceVerificationNetwork: React.FC = () => {
             <button
               key={node.id}
               type="button"
+              aria-pressed={isActive}
               onClick={() => setActiveNode(node.id)}
               className={`text-left p-4 rounded-xl border transition-all duration-200 cursor-pointer relative shadow-xs ${
                 isActive
