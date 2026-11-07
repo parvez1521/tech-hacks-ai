@@ -75,7 +75,7 @@ export const FrontierModelsPage: React.FC = () => {
               {routes.map((route) => {
                 const provider = modelAccessProviders.find((item) => item.id === route.providerId)!;
                 const relationship = provider.mode === 'official' ? 'Official provider access' : provider.mode === 'third-party-api' ? 'Third-party API route' : 'Community / promotional access';
-                return <div key={route.id} className="border border-border rounded-lg p-4">
+                return <div key={route.id} className="border border-primary/50 bg-primary/5 rounded-lg p-4 shadow-[0_0_28px_-12px_rgb(var(--color-primary)/0.5)]">
                   <div className="flex justify-between items-start gap-3"><div><p className="font-medium text-sm">{provider.name}</p><p className="text-xs text-muted-foreground mt-1">{relationship}</p></div><a href={route.claimUrl} target="_blank" rel="noreferrer" aria-label={`Open ${provider.name}`} className="text-primary"><ArrowUpRight className="w-4 h-4" /></a></div>
                   <span className={`inline-flex mt-3 rounded-md border px-2 py-1 text-[10px] font-semibold ${route.accessType.startsWith('free-') ? 'border-emerald-500/25 bg-emerald-500/10 text-emerald-700 dark:text-emerald-300' : 'border-border bg-muted text-muted-foreground'}`}>{accessTypeLabels[route.accessType] || 'Access route'}</span>
                   <p className="text-sm mt-2">{route.allowance || (route.accessType === 'paid-api' ? 'Paid usage; account billing required.' : 'Requires a paid subscription plan.')}</p>
