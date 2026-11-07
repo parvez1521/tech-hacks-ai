@@ -1243,6 +1243,7 @@ Rules:
     expectedOutputType: 'A short step-by-step deployment plan with a final launch checklist.',
     exampleUseCase: 'A student or indie maker wants to launch a first app or MVP with zero cost.',
     officialToolUrl: 'https://vercel.com',
+    aspectRatio: '4:5',
     authorOrSource: 'tech_hacks.ai',
     sourceCreator: 'tech_hacks.ai',
     promptProvenance: 'original',
