@@ -89,7 +89,7 @@ test('PromptFeed detail pages are omitted from the public build while originals 
   const library = await fs.readFile(new URL('../src/pages/PromptLibraryPage.tsx', import.meta.url), 'utf8');
   assert.doesNotMatch(library, /loadPromptFeedPrompts/);
   assert.doesNotMatch(library, /PromptFeed collection/);
-  assert.match(library, /Explore 48 original SwitchRoute prompt recipes/);
+  assert.match(library, /Explore 49 original SwitchRoute prompt recipes/);
   assert.match(library, /remote\.filter\(\(prompt\) => !prompt\.slug\.startsWith\('promptfeed-'\)\)/);
 
   const detail = await fs.readFile(new URL('../src/pages/PromptDetailPage.tsx', import.meta.url), 'utf8');

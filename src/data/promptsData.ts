@@ -1214,4 +1214,38 @@ Architecture requirements:
     officialToolUrl: 'https://cursor.com',
     authorOrSource: 'Platform Engineering Team',
   },
+  {
+    id: 'launch-app-free-stack-deployment',
+    title: 'Launch Your App for Free: Simple Free Deployment Stack',
+    slug: 'launch-app-free-stack-deployment',
+    description: 'A short, simple guide to launch any app for ₹0. Use free tools for hosting, database, login, email, and file storage, then deploy in one click.',
+    category: 'web-app-development',
+    targetModel: 'Claude / Cursor / Any AI Coding Agent',
+    provider: 'Cursor',
+    promptText: `Help me launch my app [APP_NAME] for free. Keep every step simple and short.
+
+Use only these free tools:
+1. Neon — free database. Tell me how to create a project and where to paste the connection link.
+2. Clerk — free login. Tell me how to add sign-up and Google/GitHub login.
+3. Cloudflare R2 — free file storage (10 GB). Tell me how to store user files and images.
+4. Resend — free email (3,000 emails per month). Tell me how to send a welcome email.
+5. Deploy my app — pick ONE: Vercel (one-click deploy) or Cloudflare Pages (free hosting). Connect my GitHub repo [REPO_URL] and list every secret key I must add in Settings before I click Deploy.
+
+Rules:
+- Never put secret keys in the code. Keys go in Settings only.
+- After each step, give me one small test so I can check it works.
+- End with a short checklist.
+- Also tell me what is NOT free: Google Play and Apple app store fees, and anything above the free limits.`,
+    tags: ['deployment', 'free', 'app-building', 'vercel', 'cloudflare-pages', 'neon', 'clerk', 'resend', 'cloudflare-r2'],
+    tips: 'Pick only one deployment tool — Vercel or Cloudflare Pages. Both do the same job. Keep all secret keys in Settings, never in your code.',
+    placeholders: ['[APP_NAME]', '[REPO_URL]'],
+    customizationInstructions: 'Write your app name and your GitHub repo link. The guide will adjust to your app.',
+    expectedOutputType: 'A short step-by-step deployment plan with a final launch checklist.',
+    exampleUseCase: 'A student or indie maker wants to launch a first app or MVP with zero cost.',
+    officialToolUrl: 'https://vercel.com',
+    authorOrSource: 'tech_hacks.ai',
+    sourceCreator: 'tech_hacks.ai',
+    promptProvenance: 'original',
+    rightsStatus: 'original',
+  },
 ];

@@ -11,7 +11,7 @@ test('prompt artwork audit validates all distinct generated WebP images and prov
   const audit = await buildAudit();
   assert.equal(audit.summary.originalGeneratedImages, promptsData.length);
   assert.equal(audit.summary.licensedPromptFeedImages, 534);
-  assert.equal(audit.summary.uniqueUsablePromptCount, 582);
+  assert.equal(audit.summary.uniqueUsablePromptCount, 583);
   assert.equal(audit.summary.missingPromptImages, 0);
   assert.equal(audit.summary.duplicatePromptRecords, 0);
   assert.equal(audit.summary.duplicatePromptImages, 0);
