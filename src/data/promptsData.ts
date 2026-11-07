@@ -1218,17 +1218,17 @@ Architecture requirements:
     id: 'launch-app-free-stack-deployment',
     title: 'Launch Your App for Free: Simple Free Deployment Stack',
     slug: 'launch-app-free-stack-deployment',
-    description: 'A short, simple guide to launch any app for ₹0. Use free tools for hosting, database, login, email, and file storage, then deploy in one click.',
+    description: 'A short, simple guide to launch any app for ₹0. The free stack: Cloudflare Pages gives you free hosting, Neon gives you a free PostgreSQL database, Clerk gives you free sign-up and Google/GitHub login, Resend gives you 3,000 free emails per month, Cloudflare R2 gives you 10 GB of free file storage, and Vercel gives you free one-click deployment. Follow the 5 simple steps, connect these tools, and put your app live without spending anything.',
     category: 'web-app-development',
     targetModel: 'Claude / Cursor / Any AI Coding Agent',
     provider: 'Cursor',
     promptText: `Help me launch my app [APP_NAME] for free. Keep every step simple and short.
 
 Use only these free tools:
-1. Neon — free database. Tell me how to create a project and where to paste the connection link.
+1. Neon — free PostgreSQL database. Tell me how to create a project and where to paste the connection link.
 2. Clerk — free login. Tell me how to add sign-up and Google/GitHub login.
 3. Cloudflare R2 — free file storage (10 GB). Tell me how to store user files and images.
-4. Resend — free email (3,000 emails per month). Tell me how to send a welcome email.
+4. Resend — free email (3,000 emails per month, up to 100 per day). Tell me how to send a welcome email.
 5. Deploy my app — pick ONE: Vercel (one-click deploy) or Cloudflare Pages (free hosting). Connect my GitHub repo [REPO_URL] and list every secret key I must add in Settings before I click Deploy.
 
 Rules:
@@ -1237,7 +1237,7 @@ Rules:
 - End with a short checklist.
 - Also tell me what is NOT free: Google Play and Apple app store fees, and anything above the free limits.`,
     tags: ['deployment', 'free', 'app-building', 'vercel', 'cloudflare-pages', 'neon', 'clerk', 'resend', 'cloudflare-r2'],
-    tips: 'Pick only one deployment tool — Vercel or Cloudflare Pages. Both do the same job. Keep all secret keys in Settings, never in your code.',
+    tips: 'Follow these 5 simple steps. Step 1 — Put your code on GitHub: this is your app’s home, and every update starts here. Step 2 — Create your database on Neon: make a free project, copy the connection link, and paste it in your app settings; your user data lives here. Step 3 — Add login with Clerk: create a free app and turn on Google or GitHub login, so users can sign up safely without you building a login system yourself. Step 4 — Add storage and email: use Cloudflare R2 (10 GB free) for user files and images, and Resend (3,000 free emails per month) for welcome emails and password resets. Step 5 — Deploy on Vercel or Cloudflare Pages: pick only ONE of them, connect your GitHub repo, add your secret keys in Settings (never in your code), and click Deploy — your app is live. Remember: app store fees are NOT free (Google Play and Apple charge to publish apps), and the ₹0 cost holds only while you stay inside the free limits.',
     placeholders: ['[APP_NAME]', '[REPO_URL]'],
     customizationInstructions: 'Write your app name and your GitHub repo link. The guide will adjust to your app.',
     expectedOutputType: 'A short step-by-step deployment plan with a final launch checklist.',
