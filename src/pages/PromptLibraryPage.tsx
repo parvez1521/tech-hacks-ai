@@ -143,7 +143,7 @@ export const PromptLibraryPage: React.FC = () => {
             <Heart className="w-4 h-4" aria-hidden="true" /> Ready-to-use prompts, paired with previews
           </div>
           <h1 id="prompt-library-title" className="mt-5 max-w-3xl text-3xl sm:text-5xl font-extrabold tracking-tight text-slate-950 dark:text-white">Find a prompt. Make it yours.</h1>
-          <p className="mt-3 max-w-2xl text-sm sm:text-base leading-7 text-slate-600 dark:text-slate-300">Explore 48 original SwitchRoute prompt recipes with matching previews, practical customization notes, and one-click copying.</p>
+          <p className="mt-3 max-w-2xl text-sm sm:text-base leading-7 text-slate-600 dark:text-slate-300">Explore 49 original SwitchRoute prompt recipes with matching previews, practical customization notes, and one-click copying.</p>
         </div>
         <div className="prompt-atlas__art" aria-hidden="true">
           <img src="/prompts/generated/portrait-woman-windowlight.webp" alt="" width="1122" height="1402" fetchpriority="high" decoding="async" />

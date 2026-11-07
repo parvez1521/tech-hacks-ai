@@ -57,7 +57,7 @@ test('PromptFeed source archive is retained while the public Prompt Library show
   assert.doesNotMatch(gallery, /loadPromptFeedPrompts/);
   assert.doesNotMatch(gallery, /PromptFeed collection/);
   assert.doesNotMatch(gallery, /selectedCollection/);
-  assert.match(gallery, /Explore 48 original SwitchRoute prompt recipes/);
+  assert.match(gallery, /Explore 49 original SwitchRoute prompt recipes/);
   assert.match(gallery, /remote\.filter\(\(prompt\) => !prompt\.slug\.startsWith\('promptfeed-'\)\)/);
   assert.match(gallery, /PROMPTS_PER_PAGE = 24/);
   assert.match(gallery, /visiblePrompts\.map/);
