@@ -5,16 +5,29 @@ import path from 'node:path';
 
 const read = (relative) => fs.readFileSync(path.resolve(process.cwd(), relative), 'utf8');
 
-describe('Frontier model access-route boxes', () => {
-  test('every access-route box is individually highlighted in the brand orange', () => {
+const HALO = 'hover:shadow-[0_0_0_1px_rgb(var(--color-primary)/0.38),0_12px_38px_-8px_rgb(var(--brand-cyan)/0.48),0_28px_64px_-12px_rgb(var(--brand-violet)/0.42),0_4px_16px_-4px_rgb(var(--color-primary)/0.3)]';
+
+describe('Access-route boxes: solid orange, full-box click, homepage hover halo', () => {
+  test('FrontierModelsPage route boxes are solid brand orange with theme-black text', () => {
     const page = read('src/pages/FrontierModelsPage.tsx');
-    // The route boxes are rendered from one shared map, so this single
-    // class set highlights the boxes on every model card on the page.
-    assert.ok(page.includes('border-primary/50 bg-primary/5'), 'Route boxes must carry the primary-orange border and tint');
-    assert.ok(page.includes('shadow-[0_0_28px_-12px_rgb(var(--color-primary)/0.5)]'), 'Route boxes must carry the soft primary-orange glow');
-    assert.ok(!page.includes('<div key={route.id} className="border border-border rounded-lg p-4">'), 'The plain un-highlighted route box must not come back');
-    // Highlight only: the route box markup, links and data flow stay untouched.
+    assert.ok(page.includes('border border-primary bg-primary p-4 text-primary-foreground'), 'Route box must be solid primary orange with primary-foreground (near-black) text');
+    assert.ok(!page.includes('border-primary/50 bg-primary/5'), 'The earlier border/tint-only treatment must not come back');
+    assert.ok(page.includes(HALO), 'Route boxes must carry the homepage card hover halo');
+    assert.ok(page.includes('has-[:focus-visible]:[outline:2px_solid'), 'Keyboard focus must outline the whole route box');
+  });
+
+  test('FrontierModelsPage route boxes are clickable across the whole box, not just the corner arrow', () => {
+    const page = read('src/pages/FrontierModelsPage.tsx');
+    assert.ok(page.includes('className="text-primary-foreground after:absolute after:inset-0 after:content-[\'\']"'), 'The claim arrow link must stretch over the whole box');
+    assert.ok(page.includes('className="relative z-10 underline" href={route.sourceUrl}'), 'Source and terms must stay independently clickable above the stretched link');
     assert.ok(page.includes('href={route.claimUrl}'), 'Route claim link unchanged');
-    assert.ok(page.includes('href={route.sourceUrl}'), 'Source and terms link unchanged');
+  });
+
+  test('FreeAiSitesPage frontier route boxes get the same treatment', () => {
+    const page = read('src/pages/FreeAiSitesPage.tsx');
+    assert.ok(page.includes('border border-primary bg-primary p-4 text-primary-foreground'), 'Free AI Sites route boxes must be solid primary orange with primary-foreground text');
+    assert.ok(page.includes(HALO), 'Free AI Sites route boxes must carry the homepage hover halo');
+    assert.ok(page.includes('className="underline after:absolute after:inset-0 after:content-[\'\']" href={route.claimUrl}'), 'The Claim at provider link must stretch over the whole box');
+    assert.ok(page.includes('className="relative z-10 underline" href={route.sourceUrl}'), 'Source and terms must stay independently clickable above the stretched link');
   });
 });
