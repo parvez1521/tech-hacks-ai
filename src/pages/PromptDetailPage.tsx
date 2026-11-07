@@ -186,7 +186,7 @@ export const PromptDetailPage: React.FC = () => {
           {prompt.title}
         </h1>
 
-        <p className="text-sm text-secondary-foreground leading-relaxed mb-6">
+        <p className="text-sm text-secondary-foreground leading-relaxed mb-6 whitespace-pre-line">
           {prompt.description}
         </p>
 
@@ -367,7 +367,7 @@ export const PromptDetailPage: React.FC = () => {
           <Lightbulb className="w-5 h-5 text-amber-600 shrink-0 mt-0.5" />
           <div>
             <h3 className="font-bold text-amber-950 mb-1 text-sm">Optimization Tips & Parameters</h3>
-            <p className="text-amber-900/90">{prompt.tips}</p>
+            <p className="text-amber-900/90 whitespace-pre-line">{prompt.tips}</p>
           </div>
         </div>
       )}
