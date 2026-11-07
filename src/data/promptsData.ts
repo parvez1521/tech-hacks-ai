@@ -1237,7 +1237,14 @@ Rules:
 - End with a short checklist.
 - Also tell me what is NOT free: Google Play and Apple app store fees, and anything above the free limits.`,
     tags: ['deployment', 'free', 'app-building', 'vercel', 'cloudflare-pages', 'neon', 'clerk', 'resend', 'cloudflare-r2'],
-    tips: 'Follow these 5 simple steps:\nStep 1 — Put your code on GitHub: this is your app’s home, and every update starts here.\nStep 2 — Create your database on Neon: make a free project, copy the connection link, and paste it in your app settings; your user data lives here.\nStep 3 — Add login with Clerk: create a free app and turn on Google or GitHub login, so users can sign up safely without you building a login system yourself.\nStep 4 — Add storage and email: use Cloudflare R2 (10 GB free) for user files and images, and Resend (3,000 free emails per month) for welcome emails and password resets.\nStep 5 — Deploy on Vercel or Cloudflare Pages: pick only ONE of them, connect your GitHub repo, add your secret keys in Settings (never in your code), and click Deploy — your app is live.\nRemember: app store fees are NOT free (Google Play and Apple charge to publish apps), and the ₹0 cost holds only while you stay inside the free limits.',
+    tips: 'App store fees are NOT free — Google Play and Apple charge to publish apps. The ₹0 cost holds only while you stay inside the free limits. Keep every secret key in Settings, never in your code.',
+    guideSteps: [
+      { title: 'Put your code on GitHub', text: 'This is your app’s home, and every update starts here. Upload your app code to a free GitHub repository.' },
+      { title: 'Create your database on Neon', text: 'Make a free Neon project, copy the connection link, and paste it in your app settings. Your user data lives here.' },
+      { title: 'Add login with Clerk', text: 'Create a free Clerk app and turn on Google or GitHub login, so users can sign up safely — without you building a login system yourself.' },
+      { title: 'Add storage and email', text: 'Use Cloudflare R2 (10 GB free) for user files and images, and Resend (3,000 free emails per month) for welcome emails and password resets.' },
+      { title: 'Deploy and go live', text: 'Pick only ONE — Vercel (one-click deploy) or Cloudflare Pages (free hosting). Connect your GitHub repo, add your secret keys in Settings, and click Deploy. Your app is live.' },
+    ],
     placeholders: ['[APP_NAME]', '[REPO_URL]'],
     customizationInstructions: 'Write your app name and your GitHub repo link. The guide will adjust to your app.',
     expectedOutputType: 'A short step-by-step deployment plan with a final launch checklist.',

@@ -249,6 +249,8 @@ export interface PromptItem {
   updatedAt?: string;
   tags: string[];
   tips?: string;
+  /** Optional step-by-step guide rendered as highlighted boxes under the preview image; when present, the meta strips under the image are hidden. */
+  guideSteps?: { title: string; text: string }[];
   authorOrSource?: string;
   placeholders?: string[]; // e.g. ['[PRODUCT]', '[BRAND COLORS]', '[ASPECT RATIO]', '[VISUAL STYLE]']
   customizationInstructions?: string;

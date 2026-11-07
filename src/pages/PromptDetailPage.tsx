@@ -199,16 +199,48 @@ export const PromptDetailPage: React.FC = () => {
             height={prompt.previewImageHeight}
             className={`block max-h-[500px] w-full bg-slate-100 object-contain dark:bg-slate-800${slug.startsWith('promptfeed-') ? ' mx-auto max-w-[380px]' : ''}`}
           />
-          <figcaption className="flex flex-wrap items-center gap-x-4 gap-y-1 px-4 py-3 text-xs text-muted-foreground">
-            <span><strong className="text-foreground">Visual style</strong> {prompt.visualStyle || 'Conceptual'}</span>
-            <span><strong className="text-foreground">Aspect ratio</strong> {prompt.aspectRatio || '1:1'}</span>
-            <span><strong className="text-foreground">Model</strong> {prompt.targetModel}</span>
-            {prompt.createdAt && <span><strong className="text-foreground">Added</strong> {new Date(prompt.createdAt).toLocaleDateString()}</span>}
-            <span>{prompt.rightsStatus === 'original' ? 'Original SwitchRoute preview.' : `${prompt.rightsStatus || 'Source'} content with attribution.`}</span>
-          </figcaption>
+          {!prompt.guideSteps?.length && (
+            <figcaption className="flex flex-wrap items-center gap-x-4 gap-y-1 px-4 py-3 text-xs text-muted-foreground">
+              <span><strong className="text-foreground">Visual style</strong> {prompt.visualStyle || 'Conceptual'}</span>
+              <span><strong className="text-foreground">Aspect ratio</strong> {prompt.aspectRatio || '1:1'}</span>
+              <span><strong className="text-foreground">Model</strong> {prompt.targetModel}</span>
+              {prompt.createdAt && <span><strong className="text-foreground">Added</strong> {new Date(prompt.createdAt).toLocaleDateString()}</span>}
+              <span>{prompt.rightsStatus === 'original' ? 'Original SwitchRoute preview.' : `${prompt.rightsStatus || 'Source'} content with attribution.`}</span>
+            </figcaption>
+          )}
         </figure>
 
-        {(prompt.authorOrSource || prompt.sourceCreator || prompt.sourceUrl || prompt.attributionUrl) && <div className="mb-6 flex flex-wrap items-center gap-x-4 gap-y-2 rounded-xl border border-border bg-muted/50 px-4 py-3 text-xs text-secondary-foreground"><span><strong className="text-foreground">Creator</strong> {prompt.sourceCreator || prompt.authorOrSource}</span>{(prompt.sourceUrl || prompt.attributionUrl) && <a href={prompt.sourceUrl || prompt.attributionUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 font-semibold text-primary hover:underline">View source / attribution <ExternalLink size={13} /></a>}{prompt.rightsLicense && <span><strong className="text-foreground">Rights</strong> {prompt.rightsLicense}</span>}</div>}
+        {/* Step-by-step guide boxes (guide prompts only) */}
+        {prompt.guideSteps?.length ? (
+          <section aria-label="Step-by-step guide" className="mb-8">
+            <h2 className="text-xl font-extrabold text-foreground tracking-tight mb-4">Launch in {prompt.guideSteps.length} simple steps</h2>
+            <div className="flex flex-col gap-3">
+              {prompt.guideSteps.map((step, index) => (
+                <div key={step.title} className="flex items-start gap-4 rounded-2xl border border-border bg-card p-5">
+                  <span
+                    aria-hidden="true"
+                    className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-base font-extrabold text-[#111827]"
+                    style={{ background: 'linear-gradient(135deg, #FF6A00 0%, #F93A12 55%, #FFB800 100%)' }}
+                  >
+                    {index + 1}
+                  </span>
+                  <div>
+                    <h3 className="text-base font-bold text-foreground mb-1">Step {index + 1} — {step.title}</h3>
+                    <p className="text-sm sm:text-base leading-relaxed text-secondary-foreground">{step.text}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+            {prompt.tips && (
+              <div className="mt-4 p-5 rounded-2xl border border-amber-200/80 bg-amber-50/70 text-sm sm:text-base leading-relaxed text-amber-900/90">
+                <strong className="font-bold text-amber-950">Remember: </strong>
+                {prompt.tips}
+              </div>
+            )}
+          </section>
+        ) : null}
+
+        {!prompt.guideSteps?.length && (prompt.authorOrSource || prompt.sourceCreator || prompt.sourceUrl || prompt.attributionUrl) && <div className="mb-6 flex flex-wrap items-center gap-x-4 gap-y-2 rounded-xl border border-border bg-muted/50 px-4 py-3 text-xs text-secondary-foreground"><span><strong className="text-foreground">Creator</strong> {prompt.sourceCreator || prompt.authorOrSource}</span>{(prompt.sourceUrl || prompt.attributionUrl) && <a href={prompt.sourceUrl || prompt.attributionUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 font-semibold text-primary hover:underline">View source / attribution <ExternalLink size={13} /></a>}{prompt.rightsLicense && <span><strong className="text-foreground">Rights</strong> {prompt.rightsLicense}</span>}</div>}
 
         {prompt.mediaType === 'video' && prompt.videoDetails && (
           <section className="mb-6 rounded-xl border border-indigo-200 bg-indigo-50/70 p-4 text-sm dark:border-indigo-900 dark:bg-indigo-950/30" aria-labelledby="video-source-title">
@@ -223,7 +255,7 @@ export const PromptDetailPage: React.FC = () => {
         )}
 
         {/* Expected Output & Use Case Badges */}
-        {(prompt.expectedOutputType || prompt.exampleUseCase || prompt.officialToolUrl) && (
+        {!prompt.guideSteps?.length && (prompt.expectedOutputType || prompt.exampleUseCase || prompt.officialToolUrl) && (
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6 p-4 rounded-xl bg-muted border border-border text-xs">
             {prompt.expectedOutputType && (
               <div>
@@ -361,8 +393,8 @@ export const PromptDetailPage: React.FC = () => {
         </div>
       </div>
 
-      {/* Pro Tips & Parameters */}
-      {prompt.tips && (
+      {/* Pro Tips & Parameters (hidden for guide prompts — the note renders inside the steps section) */}
+      {prompt.tips && !prompt.guideSteps?.length && (
         <div className="p-5 rounded-2xl border border-amber-200/80 bg-amber-50/70 mb-8 flex items-start gap-3 text-xs leading-relaxed">
           <Lightbulb className="w-5 h-5 text-amber-600 shrink-0 mt-0.5" />
           <div>
