@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from '../router/Router';
-import { Github, Heart, ArrowRight, Instagram, Mail, Phone } from 'lucide-react';
+import { Heart, ArrowRight, Instagram, Mail, Phone } from 'lucide-react';
 import { getConfiguredContactOptions } from '../config/contactConfig';
 
 export const Footer: React.FC = () => {
@@ -232,17 +232,6 @@ export const Footer: React.FC = () => {
                 </Link>
               </li>
             </ul>
-            <div className="flex items-center gap-3">
-              <a
-                href="https://github.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-muted-foreground hover:text-primary transition-colors duration-200"
-                aria-label="GitHub"
-              >
-                <Github className="w-4 h-4" />
-              </a>
-            </div>
           </div>
         </div>
 
