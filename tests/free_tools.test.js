@@ -10,24 +10,28 @@ import { createLatestRequestGate } from '../src/lib/utilities/requestGate.ts';
 import { getAnimatedCountValue, formatCount, formatMilestoneCount } from '../src/lib/counter.ts';
 
 describe('Built-in browser utility registry', () => {
-  test('contains at least 20 new distinct utilities with unique IDs and slugs', () => {
-    assert.ok(freeToolsData.length >= 30, `Expected at least 30 utilities, found ${freeToolsData.length}`);
+  test('contains exactly the published utilities with unique IDs and slugs', () => {
+    // Only utilities whose /free-tools/<slug> pages are actually published may be
+    // registered here; listing unpublished tools created dead links (AdSense fix).
+    assert.equal(freeToolsData.length, 7, `Expected exactly 7 published utilities, found ${freeToolsData.length}`);
     assert.equal(new Set(freeToolsData.map((tool) => tool.id)).size, freeToolsData.length, 'Utility IDs must be unique');
     assert.equal(new Set(freeToolsData.map((tool) => tool.slug)).size, freeToolsData.length, 'Utility slugs must be unique');
   });
 
-  test('new utilities are discoverable through the real lookup service', () => {
+  test('published utilities are discoverable through the real lookup service', () => {
     const expected = [
-      'heic-to-png', 'text-diff', 'slug-generator', 'markdown-table-builder', 'unicode-inspector',
-      'html-entity-codec', 'csv-json-converter', 'json-to-typescript', 'regex-tester',
-      'url-query-builder', 'css-specificity', 'css-gradient', 'jwt-decoder', 'uuid-tool',
-      'password-generator', 'text-hash', 'file-checksum', 'timestamp-converter',
-      'viewport-inspector', 'mime-sniffer', 'file-metadata', 'image-cropper',
-      'image-palette', 'favicon-generator', 'svg-optimizer', 'audio-metadata',
-      'video-metadata', 'audio-trimmer', 'youtube-metadata', 'video-audio-transcriber',
-      'mp4-to-mp3', 'youtube-video-downloader', 'instagram-video-downloader',
+      'image-resizer', 'heic-to-png', 'qr-generator', 'word-counter',
+      'json-formatter', 'svg-to-png', 'prompt-builder',
     ];
     expected.forEach((slug) => assert.ok(getFreeToolBySlug(slug), `${slug} must be registered`));
+    // Unpublished utilities (including the downloader entries) must stay unregistered
+    // so no surface can link to a non-existent /free-tools/* page.
+    const unpublished = [
+      'text-diff', 'slug-generator', 'uuid-tool', 'password-generator',
+      'video-audio-transcriber', 'mp4-to-mp3',
+      'youtube-video-downloader', 'instagram-video-downloader',
+    ];
+    unpublished.forEach((slug) => assert.equal(getFreeToolBySlug(slug), undefined, `${slug} must not be registered`));
   });
 
   test('everyday utility priorities lead the listing without duplicating routes', () => {
@@ -69,7 +73,7 @@ describe('Built-in browser utility registry', () => {
       openSourceTools: 27,
       aiPlatforms: 76,
       alternativeTargets: 25,
-      browserUtilities: 39,
+      browserUtilities: 7,
       alternativeRelationships: 226,
       uniquePrompts: 583,
       proprietaryToolsWithAlternatives: 25,

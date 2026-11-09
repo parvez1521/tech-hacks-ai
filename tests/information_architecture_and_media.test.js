@@ -90,10 +90,11 @@ describe('Canonical catalog sections and expanded media utilities', () => {
     assert.match(media, /up to 4 MB per server upload/);
   });
 
-  test('media catalog keeps server transcription and local conversion limits distinct', () => {
-    const transcriber = freeToolsData.find((tool) => tool.slug === 'video-audio-transcriber');
-    const converter = freeToolsData.find((tool) => tool.slug === 'mp4-to-mp3');
-    assert.match(transcriber?.acceptedInput || '', /4 MB per server upload/);
-    assert.match(converter?.acceptedInput || '', /100MB/);
+  test('unpublished media utilities are absent from the free-tools registry', () => {
+    // video-audio-transcriber and mp4-to-mp3 were listed as tiles but their pages
+    // were never published (live 404), so they were removed from the registry;
+    // the underlying media API limits stay covered by the source checks above.
+    assert.equal(freeToolsData.find((tool) => tool.slug === 'video-audio-transcriber'), undefined);
+    assert.equal(freeToolsData.find((tool) => tool.slug === 'mp4-to-mp3'), undefined);
   });
 });

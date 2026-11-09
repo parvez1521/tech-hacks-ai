@@ -35,8 +35,7 @@ export const utilityCategoryDefinitions: Array<{
 
 /** Practical defaults based on common tasks; this is not usage-analytics ranking. */
 export const everydayUtilityOrder = [
-  'image-resizer', 'heic-to-png', 'image-cropper', 'mp4-to-mp3', 'audio-trimmer',
-  'video-audio-transcriber', 'video-metadata', 'audio-metadata',
+  'image-resizer', 'heic-to-png',
 ];
 
 const legacyUtilityCategoryMap: Record<FreeToolUtility['category'], UtilityCategory> = {
@@ -51,10 +50,6 @@ const legacyUtilityCategoryMap: Record<FreeToolUtility['category'], UtilityCateg
 };
 
 const utilityCategoryOverrides: Record<string, UtilityCategory> = {
-  'timestamp-converter': 'files-data-browser',
-  'viewport-inspector': 'files-data-browser',
-  'mime-sniffer': 'files-data-browser',
-  'file-metadata': 'files-data-browser',
   'qr-generator': 'developer-tools',
   'word-counter': 'text-writing',
   'json-formatter': 'developer-tools',

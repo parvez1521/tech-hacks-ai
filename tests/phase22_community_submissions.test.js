@@ -446,12 +446,14 @@ describe('Phase 22: Community Contributions (Submit a Tool & Submit a Guide)', (
       assert.ok(html.includes('/submit-guide'));
     });
 
-    test('Footer contains community submission links and moderation queue link', () => {
+    test('Footer contains community submission links and no public moderation link', () => {
       setupMockBrowser('https://techhacksai.com/');
       const html = ReactDOMServer.renderToString(React.createElement(ssrModule.App));
       assert.ok(html.includes('Submit an AI Tool'));
       assert.ok(html.includes('Submit a Guide'));
-      assert.ok(html.includes('/moderation'));
+      // /moderation is an internal, robots-disallowed route; it must not be
+      // linked from the public footer (the live URL returns 404).
+      assert.ok(!html.includes('/moderation'), 'Footer must not link to /moderation');
     });
   });
 });
