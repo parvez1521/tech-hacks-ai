@@ -226,11 +226,6 @@ export const Footer: React.FC = () => {
                   Cookie Preferences
                 </button>
               </li>
-              <li>
-                <Link to="/moderation" className="transition-colors duration-200 hover:text-primary text-[11px] text-muted-foreground">
-                  Moderation Queue
-                </Link>
-              </li>
             </ul>
           </div>
         </div>
