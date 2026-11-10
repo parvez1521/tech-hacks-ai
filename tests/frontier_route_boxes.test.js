@@ -28,6 +28,18 @@ describe('Access-route boxes: brand route gradient, full-box click, homepage hov
     assert.ok(page.includes('href={route.claimUrl}'), 'Route claim link unchanged');
   });
 
+  test('Route boxes keep inner padding so content never touches the box edges', () => {
+    // Regression (2026-11-07): the v3 gradient restyle dropped the original
+    // p-4, so every label, badge and paragraph rendered flush against the
+    // top-left corner of the box on production.
+    const frontier = read('src/pages/FrontierModelsPage.tsx');
+    const freeAi = read('src/pages/FreeAiSitesPage.tsx');
+    assert.ok(frontier.includes('rounded-lg p-5 [background:var(--brand-route-gradient)]'), 'FrontierModelsPage route boxes must keep p-5 inner padding');
+    assert.ok(freeAi.includes('rounded-lg p-5 [background:var(--brand-route-gradient)]'), 'FreeAiSitesPage route boxes must keep p-5 inner padding');
+    assert.ok(!frontier.includes('rounded-lg [background:var(--brand-route-gradient)]'), 'FrontierModelsPage route box must not render without padding');
+    assert.ok(!freeAi.includes('rounded-lg [background:var(--brand-route-gradient)]'), 'FreeAiSitesPage route box must not render without padding');
+  });
+
   test('FreeAiSitesPage frontier route boxes get the same treatment', () => {
     const page = read('src/pages/FreeAiSitesPage.tsx');
     assert.ok(page.includes(GRADIENT), 'Free AI Sites route boxes must use the brand route gradient with midnight ink');
