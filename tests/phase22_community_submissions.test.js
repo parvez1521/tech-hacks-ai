@@ -1,3 +1,4 @@
+import './helpers/admin-test-secret.js';
 import { test, describe, before, after } from 'node:test';
 import assert from 'node:assert';
 import React from 'react';

@@ -1,5 +1,6 @@
 import { getSupabaseConfig, getSupabaseHeaders } from '../server/supabaseRest.js';
 import { isAuthorized } from '../server/submissionsStore.js';
+import { evaluateAdminAuth } from '../server/adminAuthRateLimit.js';
 
 const TABLE = 'switchroute_contact_messages';
 const SUBJECTS = new Set([
@@ -61,6 +62,15 @@ function isRateLimited(ip) {
   return false;
 }
 
+function adminAuthDenied(req, res) {
+  const auth = evaluateAdminAuth(req, isAuthorized);
+  if (auth.status === 'authorized') return null;
+  if (auth.status === 'rate-limited') {
+    return sendJson(res, 429, { success: false, error: 'RateLimited', message: 'Too many failed authentication attempts. Please try again in 15 minutes.' }, { 'Retry-After': '900' });
+  }
+  return sendJson(res, 401, { success: false, error: 'Unauthorized' });
+}
+
 function isUuid(value) {
   return typeof value === 'string' && /^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(value);
 }
@@ -99,9 +109,8 @@ export default async function handler(req, res) {
     }
 
     if (req.method === 'GET' && action === 'inbox') {
-      if (!isAuthorized(req.headers)) {
-        return sendJson(res, 401, { success: false, error: 'Unauthorized' });
-      }
+      const denied = adminAuthDenied(req, res);
+      if (denied) return denied;
       const config = getSupabaseConfig();
       if (!config) {
         return sendJson(res, 503, { success: false, error: 'StorageUnavailable', message: 'Contact inbox storage is not configured.' });
@@ -170,9 +179,8 @@ export default async function handler(req, res) {
     }
 
     if (req.method === 'PATCH') {
-      if (!isAuthorized(req.headers)) {
-        return sendJson(res, 401, { success: false, error: 'Unauthorized' });
-      }
+      const denied = adminAuthDenied(req, res);
+      if (denied) return denied;
       if (!isUuid(id)) return sendJson(res, 400, { success: false, error: 'InvalidRequest', message: 'A valid message ID is required.' });
       const body = readBody(req);
       if (!body || !STATUSES.has(body.status)) {
@@ -202,9 +210,8 @@ export default async function handler(req, res) {
     }
 
     if (req.method === 'DELETE') {
-      if (!isAuthorized(req.headers)) {
-        return sendJson(res, 401, { success: false, error: 'Unauthorized' });
-      }
+      const denied = adminAuthDenied(req, res);
+      if (denied) return denied;
       if (!isUuid(id)) return sendJson(res, 400, { success: false, error: 'InvalidRequest', message: 'A valid message ID is required.' });
       const config = getSupabaseConfig();
       if (!config) return sendJson(res, 503, { success: false, error: 'StorageUnavailable', message: 'Contact inbox storage is not configured.' });

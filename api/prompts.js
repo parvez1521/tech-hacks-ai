@@ -1,5 +1,6 @@
 import { canManagePrompts, listPrompts, removePrompt, savePrompt } from '../server/promptsStore.js';
 import { getSafeApiFailure, logSanitizedApiError } from '../server/apiErrorHandling.js';
+import { evaluateAdminAuth } from '../server/adminAuthRateLimit.js';
 
 function readBody(req) {
   try {
@@ -13,7 +14,11 @@ export default async function handler(req, res) {
   res.setHeader('Cache-Control', req.method === 'GET' && !req.query?.admin ? 'public, s-maxage=60, stale-while-revalidate=300' : 'no-store');
   try {
     const admin = req.method !== 'GET' || req.query?.admin === '1';
-    if (admin && !canManagePrompts(req.headers)) return res.status(401).json({ error: 'Unauthorized. Moderator access token required.' });
+    if (admin) {
+      const auth = evaluateAdminAuth(req, canManagePrompts);
+      if (auth.status === 'rate-limited') { res.setHeader('Retry-After', '900'); return res.status(429).json({ error: 'Too many failed authentication attempts. Please try again in 15 minutes.' }); }
+      if (auth.status !== 'authorized') return res.status(401).json({ error: 'Unauthorized. Moderator access token required.' });
+    }
     if (req.method === 'GET') {
       const result = await listPrompts({ admin, slug: typeof req.query?.slug === 'string' ? req.query.slug : undefined });
       return res.status(200).json(result);

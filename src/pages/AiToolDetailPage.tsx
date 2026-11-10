@@ -9,6 +9,7 @@ import { BookmarkItem } from '../types';
 import { Sparkles, Star, ExternalLink, ArrowLeft, CheckCircle2, ShieldCheck, Tag, Info, Calendar, Lock, Unlock, Server, Scale, Share2, Check, BookOpen, Users, Cpu } from 'lucide-react';
 import { BrandLogo } from '../components/BrandLogo';
 import { siteConfig } from '../config/siteConfig';
+import { serializeJsonLd } from '../lib/jsonLd';
 import { getAiAlternativeMapping, getOpenSourceAlternativesForTarget } from '../data/aiAlternativeMappings.ts';
 import { AffiliateDisclosure } from '../components/AffiliateDisclosure';
 
@@ -107,7 +108,7 @@ export const AiToolDetailPage: React.FC = () => {
       {/* Embedded JSON-LD */}
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: serializeJsonLd(jsonLd) }}
       />
 
       {/* Breadcrumbs */}

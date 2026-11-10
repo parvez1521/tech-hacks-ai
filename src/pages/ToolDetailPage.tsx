@@ -9,6 +9,7 @@ import { GuideCard } from '../components/GuideCard';
 import { VerifiedBadge, AiNativeBadge } from '../components/Badge';
 import { BrandLogo } from '../components/BrandLogo';
 import { siteConfig } from '../config/siteConfig';
+import { serializeJsonLd } from '../lib/jsonLd';
 import {
   ExternalLink,
   Github,
@@ -97,7 +98,7 @@ export const ToolDetailPage: React.FC = () => {
       {/* Embedded JSON-LD */}
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: serializeJsonLd(jsonLd) }}
       />
 
       {/* Breadcrumb Navigation */}
