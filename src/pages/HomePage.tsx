@@ -6,6 +6,10 @@ import { HeroSignalVisual } from '../components/HeroSignalVisual';
 import { DailyDiscoveriesSection } from '../components/DailyDiscoveriesSection';
 import { BrandLogo } from '../components/BrandLogo';
 import { SwitchFlow } from '../components/SwitchFlow';
+import { IntroSplash } from '../components/IntroSplash';
+import { RouteDraw } from '../components/RouteDraw';
+import { PriceDrop } from '../components/PriceDrop';
+import { SwitchFlowMini } from '../components/SwitchFlowMini';
 import { getBrandLogo } from '../data/runtimeBrandLogos.ts';
 import { aiCategories } from '../data/aiToolsData';
 import { aiModels, getCurrentModelAccessRoutes, modelAccessProviders } from '../data/modelAccessCatalog';
@@ -168,6 +172,7 @@ export const HomePage: React.FC = () => {
 
   return (
     <main className="pb-12 sm:pb-16">
+      <IntroSplash />
       <section className="hero-aurora mx-auto grid max-w-7xl items-center gap-8 px-4 pb-16 pt-14 sm:px-6 sm:pb-20 sm:pt-20 lg:grid-cols-[1.05fr_.95fr] lg:gap-12" aria-labelledby="home-hero-heading">
         <div className="hero-grid" aria-hidden="true" />
         <div className="hero-stagger max-w-2xl">
@@ -232,6 +237,10 @@ export const HomePage: React.FC = () => {
       </section>
 
       
+
+      <div className="py-10 sm:py-12">
+        <RouteDraw />
+      </div>
 
       <section className="section-band" aria-labelledby="frontier-access-heading">
        <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20">
@@ -345,6 +354,8 @@ export const HomePage: React.FC = () => {
         </div>
       </section>
 
+      <SwitchFlowMini />
+
       <section className="mx-auto max-w-7xl border-t border-border/70 px-4 py-16 sm:px-6 sm:py-20" aria-labelledby="task-categories-heading">
         <div className="mb-10 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
           <div>
@@ -432,6 +443,10 @@ export const HomePage: React.FC = () => {
           ))}
         </div>
       </section>
+
+      <div className="pt-16 sm:pt-20">
+        <PriceDrop />
+      </div>
     </main>
   );
 };

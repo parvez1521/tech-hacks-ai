@@ -1791,6 +1791,180 @@
   .switch-flow__ring { animation: none; opacity: 0; }
 }
 
+/* ---- Owner-chosen intro + section animations (Nov 2026) ----
+   Concept 1 "The Switch" intro splash, Concept 2 "Route Draw",
+   Concept 3 "Price Drop" and Concept 4 "SwitchFlow Mini". All are
+   CSS-timed, play once, and settle; reduced motion gets end states. */
+
+/* Shared FREE badge: vermilion route-gradient fill, midnight text. */
+.intro-free-badge {
+  display: inline-flex; align-items: center;
+  border-radius: 9999px; padding: 2px 8px;
+  background: var(--brand-route-gradient);
+  color: rgb(var(--brand-midnight));
+  font-size: 10px; font-weight: 800; letter-spacing: 0.08em;
+}
+
+/* J1 — IntroSplash ("The Switch"), homepage only */
+.intro-splash {
+  position: fixed; inset: 0; z-index: 120;
+  display: grid; place-items: center;
+  background: rgb(var(--brand-midnight));
+  padding: 24px;
+  animation: introSplashIn 0.3s ease both;
+  transition: opacity 0.2s ease;
+}
+.intro-splash--leaving { opacity: 0; pointer-events: none; }
+@keyframes introSplashIn { from { opacity: 0; } to { opacity: 1; } }
+.intro-splash__stage { display: flex; flex-direction: column; align-items: center; width: min(92vw, 380px); pointer-events: none; }
+.intro-splash__skip { position: absolute; inset: 0; z-index: 2; background: transparent; border: 0; padding: 0; cursor: pointer; }
+.intro-splash__wordmark { margin-top: 26px; opacity: 0; animation: introFadeUp 0.45s ease 1.45s both; }
+@keyframes introFadeUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+.intro-card-scene { perspective: 1200px; width: 100%; animation: introCardIn 0.5s cubic-bezier(0.22, 0.8, 0.32, 1) both; }
+@keyframes introCardIn { from { opacity: 0; transform: translateX(-28px); } to { opacity: 1; transform: none; } }
+.intro-card { position: relative; width: 100%; height: 148px; transform-style: preserve-3d; animation: introFlip 2.15s ease both; }
+@keyframes introFlip {
+  0%, 32% { transform: rotateY(0deg); }
+  50%, 100% { transform: rotateY(180deg); }
+}
+.intro-card__face {
+  position: absolute; inset: 0;
+  border-radius: 16px; border: 1px solid rgb(var(--color-border));
+  background: rgb(var(--color-card));
+  padding: 18px 20px;
+  backface-visibility: hidden; -webkit-backface-visibility: hidden;
+}
+.intro-card__face--back { transform: rotateY(180deg); }
+.intro-card__tile {
+  display: grid; place-items: center; flex: none;
+  width: 40px; height: 40px; border-radius: 12px;
+  font-weight: 800; font-size: 14px;
+}
+.intro-card__tile--paid { border: 1px solid rgb(var(--color-border)); color: rgb(var(--color-fg)); background: rgb(var(--brand-slate) / 0.16); }
+.intro-card__tile--free { background: var(--brand-route-gradient); color: rgb(var(--brand-midnight)); }
+.intro-lever { display: flex; align-items: center; gap: 12px; margin-top: 22px; }
+.intro-lever__label {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase;
+  color: rgb(var(--brand-slate));
+}
+.intro-lever__track {
+  position: relative; width: 52px; height: 28px; flex: none;
+  border-radius: 9999px; border: 1px solid rgb(var(--color-border));
+  background: rgb(var(--color-card)); overflow: hidden;
+}
+.intro-lever__fill {
+  position: absolute; inset: 0;
+  background: var(--brand-route-gradient);
+  transform-origin: left; transform: scaleX(0);
+  animation: introLeverFill 2.15s ease both;
+}
+@keyframes introLeverFill { 0%, 34% { transform: scaleX(0); } 52%, 100% { transform: scaleX(1); } }
+.intro-lever__knob {
+  position: absolute; top: 3px; left: 3px; width: 20px; height: 20px;
+  border-radius: 9999px; background: rgb(var(--brand-ice));
+  animation: introLeverKnob 2.15s cubic-bezier(0.22, 0.8, 0.32, 1) both;
+}
+@keyframes introLeverKnob { 0%, 34% { transform: translateX(0); } 52%, 100% { transform: translateX(24px); } }
+.intro-route { width: 100%; margin-top: 20px; }
+.intro-route__draw { stroke-dasharray: 100; stroke-dashoffset: 100; animation: introRouteDraw 2.15s ease both; }
+@keyframes introRouteDraw { 0%, 52% { stroke-dashoffset: 100; } 78%, 100% { stroke-dashoffset: 0; } }
+.intro-route__dot { opacity: 0; transform-origin: 330px 12px; animation: introDotIn 2.15s ease both; }
+@keyframes introDotIn { 0%, 76% { opacity: 0; transform: scale(0.4); } 88%, 100% { opacity: 1; transform: scale(1); } }
+@media (prefers-reduced-motion: reduce) {
+  .intro-splash { display: none !important; }
+}
+
+/* J2 — RouteDraw band */
+.route-draw__stage { position: relative; margin-top: 6px; }
+.route-draw__svg { display: block; width: 100%; height: clamp(90px, 14vw, 170px); }
+.route-draw__line { stroke-dasharray: 100; stroke-dashoffset: 100; transition: stroke-dashoffset 1.5s ease 0.1s; }
+.route-draw.is-played .route-draw__line { stroke-dashoffset: 0; }
+.route-draw__pin-end { opacity: 0; transition: opacity 0.45s ease 1.35s; }
+.route-draw.is-played .route-draw__pin-end { opacity: 1; }
+.route-draw__labels { display: flex; justify-content: space-between; gap: 16px; }
+.route-draw__label { display: flex; flex-direction: column; gap: 2px; }
+.route-draw__label--end { text-align: right; align-items: flex-end; }
+.route-draw__label-title { display: inline-flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 600; color: rgb(var(--color-fg)); }
+.route-draw__label-sub { font-size: 11px; color: rgb(var(--brand-slate)); }
+@media (prefers-reduced-motion: reduce) {
+  .route-draw__line, .route-draw__pin-end { transition: none; }
+}
+
+/* J3 — PriceDrop closing block */
+.price-drop__figure {
+  display: flex; align-items: baseline; justify-content: center; gap: 12px;
+  margin-top: 16px;
+  font-family: 'Bricolage Grotesque', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+.price-drop__amount {
+  font-size: clamp(64px, 10vw, 108px); font-weight: 800; line-height: 1;
+  letter-spacing: -0.03em; color: rgb(var(--color-fg));
+  font-variant-numeric: tabular-nums;
+}
+.price-drop__per { display: inline-grid; font-size: clamp(22px, 3.4vw, 34px); font-weight: 700; }
+.price-drop__mo { grid-area: 1 / 1; position: relative; color: rgb(var(--brand-slate)); transition: opacity 0.3s ease; }
+.price-drop__mo::after {
+  content: ""; position: absolute; left: -4px; right: -4px; top: 54%;
+  height: 3px; border-radius: 2px; background: #F93A12;
+  transform: scaleX(0); transform-origin: left;
+  transition: transform 0.45s ease 0.05s;
+}
+.price-drop__forever { grid-area: 1 / 1; color: rgb(var(--color-fg)); opacity: 0; transform: translateY(8px); transition: opacity 0.35s ease 0.15s, transform 0.35s ease 0.15s; }
+.price-drop.is-done .price-drop__mo { opacity: 0.4; }
+.price-drop.is-done .price-drop__mo::after { transform: scaleX(1); }
+.price-drop.is-done .price-drop__forever { opacity: 1; transform: none; }
+.price-drop__pill {
+  display: inline-flex; padding: 6px 14px; border-radius: 9999px;
+  background: var(--brand-route-gradient); color: rgb(var(--brand-midnight));
+  font-size: 12px; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase;
+  opacity: 0; transform: scale(0.8) translateY(6px);
+  transition: opacity 0.35s ease, transform 0.35s cubic-bezier(0.22, 0.8, 0.32, 1);
+}
+.price-drop.is-done .price-drop__pill { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  .price-drop__mo, .price-drop__mo::after, .price-drop__forever, .price-drop__pill { transition: none; }
+}
+
+/* J4 — SwitchFlowMini strip */
+.flow-mini__stage { position: relative; height: 168px; container-type: inline-size; }
+.flow-mini__hub {
+  position: absolute; left: 50%; top: 50%; translate: -50% -50%; z-index: 2;
+  width: 72px; height: 72px; display: grid; place-items: center;
+}
+.flow-mini__core {
+  position: relative; z-index: 1; display: grid; place-items: center;
+  width: 58px; height: 58px; border-radius: 9999px;
+  background: rgb(var(--color-card) / 0.92);
+  border: 1px solid rgb(var(--brand-cyan) / 0.45);
+}
+.flow-mini__ring { position: absolute; inset: 0; border-radius: 9999px; border: 1px solid rgb(var(--brand-cyan) / 0.5); opacity: 0; }
+.flow-mini.is-played .flow-mini__ring { animation: switchFlowPulse 1.1s ease-out 3; }
+.flow-mini__chip--in { left: 4%; }
+.flow-mini__chip--out { right: 4%; }
+.flow-mini.is-played .flow-mini__chip--in { animation: flowMiniIn 1.05s ease-in both; }
+.flow-mini.is-played .flow-mini__chip--out { animation: flowMiniOut 0.8s cubic-bezier(0.22, 0.8, 0.32, 1) both; animation-delay: 0.95s; }
+.flow-mini.is-played .flow-mini__chip--in.flow-mini__chip--lane-1 { animation-delay: 0.18s; }
+.flow-mini.is-played .flow-mini__chip--in.flow-mini__chip--lane-2 { animation-delay: 0.36s; }
+.flow-mini.is-played .flow-mini__chip--out.flow-mini__chip--lane-1 { animation-delay: 1.13s; }
+.flow-mini.is-played .flow-mini__chip--out.flow-mini__chip--lane-2 { animation-delay: 1.31s; }
+@keyframes flowMiniIn {
+  0% { transform: translateY(-50%) translateX(0) scale(1); opacity: 0; }
+  10% { opacity: 1; }
+  68% { opacity: 1; }
+  100% { transform: translateY(-50%) translateX(40cqw) scale(0.5); opacity: 0; }
+}
+@keyframes flowMiniOut {
+  0% { transform: translateY(-50%) translateX(-40cqw) scale(0.5); opacity: 0; }
+  25% { opacity: 1; }
+  100% { transform: translateY(-50%) translateX(0) scale(1); opacity: 1; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .flow-mini__chip--in { animation: none !important; opacity: 0 !important; }
+  .flow-mini__chip--out { animation: none !important; opacity: 1 !important; transform: translateY(-50%); }
+  .flow-mini__ring { animation: none !important; opacity: 0; }
+}
+
 
 /* Loud Block finishing touches: vermilion selection + warm scrollbar. */
 ::selection {
