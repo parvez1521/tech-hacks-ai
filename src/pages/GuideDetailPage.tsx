@@ -7,6 +7,7 @@ import { BookmarkItem } from '../types';
 import { BookOpen, Clock, Calendar, Copy, Check, ArrowLeft, ArrowRight, ExternalLink, Wrench, Share2 } from 'lucide-react';
 import { BrandLogo } from '../components/BrandLogo';
 import { siteConfig } from '../config/siteConfig';
+import { serializeJsonLd } from '../lib/jsonLd';
 
 export const GuideDetailPage: React.FC = () => {
   const { params } = useRouter();
@@ -96,7 +97,7 @@ export const GuideDetailPage: React.FC = () => {
       {/* Embedded JSON-LD */}
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: serializeJsonLd(jsonLd) }}
       />
 
       {/* Breadcrumbs */}

@@ -1,3 +1,4 @@
+import './helpers/admin-test-secret.js';
 import { test, describe } from 'node:test';
 import assert from 'node:assert';
 import fs from 'fs';

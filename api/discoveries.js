@@ -7,6 +7,19 @@ import {
   isAuthorized,
 } from '../server/discoveriesStore.js';
 import { getSafeApiFailure, logSanitizedApiError } from '../server/apiErrorHandling.js';
+import { evaluateAdminAuth } from '../server/adminAuthRateLimit.js';
+
+function requireAdmin(req, res) {
+  const auth = evaluateAdminAuth(req, isAuthorized);
+  if (auth.status === 'rate-limited') {
+    res.setHeader('Retry-After', '900');
+    return res.status(429).json({ error: 'Too many failed authentication attempts. Please try again in 15 minutes.' });
+  }
+  if (auth.status !== 'authorized') {
+    return res.status(401).json({ error: 'Unauthorized. Moderator access token required.' });
+  }
+  return null;
+}
 
 function readJsonBody(req) {
   if (req.bodyParseError) return null;
@@ -65,9 +78,8 @@ export default async function handler(req, res) {
 
     // 2. POST /api/discoveries -> Create discovery (Admin only)
     if (method === 'POST') {
-      if (!isAuthorized(req.headers)) {
-        return res.status(401).json({ error: 'Unauthorized. Moderator access token required.' });
-      }
+      const denied = requireAdmin(req, res);
+      if (denied) return denied;
 
       const body = readJsonBody(req);
       if (!body) return res.status(400).json({ error: 'InvalidRequest', message: 'Request body must be a valid JSON object.' });
@@ -77,9 +89,8 @@ export default async function handler(req, res) {
 
     // 3. PATCH /api/discoveries?id=... -> Update discovery (Admin only)
     if (method === 'PATCH') {
-      if (!isAuthorized(req.headers)) {
-        return res.status(401).json({ error: 'Unauthorized. Moderator access token required.' });
-      }
+      const denied = requireAdmin(req, res);
+      if (denied) return denied;
       if (!id) {
         return res.status(400).json({ error: 'Discovery ID parameter is required.' });
       }
@@ -92,9 +103,8 @@ export default async function handler(req, res) {
 
     // 4. DELETE /api/discoveries?id=... -> Delete discovery (Admin only)
     if (method === 'DELETE') {
-      if (!isAuthorized(req.headers)) {
-        return res.status(401).json({ error: 'Unauthorized. Moderator access token required.' });
-      }
+      const denied = requireAdmin(req, res);
+      if (denied) return denied;
       if (!id) {
         return res.status(400).json({ error: 'Discovery ID parameter is required.' });
       }

@@ -20,19 +20,18 @@ const DATA_DIR = process.env.VERCEL ? path.join('/tmp', 'techhacks-data') : BUND
 const SUBMISSIONS_FILE = path.join(DATA_DIR, 'submissions.json');
 const PUBLISHED_FILE = path.join(DATA_DIR, 'published-additions.json');
 
-const DEVELOPMENT_ADMIN_SECRET = 'techhacks-admin-2026';
-
-function isProductionEnvironment() {
-  return process.env.VERCEL === '1' || process.env.NODE_ENV === 'production';
+// Admin access requires an explicit secret in every environment.
+// There is no fallback credential in source: local development and
+// tests must set ADMIN_SECRET (for example in .env.local or the
+// test environment) or admin access stays disabled.
+export function getConfiguredAdminSecret() {
+  return process.env.ADMIN_SECRET?.trim() || '';
 }
-
-// Keep a local-only fallback so the file-backed development/test workflow remains usable.
-// Production and serverless environments must provide an explicit secret instead.
-export const ADMIN_SECRET = process.env.ADMIN_SECRET?.trim() || DEVELOPMENT_ADMIN_SECRET;
+export const ADMIN_SECRET = getConfiguredAdminSecret();
 export const ADMIN_TOKEN = ADMIN_SECRET;
 
-if (isProductionEnvironment() && (!process.env.ADMIN_SECRET?.trim() || process.env.ADMIN_SECRET.trim() === DEVELOPMENT_ADMIN_SECRET)) {
-  console.error('[Security Alert] ADMIN_SECRET is missing or uses the development passkey in production. Admin access is disabled until a strong random secret is configured.');
+if (!ADMIN_SECRET) {
+  console.error('[Security Alert] ADMIN_SECRET is not configured. Admin access is disabled until a strong random secret is configured.');
 }
 
 // In-memory rate limiting map: ip -> timestamps[]
@@ -176,9 +175,8 @@ export function checkRateLimit(ip = 'unknown') {
 // Check admin authorization
 export function isAuthorized(headers = {}) {
   if (!headers) return false;
-  const configuredSecret = process.env.ADMIN_SECRET?.trim();
-  const secret = configuredSecret || (isProductionEnvironment() ? '' : ADMIN_SECRET);
-  if (!secret || (isProductionEnvironment() && secret === DEVELOPMENT_ADMIN_SECRET)) return false;
+  const secret = getConfiguredAdminSecret();
+  if (!secret) return false;
   if (typeof headers === 'string') {
     return safelyMatchesSecret(headers, secret);
   }

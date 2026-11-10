@@ -8,6 +8,21 @@ import {
   isAuthorized,
 } from '../server/submissionsStore.js';
 import { getSafeApiFailure, logSanitizedApiError, safeApiOperationResult } from '../server/apiErrorHandling.js';
+import { evaluateAdminAuth } from '../server/adminAuthRateLimit.js';
+
+function requireAdmin(req, res) {
+  const auth = evaluateAdminAuth(req, isAuthorized);
+  if (auth.status === 'rate-limited') {
+    res.setHeader('Retry-After', '900');
+    res.status(429).json({ error: 'Too many failed authentication attempts. Please try again in 15 minutes.' });
+    return false;
+  }
+  if (auth.status !== 'authorized') {
+    res.status(401).json({ error: 'Unauthorized. Moderator access token required.' });
+    return false;
+  }
+  return true;
+}
 
 function readJsonBody(req) {
   if (req.bodyParseError) return null;
@@ -40,9 +55,7 @@ export default async function handler(req, res) {
 
     // 2. GET /api/submissions -> Admin moderation queue
     if (method === 'GET') {
-      if (!isAuthorized(req.headers)) {
-        return res.status(401).json({ error: 'Unauthorized. Moderator access token required.' });
-      }
+      if (!requireAdmin(req, res)) return res;
 
       const all = await readSubmissionsAsync();
       const statusFilter = url.searchParams.get('status');
@@ -77,9 +90,7 @@ export default async function handler(req, res) {
     if (method === 'POST') {
       // Check publish action
       if (action === 'publish' && id) {
-        if (!isAuthorized(req.headers)) {
-          return res.status(401).json({ error: 'Unauthorized. Moderator access token required.' });
-        }
+        if (!requireAdmin(req, res)) return res;
         const result = await publishSubmissionToCatalogAsync(id, req.headers);
         const response = safeApiOperationResult(result);
         return res.status(response.status).json(response.body);
@@ -108,9 +119,7 @@ export default async function handler(req, res) {
       if (!id) {
         return res.status(400).json({ error: 'Submission ID is required.' });
       }
-      if (!isAuthorized(req.headers)) {
-        return res.status(401).json({ error: 'Unauthorized. Moderator access token required.' });
-      }
+      if (!requireAdmin(req, res)) return res;
 
       const body = readJsonBody(req);
       if (!body) return res.status(400).json({ error: 'InvalidRequest', message: 'Request body must be a valid JSON object.' });
