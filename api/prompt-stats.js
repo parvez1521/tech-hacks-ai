@@ -1,4 +1,4 @@
-import { promptsData } from '../src/data/promptsData.ts';
+import { localPromptSlugs } from '../src/data/localPromptSlugs.ts';
 import { getPromptCopyStats, listPrompts, recordPromptCopy } from '../server/promptsStore.js';
 
 const recentCopyRequests = new Map();
@@ -15,7 +15,7 @@ export default async function handler(req, res) {
     if (req.method === 'GET') {
       try {
         const [{ stats }, remote] = await Promise.all([getPromptCopyStats(), listPrompts({ admin: false })]);
-        const allowed = new Set([...promptsData.map((prompt) => prompt.slug), ...remote.prompts.map((prompt) => prompt.slug)]);
+        const allowed = new Set([...localPromptSlugs, ...remote.prompts.map((prompt) => prompt.slug)]);
         return res.status(200).json({ stats: stats.filter((item) => allowed.has(item.slug)) });
       } catch {
         // Copy counts are optional display metadata. If the analytics store is
