@@ -92,9 +92,9 @@ describe('Phase 21: Prompt Library Expansion, Creative Workflows & Authentic Bra
   });
 
   // -------------------------------------------------------------------------
-  // 2. 14 Curated Categories Verification
+  // 2. 16 Curated Categories Verification
   // -------------------------------------------------------------------------
-  describe('2. 14 Curated Prompt Categories', () => {
+  describe('2. 16 Curated Prompt Categories', () => {
     const requiredCategories = [
       'human-portraits',
       'ai-image-generation',
@@ -111,17 +111,18 @@ describe('Phase 21: Prompt Library Expansion, Creative Workflows & Authentic Bra
       '3d-design-product-vis',
       'coding-debug-refactor',
       'marketing-content-social',
+      'vibe-coded-app-security',
     ];
 
-    test('promptCategories defines all 15 curated categories', () => {
-      assert.strictEqual(promptCategories.length, 15, 'Must have exactly 15 categories');
+    test('promptCategories defines all 16 curated categories', () => {
+      assert.strictEqual(promptCategories.length, 16, 'Must have exactly 16 categories');
       const slugs = promptCategories.map((c) => c.slug);
       for (const req of requiredCategories) {
         assert.ok(slugs.includes(req), `Category ${req} must be registered in promptCategories`);
       }
     });
 
-    test('every single one of the 14 categories contains at least one prompt', () => {
+    test('every single one of the 16 categories contains at least one prompt', () => {
       for (const cat of promptCategories) {
         const matching = promptsData.filter((p) => p.category === cat.slug);
         assert.ok(
