@@ -98,6 +98,12 @@ export const promptCategories: PromptCategoryDef[] = [
     slug: 'marketing-content-social',
     description: 'High-conversion B2B email sequences, technical launch posts, viral social hooks, and positioning frameworks.',
   },
+  {
+    id: 'vibe-coded-app-security',
+    name: 'Vibe-Coded App Security',
+    slug: 'vibe-coded-app-security',
+    description: 'Copy-paste security audits for Cursor, Lovable, Bolt, and other AI coding assistants. Use these prompts against your existing codebase — each asks your coding assistant to inspect the implementation, make appropriate fixes, and report what it actually verified. Review changes before deploying.',
+  },
 ];
 
 export const promptProviders = [
@@ -1255,5 +1261,101 @@ Rules:
     sourceCreator: 'tech_hacks.ai',
     promptProvenance: 'original',
     rightsStatus: 'original',
+  },
+  {
+    id: 'vibe-coded-security-exposed-api-keys',
+    title: 'Exposed API Keys and Secrets',
+    slug: 'vibe-coded-security-exposed-api-keys',
+    description: 'Prevent someone from extracting private credentials from the client and using your API account.',
+    category: 'vibe-coded-app-security',
+    targetModel: 'Cursor, Lovable, Bolt, and other AI coding assistants',
+    provider: 'Cursor',
+    promptText: `Act as a senior application security engineer. Audit my entire codebase for exposed API keys, secrets, tokens, and credentials.
+
+Check for:
+1. OpenAI, Anthropic, Stripe, and other third-party API keys embedded in frontend JavaScript, HTML, mobile code, or publicly accessible configuration files.
+2. Secrets committed to source code, Git history, logs, error messages, or client-side environment variables such as VITE_* and NEXT_PUBLIC_*.
+3. Backend API routes that expose credentials or allow unauthenticated users to make expensive API calls using my account.
+4. Missing server-side validation, authorization, rate limiting, and abuse protection on sensitive endpoints.
+
+Fix all confirmed issues. Move private credentials to server-side environment variables or a secrets manager, route privileged API calls through authenticated backend endpoints, and ensure the frontend never receives private secrets.
+
+Add appropriate rate limits and input validation to prevent API abuse. Never print actual secret values in your report.
+
+After making changes, scan the repository again and report every finding, its severity, the files changed, and the verification performed. If a secret has already been exposed, instruct me to revoke and rotate it because removing it from the code alone does not invalidate it.
+
+Do not claim the application is secure merely because the code changes look correct. Identify anything that requires manual verification.`,
+    tags: ['security', 'api-keys', 'secrets', 'vibe-coding', 'audit', 'cursor', 'lovable', 'bolt'],
+    tips: 'Before you launch: review the actual code diff before accepting security changes. Run the generated tests and verify they fail when authorization is removed. Rotate any credentials that were exposed, even if you have since removed them from the code. Test with separate accounts and non-production data. Do not treat an AI-generated “all clear” as a security certification. These prompts are a starting point, not a guarantee of security — AI tools can miss vulnerabilities, misconfigure policies, or report tests they did not actually run. Use a qualified security review for sensitive or production systems.',
+    expectedOutputType: 'Security audit report with findings, severity, files changed, and verification performed.',
+    exampleUseCase: 'Auditing a vibe-coded app built with Cursor, Lovable, or Bolt before launch.',
+    previewImage: '/prompts/generated/vibe-coded-security-exposed-api-keys.webp',
+    previewImageAlt: 'A glowing shield protects floating golden keys among faint code brackets on a dark navy background.',
+    aspectRatio: '1:1',
+    createdAt: '2026-11-12T00:00:00.000Z',
+  },
+  {
+    id: 'vibe-coded-security-supabase-rls',
+    title: 'Supabase Database Security and RLS',
+    slug: 'vibe-coded-security-supabase-rls',
+    description: 'Stop users from reading or changing database records they are not permitted to access.',
+    category: 'vibe-coded-app-security',
+    targetModel: 'Cursor, Lovable, Bolt, and other AI coding assistants',
+    provider: 'Cursor',
+    promptText: `Act as a senior database security engineer. Audit my application's Supabase configuration, database schema, SQL migrations, access policies, and frontend database queries.
+
+For every table containing user data or private application data:
+1. Verify that Row Level Security (RLS) is enabled wherever appropriate.
+2. Inspect existing RLS policies for overly permissive rules, including policies that allow unrestricted reads, writes, updates, or deletes.
+3. Ensure authenticated users can access only the records they are authorized to access. For user-owned records, enforce ownership using the authenticated user's identity, such as auth.uid(), and the correct ownership column.
+4. Check INSERT, SELECT, UPDATE, and DELETE permissions separately. Ensure users cannot assign records to another user or change ownership to bypass policies.
+5. Inspect Supabase Storage policies, exposed database views, RPC functions, and grants for equivalent access-control weaknesses.
+6. Verify that the Supabase service-role key and other privileged credentials never appear in frontend code.
+
+Implement the required SQL migrations and least-privilege policies without breaking legitimate application functionality. Do not blindly enable RLS without creating and testing the correct policies.
+
+Then test access using separate test accounts and anonymous sessions. Verify that one user cannot read or modify another user's records, and that unauthorized requests are denied by the database itself.
+
+Provide a report of the tables audited, policies added or changed, tests executed, remaining risks, and any manual dashboard configuration required. Never use production personal data for security testing.`,
+    tags: ['security', 'supabase', 'rls', 'database', 'vibe-coding', 'audit'],
+    tips: 'Before you launch: review the actual code diff before accepting security changes. Run the generated tests and verify they fail when authorization is removed. Rotate any credentials that were exposed, even if you have since removed them from the code. Test with separate accounts and non-production data. Do not treat an AI-generated “all clear” as a security certification. These prompts are a starting point, not a guarantee of security — AI tools can miss vulnerabilities, misconfigure policies, or report tests they did not actually run. Use a qualified security review for sensitive or production systems.',
+    expectedOutputType: 'Security audit report with tables audited, policies added or changed, tests executed, and remaining risks.',
+    exampleUseCase: 'Locking down Supabase tables and Storage in a vibe-coded app before launch.',
+    previewImage: '/prompts/generated/vibe-coded-security-supabase-rls.webp',
+    previewImageAlt: 'A database cylinder wrapped in a glowing padlock inside a translucent shield on a dark navy background.',
+    aspectRatio: '1:1',
+    createdAt: '2026-11-12T00:00:00.000Z',
+  },
+  {
+    id: 'vibe-coded-security-broken-authorization-idor',
+    title: 'Broken Authorization and IDOR',
+    slug: 'vibe-coded-security-broken-authorization-idor',
+    description: "Prevent a logged-in user from changing an ID in a URL or request to access someone else's order, invoice, or profile.",
+    category: 'vibe-coded-app-security',
+    targetModel: 'Cursor, Lovable, Bolt, and other AI coding assistants',
+    provider: 'Cursor',
+    promptText: `Act as a senior application security engineer. Audit my entire application for Broken Access Control and Insecure Direct Object Reference (IDOR) vulnerabilities.
+
+Inspect every page, API route, server action, database query, and resource accessed through a user-supplied identifier, including URLs such as /orders/101, /users/42, /invoices/123, and equivalent IDs in request bodies or query parameters.
+
+For every sensitive resource:
+1. Verify authentication where required.
+2. Enforce server-side authorization on every read and write. Confirm the currently authenticated user has permission to access that specific resource, not merely that they are logged in.
+3. Check resource ownership or explicit role-based permissions using trusted server-side identity and database relationships.
+4. Apply authorization checks to GET, POST, PUT, PATCH, and DELETE operations, including nested resources, file downloads, exports, and background actions.
+5. Prevent users from changing IDs, manipulating request payloads, or invoking backend endpoints directly to access another user's data.
+6. Return appropriate 403 or 404 responses for unauthorized requests without leaking private record details.
+
+Implement reusable authorization checks where practical. Add automated tests with at least two separate users, covering attempts to access, modify, and delete each other's resources, plus legitimate owner access and administrator access where applicable.
+
+Run the tests and report the vulnerable endpoints, code changes, test results, and any unverified areas. Do not treat frontend route guards or hidden UI elements as security controls. Authorization must be enforced on the server or through correctly configured database policies.`,
+    tags: ['security', 'authorization', 'idor', 'access-control', 'vibe-coding', 'audit'],
+    tips: 'Before you launch: review the actual code diff before accepting security changes. Run the generated tests and verify they fail when authorization is removed. Rotate any credentials that were exposed, even if you have since removed them from the code. Test with separate accounts and non-production data. Do not treat an AI-generated “all clear” as a security certification. These prompts are a starting point, not a guarantee of security — AI tools can miss vulnerabilities, misconfigure policies, or report tests they did not actually run. Use a qualified security review for sensitive or production systems.',
+    expectedOutputType: 'Security audit report with vulnerable endpoints, code changes, and test results.',
+    exampleUseCase: 'Checking IDOR and broken access control across pages, API routes, and downloads.',
+    previewImage: '/prompts/generated/vibe-coded-security-broken-authorization-idor.webp',
+    previewImageAlt: 'Two locked doors with ID badges behind a checkpoint barrier on a dark navy background.',
+    aspectRatio: '1:1',
+    createdAt: '2026-11-12T00:00:00.000Z',
   },
 ];

@@ -2388,4 +2388,19 @@
 
 
 
+  <url>
+    <loc>https://switchroute.in/prompt-library/vibe-coded-security-exposed-api-keys</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/vibe-coded-security-supabase-rls</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://switchroute.in/prompt-library/vibe-coded-security-broken-authorization-idor</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
 </urlset>

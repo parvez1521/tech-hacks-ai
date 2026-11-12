@@ -14,11 +14,11 @@ test('catalog statistics count unique identities, mapped pairs, and prompt slugs
   assert.equal(stats.catalogIdentities, new Set([...toolsData, ...aiToolsData, ...proprietaryTools].map((item) => item.slug)).size);
   assert.equal(stats.openSourceTools, new Set(toolsData.map((item) => item.slug)).size);
   assert.equal(stats.alternativeRelationships, 226);
-  assert.equal(stats.uniquePrompts, 583);
+  assert.equal(stats.uniquePrompts, 586);
   assert.equal(stats.proprietaryToolsWithAlternatives, 25);
   assert.equal(stats.imagePrompts, 548);
   assert.equal(stats.videoPrompts, 12);
-  assert.equal(stats.nonVisualPrompts, 23);
+  assert.equal(stats.nonVisualPrompts, 26);
   const index = JSON.parse(fs.readFileSync('data/promptfeed-catalog-index.json', 'utf8'));
   const manifest = JSON.parse(fs.readFileSync('data/promptfeed-import.json', 'utf8'));
   const feed = Array.isArray(manifest) ? manifest : manifest.prompts;

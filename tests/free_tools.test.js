@@ -75,11 +75,11 @@ describe('Built-in browser utility registry', () => {
       alternativeTargets: 25,
       browserUtilities: 7,
       alternativeRelationships: 226,
-      uniquePrompts: 583,
+      uniquePrompts: 586,
       proprietaryToolsWithAlternatives: 25,
       imagePrompts: 548,
       videoPrompts: 12,
-      nonVisualPrompts: 23,
+      nonVisualPrompts: 26,
     });
   });
 

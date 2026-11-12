@@ -57,6 +57,9 @@ export const promptArtwork: Record<string, PromptArtwork> = {
   'deep-competitive-teardown': { path: '/prompts/generated/deep-competitive-teardown.webp', alt: 'A strategy workspace with abstract charts, sticky notes, and a tablet.', description: 'Top-down editorial view of a competitive research setup.' },
   'dark-mode-dashboard-ui': { path: '/prompts/generated/dark-mode-dashboard-ui.webp', alt: 'A minimalist dark analytics dashboard with emerald and indigo charts.', description: 'Dark-mode web app interface concept.' },
   'clean-react-custom-hook': { path: '/prompts/generated/clean-react-custom-hook.webp', alt: 'A developer laptop showing an abstract code editor in a bright workspace.', description: 'Natural-light workspace for a frontend development recipe.' },
+  'vibe-coded-security-exposed-api-keys': { path: '/prompts/generated/vibe-coded-security-exposed-api-keys.webp', alt: 'A glowing shield protects floating golden keys among faint code brackets on a dark navy background.', description: 'Original security illustration for the exposed API keys audit.' },
+  'vibe-coded-security-supabase-rls': { path: '/prompts/generated/vibe-coded-security-supabase-rls.webp', alt: 'A database cylinder wrapped in a glowing padlock inside a translucent shield on a dark navy background.', description: 'Original database security illustration for the Supabase RLS audit.' },
+  'vibe-coded-security-broken-authorization-idor': { path: '/prompts/generated/vibe-coded-security-broken-authorization-idor.webp', alt: 'Two locked doors with ID badges behind a checkpoint barrier on a dark navy background.', description: 'Original access-control illustration for the broken authorization audit.' },
 };
 
 export function getPromptArtwork(prompt: Pick<PromptItem, 'slug'>): PromptArtwork | undefined {
