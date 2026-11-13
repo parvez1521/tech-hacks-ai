@@ -1828,6 +1828,7 @@ QUALITY BAR
     sourceCreator: 'Aaghaz / Make First Million (@make.first.million)',
     previewImage: '/prompts/generated/premium-website-prompts-part-1.webp',
     previewImageAlt: 'Abstract premium artwork blending the five prompt palettes — lime, gold, lavender, caramel and mint — on a dark background.',
+    hidePreviewImage: true,
     mediaType: 'image',
     aspectRatio: '1:1',
     createdAt: '2026-11-13T00:00:00.000Z',

@@ -206,25 +206,27 @@ export const PromptDetailPage: React.FC = () => {
           {prompt.description}
         </p>
 
-        <figure className="mb-6 overflow-hidden rounded-2xl border border-border bg-muted">
-          <PromptPreviewImage
-            src={prompt.previewImage}
-            alt={prompt.previewImageAlt || `${prompt.title} prompt preview`}
-            priority
-            width={prompt.previewImageWidth}
-            height={prompt.previewImageHeight}
-            className={`block max-h-[500px] w-full bg-slate-100 object-contain dark:bg-slate-800${slug.startsWith('promptfeed-') ? ' mx-auto max-w-[380px]' : ''}`}
-          />
-          {!prompt.guideSteps?.length && (
-            <figcaption className="flex flex-wrap items-center gap-x-4 gap-y-1 px-4 py-3 text-xs text-muted-foreground">
-              <span><strong className="text-foreground">Visual style</strong> {prompt.visualStyle || 'Conceptual'}</span>
-              <span><strong className="text-foreground">Aspect ratio</strong> {prompt.aspectRatio || '1:1'}</span>
-              <span><strong className="text-foreground">Model</strong> {prompt.targetModel}</span>
-              {prompt.createdAt && <span><strong className="text-foreground">Added</strong> {new Date(prompt.createdAt).toLocaleDateString()}</span>}
-              <span>{prompt.rightsStatus === 'original' ? 'Original SwitchRoute preview.' : `${prompt.rightsStatus || 'Source'} content with attribution.`}</span>
-            </figcaption>
-          )}
-        </figure>
+        {!prompt.hidePreviewImage && (
+          <figure className="mb-6 overflow-hidden rounded-2xl border border-border bg-muted">
+            <PromptPreviewImage
+              src={prompt.previewImage}
+              alt={prompt.previewImageAlt || `${prompt.title} prompt preview`}
+              priority
+              width={prompt.previewImageWidth}
+              height={prompt.previewImageHeight}
+              className={`block max-h-[500px] w-full bg-slate-100 object-contain dark:bg-slate-800${slug.startsWith('promptfeed-') ? ' mx-auto max-w-[380px]' : ''}`}
+            />
+            {!prompt.guideSteps?.length && (
+              <figcaption className="flex flex-wrap items-center gap-x-4 gap-y-1 px-4 py-3 text-xs text-muted-foreground">
+                <span><strong className="text-foreground">Visual style</strong> {prompt.visualStyle || 'Conceptual'}</span>
+                <span><strong className="text-foreground">Aspect ratio</strong> {prompt.aspectRatio || '1:1'}</span>
+                <span><strong className="text-foreground">Model</strong> {prompt.targetModel}</span>
+                {prompt.createdAt && <span><strong className="text-foreground">Added</strong> {new Date(prompt.createdAt).toLocaleDateString()}</span>}
+                <span>{prompt.rightsStatus === 'original' ? 'Original SwitchRoute preview.' : `${prompt.rightsStatus || 'Source'} content with attribution.`}</span>
+              </figcaption>
+            )}
+          </figure>
+        )}
 
         {/* Step-by-step guide boxes (guide prompts only) */}
         {prompt.guideSteps?.length ? (

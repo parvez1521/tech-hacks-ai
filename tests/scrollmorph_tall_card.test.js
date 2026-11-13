@@ -64,12 +64,23 @@ describe('ScrollMorph tall-card guard', () => {
     const src = read('src/data/promptsData.ts');
     const start = src.indexOf("slug: 'premium-website-prompts-part-1'");
     assert.ok(start > -1, 'Consolidated entry should exist in promptsData');
+    const entryEnd = src.indexOf('\n  },', start);
+    assert.ok(entryEnd > start, 'Consolidated entry should close in promptsData');
+    // PR #88 moved the five verbatim prompts out of promptText into
+    // guideSteps boxes, so the card's height now comes from promptText
+    // plus the five step texts — measure both.
     const textStart = src.indexOf('promptText:', start);
     const textEnd = src.indexOf('`,', textStart);
-    const length = textEnd - textStart;
+    let length = textEnd - textStart;
+    let stepStart = src.indexOf('text: `', textEnd);
+    while (stepStart > -1 && stepStart < entryEnd) {
+      const stepEnd = src.indexOf('`,', stepStart);
+      length += stepEnd - stepStart;
+      stepStart = src.indexOf('text: `', stepEnd);
+    }
     assert.ok(
       length > 10000,
-      `Consolidated promptText should be very long (card ~11,000px tall), got ~${length} chars`,
+      `Consolidated promptText + guide step texts should be very long (card ~11,000px tall), got ~${length} chars`,
     );
   });
 });

@@ -267,6 +267,8 @@ export interface PromptItem {
   /** Native pixel size, populated from the local image audit for stable, accurate rendering. */
   previewImageWidth?: number;
   previewImageHeight?: number;
+  /** Hides the preview image hero on the detail page; the library card still shows previewImage. */
+  hidePreviewImage?: boolean;
   /** Editorial visual treatment to help users find a compatible recipe. */
   visualStyle?: string;
   aspectRatio?: string;
