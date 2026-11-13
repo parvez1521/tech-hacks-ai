@@ -18,12 +18,27 @@ import { useEffect } from 'react';
  *   marked `data-no-reveal` (e.g. the SwitchFlow animation stage) are
  *   never touched, and only the outermost block of a nested group is
  *   tagged so nothing double-animates.
+ * - Blocks taller than MAX_REVEAL_HEIGHT_PX are never tagged either:
+ *   the 3D flip goes singular past that height (see the constant), so
+ *   they stay fully visible with no reveal animation.
  * - After a block's reveal finishes, its transition is removed so hover
  *   transforms on cards stay instant.
  */
 
 const TARGET_SELECTOR = 'article, li, h2, .glass-card, .card-glow, [class*="-card"]';
 const CARDISH = /card/i;
+
+// Tall elements are never tagged: the hidden state tilts a block back
+// -38deg around its bottom edge under a 900px perspective, and the
+// perspective projection goes singular at z = 900px — i.e. ~1,461px
+// (900 / sin 38°) above the block's bottom edge. Any block taller than
+// that crosses the singularity plane, so during the 0.7s flip its top
+// sweeps toward the viewer and is magnified into giant blurred glyphs,
+// while its projected bounding box lands thousands of pixels down the
+// page and the IntersectionObserver never fires. 1400px stays just
+// under the ~1,461px line. Such blocks are left fully visible with no
+// reveal animation at all.
+const MAX_REVEAL_HEIGHT_PX = 1400;
 
 export const ScrollMorph: React.FC = () => {
   useEffect(() => {
@@ -70,6 +85,10 @@ export const ScrollMorph: React.FC = () => {
 
         const htmlEl = el as HTMLElement;
         if (htmlEl.offsetHeight === 0) return;
+        // Tall blocks cross the perspective singularity plane (see
+        // MAX_REVEAL_HEIGHT_PX): skip them entirely so they stay fully
+        // visible with no reveal animation.
+        if (htmlEl.offsetHeight > MAX_REVEAL_HEIGHT_PX) return;
 
         const parent = el.parentElement;
         const index = parent ? groupCounts.get(parent) || 0 : 0;
