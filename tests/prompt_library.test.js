@@ -158,3 +158,13 @@ test('failed Faymas authorization gate prevents any import attempt', async () =>
   assert.equal(result.status, 3);
   assert.match(result.stderr, /import is disabled/i);
 });
+
+test('premium website prompts entry hides its hero poster on the detail page but keeps the card thumbnail', () => {
+  const entry = promptsData.find((prompt) => prompt.slug === 'premium-website-prompts-part-1');
+  assert.ok(entry, 'premium website prompts entry exists');
+  assert.equal(entry.hidePreviewImage, true, 'entry opts out of the detail-page hero image');
+  assert.ok(entry.previewImage, 'entry keeps previewImage so the library card still shows a thumbnail');
+  assert.ok(fs.existsSync(path.resolve('public', entry.previewImage.replace(/^\//, ''))), 'card thumbnail file still exists');
+  const detail = fs.readFileSync(path.resolve('src/pages/PromptDetailPage.tsx'), 'utf8');
+  assert.match(detail, /!prompt\.hidePreviewImage && \(\s*<figure/, 'detail page skips the hero figure when hidePreviewImage is set');
+});
