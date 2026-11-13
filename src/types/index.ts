@@ -250,7 +250,9 @@ export interface PromptItem {
   tags: string[];
   tips?: string;
   /** Optional step-by-step guide rendered as highlighted boxes under the preview image; when present, the meta strips under the image are hidden. */
-  guideSteps?: { title: string; text: string }[];
+  guideSteps?: { title: string; text: string; image?: string; imageAlt?: string }[];
+  /** Custom heading for the guideSteps section; when present the section is a collection, not numbered steps. */
+  guideStepsHeading?: string;
   authorOrSource?: string;
   placeholders?: string[]; // e.g. ['[PRODUCT]', '[BRAND COLORS]', '[ASPECT RATIO]', '[VISUAL STYLE]']
   customizationInstructions?: string;

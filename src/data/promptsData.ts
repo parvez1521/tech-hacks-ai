@@ -1387,7 +1387,17 @@ If a part looks broken, tell the AI exactly what you see, e.g. "the 3D object is
 
 ---
 
-## Prompt 01: Pulse
+MAKE IT YOURS
+Change the brand: "Rename the brand to <your name> and rewrite all text for <your business>."
+Change the colours: "Use #FF7D00 as the accent colour instead."
+Add a section: "Add a testimonials section with 3 reviews after pricing."
+
+Source: Aaghaz / Make First Million (@make.first.million) — "5 Premium Website Prompts (Part 1)". These prompts are not SwitchRoute originals; shared with credit.`,
+    guideStepsHeading: 'The 5 prompts',
+    guideSteps: [
+      {
+        title: 'Prompt 01: Pulse',
+        text: `## Prompt 01: Pulse
 What you get: a black + lime workflow-automation SaaS landing page. (93 lines)
 
 You are an expert creative front-end developer. Build a single self-contained index.html (HTML + CSS + vanilla JS, no build step) for the website described below.
@@ -1475,11 +1485,13 @@ QUALITY BAR
 - Crisp hairlines, generous spacing, consistent 8px rhythm.
 - All animation at 60fps (transform/opacity only).
 - No placeholder text, no broken images, no external images: build every visual with HTML, CSS and SVG.
-- Fictional brands only. Output the complete file in one code block.
-
----
-
-## Prompt 02: Vault
+- Fictional brands only. Output the complete file in one code block.`,
+        image: '/prompts/generated/premium-website-pulse-site.webp',
+        imageAlt: 'Pulse black and lime workflow-automation SaaS landing page with workflow nodes',
+      },
+      {
+        title: 'Prompt 02: Vault',
+        text: `## Prompt 02: Vault
 What you get: a holographic trading-card marketplace. (79 lines)
 
 You are an expert creative front-end developer. Build a single self-contained index.html (HTML + CSS + vanilla JS, no build step) for the website described below.
@@ -1560,11 +1572,13 @@ QUALITY BAR
 - 60fps animation: only animate transform and opacity (and background-position for the foil).
 - Semantic HTML (header, main, section, footer), buttons are real buttons or links.
 - No console errors; everything works by opening the file directly.
-- Fictional brand only. No real company names, logos or characters.
-
----
-
-## Prompt 03: Nocturne
+- Fictional brand only. No real company names, logos or characters.`,
+        image: '/prompts/generated/premium-website-vault-site.webp',
+        imageAlt: 'Vault holographic trading-card marketplace with graded collectible cards',
+      },
+      {
+        title: 'Prompt 03: Nocturne',
+        text: `## Prompt 03: Nocturne
 What you get: a dark techwear store with a 3D centrepiece. (89 lines)
 
 You are an expert creative front-end developer. Build a single self-contained index.html (HTML + CSS + vanilla JS, no build step) for the website described below.
@@ -1653,11 +1667,13 @@ QUALITY BAR
 - 60fps animation; requestAnimationFrame only; no layout thrashing.
 - Hero is never blank: the object or its fallback is visible immediately.
 - Semantic HTML, alt/aria labels, visible focus states.
-- Everything in one file, works by double-clicking index.html.
-
----
-
-## Prompt 04: Crema
+- Everything in one file, works by double-clicking index.html.`,
+        image: '/prompts/generated/premium-website-nocturne-site.webp',
+        imageAlt: 'Nocturne dark techwear store with a 3D centrepiece and monospace labels',
+      },
+      {
+        title: 'Prompt 04: Crema',
+        text: `## Prompt 04: Crema
 What you get: a warm specialty coffee roastery one-pager. (81 lines)
 
 You are an expert creative front-end developer. Build a single self-contained index.html (HTML + CSS + vanilla JS, no build step) for the website described below.
@@ -1720,11 +1736,13 @@ QUALITY BAR
 - Generous whitespace, strong type hierarchy, consistent 8px spacing grid.
 - No blank states: every animation has a visible final state within 1.5s.
 - Semantic HTML, accessible contrast, alt/aria labels on the SVG art.
-- One file, clean commented code, no console errors.
-
----
-
-## Prompt 05: Halo
+- One file, clean commented code, no console errors.`,
+        image: '/prompts/generated/premium-website-crema-site.webp',
+        imageAlt: 'Crema warm specialty coffee roastery one-pager with espresso tones and serif type',
+      },
+      {
+        title: 'Prompt 05: Halo',
+        text: `## Prompt 05: Halo
 What you get: an AI assistant site with a glowing particle orb. (70 lines)
 
 You are an expert creative front-end developer. Build a single self-contained index.html (HTML + CSS + vanilla JS, no build step) for the website described below.
@@ -1796,16 +1814,11 @@ QUALITY BAR
 - Perfect typographic hierarchy; generous whitespace; nothing touches the edges.
 - No external images; every visual is CSS, SVG or canvas.
 - No console errors; no layout shift; semantic HTML; accessible contrast and focus states.
-- All copy exactly as written above.
-
----
-
-MAKE IT YOURS
-Change the brand: "Rename the brand to <your name> and rewrite all text for <your business>."
-Change the colours: "Use #FF7D00 as the accent colour instead."
-Add a section: "Add a testimonials section with 3 reviews after pricing."
-
-Source: Aaghaz / Make First Million (@make.first.million) — "5 Premium Website Prompts (Part 1)". These prompts are not SwitchRoute originals; shared with credit.`,
+- All copy exactly as written above.`,
+        image: '/prompts/generated/premium-website-halo-site.webp',
+        imageAlt: 'Halo AI assistant site with a glowing mint particle orb on a dark background',
+      },
+    ],
     tags: ['website', 'landing-page', 'saas', 'workflow-automation', 'marketplace', 'trading-cards', 'collectibles', 'holographic', 'ecommerce', 'techwear', 'fashion-store', 'three-js', 'coffee', 'roastery', 'one-pager', 'editorial', 'ai-assistant', 'particle-orb', 'single-file-website', 'premium-website-prompts'],
     tips: 'Copy the full prompt, first line to last line. Paste it into a new chat in ChatGPT, Claude or Gemini and ask: "Give me the complete index.html in one code block." Save it as index.html (Notepad on Windows, TextEdit on Mac in plain-text mode), then double-click to open it in your browser. Remix and ship: ask the AI to change the brand name, text, colours or sections; put it online free with Netlify Drop (drag the folder onto the page). Tip: Claude can also preview the site live as an artifact. If a part looks broken, tell the AI exactly what you see, e.g. "the 3D object is not showing, fix it". Make it yours: "Rename the brand to <your name> and rewrite all text for <your business>." Change the colours: "Use #FF7D00 as the accent colour instead." Add a section: "Add a testimonials section with 3 reviews after pricing." Source: Aaghaz / Make First Million (@make.first.million) — "5 Premium Website Prompts (Part 1)". These prompts are not SwitchRoute originals; shared with credit.',
     customizationInstructions: 'Change the brand name, text, colours or sections — ask the AI to rename the brand, swap the accent colours for others, or add a section such as testimonials after pricing.',

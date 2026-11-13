@@ -60,6 +60,7 @@ export const PromptDetailPage: React.FC = () => {
 
   const [copied, setCopied] = useState(false);
   const [copiedOriginal, setCopiedOriginal] = useState(false);
+  const [copiedStep, setCopiedStep] = useState<number | null>(null);
   const [placeholderValues, setPlaceholderValues] = useState<Record<string, string>>({});
 
   if (!prompt) {
@@ -113,6 +114,14 @@ export const PromptDetailPage: React.FC = () => {
       recordPromptCopy(prompt.slug);
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
+    }
+  };
+
+  const handleCopyStep = async (stepText: string, index: number) => {
+    if (await copyText(stepText)) {
+      recordPromptCopy(prompt.slug);
+      setCopiedStep(index);
+      setTimeout(() => setCopiedStep(null), 2000);
     }
   };
 
@@ -213,7 +222,7 @@ export const PromptDetailPage: React.FC = () => {
         {/* Step-by-step guide boxes (guide prompts only) */}
         {prompt.guideSteps?.length ? (
           <section aria-label="Step-by-step guide" className="mb-8">
-            <h2 className="text-xl font-extrabold text-foreground tracking-tight mb-4">Launch in {prompt.guideSteps.length} simple steps</h2>
+            <h2 className="text-xl font-extrabold text-foreground tracking-tight mb-4">{prompt.guideStepsHeading ?? `Launch in ${prompt.guideSteps.length} simple steps`}</h2>
             <div className="flex flex-col gap-3">
               {prompt.guideSteps.map((step, index) => (
                 <div key={step.title} className="flex items-start gap-4 rounded-2xl border border-border bg-card p-5">
@@ -224,9 +233,32 @@ export const PromptDetailPage: React.FC = () => {
                   >
                     {index + 1}
                   </span>
-                  <div>
-                    <h3 className="text-base font-bold text-foreground mb-1">Step {index + 1} — {step.title}</h3>
-                    <p className="text-sm sm:text-base leading-relaxed text-secondary-foreground">{step.text}</p>
+                  <div className="min-w-0 flex-1">
+                    <div className="flex items-start justify-between gap-3 mb-3">
+                      {/* A custom guideStepsHeading means this section is a collection, not numbered steps, so the title renders verbatim. */}
+                      <h3 className="text-base font-bold text-foreground">{prompt.guideStepsHeading ? step.title : `Step ${index + 1} — ${step.title}`}</h3>
+                      <button
+                        type="button"
+                        onClick={() => handleCopyStep(step.text, index)}
+                        className="inline-flex shrink-0 items-center gap-1.5 px-3 py-1 rounded-lg bg-card hover:bg-muted text-secondary-foreground border border-border transition-colors font-medium text-[11px] shadow-xs cursor-pointer"
+                      >
+                        {copiedStep === index ? (
+                          <>
+                            <Check className="w-3.5 h-3.5 text-emerald-600" />
+                            <span className="text-emerald-600 font-semibold">Copied!</span>
+                          </>
+                        ) : (
+                          <>
+                            <Copy className="w-3.5 h-3.5 text-muted-foreground" />
+                            <span>Copy this prompt</span>
+                          </>
+                        )}
+                      </button>
+                    </div>
+                    {step.image && (
+                      <img src={step.image} alt={step.imageAlt || step.title} loading="lazy" decoding="async" className="mb-3 block max-h-[420px] w-full rounded-xl border border-border bg-muted object-contain" />
+                    )}
+                    <pre className="font-mono text-xs sm:text-sm text-foreground whitespace-pre-wrap leading-relaxed select-all bg-muted p-4 rounded-xl border border-border overflow-x-auto">{step.text}</pre>
                   </div>
                 </div>
               ))}

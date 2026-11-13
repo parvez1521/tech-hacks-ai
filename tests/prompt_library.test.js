@@ -22,6 +22,14 @@ test('prompt library recipes have usable metadata and unique original local prev
     assert.ok(fs.existsSync(filePath), `${item.path} exists`);
     assert.ok(item.alt.length >= 20, `${item.path} has meaningful alt text`);
   }
+  for (const prompt of promptsData) {
+    for (const step of prompt.guideSteps || []) {
+      if (!step.image) continue;
+      const stepPath = path.resolve('public', step.image.replace(/^\//, ''));
+      assert.ok(fs.existsSync(stepPath), `${prompt.slug} guide step "${step.title}" image ${step.image} exists`);
+      assert.ok((step.imageAlt || '').length >= 20, `${prompt.slug} guide step "${step.title}" has meaningful alt text`);
+    }
+  }
   assert.ok(promptsData.every((prompt) => prompt.promptText && prompt.tags.length && prompt.targetModel));
 });
 
