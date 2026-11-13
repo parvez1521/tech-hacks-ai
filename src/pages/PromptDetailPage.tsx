@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { useRouter, Link } from '../router/Router';
 import { getPromptBySlug, getAllPrompts } from '../services/aiCatalogService';
 import { BookmarkButton } from '../components/BookmarkButton';
@@ -29,7 +29,14 @@ export const PromptDetailPage: React.FC = () => {
   const { params } = useRouter();
   const slug = params.slug;
   const [remotePrompt, setRemotePrompt] = useState<PromptItem | undefined>();
-  const prompt = remotePrompt?.slug === slug ? remotePrompt : getPromptBySlug(slug);
+  // Memoized: getPromptBySlug() rebuilds fresh objects on every call
+  // (getAllPrompts maps the catalog anew), so an unmemoized lookup would
+  // hand the [prompt]-dependent effect below a new reference on every
+  // render and re-run its fetch/setState cycle forever.
+  const prompt = useMemo(
+    () => (remotePrompt?.slug === slug ? remotePrompt : getPromptBySlug(slug)),
+    [slug, remotePrompt],
+  );
   const [recordedCopyCount, setRecordedCopyCount] = useState<number>();
 
   useEffect(() => {
