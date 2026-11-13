@@ -104,6 +104,12 @@ export const promptCategories: PromptCategoryDef[] = [
     slug: 'vibe-coded-app-security',
     description: 'Copy-paste security audits for Cursor, Lovable, Bolt, and other AI coding assistants. Use these prompts against your existing codebase — each asks your coding assistant to inspect the implementation, make appropriate fixes, and report what it actually verified. Review changes before deploying.',
   },
+  {
+    id: 'premium-website-prompts',
+    name: 'Premium Website Prompts',
+    slug: 'premium-website-prompts',
+    description: 'Premium Website Prompts (Part 1) — five complete, animated one-file website builds from Aaghaz / Make First Million (@make.first.million): a workflow-automation SaaS landing page, a holographic trading-card marketplace, a dark techwear store with a 3D centrepiece, a warm coffee roastery one-pager, and an AI assistant site with a glowing particle orb. Copy a prompt, paste it into ChatGPT, Claude or Gemini, and get a complete index.html. Source: Aaghaz / Make First Million (@make.first.million).',
+  },
 ];
 
 export const promptProviders = [
@@ -1357,5 +1363,493 @@ Run the tests and report the vulnerable endpoints, code changes, test results, a
     previewImageAlt: 'Two locked doors with ID badges behind a checkpoint barrier on a dark navy background.',
     aspectRatio: '1:1',
     createdAt: '2026-11-12T00:00:00.000Z',
+  },
+  {
+    id: 'pulse-workflow-automation-saas',
+    title: 'Pulse Workflow-Automation SaaS Landing Page',
+    slug: 'pulse-workflow-automation-saas',
+    description: 'A black + lime workflow-automation SaaS landing page, built as one complete animated index.html file.',
+    category: 'premium-website-prompts',
+    targetModel: 'ChatGPT, Claude or Gemini',
+    provider: 'Anthropic',
+    promptText: `You are an expert creative front-end developer. Build a single self-contained index.html (HTML + CSS + vanilla JS, no build step) for the website described below.
+
+CONCEPT
+Landing page for "Pulse", a fictional workflow-automation SaaS. Mood: dark, precise, electric. Think a premium dev-tool launch page: huge tight type, one neon accent, glass UI, motion that feels alive but calm.
+
+COLOURS (use exactly these, as CSS variables)
+--bg: #0B0B0C (page background)
+--surface: #141416 (cards)
+--line: rgba(255,255,255,0.08) (hairline borders)
+--text: #F4F4F5 (primary text)
+--muted: #8A8A93 (secondary text)
+--lime: #C6F432 (the only accent: buttons, glows, ring, dots)
+Text on lime buttons is #0B0B0C.
+
+FONTS (Google Fonts)
+Headings: "Inter Tight" 600/700, letter-spacing -0.045em, line-height 0.95.
+Body: "Inter" 400/500. Labels/mono details: "JetBrains Mono" 400.
+
+1. INTRO LOADER
+Full-screen #0B0B0C overlay with a thin lime SVG ring (stroke 3px, 120px) in the centre. The ring's stroke-dashoffset fills 0 to 100% while a mono counter counts "00" to "100" in 1.1s. Then the overlay fades out and slides up (0.4s). The hero must be fully visible by 1.5s.
+
+2. NAV (sticky, glass)
+Left: logo = small lime circle with a pulsing ring + "Pulse" wordmark.
+Centre links: Product, Workflows, Pricing, Docs. Right: "Sign in" text link + lime pill button "Start free".
+Background rgba(11,11,12,0.6) with backdrop-filter: blur(14px); bottom hairline.
+
+3. HERO (min-height 100vh, two columns: 55% text / 45% visual)
+Eyebrow pill (mono, lime dot): "NEW · Pulse Agents 2.0 is live"
+Headline (clamp 56px to 98px, max-width 720px so it wraps to 3 lines): "Automations that run while you sleep." with "while you sleep." in lime.
+Subline (muted, max 520px): "Connect your apps, drop in an AI step, and let Pulse handle the busywork. 4,000+ teams ship 30 hours back every week."
+Buttons: lime pill "Start building free →" and ghost pill "Watch 90s demo".
+Under buttons, mono small: "No credit card · SOC 2 Type II · 99.99% uptime".
+Background: a large soft lime radial glow (opacity 0.18) behind the visual plus a faint 48px grid fading out at the edges.
+
+HERO VISUAL: a tilted glass window
+A 520px wide window: rgba(255,255,255,0.04) fill, 1px hairline border, 20px radius, backdrop blur, transform: perspective(1400px) rotateY(-14deg) rotateX(8deg). It floats gently (translateY ±8px, 6s loop) and tilts slightly toward the mouse. Top bar: three dots + mono title "lead-to-deal.flow" + green "● Live" badge.
+Inside, a vertical workflow of three node cards joined by SVG connector paths:
+- TRIGGER: "New form submission" (icon: bolt)
+- AI STEP: "Qualify lead with AI" with a lime border glow and a small shimmering progress bar
+- ACTION: "Create deal + notify #sales" (icon: check)
+Flowing dots: small lime circles travel along each connector path (SVG animateMotion or JS getPointAtLength), looping, staggered.
+Each node flashes its border lime when a dot arrives. Footer row of the window: mono "Runs today 12,408 · avg 1.2s" where the run count ticks up by 1 every ~0.8s.
+
+4. LOGOS STRIP
+Label "Powering automations at" then an infinite marquee of 7 fictional wordmarks in muted grey: Northwind, Lumora, Kitebase, Orbitly, Hexa, Fernway, Quantica. Edge fade masks left and right.
+
+5. FEATURES (3 cards)
+Section title: "Everything runs on Pulse."
+Card 1 "Visual builder": "Drag triggers, logic and actions onto one canvas. No code, no glue scripts."
+Card 2 "AI steps": "Summarise, classify and draft inside any workflow with one block."
+Card 3 "Never miss a run": "Automatic retries, version history and alerts the moment something breaks."
+Cards: #141416, hairline border, 24px radius. Hover: lift 6px, border turns lime at 40%, a radial glow follows the cursor.
+
+6. HOW IT WORKS (3 steps, horizontal, joined by a line that draws in on scroll)
+01 Connect — "Plug in 300+ apps in two clicks."
+02 Automate — "Describe the job in plain words. Pulse builds the flow."
+03 Relax — "Watch it run, 24/7, while you do the real work."
+
+7. PRICING (3 tiers, monthly)
+Starter $0 — 1,000 runs, 5 workflows, community support. Button "Start free".
+Pro $29 (highlighted with lime border + "Most popular" tag) — 50,000 runs, unlimited workflows, AI steps. Button "Go Pro".
+Scale $99 — 500,000 runs, SSO, priority support. Button "Talk to sales".
+
+8. CTA BAND
+Big headline "Let the robots do Mondays." Subline "Start free. Set up your first automation in under five minutes."
+Lime pill button "Start building free →". Lime glow behind.
+
+9. FOOTER
+Logo + "© 2026 Pulse Labs", four link columns (Product, Company, Resources, Legal), mono line "All systems normal ●".
+
+MOTION
+- Scroll reveals with IntersectionObserver: elements fade up 24px, 0.8s, cubic-bezier(.2,.7,.2,1), 80ms stagger.
+- Headline words rise in one by one after the loader.
+- Respect prefers-reduced-motion (disable loops, show final states).
+
+RESPONSIVE
+- Below 960px: hero stacks (text first, visual below, tilt reduced to 6deg), cards and pricing go to one column.
+- Below 600px: hide centre nav links, headline min 44px, 20px side padding. No horizontal scroll ever.
+
+QUALITY BAR
+- Must look like a top-tier, award-worthy SaaS launch page in the first viewport.
+- Only one accent colour; lime used sparingly so it pops.
+- Crisp hairlines, generous spacing, consistent 8px rhythm.
+- All animation at 60fps (transform/opacity only).
+- No placeholder text, no broken images, no external images: build every visual with HTML, CSS and SVG.
+- Fictional brands only. Output the complete file in one code block.`,
+    tags: ['website', 'landing-page', 'saas', 'workflow-automation', 'single-file-website', 'premium-website-prompts'],
+    tips: 'Copy the full prompt, first line to last line. Paste it into a new chat in ChatGPT, Claude or Gemini and ask: "Give me the complete index.html in one code block." Save it as index.html (Notepad on Windows, TextEdit on Mac in plain-text mode), then double-click to open it in your browser. Remix and ship: ask the AI to change the brand name, text, colours or sections; put it online free with Netlify Drop (drag the folder onto the page). Tip: Claude can also preview the site live as an artifact. If a part looks broken, tell the AI exactly what you see, e.g. "the 3D object is not showing, fix it". Make it yours: "Rename the brand to <your name> and rewrite all text for <your business>." Change the colours: "Use #FF7D00 as the accent colour instead." Add a section: "Add a testimonials section with 3 reviews after pricing." Source: Aaghaz / Make First Million (@make.first.million) — "5 Premium Website Prompts (Part 1)". These prompts are not SwitchRoute originals; shared with credit.',
+    customizationInstructions: 'Change the brand name, text, colours or sections — ask the AI to rename the brand, swap the lime accent for another colour, or add a section such as testimonials after pricing.',
+    expectedOutputType: 'A complete black + lime workflow-automation SaaS landing page as a single animated index.html file.',
+    exampleUseCase: 'Building a complete animated SaaS landing page in one file to launch or prototype a workflow-automation product.',
+    authorOrSource: 'Aaghaz / Make First Million (@make.first.million) — "5 Premium Website Prompts (Part 1)"',
+    sourceCreator: 'Aaghaz / Make First Million (@make.first.million)',
+    previewImage: '/prompts/generated/pulse-workflow-automation-saas.webp',
+    previewImageAlt: 'A dark SaaS landing page with a glowing lime workflow window and bold headline on a black background.',
+    mediaType: 'image',
+    aspectRatio: '1:1',
+    createdAt: '2026-11-13T00:00:00.000Z',
+  },
+  {
+    id: 'vault-trading-card-marketplace',
+    title: 'Vault Holographic Trading-Card Marketplace',
+    slug: 'vault-trading-card-marketplace',
+    description: 'A holographic trading-card marketplace — a premium graded collectibles site in one complete animated index.html file.',
+    category: 'premium-website-prompts',
+    targetModel: 'ChatGPT, Claude or Gemini',
+    provider: 'Anthropic',
+    promptText: `You are an expert creative front-end developer. Build a single self-contained index.html (HTML + CSS + vanilla JS, no build step) for the website described below.
+
+CONCEPT
+"Vault" is a premium marketplace for graded collectible trading cards. Every card is stored in an insured vault, authenticated, and can be bought, sold or traded instantly without shipping. The feel is fintech meets luxury collectibles: dark, precise, confident, a little bit futuristic. Think private bank, not toy shop.
+
+COLOURS (use exactly these)
+- Background: #0A0E1A (navy-black)
+- Surface / cards: #111729, borders #1E2740
+- Electric blue (primary accent, buttons, glows): #3D7BFF
+- Gold (secondary accent, rarity, numbers): #E8C26A
+- Text: #F2F4FA, muted text #8A93AD
+- Holographic foil gradient: #3D7BFF -> #9B6BFF -> #FF6BC8 -> #E8C26A -> #5CF2D6
+
+FONTS
+- Load from Google Fonts: "Space Grotesk" (500, 700) for headings and numbers, "Inter" (400, 500, 600) for body, "JetBrains Mono" (500) for tags and labels.
+- Headings: tight letter-spacing (-0.03em), very large. Labels: uppercase mono, letter-spacing 0.18em, 12px.
+
+LAYOUT AND SECTIONS (in this order, with this exact copy)
+
+1. NAV (fixed, transparent, blurs on scroll)
+- Left: logo = a small blue rounded square with a gold keyhole shape, then the word "VAULT".
+- Centre links: Drops, Custody, Markets, Journal.
+- Right: ghost button "Sign in", solid blue button "Open a vault".
+
+2. HERO (full viewport height, two columns)
+- Background: #0A0E1A with a faint blue radial glow behind the card, a subtle 64px grid of 1px lines at 4% opacity, and a slow drifting grain.
+- Left column:
+  - Tag row (mono pills): "Card Custody · Est. 2026" and a gold pill "● Live drop".
+  - Headline (about 92px on desktop): "Own the rarest cards. Never touch a sleeve." — the words "rarest cards" painted with the holographic gradient.
+  - Subline: "Vault authenticates, grades and stores your collectibles in an insured vault. Buy, sell and trade in seconds — the card never leaves the safe."
+  - Buttons: solid blue "Explore live drops →" and outline "How custody works".
+  - Below: a "drop progress" block. Huge Space Grotesk counter "020" in gold (about 120px) with the label "/ 100 minted" next to it, then the label "DROP 07 — AURORA SERIES", then a thin progress bar (4px, track #1E2740, fill blue-to-gold gradient) filled to 20%, with "20% claimed" and "Closes in 04:12:09" on either side underneath.
+- Right column: THE HOLOGRAPHIC CARD (the hero visual, see below), with two small floating glass chips beside it: "Grade PSA-style 10 · Gem Mint" and "Last sale $12,480 ▲ 18%".
+
+3. HERO VISUAL — HOLOGRAPHIC CARD
+- A portrait trading card, ratio 63:88, about 380px wide, rounded 18px corners, gold 2px inner frame.
+- Card art is pure CSS + inline SVG (no images): a fictional character "NOVA, the Star Warden" — a stylised armoured figure with a glowing visor and a big circular halo behind, built from SVG shapes, on a deep space background with small stars.
+- Card text: top-left "NOVA", top-right "★ 1/100", bottom panel "Star Warden · Aurora Series", a row "ATK 98 DEF 91 RARITY Mythic", and serial "VLT-07-020".
+- 3D tilt: on mousemove over the hero, rotate the card with rotateX/rotateY up to ±15° using perspective(1200px), smoothed with a lerp in requestAnimationFrame. On mouseleave, ease back to a gentle idle tilt (about rotateY -12°, rotateX 6°).
+- Foil shine: an overlay layer with the holographic gradient at 45°, mix-blend-mode: color-dodge, opacity ~0.55, whose background-position follows the tilt, plus a white diagonal glare streak that moves across the card. When the mouse is idle, the foil slowly drifts on its own (CSS animation), so it always looks alive.
+- Behind the card: a blurred blue glow and a soft gold reflection on the "floor".
+
+4. LIVE DROPS (section title "Live drops", subline "Six cards on the block right now. Every one sits in our vault, verified.")
+- A grid of 6 cards (3 x 2 on desktop). Each tile: mini CSS/SVG card art in a different hue (Nova, Ember Fox, Tidecaller, Iron Monk, Glass Serpent, Solar Kid), name, series, grade, price in gold, and a small "Bid" button.
+- Hover: tile lifts 6px, border turns blue, a foil sheen sweeps across the mini card.
+
+5. HOW CUSTODY WORKS (title "Your card never leaves the safe")
+- 3 numbered steps in a row, mono numbers in gold: "01 Send it in" — "Ship once. We authenticate and grade every card on arrival." / "02 We vault it" — "Climate-controlled, insured, 24/7 monitored storage." / "03 Trade instantly" — "Ownership moves in seconds. Withdraw the physical card any time."
+- A thin blue line connects the steps and draws itself left to right when it scrolls into view.
+
+6. STATS (four big numbers, counting up when visible)
+- "$184M" Cards in custody · "312K" Collectors · "1.4s" Average settlement · "0" Cards lost. Numbers in Space Grotesk, gold.
+
+7. CTA (big centred panel with a blue glow border)
+- Headline: "Your collection deserves a vault." Subline: "Open an account in two minutes. First withdrawal free."
+- Buttons: "Open a vault" (blue) and "Talk to a specialist" (outline).
+
+8. FOOTER
+- Logo, short line "Vault Custody Ltd. A fictional company for demonstration.", link columns (Product, Company, Legal) and "© 2026 Vault".
+
+MOTION
+- On load: hero text fades up in a stagger (total under 1.2s), the card rises and settles into its idle tilt, the counter counts from 000 to 020 and the progress bar fills to 20%, all finished within 1.5s.
+- Scroll: sections fade up with IntersectionObserver; stats count up; the custody line draws.
+- Buttons: blue buttons glow brighter on hover and move 1px up.
+- Respect prefers-reduced-motion: no tilt, no drifting, show final states.
+
+RESPONSIVE
+- Below 980px: hero stacks (text first, card below, card 300px wide), headline about 56px, drops grid 2 columns, steps stack vertically.
+- Below 600px: drops grid 1 column, nav links hide behind a simple menu button, 20px side padding.
+- Tilt follows touch drag on mobile.
+
+QUALITY BAR
+- Must look like a $50k agency site in the first screen, not a template.
+- No external images; all art is CSS/SVG. Only Google Fonts as external dependency.
+- Text is always readable: contrast at least 4.5:1 on body copy.
+- 60fps animation: only animate transform and opacity (and background-position for the foil).
+- Semantic HTML (header, main, section, footer), buttons are real buttons or links.
+- No console errors; everything works by opening the file directly.
+- Fictional brand only. No real company names, logos or characters.`,
+    tags: ['website', 'marketplace', 'trading-cards', 'collectibles', 'holographic', 'single-file-website', 'premium-website-prompts'],
+    tips: 'Copy the full prompt, first line to last line. Paste it into a new chat in ChatGPT, Claude or Gemini and ask: "Give me the complete index.html in one code block." Save it as index.html (Notepad on Windows, TextEdit on Mac in plain-text mode), then double-click to open it in your browser. Remix and ship: ask the AI to change the brand name, text, colours or sections; put it online free with Netlify Drop (drag the folder onto the page). Tip: Claude can also preview the site live as an artifact. If a part looks broken, tell the AI exactly what you see, e.g. "the 3D object is not showing, fix it". Make it yours: "Rename the brand to <your name> and rewrite all text for <your business>." Change the colours: "Use #FF7D00 as the accent colour instead." Add a section: "Add a testimonials section with 3 reviews after pricing." Source: Aaghaz / Make First Million (@make.first.million) — "5 Premium Website Prompts (Part 1)". These prompts are not SwitchRoute originals; shared with credit.',
+    customizationInstructions: 'Change the brand name, text, colours or sections — ask the AI to rename the brand, swap the blue and gold accents for other colours, or add a section such as testimonials after pricing.',
+    expectedOutputType: 'A complete holographic trading-card marketplace as a single animated index.html file.',
+    exampleUseCase: 'Building a complete animated marketplace site in one file to launch or prototype a graded collectibles store.',
+    authorOrSource: 'Aaghaz / Make First Million (@make.first.million) — "5 Premium Website Prompts (Part 1)"',
+    sourceCreator: 'Aaghaz / Make First Million (@make.first.million)',
+    previewImage: '/prompts/generated/vault-trading-card-marketplace.webp',
+    previewImageAlt: 'A holographic trading card with a glowing armoured figure, gold frame and blue glow on a dark navy background.',
+    mediaType: 'image',
+    aspectRatio: '1:1',
+    createdAt: '2026-11-13T00:00:00.000Z',
+  },
+  {
+    id: 'nocturne-techwear-store',
+    title: 'Nocturne Dark Techwear Store with 3D Centrepiece',
+    slug: 'nocturne-techwear-store',
+    description: 'A dark techwear store with a 3D centrepiece, built as one complete animated index.html file.',
+    category: 'premium-website-prompts',
+    targetModel: 'ChatGPT, Claude or Gemini',
+    provider: 'Anthropic',
+    promptText: `You are an expert creative front-end developer. Build a single self-contained index.html (HTML + CSS + vanilla JS, no build step) for the website described below.
+
+BRAND & CONCEPT
+- Name: NOCTURNE. A dark techwear / technical outerwear concept store. Fictional brand.
+- Mood: after-midnight city, engineered garments, quiet luxury, lab precision. Think gallery, not supermarket.
+- One striking 3D centrepiece, lots of negative space, tiny monospace labels everywhere.
+
+COLOURS (use as CSS variables)
+- --bg: #07070A (near-black page background)
+- --panel: #0E0E13 (cards, sections)
+- --line: rgba(255,255,255,0.06) (grid lattice and hairlines)
+- --text: #EDEDF2 (primary text)
+- --muted: #8A8A99 (secondary text)
+- --accent: #B6A6FF (lavender glow) and --accent-2: #7CF7E4 (cyan glow)
+- Iridescent gradient for highlights: #7CF7E4 -> #B6A6FF -> #FF9AD5
+
+FONTS (Google Fonts)
+- Headlines: "Space Grotesk" 500/700, tight letter-spacing (-0.04em), huge sizes.
+- Micro-labels, prices, nav: "JetBrains Mono" 400/500, uppercase, letter-spacing 0.18em, 11px.
+- <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+
+BACKGROUND
+- Full-page fixed canvas with a fine square grid lattice (48px cells, 1px lines in --line).
+- Around the cursor, the grid lights up: lines within ~220px radius glow in --accent, fading out smoothly with distance. Grid intersections near the cursor get tiny bright dots.
+- Without a mouse (or on load) place the glow just behind the hero object so the effect is visible.
+- Add a soft radial vignette and very subtle film grain on top.
+
+NAV (fixed, transparent, 28px side padding)
+- Left: logo "NOCTURNE" in Space Grotesk 700, with a small pulsing cyan dot before it.
+- Centre: Shop, Collections, Technology, About (mono, muted, turn white on hover with a 1px underline that draws in from left).
+- Right: "Cart (0)" inside a thin pill border.
+
+HERO (100vh)
+- Corner micro-labels (mono, muted, absolutely positioned near the four corners): top-left "ENGINEERED FOR MOTION", top-right "DROP 04 / LIMITED", bottom-left "N 51.5072 / W 0.1276 — 02:14 AM", bottom-right "SCROLL TO EXPLORE ↓".
+- Centrepiece: a glossy iridescent 3D object rotating slowly, using Three.js loaded from jsDelivr with a pinned version (three@0.160.0, ES module via an importmap).
+  - Geometry: TorusKnotGeometry(1.1, 0.38, 320, 48, 2, 3) — reads like a sculpted, puffy, quilted form.
+  - Material: MeshPhysicalMaterial with color #A49CC8, metalness 0.55, roughness 0.14, clearcoat 1, iridescence 1, iridescenceIOR 1.6, iridescenceThicknessRange [200, 900].
+  - Lighting: RoomEnvironment through PMREMGenerator as scene.environment, plus a lavender (#B6A6FF) and a cyan (#7CF7E4) point light (intensity 90) orbiting slowly so the colours shift. Exposure 0.95, camera at z 9.6 so the object sits behind the headline. Keep the subline readable over it (soft dark text-shadow + faint radial scrim).
+- Motion: rotate on Y ~0.15 rad/s and on X ~0.05 rad/s; gently tilt toward the mouse (lerped parallax). Fade/scale in over 1.2s on load.
+- Transparent renderer, ACES filmic tone mapping, pixel ratio capped at 2.
+- Fallback: if WebGL is not available, show a CSS-only iridescent orb (layered conic + radial gradients, blur glow, slow spin) in the same spot. Never leave the hero empty.
+- Headline layered over the object, centred, very large (clamp(64px, 11vw, 190px)): line 1 "BUILT FOR" and line 2 "THE NIGHT" — line 2 filled with the iridescent gradient.
+- Subline (muted, 18px, max 520px): "Waterproof shells, thermal mid-layers and modular cargo — engineered in small batches for people who move after dark."
+- Buttons: primary "Shop Drop 04" (white fill, black text, pill) and secondary "Explore Technology →" (thin border pill). Hover: primary gets an iridescent glow, secondary border turns --accent.
+- Small spec strip under the buttons (mono): "3L GORE-STYLE MEMBRANE · 20K MM WATERPROOF · 412 G".
+- Intro: headline letters slide up with a stagger; everything must reach its final state within 1.5s.
+
+SECTION 2 — PRODUCT GRID ("Drop 04")
+- Label "01 / SHOP" and heading "The Drop 04 capsule."
+- 4 cards in a row: dark panel, product visual area (abstract CSS-gradient silhouette, no stock photos), name, mono price.
+  1. "Umbra Shell Jacket" — $480 2. "Vanta Thermal Mid" — $320 3. "Halo Cargo Pant" — $260 4. "Echo Sling 9L" — $140
+- Hover: card lifts 6px, border glows lavender, a "+ ADD TO CART" mono label slides up.
+
+SECTION 3 — TECHNOLOGY
+- Label "02 / TECHNOLOGY", heading "Engineered layers. Zero compromise."
+- 3 feature columns with a thin-line icon (inline SVG), title and one line:
+  "Storm Membrane" — "Three-layer shell rated to 20,000 mm. Fully taped seams."
+  "Thermal Mapping" — "Body-mapped insulation that breathes when you move."
+  "Modular System" — "Magnetic anchor points. Clip, swap and carry your way."
+- Big animated stat row: "20K" mm waterproof, "412" grams, "07" pockets — numbers count up when in view.
+
+SECTION 4 — LOOKBOOK STRIP
+- Label "03 / LOOKBOOK". A horizontal strip of 5 tall frames (gradient art + mono captions like "LOOK 01 — UMBRA / VANTA") that auto-scrolls slowly as a marquee and pauses on hover.
+
+SECTION 5 — NEWSLETTER
+- Heading "Get the next drop before it sells out." Email input + "Notify me" button inline, mono helper text "NO SPAM. ONE EMAIL PER DROP."
+
+FOOTER
+- Huge outlined wordmark "NOCTURNE" across the full width, link columns (Shop, Support, Studio), and "© 2026 NOCTURNE LABS. ALL RIGHTS RESERVED." in mono.
+
+SCROLL & HOVER MOTION
+- Sections fade + rise 24px into view with IntersectionObserver.
+- The 3D object scales down slightly and drifts up as you scroll past the hero.
+- Custom cursor: a small ring that follows the mouse with easing and grows over buttons/links.
+
+RESPONSIVE
+- Under 900px: nav links collapse into a "Menu" text button, product grid becomes 2 columns, features stack.
+- Under 560px: product grid 1 column, headline clamps down, corner labels hide except top-left.
+- Respect prefers-reduced-motion (stop rotation, marquee and count-ups).
+
+QUALITY BAR
+- Looks like a $50k agency build in the very first viewport. No placeholder text, no lorem ipsum.
+- Perfect alignment, consistent spacing scale (8px), crisp hairlines.
+- 60fps animation; requestAnimationFrame only; no layout thrashing.
+- Hero is never blank: the object or its fallback is visible immediately.
+- Semantic HTML, alt/aria labels, visible focus states.
+- Everything in one file, works by double-clicking index.html.`,
+    tags: ['website', 'ecommerce', 'techwear', 'fashion-store', 'three-js', 'single-file-website', 'premium-website-prompts'],
+    tips: 'Copy the full prompt, first line to last line. Paste it into a new chat in ChatGPT, Claude or Gemini and ask: "Give me the complete index.html in one code block." Save it as index.html (Notepad on Windows, TextEdit on Mac in plain-text mode), then double-click to open it in your browser. Remix and ship: ask the AI to change the brand name, text, colours or sections; put it online free with Netlify Drop (drag the folder onto the page). Tip: Claude can also preview the site live as an artifact. If a part looks broken, tell the AI exactly what you see, e.g. "the 3D object is not showing, fix it". Make it yours: "Rename the brand to <your name> and rewrite all text for <your business>." Change the colours: "Use #FF7D00 as the accent colour instead." Add a section: "Add a testimonials section with 3 reviews after pricing." Source: Aaghaz / Make First Million (@make.first.million) — "5 Premium Website Prompts (Part 1)". These prompts are not SwitchRoute originals; shared with credit.',
+    customizationInstructions: 'Change the brand name, text, colours or sections — ask the AI to rename the brand, swap the lavender and cyan glows for other colours, or add a section such as testimonials after pricing.',
+    expectedOutputType: 'A complete dark techwear store with a 3D centrepiece as a single animated index.html file.',
+    exampleUseCase: 'Building a complete animated fashion store in one file to launch or prototype a technical outerwear brand.',
+    authorOrSource: 'Aaghaz / Make First Million (@make.first.million) — "5 Premium Website Prompts (Part 1)"',
+    sourceCreator: 'Aaghaz / Make First Million (@make.first.million)',
+    previewImage: '/prompts/generated/nocturne-techwear-store.webp',
+    previewImageAlt: 'A glossy iridescent 3D torus knot glowing lavender and cyan above a dark techwear store hero.',
+    mediaType: 'image',
+    aspectRatio: '1:1',
+    createdAt: '2026-11-13T00:00:00.000Z',
+  },
+  {
+    id: 'crema-coffee-roastery',
+    title: 'Crema Warm Specialty Coffee Roastery One-Pager',
+    slug: 'crema-coffee-roastery',
+    description: 'A warm specialty coffee roastery one-pager, built as one complete animated index.html file.',
+    category: 'premium-website-prompts',
+    targetModel: 'ChatGPT, Claude or Gemini',
+    provider: 'Anthropic',
+    promptText: `You are an expert creative front-end developer. Build a single self-contained index.html (HTML + CSS + vanilla JS, no build step) for the website described below.
+
+CONCEPT
+"Crema" is a small-batch specialty coffee roastery. The site is a warm, editorial one-pager that feels like a luxury packaging studio made it: rich espresso tones, elegant serif type, hand-drawn-feeling product art. Mood: slow, sensory, confident. Think candlelit cafe at 7am, not a fast-food chain.
+
+COLOURS (use exactly these)
+- Espresso dark: #1B0F0A (page background, start of gradient)
+- Roast brown: #4A2A1A (end of gradient, cards)
+- Cream: #F3E9DC (main text, cup, bag)
+- Caramel accent: #C98A4B (buttons, highlights, lines, labels)
+- Soft muted text: rgba(243,233,220,0.65)
+Page background: radial + linear gradient from #1B0F0A to #4A2A1A, plus a very subtle grain overlay (SVG noise, 6% opacity).
+
+FONTS
+Google Fonts: "Cormorant Garamond" (500, 600, italic) for headlines, "Inter" (400, 500, 600) for body, "JetBrains Mono" (400) for the receipt. Headline letter-spacing -0.02em; small labels uppercase, 0.2em tracking.
+
+SECTIONS (in this order, with this exact copy)
+1. Nav (sticky, transparent, blur on scroll): wordmark "crema" in italic serif with a small caramel dot; links "Origins", "Brew", "Order", "Visit"; pill button "Shop beans".
+2. Hero (100vh, two columns 55/45):
+   - Label: "SMALL-BATCH ROASTERY · EST. 2019"
+   - Headline: "Slow roast." (cream) on line one, "Fast mornings." (italic, caramel) on line two, ~128px.
+   - Subline: "Single-origin beans, roasted in tiny batches every Tuesday and on your doorstep by Friday."
+   - Buttons: "Find your roast" (solid caramel, dark text) and "Brew guide →" (ghost, cream border).
+   - Trust row: "4.9 ★ from 12,000 cups" · "Roasted < 7 days ago" · "Free shipping over $40".
+   - Visual (right column), drawn entirely in inline SVG/CSS, no images:
+     a) A tall kraft-style coffee bag (cream body, caramel fold at top, tin-tie line) with a label reading "crema" (italic serif) and "· slow roast ·" underneath, plus "ETHIOPIA · 250g".
+     b) In front of it, a takeaway cup (cream cup, caramel sleeve with the "c" monogram, brown lid).
+     c) Three soft steam wisps rising from the lid.
+     d) A large blurred caramel glow behind both objects and a soft shadow ellipse under them.
+   - Hero animation:
+     * Pour/fill intro: on load, a caramel-brown "coffee level" rect inside a clipPath of the cup rises from the bottom to full in 1.2s (ease-out), then the lid drops in 8px with a fade.
+     * Bag slides up 40px and fades in (0.9s). Headline lines rise from a mask, staggered 120ms.
+     * Steam: each wisp is an SVG path animated forever: translateY 0 → -40px, scaleX wobble, opacity 0 → 0.7 → 0, 3.6s, staggered 1.2s.
+     * The whole visual floats gently (translateY ±8px, 6s loop) and tilts a few degrees toward the mouse (parallax, max 6deg).
+     * All intro motion must finish within 1.5s so the hero is never blank.
+3. Origins: label "THE ORIGINS", heading "Three beans. Three stories." Three cards:
+   - "Yirgacheffe, Ethiopia" — notes: Jasmine · Bergamot · Peach — Light roast — $19
+   - "Huila, Colombia" — notes: Caramel · Red apple · Cocoa — Medium roast — $18
+   - "Sumatra, Indonesia" — notes: Cedar · Dark chocolate · Molasses — Dark roast — $20
+   Each card has a coloured bean icon (SVG), notes as caramel pill chips, a roast meter (5 dots). Hover: card lifts 8px, border glows caramel, bean rotates 20deg.
+4. Brew guide: heading "Pour-over in four slow steps." Numbered horizontal timeline: 01 "Grind" 18g, medium-fine · 02 "Bloom" 40g water, wait 30s · 03 "Pour" spiral to 300g · 04 "Sip" at 3:30, never rush. A caramel line draws across as you scroll.
+5. Order: heading "Your Tuesday roast, sorted." Left: copy "Pick a bean, pick a rhythm. We roast it, pack it and ship it the same week." and button "Start subscription". Right: a paper "receipt" card (cream background, dark text, mono font, zig-zag torn bottom edge) whose lines TYPE OUT one by one when it scrolls into view: "CREMA ROASTERY / ORDER #0419", "1 x Yirgacheffe 250g ..... $19.00", "1 x Huila 250g .......... $18.00", "Grind: pour-over", "Shipping ............ FREE", "TOTAL ............... $37.00", "Thank you. Brew slow."
+6. Visit: heading "Come smell the roaster." Address "48 Ember Lane, Old Mill District", hours table Mon–Fri 7:00–17:00, Sat 8:00–15:00, Sun "Roast day — closed". A stylised map card made of CSS lines with a pulsing caramel pin.
+7. Footer: wordmark, "Roasted with patience.", small links, newsletter input with "Join the brew list" button, "© 2026 Crema Roastery. A fictional brand."
+
+SCROLL AND HOVER MOTION
+- Sections fade/rise in with IntersectionObserver (opacity 0→1, translateY 30px→0, 0.8s).
+- Buttons: smooth 0.3s transitions, caramel button gets a lighter shade and soft glow on hover.
+- Respect prefers-reduced-motion: disable loops, show final states.
+
+RESPONSIVE
+- Below 900px: hero stacks (text first, visual below at 80% width), headline ~64px, cards stack, timeline becomes vertical, nav links collapse into a simple menu button.
+- No horizontal scroll at any width; 20px side gutters on mobile.
+
+QUALITY BAR
+- Looks like a real premium brand site in the very first viewport at 1600x1000.
+- Product art is crisp vector, believable proportions, soft shadows and highlights; no emoji, no stock images.
+- Generous whitespace, strong type hierarchy, consistent 8px spacing grid.
+- No blank states: every animation has a visible final state within 1.5s.
+- Semantic HTML, accessible contrast, alt/aria labels on the SVG art.
+- One file, clean commented code, no console errors.`,
+    tags: ['website', 'coffee', 'roastery', 'one-pager', 'editorial', 'single-file-website', 'premium-website-prompts'],
+    tips: 'Copy the full prompt, first line to last line. Paste it into a new chat in ChatGPT, Claude or Gemini and ask: "Give me the complete index.html in one code block." Save it as index.html (Notepad on Windows, TextEdit on Mac in plain-text mode), then double-click to open it in your browser. Remix and ship: ask the AI to change the brand name, text, colours or sections; put it online free with Netlify Drop (drag the folder onto the page). Tip: Claude can also preview the site live as an artifact. If a part looks broken, tell the AI exactly what you see, e.g. "the 3D object is not showing, fix it". Make it yours: "Rename the brand to <your name> and rewrite all text for <your business>." Change the colours: "Use #FF7D00 as the accent colour instead." Add a section: "Add a testimonials section with 3 reviews after pricing." Source: Aaghaz / Make First Million (@make.first.million) — "5 Premium Website Prompts (Part 1)". These prompts are not SwitchRoute originals; shared with credit.',
+    customizationInstructions: 'Change the brand name, text, colours or sections — ask the AI to rename the brand, swap the caramel accent for another colour, or add a section such as testimonials after pricing.',
+    expectedOutputType: 'A complete warm specialty coffee roastery one-pager as a single animated index.html file.',
+    exampleUseCase: 'Building a complete animated roastery site in one file to launch or prototype a small-batch coffee brand.',
+    authorOrSource: 'Aaghaz / Make First Million (@make.first.million) — "5 Premium Website Prompts (Part 1)"',
+    sourceCreator: 'Aaghaz / Make First Million (@make.first.million)',
+    previewImage: '/prompts/generated/crema-coffee-roastery.webp',
+    previewImageAlt: 'A cream coffee bag and takeaway cup with caramel details and rising steam on a warm espresso background.',
+    mediaType: 'image',
+    aspectRatio: '1:1',
+    createdAt: '2026-11-13T00:00:00.000Z',
+  },
+  {
+    id: 'halo-ai-assistant',
+    title: 'Halo AI Assistant Site with Glowing Particle Orb',
+    slug: 'halo-ai-assistant',
+    description: 'An AI assistant site with a glowing particle orb, built as one complete animated index.html file.',
+    category: 'premium-website-prompts',
+    targetModel: 'ChatGPT, Claude or Gemini',
+    provider: 'Anthropic',
+    promptText: `You are an expert creative front-end developer. Build a single self-contained index.html (HTML + CSS + vanilla JS, no build step) for the website described below.
+
+BRAND & CONCEPT
+- Product: "Halo", a calm, private AI assistant that reasons before it answers.
+- Mood: deep space, quiet intelligence, soft light. Think observatory at night, not sci-fi cliché.
+- The whole site is dark. Light only comes from mint and violet glows, like the assistant is "thinking".
+
+COLOURS (use as CSS variables)
+- --bg: #050507 (page background, near-black)
+- --surface: rgba(255,255,255,0.04) with a 1px border rgba(255,255,255,0.08)
+- --mint: #5CF2C8 (primary accent, buttons, highlights)
+- --violet: #8B5CF6 (secondary accent, glows, gradients)
+- --text: #F4F4F8 (headings), --muted: #9A9AAE (body copy)
+- Signature gradient: linear-gradient(90deg, #5CF2C8, #8B5CF6)
+
+FONTS (Google Fonts)
+- Headings: "Instrument Serif" (regular + italic), large and tight (letter-spacing -0.02em).
+- Body/UI: "Inter" 400/500/600.
+- Link: https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&display=swap
+
+SECTIONS (in this order, with this exact copy)
+1. Nav (fixed, transparent, blurs on scroll): logo = small glowing mint dot + "Halo". Links: Capabilities, Demo, Privacy, Pricing. Right button: "Get early access" (mint pill, dark text).
+2. Hero (100vh, centred):
+   - Small pill badge: "● Halo 2 is now thinking in public beta"
+   - Headline (clamp 56px to 120px): "An assistant that" then a line break and "actually *thinks.*" ("thinks." in italic with the mint-to-violet gradient as text fill).
+   - Subline: "Halo reasons step by step, remembers what matters to you, and never sells a single word you type."
+   - A glassy prompt bar (max-width 640px, backdrop-filter blur 20px, rounded 18px, gradient hairline border): a sparkle icon on the left, a typing placeholder that cycles through "Plan my week around three deadlines…", "Summarise this 40-page contract…", "Explain quantum computing like I'm twelve…" (type 45ms/char, hold 1.6s, delete, next), and a round mint "→" send button on the right.
+   - Under it: small muted text "Free for 14 days · No card needed".
+3. Capabilities: eyebrow "CAPABILITIES", heading "Three things it does better than anything else." Three glass cards with a glowing icon, title and one line:
+   - "Deep reasoning" / "Breaks hard problems into steps and shows its working."
+   - "Living memory" / "Learns your projects, people and preferences — only if you allow it."
+   - "Works everywhere" / "Desktop, phone, browser and your inbox. One Halo, in sync."
+4. Chat demo: heading "Watch it think." A large glass window with three traffic-light dots. It plays itself when scrolled into view: user bubble types "I have 2 hours. Should I study or go to the gym?", then a "Halo is thinking…" row with three pulsing mint dots for 1.2s, then the Halo reply types word by word: "Do both. 25 minutes of gym first boosts focus for the next 90. Then study in three 30-minute blocks with 5-minute breaks. I've added it to your calendar." Loop every 10s.
+5. Privacy: two columns. Left: heading "Your thoughts stay yours." + paragraph "End-to-end encrypted. Processed on-device when possible. Never used to train models. Delete everything with one tap." Right: a glowing violet shield/lock made of concentric rings that slowly rotate. Three check rows: "Zero data selling", "On-device mode", "One-tap delete".
+6. Pricing: heading "Simple pricing." Two cards side by side:
+   - "Free" — "$0" /month — Daily reasoning, 7-day memory, 1 device — button "Start free" (ghost).
+   - "Halo Pro" (highlighted with gradient border + "Most loved" tag) — "$18" /month — Unlimited reasoning, lifelong memory, all devices, priority speed — button "Go Pro" (mint).
+7. CTA band: a large glow, heading "Meet the assistant that thinks with you." button "Get early access".
+8. Footer: "Halo" logo, small links (Privacy, Terms, Careers, Contact), "© 2026 Halo Labs. Made with quiet light."
+
+HERO VISUAL — THE ORB (most important)
+- A full-screen <canvas> behind the hero text, devicePixelRatio aware, resized on window resize.
+- Draw ~2,600 particles forming a glowing orb centred slightly above the middle of the hero (radius ≈ 30% of the smaller viewport side).
+- Each particle has a radius from the centre and an angle. Start as a sphere-like cloud; over time particles drift onto a 2-arm logarithmic spiral (spiral-galaxy shape) and back, so the orb slowly "swirls into a galaxy" and relaxes again (12s cycle, eased).
+- The whole orb rotates slowly (≈0.08 rad/s), inner particles faster than outer ones (differential rotation).
+- Breathing: the orb scales between 0.94 and 1.06 with a 4s sine pulse; brightness pulses with it.
+- Colour: particles near the core are mint (#5CF2C8) and white, outer ones blend to violet (#8B5CF6). Use globalCompositeOperation "lighter" for additive glow.
+- Add a soft radial core glow (mint centre fading to violet to transparent) and a faint violet haze behind everything.
+- The mouse gently pulls the orb (parallax up to 30px).
+- The orb must be fully formed on the very first frame (no fade-in from nothing), and the headline must remain readable on top (add a subtle dark radial vignette behind the text).
+
+MOTION
+- Hero text fades up in a 0.9s stagger on load (badge, headline, subline, bar). Final state reached within 1.2s.
+- Sections reveal on scroll with IntersectionObserver (opacity 0 → 1, translateY 24px → 0, 0.8s cubic-bezier(.2,.7,.2,1)).
+- Cards: on hover lift 6px, the border brightens, and a mint/violet radial glow follows the cursor inside the card.
+- Buttons: soft glow on hover, 1.02 scale.
+- Respect prefers-reduced-motion (stop the swirl, keep a static orb).
+
+RESPONSIVE
+- Desktop first, max content width 1180px, 24px side padding.
+- Under 900px: cards and pricing stack into one column, privacy columns stack, nav links hide (keep logo + button).
+- Under 600px: headline min 48px, prompt bar full width, particle count halves for performance.
+
+QUALITY BAR
+- Looks like a funded startup's launch site on first glance, not a template.
+- The orb is the star: luminous, deep, clearly a galaxy-like swirl, smooth at 60fps.
+- Perfect typographic hierarchy; generous whitespace; nothing touches the edges.
+- No external images; every visual is CSS, SVG or canvas.
+- No console errors; no layout shift; semantic HTML; accessible contrast and focus states.
+- All copy exactly as written above.`,
+    tags: ['website', 'ai-assistant', 'landing-page', 'particle-orb', 'single-file-website', 'premium-website-prompts'],
+    tips: 'Copy the full prompt, first line to last line. Paste it into a new chat in ChatGPT, Claude or Gemini and ask: "Give me the complete index.html in one code block." Save it as index.html (Notepad on Windows, TextEdit on Mac in plain-text mode), then double-click to open it in your browser. Remix and ship: ask the AI to change the brand name, text, colours or sections; put it online free with Netlify Drop (drag the folder onto the page). Tip: Claude can also preview the site live as an artifact. If a part looks broken, tell the AI exactly what you see, e.g. "the 3D object is not showing, fix it". Make it yours: "Rename the brand to <your name> and rewrite all text for <your business>." Change the colours: "Use #FF7D00 as the accent colour instead." Add a section: "Add a testimonials section with 3 reviews after pricing." Source: Aaghaz / Make First Million (@make.first.million) — "5 Premium Website Prompts (Part 1)". These prompts are not SwitchRoute originals; shared with credit.',
+    customizationInstructions: 'Change the brand name, text, colours or sections — ask the AI to rename the brand, swap the mint and violet glows for other colours, or add a section such as testimonials after pricing.',
+    expectedOutputType: 'A complete AI assistant site with a glowing particle orb as a single animated index.html file.',
+    exampleUseCase: 'Building a complete animated AI product site in one file to launch or prototype a private assistant.',
+    authorOrSource: 'Aaghaz / Make First Million (@make.first.million) — "5 Premium Website Prompts (Part 1)"',
+    sourceCreator: 'Aaghaz / Make First Million (@make.first.million)',
+    previewImage: '/prompts/generated/halo-ai-assistant.webp',
+    previewImageAlt: 'A glowing mint and violet particle orb swirling like a galaxy on a near-black background.',
+    mediaType: 'image',
+    aspectRatio: '1:1',
+    createdAt: '2026-11-13T00:00:00.000Z',
   },
 ];
