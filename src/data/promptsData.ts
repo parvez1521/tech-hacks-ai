@@ -1365,14 +1365,32 @@ Run the tests and report the vulnerable endpoints, code changes, test results, a
     createdAt: '2026-11-12T00:00:00.000Z',
   },
   {
-    id: 'pulse-workflow-automation-saas',
-    title: 'Pulse Workflow-Automation SaaS Landing Page',
-    slug: 'pulse-workflow-automation-saas',
-    description: 'A black + lime workflow-automation SaaS landing page, built as one complete animated index.html file.',
+    id: 'premium-website-prompts-part-1',
+    title: '5 Premium Website Prompts (Part 1)',
+    slug: 'premium-website-prompts-part-1',
+    description: 'Five complete, animated one-file websites from Aaghaz / Make First Million (@make.first.million): a workflow-automation SaaS landing page, a holographic trading-card marketplace, a dark techwear store with a 3D centrepiece, a warm coffee roastery one-pager, and an AI assistant site with a glowing particle orb. Copy a prompt, paste it into ChatGPT, Claude or Gemini, and get a complete index.html.',
     category: 'premium-website-prompts',
     targetModel: 'ChatGPT, Claude or Gemini',
     provider: 'Anthropic',
-    promptText: `You are an expert creative front-end developer. Build a single self-contained index.html (HTML + CSS + vanilla JS, no build step) for the website described below.
+    promptText: `5 Premium Website Prompts (Part 1) — Aaghaz / Make First Million (@make.first.million)
+
+Copy one prompt, paste it into ChatGPT, Claude or Gemini, and you get a complete, animated website in ONE file called index.html. We built every site in this guide from these exact prompts, so they work.
+
+HOW TO USE A PROMPT (4 STEPS)
+1. Copy one full prompt below (from its first line to its last line).
+2. Paste it into a new chat in ChatGPT, Claude or Gemini and press send. Ask: "Give me the complete index.html in one code block."
+3. Save the code: open Notepad (Windows) or TextEdit (Mac, plain text mode), paste the code, and save it as index.html. Double-click the file and it opens in your browser.
+4. Remix and ship: ask the AI to change the brand name, text, colours or sections. To put it online for free, open Netlify Drop and drag the folder with your index.html onto the page. You get a live link in seconds.
+
+Tip: Claude can also show the site live in a preview (an "artifact"), so you see it before you save it.
+If a part looks broken, tell the AI exactly what you see, e.g. "the 3D object is not showing, fix it". It will send a fixed file.
+
+---
+
+## Prompt 01: Pulse
+What you get: a black + lime workflow-automation SaaS landing page. (93 lines)
+
+You are an expert creative front-end developer. Build a single self-contained index.html (HTML + CSS + vanilla JS, no build step) for the website described below.
 
 CONCEPT
 Landing page for "Pulse", a fictional workflow-automation SaaS. Mood: dark, precise, electric. Think a premium dev-tool launch page: huge tight type, one neon accent, glass UI, motion that feels alive but calm.
@@ -1457,29 +1475,14 @@ QUALITY BAR
 - Crisp hairlines, generous spacing, consistent 8px rhythm.
 - All animation at 60fps (transform/opacity only).
 - No placeholder text, no broken images, no external images: build every visual with HTML, CSS and SVG.
-- Fictional brands only. Output the complete file in one code block.`,
-    tags: ['website', 'landing-page', 'saas', 'workflow-automation', 'single-file-website', 'premium-website-prompts'],
-    tips: 'Copy the full prompt, first line to last line. Paste it into a new chat in ChatGPT, Claude or Gemini and ask: "Give me the complete index.html in one code block." Save it as index.html (Notepad on Windows, TextEdit on Mac in plain-text mode), then double-click to open it in your browser. Remix and ship: ask the AI to change the brand name, text, colours or sections; put it online free with Netlify Drop (drag the folder onto the page). Tip: Claude can also preview the site live as an artifact. If a part looks broken, tell the AI exactly what you see, e.g. "the 3D object is not showing, fix it". Make it yours: "Rename the brand to <your name> and rewrite all text for <your business>." Change the colours: "Use #FF7D00 as the accent colour instead." Add a section: "Add a testimonials section with 3 reviews after pricing." Source: Aaghaz / Make First Million (@make.first.million) — "5 Premium Website Prompts (Part 1)". These prompts are not SwitchRoute originals; shared with credit.',
-    customizationInstructions: 'Change the brand name, text, colours or sections — ask the AI to rename the brand, swap the lime accent for another colour, or add a section such as testimonials after pricing.',
-    expectedOutputType: 'A complete black + lime workflow-automation SaaS landing page as a single animated index.html file.',
-    exampleUseCase: 'Building a complete animated SaaS landing page in one file to launch or prototype a workflow-automation product.',
-    authorOrSource: 'Aaghaz / Make First Million (@make.first.million) — "5 Premium Website Prompts (Part 1)"',
-    sourceCreator: 'Aaghaz / Make First Million (@make.first.million)',
-    previewImage: '/prompts/generated/pulse-workflow-automation-saas.webp',
-    previewImageAlt: 'A dark SaaS landing page with a glowing lime workflow window and bold headline on a black background.',
-    mediaType: 'image',
-    aspectRatio: '1:1',
-    createdAt: '2026-11-13T00:00:00.000Z',
-  },
-  {
-    id: 'vault-trading-card-marketplace',
-    title: 'Vault Holographic Trading-Card Marketplace',
-    slug: 'vault-trading-card-marketplace',
-    description: 'A holographic trading-card marketplace — a premium graded collectibles site in one complete animated index.html file.',
-    category: 'premium-website-prompts',
-    targetModel: 'ChatGPT, Claude or Gemini',
-    provider: 'Anthropic',
-    promptText: `You are an expert creative front-end developer. Build a single self-contained index.html (HTML + CSS + vanilla JS, no build step) for the website described below.
+- Fictional brands only. Output the complete file in one code block.
+
+---
+
+## Prompt 02: Vault
+What you get: a holographic trading-card marketplace. (79 lines)
+
+You are an expert creative front-end developer. Build a single self-contained index.html (HTML + CSS + vanilla JS, no build step) for the website described below.
 
 CONCEPT
 "Vault" is a premium marketplace for graded collectible trading cards. Every card is stored in an insured vault, authenticated, and can be bought, sold or traded instantly without shipping. The feel is fintech meets luxury collectibles: dark, precise, confident, a little bit futuristic. Think private bank, not toy shop.
@@ -1557,29 +1560,14 @@ QUALITY BAR
 - 60fps animation: only animate transform and opacity (and background-position for the foil).
 - Semantic HTML (header, main, section, footer), buttons are real buttons or links.
 - No console errors; everything works by opening the file directly.
-- Fictional brand only. No real company names, logos or characters.`,
-    tags: ['website', 'marketplace', 'trading-cards', 'collectibles', 'holographic', 'single-file-website', 'premium-website-prompts'],
-    tips: 'Copy the full prompt, first line to last line. Paste it into a new chat in ChatGPT, Claude or Gemini and ask: "Give me the complete index.html in one code block." Save it as index.html (Notepad on Windows, TextEdit on Mac in plain-text mode), then double-click to open it in your browser. Remix and ship: ask the AI to change the brand name, text, colours or sections; put it online free with Netlify Drop (drag the folder onto the page). Tip: Claude can also preview the site live as an artifact. If a part looks broken, tell the AI exactly what you see, e.g. "the 3D object is not showing, fix it". Make it yours: "Rename the brand to <your name> and rewrite all text for <your business>." Change the colours: "Use #FF7D00 as the accent colour instead." Add a section: "Add a testimonials section with 3 reviews after pricing." Source: Aaghaz / Make First Million (@make.first.million) — "5 Premium Website Prompts (Part 1)". These prompts are not SwitchRoute originals; shared with credit.',
-    customizationInstructions: 'Change the brand name, text, colours or sections — ask the AI to rename the brand, swap the blue and gold accents for other colours, or add a section such as testimonials after pricing.',
-    expectedOutputType: 'A complete holographic trading-card marketplace as a single animated index.html file.',
-    exampleUseCase: 'Building a complete animated marketplace site in one file to launch or prototype a graded collectibles store.',
-    authorOrSource: 'Aaghaz / Make First Million (@make.first.million) — "5 Premium Website Prompts (Part 1)"',
-    sourceCreator: 'Aaghaz / Make First Million (@make.first.million)',
-    previewImage: '/prompts/generated/vault-trading-card-marketplace.webp',
-    previewImageAlt: 'A holographic trading card with a glowing armoured figure, gold frame and blue glow on a dark navy background.',
-    mediaType: 'image',
-    aspectRatio: '1:1',
-    createdAt: '2026-11-13T00:00:00.000Z',
-  },
-  {
-    id: 'nocturne-techwear-store',
-    title: 'Nocturne Dark Techwear Store with 3D Centrepiece',
-    slug: 'nocturne-techwear-store',
-    description: 'A dark techwear store with a 3D centrepiece, built as one complete animated index.html file.',
-    category: 'premium-website-prompts',
-    targetModel: 'ChatGPT, Claude or Gemini',
-    provider: 'Anthropic',
-    promptText: `You are an expert creative front-end developer. Build a single self-contained index.html (HTML + CSS + vanilla JS, no build step) for the website described below.
+- Fictional brand only. No real company names, logos or characters.
+
+---
+
+## Prompt 03: Nocturne
+What you get: a dark techwear store with a 3D centrepiece. (89 lines)
+
+You are an expert creative front-end developer. Build a single self-contained index.html (HTML + CSS + vanilla JS, no build step) for the website described below.
 
 BRAND & CONCEPT
 - Name: NOCTURNE. A dark techwear / technical outerwear concept store. Fictional brand.
@@ -1665,29 +1653,14 @@ QUALITY BAR
 - 60fps animation; requestAnimationFrame only; no layout thrashing.
 - Hero is never blank: the object or its fallback is visible immediately.
 - Semantic HTML, alt/aria labels, visible focus states.
-- Everything in one file, works by double-clicking index.html.`,
-    tags: ['website', 'ecommerce', 'techwear', 'fashion-store', 'three-js', 'single-file-website', 'premium-website-prompts'],
-    tips: 'Copy the full prompt, first line to last line. Paste it into a new chat in ChatGPT, Claude or Gemini and ask: "Give me the complete index.html in one code block." Save it as index.html (Notepad on Windows, TextEdit on Mac in plain-text mode), then double-click to open it in your browser. Remix and ship: ask the AI to change the brand name, text, colours or sections; put it online free with Netlify Drop (drag the folder onto the page). Tip: Claude can also preview the site live as an artifact. If a part looks broken, tell the AI exactly what you see, e.g. "the 3D object is not showing, fix it". Make it yours: "Rename the brand to <your name> and rewrite all text for <your business>." Change the colours: "Use #FF7D00 as the accent colour instead." Add a section: "Add a testimonials section with 3 reviews after pricing." Source: Aaghaz / Make First Million (@make.first.million) — "5 Premium Website Prompts (Part 1)". These prompts are not SwitchRoute originals; shared with credit.',
-    customizationInstructions: 'Change the brand name, text, colours or sections — ask the AI to rename the brand, swap the lavender and cyan glows for other colours, or add a section such as testimonials after pricing.',
-    expectedOutputType: 'A complete dark techwear store with a 3D centrepiece as a single animated index.html file.',
-    exampleUseCase: 'Building a complete animated fashion store in one file to launch or prototype a technical outerwear brand.',
-    authorOrSource: 'Aaghaz / Make First Million (@make.first.million) — "5 Premium Website Prompts (Part 1)"',
-    sourceCreator: 'Aaghaz / Make First Million (@make.first.million)',
-    previewImage: '/prompts/generated/nocturne-techwear-store.webp',
-    previewImageAlt: 'A glossy iridescent 3D torus knot glowing lavender and cyan above a dark techwear store hero.',
-    mediaType: 'image',
-    aspectRatio: '1:1',
-    createdAt: '2026-11-13T00:00:00.000Z',
-  },
-  {
-    id: 'crema-coffee-roastery',
-    title: 'Crema Warm Specialty Coffee Roastery One-Pager',
-    slug: 'crema-coffee-roastery',
-    description: 'A warm specialty coffee roastery one-pager, built as one complete animated index.html file.',
-    category: 'premium-website-prompts',
-    targetModel: 'ChatGPT, Claude or Gemini',
-    provider: 'Anthropic',
-    promptText: `You are an expert creative front-end developer. Build a single self-contained index.html (HTML + CSS + vanilla JS, no build step) for the website described below.
+- Everything in one file, works by double-clicking index.html.
+
+---
+
+## Prompt 04: Crema
+What you get: a warm specialty coffee roastery one-pager. (81 lines)
+
+You are an expert creative front-end developer. Build a single self-contained index.html (HTML + CSS + vanilla JS, no build step) for the website described below.
 
 CONCEPT
 "Crema" is a small-batch specialty coffee roastery. The site is a warm, editorial one-pager that feels like a luxury packaging studio made it: rich espresso tones, elegant serif type, hand-drawn-feeling product art. Mood: slow, sensory, confident. Think candlelit cafe at 7am, not a fast-food chain.
@@ -1747,29 +1720,14 @@ QUALITY BAR
 - Generous whitespace, strong type hierarchy, consistent 8px spacing grid.
 - No blank states: every animation has a visible final state within 1.5s.
 - Semantic HTML, accessible contrast, alt/aria labels on the SVG art.
-- One file, clean commented code, no console errors.`,
-    tags: ['website', 'coffee', 'roastery', 'one-pager', 'editorial', 'single-file-website', 'premium-website-prompts'],
-    tips: 'Copy the full prompt, first line to last line. Paste it into a new chat in ChatGPT, Claude or Gemini and ask: "Give me the complete index.html in one code block." Save it as index.html (Notepad on Windows, TextEdit on Mac in plain-text mode), then double-click to open it in your browser. Remix and ship: ask the AI to change the brand name, text, colours or sections; put it online free with Netlify Drop (drag the folder onto the page). Tip: Claude can also preview the site live as an artifact. If a part looks broken, tell the AI exactly what you see, e.g. "the 3D object is not showing, fix it". Make it yours: "Rename the brand to <your name> and rewrite all text for <your business>." Change the colours: "Use #FF7D00 as the accent colour instead." Add a section: "Add a testimonials section with 3 reviews after pricing." Source: Aaghaz / Make First Million (@make.first.million) — "5 Premium Website Prompts (Part 1)". These prompts are not SwitchRoute originals; shared with credit.',
-    customizationInstructions: 'Change the brand name, text, colours or sections — ask the AI to rename the brand, swap the caramel accent for another colour, or add a section such as testimonials after pricing.',
-    expectedOutputType: 'A complete warm specialty coffee roastery one-pager as a single animated index.html file.',
-    exampleUseCase: 'Building a complete animated roastery site in one file to launch or prototype a small-batch coffee brand.',
-    authorOrSource: 'Aaghaz / Make First Million (@make.first.million) — "5 Premium Website Prompts (Part 1)"',
-    sourceCreator: 'Aaghaz / Make First Million (@make.first.million)',
-    previewImage: '/prompts/generated/crema-coffee-roastery.webp',
-    previewImageAlt: 'A cream coffee bag and takeaway cup with caramel details and rising steam on a warm espresso background.',
-    mediaType: 'image',
-    aspectRatio: '1:1',
-    createdAt: '2026-11-13T00:00:00.000Z',
-  },
-  {
-    id: 'halo-ai-assistant',
-    title: 'Halo AI Assistant Site with Glowing Particle Orb',
-    slug: 'halo-ai-assistant',
-    description: 'An AI assistant site with a glowing particle orb, built as one complete animated index.html file.',
-    category: 'premium-website-prompts',
-    targetModel: 'ChatGPT, Claude or Gemini',
-    provider: 'Anthropic',
-    promptText: `You are an expert creative front-end developer. Build a single self-contained index.html (HTML + CSS + vanilla JS, no build step) for the website described below.
+- One file, clean commented code, no console errors.
+
+---
+
+## Prompt 05: Halo
+What you get: an AI assistant site with a glowing particle orb. (70 lines)
+
+You are an expert creative front-end developer. Build a single self-contained index.html (HTML + CSS + vanilla JS, no build step) for the website described below.
 
 BRAND & CONCEPT
 - Product: "Halo", a calm, private AI assistant that reasons before it answers.
@@ -1838,16 +1796,25 @@ QUALITY BAR
 - Perfect typographic hierarchy; generous whitespace; nothing touches the edges.
 - No external images; every visual is CSS, SVG or canvas.
 - No console errors; no layout shift; semantic HTML; accessible contrast and focus states.
-- All copy exactly as written above.`,
-    tags: ['website', 'ai-assistant', 'landing-page', 'particle-orb', 'single-file-website', 'premium-website-prompts'],
+- All copy exactly as written above.
+
+---
+
+MAKE IT YOURS
+Change the brand: "Rename the brand to <your name> and rewrite all text for <your business>."
+Change the colours: "Use #FF7D00 as the accent colour instead."
+Add a section: "Add a testimonials section with 3 reviews after pricing."
+
+Source: Aaghaz / Make First Million (@make.first.million) — "5 Premium Website Prompts (Part 1)". These prompts are not SwitchRoute originals; shared with credit.`,
+    tags: ['website', 'landing-page', 'saas', 'workflow-automation', 'marketplace', 'trading-cards', 'collectibles', 'holographic', 'ecommerce', 'techwear', 'fashion-store', 'three-js', 'coffee', 'roastery', 'one-pager', 'editorial', 'ai-assistant', 'particle-orb', 'single-file-website', 'premium-website-prompts'],
     tips: 'Copy the full prompt, first line to last line. Paste it into a new chat in ChatGPT, Claude or Gemini and ask: "Give me the complete index.html in one code block." Save it as index.html (Notepad on Windows, TextEdit on Mac in plain-text mode), then double-click to open it in your browser. Remix and ship: ask the AI to change the brand name, text, colours or sections; put it online free with Netlify Drop (drag the folder onto the page). Tip: Claude can also preview the site live as an artifact. If a part looks broken, tell the AI exactly what you see, e.g. "the 3D object is not showing, fix it". Make it yours: "Rename the brand to <your name> and rewrite all text for <your business>." Change the colours: "Use #FF7D00 as the accent colour instead." Add a section: "Add a testimonials section with 3 reviews after pricing." Source: Aaghaz / Make First Million (@make.first.million) — "5 Premium Website Prompts (Part 1)". These prompts are not SwitchRoute originals; shared with credit.',
-    customizationInstructions: 'Change the brand name, text, colours or sections — ask the AI to rename the brand, swap the mint and violet glows for other colours, or add a section such as testimonials after pricing.',
-    expectedOutputType: 'A complete AI assistant site with a glowing particle orb as a single animated index.html file.',
-    exampleUseCase: 'Building a complete animated AI product site in one file to launch or prototype a private assistant.',
+    customizationInstructions: 'Change the brand name, text, colours or sections — ask the AI to rename the brand, swap the accent colours for others, or add a section such as testimonials after pricing.',
+    expectedOutputType: 'Five complete, animated one-file websites — a workflow-automation SaaS landing page, a holographic trading-card marketplace, a dark techwear store with a 3D centrepiece, a warm coffee roastery one-pager, and an AI assistant site with a glowing particle orb — each as a single animated index.html file.',
+    exampleUseCase: 'Building five complete animated websites, one file each, to launch or prototype a SaaS product, a collectibles marketplace, a fashion store, a coffee brand, or an AI assistant.',
     authorOrSource: 'Aaghaz / Make First Million (@make.first.million) — "5 Premium Website Prompts (Part 1)"',
     sourceCreator: 'Aaghaz / Make First Million (@make.first.million)',
-    previewImage: '/prompts/generated/halo-ai-assistant.webp',
-    previewImageAlt: 'A glowing mint and violet particle orb swirling like a galaxy on a near-black background.',
+    previewImage: '/prompts/generated/premium-website-prompts-part-1.webp',
+    previewImageAlt: 'Abstract premium artwork blending the five prompt palettes — lime, gold, lavender, caramel and mint — on a dark background.',
     mediaType: 'image',
     aspectRatio: '1:1',
     createdAt: '2026-11-13T00:00:00.000Z',
