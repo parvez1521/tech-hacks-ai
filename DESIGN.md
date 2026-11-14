@@ -16,19 +16,19 @@ Source of truth: `src/index.css`.
 
 | Token | Current value | Role |
 |---|---|---|
-| `--brand-midnight` | `8 13 24` / `#080D18` | Dark theme background |
-| `--brand-navy` | `19 41 74` / `#13294A` | Deep brand navy |
+| `--brand-midnight` | `22 10 7` / `#160A07` | Dark theme background |
+| `--brand-navy` | `46 20 13` / `#2E140D` | Deep brand navy |
 | `--brand-blue` | `255 106 61` / `#FF6A3D` | Dark theme primary |
 | `--brand-cyan` | `255 106 0` / `#FF6A00` | Secondary accent; use sparingly |
 | `--brand-violet` | `249 58 18` / `#F93A12` | Secondary accent; use sparingly |
-| `--brand-ice` | `241 245 249` / `#F1F5F9` | Dark theme foreground |
-| `--brand-slate` | `148 163 184` / `#94A3B8` | Muted foreground |
-| `--brand-border` | `41 56 79` | Dark theme border |
-| `--brand-light-bg` | `248 250 252` / `#F8FAFC` | Light theme background |
+| `--brand-ice` | `255 243 234` / `#FFF3EA` | Dark theme foreground |
+| `--brand-slate` | `196 164 148` / `#C4A494` | Muted foreground |
+| `--brand-border` | `74 36 26` / `#4A241A` | Dark theme border |
+| `--brand-light-bg` | `255 247 238` / `#FFF7EE` | Light theme background |
 | `--brand-light-surface` | `255 255 255` / `#FFFFFF` | Light theme surface |
-| `--brand-light-ink` | `15 23 42` / `#0F172A` | Light theme foreground |
-| `--brand-light-blue` | `29 78 216` / `#1D4ED8` | Light theme primary |
-| `--brand-light-border` | `218 226 235` | Light theme border |
+| `--brand-light-ink` | `29 19 12` / `#1D130C` | Light theme foreground |
+| `--brand-light-blue` | `216 44 10` / `#D82C0A` | Light theme primary |
+| `--brand-light-border` | `240 220 200` / `#F0DCC8` | Light theme border |
 
 The site also defines semantic tokens such as `--color-bg`, `--color-fg`, `--color-card`, `--color-muted`, `--color-border`, and `--color-primary`. Components should consume semantic tokens rather than hard-coded theme-specific colors.
 

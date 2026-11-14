@@ -879,12 +879,28 @@
 .brand-logo-image--open-webui,
 .brand-logo-image--qwen-chat,
 .brand-logo-image--qwen-coder,
-.brand-logo-image--suno,
 .brand-logo-image--v0-vercel,
 .brand-logo-image--vllm {
   background: #ffffff;
   border-radius: 0.35rem;
   padding: 0.18rem;
+}
+
+/* Data-driven contrast tiles (see src/data/logoTileTones.ts, measured 2026-11-14).
+   Same mechanism as the per-slug rules above: a raw background on the <img>
+   itself, so the tile survives the .dark bg-white override and travels into
+   bare (showContainer={false}) spots. 'light' rescues dark marks on the dark
+   card; 'dark' rescues light marks on the light card. Never recolour the mark. */
+.brand-logo-image--tile-light {
+  background: #ffffff;
+  border-radius: 0.28rem;
+  padding: 0.16rem;
+}
+
+.brand-logo-image--tile-dark {
+  background: #111c2f;
+  border-radius: 0.28rem;
+  padding: 0.16rem;
 }
 
 .brand-logo-image--omnirush {
