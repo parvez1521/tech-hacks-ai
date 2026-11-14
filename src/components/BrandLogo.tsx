@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { getBrandLogo } from '../data/runtimeBrandLogos.ts';
+import { getLogoTileTone } from '../data/logoTileTones.ts';
 
 export type BrandLogoSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | number;
 
@@ -116,6 +117,18 @@ export const BrandLogo: React.FC<BrandLogoProps> = ({
   const sizeClasses = getSizeStyles();
   const fallbackBg = '#334155';
   const fallbackText = iconLetter || (name ? name.slice(0, 2).toUpperCase() : '??');
+  // Contrast tile: measured per logo (see src/data/logoTileTones.ts). Dark marks
+  // get a white tile, light marks a dark tile, so the mark stays legible on both
+  // themes without recolouring the artwork. The tile lives on the <img> itself
+  // (raw CSS background in index.css), so it travels into bare render spots too
+  // and is not rewritten by the .dark bg-white override.
+  const tileTone = getLogoTileTone(slug);
+  const tileClass =
+    tileTone === 'light'
+      ? 'brand-logo-image--tile-light'
+      : tileTone === 'dark'
+        ? 'brand-logo-image--tile-dark'
+        : '';
 
   if (logoEntry && canRenderLogo && currentSrc && !hasError) {
     if (!showContainer) {
@@ -129,7 +142,7 @@ export const BrandLogo: React.FC<BrandLogoProps> = ({
             src={currentSrc}
             alt=""
             aria-hidden="true"
-            className={`${sizeClasses.img} max-w-full max-h-full object-contain brand-logo-image brand-logo-image--${logoEntry.slug}`}
+            className={`${sizeClasses.img} max-w-full max-h-full object-contain brand-logo-image brand-logo-image--${logoEntry.slug} ${tileClass}`}
             loading="lazy"
             decoding="async"
             onError={handleImageError}
@@ -149,7 +162,7 @@ export const BrandLogo: React.FC<BrandLogoProps> = ({
           alt={`${name} logo`}
           data-brand-slug={slug}
           data-logo-status={logoStatus}
-          className={`${sizeClasses.img} object-contain brand-logo-image brand-logo-image--${logoEntry.slug}`}
+          className={`${sizeClasses.img} object-contain brand-logo-image brand-logo-image--${logoEntry.slug} ${tileClass}`}
           loading="lazy"
           decoding="async"
           onError={handleImageError}
