@@ -298,7 +298,7 @@ describe('Phase 9: SwitchRoute Platform Rebranding', () => {
       {
         route: 'tool-detail',
         params: { slug: 'supabase' },
-        expected: 'Supabase: Open Source Alternative to firebase — SwitchRoute',
+        expected: 'Supabase: Open Source Alternative to appwrite, aws-aurora, fauna, firebase, planetscale — SwitchRoute',
       },
       {
         route: 'alternative-detail',

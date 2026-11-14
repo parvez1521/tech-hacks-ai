@@ -13,9 +13,9 @@ test('catalog statistics count unique identities, mapped pairs, and prompt slugs
   const stats = getCatalogStats();
   assert.equal(stats.catalogIdentities, new Set([...toolsData, ...aiToolsData, ...proprietaryTools].map((item) => item.slug)).size);
   assert.equal(stats.openSourceTools, new Set(toolsData.map((item) => item.slug)).size);
-  assert.equal(stats.alternativeRelationships, 226);
+  assert.equal(stats.alternativeRelationships, 5073);
   assert.equal(stats.uniquePrompts, 587);
-  assert.equal(stats.proprietaryToolsWithAlternatives, 25);
+  assert.equal(stats.proprietaryToolsWithAlternatives, 962);
   assert.equal(stats.imagePrompts, 549);
   assert.equal(stats.videoPrompts, 12);
   assert.equal(stats.nonVisualPrompts, 26);
@@ -26,8 +26,8 @@ test('catalog statistics count unique identities, mapped pairs, and prompt slugs
   assert.equal(new Set([...promptsData.map((item) => item.slug), ...index]).size, stats.uniquePrompts);
 });
 
-test('85 additional alternatives are deduplicated, sourced, categorized, and route-backed', () => {
-  assert.equal(aiAlternativeMappings.length, 85);
+test('67 additional alternatives are deduplicated, sourced, categorized, and route-backed', () => {
+  assert.equal(aiAlternativeMappings.length, 67);
   const pairKeys = aiAlternativeMappings.map((mapping) => `${mapping.alternativeSlug}->${mapping.targetSlug}`);
   assert.equal(new Set(pairKeys).size, aiAlternativeMappings.length);
   const sources = new Map([...toolsData, ...aiToolsData].map((item) => [item.slug, item]));

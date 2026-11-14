@@ -555,7 +555,7 @@ export const offersData: AiOffer[] = [
       { step: 1, title: 'Review current plan terms', detail: 'Open the provider pricing and terms pages and confirm that the plan is available for your account and region.' },
       { step: 2, title: 'Create or sign in to your account', detail: 'Follow the official provider flow and check usage limits before enabling paid services.' },
     ],
-    logoSlug: 'mongodb', logoAssetPath: '/logos/fallback-mongodb.svg', tags: ['MongoDB', 'Free Plan', 'Developer'], isFeatured: false,
+    logoSlug: 'mongodb', logoAssetPath: '/logos/mongodb.svg', tags: ['MongoDB', 'Free Plan', 'Developer'], isFeatured: false,
   },
   {
     id: 'google-cloud-trial', slug: 'google-cloud-trial', title: 'Google Cloud Free Trial Credit', provider: 'Google Cloud',
@@ -603,7 +603,7 @@ export const offersData: AiOffer[] = [
       { step: 1, title: 'Review current plan terms', detail: 'Open the provider pricing and terms pages and confirm that the plan is available for your account and region.' },
       { step: 2, title: 'Create or sign in to your account', detail: 'Follow the official provider flow and check usage limits before enabling paid services.' },
     ],
-    logoSlug: 'turso', logoAssetPath: '/logos/fallback-turso.svg', tags: ['Turso', 'Free Plan', 'Developer'], isFeatured: false,
+    logoSlug: 'turso', logoAssetPath: '/logos/turso.svg', tags: ['Turso', 'Free Plan', 'Developer'], isFeatured: false,
   },
   {
     id: 'ibm-cloud-lite', slug: 'ibm-cloud-lite', title: 'IBM Cloud Lite Plans', provider: 'IBM Cloud',

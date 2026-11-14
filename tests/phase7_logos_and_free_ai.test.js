@@ -264,6 +264,9 @@ describe('Phase 7: Official Brand Logos & Verified Free AI Tools Directory', () 
 
     setupMockBrowser('https://openalternative.co/tools');
     const toolsHtml = renderClean(React.createElement(ssrModule.App));
-    assert.ok(toolsHtml.includes('src="/logos/supabase.svg"'), 'Open-source tool cards render the mapped SVG logo');
+    // Supabase no longer appears on the /tools first screen after the import
+    // (its 76,500 stars no longer rank in the top 12); Excalidraw does, with
+    // its mapped Simple Icons mark.
+    assert.ok(toolsHtml.includes('src="/logos/excalidraw.svg"'), 'Open-source tool cards render the mapped SVG logo');
   });
 });

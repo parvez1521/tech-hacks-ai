@@ -49,9 +49,9 @@ test('homepage catalog metrics match distinct source registry counts', () => {
     videoPrompts: stats.videoPrompts,
   }, {
     aiPlatforms: 76,
-    openSourceTools: 27,
-    alternativeTargets: 25,
-    alternativeRelationships: 226,
+    openSourceTools: 809,
+    alternativeTargets: 970,
+    alternativeRelationships: 5073,
     browserUtilities: 7,
     uniquePrompts: 587,
     imagePrompts: 549,

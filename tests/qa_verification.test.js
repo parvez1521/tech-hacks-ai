@@ -280,8 +280,10 @@ describe('Task 6: Data Integrity & Provenance', () => {
       if (tool.isVerified) {
         assert.ok(tool.verifiedAt, `Tool ${tool.slug} marked verified without verifiedAt date`);
         assert.ok(
-          tool.repositoryUrl.startsWith('https://github.com/'),
-          `Tool ${tool.slug} marked verified without valid GitHub URL`
+          ['https://github.com/', 'https://gitlab.com/', 'https://codeberg.org/'].some((host) =>
+            tool.repositoryUrl.startsWith(host)
+          ),
+          `Tool ${tool.slug} marked verified without valid repository URL`
         );
       }
     }

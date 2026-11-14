@@ -97,7 +97,7 @@ describe('Phase 15: Organic Growth, Content Quality & SEO Expansion', () => {
   // 2. Proprietary Alternatives Migration Analysis
   describe('2. Proprietary Alternatives Migration Analysis', () => {
     test('all proprietary software targets have migration drivers and cost reality notes', () => {
-      assert.strictEqual(proprietaryTools.length, 25);
+      assert.strictEqual(proprietaryTools.length, 970);
       proprietaryTools.forEach((tool) => {
         assert.ok(Array.isArray(tool.migrationDrivers), `${tool.name} missing migrationDrivers array`);
         assert.ok(tool.migrationDrivers.length >= 3, `${tool.name} has fewer than 3 migration drivers`);

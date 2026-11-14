@@ -69,14 +69,14 @@ describe('Built-in browser utility registry', () => {
   test('Catalog stats are de-duplicated and include the expanded utility count', () => {
     const stats = getCatalogStats();
     assert.deepEqual(stats, {
-      catalogIdentities: 122,
-      openSourceTools: 27,
+      catalogIdentities: 1829,
+      openSourceTools: 809,
       aiPlatforms: 76,
-      alternativeTargets: 25,
+      alternativeTargets: 970,
       browserUtilities: 7,
-      alternativeRelationships: 226,
+      alternativeRelationships: 5073,
       uniquePrompts: 587,
-      proprietaryToolsWithAlternatives: 25,
+      proprietaryToolsWithAlternatives: 962,
       imagePrompts: 549,
       videoPrompts: 12,
       nonVisualPrompts: 26,
