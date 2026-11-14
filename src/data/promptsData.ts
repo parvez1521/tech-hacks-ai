@@ -1833,4 +1833,175 @@ QUALITY BAR
     aspectRatio: '1:1',
     createdAt: '2026-11-13T00:00:00.000Z',
   },
+  {
+    id: 'clone-any-ai-tool-for-free',
+    title: 'Clone Any AI Tool for Free',
+    slug: 'clone-any-ai-tool-for-free',
+    description: 'Turn any reference website into your own complete, fully functional product. Research the reference, rebuild it as an original app with local AI models, and ship it with zero paid APIs or services — here applied to a full AutoCaption Studio with video upload, local Whisper transcription, editable subtitles, and export.',
+    category: 'web-app-development',
+    targetModel: 'Claude 3.5 Sonnet / Cursor / Claude Code',
+    provider: 'Anthropic',
+    promptText: `# Full Website Recreation & Product Development
+
+Act as a senior product engineer, UI/UX designer, software architect and AI developer.
+
+Your task is to research, analyse and build a complete, fully functional, original AutoCaption Studio using the following reference website and the Replica Skill framework.
+
+## 1. Reference Website
+
+**REFERENCE WEBSITE URL:**
+
+[PASTE YOUR REFERENCE WEBSITE URL HERE]
+
+**Replica Skill Repository:**
+
+[https://github.com/Jakeschincariol/replica-skill](https://github.com/Jakeschincariol/replica-skill)
+
+First, inspect the entire publicly accessible reference website.
+
+IMPORTANT: Do not analyse or recreate only its homepage or one particular feature.
+
+Study the complete website and product experience, including:
+
+- Homepage and all publicly accessible pages.
+- Complete UI layout and design system.
+- All available features and tools.
+- User workflows and interactions.
+- Upload and processing interfaces.
+- Editors, dashboards and settings.
+- Export options and output functionality.
+- Navigation, menus, modals and user interactions.
+- Responsive layouts and mobile experience.
+- Publicly documented functionality.
+
+Identify the product's overall architecture, feature set, user experience and functionality before starting development.
+
+## 2. Product Development
+
+Build my own complete product called **AutoCaption Studio**.
+
+Use the reference website to understand the overall product experience and relevant functionality.
+
+Create an independent product with:
+
+- Original branding and identity.
+- Original UI design.
+- Complete frontend and backend wherever required.
+- Functional features, not just UI mockups.
+- Smooth and responsive interactions.
+- Professional-quality user experience.
+
+Do not copy proprietary source code, logos, trademarks, images or copyrighted content.
+
+## 3. Core AutoCaption Features
+
+The application should support:
+
+- Video uploading.
+- Automatic speech-to-text transcription.
+- AI-generated subtitles with timestamps.
+- Editable subtitle text.
+- Subtitle timeline and video preview.
+- Multiple caption styles and fonts.
+- Text colours, backgrounds and positioning.
+- Word highlighting and caption animations.
+- SRT and VTT export.
+- Export video with permanently embedded subtitles.
+- Video format support for common creator workflows.
+
+Use locally running open-source speech recognition models such as Whisper.
+
+## 4. STRICT ZERO-PAID-COST POLICY
+
+THIS IS A CRITICAL REQUIREMENT.
+
+I want to build and run this product without paying for external services.
+
+DO NOT integrate or use:
+
+- OpenAI paid APIs.
+- Gemini paid APIs.
+- Anthropic or Claude APIs.
+- Any paid AI transcription API.
+- Any paid text-to-speech or image-generation API.
+- Paid SaaS integrations.
+- Paid third-party plugins or libraries.
+- Paid hosting or cloud infrastructure.
+- Paid database services.
+- Paid authentication services.
+- Paid storage services.
+- Paid model inference services.
+- Any subscription-based dependency.
+
+Use only:
+
+- Free and open-source libraries.
+- Locally running AI models.
+- FFmpeg for video processing.
+- Free development tools.
+- Local storage or free alternatives.
+- Free hosting options where suitable.
+
+Do not introduce API keys, billing accounts, credit-based services or hidden paid dependencies.
+
+If a feature cannot be implemented without a paid service, DO NOT silently add one. Explain the limitation and suggest a genuinely free alternative.
+
+The application must be capable of running locally without requiring a paid API key.
+
+## 5. Development Framework
+
+Use the following tools where appropriate:
+
+- Replica Skill for reverse engineering, architecture, design, development and testing.
+- Muse as the primary development environment.
+- React / Vite / TypeScript.
+- Tailwind CSS.
+- Open-source local AI models.
+- FFmpeg for video processing.
+- IndexedDB or SQLite for local data storage.
+
+Choose the architecture based on actual technical requirements rather than adding unnecessary dependencies.
+
+## 6. Development Instructions
+
+Follow this workflow:
+
+1. Analyse the complete reference website.
+2. Document its relevant features and user workflows.
+3. Prepare the complete product architecture.
+4. Design the original AutoCaption Studio interface.
+5. Build the frontend and backend.
+6. Integrate local Whisper transcription.
+7. Implement subtitle editing and video export.
+8. Test all major workflows.
+9. Fix bugs and verify functionality.
+10. Prepare the application for launch.
+
+Do not stop after creating a landing page or frontend prototype.
+
+Build a genuinely functional application.
+
+Before considering development complete, verify that a real video can be uploaded, transcribed, edited and exported successfully.
+
+## 7. Final Objective
+
+I want a professional, production-quality AutoCaption Studio that provides a complete user experience, takes inspiration from the overall reference product, and works without paid AI APIs or paid third-party services.
+
+Prioritise functionality, performance, clean architecture, usability and zero recurring API expenses.
+
+Start by inspecting the repository and reference website. Then prepare a detailed implementation plan and begin development.`,
+    tags: ['clone-ai-tool', 'website-clone', 'autocaption', 'whisper', 'transcription', 'video-captions', 'subtitle-editor', 'zero-cost', 'replica-skill', 'full-stack', 'react', 'vite'],
+    tips: 'Paste the full brief into Muse with your reference website URL in place of the placeholder, then let it inspect the reference site and prepare the implementation plan before it starts building.',
+    placeholders: ['[PASTE YOUR REFERENCE WEBSITE URL HERE]'],
+    customizationInstructions: 'Replace the reference URL placeholder with the website you want to learn from, and swap AutoCaption Studio for your own product name and feature set before you start.',
+    expectedOutputType: 'A complete, production-quality AutoCaption Studio web application with video upload, local Whisper transcription, editable timestamped subtitles, caption styling, and SRT/VTT plus burned-in video export — built with no paid APIs.',
+    exampleUseCase: 'Rebuilding a reference captioning or video tool as your own original product, or learning full-stack development by recreating the complete experience of an existing AI tool for free.',
+    officialToolUrl: 'https://github.com/Jakeschincariol/replica-skill',
+    authorOrSource: 'SwitchRoute Engineering Team',
+    previewImage: '/prompts/generated/clone-any-ai-tool-for-free.webp',
+    previewImageAlt: 'A bold blue zigzag waveform mark on a light background, the poster artwork for the clone-any-AI-tool prompt.',
+    mediaType: 'image',
+    aspectRatio: '1:1',
+    createdAt: '2026-11-14T00:00:00.000Z',
+  },
 ];
