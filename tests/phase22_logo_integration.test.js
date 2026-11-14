@@ -182,7 +182,7 @@ describe('Phase 22: Authentic Brand Logo Integration & Catalog Mapping', () => {
        assert.strictEqual(getBrandLogo('google-gemini')?.slug, 'googlegemini', 'google-gemini -> googlegemini');
       assert.strictEqual(getBrandLogo('black-forest-labs')?.slug, 'flux-1', 'black-forest-labs -> flux-1');
       assert.strictEqual(getBrandLogo('nextjs')?.slug, 'nextdotjs', 'nextjs -> nextdotjs');
-      assert.strictEqual(getBrandLogo('photoshop')?.slug, 'adobephotoshop', 'photoshop -> adobephotoshop');
+      assert.strictEqual(getBrandLogo('photoshop')?.slug, 'photoshop', 'photoshop keeps its canonical identity');
       assert.strictEqual(getBrandLogo('playht')?.slug, 'play-ht', 'playht -> play-ht');
     });
 

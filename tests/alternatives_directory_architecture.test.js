@@ -68,32 +68,34 @@ describe('Alternatives Directory & Proprietary vs Replacement Architecture', () 
 
       // Verify specific known targets
       if (proprietary.slug === 'notion') {
-        assert.strictEqual(replacements.length, 4, 'Notion must have 4 mapped open-source alternatives');
+        assert.strictEqual(replacements.length, 22, 'Notion must have 22 mapped open-source alternatives');
         const names = replacements.map((t) => t.name).sort();
-        assert.deepStrictEqual(names, ['AFFiNE', 'AppFlowy', 'Docmost', 'Outline']);
+        assert.deepStrictEqual(names, ['AFFiNE', 'AppFlowy', 'Beaver Notes', 'Blinko', 'Busabase', 'Colanode', 'Darkwrite', 'Docmost', 'Docs', 'Huly', 'Justnote', 'Koru', 'Logseq', 'Macro Docs', 'Memos', 'Notesnook', 'Orgnise', 'Outline', 'Ryot', 'SiYuan', 'Silverbullet', 'XWiki']);
       }
       if (proprietary.slug === 'figma') {
-        assert.strictEqual(replacements.length, 2, 'Figma must have 2 mapped open-source alternatives');
+        assert.strictEqual(replacements.length, 7, 'Figma must have 7 mapped open-source alternatives');
         const names = replacements.map((t) => t.name).sort();
-        assert.deepStrictEqual(names, ['AFFiNE', 'Penpot']);
+        assert.deepStrictEqual(names, ['AFFiNE', 'Graphite', 'Grida', 'Inkscape', 'OpenPencil', 'Penpot', 'Quant-UX']);
       }
       if (proprietary.slug === 'firebase') {
-        assert.strictEqual(replacements.length, 2, 'Firebase must have 2 mapped open-source alternatives');
+        assert.strictEqual(replacements.length, 15, 'Firebase must have 15 mapped open-source alternatives');
         const names = replacements.map((t) => t.name).sort();
-        assert.deepStrictEqual(names, ['Beekeeper Studio', 'Supabase']);
+        assert.deepStrictEqual(names, ['Appwrite', 'Beekeeper Studio', 'Bknd', 'Convex', 'Encore', 'Instant', 'NHost', 'Nitric', 'Ory', 'PocketBase', 'Soketi', 'Supabase', 'Turso', 'Zitadel', 'undb']);
       }
       if (proprietary.slug === 'airtable') {
-        assert.strictEqual(replacements.length, 1, 'Airtable must have 1 mapped open-source alternative (Baserow)');
-        assert.strictEqual(replacements[0].name, 'Baserow');
+        assert.strictEqual(replacements.length, 9, 'Airtable must have 9 mapped open-source alternatives');
+        const names = replacements.map((t) => t.name).sort();
+        assert.deepStrictEqual(names, ['AITable', 'Baserow', 'Busabase', 'Grist', 'Mathesar', 'NocoDB', 'Rowy', 'Teable', 'undb']);
       }
       if (proprietary.slug === 'zapier') {
-        assert.strictEqual(replacements.length, 1, 'Zapier must have 1 mapped open-source alternative (n8n)');
-        assert.strictEqual(replacements[0].name, 'n8n');
+        assert.strictEqual(replacements.length, 9, 'Zapier must have 9 mapped open-source alternatives');
+        const names = replacements.map((t) => t.name).sort();
+        assert.deepStrictEqual(names, ['ActivePieces', 'Automatisch', 'ByteChef', 'Hatchet', 'Hook0', 'Svix', 'Trigger', 'Windmill', 'n8n']);
       }
       if (proprietary.slug === 'google-analytics') {
-        assert.strictEqual(replacements.length, 2, 'Google Analytics must have 2 mapped alternatives');
+        assert.strictEqual(replacements.length, 17, 'Google Analytics must have 17 mapped alternatives');
         const names = replacements.map((t) => t.name).sort();
-        assert.deepStrictEqual(names, ['Plausible Analytics', 'Umami']);
+        assert.deepStrictEqual(names, ['Aptabase', 'Betterlytics', 'Countly', 'Fathom Lite', 'HitKeep', 'Litlyx', 'Matomo', 'OpenPanel', 'OpenWebAnalytics', 'Plausible Analytics', 'PostHog', 'Prisme Analytics', 'Rybbit', 'Swetrix', 'Tianji', 'Umami', 'Vemetric']);
       }
     }
   });
@@ -121,8 +123,8 @@ describe('Alternatives Directory & Proprietary vs Replacement Architecture', () 
     assert.ok(html.includes('href="/alternatives/firebase"'), 'Card links to /alternatives/firebase');
 
     // Dynamic alternative count labels
-    assert.ok(html.includes('4 alternatives') || html.includes('4 open alternatives'), 'Shows Notion count');
-    assert.ok(html.includes('2 alternatives') || html.includes('2 open alternatives'), 'Shows Figma count');
+    assert.ok(html.includes('22 alternatives') || html.includes('22 open alternatives'), 'Shows Notion count');
+    assert.ok(html.includes('7 alternatives') || html.includes('7 open alternatives'), 'Shows Figma count');
   });
 
   test('/alternatives/figma detail page renders only open source tools replacing Figma', async () => {
@@ -145,16 +147,16 @@ describe('Alternatives Directory & Proprietary vs Replacement Architecture', () 
     assert.ok(!html.includes('Postiz'), 'Should NOT render Postiz on Figma page');
   });
 
-  test('/alternatives/notion detail page renders only Notion alternatives with 4 verified tools', async () => {
+  test('/alternatives/notion detail page renders only Notion alternatives with 22 verified tools', async () => {
     ssrModule = await import('../dist/test-ssr.js');
     setupMockBrowser('https://openalternative.co/alternatives/notion');
     const html = renderClean(React.createElement(ssrModule.App));
 
     assert.ok(html.includes('Open Source Notion Alternatives'), 'Header shows Notion alternatives title');
     assert.ok(html.includes('https://notion.so'), 'Contains link to official notion.so website');
-    assert.ok(html.includes('4 verified replacements'), 'Displays count of 4 replacements');
+    assert.ok(html.includes('22 verified replacements'), 'Displays count of 22 replacements');
 
-    // All 4 Notion replacements must be rendered
+    // All 22 Notion replacements must be rendered
     assert.ok(html.includes('AppFlowy'), 'Renders AppFlowy');
     assert.ok(html.includes('Outline'), 'Renders Outline');
     assert.ok(html.includes('Docmost'), 'Renders Docmost');
