@@ -515,9 +515,15 @@ export const PickPage: React.FC = () => {
                         />
                         <div>
                           <div className="flex items-center gap-2 flex-wrap">
-                            <Link to={detailUrl} className="font-bold text-base text-slate-900 hover:text-blue-600 transition-colors">
-                              {tool.name}
-                            </Link>
+                            {detailUrl ? (
+                              <Link to={detailUrl} className="font-bold text-base text-slate-900 hover:text-blue-600 transition-colors">
+                                {tool.name}
+                              </Link>
+                            ) : (
+                              <span className="font-bold text-base text-slate-900">
+                                {tool.name}
+                              </span>
+                            )}
                             <span className="px-2 py-0.5 rounded text-[10px] font-mono font-medium bg-slate-100 text-slate-700 border border-slate-200 uppercase">
                               {type === 'open-source' ? 'Open Source' : type === 'utility' ? 'Utility' : 'Cloud AI'}
                             </span>
@@ -570,13 +576,15 @@ export const PickPage: React.FC = () => {
 
                     {/* Action buttons */}
                     <div className="pt-1 flex items-center justify-between text-xs">
-                      <Link
-                        to={detailUrl}
-                        className="inline-flex items-center gap-1 text-blue-600 font-semibold hover:text-blue-700 hover:underline"
-                      >
-                        <span>View Details & Limits</span>
-                        <ArrowRight className="w-3.5 h-3.5" />
-                      </Link>
+                      {detailUrl && (
+                        <Link
+                          to={detailUrl}
+                          className="inline-flex items-center gap-1 text-blue-600 font-semibold hover:text-blue-700 hover:underline"
+                        >
+                          <span>View Details & Limits</span>
+                          <ArrowRight className="w-3.5 h-3.5" />
+                        </Link>
+                      )}
                       <div className="flex flex-col items-end gap-1">
                         <a
                           href={affiliateUrl || websiteUrl}

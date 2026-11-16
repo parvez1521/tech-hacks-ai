@@ -281,7 +281,10 @@ export const PromptDetailPage: React.FC = () => {
           </section>
         ) : null}
 
-        {!prompt.guideSteps?.length && (prompt.authorOrSource || prompt.sourceCreator || prompt.sourceUrl || prompt.attributionUrl) && <div className="mb-6 flex flex-wrap items-center gap-x-4 gap-y-2 rounded-xl border border-border bg-muted/50 px-4 py-3 text-xs text-secondary-foreground"><span><strong className="text-foreground">Creator</strong> {prompt.sourceCreator || prompt.authorOrSource}</span>{(prompt.sourceUrl || prompt.attributionUrl) && <a href={prompt.sourceUrl || prompt.attributionUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 font-semibold text-primary hover:underline">View source / attribution <ExternalLink size={13} /></a>}{prompt.rightsLicense && <span><strong className="text-foreground">Rights</strong> {prompt.rightsLicense}</span>}</div>}
+        {/* Creator / source attribution. Rendered for guide-style prompts too:
+            the premium Aaghaz prompts were previously credited only inside the
+            copyable text, with no visible source link (2026-11-16 audit). */}
+        {(prompt.authorOrSource || prompt.sourceCreator || prompt.sourceUrl || prompt.attributionUrl) && <div className="mb-6 flex flex-wrap items-center gap-x-4 gap-y-2 rounded-xl border border-border bg-muted/50 px-4 py-3 text-xs text-secondary-foreground"><span><strong className="text-foreground">Creator</strong> {prompt.sourceCreator || prompt.authorOrSource}</span>{(prompt.sourceUrl || prompt.attributionUrl) && <a href={prompt.sourceUrl || prompt.attributionUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 font-semibold text-primary hover:underline">View source / attribution <ExternalLink size={13} /></a>}{prompt.rightsLicense && <span><strong className="text-foreground">Rights</strong> {prompt.rightsLicense}</span>}</div>}
 
         {prompt.mediaType === 'video' && prompt.videoDetails && (
           <section className="mb-6 rounded-xl border border-indigo-200 bg-indigo-50/70 p-4 text-sm dark:border-indigo-900 dark:bg-indigo-950/30" aria-labelledby="video-source-title">

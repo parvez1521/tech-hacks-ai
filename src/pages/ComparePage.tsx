@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useRouter, Link } from '../router/Router';
-import { getToolBySlug } from '../services/catalogService';
+import { getToolBySlug, getToolDetailUrl } from '../services/catalogService';
 import { getAiToolBySlug } from '../services/aiCatalogService';
 import { toolsData } from '../data/seedData';
 import { aiToolsData } from '../data/aiToolsData';
@@ -398,16 +398,20 @@ export const ComparePage: React.FC = () => {
                 <td className="p-4 font-semibold text-slate-700 bg-slate-50/50">Explore</td>
                 {resolvedTools.map((t) => {
                   const affiliateUrl = t.kind === 'ai' ? t.data.affiliateUrl : undefined;
+                  // Only featured open-source tools have a live /tools/:slug page.
+                  const detailUrl = t.kind === 'open-source' ? getToolDetailUrl(t.data.slug) : `/ai-tools/${t.data.slug}`;
                   return (
                     <td key={t.data.id} className="p-4">
                     <div className="flex flex-col gap-1.5">
-                      <Link
-                        to={t.kind === 'open-source' ? `/tools/${t.data.slug}` : `/ai-tools/${t.data.slug}`}
-                        className="inline-flex items-center gap-1 text-blue-600 font-semibold hover:text-blue-700 hover:underline text-xs"
-                      >
-                        <span>View Details</span>
-                        <span>→</span>
-                      </Link>
+                      {detailUrl && (
+                        <Link
+                          to={detailUrl}
+                          className="inline-flex items-center gap-1 text-blue-600 font-semibold hover:text-blue-700 hover:underline text-xs"
+                        >
+                          <span>View Details</span>
+                          <span>→</span>
+                        </Link>
+                      )}
                       <a
                         href={affiliateUrl || t.data.websiteUrl}
                         target="_blank"

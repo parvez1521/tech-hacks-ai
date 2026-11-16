@@ -100,6 +100,29 @@ export function getToolBySlug(slug: string): Tool | undefined {
   return toolsData.find((t) => t.slug.toLowerCase() === slug.toLowerCase());
 }
 
+/**
+ * Only the featured open-source tools have a prerendered `/tools/:slug`
+ * detail page (and a sitemap entry). Every other catalogue tool resolves
+ * client-side only, so a direct visit or crawler request returns the static
+ * 404 — the 2026-11-16 AdSense audit found 780 dead `/tools/*` links from
+ * this. Gate EVERY internal `/tools/:slug` link on this predicate; never
+ * emit a link for a tool without a detail page. The featured set is exactly
+ * the sitemap's `/tools/*` set (see tests/adsense_audit_link_gate.test.js).
+ */
+export function hasToolDetailPage(tool: Tool | string | undefined | null): boolean {
+  if (!tool) return false;
+  const record = typeof tool === 'string' ? getToolBySlug(tool) : tool;
+  return Boolean(record?.featuredOrder);
+}
+
+/** Internal detail-page URL for a tool, or null when it has no live page. */
+export function getToolDetailUrl(tool: Tool | string | undefined | null): string | null {
+  if (!tool) return null;
+  const record = typeof tool === 'string' ? getToolBySlug(tool) : tool;
+  if (!record?.featuredOrder) return null;
+  return `/tools/${record.slug}`;
+}
+
 export function getProprietaryToolBySlug(slug: string): ProprietaryTool | undefined {
   return proprietaryTools.find((p) => p.slug.toLowerCase() === slug.toLowerCase());
 }

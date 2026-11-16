@@ -1826,6 +1826,7 @@ QUALITY BAR
     exampleUseCase: 'Building five complete animated websites, one file each, to launch or prototype a SaaS product, a collectibles marketplace, a fashion store, a coffee brand, or an AI assistant.',
     authorOrSource: 'Aaghaz / Make First Million (@make.first.million) — "5 Premium Website Prompts (Part 1)"',
     sourceCreator: 'Aaghaz / Make First Million (@make.first.million)',
+    sourceUrl: 'https://aaghaz.ai',
     previewImage: '/prompts/generated/premium-website-prompts-part-1.webp',
     previewImageAlt: 'Abstract premium artwork blending the five prompt palettes — lime, gold, lavender, caramel and mint — on a dark background.',
     hidePreviewImage: true,

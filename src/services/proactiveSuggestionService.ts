@@ -105,7 +105,8 @@ function getVerifiedToolSuggestions(): ProactiveSuggestion[] {
   const openSourceSuggestions = toolsData
     .filter((tool) => {
       const logo = getBrandLogo(tool.slug);
-      return Boolean(tool.isVerified && tool.slug && tool.name && tool.tagline && logo && logo.sourceType !== 'fallback');
+      // Only featured tools have a live /tools/:slug page to link to.
+      return Boolean(tool.isVerified && tool.featuredOrder && tool.slug && tool.name && tool.tagline && logo && logo.sourceType !== 'fallback');
     })
     .map((tool) => ({
       id: `tool-open-source-${tool.slug}`,

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Tool } from '../types';
 import { Link } from '../router/Router';
-import { getCategoryBySlug } from '../services/catalogService';
+import { getCategoryBySlug, hasToolDetailPage } from '../services/catalogService';
 import { VerifiedBadge, AiNativeBadge } from './Badge';
 import { Star, FileCode, ExternalLink, Github, ArrowRight } from 'lucide-react';
 import { BrandLogo } from './BrandLogo';
@@ -13,6 +13,9 @@ interface ReplacementCardProps {
 
 export const ReplacementCard: React.FC<ReplacementCardProps> = ({ tool, proprietaryName }) => {
   const primaryCategory = tool.categories[0] ? getCategoryBySlug(tool.categories[0]) : undefined;
+  // Only featured tools have a live /tools/:slug page; anything else must
+  // not link there (2026-11-16 AdSense audit: 780 dead /tools/* links).
+  const detailUrl = hasToolDetailPage(tool) ? `/tools/${tool.slug}` : null;
 
   return (
     <div
@@ -31,12 +34,18 @@ export const ReplacementCard: React.FC<ReplacementCardProps> = ({ tool, propriet
             />
             <div className="min-w-0">
               <div className="flex items-center gap-1.5">
-                <Link
-                  to={`/tools/${tool.slug}`}
-                  className="font-bold text-foreground text-base tracking-tight truncate hover:text-primary transition-colors focus:outline-none focus:underline"
-                >
-                  {tool.name}
-                </Link>
+                {detailUrl ? (
+                  <Link
+                    to={detailUrl}
+                    className="font-bold text-foreground text-base tracking-tight truncate hover:text-primary transition-colors focus:outline-none focus:underline"
+                  >
+                    {tool.name}
+                  </Link>
+                ) : (
+                  <span className="font-bold text-foreground text-base tracking-tight truncate">
+                    {tool.name}
+                  </span>
+                )}
                 {tool.isVerified && <VerifiedBadge />}
               </div>
               {primaryCategory && (
@@ -102,14 +111,16 @@ export const ReplacementCard: React.FC<ReplacementCardProps> = ({ tool, propriet
 
         {/* Links Row: Clear Internal Navigation vs External Links */}
         <div className="flex items-center justify-between gap-2 pt-1">
-          {/* Primary Internal Navigation */}
-          <Link
-            to={`/tools/${tool.slug}`}
-            className="inline-flex items-center gap-1 text-xs font-semibold text-primary hover:text-primary-hover transition-colors group-hover:translate-x-0.5 focus:outline-none focus:underline"
-          >
-            <span>View Details</span>
-            <ArrowRight className="w-3.5 h-3.5" />
-          </Link>
+          {/* Primary Internal Navigation — only when a live detail page exists */}
+          {detailUrl && (
+            <Link
+              to={detailUrl}
+              className="inline-flex items-center gap-1 text-xs font-semibold text-primary hover:text-primary-hover transition-colors group-hover:translate-x-0.5 focus:outline-none focus:underline"
+            >
+              <span>View Details</span>
+              <ArrowRight className="w-3.5 h-3.5" />
+            </Link>
+          )}
 
           {/* Explicit External Links */}
           <div className="flex items-center gap-2">

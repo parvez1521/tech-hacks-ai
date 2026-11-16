@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useRouter, Link } from '../router/Router';
 import { getGuideBySlug, getAllGuides, getAiToolBySlug, getAllPrompts } from '../services/aiCatalogService';
-import { getToolBySlug } from '../services/catalogService';
+import { getToolBySlug, getToolDetailUrl } from '../services/catalogService';
 import { BookmarkButton } from '../components/BookmarkButton';
 import { BookmarkItem } from '../types';
 import { BookOpen, Clock, Calendar, Copy, Check, ArrowLeft, ArrowRight, ExternalLink, Wrench, Share2 } from 'lucide-react';
@@ -267,12 +267,38 @@ export const GuideDetailPage: React.FC = () => {
               const osTool = getToolBySlug(slug);
               const tool = aiTool || osTool;
               if (!tool) return null;
-              const link = aiTool ? `/ai-tools/${tool.slug}` : `/tools/${tool.slug}`;
+              // Only featured open-source tools have a live /tools/:slug page;
+              // the rest link out to the tool's own site instead of a 404.
+              const detailUrl = aiTool ? `/ai-tools/${tool.slug}` : getToolDetailUrl(tool.slug);
+              if (!detailUrl) {
+                return (
+                  <a
+                    key={tool.id}
+                    href={tool.websiteUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-between p-3.5 rounded-xl border border-border bg-[#F5F8FF] hover:bg-card hover:border-primary/40 transition-all group"
+                  >
+                    <div className="flex items-center gap-3 min-w-0">
+                      <BrandLogo
+                        slug={tool.slug}
+                        name={tool.name}
+                        size="xs"
+                        iconBgColor={tool.iconBgColor}
+                        iconLetter={tool.iconLetter}
+                        className="w-7 h-7"
+                      />
+                      <span className="font-semibold text-sm text-foreground group-hover:text-blue-600 transition-colors truncate">{tool.name}</span>
+                    </div>
+                    <span className="text-xs text-blue-600 font-medium shrink-0 group-hover:translate-x-0.5 transition-transform">Visit Website →</span>
+                  </a>
+                );
+              }
 
               return (
                 <Link
                   key={tool.id}
-                  to={link}
+                  to={detailUrl}
                   className="flex items-center justify-between p-3.5 rounded-xl border border-border bg-[#F5F8FF] hover:bg-card hover:border-primary/40 transition-all group"
                 >
                   <div className="flex items-center gap-3 min-w-0">
