@@ -9,6 +9,7 @@ import {
   AlertCircle,
 } from 'lucide-react';
 import { generateGroundedResponse, ChatMessage } from '../services/chatRetrievalService.ts';
+import { getToolDetailUrl } from '../services/catalogService.ts';
 import { Link } from '../router/Router.tsx';
 import { AiOrb3D } from './AiOrb3D.tsx';
 import { BrandLogo } from './BrandLogo.tsx';
@@ -415,7 +416,10 @@ export const FloatingChatbot: React.FC = () => {
                       <div className="space-y-1.5">
                         {msg.groundedTools.map((t, idx) => (
                           (() => {
-                            const toolRoute = t.type === 'open-source' ? `/tools/${t.slug}` : `/ai-tools/${t.slug}`;
+                            // Only featured open-source tools have a live
+                            // /tools/:slug page; the rest link out to the
+                            // tool's own site instead of a 404.
+                            const toolRoute = t.type === 'open-source' ? getToolDetailUrl(t.slug) : `/ai-tools/${t.slug}`;
                             return (
                           <div
                             key={idx}
@@ -424,23 +428,40 @@ export const FloatingChatbot: React.FC = () => {
                             <div className="min-w-0 flex items-center gap-2">
                               <BrandLogo slug={t.slug} name={t.name} size="xs" />
                               <div className="min-w-0">
-                                <Link
-                                  to={toolRoute}
-                                  className="font-semibold text-foreground hover:text-primary transition-colors text-xs truncate block"
-                                >
-                                  {t.name}
-                                </Link>
+                                {toolRoute ? (
+                                  <Link
+                                    to={toolRoute}
+                                    className="font-semibold text-foreground hover:text-primary transition-colors text-xs truncate block"
+                                  >
+                                    {t.name}
+                                  </Link>
+                                ) : (
+                                  <span className="font-semibold text-foreground text-xs truncate block">
+                                    {t.name}
+                                  </span>
+                                )}
                                 <span className="text-[10px] text-muted-foreground block truncate">
                                   {t.pricingSummary}
                                 </span>
                               </div>
                             </div>
-                            <Link
-                              to={toolRoute}
-                              className="px-2.5 py-1 rounded-md bg-primary/10 text-primary text-[10px] font-semibold hover:bg-primary/20 shrink-0 transition-colors border border-primary/20"
-                            >
-                              Explore
-                            </Link>
+                            {toolRoute ? (
+                              <Link
+                                to={toolRoute}
+                                className="px-2.5 py-1 rounded-md bg-primary/10 text-primary text-[10px] font-semibold hover:bg-primary/20 shrink-0 transition-colors border border-primary/20"
+                              >
+                                Explore
+                              </Link>
+                            ) : (
+                              <a
+                                href={t.websiteUrl}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="px-2.5 py-1 rounded-md bg-primary/10 text-primary text-[10px] font-semibold hover:bg-primary/20 shrink-0 transition-colors border border-primary/20"
+                              >
+                                Website
+                              </a>
+                            )}
                           </div>
                             );
                           })()

@@ -1,7 +1,7 @@
 import React from 'react';
 import { ProprietaryTool } from '../types';
 import { Link } from '../router/Router';
-import { getToolsForProprietary, getCategoryBySlug } from '../services/catalogService';
+import { getToolsForProprietary, getCategoryBySlug, hasToolDetailPage } from '../services/catalogService';
 import { getAiToolsForProprietary } from '../services/aiCatalogService';
 import { ArrowRight } from 'lucide-react';
 import { BrandLogo } from './BrandLogo';
@@ -99,20 +99,39 @@ export const AlternativeCard: React.FC<AlternativeCardProps> = ({ alternative })
               Popular replacements:
             </span>
             <div className="flex flex-wrap items-center gap-1.5">
-              {previewLinks.slice(0, 3).map((tool) => (
-                <Link
-                  key={tool.slug}
-                  to={tool.url}
-                  className="pointer-events-auto inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[11px] font-medium bg-muted hover:bg-accent text-secondary-foreground hover:text-primary border border-border hover:border-primary/30 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
-                  title={`View ${tool.name} open source tool`}
-                >
+              {previewLinks.slice(0, 3).map((tool) => {
+                // Only featured replacements have a live /tools/:slug page.
+                // The rest render as plain chips, never as dead links
+                // (2026-11-16 AdSense audit: 780 dead /tools/* links).
+                const detailUrl = tool.url.startsWith('/tools/') && !hasToolDetailPage(tool.slug) ? null : tool.url;
+                const chipInner = (
+                  <>
+                    <span
+                      className="w-2 h-2 rounded-full shrink-0"
+                      style={{ backgroundColor: tool.color || '#3b82f6' }}
+                    />
+                    <span className="truncate max-w-[90px]">{tool.name}</span>
+                  </>
+                );
+                return detailUrl ? (
+                  <Link
+                    key={tool.slug}
+                    to={detailUrl}
+                    className="pointer-events-auto inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[11px] font-medium bg-muted hover:bg-accent text-secondary-foreground hover:text-primary border border-border hover:border-primary/30 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+                    title={`View ${tool.name} open source tool`}
+                  >
+                    {chipInner}
+                  </Link>
+                ) : (
                   <span
-                    className="w-2 h-2 rounded-full shrink-0"
-                    style={{ backgroundColor: tool.color || '#3b82f6' }}
-                  />
-                  <span className="truncate max-w-[90px]">{tool.name}</span>
-                </Link>
-              ))}
+                    key={tool.slug}
+                    className="pointer-events-auto inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[11px] font-medium bg-muted text-secondary-foreground border border-border focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+                    title={tool.name}
+                  >
+                    {chipInner}
+                  </span>
+                );
+              })}
               {count > 3 && (
                 <span className="text-[10px] text-secondary-foreground font-mono">
                   +{count - 3} more

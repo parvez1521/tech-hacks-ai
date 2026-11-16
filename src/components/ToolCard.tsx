@@ -2,6 +2,7 @@ import React from 'react';
 import { Tool } from '../types';
 import { VerifiedBadge, AiNativeBadge } from './Badge';
 import { proprietaryTools } from '../data/alternatives';
+import { hasToolDetailPage } from '../services/catalogService';
 import { Link } from '../router/Router';
 import { Star, Clock, FileCode } from 'lucide-react';
 import { BrandLogo } from './BrandLogo';
@@ -15,6 +16,9 @@ export const ToolCard: React.FC<ToolCardProps> = ({ tool, headingLevel = 3 }) =>
   // Find mapped proprietary tools
   const alternativeItems = proprietaryTools.filter((p) => tool.alternativesTo.includes(p.slug));
   const Heading = headingLevel === 2 ? 'h2' : 'h3';
+  // Only featured tools have a live /tools/:slug page; the stretch link
+  // must not point at a dead URL (2026-11-16 AdSense audit).
+  const hasDetailPage = hasToolDetailPage(tool);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     const rect = e.currentTarget.getBoundingClientRect();
@@ -37,14 +41,16 @@ export const ToolCard: React.FC<ToolCardProps> = ({ tool, headingLevel = 3 }) =>
         aria-hidden="true"
       />
 
-      {/* Primary Card Stretch Link */}
-      <Link
-        to={`/tools/${tool.slug}`}
-        className="absolute inset-0 z-10 rounded-2xl focus:outline-none"
-        aria-label={`View details for ${tool.name}`}
-      >
-        <span className="sr-only">View {tool.name}</span>
-      </Link>
+      {/* Primary Card Stretch Link — only when a live detail page exists */}
+      {hasDetailPage && (
+        <Link
+          to={`/tools/${tool.slug}`}
+          className="absolute inset-0 z-10 rounded-2xl focus:outline-none"
+          aria-label={`View details for ${tool.name}`}
+        >
+          <span className="sr-only">View {tool.name}</span>
+        </Link>
+      )}
 
       {/* Top Header Row */}
       <div className="relative z-10">

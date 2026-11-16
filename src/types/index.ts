@@ -145,7 +145,9 @@ export interface MatchedPickResult {
   tasks: string[];
   freeAccessSummary: string;
   websiteUrl: string;
-  detailUrl: string;
+  // Null for open-source tools without a live /tools/:slug detail page
+  // (only featured tools have one); PickPage renders no detail link then.
+  detailUrl: string | null;
   pricingVerifiedAt: string;
 }
 
