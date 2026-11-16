@@ -5,6 +5,7 @@ import { promptCategories, promptsData } from '../src/data/promptsData.ts';
 import { aiToolsData } from '../src/data/aiToolsData.ts';
 import { proprietaryTools } from '../src/data/alternatives.ts';
 import { offersData } from '../src/data/offersData.ts';
+import { toolsData } from '../src/data/seedData.ts';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const sitemapPath = path.join(root, 'public/sitemap.xml');
@@ -63,6 +64,12 @@ const candidates = [
   ...aiToolsData.filter((item) => item?.slug).map((item) => ({ url: `https://switchroute.in/ai-tools/${item.slug}`, priority: '0.7' })),
   ...proprietaryTools.filter((item) => item?.slug).map((item) => ({ url: `https://switchroute.in/alternatives/${item.slug}`, priority: '0.6' })),
   ...offersData.filter((item) => item?.slug).map((item) => ({ url: `https://switchroute.in/offers/${item.slug}`, priority: '0.7' })),
+  // Only featured open-source tools have a prerendered /tools/:slug page.
+  // Keeping this list derived from the same featuredOrder flag that gates
+  // internal /tools links (catalogService.hasToolDetailPage) stops the
+  // sitemap and the link gate from drifting apart again (2026-11-16 audit:
+  // 780 linked /tools slugs were absent from the sitemap and returned 404).
+  ...toolsData.filter((item) => item?.slug && item.featuredOrder).map((item) => ({ url: `https://switchroute.in/tools/${item.slug}`, priority: '0.7' })),
 ];
 const entries = candidates.filter((item) => !knownUrls.has(item.url)).map((item) => `  <url>\n    <loc>${item.url}</loc>\n    <changefreq>monthly</changefreq>\n    <priority>${item.priority}</priority>\n  </url>`);
 if (entries.length) {
