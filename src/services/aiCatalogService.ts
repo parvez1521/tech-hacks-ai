@@ -12,6 +12,7 @@ import { getPromptArtwork } from '../data/promptArtwork.ts';
 import promptCatalogCount from '../../data/promptfeed-catalog-count.json' with { type: 'json' };
 import promptMediaCounts from '../../data/prompt-media-counts.json' with { type: 'json' };
 import { aiAlternativeMappings } from '../data/aiAlternativeMappings.ts';
+import { hasToolDetailPage, getToolDetailUrl } from './catalogService.ts';
 
 export const AI_PAGE_SIZE = 12;
 
@@ -497,7 +498,9 @@ export function universalSearch(query: string): UniversalSearchResult {
 
   const alternativeTarget = findAlternativeTargetFromQuery(query);
   if (alternativeTarget) {
-    const openSourceTools = getOpenSourceToolsForProprietary(alternativeTarget.slug).slice(0, 5);
+    // Search results link straight to detail pages, so only tools with a
+    // live /tools/:slug page may appear here (2026-11-16 AdSense audit).
+    const openSourceTools = getOpenSourceToolsForProprietary(alternativeTarget.slug).filter((tool) => hasToolDetailPage(tool)).slice(0, 5);
     const aiTools = getAiAlternativesForTarget(alternativeTarget.slug).slice(0, 5);
     return {
       openSourceTools,
@@ -514,9 +517,9 @@ export function universalSearch(query: string): UniversalSearchResult {
   if (intent) {
     const aiTools = getAiToolsForSearchIntent(query).slice(0, 5);
     const openSourceTools = intent === 'local-llm'
-      ? toolsData.filter((tool) => /\b(ollama|open webui|localai|jan|gpt4all|llama|vllm)\b/.test(normalizeSearchText(`${tool.name} ${tool.slug} ${tool.description} ${tool.tagline} ${tool.tags.join(' ')} ${tool.techStack.join(' ')}`))).slice(0, 5)
+      ? toolsData.filter((tool) => hasToolDetailPage(tool) && /\b(ollama|open webui|localai|jan|gpt4all|llama|vllm)\b/.test(normalizeSearchText(`${tool.name} ${tool.slug} ${tool.description} ${tool.tagline} ${tool.tags.join(' ')} ${tool.techStack.join(' ')}`))).slice(0, 5)
       : intent === 'workflow-automation'
-        ? toolsData.filter((tool) => /\b(n8n|activepieces|dify|typebot|langflow)\b/.test(normalizeSearchText(`${tool.name} ${tool.slug} ${tool.description} ${tool.tagline} ${tool.tags.join(' ')} ${tool.categories.join(' ')}`))).slice(0, 5)
+        ? toolsData.filter((tool) => hasToolDetailPage(tool) && /\b(n8n|activepieces|dify|typebot|langflow)\b/.test(normalizeSearchText(`${tool.name} ${tool.slug} ${tool.description} ${tool.tagline} ${tool.tags.join(' ')} ${tool.categories.join(' ')}`))).slice(0, 5)
         : [];
     return {
       openSourceTools,
@@ -532,9 +535,10 @@ export function universalSearch(query: string): UniversalSearchResult {
   const openSourceTools = toolsData
     .filter(
       (t) =>
-        t.name.toLowerCase().includes(q) ||
-        t.tagline.toLowerCase().includes(q) ||
-        t.tags.some((tag) => tag.toLowerCase().includes(q))
+        hasToolDetailPage(t) &&
+        (t.name.toLowerCase().includes(q) ||
+          t.tagline.toLowerCase().includes(q) ||
+          t.tags.some((tag) => tag.toLowerCase().includes(q)))
     )
     .slice(0, 4);
 
@@ -948,7 +952,7 @@ export function getPickRecommendations(criteria: PickCriteria): MatchedPickResul
         tasks: tool.categories.map((c) => c.replace(/-/g, ' ')),
         freeAccessSummary: 'Free & Open Source (Self-Hostable)',
         websiteUrl: tool.websiteUrl,
-        detailUrl: `/tools/${tool.slug}`,
+        detailUrl: getToolDetailUrl(tool),
         pricingVerifiedAt: tool.verifiedAt,
       });
     });

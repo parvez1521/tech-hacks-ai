@@ -1,5 +1,6 @@
 import { aiToolsData } from '../data/aiToolsData.ts';
 import { toolsData } from '../data/seedData.ts';
+import { hasToolDetailPage } from './catalogService.ts';
 import { getActiveOffers } from '../data/offersData.ts';
 import { proprietaryTools } from '../data/alternatives.ts';
 import type { AiTool, Tool } from '../types/index.ts';
@@ -148,7 +149,7 @@ export function generateGroundedResponse(userQuery: string): ChatMessage {
   if (alternativeTarget && containsAny(q, ['alternative', 'replace', 'replacement', 'open source', 'open-source'])) {
     const alternatives = toolsData.filter((tool) => tool.alternativesTo.includes(alternativeTarget.slug)).slice(0, 5);
     const records = alternatives.map((tool) => ({ name: tool.name, slug: tool.slug, type: 'open-source' as const, pricingSummary: `${tool.license} · open source`, websiteUrl: tool.websiteUrl }));
-    if (records.length) return message(`Open-source catalogue alternatives to ${alternativeTarget.name}:\n\n${records.map((tool) => `• [${tool.name}](/tools/${tool.slug}) — ${tool.pricingSummary}`).join('\n')}\n\nSee the [${alternativeTarget.name} alternatives page](/alternatives/${alternativeTarget.slug}).`, records, ['Compare these alternatives', 'Search open-source tools']);
+    if (records.length) return message(`Open-source catalogue alternatives to ${alternativeTarget.name}:\n\n${records.map((tool) => hasToolDetailPage(tool.slug) ? `• [${tool.name}](/tools/${tool.slug}) — ${tool.pricingSummary}` : `• **${tool.name}** — ${tool.pricingSummary}`).join('\n')}\n\nSee the [${alternativeTarget.name} alternatives page](/alternatives/${alternativeTarget.slug}).`, records, ['Compare these alternatives', 'Search open-source tools']);
   }
 
   const results = getEligibleChatTools(userQuery);
@@ -157,9 +158,12 @@ export function generateGroundedResponse(userQuery: string): ChatMessage {
     ? 'I could not verify a video-editing match in the published catalogue. Video-generation tools are not presented as editors without a documented editing workflow.'
     : `I couldn’t find a verified match for “${userQuery}” in the published catalogue. Try a broader task or category.`);
   const lines = results.map(({ item, type }) => {
+    // Only featured open-source tools have a live /tools/:slug page; link
+    // the rest as plain text (2026-11-16 AdSense audit: 780 dead links).
+    const linkable = type === 'ai' || hasToolDetailPage(item.slug);
     const path = type === 'open-source' ? `/tools/${item.slug}` : `/ai-tools/${item.slug}`;
     const summary = type === 'ai' ? `${(item as AiTool).freeTierSummary} ${(item as AiTool).freeTierLimits || ''}` : `${(item as Tool).license} · ${item.tagline}`;
-    return `• [${item.name}](${path}) — ${summary}`;
+    return linkable ? `• [${item.name}](${path}) — ${summary}` : `• **${item.name}** — ${summary}`;
   });
   const heading = videoEditingRequest ? 'Video-editing matches' : isHindi(q) ? 'Catalogue mein mile relevant matches:' : 'Relevant published catalogue matches:';
   return message(`${heading}\n\n${lines.join('\n')}\n\nI searched the published catalogue only. Check each provider’s site for current pricing and availability.`, records, ['Open side-by-side comparison', 'Find free alternatives', 'Browse the catalogue']);

@@ -7,6 +7,7 @@ import type {
 } from '../types/submissions.ts';
 import { aiToolsData } from '../data/aiToolsData.ts';
 import { toolsData } from '../data/seedData.ts';
+import { getToolDetailUrl } from './catalogService.ts';
 
 const MODERATOR_TOKEN_KEY = 'th_mod_token';
 
@@ -105,7 +106,8 @@ export function checkClientToolDuplicate(
         isDuplicate: true,
         reason: `"${tool.name}" is already in the Open Source Catalog.`,
         matchName: tool.name,
-        matchSlug: `/tools/${tool.slug}`,
+        // Only featured tools have a live /tools/:slug page to link to.
+        ...(getToolDetailUrl(tool.slug) ? { matchSlug: `/tools/${tool.slug}` } : {}),
       };
     }
 
@@ -114,7 +116,7 @@ export function checkClientToolDuplicate(
         isDuplicate: true,
         reason: `The domain "${domain}" is already cataloged as "${tool.name}".`,
         matchName: tool.name,
-        matchSlug: `/tools/${tool.slug}`,
+        ...(getToolDetailUrl(tool.slug) ? { matchSlug: `/tools/${tool.slug}` } : {}),
       };
     }
   }
