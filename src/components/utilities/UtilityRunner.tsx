@@ -78,6 +78,15 @@ const LazyImageUtility = React.lazy(() => import('./UtilityImageTools').then((mo
   },
 })));
 
+const LazyAiUtility = React.lazy(() => import('./UtilityAiTools').then((module) => ({
+  default: ({ slug }: LazyUtilityProps) => {
+    switch (slug) {
+      case 'ai-generator': return <module.AiGeneratorTool />;
+      default: return null;
+    }
+  },
+})));
+
 const LazyMediaUtility = React.lazy(() => import('./UtilityMediaTools').then((module) => ({
   default: ({ slug }: LazyUtilityProps) => {
     switch (slug) {
@@ -119,6 +128,7 @@ export const UtilityRunner: React.FC<UtilityRunnerProps> = ({ utility }) => {
       return <PromptBuilderTool />;
     case 'svg-to-png':
       return <SvgToPngTool />;
+    case 'ai-generator': return renderLazyUtility(LazyAiUtility, utility.slug);
     case 'text-diff':
     case 'slug-generator':
     case 'markdown-table-builder':

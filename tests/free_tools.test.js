@@ -13,7 +13,7 @@ describe('Built-in browser utility registry', () => {
   test('contains exactly the published utilities with unique IDs and slugs', () => {
     // Only utilities whose /free-tools/<slug> pages are actually published may be
     // registered here; listing unpublished tools created dead links (AdSense fix).
-    assert.equal(freeToolsData.length, 7, `Expected exactly 7 published utilities, found ${freeToolsData.length}`);
+    assert.equal(freeToolsData.length, 8, `Expected exactly 8 published utilities, found ${freeToolsData.length}`);
     assert.equal(new Set(freeToolsData.map((tool) => tool.id)).size, freeToolsData.length, 'Utility IDs must be unique');
     assert.equal(new Set(freeToolsData.map((tool) => tool.slug)).size, freeToolsData.length, 'Utility slugs must be unique');
   });
@@ -21,7 +21,7 @@ describe('Built-in browser utility registry', () => {
   test('published utilities are discoverable through the real lookup service', () => {
     const expected = [
       'image-resizer', 'heic-to-png', 'qr-generator', 'word-counter',
-      'json-formatter', 'svg-to-png', 'prompt-builder',
+      'json-formatter', 'svg-to-png', 'prompt-builder', 'ai-generator',
     ];
     expected.forEach((slug) => assert.ok(getFreeToolBySlug(slug), `${slug} must be registered`));
     // Unpublished utilities (including the downloader entries) must stay unregistered
@@ -73,7 +73,7 @@ describe('Built-in browser utility registry', () => {
       openSourceTools: 809,
       aiPlatforms: 76,
       alternativeTargets: 970,
-      browserUtilities: 7,
+      browserUtilities: 8,
       alternativeRelationships: 5073,
       uniquePrompts: 588,
       proprietaryToolsWithAlternatives: 962,

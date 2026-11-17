@@ -1,5 +1,6 @@
 import type { LucideIcon } from 'lucide-react';
 import {
+  Bot,
   Braces,
   CaseSensitive,
   FileImage,
@@ -27,4 +28,5 @@ export const freeToolIcons: Record<string, LucideIcon> = {
   'json-formatter': Braces,
   'svg-to-png': Shapes,
   'prompt-builder': Sparkles,
+  'ai-generator': Bot,
 };
