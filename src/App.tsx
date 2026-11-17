@@ -143,7 +143,7 @@ export function getRouteTitle(route: string, params: Record<string, string> = {}
     case 'free-tool-detail': {
       const freeTool = getFreeToolBySlug(params.slug);
       return freeTool
-        ? formatPageTitle(`${freeTool.name} (${freeTool.isClientSideOnly ? 'Client-Side' : 'Configured Service'}) — Utility Tool`)
+        ? formatPageTitle(`${freeTool.name} (${freeTool.slug === 'ai-generator' ? 'Puter AI' : freeTool.isClientSideOnly ? 'Client-Side' : 'Configured Service'}) — Utility Tool`)
         : formatPageTitle('Utility Not Found');
     }
     case 'compare':
