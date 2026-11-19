@@ -272,6 +272,22 @@ export const Footer: React.FC = () => {
             Made with <Heart className="w-3 h-3 text-rose-500 fill-rose-500" /> for the AI &amp; open-source community
           </p>
         </div>
+
+        {/* Listed on */}
+        <div className="pt-4 mt-4 border-t border-border/30 flex flex-col items-center gap-2 text-xs text-muted-foreground">
+          <span className="text-[11px] font-semibold uppercase tracking-widest">Listed on</span>
+          <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2">
+            <a href="https://indielaunch.dev/?ref=badge" target="_blank" rel="noopener">
+              <img src="https://indielaunch.dev/badges/indielaunch-light.svg" alt="Featured on IndieLaunch" />
+            </a>
+            <a href="https://fazier.com" target="_blank" rel="noopener">
+              <img src="https://fazier.com/api/v1/public/badges/launch_badges.svg?badge_type=featured&theme=neutral" alt="Featured on Fazier" />
+            </a>
+            <a href="https://1ai.tools" target="_blank" rel="noopener" className="hover:text-primary transition-colors duration-200">
+              1ai.tools
+            </a>
+          </div>
+        </div>
       </div>
     </footer>
   );
