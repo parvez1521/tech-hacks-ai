@@ -5,6 +5,7 @@ import { Header } from './components/Header';
 import { ScrollMorph } from './components/ScrollMorph';
 import { Footer } from './components/Footer';
 import { FloatingChatbot } from './components/FloatingChatbot';
+import { HourlyAlternativePopup } from './components/HourlyAlternativePopup';
 import { AdSenseBanner } from './components/AdSenseBanner';
 import { AdSenseRuntime } from './components/AdSenseRuntime';
 import { siteConfig, formatPageTitle } from './config/site';
@@ -447,6 +448,7 @@ const AppRoutes: React.FC = () => {
       </main>
       <Footer />
       <FloatingChatbot />
+      <HourlyAlternativePopup />
       <CookieConsentBanner />
       <AdSenseRuntime />
     </div>
