@@ -1011,6 +1011,20 @@
   animation: fadeInUp 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
+/* Hourly free-alternative popup: the strikethrough draws across the paid row. */
+@keyframes altPopupStrike {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+.animate-alt-popup-strike {
+  animation: altPopupStrike 0.5s ease-out forwards;
+}
+
 .animate-pulse-subtle {
   animation: pulseSubtle 3s ease-in-out infinite;
 }
@@ -1540,7 +1554,10 @@
   .discovery-interface,
   .discovery-interface__tabs button,
   .discovery-interface__samples button,
-  .discovery-interface__result { transition: none; }
+  .discovery-interface__result,
+  .animate-alt-popup-strike,
+  .animate-fade-in-up,
+  .animate-fade-in { transition: none; animation: none; }
   .discovery-card:hover,
   .catalog-trust-strip__metrics > .catalog-metric-card:hover,
   .chat-launcher:hover,
