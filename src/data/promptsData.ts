@@ -110,6 +110,12 @@ export const promptCategories: PromptCategoryDef[] = [
     slug: 'premium-website-prompts',
     description: 'Premium Website Prompts (Part 1) — five complete, animated one-file website builds from Aaghaz / Make First Million (@make.first.million): a workflow-automation SaaS landing page, a holographic trading-card marketplace, a dark techwear store with a 3D centrepiece, a warm coffee roastery one-pager, and an AI assistant site with a glowing particle orb. Copy a prompt, paste it into ChatGPT, Claude or Gemini, and get a complete index.html. Source: Aaghaz / Make First Million (@make.first.million).',
   },
+  {
+    id: 'google-free-ai-tools',
+    name: 'Google Free AI Tools',
+    slug: 'google-free-ai-tools',
+    description: '15 free Google AI tools from mavgpt.ai — SynthID Detector, Playground, Files in Gemini, Android apps via AI Studio, Gemini Notebook, Pomelli, Flow Music, Stitch, Antigravity, Flow, Gemini, Google Vids, AI Mode, Search Live and Live Translate — what each one does and exactly where to find it. Source: mavgpt.ai.',
+  },
 ];
 
 export const promptProviders = [
@@ -2004,5 +2010,208 @@ Start by inspecting the repository and reference website. Then prepare a detaile
     mediaType: 'image',
     aspectRatio: '1:1',
     createdAt: '2026-11-14T00:00:00.000Z',
+  },
+  {
+    id: 'google-free-ai-tools-2026',
+    title: '15 Free Google AI Tools',
+    slug: 'google-free-ai-tools-2026',
+    description: 'Google just released five new AI tools you can use for free, and it actually has ten more. Here are all 15 — SynthID Detector, Playground, Files in Gemini, Android apps via AI Studio, Gemini Notebook, Pomelli, Flow Music, Stitch, Antigravity, Flow, Gemini, Google Vids, AI Mode, Search Live and Live Translate — what each one does and exactly where to find it. Source: mavgpt.ai.',
+    category: 'google-free-ai-tools',
+    targetModel: 'Gemini',
+    provider: 'Google',
+    promptText: `15 Free Google AI Tools — mavgpt.ai
+
+The 5 free AI tools Google just released, plus 10 more, and where to find each.
+
+Google just released five new AI tools that you can use for free, and it actually has ten more. You can check if a photo, video or voice clip was made with AI, build your own games and Android apps just by describing them, have Gemini make your documents, slideshows and spreadsheets, and turn your notes into quizzes. Here's all 15, what each one does and exactly where to find it.
+
+---
+
+HOW THESE WORK
+
+Every tool below is free to start with your Google account. Some have daily limits, and a few are only in some countries or need you to be 18 or older. I note that under each one.
+
+A lot of these started at Google Labs, at labs.google, and that's still where new free tools show up first. If you've never set up Gemini itself, my complete Gemini guide is the place to start, with the Gemini secret codes as the shortcut list.
+
+One honest heads-up. Google moves fast, and tools come and go. Opal, from my earlier Google video, shuts down on November 17, 2026, and Jules is winding down too, so they're off this list. Mixboard has already closed.
+
+---
+
+GETTING THE MOST OUT OF THESE
+
+Bookmark the hub. Save labs.google. It's where new free tools show up first. A five-minute look every few weeks keeps you ahead of almost everyone.
+
+"Free" usually means a free tier. Everything here is free to start, but the heavier jobs (long videos, lots of creations) may cap you or nudge you toward a paid plan. You can do a lot inside the free limits.
+
+If it's not available where you are. Some tools roll out country by country, need you to be 18 or older, or start with a waitlist. If one won't open for you yet, check back. Labs experiments can also end, like Opal and Mixboard, so don't build your whole business on one.
+
+Match the tool to the job. Is it real? SynthID Detector. A game? Playground. Documents and slides? Gemini. Your own app? AI Studio. Studying? Gemini Notebook. Marketing? Pomelli. Music? Flow Music. App or web design? Stitch. Coding? Antigravity. Images and short video? Flow or Vids. Big questions? AI Mode. Traveling? Live Translate and Search Live.
+
+Tip. These pair beautifully with Claude and ChatGPT. Draft a plan in one, make it in another. Want help picking the rest of your stack? My only AI tools you need guide lays out a simple free setup.
+
+---
+
+THE ONE-PAGE CHEAT SHEET
+
+SynthID Detector — check if a photo, video or audio clip was made with AI, at synthid.com
+Playground — describe a game and play it, at playground.google
+Files in Gemini — documents, PDFs, slides and spreadsheets in the chat, at gemini.google.com
+Android apps — build your own app and install it from Google Play, at aistudio.google.com
+Gemini Notebook — quizzes and flashcards from your notes, at notebook.google
+Pomelli — on-brand marketing from your website, at labs.google.com/pomelli
+Flow Music — full songs from a prompt, at flowmusic.app
+Stitch — app and website design from a prompt, at stitch.google.com
+Antigravity — AI code editor, build by describing, at antigravity.google
+Flow — AI images and short video, at flow.google.com
+Gemini — the free AI assistant, plus images, at gemini.google.com
+Google Vids — videos and short AI clips, at vids.new
+AI Mode — ask Search big questions, at google.com/ai
+Search Live — talk to Search and show it your camera, in the Google app
+Live Translate — two-way spoken translation, in the Google Translate app
+
+---
+
+YOUR ACTION PLAN
+
+1. Upload one photo you've been unsure about to synthid.com.
+2. Ask Gemini to turn something you're working on into a PDF or a slideshow.
+3. Pick the two tools from the 10 more that fix your biggest time-sink.
+4. Run one real task through each today.
+5. Bookmark labs.google and check back for new ones.
+
+The best tools in AI right now cost nothing. You just had to know where to look.
+
+Source: mavgpt.ai — "15 Free Google AI Tools" (https://mavgpt.ai/resources/google-free-ai-tools-2026). Published August 23, 2026 · Checked November 2026 · Updated 2026-11-01. This guide is not a SwitchRoute original; shared with credit.`,
+    guideStepsHeading: 'The 15 tools',
+    guideSteps: [
+      {
+        title: '1. SynthID Detector: was this made with AI?',
+        text: `If you ever see a photo, a video or even a voice clip and you're not sure if it's real, just upload it and Google tells you if it was made with AI. It looks for SynthID, an invisible watermark that Google's AI puts in everything it makes. On synthid.com it also catches watermarked content from partners like OpenAI, NVIDIA and Kakao. For video and audio, it even shows which parts have it.
+
+1. Go to https://synthid.com and sign in with your Google, Apple or ChatGPT account.
+2. Upload a file for detection. Drag in the photo, video or audio clip, or click Select file.
+3. Read the result: Watermark detected or Watermark not detected.
+
+In the Gemini app instead: tap Add files, upload it and ask:
+
+Free. Works worldwide in English, with daily limits.
+
+Heads up. It only finds watermarked content. AI from a tool that doesn't use SynthID won't show up, so "not detected" doesn't prove something is real.`,
+      },
+      {
+        title: '2. Playground: describe a game and play it',
+        text: `You just describe what game you want to play, and Google builds the entire thing using AI in minutes. You can change it by chatting, keep it private or share it.
+
+1. Go to https://playground.google and set up your Play Games profile when it asks.
+2. Click Create game, describe your game idea and click the Generate icon.
+3. Change it from Your Games (the pencil icon), or click Publish to share it.
+
+Free to play. You can create with the free tier too, but free accounts join a waitlist first (Join Waitlist) and get a limited number of creations each week. A Google AI plan gets you in right away. US only, 18 and older.`,
+      },
+      {
+        title: '3. Files in Gemini: documents, PDFs, slides and spreadsheets',
+        text: `You can now just ask Gemini to make you a full document, PDF, slideshow or even a spreadsheet right in the chat, and if you want to change anything, you just ask. You can also open the file full screen and type your edits yourself, then download it or save it to Google Drive.
+
+1. Go to https://gemini.google.com or open the Gemini app.
+2. Ask for the file and name the type: Google Docs, Sheets or Slides, a PDF, Word (.docx), Excel (.xlsx) and more.
+3. Change anything by asking, like "Show this as a graph instead."
+
+Free for everyone using Gemini, within your daily limits. Typing edits into Docs, Sheets and Slides works on the web. PDFs work on the web and in the app.`,
+      },
+      {
+        title: '4. Your own Android apps: build it, then install it',
+        text: `Inside Google AI Studio, just describe the app you want, and you can even install it on your phone through Google Play. It's private to you, and you don't need to know how to code.
+
+1. Go to https://aistudio.google.com, click New app, choose Build an Android app and describe your app.
+2. Click Publish (top right). The first time, click Get Started, then Connect your Google Account, then Create app.
+3. Install it. When it says Ready, scan the QR code with your phone's camera. Or in the Play Store, tap your profile, then Manage apps & device, then Your personal library, and tap Install.
+
+Free. There's no fee to install your own apps. It's rolling out in the US first, for 18 and older, and you need an Android phone signed in to the same Google account.`,
+      },
+      {
+        title: '5. Gemini Notebook: turn any notes into quizzes and flashcards',
+        text: `Gemini Notebook (it used to be called NotebookLM) reads the notes, PDFs and links you give it and answers from them. Upload any notes and it turns them into quizzes or flashcards, so you can learn anything way faster.
+
+1. Go to https://notebook.google (it's also inside the Gemini app) and click Create new notebook.
+2. Upload a source, like your class notes or a PDF.
+3. Open the Studio panel and pick Flashcards or Quizzes. The pencil icon lets you set how hard and how many.
+
+Free, with daily limits.
+
+Tip. Studying? Make the flashcards first, then take the quiz. Mark cards Missed it! and review only the ones you missed.`,
+      },
+      {
+        title: '6. Pomelli, your free marketing team',
+        text: `Give Pomelli your website and it learns your brand, your tone, colors and style, then makes on-brand social posts, ad ideas and marketing images. The kind of thing agencies charge thousands a month for. Free, 18 and older, in English.
+
+Find it: https://labs.google.com/pomelli`,
+      },
+      {
+        title: '7. Flow Music, your free AI music studio',
+        text: `Describe the song you want, or chat with its built-in producer, and Flow Music makes a full track you can keep editing and remixing. It used to be called ProducerAI. Free with daily credits, 18 and older, in supported countries.
+
+Find it: https://www.flowmusic.app`,
+      },
+      {
+        title: '8. Stitch, designs from a sentence',
+        text: `Type a normal prompt, or upload a rough sketch, and Stitch hands you a clean, modern design for your app or website, plus the code behind it. Free with a daily limit, 18 and older.
+
+Find it: https://stitch.google.com (its new address)`,
+      },
+      {
+        title: '9. Antigravity, Google\'s AI code editor',
+        text: `Describe what you want to build and watch Antigravity build it, even if you've barely coded. It's an app you download for Mac, Windows or Linux. Free for individuals, with weekly limits.
+
+Find it: https://antigravity.google`,
+      },
+      {
+        title: '10. Flow, AI images and short video',
+        text: `Google's AI studio for images and short video clips. The old Whisk tool lives here now. Free: 50 credits a day, 18 and older. Without a paid plan, video can be unavailable at busy times.
+
+Find it: https://flow.google.com`,
+      },
+      {
+        title: '11. Gemini, the free front door',
+        text: `Google's AI assistant, and the free app that ties a lot of this together: answers, writing, your files from number 3, and making and editing images with Nano Banana 2. If you only open one, open this. Free, with daily limits.
+
+Find it: https://gemini.google.com`,
+      },
+      {
+        title: '12. Google Vids, make videos for free',
+        text: `A free video editor that also makes short AI video clips for you. Great for quick explainers, invites and social posts. Free: the editor, plus a few short AI clips a month.
+
+Find it: https://vids.new (on a computer)`,
+      },
+      {
+        title: '13. AI Mode in Google Search',
+        text: `Ask Google a real question, the long, messy kind, by typing, talking or adding a photo, and get one AI answer with links you can keep asking about. Free, no subscription.
+
+Find it: https://google.com/ai, or tap AI Mode in the Google app.`,
+      },
+      {
+        title: '14. Search Live, show Google what you\'re looking at',
+        text: `Talk to Google Search out loud and point your camera at anything, like a broken bike chain, a plant or a menu in another language, and it talks you through it. Free in the Google app, in 200+ countries.
+
+Find it: in the Google app, tap the Live icon under the search bar.`,
+      },
+      {
+        title: '15. Live Translate, a translator in your ear',
+        text: `Real-time, two-way spoken translation through your phone or any headphones, in 70+ languages. Free in the Translate app, on Android and iPhone.
+
+Find it: in the Google Translate app, tap Live translate and pick your two languages.`,
+      },
+    ],
+    tags: ['google', 'gemini', 'free-ai-tools', 'google-ai', 'synthid', 'notebooklm', 'ai-studio', 'stitch', 'antigravity', 'flow', 'google-vids', 'ai-mode', 'google-labs', 'productivity', 'free-tools'],
+    tips: 'Bookmark labs.google — it is where new free tools show up first. "Free" usually means a free tier: everything here is free to start, but the heavier jobs may cap you or nudge you toward a paid plan. Source: mavgpt.ai — "15 Free Google AI Tools". This guide is not a SwitchRoute original; shared with credit.',
+    expectedOutputType: 'Fifteen free Google AI tools with what each one does and exactly where to find it — SynthID Detector, Playground, Files in Gemini, Android apps via AI Studio, Gemini Notebook, Pomelli, Flow Music, Stitch, Antigravity, Flow, Gemini, Google Vids, AI Mode, Search Live and Live Translate.',
+    exampleUseCase: 'Finding and trying free Google AI tools — checking whether media was AI-made, building games and Android apps by describing them, making documents and slides with Gemini, and turning notes into quizzes and flashcards.',
+    authorOrSource: 'mavgpt.ai — "15 Free Google AI Tools"',
+    sourceCreator: 'mavgpt.ai',
+    sourceUrl: 'https://mavgpt.ai/resources/google-free-ai-tools-2026',
+    previewImage: '/prompts/generated/google-free-ai-tools-2026.webp',
+    previewImageAlt: 'Abstract Google-colour artwork in blue, red, yellow and green on a dark background for the 15 free Google AI tools guide.',
+    mediaType: 'image',
+    aspectRatio: '1:1',
+    createdAt: '2026-11-20T00:00:00.000Z',
   },
 ];
