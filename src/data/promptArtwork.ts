@@ -62,6 +62,7 @@ export const promptArtwork: Record<string, PromptArtwork> = {
   'vibe-coded-security-broken-authorization-idor': { path: '/prompts/generated/vibe-coded-security-broken-authorization-idor.webp', alt: 'Two locked doors with ID badges behind a checkpoint barrier on a dark navy background.', description: 'Original access-control illustration for the broken authorization audit.' },
   'premium-website-prompts-part-1': { path: '/prompts/generated/premium-website-prompts-part-1.webp', alt: 'Abstract premium artwork blending the five prompt palettes — lime, gold, lavender, caramel and mint — on a dark background.', description: 'Combined preview artwork for the 5 Premium Website Prompts (Part 1) collection.' },
   'clone-any-ai-tool-for-free': { path: '/prompts/generated/clone-any-ai-tool-for-free.webp', alt: 'A bold blue zigzag waveform mark on a light background, the poster artwork for the clone-any-AI-tool prompt.', description: 'Original poster artwork for the Clone Any AI Tool for Free prompt.' },
+  'google-free-ai-tools-2026': { path: '/prompts/generated/google-free-ai-tools-2026.webp', alt: 'Abstract Google-colour artwork in blue, red, yellow and green on a dark background for the 15 free Google AI tools guide.', description: 'Combined preview artwork for the 15 Free Google AI Tools guide.' },
 };
 
 export function getPromptArtwork(prompt: Pick<PromptItem, 'slug'>): PromptArtwork | undefined {
