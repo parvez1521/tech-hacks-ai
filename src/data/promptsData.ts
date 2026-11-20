@@ -2097,6 +2097,7 @@ In the Gemini app instead: tap Add files, upload it and ask:
 Free. Works worldwide in English, with daily limits.
 
 Heads up. It only finds watermarked content. AI from a tool that doesn't use SynthID won't show up, so "not detected" doesn't prove something is real.`,
+      link: 'https://synthid.com',
       },
       {
         title: '2. Playground: describe a game and play it',
@@ -2107,6 +2108,7 @@ Heads up. It only finds watermarked content. AI from a tool that doesn't use Syn
 3. Change it from Your Games (the pencil icon), or click Publish to share it.
 
 Free to play. You can create with the free tier too, but free accounts join a waitlist first (Join Waitlist) and get a limited number of creations each week. A Google AI plan gets you in right away. US only, 18 and older.`,
+      link: 'https://playground.google',
       },
       {
         title: '3. Files in Gemini: documents, PDFs, slides and spreadsheets',
@@ -2117,6 +2119,7 @@ Free to play. You can create with the free tier too, but free accounts join a wa
 3. Change anything by asking, like "Show this as a graph instead."
 
 Free for everyone using Gemini, within your daily limits. Typing edits into Docs, Sheets and Slides works on the web. PDFs work on the web and in the app.`,
+      link: 'https://gemini.google.com',
       },
       {
         title: '4. Your own Android apps: build it, then install it',
@@ -2127,6 +2130,7 @@ Free for everyone using Gemini, within your daily limits. Typing edits into Docs
 3. Install it. When it says Ready, scan the QR code with your phone's camera. Or in the Play Store, tap your profile, then Manage apps & device, then Your personal library, and tap Install.
 
 Free. There's no fee to install your own apps. It's rolling out in the US first, for 18 and older, and you need an Android phone signed in to the same Google account.`,
+      link: 'https://aistudio.google.com',
       },
       {
         title: '5. Gemini Notebook: turn any notes into quizzes and flashcards',
@@ -2139,54 +2143,63 @@ Free. There's no fee to install your own apps. It's rolling out in the US first,
 Free, with daily limits.
 
 Tip. Studying? Make the flashcards first, then take the quiz. Mark cards Missed it! and review only the ones you missed.`,
+      link: 'https://notebook.google',
       },
       {
         title: '6. Pomelli, your free marketing team',
         text: `Give Pomelli your website and it learns your brand, your tone, colors and style, then makes on-brand social posts, ad ideas and marketing images. The kind of thing agencies charge thousands a month for. Free, 18 and older, in English.
 
 Find it: https://labs.google.com/pomelli`,
+      link: 'https://labs.google.com/pomelli',
       },
       {
         title: '7. Flow Music, your free AI music studio',
         text: `Describe the song you want, or chat with its built-in producer, and Flow Music makes a full track you can keep editing and remixing. It used to be called ProducerAI. Free with daily credits, 18 and older, in supported countries.
 
 Find it: https://www.flowmusic.app`,
+      link: 'https://www.flowmusic.app',
       },
       {
         title: '8. Stitch, designs from a sentence',
         text: `Type a normal prompt, or upload a rough sketch, and Stitch hands you a clean, modern design for your app or website, plus the code behind it. Free with a daily limit, 18 and older.
 
 Find it: https://stitch.google.com (its new address)`,
+      link: 'https://stitch.google.com',
       },
       {
         title: '9. Antigravity, Google\'s AI code editor',
         text: `Describe what you want to build and watch Antigravity build it, even if you've barely coded. It's an app you download for Mac, Windows or Linux. Free for individuals, with weekly limits.
 
 Find it: https://antigravity.google`,
+      link: 'https://antigravity.google',
       },
       {
         title: '10. Flow, AI images and short video',
         text: `Google's AI studio for images and short video clips. The old Whisk tool lives here now. Free: 50 credits a day, 18 and older. Without a paid plan, video can be unavailable at busy times.
 
 Find it: https://flow.google.com`,
+      link: 'https://flow.google.com',
       },
       {
         title: '11. Gemini, the free front door',
         text: `Google's AI assistant, and the free app that ties a lot of this together: answers, writing, your files from number 3, and making and editing images with Nano Banana 2. If you only open one, open this. Free, with daily limits.
 
 Find it: https://gemini.google.com`,
+      link: 'https://gemini.google.com',
       },
       {
         title: '12. Google Vids, make videos for free',
         text: `A free video editor that also makes short AI video clips for you. Great for quick explainers, invites and social posts. Free: the editor, plus a few short AI clips a month.
 
 Find it: https://vids.new (on a computer)`,
+      link: 'https://vids.new',
       },
       {
         title: '13. AI Mode in Google Search',
         text: `Ask Google a real question, the long, messy kind, by typing, talking or adding a photo, and get one AI answer with links you can keep asking about. Free, no subscription.
 
 Find it: https://google.com/ai, or tap AI Mode in the Google app.`,
+      link: 'https://google.com/ai',
       },
       {
         title: '14. Search Live, show Google what you\'re looking at',

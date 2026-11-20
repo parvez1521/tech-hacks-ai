@@ -251,8 +251,8 @@ export interface PromptItem {
   updatedAt?: string;
   tags: string[];
   tips?: string;
-  /** Optional step-by-step guide rendered as highlighted boxes under the preview image; when present, the meta strips under the image are hidden. */
-  guideSteps?: { title: string; text: string; image?: string; imageAlt?: string }[];
+  /** Optional step-by-step guide rendered as highlighted boxes under the preview image; when present, the meta strips under the image are hidden. A step may carry an optional `link`: an external URL the detail page opens via an "Open link" button next to Copy. */
+  guideSteps?: { title: string; text: string; image?: string; imageAlt?: string; link?: string }[];
   /** Custom heading for the guideSteps section; when present the section is a collection, not numbered steps. */
   guideStepsHeading?: string;
   authorOrSource?: string;

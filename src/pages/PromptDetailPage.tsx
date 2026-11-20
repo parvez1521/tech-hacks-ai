@@ -243,26 +243,39 @@ export const PromptDetailPage: React.FC = () => {
                     {index + 1}
                   </span>
                   <div className="min-w-0 flex-1">
-                    <div className="flex items-start justify-between gap-3 mb-3">
+                    <div className="flex flex-wrap items-start justify-between gap-3 mb-3">
                       {/* A custom guideStepsHeading means this section is a collection, not numbered steps, so the title renders verbatim. */}
                       <h3 className="text-base font-bold text-foreground">{prompt.guideStepsHeading ? step.title : `Step ${index + 1} — ${step.title}`}</h3>
-                      <button
-                        type="button"
-                        onClick={() => handleCopyStep(step.text, index)}
-                        className="inline-flex shrink-0 items-center gap-1.5 px-3 py-1 rounded-lg bg-card hover:bg-muted text-secondary-foreground border border-border transition-colors font-medium text-[11px] shadow-xs cursor-pointer"
-                      >
-                        {copiedStep === index ? (
-                          <>
-                            <Check className="w-3.5 h-3.5 text-emerald-600" />
-                            <span className="text-emerald-600 font-semibold">Copied!</span>
-                          </>
-                        ) : (
-                          <>
-                            <Copy className="w-3.5 h-3.5 text-muted-foreground" />
-                            <span>Copy this prompt</span>
-                          </>
+                      <div className="flex shrink-0 flex-wrap items-center justify-end gap-2">
+                        {step.link && (
+                          <a
+                            href={step.link}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label={`Open link for ${step.title}`}
+                            className="inline-flex shrink-0 items-center gap-1.5 px-3 py-1 rounded-lg bg-card hover:bg-muted text-secondary-foreground border border-border transition-colors font-medium text-[11px] shadow-xs cursor-pointer"
+                          >
+                            <span>Open link</span>
+                          </a>
                         )}
-                      </button>
+                        <button
+                          type="button"
+                          onClick={() => handleCopyStep(step.text, index)}
+                          className="inline-flex shrink-0 items-center gap-1.5 px-3 py-1 rounded-lg bg-card hover:bg-muted text-secondary-foreground border border-border transition-colors font-medium text-[11px] shadow-xs cursor-pointer"
+                        >
+                          {copiedStep === index ? (
+                            <>
+                              <Check className="w-3.5 h-3.5 text-emerald-600" />
+                              <span className="text-emerald-600 font-semibold">Copied!</span>
+                            </>
+                          ) : (
+                            <>
+                              <Copy className="w-3.5 h-3.5 text-muted-foreground" />
+                              <span>Copy this prompt</span>
+                            </>
+                          )}
+                        </button>
+                      </div>
                     </div>
                     {step.image && (
                       <img src={step.image} alt={step.imageAlt || step.title} loading="lazy" decoding="async" className="mb-3 block max-h-[420px] w-full rounded-xl border border-border bg-muted object-contain" />
