@@ -45,14 +45,56 @@ test('google free AI tools entry links each tool step to its exact site', () => 
     links,
     'catalog passthrough keeps the step links',
   );
-  // No other entry gains a step link: the change is scoped to this entry.
+  // No other entry gains a step link: the change is scoped to these entries.
   for (const item of promptsData) {
-    if (item.slug === 'google-free-ai-tools-2026') continue;
+    if (item.slug === 'google-free-ai-tools-2026' || item.slug === 'claude-max-plan-free') continue;
     assert.ok(
       (item.guideSteps || []).every((step) => step.link === undefined),
       `${item.slug} steps stay link-free`,
     );
   }
+});
+
+// The 8 GitHub repository steps of the "Claude $200 max plan free" entry,
+// in source order. Every step links to its repository, so every step renders
+// an "Open link" button on the detail page.
+const EXPECTED_CLAUDE_MAX_LINKS = [
+  'https://github.com/Devansh-365/freellm',
+  'https://github.com/kaiser-data/free-llm-proxy-router',
+  'https://github.com/nabinkhadka/free-llm-api',
+  'https://github.com/YeomanYe/free-llm-router',
+  'https://github.com/alienz-dev/llm-router',
+  'https://github.com/MajidAsghariTabrizi/free-best-router',
+  'https://github.com/tashfeenahmed/freellmapi',
+  'https://github.com/Gmagl/omniroute',
+];
+
+test('claude max plan free entry links each repository step to its GitHub repo', () => {
+  const prompt = promptsData.find((item) => item.slug === 'claude-max-plan-free');
+  assert.ok(prompt, 'claude-max-plan-free entry exists');
+  assert.equal(prompt.title, 'Claude $200 max plan free', 'entry keeps its exact title');
+  assert.equal(prompt.provider, 'Anthropic', 'entry uses the Claude provider value');
+  assert.equal(prompt.category, 'claude-max-plan-free', 'entry uses its own category');
+  assert.equal(prompt.guideSteps.length, 8, 'entry keeps all 8 repository steps');
+  const links = prompt.guideSteps.map((step) => step.link);
+  assert.deepEqual(links, EXPECTED_CLAUDE_MAX_LINKS, 'steps carry exactly the repository URLs');
+  for (const link of links) {
+    assert.ok(link.startsWith('https://github.com/'), `${link} points at GitHub over HTTPS`);
+    assert.doesNotThrow(() => new URL(link), `${link} parses as a URL`);
+  }
+  assert.equal(prompt.hidePreviewImage, undefined, 'poster is the entry artwork, so the hero is not hidden');
+  // The entry as the detail page actually receives it (via the catalog
+  // service) keeps the same links.
+  const rendered = getPromptBySlug('claude-max-plan-free');
+  assert.ok(rendered, 'catalog lookup finds the entry');
+  assert.deepEqual(
+    rendered.guideSteps.map((step) => step.link),
+    links,
+    'catalog passthrough keeps the step links',
+  );
+  // The poster dimensions record matches the 1600x1600 artwork.
+  const dimensions = JSON.parse(fs.readFileSync(path.resolve('data/prompt-image-dimensions.json'), 'utf8'));
+  assert.deepEqual(dimensions['claude-max-plan-free'], { width: 1600, height: 1600 }, 'poster dimensions record is 1600x1600');
 });
 
 test('prompt detail page renders an Open link button for guide steps that carry a link', () => {
