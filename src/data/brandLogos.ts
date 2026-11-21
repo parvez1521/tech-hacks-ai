@@ -18,12 +18,12 @@ export const brandLogos: Record<string, BrandLogoEntry> = {
     "name": "Adobe",
     "assetPath": "/logos/adobe.svg",
     "sourceType": "simple-icons",
-    "verifiedAt": "2026-10-18",
+    "verifiedAt": "2026-11-21",
     "badgeBg": "#fa0f00",
     "format": "svg",
     "pngAssetPath": "/logos/png/adobe.png",
-    "sourceUrl": "https://cdn.jsdelivr.net/npm/simple-icons/icons/adobe.svg",
-    "notes": "Adobe umbrella brand mark from Simple Icons; not a substitute for individual Adobe app icons."
+    "sourceUrl": "https://cdn.jsdelivr.net/npm/simple-icons@13.21.0/icons/adobe.svg",
+    "notes": "Adobe umbrella brand mark from Simple Icons; not a substitute for individual Adobe app icons. Logo-correctness audit 2026-11-21: replaced the pre-2020 Adobe 'A' with the current 2020 geometric 'A' (Simple Icons 13.21.0, the last version carrying Adobe); source URL pinned to that version because the unversioned URL now 404s."
   },
   "adobeaftereffects": {
     "slug": "adobeaftereffects",
@@ -227,12 +227,13 @@ export const brandLogos: Record<string, BrandLogoEntry> = {
     "slug": "aws",
     "name": "Amazon Web Services",
     "assetPath": "/logos/aws.svg",
-    "sourceType": "fallback",
-    "verifiedAt": "2026-10-22",
+    "sourceType": "simple-icons",
+    "verifiedAt": "2026-11-21",
     "badgeBg": "#232f3e",
     "format": "svg",
     "pngAssetPath": "/logos/png/aws.png",
-    "notes": "Verification gap: the existing local mark has no traceable source and is withheld from display. BrandLogo shows its neutral initials fallback until a verified source is recorded."
+    "sourceUrl": "https://cdn.jsdelivr.net/npm/simple-icons/icons/amazonaws.svg",
+    "notes": "Logo-correctness audit 2026-11-21: the local mark had no traceable source and was withheld (initials shown); replaced with the verified AWS mark (Simple Icons amazonaws.svg content, served from the canonical 'aws' file)."
   },
   "azure": {
     "slug": "azure",
@@ -354,11 +355,12 @@ export const brandLogos: Record<string, BrandLogoEntry> = {
     "name": "Canva",
     "assetPath": "/logos/canva.svg",
     "sourceType": "official",
-    "verifiedAt": "2026-10-18",
+    "verifiedAt": "2026-11-21",
     "badgeBg": "#00c4cc",
     "format": "svg",
     "pngAssetPath": "/logos/png/canva.png",
-    "sourceUrl": "https://cdn.jsdelivr.net/npm/simple-icons/icons/canva.svg"
+    "sourceUrl": "https://cdn.jsdelivr.net/npm/simple-icons/icons/canva.svg",
+    "notes": "Logo-correctness audit 2026-11-21: replaced a fabricated gradient-circle 'C' glyph with the Canva script wordmark (Simple Icons canva.svg, verbatim)."
   },
   "capcut": {
     "slug": "capcut",
@@ -412,21 +414,23 @@ export const brandLogos: Record<string, BrandLogoEntry> = {
     "name": "Claude",
     "assetPath": "/logos/claude.svg",
     "sourceType": "simple-icons",
-    "verifiedAt": "2026-10-17",
+    "verifiedAt": "2026-11-21",
     "badgeBg": "#d97757",
     "format": "svg",
     "pngAssetPath": "/logos/png/claude.png",
-    "sourceUrl": "https://cdn.jsdelivr.net/npm/simple-icons/icons/claude.svg"
+    "sourceUrl": "https://cdn.jsdelivr.net/npm/simple-icons/icons/claude.svg",
+    "notes": "Logo-correctness audit 2026-11-21: the file held the Anthropic corporate 'A' mark; replaced with the Claude starburst (Simple Icons claude.svg path, official #D97757 fill)."
   },
   "claude-code": {
     "slug": "claude-code",
     "name": "Claude Code",
     "assetPath": "/logos/provided/claude-code.svg",
-    "sourceType": "provided",
-    "verifiedAt": "2026-10-27",
+    "sourceType": "simple-icons",
+    "verifiedAt": "2026-11-21",
     "badgeBg": "#d97757",
     "format": "svg",
-    "notes": "Artwork traced from the user-provided image IMG_0842.png uploaded on 2026-10-27; local self-hosted asset, no third-party substitute."
+    "sourceUrl": "https://cdn.jsdelivr.net/npm/simple-icons/icons/claude.svg",
+    "notes": "Logo-correctness audit 2026-11-21: the traced pixel-robot artwork was not the Claude Code mark; replaced with the Claude starburst (Simple Icons claude.svg path, official #D97757 fill)."
   },
   "clickup": {
     "slug": "clickup",
@@ -898,11 +902,12 @@ export const brandLogos: Record<string, BrandLogoEntry> = {
     "name": "Groq",
     "assetPath": "/logos/groq.svg",
     "sourceType": "official",
-    "verifiedAt": "2026-10-17",
-    "badgeBg": "#f43f5e",
+    "verifiedAt": "2026-11-21",
+    "badgeBg": "#F43E01",
     "format": "svg",
-    "sourceUrl": "https://www.google.com/s2/favicons?domain=groq.com&sz=256",
-    "pngAssetPath": "/logos/png/groq.png"
+    "sourceUrl": "https://groq.com/favicon.svg",
+    "pngAssetPath": "/logos/png/groq.png",
+    "notes": "Logo-correctness audit 2026-11-21: replaced a fabricated pink square with a white 'G' with Groq's official mark (orange square, white lightning bolt) from https://groq.com/favicon.svg."
   },
   "hailuo-ai": {
     "slug": "hailuo-ai",
@@ -977,22 +982,24 @@ export const brandLogos: Record<string, BrandLogoEntry> = {
     "name": "Hugging Face",
     "assetPath": "/logos/huggingface.svg",
     "sourceType": "official",
-    "verifiedAt": "2026-10-18",
+    "verifiedAt": "2026-11-21",
     "badgeBg": "#ffd21e",
     "format": "svg",
     "pngAssetPath": "/logos/png/huggingface.png",
-    "sourceUrl": "https://cdn.jsdelivr.net/npm/simple-icons/icons/huggingface.svg"
+    "sourceUrl": "https://cdn.jsdelivr.net/npm/simple-icons/icons/huggingface.svg",
+    "notes": "Logo-correctness audit 2026-11-21: replaced a fabricated yellow smiley with the Hugging Face mark (Simple Icons huggingface.svg path, official #FFD21E fill)."
   },
   "ideogram": {
     "slug": "ideogram",
     "name": "Ideogram v2",
     "assetPath": "/logos/ideogram.svg",
     "sourceType": "official",
-    "verifiedAt": "2026-10-17",
+    "verifiedAt": "2026-11-21",
     "badgeBg": "#000000",
     "format": "svg",
-    "sourceUrl": "https://www.google.com/s2/favicons?domain=ideogram.ai&sz=256",
-    "pngAssetPath": "/logos/png/ideogram.png"
+    "sourceUrl": "https://ideogram.ai/favicon.svg?v=new-brand-20261020",
+    "pngAssetPath": "/logos/png/ideogram.png",
+    "notes": "Logo-correctness audit 2026-11-21: replaced a fabricated black square with a white 'i' with Ideogram's official mark from https://ideogram.ai/favicon.svg."
   },
   "immich": {
     "slug": "immich",
@@ -1057,11 +1064,12 @@ export const brandLogos: Record<string, BrandLogoEntry> = {
     "name": "JetBrains",
     "assetPath": "/logos/jetbrains.svg",
     "sourceType": "official",
-    "verifiedAt": "2026-10-18",
+    "verifiedAt": "2026-11-21",
     "badgeBg": "#000000",
     "format": "svg",
     "pngAssetPath": "/logos/png/jetbrains.png",
-    "sourceUrl": "https://cdn.jsdelivr.net/npm/simple-icons/icons/jetbrains.svg"
+    "sourceUrl": "https://cdn.jsdelivr.net/npm/simple-icons/icons/jetbrains.svg",
+    "notes": "Logo-correctness audit 2026-11-21: replaced fabricated blue/pink parallelograms with the JetBrains mark (Simple Icons jetbrains.svg, verbatim)."
   },
   "jupyter": {
     "slug": "jupyter",
@@ -1319,14 +1327,14 @@ export const brandLogos: Record<string, BrandLogoEntry> = {
   },
   "luma": {
     "slug": "luma",
-    "name": "Luma AI",
+    "name": "Luma",
     "assetPath": "/logos/luma.svg",
     "format": "svg",
     "sourceType": "fallback",
-    "verifiedAt": "2026-10-18",
+    "verifiedAt": "2026-11-21",
     "badgeBg": "#3b82f6",
-    "sourceUrl": "https://www.google.com/s2/favicons?domain=lumalabs.ai&sz=256",
-    "notes": "Website favicon fallback; visually review before using as a logo",
+    "sourceUrl": "https://www.google.com/s2/favicons?domain=luma.com&sz=256",
+    "notes": "Logo-correctness audit 2026-11-21: favicon was pulled from lumalabs.ai (Luma Labs / Dream Machine, a different company); corrected to luma.com, the Luma event platform’s own domain.",
     "pngAssetPath": "/logos/png/luma.png"
   },
   "luma-dream-machine": {
@@ -1487,11 +1495,12 @@ export const brandLogos: Record<string, BrandLogoEntry> = {
     "name": "n8n",
     "assetPath": "/logos/n8n.svg",
     "sourceType": "simple-icons",
-    "verifiedAt": "2026-10-17",
-    "badgeBg": "#ea4b71",
+    "verifiedAt": "2026-11-21",
+    "badgeBg": "#FF91AC",
     "format": "svg",
     "pngAssetPath": "/logos/png/n8n.png",
-    "sourceUrl": "https://cdn.jsdelivr.net/npm/simple-icons/icons/n8n.svg"
+    "sourceUrl": "https://cdn.jsdelivr.net/npm/simple-icons/icons/n8n.svg",
+    "notes": "Logo-correctness audit 2026-11-21: replaced the superseded n8n mark with the current node mark (Simple Icons 16.38.0 path, official #FF91AC brand fill)."
   },
   "netlify": {
     "slug": "netlify",
@@ -1726,11 +1735,12 @@ export const brandLogos: Record<string, BrandLogoEntry> = {
     "name": "Pika",
     "assetPath": "/logos/pika.svg",
     "sourceType": "official",
-    "verifiedAt": "2026-10-17",
-    "badgeBg": "#ec4899",
+    "verifiedAt": "2026-11-21",
+    "badgeBg": "#000000",
     "format": "svg",
-    "sourceUrl": "https://www.google.com/s2/favicons?domain=pika.art&sz=256",
-    "pngAssetPath": "/logos/png/pika.png"
+    "sourceUrl": "https://pika.art/icon.svg",
+    "pngAssetPath": "/logos/png/pika.png",
+    "notes": "Logo-correctness audit 2026-11-21: replaced an invented pink play glyph with the official Pika mark from https://pika.art/icon.svg (verified against pika.art favicon and apple-icon). The official file's prefers-color-scheme rule was removed: the site themes app-level (html.dark), which an <img> SVG cannot see, so the black mark reads on the light tile in both themes."
   },
   "pinecone": {
     "slug": "pinecone",
@@ -2125,11 +2135,11 @@ export const brandLogos: Record<string, BrandLogoEntry> = {
     "name": "Suno",
     "assetPath": "/logos/official-ai/suno.svg",
     "sourceType": "official",
-    "verifiedAt": "2026-10-21",
+    "verifiedAt": "2026-11-21",
     "badgeBg": "#f97316",
     "format": "svg",
-    "sourceUrl": "https://cdn-o.suno.com/splash-page/logo-cloud/Billboard_logo.svg",
-    "notes": "Browser-inspected official logo from https://suno.com/. Page title: Suno | AI Music Generator"
+    "sourceUrl": "https://cdn-o.suno.com/Logo-7.svg",
+    "notes": "Logo-correctness audit 2026-11-21: the entry pointed at Billboard's logo (a different brand's mark); replaced with Suno's official 'SUNO' wordmark from https://cdn-o.suno.com/Logo-7.svg."
   },
   "supabase": {
     "slug": "supabase",
@@ -5604,12 +5614,12 @@ export const brandLogos: Record<string, BrandLogoEntry> = {
   "codev": {
     "slug": "codev",
     "name": "Codev",
-    "assetPath": "/logos/fallback-codev.svg",
-    "sourceType": "fallback",
-    "verifiedAt": "2026-11-14",
+    "assetPath": "/logos/codev.svg",
+    "sourceType": "official",
+    "verifiedAt": "2026-11-21",
     "format": "svg",
-    "sourceUrl": "https://www.google.com/s2/favicons?domain=co.dev&sz=256",
-    "notes": "Domain favicon fallback from the catalogue-listed website URL; this is not verified brand artwork."
+    "sourceUrl": "https://co.dev/codev-mark.svg",
+    "notes": "Logo-correctness audit 2026-11-21: replaced the opaque white-on-white favicon fallback with Codev's official mark from https://co.dev/codev-mark.svg."
   },
   "codex": {
     "slug": "codex",
