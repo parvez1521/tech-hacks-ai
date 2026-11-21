@@ -132,7 +132,15 @@ export const AlternativesPage: React.FC = () => {
 
       {/* Grid or Empty State */}
       {filteredAlternatives.length > 0 ? (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        // data-no-reveal: 970 cards must NOT get ScrollMorph's 3D flip +
+        // one IntersectionObserver entry each — that is what made this page
+        // scroll like glue (see tests/alternatives_scroll_perf.test.js).
+        // Cards render visible immediately; off-screen cost is handled by
+        // content-visibility on .alternatives-grid (src/index.css).
+        <div
+          className="alternatives-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"
+          data-no-reveal
+        >
           {filteredAlternatives.map((alt) => (
             <AlternativeCard key={alt.id} alternative={alt} />
           ))}

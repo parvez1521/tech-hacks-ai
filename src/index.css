@@ -2065,6 +2065,20 @@ html.js .morph-reveal.is-settled {
   }
 }
 
+/* Alternatives directory: 970 cards in a single grid. Off-screen cards
+   skip layout, style and paint so scrolling stays smooth on a page this
+   long (baseline: 32,476 DOM nodes, 90,571px tall, ~5.7s average frames
+   while scrolling). Cards stay in the DOM — SEO, search/filter and
+   find-in-page are unaffected. The 225px intrinsic size is the measured
+   average card height (259px) minus the card's own p-4 + border (34px),
+   which Chrome adds on top of contain-intrinsic-size — so off-screen
+   cards reserve ~259px and the scrollbar stays stable before a card
+   renders. */
+.alternatives-grid > .interactive-card {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 225px;
+}
+
 /* Hero CTA on the vermilion block: the sunset gradient merged into the
    hero colour, so the primary action is a black capsule instead — it
    stands off the block in both themes. Scoped to the hero; every other
