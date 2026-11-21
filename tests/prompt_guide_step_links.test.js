@@ -97,7 +97,7 @@ test('claude max plan free entry links each repository step to its GitHub repo',
   assert.deepEqual(dimensions['claude-max-plan-free'], { width: 1600, height: 1600 }, 'poster dimensions record is 1600x1600');
 });
 
-test('prompt detail page renders an Open link button for guide steps that carry a link', () => {
+test('prompt detail page renders an Open link button below the step text', () => {
   const detail = fs.readFileSync(path.resolve('src/pages/PromptDetailPage.tsx'), 'utf8');
   const types = fs.readFileSync(path.resolve('src/types/index.ts'), 'utf8');
   assert.match(types, /guideSteps\?: \{[^}]*link\?: string[^}]*\}\[\]/, 'guideSteps type carries an optional link');
@@ -110,4 +110,19 @@ test('prompt detail page renders an Open link button for guide steps that carry 
   // The button is gated on the step having a link, so steps without one
   // (and every other entry) render exactly as before.
   assert.match(detail, /\{step\.link && \(/, 'Open link renders only when the step carries a link');
+  // Position: the anchor sits BELOW the step text in DOM order — the step
+  // content (title + text) is on top, the link button underneath.
+  const textIndex = detail.indexOf('{step.text}</pre>');
+  const linkIndex = detail.indexOf('href={step.link}');
+  assert.ok(textIndex !== -1, 'step text pre is present');
+  assert.ok(linkIndex !== -1, 'Open link anchor is present');
+  assert.ok(linkIndex > textIndex, 'Open link anchor comes after the step text in DOM order');
+  // …and it is no longer in the header row: everything between the step
+  // header row and the step text carries no link anchor, while the Copy
+  // button stays there.
+  const headerIndex = detail.indexOf('flex flex-wrap items-start justify-between gap-3 mb-3');
+  assert.ok(headerIndex !== -1, 'step header row is present');
+  const headerSlice = detail.slice(headerIndex, textIndex);
+  assert.ok(!headerSlice.includes('href={step.link}'), 'header row carries no Open link anchor');
+  assert.ok(headerSlice.includes('Copy this prompt'), 'Copy button stays in the header row');
 });

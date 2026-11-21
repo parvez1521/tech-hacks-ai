@@ -247,17 +247,6 @@ export const PromptDetailPage: React.FC = () => {
                       {/* A custom guideStepsHeading means this section is a collection, not numbered steps, so the title renders verbatim. */}
                       <h3 className="text-base font-bold text-foreground">{prompt.guideStepsHeading ? step.title : `Step ${index + 1} — ${step.title}`}</h3>
                       <div className="flex shrink-0 flex-wrap items-center justify-end gap-2">
-                        {step.link && (
-                          <a
-                            href={step.link}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            aria-label={`Open link for ${step.title}`}
-                            className="inline-flex shrink-0 items-center gap-1.5 px-3 py-1 rounded-lg bg-card hover:bg-muted text-secondary-foreground border border-border transition-colors font-medium text-[11px] shadow-xs cursor-pointer"
-                          >
-                            <span>Open link</span>
-                          </a>
-                        )}
                         <button
                           type="button"
                           onClick={() => handleCopyStep(step.text, index)}
@@ -281,6 +270,17 @@ export const PromptDetailPage: React.FC = () => {
                       <img src={step.image} alt={step.imageAlt || step.title} loading="lazy" decoding="async" className="mb-3 block max-h-[420px] w-full rounded-xl border border-border bg-muted object-contain" />
                     )}
                     <pre className="font-mono text-xs sm:text-sm text-foreground whitespace-pre-wrap leading-relaxed select-all bg-muted p-4 rounded-xl border border-border overflow-x-auto">{step.text}</pre>
+                    {step.link && (
+                      <a
+                        href={step.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={`Open link for ${step.title}`}
+                        className="mt-3 inline-flex shrink-0 items-center gap-1.5 px-3 py-1 rounded-lg bg-card hover:bg-muted text-secondary-foreground border border-border transition-colors font-medium text-[11px] shadow-xs cursor-pointer"
+                      >
+                        <span>Open link</span>
+                      </a>
+                    )}
                   </div>
                 </div>
               ))}
