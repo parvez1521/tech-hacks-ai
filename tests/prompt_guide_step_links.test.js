@@ -126,3 +126,28 @@ test('prompt detail page renders an Open link button below the step text', () =>
   assert.ok(!headerSlice.includes('href={step.link}'), 'header row carries no Open link anchor');
   assert.ok(headerSlice.includes('Copy this prompt'), 'Copy button stays in the header row');
 });
+
+test('prompt detail page renders the prompt section above the guide-steps section', () => {
+  const detail = fs.readFileSync(path.resolve('src/pages/PromptDetailPage.tsx'), 'utf8');
+  // Section order in source = render order: prompt first, links below.
+  const promptIndex = detail.indexOf('{/* Prompt Container with Copy Button */}');
+  const promptLabelIndex = detail.indexOf('Prompt Instructions');
+  const stepsIndex = detail.indexOf('{/* Step-by-step guide boxes (guide prompts only) */}');
+  assert.ok(promptIndex !== -1, 'prompt container is present');
+  assert.ok(promptLabelIndex !== -1, 'Prompt Instructions label is present');
+  assert.ok(stepsIndex !== -1, 'guide-steps section is present');
+  assert.ok(promptIndex < stepsIndex, 'prompt container renders before the guide-steps section');
+  assert.ok(promptLabelIndex < stepsIndex, 'Prompt Instructions heading renders before the guide-steps section');
+  // The placeholder customizer customizes the prompt text, so it moves with
+  // the prompt container and stays directly above it — never below the steps.
+  const customizerIndex = detail.indexOf('{/* Interactive Placeholder Customizer */}');
+  assert.ok(customizerIndex !== -1, 'placeholder customizer is present');
+  assert.ok(customizerIndex < promptIndex, 'customizer stays directly above the prompt container');
+  assert.ok(customizerIndex < stepsIndex, 'customizer is not below the guide-steps section');
+  // The Open link button keeps its PR #103 position inside each step card
+  // (below the step text) after the reorder.
+  const textIndex = detail.indexOf('{step.text}</pre>');
+  const linkIndex = detail.indexOf('href={step.link}');
+  assert.ok(linkIndex > textIndex, 'Open link anchor still comes after the step text');
+  assert.ok(linkIndex > stepsIndex, 'Open link anchor lives inside the guide-steps section');
+});

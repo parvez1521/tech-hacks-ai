@@ -228,6 +228,106 @@ export const PromptDetailPage: React.FC = () => {
           </figure>
         )}
 
+        {/* Interactive Placeholder Customizer */}
+        {hasPlaceholders && (
+          <div className="mb-6 p-5 rounded-xl bg-muted border border-border">
+            <div className="flex items-center justify-between gap-3 mb-3">
+              <h2 className="text-xs font-bold uppercase tracking-wider text-foreground flex items-center gap-1.5">
+                <SlidersHorizontal className="w-4 h-4 text-primary" />
+                <span>Customize Placeholders in Real-Time</span>
+              </h2>
+              {hasCustomizedValues && (
+                <button
+                  type="button"
+                  onClick={handleResetPlaceholders}
+                  className="text-[11px] text-muted-foreground hover:text-foreground underline cursor-pointer"
+                >
+                  Reset all
+                </button>
+              )}
+            </div>
+
+            {prompt.customizationInstructions && (
+              <p className="text-xs text-secondary-foreground mb-4">
+                {prompt.customizationInstructions}
+              </p>
+            )}
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-3">
+              {prompt.placeholders!.map((ph) => (
+                <div key={ph} className="flex flex-col gap-1">
+                  <label className="text-[11px] font-mono text-secondary-foreground font-semibold">
+                    {ph}
+                  </label>
+                  <input
+                    type="text"
+                    value={placeholderValues[ph] || ''}
+                    onChange={(e) => handlePlaceholderChange(ph, e.target.value)}
+                    placeholder={`e.g. customized ${ph.replace(/[\[\]]/g, '').toLowerCase()}...`}
+                    className="px-3 py-1.5 rounded-lg bg-card border border-border text-foreground placeholder:text-muted-foreground text-xs focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all"
+                  />
+                </div>
+              ))}
+            </div>
+
+            {hasCustomizedValues && (
+              <div className="flex items-center gap-1 text-[11px] text-emerald-600 font-medium">
+                <CheckCircle2 className="w-3.5 h-3.5" />
+                <span>Placeholders populated! See customized prompt below.</span>
+              </div>
+            )}
+          </div>
+        )}
+
+        {/* Prompt Container with Copy Button */}
+        <div className="relative rounded-xl bg-muted border border-border p-5 space-y-4">
+          <div className="flex items-center justify-between text-xs text-muted-foreground border-b border-border pb-2">
+            <span className="font-semibold uppercase tracking-wider text-[11px] text-foreground flex items-center gap-1.5">
+              <Sparkles className="w-3.5 h-3.5 text-primary" />
+              <span>{hasCustomizedValues ? 'Customized Output Prompt' : 'Prompt Instructions'}</span>
+            </span>
+            <span className="font-mono text-[11px] text-muted-foreground">{recordedCopyCount !== undefined ? `${recordedCopyCount.toLocaleString()} copies` : 'Copy count not available'}</span>
+          </div>
+
+          <pre className="font-mono text-xs sm:text-sm text-foreground whitespace-pre-wrap leading-relaxed select-all selection:bg-blue-100 bg-card p-4 rounded-xl border border-border overflow-x-auto shadow-sm">
+            {customizedText}
+          </pre>
+
+          <div className="flex flex-col sm:flex-row gap-2.5">
+            <button
+              type="button"
+              onClick={handleCopyCustomized}
+              className={`flex-1 flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl font-semibold text-xs sm:text-sm transition-all duration-150 active:scale-98 cursor-pointer shadow-sm ${
+                copied
+                  ? 'bg-emerald-600 text-white'
+                  : 'bg-blue-600 hover:bg-blue-700 text-white'
+              }`}
+            >
+              {copied ? (
+                <>
+                  <Check className="w-4 h-4" />
+                  <span>{hasCustomizedValues ? 'Customized Prompt Copied!' : 'Prompt Copied to Clipboard!'}</span>
+                </>
+              ) : (
+                <>
+                  <Copy className="w-4 h-4" />
+                  <span>{hasCustomizedValues ? 'Copy Customized Prompt' : 'Copy Full Prompt'}</span>
+                </>
+              )}
+            </button>
+
+            {hasCustomizedValues && (
+              <button
+                type="button"
+                onClick={handleCopyOriginal}
+                className="px-4 py-2.5 rounded-xl font-medium text-xs text-secondary-foreground hover:text-foreground bg-card border border-border hover:bg-muted transition-colors cursor-pointer"
+              >
+                {copiedOriginal ? 'Copied Template!' : 'Copy Original Template'}
+              </button>
+            )}
+          </div>
+        </div>
+
         {/* Step-by-step guide boxes (guide prompts only) */}
         {prompt.guideSteps?.length ? (
           <section aria-label="Step-by-step guide" className="mb-8">
@@ -348,106 +448,6 @@ export const PromptDetailPage: React.FC = () => {
             )}
           </div>
         )}
-
-        {/* Interactive Placeholder Customizer */}
-        {hasPlaceholders && (
-          <div className="mb-6 p-5 rounded-xl bg-muted border border-border">
-            <div className="flex items-center justify-between gap-3 mb-3">
-              <h2 className="text-xs font-bold uppercase tracking-wider text-foreground flex items-center gap-1.5">
-                <SlidersHorizontal className="w-4 h-4 text-primary" />
-                <span>Customize Placeholders in Real-Time</span>
-              </h2>
-              {hasCustomizedValues && (
-                <button
-                  type="button"
-                  onClick={handleResetPlaceholders}
-                  className="text-[11px] text-muted-foreground hover:text-foreground underline cursor-pointer"
-                >
-                  Reset all
-                </button>
-              )}
-            </div>
-
-            {prompt.customizationInstructions && (
-              <p className="text-xs text-secondary-foreground mb-4">
-                {prompt.customizationInstructions}
-              </p>
-            )}
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-3">
-              {prompt.placeholders!.map((ph) => (
-                <div key={ph} className="flex flex-col gap-1">
-                  <label className="text-[11px] font-mono text-secondary-foreground font-semibold">
-                    {ph}
-                  </label>
-                  <input
-                    type="text"
-                    value={placeholderValues[ph] || ''}
-                    onChange={(e) => handlePlaceholderChange(ph, e.target.value)}
-                    placeholder={`e.g. customized ${ph.replace(/[\[\]]/g, '').toLowerCase()}...`}
-                    className="px-3 py-1.5 rounded-lg bg-card border border-border text-foreground placeholder:text-muted-foreground text-xs focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all"
-                  />
-                </div>
-              ))}
-            </div>
-
-            {hasCustomizedValues && (
-              <div className="flex items-center gap-1 text-[11px] text-emerald-600 font-medium">
-                <CheckCircle2 className="w-3.5 h-3.5" />
-                <span>Placeholders populated! See customized prompt below.</span>
-              </div>
-            )}
-          </div>
-        )}
-
-        {/* Prompt Container with Copy Button */}
-        <div className="relative rounded-xl bg-muted border border-border p-5 space-y-4">
-          <div className="flex items-center justify-between text-xs text-muted-foreground border-b border-border pb-2">
-            <span className="font-semibold uppercase tracking-wider text-[11px] text-foreground flex items-center gap-1.5">
-              <Sparkles className="w-3.5 h-3.5 text-primary" />
-              <span>{hasCustomizedValues ? 'Customized Output Prompt' : 'Prompt Instructions'}</span>
-            </span>
-            <span className="font-mono text-[11px] text-muted-foreground">{recordedCopyCount !== undefined ? `${recordedCopyCount.toLocaleString()} copies` : 'Copy count not available'}</span>
-          </div>
-
-          <pre className="font-mono text-xs sm:text-sm text-foreground whitespace-pre-wrap leading-relaxed select-all selection:bg-blue-100 bg-card p-4 rounded-xl border border-border overflow-x-auto shadow-sm">
-            {customizedText}
-          </pre>
-
-          <div className="flex flex-col sm:flex-row gap-2.5">
-            <button
-              type="button"
-              onClick={handleCopyCustomized}
-              className={`flex-1 flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl font-semibold text-xs sm:text-sm transition-all duration-150 active:scale-98 cursor-pointer shadow-sm ${
-                copied
-                  ? 'bg-emerald-600 text-white'
-                  : 'bg-blue-600 hover:bg-blue-700 text-white'
-              }`}
-            >
-              {copied ? (
-                <>
-                  <Check className="w-4 h-4" />
-                  <span>{hasCustomizedValues ? 'Customized Prompt Copied!' : 'Prompt Copied to Clipboard!'}</span>
-                </>
-              ) : (
-                <>
-                  <Copy className="w-4 h-4" />
-                  <span>{hasCustomizedValues ? 'Copy Customized Prompt' : 'Copy Full Prompt'}</span>
-                </>
-              )}
-            </button>
-
-            {hasCustomizedValues && (
-              <button
-                type="button"
-                onClick={handleCopyOriginal}
-                className="px-4 py-2.5 rounded-xl font-medium text-xs text-secondary-foreground hover:text-foreground bg-card border border-border hover:bg-muted transition-colors cursor-pointer"
-              >
-                {copiedOriginal ? 'Copied Template!' : 'Copy Original Template'}
-              </button>
-            )}
-          </div>
-        </div>
       </div>
 
       {/* Pro Tips & Parameters (hidden for guide prompts — the note renders inside the steps section) */}
