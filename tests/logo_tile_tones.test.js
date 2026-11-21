@@ -11,14 +11,17 @@ const brandLogo = fs.readFileSync(path.resolve(process.cwd(), 'src/components/Br
 describe('Logo contrast tiles (measured 2026-11-14)', () => {
   test('tone map covers the 770 measured failing logos with valid tones only', () => {
     const entries = Object.entries(LOGO_TILE_TONES);
-    assert.equal(entries.length, 770);
+    // 770 measured 2026-11-14 + 5 added by the 2026-11-21 logo-correctness audit
+    // (corrected assets whose monochrome/white marks need a tile to read):
+    // aws, canva, jetbrains, pika (light) and codev (dark).
+    assert.equal(entries.length, 775);
     const counts = { light: 0, dark: 0 };
     for (const [slug, tone] of entries) {
       assert.ok(tone === 'light' || tone === 'dark', `${slug} has invalid tone ${tone}`);
       counts[tone] += 1;
     }
-    assert.equal(counts.light, 603);
-    assert.equal(counts.dark, 167);
+    assert.equal(counts.light, 607);
+    assert.equal(counts.dark, 168);
   });
 
   test('every mapped slug exists in the runtime logo registry', () => {
@@ -43,6 +46,12 @@ describe('Logo contrast tiles (measured 2026-11-14)', () => {
     assert.equal(getLogoTileTone('zo-computer'), 'dark');
     // suno is a white mark whose old white CSS tile made it invisible everywhere.
     assert.equal(getLogoTileTone('suno'), 'dark');
+    // 2026-11-21 logo-correctness audit: corrected assets that need a tile.
+    assert.equal(getLogoTileTone('aws'), 'light');
+    assert.equal(getLogoTileTone('canva'), 'light');
+    assert.equal(getLogoTileTone('jetbrains'), 'light');
+    assert.equal(getLogoTileTone('pika'), 'light');
+    assert.equal(getLogoTileTone('codev'), 'dark');
   });
 
   test('no tone-mapped slug keeps a per-slug CSS tile (no specificity fight)', () => {
