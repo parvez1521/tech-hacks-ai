@@ -92,9 +92,9 @@ describe('Phase 21: Prompt Library Expansion, Creative Workflows & Authentic Bra
   });
 
   // -------------------------------------------------------------------------
-  // 2. 18 Curated Categories Verification
+  // 2. 19 Curated Categories Verification
   // -------------------------------------------------------------------------
-  describe('2. 18 Curated Prompt Categories', () => {
+  describe('2. 19 Curated Prompt Categories', () => {
     const requiredCategories = [
       'human-portraits',
       'ai-image-generation',
@@ -114,17 +114,18 @@ describe('Phase 21: Prompt Library Expansion, Creative Workflows & Authentic Bra
       'vibe-coded-app-security',
       'premium-website-prompts',
       'google-free-ai-tools',
+      'claude-max-plan-free',
     ];
 
-    test('promptCategories defines all 18 curated categories', () => {
-      assert.strictEqual(promptCategories.length, 18, 'Must have exactly 18 categories');
+    test('promptCategories defines all 19 curated categories', () => {
+      assert.strictEqual(promptCategories.length, 19, 'Must have exactly 19 categories');
       const slugs = promptCategories.map((c) => c.slug);
       for (const req of requiredCategories) {
         assert.ok(slugs.includes(req), `Category ${req} must be registered in promptCategories`);
       }
     });
 
-    test('every single one of the 18 categories contains at least one prompt', () => {
+    test('every single one of the 19 categories contains at least one prompt', () => {
       for (const cat of promptCategories) {
         const matching = promptsData.filter((p) => p.category === cat.slug);
         assert.ok(
@@ -171,8 +172,11 @@ describe('Phase 21: Prompt Library Expansion, Creative Workflows & Authentic Bra
   // -------------------------------------------------------------------------
   describe('4. Claude Artifacts & Interactive UI Collection', () => {
     test('contains rich interactive prompts targeting Claude Artifacts and Anthropic', () => {
+      // Guide collections (e.g. claude-max-plan-free, a router list with
+      // guideSteps) are not interactive Artifacts prompts and carry no
+      // officialToolUrl — the id-prefix clause would otherwise sweep them in.
       const claudeArtifacts = promptsData.filter(
-        (p) => p.category === 'claude-artifacts-ui' || p.id.startsWith('claude-')
+        (p) => (p.category === 'claude-artifacts-ui' || p.id.startsWith('claude-')) && !p.guideSteps
       );
       assert.ok(claudeArtifacts.length >= 7, `Expected at least 7 Claude Artifacts prompts (found ${claudeArtifacts.length})`);
 

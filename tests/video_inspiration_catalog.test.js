@@ -53,8 +53,8 @@ test('homepage catalog metrics match distinct source registry counts', () => {
     alternativeTargets: 970,
     alternativeRelationships: 5073,
     browserUtilities: 8,
-    uniquePrompts: 589,
-    imagePrompts: 551,
+    uniquePrompts: 590,
+    imagePrompts: 552,
     videoPrompts: 12,
   });
 });

@@ -116,6 +116,12 @@ export const promptCategories: PromptCategoryDef[] = [
     slug: 'google-free-ai-tools',
     description: '15 free Google AI tools from mavgpt.ai — SynthID Detector, Playground, Files in Gemini, Android apps via AI Studio, Gemini Notebook, Pomelli, Flow Music, Stitch, Antigravity, Flow, Gemini, Google Vids, AI Mode, Search Live and Live Translate — what each one does and exactly where to find it. Source: mavgpt.ai.',
   },
+  {
+    id: 'claude-max-plan-free',
+    name: 'Claude Max Plan Free',
+    slug: 'claude-max-plan-free',
+    description: "Claude Code's usage limit reached? Continue using free AI models with 8 GitHub repositories — FreeLLM, Free LLM Proxy Router, Free LLM API, Free LLM Router, LLM Router, Free Best Router, FreeLLM API and OmniRoute — by connecting free API keys and configuring a proxy endpoint in Claude Code.",
+  },
 ];
 
 export const promptProviders = [
@@ -2226,5 +2232,90 @@ Find it: in the Google Translate app, tap Live translate and pick your two langu
     mediaType: 'image',
     aspectRatio: '1:1',
     createdAt: '2026-11-20T00:00:00.000Z',
+  },
+  {
+    id: 'claude-max-plan-free',
+    title: 'Claude $200 max plan free',
+    slug: 'claude-max-plan-free',
+    description: "Claude Code's usage limit reached? Don't stop coding — continue using free AI models with 8 GitHub repositories: FreeLLM, Free LLM Proxy Router, Free LLM API, Free LLM Router, LLM Router, Free Best Router, FreeLLM API and OmniRoute. Choose a repository, connect free API keys from providers like Groq and Google Gemini, and configure the proxy endpoint in Claude Code.",
+    category: 'claude-max-plan-free',
+    targetModel: 'Claude Code',
+    provider: 'Anthropic',
+    promptText: `Claude Code's Usage Limit Reached?
+
+Don't stop coding! You can continue using free AI models with the help of these **8 GitHub repositories.**
+
+### How to Set It Up
+
+Step 1: Choose a compatible GitHub repository, download it, and install it on your system by following its setup instructions.
+
+Step 2: Connect free API keys from providers like Groq, Google Gemini, and other supported platforms.
+
+Step 3: Configure the compatible proxy or API endpoint in Claude Code. Select your preferred free AI model and enable automatic model switching if supported. Some repositories may require additional configuration.
+
+### 8 GitHub Repositories to Explore
+
+1. FreeLLM – https://github.com/Devansh-365/freellm
+2. Free LLM Proxy Router – https://github.com/kaiser-data/free-llm-proxy-router
+3. Free LLM API – https://github.com/nabinkhadka/free-llm-api
+4. Free LLM Router – https://github.com/YeomanYe/free-llm-router
+5. LLM Router – https://github.com/alienz-dev/llm-router
+6. Free Best Router – https://github.com/MajidAsghariTabrizi/free-best-router
+7. FreeLLM API – https://github.com/tashfeenahmed/freellmapi
+8. OmniRoute – https://github.com/Gmagl/omniroute
+
+Important: Free API providers have usage limits and rate restrictions. Compatibility and automatic switching features vary between repositories. Always check the documentation before installing.`,
+    guideStepsHeading: 'The 8 repositories',
+    guideSteps: [
+      {
+        title: '1. FreeLLM',
+        text: 'Find it: https://github.com/Devansh-365/freellm',
+        link: 'https://github.com/Devansh-365/freellm',
+      },
+      {
+        title: '2. Free LLM Proxy Router',
+        text: 'Find it: https://github.com/kaiser-data/free-llm-proxy-router',
+        link: 'https://github.com/kaiser-data/free-llm-proxy-router',
+      },
+      {
+        title: '3. Free LLM API',
+        text: 'Find it: https://github.com/nabinkhadka/free-llm-api',
+        link: 'https://github.com/nabinkhadka/free-llm-api',
+      },
+      {
+        title: '4. Free LLM Router',
+        text: 'Find it: https://github.com/YeomanYe/free-llm-router',
+        link: 'https://github.com/YeomanYe/free-llm-router',
+      },
+      {
+        title: '5. LLM Router',
+        text: 'Find it: https://github.com/alienz-dev/llm-router',
+        link: 'https://github.com/alienz-dev/llm-router',
+      },
+      {
+        title: '6. Free Best Router',
+        text: 'Find it: https://github.com/MajidAsghariTabrizi/free-best-router',
+        link: 'https://github.com/MajidAsghariTabrizi/free-best-router',
+      },
+      {
+        title: '7. FreeLLM API',
+        text: 'Find it: https://github.com/tashfeenahmed/freellmapi',
+        link: 'https://github.com/tashfeenahmed/freellmapi',
+      },
+      {
+        title: '8. OmniRoute',
+        text: 'Find it: https://github.com/Gmagl/omniroute',
+        link: 'https://github.com/Gmagl/omniroute',
+      },
+    ],
+    tags: ['claude', 'claude-code', 'free-ai-models', 'github', 'llm-router', 'free-llm', 'groq', 'gemini', 'usage-limits', 'free-tools'],
+    tips: 'Choose a compatible repository, connect free API keys from providers like Groq or Google Gemini, then configure the proxy endpoint in Claude Code. Free API providers have usage limits and rate restrictions — always check the documentation before installing.',
+    expectedOutputType: 'A Claude Code setup that keeps coding with free AI models via one of 8 GitHub repositories, with free API keys connected and automatic model switching enabled where supported.',
+    exampleUseCase: 'Continuing to code in Claude Code after hitting the usage limit, by routing free models from Groq, Google Gemini or other supported providers through a free proxy router.',
+    previewImage: '/prompts/generated/claude-max-plan-free.webp',
+    previewImageAlt: 'Poster artwork for the Claude $200 max plan free guide, covering the 8 free LLM router repositories for Claude Code.',
+    mediaType: 'image',
+    aspectRatio: '1:1',
+    createdAt: '2026-11-21T00:00:00.000Z',
   },
 ];
