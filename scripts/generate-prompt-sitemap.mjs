@@ -59,6 +59,16 @@ const promptMediaCounts = {
 };
 await fs.writeFile(promptMediaCountsPath, `${JSON.stringify(promptMediaCounts)}\n`);
 const knownUrls = new Set([...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => match[1]));
+// Alternatives pages with no indexed replacements and no AI recommendations
+// carry only boilerplate copy. They stay reachable for visitors but must not
+// be advertised to search engines. This list is the computed empty set —
+// tests/adsense_thin_alternatives.test.js fails if data changes make it stale.
+const noindexAlternativeSlugs = JSON.parse(
+  await fs.readFile(path.join(root, 'scripts', 'noindex-alternative-slugs.json'), 'utf8'),
+);
+const noindexAlternativeUrls = new Set(
+  noindexAlternativeSlugs.map((slug) => `https://switchroute.in/alternatives/${slug}`),
+);
 const candidates = [
   ...allPrompts.filter((item) => item?.slug).map((item) => ({ url: `https://switchroute.in/prompt-library/${item.slug}`, priority: '0.6' })),
   ...aiToolsData.filter((item) => item?.slug).map((item) => ({ url: `https://switchroute.in/ai-tools/${item.slug}`, priority: '0.7' })),
@@ -71,9 +81,15 @@ const candidates = [
   // 780 linked /tools slugs were absent from the sitemap and returned 404).
   ...toolsData.filter((item) => item?.slug && item.featuredOrder).map((item) => ({ url: `https://switchroute.in/tools/${item.slug}`, priority: '0.7' })),
 ];
-const entries = candidates.filter((item) => !knownUrls.has(item.url)).map((item) => `  <url>\n    <loc>${item.url}</loc>\n    <changefreq>monthly</changefreq>\n    <priority>${item.priority}</priority>\n  </url>`);
-if (entries.length) {
+const entries = candidates.filter((item) => !knownUrls.has(item.url) && !noindexAlternativeUrls.has(item.url)).map((item) => `  <url>\n    <loc>${item.url}</loc>\n    <changefreq>monthly</changefreq>\n    <priority>${item.priority}</priority>\n  </url>`);
+// Drop any previously submitted entries for noindexed alternatives.
+const removedNoindexEntries = [...sitemap.matchAll(/<url>\s*<loc>([^<]+)<\/loc>[\s\S]*?<\/url>/g)]
+  .filter((match) => noindexAlternativeUrls.has(match[1])).length;
+if (removedNoindexEntries > 0) {
+  sitemap = sitemap.replace(/<url>\s*<loc>([^<]+)<\/loc>[\s\S]*?<\/url>/g, (block, loc) => (noindexAlternativeUrls.has(loc) ? '' : block));
+}
+if (entries.length || removedNoindexEntries > 0) {
   sitemap = sitemap.replace('</urlset>', `${entries.join('\n')}\n</urlset>`);
   await fs.writeFile(sitemapPath, sitemap);
 }
-console.log(`Added ${entries.length} prompt, AI tool and alternatives detail URLs to public/sitemap.xml.`);
+console.log(`Added ${entries.length} prompt, AI tool and alternatives detail URLs to public/sitemap.xml. Removed ${removedNoindexEntries} noindexed alternatives URLs.`);

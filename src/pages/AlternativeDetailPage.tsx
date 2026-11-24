@@ -47,6 +47,46 @@ export const AlternativeDetailPage: React.FC = () => {
   // Distinct licenses among mapped replacements
   const availableLicenses = Array.from(new Set(allReplacements.map((t) => t.license))).sort();
 
+  // Page-specific summary built only from indexed data (no invented claims).
+  // Gives every detail page unique prose instead of the shared template copy.
+  const topReplacement = [...allReplacements].sort((a, b) => b.stars - a.stars)[0] ?? null;
+  const newestReplacement = allReplacements.length > 0
+    ? [...allReplacements].sort((a, b) => new Date(b.lastCommitDate).getTime() - new Date(a.lastCommitDate).getTime())[0]
+    : null;
+  const newestCommitDate = newestReplacement ? new Date(newestReplacement.lastCommitDate) : null;
+  const newestCommitLabel = newestCommitDate && !Number.isNaN(newestCommitDate.getTime())
+    ? newestCommitDate.toLocaleDateString('en-US', { month: 'short', year: 'numeric' })
+    : null;
+  const atGlanceSentences: string[] = [];
+  if (allReplacements.length > 0) {
+    atGlanceSentences.push(
+      `We list ${allReplacements.length} open source ${allReplacements.length === 1 ? 'replacement' : 'replacements'} for ${proprietary.name}${category ? ` in the ${category.name} category` : ''}.`,
+    );
+    if (topReplacement) {
+      atGlanceSentences.push(
+        `The most starred is ${topReplacement.name}, with ${topReplacement.stars.toLocaleString()} stars under the ${topReplacement.license} license.`,
+      );
+    }
+    if (availableLicenses.length === 1) {
+      atGlanceSentences.push(`Every replacement here uses the ${availableLicenses[0]} license.`);
+    } else if (availableLicenses.length > 1) {
+      const shownLicenses = availableLicenses.slice(0, 3).join(', ');
+      atGlanceSentences.push(
+        `Licenses in this list include ${shownLicenses}${availableLicenses.length > 3 ? `, and ${availableLicenses.length - 3} more` : ''}.`,
+      );
+    }
+    if (newestReplacement && newestReplacement !== topReplacement && newestCommitLabel) {
+      atGlanceSentences.push(`The most recently updated is ${newestReplacement.name} (last commit ${newestCommitLabel}).`);
+    }
+  } else {
+    atGlanceSentences.push(`We have not indexed open source replacements for ${proprietary.name} yet.`);
+  }
+  if (allAiRecommendations.length > 0) {
+    atGlanceSentences.push(
+      `We also list ${allAiRecommendations.length} related ${isVideoTarget ? 'generators and model workflows' : 'AI tools and models'}.`,
+    );
+  }
+
   // Local filter parameters from URL
   const searchQuery = searchParams.get('q') || '';
   const sortBy = (searchParams.get('sort') as SortOption) || 'stars';
@@ -175,7 +215,7 @@ export const AlternativeDetailPage: React.FC = () => {
             <span className="inline-flex items-center px-2.5 py-1 rounded-full bg-primary/10 text-primary border border-primary/30 font-medium">
               {isVideoTarget
                 ? `${allReplacements.length + allAiRecommendations.length} related options`
-                : `${allReplacements.length} ${allReplacements.length === 1 ? 'verified replacement' : 'verified replacements'}`}
+                : `${allReplacements.length} ${allReplacements.length === 1 ? 'open source replacement' : 'open source replacements'}`}
             </span>
             {category && (
               <Link
@@ -234,17 +274,31 @@ export const AlternativeDetailPage: React.FC = () => {
             </p>
           </div>
 
-          <a
-            href={proprietary.websiteUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-lg bg-primary hover:bg-primary-hover text-primary-foreground text-xs font-semibold transition-all cursor-pointer"
-          >
-            <span>Visit {proprietary.name} Official Website</span>
-            <ExternalLink className="w-3.5 h-3.5" />
-          </a>
+          {proprietary.websiteUrl && (
+            <a
+              href={proprietary.websiteUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-lg bg-primary hover:bg-primary-hover text-primary-foreground text-xs font-semibold transition-all cursor-pointer"
+            >
+              <span>Visit {proprietary.name} Official Website</span>
+              <ExternalLink className="w-3.5 h-3.5" />
+            </a>
+          )}
         </div>
       </div>
+
+      {/* At a glance — page-specific summary built from indexed data */}
+      {(allReplacements.length > 0 || allAiRecommendations.length > 0) && (
+        <section aria-labelledby="at-a-glance-heading" className="p-6 glass rounded-2xl border border-border mb-8">
+          <h2 id="at-a-glance-heading" className="text-base font-bold text-foreground mb-2">
+            At a glance: {proprietary.name} alternatives
+          </h2>
+          <p className="text-xs sm:text-sm text-secondary-foreground leading-relaxed">
+            {atGlanceSentences.join(' ')}
+          </p>
+        </section>
+      )}
 
       {/* Migration Analysis & Honest Cost Architecture */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 p-6 glass rounded-2xl border border-border text-xs mb-8">
@@ -380,7 +434,7 @@ export const AlternativeDetailPage: React.FC = () => {
             No Alternatives Mapped Yet
           </h3>
           <p className="text-xs text-slate-600 mb-4 leading-relaxed">
-            We haven't indexed any verified open source software replacements for {proprietary.name} yet.
+            We haven't indexed any open source software replacements for {proprietary.name} yet.
           </p>
           <Link
             to="/alternatives"
