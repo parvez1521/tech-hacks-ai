@@ -49,7 +49,7 @@ export interface ProprietaryTool {
   slug: string;
   tagline: string;
   description: string;
-  websiteUrl: string;
+  websiteUrl?: string;
   category: string;
   iconLetter: string;
   iconBgColor: string;

@@ -246,7 +246,7 @@ export const HomePage: React.FC = () => {
        <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20">
         <div className="mb-10 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
           <div>
-            <p className="eyebrow">Frontier access highlights · checked 3 Nov 2026</p>
+            <p className="eyebrow">Frontier access highlights</p>
             <h2 id="frontier-access-heading" className="mt-3 text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">Try frontier models without starting with a subscription</h2>
             <p className="mt-3 max-w-2xl text-base leading-7 text-muted-foreground">These are provider-specific routes, not unlimited model access. Check the quota, account rules and region before you begin.</p>
           </div>

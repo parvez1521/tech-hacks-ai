@@ -7,6 +7,7 @@
  */
 import { spawnSync } from 'node:child_process';
 import fs from 'node:fs/promises';
+import { readFileSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import React from 'react';
@@ -18,6 +19,12 @@ const dist = path.join(root, 'dist');
 const sitemapPath = path.join(root, 'public', 'sitemap.xml');
 const baseUrl = (process.env.VITE_SITE_URL || 'https://switchroute.in').replace(/\/+$/, '');
 const bundlePath = path.join(dist, 'seo-renderer.js');
+
+// Alternatives pages with no indexed content stay reachable but are served
+// with noindex,follow. Single source of truth: scripts/noindex-alternative-slugs.json.
+const noindexAlternativePaths = JSON.parse(
+  readFileSync(path.join(root, 'scripts', 'noindex-alternative-slugs.json'), 'utf8'),
+).map((slug) => `/alternatives/${slug}`);
 
 function runEsbuild() {
   const executable = path.join(root, 'node_modules', '.bin', 'esbuild');
@@ -83,7 +90,7 @@ function createRouteHtml(template, pathname, title, description, body, routeName
   html = replaceMeta(html, 'name', 'twitter:image', socialImage);
   html = replaceCanonical(html, canonical);
 
-  const noIndex = new Set(['/saved', '/submit-tool', '/submit-guide', '/submit-prompt']);
+  const noIndex = new Set(['/saved', '/submit-tool', '/submit-guide', '/submit-prompt', ...noindexAlternativePaths]);
   if (noIndex.has(pathname) || isPromptFeedDetailPath(pathname)) {
     html = replaceMeta(html, 'name', 'robots', 'noindex,follow');
   }
@@ -195,6 +202,7 @@ async function main() {
     .map((value) => normalizedPath(new URL(value).pathname));
   const extraPaths = [
     '/saved', '/submit-tool', '/submit-guide', '/submit-prompt', '/discoveries', '/updates',
+    ...noindexAlternativePaths,
     ...githubProjectDetailPaths,
   ];
   const routes = [...new Set([...sitemapUrls, ...extraPaths])].sort((a, b) => a.localeCompare(b));
@@ -237,7 +245,7 @@ async function main() {
       await fs.writeFile(cleanUrlOutputPath, html, 'utf8');
     }
     rendered += 1;
-    if (sitemapUrls.includes(pathname) && !isPromptFeedDetailPath(pathname)) validSitemapPaths.add(pathname);
+    if (sitemapUrls.includes(pathname) && !isPromptFeedDetailPath(pathname) && !noindexAlternativePaths.includes(pathname)) validSitemapPaths.add(pathname);
     if (rendered % 100 === 0) console.log(`Pre-rendered ${rendered} public pages…`);
   }
 

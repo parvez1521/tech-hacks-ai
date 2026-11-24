@@ -38,7 +38,7 @@ export const FrontierModelsPage: React.FC = () => {
 
   return <main className="max-w-6xl mx-auto px-4 sm:px-6 py-10 sm:py-14">
     <header className="max-w-3xl mb-10 sm:mb-12">
-      <p className="text-xs font-semibold tracking-[.16em] uppercase text-primary mb-3">Model index · reviewed 3 Nov 2026</p>
+      <p className="text-xs font-semibold tracking-[.16em] uppercase text-primary mb-3">Model index</p>
       <h1 className="text-4xl sm:text-5xl font-semibold tracking-tight text-foreground">Frontier models</h1>
       <p className="mt-4 max-w-2xl text-base leading-7 text-muted-foreground">A model-first guide to leading releases, what they are good at, official API pricing, and current ways to try them. Community routes are separate from official provider access and may have shared limits.</p>
       <div className="mt-6 grid gap-3 sm:grid-cols-3">

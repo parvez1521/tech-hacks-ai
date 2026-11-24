@@ -71,7 +71,7 @@ export const FreeAiSitesPage: React.FC = () => {
       <div className="mb-8">
         <div className="inline-flex min-h-9 items-center gap-2 border-l-2 border-emerald-600 pl-3 text-xs font-semibold tracking-wide text-muted-foreground mb-3 dark:border-emerald-400">
           <Gift className="w-3.5 h-3.5 text-emerald-600" />
-          <span>Free access routes · checked 3 Nov 2026</span>
+          <span>Free access routes</span>
         </div>
         <h1 className="text-2xl sm:text-4xl font-semibold text-foreground tracking-tight mb-3">
           Free AI Access

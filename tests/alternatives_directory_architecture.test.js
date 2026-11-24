@@ -154,7 +154,7 @@ describe('Alternatives Directory & Proprietary vs Replacement Architecture', () 
 
     assert.ok(html.includes('Open Source Notion Alternatives'), 'Header shows Notion alternatives title');
     assert.ok(html.includes('https://notion.so'), 'Contains link to official notion.so website');
-    assert.ok(html.includes('22 verified replacements'), 'Displays count of 22 replacements');
+    assert.ok(html.includes('22 open source replacements'), 'Displays count of 22 replacements');
 
     // All 22 Notion replacements must be rendered
     assert.ok(html.includes('AppFlowy'), 'Renders AppFlowy');
