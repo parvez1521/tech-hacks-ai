@@ -42,3 +42,30 @@ test('the workflow links only to HTTPS official documentation and tool sources',
     assert.equal(new URL(reference.url).protocol, 'https:');
   }
 });
+
+test('the OpenJarvis guide offers manual setup and copy-ready prompts for three coding agents', async () => {
+  const guide = guidesData.find((item) => item.slug === 'free-local-jarvis-windows-mac');
+  assert.ok(guide?.agentPrompts, 'Expected AI agent setup prompts on the OpenJarvis guide');
+  assert.deepEqual(guide.agentPrompts.map((prompt) => prompt.id), ['claude-code', 'codex', 'antigravity']);
+  for (const item of guide.agentPrompts) {
+    assert.ok(item.prompt.length > 1000, `Expected a complete setup prompt for ${item.name}`);
+    assert.ok(item.prompt.includes('WAIT FOR MY APPROVAL'));
+    assert.ok(item.prompt.includes('install.ps1'));
+    assert.ok(item.prompt.includes('install.sh'));
+    assert.ok(item.prompt.includes('Do not run the installer as root or with sudo'));
+  }
+
+  const page = await read('../src/pages/GuideDetailPage.tsx');
+  assert.match(page, /Choose Your Setup Method/);
+  assert.match(page, /Manual Setup/);
+  assert.match(page, /AI Agent Setup/);
+  assert.match(page, /Choose Your AI Coding Agent/);
+  assert.match(page, /handleCopyAgentPrompt/);
+  assert.match(page, /Copy Prompt/);
+});
+
+test('the OpenJarvis workflow links to the current native Windows installation instructions', () => {
+  const guide = guidesData.find((item) => item.slug === 'free-local-jarvis-windows-mac');
+  assert.ok(guide.references.some((reference) => reference.url === 'https://open-jarvis.github.io/OpenJarvis/getting-started/windows-native/'));
+  assert.ok(guide.references.some((reference) => reference.url === 'https://open-jarvis.github.io/OpenJarvis/getting-started/install/'));
+});

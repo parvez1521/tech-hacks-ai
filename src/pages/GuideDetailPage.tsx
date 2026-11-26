@@ -16,6 +16,9 @@ export const GuideDetailPage: React.FC = () => {
 
   const [copiedStep, setCopiedStep] = useState<number | null>(null);
   const [copiedCommand, setCopiedCommand] = useState<number | null>(null);
+  const [copiedAgentPrompt, setCopiedAgentPrompt] = useState<string | null>(null);
+  const [setupMode, setSetupMode] = useState<'manual' | 'agent'>('manual');
+  const [activeAgentId, setActiveAgentId] = useState<'claude-code' | 'codex' | 'antigravity'>('claude-code');
   const [copiedShare, setCopiedShare] = useState(false);
 
   if (!guide) {
@@ -35,6 +38,8 @@ export const GuideDetailPage: React.FC = () => {
       </div>
     );
   }
+
+  const activeAgentPrompt = guide.agentPrompts?.find((item) => item.id === activeAgentId) || guide.agentPrompts?.[0];
 
   const allGuides = getAllGuides();
   const relatedPromptMedia = getAllPrompts().filter((item) => item.videoDetails?.guideSlugs?.includes(guide.slug));
@@ -62,6 +67,13 @@ export const GuideDetailPage: React.FC = () => {
     navigator.clipboard.writeText(command).catch(() => {});
     setCopiedCommand(stepNumber);
     setTimeout(() => setCopiedCommand(null), 2000);
+  };
+
+  const handleCopyAgentPrompt = (promptText: string, agentId: string) => {
+    navigator.clipboard.writeText(promptText).then(() => {
+      setCopiedAgentPrompt(agentId);
+      setTimeout(() => setCopiedAgentPrompt(null), 2500);
+    }).catch(() => setCopiedAgentPrompt(null));
   };
 
   const handleCopyShare = () => {
@@ -169,7 +181,101 @@ export const GuideDetailPage: React.FC = () => {
         </p>
       </div>
 
+      {guide.agentPrompts && guide.agentPrompts.length > 0 && (
+        <section className="mb-8 rounded-2xl border border-border bg-card p-5 sm:p-6 shadow-invary-card" aria-labelledby="guide-setup-method-title">
+          <div className="mb-4">
+            <h2 id="guide-setup-method-title" className="text-lg font-bold text-foreground">Choose Your Setup Method</h2>
+            <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
+              Follow the commands yourself, or let a coding agent guide the installation on this computer.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 gap-2 sm:grid-cols-2" role="tablist" aria-label="Setup method">
+            <button
+              type="button"
+              role="tab"
+              aria-selected={setupMode === 'manual'}
+              onClick={() => setSetupMode('manual')}
+              className={`flex min-h-12 items-center justify-center rounded-xl border px-4 py-3 text-sm font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary ${setupMode === 'manual' ? 'border-primary bg-primary text-primary-foreground' : 'border-border bg-background text-foreground hover:bg-muted'}`}
+            >
+              <Terminal className="mr-2 h-4 w-4" aria-hidden="true" />
+              Manual Setup
+            </button>
+            <button
+              type="button"
+              role="tab"
+              aria-selected={setupMode === 'agent'}
+              onClick={() => setSetupMode('agent')}
+              className={`flex min-h-12 items-center justify-center rounded-xl border px-4 py-3 text-sm font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary ${setupMode === 'agent' ? 'border-primary bg-primary text-primary-foreground' : 'border-border bg-background text-foreground hover:bg-muted'}`}
+            >
+              <Copy className="mr-2 h-4 w-4" aria-hidden="true" />
+              AI Agent Setup
+            </button>
+          </div>
+
+          {setupMode === 'agent' && activeAgentPrompt && (
+            <div className="mt-5 border-t border-border pt-5">
+              <div className="mb-4">
+                <h3 className="text-sm font-bold text-foreground">Choose Your AI Coding Agent</h3>
+                <p className="mt-1 text-xs leading-relaxed text-muted-foreground">
+                  Open the selected agent on this same computer with terminal access, then copy and paste the prompt below.
+                </p>
+              </div>
+
+              <div className="flex flex-wrap gap-2" role="tablist" aria-label="AI coding agent">
+                {guide.agentPrompts.map((agent) => (
+                  <button
+                    key={agent.id}
+                    type="button"
+                    role="tab"
+                    aria-selected={activeAgentPrompt.id === agent.id}
+                    onClick={() => setActiveAgentId(agent.id)}
+                    className={`rounded-lg border px-3.5 py-2 text-xs font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary ${activeAgentPrompt.id === agent.id ? 'border-primary bg-primary/10 text-primary' : 'border-border bg-background text-secondary-foreground hover:bg-muted'}`}
+                  >
+                    {agent.name}
+                  </button>
+                ))}
+              </div>
+
+              <div className="mt-4 overflow-hidden rounded-xl border border-border bg-muted/30">
+                <div className="flex flex-col gap-3 border-b border-border bg-background/70 p-4 sm:flex-row sm:items-center sm:justify-between">
+                  <div className="min-w-0">
+                    <div className="text-xs font-semibold text-foreground">{activeAgentPrompt.name} Setup Prompt</div>
+                    <p className="mt-1 text-xs leading-relaxed text-muted-foreground">{activeAgentPrompt.description}</p>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => handleCopyAgentPrompt(activeAgentPrompt.prompt, activeAgentPrompt.id)}
+                    className="inline-flex min-h-9 shrink-0 items-center justify-center gap-1.5 rounded-lg border border-border bg-card px-3 py-2 text-xs font-semibold text-foreground transition-colors hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+                    aria-live="polite"
+                    aria-label={copiedAgentPrompt === activeAgentPrompt.id ? 'Setup prompt copied' : `Copy ${activeAgentPrompt.name} setup prompt`}
+                  >
+                    {copiedAgentPrompt === activeAgentPrompt.id ? (
+                      <>
+                        <Check className="h-3.5 w-3.5 text-emerald-600" aria-hidden="true" />
+                        <span className="text-emerald-600">Copied!</span>
+                      </>
+                    ) : (
+                      <>
+                        <Copy className="h-3.5 w-3.5" aria-hidden="true" />
+                        <span>Copy Prompt</span>
+                      </>
+                    )}
+                  </button>
+                </div>
+                <pre className="max-h-[520px] overflow-auto whitespace-pre-wrap break-words px-4 py-4 font-mono text-xs leading-relaxed text-foreground"><code>{activeAgentPrompt.prompt}</code></pre>
+              </div>
+
+              <p className="mt-3 text-xs leading-relaxed text-muted-foreground">
+                The agent will inspect your system first and ask before installing. Keep its terminal access enabled so it can run approved setup and verification commands.
+              </p>
+            </div>
+          )}
+        </section>
+      )}
+
       {/* Step by Step Walkthrough */}
+      {(!guide.agentPrompts?.length || setupMode === 'manual') && (
       <div className="space-y-6 mb-12">
         <h2 className="text-lg font-bold text-foreground flex items-center gap-2">
           <span>Step-by-Step Instructions</span>
@@ -263,6 +369,7 @@ export const GuideDetailPage: React.FC = () => {
           </div>
         ))}
       </div>
+      )}
 
       {guide.references && guide.references.length > 0 && (
         <section className="mb-12 rounded-2xl border border-border bg-card p-6 shadow-invary-card" aria-labelledby="guide-references-title">

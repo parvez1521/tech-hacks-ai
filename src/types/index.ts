@@ -225,6 +225,13 @@ export interface GuideReference {
   url: string;
 }
 
+export interface GuideAgentPrompt {
+  id: 'claude-code' | 'codex' | 'antigravity';
+  name: string;
+  description: string;
+  prompt: string;
+}
+
 export interface Guide {
   id: string;
   title: string;
@@ -236,6 +243,8 @@ export interface Guide {
   publishedDate: string; // e.g. '2026-10-12'
   tags: string[];
   steps: GuideStep[];
+  /** Optional copy-ready setup prompts for supported local coding agents. */
+  agentPrompts?: GuideAgentPrompt[];
   relatedToolSlugs: string[];
   references?: GuideReference[];
 }

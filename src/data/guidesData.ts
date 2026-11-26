@@ -1,4 +1,5 @@
 import type { Guide } from '../types/index.ts';
+import { openJarvisAgentPrompts } from './openJarvisAgentPrompts.ts';
 
 export const guideCategories = [
   { id: 'video-creation', name: 'AI Video Creation', slug: 'video-creation' },
@@ -13,7 +14,7 @@ export const guidesData: Guide[] = [
     id: 'free-local-jarvis-windows-mac',
     title: 'Build a Free Local AI Voice Assistant with OpenJarvis (Windows & Mac)',
     slug: 'free-local-jarvis-windows-mac',
-    summary: 'Set up your own local AI assistant on Windows or macOS with OpenJarvis, Ollama and Qwen3.5. Follow simple steps with copy-ready commands, then add local voice chat with Kokoro.',
+    summary: 'Set up your own local AI assistant on Windows (WSL2 or native PowerShell) or macOS with OpenJarvis and a hardware-aware local model. Choose step-by-step manual commands or copy a guided setup prompt for Claude Code, Codex or Antigravity.',
     category: 'productivity',
     readTime: '6 min read',
     author: 'SwitchRoute Editorial Team',
@@ -21,18 +22,21 @@ export const guidesData: Guide[] = [
     tags: ['openjarvis', 'jarvis', 'local-ai', 'ollama', 'qwen', 'kokoro', 'voice-assistant', 'windows', 'mac'],
     relatedToolSlugs: [],
     references: [
+      { title: 'OpenJarvis platform installation overview', publisher: 'OpenJarvis', url: 'https://open-jarvis.github.io/OpenJarvis/getting-started/install/' },
       { title: 'Install OpenJarvis on Windows with WSL2', publisher: 'OpenJarvis', url: 'https://open-jarvis.github.io/OpenJarvis/getting-started/wsl2/' },
+      { title: 'Install OpenJarvis natively on Windows with PowerShell', publisher: 'OpenJarvis', url: 'https://open-jarvis.github.io/OpenJarvis/getting-started/windows-native/' },
       { title: 'Install OpenJarvis on macOS', publisher: 'OpenJarvis', url: 'https://open-jarvis.github.io/OpenJarvis/getting-started/macos/' },
       { title: 'OpenJarvis voice chat instructions', publisher: 'OpenJarvis', url: 'https://open-jarvis.github.io/OpenJarvis/user-guide/chat-simple/' },
       { title: 'OpenJarvis Morning Digest', publisher: 'OpenJarvis', url: 'https://open-jarvis.github.io/OpenJarvis/user-guide/morning-digest/' },
       { title: 'Kokoro local text-to-speech', publisher: 'Kokoro', url: 'https://github.com/hexgrad/kokoro' },
       { title: 'Run OpenCode with Ollama', publisher: 'Ollama', url: 'https://github.com/ollama/ollama/blob/main/docs/integrations/opencode.mdx' },
     ],
+    agentPrompts: openJarvisAgentPrompts,
     steps: [
       {
         stepNumber: 1,
         title: 'Windows: Install Ubuntu with WSL2',
-        description: 'On Windows 10 or 11, open PowerShell as Administrator. Run the command below. Restart your PC if Windows asks, then open Ubuntu from the Start menu and finish its first-time setup.',
+        description: 'This manual Windows route uses WSL2. Open PowerShell as Administrator and run the command below, then restart if Windows asks and finish Ubuntu first-time setup. Prefer installing directly in Windows without WSL2? Follow the official native PowerShell guide in the references below; it has separate Python, Git and MSVC build-tool requirements.',
         command: 'wsl --install',
         commandTarget: 'PowerShell (Run as Administrator)',
         commandInstruction: 'Copy this command and paste it into PowerShell opened as Administrator. Press Enter, then restart Windows if prompted.',
@@ -97,6 +101,22 @@ export const guidesData: Guide[] = [
         stepNumber: 9,
         title: 'Optional: Add a morning briefing',
         description: 'The Morning Digest can summarise connected services such as calendar and email. Follow the official guide to connect only the accounts you choose, and start with read-only permissions. Some providers require sign-in or their own API access. The example digest uses a hosted voice service by default, so switch its digest TTS backend to "kokoro" if you want the spoken briefing to stay local and avoid a paid voice API.',
+      },
+      {
+        stepNumber: 10,
+        title: 'Alternative: Install natively on Windows (without WSL2)',
+        description: 'Use this route instead of the WSL2 setup in steps 1–3. OpenJarvis describes native PowerShell installation as an advanced option; WSL2 is still the smoother path for most Windows users. Choose native setup when you specifically want to avoid a Linux environment. It supports Windows 10 version 1809 or later and Windows 11, requires Python 3.11–3.13, Git on PATH, and roughly 5 GB of free space under your local app-data folder. The installer checks these prerequisites, installs uv if it is missing, clones the project into your local app-data folder, and prepares the desktop dependencies. It does not require you to manually install MSVC build tools for this standard native CLI route. When the installer asks about registering its optional scheduled-task service, skip that prompt for a simple manual launch; you can enable auto-start later if you decide you need it. Keep the service bound to the local loopback address unless you have a specific, secured reason to change its network exposure.',
+        command: 'irm https://open-jarvis.github.io/OpenJarvis/install.ps1 | iex',
+        commandTarget: 'Windows PowerShell',
+        commandInstruction: 'Copy this command and paste it into Windows PowerShell. Press Enter, review the installer prompts, and skip the optional scheduled-task service unless you need it.',
+      },
+      {
+        stepNumber: 11,
+        title: 'Native Windows: Start the local OpenJarvis server',
+        description: 'After the native installer completes, run the command below in PowerShell. It changes into the folder created by the installer and starts the Jarvis server through uv, using the dependencies prepared during installation. Keep this terminal window open while you test the server; closing it stops this foreground process. Visit http://127.0.0.1:8000/health in your browser and confirm that the local health response loads. This endpoint is a server check, not proof that a model can answer prompts, so test a short conversation separately before relying on the assistant. The documented default binds to 127.0.0.1, which keeps the service on your own computer instead of exposing it to other devices on your network. If the page does not load, check that the terminal is still running, read the latest error printed there, and confirm that another app is not already using port 8000. Do not solve a port or permission problem by opening the service to your LAN or disabling firewall protections; diagnose the specific error first.',
+        command: 'Set-Location "$env:LOCALAPPDATA\\OpenJarvis\\src"; uv run jarvis serve',
+        commandTarget: 'Windows PowerShell',
+        commandInstruction: 'Copy this command and paste it into Windows PowerShell. Press Enter and leave the terminal running while you test the local health page.',
       },
     ],
   },
