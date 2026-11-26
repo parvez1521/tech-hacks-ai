@@ -102,6 +102,7 @@ export const guidesData: Guide[] = [
         title: 'Optional: Add a morning briefing',
         description: 'The Morning Digest can summarise connected services such as calendar and email. Follow the official guide to connect only the accounts you choose, and start with read-only permissions. Some providers require sign-in or their own API access. The example digest uses a hosted voice service by default, so switch its digest TTS backend to "kokoro" if you want the spoken briefing to stay local and avoid a paid voice API.',
       },
+      {
         stepNumber: 10,
         title: 'Alternative: Install natively on Windows (without WSL2)',
         description: 'Use this route instead of the WSL2 setup in steps 1–3. On Windows 10/11, open PowerShell and follow the official native installer. It checks for Python 3.11–3.13, Git and MSVC C++ build tools, and needs about 5 GB of free space. Review the installer and its prompts; skip the optional background service unless you specifically want it.',
