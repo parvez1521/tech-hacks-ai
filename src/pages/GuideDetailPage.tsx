@@ -4,7 +4,7 @@ import { getGuideBySlug, getAllGuides, getAiToolBySlug, getAllPrompts } from '..
 import { getToolBySlug, getToolDetailUrl } from '../services/catalogService';
 import { BookmarkButton } from '../components/BookmarkButton';
 import { BookmarkItem } from '../types';
-import { BookOpen, Clock, Calendar, Copy, Check, ArrowLeft, ArrowRight, ExternalLink, Wrench, Share2 } from 'lucide-react';
+import { BookOpen, Clock, Calendar, Copy, Check, ArrowLeft, ArrowRight, ExternalLink, Wrench, Share2, Terminal } from 'lucide-react';
 import { BrandLogo } from '../components/BrandLogo';
 import { siteConfig } from '../config/siteConfig';
 import { serializeJsonLd } from '../lib/jsonLd';
@@ -15,6 +15,7 @@ export const GuideDetailPage: React.FC = () => {
   const guide = getGuideBySlug(slug);
 
   const [copiedStep, setCopiedStep] = useState<number | null>(null);
+  const [copiedCommand, setCopiedCommand] = useState<number | null>(null);
   const [copiedShare, setCopiedShare] = useState(false);
 
   if (!guide) {
@@ -55,6 +56,12 @@ export const GuideDetailPage: React.FC = () => {
     navigator.clipboard.writeText(promptText).catch(() => {});
     setCopiedStep(stepNumber);
     setTimeout(() => setCopiedStep(null), 2000);
+  };
+
+  const handleCopyCommand = (command: string, stepNumber: number) => {
+    navigator.clipboard.writeText(command).catch(() => {});
+    setCopiedCommand(stepNumber);
+    setTimeout(() => setCopiedCommand(null), 2000);
   };
 
   const handleCopyShare = () => {
@@ -185,6 +192,42 @@ export const GuideDetailPage: React.FC = () => {
             <p className="text-sm text-secondary-foreground leading-relaxed pl-11">
               {step.description}
             </p>
+
+            {step.command && (
+              <div className="ml-11 mt-4 rounded-xl border border-border bg-muted/40 p-4 space-y-3">
+                <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+                  <div className="min-w-0">
+                    <div className="flex items-center gap-2 font-mono text-[10px] font-semibold uppercase tracking-wider text-primary">
+                      <Terminal className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
+                      <span>Command · {step.commandTarget || 'Terminal'}</span>
+                    </div>
+                    <p className="mt-1 text-xs leading-relaxed text-secondary-foreground">
+                      {step.commandInstruction || `Copy this command and paste it into ${step.commandTarget || 'your terminal'}.`}
+                    </p>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => handleCopyCommand(step.command!, step.stepNumber)}
+                    className="inline-flex min-h-9 shrink-0 items-center justify-center gap-1.5 rounded-lg border border-border bg-card px-3 py-2 text-xs font-semibold text-foreground transition-colors hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+                    aria-live="polite"
+                    aria-label={copiedCommand === step.stepNumber ? 'Command copied' : `Copy command for step ${step.stepNumber}`}
+                  >
+                    {copiedCommand === step.stepNumber ? (
+                      <>
+                        <Check className="h-3.5 w-3.5 text-emerald-600" aria-hidden="true" />
+                        <span className="text-emerald-600">Copied!</span>
+                      </>
+                    ) : (
+                      <>
+                        <Copy className="h-3.5 w-3.5" aria-hidden="true" />
+                        <span>Copy Command</span>
+                      </>
+                    )}
+                  </button>
+                </div>
+                <pre className="overflow-x-auto rounded-lg border border-border/70 bg-background px-3 py-3 font-mono text-xs leading-relaxed text-foreground whitespace-pre-wrap"><code>{step.command}</code></pre>
+              </div>
+            )}
 
             {step.media?.type === 'image' && <figure className="ml-11 mt-4 max-w-2xl overflow-hidden rounded-xl border border-border bg-muted"><img src={step.media.src} alt={step.media.alt} loading="lazy" decoding="async" className="block max-h-[420px] w-full object-contain" /><figcaption className="px-3 py-2 text-xs leading-5 text-muted-foreground">{step.media.caption}</figcaption></figure>}
 
