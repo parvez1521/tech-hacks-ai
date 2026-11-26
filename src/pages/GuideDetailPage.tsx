@@ -194,7 +194,7 @@ export const GuideDetailPage: React.FC = () => {
             </p>
 
             {step.command && (
-              <div className="ml-11 mt-4 rounded-xl border border-border bg-muted/40 p-4 space-y-3">
+              <div className="ml-0 sm:ml-11 mt-4 rounded-xl border border-border bg-muted/40 p-4 space-y-3">
                 <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
                   <div className="min-w-0">
                     <div className="flex items-center gap-2 font-mono text-[10px] font-semibold uppercase tracking-wider text-primary">
