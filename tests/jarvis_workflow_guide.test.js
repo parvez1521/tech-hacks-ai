@@ -49,10 +49,10 @@ test('the OpenJarvis guide offers manual setup and copy-ready prompts for three 
   assert.deepEqual(guide.agentPrompts.map((prompt) => prompt.id), ['claude-code', 'codex', 'antigravity']);
   for (const item of guide.agentPrompts) {
     assert.ok(item.prompt.length > 1000, `Expected a complete setup prompt for ${item.name}`);
-    assert.match(item.prompt, /WAIT FOR MY APPROVAL/);
-    assert.match(item.prompt, /install\\.ps1/);
-    assert.match(item.prompt, /install\\.sh/);
-    assert.match(item.prompt, /Do not run the installer as root or with sudo/);
+    assert.ok(item.prompt.includes('WAIT FOR MY APPROVAL'));
+    assert.ok(item.prompt.includes('install.ps1'));
+    assert.ok(item.prompt.includes('install.sh'));
+    assert.ok(item.prompt.includes('Do not run the installer as root or with sudo'));
   }
 
   const page = await read('../src/pages/GuideDetailPage.tsx');
