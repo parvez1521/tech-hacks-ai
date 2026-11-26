@@ -20,8 +20,9 @@ WORK IN STAGES — DO NOT RUSH
      curl -fsSL https://open-jarvis.github.io/OpenJarvis/install.sh | bash
    - Windows native PowerShell (Windows 10/11): use the official PowerShell installer:
      irm https://open-jarvis.github.io/OpenJarvis/install.ps1 | iex
-     First verify the documented prerequisites (Python 3.11–3.13, Git, MSVC C++ build tools, and about 5 GB free disk). If a prerequisite is missing, explain how to install it and ask before making changes.
-   - Windows via WSL2: use the official WSL2 route. Install Ubuntu only if needed and approved, then run the official Bash installer inside Ubuntu. Never run the Bash installer from native PowerShell, Git Bash, MSYS2, or Cygwin.
+     First verify the documented prerequisites (Windows 10 1809+ or Windows 11, Python 3.11–3.13, Git on PATH, and about 5 GB free disk). The standard native CLI installer installs uv if missing; do not require MSVC build tools for this route. If a prerequisite is missing, explain how to install it and ask before making changes.
+   - Windows via WSL2: this is the recommended, smoother Windows route in the current OpenJarvis docs. Install Ubuntu only if needed and approved, then run the official Bash installer inside Ubuntu. Models are stored in the WSL filesystem, not your Windows drive. Never run the Bash installer from native PowerShell, Git Bash, MSYS2, or Cygwin.
+   - Treat native Windows PowerShell as the advanced alternative when the user wants to avoid WSL2; do not confuse the CLI installer prerequisites with the separate Windows ARM64 desktop build prerequisites.
    - Do not invent flags or use unofficial mirrors/domains. Do not run the installer as root or with sudo. Prefer reviewing the official installer source before execution and explain what it changes.
 4. PROTECT MY MACHINE AND DATA
    - Do not overwrite, uninstall, reset, or upgrade an existing OpenJarvis/Ollama setup without asking first.
