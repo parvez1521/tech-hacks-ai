@@ -213,6 +213,9 @@ export interface GuideStep {
   title: string;
   description: string;
   promptTemplate?: string;
+  command?: string;
+  commandTarget?: string;
+  commandInstruction?: string;
   media?: { type: 'image'; src: string; alt: string; caption?: string };
 }
 
