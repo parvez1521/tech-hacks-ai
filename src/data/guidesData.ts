@@ -1,4 +1,5 @@
 import type { Guide } from '../types/index.ts';
+import { openJarvisAgentPrompts } from './openJarvisAgentPrompts.ts';
 
 export const guideCategories = [
   { id: 'video-creation', name: 'AI Video Creation', slug: 'video-creation' },
@@ -13,7 +14,7 @@ export const guidesData: Guide[] = [
     id: 'free-local-jarvis-windows-mac',
     title: 'Build a Free Local AI Voice Assistant with OpenJarvis (Windows & Mac)',
     slug: 'free-local-jarvis-windows-mac',
-    summary: 'Set up your own local AI assistant on Windows or macOS with OpenJarvis, Ollama and Qwen3.5. Follow simple steps with copy-ready commands, then add local voice chat with Kokoro.',
+    summary: 'Set up your own local AI assistant on Windows (WSL2 or native PowerShell) or macOS with OpenJarvis and a hardware-aware local model. Choose step-by-step manual commands or copy a guided setup prompt for Claude Code, Codex or Antigravity.',
     category: 'productivity',
     readTime: '6 min read',
     author: 'SwitchRoute Editorial Team',
@@ -21,18 +22,21 @@ export const guidesData: Guide[] = [
     tags: ['openjarvis', 'jarvis', 'local-ai', 'ollama', 'qwen', 'kokoro', 'voice-assistant', 'windows', 'mac'],
     relatedToolSlugs: [],
     references: [
+      { title: 'OpenJarvis platform installation overview', publisher: 'OpenJarvis', url: 'https://open-jarvis.github.io/OpenJarvis/getting-started/install/' },
       { title: 'Install OpenJarvis on Windows with WSL2', publisher: 'OpenJarvis', url: 'https://open-jarvis.github.io/OpenJarvis/getting-started/wsl2/' },
+      { title: 'Install OpenJarvis natively on Windows with PowerShell', publisher: 'OpenJarvis', url: 'https://open-jarvis.github.io/OpenJarvis/getting-started/windows-native/' },
       { title: 'Install OpenJarvis on macOS', publisher: 'OpenJarvis', url: 'https://open-jarvis.github.io/OpenJarvis/getting-started/macos/' },
       { title: 'OpenJarvis voice chat instructions', publisher: 'OpenJarvis', url: 'https://open-jarvis.github.io/OpenJarvis/user-guide/chat-simple/' },
       { title: 'OpenJarvis Morning Digest', publisher: 'OpenJarvis', url: 'https://open-jarvis.github.io/OpenJarvis/user-guide/morning-digest/' },
       { title: 'Kokoro local text-to-speech', publisher: 'Kokoro', url: 'https://github.com/hexgrad/kokoro' },
       { title: 'Run OpenCode with Ollama', publisher: 'Ollama', url: 'https://github.com/ollama/ollama/blob/main/docs/integrations/opencode.mdx' },
     ],
+    agentPrompts: openJarvisAgentPrompts,
     steps: [
       {
         stepNumber: 1,
         title: 'Windows: Install Ubuntu with WSL2',
-        description: 'On Windows 10 or 11, open PowerShell as Administrator. Run the command below. Restart your PC if Windows asks, then open Ubuntu from the Start menu and finish its first-time setup.',
+        description: 'This manual Windows route uses WSL2. Open PowerShell as Administrator and run the command below, then restart if Windows asks and finish Ubuntu first-time setup. Prefer installing directly in Windows without WSL2? Follow the official native PowerShell guide in the references below; it has separate Python, Git and MSVC build-tool requirements.',
         command: 'wsl --install',
         commandTarget: 'PowerShell (Run as Administrator)',
         commandInstruction: 'Copy this command and paste it into PowerShell opened as Administrator. Press Enter, then restart Windows if prompted.',
