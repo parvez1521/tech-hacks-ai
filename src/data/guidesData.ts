@@ -48,7 +48,7 @@ export const guidesData: Guide[] = [
       {
         stepNumber: 3,
         title: 'Windows: Start Jarvis',
-        description: 'After installation finishes, stay in Ubuntu and run the command below. Jarvis will open in the terminal and you can start chatting with your local model.',
+        description: 'After installation finishes, stay in Ubuntu and run the command below. Jarvis will open in the terminal and you can start chatting with your local model. If Windows says the command cannot be found, close Ubuntu, open it again and retry.',
         command: 'jarvis',
         commandTarget: 'Ubuntu Terminal (inside WSL2)',
         commandInstruction: 'Copy this command and paste it into the Ubuntu terminal. Press Enter to start Jarvis.',
@@ -64,7 +64,7 @@ export const guidesData: Guide[] = [
       {
         stepNumber: 5,
         title: 'Mac: Start Jarvis',
-        description: 'When installation is complete, run the command below in Terminal. If macOS says the command cannot be found, close Terminal, open it again and retry.',
+        description: 'When installation is complete, run the command below in Terminal. If macOS says the command cannot be found, close Terminal, open it again and retry so the new PATH setting loads.',
         command: 'jarvis',
         commandTarget: 'Mac Terminal',
         commandInstruction: 'Copy this command and paste it into the Mac Terminal. Press Enter to start Jarvis.',
