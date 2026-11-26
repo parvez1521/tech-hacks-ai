@@ -31,6 +31,11 @@ test('every command tells readers where to paste it and has a copyable command U
   assert.match(page, /handleCopyCommand/);
 });
 
+test('the workflow detail URL is included in the sitemap for prerendering', async () => {
+  const sitemap = await read('../public/sitemap.xml');
+  assert.match(sitemap, /https:\/\/switchroute\.in\/guides\/free-local-jarvis-windows-mac/);
+});
+
 test('the workflow links only to HTTPS official documentation and tool sources', () => {
   const guide = guidesData.find((item) => item.slug === 'free-local-jarvis-windows-mac');
   for (const reference of guide.references) {
