@@ -26,7 +26,7 @@ test('staging middleware disallows all crawlers in robots.txt', async () => {
   assert.equal(response.status, 200);
   assert.equal(response.headers.get('X-Robots-Tag'), 'noindex, nofollow, noarchive');
   assert.equal(response.headers.get('Cache-Control'), 'no-store');
-  assert.equal(await response.text(), 'User-agent: *\\nDisallow: /\\n');
+  assert.equal(await response.text(), 'User-agent: *\nDisallow: /\n');
 });
 
 test('non-staging deployments keep their original robots behavior and headers', async () => {
