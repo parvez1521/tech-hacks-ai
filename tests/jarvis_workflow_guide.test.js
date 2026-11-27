@@ -54,7 +54,7 @@ test('the OpenJarvis guide offers manual setup and copy-ready prompts for three 
     assert.ok(item.prompt.includes('real microphone'));
     assert.ok(item.prompt.includes('actual TTS output audio'));
     assert.ok(item.prompt.includes('Morning Digest'));
-    assert.ok(item.prompt.includes('Never claim a feature works'));
+    assert.ok(item.prompt.includes('Do not claim a feature works'));
     assert.ok(item.prompt.includes('OpenJarvis'));
   }
 
