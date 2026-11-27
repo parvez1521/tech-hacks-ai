@@ -29,6 +29,7 @@ Validate the existing Cloudflare Pages Functions port on an isolated Git-integra
 | Build command | `npm run build` |
 | Build output directory | `dist` |
 | Node.js | `22.23.4` via `.node-version` |
+| Build watch paths | Include `*`; exclude nothing |
 
 The build creates pre-rendered public routes and copies the Pages Functions from `functions/`. The existing `public/_redirects` and `public/_headers` files carry redirects, SPA fallback, caching and static-response headers.
 
