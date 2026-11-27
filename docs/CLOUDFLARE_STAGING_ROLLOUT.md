@@ -33,6 +33,8 @@ Validate the existing Cloudflare Pages Functions port on an isolated Git-integra
 
 The build creates pre-rendered public routes and copies the Pages Functions from `functions/`. The existing `public/_redirects` and `public/_headers` files carry redirects, SPA fallback, caching and static-response headers.
 
+The Git-connected staging project runs `npm test` before `npm run build`, so a failed regression suite stops the deployment.
+
 ## Runtime secrets to configure in Cloudflare
 
 Set these only in the Pages dashboard/API as encrypted secrets, never as plaintext repository files:
