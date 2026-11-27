@@ -6,7 +6,7 @@
 # explicitly approves the DNS cutover.
 #
 # Build settings are also configured in the Cloudflare dashboard/API:
-#   Build command: npm run build
+#   Build command: npm test && npm run build
 #   Build output:  dist
 #   Root directory: /
 #
