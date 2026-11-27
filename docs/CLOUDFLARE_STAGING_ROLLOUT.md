@@ -12,6 +12,12 @@ Validate the existing Cloudflare Pages Functions port on an isolated Git-integra
 - No production DNS records or custom domains are changed by this rollout.
 - Do not add real credentials to Git, pull requests, screenshots, or build logs.
 
+## Staging project
+
+- Project: `switchroute-staging`
+- Preview/primary URL: https://switchroute-staging.pages.dev
+- Git deployment branch: `cloudflare-staging`
+
 ## Cloudflare Pages build settings
 
 | Setting | Value |
