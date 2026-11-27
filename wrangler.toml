@@ -1,15 +1,17 @@
-# Cloudflare Pages configuration for SwitchRoute.
+# Cloudflare Pages configuration for SwitchRoute staging.
 #
-# The project already exists as `switchroute-cf-test` (direct-upload test
-# deploy at https://switchroute-cf-test.pages.dev). This file documents the
-# project binding and build output dir for Git-connected builds and
-# `wrangler pages dev`. It sets NO build command: builds run
-# `npm run build` (see package.json) as configured in the dashboard;
-# direct deploys use:
-#   wrangler pages deploy dist --project-name switchroute-cf-test
+# This project is a separate Git-integrated staging deployment. The existing
+# switchroute-cf-test project remains untouched as a direct-upload fallback.
+# Production remains on Vercel until all staging checks pass and the owner
+# explicitly approves the DNS cutover.
 #
-# Vercel config (api/, vercel.json) stays intact — Vercel is the live
-# fallback until the DNS cutover is approved by the owner.
-name = "switchroute-cf-test"
+# Build settings are also configured in the Cloudflare dashboard/API:
+#   Build command: npm run build
+#   Build output:  dist
+#   Root directory: /
+#
+# For local Pages development:
+#   npx wrangler pages dev dist --compatibility-date=2026-11-26
+name = "switchroute-staging"
 pages_build_output_dir = "dist"
 compatibility_date = "2026-11-26"
