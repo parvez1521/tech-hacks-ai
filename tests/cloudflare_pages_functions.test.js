@@ -593,8 +593,8 @@ test('cf public/_headers carries the vercel.json security headers and CSP', asyn
   }
 });
 
-test('cf wrangler.toml names the existing Pages project and dist output', async () => {
+test('cf wrangler.toml names the Git-integrated staging project and dist output', async () => {
   const wrangler = await readFile(new URL('../wrangler.toml', import.meta.url), 'utf8');
-  assert.match(wrangler, /name = "switchroute-cf-test"/);
+  assert.match(wrangler, /name = "switchroute-staging"/);
   assert.match(wrangler, /pages_build_output_dir = "dist"/);
 });
