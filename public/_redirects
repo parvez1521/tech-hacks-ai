@@ -1,1 +1,9 @@
+# Cloudflare Pages redirects.
+# First two rules mirror vercel.json redirects (main @ 52e05b3). First match
+# wins, so they sit above the SPA catch-all. The catch-all line below is
+# unchanged from main: `/* /index.html 200`.
+# NOTE: requests handled by Pages Functions skip _redirects, so /api/*
+# routes are unaffected by the catch-all.
+/ai-tools/claude-code /alternatives/claude-code 301
+/privacy-policy /privacy 301
 /*    /index.html   200
