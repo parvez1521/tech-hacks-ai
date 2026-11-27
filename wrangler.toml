@@ -10,6 +10,11 @@
 #   Build output:  dist
 #   Root directory: /
 #
+# Keep the staging crawler guard in source control. Cloudflare treats this
+# Wrangler file as the source of truth for Pages Functions configuration.
+[vars]
+SWITCHROUTE_STAGING = "true"
+
 # For local Pages development:
 #   npx wrangler pages dev dist --compatibility-date=2026-11-26
 name = "switchroute-staging"
