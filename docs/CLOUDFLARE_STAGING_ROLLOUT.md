@@ -50,6 +50,8 @@ Optional public build variable:
 
 Do not assume these are configured just because the project builds. Without privileged Supabase credentials, writes are expected to fail closed with HTTP 503 rather than using ephemeral storage.
 
+The staging project sets `SWITCHROUTE_STAGING=true`. A Pages middleware adds `X-Robots-Tag: noindex, nofollow, noarchive` to every staging response and serves a staging-only `robots.txt` that disallows crawling. Production deployments without this flag retain the normal production robots policy.
+
 ## Staging verification before any production cutover
 
 1. Confirm the Git-connected Pages build succeeds from `cloudflare-staging`.
