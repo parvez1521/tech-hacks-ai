@@ -26,7 +26,7 @@ Validate the existing Cloudflare Pages Functions port on an isolated Git-integra
 | Production branch for staging project | `cloudflare-staging` |
 | Preview branches | Enabled for review branches |
 | Root directory | `/` |
-| Build command | `npm run build` |
+| Build command | `npm test && npm run build` |
 | Build output directory | `dist` |
 | Node.js | `22.23.4` via `.node-version` |
 | Build watch paths | Include `*`; exclude nothing |
