@@ -46,20 +46,31 @@ test('the workflow links only to HTTPS official documentation and tool sources',
 test('the OpenJarvis guide offers manual setup and copy-ready prompts for three coding agents', async () => {
   const guide = guidesData.find((item) => item.slug === 'free-local-jarvis-windows-mac');
   assert.ok(guide?.agentPrompts, 'Expected AI agent setup prompts on the OpenJarvis guide');
-  assert.deepEqual(guide.agentPrompts.map((prompt) => prompt.id), ['claude-code', 'codex', 'antigravity']);
+  assert.deepEqual(guide.agentPrompts.map((prompt) => prompt.id), ['antigravity', 'claude-code', 'codex']);
   for (const item of guide.agentPrompts) {
-    assert.ok(item.prompt.length > 1000, `Expected a complete setup prompt for ${item.name}`);
-    assert.ok(item.prompt.includes('WAIT FOR MY APPROVAL'));
-    assert.ok(item.prompt.includes('install.ps1'));
-    assert.ok(item.prompt.includes('install.sh'));
-    assert.ok(item.prompt.includes('Do not run the installer as root or with sudo'));
+    assert.ok(item.prompt.length > 15000, `Expected a complete end-to-end setup prompt for ${item.name}`);
+    assert.ok(item.prompt.includes('STEP 1 — ASK THE USER ONCE'));
+    assert.ok(item.prompt.includes('STEP 5 — BUILD THE INTERACTIVE HOLOGRAPHIC VOICE INTERFACE'));
+    assert.ok(item.prompt.includes('real microphone'));
+    assert.ok(item.prompt.includes('actual TTS output audio'));
+    assert.ok(item.prompt.includes('Morning Digest'));
+    assert.ok(item.prompt.includes('Do not claim a feature works'));
+    assert.ok(item.prompt.includes('OpenJarvis'));
   }
+
+  assert.match(guide.agentPrompts[0].prompt, /Google Antigravity/);
+  assert.match(guide.agentPrompts[1].prompt, /Claude Code/);
+  assert.match(guide.agentPrompts[2].prompt, /OpenAI Codex/);
+  assert.ok(guide.agentPrompts.every((prompt) => prompt.prompt.includes('Do not use ElevenLabs')));
+  assert.ok(guide.agentPrompts.every((prompt) => prompt.prompt.includes('Three.js is preferred')));
 
   const page = await read('../src/pages/GuideDetailPage.tsx');
   assert.match(page, /Choose Your Setup Method/);
   assert.match(page, /Manual Setup/);
   assert.match(page, /AI Agent Setup/);
   assert.match(page, /Choose Your AI Coding Agent/);
+  assert.match(page, /antigravity/);
+  assert.match(page, /holographic voice interface/);
   assert.match(page, /handleCopyAgentPrompt/);
   assert.match(page, /Copy Prompt/);
 });
