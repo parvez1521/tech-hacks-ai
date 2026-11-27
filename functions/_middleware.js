@@ -12,7 +12,7 @@ export async function onRequest(context) {
   if (url.pathname === '/robots.txt') {
     headers.set('Content-Type', 'text/plain; charset=utf-8');
     headers.set('Cache-Control', 'no-store');
-    return new Response('User-agent: *\\nDisallow: /\\n', {
+    return new Response('User-agent: *\nDisallow: /\n', {
       status: 200,
       headers,
     });
