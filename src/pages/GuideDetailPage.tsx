@@ -18,7 +18,7 @@ export const GuideDetailPage: React.FC = () => {
   const [copiedCommand, setCopiedCommand] = useState<number | null>(null);
   const [copiedAgentPrompt, setCopiedAgentPrompt] = useState<string | null>(null);
   const [setupMode, setSetupMode] = useState<'manual' | 'agent'>('manual');
-  const [activeAgentId, setActiveAgentId] = useState<'claude-code' | 'codex' | 'antigravity'>('claude-code');
+  const [activeAgentId, setActiveAgentId] = useState<'claude-code' | 'codex' | 'antigravity'>('antigravity');
   const [copiedShare, setCopiedShare] = useState(false);
 
   if (!guide) {
@@ -186,7 +186,7 @@ export const GuideDetailPage: React.FC = () => {
           <div className="mb-4">
             <h2 id="guide-setup-method-title" className="text-lg font-bold text-foreground">Choose Your Setup Method</h2>
             <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
-              Follow the commands yourself, or let a coding agent guide the installation on this computer.
+              Follow the commands yourself, or let a coding agent build and verify the complete local assistant, including its interactive holographic voice interface.
             </p>
           </div>
 
@@ -267,7 +267,7 @@ export const GuideDetailPage: React.FC = () => {
               </div>
 
               <p className="mt-3 text-xs leading-relaxed text-muted-foreground">
-                The agent will inspect your system first and ask before installing. Keep its terminal access enabled so it can run approved setup and verification commands.
+                Each agent prompt covers system inspection, local setup, app connections, real voice testing and the voice-reactive holographic interface. Keep the selected agent's terminal access enabled, and approve only the sign-ins or system permissions you choose.
               </p>
             </div>
           )}
